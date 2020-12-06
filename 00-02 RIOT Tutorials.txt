@@ -1,0 +1,58 @@
+https://github.com/RIOT-OS/Tutorials/blob/master/README.md
+
+git clone --recursive https://github.com/RIOT-OS/Tutorials
+
+
+*****************************************
+прохождение - 1 пример
+
+---
+
+в файл .bash_profile 
+прописываем 2 строки
+
+export BUILD_IN_DOCKER=1
+export DOCKER="sudo docker"
+
+это чтобы каждый раз не набирать в параметрах запуска make
+
+---
+
+
+[nvv@localhost native]$ ./Task01.elf
+bash: ./Task01.elf: Ќет такого файла или каталога
+
+¬озникнуть она может именно на х64 системах, т.к. в них не хватает некоторых библиотек х32.
+
+–ешение Ч установить glibc дл€ х32.
+
+Ќа RHEL/CentOS:
+
+# dnf install glibc.i686
+Debian/Ubuntu:
+
+# apt-get install ia32-libs
+
+---
+
+
+теперь пример грузим в желез€чку arduino-mega
+
+комманда
+$ make all flash term BOARD=arduino-mega2560 PORT=/dev/ttyUSB0
+
+
+дл€ этого поставить
+$ dnf install python3-pyserial
+
+включаем себ€ в группу, дл€ доступа к сериальному порту (fedora у нас)
+$ usermod -a -G dialout nvv
+
+это дл€ записи прошивки в arduino-mega
+$ dnf install -y avrdude
+
+
+---
+
+
+

@@ -1,0 +1,21 @@
+pre
+
+$ dnf install git
+
+-------
+
+
+https://doc.riot-os.org/getting-started.html
+
+Downloading RIOT code
+You can obtain the latest RIOT code from our Github repository either by downloading the latest tarball or by cloning the git repository.
+
+In order to clone the RIOT repository, you need the Git revision control system and run the following command:
+
+git clone git://github.com/RIOT-OS/RIOT.git
+
+
+
+----
+
+

@@ -1,0 +1,192 @@
+
+https://docs.docker.com/engine/install/linux-postinstall/
+
+Configure Docker to start on boot:
+
+
+Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher) use systemd to manage which services start when the system boots. Ubuntu 14.10 and below use upstart.
+
+systemd
+
+$ sudo systemctl enable docker
+
+To disable this behavior, use disable instead.
+
+$ sudo systemctl disable docker
+
+If you need to add an HTTP Proxy, 
+set a different directory or partition for the Docker runtime files, or 
+make other customizations, see customize your systemd Docker daemon options.
+https://docs.docker.com/config/daemon/systemd/
+
+
+
+проверить что docker запущен
+
+
+$ service docker status
+
+или оп€ть
+
+$ docker run hello-world
+
+
+
+
+
+------------- ------------- ------------- -------------
+ќшибка 139 Exit Code 139
+https://medium.com/better-programming/understanding-docker-container-exit-codes-5ee79a1d58f6#:~:text=Exit%20Code%20139,-This%20indicates%20that&text=SIGSEGV%20indicates%20a%20segmentation%20fault.&text=From%20the%20Docker%20container%20standpoint,images%20used%20by%20the%20container.
+
+бывает так, это из за того что новый kernel - debian 10
+а контейнер запускаем от - debian 7
+
+тогда 
+
+рекомендации по устранению
+
+https://github.com/docker/for-linux/issues/58#issuecomment-315150740
+
+Hi, specifying this command in /etc/default/grub:
+
+GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"
+
+потом
+
+$ cd /boot/grub
+
+$ grub-mkconfig > grub.cfg
+
+
+------------- ------------- ------------- -------------
+
+
+
+
+
+
+
+------
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+¬ј∆Ќќ!!!!!!!  ≈—Ћ» нужно подпортить Ќќ–ћјЋ№Ќќ≈ поведение Docker !!!!
+
+!!!иначе, не делай это!!!!
+
+
+после установки docker - он добавл€ет свой интерфейс моста docker0
+и добавл€ет фильтрацию дл€ мостов
+
+выключить это
+делаем так:  ( https://serverfault.com/questions/963759/docker-breaks-libvirt-bridge-network )
+
+echo install br_netfilter /bin/true > /etc/modprobe.d/disable-br-netfilter.conf
+
+
+
+далее 
+
+
+
+
+------------- ------------- ------------- -------------
+
+https://dker.ru/docs/docker-engine/user-guide/network-configuration/default-bridge-network/build-your-own-bridge/
+
+ѕереопределить default bridge (docker0) на собственное!!!
+
+This section explains how to build your own bridge to replace the Docker default bridge. This is a bridge network named bridge created automatically when you install Docker.
+
+удал€ем и removing docker0
+
+# Stopping Docker and removing docker0
+
+$ sudo service docker stop
+
+$ sudo ip link set dev docker0 down
+
+$ sudo brctl delbr docker0
+
+$ sudo iptables -t nat -F POSTROUTING
+
+
+Then, before starting the Docker service, create your own bridge and give it whatever configuration you want. Here we will create a simple enough bridge that we really could just have used the options in the previous section to customize docker0, but it will be enough to illustrate the technique.
+
+
+# Create our own bridge
+
+$ sudo brctl addbr bridge0
+
+$ sudo ip addr add 192.168.5.1/24 dev bridge0
+
+$ sudo ip link set dev bridge0 up
+
+# Confirming that our bridge is up and running
+
+$ ip addr show bridge0
+
+4: bridge0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state UP group default
+    link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.5.1/24 scope global bridge0
+       valid_lft forever preferred_lft forever
+
+# Tell Docker about it and restart (on Ubuntu)
+
+$ echo 'DOCKER_OPTS="-b=bridge0"' >> /etc/default/docker
+
+$ sudo service docker start
+
+# Confirming new outgoing NAT masquerade is set up
+
+$ sudo iptables -t nat -L -n
+
+...
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
+
+
+The result should be that the Docker server starts successfully and is now prepared to bind containers to the new bridge. After pausing to verify the bridgeТs configuration, try creating a container -- you will see that its IP address is in your new IP address range, which Docker will have auto-detected.
+
+
+You can use the brctl show command to see Docker add and remove interfaces from the bridge as you start and stop containers, and can run ip addr and ip route inside a container to see that it has been given an address in the bridgeТs IP address range and has been told to use the Docker hostТs IP address on the bridge as its default gateway to the rest of the Internet.
+
+
+сдесь значит одна проблема есть
+докер не воспринемает параметры из /etc/default/docker
+это проблема некоторых дистр на systemd основаных старт сервисе
+
+например, как это обойти есть в 
+https://docs.master.dockerproject.org/config/daemon/systemd/
+https://docs.docker.com/config/daemon/systemd/
+
+или 
+
+более грубо, как € сделал
+по обсуждению этого в https://github.com/moby/moby/issues/25357
+
+помен€л в 
+/lib/systemd/system/docker.service
+
+в секции [Service]
+ExecStart=/usr/bin/dockerd --bridge br1 --fixed-cidr 164.231.158.218/30 -H fd:// --containerd=/run/containerd/containerd.sock
+
+добавил туда "--bridge br1 --fixed-cidr 164.231.158.218/30"
+(в результате контейнер, стартует с 164.231.158.216 адреса, почему-то...)
+
+потом делаем
+$ systemctl daemon-reload
+$ service docker restart
+
+смотрим , с какой коммандной строкой запустильс€ dockerd
+# ps -ef | grep -i dockerd
+
+
+
+больше параметров дл€ старта dockerd
+https://docs.docker.com/engine/reference/commandline/dockerd/#/linux-configuration-file
+
+
+------------------------------------------------------------------------
