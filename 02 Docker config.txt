@@ -21,12 +21,12 @@ https://docs.docker.com/config/daemon/systemd/
 
 
 
-проверить что docker запущен
+РїСЂРѕРІРµСЂРёС‚СЊ С‡С‚Рѕ docker Р·Р°РїСѓС‰РµРЅ
 
 
 $ service docker status
 
-или опять
+РёР»Рё РѕРїСЏС‚СЊ
 
 $ docker run hello-world
 
@@ -35,15 +35,15 @@ $ docker run hello-world
 
 
 ------------- ------------- ------------- -------------
-Ошибка 139 Exit Code 139
+РћС€РёР±РєР° 139 Exit Code 139
 https://medium.com/better-programming/understanding-docker-container-exit-codes-5ee79a1d58f6#:~:text=Exit%20Code%20139,-This%20indicates%20that&text=SIGSEGV%20indicates%20a%20segmentation%20fault.&text=From%20the%20Docker%20container%20standpoint,images%20used%20by%20the%20container.
 
-бывает так, это из за того что новый kernel - debian 10
-а контейнер запускаем от - debian 7
+Р±С‹РІР°РµС‚ С‚Р°Рє, СЌС‚Рѕ РёР· Р·Р° С‚РѕРіРѕ С‡С‚Рѕ РЅРѕРІС‹Р№ kernel - debian 10
+Р° РєРѕРЅС‚РµР№РЅРµСЂ Р·Р°РїСѓСЃРєР°РµРј РѕС‚ - debian 7
 
-тогда 
+С‚РѕРіРґР° 
 
-рекомендации по устранению
+СЂРµРєРѕРјРµРЅРґР°С†РёРё РїРѕ СѓСЃС‚СЂР°РЅРµРЅРёСЋ
 
 https://github.com/docker/for-linux/issues/58#issuecomment-315150740
 
@@ -51,7 +51,7 @@ Hi, specifying this command in /etc/default/grub:
 
 GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"
 
-потом
+РїРѕС‚РѕРј
 
 $ cd /boot/grub
 
@@ -71,22 +71,22 @@ $ grub-mkconfig > grub.cfg
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
-ВАЖНО!!!!!!!  ЕСЛИ нужно подпортить НОРМАЛЬНОЕ поведение Docker !!!!
+Р’РђР–РќРћ!!!!!!!  Р•РЎР›Р РЅСѓР¶РЅРѕ РїРѕРґРїРѕСЂС‚РёС‚СЊ РќРћР РњРђР›Р¬РќРћР• РїРѕРІРµРґРµРЅРёРµ Docker !!!!
 
-!!!иначе, не делай это!!!!
+!!!РёРЅР°С‡Рµ, РЅРµ РґРµР»Р°Р№ СЌС‚Рѕ!!!!
 
 
-после установки docker - он добавляет свой интерфейс моста docker0
-и добавляет фильтрацию для мостов
+РїРѕСЃР»Рµ СѓСЃС‚Р°РЅРѕРІРєРё docker - РѕРЅ РґРѕР±Р°РІР»СЏРµС‚ СЃРІРѕР№ РёРЅС‚РµСЂС„РµР№СЃ РјРѕСЃС‚Р° docker0
+Рё РґРѕР±Р°РІР»СЏРµС‚ С„РёР»СЊС‚СЂР°С†РёСЋ РґР»СЏ РјРѕСЃС‚РѕРІ
 
-выключить это
-делаем так:  ( https://serverfault.com/questions/963759/docker-breaks-libvirt-bridge-network )
+РІС‹РєР»СЋС‡РёС‚СЊ СЌС‚Рѕ
+РґРµР»Р°РµРј С‚Р°Рє:  ( https://serverfault.com/questions/963759/docker-breaks-libvirt-bridge-network )
 
 echo install br_netfilter /bin/true > /etc/modprobe.d/disable-br-netfilter.conf
 
 
 
-далее 
+РґР°Р»РµРµ 
 
 
 
@@ -95,11 +95,11 @@ echo install br_netfilter /bin/true > /etc/modprobe.d/disable-br-netfilter.conf
 
 https://dker.ru/docs/docker-engine/user-guide/network-configuration/default-bridge-network/build-your-own-bridge/
 
-Переопределить default bridge (docker0) на собственное!!!
+РџРµСЂРµРѕРїСЂРµРґРµР»РёС‚СЊ default bridge (docker0) РЅР° СЃРѕР±СЃС‚РІРµРЅРЅРѕРµ!!!
 
 This section explains how to build your own bridge to replace the Docker default bridge. This is a bridge network named bridge created automatically when you install Docker.
 
-удаляем и removing docker0
+СѓРґР°Р»СЏРµРј Рё removing docker0
 
 # Stopping Docker and removing docker0
 
@@ -148,44 +148,44 @@ target     prot opt source               destination
 MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
 
 
-The result should be that the Docker server starts successfully and is now prepared to bind containers to the new bridge. After pausing to verify the bridge’s configuration, try creating a container -- you will see that its IP address is in your new IP address range, which Docker will have auto-detected.
+The result should be that the Docker server starts successfully and is now prepared to bind containers to the new bridge. After pausing to verify the bridgeвЂ™s configuration, try creating a container -- you will see that its IP address is in your new IP address range, which Docker will have auto-detected.
 
 
-You can use the brctl show command to see Docker add and remove interfaces from the bridge as you start and stop containers, and can run ip addr and ip route inside a container to see that it has been given an address in the bridge’s IP address range and has been told to use the Docker host’s IP address on the bridge as its default gateway to the rest of the Internet.
+You can use the brctl show command to see Docker add and remove interfaces from the bridge as you start and stop containers, and can run ip addr and ip route inside a container to see that it has been given an address in the bridgeвЂ™s IP address range and has been told to use the Docker hostвЂ™s IP address on the bridge as its default gateway to the rest of the Internet.
 
 
-сдесь значит одна проблема есть
-докер не воспринемает параметры из /etc/default/docker
-это проблема некоторых дистр на systemd основаных старт сервисе
+СЃРґРµСЃСЊ Р·РЅР°С‡РёС‚ РѕРґРЅР° РїСЂРѕР±Р»РµРјР° РµСЃС‚СЊ
+РґРѕРєРµСЂ РЅРµ РІРѕСЃРїСЂРёРЅРµРјР°РµС‚ РїР°СЂР°РјРµС‚СЂС‹ РёР· /etc/default/docker
+СЌС‚Рѕ РїСЂРѕР±Р»РµРјР° РЅРµРєРѕС‚РѕСЂС‹С… РґРёСЃС‚СЂ РЅР° systemd РѕСЃРЅРѕРІР°РЅС‹С… СЃС‚Р°СЂС‚ СЃРµСЂРІРёСЃРµ
 
-например, как это обойти есть в 
+РЅР°РїСЂРёРјРµСЂ, РєР°Рє СЌС‚Рѕ РѕР±РѕР№С‚Рё РµСЃС‚СЊ РІ 
 https://docs.master.dockerproject.org/config/daemon/systemd/
 https://docs.docker.com/config/daemon/systemd/
 
-или 
+РёР»Рё 
 
-более грубо, как я сделал
-по обсуждению этого в https://github.com/moby/moby/issues/25357
+Р±РѕР»РµРµ РіСЂСѓР±Рѕ, РєР°Рє СЏ СЃРґРµР»Р°Р»
+РїРѕ РѕР±СЃСѓР¶РґРµРЅРёСЋ СЌС‚РѕРіРѕ РІ https://github.com/moby/moby/issues/25357
 
-поменял в 
+РїРѕРјРµРЅСЏР» РІ 
 /lib/systemd/system/docker.service
 
-в секции [Service]
+РІ СЃРµРєС†РёРё [Service]
 ExecStart=/usr/bin/dockerd --bridge br1 --fixed-cidr 164.231.158.218/30 -H fd:// --containerd=/run/containerd/containerd.sock
 
-добавил туда "--bridge br1 --fixed-cidr 164.231.158.218/30"
-(в результате контейнер, стартует с 164.231.158.216 адреса, почему-то...)
+РґРѕР±Р°РІРёР» С‚СѓРґР° "--bridge br1 --fixed-cidr 164.231.158.218/30"
+(РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РєРѕРЅС‚РµР№РЅРµСЂ, СЃС‚Р°СЂС‚СѓРµС‚ СЃ 164.231.158.216 Р°РґСЂРµСЃР°, РїРѕС‡РµРјСѓ-С‚Рѕ...)
 
-потом делаем
+РїРѕС‚РѕРј РґРµР»Р°РµРј
 $ systemctl daemon-reload
 $ service docker restart
 
-смотрим , с какой коммандной строкой запустилься dockerd
+СЃРјРѕС‚СЂРёРј , СЃ РєР°РєРѕР№ РєРѕРјРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРѕР№ Р·Р°РїСѓСЃС‚РёР»СЊСЃСЏ dockerd
 # ps -ef | grep -i dockerd
 
 
 
-больше параметров для старта dockerd
+Р±РѕР»СЊС€Рµ РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ СЃС‚Р°СЂС‚Р° dockerd
 https://docs.docker.com/engine/reference/commandline/dockerd/#/linux-configuration-file
 
 
