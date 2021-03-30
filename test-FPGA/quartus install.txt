@@ -1,0 +1,68 @@
+есть версия free (у неё есть ограничения, но для хобби "за глаза")
+закачивал так (для платы MAX II)
+sudo ./quartus-install.py 20.1.1lite /opt/intelFPGA/20.1.1lite m2
+скрипт нашел в интернете
+https://github.com/CTSRD-CHERI/quartus-install
+ну или... можно зарегится на сайте intel
+
+
+
+
+
+
+[nvv@localhost ~]$ git clone https://github.com/CTSRD-CHERI/quartus-install.git
+
+
+[nvv@localhost ~]$ cd quartus-install/
+
+
+
+
+[nvv@localhost ~]$ sudo ./quartus-install.py 20.1.1lite /opt/intelFPGA/20.1.1lite m2 c4
+
+
+[nvv@localhost quartus-install]$ sudo /opt/intelFPGA/20.1.1lite/quartus/bin/quartus
+quartus: error while loading shared libraries: libnsl.so.1: cannot open shared object file: No such file or directory
+
+
+[nvv@localhost quartus-install]$ sudo dnf install libnsl
+
+
+
+
+
+
+а еще бы, вот это, как то усановить (starter edition include) 
+https://download.altera.com/akdlm/software/acdsinst/20.1std/711/ib_installers/ModelSimSetup-20.1.0.711-linux.run
+
+и, перед этим еще
+$ dnf install -y make libX11.i686 libXau.i686 libXdmcp.i686 libXext.i686 libXft-devel.i686 libXft.i686 libXrender.i686 libXt.i686 libXtst.i686
+
+GIMP toolkit: GTK+2
+
+Install the following additional RPM packages:
+• 32-bit libraries: unixODBC-libs, unixODBC, ncurses, ncurses-libs, libzmq3, libXext, alsalib,
+libXtst, libXft, libxml2, libedit, libX11, libXi.
+
+$ dnf install -y unixODBC-libs.i686 unixODBC.i686 ncurses.i686 ncurses-libs.i686 libzmq3.i686 libXext.i686 alsalib.i686 libXtst.i686 libXft.i686 libxml2.i686 libedit.i686 libX11.i686 libXi.i686 
+
+Нет соответствия аргументу: unixODBC-libs.i686
+Нет соответствия аргументу: ncurses.i686
+Нет соответствия аргументу: libzmq3.i686
+Пакет libXext-1.3.4-4.fc33.i686 уже установлен.
+Нет соответствия аргументу: alsalib.i686
+
+$ dnf install -y ncurses-libs.i686 ncurses-libs
+
+$ dnf install -y unixODBC.i686 unixODBC
+
+$ dnf install -y libX11 libXau libXdmcp libXext libXft-devel libXft libXrender libXt libXtst
+
+и потом 
+
+$ ModelSimSetup-20.1.0.711-linux.run
+
+все вроде ок !!
+
+
+
