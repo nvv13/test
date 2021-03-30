@@ -1,0 +1,18 @@
+	component unnamed is
+		port (
+			address     : in    std_logic                     := 'X';             -- address
+			chipselect  : in    std_logic                     := 'X';             -- chipselect
+			byteenable  : in    std_logic_vector(3 downto 0)  := (others => 'X'); -- byteenable
+			read        : in    std_logic                     := 'X';             -- read
+			write       : in    std_logic                     := 'X';             -- write
+			writedata   : in    std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			readdata    : out   std_logic_vector(31 downto 0);                    -- readdata
+			waitrequest : out   std_logic;                                        -- waitrequest
+			clk         : in    std_logic                     := 'X';             -- clk
+			PS2_CLK     : inout std_logic                     := 'X';             -- CLK
+			PS2_DAT     : inout std_logic                     := 'X';             -- DAT
+			irq         : out   std_logic;                                        -- irq
+			reset       : in    std_logic                     := 'X'              -- reset
+		);
+	end component unnamed;
+

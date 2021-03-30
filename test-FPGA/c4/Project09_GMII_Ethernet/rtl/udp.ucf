@@ -1,0 +1,61 @@
+
+Net fpga_gclk LOC = V10 | TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 50000 kHz;
+
+#NET CLK_25_ASIC                LOC = T10 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RESET
+
+##
+NET reset_n                                 LOC = N4 | IOSTANDARD = "LVCMOS15"; ##
+##
+
+
+########Ethernet Pin define#####################
+########1G phy Pin define#####################
+#NET e_mdc                  LOC = D17 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet MDC 
+#NET e_mdio                 LOC = G14 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet MDIO
+#NET E_COL                  LOC = H12 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet COL
+#NET E_CRS                  LOC = D18 | IOSTANDARD = "LVCMOS33"; 	  ## Ethernet CRS
+NET e_reset                LOC = J16 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RESET
+NET e_rxdv                 LOC = H15 | IOSTANDARD = "LVCMOS33"; 	  ## Ethernet RXDV
+NET e_rxc                  LOC = L16 | IOSTANDARD = "LVCMOS33"; 	  ## Ethernet RXC
+NET e_rxd<0>               LOC = G13 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD0
+NET e_rxd<1>               LOC = E16 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD1
+NET e_rxd<2>               LOC = E18 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD2
+NET e_rxd<3>               LOC = K12 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD3
+NET e_rxd<4>               LOC = K13 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD4
+NET e_rxd<5>               LOC = F17 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD5
+NET e_rxd<6>               LOC = F18 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD6
+NET e_rxd<7>               LOC = H13 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXD7
+NET e_rxer                 LOC = H14 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet RXER
+NET e_gtxc                 LOC = L15 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet GTXC
+NET e_txc                  LOC = K16 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXC
+NET e_txd<0>               LOC = H16 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD0
+NET e_txd<1>               LOC = G16 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD1
+NET e_txd<2>               LOC = G18 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD2
+NET e_txd<3>               LOC = J13 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD3
+NET e_txd<4>               LOC = K14 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD4
+NET e_txd<5>               LOC = L12 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD5
+NET e_txd<6>               LOC = L13 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD6
+NET e_txd<7>               LOC = K15 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXD7
+NET e_txen                 LOC = K17 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXEN
+NET e_txer                 LOC = J18 | IOSTANDARD = "LVCMOS33";  	  ## Ethernet TXER
+
+Net e_rxc TNM_NET = grxc_clk_pin;
+TIMESPEC TS_grxc_clk_pin = PERIOD grxc_clk_pin 8ns;
+
+Net e_gtxc TNM_NET = gtxc_clk_pin;
+TIMESPEC TS_gtxc_clk_pin = PERIOD gtxc_clk_pin 8ns;
+
+NET "e_txd<?>"  SLEW = FAST;
+NET "e_txen"  SLEW = FAST;
+NET "e_txer"  SLEW = FAST;
+NET "e_gtxc" SLEW = FAST;
+NET "e_txc" SLEW = FAST;
+
+NET "e_rxd<?>"  SLEW = FAST;
+NET "e_rxdv"  SLEW = FAST;
+NET "e_rxer"  SLEW = FAST;
+NET "e_rxc" SLEW = FAST;
+
+//PIN "instance_name/clkout1_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;
+//PIN "instance_name/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;

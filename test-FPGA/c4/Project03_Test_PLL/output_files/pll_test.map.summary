@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Thu Mar  4 12:01:19 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : pll_test
+Top-level Entity Name : pll_test
+Family : Cyclone IV E
+Total logic elements : 62
+    Total combinational functions : 62
+    Dedicated logic registers : 33
+Total registers : 33
+Total pins : 3
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 1

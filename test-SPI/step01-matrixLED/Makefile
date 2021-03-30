@@ -6,7 +6,7 @@ BOARD ?= esp8266-esp-12x
 
 #include ../Makefile.tests_common
 
-RIOTBASE ?= $(CURDIR)/../../RIOT
+RIOTBASE ?= $(CURDIR)/../../../RIOT
 
 FEATURES_REQUIRED += periph_spi
 FEATURES_OPTIONAL += periph_spi_reconfigure

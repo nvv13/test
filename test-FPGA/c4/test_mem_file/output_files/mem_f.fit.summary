@@ -1,0 +1,16 @@
+Fitter Status : Successful - Wed Mar 24 17:17:06 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : mem_f
+Top-level Entity Name : mem_f
+Family : Cyclone IV E
+Device : EP4CE15F23C8
+Timing Models : Final
+Total logic elements : 71 / 15,408 ( < 1 % )
+    Total combinational functions : 71 / 15,408 ( < 1 % )
+    Dedicated logic registers : 43 / 15,408 ( < 1 % )
+Total registers : 43
+Total pins : 3 / 344 ( < 1 % )
+Total virtual pins : 0
+Total memory bits : 0 / 516,096 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 112 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

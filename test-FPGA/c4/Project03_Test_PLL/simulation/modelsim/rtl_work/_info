@@ -1,0 +1,85 @@
+m255
+K3
+13
+cModel Technology
+Z0 dE:\Project\AX530\verilog\6_pll_test\simulation\modelsim
+vpll
+IIM7`[?89aXHg0>BQk]nQ^0
+V4mBg2NY6zIz8b[@60kZR01
+Z1 dE:\Project\AX530\verilog\6_pll_test\simulation\modelsim
+w1443872382
+8E:/Project/AX530/verilog/6_pll_test/ipcore/pll.v
+FE:/Project/AX530/verilog/6_pll_test/ipcore/pll.v
+L0 39
+Z2 OV;L;10.1b;51
+r1
+31
+Z3 o-vlog01compat -work work -O0
+!i10b 1
+!s100 BmDK:J_32bc^he4;o;85K0
+!s85 0
+!s108 1443872427.804000
+!s107 E:/Project/AX530/verilog/6_pll_test/ipcore/pll.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Project/AX530/verilog/6_pll_test/ipcore|E:/Project/AX530/verilog/6_pll_test/ipcore/pll.v|
+!s101 -O0
+!s92 -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test/ipcore -O0
+vpll_altpll
+I1W8eFA?]l2j:V1TX40A]`3
+V?DF8j=RJ_EcKZlDzF;fMW0
+R1
+w1443872390
+8E:/Project/AX530/verilog/6_pll_test/db/pll_altpll.v
+FE:/Project/AX530/verilog/6_pll_test/db/pll_altpll.v
+L0 30
+R2
+r1
+31
+R3
+!i10b 1
+!s100 Az3K?Cg:19E`@S:B1C5=l2
+!s85 0
+!s108 1443872428.132000
+!s107 E:/Project/AX530/verilog/6_pll_test/db/pll_altpll.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Project/AX530/verilog/6_pll_test/db|E:/Project/AX530/verilog/6_pll_test/db/pll_altpll.v|
+!s101 -O0
+!s92 -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test/db -O0
+vpll_test
+IFX`0hbnbCUHImHeMimDo^2
+VFIVYmJlb4`zhLEQFCAij41
+R1
+w1443787771
+8E:/Project/AX530/verilog/6_pll_test/pll_test.v
+FE:/Project/AX530/verilog/6_pll_test/pll_test.v
+L0 5
+R2
+r1
+31
+R3
+!i10b 1
+!s100 289P;ToWIIH:3JaZQ9N>]2
+!s85 0
+!s108 1443872427.991000
+!s107 E:/Project/AX530/verilog/6_pll_test/pll_test.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Project/AX530/verilog/6_pll_test|E:/Project/AX530/verilog/6_pll_test/pll_test.v|
+!s101 -O0
+!s92 -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test -O0
+vpll_test_tb
+!i10b 1
+!s100 G6fdSGkSVh:J;W4GeX?l<3
+I8R1II?:8DiD>gZBJCY3P]0
+VYmC5hE8Jae@Z>25e_@7IY1
+R1
+w1443870331
+8E:/Project/AX530/verilog/6_pll_test/simulation/modelsim/pll_test.vt
+FE:/Project/AX530/verilog/6_pll_test/simulation/modelsim/pll_test.vt
+L0 2
+R2
+r1
+!s85 0
+31
+!s108 1443872428.288000
+!s107 E:/Project/AX530/verilog/6_pll_test/simulation/modelsim/pll_test.vt|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/Project/AX530/verilog/6_pll_test/simulation/modelsim|E:/Project/AX530/verilog/6_pll_test/simulation/modelsim/pll_test.vt|
+!s101 -O0
+R3
+!s92 -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test/simulation/modelsim -O0

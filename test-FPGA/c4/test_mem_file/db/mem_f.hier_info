@@ -1,0 +1,6 @@
+|mem_f
+clock_50Mhz => clock_50Mhz~0.DATAIN
+reset => reset~0.DATAIN
+led <= x_bit.DB_MAX_OUTPUT_PORT_TYPE
+
+

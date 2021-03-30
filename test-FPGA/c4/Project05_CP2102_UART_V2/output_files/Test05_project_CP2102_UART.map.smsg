@@ -1,0 +1,1 @@
+Info (10281): Verilog HDL Declaration information at uart_tx_path.v(12): object "BAUD_DIV" differs only in case from object "baud_div" in the same scope File: E:/Altera/Cyclone_IV/SW/Project05_CP2102_UART_V2/source/uart_tx_path.v Line: 12

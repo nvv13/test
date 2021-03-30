@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Mar  3 12:37:43 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : led7
+Top-level Entity Name : led7
+Family : Cyclone IV E
+Total logic elements : 755
+    Total combinational functions : 755
+    Dedicated logic registers : 63
+Total registers : 63
+Total pins : 13
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

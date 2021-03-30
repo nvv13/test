@@ -1,0 +1,11 @@
+
+State Machine - |hdmi_leds|display:display_inst|color_fixed
+Name color_fixed.111 color_fixed.110 color_fixed.101 color_fixed.100 color_fixed.011 color_fixed.010 color_fixed.001 color_fixed.000 
+color_fixed.000 0 0 0 0 0 0 0 0 
+color_fixed.001 0 0 0 0 0 0 1 1 
+color_fixed.010 0 0 0 0 0 1 0 1 
+color_fixed.011 0 0 0 0 1 0 0 1 
+color_fixed.100 0 0 0 1 0 0 0 1 
+color_fixed.101 0 0 1 0 0 0 0 1 
+color_fixed.110 0 1 0 0 0 0 0 1 
+color_fixed.111 1 0 0 0 0 0 0 1 

@@ -1,0 +1,43 @@
+|top
+LED <= <GND>
+CLK50M => comb.DATAIN
+x_clk => comb.DATAIN
+x_dt => comb.DATAIN
+x_sw => ~NO_FANOUT~
+bus1[0] <= quad:o_quad1.port3
+bus1[1] <= quad:o_quad1.port3
+bus1[2] <= quad:o_quad1.port3
+bus1[3] <= quad:o_quad1.port3
+bus1[4] <= quad:o_quad1.port3
+bus1[5] <= quad:o_quad1.port3
+bus1[6] <= quad:o_quad1.port3
+bus1[7] <= quad:o_quad1.port3
+
+
+|top|quad:o_quad1
+clk => count[0]~reg0.CLK
+clk => count[1]~reg0.CLK
+clk => count[2]~reg0.CLK
+clk => count[3]~reg0.CLK
+clk => count[4]~reg0.CLK
+clk => count[5]~reg0.CLK
+clk => count[6]~reg0.CLK
+clk => count[7]~reg0.CLK
+clk => quadB_delayed[0].CLK
+clk => quadB_delayed[1].CLK
+clk => quadB_delayed[2].CLK
+clk => quadA_delayed[0].CLK
+clk => quadA_delayed[1].CLK
+clk => quadA_delayed[2].CLK
+quadA => quadA_delayed[0].DATAIN
+quadB => quadB_delayed[0].DATAIN
+count[0] <= count[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[1] <= count[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[2] <= count[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[3] <= count[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[4] <= count[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[5] <= count[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[6] <= count[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+count[7] <= count[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+

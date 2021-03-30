@@ -1,0 +1,12 @@
+
+State Machine - |sd_test|sd_state
+Name sd_state.STATUS_IDLE sd_state.STATUS_READ sd_state.STATUS_WRITE sd_state.STATUS_INITIAL 
+sd_state.STATUS_INITIAL 0 0 0 0 
+sd_state.STATUS_WRITE 0 0 1 1 
+sd_state.STATUS_READ 0 1 0 1 
+sd_state.STATUS_IDLE 1 0 0 1 
+
+State Machine - |sd_test|sd_read:sd_read_inst|read_step
+Name read_step.01 
+read_step.00 0 
+read_step.01 1 

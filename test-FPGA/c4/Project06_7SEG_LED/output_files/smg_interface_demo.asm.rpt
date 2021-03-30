@@ -1,0 +1,92 @@
+Assembler report for smg_interface_demo
+Tue Jan 01 12:23:07 2019
+Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Assembler Summary
+  3. Assembler Settings
+  4. Assembler Generated Files
+  5. Assembler Device Options: E:/Altera/Cyclone_IV/SW/Project06_7SEG_LED/output_files/smg_interface_demo.sof
+  6. Assembler Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------+
+; Assembler Summary                                             ;
++-----------------------+---------------------------------------+
+; Assembler Status      ; Successful - Tue Jan 01 12:23:07 2019 ;
+; Revision Name         ; smg_interface_demo                    ;
+; Top-level Entity Name ; smg_interface_demo                    ;
+; Family                ; Cyclone IV E                          ;
+; Device                ; EP4CE15F23C8                          ;
++-----------------------+---------------------------------------+
+
+
++----------------------------------+
+; Assembler Settings               ;
++--------+---------+---------------+
+; Option ; Setting ; Default Value ;
++--------+---------+---------------+
+
+
++--------------------------------------------------------------------------------+
+; Assembler Generated Files                                                      ;
++--------------------------------------------------------------------------------+
+; File Name                                                                      ;
++--------------------------------------------------------------------------------+
+; E:/Altera/Cyclone_IV/SW/Project06_7SEG_LED/output_files/smg_interface_demo.sof ;
++--------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: E:/Altera/Cyclone_IV/SW/Project06_7SEG_LED/output_files/smg_interface_demo.sof ;
++----------------+-----------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                 ;
++----------------+-----------------------------------------------------------------------------------------+
+; Device         ; EP4CE15F23C8                                                                            ;
+; JTAG usercode  ; 0x000D7FE8                                                                              ;
+; Checksum       ; 0x000D7FE8                                                                              ;
++----------------+-----------------------------------------------------------------------------------------+
+
+
++--------------------+
+; Assembler Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Assembler
+    Info: Version 15.1.0 Build 185 10/21/2015 SJ Standard Edition
+    Info: Processing started: Tue Jan 01 12:23:06 2019
+Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off smg_interface_demo -c smg_interface_demo
+Info (115031): Writing out detailed assembly data for power analysis
+Info (115030): Assembler is generating device programming files
+Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4875 megabytes
+    Info: Processing ended: Tue Jan 01 12:23:07 2019
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+

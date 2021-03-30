@@ -1,0 +1,291 @@
+<session jtag_chain="USB-Blaster [USB-0]" jtag_device="@1: EP3C16/EP4CE15 (0x020F20DD)" sof_file="../output_files/ethernet_test.sof">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance enabled="true" entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2015/08/19 16:56:41  #0">
+      <clock name="e_gtxc" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="e_txd[0]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[1]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[2]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[3]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[4]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[5]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[6]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[7]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txen" tap_mode="classic" type="output pin"/>
+          <wire name="ram_rd_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[28]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[29]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[30]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[31]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[9]" tap_mode="classic" type="combinatorial"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="e_txd[0]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[1]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[2]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[3]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[4]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[5]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[6]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[7]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txen" tap_mode="classic" type="output pin"/>
+          <wire name="ram_rd_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[28]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[29]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[30]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[31]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[9]" tap_mode="classic" type="combinatorial"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="e_txd[0]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[1]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[2]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[3]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[4]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[5]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[6]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txd[7]" tap_mode="classic" type="output pin"/>
+          <wire name="e_txen" tap_mode="classic" type="output pin"/>
+          <wire name="ram_rd_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[28]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[29]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[30]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[31]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rd_data[9]" tap_mode="classic" type="combinatorial"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <bus is_signal_inverted="no" link="all" name="e_txd" order="msb_to_lsb" radix="hex" state="collapse" type="output pin">
+            <net is_signal_inverted="no" name="e_txd[7]"/>
+            <net is_signal_inverted="no" name="e_txd[6]"/>
+            <net is_signal_inverted="no" name="e_txd[5]"/>
+            <net is_signal_inverted="no" name="e_txd[4]"/>
+            <net is_signal_inverted="no" name="e_txd[3]"/>
+            <net is_signal_inverted="no" name="e_txd[2]"/>
+            <net is_signal_inverted="no" name="e_txd[1]"/>
+            <net is_signal_inverted="no" name="e_txd[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="e_txen"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rd_data" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rd_data[31]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[30]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[29]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[28]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[27]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[0]"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <bus is_signal_inverted="no" link="all" name="e_txd" order="msb_to_lsb" radix="hex" state="collapse" type="output pin">
+            <net is_signal_inverted="no" name="e_txd[7]"/>
+            <net is_signal_inverted="no" name="e_txd[6]"/>
+            <net is_signal_inverted="no" name="e_txd[5]"/>
+            <net is_signal_inverted="no" name="e_txd[4]"/>
+            <net is_signal_inverted="no" name="e_txd[3]"/>
+            <net is_signal_inverted="no" name="e_txd[2]"/>
+            <net is_signal_inverted="no" name="e_txd[1]"/>
+            <net is_signal_inverted="no" name="e_txd[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="e_txen"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rd_data" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rd_data[31]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[30]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[29]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[28]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[27]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rd_data[0]"/>
+          </bus>
+        </setup_view>
+      </presentation>
+      <trigger CRC="CD5C0FAA" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2015/08/19 16:56:41  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'e_txen' == rising edge
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>00000000000000000000000000000000000000000
+            <pwr_up_transitional>00000000000000000000000000000000000000000</pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="58"/>
+      <single attribute="data vertical scroll position" value="0"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="4"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="32736"/>
+    </position_info>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="config widget visible" value="1"/>
+    <single attribute="data log widget visible" value="1"/>
+    <single attribute="hierarchy widget visible" value="1"/>
+    <single attribute="instance widget visible" value="1"/>
+    <single attribute="jtag widget visible" value="1"/>
+    <multi attribute="frame size" size="2" value="1920,1033"/>
+    <multi attribute="jtag widget size" size="2" value="320,120"/>
+  </global_info>
+</session>

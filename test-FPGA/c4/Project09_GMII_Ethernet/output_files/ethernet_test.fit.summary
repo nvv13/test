@@ -1,0 +1,16 @@
+Fitter Status : Successful - Thu Mar  4 15:27:55 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : ethernet_test
+Top-level Entity Name : ethernet_test
+Family : Cyclone IV E
+Device : EP4CE15F23C8
+Timing Models : Final
+Total logic elements : 2,155 / 15,408 ( 14 % )
+    Total combinational functions : 1,435 / 15,408 ( 9 % )
+    Dedicated logic registers : 1,507 / 15,408 ( 10 % )
+Total registers : 1516
+Total pins : 28 / 344 ( 8 % )
+Total virtual pins : 0
+Total memory bits : 21,632 / 516,096 ( 4 % )
+Embedded Multiplier 9-bit elements : 0 / 112 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

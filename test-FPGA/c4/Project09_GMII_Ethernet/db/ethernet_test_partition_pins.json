@@ -1,0 +1,113 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "e_gtxc",
+					"strict" : false
+				},
+				{
+					"name" : "e_txen",
+					"strict" : false
+				},
+				{
+					"name" : "e_txer",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[0]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[1]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[2]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[3]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[4]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[5]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[6]",
+					"strict" : false
+				},
+				{
+					"name" : "e_txd[7]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxc",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxdv",
+					"strict" : false
+				},
+				{
+					"name" : "reset_n",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[0]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[2]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[1]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[3]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[4]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[6]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[5]",
+					"strict" : false
+				},
+				{
+					"name" : "e_rxd[7]",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tms",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tck",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdi",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdo",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

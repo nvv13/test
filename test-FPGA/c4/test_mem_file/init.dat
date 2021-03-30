@@ -1,0 +1,7 @@
+// Since start_addr =8 memry[0:9] will all be stored as xxxxxxxx.
+@00A //
+10101100 11110000 10000011 11110101 01011010 01001100
+00000000 00000000
+@01E // 5'h1E = 5'd30. Underscore gives readability.
+11001010 000110001
+

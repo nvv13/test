@@ -1,0 +1,454 @@
+Timing Analyzer report for top
+Tue Mar 30 11:19:39 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Fmax Summary
+  6. Setup Summary
+  7. Hold Summary
+  8. Recovery Summary
+  9. Removal Summary
+ 10. Minimum Pulse Width Summary
+ 11. Setup: 'CLK50M'
+ 12. Hold: 'CLK50M'
+ 13. Setup Transfers
+ 14. Hold Transfers
+ 15. Report TCCS
+ 16. Report RSKM
+ 17. Unconstrained Paths Summary
+ 18. Clock Status Summary
+ 19. Unconstrained Input Ports
+ 20. Unconstrained Output Ports
+ 21. Unconstrained Input Ports
+ 22. Unconstrained Output Ports
+ 23. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-----------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                     ;
++-----------------------+-----------------------------------------------------+
+; Quartus Prime Version ; Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Timing Analyzer       ; Legacy Timing Analyzer                              ;
+; Revision Name         ; top                                                 ;
+; Device Family         ; MAX II                                              ;
+; Device Name           ; EPM240T100C5                                        ;
+; Timing Models         ; Final                                               ;
+; Delay Model           ; Slow Model                                          ;
+; Rise/Fall Delays      ; Unavailable                                         ;
++-----------------------+-----------------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                             ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+------------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets    ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+------------+
+; CLK50M     ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { CLK50M } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+------------+
+
+
++--------------------------------------------------+
+; Fmax Summary                                     ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 181.98 MHz ; 181.98 MHz      ; CLK50M     ;      ;
++------------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++---------------------------------+
+; Setup Summary                   ;
++--------+--------+---------------+
+; Clock  ; Slack  ; End Point TNS ;
++--------+--------+---------------+
+; CLK50M ; -4.495 ; -39.709       ;
++--------+--------+---------------+
+
+
++--------------------------------+
+; Hold Summary                   ;
++--------+-------+---------------+
+; Clock  ; Slack ; End Point TNS ;
++--------+-------+---------------+
+; CLK50M ; 1.377 ; 0.000         ;
++--------+-------+---------------+
+
+
+--------------------
+; Recovery Summary ;
+--------------------
+No paths to report.
+
+
+-------------------
+; Removal Summary ;
+-------------------
+No paths to report.
+
+
++---------------------------------+
+; Minimum Pulse Width Summary     ;
++--------+--------+---------------+
+; Clock  ; Slack  ; End Point TNS ;
++--------+--------+---------------+
+; CLK50M ; -2.289 ; -2.289        ;
++--------+--------+---------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'CLK50M'                                                                                                                              ;
++--------+-------------------------------+-------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                     ; To Node                       ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-------------------------------+-------------------------------+--------------+-------------+--------------+------------+------------+
+; -4.495 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 5.162      ;
+; -4.495 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 5.162      ;
+; -4.495 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 5.162      ;
+; -4.255 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.922      ;
+; -4.255 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.922      ;
+; -4.255 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.922      ;
+; -4.255 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.922      ;
+; -4.255 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.922      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.153 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.820      ;
+; -4.002 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.669      ;
+; -4.002 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.669      ;
+; -4.002 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.669      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.691 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.358      ;
+; -3.645 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.312      ;
+; -3.645 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.312      ;
+; -3.645 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.312      ;
+; -3.586 ; quad:o_quad1|count[5]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.253      ;
+; -3.535 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.202      ;
+; -3.463 ; quad:o_quad1|count[5]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.130      ;
+; -3.362 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.029      ;
+; -3.362 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.029      ;
+; -3.362 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 4.029      ;
+; -3.306 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.973      ;
+; -3.306 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.973      ;
+; -3.306 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.973      ;
+; -3.178 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.845      ;
+; -3.108 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.775      ;
+; -3.108 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.775      ;
+; -3.108 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.775      ;
+; -3.055 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.722      ;
+; -2.932 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.599      ;
+; -2.916 ; quad:o_quad1|count[6]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.583      ;
+; -2.895 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.562      ;
+; -2.772 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.439      ;
+; -2.688 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.355      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.652 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.319      ;
+; -2.649 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.316      ;
+; -2.641 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.308      ;
+; -2.616 ; quad:o_quad1|count[5]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.283      ;
+; -2.526 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.193      ;
+; -2.518 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 3.185      ;
+; -2.085 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.752      ;
+; -2.069 ; quad:o_quad1|count[6]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.736      ;
+; -2.046 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.713      ;
+; -1.681 ; quad:o_quad1|count[7]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.348      ;
+; -1.679 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.346      ;
+; -1.671 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.338      ;
+; -1.352 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|quadB_delayed[2] ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.019      ;
+; -1.342 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|quadA_delayed[2] ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 2.009      ;
+; -1.324 ; quad:o_quad1|quadA_delayed[0] ; quad:o_quad1|quadA_delayed[1] ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 1.991      ;
+; -0.931 ; quad:o_quad1|quadB_delayed[0] ; quad:o_quad1|quadB_delayed[1] ; CLK50M       ; CLK50M      ; 1.000        ; 0.000      ; 1.598      ;
++--------+-------------------------------+-------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'CLK50M'                                                                                                                              ;
++-------+-------------------------------+-------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                     ; To Node                       ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-------------------------------+-------------------------------+--------------+-------------+--------------+------------+------------+
+; 1.377 ; quad:o_quad1|quadB_delayed[0] ; quad:o_quad1|quadB_delayed[1] ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 1.598      ;
+; 1.770 ; quad:o_quad1|quadA_delayed[0] ; quad:o_quad1|quadA_delayed[1] ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 1.991      ;
+; 1.788 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|quadA_delayed[2] ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.009      ;
+; 1.798 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|quadB_delayed[2] ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.019      ;
+; 2.117 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.338      ;
+; 2.125 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.346      ;
+; 2.127 ; quad:o_quad1|count[7]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.348      ;
+; 2.175 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.396      ;
+; 2.492 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.713      ;
+; 2.515 ; quad:o_quad1|count[6]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.736      ;
+; 2.531 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.752      ;
+; 2.685 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.906      ;
+; 2.754 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.975      ;
+; 2.755 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.976      ;
+; 2.759 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.980      ;
+; 2.761 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.982      ;
+; 2.762 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.983      ;
+; 2.762 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 2.983      ;
+; 2.949 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.170      ;
+; 2.957 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.178      ;
+; 3.060 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.281      ;
+; 3.062 ; quad:o_quad1|count[5]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.283      ;
+; 3.068 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.289      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.098 ; quad:o_quad1|quadA_delayed[2] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.319      ;
+; 3.134 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.355      ;
+; 3.179 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.400      ;
+; 3.264 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.485      ;
+; 3.265 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.486      ;
+; 3.269 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.490      ;
+; 3.271 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.492      ;
+; 3.272 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.493      ;
+; 3.272 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.493      ;
+; 3.290 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.511      ;
+; 3.347 ; quad:o_quad1|count[6]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.568      ;
+; 3.363 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.584      ;
+; 3.474 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.695      ;
+; 3.529 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.750      ;
+; 3.529 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.750      ;
+; 3.529 ; quad:o_quad1|count[2]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.750      ;
+; 3.585 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.806      ;
+; 3.752 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.973      ;
+; 3.752 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.973      ;
+; 3.752 ; quad:o_quad1|count[4]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.973      ;
+; 3.759 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.980      ;
+; 3.759 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.980      ;
+; 3.759 ; quad:o_quad1|count[0]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 3.980      ;
+; 3.894 ; quad:o_quad1|count[5]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.115      ;
+; 3.966 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.187      ;
+; 4.005 ; quad:o_quad1|count[5]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.226      ;
+; 4.054 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.275      ;
+; 4.054 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.275      ;
+; 4.054 ; quad:o_quad1|count[1]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.275      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[1]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[2]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[3]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[4]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.137 ; quad:o_quad1|quadB_delayed[1] ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.358      ;
+; 4.435 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[5]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.656      ;
+; 4.435 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[6]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.656      ;
+; 4.435 ; quad:o_quad1|count[3]         ; quad:o_quad1|count[7]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.656      ;
+; 4.599 ; quad:o_quad1|quadB_delayed[2] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.820      ;
+; 4.701 ; quad:o_quad1|quadA_delayed[1] ; quad:o_quad1|count[0]         ; CLK50M       ; CLK50M      ; 0.000        ; 0.000      ; 4.922      ;
++-------+-------------------------------+-------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; CLK50M     ; CLK50M   ; 189      ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; CLK50M     ; CLK50M   ; 189      ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No non-DPA dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths Summary                    ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 2     ; 2    ;
+; Unconstrained Input Port Paths  ; 2     ; 2    ;
+; Unconstrained Output Ports      ; 8     ; 8    ;
+; Unconstrained Output Port Paths ; 8     ; 8    ;
++---------------------------------+-------+------+
+
+
++--------------------------------------+
+; Clock Status Summary                 ;
++--------+--------+------+-------------+
+; Target ; Clock  ; Type ; Status      ;
++--------+--------+------+-------------+
+; CLK50M ; CLK50M ; Base ; Constrained ;
++--------+--------+------+-------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; x_clk      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; x_dt       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; bus1[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; x_clk      ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; x_dt       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; bus1[0]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[1]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[4]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[5]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; bus1[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Tue Mar 30 11:19:37 2021
+Info: Command: quartus_sta top -c top
+Info: qsta_default_script.tcl version: #1
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'top.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name CLK50M CLK50M
+Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -4.495
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -4.495             -39.709 CLK50M 
+Info (332146): Worst-case hold slack is 1.377
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     1.377               0.000 CLK50M 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is -2.289
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -2.289              -2.289 CLK50M 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 570 megabytes
+    Info: Processing ended: Tue Mar 30 11:19:39 2021
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+

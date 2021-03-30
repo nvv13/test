@@ -1,0 +1,16 @@
+Fitter Status : Successful - Wed Mar  3 12:38:09 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : led7
+Top-level Entity Name : led7
+Family : Cyclone IV E
+Device : EP4CE15F23C8
+Timing Models : Final
+Total logic elements : 760 / 15,408 ( 5 % )
+    Total combinational functions : 755 / 15,408 ( 5 % )
+    Dedicated logic registers : 63 / 15,408 ( < 1 % )
+Total registers : 63
+Total pins : 13 / 344 ( 4 % )
+Total virtual pins : 0
+Total memory bits : 0 / 516,096 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 112 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

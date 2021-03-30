@@ -1,0 +1,383 @@
+Analysis & Synthesis report for smg_interface_demo
+Thu Mar  4 11:26:22 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Inverted Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Source assignments for Top-level Entity: |smg_interface_demo
+ 13. Parameter Settings for User Entity Instance: demo_control_module:U1
+ 14. Parameter Settings for User Entity Instance: smg_interface:U2
+ 15. Parameter Settings for User Entity Instance: smg_interface:U2|smg_encode_module:U2
+ 16. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Thu Mar  4 11:26:22 2021       ;
+; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name               ; smg_interface_demo                          ;
+; Top-level Entity Name       ; smg_interface_demo                          ;
+; Family                      ; MAX II                                      ;
+; Total logic elements        ; 167                                         ;
+; Total pins                  ; 13                                          ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EPM240T100C5       ;                    ;
+; Top-level entity name                                            ; smg_interface_demo ; smg_interface_demo ;
+; Family name                                                      ; MAX II             ; Cyclone V          ;
+; Maximum processors allowed for parallel compilation              ; All                ;                    ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                     ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                       ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------+---------+
+; rtl/smg_scan_module.v            ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_scan_module.v     ;         ;
+; rtl/smg_interface_demo.v         ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface_demo.v  ;         ;
+; rtl/smg_interface.v              ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface.v       ;         ;
+; rtl/smg_encode_module.v          ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_encode_module.v   ;         ;
+; rtl/smg_control_module.v         ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_control_module.v  ;         ;
+; rtl/demo_control_module.v        ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/demo_control_module.v ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 167   ;
+;     -- Combinational with no register       ; 74    ;
+;     -- Register only                        ; 41    ;
+;     -- Combinational with a register        ; 52    ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 44    ;
+;     -- 3 input functions                    ; 13    ;
+;     -- 2 input functions                    ; 66    ;
+;     -- 1 input functions                    ; 3     ;
+;     -- 0 input functions                    ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 130   ;
+;     -- arithmetic mode                      ; 37    ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 0     ;
+;     -- asynchronous clear/load mode         ; 93    ;
+;                                             ;       ;
+; Total registers                             ; 93    ;
+; Total logic cells in carry chains           ; 39    ;
+; I/O pins                                    ; 13    ;
+; Maximum fan-out node                        ; RSTn  ;
+; Maximum fan-out                             ; 93    ;
+; Total fan-out                               ; 612   ;
+; Average fan-out                             ; 3.40  ;
++---------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                  ;
++-------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node    ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                                        ; Entity Name         ; Library Name ;
++-------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------+---------------------+--------------+
+; |smg_interface_demo           ; 167 (0)     ; 93           ; 0          ; 13   ; 0            ; 74 (0)       ; 41 (0)            ; 52 (0)           ; 39 (0)          ; 0 (0)      ; |smg_interface_demo                                        ; smg_interface_demo  ; work         ;
+;    |demo_control_module:U1|   ; 106 (106)   ; 58           ; 0          ; 0    ; 0            ; 48 (48)      ; 31 (31)           ; 27 (27)          ; 23 (23)         ; 0 (0)      ; |smg_interface_demo|demo_control_module:U1                 ; demo_control_module ; work         ;
+;    |smg_interface:U2|         ; 61 (37)     ; 35           ; 0          ; 0    ; 0            ; 26 (21)      ; 10 (10)           ; 25 (6)           ; 16 (16)         ; 0 (0)      ; |smg_interface_demo|smg_interface:U2                       ; smg_interface       ; work         ;
+;       |smg_control_module:U1| ; 10 (10)     ; 6            ; 0          ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 6 (6)            ; 0 (0)           ; 0 (0)      ; |smg_interface_demo|smg_interface:U2|smg_control_module:U1 ; smg_control_module  ; work         ;
+;       |smg_encode_module:U2|  ; 8 (8)       ; 7            ; 0          ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 7 (7)            ; 0 (0)           ; 0 (0)      ; |smg_interface_demo|smg_interface:U2|smg_encode_module:U2  ; smg_encode_module   ; work         ;
+;       |smg_scan_module:U3|    ; 6 (6)       ; 6            ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 6 (6)            ; 0 (0)           ; 0 (0)      ; |smg_interface_demo|smg_interface:U2|smg_scan_module:U3    ; smg_scan_module     ; work         ;
++-------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------------------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                          ;
++-----------------------------------------------+---------------------------------------------+
+; Register name                                 ; Reason for Removal                          ;
++-----------------------------------------------+---------------------------------------------+
+; smg_interface:U2|smg_scan_module:U3|i[2,3]    ; Stuck at GND due to stuck port data_in      ;
+; smg_interface:U2|smg_control_module:U1|i[2,3] ; Stuck at GND due to stuck port data_in      ;
+; demo_control_module:U1|i[3]                   ; Stuck at GND due to stuck port clock_enable ;
+; Total Number of Removed Registers = 5         ;                                             ;
++-----------------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 93    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 93    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 24    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------+
+; Inverted Register Statistics                            ;
++-----------------------------------------------+---------+
+; Inverted Register                             ; Fan out ;
++-----------------------------------------------+---------+
+; smg_interface:U2|smg_encode_module:U2|rSMG[0] ; 1       ;
+; smg_interface:U2|smg_encode_module:U2|rSMG[1] ; 1       ;
+; smg_interface:U2|smg_encode_module:U2|rSMG[2] ; 1       ;
+; smg_interface:U2|smg_encode_module:U2|rSMG[3] ; 1       ;
+; smg_interface:U2|smg_encode_module:U2|rSMG[4] ; 1       ;
+; smg_interface:U2|smg_encode_module:U2|rSMG[5] ; 1       ;
+; smg_interface:U2|smg_encode_module:U2|rSMG[6] ; 1       ;
+; Total number of inverted registers = 7        ;         ;
++-----------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |smg_interface_demo|smg_interface:U2|smg_control_module:U1|rNumber[2] ;
+; 17:1               ; 4 bits    ; 44 LEs        ; 40 LEs               ; 4 LEs                  ; Yes        ; |smg_interface_demo|demo_control_module:U1|i[3]                       ;
+; 18:1               ; 4 bits    ; 48 LEs        ; 4 LEs                ; 44 LEs                 ; Yes        ; |smg_interface_demo|demo_control_module:U1|rNum[3]                    ;
+; 18:1               ; 4 bits    ; 48 LEs        ; 4 LEs                ; 44 LEs                 ; Yes        ; |smg_interface_demo|demo_control_module:U1|rNum[8]                    ;
+; 18:1               ; 4 bits    ; 48 LEs        ; 4 LEs                ; 44 LEs                 ; Yes        ; |smg_interface_demo|demo_control_module:U1|rNum[4]                    ;
+; 16:1               ; 7 bits    ; 70 LEs        ; 42 LEs               ; 28 LEs                 ; Yes        ; |smg_interface_demo|smg_interface:U2|smg_encode_module:U2|rSMG[1]     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+
+
++--------------------------------------------------------------+
+; Source assignments for Top-level Entity: |smg_interface_demo ;
++-------------+-------------+------+---------------------------+
+; Assignment  ; Value       ; From ; To                        ;
++-------------+-------------+------+---------------------------+
+; LOCATION    ; Pin_50      ; -    ; SMG_Data[6]               ;
+; LOCATION    ; Pin_51      ; -    ; SMG_Data[5]               ;
+; LOCATION    ; Pin_52      ; -    ; SMG_Data[4]               ;
+; LOCATION    ; Pin_53      ; -    ; SMG_Data[3]               ;
+; LOCATION    ; Pin_54      ; -    ; SMG_Data[2]               ;
+; LOCATION    ; Pin_55      ; -    ; SMG_Data[1]               ;
+; LOCATION    ; Pin_56      ; -    ; SMG_Data[0]               ;
+; LOCATION    ; Pin_26      ; -    ; Scan_Sig[3]               ;
+; LOCATION    ; Pin_27      ; -    ; Scan_Sig[2]               ;
+; LOCATION    ; Pin_28      ; -    ; Scan_Sig[1]               ;
+; LOCATION    ; Pin_29      ; -    ; Scan_Sig[0]               ;
+; LOCATION    ; Pin_12      ; -    ; CLK                       ;
+; LOCATION    ; Pin_1       ; -    ; RSTn                      ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[6]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[5]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[4]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[3]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[2]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[1]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; SMG_Data[0]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; Scan_Sig[3]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; Scan_Sig[2]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; Scan_Sig[1]               ;
+; IO_STANDARD ; 3.3-V LVTTL ; -    ; Scan_Sig[0]               ;
++-------------+-------------+------+---------------------------+
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: demo_control_module:U1 ;
++----------------+-------------------------+--------------------------+
+; Parameter Name ; Value                   ; Type                     ;
++----------------+-------------------------+--------------------------+
+; T100MS         ; 10011000100101100111111 ; Unsigned Binary          ;
++----------------+-------------------------+--------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: smg_interface:U2 ;
++----------------+------------------+---------------------------+
+; Parameter Name ; Value            ; Type                      ;
++----------------+------------------+---------------------------+
+; T1MS           ; 1100001101001111 ; Unsigned Binary           ;
++----------------+------------------+---------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: smg_interface:U2|smg_encode_module:U2 ;
++----------------+---------+---------------------------------------------------------+
+; Parameter Name ; Value   ; Type                                                    ;
++----------------+---------+---------------------------------------------------------+
+; _0             ; 1000000 ; Unsigned Binary                                         ;
+; _1             ; 1111001 ; Unsigned Binary                                         ;
+; _2             ; 0100100 ; Unsigned Binary                                         ;
+; _3             ; 0110000 ; Unsigned Binary                                         ;
+; _4             ; 0011001 ; Unsigned Binary                                         ;
+; _5             ; 0010010 ; Unsigned Binary                                         ;
+; _6             ; 0000010 ; Unsigned Binary                                         ;
+; _7             ; 1111000 ; Unsigned Binary                                         ;
+; _8             ; 0000000 ; Unsigned Binary                                         ;
+; _9             ; 0010000 ; Unsigned Binary                                         ;
++----------------+---------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Thu Mar  4 11:26:02 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off smg_interface_demo -c smg_interface_demo
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/smg_scan_module.v
+    Info (12023): Found entity 1: smg_scan_module File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_scan_module.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/smg_interface_demo.v
+    Info (12023): Found entity 1: smg_interface_demo File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface_demo.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/smg_interface.v
+    Info (12023): Found entity 1: smg_interface File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface.v Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/smg_encode_module.v
+    Info (12023): Found entity 1: smg_encode_module File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_encode_module.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/smg_control_module.v
+    Info (12023): Found entity 1: smg_control_module File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_control_module.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/demo_control_module.v
+    Info (12023): Found entity 1: demo_control_module File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/demo_control_module.v Line: 4
+Info (12127): Elaborating entity "smg_interface_demo" for the top level hierarchy
+Info (12128): Elaborating entity "demo_control_module" for hierarchy "demo_control_module:U1" File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface_demo.v Line: 19
+Info (12128): Elaborating entity "smg_interface" for hierarchy "smg_interface:U2" File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface_demo.v Line: 30
+Info (12128): Elaborating entity "smg_control_module" for hierarchy "smg_interface:U2|smg_control_module:U1" File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface.v Line: 43
+Info (12128): Elaborating entity "smg_encode_module" for hierarchy "smg_interface:U2|smg_encode_module:U2" File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface.v Line: 53
+Info (12128): Elaborating entity "smg_scan_module" for hierarchy "smg_interface:U2|smg_scan_module:U3" File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_interface.v Line: 62
+Info (13014): Ignored 2 buffer(s)
+    Info (13019): Ignored 2 SOFT buffer(s)
+Info (18000): Registers with preset signals will power-up high File: /home/nvv/fpga_prg/m2/Project06_7SEG_LED/rtl/smg_encode_module.v Line: 29
+Info (21057): Implemented 180 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 11 output pins
+    Info (21061): Implemented 167 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 558 megabytes
+    Info: Processing ended: Thu Mar  4 11:26:22 2021
+    Info: Elapsed time: 00:00:20
+    Info: Total CPU time (on all processors): 00:00:46
+
+

@@ -1,0 +1,157 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 304 352)
+	(text "unnamed" (rect 126 -1 162 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 336 20 348)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "address" (rect 0 0 31 12)(font "Arial" (font_size 8)))
+		(text "address" (rect 4 61 46 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 112 72)(line_width 1))
+	)
+	(port
+		(pt 0 88)
+		(input)
+		(text "chipselect" (rect 0 0 37 12)(font "Arial" (font_size 8)))
+		(text "chipselect" (rect 4 77 64 88)(font "Arial" (font_size 8)))
+		(line (pt 0 88)(pt 112 88)(line_width 1))
+	)
+	(port
+		(pt 0 104)
+		(input)
+		(text "byteenable[3..0]" (rect 0 0 62 12)(font "Arial" (font_size 8)))
+		(text "byteenable[3..0]" (rect 4 93 100 104)(font "Arial" (font_size 8)))
+		(line (pt 0 104)(pt 112 104)(line_width 3))
+	)
+	(port
+		(pt 0 120)
+		(input)
+		(text "read" (rect 0 0 17 12)(font "Arial" (font_size 8)))
+		(text "read" (rect 4 109 28 120)(font "Arial" (font_size 8)))
+		(line (pt 0 120)(pt 112 120)(line_width 1))
+	)
+	(port
+		(pt 0 136)
+		(input)
+		(text "write" (rect 0 0 17 12)(font "Arial" (font_size 8)))
+		(text "write" (rect 4 125 34 136)(font "Arial" (font_size 8)))
+		(line (pt 0 136)(pt 112 136)(line_width 1))
+	)
+	(port
+		(pt 0 152)
+		(input)
+		(text "writedata[31..0]" (rect 0 0 57 12)(font "Arial" (font_size 8)))
+		(text "writedata[31..0]" (rect 4 141 100 152)(font "Arial" (font_size 8)))
+		(line (pt 0 152)(pt 112 152)(line_width 3))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "clk" (rect 0 0 10 12)(font "Arial" (font_size 8)))
+		(text "clk" (rect 4 213 22 224)(font "Arial" (font_size 8)))
+		(line (pt 0 224)(pt 112 224)(line_width 1))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "reset" (rect 0 0 20 12)(font "Arial" (font_size 8)))
+		(text "reset" (rect 4 309 34 320)(font "Arial" (font_size 8)))
+		(line (pt 0 320)(pt 112 320)(line_width 1))
+	)
+	(port
+		(pt 0 168)
+		(output)
+		(text "readdata[31..0]" (rect 0 0 57 12)(font "Arial" (font_size 8)))
+		(text "readdata[31..0]" (rect 4 157 94 168)(font "Arial" (font_size 8)))
+		(line (pt 0 168)(pt 112 168)(line_width 3))
+	)
+	(port
+		(pt 0 184)
+		(output)
+		(text "waitrequest" (rect 0 0 43 12)(font "Arial" (font_size 8)))
+		(text "waitrequest" (rect 4 173 70 184)(font "Arial" (font_size 8)))
+		(line (pt 0 184)(pt 112 184)(line_width 1))
+	)
+	(port
+		(pt 304 72)
+		(output)
+		(text "irq" (rect 0 0 9 12)(font "Arial" (font_size 8)))
+		(text "irq" (rect 290 61 308 72)(font "Arial" (font_size 8)))
+		(line (pt 304 72)(pt 192 72)(line_width 1))
+	)
+	(port
+		(pt 0 264)
+		(bidir)
+		(text "PS2_CLK" (rect 0 0 42 12)(font "Arial" (font_size 8)))
+		(text "PS2_CLK" (rect 4 253 46 264)(font "Arial" (font_size 8)))
+		(line (pt 0 264)(pt 112 264)(line_width 1))
+	)
+	(port
+		(pt 0 280)
+		(bidir)
+		(text "PS2_DAT" (rect 0 0 43 12)(font "Arial" (font_size 8)))
+		(text "PS2_DAT" (rect 4 269 46 280)(font "Arial" (font_size 8)))
+		(line (pt 0 280)(pt 112 280)(line_width 1))
+	)
+	(drawing
+		(text "avalon_ps2_slave" (rect 9 43 114 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "address" (rect 117 67 276 144)(font "Arial" (color 0 0 0)))
+		(text "chipselect" (rect 117 83 294 176)(font "Arial" (color 0 0 0)))
+		(text "byteenable" (rect 117 99 294 208)(font "Arial" (color 0 0 0)))
+		(text "read" (rect 117 115 258 240)(font "Arial" (color 0 0 0)))
+		(text "write" (rect 117 131 264 272)(font "Arial" (color 0 0 0)))
+		(text "writedata" (rect 117 147 288 304)(font "Arial" (color 0 0 0)))
+		(text "readdata" (rect 117 163 282 336)(font "Arial" (color 0 0 0)))
+		(text "waitrequest" (rect 117 179 300 368)(font "Arial" (color 0 0 0)))
+		(text "clk" (rect 97 195 212 403)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 117 219 252 448)(font "Arial" (color 0 0 0)))
+		(text "external_interface" (rect 8 235 124 483)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "CLK" (rect 117 259 252 528)(font "Arial" (color 0 0 0)))
+		(text "DAT" (rect 117 275 252 560)(font "Arial" (color 0 0 0)))
+		(text "interrupt" (rect 193 43 440 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "irq" (rect 178 67 374 144)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 83 291 196 595)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset" (rect 117 315 264 640)(font "Arial" (color 0 0 0)))
+		(text " unnamed " (rect 263 336 580 682)(font "Arial" ))
+		(line (pt 112 32)(pt 192 32)(line_width 1))
+		(line (pt 192 32)(pt 192 336)(line_width 1))
+		(line (pt 112 336)(pt 192 336)(line_width 1))
+		(line (pt 112 32)(pt 112 336)(line_width 1))
+		(line (pt 113 52)(pt 113 188)(line_width 1))
+		(line (pt 114 52)(pt 114 188)(line_width 1))
+		(line (pt 113 204)(pt 113 228)(line_width 1))
+		(line (pt 114 204)(pt 114 228)(line_width 1))
+		(line (pt 113 244)(pt 113 284)(line_width 1))
+		(line (pt 114 244)(pt 114 284)(line_width 1))
+		(line (pt 191 52)(pt 191 76)(line_width 1))
+		(line (pt 190 52)(pt 190 76)(line_width 1))
+		(line (pt 113 300)(pt 113 324)(line_width 1))
+		(line (pt 114 300)(pt 114 324)(line_width 1))
+		(line (pt 0 0)(pt 304 0)(line_width 1))
+		(line (pt 304 0)(pt 304 352)(line_width 1))
+		(line (pt 0 352)(pt 304 352)(line_width 1))
+		(line (pt 0 0)(pt 0 352)(line_width 1))
+	)
+)

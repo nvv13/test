@@ -1,0 +1,41 @@
+`timescale 1 ns/ 1 ps
+module pll_test_tb();
+// constants                                           
+// general purpose registers
+reg eachvec;
+// test vector input registers
+reg clk;
+reg rst_n;
+// wires                                               
+wire clkout1;
+wire clkout2;
+wire clkout3;
+wire clkout4;
+
+// assign statements (if any)                          
+pll_test i1 (
+// port map - connection between master ports and signals/registers   
+	.clk(clk),
+	.clkout1(clkout1),
+	.clkout2(clkout2),
+	.clkout3(clkout3),
+	.clkout4(clkout4),
+	.rst_n(rst_n)
+);
+	initial begin
+		// Initialize Inputs
+		clk = 0;
+		rst_n = 0;
+
+		// Wait 100 ns for global reset to finish
+		#100;
+       rst_n = 1;        
+		// Add stimulus here
+		#2000;
+	end
+   
+   always #10 clk = ~ clk; //产生50MHz时钟源
+	
+                                                   
+endmodule
+

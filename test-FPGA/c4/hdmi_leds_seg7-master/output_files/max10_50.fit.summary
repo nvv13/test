@@ -1,0 +1,16 @@
+Fitter Status : Successful - Wed Mar 24 10:41:12 2021
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : max10_50
+Top-level Entity Name : hdmi_leds
+Family : Cyclone IV E
+Device : EP4CE15F23C8
+Timing Models : Final
+Total logic elements : 357 / 15,408 ( 2 % )
+    Total combinational functions : 337 / 15,408 ( 2 % )
+    Dedicated logic registers : 203 / 15,408 ( 1 % )
+Total registers : 219
+Total pins : 59 / 344 ( 17 % )
+Total virtual pins : 0
+Total memory bits : 0 / 516,096 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 112 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )

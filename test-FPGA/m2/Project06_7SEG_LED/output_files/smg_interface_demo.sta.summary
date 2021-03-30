@@ -1,0 +1,29 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Setup 'CLK'
+Slack : -7.182
+TNS   : -409.924
+
+Type  : Setup 'smg_interface:U2|C1[0]'
+Slack : -3.801
+TNS   : -54.927
+
+Type  : Hold 'smg_interface:U2|C1[0]'
+Slack : -2.676
+TNS   : -9.418
+
+Type  : Hold 'CLK'
+Slack : 0.413
+TNS   : 0.000
+
+Type  : Minimum Pulse Width 'CLK'
+Slack : -2.289
+TNS   : -2.289
+
+Type  : Minimum Pulse Width 'smg_interface:U2|C1[0]'
+Slack : 0.234
+TNS   : 0.000
+
+------------------------------------------------------------

@@ -1,0 +1,30 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /home/nvv/fpga_prg/c4/tst1_led7/unnamed.qsys --block-symbol-file --output-directory=/home/nvv/fpga_prg/c4/tst1_led7/unnamed --family="Cyclone IV E" --part=EP4CE15F23C8
+Progress: Loading tst1_led7/unnamed.qsys
+Progress: Reading input file
+Progress: Adding ps2_0 [altera_up_avalon_ps2 18.0]
+Progress: Parameterizing module ps2_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/nvv/fpga_prg/c4/tst1_led7/unnamed.qsys --synthesis=VERILOG --output-directory=/home/nvv/fpga_prg/c4/tst1_led7/unnamed/synthesis --family="Cyclone IV E" --part=EP4CE15F23C8
+Progress: Loading tst1_led7/unnamed.qsys
+Progress: Reading input file
+Progress: Adding ps2_0 [altera_up_avalon_ps2 18.0]
+Progress: Parameterizing module ps2_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: unnamed: Generating unnamed "unnamed" for QUARTUS_SYNTH
+Info: ps2_0: Starting Generation of PS2 Controller
+Error: ps2_0: The input clock frequency must be known at generation time.
+Info: ps2_0: "unnamed" instantiated altera_up_avalon_ps2 "ps2_0"
+Info: unnamed: Done "unnamed" with 2 modules, 5 files
+Error: qsys-generate failed with exit code 1: 1 Error, 0 Warnings
+Info: Finished: Create HDL design files for synthesis

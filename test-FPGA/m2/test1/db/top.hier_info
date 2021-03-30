@@ -1,0 +1,65 @@
+|top
+LED <= tic1sec:o_tic1sec2.port0
+CLK => comb.DATAIN
+
+
+|top|tic1sec:o_tic1sec1
+clk1sec <= counter[25].DB_MAX_OUTPUT_PORT_TYPE
+clk50mz => counter[0].CLK
+clk50mz => counter[1].CLK
+clk50mz => counter[2].CLK
+clk50mz => counter[3].CLK
+clk50mz => counter[4].CLK
+clk50mz => counter[5].CLK
+clk50mz => counter[6].CLK
+clk50mz => counter[7].CLK
+clk50mz => counter[8].CLK
+clk50mz => counter[9].CLK
+clk50mz => counter[10].CLK
+clk50mz => counter[11].CLK
+clk50mz => counter[12].CLK
+clk50mz => counter[13].CLK
+clk50mz => counter[14].CLK
+clk50mz => counter[15].CLK
+clk50mz => counter[16].CLK
+clk50mz => counter[17].CLK
+clk50mz => counter[18].CLK
+clk50mz => counter[19].CLK
+clk50mz => counter[20].CLK
+clk50mz => counter[21].CLK
+clk50mz => counter[22].CLK
+clk50mz => counter[23].CLK
+clk50mz => counter[24].CLK
+clk50mz => counter[25].CLK
+
+
+|top|tic1sec:o_tic1sec2
+clk1sec <= counter[25].DB_MAX_OUTPUT_PORT_TYPE
+clk50mz => counter[0].CLK
+clk50mz => counter[1].CLK
+clk50mz => counter[2].CLK
+clk50mz => counter[3].CLK
+clk50mz => counter[4].CLK
+clk50mz => counter[5].CLK
+clk50mz => counter[6].CLK
+clk50mz => counter[7].CLK
+clk50mz => counter[8].CLK
+clk50mz => counter[9].CLK
+clk50mz => counter[10].CLK
+clk50mz => counter[11].CLK
+clk50mz => counter[12].CLK
+clk50mz => counter[13].CLK
+clk50mz => counter[14].CLK
+clk50mz => counter[15].CLK
+clk50mz => counter[16].CLK
+clk50mz => counter[17].CLK
+clk50mz => counter[18].CLK
+clk50mz => counter[19].CLK
+clk50mz => counter[20].CLK
+clk50mz => counter[21].CLK
+clk50mz => counter[22].CLK
+clk50mz => counter[23].CLK
+clk50mz => counter[24].CLK
+clk50mz => counter[25].CLK
+
+

@@ -1,0 +1,16 @@
+|led7
+clock_50Mhz => clock_50Mhz~0.DATAIN
+reset => reset~0.DATAIN
+Anode_Activate[0] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+Anode_Activate[1] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+Anode_Activate[2] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+Anode_Activate[3] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[0] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[1] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[2] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[3] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[4] <= Decoder1.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[5] <= LED_out.DB_MAX_OUTPUT_PORT_TYPE
+LED_out[6] <= LED_out.DB_MAX_OUTPUT_PORT_TYPE
+
+

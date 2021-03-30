@@ -1,0 +1,16 @@
+Fitter Status : Successful - Tue Jan 01 12:23:00 2019
+Quartus Prime Version : 15.1.0 Build 185 10/21/2015 SJ Standard Edition
+Revision Name : smg_interface_demo
+Top-level Entity Name : smg_interface_demo
+Family : Cyclone IV E
+Device : EP4CE15F23C8
+Timing Models : Final
+Total logic elements : 117 / 15,408 ( < 1 % )
+    Total combinational functions : 109 / 15,408 ( < 1 % )
+    Dedicated logic registers : 79 / 15,408 ( < 1 % )
+Total registers : 79
+Total pins : 13 / 344 ( 4 % )
+Total virtual pins : 0
+Total memory bits : 0 / 516,096 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 112 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

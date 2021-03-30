@@ -1,0 +1,63 @@
+# Reading C:/altera/12.1/modelsim_ase/tcl/vsim/pref.tcl 
+# do pll_test_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying c:\altera\12.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied c:\altera\12.1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test/ipcore {E:/Project/AX530/verilog/6_pll_test/ipcore/pll.v}
+# Model Technology ModelSim ALTERA vlog 10.1b Compiler 2012.04 Apr 27 2012
+# -- Compiling module pll
+# 
+# Top level modules:
+# 	pll
+# vlog -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test {E:/Project/AX530/verilog/6_pll_test/pll_test.v}
+# Model Technology ModelSim ALTERA vlog 10.1b Compiler 2012.04 Apr 27 2012
+# -- Compiling module pll_test
+# 
+# Top level modules:
+# 	pll_test
+# vlog -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test/db {E:/Project/AX530/verilog/6_pll_test/db/pll_altpll.v}
+# Model Technology ModelSim ALTERA vlog 10.1b Compiler 2012.04 Apr 27 2012
+# -- Compiling module pll_altpll
+# 
+# Top level modules:
+# 	pll_altpll
+# 
+# vlog -vlog01compat -work work +incdir+E:/Project/AX530/verilog/6_pll_test/simulation/modelsim {E:/Project/AX530/verilog/6_pll_test/simulation/modelsim/pll_test.vt}
+# Model Technology ModelSim ALTERA vlog 10.1b Compiler 2012.04 Apr 27 2012
+# -- Compiling module pll_test_tb
+# 
+# Top level modules:
+# 	pll_test_tb
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  pll_test_tb
+# vsim -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=\"+acc\" -t 1ps pll_test_tb 
+# Loading work.pll_test_tb
+# Loading work.pll_test
+# Loading work.pll
+# Loading altera_mf_ver.altpll
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.pll_iobuf
+# Loading altera_mf_ver.MF_cycloneiii_pll
+# Loading altera_mf_ver.cda_m_cntr
+# Loading altera_mf_ver.cda_n_cntr
+# Loading altera_mf_ver.cda_scale_cntr
+# ** Error: (vsim-3193) Load of "c:\altera\12.1\modelsim_ase\win32aloem\imagehlp.dll" failed: File not found.
+# 
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+#  Note : Cyclone IV E PLL was reset
+# Time: 0  Instance: pll_test_tb.i1.pll_inst.altpll_component.cycloneiii_pll.pll3
+#  Note : Cyclone IV E PLL locked to incoming clock
+# Time: 190000  Instance: pll_test_tb.i1.pll_inst.altpll_component.cycloneiii_pll.pll3

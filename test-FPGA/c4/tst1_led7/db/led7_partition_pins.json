@@ -1,0 +1,61 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Anode_Activate[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Anode_Activate[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Anode_Activate[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Anode_Activate[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LED_out[6]",
+					"strict" : false
+				},
+				{
+					"name" : "clock_50Mhz",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

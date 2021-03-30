@@ -1,0 +1,29 @@
+This project implements "virtual LEDs" and "virtual 7-segment indicator" displayed on HDMI interface 
+of Marsohod3 FPGA board (https://marsohod.org/howtostart/plata-marsokhod3).
+
+Board has only 8 yellow LEDs and some people may need to display more info.
+Besides that, board has HDMI output, so additional info can be displayed on attached monitor.
+
+This project does not have framebuffer of something like this..
+
+It displays binary info like you have additional LEDs outputs:
+
+module display 
+		(
+		input wire reset,
+		input wire clk_video,	//74MHz
+		input wire clk_hdmi,	//370MHz
+		input wire [NUM_RED_LEDS-1:0]red_leds,
+		input wire [NUM_GREEN_LEDS-1:0]green_leds,
+		input wire [NUM_SEGMENTS*4-1:0]segments,
+		//HDMI output
+		output wire [7:0]TMDS
+	   );
+	   
+parameter NUM_RED_LEDS = 16;
+parameter NUM_GREEN_LEDS = 16;
+parameter NUM_SEGMENTS = 6;
+
+
+
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags="INTERNAL_COMPONENT=true"
+   categories="" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element ps2_0
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="device" value="EP4CE15F23C8" />
+ <parameter name="deviceFamily" value="Cyclone IV E" />
+ <parameter name="deviceSpeedGrade" value="8" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="hideFromIPCatalog" value="true" />
+ <parameter name="lockedInterfaceDefinition" value="" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="0" />
+ <parameter name="testBenchDutName" value="" />
+ <parameter name="timeStamp" value="0" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface
+   name="avalon_ps2_command_sink"
+   internal="ps2_0.avalon_ps2_command_sink" />
+ <interface name="avalon_ps2_data_source" internal="ps2_0.avalon_ps2_data_source" />
+ <interface
+   name="avalon_ps2_slave"
+   internal="ps2_0.avalon_ps2_slave"
+   type="avalon"
+   dir="end">
+  <port name="address" internal="address" />
+  <port name="chipselect" internal="chipselect" />
+  <port name="byteenable" internal="byteenable" />
+  <port name="read" internal="read" />
+  <port name="write" internal="write" />
+  <port name="writedata" internal="writedata" />
+  <port name="readdata" internal="readdata" />
+  <port name="waitrequest" internal="waitrequest" />
+ </interface>
+ <interface name="clk" internal="ps2_0.clk" type="clock" dir="end">
+  <port name="clk" internal="clk" />
+ </interface>
+ <interface
+   name="external_interface"
+   internal="ps2_0.external_interface"
+   type="conduit"
+   dir="end">
+  <port name="PS2_CLK" internal="PS2_CLK" />
+  <port name="PS2_DAT" internal="PS2_DAT" />
+ </interface>
+ <interface
+   name="interrupt"
+   internal="ps2_0.interrupt"
+   type="interrupt"
+   dir="end">
+  <port name="irq" internal="irq" />
+ </interface>
+ <interface name="reset" internal="ps2_0.reset" type="reset" dir="end">
+  <port name="reset" internal="reset" />
+ </interface>
+ <module
+   name="ps2_0"
+   kind="altera_up_avalon_ps2"
+   version="18.0"
+   enabled="1"
+   autoexport="1">
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="0" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="avalon_bus_type" value="Memory Mapped" />
+ </module>
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
+ <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+</system>

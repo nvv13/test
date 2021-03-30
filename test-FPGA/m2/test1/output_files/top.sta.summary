@@ -1,0 +1,29 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Setup 'CLK'
+Slack : -4.568
+TNS   : -97.888
+
+Type  : Setup 'tic1sec:o_tic1sec1|counter[25]'
+Slack : -4.568
+TNS   : -97.888
+
+Type  : Hold 'CLK'
+Slack : -1.607
+TNS   : -1.607
+
+Type  : Hold 'tic1sec:o_tic1sec1|counter[25]'
+Slack : 1.668
+TNS   : 0.000
+
+Type  : Minimum Pulse Width 'CLK'
+Slack : -2.289
+TNS   : -2.289
+
+Type  : Minimum Pulse Width 'tic1sec:o_tic1sec1|counter[25]'
+Slack : 0.234
+TNS   : 0.000
+
+------------------------------------------------------------

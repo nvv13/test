@@ -1,0 +1,57 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "SMG_Data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "SMG_Data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "SMG_Data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "SMG_Data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "SMG_Data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "SMG_Data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "SMG_Data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Scan_Sig[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Scan_Sig[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Scan_Sig[2]",
+					"strict" : false
+				},
+				{
+					"name" : "CLK",
+					"strict" : false
+				},
+				{
+					"name" : "RSTn",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

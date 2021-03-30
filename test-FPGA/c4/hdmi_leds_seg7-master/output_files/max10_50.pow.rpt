@@ -1,0 +1,388 @@
+Power Analyzer report for max10_50
+Wed Mar 24 10:41:35 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Parallel Compilation
+  3. Power Analyzer Summary
+  4. Power Analyzer Settings
+  5. Indeterminate Toggle Rates
+  6. Operating Conditions Used
+  7. Thermal Power Dissipation by Block
+  8. Thermal Power Dissipation by Block Type
+  9. Thermal Power Dissipation by Hierarchy
+ 10. Core Dynamic Thermal Power Dissipation by Clock Domain
+ 11. Current Drawn from Voltage Supplies Summary
+ 12. VCCIO Supply Current Drawn by I/O Bank
+ 13. VCCIO Supply Current Drawn by Voltage
+ 14. Confidence Metric Details
+ 15. Signal Activities
+ 16. Power Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.03        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.9%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------+
+; Power Analyzer Summary                                                                    ;
++----------------------------------------+--------------------------------------------------+
+; Power Analyzer Status                  ; Successful - Wed Mar 24 10:41:35 2021            ;
+; Quartus Prime Version                  ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition      ;
+; Revision Name                          ; max10_50                                         ;
+; Top-level Entity Name                  ; hdmi_leds                                        ;
+; Family                                 ; Cyclone IV E                                     ;
+; Device                                 ; EP4CE15F23C8                                     ;
+; Power Models                           ; Final                                            ;
+; Total Thermal Power Dissipation        ; 90.57 mW                                         ;
+; Core Dynamic Thermal Power Dissipation ; 5.57 mW                                          ;
+; Core Static Thermal Power Dissipation  ; 54.26 mW                                         ;
+; I/O Thermal Power Dissipation          ; 30.75 mW                                         ;
+; Power Estimation Confidence            ; Low: user provided insufficient toggle rate data ;
++----------------------------------------+--------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Power Analyzer Settings                                                                                                  ;
++------------------------------------------------------------------+---------------------------------------+---------------+
+; Option                                                           ; Setting                               ; Default Value ;
++------------------------------------------------------------------+---------------------------------------+---------------+
+; Maximum processors allowed for parallel compilation              ; All                                   ;               ;
+; Use smart compilation                                            ; Off                                   ; Off           ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                                    ; On            ;
+; Enable compact report table                                      ; Off                                   ; Off           ;
+; Default Power Input I/O Toggle Rate                              ; 12.5%                                 ; 12.5%         ;
+; Preset Cooling Solution                                          ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ;               ;
+; Board thermal model                                              ; None (CONSERVATIVE)                   ;               ;
+; Default Power Toggle Rate                                        ; 12.5%                                 ; 12.5%         ;
+; Use vectorless estimation                                        ; On                                    ; On            ;
+; Use Input Files                                                  ; Off                                   ; Off           ;
+; Filter Glitches in VCD File Reader                               ; On                                    ; On            ;
+; Power Analyzer Report Signal Activity                            ; Off                                   ; Off           ;
+; Power Analyzer Report Power Dissipation                          ; Off                                   ; Off           ;
+; Device Power Characteristics                                     ; TYPICAL                               ; TYPICAL       ;
+; Automatically Compute Junction Temperature                       ; On                                    ; On            ;
+; Specified Junction Temperature                                   ; 25                                    ; 25            ;
+; Ambient Temperature                                              ; 25                                    ; 25            ;
+; Use Custom Cooling Solution                                      ; Off                                   ; Off           ;
+; Board Temperature                                                ; 25                                    ; 25            ;
++------------------------------------------------------------------+---------------------------------------+---------------+
+
+
++----------------------------------------+
+; Indeterminate Toggle Rates             ;
++----------+-----------------------------+
+; Node     ; Reason                      ;
++----------+-----------------------------+
+; FTDI_BD0 ; No valid clock domain found ;
+; FTDI_BD1 ; No valid clock domain found ;
+; FTDI_BD2 ; No valid clock domain found ;
+; FTDI_BD3 ; No valid clock domain found ;
+; FTD[0]   ; No valid clock domain found ;
+; FTD[1]   ; No valid clock domain found ;
+; FTD[2]   ; No valid clock domain found ;
+; FTD[3]   ; No valid clock domain found ;
+; FTD[4]   ; No valid clock domain found ;
+; FTD[5]   ; No valid clock domain found ;
+; FTD[6]   ; No valid clock domain found ;
+; FTD[7]   ; No valid clock domain found ;
+; FTC[0]   ; No valid clock domain found ;
+; FTC[1]   ; No valid clock domain found ;
+; FTC[2]   ; No valid clock domain found ;
+; FTC[3]   ; No valid clock domain found ;
+; FTC[4]   ; No valid clock domain found ;
+; FTC[5]   ; No valid clock domain found ;
+; FTC[6]   ; No valid clock domain found ;
+; FTC[7]   ; No valid clock domain found ;
+; IO[0]    ; No valid clock domain found ;
+; IO[1]    ; No valid clock domain found ;
+; IO[2]    ; No valid clock domain found ;
+; IO[3]    ; No valid clock domain found ;
+; IO[4]    ; No valid clock domain found ;
+; IO[5]    ; No valid clock domain found ;
+; IO[6]    ; No valid clock domain found ;
+; IO[7]    ; No valid clock domain found ;
+; IO[8]    ; No valid clock domain found ;
+; IO[9]    ; No valid clock domain found ;
+; IO[10]   ; No valid clock domain found ;
+; IO[11]   ; No valid clock domain found ;
+; IO[12]   ; No valid clock domain found ;
+; IO[13]   ; No valid clock domain found ;
+; IO[14]   ; No valid clock domain found ;
+; IO[15]   ; No valid clock domain found ;
+; IO[16]   ; No valid clock domain found ;
+; IO[17]   ; No valid clock domain found ;
+; IO[18]   ; No valid clock domain found ;
+; IO[19]   ; No valid clock domain found ;
+; KEY0     ; No valid clock domain found ;
++----------+-----------------------------+
+
+
++-------------------------------------------------------------------------+
+; Operating Conditions Used                                               ;
++---------------------------------------------+---------------------------+
+; Setting                                     ; Value                     ;
++---------------------------------------------+---------------------------+
+; Device power characteristics                ; Typical                   ;
+;                                             ;                           ;
+; Voltages                                    ;                           ;
+;     VCCINT                                  ; 1.20 V                    ;
+;     VCCA                                    ; 2.50 V                    ;
+;     VCCD                                    ; 1.20 V                    ;
+;     2.5 V I/O Standard                      ; 2.5 V                     ;
+;                                             ;                           ;
+; Auto computed junction temperature          ; 26.2 degrees Celsius      ;
+;     Ambient temperature                     ; 25.0 degrees Celsius      ;
+;     Junction-to-Case thermal resistance     ; 9.60 degrees Celsius/Watt ;
+;     Case-to-Heat Sink thermal resistance    ; 0.10 degrees Celsius/Watt ;
+;     Heat Sink-to-Ambient thermal resistance ; 3.50 degrees Celsius/Watt ;
+;                                             ;                           ;
+; Board model used                            ; None                      ;
++---------------------------------------------+---------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Thermal Power Dissipation by Block                                                                                                           ;
++------------+------------+---------------------+-----------------------------+--------------------------------+-------------------------------+
+; Block Name ; Block Type ; Total Thermal Power ; Block Thermal Dynamic Power ; Block Thermal Static Power (1) ; Routing Thermal Dynamic Power ;
++------------+------------+---------------------+-----------------------------+--------------------------------+-------------------------------+
+(1) The "Thermal Power Dissipation by Block" Table has been hidden. To show this table, please select the "Write power dissipation by block to report file" option under "PowerPlay Power Analyzer Settings".
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Thermal Power Dissipation by Block Type                                                                                                                                                                                              ;
++---------------------------------------+-----------------------------------+-----------------------------+--------------------------------+-------------------------------+-----------------------------------------------------------+
+; Block Type                            ; Total Thermal Power by Block Type ; Block Thermal Dynamic Power ; Block Thermal Static Power (1) ; Routing Thermal Dynamic Power ; Block Average Toggle Rate (millions of transitions / sec) ;
++---------------------------------------+-----------------------------------+-----------------------------+--------------------------------+-------------------------------+-----------------------------------------------------------+
+; PLL                                   ; 2.96 mW                           ; 2.96 mW                     ; --                             ; 0.00 mW                       ;    6.250                                                  ;
+; Combinational cell                    ; 1.14 mW                           ; 0.72 mW                     ; --                             ; 0.42 mW                       ;   15.918                                                  ;
+; Clock control block                   ; 0.43 mW                           ; 0.00 mW                     ; --                             ; 0.43 mW                       ;    9.375                                                  ;
+; Register cell                         ; 1.03 mW                           ; 0.39 mW                     ; --                             ; 0.64 mW                       ;   12.500                                                  ;
+; Double Data Rate I/O Output Circuitry ; 0.05 mW                           ; 0.05 mW                     ; --                             ; 0.00 mW                       ;    0.000                                                  ;
+; I/O                                   ; 10.11 mW                          ; 0.33 mW                     ; 9.77 mW                        ; 0.01 mW                       ;    3.320                                                  ;
++---------------------------------------+-----------------------------------+-----------------------------+--------------------------------+-------------------------------+-----------------------------------------------------------+
+(1) The "Block Thermal Static Power" for all block types except Pins and the Voltage Regulator, if one exists, is part of the "Core Static Thermal Power Dissipation" value found on the PowerPlay Power Analyzer-->Summary report panel. The "Core Static Thermal Power Dissipation" also contains the thermal static power dissipated by the routing.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Thermal Power Dissipation by Hierarchy                                                                                                                                                                                                                                                                               ;
++------------------------------------------------+--------------------------------------+---------------------------------+-----------------------------------+-----------------------------------+--------------------------------------------------------------------------------------------------------------------+
+; Compilation Hierarchy Node                     ; Total Thermal Power by Hierarchy (1) ; Block Thermal Dynamic Power (1) ; Block Thermal Static Power (1)(2) ; Routing Thermal Dynamic Power (1) ; Full Hierarchy Name                                                                                                ;
++------------------------------------------------+--------------------------------------+---------------------------------+-----------------------------------+-----------------------------------+--------------------------------------------------------------------------------------------------------------------+
+; |hdmi_leds                                     ; 15.71 mW (10.32 mW)                  ; 4.44 mW (0.46 mW)               ; 9.77 mW (9.77 mW)                 ; 1.51 mW (0.10 mW)                 ; |hdmi_leds                                                                                                         ;
+;     |hard_block:auto_generated_inst            ; 0.00 mW (0.00 mW)                    ; 0.00 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|hard_block:auto_generated_inst                                                                          ;
+;     |display:display_inst                      ; 2.08 mW (1.25 mW)                    ; 1.02 mW (0.59 mW)               ; --                                ; 1.06 mW (0.67 mW)                 ; |hdmi_leds|display:display_inst                                                                                    ;
+;         |altddio_out1:u_ddio0                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio0                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio0|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio0|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio1                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio1                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio1|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio1|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio2                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio2                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio2|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio2|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio3                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio3                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio3|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio3|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio4                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio4                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio4|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio4|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio5                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio5                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio5|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio5|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio6                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio6                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio6|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio6|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |altddio_out1:u_ddio7                  ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio7                                                               ;
+;             |altddio_out:ALTDDIO_OUT_component ; 0.01 mW (0.00 mW)                    ; 0.01 mW (0.00 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio7|altddio_out:ALTDDIO_OUT_component                             ;
+;                 |ddio_out_p9j:auto_generated   ; 0.01 mW (0.01 mW)                    ; 0.01 mW (0.01 mW)               ; --                                ; 0.00 mW (0.00 mW)                 ; |hdmi_leds|display:display_inst|altddio_out1:u_ddio7|altddio_out:ALTDDIO_OUT_component|ddio_out_p9j:auto_generated ;
+;         |hdmi:u_hdmi                           ; 0.40 mW (0.17 mW)                    ; 0.27 mW (0.12 mW)               ; --                                ; 0.13 mW (0.05 mW)                 ; |hdmi_leds|display:display_inst|hdmi:u_hdmi                                                                        ;
+;             |TMDS_encoder:encode_B             ; 0.07 mW (0.07 mW)                    ; 0.04 mW (0.04 mW)               ; --                                ; 0.02 mW (0.02 mW)                 ; |hdmi_leds|display:display_inst|hdmi:u_hdmi|TMDS_encoder:encode_B                                                  ;
+;             |TMDS_encoder:encode_G             ; 0.09 mW (0.09 mW)                    ; 0.06 mW (0.06 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |hdmi_leds|display:display_inst|hdmi:u_hdmi|TMDS_encoder:encode_G                                                  ;
+;             |TMDS_encoder:encode_R             ; 0.08 mW (0.08 mW)                    ; 0.05 mW (0.05 mW)               ; --                                ; 0.03 mW (0.03 mW)                 ; |hdmi_leds|display:display_inst|hdmi:u_hdmi|TMDS_encoder:encode_R                                                  ;
+;         |hvsync:u_hvsync                       ; 0.39 mW (0.39 mW)                    ; 0.12 mW (0.12 mW)               ; --                                ; 0.27 mW (0.27 mW)                 ; |hdmi_leds|display:display_inst|hvsync:u_hvsync                                                                    ;
+;     |mypll:mypll_inst                          ; 3.31 mW (0.00 mW)                    ; 2.96 mW (0.00 mW)               ; --                                ; 0.35 mW (0.00 mW)                 ; |hdmi_leds|mypll:mypll_inst                                                                                        ;
+;         |altpll:altpll_component               ; 3.31 mW (0.00 mW)                    ; 2.96 mW (0.00 mW)               ; --                                ; 0.35 mW (0.00 mW)                 ; |hdmi_leds|mypll:mypll_inst|altpll:altpll_component                                                                ;
+;             |pll_altpll:auto_generated         ; 3.31 mW (3.31 mW)                    ; 2.96 mW (2.96 mW)               ; --                                ; 0.35 mW (0.35 mW)                 ; |hdmi_leds|mypll:mypll_inst|altpll:altpll_component|pll_altpll:auto_generated                                      ;
++------------------------------------------------+--------------------------------------+---------------------------------+-----------------------------------+-----------------------------------+--------------------------------------------------------------------------------------------------------------------+
+(1) Value in parentheses is the power consumed at that level of hierarchy. Value not in parentheses is the power consumed at that level of hierarchy plus the power consumed by all levels of hierarchy below it.
+
+(2) The "Block Thermal Static Power" for all levels of hierarchy except the top-level hierarchy is part of the "Core Static Thermal Power Dissipation" value found on the PowerPlay Power Analyzer-->Summary report panel. The "Core Static Thermal Power Dissipation" also contains the thermal static power dissipated by the routing.
+
+
++--------------------------------------------------------------------+
+; Core Dynamic Thermal Power Dissipation by Clock Domain             ;
++-----------------+-----------------------+--------------------------+
+; Clock Domain    ; Clock Frequency (MHz) ; Total Core Dynamic Power ;
++-----------------+-----------------------+--------------------------+
+; CLK100MHZ       ; 100.00                ; 5.61                     ;
+; No clock domain ; 0.00                  ; 0.00                     ;
++-----------------+-----------------------+--------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Current Drawn from Voltage Supplies Summary                                                                                        ;
++----------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; Voltage Supply ; Total Current Drawn (1) ; Dynamic Current Drawn (1) ; Static Current Drawn (1) ; Minimum Power Supply Current (2) ;
++----------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; VCCINT         ; 13.94 mA                ; 2.29 mA                   ; 11.65 mA                 ; 13.94 mA                         ;
+; VCCIO          ; 8.55 mA                 ; 0.06 mA                   ; 8.49 mA                  ; 8.55 mA                          ;
+; VCCA           ; 18.09 mA                ; 0.55 mA                   ; 17.54 mA                 ; 18.09 mA                         ;
+; VCCD           ; 6.00 mA                 ; 1.32 mA                   ; 4.67 mA                  ; 6.00 mA                          ;
++----------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+(1) Currents reported in columns "Total Current Drawn", "Dynamic Current Drawn", and "Static Current Drawn" are sufficient for user operation of the device.  
+(2) Currents reported in column "Minimum Power Supply Current" are sufficient for power-up, configuration, and user operation of the device.
+
+
++-----------------------------------------------------------------------------------------------+
+; VCCIO Supply Current Drawn by I/O Bank                                                        ;
++----------+---------------+---------------------+-----------------------+----------------------+
+; I/O Bank ; VCCIO Voltage ; Total Current Drawn ; Dynamic Current Drawn ; Static Current Drawn ;
++----------+---------------+---------------------+-----------------------+----------------------+
+; 1        ; 2.5V          ; 1.11 mA             ; 0.06 mA               ; 1.05 mA              ;
+; 2        ; 2.5V          ; 1.09 mA             ; 0.00 mA               ; 1.08 mA              ;
+; 3        ; 2.5V          ; 1.05 mA             ; 0.00 mA               ; 1.05 mA              ;
+; 4        ; 2.5V          ; 1.05 mA             ; 0.00 mA               ; 1.05 mA              ;
+; 5        ; 2.5V          ; 1.04 mA             ; 0.00 mA               ; 1.04 mA              ;
+; 6        ; 2.5V          ; 1.07 mA             ; 0.00 mA               ; 1.07 mA              ;
+; 7        ; 2.5V          ; 1.07 mA             ; 0.00 mA               ; 1.07 mA              ;
+; 8        ; 2.5V          ; 1.07 mA             ; 0.00 mA               ; 1.07 mA              ;
++----------+---------------+---------------------+-----------------------+----------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; VCCIO Supply Current Drawn by Voltage                                                                                             ;
++---------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; VCCIO Voltage ; Total Current Drawn (1) ; Dynamic Current Drawn (1) ; Static Current Drawn (1) ; Minimum Power Supply Current (2) ;
++---------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+; 2.5V          ; 8.55 mA                 ; 0.06 mA                   ; 8.49 mA                  ; 8.55 mA                          ;
++---------------+-------------------------+---------------------------+--------------------------+----------------------------------+
+(1) Currents reported in columns "Total Current Drawn", "Dynamic Current Drawn", and "Static Current Drawn" are sufficient for user operation of the device.  
+(2) Currents reported in column "Minimum Power Supply Current" are sufficient for power-up, configuration, and user operation of the device.
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Confidence Metric Details                                                                                                                        ;
++----------------------------------------------------------------------------------------+-------------+------------+--------------+---------------+
+; Data Source                                                                            ; Total       ; Pin        ; Registered   ; Combinational ;
++----------------------------------------------------------------------------------------+-------------+------------+--------------+---------------+
+; Simulation (from file)                                                                 ;             ;            ;              ;               ;
+;     -- Number of signals with Toggle Rate from Simulation                              ; 0 (0.0%)    ; 0 (0.0%)   ; 0 (0.0%)     ; 0 (0.0%)      ;
+;     -- Number of signals with Static Probability from Simulation                       ; 0 (0.0%)    ; 0 (0.0%)   ; 0 (0.0%)     ; 0 (0.0%)      ;
+;                                                                                        ;             ;            ;              ;               ;
+; Node, entity or clock assignment                                                       ;             ;            ;              ;               ;
+;     -- Number of signals with Toggle Rate from Node, entity or clock assignment        ; 1 (0.1%)    ; 1 (1.6%)   ; 0 (0.0%)     ; 0 (0.0%)      ;
+;     -- Number of signals with Static Probability from Node, entity or clock assignment ; 1 (0.1%)    ; 1 (1.6%)   ; 0 (0.0%)     ; 0 (0.0%)      ;
+;                                                                                        ;             ;            ;              ;               ;
+; Vectorless estimation                                                                  ;             ;            ;              ;               ;
+;     -- Number of signals with Toggle Rate from Vectorless estimation                   ; 681 (93.5%) ; 19 (29.7%) ; 203 (100.0%) ; 459 (99.6%)   ;
+;     -- Number of signals with Zero toggle rate, from Vectorless estimation             ; 47 (6.5%)   ; 18 (28.1%) ; 0 (0.0%)     ; 29 (6.3%)     ;
+;     -- Number of signals with Static Probability from Vectorless estimation            ; 681 (93.5%) ; 19 (29.7%) ; 203 (100.0%) ; 459 (99.6%)   ;
+;                                                                                        ;             ;            ;              ;               ;
+; Default assignment                                                                     ;             ;            ;              ;               ;
+;     -- Number of signals with Toggle Rate from Default assignment                      ; 3 (0.4%)    ; 1 (1.6%)   ; 0 (0.0%)     ; 2 (0.4%)      ;
+;     -- Number of signals with Static Probability from Default assignment               ; 46 (6.3%)   ; 44 (68.8%) ; 0 (0.0%)     ; 2 (0.4%)      ;
+;                                                                                        ;             ;            ;              ;               ;
+; Assumed 0                                                                              ;             ;            ;              ;               ;
+;     -- Number of signals with Toggle Rate assumed 0                                    ; 43 (5.9%)   ; 43 (67.2%) ; 0 (0.0%)     ; 0 (0.0%)      ;
++----------------------------------------------------------------------------------------+-------------+------------+--------------+---------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Signal Activities                                                                                                                           ;
++--------+------+---------------------------------------------+-------------------------+--------------------+--------------------------------+
+; Signal ; Type ; Toggle Rate (millions of transitions / sec) ; Toggle Rate Data Source ; Static Probability ; Static Probability Data Source ;
++--------+------+---------------------------------------------+-------------------------+--------------------+--------------------------------+
+(1) The "Signal Activity" Table has been hidden. To show this table, please select the "Write signal activities to report file" option under "PowerPlay Power Analyzer Settings".
+
+
++-------------------------+
+; Power Analyzer Messages ;
++-------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Power Analyzer
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Wed Mar 24 10:41:25 2021
+Info: Command: quartus_pow --read_settings_files=off --write_settings_files=off max10 -c max10_50
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (332104): Reading SDC File: 'max10_50.sdc'
+Warning (332174): Ignored filter at max10_50.sdc(45): inst2|altpll_component|auto_generated|pll1|inclk[0] could not be matched with a pin File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 45
+Warning (332174): Ignored filter at max10_50.sdc(45): inst2|altpll_component|auto_generated|pll1|clk[0] could not be matched with a pin File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 45
+Critical Warning (332049): Ignored create_generated_clock at max10_50.sdc(45): Argument <targets> is an empty collection File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 45
+    Info (332050): create_generated_clock -name {inst2|altpll_component|auto_generated|pll1|clk[0]} -source [get_pins {inst2|altpll_component|auto_generated|pll1|inclk[0]}] -duty_cycle 50.000 -multiply_by 1 -master_clock {CLK100MHZ} [get_pins {inst2|altpll_component|auto_generated|pll1|clk[0]}]  File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 45
+Warning (332049): Ignored create_generated_clock at max10_50.sdc(45): Argument -source is an empty collection File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 45
+Warning (332174): Ignored filter at max10_50.sdc(58): inst2|altpll_component|auto_generated|pll1|clk[0] could not be matched with a clock File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 58
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(58): Argument -rise_from with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 58
+    Info (332050): set_clock_uncertainty -rise_from [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] -rise_to [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}]  0.020   File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 58
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(58): Argument -rise_to with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 58
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(59): Argument -rise_from with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 59
+    Info (332050): set_clock_uncertainty -rise_from [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] -fall_to [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}]  0.020   File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 59
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(59): Argument -fall_to with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 59
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(60): Argument -fall_from with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 60
+    Info (332050): set_clock_uncertainty -fall_from [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] -rise_to [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}]  0.020   File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 60
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(60): Argument -rise_to with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 60
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(61): Argument -fall_from with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 61
+    Info (332050): set_clock_uncertainty -fall_from [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] -fall_to [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}]  0.020   File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 61
+Warning (332049): Ignored set_clock_uncertainty at max10_50.sdc(61): Argument -fall_to with value [get_clocks {inst2|altpll_component|auto_generated|pll1|clk[0]}] contains zero elements File: /home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/max10_50.sdc Line: 61
+Warning (332060): Node: display:display_inst|hvsync:u_hvsync|hsync was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register display:display_inst|hvsync:u_hvsync|line_count[9] is being clocked by display:display_inst|hvsync:u_hvsync|hsync
+Warning (332056): PLL cross checking found inconsistent PLL clock settings:
+    Warning (332056): Node: mypll_inst|altpll_component|auto_generated|pll1|clk[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
+    Warning (332056): Node: mypll_inst|altpll_component|auto_generated|pll1|clk[1] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
+Critical Warning (332168): The following clock transfers have no clock uncertainty assignment. For more accurate results, apply clock uncertainty assignments or use the derive_clock_uncertainty command.
+    Critical Warning (332169): From CLK100MHZ (Rise) to CLK100MHZ (Rise) (setup and hold)
+    Critical Warning (332169): From CLK100MHZ (Fall) to CLK100MHZ (Rise) (setup and hold)
+Info (223000): Starting Vectorless Power Activity Estimation
+Warning (222013): Relative toggle rates could not be calculated because no clock domain could be identified for some nodes
+Info (223001): Completed Vectorless Power Activity Estimation
+Info (218000): Using Advanced I/O Power to simulate I/O buffers with the specified board trace model
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Info (215049): Average toggle rate for this design is 13.524 millions of transitions / sec
+Info (215031): Total thermal power estimate for the design is 90.57 mW
+Info: Quartus Prime Power Analyzer was successful. 0 errors, 21 warnings
+    Info: Peak virtual memory: 970 megabytes
+    Info: Processing ended: Wed Mar 24 10:41:35 2021
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:10
+
+

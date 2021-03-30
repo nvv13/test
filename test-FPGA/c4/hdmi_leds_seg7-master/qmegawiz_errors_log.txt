@@ -1,0 +1,19 @@
+
+
+/home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/mypll.v
+
+Mar 05 10AM:07:03>: Error in CNX file format.
+
+Error messages are listed in file
+/home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/mypll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+/home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/mypll.v
+
+Mar 05 10AM:07:24>: Error in CNX file format.
+
+Error messages are listed in file
+/home/nvv/fpga_prg/c4/hdmi_leds_seg7-master/mypll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
