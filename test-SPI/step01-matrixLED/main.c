@@ -30,6 +30,9 @@
 #include "schedstatistics.h"
 #include "thread.h"
 
+//#include "periph/gpio.h"
+
+
 /**
  * @brief   Default port number used for the CS pin if unassigned
  */
@@ -608,26 +611,58 @@ int num_use_module=1;
 #define max7219_reg_displayTest 0x0f
 
 
+
+unsigned char reverse_bit_in_byte(unsigned char b) {
+   b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+   b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+   b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+   return b;
+}
+
+gpio_t pin15;
+
 int setCommand(unsigned char command, unsigned char value)
 {
     /* get access to the bus */
     if (spi_acquire(spiconf.dev, spiconf.cs,
                     spiconf.mode, spiconf.clk) != SPI_OK) {
+        puts(" error sendCommand - spi_acquire \t\n");
         return 1;
     }
+    gpio_write(pin15,0);
+//    xtimer_sleep(1);
 
     for (int j=0; j<num_use_module; j++) {
-      spi_transfer_byte(spiconf.dev, spiconf.cs, false, command);
-      spi_transfer_byte(spiconf.dev, spiconf.cs, false, value);
+      //printf("set Command  = %i , value= %i.\n", (int)command, (int)value);
+//      spi_transfer_byte(spiconf.dev, spiconf.cs, false, reverse_bit_in_byte(value));
+//      spi_transfer_byte(spiconf.dev, spiconf.cs, false, reverse_bit_in_byte(command));
+
+
+//      spi_transfer_byte(spiconf.dev, spiconf.cs, false, command);
+//      spi_transfer_byte(spiconf.dev, spiconf.cs, false, value);
+
+      spi_transfer_byte(spiconf.dev, spiconf.cs, true, command);
+      spi_transfer_byte(spiconf.dev, spiconf.cs, true, value);
+
       if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7)buffer_matrix[j*8+command-1]=value;
+      //xtimer_sleep(1);
+      //puts(" Command... \t\n");
       }
     spi_release(spiconf.dev);
+
+    gpio_write(pin15,1);
     
     return 0;
 }
 
 void reload(void)
 {
+    gpio_write(pin15,0);
+    if (spi_acquire(spiconf.dev, spiconf.cs,
+                    spiconf.mode, spiconf.clk) != SPI_OK) {
+            return;
+         }
+         
     for (int i=0; i<max7219_reg_digit7; i++)
     {
 	int col = i;
@@ -636,16 +671,21 @@ void reload(void)
             return;
          }
 	for (int j=0; j<num_use_module; j++) {
-            spi_transfer_byte(spiconf.dev, spiconf.cs, false, i + 1);
-            spi_transfer_byte(spiconf.dev, spiconf.cs, false, buffer_matrix[col]);
+            spi_transfer_byte(spiconf.dev, spiconf.cs, true, i + 1);
+            spi_transfer_byte(spiconf.dev, spiconf.cs, true, buffer_matrix[col]);
 	    col += 8;
 	 }
-        spi_release(spiconf.dev);
     }
+    
+    spi_release(spiconf.dev);
+    gpio_write(pin15,1);
 }
 
 void clear(void)
 {
+    if (spiconf.dev == SPI_UNDEF) {
+    }
+
     for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
          setCommand(i+1, 0x0); //
       }
@@ -687,35 +727,90 @@ You probably want to choose bus ID 1 (HSPI) for your communication, as you will 
 HSPI signals are fixed to the following IO indices and GPIO pins:
 
 Signal	IO index	ESP8266 pin
-HSPI CLK	5	GPIO14
-HSPI /CS	8	GPIO15
-HSPI MOSI	7	GPIO13
+HSPI CLK	5	GPIO14         - clk 
+HSPI /CS	8	GPIO15         - cs
+HSPI MOSI	7	GPIO13         - din
 HSPI MISO	6	GPIO12
+
+V USB		VU			vpp
+GND		gnd			gnd
+
 */
 int cmd_send_buf(int argc, char **argv)
 {
     if (spiconf.dev == SPI_UNDEF) {
-       char* a1[]={"1","0","4"};
-       if(cmd_init(3, a1)!=0) {
-        return 1;
-        }
+        puts(" error init \t\n");
+        return 1; 
+    }
+
+    setCommand(max7219_reg_scanLimit, 0x07);      
+    setCommand(max7219_reg_decodeMode, 0x00);  // using an led matrix (not digits)
+    setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
+    setCommand(max7219_reg_displayTest, 0x00); // no display test
+    setCommand(max7219_reg_intensity, 0x08);
+    clear();
+
+
+
+
+    for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
+         setCommand(i+1, 0xAA); // 10101010 
+      }
+
+    xtimer_sleep(1);
+
+    for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
+         setCommand(i+1, reverse_bit_in_byte(0xAA)); // 10101010 
+      }
+
+    xtimer_sleep(1);
+
+    clear();
+    
+    puts(" -> Test1 \t\n");
+    return 0;
+}
+
+int cmd2_send_buf(int argc, char **argv)
+{
+
+    if (spiconf.dev == SPI_UNDEF) {
+        puts(" error init \t\n");
+        return 1; 
+    }
+
     setCommand(max7219_reg_scanLimit, 0x07);      
     setCommand(max7219_reg_decodeMode, 0x00);  // using an led matrix (not digits)
     setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
     setCommand(max7219_reg_displayTest, 0x00); // no display test
     setCommand(max7219_reg_intensity, 0x0f);
     clear();
+
+    puts(" -> clear \t\n");
+
+    return 0;
+}
+
+
+int cmd3_send_buf(int argc, char **argv)
+{
+    if (spiconf.dev == SPI_UNDEF) {
+        puts(" error init \t\n");
+        return 1; 
     }
 
-
-
-
-    puts("### Test\t\t\t\tTransfer time\tuser time\n");
+    setCommand(max7219_reg_scanLimit, 0x07);      
+    setCommand(max7219_reg_decodeMode, 0x00);  // using an led matrix (not digits)
+    setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
+    setCommand(max7219_reg_displayTest, 0x00); // no display test
+    setCommand(max7219_reg_intensity, 0x0f);
+    clear();
 
     for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
-         setCommand(i+1, 0xAA); // 10101010 
+         setCommand(i+1, 0xff); //
       }
 
+    puts(" -> fill \t\n");
 
     return 0;
 }
@@ -728,12 +823,19 @@ static const shell_command_t shell_commands[] = {
     { "spi_gpio", "Re-configures MISO & MOSI pins to GPIO mode and back.", cmd_spi_gpio },
 #endif
     { "test1", "send test1 8 to 8*8 ", cmd_send_buf },
+    { "clear", "clear 8x8", cmd2_send_buf },
+    { "fill", "fill 8x8", cmd3_send_buf },
     { NULL, NULL, NULL }
 };
 
 int main(void)
 {
-    num_use_module=8;
+    num_use_module=4;
+
+    pin15 = GPIO_PIN(0,15);
+    gpio_init(pin15,GPIO_OUT);
+
+    xtimer_sleep(1);
     
     puts("Manual SPI peripheral driver test");
     puts("Refer to the README.md file for more information.\n");
@@ -741,9 +843,18 @@ int main(void)
     printf("There are %i SPI devices configured for your platform.\n",
            (int)SPI_NUMOF);
 
+
     /* reset local SPI configuration */
     spiconf.dev = SPI_UNDEF;
 
+    if (spiconf.dev == SPI_UNDEF) {
+       char* a1[]={"init","0","0","4",NULL,NULL};
+       if(cmd_init(4, a1)!=0) {
+        puts(" error init SPI \t\n");
+        //return 1;
+        }
+    }
+    
     /* run the shell */
     char line_buf[SHELL_DEFAULT_BUFSIZE];
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
