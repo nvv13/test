@@ -1,0 +1,8 @@
+|switch
+LED <= bit_a2.DB_MAX_OUTPUT_PORT_TYPE
+clk50m => ~NO_FANOUT~
+x_clk => x_clk~0.DATAIN
+x_dt => x_dt~0.DATAIN
+x_sw => ~NO_FANOUT~
+
+

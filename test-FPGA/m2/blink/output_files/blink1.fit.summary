@@ -1,0 +1,11 @@
+Fitter Status : Successful - Sat Dec 26 13:33:58 2020
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : blink1
+Top-level Entity Name : blink1
+Family : MAX II
+Device : EPM240T100C5
+Timing Models : Final
+Total logic elements : 54 / 240 ( 23 % )
+Total pins : 4 / 80 ( 5 % )
+Total virtual pins : 0
+UFM blocks : 0 / 1 ( 0 % )

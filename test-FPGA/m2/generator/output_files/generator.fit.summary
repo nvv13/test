@@ -1,0 +1,11 @@
+Fitter Status : Successful - Sat Dec 26 17:20:25 2020
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : generator
+Top-level Entity Name : generator
+Family : MAX II
+Device : EPM240T100C5
+Timing Models : Final
+Total logic elements : 26 / 240 ( 11 % )
+Total pins : 10 / 80 ( 13 % )
+Total virtual pins : 0
+UFM blocks : 0 / 1 ( 0 % )

@@ -1,0 +1,5 @@
+|up_clk1
+clk => clk~0.DATAIN
+LED <= lk0.DB_MAX_OUTPUT_PORT_TYPE
+
+

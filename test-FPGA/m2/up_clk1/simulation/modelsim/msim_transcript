@@ -1,0 +1,23 @@
+# do up_clk1_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying /opt/intelFPGA/20.1.1lite/modelsim_ase/linuxaloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+/home/nvv/fpga_prg/m2/up_clk1 {/home/nvv/fpga_prg/m2/up_clk1/up_clk1.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:18:20 on Feb 04,2021
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/nvv/fpga_prg/m2/up_clk1" /home/nvv/fpga_prg/m2/up_clk1/up_clk1.v 
+# -- Compiling module up_clk1
+# 
+# Top level modules:
+# 	up_clk1
+# End time: 21:18:20 on Feb 04,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+quit

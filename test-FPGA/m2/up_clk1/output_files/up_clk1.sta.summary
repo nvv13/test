@@ -1,0 +1,29 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Setup 'a1'
+Slack : -7.479
+TNS   : -168.299
+
+Type  : Setup 'clk'
+Slack : -1.215
+TNS   : -1.215
+
+Type  : Hold 'clk'
+Slack : -1.804
+TNS   : -1.804
+
+Type  : Hold 'a1'
+Slack : 2.656
+TNS   : 0.000
+
+Type  : Minimum Pulse Width 'clk'
+Slack : -2.289
+TNS   : -2.289
+
+Type  : Minimum Pulse Width 'a1'
+Slack : 0.234
+TNS   : 0.000
+
+------------------------------------------------------------

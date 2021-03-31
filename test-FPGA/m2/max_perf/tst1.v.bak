@@ -1,0 +1,18 @@
+module tst1 (output LED);
+
+
+reg a1;
+
+always @
+ begin
+   a1 = ~a1;
+	
+ end
+ 
+ 
+assign LED = a1;
+
+
+
+endmodule
+
