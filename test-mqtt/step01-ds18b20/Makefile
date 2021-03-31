@@ -27,17 +27,9 @@ ifneq (,$(DEFAULT_MQTT_PWD))
   CFLAGS += -DDEFAULT_MQTT_PWD=\"$(DEFAULT_MQTT_PWD)\"
 endif
 
-CFLAGS += -DBMX280_PARAM_I2C_ADDR=0x76
-CFLAGS += -DDEVELHELP
-#USEMODULE += bmp280_i2c
-USEMODULE += bme280_i2c
-#USEMODULE += periph_adc
-USEMODULE += fmt
+USEMODULE += ds18
 USEMODULE += xtimer
 USEMODULE += printf_float
-FEATURES_REQUIRED = periph_adc
-FEATURES_REQUIRED += periph_gpio
-#FEATURES_REQUIRED += periph_gpio_irq
 
 USEMODULE += shell
 USEMODULE += shell_commands

@@ -29,14 +29,11 @@ endif
 
 CFLAGS += -DBMX280_PARAM_I2C_ADDR=0x76
 CFLAGS += -DDEVELHELP
-#USEMODULE += bmp280_i2c
-USEMODULE += bme280_i2c
-#USEMODULE += periph_adc
+USEMODULE += bmp280_i2c
 USEMODULE += fmt
 USEMODULE += xtimer
 USEMODULE += printf_float
-FEATURES_REQUIRED = periph_adc
-FEATURES_REQUIRED += periph_gpio
+FEATURES_REQUIRED = periph_gpio
 #FEATURES_REQUIRED += periph_gpio_irq
 
 USEMODULE += shell
