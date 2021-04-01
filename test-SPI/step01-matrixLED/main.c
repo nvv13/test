@@ -830,7 +830,7 @@ static const shell_command_t shell_commands[] = {
 
 int main(void)
 {
-    num_use_module=4;
+    num_use_module=8;
 
     pin15 = GPIO_PIN(0,15);
     gpio_init(pin15,GPIO_OUT);
@@ -848,7 +848,7 @@ int main(void)
     spiconf.dev = SPI_UNDEF;
 
     if (spiconf.dev == SPI_UNDEF) {
-       char* a1[]={"init","0","0","4",NULL,NULL};
+       char* a1[]={"init","0","0","1",NULL,NULL};
        if(cmd_init(4, a1)!=0) {
         puts(" error init SPI \t\n");
         //return 1;
