@@ -263,9 +263,11 @@ int setCommand(unsigned char command, unsigned char value)
     for (int j=0; j<num_use_module; j++) {
       //printf("set Command  = %i , value= %i.\n", (int)command, (int)value);
       spi_transfer_byte(spiconf.dev, spiconf.cs, true, command);
-      spi_transfer_byte(spiconf.dev, spiconf.cs, true, value);
-
-      if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7)buffer_matrix[j*8+command-1]=value;
+      if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7 && j>3)
+       spi_transfer_byte(spiconf.dev, spiconf.cs, true, reverse_bit_in_byte(value));
+       else
+       spi_transfer_byte(spiconf.dev, spiconf.cs, true, value);
+      //if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7)buffer_matrix[j*8+command-1]=value;
       }
     spi_release(spiconf.dev);
 
@@ -274,25 +276,63 @@ int setCommand(unsigned char command, unsigned char value)
     return 0;
 }
 
+int setCommand2(unsigned char command, unsigned char value1, unsigned char value2)
+{
+    /* get access to the bus */
+    if (spi_acquire(spiconf.dev, spiconf.cs,
+                    spiconf.mode, spiconf.clk) != SPI_OK) {
+        puts(" error sendCommand - spi_acquire \t\n");
+        return 1;
+    }
+    gpio_write(pin15,0);
+//    xtimer_usleep(1);
+
+    unsigned char value01;
+    unsigned char value02;
+    for (int j=0; j<num_use_module; j++) {
+      //printf("set Command  = %i , value= %i.\n", (int)command(int)value);
+      spi_transfer_byte(spiconf.dev, spiconf.cs, true, command);
+
+      if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7 && (j==2 || j==3 || j==4 || j==5))
+             {
+             value01=value1>>2;
+             value02=value2>>2;
+             }
+          else
+             {
+             value01=value1;
+             value02=value2;
+             }
+
+      if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7 && j>3)
+       spi_transfer_byte(spiconf.dev, spiconf.cs, true, reverse_bit_in_byte(value02));
+       else
+       spi_transfer_byte(spiconf.dev, spiconf.cs, true, (value01));
+      //if(command>=max7219_reg_digit0 && command<=max7219_reg_digit7)buffer_matrix[j*8+command-1]=value;
+      }
+    spi_release(spiconf.dev);
+
+    gpio_write(pin15,1);
+    
+    return 0;
+}
+
+
 void reload(void)
 {
-    gpio_write(pin15,0);
     if (spi_acquire(spiconf.dev, spiconf.cs,
                     spiconf.mode, spiconf.clk) != SPI_OK) {
             return;
          }
+    gpio_write(pin15,0);
          
     for (int i=0; i<max7219_reg_digit7; i++)
     {
-	int col = i;
-        if (spi_acquire(spiconf.dev, spiconf.cs,
-                    spiconf.mode, spiconf.clk) != SPI_OK) {
-            return;
-         }
+	int command = i+1;
 	for (int j=0; j<num_use_module; j++) {
-            spi_transfer_byte(spiconf.dev, spiconf.cs, true, i + 1);
-            spi_transfer_byte(spiconf.dev, spiconf.cs, true, buffer_matrix[col]);
-	    col += 8;
+            printf("set Command  = %i , value= %i.\n", (int)command, (int)buffer_matrix[j*8+command-1]);
+            spi_transfer_byte(spiconf.dev, spiconf.cs, true, command); // 1-8
+            spi_transfer_byte(spiconf.dev, spiconf.cs, true, buffer_matrix[j*8+command-1]); 
 	 }
     }
     
@@ -511,8 +551,8 @@ static const unsigned char sprite8x16[10][16]=
  ,0b10000100
  ,0b10000100
  ,0b10000100
- ,0b10000100
  ,0b01111000
+ ,0b00000000
  ,0b00000000}//0
 ,{0b00000000
  ,0b00000100
@@ -528,89 +568,90 @@ static const unsigned char sprite8x16[10][16]=
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
+ ,0b00000000
  ,0b00000000}//1
 ,{0b00000000
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b11111100
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b11111100
+ ,0b00000000
  ,0b00000000}//2
 ,{0b00000000
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b11111100
+ ,0b00000000
  ,0b00000000}//3
 ,{0b00000000
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b00000000
  ,0b00000000}//4
 ,{0b00000000
+ ,0b11111100
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b11111100
+ ,0b00000000
  ,0b00000000}//5
 ,{0b00000000
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b11111100
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b10000000
+ ,0b11111100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b11111100
+ ,0b00000000
  ,0b00000000}//6
 ,{0b00000000
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
@@ -623,44 +664,52 @@ static const unsigned char sprite8x16[10][16]=
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b00000000
  ,0b00000000}//7
 ,{0b00000000
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b11111100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b11111100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b11111100
+ ,0b00000000
  ,0b00000000}//8
 ,{0b00000000
+ ,0b11111100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b10000100
+ ,0b11111100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
  ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
- ,0b00000100
+ ,0b11111100
+ ,0b00000000
  ,0b00000000}//9
  };
 
-//copy_sprite8x16_to_video_buf()
+void copy_sprite8x16_to_video_buf(const unsigned char* in)
+{
+for(int i=0;i<16;i++)
+ {
+ buffer_matrix[i]=in[i]; 
+ }
+return;
+}
+
+unsigned char ind=0;
 
 void *thread_handler(void *arg)
 {
@@ -672,10 +721,54 @@ void *thread_handler(void *arg)
     while(true)
      {
      //gpio_toggle(pin);
+     //xtimer_sleep(1);
 
 //     _cmd_readtemp(1, a0);
+     //clear();
+     //copy_sprite8x16_to_video_buf(sprite8x16[ind]);
+     //reload();
+
+     //for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
+     //    setCommand(i+1, ind); // 10101010 
+     // }
+
+
+
+    if (spiconf.dev == SPI_UNDEF) {
+        puts(" error init \t\n");
+        return NULL; 
+    }
+
+    setCommand(max7219_reg_scanLimit, 0x07);      
+    setCommand(max7219_reg_decodeMode, 0x00);  // using an led matrix (not digits)
+    setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
+    setCommand(max7219_reg_displayTest, 0x00); // no display test
+    setCommand(max7219_reg_intensity, 0x08);
+    clear();
+
+    //xtimer_usleep(10);
+
+
+
+
+    for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
+         //setCommand(i+1, ind); 
+         //setCommand2(i+1, sprite8x16[ind][7-i] //botton
+         //                ,sprite8x16[ind][8+i] // top
+         //                );  
+         setCommand2(i+1, sprite8x16[ind][8+i] //botton
+                         ,sprite8x16[ind][7-i] // top
+                         );  
+      }
+
+
+     if(ind++ == 9)
+      {
+      ind=0;
+      }
 
      xtimer_sleep(1);
+     //xtimer_usleep(1000);
      }
 
     return NULL;
@@ -713,7 +806,7 @@ int main(void)
     spiconf.dev = SPI_UNDEF;
 
     if (spiconf.dev == SPI_UNDEF) {
-       char* a1[]={"init","0","0","1",NULL,NULL};
+       char* a1[]={"init","0","0","2",NULL,NULL};
        if(cmd_init(4, a1)!=0) {
         puts(" error init SPI \t\n");
         //return 1;
