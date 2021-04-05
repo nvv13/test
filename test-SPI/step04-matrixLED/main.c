@@ -662,7 +662,7 @@ int refresh(void)
     setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
     setCommand(max7219_reg_displayTest, 0x00); // no display test
     setCommand(max7219_reg_intensity, b_intensity);
-    clear();
+    //clear();
     for (int i = 0; i < max7219_reg_digit7; i++) {  // 8*8 dots
          setCommand2(i+1);  
       }
@@ -713,7 +713,7 @@ static void btn_handler(void *arg)
     if(i_sec_cur!=0)return;
 
     //printf("Button pressed!  b_intensity = %i \n", (int)b_intensity);
-    if(b_intensity++==0xf)b_intensity=0x01;  
+    if(b_intensity++==0xf)b_intensity=0x00;  
     i_sec_cur=3;
 }
 
