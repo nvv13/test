@@ -59,6 +59,8 @@
  /data/riotbuild/riotbase/core/include/sched.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/inttypes.h \
  /data/riotbuild/riotbase/core/include/native_sched.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /data/riotbuild/riotbase/core/include/sched.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/esp_common.h \
  /data/riotbuild/riotbase/core/include/macros/xtstr.h \
@@ -209,6 +211,10 @@
 /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/inttypes.h:
 
 /data/riotbuild/riotbase/core/include/native_sched.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /data/riotbuild/riotbase/core/include/sched.h:
 

@@ -71,6 +71,8 @@
  /data/riotbuild/riotbase/core/include/assert.h \
  /data/riotbuild/riotbase/core/include/msg.h \
  /data/riotbuild/riotbase/core/include/sched.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /opt/esp/ESP8266_RTOS_SDK/components/spi_flash/include/esp_flash_data_types.h \
  /opt/esp/ESP8266_RTOS_SDK/components/spi_flash/include/esp_partition.h \
  /opt/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_err.h \
@@ -222,6 +224,10 @@
 /data/riotbuild/riotbase/core/include/msg.h:
 
 /data/riotbuild/riotbase/core/include/sched.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /opt/esp/ESP8266_RTOS_SDK/components/spi_flash/include/esp_flash_data_types.h:
 

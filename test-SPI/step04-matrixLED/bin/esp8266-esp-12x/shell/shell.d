@@ -33,11 +33,12 @@
  /data/riotbuild/riotbase/core/include/kernel_defines.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h \
+ /data/riotbuild/riotbase/core/include/kernel_defines.h \
+ /data/riotbuild/riotbase/core/include/xfa.h \
  /data/riotbuild/riotbase/sys/include/shell.h \
  /data/riotbuild/riotbase/drivers/include/periph/pm.h \
  /data/riotbuild/riotbase/cpu/esp8266/include/periph_cpu.h \
  /opt/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
- /data/riotbuild/riotbase/core/include/kernel_defines.h \
  /data/riotbuild/riotbase/sys/include/shell_commands.h \
  /data/riotbuild/riotbase/sys/include/shell.h
 
@@ -107,6 +108,10 @@
 
 /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h:
 
+/data/riotbuild/riotbase/core/include/kernel_defines.h:
+
+/data/riotbuild/riotbase/core/include/xfa.h:
+
 /data/riotbuild/riotbase/sys/include/shell.h:
 
 /data/riotbuild/riotbase/drivers/include/periph/pm.h:
@@ -114,8 +119,6 @@
 /data/riotbuild/riotbase/cpu/esp8266/include/periph_cpu.h:
 
 /opt/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h:
-
-/data/riotbuild/riotbase/core/include/kernel_defines.h:
 
 /data/riotbuild/riotbase/sys/include/shell_commands.h:
 

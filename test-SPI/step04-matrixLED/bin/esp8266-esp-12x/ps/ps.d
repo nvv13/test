@@ -39,6 +39,8 @@
  /data/riotbuild/riotbase/cpu/esp8266/include/cpu_conf.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /data/riotbuild/riotbase/core/include/sched.h
 
 /data/riotbuild/riotproject/test-SPI/step04-matrixLED/bin/esp8266-esp-12x/riotbuild/riotbuild.h:
@@ -118,5 +120,9 @@
 /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h:
 
 /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /data/riotbuild/riotbase/core/include/sched.h:

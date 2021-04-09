@@ -43,7 +43,9 @@
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/limits.h \
  /data/riotbuild/riotbase/drivers/include/mtd.h \
  /data/riotbuild/riotbase/boards/common/esp8266/include/board_modules.h \
- /data/riotbuild/riotbase/drivers/include/periph/spi.h
+ /data/riotbuild/riotbase/drivers/include/periph/spi.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h
 
 /data/riotbuild/riotproject/test-SPI/step04-matrixLED/bin/esp8266-esp-12x/riotbuild/riotbuild.h:
 
@@ -132,3 +134,7 @@
 /data/riotbuild/riotbase/boards/common/esp8266/include/board_modules.h:
 
 /data/riotbuild/riotbase/drivers/include/periph/spi.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h:

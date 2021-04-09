@@ -74,6 +74,8 @@
  /data/riotbuild/riotbase/core/include/panic.h \
  /data/riotbuild/riotbase/core/include/msg.h \
  /data/riotbuild/riotbase/core/include/sched.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /data/riotbuild/riotbase/cpu/esp8266/include/syscalls.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/syscalls_common.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/stdlib.h \
@@ -229,6 +231,10 @@
 /data/riotbuild/riotbase/core/include/msg.h:
 
 /data/riotbuild/riotbase/core/include/sched.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /data/riotbuild/riotbase/cpu/esp8266/include/syscalls.h:
 

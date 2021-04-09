@@ -39,6 +39,8 @@
  /data/riotbuild/riotbase/cpu/esp8266/include/cpu_conf.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/stdlib.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/stdlib.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/string.h \
@@ -161,6 +163,10 @@
 /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h:
 
 /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/stdlib.h:
 

@@ -39,6 +39,8 @@
  /data/riotbuild/riotbase/cpu/esp8266/include/cpu_conf.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /data/riotbuild/riotbase/cpu/esp8266/sdk/sdk.h \
  /data/riotbuild/riotbase/cpu/esp8266/sdk/ets.h \
  /opt/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
@@ -141,6 +143,10 @@
 /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h:
 
 /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /data/riotbuild/riotbase/cpu/esp8266/sdk/sdk.h:
 

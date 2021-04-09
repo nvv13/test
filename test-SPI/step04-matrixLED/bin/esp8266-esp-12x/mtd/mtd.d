@@ -24,6 +24,12 @@
  /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include-fixed/limits.h \
  /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include-fixed/syslimits.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/limits.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/stdlib.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/_ansi.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/cdefs.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/stdlib.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/string.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/string.h \
  /data/riotbuild/riotbase/core/include/bitarithm.h \
  /data/riotbuild/riotbase/cpu/esp8266/include/cpu_conf.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h \
@@ -77,6 +83,18 @@
 /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include-fixed/syslimits.h:
 
 /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/limits.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/stdlib.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/_ansi.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/cdefs.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/stdlib.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/string.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/string.h:
 
 /data/riotbuild/riotbase/core/include/bitarithm.h:
 

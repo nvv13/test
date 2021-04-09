@@ -28,6 +28,8 @@
  /data/riotbuild/riotbase/cpu/esp8266/include/cpu_conf.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
  /data/riotbuild/riotbase/core/include/irq.h \
  /data/riotbuild/riotbase/core/include/cib.h \
  /data/riotbuild/riotbase/core/include/debug.h \
@@ -103,6 +105,10 @@
 /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h:
 
 /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
 
 /data/riotbuild/riotbase/core/include/irq.h:
 

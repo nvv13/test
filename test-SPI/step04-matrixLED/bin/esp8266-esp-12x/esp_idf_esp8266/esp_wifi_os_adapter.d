@@ -63,7 +63,6 @@
  /data/riotbuild/riotbase/cpu/esp_common/include/freertos/FreeRTOS.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/freertos/portmacro.h \
  /data/riotbuild/riotbase/core/include/mutex.h \
- /data/riotbuild/riotbase/core/include/irq.h \
  /data/riotbuild/riotbase/core/include/list.h \
  /data/riotbuild/riotbase/core/include/thread.h \
  /data/riotbuild/riotbase/core/include/clist.h \
@@ -73,6 +72,9 @@
  /data/riotbuild/riotbase/core/include/sched.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/inttypes.h \
  /data/riotbuild/riotbase/core/include/native_sched.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
+ /data/riotbuild/riotbase/core/include/irq.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/freertos/semphr.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/stdlib.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/stdlib.h \
@@ -233,8 +235,6 @@
 
 /data/riotbuild/riotbase/core/include/mutex.h:
 
-/data/riotbuild/riotbase/core/include/irq.h:
-
 /data/riotbuild/riotbase/core/include/list.h:
 
 /data/riotbuild/riotbase/core/include/thread.h:
@@ -252,6 +252,12 @@
 /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/inttypes.h:
 
 /data/riotbuild/riotbase/core/include/native_sched.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
+
+/data/riotbuild/riotbase/core/include/irq.h:
 
 /data/riotbuild/riotbase/cpu/esp_common/include/freertos/semphr.h:
 

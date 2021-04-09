@@ -51,7 +51,9 @@
  /data/riotbuild/riotbase/core/include/cib.h \
  /data/riotbuild/riotbase/core/include/assert.h \
  /data/riotbuild/riotbase/core/include/panic.h \
- /data/riotbuild/riotbase/core/include/msg.h
+ /data/riotbuild/riotbase/core/include/msg.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h
 
 /data/riotbuild/riotproject/test-SPI/step04-matrixLED/bin/esp8266-esp-12x/riotbuild/riotbuild.h:
 
@@ -156,3 +158,7 @@
 /data/riotbuild/riotbase/core/include/panic.h:
 
 /data/riotbuild/riotbase/core/include/msg.h:
+
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:

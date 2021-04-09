@@ -40,7 +40,6 @@
  /data/riotbuild/riotbase/cpu/esp_common/include/cpu_conf_common.h \
  /data/riotbuild/riotbase/cpu/esp_common/include/xtensa_conf.h \
  /data/riotbuild/riotbase/core/include/mutex.h \
- /data/riotbuild/riotbase/core/include/irq.h \
  /data/riotbuild/riotbase/core/include/list.h \
  /data/riotbuild/riotbase/core/include/thread.h \
  /data/riotbuild/riotbase/core/include/clist.h \
@@ -50,7 +49,12 @@
  /data/riotbuild/riotbase/core/include/sched.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/inttypes.h \
  /data/riotbuild/riotbase/core/include/native_sched.h \
+ /data/riotbuild/riotbase/core/include/thread_config.h \
+ /data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h \
+ /data/riotbuild/riotbase/core/include/irq.h \
  /data/riotbuild/riotbase/drivers/include/periph/spi.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h \
  /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include-fixed/limits.h \
  /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include-fixed/syslimits.h \
  /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/limits.h \
@@ -151,8 +155,6 @@
 
 /data/riotbuild/riotbase/core/include/mutex.h:
 
-/data/riotbuild/riotbase/core/include/irq.h:
-
 /data/riotbuild/riotbase/core/include/list.h:
 
 /data/riotbuild/riotbase/core/include/thread.h:
@@ -171,7 +173,17 @@
 
 /data/riotbuild/riotbase/core/include/native_sched.h:
 
+/data/riotbuild/riotbase/core/include/thread_config.h:
+
+/data/riotbuild/riotbase/cpu/esp_common/include/thread_arch.h:
+
+/data/riotbuild/riotbase/core/include/irq.h:
+
 /data/riotbuild/riotbase/drivers/include/periph/spi.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h:
 
 /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include-fixed/limits.h:
 

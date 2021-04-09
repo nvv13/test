@@ -18,6 +18,16 @@
  /data/riotbuild/riotbase/boards/common/esp8266/include/periph_conf_common.h \
  /data/riotbuild/riotbase/core/include/kernel_defines.h \
  /data/riotbuild/riotbase/drivers/include/periph/spi.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/reent.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/_ansi.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/config.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/ieeefp.h \
+ /opt/esp/ESP8266_RTOS_SDK/components/esp8266/include/xtensa/config/core-isa.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/_types.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/_types.h \
+ /opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/lock.h \
  /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include/stdbool.h \
  /data/riotbuild/riotbase/drivers/include/periph/gpio.h \
  /data/riotbuild/riotbase/drivers/include/periph/hwrng.h
@@ -57,6 +67,26 @@
 /data/riotbuild/riotbase/core/include/kernel_defines.h:
 
 /data/riotbuild/riotbase/drivers/include/periph/spi.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/errno.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/errno.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/reent.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/_ansi.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/config.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/ieeefp.h:
+
+/opt/esp/ESP8266_RTOS_SDK/components/esp8266/include/xtensa/config/core-isa.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/_types.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/machine/_types.h:
+
+/opt/esp/xtensa-esp8266-elf/xtensa-esp8266-elf/include/sys/lock.h:
 
 /opt/esp/xtensa-esp8266-elf/lib/gcc/xtensa-esp8266-elf/5.2.0/include/stdbool.h:
 
