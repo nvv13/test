@@ -6,6 +6,8 @@
 #include "xtimer.h"
 #include "periph/gpio.h"
 
+
+
 char stack[THREAD_STACKSIZE_MAIN];
 
 kernel_pid_t pid;
@@ -21,6 +23,7 @@ void *thread_handler(void *arg)
      xtimer_sleep(1);
      gpio_write(pin13,0);
      xtimer_sleep(1);
+     puts("blink ");
      }
 
     return NULL;
@@ -28,7 +31,7 @@ void *thread_handler(void *arg)
 
 int main(void)
 {
-    puts("This is Task-03");
+    puts("This is blink");
     //xtimer_init();	
     pin13 = GPIO_PIN(1, 5);//GPIO_PIN(PORT_C, 13);
     gpio_init(pin13,GPIO_OUT);

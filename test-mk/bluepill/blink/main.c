@@ -21,6 +21,7 @@ void *thread_handler(void *arg)
      xtimer_sleep(1);
      gpio_write(pin13,0);
      xtimer_sleep(1);
+     puts("blink ");
      }
 
     return NULL;
@@ -28,7 +29,9 @@ void *thread_handler(void *arg)
 
 int main(void)
 {
-    puts("This is Task-03");
+
+    xtimer_sleep(1);
+    puts("This is blink");
     //xtimer_init();	
     pin13 = GPIO_PIN(PORT_C, 13);
     gpio_init(pin13,GPIO_OUT);
