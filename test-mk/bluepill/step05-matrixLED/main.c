@@ -267,7 +267,7 @@ int cmd_init(int argc, char **argv)
 
 
 
-static const unsigned char sprite8x16[10][16]=
+static const uint8_t sprite8x16[10][16]=
  {
  {0b00000000
  ,0b01111000
@@ -447,7 +447,7 @@ static const unsigned char sprite8x16[10][16]=
 #define max7219_reg_shutdown    0x0c
 #define max7219_reg_displayTest 0x0f
 
-unsigned char reverse_bit_in_byte(unsigned char b) {
+uint8_t reverse_bit_in_byte(uint8_t b) {
    b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
    b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
    b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
@@ -458,7 +458,7 @@ int num_use_module=1;
 gpio_t pin15;
 gpio_t pin13;
 
-int setCommand(unsigned char command, unsigned char value)
+int setCommand(uint8_t command, uint8_t value)
 {
     /* get access to the bus */
     if (spi_acquire(spiconf.dev, spiconf.cs,
@@ -488,15 +488,15 @@ int setCommand(unsigned char command, unsigned char value)
 
 
 
-unsigned char h_1=0;
-unsigned char h_2=0;
-unsigned char m_1=0;
-unsigned char m_2=0;
+uint8_t h_1=0;
+uint8_t h_2=0;
+uint8_t m_1=0;
+uint8_t m_2=0;
 
-unsigned char c_sec=0;
-unsigned char b_intensity=0x01;
+uint8_t c_sec=0;
+uint8_t b_intensity=0x01;
 
-int setCommand2(unsigned char command)
+int setCommand2(uint8_t command)
 {
     if(!(command>=max7219_reg_digit0 && command<=max7219_reg_digit7))return 1;
 
@@ -508,10 +508,10 @@ int setCommand2(unsigned char command)
     }
     gpio_write(pin15,0);
 
-    unsigned char value1=0;
-    unsigned char value2=0;
-    unsigned char value01=0;
-    unsigned char value02=0;
+    uint8_t value1=0;
+    uint8_t value2=0;
+    uint8_t value01=0;
+    uint8_t value02=0;
     for (int j=0; j<num_use_module; j++) {
       spi_transfer_byte(spiconf.dev, spiconf.cs, true, command); // позиция
 
