@@ -1,14 +1,19 @@
 APPLICATION = sntp-test02
 
 # If no BOARD is found in the environment, use this default:
-BOARD ?= esp32-wroom-32
+#BOARD ?= esp32-wroom-32
+BOARD ?= esp8266-esp-12x
+
+#BOARD ?= arduino-uno
+#PORT ?= /dev/ttyUSB0
 
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../../RIOT
 
+
 # Features required
 FEATURES_REQUIRED += cpp # basic C++ support
-FEATURES_REQUIRED += libstdcpp # libstdc++ support (for #include <cstdio>)
+#FEATURES_REQUIRED += libstdcpp # libstdc++ support (for #include <cstdio>)
 
 # If you want to add some extra flags when compile c++ files, add these flags
 # to CXXEXFLAGS variable

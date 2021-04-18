@@ -27,4 +27,9 @@ FEATURES_REQUIRED = periph_gpio
 #FEATURES_REQUIRED += periph_spi
 #FEATURES_OPTIONAL += periph_gpio_irq
 
+# If your application is very simple and doesn't use modules that use
+# messaging, it can be disabled to save some memory:
+DISABLE_MODULE += core_msg
+
+
 include $(RIOTBASE)/Makefile.include
