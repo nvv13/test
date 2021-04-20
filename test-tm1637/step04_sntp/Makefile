@@ -69,6 +69,7 @@ USEMODULE += sock_async_event
 USEMODULE += sock_ip
 USEMODULE += sock_udp
 USEMODULE += sock_tcp
+USEMODULE += sock_dns
 
 ####
 
