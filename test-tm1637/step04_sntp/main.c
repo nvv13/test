@@ -84,30 +84,29 @@ int _ntpdate1(int argc, char **argv)
         return 1;
     }
   */
-    ipv4_addr_t *addr = (ipv4_addr_t *)&server_ntp.addr;
+    //ipv4_addr_t *addr = (ipv4_addr_t *)&server_ntp.addr;
 
 
     //strncpy(_local_ip, argv[1], sizeof(_local_ip));
     //ipv4_addr_from_str(addr,argv[1]);
     //ipv4_addr_from_str(addr,time_google_com);
 
-//if(/*(server_ntp.addr.ipv4[0]==0 && server_ntp.addr.ipv4[1]==0 && 
-//    server_ntp.addr.ipv4[2]==0 && server_ntp.addr.ipv4[3]==0) ||*/ argc > 0)
-//{
-    //uint8_t addr_q[16] = {0};
-    int res = sock_dns_query(ntp_pool, addr, AF_INET);
+//if((server_ntp.addr.ipv4[0]==0 && server_ntp.addr.ipv4[1]==0 && 
+//    server_ntp.addr.ipv4[2]==0 && server_ntp.addr.ipv4[3]==0) || argc > 0)
+{
+    uint8_t addr_q[16] = {0};
+    int res = sock_dns_query(ntp_pool, addr_q, AF_INET);
     if (res > 0) {
- /*
+        //if (argc > 0)
+          {
+          inet_ntop(AF_INET, addr_q, addrstr, sizeof(addrstr));
+          printf("%s resolves to %s\n", ntp_pool, addrstr);
+          }
+
         server_ntp.addr.ipv4[0]=addr_q[0];
         server_ntp.addr.ipv4[1]=addr_q[1];
         server_ntp.addr.ipv4[2]=addr_q[2];
         server_ntp.addr.ipv4[3]=addr_q[3];
-*/
-        if (argc > 0)
-          {
-          inet_ntop(AF_INET, addr, addrstr, sizeof(addrstr));
-          printf("%s resolves to %s\n", ntp_pool, addrstr);
-          }
     }
     else
     {
@@ -116,13 +115,15 @@ int _ntpdate1(int argc, char **argv)
         //printf("dns addr to %s\n", addrstr);
         return 1;
     }
-//}
+}
 
 /*
     if (argc > 2) {
         timeout = atoi(argv[2]);
     }
 */
+
+
     if (sntp_sync(&server_ntp, timeout) < 0) {
         puts("Error in synchronization");
         return 1;
@@ -132,7 +133,7 @@ int _ntpdate1(int argc, char **argv)
     time_1 = (time_t)(sntp_get_unix_usec() / US_PER_SEC);
     time_2=time_1;
  
-   if (argc > 0)
+   //if (argc > 0)
      {
      tm_1 = gmtime(&time_1);
      printf("%04i-%02i-%02i %02i:%02i:%02i UTC (%i us)\n",
@@ -252,6 +253,7 @@ int main(void)
 #endif
 
     // configure DNS server .... 
+    memset((void*)(&sock_dns_server),0,sizeof(sock_dns_server));
     sock_dns_server.addr.ipv4[0]=8;
     sock_dns_server.addr.ipv4[1]=8;
     sock_dns_server.addr.ipv4[2]=8;
@@ -259,14 +261,15 @@ int main(void)
     sock_dns_server.port = SOCK_DNS_PORT;
     sock_dns_server.family = AF_INET;
 
-  /*
+    //conf ntp
+    memset((void*)(&server_ntp),0,sizeof(server_ntp));
     server_ntp.port = NTP_PORT;
     server_ntp.family = AF_INET;
     server_ntp.addr.ipv4[0]=0;
     server_ntp.addr.ipv4[1]=0;
     server_ntp.addr.ipv4[2]=0;
     server_ntp.addr.ipv4[3]=0;
-    */
+
 //gpio_t CLK=GPIO_PIN(0,14); // D5 - lolin - nodemcu v3 - board - не подходят, платка не перезагружаеться!!
 //gpio_t DIO=GPIO_PIN(0,15); // D8 - lolin - nodemcu v3 - board  
 

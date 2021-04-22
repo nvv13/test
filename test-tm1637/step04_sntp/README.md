@@ -6,7 +6,7 @@ esp8266-esp-12x + lwip + sntp
 
  clock
     and
- ntp synchronization
+ dns resolv ntp IP + ntp synchronization
 
 
 

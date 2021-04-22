@@ -90,6 +90,7 @@ int main(void)
     xtimer_sleep(1);
 
     // configure DNS server .... 
+    memset((void*)(&sock_dns_server),0,sizeof(sock_dns_server));
     sock_dns_server.addr.ipv4[0]=8;
     sock_dns_server.addr.ipv4[1]=8;
     sock_dns_server.addr.ipv4[2]=8;
