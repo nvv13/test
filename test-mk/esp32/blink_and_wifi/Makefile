@@ -4,12 +4,22 @@ APPLICATION = sntp-test02
 BOARD ?= esp32-wroom-32
 #BOARD ?= esp32-wemos-lolin-d32-pro
 
-# This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../RIOT
-
 #view msg prog tools
 PROGRAMMER_QUIET=0
 PORT=/dev/ttyACM0
+
+
+#BOARD ?= arduino-uno
+#PORT ?= /dev/ttyUSB0
+
+# This has to be the absolute path to the RIOT base directory:
+RIOTBASE ?= $(CURDIR)/../../../../RIOT
+
+
+
+
+#mesage prog tool
+PROGRAMMER_QUIET=0
 
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the
@@ -64,8 +74,7 @@ USEMODULE += sock_async_event
 USEMODULE += sock_ip
 USEMODULE += sock_udp
 USEMODULE += sock_tcp
-
-#USEMODULE += sntp
+USEMODULE += sock_dns
 
 ####
 
@@ -87,3 +96,6 @@ ifneq (,$(filter arch_esp,$(FEATURES_USED)))
   CFLAGS += -DESP_WIFI_SSID=\"$(WIFI_SSID)\"
   CFLAGS += -DESP_WIFI_PASS=\"$(WIFI_PASS)\"
 endif
+
+INCLUDES += -I$(CURDIR)
+
