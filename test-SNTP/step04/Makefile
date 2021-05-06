@@ -9,7 +9,7 @@ RIOTBASE ?= $(CURDIR)/../../../RIOT
 
 #view msg prog tools
 PROGRAMMER_QUIET=0
-PORT=/dev/ttyACM0
+PORT=/dev/ttyACM0 -tg
 
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the

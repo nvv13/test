@@ -7,8 +7,9 @@ BOARD ?= esp32-wroom-32
 
 #view msg prog tools
 PROGRAMMER_QUIET=0
-PORT=/dev/ttyACM0
-#-tg
+#PORT=/dev/ttyACM0
+PORT=/dev/ttyCH343USB0
+PYTERMFLAGS=-tg
 
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../../../RIOT

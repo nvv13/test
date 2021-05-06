@@ -28,10 +28,10 @@ void *thread_handler(void *arg)
     while(true)
      {
      gpio_write(pin13,1);
-     xtimer_sleep(1);
+     xtimer_sleep(5);
      gpio_write(pin13,0);
-     xtimer_sleep(1);
-     //puts("blink ");
+     xtimer_sleep(5);
+     puts("blink ");
 
     struct netif *netif;
     if (((netif) = netif_default) != NULL)
@@ -61,6 +61,7 @@ int _dns_query1(int argc, char **argv)
         return 1;
     }
 
+
     uint8_t addr[16] = {0};
     int res = sock_dns_query(argv[1], addr, AF_INET);
     if (res > 0) {
@@ -87,7 +88,6 @@ static const shell_command_t shell_commands[] =
 int main(void)
 {
 
-    xtimer_sleep(1);
 
     // configure DNS server .... 
     memset((void*)(&sock_dns_server),0,sizeof(sock_dns_server));
@@ -98,9 +98,12 @@ int main(void)
     sock_dns_server.port = SOCK_DNS_PORT;
     sock_dns_server.family = AF_INET;
 
+    xtimer_sleep(1);
+
     puts("This is blink");
     //xtimer_init();	
-    pin13 = GPIO_PIN(0, 2);
+    pin13 = GPIO_PIN(0, 13);
+    //pin13 = GPIO_PIN(0, 2);
     gpio_init(pin13,GPIO_OUT);
 
 

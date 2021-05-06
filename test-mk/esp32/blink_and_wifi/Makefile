@@ -6,7 +6,9 @@ BOARD ?= esp32-wroom-32
 
 #view msg prog tools
 PROGRAMMER_QUIET=0
-PORT=/dev/ttyACM0
+PORT=/dev/ttyUSB0
+#PORT=/dev/ttyACM0
+#PYTERMFLAGS=-tg
 
 
 #BOARD ?= arduino-uno
@@ -70,6 +72,8 @@ endif
 USEMODULE += lwip_netdev
 USEMODULE += lwip
 
+#USEMODULE += pppoe_support
+
 USEMODULE += sock_async_event
 USEMODULE += sock_ip
 USEMODULE += sock_udp
@@ -92,10 +96,11 @@ endif
 
 include $(RIOTBASE)/Makefile.include
 
+
+INCLUDES += -I$(CURDIR)
+
+#нужно чтоб сдесь было - иначе не увидит название точки wifi ....
 ifneq (,$(filter arch_esp,$(FEATURES_USED)))
   CFLAGS += -DESP_WIFI_SSID=\"$(WIFI_SSID)\"
   CFLAGS += -DESP_WIFI_PASS=\"$(WIFI_PASS)\"
 endif
-
-INCLUDES += -I$(CURDIR)
-
