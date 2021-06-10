@@ -33,7 +33,8 @@ int main(void)
     xtimer_sleep(1);
     puts("This is blink");
     //xtimer_init();	
-    pin13 = GPIO_PIN(0, 2); // http://wiki.amperka.ru/products:esp32-wroom-wifi-devkit-v1
+    //pin13 = GPIO_PIN(0, 2); // http://wiki.amperka.ru/products:esp32-wroom-wifi-devkit-v1
+    pin13 = GPIO_PIN(0, 22); // other 
     gpio_init(pin13,GPIO_OUT);
 
 

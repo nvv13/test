@@ -31,8 +31,10 @@ DEVELHELP ?= 1
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
 
-WIFI_SSID ?= "bred8"
-WIFI_PASS ?= "123123123"
+#WIFI_SSID ?= "bred8"
+#WIFI_PASS ?= "123123123"
+WIFI_SSID ?= "bred1"
+WIFI_PASS ?= "9115676369"
 
 ifneq (,$(DEFAULT_MQTT_CLIENT_ID))
   CFLAGS += -DDEFAULT_MQTT_CLIENT_ID=\"$(DEFAULT_MQTT_CLIENT_ID)\"

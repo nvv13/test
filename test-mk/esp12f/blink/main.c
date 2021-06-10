@@ -33,7 +33,9 @@ int main(void)
     xtimer_sleep(1);
     puts("This is blink");
     //xtimer_init();	
-    pin13 = GPIO_PIN(0, 13);
+    pin13 = GPIO_PIN(0, 2); // LILO esp12f pin2
+    //pin13 = GPIO_PIN(0, 13);
+    //pin13 = GPIO_PIN(0, 16);
     gpio_init(pin13,GPIO_OUT);
 
 
