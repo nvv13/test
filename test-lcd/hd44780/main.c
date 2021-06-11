@@ -34,44 +34,44 @@ int main(void)
     puts("This is test LSD I2C !");
 
 
-    hd44780_t dev;
+    hd44780_t lcd_dev;
     /* init display */
     puts("[START]");
 
 //hd44780_params
 
-    if (hd44780_init(&dev, &hd44780_params[0]) != 0) {
+    if (hd44780_init(&lcd_dev, &hd44780_params[0]) != 0) {
         puts("[FAILED]");
         return 1;
     }
  while(1)
  {
     /* clear screen, reset cursor */
-    hd44780_clear(&dev);
-    hd44780_home(&dev);
+    hd44780_clear(&lcd_dev);
+    hd44780_home(&lcd_dev);
     /* write first line */
-    hd44780_print(&dev, "Hello World ...");
+    hd44780_print(&lcd_dev, "Hello World ...");
     xtimer_sleep(1);
     /* set cursor to second line and write */
-    hd44780_set_cursor(&dev, 0, 1);
-    hd44780_print(&dev, "   RIOT is here!");
+    hd44780_set_cursor(&lcd_dev, 0, 1);
+    hd44780_print(&lcd_dev, "   RIOT is here!");
     xtimer_sleep(3);
     /* clear screen, reset cursor */
-    hd44780_clear(&dev);
-    hd44780_home(&dev);
+    hd44780_clear(&lcd_dev);
+    hd44780_home(&lcd_dev);
     /* write first line */
-    hd44780_print(&dev, "The friendly IoT");
+    hd44780_print(&lcd_dev, "The friendly IoT");
     /* set cursor to second line and write */
-    hd44780_set_cursor(&dev, 0, 1);
-    hd44780_print(&dev, "Operating System");
+    hd44780_set_cursor(&lcd_dev, 0, 1);
+    hd44780_print(&lcd_dev, "Operating System");
 
    /* set cursor to 3 line and write */
-    hd44780_set_cursor(&dev, 0, 2);
-    hd44780_print(&dev, "3 line 123 --");
+    hd44780_set_cursor(&lcd_dev, 0, 2);
+    hd44780_print(&lcd_dev, "3 line 123 --");
 
    /* set cursor to 4 line and write */
-    hd44780_set_cursor(&dev, 0, 3);
-    hd44780_print(&dev, "4 line ---- ");
+    hd44780_set_cursor(&lcd_dev, 0, 3);
+    hd44780_print(&lcd_dev, "4 line ---- ");
     xtimer_sleep(3);
 
     puts("[SUCCESS]");
