@@ -4,6 +4,8 @@ APPLICATION = Task03
 # If no BOARD is found in the environment, use this default:
 BOARD ?= arduino-mega2560
 
+PORT=/dev/ttyUSB0
+
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../../../RIOT
 

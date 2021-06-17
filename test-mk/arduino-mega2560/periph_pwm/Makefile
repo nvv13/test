@@ -3,6 +3,9 @@ APPLICATION = TestPWM
 
 BOARD ?= arduino-mega2560
 
+PORT=/dev/ttyUSB0
+
+
 RIOTBASE ?= $(CURDIR)/../../../../RIOT
 
 FEATURES_REQUIRED = periph_pwm

@@ -30,7 +30,7 @@ int main(void)
 {
     puts("This is Task-03");
     //xtimer_init();	
-    pin13 = GPIO_PIN(1, 7);//GPIO_PIN(PORT_C, 13);
+    pin13 = ARDUINO_PIN_13;//GPIO_PIN(1, 7);//GPIO_PIN(PORT_C, 13);
     gpio_init(pin13,GPIO_OUT);
 
 
