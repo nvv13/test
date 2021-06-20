@@ -65,15 +65,13 @@ int main(void)
     puts("Initializing to SPI.");
 
     u8g2_Setup_st7920_s_128x64_1(&u8g2, U8G2_R0, u8x8_byte_hw_spi_riotos, u8x8_gpio_and_delay_riotos);
-    //u8g2_Setup_st7920_s_128x64_f(&u8g2, U8G2_R0, u8x8_byte_hw_spi_riotos, u8x8_gpio_and_delay_riotos);
-    //u8g2_Setup_st7920_s_128x64_1(&u8g2, U8G2_R0, u8x8_byte_arduino_hw_spi, u8x8_gpio_and_delay_arduino);
 
     u8x8_riotos_t user_data =
     {
-        .device_index = SPI_HWCS(0),//SPI_DEV(0),//SPI_HWCS(0),//SPI_DEV(0), //SPI_HWCS(0),
-        .pin_cs =   GPIO_UNDEF,//ARDUINO_PIN_10,
-        .pin_dc = GPIO_UNDEF,//GPIO_UNDEF,
-        .pin_reset =  GPIO_UNDEF,//ARDUINO_PIN_8,
+        .device_index = SPI_DEV(0),
+        .pin_cs =  GPIO_PIN(PORT_A, 4),
+        .pin_dc =  GPIO_UNDEF,//GPIO_UNDEF,
+        .pin_reset =  GPIO_PIN(PORT_A, 0),
     };
 
     u8g2_SetUserPtr(&u8g2, &user_data);

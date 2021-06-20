@@ -3,9 +3,11 @@ APPLICATION = test_LSD
 
 # If no BOARD is found in the environment, use this default:
 #BOARD ?= esp8266-esp-12x
-BOARD ?= arduino-mega2560
 
-PORT=/dev/ttyUSB0
+BOARD ?= bluepill
+
+CFLAGS += -DDEVELHELP
+PROGRAMMER_QUIET = 0
 
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../../../RIOT
