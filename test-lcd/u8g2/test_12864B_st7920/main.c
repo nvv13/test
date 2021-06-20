@@ -102,11 +102,18 @@ int main(void)
                 case 2:
                     u8g2_DrawBitmap(&u8g2, 0, 0, 8, 32, logo);
                     break;
+                case 4:
+                    u8g2_DrawStr(&u8g2, 24, 22, "Vova Hi !");
+                    break;
+                case 5:
+                    u8g2_DrawStr(&u8g2, 4, 42, "Everything Ok !");
+                    break;
             }
         } while (u8g2_NextPage(&u8g2));
 
         /* show screen in next iteration */
-        screen = (screen + 1) % 3;
+        //screen = (screen + 1) % 3;
+        if(++screen>5)screen=0;
 
         /* sleep a little */
         xtimer_sleep(1);
