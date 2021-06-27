@@ -494,7 +494,7 @@ uint8_t m_1=0;
 uint8_t m_2=0;
 
 uint8_t c_sec=0;
-uint8_t b_intensity=0x01;
+uint8_t b_intensity=0x06;
 
 int setCommand2(uint8_t command)
 {
