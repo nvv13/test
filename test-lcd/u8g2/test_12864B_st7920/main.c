@@ -56,6 +56,31 @@ static const uint8_t logo[] = {
     0x00, 0x00, 0x00, 0x00
 };
 
+/*
+LCD		bluepill
+
+1 GND          - GND
+2 VCC (+5V)    - +5V
+3 Vo
+4 RS (CS)      - A4 (spi1 nss)
+5 R/W (MOSI)   - A7 (spi1 mosi)
+6 E (SCK)      - A5 (spi1 sck)
+7  DB0
+8  DB1
+9  DB2
+10 DB3
+11 DB4
+12 DB5
+13 DB6
+14 DB7
+15 PSB        - GND (0- serial input/1-parralel)  
+16 NC
+17 RST        - A0
+18 Vout
+19 BLA        - +3.3v
+20 BLK        - GND 
+
+*/
 int main(void)
 {
     uint32_t screen = 0;
