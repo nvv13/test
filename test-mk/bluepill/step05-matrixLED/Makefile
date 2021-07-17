@@ -1,7 +1,8 @@
 # name of your application
-APPLICATION = test_spi_01
+APPLICATION = test_spi_adc_01
 
 BOARD ?= bluepill
+PORT=/dev/ttyUSB0
 
 #include ../Makefile.tests_common
 
@@ -10,6 +11,7 @@ RIOTBASE ?= $(CURDIR)/../../../../RIOT
 PROGRAMMER_QUIET = 0
 
 FEATURES_REQUIRED += periph_spi
+FEATURES_REQUIRED += periph_adc
 
 USEMODULE += xtimer
 USEMODULE += shell

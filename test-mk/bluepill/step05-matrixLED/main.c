@@ -29,6 +29,8 @@
 #include "xtimer.h"
 #include "shell.h"
 #include "periph/spi.h"
+#include "periph/adc.h"
+
 #include "thread.h"
 
 #include "ds3231.h"
@@ -458,6 +460,10 @@ int num_use_module=1;
 gpio_t pin15;
 gpio_t pin13;
 
+adc_t line1;
+adc_res_t res1;
+int32_t i_adc_result;
+
 int setCommand(uint8_t command, uint8_t value)
 {
     /* get access to the bus */
@@ -646,6 +652,11 @@ Signal	index	bluepill    pin button
 A1      10      PA1         SWitch
 GND     GND     GND         GND
 
+Signal	index	bluepill    pin 
+3V3     3V3     3V3         foto_resistor
+A0(ADC) 9       PA0         resistor 47k + foto_resistor
+GND     GND     GND         resistor 47k
+
 Signal	index	bluepill    pin DS3231
 SDA1    15      PB7         SDA
 SCL1    16      PB6         SCL
@@ -670,7 +681,12 @@ int refresh(void)
     }
     setCommand(max7219_reg_scanLimit, 0x07);      
     setCommand(max7219_reg_decodeMode, 0x00);  // using an led matrix (not digits)
-    setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
+    //
+    if( i_adc_result < 0 ||  i_adc_result > 4 )
+     setCommand(max7219_reg_shutdown, 0x01);    // not in shutdown mode
+     else
+     setCommand(max7219_reg_shutdown, 0x00);    // shutdown mode
+    //
     setCommand(max7219_reg_displayTest, 0x00); // no display test
     setCommand(max7219_reg_intensity, b_intensity);
     //clear();
@@ -689,6 +705,9 @@ void *thread_handler(void *arg)
 
     while(true)
      {
+     i_adc_result=adc_sample(line1, res1);
+     //printf("adc result = %ld\n",  i_adc_result);
+
      refresh();
 
      struct tm time;
@@ -743,6 +762,30 @@ static const shell_command_t shell_commands[] = {
 
 int main(void)
 {
+
+    xtimer_sleep(1);
+
+/**
+ * @brief   Initialize the given ADC line
+ *
+ * The ADC line is initialized in synchronous, blocking mode.
+ *
+ * @param[in] line          line to initialize
+ *
+ * @return                  0 on success
+ * @return                  -1 on invalid ADC line
+ */	
+    line1=ADC_LINE(0); // pin A0
+    res1=ADC_RES_12BIT;
+    if(adc_init(line1)==-1)
+     {
+     puts("invalid ADC line");
+     }
+     else
+     {
+     puts("ADC init OK");
+     }
+
     num_use_module=8;
 
     pin15 = GPIO_PIN(0,4);
@@ -751,7 +794,6 @@ int main(void)
     pin13 = GPIO_PIN(PORT_C, 13);
     gpio_init(pin13,GPIO_OUT);
 
-    xtimer_sleep(1);
     
     puts("Manual SPI peripheral driver test");
     puts("Refer to the README.md file for more information.\n");
