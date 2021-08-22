@@ -1,5 +1,5 @@
 Fitter report for blink1
-Sat Dec 26 13:33:58 2020
+Wed Jul 28 19:48:01 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -55,7 +55,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Sat Dec 26 13:33:58 2020       ;
+; Fitter Status         ; Successful - Wed Jul 28 19:48:01 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; blink1                                      ;
 ; Top-level Entity Name ; blink1                                      ;
@@ -75,6 +75,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                             ; Setting                        ; Default Value                  ;
 +--------------------------------------------------------------------+--------------------------------+--------------------------------+
 ; Device                                                             ; EPM240T100C5                   ;                                ;
+; Maximum processors allowed for parallel compilation                ; All                            ;                                ;
 ; Minimum Core Junction Temperature                                  ; 0                              ;                                ;
 ; Maximum Core Junction Temperature                                  ; 85                             ;                                ;
 ; Fit Attempts to Skip                                               ; 0                              ; 0.0                            ;
@@ -131,15 +132,15 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.6%      ;
-;     Processors 3-4         ;   0.5%      ;
+;     Processor 2            ;   0.9%      ;
+;     Processors 3-4         ;   0.6%      ;
 +----------------------------+-------------+
 
 
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in /home/nvv/fpga_prg/blink/output_files/blink1.pin.
+The pin-out file can be found in /home/nvv/test/test-FPGA/m2/blink/output_files/blink1.pin.
 
 
 +------------------------------------------------------------------+
@@ -515,7 +516,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------+
 ; Fitter Messages ;
 +-----------------+
-Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (119006): Selected device EPM240T100C5 for design "blink1"
 Info (21077): Low junction temperature is 0 degrees C
@@ -537,8 +537,8 @@ Info (332111): Found 1 clocks
     Info (332111): ======== ============
     Info (332111):    1.000          clk
 Info (186079): Completed User Assigned Global Signals Promotion Operation
-Info (186216): Automatically promoted some destinations of signal "clk" to use Global clock in PIN 12 File: /home/nvv/fpga_prg/blink/blink1.v Line: 2
-    Info (186217): Destination "led2" may be non-global or may not use global clock File: /home/nvv/fpga_prg/blink/blink1.v Line: 3
+Info (186216): Automatically promoted some destinations of signal "clk" to use Global clock in PIN 12 File: /home/nvv/test/test-FPGA/m2/blink/blink1.v Line: 2
+    Info (186217): Destination "led2" may be non-global or may not use global clock File: /home/nvv/test/test-FPGA/m2/blink/blink1.v Line: 3
 Info (186079): Completed Auto Global Promotion Operation
 Info (176234): Starting register packing
 Info (186468): Started processing fast register assignments
@@ -557,12 +557,12 @@ Info (170195): Router estimated average interconnect usage is 3% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.09 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.14 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
-Info: Quartus Prime Fitter was successful. 0 errors, 3 warnings
+Info: Quartus Prime Fitter was successful. 0 errors, 2 warnings
     Info: Peak virtual memory: 992 megabytes
-    Info: Processing ended: Sat Dec 26 13:33:58 2020
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Wed Jul 28 19:48:01 2021
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:02
 
 

@@ -1,5 +1,5 @@
 Flow report for blink1
-Sat Dec 26 13:34:01 2020
+Wed Jul 28 19:48:05 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Flow Summary                                                        ;
 +-----------------------+---------------------------------------------+
-; Flow Status           ; Successful - Sat Dec 26 13:34:00 2020       ;
+; Flow Status           ; Successful - Wed Jul 28 19:48:03 2021       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; blink1                                      ;
 ; Top-level Entity Name ; blink1                                      ;
@@ -60,7 +60,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/26/2020 13:33:45 ;
+; Start date & time ; 07/28/2021 19:47:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; blink1              ;
 +-------------------+---------------------+
@@ -71,10 +71,12 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------+---------------------------------+---------------+-------------+------------+
 ; Assignment Name                       ; Value                           ; Default Value ; Entity Name ; Section Id ;
 +---------------------------------------+---------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID                 ; 163683365598573.160897882502448 ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                 ; 163683365598573.162749086703589 ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP                ; 85                              ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP                ; 0                               ; --            ; --          ; --         ;
+; NUM_PARALLEL_PROCESSORS               ; All                             ; --            ; --          ; --         ;
 ; POWER_EXT_SUPPLY_VOLTAGE_TO_REGULATOR ; 3.3V                            ; --            ; --          ; --         ;
+; POWER_PRESET_COOLING_SOLUTION         ; No Heat Sink With Still Air     ; --            ; --          ; --         ;
 ; PROJECT_OUTPUT_DIRECTORY              ; output_files                    ; --            ; --          ; --         ;
 +---------------------------------------+---------------------------------+---------------+-------------+------------+
 
@@ -84,11 +86,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:11     ; 1.0                     ; 556 MB              ; 00:00:26                           ;
-; Fitter               ; 00:00:02     ; 1.0                     ; 992 MB              ; 00:00:02                           ;
-; Assembler            ; 00:00:01     ; 1.0                     ; 544 MB              ; 00:00:00                           ;
-; Timing Analyzer      ; 00:00:00     ; 1.0                     ; 569 MB              ; 00:00:01                           ;
-; Total                ; 00:00:14     ; --                      ; --                  ; 00:00:29                           ;
+; Analysis & Synthesis ; 00:00:13     ; 1.0                     ; 556 MB              ; 00:00:28                           ;
+; Fitter               ; 00:00:01     ; 1.0                     ; 992 MB              ; 00:00:02                           ;
+; Assembler            ; 00:00:00     ; 1.0                     ; 544 MB              ; 00:00:00                           ;
+; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 569 MB              ; 00:00:01                           ;
+; Total                ; 00:00:15     ; --                      ; --                  ; 00:00:31                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

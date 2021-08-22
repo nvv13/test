@@ -1,5 +1,5 @@
 Assembler report for blink1
-Sat Dec 26 13:34:00 2020
+Wed Jul 28 19:48:03 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Dec 26 13:34:00 2020 ;
+; Assembler Status      ; Successful - Wed Jul 28 19:48:03 2021 ;
 ; Revision Name         ; blink1                                ;
 ; Top-level Entity Name ; blink1                                ;
 ; Family                ; MAX II                                ;
@@ -53,13 +53,13 @@ https://fpgasoftware.intel.com/eula.
 +--------+---------+---------------+
 
 
-+--------------------------------------------------+
-; Assembler Generated Files                        ;
-+--------------------------------------------------+
-; File Name                                        ;
-+--------------------------------------------------+
-; /home/nvv/fpga_prg/blink/output_files/blink1.pof ;
-+--------------------------------------------------+
++-----------------------------------------------------------+
+; Assembler Generated Files                                 ;
++-----------------------------------------------------------+
+; File Name                                                 ;
++-----------------------------------------------------------+
+; /home/nvv/test/test-FPGA/m2/blink/output_files/blink1.pof ;
++-----------------------------------------------------------+
 
 
 +--------------------------------------+
@@ -78,15 +78,14 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Dec 26 13:33:59 2020
+    Info: Processing started: Wed Jul 28 19:48:03 2021
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off blink1 -c blink1
-Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
-Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
+Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 544 megabytes
-    Info: Processing ended: Sat Dec 26 13:34:00 2020
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Wed Jul 28 19:48:03 2021
+    Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
 
 

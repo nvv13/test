@@ -27,8 +27,8 @@ clk => counter[23].CLK
 clk => counter[24].CLK
 clk => led2.DATAIN
 clk => lnd.CLK
-led0 <= led.DB_MAX_OUTPUT_PORT_TYPE
-led1 <= lnd.DB_MAX_OUTPUT_PORT_TYPE
-led2 <= clk.DB_MAX_OUTPUT_PORT_TYPE
+led0 << led.DB_MAX_OUTPUT_PORT_TYPE
+led1 << lnd.DB_MAX_OUTPUT_PORT_TYPE
+led2 << clk.DB_MAX_OUTPUT_PORT_TYPE
 
 

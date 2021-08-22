@@ -1,5 +1,5 @@
 Analysis & Synthesis report for blink1
-Sat Dec 26 13:33:55 2020
+Wed Jul 28 19:47:59 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sat Dec 26 13:33:55 2020       ;
+; Analysis & Synthesis Status ; Successful - Wed Jul 28 19:47:59 2021       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; blink1                                      ;
 ; Top-level Entity Name       ; blink1                                      ;
@@ -61,6 +61,7 @@ https://fpgasoftware.intel.com/eula.
 ; Device                                                           ; EPM240T100C5       ;                    ;
 ; Top-level entity name                                            ; blink1             ; blink1             ;
 ; Family name                                                      ; MAX II             ; Cyclone V          ;
+; Maximum processors allowed for parallel compilation              ; All                ;                    ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                      ; Off                ; Off                ;
@@ -140,13 +141,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                    ;
-+----------------------------------+-----------------+------------------------+-----------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path      ; Library ;
-+----------------------------------+-----------------+------------------------+-----------------------------------+---------+
-; blink1.v                         ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/blink/blink1.v ;         ;
-+----------------------------------+-----------------+------------------------+-----------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                             ;
++----------------------------------+-----------------+------------------------+--------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path               ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------------+---------+
+; blink1.v                         ; yes             ; User Verilog HDL File  ; /home/nvv/test/test-FPGA/m2/blink/blink1.v ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -215,21 +216,20 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Dec 26 13:33:44 2020
+    Info: Processing started: Wed Jul 28 19:47:46 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off blink1 -c blink1
-Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file blink1.v
-    Info (12023): Found entity 1: blink1 File: /home/nvv/fpga_prg/blink/blink1.v Line: 1
+    Info (12023): Found entity 1: blink1 File: /home/nvv/test/test-FPGA/m2/blink/blink1.v Line: 1
 Info (12127): Elaborating entity "blink1" for the top level hierarchy
 Info (21057): Implemented 64 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 1 input pins
     Info (21059): Implemented 3 output pins
     Info (21061): Implemented 60 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 556 megabytes
-    Info: Processing ended: Sat Dec 26 13:33:55 2020
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:26
+    Info: Processing ended: Wed Jul 28 19:47:59 2021
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:28
 
 

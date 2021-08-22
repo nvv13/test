@@ -1,6 +1,11 @@
 
 install from fedora linux
 
-$ dnf install rust
-$ dnf install cargo
+и сделать по
+
+https://www.rust-lang.org/tools/install
+
+# cd ~
+# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 
