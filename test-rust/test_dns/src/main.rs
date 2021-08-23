@@ -1,7 +1,6 @@
-use std::net::{ SocketAddr, ToSocketAddrs };
+use std::net::{SocketAddr, ToSocketAddrs};
 
 fn main() {
-
     let mut server_details = "ya.ru:80".to_socket_addrs().unwrap();
     let server: SocketAddr = server_details
         .next()
@@ -9,5 +8,4 @@ fn main() {
     println!("{:?}", server);
     println!("{}", server.ip());
     println!("{}", server.port());
-
 }
