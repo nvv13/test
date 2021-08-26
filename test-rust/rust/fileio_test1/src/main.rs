@@ -3,7 +3,7 @@ use std::io::prelude::*;
 use std::io::LineWriter;
 
 fn main() -> std::io::Result<()> {
-    let road_not_taken = b"l,tl,l,
+    let test_text = b"l,tl,l,
 555
 yyyu
 gtgtg
@@ -30,6 +30,6 @@ tttttttttttttttttt.",
     file.flush()?;
 
     // Confirm write
-    assert_eq!(fs::read("text1.txt")?, &road_not_taken[..]);
+    assert_eq!(fs::read("text1.txt")?, &test_text[..]);
     Ok(())
 }
