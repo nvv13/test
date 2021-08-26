@@ -1,0 +1,41 @@
+
+
+https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html
+
+
+Start a new project
+Use the command idf.py create-project for starting a new project. Execute idf.py create-project --help for more information.
+
+Example:
+
+idf.py create-project --path my_projects my_new_project
+This example will create a new project called my_new_project directly into the directory my_projects.
+
+
+
+то есть
+
+# сохраним текущий путь
+export my1pwd=$PWD
+
+# настраиваем окружение
+cd ~/esp-idf/
+. ./export.sh
+
+# потом обратно, в иректорию с проектами
+cd $my1pwd
+
+# далее - делаем директорию с пустым проектом
+idf.py create-project --path test1 test1prj
+
+# переходим в 
+cd test1
+
+# указать цель (есть ещё другие  idf.py set-target --help )
+idf.py set-target esp32s2
+
+# 
+idf.py menuconfig
+
+# Сборка, прошивка, USB консоль
+idf.py build flash monitor

@@ -1,0 +1,2 @@
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libapp_update.a CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libapp_update.a

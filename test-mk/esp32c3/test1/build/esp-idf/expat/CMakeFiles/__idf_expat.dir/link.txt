@@ -1,0 +1,2 @@
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libexpat.a CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libexpat.a

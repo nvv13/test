@@ -1,0 +1,2 @@
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libesp_eth.a CMakeFiles/__idf_esp_eth.dir/src/esp_eth.c.obj CMakeFiles/__idf_esp_eth.dir/src/esp_eth_phy.c.obj CMakeFiles/__idf_esp_eth.dir/src/esp_eth_netif_glue.c.obj
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libesp_eth.a

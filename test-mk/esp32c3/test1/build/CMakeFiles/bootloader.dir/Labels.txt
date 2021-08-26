@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/bootloader
+/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/bootloader.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/bootloader-complete.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/nvv/test/test-mk/esp32c3/test1/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule

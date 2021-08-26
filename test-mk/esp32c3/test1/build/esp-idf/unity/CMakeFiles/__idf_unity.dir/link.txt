@@ -1,0 +1,2 @@
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libunity.a CMakeFiles/__idf_unity.dir/unity/src/unity.c.obj CMakeFiles/__idf_unity.dir/unity_runner.c.obj CMakeFiles/__idf_unity.dir/unity_port_esp32.c.obj
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libunity.a

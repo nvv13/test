@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nvv/esp-idf/components/newlib/platform_include/assert.h
+sdkconfig.h
+-
+stdlib.h
+-
+stdint.h
+-
+
+/home/nvv/esp-idf/components/protobuf-c/protobuf-c/protobuf-c/protobuf-c.c
+stdlib.h
+-
+string.h
+-
+protobuf-c.h
+/home/nvv/esp-idf/components/protobuf-c/protobuf-c/protobuf-c/protobuf-c.h
+
+/home/nvv/esp-idf/components/protobuf-c/protobuf-c/protobuf-c/protobuf-c.h
+assert.h
+-
+limits.h
+-
+stddef.h
+-
+stdint.h
+-
+
+config/sdkconfig.h
+

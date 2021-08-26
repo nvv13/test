@@ -1,0 +1,2 @@
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libesp_rom.a CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_crc.c.obj CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_sys.c.obj CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_longjmp.S.obj CMakeFiles/__idf_esp_rom.dir/esp32s2/usb_descriptors.c.obj
+/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libesp_rom.a
