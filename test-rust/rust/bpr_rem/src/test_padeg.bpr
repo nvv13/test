@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="test_padeg.exe"/>
+    <OBJFILES value="..\..\..\PRG_IRC\Common\PadegUnit.obj test_padeg.obj Umain.obj"/>
+    <RESFILES value="test_padeg.res"/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Umain.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="Vcl50.lib dirnotif.lib editcenter.lib stedit.lib bcb2kaxserver50.lib 
+      vclx50.lib proide50.lib vclie50.lib bcbie50.lib bcbsmp50.lib vclmid50.lib 
+      vcldb50.lib vclbde50.lib vcldbx50.lib vclado50.lib teeui50.lib teedb50.lib 
+      tee50.lib dss50.lib vclib50.lib inetdb50.lib inet50.lib nmfast50.lib 
+      dclocx50.lib qrpt50.lib teeqr50.lib webmid50.lib dwheel.lib"/>
+    <PACKAGES value="vclado50.bpi Vcldb50.bpi Vcl50.bpi Vclx50.bpi stedit.bpi DirNotif.bpi 
+      EditCenter.bpi textLOG.bpi bcbsmp50.bpi CPORTLIBCB5.bpi 
+      bcb2kaxserver50.bpi proide50.bpi bcbie50.bpi Vclmid50.bpi Inet50.bpi 
+      Inetdb50.bpi Vclbde50.bpi vcldbx50.bpi Dss50.bpi VCLIB50.bpi vclie50.bpi 
+      NMFast50.bpi dclocx50.bpi Qrpt50.bpi TeeUI50.bpi TeeDB50.bpi Tee50.bpi 
+      TeeQR50.bpi webmid50.bpi DWheel.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\..\..\PRG_IRC\Common"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="tlink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="test_padeg.cpp"/>
+    <INCLUDEPATH value="..\..\..\PRG_IRC\Common;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\..\PRG_IRC\Common;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl50.csm -Hc -Vx -Ve -xp -X- -r- -a8 -b- -k -y -v -vi- 
+      -c -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$R -$Q -$O- -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Excluded Packages]
+$(BCB)\Bin\DbX50.bpl=(untitled)
+$(BCB)\Bin\dbwebxprt.bpl=Borland Web Wizard Package
+$(BCB)\Lib\DsgnCPortCB5.bpl=ComPort Library
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>
