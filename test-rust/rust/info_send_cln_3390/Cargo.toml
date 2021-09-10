@@ -1,0 +1,10 @@
+[package]
+name = "info_send_cln_3390"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+local-ip-address = "0.4.4"
+tokio = { version = "1.10.0", features = ["full"] }
