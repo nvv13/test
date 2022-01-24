@@ -1,2 +1,2 @@
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libmqtt.a CMakeFiles/__idf_mqtt.dir/esp-mqtt/mqtt_client.c.obj CMakeFiles/__idf_mqtt.dir/esp-mqtt/lib/mqtt_msg.c.obj CMakeFiles/__idf_mqtt.dir/esp-mqtt/lib/mqtt_outbox.c.obj CMakeFiles/__idf_mqtt.dir/esp-mqtt/lib/platform_esp32_idf.c.obj
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libmqtt.a
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libmqtt.a CMakeFiles/__idf_mqtt.dir/esp-mqtt/mqtt_client.c.obj CMakeFiles/__idf_mqtt.dir/esp-mqtt/lib/mqtt_msg.c.obj CMakeFiles/__idf_mqtt.dir/esp-mqtt/lib/mqtt_outbox.c.obj CMakeFiles/__idf_mqtt.dir/esp-mqtt/lib/platform_esp32_idf.c.obj
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libmqtt.a

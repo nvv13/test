@@ -366,15 +366,17 @@ sys/types.h
 
 /home/nvv/esp-idf/components/newlib/platform_include/time.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 stdint.h
 -
 esp_assert.h
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/esp_assert.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_assert.h
 esp_bit_defs.h
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/esp_bit_defs.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_bit_defs.h
+sdkconfig.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/sdkconfig.h
 
 config/sdkconfig.h
 

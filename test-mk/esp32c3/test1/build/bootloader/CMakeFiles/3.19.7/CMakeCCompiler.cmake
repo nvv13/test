@@ -1,4 +1,4 @@
-set(CMAKE_C_COMPILER "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc")
+set(CMAKE_C_COMPILER "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc")
 set(CMAKE_C_COMPILER_ARG1 "")
 set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_COMPILER_VERSION "8.4.0")
@@ -18,11 +18,11 @@ set(CMAKE_C_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar")
-set(CMAKE_C_COMPILER_AR "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ar")
-set(CMAKE_RANLIB "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib")
-set(CMAKE_C_COMPILER_RANLIB "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ranlib")
-set(CMAKE_LINKER "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ld")
+set(CMAKE_AR "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar")
+set(CMAKE_C_COMPILER_AR "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ar")
+set(CMAKE_RANLIB "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib")
+set(CMAKE_C_COMPILER_RANLIB "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ranlib")
+set(CMAKE_LINKER "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ld")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCC 1)
 set(CMAKE_C_COMPILER_LOADED 1)
@@ -71,7 +71,7 @@ endif()
 
 
 
-set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/sys-include;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include")
-set(CMAKE_C_IMPLICIT_LINK_LIBRARIES "gcc;c;nosys;c;gcc")
-set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/lib")
+set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include-fixed;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/sys-include;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include")
+set(CMAKE_C_IMPLICIT_LINK_LIBRARIES "gcc;c;gcc;gcc;c;nosys")
+set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib")
 set(CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")

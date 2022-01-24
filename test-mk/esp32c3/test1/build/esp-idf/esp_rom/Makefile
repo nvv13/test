@@ -190,33 +190,6 @@ __idf_esp_rom/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build
 .PHONY : __idf_esp_rom/fast
 
-esp32s2/usb_descriptors.obj: esp32s2/usb_descriptors.c.obj
-
-.PHONY : esp32s2/usb_descriptors.obj
-
-# target to build an object file
-esp32s2/usb_descriptors.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/esp32s2/usb_descriptors.c.obj
-.PHONY : esp32s2/usb_descriptors.c.obj
-
-esp32s2/usb_descriptors.i: esp32s2/usb_descriptors.c.i
-
-.PHONY : esp32s2/usb_descriptors.i
-
-# target to preprocess a source file
-esp32s2/usb_descriptors.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/esp32s2/usb_descriptors.c.i
-.PHONY : esp32s2/usb_descriptors.c.i
-
-esp32s2/usb_descriptors.s: esp32s2/usb_descriptors.c.s
-
-.PHONY : esp32s2/usb_descriptors.s
-
-# target to generate assembly for a file
-esp32s2/usb_descriptors.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/esp32s2/usb_descriptors.c.s
-.PHONY : esp32s2/usb_descriptors.c.s
-
 patches/esp_rom_crc.obj: patches/esp_rom_crc.c.obj
 
 .PHONY : patches/esp_rom_crc.obj
@@ -243,15 +216,6 @@ patches/esp_rom_crc.s: patches/esp_rom_crc.c.s
 patches/esp_rom_crc.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_crc.c.s
 .PHONY : patches/esp_rom_crc.c.s
-
-patches/esp_rom_longjmp.obj: patches/esp_rom_longjmp.S.obj
-
-.PHONY : patches/esp_rom_longjmp.obj
-
-# target to build an object file
-patches/esp_rom_longjmp.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_longjmp.S.obj
-.PHONY : patches/esp_rom_longjmp.S.obj
 
 patches/esp_rom_sys.obj: patches/esp_rom_sys.c.obj
 
@@ -320,13 +284,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_esp_rom"
-	@echo "... esp32s2/usb_descriptors.obj"
-	@echo "... esp32s2/usb_descriptors.i"
-	@echo "... esp32s2/usb_descriptors.s"
 	@echo "... patches/esp_rom_crc.obj"
 	@echo "... patches/esp_rom_crc.i"
 	@echo "... patches/esp_rom_crc.s"
-	@echo "... patches/esp_rom_longjmp.obj"
 	@echo "... patches/esp_rom_sys.obj"
 	@echo "... patches/esp_rom_sys.i"
 	@echo "... patches/esp_rom_sys.s"

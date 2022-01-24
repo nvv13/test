@@ -76,31 +76,31 @@ include CMakeFiles/test1prj.elf.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test1prj.elf.dir/flags.make
 
-project_elf_src_esp32s2.c:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating project_elf_src_esp32s2.c"
-	/usr/bin/cmake -E touch /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32s2.c
+project_elf_src_esp32c3.c:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating project_elf_src_esp32c3.c"
+	/usr/bin/cmake -E touch /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c
 
-CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj: CMakeFiles/test1prj.elf.dir/flags.make
-CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj: project_elf_src_esp32s2.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj"
-	/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32s2.c
+CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj: CMakeFiles/test1prj.elf.dir/flags.make
+CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj: project_elf_src_esp32c3.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj"
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c
 
-CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.i"
-	/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32s2.c > CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.i
+CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i"
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c > CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i
 
-CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.s"
-	/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32s2.c -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.s
+CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s"
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s
 
 # Object files for target test1prj.elf
 test1prj_elf_OBJECTS = \
-"CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj"
+"CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj"
 
 # External object files for target test1prj.elf
 test1prj_elf_EXTERNAL_OBJECTS =
 
-test1prj.elf: CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj
+test1prj.elf: CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj
 test1prj.elf: CMakeFiles/test1prj.elf.dir/build.make
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
@@ -131,7 +131,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -169,11 +169,7 @@ test1prj.elf: esp-idf/json/libjson.a
 test1prj.elf: esp-idf/libsodium/liblibsodium.a
 test1prj.elf: esp-idf/mqtt/libmqtt.a
 test1prj.elf: esp-idf/openssl/libopenssl.a
-test1prj.elf: esp-idf/perfmon/libperfmon.a
 test1prj.elf: esp-idf/spiffs/libspiffs.a
-test1prj.elf: esp-idf/touch_element/libtouch_element.a
-test1prj.elf: esp-idf/ulp/libulp.a
-test1prj.elf: esp-idf/usb/libusb.a
 test1prj.elf: esp-idf/wifi_provisioning/libwifi_provisioning.a
 test1prj.elf: esp-idf/main/libmain.a
 test1prj.elf: esp-idf/asio/libasio.a
@@ -194,10 +190,7 @@ test1prj.elf: esp-idf/jsmn/libjsmn.a
 test1prj.elf: esp-idf/libsodium/liblibsodium.a
 test1prj.elf: esp-idf/mqtt/libmqtt.a
 test1prj.elf: esp-idf/openssl/libopenssl.a
-test1prj.elf: esp-idf/perfmon/libperfmon.a
 test1prj.elf: esp-idf/spiffs/libspiffs.a
-test1prj.elf: esp-idf/touch_element/libtouch_element.a
-test1prj.elf: esp-idf/usb/libusb.a
 test1prj.elf: esp-idf/wifi_provisioning/libwifi_provisioning.a
 test1prj.elf: esp-idf/protocomm/libprotocomm.a
 test1prj.elf: esp-idf/protobuf-c/libprotobuf-c.a
@@ -233,7 +226,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -248,18 +241,17 @@ test1prj.elf: esp-idf/esp_http_server/libesp_http_server.a
 test1prj.elf: esp-idf/esp_https_ota/libesp_https_ota.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
-test1prj.elf: esp-idf/ulp/libulp.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedtls.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedx509.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcoexist.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcore.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libespnow.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libmesh.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libnet80211.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libpp.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libsmartconfig.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libwapi.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcoexist.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcore.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libespnow.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libmesh.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libnet80211.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libpp.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
 test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
@@ -289,7 +281,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -304,18 +296,17 @@ test1prj.elf: esp-idf/esp_http_server/libesp_http_server.a
 test1prj.elf: esp-idf/esp_https_ota/libesp_https_ota.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
-test1prj.elf: esp-idf/ulp/libulp.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedtls.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedx509.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcoexist.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcore.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libespnow.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libmesh.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libnet80211.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libpp.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libsmartconfig.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libwapi.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcoexist.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcore.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libespnow.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libmesh.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libnet80211.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libpp.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
 test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
@@ -345,7 +336,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -360,18 +351,17 @@ test1prj.elf: esp-idf/esp_http_server/libesp_http_server.a
 test1prj.elf: esp-idf/esp_https_ota/libesp_https_ota.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
-test1prj.elf: esp-idf/ulp/libulp.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedtls.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedx509.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcoexist.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcore.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libespnow.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libmesh.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libnet80211.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libpp.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libsmartconfig.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libwapi.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcoexist.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcore.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libespnow.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libmesh.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libnet80211.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libpp.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
 test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
@@ -401,7 +391,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -416,18 +406,17 @@ test1prj.elf: esp-idf/esp_http_server/libesp_http_server.a
 test1prj.elf: esp-idf/esp_https_ota/libesp_https_ota.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
-test1prj.elf: esp-idf/ulp/libulp.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedtls.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedx509.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcoexist.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcore.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libespnow.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libmesh.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libnet80211.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libpp.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libsmartconfig.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libwapi.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcoexist.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcore.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libespnow.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libmesh.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libnet80211.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libpp.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
 test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
@@ -457,7 +446,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -472,18 +461,17 @@ test1prj.elf: esp-idf/esp_http_server/libesp_http_server.a
 test1prj.elf: esp-idf/esp_https_ota/libesp_https_ota.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
-test1prj.elf: esp-idf/ulp/libulp.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedtls.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedx509.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcoexist.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcore.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libespnow.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libmesh.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libnet80211.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libpp.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libsmartconfig.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libwapi.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcoexist.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcore.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libespnow.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libmesh.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libnet80211.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libpp.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
 test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
@@ -513,7 +501,7 @@ test1prj.elf: esp-idf/log/liblog.a
 test1prj.elf: esp-idf/heap/libheap.a
 test1prj.elf: esp-idf/soc/libsoc.a
 test1prj.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-test1prj.elf: esp-idf/xtensa/libxtensa.a
+test1prj.elf: esp-idf/riscv/libriscv.a
 test1prj.elf: esp-idf/esp_common/libesp_common.a
 test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
@@ -528,21 +516,19 @@ test1prj.elf: esp-idf/esp_http_server/libesp_http_server.a
 test1prj.elf: esp-idf/esp_https_ota/libesp_https_ota.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
-test1prj.elf: esp-idf/ulp/libulp.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedtls.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
 test1prj.elf: esp-idf/mbedtls/mbedtls/library/libmbedx509.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcoexist.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libcore.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libespnow.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libmesh.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libnet80211.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libpp.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libsmartconfig.a
-test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32s2/libwapi.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcoexist.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libcore.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libespnow.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libmesh.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libnet80211.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libpp.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
+test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
-test1prj.elf: /home/nvv/esp-idf/components/xtensa/esp32s2/libxt_hal.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/pthread/libpthread.a
 test1prj.elf: esp-idf/cxx/libcxx.a
@@ -550,13 +536,13 @@ test1prj.elf: esp-idf/app_trace/libapp_trace.a
 test1prj.elf: esp-idf/app_trace/libapp_trace.a
 test1prj.elf: esp-idf/esp_system/ld/memory.ld
 test1prj.elf: esp-idf/esp_system/ld/sections.ld
-test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.ld
-test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.api.ld
-test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.libgcc.ld
-test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.newlib-funcs.ld
-test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.newlib-data.ld
-test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.spiflash.ld
-test1prj.elf: /home/nvv/esp-idf/components/soc/esp32s2/ld/esp32s2.peripherals.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.api.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.libgcc.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.newlib.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.version.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.eco3.ld
+test1prj.elf: /home/nvv/esp-idf/components/soc/esp32c3/ld/esp32c3.peripherals.ld
 test1prj.elf: CMakeFiles/test1prj.elf.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test1prj.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test1prj.elf.dir/link.txt --verbose=$(VERBOSE)
@@ -570,7 +556,7 @@ CMakeFiles/test1prj.elf.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/test1prj.elf.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/test1prj.elf.dir/clean
 
-CMakeFiles/test1prj.elf.dir/depend: project_elf_src_esp32s2.c
+CMakeFiles/test1prj.elf.dir/depend: project_elf_src_esp32c3.c
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nvv/test/test-mk/esp32c3/test1 /home/nvv/test/test-mk/esp32c3/test1 /home/nvv/test/test-mk/esp32c3/test1/build /home/nvv/test/test-mk/esp32c3/test1/build /home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/test1prj.elf.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test1prj.elf.dir/depend
 

@@ -1,5 +1,5 @@
 source "/home/nvv/esp-idf/components/efuse/Kconfig"
-source "/home/nvv/esp-idf/components/esp32s2/Kconfig"
+source "/home/nvv/esp-idf/components/esp32c3/Kconfig"
 source "/home/nvv/esp-idf/components/esp_common/Kconfig"
 source "/home/nvv/esp-idf/components/esp_hw_support/Kconfig"
 source "/home/nvv/esp-idf/components/esp_system/Kconfig"

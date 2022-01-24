@@ -271,194 +271,167 @@ cpu_hal.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/cpu_hal.c.s
 .PHONY : cpu_hal.c.s
 
-dac_hal.obj: dac_hal.c.obj
+ds_hal.obj: ds_hal.c.obj
 
-.PHONY : dac_hal.obj
-
-# target to build an object file
-dac_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/dac_hal.c.obj
-.PHONY : dac_hal.c.obj
-
-dac_hal.i: dac_hal.c.i
-
-.PHONY : dac_hal.i
-
-# target to preprocess a source file
-dac_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/dac_hal.c.i
-.PHONY : dac_hal.c.i
-
-dac_hal.s: dac_hal.c.s
-
-.PHONY : dac_hal.s
-
-# target to generate assembly for a file
-dac_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/dac_hal.c.s
-.PHONY : dac_hal.c.s
-
-esp32s2/adc_hal.obj: esp32s2/adc_hal.c.obj
-
-.PHONY : esp32s2/adc_hal.obj
+.PHONY : ds_hal.obj
 
 # target to build an object file
-esp32s2/adc_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/adc_hal.c.obj
-.PHONY : esp32s2/adc_hal.c.obj
+ds_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/ds_hal.c.obj
+.PHONY : ds_hal.c.obj
 
-esp32s2/adc_hal.i: esp32s2/adc_hal.c.i
+ds_hal.i: ds_hal.c.i
 
-.PHONY : esp32s2/adc_hal.i
+.PHONY : ds_hal.i
 
 # target to preprocess a source file
-esp32s2/adc_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/adc_hal.c.i
-.PHONY : esp32s2/adc_hal.c.i
+ds_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/ds_hal.c.i
+.PHONY : ds_hal.c.i
 
-esp32s2/adc_hal.s: esp32s2/adc_hal.c.s
+ds_hal.s: ds_hal.c.s
 
-.PHONY : esp32s2/adc_hal.s
+.PHONY : ds_hal.s
 
 # target to generate assembly for a file
-esp32s2/adc_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/adc_hal.c.s
-.PHONY : esp32s2/adc_hal.c.s
+ds_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/ds_hal.c.s
+.PHONY : ds_hal.c.s
 
-esp32s2/brownout_hal.obj: esp32s2/brownout_hal.c.obj
+esp32c3/adc_hal.obj: esp32c3/adc_hal.c.obj
 
-.PHONY : esp32s2/brownout_hal.obj
+.PHONY : esp32c3/adc_hal.obj
 
 # target to build an object file
-esp32s2/brownout_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/brownout_hal.c.obj
-.PHONY : esp32s2/brownout_hal.c.obj
+esp32c3/adc_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/adc_hal.c.obj
+.PHONY : esp32c3/adc_hal.c.obj
 
-esp32s2/brownout_hal.i: esp32s2/brownout_hal.c.i
+esp32c3/adc_hal.i: esp32c3/adc_hal.c.i
 
-.PHONY : esp32s2/brownout_hal.i
+.PHONY : esp32c3/adc_hal.i
 
 # target to preprocess a source file
-esp32s2/brownout_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/brownout_hal.c.i
-.PHONY : esp32s2/brownout_hal.c.i
+esp32c3/adc_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/adc_hal.c.i
+.PHONY : esp32c3/adc_hal.c.i
 
-esp32s2/brownout_hal.s: esp32s2/brownout_hal.c.s
+esp32c3/adc_hal.s: esp32c3/adc_hal.c.s
 
-.PHONY : esp32s2/brownout_hal.s
+.PHONY : esp32c3/adc_hal.s
 
 # target to generate assembly for a file
-esp32s2/brownout_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/brownout_hal.c.s
-.PHONY : esp32s2/brownout_hal.c.s
+esp32c3/adc_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/adc_hal.c.s
+.PHONY : esp32c3/adc_hal.c.s
 
-esp32s2/cp_dma_hal.obj: esp32s2/cp_dma_hal.c.obj
+esp32c3/brownout_hal.obj: esp32c3/brownout_hal.c.obj
 
-.PHONY : esp32s2/cp_dma_hal.obj
+.PHONY : esp32c3/brownout_hal.obj
 
 # target to build an object file
-esp32s2/cp_dma_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/cp_dma_hal.c.obj
-.PHONY : esp32s2/cp_dma_hal.c.obj
+esp32c3/brownout_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/brownout_hal.c.obj
+.PHONY : esp32c3/brownout_hal.c.obj
 
-esp32s2/cp_dma_hal.i: esp32s2/cp_dma_hal.c.i
+esp32c3/brownout_hal.i: esp32c3/brownout_hal.c.i
 
-.PHONY : esp32s2/cp_dma_hal.i
+.PHONY : esp32c3/brownout_hal.i
 
 # target to preprocess a source file
-esp32s2/cp_dma_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/cp_dma_hal.c.i
-.PHONY : esp32s2/cp_dma_hal.c.i
+esp32c3/brownout_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/brownout_hal.c.i
+.PHONY : esp32c3/brownout_hal.c.i
 
-esp32s2/cp_dma_hal.s: esp32s2/cp_dma_hal.c.s
+esp32c3/brownout_hal.s: esp32c3/brownout_hal.c.s
 
-.PHONY : esp32s2/cp_dma_hal.s
+.PHONY : esp32c3/brownout_hal.s
 
 # target to generate assembly for a file
-esp32s2/cp_dma_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/cp_dma_hal.c.s
-.PHONY : esp32s2/cp_dma_hal.c.s
+esp32c3/brownout_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/brownout_hal.c.s
+.PHONY : esp32c3/brownout_hal.c.s
 
-esp32s2/dac_hal.obj: esp32s2/dac_hal.c.obj
+esp32c3/hmac_hal.obj: esp32c3/hmac_hal.c.obj
 
-.PHONY : esp32s2/dac_hal.obj
+.PHONY : esp32c3/hmac_hal.obj
 
 # target to build an object file
-esp32s2/dac_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/dac_hal.c.obj
-.PHONY : esp32s2/dac_hal.c.obj
+esp32c3/hmac_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/hmac_hal.c.obj
+.PHONY : esp32c3/hmac_hal.c.obj
 
-esp32s2/dac_hal.i: esp32s2/dac_hal.c.i
+esp32c3/hmac_hal.i: esp32c3/hmac_hal.c.i
 
-.PHONY : esp32s2/dac_hal.i
+.PHONY : esp32c3/hmac_hal.i
 
 # target to preprocess a source file
-esp32s2/dac_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/dac_hal.c.i
-.PHONY : esp32s2/dac_hal.c.i
+esp32c3/hmac_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/hmac_hal.c.i
+.PHONY : esp32c3/hmac_hal.c.i
 
-esp32s2/dac_hal.s: esp32s2/dac_hal.c.s
+esp32c3/hmac_hal.s: esp32c3/hmac_hal.c.s
 
-.PHONY : esp32s2/dac_hal.s
+.PHONY : esp32c3/hmac_hal.s
 
 # target to generate assembly for a file
-esp32s2/dac_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/dac_hal.c.s
-.PHONY : esp32s2/dac_hal.c.s
+esp32c3/hmac_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/hmac_hal.c.s
+.PHONY : esp32c3/hmac_hal.c.s
 
-esp32s2/interrupt_descriptor_table.obj: esp32s2/interrupt_descriptor_table.c.obj
+esp32c3/rtc_cntl_hal.obj: esp32c3/rtc_cntl_hal.c.obj
 
-.PHONY : esp32s2/interrupt_descriptor_table.obj
+.PHONY : esp32c3/rtc_cntl_hal.obj
 
 # target to build an object file
-esp32s2/interrupt_descriptor_table.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/interrupt_descriptor_table.c.obj
-.PHONY : esp32s2/interrupt_descriptor_table.c.obj
+esp32c3/rtc_cntl_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/rtc_cntl_hal.c.obj
+.PHONY : esp32c3/rtc_cntl_hal.c.obj
 
-esp32s2/interrupt_descriptor_table.i: esp32s2/interrupt_descriptor_table.c.i
+esp32c3/rtc_cntl_hal.i: esp32c3/rtc_cntl_hal.c.i
 
-.PHONY : esp32s2/interrupt_descriptor_table.i
+.PHONY : esp32c3/rtc_cntl_hal.i
 
 # target to preprocess a source file
-esp32s2/interrupt_descriptor_table.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/interrupt_descriptor_table.c.i
-.PHONY : esp32s2/interrupt_descriptor_table.c.i
+esp32c3/rtc_cntl_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/rtc_cntl_hal.c.i
+.PHONY : esp32c3/rtc_cntl_hal.c.i
 
-esp32s2/interrupt_descriptor_table.s: esp32s2/interrupt_descriptor_table.c.s
+esp32c3/rtc_cntl_hal.s: esp32c3/rtc_cntl_hal.c.s
 
-.PHONY : esp32s2/interrupt_descriptor_table.s
+.PHONY : esp32c3/rtc_cntl_hal.s
 
 # target to generate assembly for a file
-esp32s2/interrupt_descriptor_table.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/interrupt_descriptor_table.c.s
-.PHONY : esp32s2/interrupt_descriptor_table.c.s
+esp32c3/rtc_cntl_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32c3/rtc_cntl_hal.c.s
+.PHONY : esp32c3/rtc_cntl_hal.c.s
 
-esp32s2/touch_sensor_hal.obj: esp32s2/touch_sensor_hal.c.obj
+gdma_hal.obj: gdma_hal.c.obj
 
-.PHONY : esp32s2/touch_sensor_hal.obj
+.PHONY : gdma_hal.obj
 
 # target to build an object file
-esp32s2/touch_sensor_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/touch_sensor_hal.c.obj
-.PHONY : esp32s2/touch_sensor_hal.c.obj
+gdma_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/gdma_hal.c.obj
+.PHONY : gdma_hal.c.obj
 
-esp32s2/touch_sensor_hal.i: esp32s2/touch_sensor_hal.c.i
+gdma_hal.i: gdma_hal.c.i
 
-.PHONY : esp32s2/touch_sensor_hal.i
+.PHONY : gdma_hal.i
 
 # target to preprocess a source file
-esp32s2/touch_sensor_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/touch_sensor_hal.c.i
-.PHONY : esp32s2/touch_sensor_hal.c.i
+gdma_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/gdma_hal.c.i
+.PHONY : gdma_hal.c.i
 
-esp32s2/touch_sensor_hal.s: esp32s2/touch_sensor_hal.c.s
+gdma_hal.s: gdma_hal.c.s
 
-.PHONY : esp32s2/touch_sensor_hal.s
+.PHONY : gdma_hal.s
 
 # target to generate assembly for a file
-esp32s2/touch_sensor_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/esp32s2/touch_sensor_hal.c.s
-.PHONY : esp32s2/touch_sensor_hal.c.s
+gdma_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/gdma_hal.c.s
+.PHONY : gdma_hal.c.s
 
 gpio_hal.obj: gpio_hal.c.obj
 
@@ -675,33 +648,6 @@ mpu_hal.s: mpu_hal.c.s
 mpu_hal.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/mpu_hal.c.s
 .PHONY : mpu_hal.c.s
-
-pcnt_hal.obj: pcnt_hal.c.obj
-
-.PHONY : pcnt_hal.obj
-
-# target to build an object file
-pcnt_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/pcnt_hal.c.obj
-.PHONY : pcnt_hal.c.obj
-
-pcnt_hal.i: pcnt_hal.c.i
-
-.PHONY : pcnt_hal.i
-
-# target to preprocess a source file
-pcnt_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/pcnt_hal.c.i
-.PHONY : pcnt_hal.c.i
-
-pcnt_hal.s: pcnt_hal.c.s
-
-.PHONY : pcnt_hal.s
-
-# target to generate assembly for a file
-pcnt_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/pcnt_hal.c.s
-.PHONY : pcnt_hal.c.s
 
 rmt_hal.obj: rmt_hal.c.obj
 
@@ -1135,33 +1081,6 @@ timer_hal.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/timer_hal.c.s
 .PHONY : timer_hal.c.s
 
-touch_sensor_hal.obj: touch_sensor_hal.c.obj
-
-.PHONY : touch_sensor_hal.obj
-
-# target to build an object file
-touch_sensor_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/touch_sensor_hal.c.obj
-.PHONY : touch_sensor_hal.c.obj
-
-touch_sensor_hal.i: touch_sensor_hal.c.i
-
-.PHONY : touch_sensor_hal.i
-
-# target to preprocess a source file
-touch_sensor_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/touch_sensor_hal.c.i
-.PHONY : touch_sensor_hal.c.i
-
-touch_sensor_hal.s: touch_sensor_hal.c.s
-
-.PHONY : touch_sensor_hal.s
-
-# target to generate assembly for a file
-touch_sensor_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/touch_sensor_hal.c.s
-.PHONY : touch_sensor_hal.c.s
-
 twai_hal.obj: twai_hal.c.obj
 
 .PHONY : twai_hal.obj
@@ -1270,60 +1189,6 @@ uart_hal_iram.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/uart_hal_iram.c.s
 .PHONY : uart_hal_iram.c.s
 
-usb_hal.obj: usb_hal.c.obj
-
-.PHONY : usb_hal.obj
-
-# target to build an object file
-usb_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/usb_hal.c.obj
-.PHONY : usb_hal.c.obj
-
-usb_hal.i: usb_hal.c.i
-
-.PHONY : usb_hal.i
-
-# target to preprocess a source file
-usb_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/usb_hal.c.i
-.PHONY : usb_hal.c.i
-
-usb_hal.s: usb_hal.c.s
-
-.PHONY : usb_hal.s
-
-# target to generate assembly for a file
-usb_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/usb_hal.c.s
-.PHONY : usb_hal.c.s
-
-usbh_hal.obj: usbh_hal.c.obj
-
-.PHONY : usbh_hal.obj
-
-# target to build an object file
-usbh_hal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/usbh_hal.c.obj
-.PHONY : usbh_hal.c.obj
-
-usbh_hal.i: usbh_hal.c.i
-
-.PHONY : usbh_hal.i
-
-# target to preprocess a source file
-usbh_hal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/usbh_hal.c.i
-.PHONY : usbh_hal.c.i
-
-usbh_hal.s: usbh_hal.c.s
-
-.PHONY : usbh_hal.s
-
-# target to generate assembly for a file
-usbh_hal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/usbh_hal.c.s
-.PHONY : usbh_hal.c.s
-
 wdt_hal_iram.obj: wdt_hal_iram.c.obj
 
 .PHONY : wdt_hal_iram.obj
@@ -1373,27 +1238,24 @@ help:
 	@echo "... cpu_hal.obj"
 	@echo "... cpu_hal.i"
 	@echo "... cpu_hal.s"
-	@echo "... dac_hal.obj"
-	@echo "... dac_hal.i"
-	@echo "... dac_hal.s"
-	@echo "... esp32s2/adc_hal.obj"
-	@echo "... esp32s2/adc_hal.i"
-	@echo "... esp32s2/adc_hal.s"
-	@echo "... esp32s2/brownout_hal.obj"
-	@echo "... esp32s2/brownout_hal.i"
-	@echo "... esp32s2/brownout_hal.s"
-	@echo "... esp32s2/cp_dma_hal.obj"
-	@echo "... esp32s2/cp_dma_hal.i"
-	@echo "... esp32s2/cp_dma_hal.s"
-	@echo "... esp32s2/dac_hal.obj"
-	@echo "... esp32s2/dac_hal.i"
-	@echo "... esp32s2/dac_hal.s"
-	@echo "... esp32s2/interrupt_descriptor_table.obj"
-	@echo "... esp32s2/interrupt_descriptor_table.i"
-	@echo "... esp32s2/interrupt_descriptor_table.s"
-	@echo "... esp32s2/touch_sensor_hal.obj"
-	@echo "... esp32s2/touch_sensor_hal.i"
-	@echo "... esp32s2/touch_sensor_hal.s"
+	@echo "... ds_hal.obj"
+	@echo "... ds_hal.i"
+	@echo "... ds_hal.s"
+	@echo "... esp32c3/adc_hal.obj"
+	@echo "... esp32c3/adc_hal.i"
+	@echo "... esp32c3/adc_hal.s"
+	@echo "... esp32c3/brownout_hal.obj"
+	@echo "... esp32c3/brownout_hal.i"
+	@echo "... esp32c3/brownout_hal.s"
+	@echo "... esp32c3/hmac_hal.obj"
+	@echo "... esp32c3/hmac_hal.i"
+	@echo "... esp32c3/hmac_hal.s"
+	@echo "... esp32c3/rtc_cntl_hal.obj"
+	@echo "... esp32c3/rtc_cntl_hal.i"
+	@echo "... esp32c3/rtc_cntl_hal.s"
+	@echo "... gdma_hal.obj"
+	@echo "... gdma_hal.i"
+	@echo "... gdma_hal.s"
 	@echo "... gpio_hal.obj"
 	@echo "... gpio_hal.i"
 	@echo "... gpio_hal.s"
@@ -1418,9 +1280,6 @@ help:
 	@echo "... mpu_hal.obj"
 	@echo "... mpu_hal.i"
 	@echo "... mpu_hal.s"
-	@echo "... pcnt_hal.obj"
-	@echo "... pcnt_hal.i"
-	@echo "... pcnt_hal.s"
 	@echo "... rmt_hal.obj"
 	@echo "... rmt_hal.i"
 	@echo "... rmt_hal.s"
@@ -1469,9 +1328,6 @@ help:
 	@echo "... timer_hal.obj"
 	@echo "... timer_hal.i"
 	@echo "... timer_hal.s"
-	@echo "... touch_sensor_hal.obj"
-	@echo "... touch_sensor_hal.i"
-	@echo "... touch_sensor_hal.s"
 	@echo "... twai_hal.obj"
 	@echo "... twai_hal.i"
 	@echo "... twai_hal.s"
@@ -1484,12 +1340,6 @@ help:
 	@echo "... uart_hal_iram.obj"
 	@echo "... uart_hal_iram.i"
 	@echo "... uart_hal_iram.s"
-	@echo "... usb_hal.obj"
-	@echo "... usb_hal.i"
-	@echo "... usb_hal.s"
-	@echo "... usbh_hal.obj"
-	@echo "... usbh_hal.i"
-	@echo "... usbh_hal.s"
 	@echo "... wdt_hal_iram.obj"
 	@echo "... wdt_hal_iram.i"
 	@echo "... wdt_hal_iram.s"

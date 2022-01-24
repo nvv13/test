@@ -6,7 +6,7 @@ esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/esp_system/esp_err.c
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: config/sdkconfig.h

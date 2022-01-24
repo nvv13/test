@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 include CMakeFiles/erase_flash.dir/progress.make
 
 CMakeFiles/erase_flash:
-	cd /home/nvv/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32s2" -D SERIAL_TOOL_ARGS="erase_flash" -P run_serial_tool.cmake
+	cd /home/nvv/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32c3" -D SERIAL_TOOL_ARGS="erase_flash" -P run_serial_tool.cmake
 
 erase_flash: CMakeFiles/erase_flash
 erase_flash: CMakeFiles/erase_flash.dir/build.make

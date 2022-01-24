@@ -190,32 +190,32 @@ __idf_esp_adc_cal/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build
 .PHONY : __idf_esp_adc_cal/fast
 
-esp_adc_cal_esp32s2.obj: esp_adc_cal_esp32s2.c.obj
+esp_adc_cal_esp32c3.obj: esp_adc_cal_esp32c3.c.obj
 
-.PHONY : esp_adc_cal_esp32s2.obj
+.PHONY : esp_adc_cal_esp32c3.obj
 
 # target to build an object file
-esp_adc_cal_esp32s2.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj
-.PHONY : esp_adc_cal_esp32s2.c.obj
+esp_adc_cal_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj
+.PHONY : esp_adc_cal_esp32c3.c.obj
 
-esp_adc_cal_esp32s2.i: esp_adc_cal_esp32s2.c.i
+esp_adc_cal_esp32c3.i: esp_adc_cal_esp32c3.c.i
 
-.PHONY : esp_adc_cal_esp32s2.i
+.PHONY : esp_adc_cal_esp32c3.i
 
 # target to preprocess a source file
-esp_adc_cal_esp32s2.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.i
-.PHONY : esp_adc_cal_esp32s2.c.i
+esp_adc_cal_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.i
+.PHONY : esp_adc_cal_esp32c3.c.i
 
-esp_adc_cal_esp32s2.s: esp_adc_cal_esp32s2.c.s
+esp_adc_cal_esp32c3.s: esp_adc_cal_esp32c3.c.s
 
-.PHONY : esp_adc_cal_esp32s2.s
+.PHONY : esp_adc_cal_esp32c3.s
 
 # target to generate assembly for a file
-esp_adc_cal_esp32s2.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.s
-.PHONY : esp_adc_cal_esp32s2.c.s
+esp_adc_cal_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.s
+.PHONY : esp_adc_cal_esp32c3.c.s
 
 # Help Target
 help:
@@ -230,9 +230,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_esp_adc_cal"
-	@echo "... esp_adc_cal_esp32s2.obj"
-	@echo "... esp_adc_cal_esp32s2.i"
-	@echo "... esp_adc_cal_esp32s2.s"
+	@echo "... esp_adc_cal_esp32c3.obj"
+	@echo "... esp_adc_cal_esp32c3.i"
+	@echo "... esp_adc_cal_esp32c3.s"
 .PHONY : help
 
 

@@ -406,122 +406,41 @@ port/port_systick.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.s
 .PHONY : port/port_systick.c.s
 
-port/xtensa/port.obj: port/xtensa/port.c.obj
+port/riscv/port.obj: port/riscv/port.c.obj
 
-.PHONY : port/xtensa/port.obj
+.PHONY : port/riscv/port.obj
 
 # target to build an object file
-port/xtensa/port.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/port.c.obj
-.PHONY : port/xtensa/port.c.obj
+port/riscv/port.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj
+.PHONY : port/riscv/port.c.obj
 
-port/xtensa/port.i: port/xtensa/port.c.i
+port/riscv/port.i: port/riscv/port.c.i
 
-.PHONY : port/xtensa/port.i
+.PHONY : port/riscv/port.i
 
 # target to preprocess a source file
-port/xtensa/port.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/port.c.i
-.PHONY : port/xtensa/port.c.i
+port/riscv/port.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.i
+.PHONY : port/riscv/port.c.i
 
-port/xtensa/port.s: port/xtensa/port.c.s
+port/riscv/port.s: port/riscv/port.c.s
 
-.PHONY : port/xtensa/port.s
-
-# target to generate assembly for a file
-port/xtensa/port.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/port.c.s
-.PHONY : port/xtensa/port.c.s
-
-port/xtensa/portasm.obj: port/xtensa/portasm.S.obj
-
-.PHONY : port/xtensa/portasm.obj
-
-# target to build an object file
-port/xtensa/portasm.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/portasm.S.obj
-.PHONY : port/xtensa/portasm.S.obj
-
-port/xtensa/xtensa_context.obj: port/xtensa/xtensa_context.S.obj
-
-.PHONY : port/xtensa/xtensa_context.obj
-
-# target to build an object file
-port/xtensa/xtensa_context.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_context.S.obj
-.PHONY : port/xtensa/xtensa_context.S.obj
-
-port/xtensa/xtensa_init.obj: port/xtensa/xtensa_init.c.obj
-
-.PHONY : port/xtensa/xtensa_init.obj
-
-# target to build an object file
-port/xtensa/xtensa_init.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_init.c.obj
-.PHONY : port/xtensa/xtensa_init.c.obj
-
-port/xtensa/xtensa_init.i: port/xtensa/xtensa_init.c.i
-
-.PHONY : port/xtensa/xtensa_init.i
-
-# target to preprocess a source file
-port/xtensa/xtensa_init.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_init.c.i
-.PHONY : port/xtensa/xtensa_init.c.i
-
-port/xtensa/xtensa_init.s: port/xtensa/xtensa_init.c.s
-
-.PHONY : port/xtensa/xtensa_init.s
+.PHONY : port/riscv/port.s
 
 # target to generate assembly for a file
-port/xtensa/xtensa_init.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_init.c.s
-.PHONY : port/xtensa/xtensa_init.c.s
+port/riscv/port.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.s
+.PHONY : port/riscv/port.c.s
 
-port/xtensa/xtensa_overlay_os_hook.obj: port/xtensa/xtensa_overlay_os_hook.c.obj
+port/riscv/portasm.obj: port/riscv/portasm.S.obj
 
-.PHONY : port/xtensa/xtensa_overlay_os_hook.obj
-
-# target to build an object file
-port/xtensa/xtensa_overlay_os_hook.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_overlay_os_hook.c.obj
-.PHONY : port/xtensa/xtensa_overlay_os_hook.c.obj
-
-port/xtensa/xtensa_overlay_os_hook.i: port/xtensa/xtensa_overlay_os_hook.c.i
-
-.PHONY : port/xtensa/xtensa_overlay_os_hook.i
-
-# target to preprocess a source file
-port/xtensa/xtensa_overlay_os_hook.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_overlay_os_hook.c.i
-.PHONY : port/xtensa/xtensa_overlay_os_hook.c.i
-
-port/xtensa/xtensa_overlay_os_hook.s: port/xtensa/xtensa_overlay_os_hook.c.s
-
-.PHONY : port/xtensa/xtensa_overlay_os_hook.s
-
-# target to generate assembly for a file
-port/xtensa/xtensa_overlay_os_hook.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_overlay_os_hook.c.s
-.PHONY : port/xtensa/xtensa_overlay_os_hook.c.s
-
-port/xtensa/xtensa_vector_defaults.obj: port/xtensa/xtensa_vector_defaults.S.obj
-
-.PHONY : port/xtensa/xtensa_vector_defaults.obj
+.PHONY : port/riscv/portasm.obj
 
 # target to build an object file
-port/xtensa/xtensa_vector_defaults.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_vector_defaults.S.obj
-.PHONY : port/xtensa/xtensa_vector_defaults.S.obj
-
-port/xtensa/xtensa_vectors.obj: port/xtensa/xtensa_vectors.S.obj
-
-.PHONY : port/xtensa/xtensa_vectors.obj
-
-# target to build an object file
-port/xtensa/xtensa_vectors.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/xtensa/xtensa_vectors.S.obj
-.PHONY : port/xtensa/xtensa_vectors.S.obj
+port/riscv/portasm.S.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj
+.PHONY : port/riscv/portasm.S.obj
 
 queue.obj: queue.c.obj
 
@@ -668,19 +587,10 @@ help:
 	@echo "... port/port_systick.obj"
 	@echo "... port/port_systick.i"
 	@echo "... port/port_systick.s"
-	@echo "... port/xtensa/port.obj"
-	@echo "... port/xtensa/port.i"
-	@echo "... port/xtensa/port.s"
-	@echo "... port/xtensa/portasm.obj"
-	@echo "... port/xtensa/xtensa_context.obj"
-	@echo "... port/xtensa/xtensa_init.obj"
-	@echo "... port/xtensa/xtensa_init.i"
-	@echo "... port/xtensa/xtensa_init.s"
-	@echo "... port/xtensa/xtensa_overlay_os_hook.obj"
-	@echo "... port/xtensa/xtensa_overlay_os_hook.i"
-	@echo "... port/xtensa/xtensa_overlay_os_hook.s"
-	@echo "... port/xtensa/xtensa_vector_defaults.obj"
-	@echo "... port/xtensa/xtensa_vectors.obj"
+	@echo "... port/riscv/port.obj"
+	@echo "... port/riscv/port.i"
+	@echo "... port/riscv/port.s"
+	@echo "... port/riscv/portasm.obj"
 	@echo "... queue.obj"
 	@echo "... queue.i"
 	@echo "... queue.s"

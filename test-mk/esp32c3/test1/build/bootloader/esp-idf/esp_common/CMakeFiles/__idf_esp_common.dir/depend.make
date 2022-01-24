@@ -29,9 +29,9 @@ esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /h
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj: config/sdkconfig.h

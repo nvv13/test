@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 include CMakeFiles/flash.dir/progress.make
 
 CMakeFiles/flash:
-	cd /home/nvv/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32s2" -D SERIAL_TOOL_ARGS="--before=default_reset --after=hard_reset write_flash @flash_args" -D WORKING_DIRECTORY="/home/nvv/test/test-mk/esp32c3/test1/build" -P /home/nvv/esp-idf/components/esptool_py/run_serial_tool.cmake
+	cd /home/nvv/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32c3" -D SERIAL_TOOL_ARGS="--before=default_reset --after=hard_reset write_flash @flash_args" -D WORKING_DIRECTORY="/home/nvv/test/test-mk/esp32c3/test1/build" -P /home/nvv/esp-idf/components/esptool_py/run_serial_tool.cmake
 
 flash: CMakeFiles/flash
 flash: CMakeFiles/flash.dir/build.make

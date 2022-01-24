@@ -76,116 +76,116 @@ include esp-idf/efuse/CMakeFiles/__idf_efuse.dir/progress.make
 # Include the compile flags for this target's objects.
 include esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj: /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj -c /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.c
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj: /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj -c /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.c
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.c > CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.i
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.c > CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.i
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.c -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.s
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.c -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.s
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj: /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_fields.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj -c /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_fields.c
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj: /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_fields.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj -c /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_fields.c
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_fields.c > CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.i
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_fields.c > CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.i
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_fields.c -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.s
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_fields.c -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.s
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj: /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_rtc_table.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj -c /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_rtc_table.c
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj: /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_rtc_calib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj -c /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_rtc_calib.c
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_rtc_table.c > CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.i
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_rtc_calib.c > CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.i
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_rtc_table.c -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.s
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_rtc_calib.c -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.s
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj: /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj -c /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.c
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj: /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj -c /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.c
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.c > CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.i
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.c > CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.i
 
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.c -o CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.s
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.c -o CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.s
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj: /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.i
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_api.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.s
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj: /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.i
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_fields.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.s
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj: /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.i
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_utility.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.s
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.obj: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/flags.make
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.obj: /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.obj -c /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c > CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.i
 
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/efuse/src/esp_efuse_api_key_esp32xx.c -o CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.s
 
 # Object files for target __idf_efuse
 __idf_efuse_OBJECTS = \
-"CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj" \
-"CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj" \
-"CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj" \
-"CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj" \
+"CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj" \
+"CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj" \
+"CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj" \
+"CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj" \
 "CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj" \
 "CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj" \
 "CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj" \
@@ -194,10 +194,10 @@ __idf_efuse_OBJECTS = \
 # External object files for target __idf_efuse
 __idf_efuse_EXTERNAL_OBJECTS =
 
-esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj
-esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj
-esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj
-esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj
+esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj
+esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj
+esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj
+esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj
 esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj
 esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj
 esp-idf/efuse/libefuse.a: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/src/esp_efuse_utility.c.obj

@@ -15,8 +15,8 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/log/log.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
  config/sdkconfig.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -32,32 +32,30 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/log/log_buffers.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  config/sdkconfig.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_noos.c.obj
+ /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
  /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
  /home/nvv/esp-idf/components/esp_common/include/esp_err.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/log/esp_log_private.h
  /home/nvv/esp-idf/components/log/log_noos.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  config/sdkconfig.h

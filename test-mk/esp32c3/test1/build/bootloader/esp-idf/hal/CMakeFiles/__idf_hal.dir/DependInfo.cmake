@@ -13,25 +13,24 @@ set(CMAKE_C_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
   "config"
-  "/home/nvv/esp-idf/components/hal/esp32s2/include"
+  "/home/nvv/esp-idf/components/hal/esp32c3/include"
   "/home/nvv/esp-idf/components/hal/include"
   "/home/nvv/esp-idf/components/hal/platform_port/include"
   "/home/nvv/esp-idf/components/log/include"
   "/home/nvv/esp-idf/components/esp_rom/include"
-  "/home/nvv/esp-idf/components/esp_rom/include/esp32s2"
-  "/home/nvv/esp-idf/components/esp_rom/esp32s2"
+  "/home/nvv/esp-idf/components/esp_rom/include/esp32c3"
+  "/home/nvv/esp-idf/components/esp_rom/esp32c3"
   "/home/nvv/esp-idf/components/esp_common/include"
   "/home/nvv/esp-idf/components/esp_hw_support/include"
   "/home/nvv/esp-idf/components/esp_hw_support/include/soc"
-  "/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2"
-  "/home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/."
-  "/home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/private_include"
+  "/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3"
+  "/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/."
+  "/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include"
   "/home/nvv/esp-idf/components/newlib/platform_include"
-  "/home/nvv/esp-idf/components/xtensa/include"
-  "/home/nvv/esp-idf/components/xtensa/esp32s2/include"
+  "/home/nvv/esp-idf/components/riscv/include"
   "/home/nvv/esp-idf/components/soc/include"
-  "/home/nvv/esp-idf/components/soc/esp32s2/."
-  "/home/nvv/esp-idf/components/soc/esp32s2/include"
+  "/home/nvv/esp-idf/components/soc/esp32c3/."
+  "/home/nvv/esp-idf/components/soc/esp32c3/include"
   )
 
 # Targets to which this target links.
@@ -45,7 +44,6 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/DependInfo.cmake"
-  "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/DependInfo.cmake"
   )
 

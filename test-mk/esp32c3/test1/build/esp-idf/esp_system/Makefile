@@ -247,33 +247,6 @@ crosscore_int.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.s
 .PHONY : crosscore_int.c.s
 
-dbg_stubs.obj: dbg_stubs.c.obj
-
-.PHONY : dbg_stubs.obj
-
-# target to build an object file
-dbg_stubs.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj
-.PHONY : dbg_stubs.c.obj
-
-dbg_stubs.i: dbg_stubs.c.i
-
-.PHONY : dbg_stubs.i
-
-# target to preprocess a source file
-dbg_stubs.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.i
-.PHONY : dbg_stubs.c.i
-
-dbg_stubs.s: dbg_stubs.c.s
-
-.PHONY : dbg_stubs.s
-
-# target to generate assembly for a file
-dbg_stubs.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.s
-.PHONY : dbg_stubs.c.s
-
 esp_err.obj: esp_err.c.obj
 
 .PHONY : esp_err.obj
@@ -409,140 +382,68 @@ panic.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.s
 .PHONY : panic.c.s
 
-port/arch/xtensa/debug_helpers.obj: port/arch/xtensa/debug_helpers.c.obj
+port/arch/riscv/expression_with_stack.obj: port/arch/riscv/expression_with_stack.c.obj
 
-.PHONY : port/arch/xtensa/debug_helpers.obj
+.PHONY : port/arch/riscv/expression_with_stack.obj
 
 # target to build an object file
-port/arch/xtensa/debug_helpers.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj
-.PHONY : port/arch/xtensa/debug_helpers.c.obj
+port/arch/riscv/expression_with_stack.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj
+.PHONY : port/arch/riscv/expression_with_stack.c.obj
 
-port/arch/xtensa/debug_helpers.i: port/arch/xtensa/debug_helpers.c.i
+port/arch/riscv/expression_with_stack.i: port/arch/riscv/expression_with_stack.c.i
 
-.PHONY : port/arch/xtensa/debug_helpers.i
+.PHONY : port/arch/riscv/expression_with_stack.i
 
 # target to preprocess a source file
-port/arch/xtensa/debug_helpers.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.i
-.PHONY : port/arch/xtensa/debug_helpers.c.i
+port/arch/riscv/expression_with_stack.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.i
+.PHONY : port/arch/riscv/expression_with_stack.c.i
 
-port/arch/xtensa/debug_helpers.s: port/arch/xtensa/debug_helpers.c.s
+port/arch/riscv/expression_with_stack.s: port/arch/riscv/expression_with_stack.c.s
 
-.PHONY : port/arch/xtensa/debug_helpers.s
+.PHONY : port/arch/riscv/expression_with_stack.s
 
 # target to generate assembly for a file
-port/arch/xtensa/debug_helpers.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.s
-.PHONY : port/arch/xtensa/debug_helpers.c.s
+port/arch/riscv/expression_with_stack.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.s
+.PHONY : port/arch/riscv/expression_with_stack.c.s
 
-port/arch/xtensa/debug_helpers_asm.obj: port/arch/xtensa/debug_helpers_asm.S.obj
+port/arch/riscv/expression_with_stack_asm.obj: port/arch/riscv/expression_with_stack_asm.S.obj
 
-.PHONY : port/arch/xtensa/debug_helpers_asm.obj
-
-# target to build an object file
-port/arch/xtensa/debug_helpers_asm.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj
-.PHONY : port/arch/xtensa/debug_helpers_asm.S.obj
-
-port/arch/xtensa/expression_with_stack.obj: port/arch/xtensa/expression_with_stack.c.obj
-
-.PHONY : port/arch/xtensa/expression_with_stack.obj
+.PHONY : port/arch/riscv/expression_with_stack_asm.obj
 
 # target to build an object file
-port/arch/xtensa/expression_with_stack.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj
-.PHONY : port/arch/xtensa/expression_with_stack.c.obj
+port/arch/riscv/expression_with_stack_asm.S.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj
+.PHONY : port/arch/riscv/expression_with_stack_asm.S.obj
 
-port/arch/xtensa/expression_with_stack.i: port/arch/xtensa/expression_with_stack.c.i
+port/arch/riscv/panic_arch.obj: port/arch/riscv/panic_arch.c.obj
 
-.PHONY : port/arch/xtensa/expression_with_stack.i
+.PHONY : port/arch/riscv/panic_arch.obj
+
+# target to build an object file
+port/arch/riscv/panic_arch.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj
+.PHONY : port/arch/riscv/panic_arch.c.obj
+
+port/arch/riscv/panic_arch.i: port/arch/riscv/panic_arch.c.i
+
+.PHONY : port/arch/riscv/panic_arch.i
 
 # target to preprocess a source file
-port/arch/xtensa/expression_with_stack.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.i
-.PHONY : port/arch/xtensa/expression_with_stack.c.i
+port/arch/riscv/panic_arch.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.i
+.PHONY : port/arch/riscv/panic_arch.c.i
 
-port/arch/xtensa/expression_with_stack.s: port/arch/xtensa/expression_with_stack.c.s
+port/arch/riscv/panic_arch.s: port/arch/riscv/panic_arch.c.s
 
-.PHONY : port/arch/xtensa/expression_with_stack.s
-
-# target to generate assembly for a file
-port/arch/xtensa/expression_with_stack.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.s
-.PHONY : port/arch/xtensa/expression_with_stack.c.s
-
-port/arch/xtensa/expression_with_stack_asm.obj: port/arch/xtensa/expression_with_stack_asm.S.obj
-
-.PHONY : port/arch/xtensa/expression_with_stack_asm.obj
-
-# target to build an object file
-port/arch/xtensa/expression_with_stack_asm.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj
-.PHONY : port/arch/xtensa/expression_with_stack_asm.S.obj
-
-port/arch/xtensa/panic_arch.obj: port/arch/xtensa/panic_arch.c.obj
-
-.PHONY : port/arch/xtensa/panic_arch.obj
-
-# target to build an object file
-port/arch/xtensa/panic_arch.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj
-.PHONY : port/arch/xtensa/panic_arch.c.obj
-
-port/arch/xtensa/panic_arch.i: port/arch/xtensa/panic_arch.c.i
-
-.PHONY : port/arch/xtensa/panic_arch.i
-
-# target to preprocess a source file
-port/arch/xtensa/panic_arch.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.i
-.PHONY : port/arch/xtensa/panic_arch.c.i
-
-port/arch/xtensa/panic_arch.s: port/arch/xtensa/panic_arch.c.s
-
-.PHONY : port/arch/xtensa/panic_arch.s
+.PHONY : port/arch/riscv/panic_arch.s
 
 # target to generate assembly for a file
-port/arch/xtensa/panic_arch.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.s
-.PHONY : port/arch/xtensa/panic_arch.c.s
-
-port/arch/xtensa/panic_handler_asm.obj: port/arch/xtensa/panic_handler_asm.S.obj
-
-.PHONY : port/arch/xtensa/panic_handler_asm.obj
-
-# target to build an object file
-port/arch/xtensa/panic_handler_asm.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj
-.PHONY : port/arch/xtensa/panic_handler_asm.S.obj
-
-port/arch/xtensa/trax.obj: port/arch/xtensa/trax.c.obj
-
-.PHONY : port/arch/xtensa/trax.obj
-
-# target to build an object file
-port/arch/xtensa/trax.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj
-.PHONY : port/arch/xtensa/trax.c.obj
-
-port/arch/xtensa/trax.i: port/arch/xtensa/trax.c.i
-
-.PHONY : port/arch/xtensa/trax.i
-
-# target to preprocess a source file
-port/arch/xtensa/trax.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.i
-.PHONY : port/arch/xtensa/trax.c.i
-
-port/arch/xtensa/trax.s: port/arch/xtensa/trax.c.s
-
-.PHONY : port/arch/xtensa/trax.s
-
-# target to generate assembly for a file
-port/arch/xtensa/trax.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.s
-.PHONY : port/arch/xtensa/trax.c.s
+port/arch/riscv/panic_arch.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.s
+.PHONY : port/arch/riscv/panic_arch.c.s
 
 port/brownout.obj: port/brownout.c.obj
 
@@ -625,122 +526,140 @@ port/panic_handler.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.s
 .PHONY : port/panic_handler.c.s
 
-port/soc/esp32s2/cache_err_int.obj: port/soc/esp32s2/cache_err_int.c.obj
+port/soc/esp32c3/apb_backup_dma.obj: port/soc/esp32c3/apb_backup_dma.c.obj
 
-.PHONY : port/soc/esp32s2/cache_err_int.obj
+.PHONY : port/soc/esp32c3/apb_backup_dma.obj
 
 # target to build an object file
-port/soc/esp32s2/cache_err_int.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj
-.PHONY : port/soc/esp32s2/cache_err_int.c.obj
+port/soc/esp32c3/apb_backup_dma.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj
+.PHONY : port/soc/esp32c3/apb_backup_dma.c.obj
 
-port/soc/esp32s2/cache_err_int.i: port/soc/esp32s2/cache_err_int.c.i
+port/soc/esp32c3/apb_backup_dma.i: port/soc/esp32c3/apb_backup_dma.c.i
 
-.PHONY : port/soc/esp32s2/cache_err_int.i
+.PHONY : port/soc/esp32c3/apb_backup_dma.i
 
 # target to preprocess a source file
-port/soc/esp32s2/cache_err_int.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.i
-.PHONY : port/soc/esp32s2/cache_err_int.c.i
+port/soc/esp32c3/apb_backup_dma.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.i
+.PHONY : port/soc/esp32c3/apb_backup_dma.c.i
 
-port/soc/esp32s2/cache_err_int.s: port/soc/esp32s2/cache_err_int.c.s
+port/soc/esp32c3/apb_backup_dma.s: port/soc/esp32c3/apb_backup_dma.c.s
 
-.PHONY : port/soc/esp32s2/cache_err_int.s
+.PHONY : port/soc/esp32c3/apb_backup_dma.s
 
 # target to generate assembly for a file
-port/soc/esp32s2/cache_err_int.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.s
-.PHONY : port/soc/esp32s2/cache_err_int.c.s
+port/soc/esp32c3/apb_backup_dma.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.s
+.PHONY : port/soc/esp32c3/apb_backup_dma.c.s
 
-port/soc/esp32s2/clk.obj: port/soc/esp32s2/clk.c.obj
+port/soc/esp32c3/cache_err_int.obj: port/soc/esp32c3/cache_err_int.c.obj
 
-.PHONY : port/soc/esp32s2/clk.obj
+.PHONY : port/soc/esp32c3/cache_err_int.obj
 
 # target to build an object file
-port/soc/esp32s2/clk.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj
-.PHONY : port/soc/esp32s2/clk.c.obj
+port/soc/esp32c3/cache_err_int.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj
+.PHONY : port/soc/esp32c3/cache_err_int.c.obj
 
-port/soc/esp32s2/clk.i: port/soc/esp32s2/clk.c.i
+port/soc/esp32c3/cache_err_int.i: port/soc/esp32c3/cache_err_int.c.i
 
-.PHONY : port/soc/esp32s2/clk.i
+.PHONY : port/soc/esp32c3/cache_err_int.i
 
 # target to preprocess a source file
-port/soc/esp32s2/clk.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.i
-.PHONY : port/soc/esp32s2/clk.c.i
+port/soc/esp32c3/cache_err_int.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.i
+.PHONY : port/soc/esp32c3/cache_err_int.c.i
 
-port/soc/esp32s2/clk.s: port/soc/esp32s2/clk.c.s
+port/soc/esp32c3/cache_err_int.s: port/soc/esp32c3/cache_err_int.c.s
 
-.PHONY : port/soc/esp32s2/clk.s
+.PHONY : port/soc/esp32c3/cache_err_int.s
 
 # target to generate assembly for a file
-port/soc/esp32s2/clk.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.s
-.PHONY : port/soc/esp32s2/clk.c.s
+port/soc/esp32c3/cache_err_int.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.s
+.PHONY : port/soc/esp32c3/cache_err_int.c.s
 
-port/soc/esp32s2/highint_hdl.obj: port/soc/esp32s2/highint_hdl.S.obj
+port/soc/esp32c3/clk.obj: port/soc/esp32c3/clk.c.obj
 
-.PHONY : port/soc/esp32s2/highint_hdl.obj
-
-# target to build an object file
-port/soc/esp32s2/highint_hdl.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj
-.PHONY : port/soc/esp32s2/highint_hdl.S.obj
-
-port/soc/esp32s2/reset_reason.obj: port/soc/esp32s2/reset_reason.c.obj
-
-.PHONY : port/soc/esp32s2/reset_reason.obj
+.PHONY : port/soc/esp32c3/clk.obj
 
 # target to build an object file
-port/soc/esp32s2/reset_reason.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj
-.PHONY : port/soc/esp32s2/reset_reason.c.obj
+port/soc/esp32c3/clk.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj
+.PHONY : port/soc/esp32c3/clk.c.obj
 
-port/soc/esp32s2/reset_reason.i: port/soc/esp32s2/reset_reason.c.i
+port/soc/esp32c3/clk.i: port/soc/esp32c3/clk.c.i
 
-.PHONY : port/soc/esp32s2/reset_reason.i
+.PHONY : port/soc/esp32c3/clk.i
 
 # target to preprocess a source file
-port/soc/esp32s2/reset_reason.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.i
-.PHONY : port/soc/esp32s2/reset_reason.c.i
+port/soc/esp32c3/clk.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.i
+.PHONY : port/soc/esp32c3/clk.c.i
 
-port/soc/esp32s2/reset_reason.s: port/soc/esp32s2/reset_reason.c.s
+port/soc/esp32c3/clk.s: port/soc/esp32c3/clk.c.s
 
-.PHONY : port/soc/esp32s2/reset_reason.s
+.PHONY : port/soc/esp32c3/clk.s
 
 # target to generate assembly for a file
-port/soc/esp32s2/reset_reason.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.s
-.PHONY : port/soc/esp32s2/reset_reason.c.s
+port/soc/esp32c3/clk.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.s
+.PHONY : port/soc/esp32c3/clk.c.s
 
-port/soc/esp32s2/system_internal.obj: port/soc/esp32s2/system_internal.c.obj
+port/soc/esp32c3/reset_reason.obj: port/soc/esp32c3/reset_reason.c.obj
 
-.PHONY : port/soc/esp32s2/system_internal.obj
+.PHONY : port/soc/esp32c3/reset_reason.obj
 
 # target to build an object file
-port/soc/esp32s2/system_internal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj
-.PHONY : port/soc/esp32s2/system_internal.c.obj
+port/soc/esp32c3/reset_reason.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj
+.PHONY : port/soc/esp32c3/reset_reason.c.obj
 
-port/soc/esp32s2/system_internal.i: port/soc/esp32s2/system_internal.c.i
+port/soc/esp32c3/reset_reason.i: port/soc/esp32c3/reset_reason.c.i
 
-.PHONY : port/soc/esp32s2/system_internal.i
+.PHONY : port/soc/esp32c3/reset_reason.i
 
 # target to preprocess a source file
-port/soc/esp32s2/system_internal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.i
-.PHONY : port/soc/esp32s2/system_internal.c.i
+port/soc/esp32c3/reset_reason.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.i
+.PHONY : port/soc/esp32c3/reset_reason.c.i
 
-port/soc/esp32s2/system_internal.s: port/soc/esp32s2/system_internal.c.s
+port/soc/esp32c3/reset_reason.s: port/soc/esp32c3/reset_reason.c.s
 
-.PHONY : port/soc/esp32s2/system_internal.s
+.PHONY : port/soc/esp32c3/reset_reason.s
 
 # target to generate assembly for a file
-port/soc/esp32s2/system_internal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.s
-.PHONY : port/soc/esp32s2/system_internal.c.s
+port/soc/esp32c3/reset_reason.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.s
+.PHONY : port/soc/esp32c3/reset_reason.c.s
+
+port/soc/esp32c3/system_internal.obj: port/soc/esp32c3/system_internal.c.obj
+
+.PHONY : port/soc/esp32c3/system_internal.obj
+
+# target to build an object file
+port/soc/esp32c3/system_internal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj
+.PHONY : port/soc/esp32c3/system_internal.c.obj
+
+port/soc/esp32c3/system_internal.i: port/soc/esp32c3/system_internal.c.i
+
+.PHONY : port/soc/esp32c3/system_internal.i
+
+# target to preprocess a source file
+port/soc/esp32c3/system_internal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.i
+.PHONY : port/soc/esp32c3/system_internal.c.i
+
+port/soc/esp32c3/system_internal.s: port/soc/esp32c3/system_internal.c.s
+
+.PHONY : port/soc/esp32c3/system_internal.s
+
+# target to generate assembly for a file
+port/soc/esp32c3/system_internal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.s
+.PHONY : port/soc/esp32c3/system_internal.c.s
 
 stack_check.obj: stack_check.c.obj
 
@@ -895,9 +814,6 @@ help:
 	@echo "... crosscore_int.obj"
 	@echo "... crosscore_int.i"
 	@echo "... crosscore_int.s"
-	@echo "... dbg_stubs.obj"
-	@echo "... dbg_stubs.i"
-	@echo "... dbg_stubs.s"
 	@echo "... esp_err.obj"
 	@echo "... esp_err.i"
 	@echo "... esp_err.s"
@@ -913,21 +829,13 @@ help:
 	@echo "... panic.obj"
 	@echo "... panic.i"
 	@echo "... panic.s"
-	@echo "... port/arch/xtensa/debug_helpers.obj"
-	@echo "... port/arch/xtensa/debug_helpers.i"
-	@echo "... port/arch/xtensa/debug_helpers.s"
-	@echo "... port/arch/xtensa/debug_helpers_asm.obj"
-	@echo "... port/arch/xtensa/expression_with_stack.obj"
-	@echo "... port/arch/xtensa/expression_with_stack.i"
-	@echo "... port/arch/xtensa/expression_with_stack.s"
-	@echo "... port/arch/xtensa/expression_with_stack_asm.obj"
-	@echo "... port/arch/xtensa/panic_arch.obj"
-	@echo "... port/arch/xtensa/panic_arch.i"
-	@echo "... port/arch/xtensa/panic_arch.s"
-	@echo "... port/arch/xtensa/panic_handler_asm.obj"
-	@echo "... port/arch/xtensa/trax.obj"
-	@echo "... port/arch/xtensa/trax.i"
-	@echo "... port/arch/xtensa/trax.s"
+	@echo "... port/arch/riscv/expression_with_stack.obj"
+	@echo "... port/arch/riscv/expression_with_stack.i"
+	@echo "... port/arch/riscv/expression_with_stack.s"
+	@echo "... port/arch/riscv/expression_with_stack_asm.obj"
+	@echo "... port/arch/riscv/panic_arch.obj"
+	@echo "... port/arch/riscv/panic_arch.i"
+	@echo "... port/arch/riscv/panic_arch.s"
 	@echo "... port/brownout.obj"
 	@echo "... port/brownout.i"
 	@echo "... port/brownout.s"
@@ -937,19 +845,21 @@ help:
 	@echo "... port/panic_handler.obj"
 	@echo "... port/panic_handler.i"
 	@echo "... port/panic_handler.s"
-	@echo "... port/soc/esp32s2/cache_err_int.obj"
-	@echo "... port/soc/esp32s2/cache_err_int.i"
-	@echo "... port/soc/esp32s2/cache_err_int.s"
-	@echo "... port/soc/esp32s2/clk.obj"
-	@echo "... port/soc/esp32s2/clk.i"
-	@echo "... port/soc/esp32s2/clk.s"
-	@echo "... port/soc/esp32s2/highint_hdl.obj"
-	@echo "... port/soc/esp32s2/reset_reason.obj"
-	@echo "... port/soc/esp32s2/reset_reason.i"
-	@echo "... port/soc/esp32s2/reset_reason.s"
-	@echo "... port/soc/esp32s2/system_internal.obj"
-	@echo "... port/soc/esp32s2/system_internal.i"
-	@echo "... port/soc/esp32s2/system_internal.s"
+	@echo "... port/soc/esp32c3/apb_backup_dma.obj"
+	@echo "... port/soc/esp32c3/apb_backup_dma.i"
+	@echo "... port/soc/esp32c3/apb_backup_dma.s"
+	@echo "... port/soc/esp32c3/cache_err_int.obj"
+	@echo "... port/soc/esp32c3/cache_err_int.i"
+	@echo "... port/soc/esp32c3/cache_err_int.s"
+	@echo "... port/soc/esp32c3/clk.obj"
+	@echo "... port/soc/esp32c3/clk.i"
+	@echo "... port/soc/esp32c3/clk.s"
+	@echo "... port/soc/esp32c3/reset_reason.obj"
+	@echo "... port/soc/esp32c3/reset_reason.i"
+	@echo "... port/soc/esp32c3/reset_reason.s"
+	@echo "... port/soc/esp32c3/system_internal.obj"
+	@echo "... port/soc/esp32c3/system_internal.i"
+	@echo "... port/soc/esp32c3/system_internal.s"
 	@echo "... stack_check.obj"
 	@echo "... stack_check.i"
 	@echo "... stack_check.s"

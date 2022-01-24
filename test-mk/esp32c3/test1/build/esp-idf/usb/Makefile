@@ -175,48 +175,6 @@ depend:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-# Convenience name for target.
-esp-idf/usb/CMakeFiles/__idf_usb.dir/rule:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/usb/CMakeFiles/__idf_usb.dir/rule
-.PHONY : esp-idf/usb/CMakeFiles/__idf_usb.dir/rule
-
-# Convenience name for target.
-__idf_usb: esp-idf/usb/CMakeFiles/__idf_usb.dir/rule
-
-.PHONY : __idf_usb
-
-# fast build rule for target.
-__idf_usb/fast:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/usb/CMakeFiles/__idf_usb.dir/build.make esp-idf/usb/CMakeFiles/__idf_usb.dir/build
-.PHONY : __idf_usb/fast
-
-hcd.obj: hcd.c.obj
-
-.PHONY : hcd.obj
-
-# target to build an object file
-hcd.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/usb/CMakeFiles/__idf_usb.dir/build.make esp-idf/usb/CMakeFiles/__idf_usb.dir/hcd.c.obj
-.PHONY : hcd.c.obj
-
-hcd.i: hcd.c.i
-
-.PHONY : hcd.i
-
-# target to preprocess a source file
-hcd.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/usb/CMakeFiles/__idf_usb.dir/build.make esp-idf/usb/CMakeFiles/__idf_usb.dir/hcd.c.i
-.PHONY : hcd.c.i
-
-hcd.s: hcd.c.s
-
-.PHONY : hcd.s
-
-# target to generate assembly for a file
-hcd.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/usb/CMakeFiles/__idf_usb.dir/build.make esp-idf/usb/CMakeFiles/__idf_usb.dir/hcd.c.s
-.PHONY : hcd.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -229,10 +187,6 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... __idf_usb"
-	@echo "... hcd.obj"
-	@echo "... hcd.i"
-	@echo "... hcd.s"
 .PHONY : help
 
 

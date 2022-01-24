@@ -193,8 +193,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /ho
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_crt.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedx509.dir/x509write_csr.c.obj: /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/asn1.h

@@ -17,7 +17,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/esp_crypto_lock.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_crypto_lock.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_pm/include/esp32/pm.h
  /home/nvv/esp-idf/components/esp_pm/include/esp32c3/pm.h
@@ -38,7 +39,6 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -52,12 +52,10 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/aes_ll.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/aes_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/aes_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/aes_types.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
@@ -84,57 +82,43 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp
  /home/nvv/esp-idf/components/newlib/platform_include/esp_newlib.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/hwcrypto_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.obj
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_gdma_impl.c.obj
+ /home/nvv/esp-idf/components/driver/include/esp_private/gdma.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
  /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
  /home/nvv/esp-idf/components/esp_common/include/esp_err.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/crypto_dma_ll.h
- /home/nvv/esp-idf/components/mbedtls/port/aes/dma/esp_aes_crypto_dma_impl.c
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/gdma_ll.h
+ /home/nvv/esp-idf/components/mbedtls/port/aes/dma/esp_aes_gdma_impl.c
  /home/nvv/esp-idf/components/mbedtls/port/aes/dma/include/esp_aes_dma_priv.h
+ /home/nvv/esp-idf/components/mbedtls/port/include/esp_crypto_shared_gdma.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/crypto_dma_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_channel.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_common.c.obj
@@ -148,7 +132,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/aes_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/aes_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/aes_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/aes_types.h
  /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/aes.h
@@ -166,57 +150,10 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes
  /home/nvv/esp-idf/components/mbedtls/port/include/aes_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/hwcrypto_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
- config/sdkconfig.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_gcm.c.obj
- /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
- /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
- /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
- /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
- /home/nvv/esp-idf/components/esp_common/include/esp_err.h
- /home/nvv/esp-idf/components/esp_common/include/esp_types.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/lldesc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/lldesc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/lldesc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/lldesc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/aes_ll.h
- /home/nvv/esp-idf/components/hal/include/hal/aes_hal.h
- /home/nvv/esp-idf/components/hal/include/hal/aes_types.h
- /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
- /home/nvv/esp-idf/components/heap/include/heap_memory_layout.h
- /home/nvv/esp-idf/components/heap/include/multi_heap.h
- /home/nvv/esp-idf/components/heap/include/soc/soc_memory_layout.h
- /home/nvv/esp-idf/components/log/include/esp_log.h
- /home/nvv/esp-idf/components/log/include/esp_log_internal.h
- /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/aes.h
- /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/check_config.h
- /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/cipher.h
- /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/config.h
- /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/platform_time.h
- /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/platform_util.h
- /home/nvv/esp-idf/components/mbedtls/port/aes/esp_aes_gcm.c
- /home/nvv/esp-idf/components/mbedtls/port/include/aes/esp_aes.h
- /home/nvv/esp-idf/components/mbedtls/port/include/aes/esp_aes_gcm.h
- /home/nvv/esp-idf/components/mbedtls/port/include/aes/esp_aes_internal.h
- /home/nvv/esp-idf/components/mbedtls/port/include/aes_alt.h
- /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
- /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_xts.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_types.h
@@ -228,24 +165,95 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes
  /home/nvv/esp-idf/components/mbedtls/port/include/aes/esp_aes.h
  /home/nvv/esp-idf/components/mbedtls/port/include/aes_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/lock.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32s2/bignum.c.obj
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.obj
+ /home/nvv/esp-idf/components/driver/include/esp_private/gdma.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_err.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_idf_version.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/esp_chip_info.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/esp_cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/esp_mac.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_crypto_lock.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/lldesc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/lldesc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/lldesc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/lldesc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
+ /home/nvv/esp-idf/components/esp_system/include/esp_system.h
+ /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
+ /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/FreeRTOS.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/FreeRTOSConfig.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/deprecated_definitions.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/list.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/mpu_wrappers.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/portable.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/projdefs.h
+ /home/nvv/esp-idf/components/freertos/include/freertos/task.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/gdma_ll.h
+ /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
+ /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
+ /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
+ /home/nvv/esp-idf/components/heap/include/heap_memory_layout.h
+ /home/nvv/esp-idf/components/heap/include/multi_heap.h
+ /home/nvv/esp-idf/components/heap/include/soc/soc_memory_layout.h
+ /home/nvv/esp-idf/components/log/include/esp_log.h
+ /home/nvv/esp-idf/components/log/include/esp_log_internal.h
+ /home/nvv/esp-idf/components/mbedtls/port/crypto_shared_gdma/esp_crypto_shared_gdma.c
+ /home/nvv/esp-idf/components/mbedtls/port/include/esp_crypto_shared_gdma.h
+ /home/nvv/esp-idf/components/newlib/platform_include/assert.h
+ /home/nvv/esp-idf/components/newlib/platform_include/esp_newlib.h
+ /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_channel.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
+ /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
+ /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
+ config/sdkconfig.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32c3/bignum.c.obj
  /home/nvv/esp-idf/components/driver/include/driver/periph_ctrl.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
+ /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/esp_crypto_lock.h
- /home/nvv/esp-idf/components/mbedtls/port/esp32s2/bignum.c
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_crypto_lock.h
+ /home/nvv/esp-idf/components/mbedtls/port/esp32c3/bignum.c
  /home/nvv/esp-idf/components/mbedtls/port/include/bignum_impl.h
  /home/nvv/esp-idf/components/mbedtls/port/include/mbedtls/bignum.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/hwcrypto_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/hwcrypto_periph.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_bignum.c.obj
@@ -258,7 +266,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_bignum.
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_chip_info.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_mac.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
@@ -272,15 +280,12 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_bignum.
  /home/nvv/esp-idf/components/mbedtls/port/include/bignum_impl.h
  /home/nvv/esp-idf/components/mbedtls/port/include/mbedtls/bignum.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/hwcrypto_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/hwcrypto_periph.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_ds/esp_rsa_sign_alt.c.obj
@@ -296,8 +301,9 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_ds/esp_
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/esp_ds.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/esp_hmac.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_ds.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_hmac.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/digital_signature.h
@@ -308,7 +314,6 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_ds/esp_
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -322,11 +327,9 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_ds/esp_
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
@@ -360,28 +363,17 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_ds/esp_
  /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp_hardware.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
@@ -448,8 +440,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp
  /home/nvv/esp-idf/components/mbedtls/port/sha/dma/esp_sha1.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha256.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -471,8 +463,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp
  /home/nvv/esp-idf/components/mbedtls/port/sha/dma/esp_sha256.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha512.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -494,33 +486,24 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp
  /home/nvv/esp-idf/components/mbedtls/port/sha/dma/esp_sha512.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.obj
- /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
- /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_gdma_impl.c.obj
+ /home/nvv/esp-idf/components/driver/include/esp_private/gdma.h
  /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
  /home/nvv/esp-idf/components/esp_common/include/esp_err.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/crypto_dma_ll.h
- /home/nvv/esp-idf/components/mbedtls/port/sha/dma/esp_sha_crypto_dma_impl.c
+ /home/nvv/esp-idf/components/mbedtls/port/include/esp_crypto_shared_gdma.h
+ /home/nvv/esp-idf/components/mbedtls/port/sha/dma/esp_sha_gdma_impl.c
  /home/nvv/esp-idf/components/mbedtls/port/sha/dma/include/esp_sha_dma_priv.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/crypto_dma_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/hwcrypto_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gdma_channel.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/sha.c.obj
@@ -537,7 +520,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/sha
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/esp_crypto_lock.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_crypto_lock.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/lldesc.h
@@ -558,7 +542,6 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/sha
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/lldesc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/sha.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -572,11 +555,9 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/sha
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/hal/include/hal/sha_hal.h
@@ -594,31 +575,20 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/sha
  /home/nvv/esp-idf/components/newlib/platform_include/esp_newlib.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/lock.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/cache_memory.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/cache_memory.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/esp_sha.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -650,9 +620,9 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/esp_sha
  /home/nvv/esp-idf/components/mbedtls/port/include/sha512_alt.h
  /home/nvv/esp-idf/components/mbedtls/port/sha/esp_sha.c
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/aes.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_types.h
@@ -831,7 +801,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/cipher.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/gcm_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/cipher_wrap.c.obj
@@ -867,7 +837,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/cipher_wrap.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/gcm_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/cmac.c.obj
@@ -1009,8 +979,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/ecp.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/ecp_curves.c.obj
  /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/bignum.h
@@ -1052,8 +1022,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/entropy.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/entropy_poll.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -1084,8 +1054,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/entropy_poll.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/error.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -1174,8 +1144,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/error.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/gcm.c.obj
@@ -1202,7 +1172,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/gcm.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/gcm_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/havege.c.obj
@@ -1322,8 +1292,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/md_wrap.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/sha512_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/memory_buffer_alloc.c.obj
  /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/check_config.h
@@ -1617,8 +1587,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/rsa.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/rsa_internal.c.obj
  /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/bignum.h
@@ -1653,8 +1623,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/sha1.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/sha1_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/sha256.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -1676,8 +1646,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/sha256.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/sha256_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/sha512.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -1699,8 +1669,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/sha512.c.obj
  /home/nvv/esp-idf/components/mbedtls/port/include/sha512_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
  /home/nvv/esp-idf/components/newlib/platform_include/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  config/sdkconfig.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/threading.c.obj
  /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/check_config.h

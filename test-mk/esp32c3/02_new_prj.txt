@@ -33,6 +33,7 @@ cd test1
 
 # указать цель (есть ещё другие  idf.py set-target --help )
 idf.py set-target esp32s2
+idf.py set-target esp32c3
 
 # 
 idf.py menuconfig

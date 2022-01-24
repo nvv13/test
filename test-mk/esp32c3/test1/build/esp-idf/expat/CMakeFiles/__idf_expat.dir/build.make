@@ -79,67 +79,67 @@ include esp-idf/expat/CMakeFiles/__idf_expat.dir/flags.make
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj: esp-idf/expat/CMakeFiles/__idf_expat.dir/flags.make
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj: /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.i
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlparse.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.s
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj: esp-idf/expat/CMakeFiles/__idf_expat.dir/flags.make
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj: /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.i
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmlrole.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.s
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj: esp-idf/expat/CMakeFiles/__idf_expat.dir/flags.make
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj: /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.i
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.s
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj: esp-idf/expat/CMakeFiles/__idf_expat.dir/flags.make
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj: /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.i
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_impl.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.s
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj: esp-idf/expat/CMakeFiles/__idf_expat.dir/flags.make
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj: /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj -c /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c > CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.i
 
 esp-idf/expat/CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/expat/expat/expat/lib/xmltok_ns.c -o CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.s
 
 # Object files for target __idf_expat
 __idf_expat_OBJECTS = \

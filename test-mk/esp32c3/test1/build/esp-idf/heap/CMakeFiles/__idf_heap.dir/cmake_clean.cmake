@@ -3,7 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/__idf_heap.dir/heap_caps_init.c.obj"
   "CMakeFiles/__idf_heap.dir/heap_tlsf.c.obj"
   "CMakeFiles/__idf_heap.dir/multi_heap.c.obj"
-  "CMakeFiles/__idf_heap.dir/port/esp32s2/memory_layout.c.obj"
+  "CMakeFiles/__idf_heap.dir/port/esp32c3/memory_layout.c.obj"
   "CMakeFiles/__idf_heap.dir/port/memory_layout_utils.c.obj"
   "libheap.a"
   "libheap.pdb"

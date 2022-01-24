@@ -1,2 +1,2 @@
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libesp_serial_slave_link.a CMakeFiles/__idf_esp_serial_slave_link.dir/essl.c.obj CMakeFiles/__idf_esp_serial_slave_link.dir/essl_sdio.c.obj CMakeFiles/__idf_esp_serial_slave_link.dir/essl_spi.c.obj
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libesp_serial_slave_link.a
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libesp_serial_slave_link.a CMakeFiles/__idf_esp_serial_slave_link.dir/essl.c.obj CMakeFiles/__idf_esp_serial_slave_link.dir/essl_sdio.c.obj CMakeFiles/__idf_esp_serial_slave_link.dir/essl_spi.c.obj
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libesp_serial_slave_link.a

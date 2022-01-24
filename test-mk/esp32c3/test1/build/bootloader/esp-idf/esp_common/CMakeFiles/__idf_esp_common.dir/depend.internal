@@ -30,9 +30,9 @@ esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/src/esp_err_to_name.c.obj
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
  config/sdkconfig.h

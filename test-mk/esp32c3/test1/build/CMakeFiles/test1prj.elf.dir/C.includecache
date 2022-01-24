@@ -6,5 +6,5 @@
 
 #IncludeRegexTransform: 
 
-/home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32s2.c
+/home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c
 

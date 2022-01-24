@@ -34,12 +34,12 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-objdump")
+  set(CMAKE_OBJDUMP "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/port/soc/esp32s2/cmake_install.cmake")
+  include("/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/port/soc/esp32c3/cmake_install.cmake")
 
 endif()
 

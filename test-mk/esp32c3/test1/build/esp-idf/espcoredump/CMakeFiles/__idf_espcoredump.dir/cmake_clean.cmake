@@ -5,7 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.obj"
   "CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.obj"
   "CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.obj"
-  "CMakeFiles/__idf_espcoredump.dir/src/port/xtensa/core_dump_port.c.obj"
+  "CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj"
   "libespcoredump.a"
   "libespcoredump.pdb"
 )

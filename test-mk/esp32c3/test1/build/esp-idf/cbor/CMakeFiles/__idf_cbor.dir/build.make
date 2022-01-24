@@ -79,132 +79,132 @@ include esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder_close_container_checked.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder_close_container_checked.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborencoder.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborencoder.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborerrorstrings.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborerrorstrings.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser_dup_string.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser_dup_string.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborparser.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborparser.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty_stdio.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty_stdio.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborpretty.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborpretty.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cbortojson.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cbortojson.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/cborvalidation.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/cborvalidation.c.s
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.obj: esp-idf/cbor/CMakeFiles/__idf_cbor.dir/flags.make
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.obj: /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) -D__linux__ $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D__linux__ $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.obj -c /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) -D__linux__ $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D__linux__ $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c > CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.i
 
 esp-idf/cbor/CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) -D__linux__ $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D__linux__ $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/cbor/tinycbor/src/open_memstream.c -o CMakeFiles/__idf_cbor.dir/tinycbor/src/open_memstream.c.s
 
 # Object files for target __idf_cbor
 __idf_cbor_OBJECTS = \

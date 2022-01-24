@@ -1,7 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/__idf_esp_rom.dir/esp32s2/usb_descriptors.c.obj"
   "CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_crc.c.obj"
-  "CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_longjmp.S.obj"
   "CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_sys.c.obj"
   "CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj"
   "libesp_rom.a"
@@ -9,6 +7,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang ASM C)
+foreach(lang C)
   include(CMakeFiles/__idf_esp_rom.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

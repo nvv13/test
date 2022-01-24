@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj"
-  "CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj"
-  "CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj"
-  "CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj"
+  "CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj"
+  "CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj"
+  "CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj"
+  "CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj"
   "CMakeFiles/__idf_efuse.dir/src/esp_efuse_api.c.obj"
   "CMakeFiles/__idf_efuse.dir/src/esp_efuse_api_key_esp32xx.c.obj"
   "CMakeFiles/__idf_efuse.dir/src/esp_efuse_fields.c.obj"

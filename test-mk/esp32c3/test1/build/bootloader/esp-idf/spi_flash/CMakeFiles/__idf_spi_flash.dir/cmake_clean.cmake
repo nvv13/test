@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj"
+  "CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj"
   "libspi_flash.a"
   "libspi_flash.pdb"
 )

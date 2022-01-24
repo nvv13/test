@@ -14,6 +14,7 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs.c.obj
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
@@ -21,7 +22,6 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs.c.obj
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -35,11 +35,9 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs.c.obj
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
@@ -58,30 +56,19 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/sys/termios.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/unistd.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs.h
  /home/nvv/esp-idf/components/vfs/vfs.c
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h
 esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_eventfd.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -96,6 +83,7 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_eventfd.c.obj
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
@@ -103,7 +91,6 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_eventfd.c.obj
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -117,11 +104,9 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_eventfd.c.obj
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
@@ -140,31 +125,20 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_eventfd.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/sys/select.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/termios.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs_eventfd.h
  /home/nvv/esp-idf/components/vfs/vfs_eventfd.c
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h
 esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_semihost.c.obj
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -179,6 +153,7 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_semihost.c.obj
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
@@ -186,7 +161,6 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_semihost.c.obj
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -200,11 +174,9 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_semihost.c.obj
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
@@ -220,30 +192,19 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_semihost.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/termios.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs.h
  /home/nvv/esp-idf/components/vfs/vfs_semihost.c
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h
 esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_uart.c.obj
  /home/nvv/esp-idf/components/driver/include/driver/uart.h
@@ -261,11 +222,11 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_uart.c.obj
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
  /home/nvv/esp-idf/components/esp_ringbuf/include/freertos/ringbuf.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_uart.h
- /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
  /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
  /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -279,12 +240,10 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_uart.c.obj
  /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
  /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
  /home/nvv/esp-idf/components/freertos/include/freertos/task.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
- /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/uart_ll.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+ /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/uart_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/hal/include/hal/uart_types.h
@@ -300,37 +259,25 @@ esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_uart.c.obj
  /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/termios.h
  /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_sig_map.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/io_mux_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/uart_pins.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/uart_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/uart_struct.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_pins.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_struct.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  /home/nvv/esp-idf/components/soc/include/soc/uart_periph.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs_common.h
  /home/nvv/esp-idf/components/vfs/include/esp_vfs_dev.h
  /home/nvv/esp-idf/components/vfs/vfs_uart.c
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
  config/sdkconfig.h

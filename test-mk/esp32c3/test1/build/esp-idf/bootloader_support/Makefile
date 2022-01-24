@@ -271,32 +271,32 @@ src/bootloader_common_loader.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.s
 .PHONY : src/bootloader_common_loader.c.s
 
-src/bootloader_efuse_esp32s2.obj: src/bootloader_efuse_esp32s2.c.obj
+src/bootloader_efuse_esp32c3.obj: src/bootloader_efuse_esp32c3.c.obj
 
-.PHONY : src/bootloader_efuse_esp32s2.obj
+.PHONY : src/bootloader_efuse_esp32c3.obj
 
 # target to build an object file
-src/bootloader_efuse_esp32s2.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32s2.c.obj
-.PHONY : src/bootloader_efuse_esp32s2.c.obj
+src/bootloader_efuse_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj
+.PHONY : src/bootloader_efuse_esp32c3.c.obj
 
-src/bootloader_efuse_esp32s2.i: src/bootloader_efuse_esp32s2.c.i
+src/bootloader_efuse_esp32c3.i: src/bootloader_efuse_esp32c3.c.i
 
-.PHONY : src/bootloader_efuse_esp32s2.i
+.PHONY : src/bootloader_efuse_esp32c3.i
 
 # target to preprocess a source file
-src/bootloader_efuse_esp32s2.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32s2.c.i
-.PHONY : src/bootloader_efuse_esp32s2.c.i
+src/bootloader_efuse_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.i
+.PHONY : src/bootloader_efuse_esp32c3.c.i
 
-src/bootloader_efuse_esp32s2.s: src/bootloader_efuse_esp32s2.c.s
+src/bootloader_efuse_esp32c3.s: src/bootloader_efuse_esp32c3.c.s
 
-.PHONY : src/bootloader_efuse_esp32s2.s
+.PHONY : src/bootloader_efuse_esp32c3.s
 
 # target to generate assembly for a file
-src/bootloader_efuse_esp32s2.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32s2.c.s
-.PHONY : src/bootloader_efuse_esp32s2.c.s
+src/bootloader_efuse_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.s
+.PHONY : src/bootloader_efuse_esp32c3.c.s
 
 src/bootloader_flash.obj: src/bootloader_flash.c.obj
 
@@ -325,32 +325,32 @@ src/bootloader_flash.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.s
 .PHONY : src/bootloader_flash.c.s
 
-src/bootloader_flash_config_esp32s2.obj: src/bootloader_flash_config_esp32s2.c.obj
+src/bootloader_flash_config_esp32c3.obj: src/bootloader_flash_config_esp32c3.c.obj
 
-.PHONY : src/bootloader_flash_config_esp32s2.obj
+.PHONY : src/bootloader_flash_config_esp32c3.obj
 
 # target to build an object file
-src/bootloader_flash_config_esp32s2.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32s2.c.obj
-.PHONY : src/bootloader_flash_config_esp32s2.c.obj
+src/bootloader_flash_config_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj
+.PHONY : src/bootloader_flash_config_esp32c3.c.obj
 
-src/bootloader_flash_config_esp32s2.i: src/bootloader_flash_config_esp32s2.c.i
+src/bootloader_flash_config_esp32c3.i: src/bootloader_flash_config_esp32c3.c.i
 
-.PHONY : src/bootloader_flash_config_esp32s2.i
+.PHONY : src/bootloader_flash_config_esp32c3.i
 
 # target to preprocess a source file
-src/bootloader_flash_config_esp32s2.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32s2.c.i
-.PHONY : src/bootloader_flash_config_esp32s2.c.i
+src/bootloader_flash_config_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.i
+.PHONY : src/bootloader_flash_config_esp32c3.c.i
 
-src/bootloader_flash_config_esp32s2.s: src/bootloader_flash_config_esp32s2.c.s
+src/bootloader_flash_config_esp32c3.s: src/bootloader_flash_config_esp32c3.c.s
 
-.PHONY : src/bootloader_flash_config_esp32s2.s
+.PHONY : src/bootloader_flash_config_esp32c3.s
 
 # target to generate assembly for a file
-src/bootloader_flash_config_esp32s2.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32s2.c.s
-.PHONY : src/bootloader_flash_config_esp32s2.c.s
+src/bootloader_flash_config_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.s
+.PHONY : src/bootloader_flash_config_esp32c3.c.s
 
 src/bootloader_mem.obj: src/bootloader_mem.c.obj
 
@@ -406,32 +406,32 @@ src/bootloader_random.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.s
 .PHONY : src/bootloader_random.c.s
 
-src/bootloader_random_esp32s2.obj: src/bootloader_random_esp32s2.c.obj
+src/bootloader_random_esp32c3.obj: src/bootloader_random_esp32c3.c.obj
 
-.PHONY : src/bootloader_random_esp32s2.obj
+.PHONY : src/bootloader_random_esp32c3.obj
 
 # target to build an object file
-src/bootloader_random_esp32s2.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32s2.c.obj
-.PHONY : src/bootloader_random_esp32s2.c.obj
+src/bootloader_random_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj
+.PHONY : src/bootloader_random_esp32c3.c.obj
 
-src/bootloader_random_esp32s2.i: src/bootloader_random_esp32s2.c.i
+src/bootloader_random_esp32c3.i: src/bootloader_random_esp32c3.c.i
 
-.PHONY : src/bootloader_random_esp32s2.i
+.PHONY : src/bootloader_random_esp32c3.i
 
 # target to preprocess a source file
-src/bootloader_random_esp32s2.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32s2.c.i
-.PHONY : src/bootloader_random_esp32s2.c.i
+src/bootloader_random_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.i
+.PHONY : src/bootloader_random_esp32c3.c.i
 
-src/bootloader_random_esp32s2.s: src/bootloader_random_esp32s2.c.s
+src/bootloader_random_esp32c3.s: src/bootloader_random_esp32c3.c.s
 
-.PHONY : src/bootloader_random_esp32s2.s
+.PHONY : src/bootloader_random_esp32c3.s
 
 # target to generate assembly for a file
-src/bootloader_random_esp32s2.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32s2.c.s
-.PHONY : src/bootloader_random_esp32s2.c.s
+src/bootloader_random_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.s
+.PHONY : src/bootloader_random_esp32c3.c.s
 
 src/bootloader_utility.obj: src/bootloader_utility.c.obj
 
@@ -644,24 +644,24 @@ help:
 	@echo "... src/bootloader_common_loader.obj"
 	@echo "... src/bootloader_common_loader.i"
 	@echo "... src/bootloader_common_loader.s"
-	@echo "... src/bootloader_efuse_esp32s2.obj"
-	@echo "... src/bootloader_efuse_esp32s2.i"
-	@echo "... src/bootloader_efuse_esp32s2.s"
+	@echo "... src/bootloader_efuse_esp32c3.obj"
+	@echo "... src/bootloader_efuse_esp32c3.i"
+	@echo "... src/bootloader_efuse_esp32c3.s"
 	@echo "... src/bootloader_flash.obj"
 	@echo "... src/bootloader_flash.i"
 	@echo "... src/bootloader_flash.s"
-	@echo "... src/bootloader_flash_config_esp32s2.obj"
-	@echo "... src/bootloader_flash_config_esp32s2.i"
-	@echo "... src/bootloader_flash_config_esp32s2.s"
+	@echo "... src/bootloader_flash_config_esp32c3.obj"
+	@echo "... src/bootloader_flash_config_esp32c3.i"
+	@echo "... src/bootloader_flash_config_esp32c3.s"
 	@echo "... src/bootloader_mem.obj"
 	@echo "... src/bootloader_mem.i"
 	@echo "... src/bootloader_mem.s"
 	@echo "... src/bootloader_random.obj"
 	@echo "... src/bootloader_random.i"
 	@echo "... src/bootloader_random.s"
-	@echo "... src/bootloader_random_esp32s2.obj"
-	@echo "... src/bootloader_random_esp32s2.i"
-	@echo "... src/bootloader_random_esp32s2.s"
+	@echo "... src/bootloader_random_esp32c3.obj"
+	@echo "... src/bootloader_random_esp32c3.i"
+	@echo "... src/bootloader_random_esp32c3.s"
 	@echo "... src/bootloader_utility.obj"
 	@echo "... src/bootloader_utility.i"
 	@echo "... src/bootloader_utility.s"

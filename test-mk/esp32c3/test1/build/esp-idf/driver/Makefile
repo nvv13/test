@@ -217,194 +217,113 @@ adc_common.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.s
 .PHONY : adc_common.c.s
 
-dac_common.obj: dac_common.c.obj
+esp32c3/adc.obj: esp32c3/adc.c.obj
 
-.PHONY : dac_common.obj
-
-# target to build an object file
-dac_common.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.obj
-.PHONY : dac_common.c.obj
-
-dac_common.i: dac_common.c.i
-
-.PHONY : dac_common.i
-
-# target to preprocess a source file
-dac_common.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.i
-.PHONY : dac_common.c.i
-
-dac_common.s: dac_common.c.s
-
-.PHONY : dac_common.s
-
-# target to generate assembly for a file
-dac_common.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.s
-.PHONY : dac_common.c.s
-
-dedic_gpio.obj: dedic_gpio.c.obj
-
-.PHONY : dedic_gpio.obj
+.PHONY : esp32c3/adc.obj
 
 # target to build an object file
-dedic_gpio.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj
-.PHONY : dedic_gpio.c.obj
+esp32c3/adc.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj
+.PHONY : esp32c3/adc.c.obj
 
-dedic_gpio.i: dedic_gpio.c.i
+esp32c3/adc.i: esp32c3/adc.c.i
 
-.PHONY : dedic_gpio.i
+.PHONY : esp32c3/adc.i
 
 # target to preprocess a source file
-dedic_gpio.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.i
-.PHONY : dedic_gpio.c.i
+esp32c3/adc.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.i
+.PHONY : esp32c3/adc.c.i
 
-dedic_gpio.s: dedic_gpio.c.s
+esp32c3/adc.s: esp32c3/adc.c.s
 
-.PHONY : dedic_gpio.s
+.PHONY : esp32c3/adc.s
 
 # target to generate assembly for a file
-dedic_gpio.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.s
-.PHONY : dedic_gpio.c.s
+esp32c3/adc.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.s
+.PHONY : esp32c3/adc.c.s
 
-esp32s2/adc.obj: esp32s2/adc.c.obj
+esp32c3/adc2_init_cal.obj: esp32c3/adc2_init_cal.c.obj
 
-.PHONY : esp32s2/adc.obj
+.PHONY : esp32c3/adc2_init_cal.obj
 
 # target to build an object file
-esp32s2/adc.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj
-.PHONY : esp32s2/adc.c.obj
+esp32c3/adc2_init_cal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj
+.PHONY : esp32c3/adc2_init_cal.c.obj
 
-esp32s2/adc.i: esp32s2/adc.c.i
+esp32c3/adc2_init_cal.i: esp32c3/adc2_init_cal.c.i
 
-.PHONY : esp32s2/adc.i
+.PHONY : esp32c3/adc2_init_cal.i
 
 # target to preprocess a source file
-esp32s2/adc.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.i
-.PHONY : esp32s2/adc.c.i
+esp32c3/adc2_init_cal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.i
+.PHONY : esp32c3/adc2_init_cal.c.i
 
-esp32s2/adc.s: esp32s2/adc.c.s
+esp32c3/adc2_init_cal.s: esp32c3/adc2_init_cal.c.s
 
-.PHONY : esp32s2/adc.s
+.PHONY : esp32c3/adc2_init_cal.s
 
 # target to generate assembly for a file
-esp32s2/adc.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.s
-.PHONY : esp32s2/adc.c.s
+esp32c3/adc2_init_cal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.s
+.PHONY : esp32c3/adc2_init_cal.c.s
 
-esp32s2/adc2_init_cal.obj: esp32s2/adc2_init_cal.c.obj
+esp32c3/rtc_tempsensor.obj: esp32c3/rtc_tempsensor.c.obj
 
-.PHONY : esp32s2/adc2_init_cal.obj
+.PHONY : esp32c3/rtc_tempsensor.obj
 
 # target to build an object file
-esp32s2/adc2_init_cal.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj
-.PHONY : esp32s2/adc2_init_cal.c.obj
+esp32c3/rtc_tempsensor.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj
+.PHONY : esp32c3/rtc_tempsensor.c.obj
 
-esp32s2/adc2_init_cal.i: esp32s2/adc2_init_cal.c.i
+esp32c3/rtc_tempsensor.i: esp32c3/rtc_tempsensor.c.i
 
-.PHONY : esp32s2/adc2_init_cal.i
+.PHONY : esp32c3/rtc_tempsensor.i
 
 # target to preprocess a source file
-esp32s2/adc2_init_cal.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.i
-.PHONY : esp32s2/adc2_init_cal.c.i
+esp32c3/rtc_tempsensor.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.i
+.PHONY : esp32c3/rtc_tempsensor.c.i
 
-esp32s2/adc2_init_cal.s: esp32s2/adc2_init_cal.c.s
+esp32c3/rtc_tempsensor.s: esp32c3/rtc_tempsensor.c.s
 
-.PHONY : esp32s2/adc2_init_cal.s
+.PHONY : esp32c3/rtc_tempsensor.s
 
 # target to generate assembly for a file
-esp32s2/adc2_init_cal.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.s
-.PHONY : esp32s2/adc2_init_cal.c.s
+esp32c3/rtc_tempsensor.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.s
+.PHONY : esp32c3/rtc_tempsensor.c.s
 
-esp32s2/dac.obj: esp32s2/dac.c.obj
+gdma.obj: gdma.c.obj
 
-.PHONY : esp32s2/dac.obj
+.PHONY : gdma.obj
 
 # target to build an object file
-esp32s2/dac.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj
-.PHONY : esp32s2/dac.c.obj
+gdma.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.obj
+.PHONY : gdma.c.obj
 
-esp32s2/dac.i: esp32s2/dac.c.i
+gdma.i: gdma.c.i
 
-.PHONY : esp32s2/dac.i
-
-# target to preprocess a source file
-esp32s2/dac.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.i
-.PHONY : esp32s2/dac.c.i
-
-esp32s2/dac.s: esp32s2/dac.c.s
-
-.PHONY : esp32s2/dac.s
-
-# target to generate assembly for a file
-esp32s2/dac.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.s
-.PHONY : esp32s2/dac.c.s
-
-esp32s2/rtc_tempsensor.obj: esp32s2/rtc_tempsensor.c.obj
-
-.PHONY : esp32s2/rtc_tempsensor.obj
-
-# target to build an object file
-esp32s2/rtc_tempsensor.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj
-.PHONY : esp32s2/rtc_tempsensor.c.obj
-
-esp32s2/rtc_tempsensor.i: esp32s2/rtc_tempsensor.c.i
-
-.PHONY : esp32s2/rtc_tempsensor.i
+.PHONY : gdma.i
 
 # target to preprocess a source file
-esp32s2/rtc_tempsensor.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.i
-.PHONY : esp32s2/rtc_tempsensor.c.i
+gdma.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.i
+.PHONY : gdma.c.i
 
-esp32s2/rtc_tempsensor.s: esp32s2/rtc_tempsensor.c.s
+gdma.s: gdma.c.s
 
-.PHONY : esp32s2/rtc_tempsensor.s
-
-# target to generate assembly for a file
-esp32s2/rtc_tempsensor.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.s
-.PHONY : esp32s2/rtc_tempsensor.c.s
-
-esp32s2/touch_sensor.obj: esp32s2/touch_sensor.c.obj
-
-.PHONY : esp32s2/touch_sensor.obj
-
-# target to build an object file
-esp32s2/touch_sensor.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj
-.PHONY : esp32s2/touch_sensor.c.obj
-
-esp32s2/touch_sensor.i: esp32s2/touch_sensor.c.i
-
-.PHONY : esp32s2/touch_sensor.i
-
-# target to preprocess a source file
-esp32s2/touch_sensor.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.i
-.PHONY : esp32s2/touch_sensor.c.i
-
-esp32s2/touch_sensor.s: esp32s2/touch_sensor.c.s
-
-.PHONY : esp32s2/touch_sensor.s
+.PHONY : gdma.s
 
 # target to generate assembly for a file
-esp32s2/touch_sensor.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.s
-.PHONY : esp32s2/touch_sensor.c.s
+gdma.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.s
+.PHONY : gdma.c.s
 
 gpio.obj: gpio.c.obj
 
@@ -919,33 +838,6 @@ timer.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.s
 .PHONY : timer.c.s
 
-touch_sensor_common.obj: touch_sensor_common.c.obj
-
-.PHONY : touch_sensor_common.obj
-
-# target to build an object file
-touch_sensor_common.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj
-.PHONY : touch_sensor_common.c.obj
-
-touch_sensor_common.i: touch_sensor_common.c.i
-
-.PHONY : touch_sensor_common.i
-
-# target to preprocess a source file
-touch_sensor_common.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.i
-.PHONY : touch_sensor_common.c.i
-
-touch_sensor_common.s: touch_sensor_common.c.s
-
-.PHONY : touch_sensor_common.s
-
-# target to generate assembly for a file
-touch_sensor_common.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.s
-.PHONY : touch_sensor_common.c.s
-
 twai.obj: twai.c.obj
 
 .PHONY : twai.obj
@@ -1000,6 +892,33 @@ uart.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.s
 .PHONY : uart.c.s
 
+usb_serial_jtag.obj: usb_serial_jtag.c.obj
+
+.PHONY : usb_serial_jtag.obj
+
+# target to build an object file
+usb_serial_jtag.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj
+.PHONY : usb_serial_jtag.c.obj
+
+usb_serial_jtag.i: usb_serial_jtag.c.i
+
+.PHONY : usb_serial_jtag.i
+
+# target to preprocess a source file
+usb_serial_jtag.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.i
+.PHONY : usb_serial_jtag.c.i
+
+usb_serial_jtag.s: usb_serial_jtag.c.s
+
+.PHONY : usb_serial_jtag.s
+
+# target to generate assembly for a file
+usb_serial_jtag.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.s
+.PHONY : usb_serial_jtag.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1016,27 +935,18 @@ help:
 	@echo "... adc_common.obj"
 	@echo "... adc_common.i"
 	@echo "... adc_common.s"
-	@echo "... dac_common.obj"
-	@echo "... dac_common.i"
-	@echo "... dac_common.s"
-	@echo "... dedic_gpio.obj"
-	@echo "... dedic_gpio.i"
-	@echo "... dedic_gpio.s"
-	@echo "... esp32s2/adc.obj"
-	@echo "... esp32s2/adc.i"
-	@echo "... esp32s2/adc.s"
-	@echo "... esp32s2/adc2_init_cal.obj"
-	@echo "... esp32s2/adc2_init_cal.i"
-	@echo "... esp32s2/adc2_init_cal.s"
-	@echo "... esp32s2/dac.obj"
-	@echo "... esp32s2/dac.i"
-	@echo "... esp32s2/dac.s"
-	@echo "... esp32s2/rtc_tempsensor.obj"
-	@echo "... esp32s2/rtc_tempsensor.i"
-	@echo "... esp32s2/rtc_tempsensor.s"
-	@echo "... esp32s2/touch_sensor.obj"
-	@echo "... esp32s2/touch_sensor.i"
-	@echo "... esp32s2/touch_sensor.s"
+	@echo "... esp32c3/adc.obj"
+	@echo "... esp32c3/adc.i"
+	@echo "... esp32c3/adc.s"
+	@echo "... esp32c3/adc2_init_cal.obj"
+	@echo "... esp32c3/adc2_init_cal.i"
+	@echo "... esp32c3/adc2_init_cal.s"
+	@echo "... esp32c3/rtc_tempsensor.obj"
+	@echo "... esp32c3/rtc_tempsensor.i"
+	@echo "... esp32c3/rtc_tempsensor.s"
+	@echo "... gdma.obj"
+	@echo "... gdma.i"
+	@echo "... gdma.s"
 	@echo "... gpio.obj"
 	@echo "... gpio.i"
 	@echo "... gpio.s"
@@ -1094,15 +1004,15 @@ help:
 	@echo "... timer.obj"
 	@echo "... timer.i"
 	@echo "... timer.s"
-	@echo "... touch_sensor_common.obj"
-	@echo "... touch_sensor_common.i"
-	@echo "... touch_sensor_common.s"
 	@echo "... twai.obj"
 	@echo "... twai.i"
 	@echo "... twai.s"
 	@echo "... uart.obj"
 	@echo "... uart.i"
 	@echo "... uart.s"
+	@echo "... usb_serial_jtag.obj"
+	@echo "... usb_serial_jtag.i"
+	@echo "... usb_serial_jtag.s"
 .PHONY : help
 
 

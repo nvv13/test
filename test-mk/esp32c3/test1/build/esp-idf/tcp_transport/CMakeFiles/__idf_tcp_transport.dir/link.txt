@@ -1,2 +1,2 @@
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libtcp_transport.a CMakeFiles/__idf_tcp_transport.dir/transport.c.obj CMakeFiles/__idf_tcp_transport.dir/transport_ssl.c.obj CMakeFiles/__idf_tcp_transport.dir/transport_utils.c.obj CMakeFiles/__idf_tcp_transport.dir/transport_ws.c.obj
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libtcp_transport.a
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libtcp_transport.a CMakeFiles/__idf_tcp_transport.dir/transport.c.obj CMakeFiles/__idf_tcp_transport.dir/transport_ssl.c.obj CMakeFiles/__idf_tcp_transport.dir/transport_utils.c.obj CMakeFiles/__idf_tcp_transport.dir/transport_ws.c.obj
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libtcp_transport.a

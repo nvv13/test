@@ -2295,49 +2295,39 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "IDF_ENV_FPGA && <choice ESP32S2_DEFAULT_CPU_FREQ_MHZ>",
+                                "depends_on": "IDF_ENV_FPGA && <choice ESP32C3_DEFAULT_CPU_FREQ_MHZ>",
                                 "help": null,
-                                "id": "ESP32S2_DEFAULT_CPU_FREQ_FPGA",
-                                "name": "ESP32S2_DEFAULT_CPU_FREQ_FPGA",
+                                "id": "ESP32C3_DEFAULT_CPU_FREQ_40",
+                                "name": "ESP32C3_DEFAULT_CPU_FREQ_40",
                                 "range": null,
-                                "title": "FPGA",
+                                "title": "40 MHz",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_DEFAULT_CPU_FREQ_MHZ>",
+                                "depends_on": "<choice ESP32C3_DEFAULT_CPU_FREQ_MHZ>",
                                 "help": null,
-                                "id": "ESP32S2_DEFAULT_CPU_FREQ_80",
-                                "name": "ESP32S2_DEFAULT_CPU_FREQ_80",
+                                "id": "ESP32C3_DEFAULT_CPU_FREQ_80",
+                                "name": "ESP32C3_DEFAULT_CPU_FREQ_80",
                                 "range": null,
                                 "title": "80 MHz",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_DEFAULT_CPU_FREQ_MHZ>",
+                                "depends_on": "<choice ESP32C3_DEFAULT_CPU_FREQ_MHZ>",
                                 "help": null,
-                                "id": "ESP32S2_DEFAULT_CPU_FREQ_160",
-                                "name": "ESP32S2_DEFAULT_CPU_FREQ_160",
+                                "id": "ESP32C3_DEFAULT_CPU_FREQ_160",
+                                "name": "ESP32C3_DEFAULT_CPU_FREQ_160",
                                 "range": null,
                                 "title": "160 MHz",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "<choice ESP32S2_DEFAULT_CPU_FREQ_MHZ>",
-                                "help": null,
-                                "id": "ESP32S2_DEFAULT_CPU_FREQ_240",
-                                "name": "ESP32S2_DEFAULT_CPU_FREQ_240",
-                                "range": null,
-                                "title": "240 MHz",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
                         "help": "CPU frequency to be set on application startup.",
-                        "id": "component-config-esp32s2-specific-cpu-frequency",
-                        "name": "ESP32S2_DEFAULT_CPU_FREQ_MHZ",
+                        "id": "component-config-esp32c3-specific-cpu-frequency",
+                        "name": "ESP32C3_DEFAULT_CPU_FREQ_MHZ",
                         "title": "CPU frequency",
                         "type": "choice"
                     },
@@ -2345,8 +2335,8 @@
                         "children": [],
                         "depends_on": null,
                         "help": null,
-                        "id": "ESP32S2_DEFAULT_CPU_FREQ_MHZ",
-                        "name": "ESP32S2_DEFAULT_CPU_FREQ_MHZ",
+                        "id": "ESP32C3_DEFAULT_CPU_FREQ_MHZ",
+                        "name": "ESP32C3_DEFAULT_CPU_FREQ_MHZ",
                         "range": null,
                         "title": null,
                         "type": "int"
@@ -2354,559 +2344,79 @@
                     {
                         "children": [
                             {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_INSTRUCTION_CACHE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_INSTRUCTION_CACHE_8KB",
-                                        "name": "ESP32S2_INSTRUCTION_CACHE_8KB",
-                                        "range": null,
-                                        "title": "8KB",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_INSTRUCTION_CACHE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_INSTRUCTION_CACHE_16KB",
-                                        "name": "ESP32S2_INSTRUCTION_CACHE_16KB",
-                                        "range": null,
-                                        "title": "16KB",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": null,
-                                "help": "Instruction cache size to be set on application startup.\nIf you use 8KB instruction cache rather than 16KB instruction cache,\nthen the other 8KB will be added to the heap.",
-                                "id": "component-config-esp32s2-specific-cache-config-instruction-cache-size",
-                                "name": "ESP32S2_INSTRUCTION_CACHE_SIZE",
-                                "title": "Instruction cache size",
-                                "type": "choice"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_INSTRUCTION_CACHE_LINE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_INSTRUCTION_CACHE_LINE_16B",
-                                        "name": "ESP32S2_INSTRUCTION_CACHE_LINE_16B",
-                                        "range": null,
-                                        "title": "16 Bytes",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_INSTRUCTION_CACHE_LINE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_INSTRUCTION_CACHE_LINE_32B",
-                                        "name": "ESP32S2_INSTRUCTION_CACHE_LINE_32B",
-                                        "range": null,
-                                        "title": "32 Bytes",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": null,
-                                "help": "Instruction cache line size to be set on application startup.",
-                                "id": "component-config-esp32s2-specific-cache-config-instruction-cache-line-size",
-                                "name": "ESP32S2_INSTRUCTION_CACHE_LINE_SIZE",
-                                "title": "Instruction cache line size",
-                                "type": "choice"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "!ESP32S2_SPIRAM_SUPPORT && <choice ESP32S2_DATA_CACHE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_DATA_CACHE_0KB",
-                                        "name": "ESP32S2_DATA_CACHE_0KB",
-                                        "range": null,
-                                        "title": "0KB",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_DATA_CACHE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_DATA_CACHE_8KB",
-                                        "name": "ESP32S2_DATA_CACHE_8KB",
-                                        "range": null,
-                                        "title": "8KB",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_DATA_CACHE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_DATA_CACHE_16KB",
-                                        "name": "ESP32S2_DATA_CACHE_16KB",
-                                        "range": null,
-                                        "title": "16KB",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": null,
-                                "help": "Data cache size to be set on application startup.\nIf you use 0KB data cache, the other 16KB will be added to the heap\nIf you use 8KB data cache rather than 16KB data cache, the other 8KB will be added to the heap",
-                                "id": "component-config-esp32s2-specific-cache-config-data-cache-size",
-                                "name": "ESP32S2_DATA_CACHE_SIZE",
-                                "title": "Data cache size",
-                                "type": "choice"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_DATA_CACHE_LINE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_DATA_CACHE_LINE_16B",
-                                        "name": "ESP32S2_DATA_CACHE_LINE_16B",
-                                        "range": null,
-                                        "title": "16 Bytes",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_DATA_CACHE_LINE_SIZE>",
-                                        "help": null,
-                                        "id": "ESP32S2_DATA_CACHE_LINE_32B",
-                                        "name": "ESP32S2_DATA_CACHE_LINE_32B",
-                                        "range": null,
-                                        "title": "32 Bytes",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": null,
-                                "help": "Data cache line size to be set on application startup.",
-                                "id": "component-config-esp32s2-specific-cache-config-data-cache-line-size",
-                                "name": "ESP32S2_DATA_CACHE_LINE_SIZE",
-                                "title": "Data cache line size",
-                                "type": "choice"
-                            },
-                            {
                                 "children": [],
-                                "depends_on": null,
-                                "help": "If enabled, instruction cache will use wrap mode to read spi flash (maybe spiram).\nThe wrap length equals to INSTRUCTION_CACHE_LINE_SIZE.\nHowever, it depends on complex conditions.",
-                                "id": "ESP32S2_INSTRUCTION_CACHE_WRAP",
-                                "name": "ESP32S2_INSTRUCTION_CACHE_WRAP",
+                                "depends_on": "<choice ESP32C3_REV_MIN>",
+                                "help": null,
+                                "id": "ESP32C3_REV_MIN_0",
+                                "name": "ESP32C3_REV_MIN_0",
                                 "range": null,
-                                "title": "Enable instruction cache wrap",
+                                "title": "Rev 0",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": null,
-                                "help": "If enabled, data cache will use wrap mode to read spiram (maybe spi flash).\nThe wrap length equals to DATA_CACHE_LINE_SIZE.\nHowever, it depends on complex conditions.",
-                                "id": "ESP32S2_DATA_CACHE_WRAP",
-                                "name": "ESP32S2_DATA_CACHE_WRAP",
+                                "depends_on": "<choice ESP32C3_REV_MIN>",
+                                "help": null,
+                                "id": "ESP32C3_REV_MIN_1",
+                                "name": "ESP32C3_REV_MIN_1",
                                 "range": null,
-                                "title": "Enable data cache wrap",
+                                "title": "Rev 1",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice ESP32C3_REV_MIN>",
+                                "help": null,
+                                "id": "ESP32C3_REV_MIN_2",
+                                "name": "ESP32C3_REV_MIN_2",
+                                "range": null,
+                                "title": "Rev 2",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice ESP32C3_REV_MIN>",
+                                "help": null,
+                                "id": "ESP32C3_REV_MIN_3",
+                                "name": "ESP32C3_REV_MIN_3",
+                                "range": null,
+                                "title": "Rev 3",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "id": "component-config-esp32s2-specific-cache-config",
-                        "title": "Cache config",
-                        "type": "menu"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_TYPE>",
-                                                "help": null,
-                                                "id": "SPIRAM_TYPE_AUTO",
-                                                "name": "SPIRAM_TYPE_AUTO",
-                                                "range": null,
-                                                "title": "Auto-detect",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_TYPE>",
-                                                "help": null,
-                                                "id": "SPIRAM_TYPE_ESPPSRAM16",
-                                                "name": "SPIRAM_TYPE_ESPPSRAM16",
-                                                "range": null,
-                                                "title": "ESP-PSRAM16 or APS1604",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_TYPE>",
-                                                "help": null,
-                                                "id": "SPIRAM_TYPE_ESPPSRAM32",
-                                                "name": "SPIRAM_TYPE_ESPPSRAM32",
-                                                "range": null,
-                                                "title": "ESP-PSRAM32 or IS25WP032",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_TYPE>",
-                                                "help": null,
-                                                "id": "SPIRAM_TYPE_ESPPSRAM64",
-                                                "name": "SPIRAM_TYPE_ESPPSRAM64",
-                                                "range": null,
-                                                "title": "ESP-PSRAM64 or LY68L6400",
-                                                "type": "bool"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": null,
-                                        "id": "component-config-esp32s2-specific-support-for-external-spi-connected-ram-spi-ram-config-type-of-spi-ram-chip-in-use",
-                                        "name": "SPIRAM_TYPE",
-                                        "title": "Type of SPI RAM chip in use",
-                                        "type": "choice"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": null,
-                                        "id": "SPIRAM_SIZE",
-                                        "name": "SPIRAM_SIZE",
-                                        "range": null,
-                                        "title": null,
-                                        "type": "int"
-                                    },
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "ESP32S2_SPIRAM_SUPPORT && ESP32S2_SPIRAM_SUPPORT",
-                                                "help": "The PSRAM CLOCK IO can be any unused GPIO, user can config it based on hardware design.",
-                                                "id": "DEFAULT_PSRAM_CLK_IO",
-                                                "name": "DEFAULT_PSRAM_CLK_IO",
-                                                "range": null,
-                                                "title": "PSRAM CLK IO number",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "ESP32S2_SPIRAM_SUPPORT && ESP32S2_SPIRAM_SUPPORT",
-                                                "help": "The PSRAM CS IO can be any unused GPIO, user can config it based on hardware design.",
-                                                "id": "DEFAULT_PSRAM_CS_IO",
-                                                "name": "DEFAULT_PSRAM_CS_IO",
-                                                "range": null,
-                                                "title": "PSRAM CS IO number",
-                                                "type": "int"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT && ESP32S2_SPIRAM_SUPPORT",
-                                        "id": "component-config-esp32s2-specific-support-for-external-spi-connected-ram-spi-ram-config-psram-clock-and-cs-io-for-esp32s2",
-                                        "title": "PSRAM clock and cs IO for ESP32S2",
-                                        "type": "menu"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "If enabled, instruction in flash will be copied into SPIRAM.\nIf SPIRAM_RODATA also enabled,\nyou can run the instruction when erasing or programming the flash.",
-                                        "id": "SPIRAM_FETCH_INSTRUCTIONS",
-                                        "name": "SPIRAM_FETCH_INSTRUCTIONS",
-                                        "range": null,
-                                        "title": "Cache fetch instructions from SPI RAM",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "If enabled, radata in flash will be copied into SPIRAM.\nIf SPIRAM_FETCH_INSTRUCTIONS also enabled,\nyou can run the instruction when erasing or programming the flash.",
-                                        "id": "SPIRAM_RODATA",
-                                        "name": "SPIRAM_RODATA",
-                                        "range": null,
-                                        "title": "Cache load read only data from SPI RAM",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_SPEED>",
-                                                "help": null,
-                                                "id": "SPIRAM_SPEED_80M",
-                                                "name": "SPIRAM_SPEED_80M",
-                                                "range": null,
-                                                "title": "80MHz clock speed",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_SPEED>",
-                                                "help": null,
-                                                "id": "SPIRAM_SPEED_40M",
-                                                "name": "SPIRAM_SPEED_40M",
-                                                "range": null,
-                                                "title": "40Mhz clock speed",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_SPEED>",
-                                                "help": null,
-                                                "id": "SPIRAM_SPEED_26M",
-                                                "name": "SPIRAM_SPEED_26M",
-                                                "range": null,
-                                                "title": "26Mhz clock speed",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_SPEED>",
-                                                "help": null,
-                                                "id": "SPIRAM_SPEED_20M",
-                                                "name": "SPIRAM_SPEED_20M",
-                                                "range": null,
-                                                "title": "20Mhz clock speed",
-                                                "type": "bool"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "Select the speed for the SPI RAM chip.",
-                                        "id": "component-config-esp32s2-specific-support-for-external-spi-connected-ram-spi-ram-config-set-ram-clock-speed",
-                                        "name": "SPIRAM_SPEED",
-                                        "title": "Set RAM clock speed",
-                                        "type": "choice"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": null,
-                                        "id": "SPIRAM",
-                                        "name": "SPIRAM",
-                                        "range": null,
-                                        "title": null,
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "SPIRAM_BOOT_INIT && !SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY && ESP32S2_SPIRAM_SUPPORT",
-                                                "help": "Normally, if psram initialization is enabled during compile time but not found at runtime, it\nis seen as an error making the CPU panic. If this is enabled, booting will complete\nbut no PSRAM will be available.",
-                                                "id": "SPIRAM_IGNORE_NOTFOUND",
-                                                "name": "SPIRAM_IGNORE_NOTFOUND",
-                                                "range": null,
-                                                "title": "Ignore PSRAM when not found",
-                                                "type": "bool"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "If this is enabled, the SPI RAM will be enabled during initial boot. Unless you\nhave specific requirements, you'll want to leave this enabled so memory allocated\nduring boot-up can also be placed in SPI RAM.",
-                                        "id": "SPIRAM_BOOT_INIT",
-                                        "name": "SPIRAM_BOOT_INIT",
-                                        "range": null,
-                                        "title": "Initialize SPI RAM during startup",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_USE>",
-                                                "help": null,
-                                                "id": "SPIRAM_USE_MEMMAP",
-                                                "name": "SPIRAM_USE_MEMMAP",
-                                                "range": null,
-                                                "title": "Integrate RAM into memory map",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_USE>",
-                                                "help": null,
-                                                "id": "SPIRAM_USE_CAPS_ALLOC",
-                                                "name": "SPIRAM_USE_CAPS_ALLOC",
-                                                "range": null,
-                                                "title": "Make RAM allocatable using heap_caps_malloc(..., MALLOC_CAP_SPIRAM)",
-                                                "type": "bool"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "<choice SPIRAM_USE>",
-                                                "help": null,
-                                                "id": "SPIRAM_USE_MALLOC",
-                                                "name": "SPIRAM_USE_MALLOC",
-                                                "range": null,
-                                                "title": "Make RAM allocatable using malloc() as well",
-                                                "type": "bool"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "The SPI RAM can be accessed in multiple methods: by just having it available as an unmanaged\nmemory region in the CPU's memory map, by integrating it in the heap as 'special' memory\nneeding heap_caps_malloc to allocate, or by fully integrating it making malloc() also able to\nreturn SPI RAM pointers.",
-                                        "id": "component-config-esp32s2-specific-support-for-external-spi-connected-ram-spi-ram-config-spi-ram-access-method",
-                                        "name": "SPIRAM_USE",
-                                        "title": "SPI RAM access method",
-                                        "type": "choice"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM_BOOT_INIT && ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "Runs a rudimentary memory test on initialization. Aborts when memory test fails. Disable this for\nslightly faster startup.",
-                                        "id": "SPIRAM_MEMTEST",
-                                        "name": "SPIRAM_MEMTEST",
-                                        "range": null,
-                                        "title": "Run memory test on SPI RAM initialization",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM_USE_MALLOC && ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "If malloc() is capable of also allocating SPI-connected ram, its allocation strategy will prefer to\nallocate chunks less than this size in internal memory, while allocations larger than this will be\ndone from external RAM. If allocation from the preferred region fails, an attempt is made to allocate\nfrom the non-preferred region instead, so malloc() will not suddenly fail when either internal or\nexternal memory is full.",
-                                        "id": "SPIRAM_MALLOC_ALWAYSINTERNAL",
-                                        "name": "SPIRAM_MALLOC_ALWAYSINTERNAL",
-                                        "range": null,
-                                        "title": "Maximum malloc() size, in bytes, to always put in internal memory",
-                                        "type": "int"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "(SPIRAM_USE_CAPS_ALLOC || SPIRAM_USE_MALLOC) && ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "Try to allocate memories of WiFi and LWIP in SPIRAM firstly. If failed, try to allocate internal\nmemory then.",
-                                        "id": "SPIRAM_TRY_ALLOCATE_WIFI_LWIP",
-                                        "name": "SPIRAM_TRY_ALLOCATE_WIFI_LWIP",
-                                        "range": null,
-                                        "title": "Try to allocate memories of WiFi and LWIP in SPIRAM firstly. If failed, allocate internal memory",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM_USE_MALLOC && ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "Because the external/internal RAM allocation strategy is not always perfect, it sometimes may happen\nthat the internal memory is entirely filled up. This causes allocations that are specifically done in\ninternal memory, for example the stack for new tasks or memory to service DMA or have memory that's\nalso available when SPI cache is down, to fail. This option reserves a pool specifically for requests\nlike that; the memory in this pool is not given out when a normal malloc() is called.\n\nSet this to 0 to disable this feature.\n\nNote that because FreeRTOS stacks are forced to internal memory, they will also use this memory pool;\nbe sure to keep this in mind when adjusting this value.\n\nNote also that the DMA reserved pool may not be one single contiguous memory region, depending on the\nconfigured size and the static memory usage of the app.",
-                                        "id": "SPIRAM_MALLOC_RESERVE_INTERNAL",
-                                        "name": "SPIRAM_MALLOC_RESERVE_INTERNAL",
-                                        "range": null,
-                                        "title": "Reserve this amount of bytes for data that specifically needs to be in DMA or internal memory",
-                                        "type": "int"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM && IDF_TARGET_ESP32 && ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "If enabled, variables with EXT_RAM_ATTR attribute will be placed in SPIRAM instead of internal DRAM.\nBSS section of `lwip`, `net80211`, `pp`, `bt` libraries will be automatically placed\nin SPIRAM. BSS sections from other object files and libraries can also be placed in SPIRAM through\nlinker fragment scheme `extram_bss`.\n\nNote that the variables placed in SPIRAM using EXT_RAM_ATTR will be zero initialized.",
-                                        "id": "SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY",
-                                        "name": "SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY",
-                                        "range": null,
-                                        "title": "Allow .bss segment placed in external memory",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM && IDF_TARGET_ESP32 && ESP32S2_SPIRAM_SUPPORT",
-                                        "help": "If enabled, noinit variables can be placed in PSRAM using EXT_RAM_NOINIT_ATTR.\n\nNote the values placed into this section will not be initialized at startup and should keep its value\nafter software restart.",
-                                        "id": "SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY",
-                                        "name": "SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY",
-                                        "range": null,
-                                        "title": "Allow .noinit segment placed in external memory",
-                                        "type": "bool"
-                                    }
-                                ],
-                                "depends_on": "ESP32S2_SPIRAM_SUPPORT",
-                                "id": "component-config-esp32s2-specific-support-for-external-spi-connected-ram-spi-ram-config",
-                                "title": "SPI RAM config",
-                                "type": "menu"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "This enables support for an external SPI RAM chip, connected in parallel with the\nmain SPI flash chip.",
-                        "id": "ESP32S2_SPIRAM_SUPPORT",
-                        "name": "ESP32S2_SPIRAM_SUPPORT",
-                        "range": null,
-                        "title": "Support for external, SPI-connected RAM",
-                        "type": "bool"
+                        "help": "Minimum revision that ESP-IDF would support.\n\nOnly supporting higher chip revisions can reduce binary size.",
+                        "id": "component-config-esp32c3-specific-minimum-supported-esp32-c3-revision",
+                        "name": "ESP32C3_REV_MIN",
+                        "title": "Minimum Supported ESP32-C3 Revision",
+                        "type": "choice"
                     },
                     {
                         "children": [],
                         "depends_on": null,
                         "help": null,
-                        "id": "ESP32S2_MEMMAP_TRACEMEM",
-                        "name": "ESP32S2_MEMMAP_TRACEMEM",
+                        "id": "ESP32C3_REV_MIN",
+                        "name": "ESP32C3_REV_MIN",
                         "range": null,
                         "title": null,
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "ESP32S2_MEMMAP_TRACEMEM_TWOBANKS",
-                        "name": "ESP32S2_MEMMAP_TRACEMEM_TWOBANKS",
-                        "range": null,
-                        "title": null,
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "The ESP32S2 contains a feature which allows you to trace the execution path the processor\nhas taken through the program. This is stored in a chunk of 32K (16K for single-processor)\nof memory that can't be used for general purposes anymore. Disable this if you do not know\nwhat this is.",
-                        "id": "ESP32S2_TRAX",
-                        "name": "ESP32S2_TRAX",
-                        "range": null,
-                        "title": "Use TRAX tracing feature",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": null,
-                        "id": "ESP32S2_TRACEMEM_RESERVE_DRAM",
-                        "name": "ESP32S2_TRACEMEM_RESERVE_DRAM",
-                        "range": null,
-                        "title": null,
-                        "type": "hex"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": null,
-                                "help": "Bytes of memory to reserve for ULP coprocessor firmware & data.\n\nData is reserved at the beginning of RTC slow memory.",
-                                "id": "ESP32S2_ULP_COPROC_RESERVE_MEM",
-                                "name": "ESP32S2_ULP_COPROC_RESERVE_MEM",
-                                "range": [
-                                    0,
-                                    0
-                                ],
-                                "title": "RTC slow memory reserved for coprocessor",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "ESP32S2_ULP_COPROC_ENABLED",
-                                "help": "Set this to y to use the RISC-V coprocessor instead of the FSM-ULP.",
-                                "id": "ESP32S2_ULP_COPROC_RISCV",
-                                "name": "ESP32S2_ULP_COPROC_RISCV",
-                                "range": null,
-                                "title": "Enable RISC-V as ULP coprocessor",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "Set to 'y' if you plan to load a firmware for the coprocessor.\n\nIf this option is enabled, further coprocessor configuration will appear in the Components menu.",
-                        "id": "ESP32S2_ULP_COPROC_ENABLED",
-                        "name": "ESP32S2_ULP_COPROC_ENABLED",
-                        "range": null,
-                        "title": "Enable Ultra Low Power (ULP) Coprocessor",
-                        "type": "bool"
+                        "type": "int"
                     },
                     {
                         "children": [],
                         "depends_on": null,
                         "help": "The FreeRTOS panic and unhandled exception handers can detect a JTAG OCD debugger and\ninstead of panicking, have the debugger stop on the offending instruction.",
-                        "id": "ESP32S2_DEBUG_OCDAWARE",
-                        "name": "ESP32S2_DEBUG_OCDAWARE",
+                        "id": "ESP32C3_DEBUG_OCDAWARE",
+                        "name": "ESP32C3_DEBUG_OCDAWARE",
                         "range": null,
                         "title": "Make exception and panic handlers JTAG/OCD aware",
                         "type": "bool"
                     },
                     {
                         "children": [],
-                        "depends_on": "!ESP32S2_TRAX",
+                        "depends_on": "!ESP32C3_TRAX",
                         "help": "Debug stubs are used by OpenOCD to execute pre-compiled onboard code which does some useful debugging,\ne.g. GCOV data dump.",
-                        "id": "ESP32S2_DEBUG_STUBS_ENABLE",
-                        "name": "ESP32S2_DEBUG_STUBS_ENABLE",
+                        "id": "ESP32C3_DEBUG_STUBS_ENABLE",
+                        "name": "ESP32C3_DEBUG_STUBS_ENABLE",
                         "range": null,
                         "title": "OpenOCD debug stubs",
                         "type": "bool"
@@ -2917,87 +2427,77 @@
                                 "children": [
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
+                                        "depends_on": "<choice ESP32C3_BROWNOUT_DET_LVL_SEL>",
                                         "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_7",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_7",
+                                        "id": "ESP32C3_BROWNOUT_DET_LVL_SEL_7",
+                                        "name": "ESP32C3_BROWNOUT_DET_LVL_SEL_7",
                                         "range": null,
-                                        "title": "2.44V",
+                                        "title": "2.51V",
                                         "type": "bool"
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
+                                        "depends_on": "<choice ESP32C3_BROWNOUT_DET_LVL_SEL>",
                                         "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_6",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_6",
+                                        "id": "ESP32C3_BROWNOUT_DET_LVL_SEL_6",
+                                        "name": "ESP32C3_BROWNOUT_DET_LVL_SEL_6",
                                         "range": null,
-                                        "title": "2.56V",
+                                        "title": "2.64V",
                                         "type": "bool"
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
+                                        "depends_on": "<choice ESP32C3_BROWNOUT_DET_LVL_SEL>",
                                         "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_5",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_5",
+                                        "id": "ESP32C3_BROWNOUT_DET_LVL_SEL_5",
+                                        "name": "ESP32C3_BROWNOUT_DET_LVL_SEL_5",
                                         "range": null,
-                                        "title": "2.67V",
+                                        "title": "2.76V",
                                         "type": "bool"
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
+                                        "depends_on": "<choice ESP32C3_BROWNOUT_DET_LVL_SEL>",
                                         "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_4",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_4",
+                                        "id": "ESP32C3_BROWNOUT_DET_LVL_SEL_4",
+                                        "name": "ESP32C3_BROWNOUT_DET_LVL_SEL_4",
                                         "range": null,
-                                        "title": "2.84V",
+                                        "title": "2.92V",
                                         "type": "bool"
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
+                                        "depends_on": "<choice ESP32C3_BROWNOUT_DET_LVL_SEL>",
                                         "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_3",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_3",
+                                        "id": "ESP32C3_BROWNOUT_DET_LVL_SEL_3",
+                                        "name": "ESP32C3_BROWNOUT_DET_LVL_SEL_3",
                                         "range": null,
-                                        "title": "2.98V",
+                                        "title": "3.10V",
                                         "type": "bool"
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
+                                        "depends_on": "<choice ESP32C3_BROWNOUT_DET_LVL_SEL>",
                                         "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_2",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_2",
+                                        "id": "ESP32C3_BROWNOUT_DET_LVL_SEL_2",
+                                        "name": "ESP32C3_BROWNOUT_DET_LVL_SEL_2",
                                         "range": null,
-                                        "title": "3.19V",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "<choice ESP32S2_BROWNOUT_DET_LVL_SEL>",
-                                        "help": null,
-                                        "id": "ESP32S2_BROWNOUT_DET_LVL_SEL_1",
-                                        "name": "ESP32S2_BROWNOUT_DET_LVL_SEL_1",
-                                        "range": null,
-                                        "title": "3.30V",
+                                        "title": "3.27V",
                                         "type": "bool"
                                     }
                                 ],
-                                "depends_on": "ESP32S2_BROWNOUT_DET",
-                                "help": "The brownout detector will reset the chip when the supply voltage is approximately\nbelow this level. Note that there may be some variation of brownout voltage level\nbetween each ESP3-S2 chip.\n\n#The voltage levels here are estimates, more work needs to be done to figure out the exact voltages\n#of the brownout threshold levels.",
-                                "id": "component-config-esp32s2-specific-hardware-brownout-detect-reset-brownout-voltage-level",
-                                "name": "ESP32S2_BROWNOUT_DET_LVL_SEL",
+                                "depends_on": "ESP32C3_BROWNOUT_DET",
+                                "help": "The brownout detector will reset the chip when the supply voltage is approximately\nbelow this level. Note that there may be some variation of brownout voltage level\nbetween each chip.\n\n#The voltage levels here are estimates, more work needs to be done to figure out the exact voltages\n#of the brownout threshold levels.",
+                                "id": "component-config-esp32c3-specific-hardware-brownout-detect-reset-brownout-voltage-level",
+                                "name": "ESP32C3_BROWNOUT_DET_LVL_SEL",
                                 "title": "Brownout voltage level",
                                 "type": "choice"
                             }
                         ],
                         "depends_on": "!IDF_ENV_FPGA",
-                        "help": "The ESP32-S2 has a built-in brownout detector which can detect if the voltage is lower than\na specific value. If this happens, it will reset the chip in order to prevent unintended\nbehaviour.",
-                        "id": "ESP32S2_BROWNOUT_DET",
-                        "name": "ESP32S2_BROWNOUT_DET",
+                        "help": "The ESP32-C3 has a built-in brownout detector which can detect if the voltage is lower than\na specific value. If this happens, it will reset the chip in order to prevent unintended\nbehaviour.",
+                        "id": "ESP32C3_BROWNOUT_DET",
+                        "name": "ESP32C3_BROWNOUT_DET",
                         "range": null,
                         "title": "Hardware brownout detect & reset",
                         "type": "bool"
@@ -3006,8 +2506,8 @@
                         "children": [],
                         "depends_on": null,
                         "help": null,
-                        "id": "ESP32S2_BROWNOUT_DET_LVL",
-                        "name": "ESP32S2_BROWNOUT_DET_LVL",
+                        "id": "ESP32C3_BROWNOUT_DET_LVL",
+                        "name": "ESP32C3_BROWNOUT_DET_LVL",
                         "range": null,
                         "title": null,
                         "type": "int"
@@ -3016,49 +2516,49 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_TIME_SYSCALL>",
+                                "depends_on": "<choice ESP32C3_TIME_SYSCALL>",
                                 "help": null,
-                                "id": "ESP32S2_TIME_SYSCALL_USE_RTC_FRC1",
-                                "name": "ESP32S2_TIME_SYSCALL_USE_RTC_FRC1",
+                                "id": "ESP32C3_TIME_SYSCALL_USE_RTC_SYSTIMER",
+                                "name": "ESP32C3_TIME_SYSCALL_USE_RTC_SYSTIMER",
                                 "range": null,
                                 "title": "RTC and high-resolution timer",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_TIME_SYSCALL>",
+                                "depends_on": "<choice ESP32C3_TIME_SYSCALL>",
                                 "help": null,
-                                "id": "ESP32S2_TIME_SYSCALL_USE_RTC",
-                                "name": "ESP32S2_TIME_SYSCALL_USE_RTC",
+                                "id": "ESP32C3_TIME_SYSCALL_USE_RTC",
+                                "name": "ESP32C3_TIME_SYSCALL_USE_RTC",
                                 "range": null,
                                 "title": "RTC",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_TIME_SYSCALL>",
+                                "depends_on": "<choice ESP32C3_TIME_SYSCALL>",
                                 "help": null,
-                                "id": "ESP32S2_TIME_SYSCALL_USE_FRC1",
-                                "name": "ESP32S2_TIME_SYSCALL_USE_FRC1",
+                                "id": "ESP32C3_TIME_SYSCALL_USE_SYSTIMER",
+                                "name": "ESP32C3_TIME_SYSCALL_USE_SYSTIMER",
                                 "range": null,
                                 "title": "High-resolution timer",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_TIME_SYSCALL>",
+                                "depends_on": "<choice ESP32C3_TIME_SYSCALL>",
                                 "help": null,
-                                "id": "ESP32S2_TIME_SYSCALL_USE_NONE",
-                                "name": "ESP32S2_TIME_SYSCALL_USE_NONE",
+                                "id": "ESP32C3_TIME_SYSCALL_USE_NONE",
+                                "name": "ESP32C3_TIME_SYSCALL_USE_NONE",
                                 "range": null,
                                 "title": "None",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "help": "This setting defines which hardware timers are used to\nimplement 'gettimeofday' and 'time' functions in C library.\n\n- If both high-resolution and RTC timers are used, timekeeping will\n  continue in deep sleep. Time will be reported at 1 microsecond\n  resolution. This is the default, and the recommended option.\n- If only high-resolution timer is used, gettimeofday will\n  provide time at microsecond resolution.\n  Time will not be preserved when going into deep sleep mode.\n- If only RTC timer is used, timekeeping will continue in\n  deep sleep, but time will be measured at 6.(6) microsecond\n  resolution. Also the gettimeofday function itself may take\n  longer to run.\n- If no timers are used, gettimeofday and time functions\n  return -1 and set errno to ENOSYS.\n- When RTC is used for timekeeping, two RTC_STORE registers are\n  used to keep time in deep sleep mode.",
-                        "id": "component-config-esp32s2-specific-timers-used-for-gettimeofday-function",
-                        "name": "ESP32S2_TIME_SYSCALL",
+                        "help": "This setting defines which hardware timers are used to\nimplement 'gettimeofday' and 'time' functions in C library.\n\n- If both high-resolution (systimer) and RTC timers are used, timekeeping will\n  continue in deep sleep. Time will be reported at 1 microsecond\n  resolution. This is the default, and the recommended option.\n- If only high-resolution timer (systimer) is used, gettimeofday will\n  provide time at microsecond resolution.\n  Time will not be preserved when going into deep sleep mode.\n- If only RTC timer is used, timekeeping will continue in\n  deep sleep, but time will be measured at 6.(6) microsecond\n  resolution. Also the gettimeofday function itself may take\n  longer to run.\n- If no timers are used, gettimeofday and time functions\n  return -1 and set errno to ENOSYS.\n- When RTC is used for timekeeping, two RTC_STORE registers are\n  used to keep time in deep sleep mode.",
+                        "id": "component-config-esp32c3-specific-timers-used-for-gettimeofday-function",
+                        "name": "ESP32C3_TIME_SYSCALL",
                         "title": "Timers used for gettimeofday function",
                         "type": "choice"
                     },
@@ -3066,81 +2566,71 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_RTC_CLK_SRC>",
+                                "depends_on": "<choice ESP32C3_RTC_CLK_SRC>",
                                 "help": null,
-                                "id": "ESP32S2_RTC_CLK_SRC_INT_RC",
-                                "name": "ESP32S2_RTC_CLK_SRC_INT_RC",
+                                "id": "ESP32C3_RTC_CLK_SRC_INT_RC",
+                                "name": "ESP32C3_RTC_CLK_SRC_INT_RC",
                                 "range": null,
-                                "title": "Internal 90kHz RC oscillator",
+                                "title": "Internal 150kHz RC oscillator",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_RTC_CLK_SRC>",
+                                "depends_on": "<choice ESP32C3_RTC_CLK_SRC>",
                                 "help": null,
-                                "id": "ESP32S2_RTC_CLK_SRC_EXT_CRYS",
-                                "name": "ESP32S2_RTC_CLK_SRC_EXT_CRYS",
+                                "id": "ESP32C3_RTC_CLK_SRC_EXT_CRYS",
+                                "name": "ESP32C3_RTC_CLK_SRC_EXT_CRYS",
                                 "range": null,
                                 "title": "External 32kHz crystal",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_RTC_CLK_SRC>",
+                                "depends_on": "<choice ESP32C3_RTC_CLK_SRC>",
                                 "help": null,
-                                "id": "ESP32S2_RTC_CLK_SRC_EXT_OSC",
-                                "name": "ESP32S2_RTC_CLK_SRC_EXT_OSC",
+                                "id": "ESP32C3_RTC_CLK_SRC_EXT_OSC",
+                                "name": "ESP32C3_RTC_CLK_SRC_EXT_OSC",
                                 "range": null,
-                                "title": "External 32kHz oscillator at 32K_XN pin",
+                                "title": "External 32kHz oscillator at 32K_XP pin",
                                 "type": "bool"
                             },
                             {
                                 "children": [],
-                                "depends_on": "<choice ESP32S2_RTC_CLK_SRC>",
+                                "depends_on": "<choice ESP32C3_RTC_CLK_SRC>",
                                 "help": null,
-                                "id": "ESP32S2_RTC_CLK_SRC_INT_8MD256",
-                                "name": "ESP32S2_RTC_CLK_SRC_INT_8MD256",
+                                "id": "ESP32C3_RTC_CLK_SRC_INT_8MD256",
+                                "name": "ESP32C3_RTC_CLK_SRC_INT_8MD256",
                                 "range": null,
                                 "title": "Internal 8MHz oscillator, divided by 256 (~32kHz)",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "help": "Choose which clock is used as RTC clock source.\n\n- \"Internal 90kHz oscillator\" option provides lowest deep sleep current\n  consumption, and does not require extra external components. However\n  frequency stability with respect to temperature is poor, so time may\n  drift in deep/light sleep modes.\n- \"External 32kHz crystal\" provides better frequency stability, at the\n  expense of slightly higher (1uA) deep sleep current consumption.\n- \"External 32kHz oscillator\" allows using 32kHz clock generated by an\n  external circuit. In this case, external clock signal must be connected\n  to 32K_XN pin. Amplitude should be <1.2V in case of sine wave signal,\n  and <1V in case of square wave signal. Common mode voltage should be\n  0.1 < Vcm < 0.5Vamp, where Vamp is the signal amplitude.\n  Additionally, 1nF capacitor must be connected between 32K_XP pin and\n  ground. 32K_XP pin can not be used as a GPIO in this case.\n- \"Internal 8MHz oscillator divided by 256\" option results in higher\n  deep sleep current (by 5uA) but has better frequency stability than\n  the internal 90kHz oscillator. It does not require external components.",
-                        "id": "component-config-esp32s2-specific-rtc-clock-source",
-                        "name": "ESP32S2_RTC_CLK_SRC",
+                        "help": "Choose which clock is used as RTC clock source.",
+                        "id": "component-config-esp32c3-specific-rtc-clock-source",
+                        "name": "ESP32C3_RTC_CLK_SRC",
                         "title": "RTC clock source",
                         "type": "choice"
                     },
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "When the startup code initializes RTC_SLOW_CLK, it can perform\ncalibration by comparing the RTC_SLOW_CLK frequency with main XTAL\nfrequency. This option sets the number of RTC_SLOW_CLK cycles measured\nby the calibration routine. Higher numbers increase calibration\nprecision, which may be important for applications which spend a lot of\ntime in deep sleep. Lower numbers reduce startup time.\n\nWhen this option is set to 0, clock calibration will not be performed at\nstartup, and approximate clock frequencies will be assumed:\n\n- 90000 Hz if internal RC oscillator is used as clock source. For this use value 1024.\n- 32768 Hz if the 32k crystal oscillator is used. For this use value 3000 or more.\n  In case more value will help improve the definition of the launch of the crystal.\n  If the crystal could not start, it will be switched to internal RC.",
-                        "id": "ESP32S2_RTC_CLK_CAL_CYCLES",
-                        "name": "ESP32S2_RTC_CLK_CAL_CYCLES",
+                        "help": "When the startup code initializes RTC_SLOW_CLK, it can perform\ncalibration by comparing the RTC_SLOW_CLK frequency with main XTAL\nfrequency. This option sets the number of RTC_SLOW_CLK cycles measured\nby the calibration routine. Higher numbers increase calibration\nprecision, which may be important for applications which spend a lot of\ntime in deep sleep. Lower numbers reduce startup time.\n\nWhen this option is set to 0, clock calibration will not be performed at\nstartup, and approximate clock frequencies will be assumed:\n\n- 150000 Hz if internal RC oscillator is used as clock source. For this use value 1024.\n- 32768 Hz if the 32k crystal oscillator is used. For this use value 3000 or more.\n  In case more value will help improve the definition of the launch of the crystal.\n  If the crystal could not start, it will be switched to internal RC.",
+                        "id": "ESP32C3_RTC_CLK_CAL_CYCLES",
+                        "name": "ESP32C3_RTC_CLK_CAL_CYCLES",
                         "range": [
                             0,
-                            125000
+                            32766
                         ],
                         "title": "Number of cycles for RTC_SLOW_CLK calibration",
                         "type": "int"
                     },
                     {
                         "children": [],
-                        "depends_on": "ESP32S2_RTC_CLK_SRC_EXT_CRYS",
-                        "help": "Number of attempts to repeat 32k XTAL calibration\nbefore giving up and switching to the internal RC.\nIncrease this option if the 32k crystal oscillator\ndoes not start and switches to internal RC.",
-                        "id": "ESP32S2_RTC_XTAL_CAL_RETRY",
-                        "name": "ESP32S2_RTC_XTAL_CAL_RETRY",
-                        "range": null,
-                        "title": "Number of attempts to repeat 32k XTAL calibration",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
                         "depends_on": "!BT_ENABLED",
                         "help": "If enabled, this disables the linking of binary libraries in the application build. Note\nthat after enabling this Wi-Fi/Bluetooth will not work.",
-                        "id": "ESP32S2_NO_BLOBS",
-                        "name": "ESP32S2_NO_BLOBS",
+                        "id": "ESP32C3_NO_BLOBS",
+                        "name": "ESP32C3_NO_BLOBS",
                         "range": null,
                         "title": "No Binary Blobs",
                         "type": "bool"
@@ -3148,48 +2638,17 @@
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "During the application initialization process, all the peripherals except UARTs and timers\nare reset. Enable this option to keep USB peripheral enabled.\nThis option is automatically enabled if \"USB CDC\" console is selected.",
-                        "id": "ESP32S2_KEEP_USB_ALIVE",
-                        "name": "ESP32S2_KEEP_USB_ALIVE",
+                        "help": "ESP32C3 will reset at wake-up if GPIO is received a small electrostatic pulse during\nlight sleep, with specific condition\n\n- GPIO needs to be configured as input-mode only\n- The pin receives a small electrostatic pulse, and reset occurs when the pulse\n  voltage is higher than 6 V\n\nFor GPIO set to input mode only, it is not a good practice to leave it open/floating,\nThe hardware design needs to controlled it with determined supply or ground voltage\nis necessary.\n\nThis option provides a software workaround for this issue. Configure to isolate all\nGPIO pins in sleep state.",
+                        "id": "ESP32C3_LIGHTSLEEP_GPIO_RESET_WORKAROUND",
+                        "name": "ESP32C3_LIGHTSLEEP_GPIO_RESET_WORKAROUND",
                         "range": null,
-                        "title": "Keep USB peripheral enabled at start up",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This option allows to place .rtc_data and .rtc_rodata sections into\nRTC fast memory segment to free the slow memory region for ULP programs.",
-                        "id": "ESP32S2_RTCDATA_IN_FAST_MEM",
-                        "name": "ESP32S2_RTCDATA_IN_FAST_MEM",
-                        "range": null,
-                        "title": "Place RTC_DATA_ATTR and RTC_RODATA_ATTR variables into RTC fast memory segment",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "ESP32S2_USE_FIXED_STATIC_RAM_SIZE",
-                                "help": "RAM size dedicated for static variables (.data & .bss sections).",
-                                "id": "ESP32S2_FIXED_STATIC_RAM_SIZE",
-                                "name": "ESP32S2_FIXED_STATIC_RAM_SIZE",
-                                "range": null,
-                                "title": "Fixed Static RAM size",
-                                "type": "hex"
-                            }
-                        ],
-                        "depends_on": null,
-                        "help": "If this option is disabled, the DRAM part of the heap starts right after the .bss section,\nwithin the dram0_0 region. As a result, adding or removing some static variables\nwill change the available heap size.\n\nIf this option is enabled, the DRAM part of the heap starts right after the dram0_0 region,\nwhere its length is set with ESP32S2_FIXED_STATIC_RAM_SIZE",
-                        "id": "ESP32S2_USE_FIXED_STATIC_RAM_SIZE",
-                        "name": "ESP32S2_USE_FIXED_STATIC_RAM_SIZE",
-                        "range": null,
-                        "title": "Use fixed static RAM size",
+                        "title": "light sleep GPIO reset workaround",
                         "type": "bool"
                     }
                 ],
                 "depends_on": null,
-                "id": "component-config-esp32s2-specific",
-                "title": "ESP32S2-specific",
+                "id": "component-config-esp32c3-specific",
+                "title": "ESP32C3-Specific",
                 "type": "menu"
             },
             {
@@ -3268,29 +2727,29 @@
                                 "children": [
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_UNIVERSAL_MAC_ADDRESSES>",
+                                        "depends_on": "<choice ESP32C3_UNIVERSAL_MAC_ADDRESSES>",
                                         "help": null,
-                                        "id": "ESP32S2_UNIVERSAL_MAC_ADDRESSES_ONE",
-                                        "name": "ESP32S2_UNIVERSAL_MAC_ADDRESSES_ONE",
+                                        "id": "ESP32C3_UNIVERSAL_MAC_ADDRESSES_TWO",
+                                        "name": "ESP32C3_UNIVERSAL_MAC_ADDRESSES_TWO",
                                         "range": null,
-                                        "title": "One",
+                                        "title": "Two",
                                         "type": "bool"
                                     },
                                     {
                                         "children": [],
-                                        "depends_on": "<choice ESP32S2_UNIVERSAL_MAC_ADDRESSES>",
+                                        "depends_on": "<choice ESP32C3_UNIVERSAL_MAC_ADDRESSES>",
                                         "help": null,
-                                        "id": "ESP32S2_UNIVERSAL_MAC_ADDRESSES_TWO",
-                                        "name": "ESP32S2_UNIVERSAL_MAC_ADDRESSES_TWO",
+                                        "id": "ESP32C3_UNIVERSAL_MAC_ADDRESSES_FOUR",
+                                        "name": "ESP32C3_UNIVERSAL_MAC_ADDRESSES_FOUR",
                                         "range": null,
-                                        "title": "Two",
+                                        "title": "Four",
                                         "type": "bool"
                                     }
                                 ],
                                 "depends_on": null,
-                                "help": "Configure the number of universally administered (by IEEE) MAC addresses.\nDuring initialization, MAC addresses for each network interface are generated or derived from a\nsingle base MAC address.\nIf the number of universal MAC addresses is Two, all interfaces (WiFi station, WiFi softap) receive a\nuniversally administered MAC address. They are generated sequentially by adding 0, and 1 (respectively)\nto the final octet of the base MAC address. If the number of universal MAC addresses is one,\nonly WiFi station receives a universally administered MAC address.\nIt's generated by adding 0 to the base MAC address.\nThe WiFi softap receives local MAC addresses. It's derived from the universal WiFi station MAC addresses.\nWhen using the default (Espressif-assigned) base MAC address, either setting can be used. When using\na custom universal MAC address range, the correct setting will depend on the allocation of MAC\naddresses in this range (either 1 or 2 per device.)",
+                                "help": "Configure the number of universally administered (by IEEE) MAC addresses.\n\nDuring initialization, MAC addresses for each network interface are generated or derived from a\nsingle base MAC address.\n\nIf the number of universal MAC addresses is four, all four interfaces (WiFi station, WiFi softap,\nBluetooth and Ethernet) receive a universally administered MAC address. These are generated\nsequentially by adding 0, 1, 2 and 3 (respectively) to the final octet of the base MAC address.\n\nIf the number of universal MAC addresses is two, only two interfaces (WiFi station and Bluetooth)\nreceive a universally administered MAC address. These are generated sequentially by adding 0\nand 1 (respectively) to the base MAC address. The remaining two interfaces (WiFi softap and Ethernet)\nreceive local MAC addresses. These are derived from the universal WiFi station and Bluetooth MAC\naddresses, respectively.\n\nWhen using the default (Espressif-assigned) base MAC address, either setting can be used. When using\na custom universal MAC address range, the correct setting will depend on the allocation of MAC\naddresses in this range (either 2 or 4 per device.)\n\nNote that ESP32-C3 has no integrated Ethernet MAC. Although it's possible to use the esp_read_mac()\nAPI to return a MAC for Ethernet, this can only be used with an external MAC peripheral.",
                                 "id": "component-config-hardware-settings-mac-config-number-of-universally-administered-by-ieee-mac-address",
-                                "name": "ESP32S2_UNIVERSAL_MAC_ADDRESSES",
+                                "name": "ESP32C3_UNIVERSAL_MAC_ADDRESSES",
                                 "title": "Number of universally administered (by IEEE) MAC address",
                                 "type": "choice"
                             },
@@ -3298,8 +2757,8 @@
                                 "children": [],
                                 "depends_on": null,
                                 "help": null,
-                                "id": "ESP32S2_UNIVERSAL_MAC_ADDRESSES",
-                                "name": "ESP32S2_UNIVERSAL_MAC_ADDRESSES",
+                                "id": "ESP32C3_UNIVERSAL_MAC_ADDRESSES",
+                                "name": "ESP32C3_UNIVERSAL_MAC_ADDRESSES",
                                 "range": null,
                                 "title": null,
                                 "type": "int"

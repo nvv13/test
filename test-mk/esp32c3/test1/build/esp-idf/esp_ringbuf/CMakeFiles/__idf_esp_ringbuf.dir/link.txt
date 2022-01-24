@@ -1,2 +1,2 @@
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar qc libesp_ringbuf.a CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib libesp_ringbuf.a
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libesp_ringbuf.a CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libesp_ringbuf.a

@@ -3,7 +3,7 @@ file(REMOVE_RECURSE
   "bootloader.map"
   "config/sdkconfig.cmake"
   "config/sdkconfig.h"
-  "project_elf_src_esp32s2.c"
+  "project_elf_src_esp32c3.c"
   "CMakeFiles/size-files"
 )
 

@@ -76,27 +76,27 @@ include esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/progress.make
 # Include the compile flags for this target's objects.
 include esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/flags.make
 
-esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/flags.make
-esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj: /home/nvv/esp-idf/components/spi_flash/esp32s2/spi_flash_rom_patch.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj -c /home/nvv/esp-idf/components/spi_flash/esp32s2/spi_flash_rom_patch.c
+esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/flags.make
+esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj: /home/nvv/esp-idf/components/spi_flash/esp32c3/spi_flash_rom_patch.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj -c /home/nvv/esp-idf/components/spi_flash/esp32c3/spi_flash_rom_patch.c
 
-esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/spi_flash/esp32s2/spi_flash_rom_patch.c > CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.i
+esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/spi_flash/esp32c3/spi_flash_rom_patch.c > CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.i
 
-esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/spi_flash/esp32s2/spi_flash_rom_patch.c -o CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.s
+esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/spi_flash/esp32c3/spi_flash_rom_patch.c -o CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.s
 
 # Object files for target __idf_spi_flash
 __idf_spi_flash_OBJECTS = \
-"CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj"
+"CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj"
 
 # External object files for target __idf_spi_flash
 __idf_spi_flash_EXTERNAL_OBJECTS =
 
-esp-idf/spi_flash/libspi_flash.a: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj
+esp-idf/spi_flash/libspi_flash.a: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj
 esp-idf/spi_flash/libspi_flash.a: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make
 esp-idf/spi_flash/libspi_flash.a: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libspi_flash.a"

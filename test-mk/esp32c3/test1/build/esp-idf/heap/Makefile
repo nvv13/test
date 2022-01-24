@@ -298,32 +298,32 @@ multi_heap.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/multi_heap.c.s
 .PHONY : multi_heap.c.s
 
-port/esp32s2/memory_layout.obj: port/esp32s2/memory_layout.c.obj
+port/esp32c3/memory_layout.obj: port/esp32c3/memory_layout.c.obj
 
-.PHONY : port/esp32s2/memory_layout.obj
+.PHONY : port/esp32c3/memory_layout.obj
 
 # target to build an object file
-port/esp32s2/memory_layout.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/port/esp32s2/memory_layout.c.obj
-.PHONY : port/esp32s2/memory_layout.c.obj
+port/esp32c3/memory_layout.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/port/esp32c3/memory_layout.c.obj
+.PHONY : port/esp32c3/memory_layout.c.obj
 
-port/esp32s2/memory_layout.i: port/esp32s2/memory_layout.c.i
+port/esp32c3/memory_layout.i: port/esp32c3/memory_layout.c.i
 
-.PHONY : port/esp32s2/memory_layout.i
+.PHONY : port/esp32c3/memory_layout.i
 
 # target to preprocess a source file
-port/esp32s2/memory_layout.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/port/esp32s2/memory_layout.c.i
-.PHONY : port/esp32s2/memory_layout.c.i
+port/esp32c3/memory_layout.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/port/esp32c3/memory_layout.c.i
+.PHONY : port/esp32c3/memory_layout.c.i
 
-port/esp32s2/memory_layout.s: port/esp32s2/memory_layout.c.s
+port/esp32c3/memory_layout.s: port/esp32c3/memory_layout.c.s
 
-.PHONY : port/esp32s2/memory_layout.s
+.PHONY : port/esp32c3/memory_layout.s
 
 # target to generate assembly for a file
-port/esp32s2/memory_layout.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/port/esp32s2/memory_layout.c.s
-.PHONY : port/esp32s2/memory_layout.c.s
+port/esp32c3/memory_layout.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/heap/CMakeFiles/__idf_heap.dir/build.make esp-idf/heap/CMakeFiles/__idf_heap.dir/port/esp32c3/memory_layout.c.s
+.PHONY : port/esp32c3/memory_layout.c.s
 
 port/memory_layout_utils.obj: port/memory_layout_utils.c.obj
 
@@ -377,9 +377,9 @@ help:
 	@echo "... multi_heap.obj"
 	@echo "... multi_heap.i"
 	@echo "... multi_heap.s"
-	@echo "... port/esp32s2/memory_layout.obj"
-	@echo "... port/esp32s2/memory_layout.i"
-	@echo "... port/esp32s2/memory_layout.s"
+	@echo "... port/esp32c3/memory_layout.obj"
+	@echo "... port/esp32c3/memory_layout.i"
+	@echo "... port/esp32c3/memory_layout.s"
 	@echo "... port/memory_layout_utils.obj"
 	@echo "... port/memory_layout_utils.i"
 	@echo "... port/memory_layout_utils.s"

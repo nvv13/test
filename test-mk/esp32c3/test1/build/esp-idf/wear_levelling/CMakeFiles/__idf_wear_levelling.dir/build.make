@@ -79,93 +79,93 @@ include esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/Partition.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/Partition.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/Partition.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/Partition.cpp > CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/Partition.cpp > CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/Partition.cpp -o CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/Partition.cpp -o CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.s
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp > CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp > CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp -o CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp -o CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.s
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp > CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp > CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.s
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp > CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp > CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp -o CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.s
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp > CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp > CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp -o CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp -o CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.s
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/crc32.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/crc32.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/crc32.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/crc32.cpp > CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/crc32.cpp > CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/crc32.cpp -o CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/crc32.cpp -o CMakeFiles/__idf_wear_levelling.dir/crc32.cpp.s
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/flags.make
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj -c /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp > CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp > CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.i
 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp -o CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvv/esp-idf/components/wear_levelling/wear_levelling.cpp -o CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.s
 
 # Object files for target __idf_wear_levelling
 __idf_wear_levelling_OBJECTS = \

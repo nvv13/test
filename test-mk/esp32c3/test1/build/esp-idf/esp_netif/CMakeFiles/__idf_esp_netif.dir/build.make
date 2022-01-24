@@ -79,93 +79,93 @@ include esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.obj: /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.obj -c /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.obj -c /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c > CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c > CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c -o CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/esp_netif_handlers.c -o CMakeFiles/__idf_esp_netif.dir/esp_netif_handlers.c.s
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.obj: /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.obj -c /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.obj -c /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c > CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c > CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c -o CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/esp_netif_objects.c -o CMakeFiles/__idf_esp_netif.dir/esp_netif_objects.c.s
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.obj: /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.obj -c /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.obj -c /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c > CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c > CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c -o CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/esp_netif_defaults.c -o CMakeFiles/__idf_esp_netif.dir/esp_netif_defaults.c.s
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.obj: /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.obj -c /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.obj -c /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c > CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c > CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip.c -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip.c.s
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.obj: /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.obj -c /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.obj -c /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c > CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c > CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_lwip_defaults.c -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_lwip_defaults.c.s
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.obj: /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.obj -c /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.obj -c /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c > CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c > CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/lwip/esp_netif_sta_list.c -o CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.s
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.obj: esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/flags.make
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.obj: /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.obj -c /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.obj -c /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c > CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c > CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.i
 
 esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c -o CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_netif && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_netif/loopback/esp_netif_loopback.c -o CMakeFiles/__idf_esp_netif.dir/loopback/esp_netif_loopback.c.s
 
 # Object files for target __idf_esp_netif
 __idf_esp_netif_OBJECTS = \

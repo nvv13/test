@@ -17,8 +17,8 @@ esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_flash.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_partition.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/Partition.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
@@ -41,8 +41,8 @@ esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/SPI_Flash.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/SPI_Flash.cpp
@@ -63,8 +63,8 @@ esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Perf.cpp
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/private_include/Flash_Access.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Perf.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/private_include/WL_Config.h
@@ -87,8 +87,8 @@ esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: 
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/WL_Ext_Safe.cpp
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/private_include/Flash_Access.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Ext_Safe.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/private_include/WL_Config.h
@@ -118,8 +118,8 @@ esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /ho
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/WL_Flash.cpp
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/crc32.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/WL_Flash.cpp.obj: /home/nvv/esp-idf/components/wear_levelling/private_include/Flash_Access.h
@@ -149,8 +149,8 @@ esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.ob
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/lock.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_flash.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_partition.h
 esp-idf/wear_levelling/CMakeFiles/__idf_wear_levelling.dir/wear_levelling.cpp.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h

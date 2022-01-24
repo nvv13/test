@@ -30,8 +30,8 @@ esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/protocomm/include/security/protocomm_security.h
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/protocomm/include/security/protocomm_security0.h
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/protocomm/proto-c/constants.pb-c.h
-esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl.c.obj: config/sdkconfig.h
 
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -55,7 +55,7 @@ esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_ha
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/protocomm/include/common/protocomm.h
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/protocomm/include/security/protocomm_security.h
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/protocomm/proto-c/constants.pb-c.h
-esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/esp_local_ctrl/CMakeFiles/__idf_esp_local_ctrl.dir/src/esp_local_ctrl_handler.c.obj: config/sdkconfig.h
 

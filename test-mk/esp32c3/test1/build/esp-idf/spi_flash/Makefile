@@ -217,59 +217,59 @@ cache_utils.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/cache_utils.c.s
 .PHONY : cache_utils.c.s
 
-esp32s2/flash_ops_esp32s2.obj: esp32s2/flash_ops_esp32s2.c.obj
+esp32c3/flash_ops_esp32c3.obj: esp32c3/flash_ops_esp32c3.c.obj
 
-.PHONY : esp32s2/flash_ops_esp32s2.obj
-
-# target to build an object file
-esp32s2/flash_ops_esp32s2.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/flash_ops_esp32s2.c.obj
-.PHONY : esp32s2/flash_ops_esp32s2.c.obj
-
-esp32s2/flash_ops_esp32s2.i: esp32s2/flash_ops_esp32s2.c.i
-
-.PHONY : esp32s2/flash_ops_esp32s2.i
-
-# target to preprocess a source file
-esp32s2/flash_ops_esp32s2.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/flash_ops_esp32s2.c.i
-.PHONY : esp32s2/flash_ops_esp32s2.c.i
-
-esp32s2/flash_ops_esp32s2.s: esp32s2/flash_ops_esp32s2.c.s
-
-.PHONY : esp32s2/flash_ops_esp32s2.s
-
-# target to generate assembly for a file
-esp32s2/flash_ops_esp32s2.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/flash_ops_esp32s2.c.s
-.PHONY : esp32s2/flash_ops_esp32s2.c.s
-
-esp32s2/spi_flash_rom_patch.obj: esp32s2/spi_flash_rom_patch.c.obj
-
-.PHONY : esp32s2/spi_flash_rom_patch.obj
+.PHONY : esp32c3/flash_ops_esp32c3.obj
 
 # target to build an object file
-esp32s2/spi_flash_rom_patch.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj
-.PHONY : esp32s2/spi_flash_rom_patch.c.obj
+esp32c3/flash_ops_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/flash_ops_esp32c3.c.obj
+.PHONY : esp32c3/flash_ops_esp32c3.c.obj
 
-esp32s2/spi_flash_rom_patch.i: esp32s2/spi_flash_rom_patch.c.i
+esp32c3/flash_ops_esp32c3.i: esp32c3/flash_ops_esp32c3.c.i
 
-.PHONY : esp32s2/spi_flash_rom_patch.i
+.PHONY : esp32c3/flash_ops_esp32c3.i
 
 # target to preprocess a source file
-esp32s2/spi_flash_rom_patch.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.i
-.PHONY : esp32s2/spi_flash_rom_patch.c.i
+esp32c3/flash_ops_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/flash_ops_esp32c3.c.i
+.PHONY : esp32c3/flash_ops_esp32c3.c.i
 
-esp32s2/spi_flash_rom_patch.s: esp32s2/spi_flash_rom_patch.c.s
+esp32c3/flash_ops_esp32c3.s: esp32c3/flash_ops_esp32c3.c.s
 
-.PHONY : esp32s2/spi_flash_rom_patch.s
+.PHONY : esp32c3/flash_ops_esp32c3.s
 
 # target to generate assembly for a file
-esp32s2/spi_flash_rom_patch.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.s
-.PHONY : esp32s2/spi_flash_rom_patch.c.s
+esp32c3/flash_ops_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/flash_ops_esp32c3.c.s
+.PHONY : esp32c3/flash_ops_esp32c3.c.s
+
+esp32c3/spi_flash_rom_patch.obj: esp32c3/spi_flash_rom_patch.c.obj
+
+.PHONY : esp32c3/spi_flash_rom_patch.obj
+
+# target to build an object file
+esp32c3/spi_flash_rom_patch.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj
+.PHONY : esp32c3/spi_flash_rom_patch.c.obj
+
+esp32c3/spi_flash_rom_patch.i: esp32c3/spi_flash_rom_patch.c.i
+
+.PHONY : esp32c3/spi_flash_rom_patch.i
+
+# target to preprocess a source file
+esp32c3/spi_flash_rom_patch.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.i
+.PHONY : esp32c3/spi_flash_rom_patch.c.i
+
+esp32c3/spi_flash_rom_patch.s: esp32c3/spi_flash_rom_patch.c.s
+
+.PHONY : esp32c3/spi_flash_rom_patch.s
+
+# target to generate assembly for a file
+esp32c3/spi_flash_rom_patch.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.s
+.PHONY : esp32c3/spi_flash_rom_patch.c.s
 
 esp_flash_api.obj: esp_flash_api.c.obj
 
@@ -692,12 +692,12 @@ help:
 	@echo "... cache_utils.obj"
 	@echo "... cache_utils.i"
 	@echo "... cache_utils.s"
-	@echo "... esp32s2/flash_ops_esp32s2.obj"
-	@echo "... esp32s2/flash_ops_esp32s2.i"
-	@echo "... esp32s2/flash_ops_esp32s2.s"
-	@echo "... esp32s2/spi_flash_rom_patch.obj"
-	@echo "... esp32s2/spi_flash_rom_patch.i"
-	@echo "... esp32s2/spi_flash_rom_patch.s"
+	@echo "... esp32c3/flash_ops_esp32c3.obj"
+	@echo "... esp32c3/flash_ops_esp32c3.i"
+	@echo "... esp32c3/flash_ops_esp32c3.s"
+	@echo "... esp32c3/spi_flash_rom_patch.obj"
+	@echo "... esp32c3/spi_flash_rom_patch.i"
+	@echo "... esp32c3/spi_flash_rom_patch.s"
 	@echo "... esp_flash_api.obj"
 	@echo "... esp_flash_api.i"
 	@echo "... esp_flash_api.s"

@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 include esp-idf/bootloader/CMakeFiles/bootloader-flash.dir/progress.make
 
 esp-idf/bootloader/CMakeFiles/bootloader-flash:
-	cd /home/nvv/esp-idf/components/bootloader && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32s2" -D SERIAL_TOOL_ARGS="--before=default_reset --after=hard_reset write_flash @bootloader-flash_args" -D WORKING_DIRECTORY="/home/nvv/test/test-mk/esp32c3/test1/build" -P /home/nvv/esp-idf/components/esptool_py/run_serial_tool.cmake
+	cd /home/nvv/esp-idf/components/bootloader && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32c3" -D SERIAL_TOOL_ARGS="--before=default_reset --after=hard_reset write_flash @bootloader-flash_args" -D WORKING_DIRECTORY="/home/nvv/test/test-mk/esp32c3/test1/build" -P /home/nvv/esp-idf/components/esptool_py/run_serial_tool.cmake
 
 bootloader-flash: esp-idf/bootloader/CMakeFiles/bootloader-flash
 bootloader-flash: esp-idf/bootloader/CMakeFiles/bootloader-flash.dir/build.make

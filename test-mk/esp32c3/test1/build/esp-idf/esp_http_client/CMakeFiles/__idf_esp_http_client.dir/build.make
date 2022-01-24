@@ -79,54 +79,54 @@ include esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/flags.make
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.obj: esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/flags.make
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.obj: /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.obj -c /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.obj -c /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c > CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c > CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.i
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c -o CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/esp_http_client.c -o CMakeFiles/__idf_esp_http_client.dir/esp_http_client.c.s
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.obj: esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/flags.make
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.obj: /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.obj -c /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.obj -c /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c > CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c > CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.i
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c -o CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/lib/http_auth.c -o CMakeFiles/__idf_esp_http_client.dir/lib/http_auth.c.s
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.obj: esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/flags.make
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.obj: /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.obj -c /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.obj -c /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c > CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c > CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.i
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c -o CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/lib/http_header.c -o CMakeFiles/__idf_esp_http_client.dir/lib/http_header.c.s
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.obj: esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/flags.make
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.obj: /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.obj -c /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.obj -c /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c > CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c > CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.i
 
 esp-idf/esp_http_client/CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c -o CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_http_client/lib/http_utils.c -o CMakeFiles/__idf_esp_http_client.dir/lib/http_utils.c.s
 
 # Object files for target __idf_esp_http_client
 __idf_esp_http_client_OBJECTS = \

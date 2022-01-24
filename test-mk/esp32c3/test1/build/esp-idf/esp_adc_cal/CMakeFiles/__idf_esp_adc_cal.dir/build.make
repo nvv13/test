@@ -76,27 +76,27 @@ include esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/progress.make
 # Include the compile flags for this target's objects.
 include esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/flags.make
 
-esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj: esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/flags.make
-esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj: /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32s2.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj -c /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32s2.c
+esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj: esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/flags.make
+esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj: /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32c3.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj -c /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32c3.c
 
-esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32s2.c > CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.i
+esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32c3.c > CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.i
 
-esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32s2.c -o CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.s
+esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_adc_cal/esp_adc_cal_esp32c3.c -o CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.s
 
 # Object files for target __idf_esp_adc_cal
 __idf_esp_adc_cal_OBJECTS = \
-"CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj"
+"CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj"
 
 # External object files for target __idf_esp_adc_cal
 __idf_esp_adc_cal_EXTERNAL_OBJECTS =
 
-esp-idf/esp_adc_cal/libesp_adc_cal.a: esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj
+esp-idf/esp_adc_cal/libesp_adc_cal.a: esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj
 esp-idf/esp_adc_cal/libesp_adc_cal.a: esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/build.make
 esp-idf/esp_adc_cal/libesp_adc_cal.a: esp-idf/esp_adc_cal/CMakeFiles/__idf_esp_adc_cal.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libesp_adc_cal.a"

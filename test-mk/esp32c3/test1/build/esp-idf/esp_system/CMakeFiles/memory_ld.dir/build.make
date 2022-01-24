@@ -76,9 +76,9 @@ esp-idf/esp_system/CMakeFiles/memory_ld: esp-idf/esp_system/ld/memory.ld
 
 
 esp-idf/esp_system/ld/memory.ld: config/sdkconfig.h
-esp-idf/esp_system/ld/memory.ld: /home/nvv/esp-idf/components/esp_system/ld/esp32s2/memory.ld.in
+esp-idf/esp_system/ld/memory.ld: /home/nvv/esp-idf/components/esp_system/ld/esp32c3/memory.ld.in
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating memory.ld linker script..."
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc -C -P -x c -E -o /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/ld/memory.ld -I /home/nvv/test/test-mk/esp32c3/test1/build/config /home/nvv/esp-idf/components/esp_system/ld/esp32s2/memory.ld.in
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc -C -P -x c -E -o /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/ld/memory.ld -I /home/nvv/test/test-mk/esp32c3/test1/build/config /home/nvv/esp-idf/components/esp_system/ld/esp32c3/memory.ld.in
 
 memory_ld: esp-idf/esp_system/CMakeFiles/memory_ld
 memory_ld: esp-idf/esp_system/ld/memory.ld

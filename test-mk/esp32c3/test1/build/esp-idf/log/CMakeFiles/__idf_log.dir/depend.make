@@ -14,8 +14,8 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/log
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/log/log.c
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: config/sdkconfig.h
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -31,9 +31,9 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/compon
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/log/log_buffers.c
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: config/sdkconfig.h
 
@@ -49,6 +49,7 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/compo
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
@@ -56,7 +57,6 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/compo
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_system/include/esp_system.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
@@ -70,11 +70,9 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/compo
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/include/freertos/task.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
@@ -90,27 +88,16 @@ esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/compo
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/reent.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
-esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: config/sdkconfig.h
 

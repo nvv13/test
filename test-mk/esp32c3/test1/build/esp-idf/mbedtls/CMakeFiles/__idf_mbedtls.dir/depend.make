@@ -47,7 +47,7 @@ esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj
 esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/mbedtls/CMakeFiles/__idf_mbedtls.dir/esp_crt_bundle/esp_crt_bundle.c.obj: config/sdkconfig.h
 

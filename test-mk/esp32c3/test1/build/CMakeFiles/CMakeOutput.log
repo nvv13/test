@@ -1,33 +1,33 @@
 The target system is: Generic -  - 
-The host system is: Linux - 5.13.10-100.fc33.x86_64 - x86_64
+The host system is: Linux - 5.14.18-100.fc33.x86_64 - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc 
-Build flags: -mlongcalls
-Id flags:  
+Compiler: /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc 
+Build flags: -march=rv32imc
+Id flags: -c 
 
 The output was:
 0
 
 
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
 
-The C compiler identification is GNU, found in "/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/3.19.7/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/3.19.7/CompilerIdC/CMakeCCompilerId.o"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ 
-Build flags: -mlongcalls
-Id flags:  
+Compiler: /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ 
+Build flags: -march=rv32imc
+Id flags: -c 
 
 The output was:
 0
 
 
-Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
 
-The CXX compiler identification is GNU, found in "/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/3.19.7/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/3.19.7/CompilerIdCXX/CMakeCXXCompilerId.o"
 
 Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
-xtensa-esp32s2-elf-gcc (crosstool-NG esp-2021r1) 8.4.0
+riscv32-esp-elf-gcc (crosstool-NG esp-2021r1) 8.4.0
 Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -35,58 +35,62 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_0669e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0669e.dir/build.make CMakeFiles/cmTC_0669e.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_c6cca/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c6cca.dir/build.make CMakeFiles/cmTC_c6cca.dir/build
 gmake[1]: Entering directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc   -mlongcalls    -v -o CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+Building C object CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc   -march=rv32imc    -v -o CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
 Using built-in specs.
-COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc
-Target: xtensa-esp32s2-elf
-Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
+COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc
+Target: riscv32-esp-elf
+Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
 Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r1) 
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj' '-c'
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/cc1 -quiet -v -iprefix /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mlongcalls -auxbase-strip CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -version -o /tmp/far2l_3e8_0//ccWv6A7R.s
-GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj' '-c' '-mabi=ilp32'
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/cc1 -quiet -v -imultilib rv32im/ilp32 -iprefix /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -march=rv32imc -mabi=ilp32 -auxbase-strip CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -version -o /tmp/cc6Xi4q1.s
+GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)
 	compiled by GNU C version 4.9.2, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include"
 #include "..." search starts here:
 #include <...> search starts here:
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include
 End of search list.
-GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)
+GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)
 	compiled by GNU C version 4.9.2, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-Compiler executable checksum: 8b5746586694088851084c7f89ca76cc
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj' '-c'
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/as --traditional-format --longcalls -o CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj /tmp/far2l_3e8_0//ccWv6A7R.s
-COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/
-LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj' '-c'
-Linking C executable cmTC_0669e
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0669e.dir/link.txt --verbose=1
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc -mlongcalls   -v CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -o cmTC_0669e 
+Compiler executable checksum: dee84e016adae26b3ff13503cb1d4126
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj' '-c' '-mabi=ilp32'
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/as -v --traditional-format -march=rv32imc -mabi=ilp32 -o CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj /tmp/cc6Xi4q1.s
+GNU assembler version 2.35.1 (riscv32-esp-elf) using BFD version (crosstool-NG esp-2021r1) 2.35.1.20201223
+COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/
+LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj' '-c' '-mabi=ilp32'
+Linking C executable cmTC_c6cca
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6cca.dir/link.txt --verbose=1
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc -march=rv32imc  -nostartfiles -march=rv32imc --specs=nosys.specs -v CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -o cmTC_c6cca 
 Using built-in specs.
-COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc
-COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper
-Target: xtensa-esp32s2-elf
-Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
+Reading specs from /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/nosys.specs
+rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
+COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc
+COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper
+Target: riscv32-esp-elf
+Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
 Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r1) 
-COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/
-LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'cmTC_0669e'
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/far2l_3e8_0//cc251Voc.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_0669e /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/crt0.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crti.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtbegin.o -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0 -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -lgcc -lc -lnosys -lc -lgcc /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtend.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtn.o
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'cmTC_0669e'
+COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/
+LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-nostartfiles' '-march=rv32imc' '-specs=nosys.specs' '-v' '-o' 'cmTC_c6cca' '-mabi=ilp32'
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccVu1YFq.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -melf32lriscv -o cmTC_c6cca -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -lgcc --start-group -lc --end-group -lgcc --start-group -lgcc -lc -lnosys --end-group
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000010054
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-nostartfiles' '-march=rv32imc' '-specs=nosys.specs' '-v' '-o' 'cmTC_c6cca' '-mabi=ilp32'
 gmake[1]: Leaving directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp'
 
 
@@ -94,168 +98,181 @@ gmake[1]: Leaving directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFil
 Parsed C implicit include dir info from above output: rv=done
   found start of include info
   found start of implicit include info
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include]
   end of search list found
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/sys-include]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include]
-  implicit include dirs: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/sys-include;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include-fixed]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/sys-include]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include]
+  implicit include dirs: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include-fixed;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/sys-include;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include]
 
 
 Parsed C implicit link information from above output:
-  link line regex: [^( *|.*[/\])(xtensa-esp32s2-elf-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  link line regex: [^( *|.*[/\])(riscv32-esp-elf-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_0669e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0669e.dir/build.make CMakeFiles/cmTC_0669e.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_c6cca/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c6cca.dir/build.make CMakeFiles/cmTC_c6cca.dir/build]
   ignore line: [gmake[1]: Entering directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc   -mlongcalls    -v -o CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Building C object CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc   -march=rv32imc    -v -o CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc]
-  ignore line: [Target: xtensa-esp32s2-elf]
-  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
+  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc]
+  ignore line: [Target: riscv32-esp-elf]
+  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.4.0 (crosstool-NG esp-2021r1) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj' '-c']
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/cc1 -quiet -v -iprefix /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mlongcalls -auxbase-strip CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -version -o /tmp/far2l_3e8_0//ccWv6A7R.s]
-  ignore line: [GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj' '-c' '-mabi=ilp32']
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/cc1 -quiet -v -imultilib rv32im/ilp32 -iprefix /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -march=rv32imc -mabi=ilp32 -auxbase-strip CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -version -o /tmp/cc6Xi4q1.s]
+  ignore line: [GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)]
   ignore line: [	compiled by GNU C version 4.9.2  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include"]
   ignore line: [#include "..." search starts here:]
   ignore line: [#include <...> search starts here:]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include]
   ignore line: [End of search list.]
-  ignore line: [GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)]
+  ignore line: [GNU C17 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)]
   ignore line: [	compiled by GNU C version 4.9.2  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [Compiler executable checksum: 8b5746586694088851084c7f89ca76cc]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj' '-c']
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/as --traditional-format --longcalls -o CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj /tmp/far2l_3e8_0//ccWv6A7R.s]
-  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/]
-  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj' '-c']
-  ignore line: [Linking C executable cmTC_0669e]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0669e.dir/link.txt --verbose=1]
-  ignore line: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc -mlongcalls   -v CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -o cmTC_0669e ]
+  ignore line: [Compiler executable checksum: dee84e016adae26b3ff13503cb1d4126]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj' '-c' '-mabi=ilp32']
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/as -v --traditional-format -march=rv32imc -mabi=ilp32 -o CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj /tmp/cc6Xi4q1.s]
+  ignore line: [GNU assembler version 2.35.1 (riscv32-esp-elf) using BFD version (crosstool-NG esp-2021r1) 2.35.1.20201223]
+  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/]
+  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj' '-c' '-mabi=ilp32']
+  ignore line: [Linking C executable cmTC_c6cca]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6cca.dir/link.txt --verbose=1]
+  ignore line: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc -march=rv32imc  -nostartfiles -march=rv32imc --specs=nosys.specs -v CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -o cmTC_c6cca ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc]
-  ignore line: [COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper]
-  ignore line: [Target: xtensa-esp32s2-elf]
-  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
+  ignore line: [Reading specs from /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/nosys.specs]
+  ignore line: [rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence]
+  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper]
+  ignore line: [Target: riscv32-esp-elf]
+  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.4.0 (crosstool-NG esp-2021r1) ]
-  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/]
-  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'cmTC_0669e']
-  link line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/far2l_3e8_0//cc251Voc.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_0669e /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/crt0.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crti.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtbegin.o -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0 -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj -lgcc -lc -lnosys -lc -lgcc /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtend.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtn.o]
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/collect2] ==> ignore
+  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/]
+  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-nostartfiles' '-march=rv32imc' '-specs=nosys.specs' '-v' '-o' 'cmTC_c6cca' '-mabi=ilp32']
+  link line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccVu1YFq.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -melf32lriscv -o cmTC_c6cca -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj -lgcc --start-group -lc --end-group -lgcc --start-group -lgcc -lc -lnosys --end-group]
+    arg [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/far2l_3e8_0//cc251Voc.res] ==> ignore
+    arg [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccVu1YFq.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lnosys] ==> ignore
-    arg [-plugin-opt=-pass-through=-lc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-melf32lriscv] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_0669e] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/crt0.o] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crti.o] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtbegin.o] ==> ignore
-    arg [-L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0] ==> dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0]
-    arg [-L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc] ==> dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc]
-    arg [-L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib] ==> dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib]
-    arg [CMakeFiles/cmTC_0669e.dir/CMakeCCompilerABI.c.obj] ==> ignore
+    arg [cmTC_c6cca] ==> ignore
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib]
+    arg [CMakeFiles/cmTC_c6cca.dir/CMakeCCompilerABI.c.obj] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--start-group] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [--end-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--start-group] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [-lc] ==> lib [c]
     arg [-lnosys] ==> lib [nosys]
-    arg [-lc] ==> lib [c]
-    arg [-lgcc] ==> lib [gcc]
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtend.o] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtn.o] ==> ignore
-  collapse library dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0]
-  collapse library dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc]
-  collapse library dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/lib]
-  implicit libs: [gcc;c;nosys;c;gcc]
-  implicit dirs: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/lib]
+    arg [--end-group] ==> ignore
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib/rv32im/ilp32]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib]
+  implicit libs: [gcc;c;gcc;gcc;c;nosys]
+  implicit dirs: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib]
   implicit fwks: []
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_7ab2e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7ab2e.dir/build.make CMakeFiles/cmTC_7ab2e.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_04aa6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_04aa6.dir/build.make CMakeFiles/cmTC_04aa6.dir/build
 gmake[1]: Entering directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++   -mlongcalls    -v -o CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Building CXX object CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++   -march=rv32imc    -v -o CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
-COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++
-Target: xtensa-esp32s2-elf
-Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
+COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++
+Target: riscv32-esp-elf
+Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
 Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r1) 
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/cc1plus -quiet -v -iprefix /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/far2l_3e8_0//cc4V7N7E.s
-GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mabi=ilp32'
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/cc1plus -quiet -v -imultilib rv32im/ilp32 -iprefix /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -march=rv32imc -mabi=ilp32 -auxbase-strip CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/ccyn62bU.s
+GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)
 	compiled by GNU C version 4.9.2, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/backward"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include"
-ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/backward"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include"
+ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include"
 #include "..." search starts here:
 #include <...> search starts here:
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/backward
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/backward
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include
 End of search list.
-GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)
+GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)
 	compiled by GNU C version 4.9.2, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-Compiler executable checksum: e5d474979f18a028333ef3ccf3b70763
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/as --traditional-format --longcalls -o CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj /tmp/far2l_3e8_0//cc4V7N7E.s
-COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/
-LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj' '-c'
-Linking CXX executable cmTC_7ab2e
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ab2e.dir/link.txt --verbose=1
-/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ -mlongcalls   -v CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_7ab2e 
+Compiler executable checksum: ef481ee897ce68b8af1680d1a85cfa7e
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mabi=ilp32'
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/as -v --traditional-format -march=rv32imc -mabi=ilp32 -o CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccyn62bU.s
+GNU assembler version 2.35.1 (riscv32-esp-elf) using BFD version (crosstool-NG esp-2021r1) 2.35.1.20201223
+COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/
+LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mabi=ilp32'
+Linking CXX executable cmTC_04aa6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04aa6.dir/link.txt --verbose=1
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ -march=rv32imc  -nostartfiles -march=rv32imc --specs=nosys.specs -v CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_04aa6 
 Using built-in specs.
-COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++
-COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper
-Target: xtensa-esp32s2-elf
-Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
+Reading specs from /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/nosys.specs
+rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence
+COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++
+COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper
+Target: riscv32-esp-elf
+Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c,c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes
 Thread model: posix
 gcc version 8.4.0 (crosstool-NG esp-2021r1) 
-COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/
-LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'cmTC_7ab2e'
- /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/far2l_3e8_0//cc3vQVA3.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_7ab2e /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/crt0.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crti.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtbegin.o -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0 -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc -lc -lnosys -lc -lgcc /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtend.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtn.o
-COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'cmTC_7ab2e'
+COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/
+LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-nostartfiles' '-march=rv32imc' '-specs=nosys.specs' '-v' '-o' 'cmTC_04aa6' '-mabi=ilp32'
+ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccl9Y6Qf.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -melf32lriscv -o cmTC_04aa6 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc --start-group -lc --end-group -lgcc --start-group -lgcc -lc -lnosys --end-group
+/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000010054
+COLLECT_GCC_OPTIONS='-march=rv32imc' '-nostartfiles' '-march=rv32imc' '-specs=nosys.specs' '-v' '-o' 'cmTC_04aa6' '-mabi=ilp32'
 gmake[1]: Leaving directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp'
 
 
@@ -263,118 +280,127 @@ gmake[1]: Leaving directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFil
 Parsed CXX implicit include dir info from above output: rv=done
   found start of include info
   found start of implicit include info
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/backward]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include]
-    add: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/backward]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include]
+    add: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include]
   end of search list found
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/c++/8.4.0]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/backward] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/c++/8.4.0/backward]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/sys-include]
-  collapse include dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include]
-  implicit include dirs: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/c++/8.4.0;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/c++/8.4.0/backward;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/sys-include;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include/c++/8.4.0]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/backward] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include/c++/8.4.0/backward]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include-fixed]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/sys-include]
+  collapse include dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include]
+  implicit include dirs: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include/c++/8.4.0;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include/c++/8.4.0/backward;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/include-fixed;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/sys-include;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/include]
 
 
 Parsed CXX implicit link information from above output:
-  link line regex: [^( *|.*[/\])(xtensa-esp32s2-elf-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  link line regex: [^( *|.*[/\])(riscv32-esp-elf-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_7ab2e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7ab2e.dir/build.make CMakeFiles/cmTC_7ab2e.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_04aa6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_04aa6.dir/build.make CMakeFiles/cmTC_04aa6.dir/build]
   ignore line: [gmake[1]: Entering directory '/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++   -mlongcalls    -v -o CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Building CXX object CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++   -march=rv32imc    -v -o CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++]
-  ignore line: [Target: xtensa-esp32s2-elf]
-  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
+  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++]
+  ignore line: [Target: riscv32-esp-elf]
+  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.4.0 (crosstool-NG esp-2021r1) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/cc1plus -quiet -v -iprefix /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlongcalls -auxbase-strip CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/far2l_3e8_0//cc4V7N7E.s]
-  ignore line: [GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mabi=ilp32']
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/cc1plus -quiet -v -imultilib rv32im/ilp32 -iprefix /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/ /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -march=rv32imc -mabi=ilp32 -auxbase-strip CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/ccyn62bU.s]
+  ignore line: [GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)]
   ignore line: [	compiled by GNU C version 4.9.2  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/backward"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include"]
-  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/../../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/backward"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include"]
+  ignore line: [ignoring duplicate directory "/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/../../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include"]
   ignore line: [#include "..." search starts here:]
   ignore line: [#include <...> search starts here:]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/xtensa-esp32s2-elf]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include/c++/8.4.0/backward]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/include-fixed]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/sys-include]
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/include]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf/rv32im/ilp32]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include/c++/8.4.0/backward]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/include-fixed]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/sys-include]
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/include]
   ignore line: [End of search list.]
-  ignore line: [GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (xtensa-esp32s2-elf)]
+  ignore line: [GNU C++14 (crosstool-NG esp-2021r1) version 8.4.0 (riscv32-esp-elf)]
   ignore line: [	compiled by GNU C version 4.9.2  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [Compiler executable checksum: e5d474979f18a028333ef3ccf3b70763]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
-  ignore line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/as --traditional-format --longcalls -o CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj /tmp/far2l_3e8_0//cc4V7N7E.s]
-  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/]
-  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj' '-c']
-  ignore line: [Linking CXX executable cmTC_7ab2e]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ab2e.dir/link.txt --verbose=1]
-  ignore line: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++ -mlongcalls   -v CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_7ab2e ]
+  ignore line: [Compiler executable checksum: ef481ee897ce68b8af1680d1a85cfa7e]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mabi=ilp32']
+  ignore line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/as -v --traditional-format -march=rv32imc -mabi=ilp32 -o CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccyn62bU.s]
+  ignore line: [GNU assembler version 2.35.1 (riscv32-esp-elf) using BFD version (crosstool-NG esp-2021r1) 2.35.1.20201223]
+  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/]
+  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-v' '-o' 'CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mabi=ilp32']
+  ignore line: [Linking CXX executable cmTC_04aa6]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04aa6.dir/link.txt --verbose=1]
+  ignore line: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++ -march=rv32imc  -nostartfiles -march=rv32imc --specs=nosys.specs -v CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_04aa6 ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-g++]
-  ignore line: [COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper]
-  ignore line: [Target: xtensa-esp32s2-elf]
-  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=xtensa-esp32s2-elf --prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf --with-headers=/builds/idf/crosstool-NG/builds/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/xtensa-esp32s2-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
+  ignore line: [Reading specs from /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/nosys.specs]
+  ignore line: [rename spec link_gcc_c_sequence to nosys_link_gcc_c_sequence]
+  ignore line: [COLLECT_GCC=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper]
+  ignore line: [Target: riscv32-esp-elf]
+  ignore line: [Configured with: /builds/idf/crosstool-NG/.build/riscv32-esp-elf/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=riscv32-esp-elf --prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf --with-local-prefix=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf --with-headers=/builds/idf/crosstool-NG/builds/riscv32-esp-elf/riscv32-esp-elf/include --with-newlib --enable-threads=no --disable-shared --with-arch=rv32imc --with-abi=ilp32 --with-pkgversion='crosstool-NG esp-2021r1' --disable-__cxa_atexit --enable-cxx-flags=-ffunction-sections --disable-libgomp --disable-libmudflap --disable-libmpx --disable-libssp --disable-libquadmath --disable-libquadmath-support --with-gmp=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpfr=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-mpc=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --with-isl=/builds/idf/crosstool-NG/.build/riscv32-esp-elf/buildtools --enable-lto --enable-target-optspace --without-long-double-128 --disable-nls --enable-multiarch --enable-languages=c c++ --disable-libstdcxx-verbose --enable-threads=posix --enable-gcov-custom-rtio --enable-libstdcxx-time=yes]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.4.0 (crosstool-NG esp-2021r1) ]
-  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/bin/]
-  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-mlongcalls' '-v' '-o' 'cmTC_7ab2e']
-  link line: [ /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/far2l_3e8_0//cc3vQVA3.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -o cmTC_7ab2e /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/crt0.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crti.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtbegin.o -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0 -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc -lc -lnosys -lc -lgcc /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtend.o /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtn.o]
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/collect2] ==> ignore
+  ignore line: [COMPILER_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/bin/]
+  ignore line: [LIBRARY_PATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/:/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=rv32imc' '-nostartfiles' '-march=rv32imc' '-specs=nosys.specs' '-v' '-o' 'cmTC_04aa6' '-mabi=ilp32']
+  link line: [ /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/collect2 -plugin /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/liblto_plugin.so -plugin-opt=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccl9Y6Qf.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lnosys -melf32lriscv -o cmTC_04aa6 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0 -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc -L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj -lstdc++ -lm -lgcc --start-group -lc --end-group -lgcc --start-group -lgcc -lc -lnosys --end-group]
+    arg [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../libexec/gcc/xtensa-esp32s2-elf/8.4.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/far2l_3e8_0//cc3vQVA3.res] ==> ignore
+    arg [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../libexec/gcc/riscv32-esp-elf/8.4.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccl9Y6Qf.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lnosys] ==> ignore
-    arg [-plugin-opt=-pass-through=-lc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-melf32lriscv] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_7ab2e] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib/crt0.o] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crti.o] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtbegin.o] ==> ignore
-    arg [-L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0] ==> dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0]
-    arg [-L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc] ==> dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc]
-    arg [-L/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib] ==> dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib]
-    arg [CMakeFiles/cmTC_7ab2e.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+    arg [cmTC_04aa6] ==> ignore
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc]
+    arg [-L/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib] ==> dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib]
+    arg [CMakeFiles/cmTC_04aa6.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc] ==> lib [gcc]
+    arg [--start-group] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [--end-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--start-group] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
     arg [-lc] ==> lib [c]
     arg [-lnosys] ==> lib [nosys]
-    arg [-lc] ==> lib [c]
-    arg [-lgcc] ==> lib [gcc]
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtend.o] ==> ignore
-    arg [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/crtn.o] ==> ignore
-  collapse library dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0]
-  collapse library dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc]
-  collapse library dir [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/../lib/gcc/xtensa-esp32s2-elf/8.4.0/../../../../xtensa-esp32s2-elf/lib] ==> [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/lib]
-  implicit libs: [stdc++;m;gcc;c;nosys;c;gcc]
-  implicit dirs: [/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc/xtensa-esp32s2-elf/8.4.0;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/lib/gcc;/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/lib]
+    arg [--end-group] ==> ignore
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib/rv32im/ilp32] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib/rv32im/ilp32]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc]
+  collapse library dir [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/../lib/gcc/riscv32-esp-elf/8.4.0/../../../../riscv32-esp-elf/lib] ==> [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib]
+  implicit libs: [stdc++;m;gcc;c;gcc;gcc;c;nosys]
+  implicit dirs: [/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib/rv32im/ilp32;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc/riscv32-esp-elf/8.4.0;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/lib/gcc;/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/riscv32-esp-elf/lib]
   implicit fwks: []
 
 

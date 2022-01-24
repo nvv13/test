@@ -84,22 +84,19 @@ preinstall: esp-idf/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/uf2.dir/clean
-clean: CMakeFiles/dfu-flash.dir/clean
 clean: CMakeFiles/menuconfig.dir/clean
 clean: CMakeFiles/confserver.dir/clean
 clean: CMakeFiles/bootloader.elf.dir/clean
 clean: CMakeFiles/gen_project_binary.dir/clean
-clean: CMakeFiles/uf2-app.dir/clean
-clean: CMakeFiles/erase_flash.dir/clean
+clean: CMakeFiles/app.dir/clean
 clean: CMakeFiles/monitor.dir/clean
 clean: CMakeFiles/_project_elf_src.dir/clean
 clean: CMakeFiles/size-files.dir/clean
 clean: CMakeFiles/size.dir/clean
 clean: CMakeFiles/size-components.dir/clean
-clean: CMakeFiles/dfu.dir/clean
-clean: CMakeFiles/app.dir/clean
-clean: CMakeFiles/dfu-list.dir/clean
+clean: CMakeFiles/erase_flash.dir/clean
+clean: CMakeFiles/uf2-app.dir/clean
+clean: CMakeFiles/uf2.dir/clean
 clean: esp-idf/clean
 
 .PHONY : clean
@@ -117,8 +114,8 @@ esp-idf/all: esp-idf/bootloader_support/all
 esp-idf/all: esp-idf/efuse/all
 esp-idf/all: esp-idf/esp_system/all
 esp-idf/all: esp-idf/esp_hw_support/all
-esp-idf/all: esp-idf/xtensa/all
-esp-idf/all: esp-idf/esp32s2/all
+esp-idf/all: esp-idf/riscv/all
+esp-idf/all: esp-idf/esp32c3/all
 esp-idf/all: esp-idf/esp_common/all
 esp-idf/all: esp-idf/esp_rom/all
 esp-idf/all: esp-idf/log/all
@@ -140,8 +137,8 @@ esp-idf/preinstall: esp-idf/bootloader_support/preinstall
 esp-idf/preinstall: esp-idf/efuse/preinstall
 esp-idf/preinstall: esp-idf/esp_system/preinstall
 esp-idf/preinstall: esp-idf/esp_hw_support/preinstall
-esp-idf/preinstall: esp-idf/xtensa/preinstall
-esp-idf/preinstall: esp-idf/esp32s2/preinstall
+esp-idf/preinstall: esp-idf/riscv/preinstall
+esp-idf/preinstall: esp-idf/esp32c3/preinstall
 esp-idf/preinstall: esp-idf/esp_common/preinstall
 esp-idf/preinstall: esp-idf/esp_rom/preinstall
 esp-idf/preinstall: esp-idf/log/preinstall
@@ -163,8 +160,8 @@ esp-idf/clean: esp-idf/bootloader_support/clean
 esp-idf/clean: esp-idf/efuse/clean
 esp-idf/clean: esp-idf/esp_system/clean
 esp-idf/clean: esp-idf/esp_hw_support/clean
-esp-idf/clean: esp-idf/xtensa/clean
-esp-idf/clean: esp-idf/esp32s2/clean
+esp-idf/clean: esp-idf/riscv/clean
+esp-idf/clean: esp-idf/esp32c3/clean
 esp-idf/clean: esp-idf/esp_common/clean
 esp-idf/clean: esp-idf/esp_rom/clean
 esp-idf/clean: esp-idf/log/clean
@@ -235,22 +232,22 @@ esp-idf/efuse/clean: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/clean
 .PHONY : esp-idf/efuse/clean
 
 #=============================================================================
-# Directory level rules for directory esp-idf/esp32s2
+# Directory level rules for directory esp-idf/esp32c3
 
 # Recursive "all" directory target.
-esp-idf/esp32s2/all:
+esp-idf/esp32c3/all:
 
-.PHONY : esp-idf/esp32s2/all
+.PHONY : esp-idf/esp32c3/all
 
 # Recursive "preinstall" directory target.
-esp-idf/esp32s2/preinstall:
+esp-idf/esp32c3/preinstall:
 
-.PHONY : esp-idf/esp32s2/preinstall
+.PHONY : esp-idf/esp32c3/preinstall
 
 # Recursive "clean" directory target.
-esp-idf/esp32s2/clean:
+esp-idf/esp32c3/clean:
 
-.PHONY : esp-idf/esp32s2/clean
+.PHONY : esp-idf/esp32c3/clean
 
 #=============================================================================
 # Directory level rules for directory esp-idf/esp_common
@@ -275,38 +272,38 @@ esp-idf/esp_common/clean: esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/cle
 
 # Recursive "all" directory target.
 esp-idf/esp_hw_support/all: esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all
-esp-idf/esp_hw_support/all: esp-idf/esp_hw_support/port/esp32s2/all
+esp-idf/esp_hw_support/all: esp-idf/esp_hw_support/port/esp32c3/all
 
 .PHONY : esp-idf/esp_hw_support/all
 
 # Recursive "preinstall" directory target.
-esp-idf/esp_hw_support/preinstall: esp-idf/esp_hw_support/port/esp32s2/preinstall
+esp-idf/esp_hw_support/preinstall: esp-idf/esp_hw_support/port/esp32c3/preinstall
 
 .PHONY : esp-idf/esp_hw_support/preinstall
 
 # Recursive "clean" directory target.
 esp-idf/esp_hw_support/clean: esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/clean
-esp-idf/esp_hw_support/clean: esp-idf/esp_hw_support/port/esp32s2/clean
+esp-idf/esp_hw_support/clean: esp-idf/esp_hw_support/port/esp32c3/clean
 
 .PHONY : esp-idf/esp_hw_support/clean
 
 #=============================================================================
-# Directory level rules for directory esp-idf/esp_hw_support/port/esp32s2
+# Directory level rules for directory esp-idf/esp_hw_support/port/esp32c3
 
 # Recursive "all" directory target.
-esp-idf/esp_hw_support/port/esp32s2/all:
+esp-idf/esp_hw_support/port/esp32c3/all:
 
-.PHONY : esp-idf/esp_hw_support/port/esp32s2/all
+.PHONY : esp-idf/esp_hw_support/port/esp32c3/all
 
 # Recursive "preinstall" directory target.
-esp-idf/esp_hw_support/port/esp32s2/preinstall:
+esp-idf/esp_hw_support/port/esp32c3/preinstall:
 
-.PHONY : esp-idf/esp_hw_support/port/esp32s2/preinstall
+.PHONY : esp-idf/esp_hw_support/port/esp32c3/preinstall
 
 # Recursive "clean" directory target.
-esp-idf/esp_hw_support/port/esp32s2/clean:
+esp-idf/esp_hw_support/port/esp32c3/clean:
 
-.PHONY : esp-idf/esp_hw_support/port/esp32s2/clean
+.PHONY : esp-idf/esp_hw_support/port/esp32c3/clean
 
 #=============================================================================
 # Directory level rules for directory esp-idf/esp_rom
@@ -489,42 +486,60 @@ esp-idf/partition_table/clean:
 .PHONY : esp-idf/partition_table/clean
 
 #=============================================================================
+# Directory level rules for directory esp-idf/riscv
+
+# Recursive "all" directory target.
+esp-idf/riscv/all:
+
+.PHONY : esp-idf/riscv/all
+
+# Recursive "preinstall" directory target.
+esp-idf/riscv/preinstall:
+
+.PHONY : esp-idf/riscv/preinstall
+
+# Recursive "clean" directory target.
+esp-idf/riscv/clean:
+
+.PHONY : esp-idf/riscv/clean
+
+#=============================================================================
 # Directory level rules for directory esp-idf/soc
 
 # Recursive "all" directory target.
 esp-idf/soc/all: esp-idf/soc/CMakeFiles/__idf_soc.dir/all
-esp-idf/soc/all: esp-idf/soc/esp32s2/all
+esp-idf/soc/all: esp-idf/soc/esp32c3/all
 
 .PHONY : esp-idf/soc/all
 
 # Recursive "preinstall" directory target.
-esp-idf/soc/preinstall: esp-idf/soc/esp32s2/preinstall
+esp-idf/soc/preinstall: esp-idf/soc/esp32c3/preinstall
 
 .PHONY : esp-idf/soc/preinstall
 
 # Recursive "clean" directory target.
 esp-idf/soc/clean: esp-idf/soc/CMakeFiles/__idf_soc.dir/clean
-esp-idf/soc/clean: esp-idf/soc/esp32s2/clean
+esp-idf/soc/clean: esp-idf/soc/esp32c3/clean
 
 .PHONY : esp-idf/soc/clean
 
 #=============================================================================
-# Directory level rules for directory esp-idf/soc/esp32s2
+# Directory level rules for directory esp-idf/soc/esp32c3
 
 # Recursive "all" directory target.
-esp-idf/soc/esp32s2/all:
+esp-idf/soc/esp32c3/all:
 
-.PHONY : esp-idf/soc/esp32s2/all
+.PHONY : esp-idf/soc/esp32c3/all
 
 # Recursive "preinstall" directory target.
-esp-idf/soc/esp32s2/preinstall:
+esp-idf/soc/esp32c3/preinstall:
 
-.PHONY : esp-idf/soc/esp32s2/preinstall
+.PHONY : esp-idf/soc/esp32c3/preinstall
 
 # Recursive "clean" directory target.
-esp-idf/soc/esp32s2/clean:
+esp-idf/soc/esp32c3/clean:
 
-.PHONY : esp-idf/soc/esp32s2/clean
+.PHONY : esp-idf/soc/esp32c3/clean
 
 #=============================================================================
 # Directory level rules for directory esp-idf/spi_flash
@@ -543,78 +558,6 @@ esp-idf/spi_flash/preinstall:
 esp-idf/spi_flash/clean: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/clean
 
 .PHONY : esp-idf/spi_flash/clean
-
-#=============================================================================
-# Directory level rules for directory esp-idf/xtensa
-
-# Recursive "all" directory target.
-esp-idf/xtensa/all: esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all
-
-.PHONY : esp-idf/xtensa/all
-
-# Recursive "preinstall" directory target.
-esp-idf/xtensa/preinstall:
-
-.PHONY : esp-idf/xtensa/preinstall
-
-# Recursive "clean" directory target.
-esp-idf/xtensa/clean: esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/clean
-
-.PHONY : esp-idf/xtensa/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/uf2.dir
-
-# All Build rule for target.
-CMakeFiles/uf2.dir/all: CMakeFiles/gen_project_binary.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target uf2"
-.PHONY : CMakeFiles/uf2.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/uf2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 97
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uf2.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/uf2.dir/rule
-
-# Convenience name for target.
-uf2: CMakeFiles/uf2.dir/rule
-
-.PHONY : uf2
-
-# clean rule for target.
-CMakeFiles/uf2.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/clean
-.PHONY : CMakeFiles/uf2.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/dfu-flash.dir
-
-# All Build rule for target.
-CMakeFiles/dfu-flash.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-flash.dir/build.make CMakeFiles/dfu-flash.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-flash.dir/build.make CMakeFiles/dfu-flash.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target dfu-flash"
-.PHONY : CMakeFiles/dfu-flash.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/dfu-flash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dfu-flash.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/dfu-flash.dir/rule
-
-# Convenience name for target.
-dfu-flash: CMakeFiles/dfu-flash.dir/rule
-
-.PHONY : dfu-flash
-
-# clean rule for target.
-CMakeFiles/dfu-flash.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-flash.dir/build.make CMakeFiles/dfu-flash.dir/clean
-.PHONY : CMakeFiles/dfu-flash.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/menuconfig.dir
@@ -679,12 +622,12 @@ CMakeFiles/bootloader.elf.dir/all: esp-idf/hal/CMakeFiles/__idf_hal.dir/all
 CMakeFiles/bootloader.elf.dir/all: esp-idf/main/CMakeFiles/__idf_main.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bootloader.elf.dir/build.make CMakeFiles/bootloader.elf.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bootloader.elf.dir/build.make CMakeFiles/bootloader.elf.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=94,95,96 "Built target bootloader.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=82,83,84 "Built target bootloader.elf"
 .PHONY : CMakeFiles/bootloader.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/bootloader.elf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 96
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 84
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/bootloader.elf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : CMakeFiles/bootloader.elf.dir/rule
@@ -706,12 +649,12 @@ CMakeFiles/bootloader.elf.dir/clean:
 CMakeFiles/gen_project_binary.dir/all: CMakeFiles/bootloader.elf.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gen_project_binary.dir/build.make CMakeFiles/gen_project_binary.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gen_project_binary.dir/build.make CMakeFiles/gen_project_binary.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=97 "Built target gen_project_binary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=85 "Built target gen_project_binary"
 .PHONY : CMakeFiles/gen_project_binary.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gen_project_binary.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 97
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 85
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/gen_project_binary.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : CMakeFiles/gen_project_binary.dir/rule
@@ -727,58 +670,32 @@ CMakeFiles/gen_project_binary.dir/clean:
 .PHONY : CMakeFiles/gen_project_binary.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/uf2-app.dir
+# Target rules for target CMakeFiles/app.dir
 
 # All Build rule for target.
-CMakeFiles/uf2-app.dir/all: CMakeFiles/gen_project_binary.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2-app.dir/build.make CMakeFiles/uf2-app.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2-app.dir/build.make CMakeFiles/uf2-app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target uf2-app"
-.PHONY : CMakeFiles/uf2-app.dir/all
+CMakeFiles/app.dir/all: CMakeFiles/gen_project_binary.dir/all
+CMakeFiles/app.dir/all: esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target app"
+.PHONY : CMakeFiles/app.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/uf2-app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 97
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uf2-app.dir/all
+CMakeFiles/app.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 85
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/uf2-app.dir/rule
+.PHONY : CMakeFiles/app.dir/rule
 
 # Convenience name for target.
-uf2-app: CMakeFiles/uf2-app.dir/rule
+app: CMakeFiles/app.dir/rule
 
-.PHONY : uf2-app
-
-# clean rule for target.
-CMakeFiles/uf2-app.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2-app.dir/build.make CMakeFiles/uf2-app.dir/clean
-.PHONY : CMakeFiles/uf2-app.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/erase_flash.dir
-
-# All Build rule for target.
-CMakeFiles/erase_flash.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/erase_flash.dir/build.make CMakeFiles/erase_flash.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/erase_flash.dir/build.make CMakeFiles/erase_flash.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target erase_flash"
-.PHONY : CMakeFiles/erase_flash.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/erase_flash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/erase_flash.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/erase_flash.dir/rule
-
-# Convenience name for target.
-erase_flash: CMakeFiles/erase_flash.dir/rule
-
-.PHONY : erase_flash
+.PHONY : app
 
 # clean rule for target.
-CMakeFiles/erase_flash.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/erase_flash.dir/build.make CMakeFiles/erase_flash.dir/clean
-.PHONY : CMakeFiles/erase_flash.dir/clean
+CMakeFiles/app.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/clean
+.PHONY : CMakeFiles/app.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/monitor.dir
@@ -814,7 +731,7 @@ CMakeFiles/monitor.dir/clean:
 CMakeFiles/_project_elf_src.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/_project_elf_src.dir/build.make CMakeFiles/_project_elf_src.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/_project_elf_src.dir/build.make CMakeFiles/_project_elf_src.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=93 "Built target _project_elf_src"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=81 "Built target _project_elf_src"
 .PHONY : CMakeFiles/_project_elf_src.dir/all
 
 # Build rule for subdir invocation for target.
@@ -846,7 +763,7 @@ CMakeFiles/size-files.dir/all: CMakeFiles/bootloader.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/size-files.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 96
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 84
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/size-files.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : CMakeFiles/size-files.dir/rule
@@ -873,7 +790,7 @@ CMakeFiles/size.dir/all: CMakeFiles/bootloader.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/size.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 96
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 84
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/size.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : CMakeFiles/size.dir/rule
@@ -900,7 +817,7 @@ CMakeFiles/size-components.dir/all: CMakeFiles/bootloader.elf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/size-components.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 96
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 84
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/size-components.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : CMakeFiles/size-components.dir/rule
@@ -916,86 +833,85 @@ CMakeFiles/size-components.dir/clean:
 .PHONY : CMakeFiles/size-components.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/dfu.dir
+# Target rules for target CMakeFiles/erase_flash.dir
 
 # All Build rule for target.
-CMakeFiles/dfu.dir/all: CMakeFiles/gen_project_binary.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu.dir/build.make CMakeFiles/dfu.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu.dir/build.make CMakeFiles/dfu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target dfu"
-.PHONY : CMakeFiles/dfu.dir/all
+CMakeFiles/erase_flash.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/erase_flash.dir/build.make CMakeFiles/erase_flash.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/erase_flash.dir/build.make CMakeFiles/erase_flash.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target erase_flash"
+.PHONY : CMakeFiles/erase_flash.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/dfu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 97
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dfu.dir/all
+CMakeFiles/erase_flash.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/dfu.dir/rule
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/erase_flash.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
+.PHONY : CMakeFiles/erase_flash.dir/rule
 
 # Convenience name for target.
-dfu: CMakeFiles/dfu.dir/rule
+erase_flash: CMakeFiles/erase_flash.dir/rule
 
-.PHONY : dfu
+.PHONY : erase_flash
 
 # clean rule for target.
-CMakeFiles/dfu.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu.dir/build.make CMakeFiles/dfu.dir/clean
-.PHONY : CMakeFiles/dfu.dir/clean
+CMakeFiles/erase_flash.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/erase_flash.dir/build.make CMakeFiles/erase_flash.dir/clean
+.PHONY : CMakeFiles/erase_flash.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/app.dir
+# Target rules for target CMakeFiles/uf2-app.dir
 
 # All Build rule for target.
-CMakeFiles/app.dir/all: CMakeFiles/gen_project_binary.dir/all
-CMakeFiles/app.dir/all: esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target app"
-.PHONY : CMakeFiles/app.dir/all
+CMakeFiles/uf2-app.dir/all: CMakeFiles/gen_project_binary.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2-app.dir/build.make CMakeFiles/uf2-app.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2-app.dir/build.make CMakeFiles/uf2-app.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target uf2-app"
+.PHONY : CMakeFiles/uf2-app.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 97
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
+CMakeFiles/uf2-app.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 85
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uf2-app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/app.dir/rule
+.PHONY : CMakeFiles/uf2-app.dir/rule
 
 # Convenience name for target.
-app: CMakeFiles/app.dir/rule
+uf2-app: CMakeFiles/uf2-app.dir/rule
 
-.PHONY : app
+.PHONY : uf2-app
 
 # clean rule for target.
-CMakeFiles/app.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/clean
-.PHONY : CMakeFiles/app.dir/clean
+CMakeFiles/uf2-app.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2-app.dir/build.make CMakeFiles/uf2-app.dir/clean
+.PHONY : CMakeFiles/uf2-app.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/dfu-list.dir
+# Target rules for target CMakeFiles/uf2.dir
 
 # All Build rule for target.
-CMakeFiles/dfu-list.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-list.dir/build.make CMakeFiles/dfu-list.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-list.dir/build.make CMakeFiles/dfu-list.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target dfu-list"
-.PHONY : CMakeFiles/dfu-list.dir/all
+CMakeFiles/uf2.dir/all: CMakeFiles/gen_project_binary.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num= "Built target uf2"
+.PHONY : CMakeFiles/uf2.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/dfu-list.dir/rule: cmake_check_build_system
+CMakeFiles/uf2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 85
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uf2.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dfu-list.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : CMakeFiles/dfu-list.dir/rule
+.PHONY : CMakeFiles/uf2.dir/rule
 
 # Convenience name for target.
-dfu-list: CMakeFiles/dfu-list.dir/rule
+uf2: CMakeFiles/uf2.dir/rule
 
-.PHONY : dfu-list
+.PHONY : uf2
 
 # clean rule for target.
-CMakeFiles/dfu-list.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-list.dir/build.make CMakeFiles/dfu-list.dir/clean
-.PHONY : CMakeFiles/dfu-list.dir/clean
+CMakeFiles/uf2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/clean
+.PHONY : CMakeFiles/uf2.dir/clean
 
 #=============================================================================
 # Target rules for target esp-idf/hal/CMakeFiles/__idf_hal.dir
@@ -1004,12 +920,12 @@ CMakeFiles/dfu-list.dir/clean:
 esp-idf/hal/CMakeFiles/__idf_hal.dir/all: esp-idf/soc/CMakeFiles/__idf_soc.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=55,56,57,58 "Built target __idf_hal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=52,53,54,55 "Built target __idf_hal"
 .PHONY : esp-idf/hal/CMakeFiles/__idf_hal.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/hal/CMakeFiles/__idf_hal.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 90
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 78
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/hal/CMakeFiles/__idf_hal.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/hal/CMakeFiles/__idf_hal.dir/rule
@@ -1031,12 +947,12 @@ esp-idf/hal/CMakeFiles/__idf_hal.dir/clean:
 esp-idf/soc/CMakeFiles/__idf_soc.dir/all: esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87 "Built target __idf_soc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=64,65,66,67,68,69,70,71,72,73,74,75,76,77,78 "Built target __idf_soc"
 .PHONY : esp-idf/soc/CMakeFiles/__idf_soc.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/soc/CMakeFiles/__idf_soc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 86
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 74
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/soc/CMakeFiles/__idf_soc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/soc/CMakeFiles/__idf_soc.dir/rule
@@ -1058,12 +974,12 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/clean:
 esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/all: esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/build.make esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/build.make esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=65,66 "Built target __idf_micro-ecc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=62,63 "Built target __idf_micro-ecc"
 .PHONY : esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 65
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 59
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/rule
@@ -1085,12 +1001,12 @@ esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/clean:
 esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/all: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=88,89 "Built target __idf_spi_flash"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=79,80 "Built target __idf_spi_flash"
 .PHONY : esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 63
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 57
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/rule
@@ -1117,7 +1033,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/all: esp-idf/
 
 # Build rule for subdir invocation for target.
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 61
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 55
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/rule
@@ -1252,7 +1168,7 @@ esp-idf/efuse/CMakeFiles/__idf_efuse.dir/all: esp-idf/esp_system/CMakeFiles/__id
 
 # Build rule for subdir invocation for target.
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 38
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 32
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
@@ -1274,12 +1190,12 @@ esp-idf/efuse/CMakeFiles/__idf_efuse.dir/clean:
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/all: esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=53,54 "Built target __idf_esp_system"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=50,51 "Built target __idf_esp_system"
 .PHONY : esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 29
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/rule
@@ -1298,15 +1214,15 @@ esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/clean:
 # Target rules for target esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir
 
 # All Build rule for target.
-esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all: esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all
+esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all: esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=35,36,37,38,39,40,41,42,43,44,45,46 "Built target __idf_esp_hw_support"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=35,36,37,38,39,40,41,42,43,44,45 "Built target __idf_esp_hw_support"
 .PHONY : esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 21
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/rule
@@ -1322,33 +1238,6 @@ esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/clean:
 .PHONY : esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/clean
 
 #=============================================================================
-# Target rules for target esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir
-
-# All Build rule for target.
-esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all: esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/all
-	$(MAKE) $(MAKESILENT) -f esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/build.make esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/depend
-	$(MAKE) $(MAKESILENT) -f esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/build.make esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=90,91,92 "Built target __idf_xtensa"
-.PHONY : esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all
-
-# Build rule for subdir invocation for target.
-esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 15
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
-.PHONY : esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/rule
-
-# Convenience name for target.
-__idf_xtensa: esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/rule
-
-.PHONY : __idf_xtensa
-
-# clean rule for target.
-esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/clean:
-	$(MAKE) $(MAKESILENT) -f esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/build.make esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/clean
-.PHONY : esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/clean
-
-#=============================================================================
 # Target rules for target esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir
 
 # All Build rule for target.
@@ -1360,7 +1249,7 @@ esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/all: esp-idf/esp_rom/CMakeFil
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/rule
@@ -1382,12 +1271,12 @@ esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/clean:
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/all: esp-idf/log/CMakeFiles/__idf_log.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=47,48,49,50,51,52 "Built target __idf_esp_rom"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=46,47,48,49 "Built target __idf_esp_rom"
 .PHONY : esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/rule
@@ -1409,7 +1298,7 @@ esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/clean:
 esp-idf/log/CMakeFiles/__idf_log.dir/all:
 	$(MAKE) $(MAKESILENT) -f esp-idf/log/CMakeFiles/__idf_log.dir/build.make esp-idf/log/CMakeFiles/__idf_log.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/log/CMakeFiles/__idf_log.dir/build.make esp-idf/log/CMakeFiles/__idf_log.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=59,60,61,62 "Built target __idf_log"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=56,57,58,59 "Built target __idf_log"
 .PHONY : esp-idf/log/CMakeFiles/__idf_log.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1441,7 +1330,7 @@ esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/all: CMakeFiles/gen_proj
 
 # Build rule for subdir invocation for target.
 esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 97
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 85
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/rule
@@ -1463,12 +1352,12 @@ esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/clean:
 esp-idf/main/CMakeFiles/__idf_main.dir/all: esp-idf/hal/CMakeFiles/__idf_hal.dir/all
 	$(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=63,64 "Built target __idf_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=60,61 "Built target __idf_main"
 .PHONY : esp-idf/main/CMakeFiles/__idf_main.dir/all
 
 # Build rule for subdir invocation for target.
 esp-idf/main/CMakeFiles/__idf_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 92
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 80
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/main/CMakeFiles/__idf_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles 0
 .PHONY : esp-idf/main/CMakeFiles/__idf_main.dir/rule

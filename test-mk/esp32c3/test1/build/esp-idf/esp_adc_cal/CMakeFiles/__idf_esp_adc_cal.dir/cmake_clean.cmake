@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32s2.c.obj"
+  "CMakeFiles/__idf_esp_adc_cal.dir/esp_adc_cal_esp32c3.c.obj"
   "libesp_adc_cal.a"
   "libesp_adc_cal.pdb"
 )

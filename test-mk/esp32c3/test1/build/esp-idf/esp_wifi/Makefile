@@ -190,32 +190,32 @@ __idf_esp_wifi/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build
 .PHONY : __idf_esp_wifi/fast
 
-esp32s2/esp_adapter.obj: esp32s2/esp_adapter.c.obj
+esp32c3/esp_adapter.obj: esp32c3/esp_adapter.c.obj
 
-.PHONY : esp32s2/esp_adapter.obj
+.PHONY : esp32c3/esp_adapter.obj
 
 # target to build an object file
-esp32s2/esp_adapter.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/esp32s2/esp_adapter.c.obj
-.PHONY : esp32s2/esp_adapter.c.obj
+esp32c3/esp_adapter.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/esp32c3/esp_adapter.c.obj
+.PHONY : esp32c3/esp_adapter.c.obj
 
-esp32s2/esp_adapter.i: esp32s2/esp_adapter.c.i
+esp32c3/esp_adapter.i: esp32c3/esp_adapter.c.i
 
-.PHONY : esp32s2/esp_adapter.i
+.PHONY : esp32c3/esp_adapter.i
 
 # target to preprocess a source file
-esp32s2/esp_adapter.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/esp32s2/esp_adapter.c.i
-.PHONY : esp32s2/esp_adapter.c.i
+esp32c3/esp_adapter.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/esp32c3/esp_adapter.c.i
+.PHONY : esp32c3/esp_adapter.c.i
 
-esp32s2/esp_adapter.s: esp32s2/esp_adapter.c.s
+esp32c3/esp_adapter.s: esp32c3/esp_adapter.c.s
 
-.PHONY : esp32s2/esp_adapter.s
+.PHONY : esp32c3/esp_adapter.s
 
 # target to generate assembly for a file
-esp32s2/esp_adapter.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/esp32s2/esp_adapter.c.s
-.PHONY : esp32s2/esp_adapter.c.s
+esp32c3/esp_adapter.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/build.make esp-idf/esp_wifi/CMakeFiles/__idf_esp_wifi.dir/esp32c3/esp_adapter.c.s
+.PHONY : esp32c3/esp_adapter.c.s
 
 src/coexist.obj: src/coexist.c.obj
 
@@ -446,9 +446,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_esp_wifi"
-	@echo "... esp32s2/esp_adapter.obj"
-	@echo "... esp32s2/esp_adapter.i"
-	@echo "... esp32s2/esp_adapter.s"
+	@echo "... esp32c3/esp_adapter.obj"
+	@echo "... esp32c3/esp_adapter.i"
+	@echo "... esp32c3/esp_adapter.s"
 	@echo "... src/coexist.obj"
 	@echo "... src/coexist.i"
 	@echo "... src/coexist.s"

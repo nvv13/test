@@ -48,7 +48,7 @@ stdlib.h
 stdint.h
 -
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
 
 /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
 stdint.h

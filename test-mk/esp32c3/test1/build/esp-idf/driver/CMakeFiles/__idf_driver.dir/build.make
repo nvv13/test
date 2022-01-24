@@ -79,392 +79,353 @@ include esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/gpio.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/gpio.c.obj: /home/nvv/esp-idf/components/driver/gpio.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/gpio.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/gpio.c.obj -c /home/nvv/esp-idf/components/driver/gpio.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/gpio.c.obj -c /home/nvv/esp-idf/components/driver/gpio.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/gpio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/gpio.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/gpio.c > CMakeFiles/__idf_driver.dir/gpio.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/gpio.c > CMakeFiles/__idf_driver.dir/gpio.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/gpio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/gpio.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/gpio.c -o CMakeFiles/__idf_driver.dir/gpio.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/gpio.c -o CMakeFiles/__idf_driver.dir/gpio.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2c.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2c.c.obj: /home/nvv/esp-idf/components/driver/i2c.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/i2c.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/i2c.c.obj -c /home/nvv/esp-idf/components/driver/i2c.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/i2c.c.obj -c /home/nvv/esp-idf/components/driver/i2c.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2c.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/i2c.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/i2c.c > CMakeFiles/__idf_driver.dir/i2c.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/i2c.c > CMakeFiles/__idf_driver.dir/i2c.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2c.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/i2c.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/i2c.c -o CMakeFiles/__idf_driver.dir/i2c.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/i2c.c -o CMakeFiles/__idf_driver.dir/i2c.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2s.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2s.c.obj: /home/nvv/esp-idf/components/driver/i2s.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/i2s.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/i2s.c.obj -c /home/nvv/esp-idf/components/driver/i2s.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/i2s.c.obj -c /home/nvv/esp-idf/components/driver/i2s.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2s.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/i2s.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/i2s.c > CMakeFiles/__idf_driver.dir/i2s.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/i2s.c > CMakeFiles/__idf_driver.dir/i2s.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/i2s.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/i2s.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/i2s.c -o CMakeFiles/__idf_driver.dir/i2s.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/i2s.c -o CMakeFiles/__idf_driver.dir/i2s.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/ledc.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/ledc.c.obj: /home/nvv/esp-idf/components/driver/ledc.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/ledc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/ledc.c.obj -c /home/nvv/esp-idf/components/driver/ledc.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/ledc.c.obj -c /home/nvv/esp-idf/components/driver/ledc.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/ledc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/ledc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/ledc.c > CMakeFiles/__idf_driver.dir/ledc.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/ledc.c > CMakeFiles/__idf_driver.dir/ledc.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/ledc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/ledc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/ledc.c -o CMakeFiles/__idf_driver.dir/ledc.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/ledc.c -o CMakeFiles/__idf_driver.dir/ledc.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.obj: /home/nvv/esp-idf/components/driver/pcnt.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/pcnt.c.obj -c /home/nvv/esp-idf/components/driver/pcnt.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/pcnt.c.obj -c /home/nvv/esp-idf/components/driver/pcnt.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/pcnt.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/pcnt.c > CMakeFiles/__idf_driver.dir/pcnt.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/pcnt.c > CMakeFiles/__idf_driver.dir/pcnt.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/pcnt.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/pcnt.c -o CMakeFiles/__idf_driver.dir/pcnt.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/pcnt.c -o CMakeFiles/__idf_driver.dir/pcnt.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/periph_ctrl.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/periph_ctrl.c.obj: /home/nvv/esp-idf/components/driver/periph_ctrl.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/periph_ctrl.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/periph_ctrl.c.obj -c /home/nvv/esp-idf/components/driver/periph_ctrl.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/periph_ctrl.c.obj -c /home/nvv/esp-idf/components/driver/periph_ctrl.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/periph_ctrl.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/periph_ctrl.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/periph_ctrl.c > CMakeFiles/__idf_driver.dir/periph_ctrl.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/periph_ctrl.c > CMakeFiles/__idf_driver.dir/periph_ctrl.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/periph_ctrl.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/periph_ctrl.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/periph_ctrl.c -o CMakeFiles/__idf_driver.dir/periph_ctrl.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/periph_ctrl.c -o CMakeFiles/__idf_driver.dir/periph_ctrl.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rmt.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rmt.c.obj: /home/nvv/esp-idf/components/driver/rmt.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/rmt.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/rmt.c.obj -c /home/nvv/esp-idf/components/driver/rmt.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/rmt.c.obj -c /home/nvv/esp-idf/components/driver/rmt.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rmt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/rmt.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/rmt.c > CMakeFiles/__idf_driver.dir/rmt.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/rmt.c > CMakeFiles/__idf_driver.dir/rmt.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rmt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/rmt.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/rmt.c -o CMakeFiles/__idf_driver.dir/rmt.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/rmt.c -o CMakeFiles/__idf_driver.dir/rmt.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_io.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_io.c.obj: /home/nvv/esp-idf/components/driver/rtc_io.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_io.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/rtc_io.c.obj -c /home/nvv/esp-idf/components/driver/rtc_io.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/rtc_io.c.obj -c /home/nvv/esp-idf/components/driver/rtc_io.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_io.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/rtc_io.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/rtc_io.c > CMakeFiles/__idf_driver.dir/rtc_io.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/rtc_io.c > CMakeFiles/__idf_driver.dir/rtc_io.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_io.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/rtc_io.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/rtc_io.c -o CMakeFiles/__idf_driver.dir/rtc_io.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/rtc_io.c -o CMakeFiles/__idf_driver.dir/rtc_io.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_module.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_module.c.obj: /home/nvv/esp-idf/components/driver/rtc_module.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_module.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/rtc_module.c.obj -c /home/nvv/esp-idf/components/driver/rtc_module.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/rtc_module.c.obj -c /home/nvv/esp-idf/components/driver/rtc_module.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_module.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/rtc_module.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/rtc_module.c > CMakeFiles/__idf_driver.dir/rtc_module.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/rtc_module.c > CMakeFiles/__idf_driver.dir/rtc_module.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/rtc_module.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/rtc_module.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/rtc_module.c -o CMakeFiles/__idf_driver.dir/rtc_module.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/rtc_module.c -o CMakeFiles/__idf_driver.dir/rtc_module.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_crc.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_crc.c.obj: /home/nvv/esp-idf/components/driver/sdspi_crc.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_crc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sdspi_crc.c.obj -c /home/nvv/esp-idf/components/driver/sdspi_crc.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sdspi_crc.c.obj -c /home/nvv/esp-idf/components/driver/sdspi_crc.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_crc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/sdspi_crc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sdspi_crc.c > CMakeFiles/__idf_driver.dir/sdspi_crc.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sdspi_crc.c > CMakeFiles/__idf_driver.dir/sdspi_crc.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_crc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/sdspi_crc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sdspi_crc.c -o CMakeFiles/__idf_driver.dir/sdspi_crc.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sdspi_crc.c -o CMakeFiles/__idf_driver.dir/sdspi_crc.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_host.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_host.c.obj: /home/nvv/esp-idf/components/driver/sdspi_host.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_host.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sdspi_host.c.obj -c /home/nvv/esp-idf/components/driver/sdspi_host.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sdspi_host.c.obj -c /home/nvv/esp-idf/components/driver/sdspi_host.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_host.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/sdspi_host.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sdspi_host.c > CMakeFiles/__idf_driver.dir/sdspi_host.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sdspi_host.c > CMakeFiles/__idf_driver.dir/sdspi_host.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_host.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/sdspi_host.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sdspi_host.c -o CMakeFiles/__idf_driver.dir/sdspi_host.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sdspi_host.c -o CMakeFiles/__idf_driver.dir/sdspi_host.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_transaction.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_transaction.c.obj: /home/nvv/esp-idf/components/driver/sdspi_transaction.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_transaction.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sdspi_transaction.c.obj -c /home/nvv/esp-idf/components/driver/sdspi_transaction.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sdspi_transaction.c.obj -c /home/nvv/esp-idf/components/driver/sdspi_transaction.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_transaction.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/sdspi_transaction.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sdspi_transaction.c > CMakeFiles/__idf_driver.dir/sdspi_transaction.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sdspi_transaction.c > CMakeFiles/__idf_driver.dir/sdspi_transaction.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sdspi_transaction.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/sdspi_transaction.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sdspi_transaction.c -o CMakeFiles/__idf_driver.dir/sdspi_transaction.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sdspi_transaction.c -o CMakeFiles/__idf_driver.dir/sdspi_transaction.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sigmadelta.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sigmadelta.c.obj: /home/nvv/esp-idf/components/driver/sigmadelta.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/sigmadelta.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sigmadelta.c.obj -c /home/nvv/esp-idf/components/driver/sigmadelta.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/sigmadelta.c.obj -c /home/nvv/esp-idf/components/driver/sigmadelta.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sigmadelta.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/sigmadelta.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sigmadelta.c > CMakeFiles/__idf_driver.dir/sigmadelta.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/sigmadelta.c > CMakeFiles/__idf_driver.dir/sigmadelta.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/sigmadelta.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/sigmadelta.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sigmadelta.c -o CMakeFiles/__idf_driver.dir/sigmadelta.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/sigmadelta.c -o CMakeFiles/__idf_driver.dir/sigmadelta.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_common.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_common.c.obj: /home/nvv/esp-idf/components/driver/spi_common.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_common.c.obj -c /home/nvv/esp-idf/components/driver/spi_common.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_common.c.obj -c /home/nvv/esp-idf/components/driver/spi_common.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_common.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/spi_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_common.c > CMakeFiles/__idf_driver.dir/spi_common.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_common.c > CMakeFiles/__idf_driver.dir/spi_common.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_common.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/spi_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_common.c -o CMakeFiles/__idf_driver.dir/spi_common.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_common.c -o CMakeFiles/__idf_driver.dir/spi_common.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_master.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_master.c.obj: /home/nvv/esp-idf/components/driver/spi_master.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_master.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -std=gnu11 -o CMakeFiles/__idf_driver.dir/spi_master.c.obj -c /home/nvv/esp-idf/components/driver/spi_master.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -std=gnu11 -o CMakeFiles/__idf_driver.dir/spi_master.c.obj -c /home/nvv/esp-idf/components/driver/spi_master.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_master.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/spi_master.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -std=gnu11 -E /home/nvv/esp-idf/components/driver/spi_master.c > CMakeFiles/__idf_driver.dir/spi_master.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -std=gnu11 -E /home/nvv/esp-idf/components/driver/spi_master.c > CMakeFiles/__idf_driver.dir/spi_master.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_master.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/spi_master.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -std=gnu11 -S /home/nvv/esp-idf/components/driver/spi_master.c -o CMakeFiles/__idf_driver.dir/spi_master.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -std=gnu11 -S /home/nvv/esp-idf/components/driver/spi_master.c -o CMakeFiles/__idf_driver.dir/spi_master.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave.c.obj: /home/nvv/esp-idf/components/driver/spi_slave.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_slave.c.obj -c /home/nvv/esp-idf/components/driver/spi_slave.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_slave.c.obj -c /home/nvv/esp-idf/components/driver/spi_slave.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/spi_slave.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_slave.c > CMakeFiles/__idf_driver.dir/spi_slave.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_slave.c > CMakeFiles/__idf_driver.dir/spi_slave.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/spi_slave.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_slave.c -o CMakeFiles/__idf_driver.dir/spi_slave.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_slave.c -o CMakeFiles/__idf_driver.dir/spi_slave.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_bus_lock.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_bus_lock.c.obj: /home/nvv/esp-idf/components/driver/spi_bus_lock.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_bus_lock.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_bus_lock.c.obj -c /home/nvv/esp-idf/components/driver/spi_bus_lock.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_bus_lock.c.obj -c /home/nvv/esp-idf/components/driver/spi_bus_lock.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_bus_lock.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/spi_bus_lock.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_bus_lock.c > CMakeFiles/__idf_driver.dir/spi_bus_lock.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_bus_lock.c > CMakeFiles/__idf_driver.dir/spi_bus_lock.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_bus_lock.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/spi_bus_lock.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_bus_lock.c -o CMakeFiles/__idf_driver.dir/spi_bus_lock.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_bus_lock.c -o CMakeFiles/__idf_driver.dir/spi_bus_lock.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.obj: /home/nvv/esp-idf/components/driver/timer.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/timer.c.obj -c /home/nvv/esp-idf/components/driver/timer.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/timer.c.obj -c /home/nvv/esp-idf/components/driver/timer.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/timer.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/timer.c > CMakeFiles/__idf_driver.dir/timer.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/timer.c > CMakeFiles/__idf_driver.dir/timer.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/timer.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/timer.c -o CMakeFiles/__idf_driver.dir/timer.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/timer.c -o CMakeFiles/__idf_driver.dir/timer.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/twai.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/twai.c.obj: /home/nvv/esp-idf/components/driver/twai.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/twai.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/twai.c.obj -c /home/nvv/esp-idf/components/driver/twai.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/twai.c.obj -c /home/nvv/esp-idf/components/driver/twai.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/twai.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/twai.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/twai.c > CMakeFiles/__idf_driver.dir/twai.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/twai.c > CMakeFiles/__idf_driver.dir/twai.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/twai.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/twai.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/twai.c -o CMakeFiles/__idf_driver.dir/twai.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/twai.c -o CMakeFiles/__idf_driver.dir/twai.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.obj: /home/nvv/esp-idf/components/driver/uart.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/uart.c.obj -c /home/nvv/esp-idf/components/driver/uart.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/uart.c.obj -c /home/nvv/esp-idf/components/driver/uart.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/uart.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/uart.c > CMakeFiles/__idf_driver.dir/uart.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/uart.c > CMakeFiles/__idf_driver.dir/uart.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/uart.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/uart.c -o CMakeFiles/__idf_driver.dir/uart.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/uart.c -o CMakeFiles/__idf_driver.dir/uart.c.s
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj: /home/nvv/esp-idf/components/driver/adc_common.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/adc_common.c.obj -c /home/nvv/esp-idf/components/driver/adc_common.c
+esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
+esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.obj: /home/nvv/esp-idf/components/driver/gdma.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/gdma.c.obj -c /home/nvv/esp-idf/components/driver/gdma.c
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/adc_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/adc_common.c > CMakeFiles/__idf_driver.dir/adc_common.c.i
+esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/gdma.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/gdma.c > CMakeFiles/__idf_driver.dir/gdma.c.i
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/adc_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/adc_common.c -o CMakeFiles/__idf_driver.dir/adc_common.c.s
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.obj: /home/nvv/esp-idf/components/driver/dac_common.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/dac_common.c.obj -c /home/nvv/esp-idf/components/driver/dac_common.c
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/dac_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/dac_common.c > CMakeFiles/__idf_driver.dir/dac_common.c.i
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/dac_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/dac_common.c -o CMakeFiles/__idf_driver.dir/dac_common.c.s
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj: /home/nvv/esp-idf/components/driver/dedic_gpio.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj -c /home/nvv/esp-idf/components/driver/dedic_gpio.c
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/dedic_gpio.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/dedic_gpio.c > CMakeFiles/__idf_driver.dir/dedic_gpio.c.i
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/dedic_gpio.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/dedic_gpio.c -o CMakeFiles/__idf_driver.dir/dedic_gpio.c.s
+esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/gdma.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/gdma.c -o CMakeFiles/__idf_driver.dir/gdma.c.s
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj: /home/nvv/esp-idf/components/driver/spi_slave_hd.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj -c /home/nvv/esp-idf/components/driver/spi_slave_hd.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj -c /home/nvv/esp-idf/components/driver/spi_slave_hd.c
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/spi_slave_hd.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_slave_hd.c > CMakeFiles/__idf_driver.dir/spi_slave_hd.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/spi_slave_hd.c > CMakeFiles/__idf_driver.dir/spi_slave_hd.c.i
 
 esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/spi_slave_hd.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_slave_hd.c -o CMakeFiles/__idf_driver.dir/spi_slave_hd.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/spi_slave_hd.c -o CMakeFiles/__idf_driver.dir/spi_slave_hd.c.s
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj: /home/nvv/esp-idf/components/driver/touch_sensor_common.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj -c /home/nvv/esp-idf/components/driver/touch_sensor_common.c
+esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
+esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj: /home/nvv/esp-idf/components/driver/adc_common.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/adc_common.c.obj -c /home/nvv/esp-idf/components/driver/adc_common.c
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/touch_sensor_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/touch_sensor_common.c > CMakeFiles/__idf_driver.dir/touch_sensor_common.c.i
+esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/adc_common.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/adc_common.c > CMakeFiles/__idf_driver.dir/adc_common.c.i
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/touch_sensor_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/touch_sensor_common.c -o CMakeFiles/__idf_driver.dir/touch_sensor_common.c.s
+esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/adc_common.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/adc_common.c -o CMakeFiles/__idf_driver.dir/adc_common.c.s
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj: /home/nvv/esp-idf/components/driver/esp32s2/rtc_tempsensor.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj -c /home/nvv/esp-idf/components/driver/esp32s2/rtc_tempsensor.c
+esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
+esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj: /home/nvv/esp-idf/components/driver/usb_serial_jtag.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj -c /home/nvv/esp-idf/components/driver/usb_serial_jtag.c
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32s2/rtc_tempsensor.c > CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.i
+esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/usb_serial_jtag.c > CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.i
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32s2/rtc_tempsensor.c -o CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.s
+esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/usb_serial_jtag.c -o CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.s
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj: /home/nvv/esp-idf/components/driver/esp32s2/touch_sensor.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj -c /home/nvv/esp-idf/components/driver/esp32s2/touch_sensor.c
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj: /home/nvv/esp-idf/components/driver/esp32c3/adc.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj -c /home/nvv/esp-idf/components/driver/esp32c3/adc.c
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32s2/touch_sensor.c > CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.i
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32c3/adc.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32c3/adc.c > CMakeFiles/__idf_driver.dir/esp32c3/adc.c.i
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32s2/touch_sensor.c -o CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.s
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32c3/adc.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32c3/adc.c -o CMakeFiles/__idf_driver.dir/esp32c3/adc.c.s
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj: /home/nvv/esp-idf/components/driver/esp32s2/adc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj -c /home/nvv/esp-idf/components/driver/esp32s2/adc.c
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj: /home/nvv/esp-idf/components/driver/esp32c3/adc2_init_cal.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj -c /home/nvv/esp-idf/components/driver/esp32c3/adc2_init_cal.c
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32s2/adc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32s2/adc.c > CMakeFiles/__idf_driver.dir/esp32s2/adc.c.i
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32c3/adc2_init_cal.c > CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.i
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32s2/adc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32s2/adc.c -o CMakeFiles/__idf_driver.dir/esp32s2/adc.c.s
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32c3/adc2_init_cal.c -o CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.s
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj: /home/nvv/esp-idf/components/driver/esp32s2/adc2_init_cal.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj -c /home/nvv/esp-idf/components/driver/esp32s2/adc2_init_cal.c
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj: /home/nvv/esp-idf/components/driver/esp32c3/rtc_tempsensor.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj -c /home/nvv/esp-idf/components/driver/esp32c3/rtc_tempsensor.c
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32s2/adc2_init_cal.c > CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.i
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32c3/rtc_tempsensor.c > CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.i
 
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32s2/adc2_init_cal.c -o CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.s
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj: esp-idf/driver/CMakeFiles/__idf_driver.dir/flags.make
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj: /home/nvv/esp-idf/components/driver/esp32s2/dac.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj -c /home/nvv/esp-idf/components/driver/esp32s2/dac.c
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_driver.dir/esp32s2/dac.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/driver/esp32s2/dac.c > CMakeFiles/__idf_driver.dir/esp32s2/dac.c.i
-
-esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32s2/dac.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32s2/dac.c -o CMakeFiles/__idf_driver.dir/esp32s2/dac.c.s
+esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/driver/esp32c3/rtc_tempsensor.c -o CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.s
 
 # Object files for target __idf_driver
 __idf_driver_OBJECTS = \
@@ -488,16 +449,13 @@ __idf_driver_OBJECTS = \
 "CMakeFiles/__idf_driver.dir/timer.c.obj" \
 "CMakeFiles/__idf_driver.dir/twai.c.obj" \
 "CMakeFiles/__idf_driver.dir/uart.c.obj" \
-"CMakeFiles/__idf_driver.dir/adc_common.c.obj" \
-"CMakeFiles/__idf_driver.dir/dac_common.c.obj" \
-"CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj" \
+"CMakeFiles/__idf_driver.dir/gdma.c.obj" \
 "CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj" \
-"CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj" \
-"CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj" \
-"CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj" \
-"CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj" \
-"CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj" \
-"CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj"
+"CMakeFiles/__idf_driver.dir/adc_common.c.obj" \
+"CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj" \
+"CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj" \
+"CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj" \
+"CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj"
 
 # External object files for target __idf_driver
 __idf_driver_EXTERNAL_OBJECTS =
@@ -522,19 +480,16 @@ esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_bus_l
 esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.obj
 esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/twai.c.obj
 esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/uart.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/dac_common.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj
+esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/gdma.c.obj
 esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/touch_sensor_common.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/rtc_tempsensor.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/touch_sensor.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/adc2_init_cal.c.obj
-esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32s2/dac.c.obj
+esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.obj
+esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/usb_serial_jtag.c.obj
+esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj
+esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc2_init_cal.c.obj
+esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/rtc_tempsensor.c.obj
 esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make
 esp-idf/driver/libdriver.a: esp-idf/driver/CMakeFiles/__idf_driver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking C static library libdriver.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking C static library libdriver.a"
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && $(CMAKE_COMMAND) -P CMakeFiles/__idf_driver.dir/cmake_clean_target.cmake
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/__idf_driver.dir/link.txt --verbose=$(VERBOSE)
 

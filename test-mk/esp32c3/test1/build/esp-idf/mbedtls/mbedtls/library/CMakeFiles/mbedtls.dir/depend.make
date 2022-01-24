@@ -39,8 +39,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/mbedtls_debug.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -55,9 +55,9 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/compare_set.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_hw_support/include/soc/spinlock.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_system/include/esp_private/crosscore_int.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_system/include/esp_system.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_system/include/esp_task.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/esp_timer/include/esp_timer.h
@@ -72,11 +72,9 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/include/freertos/queue.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/include/freertos/task.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portbenchmark.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/portmacro_priv.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/port/xtensa/include/freertos/xtensa_api.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/heap/include/esp_heap_caps.h
@@ -148,28 +146,17 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/select.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/system.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/coreasm.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_api.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa_context.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-core-state.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime-frames.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: /home/nvv/esp-idf/components/xtensa/include/xtensa/xtruntime.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/__/__/port/net_sockets.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/debug.c.obj: /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/asn1.h
@@ -306,8 +293,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cli.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -358,8 +345,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/n
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_cookie.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -410,8 +397,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_srv.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -462,8 +449,8 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/n
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_ticket.c.obj: config/sdkconfig.h
 
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -515,7 +502,7 @@ esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/pthread.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/sys/time.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/time.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedtls.dir/ssl_tls.c.obj: config/sdkconfig.h
 

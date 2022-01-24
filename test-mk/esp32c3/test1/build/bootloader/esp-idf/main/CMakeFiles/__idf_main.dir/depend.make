@@ -29,8 +29,8 @@ esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf
 esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
-esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/main/CMakeFiles/__idf_main.dir/bootloader_start.c.obj: config/sdkconfig.h
 

@@ -79,321 +79,280 @@ include esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj: /home/nvv/esp-idf/components/esp_system/esp_err.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/esp_err.c.obj -c /home/nvv/esp-idf/components/esp_system/esp_err.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/esp_err.c.obj -c /home/nvv/esp-idf/components/esp_system/esp_err.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/esp_err.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/esp_err.c > CMakeFiles/__idf_esp_system.dir/esp_err.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/esp_err.c > CMakeFiles/__idf_esp_system.dir/esp_err.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/esp_err.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/esp_err.c -o CMakeFiles/__idf_esp_system.dir/esp_err.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/esp_err.c -o CMakeFiles/__idf_esp_system.dir/esp_err.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.obj: /home/nvv/esp-idf/components/esp_system/crosscore_int.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/crosscore_int.c.obj -c /home/nvv/esp-idf/components/esp_system/crosscore_int.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/crosscore_int.c.obj -c /home/nvv/esp-idf/components/esp_system/crosscore_int.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/crosscore_int.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/crosscore_int.c > CMakeFiles/__idf_esp_system.dir/crosscore_int.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/crosscore_int.c > CMakeFiles/__idf_esp_system.dir/crosscore_int.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/crosscore_int.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/crosscore_int.c -o CMakeFiles/__idf_esp_system.dir/crosscore_int.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/crosscore_int.c -o CMakeFiles/__idf_esp_system.dir/crosscore_int.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.obj: /home/nvv/esp-idf/components/esp_system/freertos_hooks.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.obj -c /home/nvv/esp-idf/components/esp_system/freertos_hooks.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.obj -c /home/nvv/esp-idf/components/esp_system/freertos_hooks.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/freertos_hooks.c > CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/freertos_hooks.c > CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/freertos_hooks.c -o CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/freertos_hooks.c -o CMakeFiles/__idf_esp_system.dir/freertos_hooks.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/int_wdt.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/int_wdt.c.obj: /home/nvv/esp-idf/components/esp_system/int_wdt.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/int_wdt.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/int_wdt.c.obj -c /home/nvv/esp-idf/components/esp_system/int_wdt.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/int_wdt.c.obj -c /home/nvv/esp-idf/components/esp_system/int_wdt.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/int_wdt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/int_wdt.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/int_wdt.c > CMakeFiles/__idf_esp_system.dir/int_wdt.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/int_wdt.c > CMakeFiles/__idf_esp_system.dir/int_wdt.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/int_wdt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/int_wdt.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/int_wdt.c -o CMakeFiles/__idf_esp_system.dir/int_wdt.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/int_wdt.c -o CMakeFiles/__idf_esp_system.dir/int_wdt.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.obj: /home/nvv/esp-idf/components/esp_system/panic.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/panic.c.obj -c /home/nvv/esp-idf/components/esp_system/panic.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/panic.c.obj -c /home/nvv/esp-idf/components/esp_system/panic.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/panic.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/panic.c > CMakeFiles/__idf_esp_system.dir/panic.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/panic.c > CMakeFiles/__idf_esp_system.dir/panic.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/panic.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/panic.c -o CMakeFiles/__idf_esp_system.dir/panic.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/panic.c -o CMakeFiles/__idf_esp_system.dir/panic.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_system.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_system.c.obj: /home/nvv/esp-idf/components/esp_system/esp_system.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_system.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/esp_system.c.obj -c /home/nvv/esp-idf/components/esp_system/esp_system.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/esp_system.c.obj -c /home/nvv/esp-idf/components/esp_system/esp_system.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_system.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/esp_system.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/esp_system.c > CMakeFiles/__idf_esp_system.dir/esp_system.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/esp_system.c > CMakeFiles/__idf_esp_system.dir/esp_system.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_system.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/esp_system.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/esp_system.c -o CMakeFiles/__idf_esp_system.dir/esp_system.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/esp_system.c -o CMakeFiles/__idf_esp_system.dir/esp_system.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/startup.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/startup.c.obj: /home/nvv/esp-idf/components/esp_system/startup.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/startup.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -o CMakeFiles/__idf_esp_system.dir/startup.c.obj -c /home/nvv/esp-idf/components/esp_system/startup.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -o CMakeFiles/__idf_esp_system.dir/startup.c.obj -c /home/nvv/esp-idf/components/esp_system/startup.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/startup.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/startup.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -E /home/nvv/esp-idf/components/esp_system/startup.c > CMakeFiles/__idf_esp_system.dir/startup.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -E /home/nvv/esp-idf/components/esp_system/startup.c > CMakeFiles/__idf_esp_system.dir/startup.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/startup.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/startup.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -S /home/nvv/esp-idf/components/esp_system/startup.c -o CMakeFiles/__idf_esp_system.dir/startup.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -S /home/nvv/esp-idf/components/esp_system/startup.c -o CMakeFiles/__idf_esp_system.dir/startup.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/system_time.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/system_time.c.obj: /home/nvv/esp-idf/components/esp_system/system_time.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/system_time.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/system_time.c.obj -c /home/nvv/esp-idf/components/esp_system/system_time.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/system_time.c.obj -c /home/nvv/esp-idf/components/esp_system/system_time.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/system_time.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/system_time.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/system_time.c > CMakeFiles/__idf_esp_system.dir/system_time.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/system_time.c > CMakeFiles/__idf_esp_system.dir/system_time.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/system_time.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/system_time.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/system_time.c -o CMakeFiles/__idf_esp_system.dir/system_time.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/system_time.c -o CMakeFiles/__idf_esp_system.dir/system_time.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/stack_check.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/stack_check.c.obj: /home/nvv/esp-idf/components/esp_system/stack_check.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/stack_check.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -o CMakeFiles/__idf_esp_system.dir/stack_check.c.obj -c /home/nvv/esp-idf/components/esp_system/stack_check.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -o CMakeFiles/__idf_esp_system.dir/stack_check.c.obj -c /home/nvv/esp-idf/components/esp_system/stack_check.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/stack_check.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/stack_check.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -E /home/nvv/esp-idf/components/esp_system/stack_check.c > CMakeFiles/__idf_esp_system.dir/stack_check.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -E /home/nvv/esp-idf/components/esp_system/stack_check.c > CMakeFiles/__idf_esp_system.dir/stack_check.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/stack_check.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/stack_check.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -S /home/nvv/esp-idf/components/esp_system/stack_check.c -o CMakeFiles/__idf_esp_system.dir/stack_check.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -fno-stack-protector -S /home/nvv/esp-idf/components/esp_system/stack_check.c -o CMakeFiles/__idf_esp_system.dir/stack_check.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj: /home/nvv/esp-idf/components/esp_system/task_wdt.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj -c /home/nvv/esp-idf/components/esp_system/task_wdt.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj -c /home/nvv/esp-idf/components/esp_system/task_wdt.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/task_wdt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/task_wdt.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/task_wdt.c > CMakeFiles/__idf_esp_system.dir/task_wdt.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/task_wdt.c > CMakeFiles/__idf_esp_system.dir/task_wdt.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/task_wdt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/task_wdt.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/task_wdt.c -o CMakeFiles/__idf_esp_system.dir/task_wdt.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/task_wdt.c -o CMakeFiles/__idf_esp_system.dir/task_wdt.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.obj: /home/nvv/esp-idf/components/esp_system/ubsan.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/ubsan.c.obj -c /home/nvv/esp-idf/components/esp_system/ubsan.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/ubsan.c.obj -c /home/nvv/esp-idf/components/esp_system/ubsan.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/ubsan.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/ubsan.c > CMakeFiles/__idf_esp_system.dir/ubsan.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/ubsan.c > CMakeFiles/__idf_esp_system.dir/ubsan.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/ubsan.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/ubsan.c -o CMakeFiles/__idf_esp_system.dir/ubsan.c.s
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj: /home/nvv/esp-idf/components/esp_system/dbg_stubs.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj -c /home/nvv/esp-idf/components/esp_system/dbg_stubs.c
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/dbg_stubs.c > CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.i
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/dbg_stubs.c -o CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/ubsan.c -o CMakeFiles/__idf_esp_system.dir/ubsan.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj: /home/nvv/esp-idf/components/esp_system/port/cpu_start.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj -c /home/nvv/esp-idf/components/esp_system/port/cpu_start.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj -c /home/nvv/esp-idf/components/esp_system/port/cpu_start.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/cpu_start.c > CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/cpu_start.c > CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/cpu_start.c -o CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/cpu_start.c -o CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj: /home/nvv/esp-idf/components/esp_system/port/panic_handler.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj -c /home/nvv/esp-idf/components/esp_system/port/panic_handler.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj -c /home/nvv/esp-idf/components/esp_system/port/panic_handler.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/panic_handler.c > CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/panic_handler.c > CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/panic_handler.c -o CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/panic_handler.c -o CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.s
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj: /home/nvv/esp-idf/components/esp_system/port/brownout.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj -c /home/nvv/esp-idf/components/esp_system/port/brownout.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj -c /home/nvv/esp-idf/components/esp_system/port/brownout.c
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/brownout.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/brownout.c > CMakeFiles/__idf_esp_system.dir/port/brownout.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/brownout.c > CMakeFiles/__idf_esp_system.dir/port/brownout.c.i
 
 esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/brownout.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/brownout.c -o CMakeFiles/__idf_esp_system.dir/port/brownout.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/brownout.c -o CMakeFiles/__idf_esp_system.dir/port/brownout.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/highint_hdl.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building ASM object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/highint_hdl.S
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/clk.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/clk.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/clk.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/clk.c
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/clk.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/clk.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.i
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/clk.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/clk.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/reset_reason.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/reset_reason.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/reset_reason.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/reset_reason.c
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/reset_reason.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/reset_reason.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.i
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/reset_reason.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/reset_reason.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/system_internal.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/system_internal.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/system_internal.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/system_internal.c
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/system_internal.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/system_internal.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.i
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/system_internal.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/system_internal.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/cache_err_int.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/cache_err_int.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/cache_err_int.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/cache_err_int.c
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/cache_err_int.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/cache_err_int.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.i
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/cache_err_int.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32s2/cache_err_int.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj: /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/apb_backup_dma.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj -c /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/apb_backup_dma.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/panic_arch.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/panic_arch.c
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/apb_backup_dma.c > CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/panic_arch.c > CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.i
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/soc/esp32c3/apb_backup_dma.c -o CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/panic_arch.c -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj: /home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/panic_handler_asm.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building ASM object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/panic_handler_asm.S
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack.c > CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack.c
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack.c -o CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.s
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack.c > CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.i
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj: /home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack_asm.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building ASM object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack_asm.S
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack.c -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj: /home/nvv/esp-idf/components/esp_system/port/arch/riscv/panic_arch.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/riscv/panic_arch.c
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack_asm.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building ASM object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/expression_with_stack_asm.S
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/arch/riscv/panic_arch.c > CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.i
 
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers.c
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers.c > CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.i
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers.c -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.s
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers_asm.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building ASM object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/debug_helpers_asm.S
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/flags.make
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj: /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/trax.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj -c /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/trax.c
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/trax.c > CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.i
-
-esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/arch/xtensa/trax.c -o CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.s
+esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_system/port/arch/riscv/panic_arch.c -o CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.s
 
 # Object files for target __idf_esp_system
 __idf_esp_system_OBJECTS = \
@@ -408,22 +367,17 @@ __idf_esp_system_OBJECTS = \
 "CMakeFiles/__idf_esp_system.dir/stack_check.c.obj" \
 "CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj" \
 "CMakeFiles/__idf_esp_system.dir/ubsan.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj" \
 "CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj" \
 "CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj" \
 "CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj" \
-"CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj"
+"CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj" \
+"CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj"
 
 # External object files for target __idf_esp_system
 __idf_esp_system_EXTERNAL_OBJECTS =
@@ -439,25 +393,20 @@ esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_syst
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/stack_check.c.obj
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/task_wdt.c.obj
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/dbg_stubs.c.obj
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/cpu_start.c.obj
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/panic_handler.c.obj
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/brownout.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/highint_hdl.S.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/clk.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/reset_reason.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/system_internal.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32s2/cache_err_int.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_arch.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/panic_handler_asm.S.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/expression_with_stack_asm.S.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers.c.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/debug_helpers_asm.S.obj
-esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/xtensa/trax.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/clk.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/reset_reason.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/system_internal.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/cache_err_int.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/soc/esp32c3/apb_backup_dma.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack.c.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/expression_with_stack_asm.S.obj
+esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/panic_arch.c.obj
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make
 esp-idf/esp_system/libesp_system.a: esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking C static library libesp_system.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking C static library libesp_system.a"
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && $(CMAKE_COMMAND) -P CMakeFiles/__idf_esp_system.dir/cmake_clean_target.cmake
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/__idf_esp_system.dir/link.txt --verbose=$(VERBOSE)
 

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/__idf_spi_flash.dir/cache_utils.c.obj"
-  "CMakeFiles/__idf_spi_flash.dir/esp32s2/flash_ops_esp32s2.c.obj"
-  "CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj"
+  "CMakeFiles/__idf_spi_flash.dir/esp32c3/flash_ops_esp32c3.c.obj"
+  "CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj"
   "CMakeFiles/__idf_spi_flash.dir/esp_flash_api.c.obj"
   "CMakeFiles/__idf_spi_flash.dir/esp_flash_spi_init.c.obj"
   "CMakeFiles/__idf_spi_flash.dir/flash_mmap.c.obj"

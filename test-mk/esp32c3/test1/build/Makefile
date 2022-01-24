@@ -189,32 +189,6 @@ uf2/fast:
 .PHONY : uf2/fast
 
 #=============================================================================
-# Target rules for targets named dfu-flash
-
-# Build rule for target.
-dfu-flash: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dfu-flash
-.PHONY : dfu-flash
-
-# fast build rule for target.
-dfu-flash/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-flash.dir/build.make CMakeFiles/dfu-flash.dir/build
-.PHONY : dfu-flash/fast
-
-#=============================================================================
-# Target rules for targets named dfu
-
-# Build rule for target.
-dfu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dfu
-.PHONY : dfu
-
-# fast build rule for target.
-dfu/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu.dir/build.make CMakeFiles/dfu.dir/build
-.PHONY : dfu/fast
-
-#=============================================================================
 # Target rules for targets named menuconfig
 
 # Build rule for target.
@@ -278,19 +252,6 @@ gen_project_binary: cmake_check_build_system
 gen_project_binary/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gen_project_binary.dir/build.make CMakeFiles/gen_project_binary.dir/build
 .PHONY : gen_project_binary/fast
-
-#=============================================================================
-# Target rules for targets named dfu-list
-
-# Build rule for target.
-dfu-list: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dfu-list
-.PHONY : dfu-list
-
-# fast build rule for target.
-dfu-list/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dfu-list.dir/build.make CMakeFiles/dfu-list.dir/build
-.PHONY : dfu-list/fast
 
 #=============================================================================
 # Target rules for targets named app
@@ -1073,17 +1034,17 @@ __idf_esp_hw_support/fast:
 .PHONY : __idf_esp_hw_support/fast
 
 #=============================================================================
-# Target rules for targets named __idf_xtensa
+# Target rules for targets named __idf_riscv
 
 # Build rule for target.
-__idf_xtensa: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_xtensa
-.PHONY : __idf_xtensa
+__idf_riscv: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_riscv
+.PHONY : __idf_riscv
 
 # fast build rule for target.
-__idf_xtensa/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/build.make esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/build
-.PHONY : __idf_xtensa/fast
+__idf_riscv/fast:
+	$(MAKE) $(MAKESILENT) -f esp-idf/riscv/CMakeFiles/__idf_riscv.dir/build.make esp-idf/riscv/CMakeFiles/__idf_riscv.dir/build
+.PHONY : __idf_riscv/fast
 
 #=============================================================================
 # Target rules for targets named __idf_esp_common
@@ -1567,19 +1528,6 @@ __idf_openssl/fast:
 .PHONY : __idf_openssl/fast
 
 #=============================================================================
-# Target rules for targets named __idf_perfmon
-
-# Build rule for target.
-__idf_perfmon: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_perfmon
-.PHONY : __idf_perfmon
-
-# fast build rule for target.
-__idf_perfmon/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/perfmon/CMakeFiles/__idf_perfmon.dir/build.make esp-idf/perfmon/CMakeFiles/__idf_perfmon.dir/build
-.PHONY : __idf_perfmon/fast
-
-#=============================================================================
 # Target rules for targets named __idf_spiffs
 
 # Build rule for target.
@@ -1591,45 +1539,6 @@ __idf_spiffs: cmake_check_build_system
 __idf_spiffs/fast:
 	$(MAKE) $(MAKESILENT) -f esp-idf/spiffs/CMakeFiles/__idf_spiffs.dir/build.make esp-idf/spiffs/CMakeFiles/__idf_spiffs.dir/build
 .PHONY : __idf_spiffs/fast
-
-#=============================================================================
-# Target rules for targets named __idf_touch_element
-
-# Build rule for target.
-__idf_touch_element: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_touch_element
-.PHONY : __idf_touch_element
-
-# fast build rule for target.
-__idf_touch_element/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/touch_element/CMakeFiles/__idf_touch_element.dir/build.make esp-idf/touch_element/CMakeFiles/__idf_touch_element.dir/build
-.PHONY : __idf_touch_element/fast
-
-#=============================================================================
-# Target rules for targets named __idf_ulp
-
-# Build rule for target.
-__idf_ulp: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_ulp
-.PHONY : __idf_ulp
-
-# fast build rule for target.
-__idf_ulp/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/ulp/CMakeFiles/__idf_ulp.dir/build.make esp-idf/ulp/CMakeFiles/__idf_ulp.dir/build
-.PHONY : __idf_ulp/fast
-
-#=============================================================================
-# Target rules for targets named __idf_usb
-
-# Build rule for target.
-__idf_usb: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_usb
-.PHONY : __idf_usb
-
-# fast build rule for target.
-__idf_usb/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/usb/CMakeFiles/__idf_usb.dir/build.make esp-idf/usb/CMakeFiles/__idf_usb.dir/build
-.PHONY : __idf_usb/fast
 
 #=============================================================================
 # Target rules for targets named __idf_wifi_provisioning
@@ -1657,32 +1566,32 @@ __idf_main/fast:
 	$(MAKE) $(MAKESILENT) -f esp-idf/main/CMakeFiles/__idf_main.dir/build.make esp-idf/main/CMakeFiles/__idf_main.dir/build
 .PHONY : __idf_main/fast
 
-project_elf_src_esp32s2.obj: project_elf_src_esp32s2.c.obj
+project_elf_src_esp32c3.obj: project_elf_src_esp32c3.c.obj
 
-.PHONY : project_elf_src_esp32s2.obj
+.PHONY : project_elf_src_esp32c3.obj
 
 # target to build an object file
-project_elf_src_esp32s2.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1prj.elf.dir/build.make CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.obj
-.PHONY : project_elf_src_esp32s2.c.obj
+project_elf_src_esp32c3.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1prj.elf.dir/build.make CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj
+.PHONY : project_elf_src_esp32c3.c.obj
 
-project_elf_src_esp32s2.i: project_elf_src_esp32s2.c.i
+project_elf_src_esp32c3.i: project_elf_src_esp32c3.c.i
 
-.PHONY : project_elf_src_esp32s2.i
+.PHONY : project_elf_src_esp32c3.i
 
 # target to preprocess a source file
-project_elf_src_esp32s2.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1prj.elf.dir/build.make CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.i
-.PHONY : project_elf_src_esp32s2.c.i
+project_elf_src_esp32c3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1prj.elf.dir/build.make CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i
+.PHONY : project_elf_src_esp32c3.c.i
 
-project_elf_src_esp32s2.s: project_elf_src_esp32s2.c.s
+project_elf_src_esp32c3.s: project_elf_src_esp32c3.c.s
 
-.PHONY : project_elf_src_esp32s2.s
+.PHONY : project_elf_src_esp32c3.s
 
 # target to generate assembly for a file
-project_elf_src_esp32s2.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1prj.elf.dir/build.make CMakeFiles/test1prj.elf.dir/project_elf_src_esp32s2.c.s
-.PHONY : project_elf_src_esp32s2.c.s
+project_elf_src_esp32c3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1prj.elf.dir/build.make CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s
+.PHONY : project_elf_src_esp32c3.c.s
 
 # Help Target
 help:
@@ -1706,9 +1615,6 @@ help:
 	@echo "... bootloader-flash"
 	@echo "... confserver"
 	@echo "... custom_bundle"
-	@echo "... dfu"
-	@echo "... dfu-flash"
-	@echo "... dfu-list"
 	@echo "... efuse_common_table"
 	@echo "... efuse_custom_table"
 	@echo "... efuse_test_table"
@@ -1787,32 +1693,28 @@ help:
 	@echo "... __idf_nghttp"
 	@echo "... __idf_nvs_flash"
 	@echo "... __idf_openssl"
-	@echo "... __idf_perfmon"
 	@echo "... __idf_protobuf-c"
 	@echo "... __idf_protocomm"
 	@echo "... __idf_pthread"
+	@echo "... __idf_riscv"
 	@echo "... __idf_sdmmc"
 	@echo "... __idf_soc"
 	@echo "... __idf_spi_flash"
 	@echo "... __idf_spiffs"
 	@echo "... __idf_tcp_transport"
 	@echo "... __idf_tcpip_adapter"
-	@echo "... __idf_touch_element"
-	@echo "... __idf_ulp"
 	@echo "... __idf_unity"
-	@echo "... __idf_usb"
 	@echo "... __idf_vfs"
 	@echo "... __idf_wear_levelling"
 	@echo "... __idf_wifi_provisioning"
 	@echo "... __idf_wpa_supplicant"
-	@echo "... __idf_xtensa"
 	@echo "... mbedcrypto"
 	@echo "... mbedtls"
 	@echo "... mbedx509"
 	@echo "... test1prj.elf"
-	@echo "... project_elf_src_esp32s2.obj"
-	@echo "... project_elf_src_esp32s2.i"
-	@echo "... project_elf_src_esp32s2.s"
+	@echo "... project_elf_src_esp32c3.obj"
+	@echo "... project_elf_src_esp32c3.i"
+	@echo "... project_elf_src_esp32c3.s"
 .PHONY : help
 
 

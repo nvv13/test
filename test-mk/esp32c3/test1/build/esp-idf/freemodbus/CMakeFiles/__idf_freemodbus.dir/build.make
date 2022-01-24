@@ -79,535 +79,535 @@ include esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.obj: /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.obj: /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/mb.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/mb.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/mb.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/mb.c > CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/mb.c > CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/mb.c -o CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/mb.c -o CMakeFiles/__idf_freemodbus.dir/modbus/mb.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/mb_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/mb_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c > CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c > CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii.c -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/ascii/mbascii_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/ascii/mbascii_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c > CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c > CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbrtu.c -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbrtu.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c > CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c > CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/rtu/mbcrc.c -o CMakeFiles/__idf_freemodbus.dir/modbus/rtu/mbcrc.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c > CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c > CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp.c -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/tcp/mbtcp_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/tcp/mbtcp_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/port.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/port.c.obj: /home/nvv/esp-idf/components/freemodbus/port/port.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/port.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/port.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/port.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/port.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/port.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/port.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/port.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/port.c > CMakeFiles/__idf_freemodbus.dir/port/port.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/port.c > CMakeFiles/__idf_freemodbus.dir/port/port.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/port.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/port.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/port.c -o CMakeFiles/__idf_freemodbus.dir/port/port.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/port.c -o CMakeFiles/__idf_freemodbus.dir/port/port.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent.c.obj: /home/nvv/esp-idf/components/freemodbus/port/portevent.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portevent.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portevent.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portevent.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portevent.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/portevent.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portevent.c > CMakeFiles/__idf_freemodbus.dir/port/portevent.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portevent.c > CMakeFiles/__idf_freemodbus.dir/port/portevent.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/portevent.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portevent.c -o CMakeFiles/__idf_freemodbus.dir/port/portevent.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portevent.c -o CMakeFiles/__idf_freemodbus.dir/port/portevent.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.obj: /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c > CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c > CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c -o CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portevent_m.c -o CMakeFiles/__idf_freemodbus.dir/port/portevent_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother.c.obj: /home/nvv/esp-idf/components/freemodbus/port/portother.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portother.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portother.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portother.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portother.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/portother.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portother.c > CMakeFiles/__idf_freemodbus.dir/port/portother.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portother.c > CMakeFiles/__idf_freemodbus.dir/port/portother.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/portother.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portother.c -o CMakeFiles/__idf_freemodbus.dir/port/portother.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portother.c -o CMakeFiles/__idf_freemodbus.dir/port/portother.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.obj: /home/nvv/esp-idf/components/freemodbus/port/portother_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portother_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portother_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portother_m.c > CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portother_m.c > CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portother_m.c -o CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portother_m.c -o CMakeFiles/__idf_freemodbus.dir/port/portother_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial.c.obj: /home/nvv/esp-idf/components/freemodbus/port/portserial.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portserial.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portserial.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portserial.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portserial.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/portserial.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portserial.c > CMakeFiles/__idf_freemodbus.dir/port/portserial.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portserial.c > CMakeFiles/__idf_freemodbus.dir/port/portserial.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/portserial.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portserial.c -o CMakeFiles/__idf_freemodbus.dir/port/portserial.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portserial.c -o CMakeFiles/__idf_freemodbus.dir/port/portserial.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.obj: /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c > CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c > CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c -o CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/portserial_m.c -o CMakeFiles/__idf_freemodbus.dir/port/portserial_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.obj: /home/nvv/esp-idf/components/freemodbus/port/porttimer.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/porttimer.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/porttimer.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/porttimer.c > CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/porttimer.c > CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/porttimer.c -o CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/porttimer.c -o CMakeFiles/__idf_freemodbus.dir/port/porttimer.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.obj: /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c > CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c > CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c -o CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/port/porttimer_m.c -o CMakeFiles/__idf_freemodbus.dir/port/porttimer_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfunccoils_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfunccoils_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdiag.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncdisc_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncholding_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncholding_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncinput_m.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncinput_m.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncother.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbfuncother.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.obj: /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.obj -c /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c > CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.c -o CMakeFiles/__idf_freemodbus.dir/modbus/functions/mbutils.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.obj: /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c > CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c > CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c -o CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/serial_slave/modbus_controller/mbc_serial_slave.c -o CMakeFiles/__idf_freemodbus.dir/serial_slave/modbus_controller/mbc_serial_slave.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.obj: /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c > CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c > CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c -o CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/serial_master/modbus_controller/mbc_serial_master.c -o CMakeFiles/__idf_freemodbus.dir/serial_master/modbus_controller/mbc_serial_master.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.obj: /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c > CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c > CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/port_tcp_slave.c -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/port/port_tcp_slave.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.obj: /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c > CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c > CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_slave/modbus_controller/mbc_tcp_slave.c -o CMakeFiles/__idf_freemodbus.dir/tcp_slave/modbus_controller/mbc_tcp_slave.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.obj: /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c > CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c > CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c -o CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/mbc_tcp_master.c -o CMakeFiles/__idf_freemodbus.dir/tcp_master/modbus_controller/mbc_tcp_master.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.obj: /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.obj -c /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c > CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c > CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c -o CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/tcp_master/port/port_tcp_master.c -o CMakeFiles/__idf_freemodbus.dir/tcp_master/port/port_tcp_master.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.obj: /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_tcp.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_tcp.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.obj: /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_tcp.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_tcp.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.obj: /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_master_serial.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_master_serial.c.s
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.obj: esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/flags.make
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.obj: /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.obj -c /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c > CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.i
 
 esp-idf/freemodbus/CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave_serial.c -o CMakeFiles/__idf_freemodbus.dir/common/esp_modbus_slave_serial.c.s
 
 # Object files for target __idf_freemodbus
 __idf_freemodbus_OBJECTS = \

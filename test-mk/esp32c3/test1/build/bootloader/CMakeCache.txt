@@ -15,18 +15,18 @@
 ########################
 
 //Path to a program.
-CMAKE_ADDR2LINE:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-addr2line
+CMAKE_ADDR2LINE:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-addr2line
 
 //Path to a program.
-CMAKE_AR:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ar
+CMAKE_AR:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_ASM_COMPILER_AR:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ar
+CMAKE_ASM_COMPILER_AR:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ar
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_ASM_COMPILER_RANLIB:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ranlib
+CMAKE_ASM_COMPILER_RANLIB:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ranlib
 
 //Flags used by the ASM compiler during all build types.
 CMAKE_ASM_FLAGS:STRING=
@@ -52,14 +52,14 @@ CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_AR:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ar
+CMAKE_CXX_COMPILER_AR:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ar
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ranlib
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ranlib
 
 //C++ Compiler Base Flags
-CMAKE_CXX_FLAGS:STRING=-mlongcalls
+CMAKE_CXX_FLAGS:STRING=-march=rv32imc
 
 //Flags used by the CXX compiler during DEBUG builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
@@ -75,14 +75,14 @@ CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_AR:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ar
+CMAKE_C_COMPILER_AR:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ar
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_RANLIB:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc-ranlib
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc-ranlib
 
 //C Compiler Base Flags
-CMAKE_C_FLAGS:STRING=-mlongcalls
+CMAKE_C_FLAGS:STRING=-march=rv32imc
 
 //Flags used by the C compiler during DEBUG builds.
 CMAKE_C_FLAGS_DEBUG:STRING=-g
@@ -99,8 +99,8 @@ CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 //Path to a program.
 CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
 
-//Flags used by the linker during all build types.
-CMAKE_EXE_LINKER_FLAGS:STRING=
+//Linker Base Flags
+CMAKE_EXE_LINKER_FLAGS:STRING=-nostartfiles -march=rv32imc --specs=nosys.specs
 
 //Flags used by the linker during DEBUG builds.
 CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
@@ -121,7 +121,7 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ld
+CMAKE_LINKER:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ld
 
 //Path to a program.
 CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
@@ -147,13 +147,13 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_NM:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-nm
+CMAKE_NM:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-nm
 
 //Path to a program.
-CMAKE_OBJCOPY:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-objcopy
+CMAKE_OBJCOPY:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-objcopy
 
 //Path to a program.
-CMAKE_OBJDUMP:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-objdump
+CMAKE_OBJDUMP:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-objdump
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -165,10 +165,10 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 CMAKE_PROJECT_NAME:STATIC=bootloader
 
 //Path to a program.
-CMAKE_RANLIB:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-ranlib
+CMAKE_RANLIB:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib
 
 //Path to a program.
-CMAKE_READELF:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-readelf
+CMAKE_READELF:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-readelf
 
 //Flags used by the linker during the creation of shared libraries
 // during all build types.
@@ -218,10 +218,10 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_STRIP:FILEPATH=/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-strip
+CMAKE_STRIP:FILEPATH=/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-strip
 
 //The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/nvv/esp-idf/tools/cmake/toolchain-esp32s2.cmake
+CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/nvv/esp-idf/tools/cmake/toolchain-esp32c3.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -239,7 +239,7 @@ GIT_EXECUTABLE:FILEPATH=/usr/bin/git
 IDF_PATH:UNINITIALIZED=/home/nvv/esp-idf
 
 //IDF Build Target
-IDF_TARGET:STRING=esp32s2
+IDF_TARGET:STRING=esp32c3
 
 //No help, variable specified on the command line.
 LEGACY_INCLUDE_COMMON_HEADERS:UNINITIALIZED=
@@ -257,25 +257,25 @@ PYTHON_DEPS_CHECKED:UNINITIALIZED=1
 SDKCONFIG:UNINITIALIZED=/home/nvv/test/test-mk/esp32c3/test1/sdkconfig
 
 //Dependencies for the target
-__idf_bootloader_support_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;
+__idf_bootloader_support_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32c3;
 
 //Dependencies for the target
-__idf_efuse_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;
+__idf_efuse_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32c3;
 
 //Dependencies for the target
 __idf_esp_common_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_efuse;general;__idf_bootloader_support;general;__idf_spi_flash;general;__idf_soc;
 
 //Dependencies for the target
-__idf_esp_hw_support_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_hal;general;__idf_esp32s2;
+__idf_esp_hw_support_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_hal;general;__idf_esp32c3;
 
 //Dependencies for the target
 __idf_esp_rom_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;
 
 //Dependencies for the target
-__idf_esp_system_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;
+__idf_esp_system_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32c3;
 
 //Dependencies for the target
-__idf_hal_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_esp32s2;
+__idf_hal_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_esp32c3;
 
 //Dependencies for the target
 __idf_log_LIB_DEPENDS:STATIC=general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;
@@ -284,16 +284,13 @@ __idf_log_LIB_DEPENDS:STATIC=general;__idf_esp_rom;general;__idf_esp_common;gene
 __idf_main_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;
 
 //Dependencies for the target
-__idf_micro-ecc_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;
+__idf_micro-ecc_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32c3;
 
 //Dependencies for the target
-__idf_soc_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;
+__idf_soc_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32c3;
 
 //Dependencies for the target
-__idf_spi_flash_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;
-
-//Dependencies for the target
-__idf_xtensa_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32s2;general;/home/nvv/esp-idf/components/xtensa/esp32s2/libxt_hal.a;
+__idf_spi_flash_LIB_DEPENDS:STATIC=general;__idf_log;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_hw_support;general;__idf_hal;general;__idf_esp32c3;
 
 //Value Computed by CMake
 bootloader_BINARY_DIR:STATIC=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader

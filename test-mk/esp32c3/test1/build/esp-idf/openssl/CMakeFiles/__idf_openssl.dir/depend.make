@@ -25,8 +25,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/es
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_bio.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_bio.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -54,8 +54,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/e
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_cert.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_cert.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -74,8 +74,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/es
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_err.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_err.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -104,8 +104,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/es
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_lib.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_lib.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -129,8 +129,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nv
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_pm.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_methods.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_methods.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -157,8 +157,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/e
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_pkey.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_pkey.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -183,8 +183,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_stack.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_stack.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -215,8 +215,8 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/e
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_opt.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/openssl/library/ssl_x509.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/library/ssl_x509.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -288,9 +288,9 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/es
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_pm.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/openssl/platform/ssl_pm.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_pm.c.obj: config/sdkconfig.h
 
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
@@ -307,7 +307,7 @@ esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/openssl/include/platform/ssl_port.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/openssl/platform/ssl_port.c
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/openssl/CMakeFiles/__idf_openssl.dir/platform/ssl_port.c.obj: config/sdkconfig.h
 

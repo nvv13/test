@@ -190,491 +190,329 @@ __idf_soc/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/build
 .PHONY : __idf_soc/fast
 
-esp32s2/adc_periph.obj: esp32s2/adc_periph.c.obj
+esp32c3/adc_periph.obj: esp32c3/adc_periph.c.obj
 
-.PHONY : esp32s2/adc_periph.obj
-
-# target to build an object file
-esp32s2/adc_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/adc_periph.c.obj
-.PHONY : esp32s2/adc_periph.c.obj
-
-esp32s2/adc_periph.i: esp32s2/adc_periph.c.i
-
-.PHONY : esp32s2/adc_periph.i
-
-# target to preprocess a source file
-esp32s2/adc_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/adc_periph.c.i
-.PHONY : esp32s2/adc_periph.c.i
-
-esp32s2/adc_periph.s: esp32s2/adc_periph.c.s
-
-.PHONY : esp32s2/adc_periph.s
-
-# target to generate assembly for a file
-esp32s2/adc_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/adc_periph.c.s
-.PHONY : esp32s2/adc_periph.c.s
-
-esp32s2/dac_periph.obj: esp32s2/dac_periph.c.obj
-
-.PHONY : esp32s2/dac_periph.obj
+.PHONY : esp32c3/adc_periph.obj
 
 # target to build an object file
-esp32s2/dac_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/dac_periph.c.obj
-.PHONY : esp32s2/dac_periph.c.obj
+esp32c3/adc_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj
+.PHONY : esp32c3/adc_periph.c.obj
 
-esp32s2/dac_periph.i: esp32s2/dac_periph.c.i
+esp32c3/adc_periph.i: esp32c3/adc_periph.c.i
 
-.PHONY : esp32s2/dac_periph.i
+.PHONY : esp32c3/adc_periph.i
 
 # target to preprocess a source file
-esp32s2/dac_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/dac_periph.c.i
-.PHONY : esp32s2/dac_periph.c.i
+esp32c3/adc_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.i
+.PHONY : esp32c3/adc_periph.c.i
 
-esp32s2/dac_periph.s: esp32s2/dac_periph.c.s
+esp32c3/adc_periph.s: esp32c3/adc_periph.c.s
 
-.PHONY : esp32s2/dac_periph.s
+.PHONY : esp32c3/adc_periph.s
 
 # target to generate assembly for a file
-esp32s2/dac_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/dac_periph.c.s
-.PHONY : esp32s2/dac_periph.c.s
+esp32c3/adc_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.s
+.PHONY : esp32c3/adc_periph.c.s
 
-esp32s2/dedic_gpio_periph.obj: esp32s2/dedic_gpio_periph.c.obj
+esp32c3/gdma_periph.obj: esp32c3/gdma_periph.c.obj
 
-.PHONY : esp32s2/dedic_gpio_periph.obj
+.PHONY : esp32c3/gdma_periph.obj
 
 # target to build an object file
-esp32s2/dedic_gpio_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/dedic_gpio_periph.c.obj
-.PHONY : esp32s2/dedic_gpio_periph.c.obj
+esp32c3/gdma_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj
+.PHONY : esp32c3/gdma_periph.c.obj
 
-esp32s2/dedic_gpio_periph.i: esp32s2/dedic_gpio_periph.c.i
+esp32c3/gdma_periph.i: esp32c3/gdma_periph.c.i
 
-.PHONY : esp32s2/dedic_gpio_periph.i
+.PHONY : esp32c3/gdma_periph.i
 
 # target to preprocess a source file
-esp32s2/dedic_gpio_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/dedic_gpio_periph.c.i
-.PHONY : esp32s2/dedic_gpio_periph.c.i
+esp32c3/gdma_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.i
+.PHONY : esp32c3/gdma_periph.c.i
 
-esp32s2/dedic_gpio_periph.s: esp32s2/dedic_gpio_periph.c.s
+esp32c3/gdma_periph.s: esp32c3/gdma_periph.c.s
 
-.PHONY : esp32s2/dedic_gpio_periph.s
+.PHONY : esp32c3/gdma_periph.s
 
 # target to generate assembly for a file
-esp32s2/dedic_gpio_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/dedic_gpio_periph.c.s
-.PHONY : esp32s2/dedic_gpio_periph.c.s
+esp32c3/gdma_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.s
+.PHONY : esp32c3/gdma_periph.c.s
 
-esp32s2/gpio_periph.obj: esp32s2/gpio_periph.c.obj
+esp32c3/gpio_periph.obj: esp32c3/gpio_periph.c.obj
 
-.PHONY : esp32s2/gpio_periph.obj
+.PHONY : esp32c3/gpio_periph.obj
 
 # target to build an object file
-esp32s2/gpio_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/gpio_periph.c.obj
-.PHONY : esp32s2/gpio_periph.c.obj
+esp32c3/gpio_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj
+.PHONY : esp32c3/gpio_periph.c.obj
 
-esp32s2/gpio_periph.i: esp32s2/gpio_periph.c.i
+esp32c3/gpio_periph.i: esp32c3/gpio_periph.c.i
 
-.PHONY : esp32s2/gpio_periph.i
+.PHONY : esp32c3/gpio_periph.i
 
 # target to preprocess a source file
-esp32s2/gpio_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/gpio_periph.c.i
-.PHONY : esp32s2/gpio_periph.c.i
+esp32c3/gpio_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.i
+.PHONY : esp32c3/gpio_periph.c.i
 
-esp32s2/gpio_periph.s: esp32s2/gpio_periph.c.s
+esp32c3/gpio_periph.s: esp32c3/gpio_periph.c.s
 
-.PHONY : esp32s2/gpio_periph.s
+.PHONY : esp32c3/gpio_periph.s
 
 # target to generate assembly for a file
-esp32s2/gpio_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/gpio_periph.c.s
-.PHONY : esp32s2/gpio_periph.c.s
+esp32c3/gpio_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.s
+.PHONY : esp32c3/gpio_periph.c.s
 
-esp32s2/i2c_periph.obj: esp32s2/i2c_periph.c.obj
+esp32c3/i2c_periph.obj: esp32c3/i2c_periph.c.obj
 
-.PHONY : esp32s2/i2c_periph.obj
+.PHONY : esp32c3/i2c_periph.obj
 
 # target to build an object file
-esp32s2/i2c_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/i2c_periph.c.obj
-.PHONY : esp32s2/i2c_periph.c.obj
+esp32c3/i2c_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj
+.PHONY : esp32c3/i2c_periph.c.obj
 
-esp32s2/i2c_periph.i: esp32s2/i2c_periph.c.i
+esp32c3/i2c_periph.i: esp32c3/i2c_periph.c.i
 
-.PHONY : esp32s2/i2c_periph.i
+.PHONY : esp32c3/i2c_periph.i
 
 # target to preprocess a source file
-esp32s2/i2c_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/i2c_periph.c.i
-.PHONY : esp32s2/i2c_periph.c.i
+esp32c3/i2c_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.i
+.PHONY : esp32c3/i2c_periph.c.i
 
-esp32s2/i2c_periph.s: esp32s2/i2c_periph.c.s
+esp32c3/i2c_periph.s: esp32c3/i2c_periph.c.s
 
-.PHONY : esp32s2/i2c_periph.s
+.PHONY : esp32c3/i2c_periph.s
 
 # target to generate assembly for a file
-esp32s2/i2c_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/i2c_periph.c.s
-.PHONY : esp32s2/i2c_periph.c.s
+esp32c3/i2c_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.s
+.PHONY : esp32c3/i2c_periph.c.s
 
-esp32s2/i2s_periph.obj: esp32s2/i2s_periph.c.obj
+esp32c3/i2s_periph.obj: esp32c3/i2s_periph.c.obj
 
-.PHONY : esp32s2/i2s_periph.obj
+.PHONY : esp32c3/i2s_periph.obj
 
 # target to build an object file
-esp32s2/i2s_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/i2s_periph.c.obj
-.PHONY : esp32s2/i2s_periph.c.obj
+esp32c3/i2s_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj
+.PHONY : esp32c3/i2s_periph.c.obj
 
-esp32s2/i2s_periph.i: esp32s2/i2s_periph.c.i
+esp32c3/i2s_periph.i: esp32c3/i2s_periph.c.i
 
-.PHONY : esp32s2/i2s_periph.i
+.PHONY : esp32c3/i2s_periph.i
 
 # target to preprocess a source file
-esp32s2/i2s_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/i2s_periph.c.i
-.PHONY : esp32s2/i2s_periph.c.i
+esp32c3/i2s_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.i
+.PHONY : esp32c3/i2s_periph.c.i
 
-esp32s2/i2s_periph.s: esp32s2/i2s_periph.c.s
+esp32c3/i2s_periph.s: esp32c3/i2s_periph.c.s
 
-.PHONY : esp32s2/i2s_periph.s
+.PHONY : esp32c3/i2s_periph.s
 
 # target to generate assembly for a file
-esp32s2/i2s_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/i2s_periph.c.s
-.PHONY : esp32s2/i2s_periph.c.s
+esp32c3/i2s_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.s
+.PHONY : esp32c3/i2s_periph.c.s
 
-esp32s2/interrupts.obj: esp32s2/interrupts.c.obj
+esp32c3/interrupts.obj: esp32c3/interrupts.c.obj
 
-.PHONY : esp32s2/interrupts.obj
+.PHONY : esp32c3/interrupts.obj
 
 # target to build an object file
-esp32s2/interrupts.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/interrupts.c.obj
-.PHONY : esp32s2/interrupts.c.obj
+esp32c3/interrupts.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj
+.PHONY : esp32c3/interrupts.c.obj
 
-esp32s2/interrupts.i: esp32s2/interrupts.c.i
+esp32c3/interrupts.i: esp32c3/interrupts.c.i
 
-.PHONY : esp32s2/interrupts.i
+.PHONY : esp32c3/interrupts.i
 
 # target to preprocess a source file
-esp32s2/interrupts.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/interrupts.c.i
-.PHONY : esp32s2/interrupts.c.i
+esp32c3/interrupts.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.i
+.PHONY : esp32c3/interrupts.c.i
 
-esp32s2/interrupts.s: esp32s2/interrupts.c.s
+esp32c3/interrupts.s: esp32c3/interrupts.c.s
 
-.PHONY : esp32s2/interrupts.s
+.PHONY : esp32c3/interrupts.s
 
 # target to generate assembly for a file
-esp32s2/interrupts.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/interrupts.c.s
-.PHONY : esp32s2/interrupts.c.s
+esp32c3/interrupts.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.s
+.PHONY : esp32c3/interrupts.c.s
 
-esp32s2/lcd_periph.obj: esp32s2/lcd_periph.c.obj
+esp32c3/ledc_periph.obj: esp32c3/ledc_periph.c.obj
 
-.PHONY : esp32s2/lcd_periph.obj
+.PHONY : esp32c3/ledc_periph.obj
 
 # target to build an object file
-esp32s2/lcd_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/lcd_periph.c.obj
-.PHONY : esp32s2/lcd_periph.c.obj
+esp32c3/ledc_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj
+.PHONY : esp32c3/ledc_periph.c.obj
 
-esp32s2/lcd_periph.i: esp32s2/lcd_periph.c.i
+esp32c3/ledc_periph.i: esp32c3/ledc_periph.c.i
 
-.PHONY : esp32s2/lcd_periph.i
+.PHONY : esp32c3/ledc_periph.i
 
 # target to preprocess a source file
-esp32s2/lcd_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/lcd_periph.c.i
-.PHONY : esp32s2/lcd_periph.c.i
+esp32c3/ledc_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.i
+.PHONY : esp32c3/ledc_periph.c.i
 
-esp32s2/lcd_periph.s: esp32s2/lcd_periph.c.s
+esp32c3/ledc_periph.s: esp32c3/ledc_periph.c.s
 
-.PHONY : esp32s2/lcd_periph.s
+.PHONY : esp32c3/ledc_periph.s
 
 # target to generate assembly for a file
-esp32s2/lcd_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/lcd_periph.c.s
-.PHONY : esp32s2/lcd_periph.c.s
+esp32c3/ledc_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.s
+.PHONY : esp32c3/ledc_periph.c.s
 
-esp32s2/ledc_periph.obj: esp32s2/ledc_periph.c.obj
+esp32c3/rmt_periph.obj: esp32c3/rmt_periph.c.obj
 
-.PHONY : esp32s2/ledc_periph.obj
+.PHONY : esp32c3/rmt_periph.obj
 
 # target to build an object file
-esp32s2/ledc_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/ledc_periph.c.obj
-.PHONY : esp32s2/ledc_periph.c.obj
+esp32c3/rmt_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.obj
+.PHONY : esp32c3/rmt_periph.c.obj
 
-esp32s2/ledc_periph.i: esp32s2/ledc_periph.c.i
+esp32c3/rmt_periph.i: esp32c3/rmt_periph.c.i
 
-.PHONY : esp32s2/ledc_periph.i
+.PHONY : esp32c3/rmt_periph.i
 
 # target to preprocess a source file
-esp32s2/ledc_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/ledc_periph.c.i
-.PHONY : esp32s2/ledc_periph.c.i
+esp32c3/rmt_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.i
+.PHONY : esp32c3/rmt_periph.c.i
 
-esp32s2/ledc_periph.s: esp32s2/ledc_periph.c.s
+esp32c3/rmt_periph.s: esp32c3/rmt_periph.c.s
 
-.PHONY : esp32s2/ledc_periph.s
+.PHONY : esp32c3/rmt_periph.s
 
 # target to generate assembly for a file
-esp32s2/ledc_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/ledc_periph.c.s
-.PHONY : esp32s2/ledc_periph.c.s
+esp32c3/rmt_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.s
+.PHONY : esp32c3/rmt_periph.c.s
 
-esp32s2/pcnt_periph.obj: esp32s2/pcnt_periph.c.obj
+esp32c3/sigmadelta_periph.obj: esp32c3/sigmadelta_periph.c.obj
 
-.PHONY : esp32s2/pcnt_periph.obj
+.PHONY : esp32c3/sigmadelta_periph.obj
 
 # target to build an object file
-esp32s2/pcnt_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/pcnt_periph.c.obj
-.PHONY : esp32s2/pcnt_periph.c.obj
+esp32c3/sigmadelta_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj
+.PHONY : esp32c3/sigmadelta_periph.c.obj
 
-esp32s2/pcnt_periph.i: esp32s2/pcnt_periph.c.i
+esp32c3/sigmadelta_periph.i: esp32c3/sigmadelta_periph.c.i
 
-.PHONY : esp32s2/pcnt_periph.i
+.PHONY : esp32c3/sigmadelta_periph.i
 
 # target to preprocess a source file
-esp32s2/pcnt_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/pcnt_periph.c.i
-.PHONY : esp32s2/pcnt_periph.c.i
+esp32c3/sigmadelta_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.i
+.PHONY : esp32c3/sigmadelta_periph.c.i
 
-esp32s2/pcnt_periph.s: esp32s2/pcnt_periph.c.s
+esp32c3/sigmadelta_periph.s: esp32c3/sigmadelta_periph.c.s
 
-.PHONY : esp32s2/pcnt_periph.s
+.PHONY : esp32c3/sigmadelta_periph.s
 
 # target to generate assembly for a file
-esp32s2/pcnt_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/pcnt_periph.c.s
-.PHONY : esp32s2/pcnt_periph.c.s
+esp32c3/sigmadelta_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.s
+.PHONY : esp32c3/sigmadelta_periph.c.s
 
-esp32s2/rmt_periph.obj: esp32s2/rmt_periph.c.obj
+esp32c3/spi_periph.obj: esp32c3/spi_periph.c.obj
 
-.PHONY : esp32s2/rmt_periph.obj
+.PHONY : esp32c3/spi_periph.obj
 
 # target to build an object file
-esp32s2/rmt_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/rmt_periph.c.obj
-.PHONY : esp32s2/rmt_periph.c.obj
+esp32c3/spi_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj
+.PHONY : esp32c3/spi_periph.c.obj
 
-esp32s2/rmt_periph.i: esp32s2/rmt_periph.c.i
+esp32c3/spi_periph.i: esp32c3/spi_periph.c.i
 
-.PHONY : esp32s2/rmt_periph.i
+.PHONY : esp32c3/spi_periph.i
 
 # target to preprocess a source file
-esp32s2/rmt_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/rmt_periph.c.i
-.PHONY : esp32s2/rmt_periph.c.i
+esp32c3/spi_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.i
+.PHONY : esp32c3/spi_periph.c.i
 
-esp32s2/rmt_periph.s: esp32s2/rmt_periph.c.s
+esp32c3/spi_periph.s: esp32c3/spi_periph.c.s
 
-.PHONY : esp32s2/rmt_periph.s
+.PHONY : esp32c3/spi_periph.s
 
 # target to generate assembly for a file
-esp32s2/rmt_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/rmt_periph.c.s
-.PHONY : esp32s2/rmt_periph.c.s
+esp32c3/spi_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.s
+.PHONY : esp32c3/spi_periph.c.s
 
-esp32s2/rtc_io_periph.obj: esp32s2/rtc_io_periph.c.obj
+esp32c3/timer_periph.obj: esp32c3/timer_periph.c.obj
 
-.PHONY : esp32s2/rtc_io_periph.obj
+.PHONY : esp32c3/timer_periph.obj
 
 # target to build an object file
-esp32s2/rtc_io_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/rtc_io_periph.c.obj
-.PHONY : esp32s2/rtc_io_periph.c.obj
+esp32c3/timer_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj
+.PHONY : esp32c3/timer_periph.c.obj
 
-esp32s2/rtc_io_periph.i: esp32s2/rtc_io_periph.c.i
+esp32c3/timer_periph.i: esp32c3/timer_periph.c.i
 
-.PHONY : esp32s2/rtc_io_periph.i
+.PHONY : esp32c3/timer_periph.i
 
 # target to preprocess a source file
-esp32s2/rtc_io_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/rtc_io_periph.c.i
-.PHONY : esp32s2/rtc_io_periph.c.i
+esp32c3/timer_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.i
+.PHONY : esp32c3/timer_periph.c.i
 
-esp32s2/rtc_io_periph.s: esp32s2/rtc_io_periph.c.s
+esp32c3/timer_periph.s: esp32c3/timer_periph.c.s
 
-.PHONY : esp32s2/rtc_io_periph.s
+.PHONY : esp32c3/timer_periph.s
 
 # target to generate assembly for a file
-esp32s2/rtc_io_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/rtc_io_periph.c.s
-.PHONY : esp32s2/rtc_io_periph.c.s
+esp32c3/timer_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.s
+.PHONY : esp32c3/timer_periph.c.s
 
-esp32s2/sigmadelta_periph.obj: esp32s2/sigmadelta_periph.c.obj
+esp32c3/uart_periph.obj: esp32c3/uart_periph.c.obj
 
-.PHONY : esp32s2/sigmadelta_periph.obj
+.PHONY : esp32c3/uart_periph.obj
 
 # target to build an object file
-esp32s2/sigmadelta_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/sigmadelta_periph.c.obj
-.PHONY : esp32s2/sigmadelta_periph.c.obj
+esp32c3/uart_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj
+.PHONY : esp32c3/uart_periph.c.obj
 
-esp32s2/sigmadelta_periph.i: esp32s2/sigmadelta_periph.c.i
+esp32c3/uart_periph.i: esp32c3/uart_periph.c.i
 
-.PHONY : esp32s2/sigmadelta_periph.i
-
-# target to preprocess a source file
-esp32s2/sigmadelta_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/sigmadelta_periph.c.i
-.PHONY : esp32s2/sigmadelta_periph.c.i
-
-esp32s2/sigmadelta_periph.s: esp32s2/sigmadelta_periph.c.s
-
-.PHONY : esp32s2/sigmadelta_periph.s
-
-# target to generate assembly for a file
-esp32s2/sigmadelta_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/sigmadelta_periph.c.s
-.PHONY : esp32s2/sigmadelta_periph.c.s
-
-esp32s2/spi_periph.obj: esp32s2/spi_periph.c.obj
-
-.PHONY : esp32s2/spi_periph.obj
-
-# target to build an object file
-esp32s2/spi_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/spi_periph.c.obj
-.PHONY : esp32s2/spi_periph.c.obj
-
-esp32s2/spi_periph.i: esp32s2/spi_periph.c.i
-
-.PHONY : esp32s2/spi_periph.i
+.PHONY : esp32c3/uart_periph.i
 
 # target to preprocess a source file
-esp32s2/spi_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/spi_periph.c.i
-.PHONY : esp32s2/spi_periph.c.i
+esp32c3/uart_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.i
+.PHONY : esp32c3/uart_periph.c.i
 
-esp32s2/spi_periph.s: esp32s2/spi_periph.c.s
+esp32c3/uart_periph.s: esp32c3/uart_periph.c.s
 
-.PHONY : esp32s2/spi_periph.s
-
-# target to generate assembly for a file
-esp32s2/spi_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/spi_periph.c.s
-.PHONY : esp32s2/spi_periph.c.s
-
-esp32s2/timer_periph.obj: esp32s2/timer_periph.c.obj
-
-.PHONY : esp32s2/timer_periph.obj
-
-# target to build an object file
-esp32s2/timer_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/timer_periph.c.obj
-.PHONY : esp32s2/timer_periph.c.obj
-
-esp32s2/timer_periph.i: esp32s2/timer_periph.c.i
-
-.PHONY : esp32s2/timer_periph.i
-
-# target to preprocess a source file
-esp32s2/timer_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/timer_periph.c.i
-.PHONY : esp32s2/timer_periph.c.i
-
-esp32s2/timer_periph.s: esp32s2/timer_periph.c.s
-
-.PHONY : esp32s2/timer_periph.s
+.PHONY : esp32c3/uart_periph.s
 
 # target to generate assembly for a file
-esp32s2/timer_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/timer_periph.c.s
-.PHONY : esp32s2/timer_periph.c.s
-
-esp32s2/touch_sensor_periph.obj: esp32s2/touch_sensor_periph.c.obj
-
-.PHONY : esp32s2/touch_sensor_periph.obj
-
-# target to build an object file
-esp32s2/touch_sensor_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/touch_sensor_periph.c.obj
-.PHONY : esp32s2/touch_sensor_periph.c.obj
-
-esp32s2/touch_sensor_periph.i: esp32s2/touch_sensor_periph.c.i
-
-.PHONY : esp32s2/touch_sensor_periph.i
-
-# target to preprocess a source file
-esp32s2/touch_sensor_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/touch_sensor_periph.c.i
-.PHONY : esp32s2/touch_sensor_periph.c.i
-
-esp32s2/touch_sensor_periph.s: esp32s2/touch_sensor_periph.c.s
-
-.PHONY : esp32s2/touch_sensor_periph.s
-
-# target to generate assembly for a file
-esp32s2/touch_sensor_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/touch_sensor_periph.c.s
-.PHONY : esp32s2/touch_sensor_periph.c.s
-
-esp32s2/uart_periph.obj: esp32s2/uart_periph.c.obj
-
-.PHONY : esp32s2/uart_periph.obj
-
-# target to build an object file
-esp32s2/uart_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/uart_periph.c.obj
-.PHONY : esp32s2/uart_periph.c.obj
-
-esp32s2/uart_periph.i: esp32s2/uart_periph.c.i
-
-.PHONY : esp32s2/uart_periph.i
-
-# target to preprocess a source file
-esp32s2/uart_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/uart_periph.c.i
-.PHONY : esp32s2/uart_periph.c.i
-
-esp32s2/uart_periph.s: esp32s2/uart_periph.c.s
-
-.PHONY : esp32s2/uart_periph.s
-
-# target to generate assembly for a file
-esp32s2/uart_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/uart_periph.c.s
-.PHONY : esp32s2/uart_periph.c.s
-
-esp32s2/usb_periph.obj: esp32s2/usb_periph.c.obj
-
-.PHONY : esp32s2/usb_periph.obj
-
-# target to build an object file
-esp32s2/usb_periph.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/usb_periph.c.obj
-.PHONY : esp32s2/usb_periph.c.obj
-
-esp32s2/usb_periph.i: esp32s2/usb_periph.c.i
-
-.PHONY : esp32s2/usb_periph.i
-
-# target to preprocess a source file
-esp32s2/usb_periph.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/usb_periph.c.i
-.PHONY : esp32s2/usb_periph.c.i
-
-esp32s2/usb_periph.s: esp32s2/usb_periph.c.s
-
-.PHONY : esp32s2/usb_periph.s
-
-# target to generate assembly for a file
-esp32s2/usb_periph.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s2/usb_periph.c.s
-.PHONY : esp32s2/usb_periph.c.s
+esp32c3/uart_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.s
+.PHONY : esp32c3/uart_periph.c.s
 
 lldesc.obj: lldesc.c.obj
 
@@ -743,60 +581,42 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_soc"
-	@echo "... esp32s2/adc_periph.obj"
-	@echo "... esp32s2/adc_periph.i"
-	@echo "... esp32s2/adc_periph.s"
-	@echo "... esp32s2/dac_periph.obj"
-	@echo "... esp32s2/dac_periph.i"
-	@echo "... esp32s2/dac_periph.s"
-	@echo "... esp32s2/dedic_gpio_periph.obj"
-	@echo "... esp32s2/dedic_gpio_periph.i"
-	@echo "... esp32s2/dedic_gpio_periph.s"
-	@echo "... esp32s2/gpio_periph.obj"
-	@echo "... esp32s2/gpio_periph.i"
-	@echo "... esp32s2/gpio_periph.s"
-	@echo "... esp32s2/i2c_periph.obj"
-	@echo "... esp32s2/i2c_periph.i"
-	@echo "... esp32s2/i2c_periph.s"
-	@echo "... esp32s2/i2s_periph.obj"
-	@echo "... esp32s2/i2s_periph.i"
-	@echo "... esp32s2/i2s_periph.s"
-	@echo "... esp32s2/interrupts.obj"
-	@echo "... esp32s2/interrupts.i"
-	@echo "... esp32s2/interrupts.s"
-	@echo "... esp32s2/lcd_periph.obj"
-	@echo "... esp32s2/lcd_periph.i"
-	@echo "... esp32s2/lcd_periph.s"
-	@echo "... esp32s2/ledc_periph.obj"
-	@echo "... esp32s2/ledc_periph.i"
-	@echo "... esp32s2/ledc_periph.s"
-	@echo "... esp32s2/pcnt_periph.obj"
-	@echo "... esp32s2/pcnt_periph.i"
-	@echo "... esp32s2/pcnt_periph.s"
-	@echo "... esp32s2/rmt_periph.obj"
-	@echo "... esp32s2/rmt_periph.i"
-	@echo "... esp32s2/rmt_periph.s"
-	@echo "... esp32s2/rtc_io_periph.obj"
-	@echo "... esp32s2/rtc_io_periph.i"
-	@echo "... esp32s2/rtc_io_periph.s"
-	@echo "... esp32s2/sigmadelta_periph.obj"
-	@echo "... esp32s2/sigmadelta_periph.i"
-	@echo "... esp32s2/sigmadelta_periph.s"
-	@echo "... esp32s2/spi_periph.obj"
-	@echo "... esp32s2/spi_periph.i"
-	@echo "... esp32s2/spi_periph.s"
-	@echo "... esp32s2/timer_periph.obj"
-	@echo "... esp32s2/timer_periph.i"
-	@echo "... esp32s2/timer_periph.s"
-	@echo "... esp32s2/touch_sensor_periph.obj"
-	@echo "... esp32s2/touch_sensor_periph.i"
-	@echo "... esp32s2/touch_sensor_periph.s"
-	@echo "... esp32s2/uart_periph.obj"
-	@echo "... esp32s2/uart_periph.i"
-	@echo "... esp32s2/uart_periph.s"
-	@echo "... esp32s2/usb_periph.obj"
-	@echo "... esp32s2/usb_periph.i"
-	@echo "... esp32s2/usb_periph.s"
+	@echo "... esp32c3/adc_periph.obj"
+	@echo "... esp32c3/adc_periph.i"
+	@echo "... esp32c3/adc_periph.s"
+	@echo "... esp32c3/gdma_periph.obj"
+	@echo "... esp32c3/gdma_periph.i"
+	@echo "... esp32c3/gdma_periph.s"
+	@echo "... esp32c3/gpio_periph.obj"
+	@echo "... esp32c3/gpio_periph.i"
+	@echo "... esp32c3/gpio_periph.s"
+	@echo "... esp32c3/i2c_periph.obj"
+	@echo "... esp32c3/i2c_periph.i"
+	@echo "... esp32c3/i2c_periph.s"
+	@echo "... esp32c3/i2s_periph.obj"
+	@echo "... esp32c3/i2s_periph.i"
+	@echo "... esp32c3/i2s_periph.s"
+	@echo "... esp32c3/interrupts.obj"
+	@echo "... esp32c3/interrupts.i"
+	@echo "... esp32c3/interrupts.s"
+	@echo "... esp32c3/ledc_periph.obj"
+	@echo "... esp32c3/ledc_periph.i"
+	@echo "... esp32c3/ledc_periph.s"
+	@echo "... esp32c3/rmt_periph.obj"
+	@echo "... esp32c3/rmt_periph.i"
+	@echo "... esp32c3/rmt_periph.s"
+	@echo "... esp32c3/sigmadelta_periph.obj"
+	@echo "... esp32c3/sigmadelta_periph.i"
+	@echo "... esp32c3/sigmadelta_periph.s"
+	@echo "... esp32c3/spi_periph.obj"
+	@echo "... esp32c3/spi_periph.i"
+	@echo "... esp32c3/spi_periph.s"
+	@echo "... esp32c3/timer_periph.obj"
+	@echo "... esp32c3/timer_periph.i"
+	@echo "... esp32c3/timer_periph.s"
+	@echo "... esp32c3/uart_periph.obj"
+	@echo "... esp32c3/uart_periph.i"
+	@echo "... esp32c3/uart_periph.s"
 	@echo "... lldesc.obj"
 	@echo "... lldesc.i"
 	@echo "... lldesc.s"

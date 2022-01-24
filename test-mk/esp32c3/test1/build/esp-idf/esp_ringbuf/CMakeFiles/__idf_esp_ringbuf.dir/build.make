@@ -79,15 +79,15 @@ include esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/flags.make
 esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj: esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/flags.make
 esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj: /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj -c /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.obj -c /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c
 
 esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c > CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c > CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.i
 
 esp-idf/esp_ringbuf/CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c -o CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_ringbuf/ringbuf.c -o CMakeFiles/__idf_esp_ringbuf.dir/ringbuf.c.s
 
 # Object files for target __idf_esp_ringbuf
 __idf_esp_ringbuf_OBJECTS = \

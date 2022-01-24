@@ -76,31 +76,31 @@ include CMakeFiles/bootloader.elf.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/bootloader.elf.dir/flags.make
 
-project_elf_src_esp32s2.c:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating project_elf_src_esp32s2.c"
-	/usr/bin/cmake -E touch /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32s2.c
+project_elf_src_esp32c3.c:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating project_elf_src_esp32c3.c"
+	/usr/bin/cmake -E touch /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c
 
-CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.obj: CMakeFiles/bootloader.elf.dir/flags.make
-CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.obj: project_elf_src_esp32s2.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.obj"
-	/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32s2.c
+CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj: CMakeFiles/bootloader.elf.dir/flags.make
+CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj: project_elf_src_esp32c3.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj"
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c
 
-CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.i"
-	/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32s2.c > CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.i
+CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i"
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c > CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i
 
-CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.s"
-	/home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32s2.c -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.s
+CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s"
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s
 
 # Object files for target bootloader.elf
 bootloader_elf_OBJECTS = \
-"CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.obj"
+"CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj"
 
 # External object files for target bootloader.elf
 bootloader_elf_EXTERNAL_OBJECTS =
 
-bootloader.elf: CMakeFiles/bootloader.elf.dir/project_elf_src_esp32s2.c.obj
+bootloader.elf: CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj
 bootloader.elf: CMakeFiles/bootloader.elf.dir/build.make
 bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/soc/libsoc.a
@@ -110,7 +110,6 @@ bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
 bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-bootloader.elf: esp-idf/xtensa/libxtensa.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
@@ -123,7 +122,6 @@ bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
 bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-bootloader.elf: esp-idf/xtensa/libxtensa.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
@@ -135,7 +133,6 @@ bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
 bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-bootloader.elf: esp-idf/xtensa/libxtensa.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
@@ -147,7 +144,6 @@ bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
 bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-bootloader.elf: esp-idf/xtensa/libxtensa.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
@@ -159,19 +155,16 @@ bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
 bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
-bootloader.elf: esp-idf/xtensa/libxtensa.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
-bootloader.elf: /home/nvv/esp-idf/components/xtensa/esp32s2/libxt_hal.a
-bootloader.elf: /home/nvv/esp-idf/components/soc/esp32s2/ld/esp32s2.peripherals.ld
-bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.ld
-bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.api.ld
-bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.libgcc.ld
-bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.newlib-funcs.ld
-bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32s2/ld/esp32s2.rom.spiflash.ld
-bootloader.elf: /home/nvv/esp-idf/components/bootloader/subproject/main/ld/esp32s2/bootloader.ld
-bootloader.elf: /home/nvv/esp-idf/components/bootloader/subproject/main/ld/esp32s2/bootloader.rom.ld
+bootloader.elf: /home/nvv/esp-idf/components/soc/esp32c3/ld/esp32c3.peripherals.ld
+bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.ld
+bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.api.ld
+bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.libgcc.ld
+bootloader.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.newlib.ld
+bootloader.elf: /home/nvv/esp-idf/components/bootloader/subproject/main/ld/esp32c3/bootloader.ld
+bootloader.elf: /home/nvv/esp-idf/components/bootloader/subproject/main/ld/esp32c3/bootloader.rom.ld
 bootloader.elf: CMakeFiles/bootloader.elf.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable bootloader.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bootloader.elf.dir/link.txt --verbose=$(VERBOSE)
@@ -185,7 +178,7 @@ CMakeFiles/bootloader.elf.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/bootloader.elf.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/bootloader.elf.dir/clean
 
-CMakeFiles/bootloader.elf.dir/depend: project_elf_src_esp32s2.c
+CMakeFiles/bootloader.elf.dir/depend: project_elf_src_esp32c3.c
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nvv/esp-idf/components/bootloader/subproject /home/nvv/esp-idf/components/bootloader/subproject /home/nvv/test/test-mk/esp32c3/test1/build/bootloader /home/nvv/test/test-mk/esp32c3/test1/build/bootloader /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles/bootloader.elf.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/bootloader.elf.dir/depend
 

@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 include esp-idf/efuse/CMakeFiles/efuse_test_table.dir/progress.make
 
 esp-idf/efuse/CMakeFiles/efuse_test_table:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/efuse/efuse_table_gen.py /home/nvv/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32s2 --max_blk_len 256
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/efuse/efuse_table_gen.py /home/nvv/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32c3 --max_blk_len 256
 
 efuse_test_table: esp-idf/efuse/CMakeFiles/efuse_test_table
 efuse_test_table: esp-idf/efuse/CMakeFiles/efuse_test_table.dir/build.make

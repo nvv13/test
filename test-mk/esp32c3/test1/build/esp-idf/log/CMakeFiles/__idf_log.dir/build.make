@@ -79,41 +79,41 @@ include esp-idf/log/CMakeFiles/__idf_log.dir/flags.make
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: esp-idf/log/CMakeFiles/__idf_log.dir/flags.make
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj: /home/nvv/esp-idf/components/log/log.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/log/CMakeFiles/__idf_log.dir/log.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_log.dir/log.c.obj -c /home/nvv/esp-idf/components/log/log.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_log.dir/log.c.obj -c /home/nvv/esp-idf/components/log/log.c
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_log.dir/log.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/log/log.c > CMakeFiles/__idf_log.dir/log.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/log/log.c > CMakeFiles/__idf_log.dir/log.c.i
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_log.dir/log.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/log/log.c -o CMakeFiles/__idf_log.dir/log.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/log/log.c -o CMakeFiles/__idf_log.dir/log.c.s
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: esp-idf/log/CMakeFiles/__idf_log.dir/flags.make
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj: /home/nvv/esp-idf/components/log/log_buffers.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_log.dir/log_buffers.c.obj -c /home/nvv/esp-idf/components/log/log_buffers.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_log.dir/log_buffers.c.obj -c /home/nvv/esp-idf/components/log/log_buffers.c
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_log.dir/log_buffers.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/log/log_buffers.c > CMakeFiles/__idf_log.dir/log_buffers.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/log/log_buffers.c > CMakeFiles/__idf_log.dir/log_buffers.c.i
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_buffers.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_log.dir/log_buffers.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/log/log_buffers.c -o CMakeFiles/__idf_log.dir/log_buffers.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/log/log_buffers.c -o CMakeFiles/__idf_log.dir/log_buffers.c.s
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: esp-idf/log/CMakeFiles/__idf_log.dir/flags.make
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj: /home/nvv/esp-idf/components/log/log_freertos.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_log.dir/log_freertos.c.obj -c /home/nvv/esp-idf/components/log/log_freertos.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_log.dir/log_freertos.c.obj -c /home/nvv/esp-idf/components/log/log_freertos.c
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_log.dir/log_freertos.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/log/log_freertos.c > CMakeFiles/__idf_log.dir/log_freertos.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/log/log_freertos.c > CMakeFiles/__idf_log.dir/log_freertos.c.i
 
 esp-idf/log/CMakeFiles/__idf_log.dir/log_freertos.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_log.dir/log_freertos.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/log/log_freertos.c -o CMakeFiles/__idf_log.dir/log_freertos.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/log && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/log/log_freertos.c -o CMakeFiles/__idf_log.dir/log_freertos.c.s
 
 # Object files for target __idf_log
 __idf_log_OBJECTS = \

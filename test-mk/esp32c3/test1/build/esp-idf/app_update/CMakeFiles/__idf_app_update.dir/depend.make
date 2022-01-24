@@ -14,7 +14,7 @@ esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/hal/include/hal/esp_flash_err.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/hal/include/hal/spi_flash_types.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_flash.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_partition.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
@@ -29,7 +29,7 @@ esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/bootloader_support/include/esp_flash_partitions.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/bootloader_support/include/esp_image_format.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/bootloader_support/include/esp_secure_boot.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
@@ -71,11 +71,11 @@ esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/log/include/esp_log.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
-esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_flash.h
 esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_ota_ops.c.obj: /home/nvv/esp-idf/components/spi_flash/include/esp_partition.h

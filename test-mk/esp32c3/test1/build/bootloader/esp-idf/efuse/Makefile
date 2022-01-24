@@ -204,113 +204,113 @@ __idf_efuse/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build
 .PHONY : __idf_efuse/fast
 
-esp32s2/esp_efuse_fields.obj: esp32s2/esp_efuse_fields.c.obj
+esp32c3/esp_efuse_fields.obj: esp32c3/esp_efuse_fields.c.obj
 
-.PHONY : esp32s2/esp_efuse_fields.obj
-
-# target to build an object file
-esp32s2/esp_efuse_fields.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.obj
-.PHONY : esp32s2/esp_efuse_fields.c.obj
-
-esp32s2/esp_efuse_fields.i: esp32s2/esp_efuse_fields.c.i
-
-.PHONY : esp32s2/esp_efuse_fields.i
-
-# target to preprocess a source file
-esp32s2/esp_efuse_fields.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.i
-.PHONY : esp32s2/esp_efuse_fields.c.i
-
-esp32s2/esp_efuse_fields.s: esp32s2/esp_efuse_fields.c.s
-
-.PHONY : esp32s2/esp_efuse_fields.s
-
-# target to generate assembly for a file
-esp32s2/esp_efuse_fields.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_fields.c.s
-.PHONY : esp32s2/esp_efuse_fields.c.s
-
-esp32s2/esp_efuse_rtc_table.obj: esp32s2/esp_efuse_rtc_table.c.obj
-
-.PHONY : esp32s2/esp_efuse_rtc_table.obj
+.PHONY : esp32c3/esp_efuse_fields.obj
 
 # target to build an object file
-esp32s2/esp_efuse_rtc_table.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.obj
-.PHONY : esp32s2/esp_efuse_rtc_table.c.obj
+esp32c3/esp_efuse_fields.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.obj
+.PHONY : esp32c3/esp_efuse_fields.c.obj
 
-esp32s2/esp_efuse_rtc_table.i: esp32s2/esp_efuse_rtc_table.c.i
+esp32c3/esp_efuse_fields.i: esp32c3/esp_efuse_fields.c.i
 
-.PHONY : esp32s2/esp_efuse_rtc_table.i
+.PHONY : esp32c3/esp_efuse_fields.i
 
 # target to preprocess a source file
-esp32s2/esp_efuse_rtc_table.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.i
-.PHONY : esp32s2/esp_efuse_rtc_table.c.i
+esp32c3/esp_efuse_fields.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.i
+.PHONY : esp32c3/esp_efuse_fields.c.i
 
-esp32s2/esp_efuse_rtc_table.s: esp32s2/esp_efuse_rtc_table.c.s
+esp32c3/esp_efuse_fields.s: esp32c3/esp_efuse_fields.c.s
 
-.PHONY : esp32s2/esp_efuse_rtc_table.s
+.PHONY : esp32c3/esp_efuse_fields.s
 
 # target to generate assembly for a file
-esp32s2/esp_efuse_rtc_table.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_rtc_table.c.s
-.PHONY : esp32s2/esp_efuse_rtc_table.c.s
+esp32c3/esp_efuse_fields.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_fields.c.s
+.PHONY : esp32c3/esp_efuse_fields.c.s
 
-esp32s2/esp_efuse_table.obj: esp32s2/esp_efuse_table.c.obj
+esp32c3/esp_efuse_rtc_calib.obj: esp32c3/esp_efuse_rtc_calib.c.obj
 
-.PHONY : esp32s2/esp_efuse_table.obj
+.PHONY : esp32c3/esp_efuse_rtc_calib.obj
 
 # target to build an object file
-esp32s2/esp_efuse_table.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.obj
-.PHONY : esp32s2/esp_efuse_table.c.obj
+esp32c3/esp_efuse_rtc_calib.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.obj
+.PHONY : esp32c3/esp_efuse_rtc_calib.c.obj
 
-esp32s2/esp_efuse_table.i: esp32s2/esp_efuse_table.c.i
+esp32c3/esp_efuse_rtc_calib.i: esp32c3/esp_efuse_rtc_calib.c.i
 
-.PHONY : esp32s2/esp_efuse_table.i
+.PHONY : esp32c3/esp_efuse_rtc_calib.i
 
 # target to preprocess a source file
-esp32s2/esp_efuse_table.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.i
-.PHONY : esp32s2/esp_efuse_table.c.i
+esp32c3/esp_efuse_rtc_calib.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.i
+.PHONY : esp32c3/esp_efuse_rtc_calib.c.i
 
-esp32s2/esp_efuse_table.s: esp32s2/esp_efuse_table.c.s
+esp32c3/esp_efuse_rtc_calib.s: esp32c3/esp_efuse_rtc_calib.c.s
 
-.PHONY : esp32s2/esp_efuse_table.s
+.PHONY : esp32c3/esp_efuse_rtc_calib.s
 
 # target to generate assembly for a file
-esp32s2/esp_efuse_table.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_table.c.s
-.PHONY : esp32s2/esp_efuse_table.c.s
+esp32c3/esp_efuse_rtc_calib.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_rtc_calib.c.s
+.PHONY : esp32c3/esp_efuse_rtc_calib.c.s
 
-esp32s2/esp_efuse_utility.obj: esp32s2/esp_efuse_utility.c.obj
+esp32c3/esp_efuse_table.obj: esp32c3/esp_efuse_table.c.obj
 
-.PHONY : esp32s2/esp_efuse_utility.obj
+.PHONY : esp32c3/esp_efuse_table.obj
 
 # target to build an object file
-esp32s2/esp_efuse_utility.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.obj
-.PHONY : esp32s2/esp_efuse_utility.c.obj
+esp32c3/esp_efuse_table.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.obj
+.PHONY : esp32c3/esp_efuse_table.c.obj
 
-esp32s2/esp_efuse_utility.i: esp32s2/esp_efuse_utility.c.i
+esp32c3/esp_efuse_table.i: esp32c3/esp_efuse_table.c.i
 
-.PHONY : esp32s2/esp_efuse_utility.i
+.PHONY : esp32c3/esp_efuse_table.i
 
 # target to preprocess a source file
-esp32s2/esp_efuse_utility.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.i
-.PHONY : esp32s2/esp_efuse_utility.c.i
+esp32c3/esp_efuse_table.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.i
+.PHONY : esp32c3/esp_efuse_table.c.i
 
-esp32s2/esp_efuse_utility.s: esp32s2/esp_efuse_utility.c.s
+esp32c3/esp_efuse_table.s: esp32c3/esp_efuse_table.c.s
 
-.PHONY : esp32s2/esp_efuse_utility.s
+.PHONY : esp32c3/esp_efuse_table.s
 
 # target to generate assembly for a file
-esp32s2/esp_efuse_utility.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32s2/esp_efuse_utility.c.s
-.PHONY : esp32s2/esp_efuse_utility.c.s
+esp32c3/esp_efuse_table.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_table.c.s
+.PHONY : esp32c3/esp_efuse_table.c.s
+
+esp32c3/esp_efuse_utility.obj: esp32c3/esp_efuse_utility.c.obj
+
+.PHONY : esp32c3/esp_efuse_utility.obj
+
+# target to build an object file
+esp32c3/esp_efuse_utility.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.obj
+.PHONY : esp32c3/esp_efuse_utility.c.obj
+
+esp32c3/esp_efuse_utility.i: esp32c3/esp_efuse_utility.c.i
+
+.PHONY : esp32c3/esp_efuse_utility.i
+
+# target to preprocess a source file
+esp32c3/esp_efuse_utility.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.i
+.PHONY : esp32c3/esp_efuse_utility.c.i
+
+esp32c3/esp_efuse_utility.s: esp32c3/esp_efuse_utility.c.s
+
+.PHONY : esp32c3/esp_efuse_utility.s
+
+# target to generate assembly for a file
+esp32c3/esp_efuse_utility.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/esp32c3/esp_efuse_utility.c.s
+.PHONY : esp32c3/esp_efuse_utility.c.s
 
 src/esp_efuse_api.obj: src/esp_efuse_api.c.obj
 
@@ -433,18 +433,18 @@ help:
 	@echo "... efuse_test_table"
 	@echo "... show_efuse_table"
 	@echo "... __idf_efuse"
-	@echo "... esp32s2/esp_efuse_fields.obj"
-	@echo "... esp32s2/esp_efuse_fields.i"
-	@echo "... esp32s2/esp_efuse_fields.s"
-	@echo "... esp32s2/esp_efuse_rtc_table.obj"
-	@echo "... esp32s2/esp_efuse_rtc_table.i"
-	@echo "... esp32s2/esp_efuse_rtc_table.s"
-	@echo "... esp32s2/esp_efuse_table.obj"
-	@echo "... esp32s2/esp_efuse_table.i"
-	@echo "... esp32s2/esp_efuse_table.s"
-	@echo "... esp32s2/esp_efuse_utility.obj"
-	@echo "... esp32s2/esp_efuse_utility.i"
-	@echo "... esp32s2/esp_efuse_utility.s"
+	@echo "... esp32c3/esp_efuse_fields.obj"
+	@echo "... esp32c3/esp_efuse_fields.i"
+	@echo "... esp32c3/esp_efuse_fields.s"
+	@echo "... esp32c3/esp_efuse_rtc_calib.obj"
+	@echo "... esp32c3/esp_efuse_rtc_calib.i"
+	@echo "... esp32c3/esp_efuse_rtc_calib.s"
+	@echo "... esp32c3/esp_efuse_table.obj"
+	@echo "... esp32c3/esp_efuse_table.i"
+	@echo "... esp32c3/esp_efuse_table.s"
+	@echo "... esp32c3/esp_efuse_utility.obj"
+	@echo "... esp32c3/esp_efuse_utility.i"
+	@echo "... esp32c3/esp_efuse_utility.s"
 	@echo "... src/esp_efuse_api.obj"
 	@echo "... src/esp_efuse_api.i"
 	@echo "... src/esp_efuse_api.s"

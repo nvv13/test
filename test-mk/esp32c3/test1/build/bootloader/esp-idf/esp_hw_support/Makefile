@@ -198,248 +198,221 @@ cpu_util.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/cpu_util.c.s
 .PHONY : cpu_util.c.s
 
-port/esp32s2/chip_info.obj: port/esp32s2/chip_info.c.obj
+port/esp32c3/chip_info.obj: port/esp32c3/chip_info.c.obj
 
-.PHONY : port/esp32s2/chip_info.obj
-
-# target to build an object file
-port/esp32s2/chip_info.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/chip_info.c.obj
-.PHONY : port/esp32s2/chip_info.c.obj
-
-port/esp32s2/chip_info.i: port/esp32s2/chip_info.c.i
-
-.PHONY : port/esp32s2/chip_info.i
-
-# target to preprocess a source file
-port/esp32s2/chip_info.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/chip_info.c.i
-.PHONY : port/esp32s2/chip_info.c.i
-
-port/esp32s2/chip_info.s: port/esp32s2/chip_info.c.s
-
-.PHONY : port/esp32s2/chip_info.s
-
-# target to generate assembly for a file
-port/esp32s2/chip_info.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/chip_info.c.s
-.PHONY : port/esp32s2/chip_info.c.s
-
-port/esp32s2/regi2c_ctrl.obj: port/esp32s2/regi2c_ctrl.c.obj
-
-.PHONY : port/esp32s2/regi2c_ctrl.obj
+.PHONY : port/esp32c3/chip_info.obj
 
 # target to build an object file
-port/esp32s2/regi2c_ctrl.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/regi2c_ctrl.c.obj
-.PHONY : port/esp32s2/regi2c_ctrl.c.obj
+port/esp32c3/chip_info.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/chip_info.c.obj
+.PHONY : port/esp32c3/chip_info.c.obj
 
-port/esp32s2/regi2c_ctrl.i: port/esp32s2/regi2c_ctrl.c.i
+port/esp32c3/chip_info.i: port/esp32c3/chip_info.c.i
 
-.PHONY : port/esp32s2/regi2c_ctrl.i
+.PHONY : port/esp32c3/chip_info.i
 
 # target to preprocess a source file
-port/esp32s2/regi2c_ctrl.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/regi2c_ctrl.c.i
-.PHONY : port/esp32s2/regi2c_ctrl.c.i
+port/esp32c3/chip_info.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/chip_info.c.i
+.PHONY : port/esp32c3/chip_info.c.i
 
-port/esp32s2/regi2c_ctrl.s: port/esp32s2/regi2c_ctrl.c.s
+port/esp32c3/chip_info.s: port/esp32c3/chip_info.c.s
 
-.PHONY : port/esp32s2/regi2c_ctrl.s
+.PHONY : port/esp32c3/chip_info.s
 
 # target to generate assembly for a file
-port/esp32s2/regi2c_ctrl.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/regi2c_ctrl.c.s
-.PHONY : port/esp32s2/regi2c_ctrl.c.s
+port/esp32c3/chip_info.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/chip_info.c.s
+.PHONY : port/esp32c3/chip_info.c.s
 
-port/esp32s2/rtc_clk.obj: port/esp32s2/rtc_clk.c.obj
+port/esp32c3/cpu_util_esp32c3.obj: port/esp32c3/cpu_util_esp32c3.c.obj
 
-.PHONY : port/esp32s2/rtc_clk.obj
+.PHONY : port/esp32c3/cpu_util_esp32c3.obj
 
 # target to build an object file
-port/esp32s2/rtc_clk.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_clk.c.obj
-.PHONY : port/esp32s2/rtc_clk.c.obj
+port/esp32c3/cpu_util_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/cpu_util_esp32c3.c.obj
+.PHONY : port/esp32c3/cpu_util_esp32c3.c.obj
 
-port/esp32s2/rtc_clk.i: port/esp32s2/rtc_clk.c.i
+port/esp32c3/cpu_util_esp32c3.i: port/esp32c3/cpu_util_esp32c3.c.i
 
-.PHONY : port/esp32s2/rtc_clk.i
+.PHONY : port/esp32c3/cpu_util_esp32c3.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_clk.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_clk.c.i
-.PHONY : port/esp32s2/rtc_clk.c.i
+port/esp32c3/cpu_util_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/cpu_util_esp32c3.c.i
+.PHONY : port/esp32c3/cpu_util_esp32c3.c.i
 
-port/esp32s2/rtc_clk.s: port/esp32s2/rtc_clk.c.s
+port/esp32c3/cpu_util_esp32c3.s: port/esp32c3/cpu_util_esp32c3.c.s
 
-.PHONY : port/esp32s2/rtc_clk.s
+.PHONY : port/esp32c3/cpu_util_esp32c3.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_clk.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_clk.c.s
-.PHONY : port/esp32s2/rtc_clk.c.s
+port/esp32c3/cpu_util_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/cpu_util_esp32c3.c.s
+.PHONY : port/esp32c3/cpu_util_esp32c3.c.s
 
-port/esp32s2/rtc_clk_init.obj: port/esp32s2/rtc_clk_init.c.obj
+port/esp32c3/rtc_clk.obj: port/esp32c3/rtc_clk.c.obj
 
-.PHONY : port/esp32s2/rtc_clk_init.obj
+.PHONY : port/esp32c3/rtc_clk.obj
 
 # target to build an object file
-port/esp32s2/rtc_clk_init.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_clk_init.c.obj
-.PHONY : port/esp32s2/rtc_clk_init.c.obj
+port/esp32c3/rtc_clk.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_clk.c.obj
+.PHONY : port/esp32c3/rtc_clk.c.obj
 
-port/esp32s2/rtc_clk_init.i: port/esp32s2/rtc_clk_init.c.i
+port/esp32c3/rtc_clk.i: port/esp32c3/rtc_clk.c.i
 
-.PHONY : port/esp32s2/rtc_clk_init.i
+.PHONY : port/esp32c3/rtc_clk.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_clk_init.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_clk_init.c.i
-.PHONY : port/esp32s2/rtc_clk_init.c.i
+port/esp32c3/rtc_clk.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_clk.c.i
+.PHONY : port/esp32c3/rtc_clk.c.i
 
-port/esp32s2/rtc_clk_init.s: port/esp32s2/rtc_clk_init.c.s
+port/esp32c3/rtc_clk.s: port/esp32c3/rtc_clk.c.s
 
-.PHONY : port/esp32s2/rtc_clk_init.s
+.PHONY : port/esp32c3/rtc_clk.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_clk_init.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_clk_init.c.s
-.PHONY : port/esp32s2/rtc_clk_init.c.s
+port/esp32c3/rtc_clk.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_clk.c.s
+.PHONY : port/esp32c3/rtc_clk.c.s
 
-port/esp32s2/rtc_init.obj: port/esp32s2/rtc_init.c.obj
+port/esp32c3/rtc_clk_init.obj: port/esp32c3/rtc_clk_init.c.obj
 
-.PHONY : port/esp32s2/rtc_init.obj
+.PHONY : port/esp32c3/rtc_clk_init.obj
 
 # target to build an object file
-port/esp32s2/rtc_init.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_init.c.obj
-.PHONY : port/esp32s2/rtc_init.c.obj
+port/esp32c3/rtc_clk_init.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_clk_init.c.obj
+.PHONY : port/esp32c3/rtc_clk_init.c.obj
 
-port/esp32s2/rtc_init.i: port/esp32s2/rtc_init.c.i
+port/esp32c3/rtc_clk_init.i: port/esp32c3/rtc_clk_init.c.i
 
-.PHONY : port/esp32s2/rtc_init.i
+.PHONY : port/esp32c3/rtc_clk_init.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_init.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_init.c.i
-.PHONY : port/esp32s2/rtc_init.c.i
+port/esp32c3/rtc_clk_init.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_clk_init.c.i
+.PHONY : port/esp32c3/rtc_clk_init.c.i
 
-port/esp32s2/rtc_init.s: port/esp32s2/rtc_init.c.s
+port/esp32c3/rtc_clk_init.s: port/esp32c3/rtc_clk_init.c.s
 
-.PHONY : port/esp32s2/rtc_init.s
+.PHONY : port/esp32c3/rtc_clk_init.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_init.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_init.c.s
-.PHONY : port/esp32s2/rtc_init.c.s
+port/esp32c3/rtc_clk_init.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_clk_init.c.s
+.PHONY : port/esp32c3/rtc_clk_init.c.s
 
-port/esp32s2/rtc_pm.obj: port/esp32s2/rtc_pm.c.obj
+port/esp32c3/rtc_init.obj: port/esp32c3/rtc_init.c.obj
 
-.PHONY : port/esp32s2/rtc_pm.obj
+.PHONY : port/esp32c3/rtc_init.obj
 
 # target to build an object file
-port/esp32s2/rtc_pm.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_pm.c.obj
-.PHONY : port/esp32s2/rtc_pm.c.obj
+port/esp32c3/rtc_init.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_init.c.obj
+.PHONY : port/esp32c3/rtc_init.c.obj
 
-port/esp32s2/rtc_pm.i: port/esp32s2/rtc_pm.c.i
+port/esp32c3/rtc_init.i: port/esp32c3/rtc_init.c.i
 
-.PHONY : port/esp32s2/rtc_pm.i
+.PHONY : port/esp32c3/rtc_init.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_pm.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_pm.c.i
-.PHONY : port/esp32s2/rtc_pm.c.i
+port/esp32c3/rtc_init.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_init.c.i
+.PHONY : port/esp32c3/rtc_init.c.i
 
-port/esp32s2/rtc_pm.s: port/esp32s2/rtc_pm.c.s
+port/esp32c3/rtc_init.s: port/esp32c3/rtc_init.c.s
 
-.PHONY : port/esp32s2/rtc_pm.s
+.PHONY : port/esp32c3/rtc_init.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_pm.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_pm.c.s
-.PHONY : port/esp32s2/rtc_pm.c.s
+port/esp32c3/rtc_init.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_init.c.s
+.PHONY : port/esp32c3/rtc_init.c.s
 
-port/esp32s2/rtc_sleep.obj: port/esp32s2/rtc_sleep.c.obj
+port/esp32c3/rtc_pm.obj: port/esp32c3/rtc_pm.c.obj
 
-.PHONY : port/esp32s2/rtc_sleep.obj
+.PHONY : port/esp32c3/rtc_pm.obj
 
 # target to build an object file
-port/esp32s2/rtc_sleep.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_sleep.c.obj
-.PHONY : port/esp32s2/rtc_sleep.c.obj
+port/esp32c3/rtc_pm.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_pm.c.obj
+.PHONY : port/esp32c3/rtc_pm.c.obj
 
-port/esp32s2/rtc_sleep.i: port/esp32s2/rtc_sleep.c.i
+port/esp32c3/rtc_pm.i: port/esp32c3/rtc_pm.c.i
 
-.PHONY : port/esp32s2/rtc_sleep.i
+.PHONY : port/esp32c3/rtc_pm.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_sleep.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_sleep.c.i
-.PHONY : port/esp32s2/rtc_sleep.c.i
+port/esp32c3/rtc_pm.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_pm.c.i
+.PHONY : port/esp32c3/rtc_pm.c.i
 
-port/esp32s2/rtc_sleep.s: port/esp32s2/rtc_sleep.c.s
+port/esp32c3/rtc_pm.s: port/esp32c3/rtc_pm.c.s
 
-.PHONY : port/esp32s2/rtc_sleep.s
+.PHONY : port/esp32c3/rtc_pm.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_sleep.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_sleep.c.s
-.PHONY : port/esp32s2/rtc_sleep.c.s
+port/esp32c3/rtc_pm.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_pm.c.s
+.PHONY : port/esp32c3/rtc_pm.c.s
 
-port/esp32s2/rtc_time.obj: port/esp32s2/rtc_time.c.obj
+port/esp32c3/rtc_sleep.obj: port/esp32c3/rtc_sleep.c.obj
 
-.PHONY : port/esp32s2/rtc_time.obj
+.PHONY : port/esp32c3/rtc_sleep.obj
 
 # target to build an object file
-port/esp32s2/rtc_time.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_time.c.obj
-.PHONY : port/esp32s2/rtc_time.c.obj
+port/esp32c3/rtc_sleep.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_sleep.c.obj
+.PHONY : port/esp32c3/rtc_sleep.c.obj
 
-port/esp32s2/rtc_time.i: port/esp32s2/rtc_time.c.i
+port/esp32c3/rtc_sleep.i: port/esp32c3/rtc_sleep.c.i
 
-.PHONY : port/esp32s2/rtc_time.i
+.PHONY : port/esp32c3/rtc_sleep.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_time.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_time.c.i
-.PHONY : port/esp32s2/rtc_time.c.i
+port/esp32c3/rtc_sleep.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_sleep.c.i
+.PHONY : port/esp32c3/rtc_sleep.c.i
 
-port/esp32s2/rtc_time.s: port/esp32s2/rtc_time.c.s
+port/esp32c3/rtc_sleep.s: port/esp32c3/rtc_sleep.c.s
 
-.PHONY : port/esp32s2/rtc_time.s
+.PHONY : port/esp32c3/rtc_sleep.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_time.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_time.c.s
-.PHONY : port/esp32s2/rtc_time.c.s
+port/esp32c3/rtc_sleep.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_sleep.c.s
+.PHONY : port/esp32c3/rtc_sleep.c.s
 
-port/esp32s2/rtc_wdt.obj: port/esp32s2/rtc_wdt.c.obj
+port/esp32c3/rtc_time.obj: port/esp32c3/rtc_time.c.obj
 
-.PHONY : port/esp32s2/rtc_wdt.obj
+.PHONY : port/esp32c3/rtc_time.obj
 
 # target to build an object file
-port/esp32s2/rtc_wdt.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_wdt.c.obj
-.PHONY : port/esp32s2/rtc_wdt.c.obj
+port/esp32c3/rtc_time.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_time.c.obj
+.PHONY : port/esp32c3/rtc_time.c.obj
 
-port/esp32s2/rtc_wdt.i: port/esp32s2/rtc_wdt.c.i
+port/esp32c3/rtc_time.i: port/esp32c3/rtc_time.c.i
 
-.PHONY : port/esp32s2/rtc_wdt.i
+.PHONY : port/esp32c3/rtc_time.i
 
 # target to preprocess a source file
-port/esp32s2/rtc_wdt.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_wdt.c.i
-.PHONY : port/esp32s2/rtc_wdt.c.i
+port/esp32c3/rtc_time.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_time.c.i
+.PHONY : port/esp32c3/rtc_time.c.i
 
-port/esp32s2/rtc_wdt.s: port/esp32s2/rtc_wdt.c.s
+port/esp32c3/rtc_time.s: port/esp32c3/rtc_time.c.s
 
-.PHONY : port/esp32s2/rtc_wdt.s
+.PHONY : port/esp32c3/rtc_time.s
 
 # target to generate assembly for a file
-port/esp32s2/rtc_wdt.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32s2/rtc_wdt.c.s
-.PHONY : port/esp32s2/rtc_wdt.c.s
+port/esp32c3/rtc_time.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_time.c.s
+.PHONY : port/esp32c3/rtc_time.c.s
 
 # Help Target
 help:
@@ -456,33 +429,30 @@ help:
 	@echo "... cpu_util.obj"
 	@echo "... cpu_util.i"
 	@echo "... cpu_util.s"
-	@echo "... port/esp32s2/chip_info.obj"
-	@echo "... port/esp32s2/chip_info.i"
-	@echo "... port/esp32s2/chip_info.s"
-	@echo "... port/esp32s2/regi2c_ctrl.obj"
-	@echo "... port/esp32s2/regi2c_ctrl.i"
-	@echo "... port/esp32s2/regi2c_ctrl.s"
-	@echo "... port/esp32s2/rtc_clk.obj"
-	@echo "... port/esp32s2/rtc_clk.i"
-	@echo "... port/esp32s2/rtc_clk.s"
-	@echo "... port/esp32s2/rtc_clk_init.obj"
-	@echo "... port/esp32s2/rtc_clk_init.i"
-	@echo "... port/esp32s2/rtc_clk_init.s"
-	@echo "... port/esp32s2/rtc_init.obj"
-	@echo "... port/esp32s2/rtc_init.i"
-	@echo "... port/esp32s2/rtc_init.s"
-	@echo "... port/esp32s2/rtc_pm.obj"
-	@echo "... port/esp32s2/rtc_pm.i"
-	@echo "... port/esp32s2/rtc_pm.s"
-	@echo "... port/esp32s2/rtc_sleep.obj"
-	@echo "... port/esp32s2/rtc_sleep.i"
-	@echo "... port/esp32s2/rtc_sleep.s"
-	@echo "... port/esp32s2/rtc_time.obj"
-	@echo "... port/esp32s2/rtc_time.i"
-	@echo "... port/esp32s2/rtc_time.s"
-	@echo "... port/esp32s2/rtc_wdt.obj"
-	@echo "... port/esp32s2/rtc_wdt.i"
-	@echo "... port/esp32s2/rtc_wdt.s"
+	@echo "... port/esp32c3/chip_info.obj"
+	@echo "... port/esp32c3/chip_info.i"
+	@echo "... port/esp32c3/chip_info.s"
+	@echo "... port/esp32c3/cpu_util_esp32c3.obj"
+	@echo "... port/esp32c3/cpu_util_esp32c3.i"
+	@echo "... port/esp32c3/cpu_util_esp32c3.s"
+	@echo "... port/esp32c3/rtc_clk.obj"
+	@echo "... port/esp32c3/rtc_clk.i"
+	@echo "... port/esp32c3/rtc_clk.s"
+	@echo "... port/esp32c3/rtc_clk_init.obj"
+	@echo "... port/esp32c3/rtc_clk_init.i"
+	@echo "... port/esp32c3/rtc_clk_init.s"
+	@echo "... port/esp32c3/rtc_init.obj"
+	@echo "... port/esp32c3/rtc_init.i"
+	@echo "... port/esp32c3/rtc_init.s"
+	@echo "... port/esp32c3/rtc_pm.obj"
+	@echo "... port/esp32c3/rtc_pm.i"
+	@echo "... port/esp32c3/rtc_pm.s"
+	@echo "... port/esp32c3/rtc_sleep.obj"
+	@echo "... port/esp32c3/rtc_sleep.i"
+	@echo "... port/esp32c3/rtc_sleep.s"
+	@echo "... port/esp32c3/rtc_time.obj"
+	@echo "... port/esp32c3/rtc_time.i"
+	@echo "... port/esp32c3/rtc_time.s"
 .PHONY : help
 
 

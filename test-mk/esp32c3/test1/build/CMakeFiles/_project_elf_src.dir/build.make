@@ -72,15 +72,15 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 # Include the progress variables for this target.
 include CMakeFiles/_project_elf_src.dir/progress.make
 
-CMakeFiles/_project_elf_src: project_elf_src_esp32s2.c
+CMakeFiles/_project_elf_src: project_elf_src_esp32c3.c
 
 
-project_elf_src_esp32s2.c:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating project_elf_src_esp32s2.c"
-	/usr/bin/cmake -E touch /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32s2.c
+project_elf_src_esp32c3.c:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating project_elf_src_esp32c3.c"
+	/usr/bin/cmake -E touch /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c
 
 _project_elf_src: CMakeFiles/_project_elf_src
-_project_elf_src: project_elf_src_esp32s2.c
+_project_elf_src: project_elf_src_esp32c3.c
 _project_elf_src: CMakeFiles/_project_elf_src.dir/build.make
 
 .PHONY : _project_elf_src

@@ -5,20 +5,14 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_uart.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj
@@ -56,25 +50,24 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_crc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_gpio.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/gpio_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/gpio_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/gpio_types.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_pins.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_sig_map.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/io_mux_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_pins.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/gpio_periph.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
@@ -109,68 +102,51 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_crc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_gpio.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/gpio_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/gpio_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/gpio_types.h
  /home/nvv/esp-idf/components/heap/include/heap_memory_layout.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_pins.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_sig_map.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/io_mux_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_pins.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/gpio_periph.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
  config/sdkconfig.h
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32s2.c.obj
- /home/nvv/esp-idf/components/bootloader_support/include/bootloader_clock.h
- /home/nvv/esp-idf/components/bootloader_support/include/bootloader_common.h
- /home/nvv/esp-idf/components/bootloader_support/include/esp_app_format.h
- /home/nvv/esp-idf/components/bootloader_support/include/esp_flash_partitions.h
- /home/nvv/esp-idf/components/bootloader_support/include/esp_image_format.h
- /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32s2.c
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj
+ /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
- /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
- /home/nvv/esp-idf/components/esp_common/include/esp_err.h
- /home/nvv/esp-idf/components/esp_common/include/esp_types.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/rtc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/rtc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/rtc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/rtc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/rtc.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_flash.h
  /home/nvv/esp-idf/components/bootloader_support/include/esp_flash_encrypt.h
  /home/nvv/esp-idf/components/bootloader_support/include_bootloader/bootloader_flash_priv.h
  /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash.c
- /home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+ /home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
  /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
  /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
  /home/nvv/esp-idf/components/esp_common/include/esp_err.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/cache.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/rsa_pss.h
@@ -196,28 +172,29 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/cache_memory.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/cache_memory.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
  config/sdkconfig.h
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32s2.c.obj
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_common.h
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_flash_config.h
  /home/nvv/esp-idf/components/bootloader_support/include/esp_app_format.h
  /home/nvv/esp-idf/components/bootloader_support/include/esp_flash_partitions.h
  /home/nvv/esp-idf/components/bootloader_support/include/esp_image_format.h
  /home/nvv/esp-idf/components/bootloader_support/include_bootloader/flash_qio_mode.h
- /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash_config_esp32s2.c
+ /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash_config_esp32c3.c
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
@@ -226,54 +203,59 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_common/include/esp_types.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/rtc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/efuse.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/gpio.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/rtc.h
+ /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/spi_flash.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/rtc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/rtc.h
- /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/spi_flash.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/rtc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/include/soc/gpio_periph.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_mem.h
  /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c
+ /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
  /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
  /home/nvv/esp-idf/components/esp_common/include/esp_err.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_cpu.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/hal/include/hal/mpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/mpu_types.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_random.h
@@ -288,6 +270,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_chip_info.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_mac.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_random.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
@@ -295,83 +278,50 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
  /home/nvv/esp-idf/components/esp_system/include/esp_system.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/wdev_reg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/wdev_reg.h
  config/sdkconfig.h
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32s2.c.obj
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_random.h
- /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32s2.c
- /home/nvv/esp-idf/components/driver/include/driver/periph_ctrl.h
+ /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
- /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
- /home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/private_include/regi2c_apll.h
- /home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/private_include/regi2c_bbpll.h
- /home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/private_include/regi2c_saradc.h
- /home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/private_include/regi2c_ulp.h
- /home/nvv/esp-idf/components/esp_hw_support/port/esp32s2/regi2c_ctrl.h
+ /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include/regi2c_bbpll.h
+ /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include/regi2c_bias.h
+ /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include/regi2c_dig_reg.h
+ /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include/regi2c_lp_bias.h
+ /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include/regi2c_saradc.h
+ /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/regi2c_ctrl.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/adc_ll.h
- /home/nvv/esp-idf/components/hal/include/hal/adc_types.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/adc_channel.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/apb_saradc_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/apb_saradc_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/i2s_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/i2s_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/io_mux_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_channel.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sens_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sens_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/syscon_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/syscon_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
- /home/nvv/esp-idf/components/soc/include/soc/adc_periph.h
- /home/nvv/esp-idf/components/soc/include/soc/i2s_periph.h
- /home/nvv/esp-idf/components/soc/include/soc/rtc_io_periph.h
- /home/nvv/esp-idf/components/soc/include/soc/rtc_periph.h
- /home/nvv/esp-idf/components/soc/include/soc/sens_periph.h
- /home/nvv/esp-idf/components/soc/include/soc/syscon_periph.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/apb_saradc_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/syscon_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_common.h
@@ -388,7 +338,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/bootloader_support/include_bootloader/bootloader_sha.h
  /home/nvv/esp-idf/components/bootloader_support/include_bootloader/bootloader_utility.h
  /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c
- /home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+ /home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
  /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
@@ -398,7 +348,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_common/include/esp_types.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_cpu.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
- /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/dport_access.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/cache.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/efuse.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
@@ -440,40 +390,36 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_efuse.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_uart.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/cache_memory.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_access.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/dport_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/extmem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_sig_map.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/gpio_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/interrupt_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/io_mux_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/periph_defs.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_channel.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_io_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sens_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/sensitive_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/system_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/timer_group_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/timer_group_struct.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/uart_reg.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/cache_memory.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/extmem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/timer_group_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/timer_group_struct.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  /home/nvv/esp-idf/components/soc/include/soc/gpio_periph.h
  /home/nvv/esp-idf/components/soc/include/soc/rtc_io_periph.h
@@ -481,17 +427,6 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloade
  /home/nvv/esp-idf/components/soc/include/soc/timer_periph.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_common.h
@@ -507,7 +442,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image
  /home/nvv/esp-idf/components/bootloader_support/include_bootloader/bootloader_sha.h
  /home/nvv/esp-idf/components/bootloader_support/include_bootloader/bootloader_utility.h
  /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c
- /home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+ /home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
  /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
@@ -518,6 +453,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_cpu.h
  /home/nvv/esp-idf/components/esp_hw_support/include/esp_fault.h
  /home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
+ /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/efuse.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
  /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/rsa_pss.h
@@ -542,32 +478,27 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_crc.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_efuse.h
  /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
- /home/nvv/esp-idf/components/hal/esp32s2/include/hal/cpu_ll.h
+ /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_hal.h
  /home/nvv/esp-idf/components/hal/include/hal/cpu_types.h
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/rtc_cntl_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/csr.h
+ /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/assist_debug_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/dport_access.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-isa.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core-matmap.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/core.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/extreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/specreg.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie-asm.h
- /home/nvv/esp-idf/components/xtensa/esp32s2/include/xtensa/config/tie.h
- /home/nvv/esp-idf/components/xtensa/include/xt_instr_macros.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/corebits.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/hal.h
- /home/nvv/esp-idf/components/xtensa/include/xtensa/xtensa-versions.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/esp_app_format.h
@@ -576,7 +507,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_enc
  /home/nvv/esp-idf/components/bootloader_support/include/esp_image_format.h
  /home/nvv/esp-idf/components/bootloader_support/include/esp_secure_boot.h
  /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c
- /home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+ /home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
  /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
@@ -606,10 +537,10 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_enc
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
@@ -638,10 +569,10 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_par
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
  config/sdkconfig.h
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj
  /home/nvv/esp-idf/components/bootloader_support/include/bootloader_flash.h
@@ -673,13 +604,13 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/io_mux_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_mem_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/spi_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
@@ -705,8 +636,8 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootl
  /home/nvv/esp-idf/components/mbedtls/mbedtls/include/mbedtls/sha256.h
  /home/nvv/esp-idf/components/mbedtls/port/include/sha256_alt.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash.h
  /home/nvv/esp-idf/components/spi_flash/include/esp_spi_flash_counters.h
  config/sdkconfig.h
@@ -716,7 +647,7 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_bo
  /home/nvv/esp-idf/components/bootloader_support/include/esp_image_format.h
  /home/nvv/esp-idf/components/bootloader_support/include/esp_secure_boot.h
  /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c
- /home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+ /home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
  /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
  /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
  /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
@@ -745,9 +676,9 @@ esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_bo
  /home/nvv/esp-idf/components/log/include/esp_log.h
  /home/nvv/esp-idf/components/log/include/esp_log_internal.h
  /home/nvv/esp-idf/components/newlib/platform_include/assert.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
- /home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+ /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
  /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
  config/sdkconfig.h

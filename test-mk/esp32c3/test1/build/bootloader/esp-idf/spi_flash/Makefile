@@ -144,32 +144,32 @@ __idf_spi_flash/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build
 .PHONY : __idf_spi_flash/fast
 
-esp32s2/spi_flash_rom_patch.obj: esp32s2/spi_flash_rom_patch.c.obj
+esp32c3/spi_flash_rom_patch.obj: esp32c3/spi_flash_rom_patch.c.obj
 
-.PHONY : esp32s2/spi_flash_rom_patch.obj
+.PHONY : esp32c3/spi_flash_rom_patch.obj
 
 # target to build an object file
-esp32s2/spi_flash_rom_patch.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.obj
-.PHONY : esp32s2/spi_flash_rom_patch.c.obj
+esp32c3/spi_flash_rom_patch.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj
+.PHONY : esp32c3/spi_flash_rom_patch.c.obj
 
-esp32s2/spi_flash_rom_patch.i: esp32s2/spi_flash_rom_patch.c.i
+esp32c3/spi_flash_rom_patch.i: esp32c3/spi_flash_rom_patch.c.i
 
-.PHONY : esp32s2/spi_flash_rom_patch.i
+.PHONY : esp32c3/spi_flash_rom_patch.i
 
 # target to preprocess a source file
-esp32s2/spi_flash_rom_patch.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.i
-.PHONY : esp32s2/spi_flash_rom_patch.c.i
+esp32c3/spi_flash_rom_patch.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.i
+.PHONY : esp32c3/spi_flash_rom_patch.c.i
 
-esp32s2/spi_flash_rom_patch.s: esp32s2/spi_flash_rom_patch.c.s
+esp32c3/spi_flash_rom_patch.s: esp32c3/spi_flash_rom_patch.c.s
 
-.PHONY : esp32s2/spi_flash_rom_patch.s
+.PHONY : esp32c3/spi_flash_rom_patch.s
 
 # target to generate assembly for a file
-esp32s2/spi_flash_rom_patch.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32s2/spi_flash_rom_patch.c.s
-.PHONY : esp32s2/spi_flash_rom_patch.c.s
+esp32c3/spi_flash_rom_patch.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.s
+.PHONY : esp32c3/spi_flash_rom_patch.c.s
 
 # Help Target
 help:
@@ -180,9 +180,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... __idf_spi_flash"
-	@echo "... esp32s2/spi_flash_rom_patch.obj"
-	@echo "... esp32s2/spi_flash_rom_patch.i"
-	@echo "... esp32s2/spi_flash_rom_patch.s"
+	@echo "... esp32c3/spi_flash_rom_patch.obj"
+	@echo "... esp32c3/spi_flash_rom_patch.i"
+	@echo "... esp32c3/spi_flash_rom_patch.s"
 .PHONY : help
 
 

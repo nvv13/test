@@ -262,32 +262,32 @@ __/__/port/aes/dma/esp_aes.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes.c.s
 .PHONY : __/__/port/aes/dma/esp_aes.c.s
 
-__/__/port/aes/dma/esp_aes_crypto_dma_impl.obj: __/__/port/aes/dma/esp_aes_crypto_dma_impl.c.obj
+__/__/port/aes/dma/esp_aes_gdma_impl.obj: __/__/port/aes/dma/esp_aes_gdma_impl.c.obj
 
-.PHONY : __/__/port/aes/dma/esp_aes_crypto_dma_impl.obj
+.PHONY : __/__/port/aes/dma/esp_aes_gdma_impl.obj
 
 # target to build an object file
-__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.obj
-.PHONY : __/__/port/aes/dma/esp_aes_crypto_dma_impl.c.obj
+__/__/port/aes/dma/esp_aes_gdma_impl.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_gdma_impl.c.obj
+.PHONY : __/__/port/aes/dma/esp_aes_gdma_impl.c.obj
 
-__/__/port/aes/dma/esp_aes_crypto_dma_impl.i: __/__/port/aes/dma/esp_aes_crypto_dma_impl.c.i
+__/__/port/aes/dma/esp_aes_gdma_impl.i: __/__/port/aes/dma/esp_aes_gdma_impl.c.i
 
-.PHONY : __/__/port/aes/dma/esp_aes_crypto_dma_impl.i
+.PHONY : __/__/port/aes/dma/esp_aes_gdma_impl.i
 
 # target to preprocess a source file
-__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.i
-.PHONY : __/__/port/aes/dma/esp_aes_crypto_dma_impl.c.i
+__/__/port/aes/dma/esp_aes_gdma_impl.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_gdma_impl.c.i
+.PHONY : __/__/port/aes/dma/esp_aes_gdma_impl.c.i
 
-__/__/port/aes/dma/esp_aes_crypto_dma_impl.s: __/__/port/aes/dma/esp_aes_crypto_dma_impl.c.s
+__/__/port/aes/dma/esp_aes_gdma_impl.s: __/__/port/aes/dma/esp_aes_gdma_impl.c.s
 
-.PHONY : __/__/port/aes/dma/esp_aes_crypto_dma_impl.s
+.PHONY : __/__/port/aes/dma/esp_aes_gdma_impl.s
 
 # target to generate assembly for a file
-__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_crypto_dma_impl.c.s
-.PHONY : __/__/port/aes/dma/esp_aes_crypto_dma_impl.c.s
+__/__/port/aes/dma/esp_aes_gdma_impl.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/dma/esp_aes_gdma_impl.c.s
+.PHONY : __/__/port/aes/dma/esp_aes_gdma_impl.c.s
 
 __/__/port/aes/esp_aes_common.obj: __/__/port/aes/esp_aes_common.c.obj
 
@@ -316,33 +316,6 @@ __/__/port/aes/esp_aes_common.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_common.c.s
 .PHONY : __/__/port/aes/esp_aes_common.c.s
 
-__/__/port/aes/esp_aes_gcm.obj: __/__/port/aes/esp_aes_gcm.c.obj
-
-.PHONY : __/__/port/aes/esp_aes_gcm.obj
-
-# target to build an object file
-__/__/port/aes/esp_aes_gcm.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_gcm.c.obj
-.PHONY : __/__/port/aes/esp_aes_gcm.c.obj
-
-__/__/port/aes/esp_aes_gcm.i: __/__/port/aes/esp_aes_gcm.c.i
-
-.PHONY : __/__/port/aes/esp_aes_gcm.i
-
-# target to preprocess a source file
-__/__/port/aes/esp_aes_gcm.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_gcm.c.i
-.PHONY : __/__/port/aes/esp_aes_gcm.c.i
-
-__/__/port/aes/esp_aes_gcm.s: __/__/port/aes/esp_aes_gcm.c.s
-
-.PHONY : __/__/port/aes/esp_aes_gcm.s
-
-# target to generate assembly for a file
-__/__/port/aes/esp_aes_gcm.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_gcm.c.s
-.PHONY : __/__/port/aes/esp_aes_gcm.c.s
-
 __/__/port/aes/esp_aes_xts.obj: __/__/port/aes/esp_aes_xts.c.obj
 
 .PHONY : __/__/port/aes/esp_aes_xts.obj
@@ -370,32 +343,59 @@ __/__/port/aes/esp_aes_xts.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/aes/esp_aes_xts.c.s
 .PHONY : __/__/port/aes/esp_aes_xts.c.s
 
-__/__/port/esp32s2/bignum.obj: __/__/port/esp32s2/bignum.c.obj
+__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.obj: __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.obj
 
-.PHONY : __/__/port/esp32s2/bignum.obj
+.PHONY : __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.obj
 
 # target to build an object file
-__/__/port/esp32s2/bignum.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32s2/bignum.c.obj
-.PHONY : __/__/port/esp32s2/bignum.c.obj
+__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.obj
+.PHONY : __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.obj
 
-__/__/port/esp32s2/bignum.i: __/__/port/esp32s2/bignum.c.i
+__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.i: __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.i
 
-.PHONY : __/__/port/esp32s2/bignum.i
+.PHONY : __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.i
 
 # target to preprocess a source file
-__/__/port/esp32s2/bignum.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32s2/bignum.c.i
-.PHONY : __/__/port/esp32s2/bignum.c.i
+__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.i
+.PHONY : __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.i
 
-__/__/port/esp32s2/bignum.s: __/__/port/esp32s2/bignum.c.s
+__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.s: __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.s
 
-.PHONY : __/__/port/esp32s2/bignum.s
+.PHONY : __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.s
 
 # target to generate assembly for a file
-__/__/port/esp32s2/bignum.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32s2/bignum.c.s
-.PHONY : __/__/port/esp32s2/bignum.c.s
+__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.s
+.PHONY : __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.s
+
+__/__/port/esp32c3/bignum.obj: __/__/port/esp32c3/bignum.c.obj
+
+.PHONY : __/__/port/esp32c3/bignum.obj
+
+# target to build an object file
+__/__/port/esp32c3/bignum.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32c3/bignum.c.obj
+.PHONY : __/__/port/esp32c3/bignum.c.obj
+
+__/__/port/esp32c3/bignum.i: __/__/port/esp32c3/bignum.c.i
+
+.PHONY : __/__/port/esp32c3/bignum.i
+
+# target to preprocess a source file
+__/__/port/esp32c3/bignum.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32c3/bignum.c.i
+.PHONY : __/__/port/esp32c3/bignum.c.i
+
+__/__/port/esp32c3/bignum.s: __/__/port/esp32c3/bignum.c.s
+
+.PHONY : __/__/port/esp32c3/bignum.s
+
+# target to generate assembly for a file
+__/__/port/esp32c3/bignum.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/esp32c3/bignum.c.s
+.PHONY : __/__/port/esp32c3/bignum.c.s
 
 __/__/port/esp_bignum.obj: __/__/port/esp_bignum.c.obj
 
@@ -694,32 +694,32 @@ __/__/port/sha/dma/esp_sha512.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha512.c.s
 .PHONY : __/__/port/sha/dma/esp_sha512.c.s
 
-__/__/port/sha/dma/esp_sha_crypto_dma_impl.obj: __/__/port/sha/dma/esp_sha_crypto_dma_impl.c.obj
+__/__/port/sha/dma/esp_sha_gdma_impl.obj: __/__/port/sha/dma/esp_sha_gdma_impl.c.obj
 
-.PHONY : __/__/port/sha/dma/esp_sha_crypto_dma_impl.obj
+.PHONY : __/__/port/sha/dma/esp_sha_gdma_impl.obj
 
 # target to build an object file
-__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.obj
-.PHONY : __/__/port/sha/dma/esp_sha_crypto_dma_impl.c.obj
+__/__/port/sha/dma/esp_sha_gdma_impl.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_gdma_impl.c.obj
+.PHONY : __/__/port/sha/dma/esp_sha_gdma_impl.c.obj
 
-__/__/port/sha/dma/esp_sha_crypto_dma_impl.i: __/__/port/sha/dma/esp_sha_crypto_dma_impl.c.i
+__/__/port/sha/dma/esp_sha_gdma_impl.i: __/__/port/sha/dma/esp_sha_gdma_impl.c.i
 
-.PHONY : __/__/port/sha/dma/esp_sha_crypto_dma_impl.i
+.PHONY : __/__/port/sha/dma/esp_sha_gdma_impl.i
 
 # target to preprocess a source file
-__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.i
-.PHONY : __/__/port/sha/dma/esp_sha_crypto_dma_impl.c.i
+__/__/port/sha/dma/esp_sha_gdma_impl.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_gdma_impl.c.i
+.PHONY : __/__/port/sha/dma/esp_sha_gdma_impl.c.i
 
-__/__/port/sha/dma/esp_sha_crypto_dma_impl.s: __/__/port/sha/dma/esp_sha_crypto_dma_impl.c.s
+__/__/port/sha/dma/esp_sha_gdma_impl.s: __/__/port/sha/dma/esp_sha_gdma_impl.c.s
 
-.PHONY : __/__/port/sha/dma/esp_sha_crypto_dma_impl.s
+.PHONY : __/__/port/sha/dma/esp_sha_gdma_impl.s
 
 # target to generate assembly for a file
-__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_crypto_dma_impl.c.s
-.PHONY : __/__/port/sha/dma/esp_sha_crypto_dma_impl.c.s
+__/__/port/sha/dma/esp_sha_gdma_impl.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/build.make esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/__/__/port/sha/dma/esp_sha_gdma_impl.c.s
+.PHONY : __/__/port/sha/dma/esp_sha_gdma_impl.c.s
 
 __/__/port/sha/dma/sha.obj: __/__/port/sha/dma/sha.c.obj
 
@@ -2900,21 +2900,21 @@ help:
 	@echo "... __/__/port/aes/dma/esp_aes.obj"
 	@echo "... __/__/port/aes/dma/esp_aes.i"
 	@echo "... __/__/port/aes/dma/esp_aes.s"
-	@echo "... __/__/port/aes/dma/esp_aes_crypto_dma_impl.obj"
-	@echo "... __/__/port/aes/dma/esp_aes_crypto_dma_impl.i"
-	@echo "... __/__/port/aes/dma/esp_aes_crypto_dma_impl.s"
+	@echo "... __/__/port/aes/dma/esp_aes_gdma_impl.obj"
+	@echo "... __/__/port/aes/dma/esp_aes_gdma_impl.i"
+	@echo "... __/__/port/aes/dma/esp_aes_gdma_impl.s"
 	@echo "... __/__/port/aes/esp_aes_common.obj"
 	@echo "... __/__/port/aes/esp_aes_common.i"
 	@echo "... __/__/port/aes/esp_aes_common.s"
-	@echo "... __/__/port/aes/esp_aes_gcm.obj"
-	@echo "... __/__/port/aes/esp_aes_gcm.i"
-	@echo "... __/__/port/aes/esp_aes_gcm.s"
 	@echo "... __/__/port/aes/esp_aes_xts.obj"
 	@echo "... __/__/port/aes/esp_aes_xts.i"
 	@echo "... __/__/port/aes/esp_aes_xts.s"
-	@echo "... __/__/port/esp32s2/bignum.obj"
-	@echo "... __/__/port/esp32s2/bignum.i"
-	@echo "... __/__/port/esp32s2/bignum.s"
+	@echo "... __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.obj"
+	@echo "... __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.i"
+	@echo "... __/__/port/crypto_shared_gdma/esp_crypto_shared_gdma.s"
+	@echo "... __/__/port/esp32c3/bignum.obj"
+	@echo "... __/__/port/esp32c3/bignum.i"
+	@echo "... __/__/port/esp32c3/bignum.s"
 	@echo "... __/__/port/esp_bignum.obj"
 	@echo "... __/__/port/esp_bignum.i"
 	@echo "... __/__/port/esp_bignum.s"
@@ -2948,9 +2948,9 @@ help:
 	@echo "... __/__/port/sha/dma/esp_sha512.obj"
 	@echo "... __/__/port/sha/dma/esp_sha512.i"
 	@echo "... __/__/port/sha/dma/esp_sha512.s"
-	@echo "... __/__/port/sha/dma/esp_sha_crypto_dma_impl.obj"
-	@echo "... __/__/port/sha/dma/esp_sha_crypto_dma_impl.i"
-	@echo "... __/__/port/sha/dma/esp_sha_crypto_dma_impl.s"
+	@echo "... __/__/port/sha/dma/esp_sha_gdma_impl.obj"
+	@echo "... __/__/port/sha/dma/esp_sha_gdma_impl.i"
+	@echo "... __/__/port/sha/dma/esp_sha_gdma_impl.s"
 	@echo "... __/__/port/sha/dma/sha.obj"
 	@echo "... __/__/port/sha/dma/sha.i"
 	@echo "... __/__/port/sha/dma/sha.s"

@@ -352,32 +352,32 @@ src/core_dump_uart.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.s
 .PHONY : src/core_dump_uart.c.s
 
-src/port/xtensa/core_dump_port.obj: src/port/xtensa/core_dump_port.c.obj
+src/port/riscv/core_dump_port.obj: src/port/riscv/core_dump_port.c.obj
 
-.PHONY : src/port/xtensa/core_dump_port.obj
+.PHONY : src/port/riscv/core_dump_port.obj
 
 # target to build an object file
-src/port/xtensa/core_dump_port.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/xtensa/core_dump_port.c.obj
-.PHONY : src/port/xtensa/core_dump_port.c.obj
+src/port/riscv/core_dump_port.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj
+.PHONY : src/port/riscv/core_dump_port.c.obj
 
-src/port/xtensa/core_dump_port.i: src/port/xtensa/core_dump_port.c.i
+src/port/riscv/core_dump_port.i: src/port/riscv/core_dump_port.c.i
 
-.PHONY : src/port/xtensa/core_dump_port.i
+.PHONY : src/port/riscv/core_dump_port.i
 
 # target to preprocess a source file
-src/port/xtensa/core_dump_port.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/xtensa/core_dump_port.c.i
-.PHONY : src/port/xtensa/core_dump_port.c.i
+src/port/riscv/core_dump_port.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.i
+.PHONY : src/port/riscv/core_dump_port.c.i
 
-src/port/xtensa/core_dump_port.s: src/port/xtensa/core_dump_port.c.s
+src/port/riscv/core_dump_port.s: src/port/riscv/core_dump_port.c.s
 
-.PHONY : src/port/xtensa/core_dump_port.s
+.PHONY : src/port/riscv/core_dump_port.s
 
 # target to generate assembly for a file
-src/port/xtensa/core_dump_port.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/xtensa/core_dump_port.c.s
-.PHONY : src/port/xtensa/core_dump_port.c.s
+src/port/riscv/core_dump_port.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/build.make esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.s
+.PHONY : src/port/riscv/core_dump_port.c.s
 
 # Help Target
 help:
@@ -410,9 +410,9 @@ help:
 	@echo "... src/core_dump_uart.obj"
 	@echo "... src/core_dump_uart.i"
 	@echo "... src/core_dump_uart.s"
-	@echo "... src/port/xtensa/core_dump_port.obj"
-	@echo "... src/port/xtensa/core_dump_port.i"
-	@echo "... src/port/xtensa/core_dump_port.s"
+	@echo "... src/port/riscv/core_dump_port.obj"
+	@echo "... src/port/riscv/core_dump_port.i"
+	@echo "... src/port/riscv/core_dump_port.s"
 .PHONY : help
 
 

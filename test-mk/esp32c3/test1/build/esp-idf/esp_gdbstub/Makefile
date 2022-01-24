@@ -190,32 +190,59 @@ __idf_esp_gdbstub/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build
 .PHONY : __idf_esp_gdbstub/fast
 
-esp_common/gdbstub_common.obj: esp_common/gdbstub_common.c.obj
+esp32c3/gdbstub_esp32c3.obj: esp32c3/gdbstub_esp32c3.c.obj
 
-.PHONY : esp_common/gdbstub_common.obj
+.PHONY : esp32c3/gdbstub_esp32c3.obj
 
 # target to build an object file
-esp_common/gdbstub_common.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/esp_common/gdbstub_common.c.obj
-.PHONY : esp_common/gdbstub_common.c.obj
+esp32c3/gdbstub_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/esp32c3/gdbstub_esp32c3.c.obj
+.PHONY : esp32c3/gdbstub_esp32c3.c.obj
 
-esp_common/gdbstub_common.i: esp_common/gdbstub_common.c.i
+esp32c3/gdbstub_esp32c3.i: esp32c3/gdbstub_esp32c3.c.i
 
-.PHONY : esp_common/gdbstub_common.i
+.PHONY : esp32c3/gdbstub_esp32c3.i
 
 # target to preprocess a source file
-esp_common/gdbstub_common.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/esp_common/gdbstub_common.c.i
-.PHONY : esp_common/gdbstub_common.c.i
+esp32c3/gdbstub_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/esp32c3/gdbstub_esp32c3.c.i
+.PHONY : esp32c3/gdbstub_esp32c3.c.i
 
-esp_common/gdbstub_common.s: esp_common/gdbstub_common.c.s
+esp32c3/gdbstub_esp32c3.s: esp32c3/gdbstub_esp32c3.c.s
 
-.PHONY : esp_common/gdbstub_common.s
+.PHONY : esp32c3/gdbstub_esp32c3.s
 
 # target to generate assembly for a file
-esp_common/gdbstub_common.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/esp_common/gdbstub_common.c.s
-.PHONY : esp_common/gdbstub_common.c.s
+esp32c3/gdbstub_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/esp32c3/gdbstub_esp32c3.c.s
+.PHONY : esp32c3/gdbstub_esp32c3.c.s
+
+riscv/gdbstub_riscv.obj: riscv/gdbstub_riscv.c.obj
+
+.PHONY : riscv/gdbstub_riscv.obj
+
+# target to build an object file
+riscv/gdbstub_riscv.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/riscv/gdbstub_riscv.c.obj
+.PHONY : riscv/gdbstub_riscv.c.obj
+
+riscv/gdbstub_riscv.i: riscv/gdbstub_riscv.c.i
+
+.PHONY : riscv/gdbstub_riscv.i
+
+# target to preprocess a source file
+riscv/gdbstub_riscv.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/riscv/gdbstub_riscv.c.i
+.PHONY : riscv/gdbstub_riscv.c.i
+
+riscv/gdbstub_riscv.s: riscv/gdbstub_riscv.c.s
+
+.PHONY : riscv/gdbstub_riscv.s
+
+# target to generate assembly for a file
+riscv/gdbstub_riscv.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/riscv/gdbstub_riscv.c.s
+.PHONY : riscv/gdbstub_riscv.c.s
 
 src/gdbstub.obj: src/gdbstub.c.obj
 
@@ -271,42 +298,6 @@ src/packet.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/src/packet.c.s
 .PHONY : src/packet.c.s
 
-xtensa/gdbstub-entry.obj: xtensa/gdbstub-entry.S.obj
-
-.PHONY : xtensa/gdbstub-entry.obj
-
-# target to build an object file
-xtensa/gdbstub-entry.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/xtensa/gdbstub-entry.S.obj
-.PHONY : xtensa/gdbstub-entry.S.obj
-
-xtensa/gdbstub_xtensa.obj: xtensa/gdbstub_xtensa.c.obj
-
-.PHONY : xtensa/gdbstub_xtensa.obj
-
-# target to build an object file
-xtensa/gdbstub_xtensa.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/xtensa/gdbstub_xtensa.c.obj
-.PHONY : xtensa/gdbstub_xtensa.c.obj
-
-xtensa/gdbstub_xtensa.i: xtensa/gdbstub_xtensa.c.i
-
-.PHONY : xtensa/gdbstub_xtensa.i
-
-# target to preprocess a source file
-xtensa/gdbstub_xtensa.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/xtensa/gdbstub_xtensa.c.i
-.PHONY : xtensa/gdbstub_xtensa.c.i
-
-xtensa/gdbstub_xtensa.s: xtensa/gdbstub_xtensa.c.s
-
-.PHONY : xtensa/gdbstub_xtensa.s
-
-# target to generate assembly for a file
-xtensa/gdbstub_xtensa.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/build.make esp-idf/esp_gdbstub/CMakeFiles/__idf_esp_gdbstub.dir/xtensa/gdbstub_xtensa.c.s
-.PHONY : xtensa/gdbstub_xtensa.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -320,19 +311,18 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_esp_gdbstub"
-	@echo "... esp_common/gdbstub_common.obj"
-	@echo "... esp_common/gdbstub_common.i"
-	@echo "... esp_common/gdbstub_common.s"
+	@echo "... esp32c3/gdbstub_esp32c3.obj"
+	@echo "... esp32c3/gdbstub_esp32c3.i"
+	@echo "... esp32c3/gdbstub_esp32c3.s"
+	@echo "... riscv/gdbstub_riscv.obj"
+	@echo "... riscv/gdbstub_riscv.i"
+	@echo "... riscv/gdbstub_riscv.s"
 	@echo "... src/gdbstub.obj"
 	@echo "... src/gdbstub.i"
 	@echo "... src/gdbstub.s"
 	@echo "... src/packet.obj"
 	@echo "... src/packet.i"
 	@echo "... src/packet.s"
-	@echo "... xtensa/gdbstub-entry.obj"
-	@echo "... xtensa/gdbstub_xtensa.obj"
-	@echo "... xtensa/gdbstub_xtensa.i"
-	@echo "... xtensa/gdbstub_xtensa.s"
 .PHONY : help
 
 

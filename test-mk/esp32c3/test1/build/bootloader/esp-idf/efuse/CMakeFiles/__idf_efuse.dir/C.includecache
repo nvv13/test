@@ -36,83 +36,69 @@ sdkconfig.h
 bootloader_flash.h
 /home/nvv/esp-idf/components/bootloader_support/include_bootloader/bootloader_flash.h
 
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_fields.c
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_fields.c
 esp_efuse.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse.h
 esp_efuse_utility.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.h
 esp_efuse_table.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.h
 stdlib.h
-/home/nvv/esp-idf/components/efuse/esp32s2/stdlib.h
+/home/nvv/esp-idf/components/efuse/esp32c3/stdlib.h
 esp_types.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_types.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_types.h
+esp32c3/rom/efuse.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp32c3/rom/efuse.h
 assert.h
-/home/nvv/esp-idf/components/efuse/esp32s2/assert.h
+/home/nvv/esp-idf/components/efuse/esp32c3/assert.h
 esp_err.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_err.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_err.h
 esp_log.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_log.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_log.h
 soc/efuse_periph.h
-/home/nvv/esp-idf/components/efuse/esp32s2/soc/efuse_periph.h
+/home/nvv/esp-idf/components/efuse/esp32c3/soc/efuse_periph.h
 bootloader_random.h
-/home/nvv/esp-idf/components/efuse/esp32s2/bootloader_random.h
+/home/nvv/esp-idf/components/efuse/esp32c3/bootloader_random.h
 sys/param.h
-/home/nvv/esp-idf/components/efuse/esp32s2/sys/param.h
+/home/nvv/esp-idf/components/efuse/esp32c3/sys/param.h
 
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_rtc_table.c
-stdbool.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_rtc_calib.c
+esp_bit_defs.h
 -
-esp_efuse_rtc_table.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_rtc_table.h
 esp_efuse.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse.h
 esp_efuse_table.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.h
-esp_log.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_log.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/efuse/esp32s2/soc/soc_caps.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.h
 
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.c
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.c
 sdkconfig.h
-/home/nvv/esp-idf/components/efuse/esp32s2/sdkconfig.h
+/home/nvv/esp-idf/components/efuse/esp32c3/sdkconfig.h
 esp_efuse.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse.h
 assert.h
 -
 esp_efuse_table.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_table.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_table.h
 
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.c
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.c
+sys/param.h
+-
+sdkconfig.h
+/home/nvv/esp-idf/components/efuse/esp32c3/sdkconfig.h
+esp_log.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_log.h
+assert.h
+/home/nvv/esp-idf/components/efuse/esp32c3/assert.h
 esp_efuse_utility.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_efuse_utility.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp_efuse_utility.h
 soc/efuse_periph.h
-/home/nvv/esp-idf/components/efuse/esp32s2/soc/efuse_periph.h
-esp32s2/clk.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp32s2/clk.h
-esp_log.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp_log.h
-assert.h
-/home/nvv/esp-idf/components/efuse/esp32s2/assert.h
-sdkconfig.h
-/home/nvv/esp-idf/components/efuse/esp32s2/sdkconfig.h
-sys/param.h
--
-esp32s2/rom/efuse.h
-/home/nvv/esp-idf/components/efuse/esp32s2/esp32s2/rom/efuse.h
+/home/nvv/esp-idf/components/efuse/esp32c3/soc/efuse_periph.h
+esp32c3/clk.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp32c3/clk.h
+esp32c3/rom/efuse.h
+/home/nvv/esp-idf/components/efuse/esp32c3/esp32c3/rom/efuse.h
 
-/home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_rtc_table.h
-stdbool.h
--
-stdint.h
--
-esp_err.h
-/home/nvv/esp-idf/components/efuse/esp32s2/include/esp_err.h
-sdkconfig.h
-/home/nvv/esp-idf/components/efuse/esp32s2/include/sdkconfig.h
-
-/home/nvv/esp-idf/components/efuse/esp32s2/include/esp_efuse_table.h
+/home/nvv/esp-idf/components/efuse/esp32c3/include/esp_efuse_table.h
 
 /home/nvv/esp-idf/components/efuse/include/esp_efuse.h
 stdint.h
@@ -258,9 +244,9 @@ stddef.h
 stdint.h
 -
 
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/clk.h
+/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/clk.h
 esp_private/esp_clk.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32s2/esp_private/esp_clk.h
+/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/esp_private/esp_clk.h
 
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
 stdint.h
@@ -294,6 +280,14 @@ ets_sys.h
 rsa_pss.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/rsa_pss.h
 
+/home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/efuse.h
+stdint.h
+-
+stddef.h
+-
+stdbool.h
+-
+
 /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
 stdint.h
 -
@@ -325,12 +319,6 @@ ets_sys.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
 rsa_pss.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/rsa_pss.h
-
-/home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/efuse.h
-stdlib.h
--
-stdbool.h
--
 
 /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
 stdint.h
@@ -408,25 +396,27 @@ stdint.h
 
 /home/nvv/esp-idf/components/newlib/platform_include/sys/lock.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/apb_ctrl_reg.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/apb_ctrl_reg.h
 soc.h
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/efuse_reg.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/efuse_reg.h
 soc.h
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/reset_reasons.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 stdint.h
 -
 esp_assert.h
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/esp_assert.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_assert.h
 esp_bit_defs.h
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/esp_bit_defs.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_bit_defs.h
+sdkconfig.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/sdkconfig.h
 
-/home/nvv/esp-idf/components/soc/esp32s2/include/soc/soc_caps.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 
 /home/nvv/esp-idf/components/soc/include/soc/efuse_periph.h
 soc/efuse_reg.h

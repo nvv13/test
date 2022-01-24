@@ -79,15 +79,15 @@ include esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/flags.make
 esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.obj: esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/flags.make
 esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.obj: /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.obj -c /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.obj -c /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c
 
 esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c > CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c > CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.i
 
 esp-idf/esp_ipc/CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c -o CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_ipc/src/esp_ipc.c -o CMakeFiles/__idf_esp_ipc.dir/src/esp_ipc.c.s
 
 # Object files for target __idf_esp_ipc
 __idf_esp_ipc_OBJECTS = \

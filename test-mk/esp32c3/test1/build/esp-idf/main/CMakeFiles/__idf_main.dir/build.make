@@ -79,15 +79,15 @@ include esp-idf/main/CMakeFiles/__idf_main.dir/flags.make
 esp-idf/main/CMakeFiles/__idf_main.dir/test1prj.c.obj: esp-idf/main/CMakeFiles/__idf_main.dir/flags.make
 esp-idf/main/CMakeFiles/__idf_main.dir/test1prj.c.obj: ../main/test1prj.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/main/CMakeFiles/__idf_main.dir/test1prj.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/main && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_main.dir/test1prj.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/main/test1prj.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/main && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_main.dir/test1prj.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/main/test1prj.c
 
 esp-idf/main/CMakeFiles/__idf_main.dir/test1prj.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_main.dir/test1prj.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/main && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/main/test1prj.c > CMakeFiles/__idf_main.dir/test1prj.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/main && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/main/test1prj.c > CMakeFiles/__idf_main.dir/test1prj.c.i
 
 esp-idf/main/CMakeFiles/__idf_main.dir/test1prj.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_main.dir/test1prj.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/main && /home/nvv/.espressif/tools/xtensa-esp32s2-elf/esp-2021r1-8.4.0/xtensa-esp32s2-elf/bin/xtensa-esp32s2-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/main/test1prj.c -o CMakeFiles/__idf_main.dir/test1prj.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/main && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/main/test1prj.c -o CMakeFiles/__idf_main.dir/test1prj.c.s
 
 # Object files for target __idf_main
 __idf_main_OBJECTS = \
