@@ -79,27 +79,42 @@ include esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/flags.make
 esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj: esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/flags.make
 esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj: /home/nvv/esp-idf/components/esp_phy/src/phy_init.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj -c /home/nvv/esp-idf/components/esp_phy/src/phy_init.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj -c /home/nvv/esp-idf/components/esp_phy/src/phy_init.c
 
 esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_phy/src/phy_init.c > CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_phy/src/phy_init.c > CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.i
 
 esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_phy/src/phy_init.c -o CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_phy/src/phy_init.c -o CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.s
+
+esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj: esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/flags.make
+esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj: /home/nvv/esp-idf/components/esp_phy/src/lib_printf.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj -c /home/nvv/esp-idf/components/esp_phy/src/lib_printf.c
+
+esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/esp_phy/src/lib_printf.c > CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.i
+
+esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/esp_phy/src/lib_printf.c -o CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.s
 
 # Object files for target __idf_esp_phy
 __idf_esp_phy_OBJECTS = \
-"CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj"
+"CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj" \
+"CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj"
 
 # External object files for target __idf_esp_phy
 __idf_esp_phy_EXTERNAL_OBJECTS =
 
 esp-idf/esp_phy/libesp_phy.a: esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/phy_init.c.obj
+esp-idf/esp_phy/libesp_phy.a: esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj
 esp-idf/esp_phy/libesp_phy.a: esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/build.make
 esp-idf/esp_phy/libesp_phy.a: esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libesp_phy.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C static library libesp_phy.a"
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && $(CMAKE_COMMAND) -P CMakeFiles/__idf_esp_phy.dir/cmake_clean_target.cmake
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/__idf_esp_phy.dir/link.txt --verbose=$(VERBOSE)
 

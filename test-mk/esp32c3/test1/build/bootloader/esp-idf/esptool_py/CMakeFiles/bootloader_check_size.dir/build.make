@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build/bootloader
 include esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/progress.make
 
 esp-idf/esptool_py/CMakeFiles/bootloader_check_size:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esptool_py && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/bootloader.bin
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esptool_py && /home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/bootloader.bin
 
 bootloader_check_size: esp-idf/esptool_py/CMakeFiles/bootloader_check_size
 bootloader_check_size: esp-idf/esptool_py/CMakeFiles/bootloader_check_size.dir/build.make

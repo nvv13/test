@@ -72,8 +72,8 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 # Include the progress variables for this target.
 include CMakeFiles/size-files.dir/progress.make
 
-CMakeFiles/size-files: test1prj.elf
-	/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/idf_size.py --files /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.map
+CMakeFiles/size-files: test1prj.map
+	/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/tools/idf_size.py --files /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.map
 
 size-files: CMakeFiles/size-files
 size-files: CMakeFiles/size-files.dir/build.make

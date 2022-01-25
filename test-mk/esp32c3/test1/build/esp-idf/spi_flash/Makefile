@@ -244,33 +244,6 @@ esp32c3/flash_ops_esp32c3.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/flash_ops_esp32c3.c.s
 .PHONY : esp32c3/flash_ops_esp32c3.c.s
 
-esp32c3/spi_flash_rom_patch.obj: esp32c3/spi_flash_rom_patch.c.obj
-
-.PHONY : esp32c3/spi_flash_rom_patch.obj
-
-# target to build an object file
-esp32c3/spi_flash_rom_patch.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.obj
-.PHONY : esp32c3/spi_flash_rom_patch.c.obj
-
-esp32c3/spi_flash_rom_patch.i: esp32c3/spi_flash_rom_patch.c.i
-
-.PHONY : esp32c3/spi_flash_rom_patch.i
-
-# target to preprocess a source file
-esp32c3/spi_flash_rom_patch.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.i
-.PHONY : esp32c3/spi_flash_rom_patch.c.i
-
-esp32c3/spi_flash_rom_patch.s: esp32c3/spi_flash_rom_patch.c.s
-
-.PHONY : esp32c3/spi_flash_rom_patch.s
-
-# target to generate assembly for a file
-esp32c3/spi_flash_rom_patch.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/esp32c3/spi_flash_rom_patch.c.s
-.PHONY : esp32c3/spi_flash_rom_patch.c.s
-
 esp_flash_api.obj: esp_flash_api.c.obj
 
 .PHONY : esp_flash_api.obj
@@ -595,6 +568,60 @@ spi_flash_chip_mxic.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_mxic.c.s
 .PHONY : spi_flash_chip_mxic.c.s
 
+spi_flash_chip_mxic_opi.obj: spi_flash_chip_mxic_opi.c.obj
+
+.PHONY : spi_flash_chip_mxic_opi.obj
+
+# target to build an object file
+spi_flash_chip_mxic_opi.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_mxic_opi.c.obj
+.PHONY : spi_flash_chip_mxic_opi.c.obj
+
+spi_flash_chip_mxic_opi.i: spi_flash_chip_mxic_opi.c.i
+
+.PHONY : spi_flash_chip_mxic_opi.i
+
+# target to preprocess a source file
+spi_flash_chip_mxic_opi.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_mxic_opi.c.i
+.PHONY : spi_flash_chip_mxic_opi.c.i
+
+spi_flash_chip_mxic_opi.s: spi_flash_chip_mxic_opi.c.s
+
+.PHONY : spi_flash_chip_mxic_opi.s
+
+# target to generate assembly for a file
+spi_flash_chip_mxic_opi.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_mxic_opi.c.s
+.PHONY : spi_flash_chip_mxic_opi.c.s
+
+spi_flash_chip_th.obj: spi_flash_chip_th.c.obj
+
+.PHONY : spi_flash_chip_th.obj
+
+# target to build an object file
+spi_flash_chip_th.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_th.c.obj
+.PHONY : spi_flash_chip_th.c.obj
+
+spi_flash_chip_th.i: spi_flash_chip_th.c.i
+
+.PHONY : spi_flash_chip_th.i
+
+# target to preprocess a source file
+spi_flash_chip_th.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_th.c.i
+.PHONY : spi_flash_chip_th.c.i
+
+spi_flash_chip_th.s: spi_flash_chip_th.c.s
+
+.PHONY : spi_flash_chip_th.s
+
+# target to generate assembly for a file
+spi_flash_chip_th.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/spi_flash_chip_th.c.s
+.PHONY : spi_flash_chip_th.c.s
+
 spi_flash_chip_winbond.obj: spi_flash_chip_winbond.c.obj
 
 .PHONY : spi_flash_chip_winbond.obj
@@ -695,9 +722,6 @@ help:
 	@echo "... esp32c3/flash_ops_esp32c3.obj"
 	@echo "... esp32c3/flash_ops_esp32c3.i"
 	@echo "... esp32c3/flash_ops_esp32c3.s"
-	@echo "... esp32c3/spi_flash_rom_patch.obj"
-	@echo "... esp32c3/spi_flash_rom_patch.i"
-	@echo "... esp32c3/spi_flash_rom_patch.s"
 	@echo "... esp_flash_api.obj"
 	@echo "... esp_flash_api.i"
 	@echo "... esp_flash_api.s"
@@ -734,6 +758,12 @@ help:
 	@echo "... spi_flash_chip_mxic.obj"
 	@echo "... spi_flash_chip_mxic.i"
 	@echo "... spi_flash_chip_mxic.s"
+	@echo "... spi_flash_chip_mxic_opi.obj"
+	@echo "... spi_flash_chip_mxic_opi.i"
+	@echo "... spi_flash_chip_mxic_opi.s"
+	@echo "... spi_flash_chip_th.obj"
+	@echo "... spi_flash_chip_th.i"
+	@echo "... spi_flash_chip_th.s"
 	@echo "... spi_flash_chip_winbond.obj"
 	@echo "... spi_flash_chip_winbond.i"
 	@echo "... spi_flash_chip_winbond.s"

@@ -72,8 +72,8 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build/bootloader
 # Include the progress variables for this target.
 include CMakeFiles/size-components.dir/progress.make
 
-CMakeFiles/size-components: bootloader.elf
-	/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/idf_size.py --archives /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/bootloader.map
+CMakeFiles/size-components: bootloader.map
+	/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/tools/idf_size.py --archives /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/bootloader.map
 
 size-components: CMakeFiles/size-components
 size-components: CMakeFiles/size-components.dir/build.make

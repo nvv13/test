@@ -62,10 +62,6 @@ stddef.h
 stdint.h
 -
 
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/crc.h
-stdint.h
--
-
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/ets_sys.h
 stdint.h
 -
@@ -75,8 +71,12 @@ stdlib.h
 -
 sdkconfig.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/sdkconfig.h
-soc/soc.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/soc/soc.h
+
+/home/nvv/esp-idf/components/esp_rom/include/esp32c2/rom/ets_sys.h
+stdint.h
+-
+stdbool.h
+-
 
 /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
 stdint.h
@@ -169,6 +169,8 @@ esp32c3/rom/ets_sys.h
 /home/nvv/esp-idf/components/log/include/esp32c3/rom/ets_sys.h
 esp32h2/rom/ets_sys.h
 /home/nvv/esp-idf/components/log/include/esp32h2/rom/ets_sys.h
+esp32c2/rom/ets_sys.h
+/home/nvv/esp-idf/components/log/include/esp32c2/rom/ets_sys.h
 esp_log_internal.h
 /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 
@@ -184,6 +186,8 @@ stdint.h
 
 /home/nvv/esp-idf/components/newlib/platform_include/sys/lock.h
 
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
+
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
@@ -193,8 +197,8 @@ esp_assert.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_assert.h
 esp_bit_defs.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_bit_defs.h
-sdkconfig.h
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/sdkconfig.h
+reg_base.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 
 /home/nvv/esp-idf/components/spi_flash/include/esp_flash.h
 esp_err.h
@@ -291,12 +295,6 @@ string.h
 -
 stddef.h
 -
-
-/home/nvv/esp-idf/components/wear_levelling/crc32.cpp
-crc32.h
-/home/nvv/esp-idf/components/wear_levelling/crc32.h
-esp32/rom/crc.h
-/home/nvv/esp-idf/components/wear_levelling/esp32/rom/crc.h
 
 /home/nvv/esp-idf/components/wear_levelling/crc32.h
 

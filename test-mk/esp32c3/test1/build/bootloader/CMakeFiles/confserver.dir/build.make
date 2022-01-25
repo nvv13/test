@@ -73,8 +73,8 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build/bootloader
 include CMakeFiles/confserver.dir/progress.make
 
 CMakeFiles/confserver:
-	/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --env-file /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/config.env
-	/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/kconfig_new/confserver.py --env-file /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/config.env --kconfig /home/nvv/esp-idf/Kconfig --sdkconfig-rename /home/nvv/esp-idf/sdkconfig.rename --config /home/nvv/test/test-mk/esp32c3/test1/sdkconfig
+	/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/config.env
+	/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/tools/kconfig_new/confserver.py --env-file /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/config.env --kconfig /home/nvv/esp-idf/Kconfig --sdkconfig-rename /home/nvv/esp-idf/sdkconfig.rename --config /home/nvv/test/test-mk/esp32c3/test1/sdkconfig
 
 confserver: CMakeFiles/confserver
 confserver: CMakeFiles/confserver.dir/build.make

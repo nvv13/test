@@ -433,6 +433,33 @@ random.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/random.c.s
 .PHONY : random.c.s
 
+realpath.obj: realpath.c.obj
+
+.PHONY : realpath.obj
+
+# target to build an object file
+realpath.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/realpath.c.obj
+.PHONY : realpath.c.obj
+
+realpath.i: realpath.c.i
+
+.PHONY : realpath.i
+
+# target to preprocess a source file
+realpath.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/realpath.c.i
+.PHONY : realpath.c.i
+
+realpath.s: realpath.c.s
+
+.PHONY : realpath.s
+
+# target to generate assembly for a file
+realpath.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/realpath.c.s
+.PHONY : realpath.c.s
+
 reent_init.obj: reent_init.c.obj
 
 .PHONY : reent_init.obj
@@ -513,6 +540,33 @@ syscalls.s: syscalls.c.s
 syscalls.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/syscalls.c.s
 .PHONY : syscalls.c.s
+
+sysconf.obj: sysconf.c.obj
+
+.PHONY : sysconf.obj
+
+# target to build an object file
+sysconf.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/sysconf.c.obj
+.PHONY : sysconf.c.obj
+
+sysconf.i: sysconf.c.i
+
+.PHONY : sysconf.i
+
+# target to preprocess a source file
+sysconf.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/sysconf.c.i
+.PHONY : sysconf.c.i
+
+sysconf.s: sysconf.c.s
+
+.PHONY : sysconf.s
+
+# target to generate assembly for a file
+sysconf.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/newlib/CMakeFiles/__idf_newlib.dir/build.make esp-idf/newlib/CMakeFiles/__idf_newlib.dir/sysconf.c.s
+.PHONY : sysconf.c.s
 
 termios.obj: termios.c.obj
 
@@ -608,6 +662,9 @@ help:
 	@echo "... random.obj"
 	@echo "... random.i"
 	@echo "... random.s"
+	@echo "... realpath.obj"
+	@echo "... realpath.i"
+	@echo "... realpath.s"
 	@echo "... reent_init.obj"
 	@echo "... reent_init.i"
 	@echo "... reent_init.s"
@@ -617,6 +674,9 @@ help:
 	@echo "... syscalls.obj"
 	@echo "... syscalls.i"
 	@echo "... syscalls.s"
+	@echo "... sysconf.obj"
+	@echo "... sysconf.i"
+	@echo "... sysconf.s"
 	@echo "... termios.obj"
 	@echo "... termios.i"
 	@echo "... termios.s"

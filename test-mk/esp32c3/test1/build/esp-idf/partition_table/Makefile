@@ -87,6 +87,17 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -119,17 +130,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
@@ -176,21 +176,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-esp-idf/partition_table/CMakeFiles/encrypted-partition_table-flash.dir/rule:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/partition_table/CMakeFiles/encrypted-partition_table-flash.dir/rule
-.PHONY : esp-idf/partition_table/CMakeFiles/encrypted-partition_table-flash.dir/rule
-
-# Convenience name for target.
-encrypted-partition_table-flash: esp-idf/partition_table/CMakeFiles/encrypted-partition_table-flash.dir/rule
-
-.PHONY : encrypted-partition_table-flash
-
-# fast build rule for target.
-encrypted-partition_table-flash/fast:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/encrypted-partition_table-flash.dir/build.make esp-idf/partition_table/CMakeFiles/encrypted-partition_table-flash.dir/build
-.PHONY : encrypted-partition_table-flash/fast
-
-# Convenience name for target.
 esp-idf/partition_table/CMakeFiles/partition_table-flash.dir/rule:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/partition_table/CMakeFiles/partition_table-flash.dir/rule
 .PHONY : esp-idf/partition_table/CMakeFiles/partition_table-flash.dir/rule
@@ -204,6 +189,51 @@ partition_table-flash: esp-idf/partition_table/CMakeFiles/partition_table-flash.
 partition_table-flash/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/partition_table-flash.dir/build.make esp-idf/partition_table/CMakeFiles/partition_table-flash.dir/build
 .PHONY : partition_table-flash/fast
+
+# Convenience name for target.
+esp-idf/partition_table/CMakeFiles/encrypted-partition-table-flash.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/partition_table/CMakeFiles/encrypted-partition-table-flash.dir/rule
+.PHONY : esp-idf/partition_table/CMakeFiles/encrypted-partition-table-flash.dir/rule
+
+# Convenience name for target.
+encrypted-partition-table-flash: esp-idf/partition_table/CMakeFiles/encrypted-partition-table-flash.dir/rule
+
+.PHONY : encrypted-partition-table-flash
+
+# fast build rule for target.
+encrypted-partition-table-flash/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/encrypted-partition-table-flash.dir/build.make esp-idf/partition_table/CMakeFiles/encrypted-partition-table-flash.dir/build
+.PHONY : encrypted-partition-table-flash/fast
+
+# Convenience name for target.
+esp-idf/partition_table/CMakeFiles/partition-table-flash.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/partition_table/CMakeFiles/partition-table-flash.dir/rule
+.PHONY : esp-idf/partition_table/CMakeFiles/partition-table-flash.dir/rule
+
+# Convenience name for target.
+partition-table-flash: esp-idf/partition_table/CMakeFiles/partition-table-flash.dir/rule
+
+.PHONY : partition-table-flash
+
+# fast build rule for target.
+partition-table-flash/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/partition-table-flash.dir/build.make esp-idf/partition_table/CMakeFiles/partition-table-flash.dir/build
+.PHONY : partition-table-flash/fast
+
+# Convenience name for target.
+esp-idf/partition_table/CMakeFiles/partition-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/partition_table/CMakeFiles/partition-table.dir/rule
+.PHONY : esp-idf/partition_table/CMakeFiles/partition-table.dir/rule
+
+# Convenience name for target.
+partition-table: esp-idf/partition_table/CMakeFiles/partition-table.dir/rule
+
+.PHONY : partition-table
+
+# fast build rule for target.
+partition-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/partition_table/CMakeFiles/partition-table.dir/build.make esp-idf/partition_table/CMakeFiles/partition-table.dir/build
+.PHONY : partition-table/fast
 
 # Convenience name for target.
 esp-idf/partition_table/CMakeFiles/partition_table_bin.dir/rule:
@@ -247,7 +277,9 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... encrypted-partition_table-flash"
+	@echo "... encrypted-partition-table-flash"
+	@echo "... partition-table"
+	@echo "... partition-table-flash"
 	@echo "... partition_table"
 	@echo "... partition_table-flash"
 	@echo "... partition_table_bin"

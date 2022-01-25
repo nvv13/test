@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj"
+  "/home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj"
   "/home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj"
   "/home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj"
   "/home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj"
@@ -17,7 +18,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj"
   "/home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj"
   "/home/nvv/esp-idf/components/soc/lldesc.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj"
-  "/home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c" "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -37,9 +37,6 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3"
   "/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/."
   "/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include"
-  "/home/nvv/esp-idf/components/hal/esp32c3/include"
-  "/home/nvv/esp-idf/components/hal/include"
-  "/home/nvv/esp-idf/components/hal/platform_port/include"
   "/home/nvv/esp-idf/components/newlib/platform_include"
   "/home/nvv/esp-idf/components/riscv/include"
   )
@@ -53,7 +50,6 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/hal/CMakeFiles/__idf_hal.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/efuse/CMakeFiles/__idf_efuse.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/DependInfo.cmake"
-  "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/DependInfo.cmake"
   )

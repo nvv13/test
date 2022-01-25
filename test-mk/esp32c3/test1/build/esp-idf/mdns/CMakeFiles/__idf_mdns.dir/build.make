@@ -79,41 +79,41 @@ include esp-idf/mdns/CMakeFiles/__idf_mdns.dir/flags.make
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns.c.obj: esp-idf/mdns/CMakeFiles/__idf_mdns.dir/flags.make
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns.c.obj: /home/nvv/esp-idf/components/mdns/mdns.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_mdns.dir/mdns.c.obj -c /home/nvv/esp-idf/components/mdns/mdns.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_mdns.dir/mdns.c.obj -c /home/nvv/esp-idf/components/mdns/mdns.c
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_mdns.dir/mdns.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/mdns/mdns.c > CMakeFiles/__idf_mdns.dir/mdns.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/mdns/mdns.c > CMakeFiles/__idf_mdns.dir/mdns.c.i
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_mdns.dir/mdns.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/mdns/mdns.c -o CMakeFiles/__idf_mdns.dir/mdns.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/mdns/mdns.c -o CMakeFiles/__idf_mdns.dir/mdns.c.s
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.obj: esp-idf/mdns/CMakeFiles/__idf_mdns.dir/flags.make
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.obj: /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.obj -c /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.obj -c /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c > CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c > CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.i
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c -o CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/mdns/mdns_networking_lwip.c -o CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.s
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_console.c.obj: esp-idf/mdns/CMakeFiles/__idf_mdns.dir/flags.make
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_console.c.obj: /home/nvv/esp-idf/components/mdns/mdns_console.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_console.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_mdns.dir/mdns_console.c.obj -c /home/nvv/esp-idf/components/mdns/mdns_console.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_mdns.dir/mdns_console.c.obj -c /home/nvv/esp-idf/components/mdns/mdns_console.c
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_console.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_mdns.dir/mdns_console.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/mdns/mdns_console.c > CMakeFiles/__idf_mdns.dir/mdns_console.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/mdns/mdns_console.c > CMakeFiles/__idf_mdns.dir/mdns_console.c.i
 
 esp-idf/mdns/CMakeFiles/__idf_mdns.dir/mdns_console.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_mdns.dir/mdns_console.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/mdns/mdns_console.c -o CMakeFiles/__idf_mdns.dir/mdns_console.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mdns && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/mdns/mdns_console.c -o CMakeFiles/__idf_mdns.dir/mdns_console.c.s
 
 # Object files for target __idf_mdns
 __idf_mdns_OBJECTS = \

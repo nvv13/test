@@ -76,214 +76,214 @@ include esp-idf/freertos/CMakeFiles/__idf_freertos.dir/progress.make
 # Include the compile flags for this target's objects.
 include esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj: /home/nvv/esp-idf/components/freertos/port/riscv/port.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj -c /home/nvv/esp-idf/components/freertos/port/riscv/port.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/port.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/port.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/port/riscv/port.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/port/riscv/port.c > CMakeFiles/__idf_freertos.dir/port/riscv/port.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/port.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/port/riscv/port.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/port/riscv/port.c -o CMakeFiles/__idf_freertos.dir/port/riscv/port.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/port.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj: /home/nvv/esp-idf/components/freertos/port/riscv/portasm.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building ASM object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj -c /home/nvv/esp-idf/components/freertos/port/riscv/portasm.S
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/portasm.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building ASM object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/portasm.S
 
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj: /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj -c /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj -c /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c
 
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c > CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c > CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.i
 
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c -o CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/esp_additions/task_snapshot.c -o CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.obj: /home/nvv/esp-idf/components/freertos/port/port_common.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/port/port_common.c.obj -c /home/nvv/esp-idf/components/freertos/port/port_common.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_common.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_common.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/port/port_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/port/port_common.c > CMakeFiles/__idf_freertos.dir/port/port_common.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_common.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/port/port_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/port/port_common.c -o CMakeFiles/__idf_freertos.dir/port/port_common.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_common.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj: /home/nvv/esp-idf/components/freertos/port/port_systick.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj -c /home/nvv/esp-idf/components/freertos/port/port_systick.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_systick.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_systick.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/port/port_systick.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/port/port_systick.c > CMakeFiles/__idf_freertos.dir/port/port_systick.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_systick.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/port/port_systick.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/port/port_systick.c -o CMakeFiles/__idf_freertos.dir/port/port_systick.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/port_systick.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.obj: /home/nvv/esp-idf/components/freertos/croutine.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/croutine.c.obj -c /home/nvv/esp-idf/components/freertos/croutine.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/croutine.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/croutine.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/croutine.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/croutine.c > CMakeFiles/__idf_freertos.dir/croutine.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/croutine.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/croutine.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/croutine.c -o CMakeFiles/__idf_freertos.dir/croutine.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/croutine.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.obj: /home/nvv/esp-idf/components/freertos/event_groups.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/event_groups.c.obj -c /home/nvv/esp-idf/components/freertos/event_groups.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/event_groups.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/event_groups.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/event_groups.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/event_groups.c > CMakeFiles/__idf_freertos.dir/event_groups.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/event_groups.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/event_groups.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/event_groups.c -o CMakeFiles/__idf_freertos.dir/event_groups.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/event_groups.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.obj: /home/nvv/esp-idf/components/freertos/list.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/list.c.obj -c /home/nvv/esp-idf/components/freertos/list.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/list.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/list.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/list.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/list.c > CMakeFiles/__idf_freertos.dir/list.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/list.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/list.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/list.c -o CMakeFiles/__idf_freertos.dir/list.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/list.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.obj: /home/nvv/esp-idf/components/freertos/queue.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/queue.c.obj -c /home/nvv/esp-idf/components/freertos/queue.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/queue.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/queue.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/queue.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/queue.c > CMakeFiles/__idf_freertos.dir/queue.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/queue.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/queue.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/queue.c -o CMakeFiles/__idf_freertos.dir/queue.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/queue.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.obj: /home/nvv/esp-idf/components/freertos/tasks.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/tasks.c.obj -c /home/nvv/esp-idf/components/freertos/tasks.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/tasks.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/tasks.c > CMakeFiles/__idf_freertos.dir/tasks.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/tasks.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/tasks.c -o CMakeFiles/__idf_freertos.dir/tasks.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.obj: /home/nvv/esp-idf/components/freertos/timers.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/timers.c.obj -c /home/nvv/esp-idf/components/freertos/timers.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/timers.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/timers.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/timers.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/timers.c > CMakeFiles/__idf_freertos.dir/timers.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/timers.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/timers.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/timers.c -o CMakeFiles/__idf_freertos.dir/timers.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/timers.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj: /home/nvv/esp-idf/components/freertos/stream_buffer.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj -c /home/nvv/esp-idf/components/freertos/stream_buffer.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/stream_buffer.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/stream_buffer.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/stream_buffer.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/stream_buffer.c > CMakeFiles/__idf_freertos.dir/stream_buffer.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/stream_buffer.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/stream_buffer.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) -D_ESP_FREERTOS_INTERNAL $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/stream_buffer.c -o CMakeFiles/__idf_freertos.dir/stream_buffer.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/stream_buffer.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.s
 
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj: /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj -c /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c
 
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c > CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.i
 
 esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/FreeRTOS-openocd.c -o CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.s
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj: /home/nvv/esp-idf/components/freertos/freertos_v8_compat.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj -c /home/nvv/esp-idf/components/freertos/freertos_v8_compat.c
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/flags.make
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj: /home/nvv/esp-idf/components/freertos/esp_additions/freertos_v8_compat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj -c /home/nvv/esp-idf/components/freertos/esp_additions/freertos_v8_compat.c
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/freertos_v8_compat.c > CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.i
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/freertos/esp_additions/freertos_v8_compat.c > CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.i
 
-esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/freertos_v8_compat.c -o CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.s
+esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freertos && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/freertos/esp_additions/freertos_v8_compat.c -o CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.s
 
 # Object files for target __idf_freertos
 __idf_freertos_OBJECTS = \
-"CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj" \
-"CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj" \
 "CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj" \
-"CMakeFiles/__idf_freertos.dir/port/port_common.c.obj" \
-"CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj" \
-"CMakeFiles/__idf_freertos.dir/croutine.c.obj" \
-"CMakeFiles/__idf_freertos.dir/event_groups.c.obj" \
-"CMakeFiles/__idf_freertos.dir/list.c.obj" \
-"CMakeFiles/__idf_freertos.dir/queue.c.obj" \
-"CMakeFiles/__idf_freertos.dir/tasks.c.obj" \
-"CMakeFiles/__idf_freertos.dir/timers.c.obj" \
-"CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj" \
+"CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj" \
 "CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj" \
-"CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj"
+"CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj"
 
 # External object files for target __idf_freertos
 __idf_freertos_EXTERNAL_OBJECTS =
 
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj
 esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj
 esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.obj
-esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj
+esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj
 esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make
 esp-idf/freertos/libfreertos.a: esp-idf/freertos/CMakeFiles/__idf_freertos.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking C static library libfreertos.a"

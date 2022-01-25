@@ -79,190 +79,190 @@ include esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/soc/lldesc.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/lldesc.c.obj -c /home/nvv/esp-idf/components/soc/lldesc.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/lldesc.c.obj -c /home/nvv/esp-idf/components/soc/lldesc.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/lldesc.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/lldesc.c > CMakeFiles/__idf_soc.dir/lldesc.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/lldesc.c > CMakeFiles/__idf_soc.dir/lldesc.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/lldesc.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/lldesc.c -o CMakeFiles/__idf_soc.dir/lldesc.c.s
-
-esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
-esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj: /home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj -c /home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c
-
-esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c > CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.i
-
-esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c -o CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/lldesc.c -o CMakeFiles/__idf_soc.dir/lldesc.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.s
+
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c
+
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.i
+
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c > CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c > CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c -o CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c -o CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/spi_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/rmt_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/i2s_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/i2c_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/uart_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.s
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: esp-idf/soc/CMakeFiles/__idf_soc.dir/flags.make
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj -c /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c > CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.i
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/soc/esp32c3/timer_periph.c -o CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.s
 
 # Object files for target __idf_soc
 __idf_soc_OBJECTS = \
 "CMakeFiles/__idf_soc.dir/lldesc.c.obj" \
-"CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj" \
 "CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj" \
+"CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj" \
 "CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj" \
 "CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj" \
 "CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj" \
@@ -279,8 +279,8 @@ __idf_soc_OBJECTS = \
 __idf_soc_EXTERNAL_OBJECTS =
 
 esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj
-esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj
 esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj
+esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj
 esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj
 esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj
 esp-idf/soc/libsoc.a: esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj

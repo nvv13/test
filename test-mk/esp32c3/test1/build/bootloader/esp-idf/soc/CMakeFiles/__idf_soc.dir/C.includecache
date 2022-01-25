@@ -18,6 +18,12 @@ stdint.h
 sys/queue.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/sys/queue.h
 
+/home/nvv/esp-idf/components/esp_rom/include/esp32c2/rom/lldesc.h
+stdint.h
+-
+sys/queue.h
+/home/nvv/esp-idf/components/esp_rom/include/esp32c2/rom/sys/queue.h
+
 /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/lldesc.h
 stdint.h
 -
@@ -54,9 +60,11 @@ stdint.h
 soc/adc_periph.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/adc_periph.h
 
-/home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c
-soc/gdma_periph.h
-/home/nvv/esp-idf/components/soc/esp32c3/soc/gdma_periph.h
+/home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c
+soc/gpio_sig_map.h
+/home/nvv/esp-idf/components/soc/esp32c3/soc/gpio_sig_map.h
+soc/dedic_gpio_periph.h
+/home/nvv/esp-idf/components/soc/esp32c3/soc/dedic_gpio_periph.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c
 soc/gpio_periph.h
@@ -120,6 +128,8 @@ soc.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
 
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
+
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_struct.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
@@ -129,8 +139,8 @@ esp_assert.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_assert.h
 esp_bit_defs.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_bit_defs.h
-sdkconfig.h
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/sdkconfig.h
+reg_base.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 
@@ -186,12 +196,6 @@ soc/ledc_periph.h
 soc/gpio_sig_map.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/gpio_sig_map.h
 
-/home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c
-soc/rmt_periph.h
-/home/nvv/esp-idf/components/soc/esp32c3/soc/rmt_periph.h
-soc/gpio_sig_map.h
-/home/nvv/esp-idf/components/soc/esp32c3/soc/gpio_sig_map.h
-
 /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c
 soc/sigmadelta_periph.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/sigmadelta_periph.h
@@ -232,7 +236,11 @@ soc/adc_channel.h
 soc/soc_caps.h
 /home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
 
-/home/nvv/esp-idf/components/soc/include/soc/gdma_periph.h
+/home/nvv/esp-idf/components/soc/include/soc/dedic_gpio_periph.h
+stdint.h
+-
+soc/soc.h
+/home/nvv/esp-idf/components/soc/include/soc/soc/soc.h
 soc/soc_caps.h
 /home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
 soc/periph_defs.h
@@ -305,12 +313,8 @@ esp32c3/rom/lldesc.h
 /home/nvv/esp-idf/components/soc/include/soc/esp32c3/rom/lldesc.h
 esp32h2/rom/lldesc.h
 /home/nvv/esp-idf/components/soc/include/soc/esp32h2/rom/lldesc.h
-
-/home/nvv/esp-idf/components/soc/include/soc/rmt_periph.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
-soc/periph_defs.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/periph_defs.h
+esp32c2/rom/lldesc.h
+/home/nvv/esp-idf/components/soc/include/soc/esp32c2/rom/lldesc.h
 
 /home/nvv/esp-idf/components/soc/include/soc/sigmadelta_periph.h
 stdint.h
@@ -377,10 +381,6 @@ soc/uart_pins.h
 /home/nvv/esp-idf/components/soc/lldesc.c
 soc/lldesc.h
 /home/nvv/esp-idf/components/soc/soc/lldesc.h
-
-/home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c
-sdkconfig.h
-/home/nvv/esp-idf/components/soc/sdkconfig.h
 
 config/sdkconfig.h
 

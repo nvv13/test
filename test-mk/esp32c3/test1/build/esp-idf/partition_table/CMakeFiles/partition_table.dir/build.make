@@ -73,10 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 include esp-idf/partition_table/CMakeFiles/partition_table.dir/progress.make
 
 esp-idf/partition_table/CMakeFiles/partition_table:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo "Partition table binary generated. Contents:"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo "*******************************************************************************"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/gen_esp32part.py -q --offset 0x8000 --flash-size 2MB /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo "*******************************************************************************"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo Warning:\ Command\ "partition_table"\ is\ deprecated\ and\ will\ be\ removed\ in\ the\ next\ major\ release.\ \ \ \ \ \ \ \ \ Please\ use\ "partition-table"\ instead.
 
 partition_table: esp-idf/partition_table/CMakeFiles/partition_table
 partition_table: esp-idf/partition_table/CMakeFiles/partition_table.dir/build.make

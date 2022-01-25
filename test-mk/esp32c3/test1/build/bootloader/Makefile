@@ -130,6 +130,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named uf2
+
+# Build rule for target.
+uf2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uf2
+.PHONY : uf2
+
+# fast build rule for target.
+uf2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/build
+.PHONY : uf2/fast
+
+#=============================================================================
 # Target rules for targets named menuconfig
 
 # Build rule for target.
@@ -169,30 +182,17 @@ bootloader.elf/fast:
 .PHONY : bootloader.elf/fast
 
 #=============================================================================
-# Target rules for targets named gen_project_binary
+# Target rules for targets named save-defconfig
 
 # Build rule for target.
-gen_project_binary: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gen_project_binary
-.PHONY : gen_project_binary
+save-defconfig: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 save-defconfig
+.PHONY : save-defconfig
 
 # fast build rule for target.
-gen_project_binary/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gen_project_binary.dir/build.make CMakeFiles/gen_project_binary.dir/build
-.PHONY : gen_project_binary/fast
-
-#=============================================================================
-# Target rules for targets named app
-
-# Build rule for target.
-app: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app
-.PHONY : app
-
-# fast build rule for target.
-app/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
-.PHONY : app/fast
+save-defconfig/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/save-defconfig.dir/build.make CMakeFiles/save-defconfig.dir/build
+.PHONY : save-defconfig/fast
 
 #=============================================================================
 # Target rules for targets named monitor
@@ -219,6 +219,32 @@ _project_elf_src: cmake_check_build_system
 _project_elf_src/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/_project_elf_src.dir/build.make CMakeFiles/_project_elf_src.dir/build
 .PHONY : _project_elf_src/fast
+
+#=============================================================================
+# Target rules for targets named gen_project_binary
+
+# Build rule for target.
+gen_project_binary: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gen_project_binary
+.PHONY : gen_project_binary
+
+# fast build rule for target.
+gen_project_binary/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gen_project_binary.dir/build.make CMakeFiles/gen_project_binary.dir/build
+.PHONY : gen_project_binary/fast
+
+#=============================================================================
+# Target rules for targets named app
+
+# Build rule for target.
+app: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app
+.PHONY : app
+
+# fast build rule for target.
+app/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
+.PHONY : app/fast
 
 #=============================================================================
 # Target rules for targets named size-files
@@ -286,32 +312,6 @@ uf2-app/fast:
 .PHONY : uf2-app/fast
 
 #=============================================================================
-# Target rules for targets named uf2
-
-# Build rule for target.
-uf2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uf2
-.PHONY : uf2
-
-# fast build rule for target.
-uf2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/uf2.dir/build.make CMakeFiles/uf2.dir/build
-.PHONY : uf2/fast
-
-#=============================================================================
-# Target rules for targets named __idf_hal
-
-# Build rule for target.
-__idf_hal: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_hal
-.PHONY : __idf_hal
-
-# fast build rule for target.
-__idf_hal/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/build
-.PHONY : __idf_hal/fast
-
-#=============================================================================
 # Target rules for targets named __idf_soc
 
 # Build rule for target.
@@ -338,17 +338,17 @@ __idf_micro-ecc/fast:
 .PHONY : __idf_micro-ecc/fast
 
 #=============================================================================
-# Target rules for targets named __idf_spi_flash
+# Target rules for targets named __idf_hal
 
 # Build rule for target.
-__idf_spi_flash: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_spi_flash
-.PHONY : __idf_spi_flash
+__idf_hal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 __idf_hal
+.PHONY : __idf_hal
 
 # fast build rule for target.
-__idf_spi_flash/fast:
-	$(MAKE) $(MAKESILENT) -f esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build.make esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/build
-.PHONY : __idf_spi_flash/fast
+__idf_hal/fast:
+	$(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/build
+.PHONY : __idf_hal/fast
 
 #=============================================================================
 # Target rules for targets named __idf_bootloader_support
@@ -403,6 +403,32 @@ efuse_custom_table/fast:
 .PHONY : efuse_custom_table/fast
 
 #=============================================================================
+# Target rules for targets named efuse-custom-table
+
+# Build rule for target.
+efuse-custom-table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 efuse-custom-table
+.PHONY : efuse-custom-table
+
+# fast build rule for target.
+efuse-custom-table/fast:
+	$(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/build.make esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/build
+.PHONY : efuse-custom-table/fast
+
+#=============================================================================
+# Target rules for targets named show-efuse-table
+
+# Build rule for target.
+show-efuse-table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 show-efuse-table
+.PHONY : show-efuse-table
+
+# fast build rule for target.
+show-efuse-table/fast:
+	$(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/show-efuse-table.dir/build.make esp-idf/efuse/CMakeFiles/show-efuse-table.dir/build
+.PHONY : show-efuse-table/fast
+
+#=============================================================================
 # Target rules for targets named efuse_common_table
 
 # Build rule for target.
@@ -414,6 +440,19 @@ efuse_common_table: cmake_check_build_system
 efuse_common_table/fast:
 	$(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse_common_table.dir/build.make esp-idf/efuse/CMakeFiles/efuse_common_table.dir/build
 .PHONY : efuse_common_table/fast
+
+#=============================================================================
+# Target rules for targets named efuse-common-table
+
+# Build rule for target.
+efuse-common-table: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 efuse-common-table
+.PHONY : efuse-common-table
+
+# fast build rule for target.
+efuse-common-table/fast:
+	$(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse-common-table.dir/build.make esp-idf/efuse/CMakeFiles/efuse-common-table.dir/build
+.PHONY : efuse-common-table/fast
 
 #=============================================================================
 # Target rules for targets named __idf_efuse
@@ -558,6 +597,8 @@ help:
 	@echo "... app"
 	@echo "... bootloader_check_size"
 	@echo "... confserver"
+	@echo "... efuse-common-table"
+	@echo "... efuse-custom-table"
 	@echo "... efuse_common_table"
 	@echo "... efuse_custom_table"
 	@echo "... efuse_test_table"
@@ -565,6 +606,8 @@ help:
 	@echo "... gen_project_binary"
 	@echo "... menuconfig"
 	@echo "... monitor"
+	@echo "... save-defconfig"
+	@echo "... show-efuse-table"
 	@echo "... show_efuse_table"
 	@echo "... size"
 	@echo "... size-components"
@@ -582,7 +625,6 @@ help:
 	@echo "... __idf_main"
 	@echo "... __idf_micro-ecc"
 	@echo "... __idf_soc"
-	@echo "... __idf_spi_flash"
 	@echo "... bootloader.elf"
 	@echo "... project_elf_src_esp32c3.obj"
 	@echo "... project_elf_src_esp32c3.i"

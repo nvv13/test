@@ -622,6 +622,33 @@ src/crypto/aes-ccm.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/aes-ccm.c.s
 .PHONY : src/crypto/aes-ccm.c.s
 
+src/crypto/aes-gcm.obj: src/crypto/aes-gcm.c.obj
+
+.PHONY : src/crypto/aes-gcm.obj
+
+# target to build an object file
+src/crypto/aes-gcm.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/aes-gcm.c.obj
+.PHONY : src/crypto/aes-gcm.c.obj
+
+src/crypto/aes-gcm.i: src/crypto/aes-gcm.c.i
+
+.PHONY : src/crypto/aes-gcm.i
+
+# target to preprocess a source file
+src/crypto/aes-gcm.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/aes-gcm.c.i
+.PHONY : src/crypto/aes-gcm.c.i
+
+src/crypto/aes-gcm.s: src/crypto/aes-gcm.c.s
+
+.PHONY : src/crypto/aes-gcm.s
+
+# target to generate assembly for a file
+src/crypto/aes-gcm.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/aes-gcm.c.s
+.PHONY : src/crypto/aes-gcm.c.s
+
 src/crypto/aes-omac1.obj: src/crypto/aes-omac1.c.obj
 
 .PHONY : src/crypto/aes-omac1.obj
@@ -1081,6 +1108,33 @@ src/crypto/sha1-tlsprf.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha1-tlsprf.c.s
 .PHONY : src/crypto/sha1-tlsprf.c.s
 
+src/crypto/sha1-tprf.obj: src/crypto/sha1-tprf.c.obj
+
+.PHONY : src/crypto/sha1-tprf.obj
+
+# target to build an object file
+src/crypto/sha1-tprf.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha1-tprf.c.obj
+.PHONY : src/crypto/sha1-tprf.c.obj
+
+src/crypto/sha1-tprf.i: src/crypto/sha1-tprf.c.i
+
+.PHONY : src/crypto/sha1-tprf.i
+
+# target to preprocess a source file
+src/crypto/sha1-tprf.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha1-tprf.c.i
+.PHONY : src/crypto/sha1-tprf.c.i
+
+src/crypto/sha1-tprf.s: src/crypto/sha1-tprf.c.s
+
+.PHONY : src/crypto/sha1-tprf.s
+
+# target to generate assembly for a file
+src/crypto/sha1-tprf.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha1-tprf.c.s
+.PHONY : src/crypto/sha1-tprf.c.s
+
 src/crypto/sha256-kdf.obj: src/crypto/sha256-kdf.c.obj
 
 .PHONY : src/crypto/sha256-kdf.obj
@@ -1161,6 +1215,33 @@ src/crypto/sha256-tlsprf.s: src/crypto/sha256-tlsprf.c.s
 src/crypto/sha256-tlsprf.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha256-tlsprf.c.s
 .PHONY : src/crypto/sha256-tlsprf.c.s
+
+src/crypto/sha384-prf.obj: src/crypto/sha384-prf.c.obj
+
+.PHONY : src/crypto/sha384-prf.obj
+
+# target to build an object file
+src/crypto/sha384-prf.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha384-prf.c.obj
+.PHONY : src/crypto/sha384-prf.c.obj
+
+src/crypto/sha384-prf.i: src/crypto/sha384-prf.c.i
+
+.PHONY : src/crypto/sha384-prf.i
+
+# target to preprocess a source file
+src/crypto/sha384-prf.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha384-prf.c.i
+.PHONY : src/crypto/sha384-prf.c.i
+
+src/crypto/sha384-prf.s: src/crypto/sha384-prf.c.s
+
+.PHONY : src/crypto/sha384-prf.s
+
+# target to generate assembly for a file
+src/crypto/sha384-prf.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/crypto/sha384-prf.c.s
+.PHONY : src/crypto/sha384-prf.c.s
 
 src/crypto/sha384-tlsprf.obj: src/crypto/sha384-tlsprf.c.obj
 
@@ -1296,6 +1377,87 @@ src/eap_peer/eap_common.s: src/eap_peer/eap_common.c.s
 src/eap_peer/eap_common.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_common.c.s
 .PHONY : src/eap_peer/eap_common.c.s
+
+src/eap_peer/eap_fast.obj: src/eap_peer/eap_fast.c.obj
+
+.PHONY : src/eap_peer/eap_fast.obj
+
+# target to build an object file
+src/eap_peer/eap_fast.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast.c.obj
+.PHONY : src/eap_peer/eap_fast.c.obj
+
+src/eap_peer/eap_fast.i: src/eap_peer/eap_fast.c.i
+
+.PHONY : src/eap_peer/eap_fast.i
+
+# target to preprocess a source file
+src/eap_peer/eap_fast.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast.c.i
+.PHONY : src/eap_peer/eap_fast.c.i
+
+src/eap_peer/eap_fast.s: src/eap_peer/eap_fast.c.s
+
+.PHONY : src/eap_peer/eap_fast.s
+
+# target to generate assembly for a file
+src/eap_peer/eap_fast.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast.c.s
+.PHONY : src/eap_peer/eap_fast.c.s
+
+src/eap_peer/eap_fast_common.obj: src/eap_peer/eap_fast_common.c.obj
+
+.PHONY : src/eap_peer/eap_fast_common.obj
+
+# target to build an object file
+src/eap_peer/eap_fast_common.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast_common.c.obj
+.PHONY : src/eap_peer/eap_fast_common.c.obj
+
+src/eap_peer/eap_fast_common.i: src/eap_peer/eap_fast_common.c.i
+
+.PHONY : src/eap_peer/eap_fast_common.i
+
+# target to preprocess a source file
+src/eap_peer/eap_fast_common.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast_common.c.i
+.PHONY : src/eap_peer/eap_fast_common.c.i
+
+src/eap_peer/eap_fast_common.s: src/eap_peer/eap_fast_common.c.s
+
+.PHONY : src/eap_peer/eap_fast_common.s
+
+# target to generate assembly for a file
+src/eap_peer/eap_fast_common.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast_common.c.s
+.PHONY : src/eap_peer/eap_fast_common.c.s
+
+src/eap_peer/eap_fast_pac.obj: src/eap_peer/eap_fast_pac.c.obj
+
+.PHONY : src/eap_peer/eap_fast_pac.obj
+
+# target to build an object file
+src/eap_peer/eap_fast_pac.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast_pac.c.obj
+.PHONY : src/eap_peer/eap_fast_pac.c.obj
+
+src/eap_peer/eap_fast_pac.i: src/eap_peer/eap_fast_pac.c.i
+
+.PHONY : src/eap_peer/eap_fast_pac.i
+
+# target to preprocess a source file
+src/eap_peer/eap_fast_pac.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast_pac.c.i
+.PHONY : src/eap_peer/eap_fast_pac.c.i
+
+src/eap_peer/eap_fast_pac.s: src/eap_peer/eap_fast_pac.c.s
+
+.PHONY : src/eap_peer/eap_fast_pac.s
+
+# target to generate assembly for a file
+src/eap_peer/eap_fast_pac.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/build.make esp-idf/wpa_supplicant/CMakeFiles/__idf_wpa_supplicant.dir/src/eap_peer/eap_fast_pac.c.s
+.PHONY : src/eap_peer/eap_fast_pac.c.s
 
 src/eap_peer/eap_mschapv2.obj: src/eap_peer/eap_mschapv2.c.obj
 
@@ -2087,6 +2249,9 @@ help:
 	@echo "... src/crypto/aes-ccm.obj"
 	@echo "... src/crypto/aes-ccm.i"
 	@echo "... src/crypto/aes-ccm.s"
+	@echo "... src/crypto/aes-gcm.obj"
+	@echo "... src/crypto/aes-gcm.i"
+	@echo "... src/crypto/aes-gcm.s"
 	@echo "... src/crypto/aes-omac1.obj"
 	@echo "... src/crypto/aes-omac1.i"
 	@echo "... src/crypto/aes-omac1.s"
@@ -2138,6 +2303,9 @@ help:
 	@echo "... src/crypto/sha1-tlsprf.obj"
 	@echo "... src/crypto/sha1-tlsprf.i"
 	@echo "... src/crypto/sha1-tlsprf.s"
+	@echo "... src/crypto/sha1-tprf.obj"
+	@echo "... src/crypto/sha1-tprf.i"
+	@echo "... src/crypto/sha1-tprf.s"
 	@echo "... src/crypto/sha256-kdf.obj"
 	@echo "... src/crypto/sha256-kdf.i"
 	@echo "... src/crypto/sha256-kdf.s"
@@ -2147,6 +2315,9 @@ help:
 	@echo "... src/crypto/sha256-tlsprf.obj"
 	@echo "... src/crypto/sha256-tlsprf.i"
 	@echo "... src/crypto/sha256-tlsprf.s"
+	@echo "... src/crypto/sha384-prf.obj"
+	@echo "... src/crypto/sha384-prf.i"
+	@echo "... src/crypto/sha384-prf.s"
 	@echo "... src/crypto/sha384-tlsprf.obj"
 	@echo "... src/crypto/sha384-tlsprf.i"
 	@echo "... src/crypto/sha384-tlsprf.s"
@@ -2162,6 +2333,15 @@ help:
 	@echo "... src/eap_peer/eap_common.obj"
 	@echo "... src/eap_peer/eap_common.i"
 	@echo "... src/eap_peer/eap_common.s"
+	@echo "... src/eap_peer/eap_fast.obj"
+	@echo "... src/eap_peer/eap_fast.i"
+	@echo "... src/eap_peer/eap_fast.s"
+	@echo "... src/eap_peer/eap_fast_common.obj"
+	@echo "... src/eap_peer/eap_fast_common.i"
+	@echo "... src/eap_peer/eap_fast_common.s"
+	@echo "... src/eap_peer/eap_fast_pac.obj"
+	@echo "... src/eap_peer/eap_fast_pac.i"
+	@echo "... src/eap_peer/eap_fast_pac.s"
 	@echo "... src/eap_peer/eap_mschapv2.obj"
 	@echo "... src/eap_peer/eap_mschapv2.i"
 	@echo "... src/eap_peer/eap_mschapv2.s"

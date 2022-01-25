@@ -83,15 +83,15 @@ project_elf_src_esp32c3.c:
 CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj: CMakeFiles/test1prj.elf.dir/flags.make
 CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj: project_elf_src_esp32c3.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj"
-	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c
 
 CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i"
-	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c > CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c > CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.i
 
 CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s"
-	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/project_elf_src_esp32c3.c -o CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.s
 
 # Object files for target test1prj.elf
 test1prj_elf_OBJECTS = \
@@ -104,7 +104,6 @@ test1prj.elf: CMakeFiles/test1prj.elf.dir/project_elf_src_esp32c3.c.obj
 test1prj.elf: CMakeFiles/test1prj.elf.dir/build.make
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -113,8 +112,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -139,14 +136,14 @@ test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
 test1prj.elf: esp-idf/app_trace/libapp_trace.a
 test1prj.elf: esp-idf/asio/libasio.a
-test1prj.elf: esp-idf/cbor/libcbor.a
 test1prj.elf: esp-idf/unity/libunity.a
 test1prj.elf: esp-idf/cmock/libcmock.a
 test1prj.elf: esp-idf/coap/libcoap.a
 test1prj.elf: esp-idf/console/libconsole.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/esp_adc_cal/libesp_adc_cal.a
+test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
 test1prj.elf: esp-idf/esp_hid/libesp_hid.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -160,34 +157,33 @@ test1prj.elf: esp-idf/esp_local_ctrl/libesp_local_ctrl.a
 test1prj.elf: esp-idf/sdmmc/libsdmmc.a
 test1prj.elf: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
 test1prj.elf: esp-idf/esp_websocket_client/libesp_websocket_client.a
-test1prj.elf: esp-idf/expat/libexpat.a
+test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/wear_levelling/libwear_levelling.a
 test1prj.elf: esp-idf/fatfs/libfatfs.a
 test1prj.elf: esp-idf/freemodbus/libfreemodbus.a
-test1prj.elf: esp-idf/jsmn/libjsmn.a
 test1prj.elf: esp-idf/json/libjson.a
-test1prj.elf: esp-idf/libsodium/liblibsodium.a
 test1prj.elf: esp-idf/mqtt/libmqtt.a
 test1prj.elf: esp-idf/openssl/libopenssl.a
 test1prj.elf: esp-idf/spiffs/libspiffs.a
 test1prj.elf: esp-idf/wifi_provisioning/libwifi_provisioning.a
 test1prj.elf: esp-idf/main/libmain.a
+test1prj.elf: esp-idf/app_trace/libapp_trace.a
+test1prj.elf: esp-idf/app_trace/libapp_trace.a
+test1prj.elf: esp-idf/app_trace/libapp_trace.a
 test1prj.elf: esp-idf/asio/libasio.a
-test1prj.elf: esp-idf/cbor/libcbor.a
 test1prj.elf: esp-idf/cmock/libcmock.a
 test1prj.elf: esp-idf/unity/libunity.a
 test1prj.elf: esp-idf/coap/libcoap.a
 test1prj.elf: esp-idf/esp_adc_cal/libesp_adc_cal.a
+test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
 test1prj.elf: esp-idf/esp_hid/libesp_hid.a
 test1prj.elf: esp-idf/esp_lcd/libesp_lcd.a
 test1prj.elf: esp-idf/esp_local_ctrl/libesp_local_ctrl.a
 test1prj.elf: esp-idf/esp_websocket_client/libesp_websocket_client.a
-test1prj.elf: esp-idf/expat/libexpat.a
+test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/fatfs/libfatfs.a
 test1prj.elf: esp-idf/wear_levelling/libwear_levelling.a
 test1prj.elf: esp-idf/freemodbus/libfreemodbus.a
-test1prj.elf: esp-idf/jsmn/libjsmn.a
-test1prj.elf: esp-idf/libsodium/liblibsodium.a
 test1prj.elf: esp-idf/mqtt/libmqtt.a
 test1prj.elf: esp-idf/openssl/libopenssl.a
 test1prj.elf: esp-idf/spiffs/libspiffs.a
@@ -199,7 +195,6 @@ test1prj.elf: esp-idf/console/libconsole.a
 test1prj.elf: esp-idf/json/libjson.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -208,8 +203,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -232,8 +225,7 @@ test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -254,7 +246,6 @@ test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
 test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -263,8 +254,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -287,8 +276,7 @@ test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -309,7 +297,6 @@ test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
 test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -318,8 +305,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -342,8 +327,7 @@ test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -364,7 +348,6 @@ test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
 test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -373,8 +356,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -397,8 +378,7 @@ test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -419,7 +399,6 @@ test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
 test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -428,8 +407,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -452,8 +429,7 @@ test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -474,7 +450,6 @@ test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libsmartconfig.a
 test1prj.elf: /home/nvv/esp-idf/components/esp_wifi/lib/esp32c3/libwapi.a
 test1prj.elf: esp-idf/esp_ringbuf/libesp_ringbuf.a
 test1prj.elf: esp-idf/efuse/libefuse.a
-test1prj.elf: esp-idf/esp_ipc/libesp_ipc.a
 test1prj.elf: esp-idf/driver/libdriver.a
 test1prj.elf: esp-idf/esp_pm/libesp_pm.a
 test1prj.elf: esp-idf/mbedtls/libmbedtls.a
@@ -483,8 +458,6 @@ test1prj.elf: esp-idf/bootloader_support/libbootloader_support.a
 test1prj.elf: esp-idf/spi_flash/libspi_flash.a
 test1prj.elf: esp-idf/nvs_flash/libnvs_flash.a
 test1prj.elf: esp-idf/pthread/libpthread.a
-test1prj.elf: esp-idf/esp_gdbstub/libesp_gdbstub.a
-test1prj.elf: esp-idf/espcoredump/libespcoredump.a
 test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/esp_system/libesp_system.a
 test1prj.elf: esp-idf/esp_rom/libesp_rom.a
@@ -507,8 +480,7 @@ test1prj.elf: esp-idf/esp_timer/libesp_timer.a
 test1prj.elf: esp-idf/freertos/libfreertos.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/nghttp/libnghttp.a
+test1prj.elf: esp-idf/http_parser/libhttp_parser.a
 test1prj.elf: esp-idf/esp-tls/libesp-tls.a
 test1prj.elf: esp-idf/tcp_transport/libtcp_transport.a
 test1prj.elf: esp-idf/esp_http_client/libesp_http_client.a
@@ -532,8 +504,6 @@ test1prj.elf: esp-idf/esp_phy/libesp_phy.a
 test1prj.elf: esp-idf/newlib/libnewlib.a
 test1prj.elf: esp-idf/pthread/libpthread.a
 test1prj.elf: esp-idf/cxx/libcxx.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
-test1prj.elf: esp-idf/app_trace/libapp_trace.a
 test1prj.elf: esp-idf/esp_system/ld/memory.ld
 test1prj.elf: esp-idf/esp_system/ld/sections.ld
 test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.ld
@@ -541,6 +511,7 @@ test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.api.ld
 test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.libgcc.ld
 test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.newlib.ld
 test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.version.ld
+test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.newlib-time.ld
 test1prj.elf: /home/nvv/esp-idf/components/esp_rom/esp32c3/ld/esp32c3.rom.eco3.ld
 test1prj.elf: /home/nvv/esp-idf/components/soc/esp32c3/ld/esp32c3.peripherals.ld
 test1prj.elf: CMakeFiles/test1prj.elf.dir/link.txt

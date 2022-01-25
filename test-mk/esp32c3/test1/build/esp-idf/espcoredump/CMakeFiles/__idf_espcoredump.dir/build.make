@@ -79,93 +79,93 @@ include esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.obj: /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_common.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_common.c.s
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.obj: /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_checksum.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_checksum.c.s
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.obj: /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_flash.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_flash.c.s
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.obj: /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_uart.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_uart.c.s
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.obj: /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_elf.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_elf.c.s
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.obj: /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c > CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/core_dump_binary.c -o CMakeFiles/__idf_espcoredump.dir/src/core_dump_binary.c.s
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj: esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/flags.make
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj: /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.obj -c /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c > CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c > CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.i
 
 esp-idf/espcoredump/CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c -o CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/espcoredump/src/port/riscv/core_dump_port.c -o CMakeFiles/__idf_espcoredump.dir/src/port/riscv/core_dump_port.c.s
 
 # Object files for target __idf_espcoredump
 __idf_espcoredump_OBJECTS = \

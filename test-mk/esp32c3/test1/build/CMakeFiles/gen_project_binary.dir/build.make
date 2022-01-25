@@ -77,7 +77,7 @@ CMakeFiles/gen_project_binary: .bin_timestamp
 
 .bin_timestamp: test1prj.elf
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating binary image from built executable"
-	/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32c3 elf2image --flash_mode dio --flash_freq 80m --flash_size 2MB --elf-sha256-offset 0xb0 --min-rev 3 -o /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.bin /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.elf
+	/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32c3 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB --elf-sha256-offset 0xb0 --min-rev 3 -o /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.bin /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.elf
 	/usr/bin/cmake -E echo "Generated /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.bin"
 	/usr/bin/cmake -E md5sum /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.bin > /home/nvv/test/test-mk/esp32c3/test1/build/.bin_timestamp
 

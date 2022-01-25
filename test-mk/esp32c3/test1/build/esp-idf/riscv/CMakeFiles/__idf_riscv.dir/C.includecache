@@ -38,17 +38,7 @@ encoding.h
 
 /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
 
-/home/nvv/esp-idf/components/riscv/include/riscv/instruction_decode.h
-stdint.h
--
-
 /home/nvv/esp-idf/components/riscv/include/riscv/interrupt.h
-
-/home/nvv/esp-idf/components/riscv/instruction_decode.c
-stdlib.h
--
-riscv/instruction_decode.h
-/home/nvv/esp-idf/components/riscv/riscv/instruction_decode.h
 
 /home/nvv/esp-idf/components/riscv/interrupt.c
 stdint.h
@@ -74,6 +64,8 @@ soc.h
 interrupt_core0_reg.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
 
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
+
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 stdint.h
 -
@@ -81,8 +73,8 @@ esp_assert.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_assert.h
 esp_bit_defs.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_bit_defs.h
-sdkconfig.h
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/sdkconfig.h
+reg_base.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 
 config/sdkconfig.h
 

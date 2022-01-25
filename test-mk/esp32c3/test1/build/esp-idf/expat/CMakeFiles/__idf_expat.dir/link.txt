@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libexpat.a CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlparse.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmlrole.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_impl.c.obj CMakeFiles/__idf_expat.dir/expat/expat/lib/xmltok_ns.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libexpat.a

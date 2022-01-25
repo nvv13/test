@@ -190,6 +190,87 @@ __idf_bootloader_support/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build
 .PHONY : __idf_bootloader_support/fast
 
+bootloader_flash/src/bootloader_flash.obj: bootloader_flash/src/bootloader_flash.c.obj
+
+.PHONY : bootloader_flash/src/bootloader_flash.obj
+
+# target to build an object file
+bootloader_flash/src/bootloader_flash.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj
+.PHONY : bootloader_flash/src/bootloader_flash.c.obj
+
+bootloader_flash/src/bootloader_flash.i: bootloader_flash/src/bootloader_flash.c.i
+
+.PHONY : bootloader_flash/src/bootloader_flash.i
+
+# target to preprocess a source file
+bootloader_flash/src/bootloader_flash.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.i
+.PHONY : bootloader_flash/src/bootloader_flash.c.i
+
+bootloader_flash/src/bootloader_flash.s: bootloader_flash/src/bootloader_flash.c.s
+
+.PHONY : bootloader_flash/src/bootloader_flash.s
+
+# target to generate assembly for a file
+bootloader_flash/src/bootloader_flash.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.s
+.PHONY : bootloader_flash/src/bootloader_flash.c.s
+
+bootloader_flash/src/bootloader_flash_config_esp32c3.obj: bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj
+
+.PHONY : bootloader_flash/src/bootloader_flash_config_esp32c3.obj
+
+# target to build an object file
+bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj
+.PHONY : bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj
+
+bootloader_flash/src/bootloader_flash_config_esp32c3.i: bootloader_flash/src/bootloader_flash_config_esp32c3.c.i
+
+.PHONY : bootloader_flash/src/bootloader_flash_config_esp32c3.i
+
+# target to preprocess a source file
+bootloader_flash/src/bootloader_flash_config_esp32c3.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.i
+.PHONY : bootloader_flash/src/bootloader_flash_config_esp32c3.c.i
+
+bootloader_flash/src/bootloader_flash_config_esp32c3.s: bootloader_flash/src/bootloader_flash_config_esp32c3.c.s
+
+.PHONY : bootloader_flash/src/bootloader_flash_config_esp32c3.s
+
+# target to generate assembly for a file
+bootloader_flash/src/bootloader_flash_config_esp32c3.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.s
+.PHONY : bootloader_flash/src/bootloader_flash_config_esp32c3.c.s
+
+bootloader_flash/src/flash_qio_mode.obj: bootloader_flash/src/flash_qio_mode.c.obj
+
+.PHONY : bootloader_flash/src/flash_qio_mode.obj
+
+# target to build an object file
+bootloader_flash/src/flash_qio_mode.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj
+.PHONY : bootloader_flash/src/flash_qio_mode.c.obj
+
+bootloader_flash/src/flash_qio_mode.i: bootloader_flash/src/flash_qio_mode.c.i
+
+.PHONY : bootloader_flash/src/flash_qio_mode.i
+
+# target to preprocess a source file
+bootloader_flash/src/flash_qio_mode.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.i
+.PHONY : bootloader_flash/src/flash_qio_mode.c.i
+
+bootloader_flash/src/flash_qio_mode.s: bootloader_flash/src/flash_qio_mode.c.s
+
+.PHONY : bootloader_flash/src/flash_qio_mode.s
+
+# target to generate assembly for a file
+bootloader_flash/src/flash_qio_mode.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.s
+.PHONY : bootloader_flash/src/flash_qio_mode.c.s
+
 src/bootloader_clock_init.obj: src/bootloader_clock_init.c.obj
 
 .PHONY : src/bootloader_clock_init.obj
@@ -297,60 +378,6 @@ src/bootloader_efuse_esp32c3.s: src/bootloader_efuse_esp32c3.c.s
 src/bootloader_efuse_esp32c3.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.s
 .PHONY : src/bootloader_efuse_esp32c3.c.s
-
-src/bootloader_flash.obj: src/bootloader_flash.c.obj
-
-.PHONY : src/bootloader_flash.obj
-
-# target to build an object file
-src/bootloader_flash.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj
-.PHONY : src/bootloader_flash.c.obj
-
-src/bootloader_flash.i: src/bootloader_flash.c.i
-
-.PHONY : src/bootloader_flash.i
-
-# target to preprocess a source file
-src/bootloader_flash.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.i
-.PHONY : src/bootloader_flash.c.i
-
-src/bootloader_flash.s: src/bootloader_flash.c.s
-
-.PHONY : src/bootloader_flash.s
-
-# target to generate assembly for a file
-src/bootloader_flash.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.s
-.PHONY : src/bootloader_flash.c.s
-
-src/bootloader_flash_config_esp32c3.obj: src/bootloader_flash_config_esp32c3.c.obj
-
-.PHONY : src/bootloader_flash_config_esp32c3.obj
-
-# target to build an object file
-src/bootloader_flash_config_esp32c3.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj
-.PHONY : src/bootloader_flash_config_esp32c3.c.obj
-
-src/bootloader_flash_config_esp32c3.i: src/bootloader_flash_config_esp32c3.c.i
-
-.PHONY : src/bootloader_flash_config_esp32c3.i
-
-# target to preprocess a source file
-src/bootloader_flash_config_esp32c3.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.i
-.PHONY : src/bootloader_flash_config_esp32c3.c.i
-
-src/bootloader_flash_config_esp32c3.s: src/bootloader_flash_config_esp32c3.c.s
-
-.PHONY : src/bootloader_flash_config_esp32c3.s
-
-# target to generate assembly for a file
-src/bootloader_flash_config_esp32c3.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.s
-.PHONY : src/bootloader_flash_config_esp32c3.c.s
 
 src/bootloader_mem.obj: src/bootloader_mem.c.obj
 
@@ -541,33 +568,6 @@ src/flash_partitions.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.s
 .PHONY : src/flash_partitions.c.s
 
-src/flash_qio_mode.obj: src/flash_qio_mode.c.obj
-
-.PHONY : src/flash_qio_mode.obj
-
-# target to build an object file
-src/flash_qio_mode.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj
-.PHONY : src/flash_qio_mode.c.obj
-
-src/flash_qio_mode.i: src/flash_qio_mode.c.i
-
-.PHONY : src/flash_qio_mode.i
-
-# target to preprocess a source file
-src/flash_qio_mode.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.i
-.PHONY : src/flash_qio_mode.c.i
-
-src/flash_qio_mode.s: src/flash_qio_mode.c.s
-
-.PHONY : src/flash_qio_mode.s
-
-# target to generate assembly for a file
-src/flash_qio_mode.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.s
-.PHONY : src/flash_qio_mode.c.s
-
 src/idf/bootloader_sha.obj: src/idf/bootloader_sha.c.obj
 
 .PHONY : src/idf/bootloader_sha.obj
@@ -635,6 +635,15 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_bootloader_support"
+	@echo "... bootloader_flash/src/bootloader_flash.obj"
+	@echo "... bootloader_flash/src/bootloader_flash.i"
+	@echo "... bootloader_flash/src/bootloader_flash.s"
+	@echo "... bootloader_flash/src/bootloader_flash_config_esp32c3.obj"
+	@echo "... bootloader_flash/src/bootloader_flash_config_esp32c3.i"
+	@echo "... bootloader_flash/src/bootloader_flash_config_esp32c3.s"
+	@echo "... bootloader_flash/src/flash_qio_mode.obj"
+	@echo "... bootloader_flash/src/flash_qio_mode.i"
+	@echo "... bootloader_flash/src/flash_qio_mode.s"
 	@echo "... src/bootloader_clock_init.obj"
 	@echo "... src/bootloader_clock_init.i"
 	@echo "... src/bootloader_clock_init.s"
@@ -647,12 +656,6 @@ help:
 	@echo "... src/bootloader_efuse_esp32c3.obj"
 	@echo "... src/bootloader_efuse_esp32c3.i"
 	@echo "... src/bootloader_efuse_esp32c3.s"
-	@echo "... src/bootloader_flash.obj"
-	@echo "... src/bootloader_flash.i"
-	@echo "... src/bootloader_flash.s"
-	@echo "... src/bootloader_flash_config_esp32c3.obj"
-	@echo "... src/bootloader_flash_config_esp32c3.i"
-	@echo "... src/bootloader_flash_config_esp32c3.s"
 	@echo "... src/bootloader_mem.obj"
 	@echo "... src/bootloader_mem.i"
 	@echo "... src/bootloader_mem.s"
@@ -674,9 +677,6 @@ help:
 	@echo "... src/flash_partitions.obj"
 	@echo "... src/flash_partitions.i"
 	@echo "... src/flash_partitions.s"
-	@echo "... src/flash_qio_mode.obj"
-	@echo "... src/flash_qio_mode.i"
-	@echo "... src/flash_qio_mode.s"
 	@echo "... src/idf/bootloader_sha.obj"
 	@echo "... src/idf/bootloader_sha.i"
 	@echo "... src/idf/bootloader_sha.s"

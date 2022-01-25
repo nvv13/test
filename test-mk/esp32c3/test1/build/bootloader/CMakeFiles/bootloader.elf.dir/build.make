@@ -83,15 +83,15 @@ project_elf_src_esp32c3.c:
 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj: CMakeFiles/bootloader.elf.dir/flags.make
 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj: project_elf_src_esp32c3.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj"
-	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj -c /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c
 
 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i"
-	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c > CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c > CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.i
 
 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s"
-	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s
+	/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/project_elf_src_esp32c3.c -o CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.s
 
 # Object files for target bootloader.elf
 bootloader_elf_OBJECTS = \
@@ -102,10 +102,9 @@ bootloader_elf_EXTERNAL_OBJECTS =
 
 bootloader.elf: CMakeFiles/bootloader.elf.dir/project_elf_src_esp32c3.c.obj
 bootloader.elf: CMakeFiles/bootloader.elf.dir/build.make
-bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/soc/libsoc.a
 bootloader.elf: esp-idf/micro-ecc/libmicro-ecc.a
-bootloader.elf: esp-idf/spi_flash/libspi_flash.a
+bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
@@ -114,10 +113,9 @@ bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
 bootloader.elf: esp-idf/main/libmain.a
-bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/soc/libsoc.a
 bootloader.elf: esp-idf/micro-ecc/libmicro-ecc.a
-bootloader.elf: esp-idf/spi_flash/libspi_flash.a
+bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
@@ -125,10 +123,9 @@ bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
-bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/soc/libsoc.a
 bootloader.elf: esp-idf/micro-ecc/libmicro-ecc.a
-bootloader.elf: esp-idf/spi_flash/libspi_flash.a
+bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
@@ -136,10 +133,9 @@ bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
-bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/soc/libsoc.a
 bootloader.elf: esp-idf/micro-ecc/libmicro-ecc.a
-bootloader.elf: esp-idf/spi_flash/libspi_flash.a
+bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a
@@ -147,10 +143,9 @@ bootloader.elf: esp-idf/esp_hw_support/libesp_hw_support.a
 bootloader.elf: esp-idf/esp_common/libesp_common.a
 bootloader.elf: esp-idf/esp_rom/libesp_rom.a
 bootloader.elf: esp-idf/log/liblog.a
-bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/soc/libsoc.a
 bootloader.elf: esp-idf/micro-ecc/libmicro-ecc.a
-bootloader.elf: esp-idf/spi_flash/libspi_flash.a
+bootloader.elf: esp-idf/hal/libhal.a
 bootloader.elf: esp-idf/bootloader_support/libbootloader_support.a
 bootloader.elf: esp-idf/efuse/libefuse.a
 bootloader.elf: esp-idf/esp_system/libesp_system.a

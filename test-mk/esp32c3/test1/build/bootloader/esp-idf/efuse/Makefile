@@ -175,6 +175,36 @@ efuse_custom_table/fast:
 .PHONY : efuse_custom_table/fast
 
 # Convenience name for target.
+esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule
+
+# Convenience name for target.
+efuse-custom-table: esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule
+
+.PHONY : efuse-custom-table
+
+# fast build rule for target.
+efuse-custom-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/build.make esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/build
+.PHONY : efuse-custom-table/fast
+
+# Convenience name for target.
+esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule
+
+# Convenience name for target.
+show-efuse-table: esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule
+
+.PHONY : show-efuse-table
+
+# fast build rule for target.
+show-efuse-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/show-efuse-table.dir/build.make esp-idf/efuse/CMakeFiles/show-efuse-table.dir/build
+.PHONY : show-efuse-table/fast
+
+# Convenience name for target.
 esp-idf/efuse/CMakeFiles/efuse_common_table.dir/rule:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse_common_table.dir/rule
 .PHONY : esp-idf/efuse/CMakeFiles/efuse_common_table.dir/rule
@@ -188,6 +218,21 @@ efuse_common_table: esp-idf/efuse/CMakeFiles/efuse_common_table.dir/rule
 efuse_common_table/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse_common_table.dir/build.make esp-idf/efuse/CMakeFiles/efuse_common_table.dir/build
 .PHONY : efuse_common_table/fast
+
+# Convenience name for target.
+esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule
+
+# Convenience name for target.
+efuse-common-table: esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule
+
+.PHONY : efuse-common-table
+
+# fast build rule for target.
+efuse-common-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse-common-table.dir/build.make esp-idf/efuse/CMakeFiles/efuse-common-table.dir/build
+.PHONY : efuse-common-table/fast
 
 # Convenience name for target.
 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule:
@@ -428,9 +473,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... efuse-common-table"
+	@echo "... efuse-custom-table"
 	@echo "... efuse_common_table"
 	@echo "... efuse_custom_table"
 	@echo "... efuse_test_table"
+	@echo "... show-efuse-table"
 	@echo "... show_efuse_table"
 	@echo "... __idf_efuse"
 	@echo "... esp32c3/esp_efuse_fields.obj"

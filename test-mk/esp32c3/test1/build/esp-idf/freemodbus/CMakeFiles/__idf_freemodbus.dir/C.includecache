@@ -7,54 +7,24 @@
 #IncludeRegexTransform: 
 
 /home/nvv/esp-idf/components/driver/include/driver/gpio.h
+stdbool.h
+-
 sdkconfig.h
 /home/nvv/esp-idf/components/driver/include/driver/sdkconfig.h
 esp_err.h
 /home/nvv/esp-idf/components/driver/include/driver/esp_err.h
-stdbool.h
--
 esp_intr_alloc.h
 /home/nvv/esp-idf/components/driver/include/driver/esp_intr_alloc.h
-esp_types.h
--
-esp_bit_defs.h
--
 esp_attr.h
 /home/nvv/esp-idf/components/driver/include/driver/esp_attr.h
+esp_types.h
+/home/nvv/esp-idf/components/driver/include/driver/esp_types.h
 soc/soc_caps.h
 /home/nvv/esp-idf/components/driver/include/driver/soc/soc_caps.h
-soc/gpio_periph.h
-/home/nvv/esp-idf/components/driver/include/driver/soc/gpio_periph.h
 hal/gpio_types.h
 /home/nvv/esp-idf/components/driver/include/driver/hal/gpio_types.h
-esp32/rom/gpio.h
-/home/nvv/esp-idf/components/driver/include/driver/esp32/rom/gpio.h
-esp32s2/rom/gpio.h
-/home/nvv/esp-idf/components/driver/include/driver/esp32s2/rom/gpio.h
-esp32s3/rom/gpio.h
-/home/nvv/esp-idf/components/driver/include/driver/esp32s3/rom/gpio.h
-esp32c3/rom/gpio.h
-/home/nvv/esp-idf/components/driver/include/driver/esp32c3/rom/gpio.h
-esp32s3/rom/gpio.h
-/home/nvv/esp-idf/components/driver/include/driver/esp32s3/rom/gpio.h
-esp32h2/rom/gpio.h
-/home/nvv/esp-idf/components/driver/include/driver/esp32h2/rom/gpio.h
-soc/rtc_io_reg.h
-/home/nvv/esp-idf/components/driver/include/driver/soc/rtc_io_reg.h
-
-/home/nvv/esp-idf/components/driver/include/driver/timer.h
-esp_err.h
-/home/nvv/esp-idf/components/driver/include/driver/esp_err.h
-esp_attr.h
-/home/nvv/esp-idf/components/driver/include/driver/esp_attr.h
-soc/soc.h
-/home/nvv/esp-idf/components/driver/include/driver/soc/soc.h
-soc/timer_periph.h
-/home/nvv/esp-idf/components/driver/include/driver/soc/timer_periph.h
-esp_intr_alloc.h
-/home/nvv/esp-idf/components/driver/include/driver/esp_intr_alloc.h
-hal/timer_types.h
-/home/nvv/esp-idf/components/driver/include/driver/hal/timer_types.h
+esp_rom_gpio.h
+/home/nvv/esp-idf/components/driver/include/driver/esp_rom_gpio.h
 
 /home/nvv/esp-idf/components/driver/include/driver/uart.h
 esp_err.h
@@ -85,6 +55,12 @@ sdkconfig.h
 /home/nvv/esp-idf/components/esp_common/include/sdkconfig.h
 
 /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
+
+/home/nvv/esp-idf/components/esp_common/include/esp_check.h
+esp_err.h
+/home/nvv/esp-idf/components/esp_common/include/esp_err.h
+esp_log.h
+/home/nvv/esp-idf/components/esp_common/include/esp_log.h
 
 /home/nvv/esp-idf/components/esp_common/include/esp_compiler.h
 
@@ -125,6 +101,8 @@ esp_event_base.h
 /home/nvv/esp-idf/components/esp_eth/include/esp_event_base.h
 hal/eth_types.h
 /home/nvv/esp-idf/components/esp_eth/include/hal/eth_types.h
+esp_eth_spec.h
+/home/nvv/esp-idf/components/esp_eth/include/esp_eth_spec.h
 
 /home/nvv/esp-idf/components/esp_eth/include/esp_eth_mac.h
 stdbool.h
@@ -145,6 +123,8 @@ esp_eth_com.h
 /home/nvv/esp-idf/components/esp_eth/include/esp_eth_com.h
 sdkconfig.h
 /home/nvv/esp-idf/components/esp_eth/include/sdkconfig.h
+
+/home/nvv/esp-idf/components/esp_eth/include/esp_eth_spec.h
 
 /home/nvv/esp-idf/components/esp_event/include/esp_event_base.h
 
@@ -197,30 +177,12 @@ stdint.h
 -
 stdbool.h
 -
-soc/cpu.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/soc/cpu.h
+esp_cpu.h
+/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp_cpu.h
 soc/soc_memory_types.h
 /home/nvv/esp-idf/components/esp_hw_support/include/soc/soc/soc_memory_types.h
 xtensa/xtruntime.h
 /home/nvv/esp-idf/components/esp_hw_support/include/soc/xtensa/xtruntime.h
-
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/cpu.h
-stdint.h
--
-stdbool.h
--
-stddef.h
--
-esp_cpu.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp_cpu.h
-xt_instr_macros.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/xt_instr_macros.h
-xtensa/corebits.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/xtensa/corebits.h
-xtensa/config/core.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/xtensa/config/core.h
-xtensa/config/specreg.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/xtensa/config/specreg.h
 
 /home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3/dport_access.h
 stdint.h
@@ -233,8 +195,6 @@ stdbool.h
 -
 sdkconfig.h
 /home/nvv/esp-idf/components/esp_hw_support/include/soc/sdkconfig.h
-soc/cpu.h
-/home/nvv/esp-idf/components/esp_hw_support/include/soc/soc/cpu.h
 hal/cpu_hal.h
 /home/nvv/esp-idf/components/esp_hw_support/include/soc/hal/cpu_hal.h
 soc/compare_set.h
@@ -265,6 +225,8 @@ esp_compiler.h
 /home/nvv/esp-idf/components/esp_netif/include/esp_compiler.h
 
 /home/nvv/esp-idf/components/esp_netif/include/esp_netif_ip_addr.h
+stdint.h
+-
 machine/endian.h
 -
 
@@ -273,6 +235,16 @@ esp_netif_types.h
 /home/nvv/esp-idf/components/esp_netif/include/esp_netif_types.h
 
 /home/nvv/esp-idf/components/esp_netif/include/esp_netif_types.h
+stdbool.h
+-
+stdint.h
+-
+esp_event_base.h
+/home/nvv/esp-idf/components/esp_netif/include/esp_event_base.h
+esp_err.h
+/home/nvv/esp-idf/components/esp_netif/include/esp_err.h
+esp_netif_ip_addr.h
+/home/nvv/esp-idf/components/esp_netif/include/esp_netif_ip_addr.h
 
 /home/nvv/esp-idf/components/esp_ringbuf/include/freertos/ringbuf.h
 freertos/queue.h
@@ -287,22 +259,12 @@ stdlib.h
 -
 sdkconfig.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/sdkconfig.h
-soc/soc.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/soc/soc.h
 
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/gpio.h
+/home/nvv/esp-idf/components/esp_rom/include/esp32c2/rom/ets_sys.h
 stdint.h
 -
 stdbool.h
 -
-esp_attr.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/esp_attr.h
-sdkconfig.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/sdkconfig.h
-soc/gpio_reg.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/soc/gpio_reg.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32/rom/soc/soc_caps.h
 
 /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/ets_sys.h
 stdint.h
@@ -310,31 +272,11 @@ stdint.h
 stdbool.h
 -
 
-/home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/gpio.h
-stdint.h
--
-stdbool.h
--
-esp_attr.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/esp_attr.h
-soc/gpio_reg.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/soc/gpio_reg.h
-
 /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/ets_sys.h
 stdint.h
 -
 stdbool.h
 -
-
-/home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/gpio.h
-stdint.h
--
-stdbool.h
--
-esp_attr.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/esp_attr.h
-soc/gpio_reg.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/soc/gpio_reg.h
 
 /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/ets_sys.h
 stdint.h
@@ -344,16 +286,6 @@ stdbool.h
 soc/soc.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/soc/soc.h
 
-/home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/gpio.h
-stdint.h
--
-stdbool.h
--
-esp_attr.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/esp_attr.h
-soc/gpio_reg.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/soc/gpio_reg.h
-
 /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/ets_sys.h
 stdint.h
 -
@@ -362,13 +294,13 @@ stdbool.h
 soc/soc.h
 /home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/soc/soc.h
 
-/home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/gpio.h
+/home/nvv/esp-idf/components/esp_rom/include/esp_rom_gpio.h
 stdint.h
 -
 stdbool.h
 -
-soc/gpio_reg.h
-/home/nvv/esp-idf/components/esp_rom/include/esp32s3/rom/soc/gpio_reg.h
+soc/gpio_pins.h
+/home/nvv/esp-idf/components/esp_rom/include/soc/gpio_pins.h
 
 /home/nvv/esp-idf/components/esp_rom/include/esp_rom_sys.h
 sdkconfig.h
@@ -475,6 +407,8 @@ mbc_tcp_master.h
 /home/nvv/esp-idf/components/freemodbus/common/esp_modbus_slave.c
 esp_err.h
 /home/nvv/esp-idf/components/freemodbus/common/esp_err.h
+esp_timer.h
+/home/nvv/esp-idf/components/freemodbus/common/esp_timer.h
 sdkconfig.h
 /home/nvv/esp-idf/components/freemodbus/common/sdkconfig.h
 mbc_slave.h
@@ -511,14 +445,14 @@ mbc_tcp_slave.h
 /home/nvv/esp-idf/components/freemodbus/common/include/esp_modbus_common.h
 driver/uart.h
 /home/nvv/esp-idf/components/freemodbus/common/include/driver/uart.h
+esp_check.h
+/home/nvv/esp-idf/components/freemodbus/common/include/esp_check.h
 
 /home/nvv/esp-idf/components/freemodbus/common/include/esp_modbus_master.h
 stdint.h
 -
 stddef.h
 -
-soc/soc.h
-/home/nvv/esp-idf/components/freemodbus/common/include/soc/soc.h
 esp_modbus_common.h
 /home/nvv/esp-idf/components/freemodbus/common/include/esp_modbus_common.h
 
@@ -527,8 +461,6 @@ stdint.h
 -
 stddef.h
 -
-soc/soc.h
-/home/nvv/esp-idf/components/freemodbus/common/include/soc/soc.h
 freertos/FreeRTOS.h
 /home/nvv/esp-idf/components/freemodbus/common/include/freertos/FreeRTOS.h
 freertos/event_groups.h
@@ -537,6 +469,8 @@ esp_modbus_common.h
 /home/nvv/esp-idf/components/freemodbus/common/include/esp_modbus_common.h
 
 /home/nvv/esp-idf/components/freemodbus/common/mbc_master.h
+sys/queue.h
+-
 freertos/FreeRTOS.h
 /home/nvv/esp-idf/components/freemodbus/common/freertos/FreeRTOS.h
 freertos/task.h
@@ -649,8 +583,6 @@ mbconfig.h
 /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbconfig.h
 mbutils.h
 /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.h
-
-/home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c
 
 /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c
 stdlib.h
@@ -971,6 +903,8 @@ freertos/FreeRTOS.h
 /home/nvv/esp-idf/components/freemodbus/port/freertos/FreeRTOS.h
 esp_log.h
 /home/nvv/esp-idf/components/freemodbus/port/esp_log.h
+esp_timer.h
+/home/nvv/esp-idf/components/freemodbus/port/esp_timer.h
 mbconfig.h
 /home/nvv/esp-idf/components/freemodbus/port/mbconfig.h
 
@@ -1097,16 +1031,10 @@ port_serial_master.h
 /home/nvv/esp-idf/components/freemodbus/port/porttimer.c
 port.h
 /home/nvv/esp-idf/components/freemodbus/port/port.h
-sdkconfig.h
-/home/nvv/esp-idf/components/freemodbus/port/sdkconfig.h
 mb.h
 /home/nvv/esp-idf/components/freemodbus/port/mb.h
 mbport.h
 /home/nvv/esp-idf/components/freemodbus/port/mbport.h
-driver/timer.h
-/home/nvv/esp-idf/components/freemodbus/port/driver/timer.h
-port_serial_slave.h
-/home/nvv/esp-idf/components/freemodbus/port/port_serial_slave.h
 sdkconfig.h
 /home/nvv/esp-idf/components/freemodbus/port/sdkconfig.h
 
@@ -1117,8 +1045,6 @@ mb_m.h
 /home/nvv/esp-idf/components/freemodbus/port/mb_m.h
 mbport.h
 /home/nvv/esp-idf/components/freemodbus/port/mbport.h
-port_serial_master.h
-/home/nvv/esp-idf/components/freemodbus/port/port_serial_master.h
 sdkconfig.h
 /home/nvv/esp-idf/components/freemodbus/port/sdkconfig.h
 
@@ -1169,8 +1095,6 @@ esp_modbus_common.h
 /home/nvv/esp-idf/components/freemodbus/serial_master/port/port_serial_master.h
 driver/uart.h
 /home/nvv/esp-idf/components/freemodbus/serial_master/port/driver/uart.h
-driver/timer.h
-/home/nvv/esp-idf/components/freemodbus/serial_master/port/driver/timer.h
 esp_log.h
 /home/nvv/esp-idf/components/freemodbus/serial_master/port/esp_log.h
 mb_m.h
@@ -1211,8 +1135,6 @@ esp_modbus_common.h
 /home/nvv/esp-idf/components/freemodbus/serial_slave/port/port_serial_slave.h
 driver/uart.h
 /home/nvv/esp-idf/components/freemodbus/serial_slave/port/driver/uart.h
-driver/timer.h
-/home/nvv/esp-idf/components/freemodbus/serial_slave/port/driver/timer.h
 esp_log.h
 /home/nvv/esp-idf/components/freemodbus/serial_slave/port/esp_log.h
 port.h
@@ -1224,6 +1146,8 @@ sys/time.h
 esp_log.h
 /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/esp_log.h
 string.h
+-
+sys/queue.h
 -
 freertos/FreeRTOS.h
 /home/nvv/esp-idf/components/freemodbus/tcp_master/modbus_controller/freertos/FreeRTOS.h
@@ -1267,6 +1191,8 @@ string.h
 -
 esp_err.h
 /home/nvv/esp-idf/components/freemodbus/tcp_master/port/esp_err.h
+esp_timer.h
+/home/nvv/esp-idf/components/freemodbus/tcp_master/port/esp_timer.h
 lwip/err.h
 /home/nvv/esp-idf/components/freemodbus/tcp_master/port/lwip/err.h
 lwip/sockets.h
@@ -1335,6 +1261,8 @@ string.h
 -
 esp_err.h
 /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/esp_err.h
+esp_timer.h
+/home/nvv/esp-idf/components/freemodbus/tcp_slave/port/esp_timer.h
 sys/time.h
 /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/sys/time.h
 esp_netif.h
@@ -1372,193 +1300,185 @@ port.h
 esp_modbus_common.h
 /home/nvv/esp-idf/components/freemodbus/tcp_slave/port/esp_modbus_common.h
 
-/home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/task_snapshot.h
-freertos/FreeRTOS.h
-/home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/freertos/FreeRTOS.h
-freertos/task.h
-/home/nvv/esp-idf/components/freertos/include/esp_additions/freertos/freertos/task.h
-
-/home/nvv/esp-idf/components/freertos/include/freertos/FreeRTOS.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/FreeRTOS.h
 stddef.h
 -
 stdint.h
 -
-esp_compiler.h
-/home/nvv/esp-idf/components/freertos/include/freertos/esp_compiler.h
-freertos/FreeRTOSConfig.h
-/home/nvv/esp-idf/components/freertos/include/freertos/freertos/FreeRTOSConfig.h
+FreeRTOSConfig.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/FreeRTOSConfig.h
 projdefs.h
-/home/nvv/esp-idf/components/freertos/include/freertos/projdefs.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/projdefs.h
 portable.h
-/home/nvv/esp-idf/components/freertos/include/freertos/portable.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portable.h
 reent.h
 -
 
-/home/nvv/esp-idf/components/freertos/include/freertos/FreeRTOSConfig.h
-sdkconfig.h
-/home/nvv/esp-idf/components/freertos/include/freertos/sdkconfig.h
-assert.h
--
-SEGGER_SYSVIEW_FreeRTOS.h
-/home/nvv/esp-idf/components/freertos/include/freertos/SEGGER_SYSVIEW_FreeRTOS.h
-
-/home/nvv/esp-idf/components/freertos/include/freertos/deprecated_definitions.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/deprecated_definitions.h
 ../../Source/portable/owatcom/16bitdos/pc/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/owatcom/16bitdos/pc/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/owatcom/16bitdos/pc/portmacro.h
 ../../Source/portable/owatcom/16bitdos/flsh186/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/owatcom/16bitdos/flsh186/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/owatcom/16bitdos/flsh186/portmacro.h
 ../portable/GCC/ATMega323/portmacro.h
-/home/nvv/esp-idf/components/freertos/include/portable/GCC/ATMega323/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/portable/GCC/ATMega323/portmacro.h
 ../portable/IAR/ATMega323/portmacro.h
-/home/nvv/esp-idf/components/freertos/include/portable/IAR/ATMega323/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/portable/IAR/ATMega323/portmacro.h
 ../../Source/portable/MPLAB/PIC24_dsPIC/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/MPLAB/PIC24_dsPIC/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/MPLAB/PIC24_dsPIC/portmacro.h
 ../../Source/portable/MPLAB/PIC24_dsPIC/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/MPLAB/PIC24_dsPIC/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/MPLAB/PIC24_dsPIC/portmacro.h
 ../../Source/portable/MPLAB/PIC18F/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/MPLAB/PIC18F/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/MPLAB/PIC18F/portmacro.h
 ../../Source/portable/MPLAB/PIC32MX/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/MPLAB/PIC32MX/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/MPLAB/PIC32MX/portmacro.h
 libFreeRTOS/Include/portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/libFreeRTOS/Include/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/libFreeRTOS/Include/portmacro.h
 ../../Source/portable/SDCC/Cygnal/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/SDCC/Cygnal/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/SDCC/Cygnal/portmacro.h
 ../../Source/portable/GCC/ARM7_LPC2000/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ARM7_LPC2000/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/ARM7_LPC2000/portmacro.h
 portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portmacro.h
 ../../Source/portable/GCC/ARM7_LPC23xx/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ARM7_LPC23xx/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/ARM7_LPC23xx/portmacro.h
 ../../Source/portable/IAR/MSP430/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/MSP430/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/MSP430/portmacro.h
 ../../Source/portable/GCC/MSP430F449/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/MSP430F449/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/MSP430F449/portmacro.h
 ../../Source/portable/Rowley/MSP430F449/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/Rowley/MSP430F449/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/Rowley/MSP430F449/portmacro.h
 ../../Source/portable/RVDS/ARM7_LPC21xx/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/RVDS/ARM7_LPC21xx/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/RVDS/ARM7_LPC21xx/portmacro.h
 ../../Source/portable/GCC/ARM7_AT91SAM7S/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ARM7_AT91SAM7S/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/ARM7_AT91SAM7S/portmacro.h
 ../../Source/portable/IAR/AtmelSAM7S64/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/AtmelSAM7S64/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/AtmelSAM7S64/portmacro.h
 ../../Source/portable/IAR/AtmelSAM9XE/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/AtmelSAM9XE/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/AtmelSAM9XE/portmacro.h
 ../../Source/portable/IAR/LPC2000/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/LPC2000/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/LPC2000/portmacro.h
 ../../Source/portable/IAR/STR71x/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/STR71x/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/STR71x/portmacro.h
 ../../Source/portable/IAR/STR75x/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/STR75x/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/STR75x/portmacro.h
 ../../Source/portable/GCC/STR75x/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/STR75x/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/STR75x/portmacro.h
 ../../Source/portable/IAR/STR91x/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/STR91x/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/STR91x/portmacro.h
 ../../Source/portable/GCC/H8S2329/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/H8S2329/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/H8S2329/portmacro.h
 ../../Source/portable/GCC/ARM7_AT91FR40008/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ARM7_AT91FR40008/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/ARM7_AT91FR40008/portmacro.h
 ../../Source/portable/RVDS/ARM_CM3/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/RVDS/ARM_CM3/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/RVDS/ARM_CM3/portmacro.h
 ../../Source/portable/GCC/ARM_CM3/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ARM_CM3/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/ARM_CM3/portmacro.h
 ../../Source/portable/GCC/ARM_CM3/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ARM_CM3/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/ARM_CM3/portmacro.h
 ../../Source/portable/IAR/ARM_CM3/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/ARM_CM3/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/ARM_CM3/portmacro.h
 ../../Source/portable/IAR/ARM_CM3/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/ARM_CM3/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/ARM_CM3/portmacro.h
 ../../Source/portable/CodeWarrior/HCS12/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/CodeWarrior/HCS12/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/CodeWarrior/HCS12/portmacro.h
 ../../Source/portable/GCC/MicroBlaze/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/MicroBlaze/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/MicroBlaze/portmacro.h
 ../../Source/portable/Paradigm/Tern_EE/small/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/Paradigm/Tern_EE/small/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/Paradigm/Tern_EE/small/portmacro.h
 ../../Source/portable/GCC/HCS12/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/HCS12/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/HCS12/portmacro.h
 ../../Source/portable/GCC/MCF5235/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/MCF5235/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/MCF5235/portmacro.h
 ../../../Source/portable/GCC/ColdFire_V2/portmacro.h
-/home/nvv/esp-idf/components/Source/portable/GCC/ColdFire_V2/portmacro.h
+/home/nvv/esp-idf/components/freertos/Source/portable/GCC/ColdFire_V2/portmacro.h
 ../../Source/portable/CodeWarrior/ColdFire_V2/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/CodeWarrior/ColdFire_V2/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/CodeWarrior/ColdFire_V2/portmacro.h
 ../../Source/portable/GCC/PPC405_Xilinx/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/PPC405_Xilinx/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/PPC405_Xilinx/portmacro.h
 ../../Source/portable/GCC/PPC440_Xilinx/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/GCC/PPC440_Xilinx/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/GCC/PPC440_Xilinx/portmacro.h
 ../../Source/portable/Softune/MB96340/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/Softune/MB96340/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/Softune/MB96340/portmacro.h
 frconfig.h
-/home/nvv/esp-idf/components/freertos/include/freertos/frconfig.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/frconfig.h
 ../portable/BCC/16BitDOS/PC/prtmacro.h
-/home/nvv/esp-idf/components/freertos/include/portable/BCC/16BitDOS/PC/prtmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/portable/BCC/16BitDOS/PC/prtmacro.h
 frconfig.h
-/home/nvv/esp-idf/components/freertos/include/freertos/frconfig.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/frconfig.h
 ../portable/BCC/16BitDOS/flsh186/prtmacro.h
-/home/nvv/esp-idf/components/freertos/include/portable/BCC/16BitDOS/flsh186/prtmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/portable/BCC/16BitDOS/flsh186/prtmacro.h
 portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portmacro.h
 portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portmacro.h
 portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portmacro.h
 portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portmacro.h
 ../../Source/portable/IAR/V850ES/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/V850ES/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/V850ES/portmacro.h
 ../../Source/portable/IAR/V850ES/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/V850ES/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/V850ES/portmacro.h
 ../../Source/portable/IAR/V850ES/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/V850ES/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/V850ES/portmacro.h
 ../../Source/portable/IAR/V850ES/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/V850ES/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/V850ES/portmacro.h
 ../../Source/portable/IAR/V850ES/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/V850ES/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/V850ES/portmacro.h
 ../../Source/portable/IAR/78K0R/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/78K0R/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/78K0R/portmacro.h
 ../../Source/portable/IAR/78K0R/portmacro.h
-/home/nvv/esp-idf/components/freertos/Source/portable/IAR/78K0R/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/Source/portable/IAR/78K0R/portmacro.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/event_groups.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/event_groups.h
 timers.h
-/home/nvv/esp-idf/components/freertos/include/freertos/timers.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/timers.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/list.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/list.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/mpu_wrappers.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/mpu_wrappers.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/portable.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/portable.h
 deprecated_definitions.h
-/home/nvv/esp-idf/components/freertos/include/freertos/deprecated_definitions.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/deprecated_definitions.h
 freertos/portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/freertos/portmacro.h
 mpu_wrappers.h
-/home/nvv/esp-idf/components/freertos/include/freertos/mpu_wrappers.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/mpu_wrappers.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/projdefs.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/projdefs.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/queue.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/queue.h
 task.h
-/home/nvv/esp-idf/components/freertos/include/freertos/task.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/task.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/semphr.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/semphr.h
 queue.h
-/home/nvv/esp-idf/components/freertos/include/freertos/queue.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/queue.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/task.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/task.h
 list.h
-/home/nvv/esp-idf/components/freertos/include/freertos/list.h
-freertos/portmacro.h
-/home/nvv/esp-idf/components/freertos/include/freertos/freertos/portmacro.h
-freertos/task_snapshot.h
-/home/nvv/esp-idf/components/freertos/include/freertos/freertos/task_snapshot.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/list.h
 
-/home/nvv/esp-idf/components/freertos/include/freertos/timers.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/timers.h
 task.h
-/home/nvv/esp-idf/components/freertos/include/freertos/task.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/task.h
 
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/FreeRTOSConfig_arch.h
+sdkconfig.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/sdkconfig.h
+esp32c3/rom/ets_sys.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp32c3/rom/ets_sys.h
+esp32h2/rom/ets_sys.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp32h2/rom/ets_sys.h
+esp32c2/rom/ets_sys.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp32c2/rom/ets_sys.h
 
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portmacro.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/portbenchmark.h
+
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/portmacro.h
+sdkconfig.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/sdkconfig.h
 stdint.h
 -
 stdlib.h
@@ -1567,34 +1487,42 @@ stdbool.h
 -
 stdio.h
 -
+soc/spinlock.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/soc/spinlock.h
+soc/interrupt_core0_reg.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/soc/interrupt_core0_reg.h
+esp_attr.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp_attr.h
+esp_rom_sys.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp_rom_sys.h
+esp_timer.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp_timer.h
+esp_heap_caps.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp_heap_caps.h
+esp_system.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp_system.h
+esp_newlib.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/esp_newlib.h
+portbenchmark.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/portbenchmark.h
 limits.h
 -
-esp_timer.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/esp_timer.h
+portmacro_deprecated.h
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/portmacro_deprecated.h
+
+/home/nvv/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/portmacro_deprecated.h
+
+/home/nvv/esp-idf/components/freertos/esp_additions/include/freertos/FreeRTOSConfig.h
 sdkconfig.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/sdkconfig.h
-esp_attr.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/esp_attr.h
-esp_heap_caps.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/esp_heap_caps.h
-soc/soc_memory_layout.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/soc/soc_memory_layout.h
-soc/spinlock.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/soc/spinlock.h
-soc/interrupt_core0_reg.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/soc/interrupt_core0_reg.h
-esp_rom_sys.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/esp_rom_sys.h
-soc/cpu.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/soc/cpu.h
-esp_system.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/esp_system.h
-esp_newlib.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/esp_newlib.h
-portbenchmark.h
-/home/nvv/esp-idf/components/freertos/port/riscv/include/freertos/portbenchmark.h
-stdio.h
+/home/nvv/esp-idf/components/freertos/esp_additions/include/freertos/sdkconfig.h
+esp_compiler.h
+/home/nvv/esp-idf/components/freertos/esp_additions/include/freertos/esp_compiler.h
+freertos/FreeRTOSConfig_arch.h
+/home/nvv/esp-idf/components/freertos/esp_additions/include/freertos/freertos/FreeRTOSConfig_arch.h
+assert.h
 -
+SEGGER_SYSVIEW_FreeRTOS.h
+/home/nvv/esp-idf/components/freertos/esp_additions/include/freertos/SEGGER_SYSVIEW_FreeRTOS.h
 
 /home/nvv/esp-idf/components/hal/esp32c3/include/hal/cpu_ll.h
 stdint.h
@@ -1633,22 +1561,12 @@ hal/cpu_ll.h
 /home/nvv/esp-idf/components/hal/include/hal/eth_types.h
 
 /home/nvv/esp-idf/components/hal/include/hal/gpio_types.h
-soc/gpio_periph.h
-/home/nvv/esp-idf/components/hal/include/hal/soc/gpio_periph.h
+sdkconfig.h
+/home/nvv/esp-idf/components/hal/include/hal/sdkconfig.h
 soc/soc_caps.h
 /home/nvv/esp-idf/components/hal/include/hal/soc/soc_caps.h
-
-/home/nvv/esp-idf/components/hal/include/hal/timer_types.h
-stdint.h
--
-stdbool.h
--
 esp_bit_defs.h
--
-esp_attr.h
-/home/nvv/esp-idf/components/hal/include/hal/esp_attr.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/hal/include/hal/soc/soc_caps.h
+/home/nvv/esp-idf/components/hal/include/hal/esp_bit_defs.h
 
 /home/nvv/esp-idf/components/hal/include/hal/uart_types.h
 stdint.h
@@ -1670,16 +1588,6 @@ sdkconfig.h
 esp_err.h
 /home/nvv/esp-idf/components/heap/include/esp_err.h
 
-/home/nvv/esp-idf/components/heap/include/heap_memory_layout.h
-stdlib.h
--
-stdint.h
--
-stdbool.h
--
-sdkconfig.h
-/home/nvv/esp-idf/components/heap/include/sdkconfig.h
-
 /home/nvv/esp-idf/components/heap/include/multi_heap.h
 stdint.h
 -
@@ -1687,12 +1595,6 @@ stdlib.h
 -
 stdbool.h
 -
-
-/home/nvv/esp-idf/components/heap/include/soc/soc_memory_layout.h
-heap_memory_layout.h
-/home/nvv/esp-idf/components/heap/include/soc/heap_memory_layout.h
-soc/soc_memory_types.h
-/home/nvv/esp-idf/components/heap/include/soc/soc/soc_memory_types.h
 
 /home/nvv/esp-idf/components/log/include/esp_log.h
 stdint.h
@@ -1713,6 +1615,8 @@ esp32c3/rom/ets_sys.h
 /home/nvv/esp-idf/components/log/include/esp32c3/rom/ets_sys.h
 esp32h2/rom/ets_sys.h
 /home/nvv/esp-idf/components/log/include/esp32h2/rom/ets_sys.h
+esp32c2/rom/ets_sys.h
+/home/nvv/esp-idf/components/log/include/esp32c2/rom/ets_sys.h
 esp_log_internal.h
 /home/nvv/esp-idf/components/log/include/esp_log_internal.h
 
@@ -2060,15 +1964,9 @@ soc.h
 uart_reg.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_reg.h
 
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_reg.h
-soc.h
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_pins.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
-
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_struct.h
-stdint.h
--
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/interrupt_core0_reg.h
 soc.h
@@ -2080,6 +1978,8 @@ soc.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
 
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
+
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reset_reasons.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
@@ -2089,24 +1989,14 @@ esp_assert.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_assert.h
 esp_bit_defs.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/esp_bit_defs.h
-sdkconfig.h
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/sdkconfig.h
+reg_base.h
+/home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/system_reg.h
 soc.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
-
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/timer_group_reg.h
-stdint.h
--
-soc/soc.h
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc/soc.h
-
-/home/nvv/esp-idf/components/soc/esp32c3/include/soc/timer_group_struct.h
-stdint.h
--
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_pins.h
 soc/io_mux_reg.h
@@ -2117,20 +2007,6 @@ soc.h
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 
 /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_struct.h
-
-/home/nvv/esp-idf/components/soc/include/soc/gpio_periph.h
-stdint.h
-/home/nvv/esp-idf/components/soc/include/soc/stdint.h
-soc/io_mux_reg.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/io_mux_reg.h
-soc/gpio_struct.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/gpio_struct.h
-soc/gpio_reg.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/gpio_reg.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
-soc/gpio_sig_map.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/gpio_sig_map.h
 
 /home/nvv/esp-idf/components/soc/include/soc/soc_memory_types.h
 stdlib.h
@@ -2147,18 +2023,6 @@ sdkconfig.h
 /home/nvv/esp-idf/components/soc/include/soc/sdkconfig.h
 esp_attr.h
 /home/nvv/esp-idf/components/soc/include/soc/esp_attr.h
-
-/home/nvv/esp-idf/components/soc/include/soc/timer_periph.h
-stdint.h
--
-soc/timer_group_reg.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/timer_group_reg.h
-soc/timer_group_struct.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/timer_group_struct.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
-soc/periph_defs.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/periph_defs.h
 
 /home/nvv/esp-idf/components/soc/include/soc/uart_periph.h
 soc/soc_caps.h

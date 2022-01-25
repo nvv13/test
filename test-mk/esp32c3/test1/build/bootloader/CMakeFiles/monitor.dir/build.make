@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build/bootloader
 include CMakeFiles/monitor.dir/progress.make
 
 CMakeFiles/monitor:
-	cd /home/nvv/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH="/home/nvv/esp-idf" -D SERIAL_TOOL="/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/idf_monitor.py" -D SERIAL_TOOL_ARGS="--target esp32c3 --revision 3 /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/bootloader.elf" -D WORKING_DIRECTORY="/home/nvv/test/test-mk/esp32c3/test1/build/bootloader" -P run_serial_tool.cmake
+	cd /home/nvv/esp-idf/components/esptool_py && /usr/bin/cmake -D IDF_PATH=/home/nvv/esp-idf -D "SERIAL_TOOL=/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python;/home/nvv/esp-idf/tools/idf_monitor.py" -D "SERIAL_TOOL_ARGS=--target;esp32c3;--revision;3;/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/bootloader.elf" -D WORKING_DIRECTORY=/home/nvv/test/test-mk/esp32c3/test1/build/bootloader -P run_serial_tool.cmake
 
 monitor: CMakeFiles/monitor
 monitor: CMakeFiles/monitor.dir/build.make

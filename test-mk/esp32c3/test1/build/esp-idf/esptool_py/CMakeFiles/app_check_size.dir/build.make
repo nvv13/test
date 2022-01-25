@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build
 include esp-idf/esptool_py/CMakeFiles/app_check_size.dir/progress.make
 
 esp-idf/esptool_py/CMakeFiles/app_check_size:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esptool_py && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.bin
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esptool_py && /home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin /home/nvv/test/test-mk/esp32c3/test1/build/test1prj.bin
 
 app_check_size: esp-idf/esptool_py/CMakeFiles/app_check_size
 app_check_size: esp-idf/esptool_py/CMakeFiles/app_check_size.dir/build.make

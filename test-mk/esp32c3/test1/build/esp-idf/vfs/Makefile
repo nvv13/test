@@ -217,6 +217,33 @@ vfs.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs.c.s
 .PHONY : vfs.c.s
 
+vfs_console.obj: vfs_console.c.obj
+
+.PHONY : vfs_console.obj
+
+# target to build an object file
+vfs_console.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_console.c.obj
+.PHONY : vfs_console.c.obj
+
+vfs_console.i: vfs_console.c.i
+
+.PHONY : vfs_console.i
+
+# target to preprocess a source file
+vfs_console.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_console.c.i
+.PHONY : vfs_console.c.i
+
+vfs_console.s: vfs_console.c.s
+
+.PHONY : vfs_console.s
+
+# target to generate assembly for a file
+vfs_console.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_console.c.s
+.PHONY : vfs_console.c.s
+
 vfs_eventfd.obj: vfs_eventfd.c.obj
 
 .PHONY : vfs_eventfd.obj
@@ -298,6 +325,33 @@ vfs_uart.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_uart.c.s
 .PHONY : vfs_uart.c.s
 
+vfs_usb_serial_jtag.obj: vfs_usb_serial_jtag.c.obj
+
+.PHONY : vfs_usb_serial_jtag.obj
+
+# target to build an object file
+vfs_usb_serial_jtag.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_usb_serial_jtag.c.obj
+.PHONY : vfs_usb_serial_jtag.c.obj
+
+vfs_usb_serial_jtag.i: vfs_usb_serial_jtag.c.i
+
+.PHONY : vfs_usb_serial_jtag.i
+
+# target to preprocess a source file
+vfs_usb_serial_jtag.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_usb_serial_jtag.c.i
+.PHONY : vfs_usb_serial_jtag.c.i
+
+vfs_usb_serial_jtag.s: vfs_usb_serial_jtag.c.s
+
+.PHONY : vfs_usb_serial_jtag.s
+
+# target to generate assembly for a file
+vfs_usb_serial_jtag.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/vfs/CMakeFiles/__idf_vfs.dir/build.make esp-idf/vfs/CMakeFiles/__idf_vfs.dir/vfs_usb_serial_jtag.c.s
+.PHONY : vfs_usb_serial_jtag.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -314,6 +368,9 @@ help:
 	@echo "... vfs.obj"
 	@echo "... vfs.i"
 	@echo "... vfs.s"
+	@echo "... vfs_console.obj"
+	@echo "... vfs_console.i"
+	@echo "... vfs_console.s"
 	@echo "... vfs_eventfd.obj"
 	@echo "... vfs_eventfd.i"
 	@echo "... vfs_eventfd.s"
@@ -323,6 +380,9 @@ help:
 	@echo "... vfs_uart.obj"
 	@echo "... vfs_uart.i"
 	@echo "... vfs_uart.s"
+	@echo "... vfs_usb_serial_jtag.obj"
+	@echo "... vfs_usb_serial_jtag.i"
+	@echo "... vfs_usb_serial_jtag.s"
 .PHONY : help
 
 

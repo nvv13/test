@@ -73,7 +73,7 @@ CMAKE_BINARY_DIR = /home/nvv/test/test-mk/esp32c3/test1/build/bootloader
 include CMakeFiles/uf2.dir/progress.make
 
 CMakeFiles/uf2: bootloader
-	/home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/mkuf2.py write -o /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/uf2.bin --json /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/flasher_args.json --chip-id 0xd42ba06c
+	/home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/tools/mkuf2.py write -o /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/uf2.bin --json /home/nvv/test/test-mk/esp32c3/test1/build/bootloader/flasher_args.json --chip-id 0xd42ba06c
 
 uf2: CMakeFiles/uf2
 uf2: CMakeFiles/uf2.dir/build.make

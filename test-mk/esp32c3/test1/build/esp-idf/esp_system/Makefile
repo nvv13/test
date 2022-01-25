@@ -247,6 +247,33 @@ crosscore_int.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/crosscore_int.c.s
 .PHONY : crosscore_int.c.s
 
+debug_stubs.obj: debug_stubs.c.obj
+
+.PHONY : debug_stubs.obj
+
+# target to build an object file
+debug_stubs.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/debug_stubs.c.obj
+.PHONY : debug_stubs.c.obj
+
+debug_stubs.i: debug_stubs.c.i
+
+.PHONY : debug_stubs.i
+
+# target to preprocess a source file
+debug_stubs.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/debug_stubs.c.i
+.PHONY : debug_stubs.c.i
+
+debug_stubs.s: debug_stubs.c.s
+
+.PHONY : debug_stubs.s
+
+# target to generate assembly for a file
+debug_stubs.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/debug_stubs.c.s
+.PHONY : debug_stubs.c.s
+
 esp_err.obj: esp_err.c.obj
 
 .PHONY : esp_err.obj
@@ -273,6 +300,33 @@ esp_err.s: esp_err.c.s
 esp_err.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_err.c.s
 .PHONY : esp_err.c.s
+
+esp_ipc.obj: esp_ipc.c.obj
+
+.PHONY : esp_ipc.obj
+
+# target to build an object file
+esp_ipc.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_ipc.c.obj
+.PHONY : esp_ipc.c.obj
+
+esp_ipc.i: esp_ipc.c.i
+
+.PHONY : esp_ipc.i
+
+# target to preprocess a source file
+esp_ipc.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_ipc.c.i
+.PHONY : esp_ipc.c.i
+
+esp_ipc.s: esp_ipc.c.s
+
+.PHONY : esp_ipc.s
+
+# target to generate assembly for a file
+esp_ipc.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/esp_ipc.c.s
+.PHONY : esp_ipc.c.s
 
 esp_system.obj: esp_system.c.obj
 
@@ -381,6 +435,33 @@ panic.s: panic.c.s
 panic.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/panic.c.s
 .PHONY : panic.c.s
+
+port/arch/riscv/debug_stubs.obj: port/arch/riscv/debug_stubs.c.obj
+
+.PHONY : port/arch/riscv/debug_stubs.obj
+
+# target to build an object file
+port/arch/riscv/debug_stubs.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/debug_stubs.c.obj
+.PHONY : port/arch/riscv/debug_stubs.c.obj
+
+port/arch/riscv/debug_stubs.i: port/arch/riscv/debug_stubs.c.i
+
+.PHONY : port/arch/riscv/debug_stubs.i
+
+# target to preprocess a source file
+port/arch/riscv/debug_stubs.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/debug_stubs.c.i
+.PHONY : port/arch/riscv/debug_stubs.c.i
+
+port/arch/riscv/debug_stubs.s: port/arch/riscv/debug_stubs.c.s
+
+.PHONY : port/arch/riscv/debug_stubs.s
+
+# target to generate assembly for a file
+port/arch/riscv/debug_stubs.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/port/arch/riscv/debug_stubs.c.s
+.PHONY : port/arch/riscv/debug_stubs.c.s
 
 port/arch/riscv/expression_with_stack.obj: port/arch/riscv/expression_with_stack.c.obj
 
@@ -796,6 +877,33 @@ ubsan.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/ubsan.c.s
 .PHONY : ubsan.c.s
 
+xt_wdt.obj: xt_wdt.c.obj
+
+.PHONY : xt_wdt.obj
+
+# target to build an object file
+xt_wdt.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/xt_wdt.c.obj
+.PHONY : xt_wdt.c.obj
+
+xt_wdt.i: xt_wdt.c.i
+
+.PHONY : xt_wdt.i
+
+# target to preprocess a source file
+xt_wdt.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/xt_wdt.c.i
+.PHONY : xt_wdt.c.i
+
+xt_wdt.s: xt_wdt.c.s
+
+.PHONY : xt_wdt.s
+
+# target to generate assembly for a file
+xt_wdt.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/build.make esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/xt_wdt.c.s
+.PHONY : xt_wdt.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -814,9 +922,15 @@ help:
 	@echo "... crosscore_int.obj"
 	@echo "... crosscore_int.i"
 	@echo "... crosscore_int.s"
+	@echo "... debug_stubs.obj"
+	@echo "... debug_stubs.i"
+	@echo "... debug_stubs.s"
 	@echo "... esp_err.obj"
 	@echo "... esp_err.i"
 	@echo "... esp_err.s"
+	@echo "... esp_ipc.obj"
+	@echo "... esp_ipc.i"
+	@echo "... esp_ipc.s"
 	@echo "... esp_system.obj"
 	@echo "... esp_system.i"
 	@echo "... esp_system.s"
@@ -829,6 +943,9 @@ help:
 	@echo "... panic.obj"
 	@echo "... panic.i"
 	@echo "... panic.s"
+	@echo "... port/arch/riscv/debug_stubs.obj"
+	@echo "... port/arch/riscv/debug_stubs.i"
+	@echo "... port/arch/riscv/debug_stubs.s"
 	@echo "... port/arch/riscv/expression_with_stack.obj"
 	@echo "... port/arch/riscv/expression_with_stack.i"
 	@echo "... port/arch/riscv/expression_with_stack.s"
@@ -875,6 +992,9 @@ help:
 	@echo "... ubsan.obj"
 	@echo "... ubsan.i"
 	@echo "... ubsan.s"
+	@echo "... xt_wdt.obj"
+	@echo "... xt_wdt.i"
+	@echo "... xt_wdt.s"
 .PHONY : help
 
 

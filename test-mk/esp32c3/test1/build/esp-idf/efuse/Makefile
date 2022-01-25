@@ -87,6 +87,28 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -99,27 +121,6 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -131,17 +132,16 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -176,49 +176,34 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule
-.PHONY : esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule
+esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
 
 # Convenience name for target.
-efuse_test_table: esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule
+__idf_efuse: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
 
-.PHONY : efuse_test_table
+.PHONY : __idf_efuse
 
 # fast build rule for target.
-efuse_test_table/fast:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse_test_table.dir/build.make esp-idf/efuse/CMakeFiles/efuse_test_table.dir/build
-.PHONY : efuse_test_table/fast
+__idf_efuse/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build
+.PHONY : __idf_efuse/fast
 
 # Convenience name for target.
-esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule
-.PHONY : esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule
+esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule
 
 # Convenience name for target.
-show_efuse_table: esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule
+efuse-common-table: esp-idf/efuse/CMakeFiles/efuse-common-table.dir/rule
 
-.PHONY : show_efuse_table
+.PHONY : efuse-common-table
 
 # fast build rule for target.
-show_efuse_table/fast:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/show_efuse_table.dir/build.make esp-idf/efuse/CMakeFiles/show_efuse_table.dir/build
-.PHONY : show_efuse_table/fast
-
-# Convenience name for target.
-esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule
-.PHONY : esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule
-
-# Convenience name for target.
-efuse_custom_table: esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule
-
-.PHONY : efuse_custom_table
-
-# fast build rule for target.
-efuse_custom_table/fast:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/build.make esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/build
-.PHONY : efuse_custom_table/fast
+efuse-common-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse-common-table.dir/build.make esp-idf/efuse/CMakeFiles/efuse-common-table.dir/build
+.PHONY : efuse-common-table/fast
 
 # Convenience name for target.
 esp-idf/efuse/CMakeFiles/efuse_common_table.dir/rule:
@@ -236,19 +221,79 @@ efuse_common_table/fast:
 .PHONY : efuse_common_table/fast
 
 # Convenience name for target.
-esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
-.PHONY : esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
+esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule
 
 # Convenience name for target.
-__idf_efuse: esp-idf/efuse/CMakeFiles/__idf_efuse.dir/rule
+show-efuse-table: esp-idf/efuse/CMakeFiles/show-efuse-table.dir/rule
 
-.PHONY : __idf_efuse
+.PHONY : show-efuse-table
 
 # fast build rule for target.
-__idf_efuse/fast:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build.make esp-idf/efuse/CMakeFiles/__idf_efuse.dir/build
-.PHONY : __idf_efuse/fast
+show-efuse-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/show-efuse-table.dir/build.make esp-idf/efuse/CMakeFiles/show-efuse-table.dir/build
+.PHONY : show-efuse-table/fast
+
+# Convenience name for target.
+esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule
+
+# Convenience name for target.
+efuse-custom-table: esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/rule
+
+.PHONY : efuse-custom-table
+
+# fast build rule for target.
+efuse-custom-table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/build.make esp-idf/efuse/CMakeFiles/efuse-custom-table.dir/build
+.PHONY : efuse-custom-table/fast
+
+# Convenience name for target.
+esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule
+
+# Convenience name for target.
+efuse_custom_table: esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/rule
+
+.PHONY : efuse_custom_table
+
+# fast build rule for target.
+efuse_custom_table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/build.make esp-idf/efuse/CMakeFiles/efuse_custom_table.dir/build
+.PHONY : efuse_custom_table/fast
+
+# Convenience name for target.
+esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule
+
+# Convenience name for target.
+show_efuse_table: esp-idf/efuse/CMakeFiles/show_efuse_table.dir/rule
+
+.PHONY : show_efuse_table
+
+# fast build rule for target.
+show_efuse_table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/show_efuse_table.dir/build.make esp-idf/efuse/CMakeFiles/show_efuse_table.dir/build
+.PHONY : show_efuse_table/fast
+
+# Convenience name for target.
+esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule
+.PHONY : esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule
+
+# Convenience name for target.
+efuse_test_table: esp-idf/efuse/CMakeFiles/efuse_test_table.dir/rule
+
+.PHONY : efuse_test_table
+
+# fast build rule for target.
+efuse_test_table/fast:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/efuse/CMakeFiles/efuse_test_table.dir/build.make esp-idf/efuse/CMakeFiles/efuse_test_table.dir/build
+.PHONY : efuse_test_table/fast
 
 esp32c3/esp_efuse_fields.obj: esp32c3/esp_efuse_fields.c.obj
 
@@ -478,9 +523,12 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... efuse-common-table"
+	@echo "... efuse-custom-table"
 	@echo "... efuse_common_table"
 	@echo "... efuse_custom_table"
 	@echo "... efuse_test_table"
+	@echo "... show-efuse-table"
 	@echo "... show_efuse_table"
 	@echo "... __idf_efuse"
 	@echo "... esp32c3/esp_efuse_fields.obj"

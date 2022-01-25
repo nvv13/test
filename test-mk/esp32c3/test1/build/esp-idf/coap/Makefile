@@ -271,6 +271,87 @@ libcoap/src/block.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/block.c.s
 .PHONY : libcoap/src/block.c.s
 
+libcoap/src/coap_asn1.obj: libcoap/src/coap_asn1.c.obj
+
+.PHONY : libcoap/src/coap_asn1.obj
+
+# target to build an object file
+libcoap/src/coap_asn1.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_asn1.c.obj
+.PHONY : libcoap/src/coap_asn1.c.obj
+
+libcoap/src/coap_asn1.i: libcoap/src/coap_asn1.c.i
+
+.PHONY : libcoap/src/coap_asn1.i
+
+# target to preprocess a source file
+libcoap/src/coap_asn1.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_asn1.c.i
+.PHONY : libcoap/src/coap_asn1.c.i
+
+libcoap/src/coap_asn1.s: libcoap/src/coap_asn1.c.s
+
+.PHONY : libcoap/src/coap_asn1.s
+
+# target to generate assembly for a file
+libcoap/src/coap_asn1.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_asn1.c.s
+.PHONY : libcoap/src/coap_asn1.c.s
+
+libcoap/src/coap_cache.obj: libcoap/src/coap_cache.c.obj
+
+.PHONY : libcoap/src/coap_cache.obj
+
+# target to build an object file
+libcoap/src/coap_cache.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_cache.c.obj
+.PHONY : libcoap/src/coap_cache.c.obj
+
+libcoap/src/coap_cache.i: libcoap/src/coap_cache.c.i
+
+.PHONY : libcoap/src/coap_cache.i
+
+# target to preprocess a source file
+libcoap/src/coap_cache.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_cache.c.i
+.PHONY : libcoap/src/coap_cache.c.i
+
+libcoap/src/coap_cache.s: libcoap/src/coap_cache.c.s
+
+.PHONY : libcoap/src/coap_cache.s
+
+# target to generate assembly for a file
+libcoap/src/coap_cache.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_cache.c.s
+.PHONY : libcoap/src/coap_cache.c.s
+
+libcoap/src/coap_debug.obj: libcoap/src/coap_debug.c.obj
+
+.PHONY : libcoap/src/coap_debug.obj
+
+# target to build an object file
+libcoap/src/coap_debug.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_debug.c.obj
+.PHONY : libcoap/src/coap_debug.c.obj
+
+libcoap/src/coap_debug.i: libcoap/src/coap_debug.c.i
+
+.PHONY : libcoap/src/coap_debug.i
+
+# target to preprocess a source file
+libcoap/src/coap_debug.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_debug.c.i
+.PHONY : libcoap/src/coap_debug.c.i
+
+libcoap/src/coap_debug.s: libcoap/src/coap_debug.c.s
+
+.PHONY : libcoap/src/coap_debug.s
+
+# target to generate assembly for a file
+libcoap/src/coap_debug.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_debug.c.s
+.PHONY : libcoap/src/coap_debug.c.s
+
 libcoap/src/coap_event.obj: libcoap/src/coap_event.c.obj
 
 .PHONY : libcoap/src/coap_event.obj
@@ -352,6 +433,87 @@ libcoap/src/coap_io.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_io.c.s
 .PHONY : libcoap/src/coap_io.c.s
 
+libcoap/src/coap_mbedtls.obj: libcoap/src/coap_mbedtls.c.obj
+
+.PHONY : libcoap/src/coap_mbedtls.obj
+
+# target to build an object file
+libcoap/src/coap_mbedtls.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_mbedtls.c.obj
+.PHONY : libcoap/src/coap_mbedtls.c.obj
+
+libcoap/src/coap_mbedtls.i: libcoap/src/coap_mbedtls.c.i
+
+.PHONY : libcoap/src/coap_mbedtls.i
+
+# target to preprocess a source file
+libcoap/src/coap_mbedtls.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_mbedtls.c.i
+.PHONY : libcoap/src/coap_mbedtls.c.i
+
+libcoap/src/coap_mbedtls.s: libcoap/src/coap_mbedtls.c.s
+
+.PHONY : libcoap/src/coap_mbedtls.s
+
+# target to generate assembly for a file
+libcoap/src/coap_mbedtls.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_mbedtls.c.s
+.PHONY : libcoap/src/coap_mbedtls.c.s
+
+libcoap/src/coap_notls.obj: libcoap/src/coap_notls.c.obj
+
+.PHONY : libcoap/src/coap_notls.obj
+
+# target to build an object file
+libcoap/src/coap_notls.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_notls.c.obj
+.PHONY : libcoap/src/coap_notls.c.obj
+
+libcoap/src/coap_notls.i: libcoap/src/coap_notls.c.i
+
+.PHONY : libcoap/src/coap_notls.i
+
+# target to preprocess a source file
+libcoap/src/coap_notls.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_notls.c.i
+.PHONY : libcoap/src/coap_notls.c.i
+
+libcoap/src/coap_notls.s: libcoap/src/coap_notls.c.s
+
+.PHONY : libcoap/src/coap_notls.s
+
+# target to generate assembly for a file
+libcoap/src/coap_notls.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_notls.c.s
+.PHONY : libcoap/src/coap_notls.c.s
+
+libcoap/src/coap_prng.obj: libcoap/src/coap_prng.c.obj
+
+.PHONY : libcoap/src/coap_prng.obj
+
+# target to build an object file
+libcoap/src/coap_prng.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_prng.c.obj
+.PHONY : libcoap/src/coap_prng.c.obj
+
+libcoap/src/coap_prng.i: libcoap/src/coap_prng.c.i
+
+.PHONY : libcoap/src/coap_prng.i
+
+# target to preprocess a source file
+libcoap/src/coap_prng.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_prng.c.i
+.PHONY : libcoap/src/coap_prng.c.i
+
+libcoap/src/coap_prng.s: libcoap/src/coap_prng.c.s
+
+.PHONY : libcoap/src/coap_prng.s
+
+# target to generate assembly for a file
+libcoap/src/coap_prng.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_prng.c.s
+.PHONY : libcoap/src/coap_prng.c.s
+
 libcoap/src/coap_session.obj: libcoap/src/coap_session.c.obj
 
 .PHONY : libcoap/src/coap_session.obj
@@ -378,6 +540,33 @@ libcoap/src/coap_session.s: libcoap/src/coap_session.c.s
 libcoap/src/coap_session.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_session.c.s
 .PHONY : libcoap/src/coap_session.c.s
+
+libcoap/src/coap_tcp.obj: libcoap/src/coap_tcp.c.obj
+
+.PHONY : libcoap/src/coap_tcp.obj
+
+# target to build an object file
+libcoap/src/coap_tcp.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_tcp.c.obj
+.PHONY : libcoap/src/coap_tcp.c.obj
+
+libcoap/src/coap_tcp.i: libcoap/src/coap_tcp.c.i
+
+.PHONY : libcoap/src/coap_tcp.i
+
+# target to preprocess a source file
+libcoap/src/coap_tcp.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_tcp.c.i
+.PHONY : libcoap/src/coap_tcp.c.i
+
+libcoap/src/coap_tcp.s: libcoap/src/coap_tcp.c.s
+
+.PHONY : libcoap/src/coap_tcp.s
+
+# target to generate assembly for a file
+libcoap/src/coap_tcp.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/coap_tcp.c.s
+.PHONY : libcoap/src/coap_tcp.c.s
 
 libcoap/src/coap_time.obj: libcoap/src/coap_time.c.obj
 
@@ -649,87 +838,6 @@ libcoap/src/uri.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/libcoap/src/uri.c.s
 .PHONY : libcoap/src/uri.c.s
 
-port/coap_debug.obj: port/coap_debug.c.obj
-
-.PHONY : port/coap_debug.obj
-
-# target to build an object file
-port/coap_debug.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_debug.c.obj
-.PHONY : port/coap_debug.c.obj
-
-port/coap_debug.i: port/coap_debug.c.i
-
-.PHONY : port/coap_debug.i
-
-# target to preprocess a source file
-port/coap_debug.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_debug.c.i
-.PHONY : port/coap_debug.c.i
-
-port/coap_debug.s: port/coap_debug.c.s
-
-.PHONY : port/coap_debug.s
-
-# target to generate assembly for a file
-port/coap_debug.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_debug.c.s
-.PHONY : port/coap_debug.c.s
-
-port/coap_mbedtls.obj: port/coap_mbedtls.c.obj
-
-.PHONY : port/coap_mbedtls.obj
-
-# target to build an object file
-port/coap_mbedtls.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_mbedtls.c.obj
-.PHONY : port/coap_mbedtls.c.obj
-
-port/coap_mbedtls.i: port/coap_mbedtls.c.i
-
-.PHONY : port/coap_mbedtls.i
-
-# target to preprocess a source file
-port/coap_mbedtls.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_mbedtls.c.i
-.PHONY : port/coap_mbedtls.c.i
-
-port/coap_mbedtls.s: port/coap_mbedtls.c.s
-
-.PHONY : port/coap_mbedtls.s
-
-# target to generate assembly for a file
-port/coap_mbedtls.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_mbedtls.c.s
-.PHONY : port/coap_mbedtls.c.s
-
-port/coap_notls.obj: port/coap_notls.c.obj
-
-.PHONY : port/coap_notls.obj
-
-# target to build an object file
-port/coap_notls.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_notls.c.obj
-.PHONY : port/coap_notls.c.obj
-
-port/coap_notls.i: port/coap_notls.c.i
-
-.PHONY : port/coap_notls.i
-
-# target to preprocess a source file
-port/coap_notls.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_notls.c.i
-.PHONY : port/coap_notls.c.i
-
-port/coap_notls.s: port/coap_notls.c.s
-
-.PHONY : port/coap_notls.s
-
-# target to generate assembly for a file
-port/coap_notls.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/coap/CMakeFiles/__idf_coap.dir/build.make esp-idf/coap/CMakeFiles/__idf_coap.dir/port/coap_notls.c.s
-.PHONY : port/coap_notls.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -752,6 +860,15 @@ help:
 	@echo "... libcoap/src/block.obj"
 	@echo "... libcoap/src/block.i"
 	@echo "... libcoap/src/block.s"
+	@echo "... libcoap/src/coap_asn1.obj"
+	@echo "... libcoap/src/coap_asn1.i"
+	@echo "... libcoap/src/coap_asn1.s"
+	@echo "... libcoap/src/coap_cache.obj"
+	@echo "... libcoap/src/coap_cache.i"
+	@echo "... libcoap/src/coap_cache.s"
+	@echo "... libcoap/src/coap_debug.obj"
+	@echo "... libcoap/src/coap_debug.i"
+	@echo "... libcoap/src/coap_debug.s"
 	@echo "... libcoap/src/coap_event.obj"
 	@echo "... libcoap/src/coap_event.i"
 	@echo "... libcoap/src/coap_event.s"
@@ -761,9 +878,21 @@ help:
 	@echo "... libcoap/src/coap_io.obj"
 	@echo "... libcoap/src/coap_io.i"
 	@echo "... libcoap/src/coap_io.s"
+	@echo "... libcoap/src/coap_mbedtls.obj"
+	@echo "... libcoap/src/coap_mbedtls.i"
+	@echo "... libcoap/src/coap_mbedtls.s"
+	@echo "... libcoap/src/coap_notls.obj"
+	@echo "... libcoap/src/coap_notls.i"
+	@echo "... libcoap/src/coap_notls.s"
+	@echo "... libcoap/src/coap_prng.obj"
+	@echo "... libcoap/src/coap_prng.i"
+	@echo "... libcoap/src/coap_prng.s"
 	@echo "... libcoap/src/coap_session.obj"
 	@echo "... libcoap/src/coap_session.i"
 	@echo "... libcoap/src/coap_session.s"
+	@echo "... libcoap/src/coap_tcp.obj"
+	@echo "... libcoap/src/coap_tcp.i"
+	@echo "... libcoap/src/coap_tcp.s"
 	@echo "... libcoap/src/coap_time.obj"
 	@echo "... libcoap/src/coap_time.i"
 	@echo "... libcoap/src/coap_time.s"
@@ -794,15 +923,6 @@ help:
 	@echo "... libcoap/src/uri.obj"
 	@echo "... libcoap/src/uri.i"
 	@echo "... libcoap/src/uri.s"
-	@echo "... port/coap_debug.obj"
-	@echo "... port/coap_debug.i"
-	@echo "... port/coap_debug.s"
-	@echo "... port/coap_mbedtls.obj"
-	@echo "... port/coap_mbedtls.i"
-	@echo "... port/coap_mbedtls.s"
-	@echo "... port/coap_notls.obj"
-	@echo "... port/coap_notls.i"
-	@echo "... port/coap_notls.s"
 .PHONY : help
 
 

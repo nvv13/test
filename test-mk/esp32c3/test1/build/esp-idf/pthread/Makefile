@@ -271,6 +271,33 @@ pthread_local_storage.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/pthread/CMakeFiles/__idf_pthread.dir/build.make esp-idf/pthread/CMakeFiles/__idf_pthread.dir/pthread_local_storage.c.s
 .PHONY : pthread_local_storage.c.s
 
+pthread_rwlock.obj: pthread_rwlock.c.obj
+
+.PHONY : pthread_rwlock.obj
+
+# target to build an object file
+pthread_rwlock.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/pthread/CMakeFiles/__idf_pthread.dir/build.make esp-idf/pthread/CMakeFiles/__idf_pthread.dir/pthread_rwlock.c.obj
+.PHONY : pthread_rwlock.c.obj
+
+pthread_rwlock.i: pthread_rwlock.c.i
+
+.PHONY : pthread_rwlock.i
+
+# target to preprocess a source file
+pthread_rwlock.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/pthread/CMakeFiles/__idf_pthread.dir/build.make esp-idf/pthread/CMakeFiles/__idf_pthread.dir/pthread_rwlock.c.i
+.PHONY : pthread_rwlock.c.i
+
+pthread_rwlock.s: pthread_rwlock.c.s
+
+.PHONY : pthread_rwlock.s
+
+# target to generate assembly for a file
+pthread_rwlock.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/pthread/CMakeFiles/__idf_pthread.dir/build.make esp-idf/pthread/CMakeFiles/__idf_pthread.dir/pthread_rwlock.c.s
+.PHONY : pthread_rwlock.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -293,6 +320,9 @@ help:
 	@echo "... pthread_local_storage.obj"
 	@echo "... pthread_local_storage.i"
 	@echo "... pthread_local_storage.s"
+	@echo "... pthread_rwlock.obj"
+	@echo "... pthread_rwlock.i"
+	@echo "... pthread_rwlock.s"
 .PHONY : help
 
 

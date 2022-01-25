@@ -79,10 +79,10 @@ esp-idf/partition_table/CMakeFiles/partition_table_bin: partition_table/partitio
 partition_table/partition-table.bin: /home/nvv/esp-idf/components/partition_table/partitions_singleapp.csv
 partition_table/partition-table.bin: /home/nvv/esp-idf/components/partition_table/gen_esp32part.py
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../../partition_table/partition-table.bin"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/gen_esp32part.py -q --offset 0x8000 --flash-size 2MB /home/nvv/esp-idf/components/partition_table/partitions_singleapp.csv /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/gen_esp32part.py -q --offset 0x8000 --flash-size 4MB /home/nvv/esp-idf/components/partition_table/partitions_singleapp.csv /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo "Partition table binary generated. Contents:"
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo "*******************************************************************************"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/gen_esp32part.py -q --offset 0x8000 --flash-size 2MB /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/components/partition_table/gen_esp32part.py -q --offset 0x8000 --flash-size 4MB /home/nvv/test/test-mk/esp32c3/test1/build/partition_table/partition-table.bin
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/partition_table && /usr/bin/cmake -E echo "*******************************************************************************"
 
 partition_table_bin: esp-idf/partition_table/CMakeFiles/partition_table_bin

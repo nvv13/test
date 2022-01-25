@@ -171,6 +171,33 @@ esp32c3/adc_periph.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.s
 .PHONY : esp32c3/adc_periph.c.s
 
+esp32c3/dedic_gpio_periph.obj: esp32c3/dedic_gpio_periph.c.obj
+
+.PHONY : esp32c3/dedic_gpio_periph.obj
+
+# target to build an object file
+esp32c3/dedic_gpio_periph.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj
+.PHONY : esp32c3/dedic_gpio_periph.c.obj
+
+esp32c3/dedic_gpio_periph.i: esp32c3/dedic_gpio_periph.c.i
+
+.PHONY : esp32c3/dedic_gpio_periph.i
+
+# target to preprocess a source file
+esp32c3/dedic_gpio_periph.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.i
+.PHONY : esp32c3/dedic_gpio_periph.c.i
+
+esp32c3/dedic_gpio_periph.s: esp32c3/dedic_gpio_periph.c.s
+
+.PHONY : esp32c3/dedic_gpio_periph.s
+
+# target to generate assembly for a file
+esp32c3/dedic_gpio_periph.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.s
+.PHONY : esp32c3/dedic_gpio_periph.c.s
+
 esp32c3/gdma_periph.obj: esp32c3/gdma_periph.c.obj
 
 .PHONY : esp32c3/gdma_periph.obj
@@ -495,33 +522,6 @@ lldesc.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.s
 .PHONY : lldesc.c.s
 
-soc_include_legacy_warn.obj: soc_include_legacy_warn.c.obj
-
-.PHONY : soc_include_legacy_warn.obj
-
-# target to build an object file
-soc_include_legacy_warn.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj
-.PHONY : soc_include_legacy_warn.c.obj
-
-soc_include_legacy_warn.i: soc_include_legacy_warn.c.i
-
-.PHONY : soc_include_legacy_warn.i
-
-# target to preprocess a source file
-soc_include_legacy_warn.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.i
-.PHONY : soc_include_legacy_warn.c.i
-
-soc_include_legacy_warn.s: soc_include_legacy_warn.c.s
-
-.PHONY : soc_include_legacy_warn.s
-
-# target to generate assembly for a file
-soc_include_legacy_warn.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/bootloader && $(MAKE) $(MAKESILENT) -f esp-idf/soc/CMakeFiles/__idf_soc.dir/build.make esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.s
-.PHONY : soc_include_legacy_warn.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -534,6 +534,9 @@ help:
 	@echo "... esp32c3/adc_periph.obj"
 	@echo "... esp32c3/adc_periph.i"
 	@echo "... esp32c3/adc_periph.s"
+	@echo "... esp32c3/dedic_gpio_periph.obj"
+	@echo "... esp32c3/dedic_gpio_periph.i"
+	@echo "... esp32c3/dedic_gpio_periph.s"
 	@echo "... esp32c3/gdma_periph.obj"
 	@echo "... esp32c3/gdma_periph.i"
 	@echo "... esp32c3/gdma_periph.s"
@@ -570,9 +573,6 @@ help:
 	@echo "... lldesc.obj"
 	@echo "... lldesc.i"
 	@echo "... lldesc.s"
-	@echo "... soc_include_legacy_warn.obj"
-	@echo "... soc_include_legacy_warn.i"
-	@echo "... soc_include_legacy_warn.s"
 .PHONY : help
 
 

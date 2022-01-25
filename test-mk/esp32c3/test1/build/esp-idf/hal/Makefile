@@ -1081,6 +1081,33 @@ timer_hal.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/timer_hal.c.s
 .PHONY : timer_hal.c.s
 
+timer_hal_iram.obj: timer_hal_iram.c.obj
+
+.PHONY : timer_hal_iram.obj
+
+# target to build an object file
+timer_hal_iram.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/timer_hal_iram.c.obj
+.PHONY : timer_hal_iram.c.obj
+
+timer_hal_iram.i: timer_hal_iram.c.i
+
+.PHONY : timer_hal_iram.i
+
+# target to preprocess a source file
+timer_hal_iram.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/timer_hal_iram.c.i
+.PHONY : timer_hal_iram.c.i
+
+timer_hal_iram.s: timer_hal_iram.c.s
+
+.PHONY : timer_hal_iram.s
+
+# target to generate assembly for a file
+timer_hal_iram.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/timer_hal_iram.c.s
+.PHONY : timer_hal_iram.c.s
+
 twai_hal.obj: twai_hal.c.obj
 
 .PHONY : twai_hal.obj
@@ -1216,6 +1243,33 @@ wdt_hal_iram.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/wdt_hal_iram.c.s
 .PHONY : wdt_hal_iram.c.s
 
+xt_wdt_hal.obj: xt_wdt_hal.c.obj
+
+.PHONY : xt_wdt_hal.obj
+
+# target to build an object file
+xt_wdt_hal.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/xt_wdt_hal.c.obj
+.PHONY : xt_wdt_hal.c.obj
+
+xt_wdt_hal.i: xt_wdt_hal.c.i
+
+.PHONY : xt_wdt_hal.i
+
+# target to preprocess a source file
+xt_wdt_hal.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/xt_wdt_hal.c.i
+.PHONY : xt_wdt_hal.c.i
+
+xt_wdt_hal.s: xt_wdt_hal.c.s
+
+.PHONY : xt_wdt_hal.s
+
+# target to generate assembly for a file
+xt_wdt_hal.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/hal/CMakeFiles/__idf_hal.dir/build.make esp-idf/hal/CMakeFiles/__idf_hal.dir/xt_wdt_hal.c.s
+.PHONY : xt_wdt_hal.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1328,6 +1382,9 @@ help:
 	@echo "... timer_hal.obj"
 	@echo "... timer_hal.i"
 	@echo "... timer_hal.s"
+	@echo "... timer_hal_iram.obj"
+	@echo "... timer_hal_iram.i"
+	@echo "... timer_hal_iram.s"
 	@echo "... twai_hal.obj"
 	@echo "... twai_hal.i"
 	@echo "... twai_hal.s"
@@ -1343,6 +1400,9 @@ help:
 	@echo "... wdt_hal_iram.obj"
 	@echo "... wdt_hal_iram.i"
 	@echo "... wdt_hal_iram.s"
+	@echo "... xt_wdt_hal.obj"
+	@echo "... xt_wdt_hal.i"
+	@echo "... xt_wdt_hal.s"
 .PHONY : help
 
 

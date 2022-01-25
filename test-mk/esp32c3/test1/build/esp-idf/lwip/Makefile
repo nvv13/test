@@ -1594,33 +1594,6 @@ lwip/src/netif/ethernet.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/lwip/src/netif/ethernet.c.s
 .PHONY : lwip/src/netif/ethernet.c.s
 
-lwip/src/netif/lowpan6.obj: lwip/src/netif/lowpan6.c.obj
-
-.PHONY : lwip/src/netif/lowpan6.obj
-
-# target to build an object file
-lwip/src/netif/lowpan6.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/lwip/src/netif/lowpan6.c.obj
-.PHONY : lwip/src/netif/lowpan6.c.obj
-
-lwip/src/netif/lowpan6.i: lwip/src/netif/lowpan6.c.i
-
-.PHONY : lwip/src/netif/lowpan6.i
-
-# target to preprocess a source file
-lwip/src/netif/lowpan6.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/lwip/src/netif/lowpan6.c.i
-.PHONY : lwip/src/netif/lowpan6.c.i
-
-lwip/src/netif/lowpan6.s: lwip/src/netif/lowpan6.c.s
-
-.PHONY : lwip/src/netif/lowpan6.s
-
-# target to generate assembly for a file
-lwip/src/netif/lowpan6.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/lwip/src/netif/lowpan6.c.s
-.PHONY : lwip/src/netif/lowpan6.c.s
-
 lwip/src/netif/ppp/auth.obj: lwip/src/netif/ppp/auth.c.obj
 
 .PHONY : lwip/src/netif/ppp/auth.obj
@@ -2431,33 +2404,6 @@ port/esp32/hooks/tcp_isn_default.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/port/esp32/hooks/tcp_isn_default.c.s
 .PHONY : port/esp32/hooks/tcp_isn_default.c.s
 
-port/esp32/netif/dhcp_state.obj: port/esp32/netif/dhcp_state.c.obj
-
-.PHONY : port/esp32/netif/dhcp_state.obj
-
-# target to build an object file
-port/esp32/netif/dhcp_state.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/port/esp32/netif/dhcp_state.c.obj
-.PHONY : port/esp32/netif/dhcp_state.c.obj
-
-port/esp32/netif/dhcp_state.i: port/esp32/netif/dhcp_state.c.i
-
-.PHONY : port/esp32/netif/dhcp_state.i
-
-# target to preprocess a source file
-port/esp32/netif/dhcp_state.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/port/esp32/netif/dhcp_state.c.i
-.PHONY : port/esp32/netif/dhcp_state.c.i
-
-port/esp32/netif/dhcp_state.s: port/esp32/netif/dhcp_state.c.s
-
-.PHONY : port/esp32/netif/dhcp_state.s
-
-# target to generate assembly for a file
-port/esp32/netif/dhcp_state.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/lwip/CMakeFiles/__idf_lwip.dir/build.make esp-idf/lwip/CMakeFiles/__idf_lwip.dir/port/esp32/netif/dhcp_state.c.s
-.PHONY : port/esp32/netif/dhcp_state.c.s
-
 port/esp32/netif/ethernetif.obj: port/esp32/netif/ethernetif.c.obj
 
 .PHONY : port/esp32/netif/ethernetif.obj
@@ -2708,9 +2654,6 @@ help:
 	@echo "... lwip/src/netif/ethernet.obj"
 	@echo "... lwip/src/netif/ethernet.i"
 	@echo "... lwip/src/netif/ethernet.s"
-	@echo "... lwip/src/netif/lowpan6.obj"
-	@echo "... lwip/src/netif/lowpan6.i"
-	@echo "... lwip/src/netif/lowpan6.s"
 	@echo "... lwip/src/netif/ppp/auth.obj"
 	@echo "... lwip/src/netif/ppp/auth.i"
 	@echo "... lwip/src/netif/ppp/auth.s"
@@ -2801,9 +2744,6 @@ help:
 	@echo "... port/esp32/hooks/tcp_isn_default.obj"
 	@echo "... port/esp32/hooks/tcp_isn_default.i"
 	@echo "... port/esp32/hooks/tcp_isn_default.s"
-	@echo "... port/esp32/netif/dhcp_state.obj"
-	@echo "... port/esp32/netif/dhcp_state.i"
-	@echo "... port/esp32/netif/dhcp_state.s"
 	@echo "... port/esp32/netif/ethernetif.obj"
 	@echo "... port/esp32/netif/ethernetif.i"
 	@echo "... port/esp32/netif/ethernetif.s"

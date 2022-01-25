@@ -79,33 +79,33 @@ include esp-idf/riscv/CMakeFiles/__idf_riscv.dir/flags.make
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/instruction_decode.c.obj: esp-idf/riscv/CMakeFiles/__idf_riscv.dir/flags.make
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/instruction_decode.c.obj: /home/nvv/esp-idf/components/riscv/instruction_decode.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/riscv/CMakeFiles/__idf_riscv.dir/instruction_decode.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_riscv.dir/instruction_decode.c.obj -c /home/nvv/esp-idf/components/riscv/instruction_decode.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_riscv.dir/instruction_decode.c.obj -c /home/nvv/esp-idf/components/riscv/instruction_decode.c
 
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/instruction_decode.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_riscv.dir/instruction_decode.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/riscv/instruction_decode.c > CMakeFiles/__idf_riscv.dir/instruction_decode.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/riscv/instruction_decode.c > CMakeFiles/__idf_riscv.dir/instruction_decode.c.i
 
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/instruction_decode.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_riscv.dir/instruction_decode.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/riscv/instruction_decode.c -o CMakeFiles/__idf_riscv.dir/instruction_decode.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/riscv/instruction_decode.c -o CMakeFiles/__idf_riscv.dir/instruction_decode.c.s
 
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/interrupt.c.obj: esp-idf/riscv/CMakeFiles/__idf_riscv.dir/flags.make
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/interrupt.c.obj: /home/nvv/esp-idf/components/riscv/interrupt.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/riscv/CMakeFiles/__idf_riscv.dir/interrupt.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_riscv.dir/interrupt.c.obj -c /home/nvv/esp-idf/components/riscv/interrupt.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_riscv.dir/interrupt.c.obj -c /home/nvv/esp-idf/components/riscv/interrupt.c
 
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/interrupt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_riscv.dir/interrupt.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/riscv/interrupt.c > CMakeFiles/__idf_riscv.dir/interrupt.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/riscv/interrupt.c > CMakeFiles/__idf_riscv.dir/interrupt.c.i
 
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/interrupt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_riscv.dir/interrupt.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/riscv/interrupt.c -o CMakeFiles/__idf_riscv.dir/interrupt.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/riscv/interrupt.c -o CMakeFiles/__idf_riscv.dir/interrupt.c.s
 
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/vectors.S.obj: esp-idf/riscv/CMakeFiles/__idf_riscv.dir/flags.make
 esp-idf/riscv/CMakeFiles/__idf_riscv.dir/vectors.S.obj: /home/nvv/esp-idf/components/riscv/vectors.S
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building ASM object esp-idf/riscv/CMakeFiles/__idf_riscv.dir/vectors.S.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_riscv.dir/vectors.S.obj -c /home/nvv/esp-idf/components/riscv/vectors.S
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/riscv && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/__idf_riscv.dir/vectors.S.obj -c /home/nvv/esp-idf/components/riscv/vectors.S
 
 # Object files for target __idf_riscv
 __idf_riscv_OBJECTS = \

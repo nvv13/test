@@ -217,6 +217,33 @@ patches/esp_rom_crc.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_crc.c.s
 .PHONY : patches/esp_rom_crc.c.s
 
+patches/esp_rom_spiflash.obj: patches/esp_rom_spiflash.c.obj
+
+.PHONY : patches/esp_rom_spiflash.obj
+
+# target to build an object file
+patches/esp_rom_spiflash.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj
+.PHONY : patches/esp_rom_spiflash.c.obj
+
+patches/esp_rom_spiflash.i: patches/esp_rom_spiflash.c.i
+
+.PHONY : patches/esp_rom_spiflash.i
+
+# target to preprocess a source file
+patches/esp_rom_spiflash.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.i
+.PHONY : patches/esp_rom_spiflash.c.i
+
+patches/esp_rom_spiflash.s: patches/esp_rom_spiflash.c.s
+
+.PHONY : patches/esp_rom_spiflash.s
+
+# target to generate assembly for a file
+patches/esp_rom_spiflash.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.s
+.PHONY : patches/esp_rom_spiflash.c.s
+
 patches/esp_rom_sys.obj: patches/esp_rom_sys.c.obj
 
 .PHONY : patches/esp_rom_sys.obj
@@ -243,6 +270,33 @@ patches/esp_rom_sys.s: patches/esp_rom_sys.c.s
 patches/esp_rom_sys.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_sys.c.s
 .PHONY : patches/esp_rom_sys.c.s
+
+patches/esp_rom_tjpgd.obj: patches/esp_rom_tjpgd.c.obj
+
+.PHONY : patches/esp_rom_tjpgd.obj
+
+# target to build an object file
+patches/esp_rom_tjpgd.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_tjpgd.c.obj
+.PHONY : patches/esp_rom_tjpgd.c.obj
+
+patches/esp_rom_tjpgd.i: patches/esp_rom_tjpgd.c.i
+
+.PHONY : patches/esp_rom_tjpgd.i
+
+# target to preprocess a source file
+patches/esp_rom_tjpgd.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_tjpgd.c.i
+.PHONY : patches/esp_rom_tjpgd.c.i
+
+patches/esp_rom_tjpgd.s: patches/esp_rom_tjpgd.c.s
+
+.PHONY : patches/esp_rom_tjpgd.s
+
+# target to generate assembly for a file
+patches/esp_rom_tjpgd.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/build.make esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_tjpgd.c.s
+.PHONY : patches/esp_rom_tjpgd.c.s
 
 patches/esp_rom_uart.obj: patches/esp_rom_uart.c.obj
 
@@ -287,9 +341,15 @@ help:
 	@echo "... patches/esp_rom_crc.obj"
 	@echo "... patches/esp_rom_crc.i"
 	@echo "... patches/esp_rom_crc.s"
+	@echo "... patches/esp_rom_spiflash.obj"
+	@echo "... patches/esp_rom_spiflash.i"
+	@echo "... patches/esp_rom_spiflash.s"
 	@echo "... patches/esp_rom_sys.obj"
 	@echo "... patches/esp_rom_sys.i"
 	@echo "... patches/esp_rom_sys.s"
+	@echo "... patches/esp_rom_tjpgd.obj"
+	@echo "... patches/esp_rom_tjpgd.i"
+	@echo "... patches/esp_rom_tjpgd.s"
 	@echo "... patches/esp_rom_uart.obj"
 	@echo "... patches/esp_rom_uart.i"
 	@echo "... patches/esp_rom_uart.s"

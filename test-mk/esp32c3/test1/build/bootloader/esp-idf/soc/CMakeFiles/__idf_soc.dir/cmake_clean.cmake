@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj"
+  "CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj"
   "CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj"
   "CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj"
   "CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj"
@@ -12,7 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj"
   "CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj"
   "CMakeFiles/__idf_soc.dir/lldesc.c.obj"
-  "CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj"
   "libsoc.a"
   "libsoc.pdb"
 )

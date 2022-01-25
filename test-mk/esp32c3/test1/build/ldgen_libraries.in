@@ -1,6 +1,5 @@
 $<TARGET_FILE:__idf_esp_ringbuf>
 $<TARGET_FILE:__idf_efuse>
-$<TARGET_FILE:__idf_esp_ipc>
 $<TARGET_FILE:__idf_driver>
 $<TARGET_FILE:__idf_esp_pm>
 $<TARGET_FILE:__idf_mbedtls>
@@ -9,8 +8,6 @@ $<TARGET_FILE:__idf_bootloader_support>
 $<TARGET_FILE:__idf_spi_flash>
 $<TARGET_FILE:__idf_nvs_flash>
 $<TARGET_FILE:__idf_pthread>
-$<TARGET_FILE:__idf_esp_gdbstub>
-$<TARGET_FILE:__idf_espcoredump>
 $<TARGET_FILE:__idf_esp_phy>
 $<TARGET_FILE:__idf_esp_system>
 $<TARGET_FILE:__idf_esp_rom>
@@ -35,14 +32,14 @@ $<TARGET_FILE:__idf_newlib>
 $<TARGET_FILE:__idf_cxx>
 $<TARGET_FILE:__idf_app_trace>
 $<TARGET_FILE:__idf_asio>
-$<TARGET_FILE:__idf_cbor>
 $<TARGET_FILE:__idf_unity>
 $<TARGET_FILE:__idf_cmock>
 $<TARGET_FILE:__idf_coap>
 $<TARGET_FILE:__idf_console>
-$<TARGET_FILE:__idf_nghttp>
+$<TARGET_FILE:__idf_http_parser>
 $<TARGET_FILE:__idf_esp-tls>
 $<TARGET_FILE:__idf_esp_adc_cal>
+$<TARGET_FILE:__idf_esp_gdbstub>
 $<TARGET_FILE:__idf_esp_hid>
 $<TARGET_FILE:__idf_tcp_transport>
 $<TARGET_FILE:__idf_esp_http_client>
@@ -56,13 +53,11 @@ $<TARGET_FILE:__idf_esp_local_ctrl>
 $<TARGET_FILE:__idf_sdmmc>
 $<TARGET_FILE:__idf_esp_serial_slave_link>
 $<TARGET_FILE:__idf_esp_websocket_client>
-$<TARGET_FILE:__idf_expat>
+$<TARGET_FILE:__idf_espcoredump>
 $<TARGET_FILE:__idf_wear_levelling>
 $<TARGET_FILE:__idf_fatfs>
 $<TARGET_FILE:__idf_freemodbus>
-$<TARGET_FILE:__idf_jsmn>
 $<TARGET_FILE:__idf_json>
-$<TARGET_FILE:__idf_libsodium>
 $<TARGET_FILE:__idf_mqtt>
 $<TARGET_FILE:__idf_openssl>
 $<TARGET_FILE:__idf_spiffs>

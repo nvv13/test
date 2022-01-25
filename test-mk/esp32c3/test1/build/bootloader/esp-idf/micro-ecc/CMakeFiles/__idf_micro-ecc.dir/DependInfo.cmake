@@ -23,9 +23,6 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/home/nvv/esp-idf/components/esp_hw_support/include/soc/esp32c3"
   "/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/."
   "/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/private_include"
-  "/home/nvv/esp-idf/components/hal/esp32c3/include"
-  "/home/nvv/esp-idf/components/hal/include"
-  "/home/nvv/esp-idf/components/hal/platform_port/include"
   "/home/nvv/esp-idf/components/newlib/platform_include"
   "/home/nvv/esp-idf/components/riscv/include"
   "/home/nvv/esp-idf/components/soc/include"
@@ -39,11 +36,10 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/DependInfo.cmake"
-  "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/hal/CMakeFiles/__idf_hal.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/DependInfo.cmake"
+  "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/hal/CMakeFiles/__idf_hal.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/efuse/CMakeFiles/__idf_efuse.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/DependInfo.cmake"
-  "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/DependInfo.cmake"
   )
 

@@ -190,6 +190,33 @@ __idf_esp_phy/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/build.make esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/build
 .PHONY : __idf_esp_phy/fast
 
+src/lib_printf.obj: src/lib_printf.c.obj
+
+.PHONY : src/lib_printf.obj
+
+# target to build an object file
+src/lib_printf.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/build.make esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.obj
+.PHONY : src/lib_printf.c.obj
+
+src/lib_printf.i: src/lib_printf.c.i
+
+.PHONY : src/lib_printf.i
+
+# target to preprocess a source file
+src/lib_printf.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/build.make esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.i
+.PHONY : src/lib_printf.c.i
+
+src/lib_printf.s: src/lib_printf.c.s
+
+.PHONY : src/lib_printf.s
+
+# target to generate assembly for a file
+src/lib_printf.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/build.make esp-idf/esp_phy/CMakeFiles/__idf_esp_phy.dir/src/lib_printf.c.s
+.PHONY : src/lib_printf.c.s
+
 src/phy_init.obj: src/phy_init.c.obj
 
 .PHONY : src/phy_init.obj
@@ -230,6 +257,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_esp_phy"
+	@echo "... src/lib_printf.obj"
+	@echo "... src/lib_printf.i"
+	@echo "... src/lib_printf.s"
 	@echo "... src/phy_init.obj"
 	@echo "... src/phy_init.i"
 	@echo "... src/phy_init.s"

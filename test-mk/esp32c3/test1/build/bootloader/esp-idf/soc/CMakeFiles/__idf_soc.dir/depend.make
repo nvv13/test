@@ -6,12 +6,25 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/adc_periph.c
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/adc_channel.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/rtc_cntl_struct.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/syscon_struct.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: /home/nvv/esp-idf/components/soc/include/soc/adc_periph.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/adc_periph.c.obj: config/sdkconfig.h
+
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/dedic_gpio_periph.c
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/include/soc/dedic_gpio_periph.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/dedic_gpio_periph.c.obj: config/sdkconfig.h
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gdma_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
@@ -26,6 +39,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-id
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_struct.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/gpio_periph.c.obj: /home/nvv/esp-idf/components/soc/include/soc/gpio_periph.h
@@ -39,6 +53,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/i2c_reg.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/i2c_struct.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2c_periph.c.obj: /home/nvv/esp-idf/components/soc/include/soc/i2c_periph.h
@@ -52,6 +67,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/i2s_reg.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/i2s_struct.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/i2s_periph.c.obj: /home/nvv/esp-idf/components/soc/include/soc/i2s_periph.h
@@ -61,6 +77,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/interrupts.c
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/interrupts.c.obj: /home/nvv/esp-idf/components/soc/include/soc/interrupts.h
@@ -72,6 +89,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-id
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/ledc_reg.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/ledc_struct.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/ledc_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/ledc_periph.c
@@ -90,6 +108,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sd_reg.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sd_struct.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/sigmadelta_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c
@@ -102,6 +121,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_pins.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/spi_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_pins.h
@@ -118,6 +138,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-i
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/timer_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/timer_group_reg.h
@@ -132,6 +153,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-id
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_pins.h
@@ -142,6 +164,7 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: /home/nvv/esp-id
 esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32c3/uart_periph.c.obj: config/sdkconfig.h
 
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/lldesc.h
+esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32c2/rom/lldesc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32c3/rom/lldesc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32h2/rom/lldesc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/lldesc.h
@@ -149,7 +172,4 @@ esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/soc/include/soc/lldesc.h
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: /home/nvv/esp-idf/components/soc/lldesc.c
 esp-idf/soc/CMakeFiles/__idf_soc.dir/lldesc.c.obj: config/sdkconfig.h
-
-esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj: /home/nvv/esp-idf/components/soc/soc_include_legacy_warn.c
-esp-idf/soc/CMakeFiles/__idf_soc.dir/soc_include_legacy_warn.c.obj: config/sdkconfig.h
 

@@ -79,217 +79,217 @@ include esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_common_loader.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_clock_init.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.s
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash.c
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj: /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj -c /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash.c
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.i
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash.c > CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.i
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.s
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash.c -o CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_mem.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_random_esp32c3.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_utility.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_utility.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c > CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c > CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c -o CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/esp_image_format.c -o CMakeFiles/__idf_bootloader_support.dir/src/esp_image_format.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c > CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c > CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c -o CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/flash_encrypt.c -o CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c > CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c > CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c -o CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/secure_boot.c -o CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c > CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c > CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c -o CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/flash_partitions.c -o CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.s
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/flash_qio_mode.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/flash_qio_mode.c
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj: /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/flash_qio_mode.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj -c /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/flash_qio_mode.c
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/flash_qio_mode.c > CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.i
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/flash_qio_mode.c > CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.i
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/flash_qio_mode.c -o CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.s
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/flash_qio_mode.c -o CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.s
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash_config_esp32c3.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash_config_esp32c3.c
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj: /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32c3.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj -c /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32c3.c
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash_config_esp32c3.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.i
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.i"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32c3.c > CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.i
 
-esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_flash_config_esp32c3.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.s
+esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.s"
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32c3.c -o CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c > CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/bootloader_efuse_esp32c3.c -o CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.s
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/flags.make
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj: /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj -c /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c > CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c > CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.i
 
 esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c -o CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/bootloader_support && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/bootloader_support/src/idf/bootloader_sha.c -o CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.s
 
 # Object files for target __idf_bootloader_support
 __idf_bootloader_support_OBJECTS = \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj" \
-"CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj" \
+"CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj" \
@@ -298,8 +298,8 @@ __idf_bootloader_support_OBJECTS = \
 "CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj" \
-"CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj" \
-"CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj" \
+"CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj" \
+"CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj" \
 "CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj"
 
@@ -309,7 +309,7 @@ __idf_bootloader_support_EXTERNAL_OBJECTS =
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_common_loader.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_clock_init.c.obj
-esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash.c.obj
+esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_mem.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_random_esp32c3.c.obj
@@ -318,8 +318,8 @@ esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/C
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_encrypt.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/secure_boot.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_partitions.c.obj
-esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/flash_qio_mode.c.obj
-esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_flash_config_esp32c3.c.obj
+esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/flash_qio_mode.c.obj
+esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/bootloader_flash/src/bootloader_flash_config_esp32c3.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/bootloader_efuse_esp32c3.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/src/idf/bootloader_sha.c.obj
 esp-idf/bootloader_support/libbootloader_support.a: esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/build.make

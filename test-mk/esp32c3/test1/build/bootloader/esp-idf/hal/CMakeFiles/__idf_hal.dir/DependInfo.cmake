@@ -42,7 +42,6 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/soc/CMakeFiles/__idf_soc.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/efuse/CMakeFiles/__idf_efuse.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/bootloader_support/CMakeFiles/__idf_bootloader_support.dir/DependInfo.cmake"
-  "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/spi_flash/CMakeFiles/__idf_spi_flash.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/esp_system/CMakeFiles/__idf_esp_system.dir/DependInfo.cmake"
   "/home/nvv/test/test-mk/esp32c3/test1/build/bootloader/esp-idf/micro-ecc/CMakeFiles/__idf_micro-ecc.dir/DependInfo.cmake"
   )

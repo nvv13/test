@@ -79,15 +79,15 @@ include esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/flags.make
 esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.obj: esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/flags.make
 esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.obj: /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.obj"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcpip_adapter && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.obj -c /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcpip_adapter && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.obj -c /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c
 
 esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.i"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcpip_adapter && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c > CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.i
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcpip_adapter && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c > CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.i
 
 esp-idf/tcpip_adapter/CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.s"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcpip_adapter && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c -o CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.s
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcpip_adapter && /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvv/esp-idf/components/tcpip_adapter/tcpip_adapter_compat.c -o CMakeFiles/__idf_tcpip_adapter.dir/tcpip_adapter_compat.c.s
 
 # Object files for target __idf_tcpip_adapter
 __idf_tcpip_adapter_OBJECTS = \

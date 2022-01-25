@@ -4,9 +4,37 @@
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_crc.c.obj: /home/nvv/esp-idf/components/esp_rom/esp32c3/esp_rom_caps.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_crc.c.obj: /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_crc.c
 
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/spi_flash.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp32s2/rom/spi_flash.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp_rom_spiflash.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp_rom_spiflash_defs.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_spiflash.c
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_pins.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_pins.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_reg.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_mem_struct.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_pins.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_reg.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/spi_struct.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: /home/nvv/esp-idf/components/soc/include/soc/spi_periph.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_spiflash.c.obj: config/sdkconfig.h
+
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_sys.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_sys.c.obj: /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_sys.c
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_sys.c.obj: config/sdkconfig.h
+
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_tjpgd.c.obj: /home/nvv/esp-idf/components/esp_rom/esp32c3/esp_rom_caps.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_tjpgd.c.obj: /home/nvv/esp-idf/components/esp_rom/include/esp_rom_tjpgd.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_tjpgd.c.obj: /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_tjpgd.c
 
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_assert.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/esp_common/include/esp_attr.h
@@ -14,10 +42,12 @@ esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/n
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_uart.c
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/hal/esp32c3/include/hal/uart_ll.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/hal/include/hal/uart_types.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/hal/platform_port/include/hal/misc.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/newlib/platform_include/assert.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/gpio_sig_map.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/io_mux_reg.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/periph_defs.h
+esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/reg_base.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/soc_caps.h
 esp-idf/esp_rom/CMakeFiles/__idf_esp_rom.dir/patches/esp_rom_uart.c.obj: /home/nvv/esp-idf/components/soc/esp32c3/include/soc/uart_pins.h

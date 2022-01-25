@@ -80,11 +80,10 @@ esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_ringbuf/link
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/driver/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_pm/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/spi_flash/linker.lf
-esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_gdbstub/linker.lf
-esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/espcoredump/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_phy/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_system/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_system/app.lf
+esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_rom/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/hal/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_event/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_wifi/linker.lf
@@ -101,9 +100,10 @@ esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/newlib/newlib.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/newlib/system_libs.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/app_trace/linker.lf
 esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/bt/linker.lf
+esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/esp_gdbstub/linker.lf
+esp-idf/esp_system/ld/sections.ld: /home/nvv/esp-idf/components/espcoredump/linker.lf
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_ringbuf/libesp_ringbuf.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/efuse/libefuse.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/esp_ipc/libesp_ipc.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/driver/libdriver.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_pm/libesp_pm.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/mbedtls/libmbedtls.a
@@ -112,8 +112,6 @@ esp-idf/esp_system/ld/sections.ld: esp-idf/bootloader_support/libbootloader_supp
 esp-idf/esp_system/ld/sections.ld: esp-idf/spi_flash/libspi_flash.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/nvs_flash/libnvs_flash.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/pthread/libpthread.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/esp_gdbstub/libesp_gdbstub.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/espcoredump/libespcoredump.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_phy/libesp_phy.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_system/libesp_system.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_rom/libesp_rom.a
@@ -138,14 +136,14 @@ esp-idf/esp_system/ld/sections.ld: esp-idf/newlib/libnewlib.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/cxx/libcxx.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/app_trace/libapp_trace.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/asio/libasio.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/cbor/libcbor.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/unity/libunity.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/cmock/libcmock.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/coap/libcoap.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/console/libconsole.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/nghttp/libnghttp.a
+esp-idf/esp_system/ld/sections.ld: esp-idf/http_parser/libhttp_parser.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp-tls/libesp-tls.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_adc_cal/libesp_adc_cal.a
+esp-idf/esp_system/ld/sections.ld: esp-idf/esp_gdbstub/libesp_gdbstub.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_hid/libesp_hid.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/tcp_transport/libtcp_transport.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_http_client/libesp_http_client.a
@@ -159,13 +157,11 @@ esp-idf/esp_system/ld/sections.ld: esp-idf/esp_local_ctrl/libesp_local_ctrl.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/sdmmc/libsdmmc.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/esp_websocket_client/libesp_websocket_client.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/expat/libexpat.a
+esp-idf/esp_system/ld/sections.ld: esp-idf/espcoredump/libespcoredump.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/wear_levelling/libwear_levelling.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/fatfs/libfatfs.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/freemodbus/libfreemodbus.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/jsmn/libjsmn.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/json/libjson.a
-esp-idf/esp_system/ld/sections.ld: esp-idf/libsodium/liblibsodium.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/mqtt/libmqtt.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/openssl/libopenssl.a
 esp-idf/esp_system/ld/sections.ld: esp-idf/spiffs/libspiffs.a
@@ -173,7 +169,7 @@ esp-idf/esp_system/ld/sections.ld: esp-idf/wifi_provisioning/libwifi_provisionin
 esp-idf/esp_system/ld/sections.ld: esp-idf/main/libmain.a
 esp-idf/esp_system/ld/sections.ld: /home/nvv/test/test-mk/esp32c3/test1/sdkconfig
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvv/test/test-mk/esp32c3/test1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ld/sections.ld"
-	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/python_env/idf4.4_py3.9_env/bin/python /home/nvv/esp-idf/tools/ldgen/ldgen.py --config /home/nvv/test/test-mk/esp32c3/test1/sdkconfig --fragments /home/nvv/esp-idf/components/esp_ringbuf/linker.lf	/home/nvv/esp-idf/components/driver/linker.lf	/home/nvv/esp-idf/components/esp_pm/linker.lf	/home/nvv/esp-idf/components/spi_flash/linker.lf	/home/nvv/esp-idf/components/esp_gdbstub/linker.lf	/home/nvv/esp-idf/components/espcoredump/linker.lf	/home/nvv/esp-idf/components/esp_phy/linker.lf	/home/nvv/esp-idf/components/esp_system/linker.lf	/home/nvv/esp-idf/components/esp_system/app.lf	/home/nvv/esp-idf/components/hal/linker.lf	/home/nvv/esp-idf/components/esp_event/linker.lf	/home/nvv/esp-idf/components/esp_wifi/linker.lf	/home/nvv/esp-idf/components/lwip/linker.lf	/home/nvv/esp-idf/components/log/linker.lf	/home/nvv/esp-idf/components/heap/linker.lf	/home/nvv/esp-idf/components/soc/linker.lf	/home/nvv/esp-idf/components/esp_hw_support/linker.lf	/home/nvv/esp-idf/components/riscv/linker.lf	/home/nvv/esp-idf/components/esp_common/common.lf	/home/nvv/esp-idf/components/esp_common/soc.lf	/home/nvv/esp-idf/components/freertos/linker.lf	/home/nvv/esp-idf/components/newlib/newlib.lf	/home/nvv/esp-idf/components/newlib/system_libs.lf	/home/nvv/esp-idf/components/app_trace/linker.lf	/home/nvv/esp-idf/components/bt/linker.lf --input /home/nvv/esp-idf/components/esp_system/ld/esp32c3/sections.ld.in --output /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/ld/sections.ld --kconfig /home/nvv/esp-idf/Kconfig --env-file /home/nvv/test/test-mk/esp32c3/test1/build/config.env --libraries-file /home/nvv/test/test-mk/esp32c3/test1/build/ldgen_libraries --objdump /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r1-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-objdump
+	cd /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system && /home/nvv/.espressif/python_env/idf5.0_py3.9_env/bin/python /home/nvv/esp-idf/tools/ldgen/ldgen.py --config /home/nvv/test/test-mk/esp32c3/test1/sdkconfig --fragments-list "/home/nvv/esp-idf/components/esp_ringbuf/linker.lf;/home/nvv/esp-idf/components/driver/linker.lf;/home/nvv/esp-idf/components/esp_pm/linker.lf;/home/nvv/esp-idf/components/spi_flash/linker.lf;/home/nvv/esp-idf/components/esp_phy/linker.lf;/home/nvv/esp-idf/components/esp_system/linker.lf;/home/nvv/esp-idf/components/esp_system/app.lf;/home/nvv/esp-idf/components/esp_rom/linker.lf;/home/nvv/esp-idf/components/hal/linker.lf;/home/nvv/esp-idf/components/esp_event/linker.lf;/home/nvv/esp-idf/components/esp_wifi/linker.lf;/home/nvv/esp-idf/components/lwip/linker.lf;/home/nvv/esp-idf/components/log/linker.lf;/home/nvv/esp-idf/components/heap/linker.lf;/home/nvv/esp-idf/components/soc/linker.lf;/home/nvv/esp-idf/components/esp_hw_support/linker.lf;/home/nvv/esp-idf/components/riscv/linker.lf;/home/nvv/esp-idf/components/esp_common/common.lf;/home/nvv/esp-idf/components/esp_common/soc.lf;/home/nvv/esp-idf/components/freertos/linker.lf;/home/nvv/esp-idf/components/newlib/newlib.lf;/home/nvv/esp-idf/components/newlib/system_libs.lf;/home/nvv/esp-idf/components/app_trace/linker.lf;/home/nvv/esp-idf/components/bt/linker.lf;/home/nvv/esp-idf/components/esp_gdbstub/linker.lf;/home/nvv/esp-idf/components/espcoredump/linker.lf" --input /home/nvv/esp-idf/components/esp_system/ld/esp32c3/sections.ld.in --output /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/ld/sections.ld --kconfig /home/nvv/esp-idf/Kconfig --env-file /home/nvv/test/test-mk/esp32c3/test1/build/config.env --libraries-file /home/nvv/test/test-mk/esp32c3/test1/build/ldgen_libraries --objdump /home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-objdump
 
 __ldgen_output_sections.ld: esp-idf/esp_system/CMakeFiles/__ldgen_output_sections.ld
 __ldgen_output_sections.ld: esp-idf/esp_system/ld/sections.ld

@@ -1,6 +1,5 @@
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ringbuf/libesp_ringbuf.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/efuse/libefuse.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_ipc/libesp_ipc.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/driver/libdriver.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_pm/libesp_pm.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mbedtls/libmbedtls.a
@@ -9,8 +8,6 @@
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/spi_flash/libspi_flash.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/nvs_flash/libnvs_flash.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/pthread/libpthread.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_gdbstub/libesp_gdbstub.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump/libespcoredump.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_phy/libesp_phy.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_system/libesp_system.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_rom/libesp_rom.a
@@ -35,14 +32,14 @@
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cxx/libcxx.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/app_trace/libapp_trace.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/asio/libasio.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cbor/libcbor.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/unity/libunity.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/cmock/libcmock.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/coap/libcoap.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/console/libconsole.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/nghttp/libnghttp.a
+/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/http_parser/libhttp_parser.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp-tls/libesp-tls.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_adc_cal/libesp_adc_cal.a
+/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_gdbstub/libesp_gdbstub.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_hid/libesp_hid.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/tcp_transport/libtcp_transport.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_http_client/libesp_http_client.a
@@ -56,13 +53,11 @@
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/sdmmc/libsdmmc.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_serial_slave_link/libesp_serial_slave_link.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/esp_websocket_client/libesp_websocket_client.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/expat/libexpat.a
+/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/espcoredump/libespcoredump.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/wear_levelling/libwear_levelling.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/fatfs/libfatfs.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/freemodbus/libfreemodbus.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/jsmn/libjsmn.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/json/libjson.a
-/home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/libsodium/liblibsodium.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/mqtt/libmqtt.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/openssl/libopenssl.a
 /home/nvv/test/test-mk/esp32c3/test1/build/esp-idf/spiffs/libspiffs.a

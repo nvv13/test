@@ -190,6 +190,33 @@ __idf_driver/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/build
 .PHONY : __idf_driver/fast
 
+adc.obj: adc.c.obj
+
+.PHONY : adc.obj
+
+# target to build an object file
+adc.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/adc.c.obj
+.PHONY : adc.c.obj
+
+adc.i: adc.c.i
+
+.PHONY : adc.i
+
+# target to preprocess a source file
+adc.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/adc.c.i
+.PHONY : adc.c.i
+
+adc.s: adc.c.s
+
+.PHONY : adc.s
+
+# target to generate assembly for a file
+adc.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/adc.c.s
+.PHONY : adc.c.s
+
 adc_common.obj: adc_common.c.obj
 
 .PHONY : adc_common.obj
@@ -217,32 +244,32 @@ adc_common.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/adc_common.c.s
 .PHONY : adc_common.c.s
 
-esp32c3/adc.obj: esp32c3/adc.c.obj
+dedic_gpio.obj: dedic_gpio.c.obj
 
-.PHONY : esp32c3/adc.obj
+.PHONY : dedic_gpio.obj
 
 # target to build an object file
-esp32c3/adc.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.obj
-.PHONY : esp32c3/adc.c.obj
+dedic_gpio.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.obj
+.PHONY : dedic_gpio.c.obj
 
-esp32c3/adc.i: esp32c3/adc.c.i
+dedic_gpio.i: dedic_gpio.c.i
 
-.PHONY : esp32c3/adc.i
+.PHONY : dedic_gpio.i
 
 # target to preprocess a source file
-esp32c3/adc.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.i
-.PHONY : esp32c3/adc.c.i
+dedic_gpio.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.i
+.PHONY : dedic_gpio.c.i
 
-esp32c3/adc.s: esp32c3/adc.c.s
+dedic_gpio.s: dedic_gpio.c.s
 
-.PHONY : esp32c3/adc.s
+.PHONY : dedic_gpio.s
 
 # target to generate assembly for a file
-esp32c3/adc.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/esp32c3/adc.c.s
-.PHONY : esp32c3/adc.c.s
+dedic_gpio.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/dedic_gpio.c.s
+.PHONY : dedic_gpio.c.s
 
 esp32c3/adc2_init_cal.obj: esp32c3/adc2_init_cal.c.obj
 
@@ -352,6 +379,33 @@ gpio.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gpio.c.s
 .PHONY : gpio.c.s
 
+gptimer.obj: gptimer.c.obj
+
+.PHONY : gptimer.obj
+
+# target to build an object file
+gptimer.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gptimer.c.obj
+.PHONY : gptimer.c.obj
+
+gptimer.i: gptimer.c.i
+
+.PHONY : gptimer.i
+
+# target to preprocess a source file
+gptimer.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gptimer.c.i
+.PHONY : gptimer.c.i
+
+gptimer.s: gptimer.c.s
+
+.PHONY : gptimer.s
+
+# target to generate assembly for a file
+gptimer.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/gptimer.c.s
+.PHONY : gptimer.c.s
+
 i2c.obj: i2c.c.obj
 
 .PHONY : i2c.obj
@@ -433,32 +487,32 @@ ledc.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/ledc.c.s
 .PHONY : ledc.c.s
 
-pcnt.obj: pcnt.c.obj
+legacy_new_driver_coexist.obj: legacy_new_driver_coexist.c.obj
 
-.PHONY : pcnt.obj
+.PHONY : legacy_new_driver_coexist.obj
 
 # target to build an object file
-pcnt.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.obj
-.PHONY : pcnt.c.obj
+legacy_new_driver_coexist.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/legacy_new_driver_coexist.c.obj
+.PHONY : legacy_new_driver_coexist.c.obj
 
-pcnt.i: pcnt.c.i
+legacy_new_driver_coexist.i: legacy_new_driver_coexist.c.i
 
-.PHONY : pcnt.i
+.PHONY : legacy_new_driver_coexist.i
 
 # target to preprocess a source file
-pcnt.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.i
-.PHONY : pcnt.c.i
+legacy_new_driver_coexist.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/legacy_new_driver_coexist.c.i
+.PHONY : legacy_new_driver_coexist.c.i
 
-pcnt.s: pcnt.c.s
+legacy_new_driver_coexist.s: legacy_new_driver_coexist.c.s
 
-.PHONY : pcnt.s
+.PHONY : legacy_new_driver_coexist.s
 
 # target to generate assembly for a file
-pcnt.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/pcnt.c.s
-.PHONY : pcnt.c.s
+legacy_new_driver_coexist.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/legacy_new_driver_coexist.c.s
+.PHONY : legacy_new_driver_coexist.c.s
 
 periph_ctrl.obj: periph_ctrl.c.obj
 
@@ -811,32 +865,32 @@ spi_slave_hd.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/spi_slave_hd.c.s
 .PHONY : spi_slave_hd.c.s
 
-timer.obj: timer.c.obj
+timer_legacy.obj: timer_legacy.c.obj
 
-.PHONY : timer.obj
+.PHONY : timer_legacy.obj
 
 # target to build an object file
-timer.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.obj
-.PHONY : timer.c.obj
+timer_legacy.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer_legacy.c.obj
+.PHONY : timer_legacy.c.obj
 
-timer.i: timer.c.i
+timer_legacy.i: timer_legacy.c.i
 
-.PHONY : timer.i
+.PHONY : timer_legacy.i
 
 # target to preprocess a source file
-timer.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.i
-.PHONY : timer.c.i
+timer_legacy.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer_legacy.c.i
+.PHONY : timer_legacy.c.i
 
-timer.s: timer.c.s
+timer_legacy.s: timer_legacy.c.s
 
-.PHONY : timer.s
+.PHONY : timer_legacy.s
 
 # target to generate assembly for a file
-timer.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer.c.s
-.PHONY : timer.c.s
+timer_legacy.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/driver/CMakeFiles/__idf_driver.dir/build.make esp-idf/driver/CMakeFiles/__idf_driver.dir/timer_legacy.c.s
+.PHONY : timer_legacy.c.s
 
 twai.obj: twai.c.obj
 
@@ -932,12 +986,15 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_driver"
+	@echo "... adc.obj"
+	@echo "... adc.i"
+	@echo "... adc.s"
 	@echo "... adc_common.obj"
 	@echo "... adc_common.i"
 	@echo "... adc_common.s"
-	@echo "... esp32c3/adc.obj"
-	@echo "... esp32c3/adc.i"
-	@echo "... esp32c3/adc.s"
+	@echo "... dedic_gpio.obj"
+	@echo "... dedic_gpio.i"
+	@echo "... dedic_gpio.s"
 	@echo "... esp32c3/adc2_init_cal.obj"
 	@echo "... esp32c3/adc2_init_cal.i"
 	@echo "... esp32c3/adc2_init_cal.s"
@@ -950,6 +1007,9 @@ help:
 	@echo "... gpio.obj"
 	@echo "... gpio.i"
 	@echo "... gpio.s"
+	@echo "... gptimer.obj"
+	@echo "... gptimer.i"
+	@echo "... gptimer.s"
 	@echo "... i2c.obj"
 	@echo "... i2c.i"
 	@echo "... i2c.s"
@@ -959,9 +1019,9 @@ help:
 	@echo "... ledc.obj"
 	@echo "... ledc.i"
 	@echo "... ledc.s"
-	@echo "... pcnt.obj"
-	@echo "... pcnt.i"
-	@echo "... pcnt.s"
+	@echo "... legacy_new_driver_coexist.obj"
+	@echo "... legacy_new_driver_coexist.i"
+	@echo "... legacy_new_driver_coexist.s"
 	@echo "... periph_ctrl.obj"
 	@echo "... periph_ctrl.i"
 	@echo "... periph_ctrl.s"
@@ -1001,9 +1061,9 @@ help:
 	@echo "... spi_slave_hd.obj"
 	@echo "... spi_slave_hd.i"
 	@echo "... spi_slave_hd.s"
-	@echo "... timer.obj"
-	@echo "... timer.i"
-	@echo "... timer.s"
+	@echo "... timer_legacy.obj"
+	@echo "... timer_legacy.i"
+	@echo "... timer_legacy.s"
 	@echo "... twai.obj"
 	@echo "... twai.i"
 	@echo "... twai.s"

@@ -379,6 +379,33 @@ lwip/esp_netif_sta_list.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/build.make esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/lwip/esp_netif_sta_list.c.s
 .PHONY : lwip/esp_netif_sta_list.c.s
 
+vfs_l2tap/esp_vfs_l2tap.obj: vfs_l2tap/esp_vfs_l2tap.c.obj
+
+.PHONY : vfs_l2tap/esp_vfs_l2tap.obj
+
+# target to build an object file
+vfs_l2tap/esp_vfs_l2tap.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/build.make esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/vfs_l2tap/esp_vfs_l2tap.c.obj
+.PHONY : vfs_l2tap/esp_vfs_l2tap.c.obj
+
+vfs_l2tap/esp_vfs_l2tap.i: vfs_l2tap/esp_vfs_l2tap.c.i
+
+.PHONY : vfs_l2tap/esp_vfs_l2tap.i
+
+# target to preprocess a source file
+vfs_l2tap/esp_vfs_l2tap.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/build.make esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/vfs_l2tap/esp_vfs_l2tap.c.i
+.PHONY : vfs_l2tap/esp_vfs_l2tap.c.i
+
+vfs_l2tap/esp_vfs_l2tap.s: vfs_l2tap/esp_vfs_l2tap.c.s
+
+.PHONY : vfs_l2tap/esp_vfs_l2tap.s
+
+# target to generate assembly for a file
+vfs_l2tap/esp_vfs_l2tap.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/build.make esp-idf/esp_netif/CMakeFiles/__idf_esp_netif.dir/vfs_l2tap/esp_vfs_l2tap.c.s
+.PHONY : vfs_l2tap/esp_vfs_l2tap.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -413,6 +440,9 @@ help:
 	@echo "... lwip/esp_netif_sta_list.obj"
 	@echo "... lwip/esp_netif_sta_list.i"
 	@echo "... lwip/esp_netif_sta_list.s"
+	@echo "... vfs_l2tap/esp_vfs_l2tap.obj"
+	@echo "... vfs_l2tap/esp_vfs_l2tap.i"
+	@echo "... vfs_l2tap/esp_vfs_l2tap.s"
 .PHONY : help
 
 

@@ -190,6 +190,285 @@ __idf_freertos/fast:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build
 .PHONY : __idf_freertos/fast
 
+FreeRTOS-Kernel/croutine.obj: FreeRTOS-Kernel/croutine.c.obj
+
+.PHONY : FreeRTOS-Kernel/croutine.obj
+
+# target to build an object file
+FreeRTOS-Kernel/croutine.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.obj
+.PHONY : FreeRTOS-Kernel/croutine.c.obj
+
+FreeRTOS-Kernel/croutine.i: FreeRTOS-Kernel/croutine.c.i
+
+.PHONY : FreeRTOS-Kernel/croutine.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/croutine.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.i
+.PHONY : FreeRTOS-Kernel/croutine.c.i
+
+FreeRTOS-Kernel/croutine.s: FreeRTOS-Kernel/croutine.c.s
+
+.PHONY : FreeRTOS-Kernel/croutine.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/croutine.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/croutine.c.s
+.PHONY : FreeRTOS-Kernel/croutine.c.s
+
+FreeRTOS-Kernel/event_groups.obj: FreeRTOS-Kernel/event_groups.c.obj
+
+.PHONY : FreeRTOS-Kernel/event_groups.obj
+
+# target to build an object file
+FreeRTOS-Kernel/event_groups.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.obj
+.PHONY : FreeRTOS-Kernel/event_groups.c.obj
+
+FreeRTOS-Kernel/event_groups.i: FreeRTOS-Kernel/event_groups.c.i
+
+.PHONY : FreeRTOS-Kernel/event_groups.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/event_groups.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.i
+.PHONY : FreeRTOS-Kernel/event_groups.c.i
+
+FreeRTOS-Kernel/event_groups.s: FreeRTOS-Kernel/event_groups.c.s
+
+.PHONY : FreeRTOS-Kernel/event_groups.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/event_groups.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/event_groups.c.s
+.PHONY : FreeRTOS-Kernel/event_groups.c.s
+
+FreeRTOS-Kernel/list.obj: FreeRTOS-Kernel/list.c.obj
+
+.PHONY : FreeRTOS-Kernel/list.obj
+
+# target to build an object file
+FreeRTOS-Kernel/list.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.obj
+.PHONY : FreeRTOS-Kernel/list.c.obj
+
+FreeRTOS-Kernel/list.i: FreeRTOS-Kernel/list.c.i
+
+.PHONY : FreeRTOS-Kernel/list.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/list.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.i
+.PHONY : FreeRTOS-Kernel/list.c.i
+
+FreeRTOS-Kernel/list.s: FreeRTOS-Kernel/list.c.s
+
+.PHONY : FreeRTOS-Kernel/list.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/list.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/list.c.s
+.PHONY : FreeRTOS-Kernel/list.c.s
+
+FreeRTOS-Kernel/portable/port_common.obj: FreeRTOS-Kernel/portable/port_common.c.obj
+
+.PHONY : FreeRTOS-Kernel/portable/port_common.obj
+
+# target to build an object file
+FreeRTOS-Kernel/portable/port_common.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.obj
+.PHONY : FreeRTOS-Kernel/portable/port_common.c.obj
+
+FreeRTOS-Kernel/portable/port_common.i: FreeRTOS-Kernel/portable/port_common.c.i
+
+.PHONY : FreeRTOS-Kernel/portable/port_common.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/portable/port_common.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.i
+.PHONY : FreeRTOS-Kernel/portable/port_common.c.i
+
+FreeRTOS-Kernel/portable/port_common.s: FreeRTOS-Kernel/portable/port_common.c.s
+
+.PHONY : FreeRTOS-Kernel/portable/port_common.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/portable/port_common.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_common.c.s
+.PHONY : FreeRTOS-Kernel/portable/port_common.c.s
+
+FreeRTOS-Kernel/portable/port_systick.obj: FreeRTOS-Kernel/portable/port_systick.c.obj
+
+.PHONY : FreeRTOS-Kernel/portable/port_systick.obj
+
+# target to build an object file
+FreeRTOS-Kernel/portable/port_systick.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.obj
+.PHONY : FreeRTOS-Kernel/portable/port_systick.c.obj
+
+FreeRTOS-Kernel/portable/port_systick.i: FreeRTOS-Kernel/portable/port_systick.c.i
+
+.PHONY : FreeRTOS-Kernel/portable/port_systick.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/portable/port_systick.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.i
+.PHONY : FreeRTOS-Kernel/portable/port_systick.c.i
+
+FreeRTOS-Kernel/portable/port_systick.s: FreeRTOS-Kernel/portable/port_systick.c.s
+
+.PHONY : FreeRTOS-Kernel/portable/port_systick.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/portable/port_systick.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/port_systick.c.s
+.PHONY : FreeRTOS-Kernel/portable/port_systick.c.s
+
+FreeRTOS-Kernel/portable/riscv/port.obj: FreeRTOS-Kernel/portable/riscv/port.c.obj
+
+.PHONY : FreeRTOS-Kernel/portable/riscv/port.obj
+
+# target to build an object file
+FreeRTOS-Kernel/portable/riscv/port.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.obj
+.PHONY : FreeRTOS-Kernel/portable/riscv/port.c.obj
+
+FreeRTOS-Kernel/portable/riscv/port.i: FreeRTOS-Kernel/portable/riscv/port.c.i
+
+.PHONY : FreeRTOS-Kernel/portable/riscv/port.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/portable/riscv/port.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.i
+.PHONY : FreeRTOS-Kernel/portable/riscv/port.c.i
+
+FreeRTOS-Kernel/portable/riscv/port.s: FreeRTOS-Kernel/portable/riscv/port.c.s
+
+.PHONY : FreeRTOS-Kernel/portable/riscv/port.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/portable/riscv/port.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/port.c.s
+.PHONY : FreeRTOS-Kernel/portable/riscv/port.c.s
+
+FreeRTOS-Kernel/portable/riscv/portasm.obj: FreeRTOS-Kernel/portable/riscv/portasm.S.obj
+
+.PHONY : FreeRTOS-Kernel/portable/riscv/portasm.obj
+
+# target to build an object file
+FreeRTOS-Kernel/portable/riscv/portasm.S.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/portable/riscv/portasm.S.obj
+.PHONY : FreeRTOS-Kernel/portable/riscv/portasm.S.obj
+
+FreeRTOS-Kernel/queue.obj: FreeRTOS-Kernel/queue.c.obj
+
+.PHONY : FreeRTOS-Kernel/queue.obj
+
+# target to build an object file
+FreeRTOS-Kernel/queue.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.obj
+.PHONY : FreeRTOS-Kernel/queue.c.obj
+
+FreeRTOS-Kernel/queue.i: FreeRTOS-Kernel/queue.c.i
+
+.PHONY : FreeRTOS-Kernel/queue.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/queue.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.i
+.PHONY : FreeRTOS-Kernel/queue.c.i
+
+FreeRTOS-Kernel/queue.s: FreeRTOS-Kernel/queue.c.s
+
+.PHONY : FreeRTOS-Kernel/queue.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/queue.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/queue.c.s
+.PHONY : FreeRTOS-Kernel/queue.c.s
+
+FreeRTOS-Kernel/stream_buffer.obj: FreeRTOS-Kernel/stream_buffer.c.obj
+
+.PHONY : FreeRTOS-Kernel/stream_buffer.obj
+
+# target to build an object file
+FreeRTOS-Kernel/stream_buffer.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.obj
+.PHONY : FreeRTOS-Kernel/stream_buffer.c.obj
+
+FreeRTOS-Kernel/stream_buffer.i: FreeRTOS-Kernel/stream_buffer.c.i
+
+.PHONY : FreeRTOS-Kernel/stream_buffer.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/stream_buffer.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.i
+.PHONY : FreeRTOS-Kernel/stream_buffer.c.i
+
+FreeRTOS-Kernel/stream_buffer.s: FreeRTOS-Kernel/stream_buffer.c.s
+
+.PHONY : FreeRTOS-Kernel/stream_buffer.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/stream_buffer.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/stream_buffer.c.s
+.PHONY : FreeRTOS-Kernel/stream_buffer.c.s
+
+FreeRTOS-Kernel/tasks.obj: FreeRTOS-Kernel/tasks.c.obj
+
+.PHONY : FreeRTOS-Kernel/tasks.obj
+
+# target to build an object file
+FreeRTOS-Kernel/tasks.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.obj
+.PHONY : FreeRTOS-Kernel/tasks.c.obj
+
+FreeRTOS-Kernel/tasks.i: FreeRTOS-Kernel/tasks.c.i
+
+.PHONY : FreeRTOS-Kernel/tasks.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/tasks.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.i
+.PHONY : FreeRTOS-Kernel/tasks.c.i
+
+FreeRTOS-Kernel/tasks.s: FreeRTOS-Kernel/tasks.c.s
+
+.PHONY : FreeRTOS-Kernel/tasks.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/tasks.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/tasks.c.s
+.PHONY : FreeRTOS-Kernel/tasks.c.s
+
+FreeRTOS-Kernel/timers.obj: FreeRTOS-Kernel/timers.c.obj
+
+.PHONY : FreeRTOS-Kernel/timers.obj
+
+# target to build an object file
+FreeRTOS-Kernel/timers.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.obj
+.PHONY : FreeRTOS-Kernel/timers.c.obj
+
+FreeRTOS-Kernel/timers.i: FreeRTOS-Kernel/timers.c.i
+
+.PHONY : FreeRTOS-Kernel/timers.i
+
+# target to preprocess a source file
+FreeRTOS-Kernel/timers.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.i
+.PHONY : FreeRTOS-Kernel/timers.c.i
+
+FreeRTOS-Kernel/timers.s: FreeRTOS-Kernel/timers.c.s
+
+.PHONY : FreeRTOS-Kernel/timers.s
+
+# target to generate assembly for a file
+FreeRTOS-Kernel/timers.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-Kernel/timers.c.s
+.PHONY : FreeRTOS-Kernel/timers.c.s
+
 FreeRTOS-openocd.obj: FreeRTOS-openocd.c.obj
 
 .PHONY : FreeRTOS-openocd.obj
@@ -217,32 +496,32 @@ FreeRTOS-openocd.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/FreeRTOS-openocd.c.s
 .PHONY : FreeRTOS-openocd.c.s
 
-croutine.obj: croutine.c.obj
+esp_additions/freertos_v8_compat.obj: esp_additions/freertos_v8_compat.c.obj
 
-.PHONY : croutine.obj
+.PHONY : esp_additions/freertos_v8_compat.obj
 
 # target to build an object file
-croutine.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.obj
-.PHONY : croutine.c.obj
+esp_additions/freertos_v8_compat.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.obj
+.PHONY : esp_additions/freertos_v8_compat.c.obj
 
-croutine.i: croutine.c.i
+esp_additions/freertos_v8_compat.i: esp_additions/freertos_v8_compat.c.i
 
-.PHONY : croutine.i
+.PHONY : esp_additions/freertos_v8_compat.i
 
 # target to preprocess a source file
-croutine.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.i
-.PHONY : croutine.c.i
+esp_additions/freertos_v8_compat.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.i
+.PHONY : esp_additions/freertos_v8_compat.c.i
 
-croutine.s: croutine.c.s
+esp_additions/freertos_v8_compat.s: esp_additions/freertos_v8_compat.c.s
 
-.PHONY : croutine.s
+.PHONY : esp_additions/freertos_v8_compat.s
 
 # target to generate assembly for a file
-croutine.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/croutine.c.s
-.PHONY : croutine.c.s
+esp_additions/freertos_v8_compat.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/freertos_v8_compat.c.s
+.PHONY : esp_additions/freertos_v8_compat.c.s
 
 esp_additions/task_snapshot.obj: esp_additions/task_snapshot.c.obj
 
@@ -271,285 +550,6 @@ esp_additions/task_snapshot.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/esp_additions/task_snapshot.c.s
 .PHONY : esp_additions/task_snapshot.c.s
 
-event_groups.obj: event_groups.c.obj
-
-.PHONY : event_groups.obj
-
-# target to build an object file
-event_groups.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.obj
-.PHONY : event_groups.c.obj
-
-event_groups.i: event_groups.c.i
-
-.PHONY : event_groups.i
-
-# target to preprocess a source file
-event_groups.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.i
-.PHONY : event_groups.c.i
-
-event_groups.s: event_groups.c.s
-
-.PHONY : event_groups.s
-
-# target to generate assembly for a file
-event_groups.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/event_groups.c.s
-.PHONY : event_groups.c.s
-
-freertos_v8_compat.obj: freertos_v8_compat.c.obj
-
-.PHONY : freertos_v8_compat.obj
-
-# target to build an object file
-freertos_v8_compat.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.obj
-.PHONY : freertos_v8_compat.c.obj
-
-freertos_v8_compat.i: freertos_v8_compat.c.i
-
-.PHONY : freertos_v8_compat.i
-
-# target to preprocess a source file
-freertos_v8_compat.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.i
-.PHONY : freertos_v8_compat.c.i
-
-freertos_v8_compat.s: freertos_v8_compat.c.s
-
-.PHONY : freertos_v8_compat.s
-
-# target to generate assembly for a file
-freertos_v8_compat.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/freertos_v8_compat.c.s
-.PHONY : freertos_v8_compat.c.s
-
-list.obj: list.c.obj
-
-.PHONY : list.obj
-
-# target to build an object file
-list.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.obj
-.PHONY : list.c.obj
-
-list.i: list.c.i
-
-.PHONY : list.i
-
-# target to preprocess a source file
-list.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.i
-.PHONY : list.c.i
-
-list.s: list.c.s
-
-.PHONY : list.s
-
-# target to generate assembly for a file
-list.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/list.c.s
-.PHONY : list.c.s
-
-port/port_common.obj: port/port_common.c.obj
-
-.PHONY : port/port_common.obj
-
-# target to build an object file
-port/port_common.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.obj
-.PHONY : port/port_common.c.obj
-
-port/port_common.i: port/port_common.c.i
-
-.PHONY : port/port_common.i
-
-# target to preprocess a source file
-port/port_common.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.i
-.PHONY : port/port_common.c.i
-
-port/port_common.s: port/port_common.c.s
-
-.PHONY : port/port_common.s
-
-# target to generate assembly for a file
-port/port_common.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_common.c.s
-.PHONY : port/port_common.c.s
-
-port/port_systick.obj: port/port_systick.c.obj
-
-.PHONY : port/port_systick.obj
-
-# target to build an object file
-port/port_systick.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.obj
-.PHONY : port/port_systick.c.obj
-
-port/port_systick.i: port/port_systick.c.i
-
-.PHONY : port/port_systick.i
-
-# target to preprocess a source file
-port/port_systick.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.i
-.PHONY : port/port_systick.c.i
-
-port/port_systick.s: port/port_systick.c.s
-
-.PHONY : port/port_systick.s
-
-# target to generate assembly for a file
-port/port_systick.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/port_systick.c.s
-.PHONY : port/port_systick.c.s
-
-port/riscv/port.obj: port/riscv/port.c.obj
-
-.PHONY : port/riscv/port.obj
-
-# target to build an object file
-port/riscv/port.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.obj
-.PHONY : port/riscv/port.c.obj
-
-port/riscv/port.i: port/riscv/port.c.i
-
-.PHONY : port/riscv/port.i
-
-# target to preprocess a source file
-port/riscv/port.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.i
-.PHONY : port/riscv/port.c.i
-
-port/riscv/port.s: port/riscv/port.c.s
-
-.PHONY : port/riscv/port.s
-
-# target to generate assembly for a file
-port/riscv/port.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/port.c.s
-.PHONY : port/riscv/port.c.s
-
-port/riscv/portasm.obj: port/riscv/portasm.S.obj
-
-.PHONY : port/riscv/portasm.obj
-
-# target to build an object file
-port/riscv/portasm.S.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/port/riscv/portasm.S.obj
-.PHONY : port/riscv/portasm.S.obj
-
-queue.obj: queue.c.obj
-
-.PHONY : queue.obj
-
-# target to build an object file
-queue.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.obj
-.PHONY : queue.c.obj
-
-queue.i: queue.c.i
-
-.PHONY : queue.i
-
-# target to preprocess a source file
-queue.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.i
-.PHONY : queue.c.i
-
-queue.s: queue.c.s
-
-.PHONY : queue.s
-
-# target to generate assembly for a file
-queue.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/queue.c.s
-.PHONY : queue.c.s
-
-stream_buffer.obj: stream_buffer.c.obj
-
-.PHONY : stream_buffer.obj
-
-# target to build an object file
-stream_buffer.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.obj
-.PHONY : stream_buffer.c.obj
-
-stream_buffer.i: stream_buffer.c.i
-
-.PHONY : stream_buffer.i
-
-# target to preprocess a source file
-stream_buffer.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.i
-.PHONY : stream_buffer.c.i
-
-stream_buffer.s: stream_buffer.c.s
-
-.PHONY : stream_buffer.s
-
-# target to generate assembly for a file
-stream_buffer.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/stream_buffer.c.s
-.PHONY : stream_buffer.c.s
-
-tasks.obj: tasks.c.obj
-
-.PHONY : tasks.obj
-
-# target to build an object file
-tasks.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.obj
-.PHONY : tasks.c.obj
-
-tasks.i: tasks.c.i
-
-.PHONY : tasks.i
-
-# target to preprocess a source file
-tasks.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.i
-.PHONY : tasks.c.i
-
-tasks.s: tasks.c.s
-
-.PHONY : tasks.s
-
-# target to generate assembly for a file
-tasks.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/tasks.c.s
-.PHONY : tasks.c.s
-
-timers.obj: timers.c.obj
-
-.PHONY : timers.obj
-
-# target to build an object file
-timers.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.obj
-.PHONY : timers.c.obj
-
-timers.i: timers.c.i
-
-.PHONY : timers.i
-
-# target to preprocess a source file
-timers.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.i
-.PHONY : timers.c.i
-
-timers.s: timers.c.s
-
-.PHONY : timers.s
-
-# target to generate assembly for a file
-timers.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/freertos/CMakeFiles/__idf_freertos.dir/build.make esp-idf/freertos/CMakeFiles/__idf_freertos.dir/timers.c.s
-.PHONY : timers.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -563,46 +563,46 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... __idf_freertos"
+	@echo "... FreeRTOS-Kernel/croutine.obj"
+	@echo "... FreeRTOS-Kernel/croutine.i"
+	@echo "... FreeRTOS-Kernel/croutine.s"
+	@echo "... FreeRTOS-Kernel/event_groups.obj"
+	@echo "... FreeRTOS-Kernel/event_groups.i"
+	@echo "... FreeRTOS-Kernel/event_groups.s"
+	@echo "... FreeRTOS-Kernel/list.obj"
+	@echo "... FreeRTOS-Kernel/list.i"
+	@echo "... FreeRTOS-Kernel/list.s"
+	@echo "... FreeRTOS-Kernel/portable/port_common.obj"
+	@echo "... FreeRTOS-Kernel/portable/port_common.i"
+	@echo "... FreeRTOS-Kernel/portable/port_common.s"
+	@echo "... FreeRTOS-Kernel/portable/port_systick.obj"
+	@echo "... FreeRTOS-Kernel/portable/port_systick.i"
+	@echo "... FreeRTOS-Kernel/portable/port_systick.s"
+	@echo "... FreeRTOS-Kernel/portable/riscv/port.obj"
+	@echo "... FreeRTOS-Kernel/portable/riscv/port.i"
+	@echo "... FreeRTOS-Kernel/portable/riscv/port.s"
+	@echo "... FreeRTOS-Kernel/portable/riscv/portasm.obj"
+	@echo "... FreeRTOS-Kernel/queue.obj"
+	@echo "... FreeRTOS-Kernel/queue.i"
+	@echo "... FreeRTOS-Kernel/queue.s"
+	@echo "... FreeRTOS-Kernel/stream_buffer.obj"
+	@echo "... FreeRTOS-Kernel/stream_buffer.i"
+	@echo "... FreeRTOS-Kernel/stream_buffer.s"
+	@echo "... FreeRTOS-Kernel/tasks.obj"
+	@echo "... FreeRTOS-Kernel/tasks.i"
+	@echo "... FreeRTOS-Kernel/tasks.s"
+	@echo "... FreeRTOS-Kernel/timers.obj"
+	@echo "... FreeRTOS-Kernel/timers.i"
+	@echo "... FreeRTOS-Kernel/timers.s"
 	@echo "... FreeRTOS-openocd.obj"
 	@echo "... FreeRTOS-openocd.i"
 	@echo "... FreeRTOS-openocd.s"
-	@echo "... croutine.obj"
-	@echo "... croutine.i"
-	@echo "... croutine.s"
+	@echo "... esp_additions/freertos_v8_compat.obj"
+	@echo "... esp_additions/freertos_v8_compat.i"
+	@echo "... esp_additions/freertos_v8_compat.s"
 	@echo "... esp_additions/task_snapshot.obj"
 	@echo "... esp_additions/task_snapshot.i"
 	@echo "... esp_additions/task_snapshot.s"
-	@echo "... event_groups.obj"
-	@echo "... event_groups.i"
-	@echo "... event_groups.s"
-	@echo "... freertos_v8_compat.obj"
-	@echo "... freertos_v8_compat.i"
-	@echo "... freertos_v8_compat.s"
-	@echo "... list.obj"
-	@echo "... list.i"
-	@echo "... list.s"
-	@echo "... port/port_common.obj"
-	@echo "... port/port_common.i"
-	@echo "... port/port_common.s"
-	@echo "... port/port_systick.obj"
-	@echo "... port/port_systick.i"
-	@echo "... port/port_systick.s"
-	@echo "... port/riscv/port.obj"
-	@echo "... port/riscv/port.i"
-	@echo "... port/riscv/port.s"
-	@echo "... port/riscv/portasm.obj"
-	@echo "... queue.obj"
-	@echo "... queue.i"
-	@echo "... queue.s"
-	@echo "... stream_buffer.obj"
-	@echo "... stream_buffer.i"
-	@echo "... stream_buffer.s"
-	@echo "... tasks.obj"
-	@echo "... tasks.i"
-	@echo "... tasks.s"
-	@echo "... timers.obj"
-	@echo "... timers.i"
-	@echo "... timers.s"
 .PHONY : help
 
 

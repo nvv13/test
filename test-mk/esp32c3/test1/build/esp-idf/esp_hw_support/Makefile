@@ -595,32 +595,32 @@ port/esp32c3/esp_hmac.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/esp_hmac.c.s
 .PHONY : port/esp32c3/esp_hmac.c.s
 
-port/esp32c3/memprot.obj: port/esp32c3/memprot.c.obj
+port/esp32c3/esp_memprot.obj: port/esp32c3/esp_memprot.c.obj
 
-.PHONY : port/esp32c3/memprot.obj
+.PHONY : port/esp32c3/esp_memprot.obj
 
 # target to build an object file
-port/esp32c3/memprot.c.obj:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/memprot.c.obj
-.PHONY : port/esp32c3/memprot.c.obj
+port/esp32c3/esp_memprot.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/esp_memprot.c.obj
+.PHONY : port/esp32c3/esp_memprot.c.obj
 
-port/esp32c3/memprot.i: port/esp32c3/memprot.c.i
+port/esp32c3/esp_memprot.i: port/esp32c3/esp_memprot.c.i
 
-.PHONY : port/esp32c3/memprot.i
+.PHONY : port/esp32c3/esp_memprot.i
 
 # target to preprocess a source file
-port/esp32c3/memprot.c.i:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/memprot.c.i
-.PHONY : port/esp32c3/memprot.c.i
+port/esp32c3/esp_memprot.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/esp_memprot.c.i
+.PHONY : port/esp32c3/esp_memprot.c.i
 
-port/esp32c3/memprot.s: port/esp32c3/memprot.c.s
+port/esp32c3/esp_memprot.s: port/esp32c3/esp_memprot.c.s
 
-.PHONY : port/esp32c3/memprot.s
+.PHONY : port/esp32c3/esp_memprot.s
 
 # target to generate assembly for a file
-port/esp32c3/memprot.c.s:
-	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/memprot.c.s
-.PHONY : port/esp32c3/memprot.c.s
+port/esp32c3/esp_memprot.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/esp_memprot.c.s
+.PHONY : port/esp32c3/esp_memprot.c.s
 
 port/esp32c3/rtc_clk.obj: port/esp32c3/rtc_clk.c.obj
 
@@ -784,6 +784,33 @@ port/esp32c3/rtc_time.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp32c3/rtc_time.c.s
 .PHONY : port/esp32c3/rtc_time.c.s
 
+port/esp_memprot_conv.obj: port/esp_memprot_conv.c.obj
+
+.PHONY : port/esp_memprot_conv.obj
+
+# target to build an object file
+port/esp_memprot_conv.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp_memprot_conv.c.obj
+.PHONY : port/esp_memprot_conv.c.obj
+
+port/esp_memprot_conv.i: port/esp_memprot_conv.c.i
+
+.PHONY : port/esp_memprot_conv.i
+
+# target to preprocess a source file
+port/esp_memprot_conv.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp_memprot_conv.c.i
+.PHONY : port/esp_memprot_conv.c.i
+
+port/esp_memprot_conv.s: port/esp_memprot_conv.c.s
+
+.PHONY : port/esp_memprot_conv.s
+
+# target to generate assembly for a file
+port/esp_memprot_conv.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/port/esp_memprot_conv.c.s
+.PHONY : port/esp_memprot_conv.c.s
+
 regi2c_ctrl.obj: regi2c_ctrl.c.obj
 
 .PHONY : regi2c_ctrl.obj
@@ -811,6 +838,60 @@ regi2c_ctrl.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/regi2c_ctrl.c.s
 .PHONY : regi2c_ctrl.c.s
 
+sleep_gpio.obj: sleep_gpio.c.obj
+
+.PHONY : sleep_gpio.obj
+
+# target to build an object file
+sleep_gpio.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_gpio.c.obj
+.PHONY : sleep_gpio.c.obj
+
+sleep_gpio.i: sleep_gpio.c.i
+
+.PHONY : sleep_gpio.i
+
+# target to preprocess a source file
+sleep_gpio.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_gpio.c.i
+.PHONY : sleep_gpio.c.i
+
+sleep_gpio.s: sleep_gpio.c.s
+
+.PHONY : sleep_gpio.s
+
+# target to generate assembly for a file
+sleep_gpio.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_gpio.c.s
+.PHONY : sleep_gpio.c.s
+
+sleep_mac_bb.obj: sleep_mac_bb.c.obj
+
+.PHONY : sleep_mac_bb.obj
+
+# target to build an object file
+sleep_mac_bb.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_mac_bb.c.obj
+.PHONY : sleep_mac_bb.c.obj
+
+sleep_mac_bb.i: sleep_mac_bb.c.i
+
+.PHONY : sleep_mac_bb.i
+
+# target to preprocess a source file
+sleep_mac_bb.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_mac_bb.c.i
+.PHONY : sleep_mac_bb.c.i
+
+sleep_mac_bb.s: sleep_mac_bb.c.s
+
+.PHONY : sleep_mac_bb.s
+
+# target to generate assembly for a file
+sleep_mac_bb.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_mac_bb.c.s
+.PHONY : sleep_mac_bb.c.s
+
 sleep_modes.obj: sleep_modes.c.obj
 
 .PHONY : sleep_modes.obj
@@ -837,6 +918,33 @@ sleep_modes.s: sleep_modes.c.s
 sleep_modes.c.s:
 	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_modes.c.s
 .PHONY : sleep_modes.c.s
+
+sleep_retention.obj: sleep_retention.c.obj
+
+.PHONY : sleep_retention.obj
+
+# target to build an object file
+sleep_retention.c.obj:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_retention.c.obj
+.PHONY : sleep_retention.c.obj
+
+sleep_retention.i: sleep_retention.c.i
+
+.PHONY : sleep_retention.i
+
+# target to preprocess a source file
+sleep_retention.c.i:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_retention.c.i
+.PHONY : sleep_retention.c.i
+
+sleep_retention.s: sleep_retention.c.s
+
+.PHONY : sleep_retention.s
+
+# target to generate assembly for a file
+sleep_retention.c.s:
+	cd /home/nvv/test/test-mk/esp32c3/test1/build && $(MAKE) $(MAKESILENT) -f esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/build.make esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir/sleep_retention.c.s
+.PHONY : sleep_retention.c.s
 
 # Help Target
 help:
@@ -896,9 +1004,9 @@ help:
 	@echo "... port/esp32c3/esp_hmac.obj"
 	@echo "... port/esp32c3/esp_hmac.i"
 	@echo "... port/esp32c3/esp_hmac.s"
-	@echo "... port/esp32c3/memprot.obj"
-	@echo "... port/esp32c3/memprot.i"
-	@echo "... port/esp32c3/memprot.s"
+	@echo "... port/esp32c3/esp_memprot.obj"
+	@echo "... port/esp32c3/esp_memprot.i"
+	@echo "... port/esp32c3/esp_memprot.s"
 	@echo "... port/esp32c3/rtc_clk.obj"
 	@echo "... port/esp32c3/rtc_clk.i"
 	@echo "... port/esp32c3/rtc_clk.s"
@@ -917,12 +1025,24 @@ help:
 	@echo "... port/esp32c3/rtc_time.obj"
 	@echo "... port/esp32c3/rtc_time.i"
 	@echo "... port/esp32c3/rtc_time.s"
+	@echo "... port/esp_memprot_conv.obj"
+	@echo "... port/esp_memprot_conv.i"
+	@echo "... port/esp_memprot_conv.s"
 	@echo "... regi2c_ctrl.obj"
 	@echo "... regi2c_ctrl.i"
 	@echo "... regi2c_ctrl.s"
+	@echo "... sleep_gpio.obj"
+	@echo "... sleep_gpio.i"
+	@echo "... sleep_gpio.s"
+	@echo "... sleep_mac_bb.obj"
+	@echo "... sleep_mac_bb.i"
+	@echo "... sleep_mac_bb.s"
 	@echo "... sleep_modes.obj"
 	@echo "... sleep_modes.i"
 	@echo "... sleep_modes.s"
+	@echo "... sleep_retention.obj"
+	@echo "... sleep_retention.i"
+	@echo "... sleep_retention.s"
 .PHONY : help
 
 
