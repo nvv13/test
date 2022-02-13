@@ -600,12 +600,6 @@ stdint.h
 
 /home/nvv/esp-idf/components/mbedtls/mbedtls/include/psa/crypto_values.h
 
-/home/nvv/esp-idf/components/mbedtls/mbedtls/library/certs.c
-common.h
-/home/nvv/esp-idf/components/mbedtls/mbedtls/library/common.h
-mbedtls/certs.h
-/home/nvv/esp-idf/components/mbedtls/mbedtls/library/mbedtls/certs.h
-
 /home/nvv/esp-idf/components/mbedtls/mbedtls/library/common.h
 mbedtls/config.h
 /home/nvv/esp-idf/components/mbedtls/mbedtls/library/mbedtls/config.h

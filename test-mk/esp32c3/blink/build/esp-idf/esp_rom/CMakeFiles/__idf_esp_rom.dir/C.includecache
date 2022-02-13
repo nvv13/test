@@ -16,8 +16,6 @@ sdkconfig.h
 
 /home/nvv/esp-idf/components/esp_common/include/esp_bit_defs.h
 
-/home/nvv/esp-idf/components/esp_rom/esp32c3/esp_rom_caps.h
-
 /home/nvv/esp-idf/components/esp_rom/include/esp32/rom/spi_flash.h
 stdint.h
 -
@@ -54,16 +52,6 @@ esp_rom_spiflash_defs.h
 
 /home/nvv/esp-idf/components/esp_rom/include/esp_rom_spiflash_defs.h
 
-/home/nvv/esp-idf/components/esp_rom/include/esp_rom_tjpgd.h
-stdint.h
--
-
-/home/nvv/esp-idf/components/esp_rom/patches/esp_rom_crc.c
-stdint.h
--
-esp_rom_caps.h
-/home/nvv/esp-idf/components/esp_rom/patches/esp_rom_caps.h
-
 /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_spiflash.c
 sdkconfig.h
 /home/nvv/esp-idf/components/esp_rom/patches/sdkconfig.h
@@ -85,12 +73,6 @@ esp_attr.h
 /home/nvv/esp-idf/components/esp_rom/patches/esp_attr.h
 sdkconfig.h
 /home/nvv/esp-idf/components/esp_rom/patches/sdkconfig.h
-
-/home/nvv/esp-idf/components/esp_rom/patches/esp_rom_tjpgd.c
-esp_rom_caps.h
-/home/nvv/esp-idf/components/esp_rom/patches/esp_rom_caps.h
-esp_rom_tjpgd.h
-/home/nvv/esp-idf/components/esp_rom/patches/esp_rom_tjpgd.h
 
 /home/nvv/esp-idf/components/esp_rom/patches/esp_rom_uart.c
 stdint.h

@@ -66,10 +66,6 @@ soc/gpio_sig_map.h
 soc/dedic_gpio_periph.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/dedic_gpio_periph.h
 
-/home/nvv/esp-idf/components/soc/esp32c3/gdma_periph.c
-soc/gdma_periph.h
-/home/nvv/esp-idf/components/soc/esp32c3/soc/gdma_periph.h
-
 /home/nvv/esp-idf/components/soc/esp32c3/gpio_periph.c
 soc/gpio_periph.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/gpio_periph.h
@@ -200,12 +196,6 @@ soc/ledc_periph.h
 soc/gpio_sig_map.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/gpio_sig_map.h
 
-/home/nvv/esp-idf/components/soc/esp32c3/rmt_periph.c
-soc/rmt_periph.h
-/home/nvv/esp-idf/components/soc/esp32c3/soc/rmt_periph.h
-soc/gpio_sig_map.h
-/home/nvv/esp-idf/components/soc/esp32c3/soc/gpio_sig_map.h
-
 /home/nvv/esp-idf/components/soc/esp32c3/sigmadelta_periph.c
 soc/sigmadelta_periph.h
 /home/nvv/esp-idf/components/soc/esp32c3/soc/sigmadelta_periph.h
@@ -251,12 +241,6 @@ stdint.h
 -
 soc/soc.h
 /home/nvv/esp-idf/components/soc/include/soc/soc/soc.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
-soc/periph_defs.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/periph_defs.h
-
-/home/nvv/esp-idf/components/soc/include/soc/gdma_periph.h
 soc/soc_caps.h
 /home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
 soc/periph_defs.h
@@ -331,12 +315,6 @@ esp32h2/rom/lldesc.h
 /home/nvv/esp-idf/components/soc/include/soc/esp32h2/rom/lldesc.h
 esp32c2/rom/lldesc.h
 /home/nvv/esp-idf/components/soc/include/soc/esp32c2/rom/lldesc.h
-
-/home/nvv/esp-idf/components/soc/include/soc/rmt_periph.h
-soc/soc_caps.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/soc_caps.h
-soc/periph_defs.h
-/home/nvv/esp-idf/components/soc/include/soc/soc/periph_defs.h
 
 /home/nvv/esp-idf/components/soc/include/soc/sigmadelta_periph.h
 stdint.h

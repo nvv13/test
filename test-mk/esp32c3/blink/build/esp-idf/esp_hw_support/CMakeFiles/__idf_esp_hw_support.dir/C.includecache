@@ -680,12 +680,6 @@ string.h
 soc/dport_access.h
 /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/soc/dport_access.h
 
-/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/esp_crypto_lock.c
-sys/lock.h
--
-esp_crypto_lock.h
-/home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/esp_crypto_lock.h
-
 /home/nvv/esp-idf/components/esp_hw_support/port/esp32c3/esp_ds.c
 stdlib.h
 -

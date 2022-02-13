@@ -6,5 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/nvv/esp-idf/components/esp_system/port/arch/riscv/expression_with_stack_asm.S
-

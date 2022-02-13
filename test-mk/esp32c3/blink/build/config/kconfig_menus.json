@@ -3527,10 +3527,7 @@
                 "help": "Set the RMT peripheral channel.\nESP32 RMT channel from 0 to 7\nESP32-S2 RMT channel from 0 to 3\nESP32-S3 RMT channel from 0 to 3\nESP32-C3 RMT channel from 0 to 1",
                 "id": "BLINK_LED_RMT_CHANNEL",
                 "name": "BLINK_LED_RMT_CHANNEL",
-                "range": [
-                    0,
-                    7
-                ],
+                "range": null,
                 "title": "RMT Channel",
                 "type": "int"
             },

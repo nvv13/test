@@ -800,8 +800,6 @@ soc/clk_ctrl_os.h
 esp_private/periph_ctrl.h
 /home/nvv/esp-idf/components/driver/esp_private/periph_ctrl.h
 
-/home/nvv/esp-idf/components/driver/legacy_new_driver_coexist.c
-
 /home/nvv/esp-idf/components/driver/periph_ctrl.c
 freertos/FreeRTOS.h
 /home/nvv/esp-idf/components/driver/freertos/FreeRTOS.h

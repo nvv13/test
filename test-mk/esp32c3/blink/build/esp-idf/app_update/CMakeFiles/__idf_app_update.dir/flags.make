@@ -8,5 +8,5 @@ C_INCLUDES = -I/home/nvv/test/test-mk/esp32c3/blink/build/config -I/home/nvv/esp
 
 C_FLAGS = -march=rv32imc  -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=deprecated-declarations -Wextra -Wno-unused-parameter -Wno-sign-compare -ggdb -Wno-error=format= -nostartfiles -Wno-format -Og -fmacro-prefix-map=/home/nvv/test/test-mk/esp32c3/blink=. -fmacro-prefix-map=/home/nvv/esp-idf=/IDF -fstrict-volatile-bitfields -Wno-error=unused-but-set-variable -fno-jump-tables -fno-tree-switch-conversion -std=gnu99 -Wno-old-style-declaration -D_GNU_SOURCE -DIDF_VER=\"v5.0-dev-1350-g41761fc762\" -DESP_PLATFORM -D_POSIX_READER_WRITER_LOCKS
 
-# Custom defines: esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj_DEFINES = PROJECT_VER="c578deb-dirty"; PROJECT_NAME="blink"
+# Custom defines: esp-idf/app_update/CMakeFiles/__idf_app_update.dir/esp_app_desc.c.obj_DEFINES = PROJECT_VER="896716a-dirty"; PROJECT_NAME="blink"
 

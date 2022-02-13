@@ -584,8 +584,6 @@ mbconfig.h
 mbutils.h
 /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbutils.h
 
-/home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdiag.c
-
 /home/nvv/esp-idf/components/freemodbus/modbus/functions/mbfuncdisc.c
 stdlib.h
 /home/nvv/esp-idf/components/freemodbus/modbus/functions/stdlib.h

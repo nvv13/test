@@ -1,0 +1,41 @@
+
+see getting-started-with-pico.pdf
+
+
+$ cd ~/
+$ mkdir pico
+$ cd pico
+
+$ git clone -b master https://github.com/raspberrypi/pico-sdk.git
+$ cd pico-sdk
+$ git submodule update --init
+$ cd ..
+$ git clone -b master https://github.com/raspberrypi/pico-examples.git
+
+
+$ sudo dnf install cmake arm-none-eabi-*
+
+
+$ cd pico-sdk
+$ git pull
+$ git submodule update
+
+
+$ cd pico-examples
+$ mkdir build
+$ cd build
+
+$ export PICO_SDK_PATH=../../pico-sdk
+
+$ cmake ..
+
+$ cd blink
+$ make -j4
+
+
+
+
+There are additional repositories: pico-extras, and pico-playground that you may also be interested in.
+git clone -b master https://github.com/raspberrypi/pico-extras.git
+git clone -b master https://github.com/raspberrypi/pico-playground.git
+

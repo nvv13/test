@@ -38,17 +38,7 @@ encoding.h
 
 /home/nvv/esp-idf/components/riscv/include/riscv/encoding.h
 
-/home/nvv/esp-idf/components/riscv/include/riscv/instruction_decode.h
-stdint.h
--
-
 /home/nvv/esp-idf/components/riscv/include/riscv/interrupt.h
-
-/home/nvv/esp-idf/components/riscv/instruction_decode.c
-stdlib.h
--
-riscv/instruction_decode.h
-/home/nvv/esp-idf/components/riscv/riscv/instruction_decode.h
 
 /home/nvv/esp-idf/components/riscv/interrupt.c
 stdint.h
