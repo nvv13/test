@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libhttp_parser.a CMakeFiles/__idf_http_parser.dir/http_parser.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libhttp_parser.a

@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libsdmmc.a CMakeFiles/__idf_sdmmc.dir/sdmmc_cmd.c.obj CMakeFiles/__idf_sdmmc.dir/sdmmc_common.c.obj CMakeFiles/__idf_sdmmc.dir/sdmmc_init.c.obj CMakeFiles/__idf_sdmmc.dir/sdmmc_io.c.obj CMakeFiles/__idf_sdmmc.dir/sdmmc_mmc.c.obj CMakeFiles/__idf_sdmmc.dir/sdmmc_sd.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libsdmmc.a

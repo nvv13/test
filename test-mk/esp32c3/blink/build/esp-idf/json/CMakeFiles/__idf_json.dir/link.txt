@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libjson.a CMakeFiles/__idf_json.dir/cJSON/cJSON.c.obj CMakeFiles/__idf_json.dir/cJSON/cJSON_Utils.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libjson.a

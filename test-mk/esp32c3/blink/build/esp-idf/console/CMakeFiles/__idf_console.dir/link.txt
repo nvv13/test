@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libconsole.a CMakeFiles/__idf_console.dir/commands.c.obj CMakeFiles/__idf_console.dir/esp_console_repl.c.obj CMakeFiles/__idf_console.dir/split_argv.c.obj CMakeFiles/__idf_console.dir/argtable3/argtable3.c.obj CMakeFiles/__idf_console.dir/linenoise/linenoise.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libconsole.a

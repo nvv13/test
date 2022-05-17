@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libesp_hid.a CMakeFiles/__idf_esp_hid.dir/src/esp_hidd.c.obj CMakeFiles/__idf_esp_hid.dir/src/esp_hidh.c.obj CMakeFiles/__idf_esp_hid.dir/src/esp_hid_common.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libesp_hid.a

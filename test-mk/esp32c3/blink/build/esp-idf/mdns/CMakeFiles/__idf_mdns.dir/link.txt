@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libmdns.a CMakeFiles/__idf_mdns.dir/mdns.c.obj CMakeFiles/__idf_mdns.dir/mdns_networking_lwip.c.obj CMakeFiles/__idf_mdns.dir/mdns_console.c.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libmdns.a
