@@ -27,20 +27,30 @@ https://github.com/droppingy/W801_SDK-linux
    это чтоб в menuconfig не переделывать, такой там путь по умолчанию
  (еще, в этом мануале https://github.com/IOsetting/wm-sdk-w806, есть ссылки как получить данный Toolchain на другие архитектуры, типа i386)
 
-<p><code>
+
 
 3) далее, из домашней директории
+
 $ mkdir w800
+
 $ cd w800
+
 $ git clone https://github.com/droppingy/W801_SDK-linux.git
+
   тут все по умолчанию подошло ( порт подключённой платки оказалься /dev/ttyUSB0 )
+
 $ make menuconfig
+
 $ make
+
   даже кнопку boot не пришлось нажимать ( когда пробовал проект на Arduino, там потребовалось, это я про https://github.com/Hi-LinkDuino/w80x_arduino )
+
 $ make flash
 
   далее подцепляемся к платке, для ипользования демо проекта (60 функций!!!)
+
 $ picocom --echo -b 115200 /dev/ttyUSB0
+
   после подсоединения платка "висит", это из за сигнала RTS (про это есть обьяснение в статье https://www.cnblogs.com/milton/p/15621540.html)
   поэтому делаем CTRL + A + G   - это комманда picocom - RTS down, (нажимать надо достаточно быстро, (одновременно, но сначала CTRL))
   и пользуемся ...
@@ -49,6 +59,7 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
   но, если выделить, и вставить комманду через буфер обмена (дополнив чем надо - иногда) все работает!
 
   можно прямо отсюда выделять-(подправлять)-копировать...
+
 Sequence  Command             Description
 ------------------------------------------------------------------------------------
 1         t-connect           Test connecting ap;t-connect("ssid","pwd"); For open ap, pwd should be empty
@@ -124,4 +135,3 @@ Sequence  Command             Description
   ~/w800/W801_SDK-linux/doc.w800_apis.chm
   а еще исходники этой demo программы, очень неплохо
 
-</code></p>  
