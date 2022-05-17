@@ -11,7 +11,6 @@ HLK-W801-KIT-V1.1
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
 https://github.com/droppingy/W801_SDK-linux
 
-<p><code>
 
 1) первое замечание, насчет конденсатора
  Board : HLK-W801-KIT-V1.0 (add a capacitor (4.7uF) between GND and RESET)
@@ -27,6 +26,8 @@ https://github.com/droppingy/W801_SDK-linux
    так чтобы в итоге получилось /opt/w80x-tools/bin
    это чтоб в menuconfig не переделывать, такой там путь по умолчанию
  (еще, в этом мануале https://github.com/IOsetting/wm-sdk-w806, есть ссылки как получить данный Toolchain на другие архитектуры, типа i386)
+
+<p><code>
 
 3) далее, из домашней директории
 $ mkdir w800
