@@ -1,3 +1,5 @@
+устанавливал по https://robot-on.ru/articles/ystanovka-mqtt-brokera-mosquitto-raspberry-orange-pi
+
 тест riot-os + mqtt + esp8266
 
 макет esp8266 + bme280 + MQ-2 + LED
