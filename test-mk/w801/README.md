@@ -11,6 +11,8 @@ HLK-W801-KIT-V1.1
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
 https://github.com/droppingy/W801_SDK-linux
 
+<p><code>
+
 1) первое замечание, насчет конденсатора
  Board : HLK-W801-KIT-V1.0 (add a capacitor (4.7uF) between GND and RESET)
    про это есть обьяснение в статье
@@ -20,10 +22,11 @@ https://github.com/droppingy/W801_SDK-linux
 
 2) второе, установка :
  Toolchain: <a href="https://github.com/droppingy/hlk-w80x-toolchain" title="csky-elfabiv2-tools-x86_64-minilibc-20210423"></a>
-   я его скачат как zip архив
+   я его скачал как zip архив
    потом распаковал в директорию /opt 
    так чтобы в итоге получилось /opt/w80x-tools/bin
    это чтоб в menuconfig не переделывать, такой там путь по умолчанию
+ (еще, в этом мануале https://github.com/IOsetting/wm-sdk-w806, есть ссылки как получить данный Toolchain на другие архитектуры, типа i386)
 
 3) далее, из домашней директории
 $ mkdir w800
@@ -113,11 +116,11 @@ Sequence  Command             Description
 например , берём t-connect("ssid","pwd") в блокнот
 подправляем t-connect("mywifi2","94510984")
 и вставляем в терминал...
-
+                         
 
 4) что дальше?
   например, изучаем пиложенный файлик
   ~/w800/W801_SDK-linux/doc.w800_apis.chm
   а еще исходники этой demo программы, очень неплохо
 
-  
+</code></p>  
