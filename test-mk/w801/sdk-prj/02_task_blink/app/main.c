@@ -47,7 +47,9 @@ void demo_console_task(void *sdata)
     {
 	    tls_gpio_write(WM_IO_PB_05, u8_led_state);	
 	    tls_gpio_write(WM_IO_PB_11, u8_led_state);
-	    tls_os_time_delay(100);
+	    tls_gpio_write(WM_IO_PB_16, ~u8_led_state);
+	    tls_gpio_write(WM_IO_PB_25, ~u8_led_state);
+	    tls_os_time_delay(500);
 	    u8_led_state=~u8_led_state;
     }
 }
@@ -58,6 +60,8 @@ void UserMain(void)
 	
 	tls_gpio_cfg(WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
 	tls_gpio_cfg(WM_IO_PB_11, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+	tls_gpio_cfg(WM_IO_PB_16, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+	tls_gpio_cfg(WM_IO_PB_25, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
 
 
     tls_os_task_create(NULL, NULL,

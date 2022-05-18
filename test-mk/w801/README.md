@@ -196,3 +196,14 @@ Sequence  Command             Description
   ~/w800/W801_SDK-linux/doc.w800_apis.chm
   а еще исходники этой demo программы, очень неплохо
 
+
+5) еще, 
+очистить проект
+
+$ make distclean
+
+
+стереть флэш в микроконтроллере
+
+$ make erase
+
