@@ -7,7 +7,7 @@ git commit -m "sync1"
 git push
 
 
-rsync -r --exclude=.git --delete /home/nvv/gitflic.ru/test /home/nvv/github.com
+rsync -r --links --exclude=.git --delete /home/nvv/gitflic.ru/test /home/nvv/github.com
 
 cd /home/nvv/github.com/test
 
