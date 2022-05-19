@@ -8,6 +8,11 @@ HLK-W801-KIT-V1.1
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/HLK-W801-KIT-V1-1.jpg" alt="HLK-W801-KIT-V1-1" title="HLK-W801-KIT-V1-1" /></p>
 
 
+WinnerMicro W801 Block Diagram
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/winnermicro-w801-block-diagram.jpg" alt="WinnerMicro W801 Block Diagram" title="WinnerMicro W801 Block Diagram" /></p>
+
+описание есть на <a href="https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2/" title="HLK-W801 board "></a>
+
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
 https://github.com/droppingy/W801_SDK-linux
 

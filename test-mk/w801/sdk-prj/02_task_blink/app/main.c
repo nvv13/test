@@ -4,12 +4,7 @@
 * 
 * Description: main 
 * 
-* Copyright (c) 2014 Winner Micro Electronic Design Co., Ltd. 
-* All rights reserved. 
-* 
-* Author : dave
-* 
-* Date : 2014-6-14
+* Date : 2022-05-19
 *****************************************************************************/ 
 
 #include <stdio.h>
