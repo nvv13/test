@@ -12,6 +12,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "wm_type_def.h"
+#include "wm_cpu.h"
 //#include "wm_type_def.h"
 //#include "wm_uart.h"
 #include "wm_gpio.h"
@@ -38,17 +40,17 @@ static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
 
 
 
-#define US_PER_MS	10
+#define US_PER_MS	1
 
 /**
  * @brief   Switch to the next LED every 10ms
  */
-#define STEP        (200 * US_PER_MS)
+#define STEP        (10 * US_PER_MS)
 
 /**
  * @brief   Interval for dimming colors
  */
-#define DIM         (100 * US_PER_MS)
+#define DIM         (5 * US_PER_MS)
 
 /**
  * @brief   Step through brightness levels (0-255) in 32 steps
@@ -99,17 +101,17 @@ void demo_console_task(void *sdata)
 
 
     ws2812b_params_t param;
-    param.led_numof = 10;
+    param.led_numof = 60;
     param.data_pin  = WM_IO_PB_01;
 
     ws2812b_init(&dev, &param );
 
     puts("Initialization done.");
 
-    while (1) {
-    setcolor(-1, 255);
-    ws2812b_load_rgba(&dev, leds);
-}
+//    while (1) {
+//    setcolor(1, 123);
+//    ws2812b_load_rgba(&dev, leds);
+//}
 
     /* set to each red, green, and blue, and fade each color in and out */
     for (int col = 0; col <= 2; col++) {
@@ -162,11 +164,10 @@ void UserMain(void)
 {
 	printf("user task\n");
 	
-	tls_gpio_cfg(WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_11, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_16, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_25, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-
+	tls_sys_clk sysclk;
+	tls_sys_clk_get(&sysclk);
+	printf("  sysclk.apbclk %d\n",sysclk.apbclk);
+	printf("  sysclk.cpuclk %d\n",sysclk.cpuclk);
 
     tls_os_task_create(NULL, NULL,
                        demo_console_task,
