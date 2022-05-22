@@ -18,7 +18,7 @@ W800 address mapping
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/W800%20address%20mapping.jpg" alt="W800 address mapping" title="W800 address mapping" /></p>
 
 
-описание есть на <a href="https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2/" title="HLK-W801 board "></a>
+описание есть на https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2
 
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
 https://github.com/droppingy/W801_SDK-linux
@@ -32,7 +32,7 @@ https://github.com/droppingy/W801_SDK-linux
    поскольку у меня платка HLK-W801-KIT-V1.1 , я конденсатор не припаял, и .. работает
 
 2) второе, установка :
- Toolchain: <a href="https://github.com/droppingy/hlk-w80x-toolchain" title="csky-elfabiv2-tools-x86_64-minilibc-20210423"></a>
+ Toolchain: csky-elfabiv2-tools-x86_64-minilibc-20210423  https://github.com/droppingy/hlk-w80x-toolchain 
    я его скачал как zip архив
    потом распаковал в директорию /opt 
    так чтобы в итоге получилось /opt/w80x-tools/bin
