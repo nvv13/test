@@ -11,6 +11,13 @@ HLK-W801-KIT-V1.1
 WinnerMicro W801 Block Diagram
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/winnermicro-w801-block-diagram.jpg" alt="WinnerMicro W801 Block Diagram" title="WinnerMicro W801 Block Diagram" /></p>
 
+W800 Clock Structure
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/W800%20Clock%20Structure.jpg" alt="W800 Clock Structure" title="W800 Clock Structure" /></p>
+
+W800 address mapping
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/W800%20address%20mapping.jpg" alt="W800 address mapping" title="W800 address mapping" /></p>
+
+
 описание есть на <a href="https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2/" title="HLK-W801 board "></a>
 
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
