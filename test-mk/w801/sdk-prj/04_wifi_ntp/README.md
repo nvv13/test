@@ -2,7 +2,11 @@ project
 
 board HLK-W801-KIT-V1.1 + wifi + ntp
 
-в итоге, работает так
+
+
+
+
+
 
 
 

@@ -24,6 +24,7 @@
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
 //#include "wm_regs.h"
+#include "wm_rtc.h"
 
 #include "w_wifi.h"
 #include "w_ntp.h"
@@ -53,6 +54,18 @@ void demo_console_task(void *sdata)
             }
 	}
  
+    u8 u8_ntp_state=0;
+    while(u8_ntp_state==0)
+	{
+        printf("trying to get ntp\n");
+	if(u8_ntp_state==0 && ntp_demo()==WM_SUCCESS)
+	    u8_ntp_state=1;
+   	    else
+            {
+	    tls_os_time_delay(5000);
+            }
+	}
+
     u8 u8_led_state=0;
   
 
@@ -64,10 +77,14 @@ void demo_console_task(void *sdata)
 	    tls_gpio_write(WM_IO_PB_11, u8_led_state);
 	    tls_gpio_write(WM_IO_PB_16, ~u8_led_state);
 	    tls_gpio_write(WM_IO_PB_25, ~u8_led_state);
-	    tls_os_time_delay(500);
+	    tls_os_time_delay(1000);
 	    u8_led_state=~u8_led_state;
 
-            ntp_demo();
+
+	    struct tm tblock;
+ 	    tls_get_rtc(&tblock);
+            printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
+
 
 	}
     }
