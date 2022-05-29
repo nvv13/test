@@ -38,6 +38,7 @@ static void tic_delay(uint32_t cnt)
     if (cnt == 0) {
         return;
     }
+    // нашел данный алгоритм в исходниках SDK, там все что может понадобиться - есть
     uint32_t load = csi_coret_get_load();
     uint32_t start = csi_coret_get_value();
     uint32_t cur;
@@ -79,7 +80,7 @@ static inline void shift(const u16 offset, const u32 reg, const u8 pin, uint32_t
         if( ((data >> i) & 0x01) )
         {//1
 	tls_reg_write32(HR_GPIO_DATA + offset, reg |  (1 << pin));	/* write high */
-        tic_delay(170);// freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
+        tic_delay(170);// freg 571.420  KHz CPU_CLK_240M     half period 0.85 us, + - значения чуть подравлены с учетом операторов в цикле
         tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));/* write low */
         tic_delay(61);// freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
         }
@@ -113,7 +114,7 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
 	tls_sys_clk_get(&sysclk);
         if(sysclk.cpuclk!=240)
          {
-         tls_sys_clk_set(CPU_CLK_240M); 
+         tls_sys_clk_set(CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
          }
 
 	u32 cpu_sr = 0;
@@ -122,9 +123,9 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
         u8  pin;
         u16 offset;
 
-        if (dev->data_pin >= WM_IO_PB_00)
+        if (dev->data_pin >= WM_IO_PB_00) // w801 chip, only two GPIO port, PA (GPIOA - 16 bit) and PB (GPIOB - 32 bit), max power 12ma
         {
-           pin    = dev->data_pin - WM_IO_PB_00;
+          pin    = dev->data_pin - WM_IO_PB_00;
           offset = TLS_IO_AB_OFFSET;
         }
         else
@@ -137,9 +138,9 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
 	cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
 	
 	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
-	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin));
+	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin)); // enabled control reg from need pin
 
-	reg = tls_reg_read32(HR_GPIO_DATA + offset);
+	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
 
     for (int i = 0; i < dev->led_numof; i++) {
         uint32_t data = 0;//HEAD;
@@ -151,17 +152,16 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
         shift(offset, reg, pin, data);
     }
 
-        tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));/* write low */
+        tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));/* write low from pin */
 
-        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en);
+        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
 
 	tls_os_release_critical(cpu_sr); // enable Interrupt
 
-    // RES above 50 mKs
+    // RES above 50μs
     tic_delay(13000);
-    //mdelay(50); ms
 
-    switch(sysclk.cpuclk)
+    switch(sysclk.cpuclk) // восстанавливаем частоту
     {
      case 2:
        {

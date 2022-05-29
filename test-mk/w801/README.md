@@ -25,6 +25,13 @@ W800 address mapping
 подробнее на https://chowdera.com/2022/03/202203272225090142.html
 
 
+еще приложил в папку doc, документы переведенные с китайского на английский, с помощью Machine Translated by Google
+
+"W801 Chip Specifications W801 V1.0 (en - Machine Translated by Google).pdf"
+
+
+
+
 
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
 https://github.com/droppingy/W801_SDK-linux
