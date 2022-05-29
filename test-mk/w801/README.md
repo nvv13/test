@@ -24,6 +24,7 @@ W800 address mapping
 
 подробнее на https://chowdera.com/2022/03/202203272225090142.html
 
+про SDK, инициализацию и старт https://cdmana.com/2022/03/202203272225056680.html
 
 еще приложил в папку doc, документы переведенные с китайского на английский, с помощью - Machine Translated by Google.
 
