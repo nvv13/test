@@ -1,10 +1,9 @@
 project
 
-board HLK-W801-KIT-V1.1 + ws2812b RGB address LED
+board HLK-W801-KIT-V1.1 + wifi + ntp
 
 в итоге, работает так
 
-https://youtu.be/7E6WU3hryAg
 
 
 
@@ -34,12 +33,3 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
   поэтому делаем CTRL + A + G   - это комманда picocom - RTS down, (нажимать надо достаточно быстро, (одновременно, но сначала CTRL))
   и пользуемся ...
           выход из picocom - CTRL + A + Q  (это выход без сброса порта (Skipping tty reset...))
-
-
-
-
-
-
-
-
-
