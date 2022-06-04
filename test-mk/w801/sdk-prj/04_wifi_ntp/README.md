@@ -1,10 +1,30 @@
 project
 
-board HLK-W801-KIT-V1.1 + wifi + ntp
+board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1
 
 
+дисплей
 
+LCD display 5643AS-1
+     12 pin
 
+надо соеденить по схеме:
+
+connect to
+W801  5643AS-1 
+GPIO  PIN
+PB_21 1
+PB_22 2
+PB_23 3
+PB_24 4
+PB_25 5
+PB_26 6
+PB_18 7
+PB_17 8
+PB_16 9
+PB_11 10
+PB_10 11
+PB_15 12
 
 
 
