@@ -345,7 +345,11 @@ static u8 i_5643_hour =0;
 static u8 i_5643_min  =0;
 static u8 u8_sec_state=0;
 static u8 i_out=0;
-static u8 i_max_out=200;
+
+#define LCD_VAL_LG_low	     200
+#define LCD_VAL_LG_middle    50
+#define LCD_VAL_LG_hi        5
+static u8 i_max_out=LCD_VAL_LG_middle;
 
 static void demo_timer_irq(u8 *arg)
 {
@@ -410,9 +414,9 @@ static void demo_gpio_isr_callback(void *context)
                   {
                   switch(i_max_out)// градации яркости, 5-все 4 циры подряд выводит, а далее, чем больше, тем больше пропустит циклов вызова таймера для вывода
                    {
-                   case 200 : i_max_out=5;break;
-                   case 50  : i_max_out=200;break;
-                   case 5   : i_max_out=50;break;
+                   case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_hi    ;break;
+                   case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low   ;break;
+                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_middle;break;
                    }
                   i_dreb=1;
                   }
