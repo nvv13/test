@@ -26,6 +26,7 @@
 #include "wm_regs.h"
 #include "wm_rtc.h"
 #include "wm_timer.h"
+#include "wm_watchdog.h"
 
 //#include "wm_cpu.h"
 //#include "csi_core.h"
@@ -315,6 +316,20 @@ switch(i_pos)
  };break;
  default: // off ligth
  {
+        reg_temp=reg_temp 
+              & (~(1 << 15))
+              & (~(1 << 17))
+              & (~(1 << 26))
+              & (~(1 << 16))
+              & (~(1 << 10))
+              & (~(1 << 18))
+              & (~(1 << 24))
+              & (~(1 << 22))
+              & (~(1 << 21))
+              & (~(1 << 11))
+              & (~(1 << 25))
+              & (~(1 << 23))
+                 ;/* write low */
  };break;
 }
 	tls_reg_write32(HR_GPIO_DATA + offset,reg_temp );  /* write  */
@@ -330,6 +345,7 @@ static u8 i_5643_hour =0;
 static u8 i_5643_min  =0;
 static u8 u8_sec_state=0;
 static u8 i_out=0;
+static u8 i_max_out=200;
 
 static void demo_timer_irq(u8 *arg)
 {
@@ -346,32 +362,65 @@ switch(i_out)
  case 0:
  {
  lcd5643printDigit(1,i_HiHour);
- i_out++;  
  };break;
  case 1:
  {
  lcd5643printDigit(2,i_LoHour);
- i_out++;  
  };break;
- case  2:
+ case 2:
  {
  lcd5643printDigit(3,i_HiMin);
- i_out++;  
  };break;
- case  3:
+ case 3:
  {
  lcd5643printDigit(4,i_LoMin);
- i_out++;  
  };break;
- case  4:
+ case 4:
  {
  lcd5643printDigit(0,u8_sec_state); // on sec state
- i_out=0;
+ };break;
+ default:
+ {
+ lcd5643printDigit(5,0); // off 
  };break;
 }
 
+if(i_out++>i_max_out) // от 5 ...
+ {
+ i_out=0;
+ }
+
 }
 
+static u8 i_dreb=0;
+
+#define DEMO_ISR_IO		WM_IO_PA_01
+static void demo_gpio_isr_callback(void *context)
+{
+
+	u16 ret = tls_get_gpio_irq_status(DEMO_ISR_IO);
+	//printf("\nint flag =%d\n",ret);
+	if(ret)
+	{
+		tls_clr_gpio_irq_status(DEMO_ISR_IO);
+		if(ret == tls_gpio_read(DEMO_ISR_IO)) // button ok
+                 {
+		 printf("\nbutton io =%d\n",ret);
+                 if(i_dreb==0)
+                  {
+                  switch(i_max_out)
+                   {
+                   case 200 : i_max_out=5;break;
+                   //case 100 : i_max_out=200;break;
+                   case 50  : i_max_out=200;break;
+                   case 5   : i_max_out=50;break;
+                   }
+                  i_dreb=1;
+                  }
+		 }
+		//printf("\nafter int io =%d\n",ret);
+	}
+}
 
 //console task use UART0 as communication port with PC
 void demo_console_task(void *sdata)
@@ -382,14 +431,24 @@ void demo_console_task(void *sdata)
     u8 timer_id;
     struct tls_timer_cfg timer_cfg;
 
-    timer_cfg.unit = TLS_TIMER_UNIT_MS;
-    timer_cfg.timeout = 4;//40
+    //timer_cfg.unit = TLS_TIMER_UNIT_MS;
+    //timer_cfg.timeout = 1;//4
+    timer_cfg.unit = TLS_TIMER_UNIT_US;
+    timer_cfg.timeout = 100;
     timer_cfg.is_repeat = 1;
     timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
     timer_cfg.arg = NULL;
     timer_id = tls_timer_create(&timer_cfg);
     tls_timer_start(timer_id);
     printf("timer start\n");	
+
+	u16 gpio_pin;
+	gpio_pin = DEMO_ISR_IO;
+	//
+	tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
+	tls_gpio_isr_register(gpio_pin, demo_gpio_isr_callback, NULL);
+	tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
+	printf("\nbutton gpio %d rising isr\n",gpio_pin);
 
 
     u8 u8_wifi_state=0;
@@ -419,13 +478,6 @@ void demo_console_task(void *sdata)
     for(;;)
     {
 
-    if(u8_ntp_state==0)
-	{
-	ntp_demo();
-        u8_ntp_state=1;
-        tls_os_time_delay(600);
-	}
-
     tls_gpio_write(WM_IO_PB_05, u8_sec_state);	
     tls_os_time_delay(500);
 
@@ -439,8 +491,10 @@ void demo_console_task(void *sdata)
     //i_5643_min =tblock.tm_sec;
     u8_sec_state=~u8_sec_state;
 
-    if(tblock.tm_hour==0 && tblock.tm_min==0 && tblock.tm_sec==0)
-    	u8_ntp_state=0;
+    i_dreb=0;
+
+    if(tblock.tm_hour==3 && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, синхр время
+    	    tls_sys_reset();
 
     }
 }

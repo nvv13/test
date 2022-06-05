@@ -1,7 +1,26 @@
 project
 
-board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1
+board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button
 
+при старте, подсоеденяемся к сети Wifi
+далее, синхронизация времени с ntp сервером в интернете, и еще, повторы синхронизации в 3 часа ночи
+
+в дополнеии, есть кнопка изменения яркости дисплея
+
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/04_wifi_ntp/w801_quad_digit_led_display.jpg" alt="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1" title="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1" /></p>
+
+фото 2 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/04_wifi_ntp/w801_4_1.jpg" alt="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button" title="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button" /></p>
+
+фото 3 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/04_wifi_ntp/w801_4_2.jpg" alt="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button" title="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button" /></p>
+
+видео 
+https://youtu.be/yVC3PTPEEaM
+
+
+соединения
 
 дисплей
 
@@ -26,8 +45,8 @@ PB_11 10
 PB_10 11
 PB_15 12
 
-
-
+к выводу 
+PA_1 подсоеденяем кнопку на корпус, с подтяжкой резистором на питание 3.3 в (я взял резистор 2 ком, то что под рукой валялось)
 
 
 
