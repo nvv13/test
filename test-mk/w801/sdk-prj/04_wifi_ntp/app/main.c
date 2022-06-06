@@ -200,8 +200,18 @@ switch(i_num)
 return reg_temp;
 }
 
+
+#define OUT_SEC_IND 0
+#define OUT_DIG_1   1
+#define OUT_DIG_2   2
+#define OUT_DIG_3   3
+#define OUT_DIG_4   4
+
+static u8 i_off=0;
+
 void lcd5643printDigit(u8 i_pos,u8 i_num)
 {
+if(i_pos>OUT_DIG_4 && i_off==1)return; //выключть свет, а он уже выключен = сразу выйти
 /*
 LCD display 5643AS-1
      12 pin
@@ -250,9 +260,10 @@ PB_15 12
 
 	u32 reg_temp=reg;
 
+i_off=0; 
 switch(i_pos)
 {
- case 0: //sec indicator, 0=9,11.7.4.2.1.10.5 1=12,8,6 - i_num=3
+ case OUT_SEC_IND: //sec indicator, 0=9,11.7.4.2.1.10.5 1=12,8,6 - i_num=3
  {
         reg_temp=reg_temp 
          | (1 << 15)   // 12
@@ -274,7 +285,7 @@ switch(i_pos)
            else
            reg_temp=reg_temp  | (1 << 23);    // 3
  };break;
- case 1: //digit 1, 0=12 1=9,8,6 - i_num=11.7.4.2.1.10.5
+ case OUT_DIG_1: //digit 1, 0=12 1=9,8,6 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
          | (1 << 16)    //9
@@ -284,7 +295,7 @@ switch(i_pos)
               & (~(1 << 15)); //12
         reg_temp=reg_set_num(reg_temp,i_num);
  };break;
- case 2: //digit 2, 0=9 1=12,8,6 - i_num=11.7.4.2.1.10.5
+ case OUT_DIG_2: //digit 2, 0=9 1=12,8,6 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
          | (1 << 15)    //12
@@ -294,7 +305,7 @@ switch(i_pos)
               & (~(1 << 16)); //9
         reg_temp=reg_set_num(reg_temp,i_num);
  };break;
- case 3: //digit 3, 0=8 1=12,9,6 - i_num=11.7.4.2.1.10.5
+ case OUT_DIG_3: //digit 3, 0=8 1=12,9,6 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
          | (1 << 15)    //12
@@ -304,7 +315,7 @@ switch(i_pos)
               & (~(1 << 17)); //8
         reg_temp=reg_set_num(reg_temp,i_num);
  };break;
- case 4: //digit 4, 0=6 1=12,9,8 - i_num=11.7.4.2.1.10.5
+ case OUT_DIG_4: //digit 4, 0=6 1=12,9,8 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
          | (1 << 15)    //12
@@ -330,6 +341,7 @@ switch(i_pos)
               & (~(1 << 25))
               & (~(1 << 23))
                  ;/* write low */
+        i_off=1; 
  };break;
 }
 	tls_reg_write32(HR_GPIO_DATA + offset,reg_temp );  /* write  */
@@ -344,12 +356,13 @@ switch(i_pos)
 static u8 i_5643_hour =0;
 static u8 i_5643_min  =0;
 static u8 u8_sec_state=0;
-static u8 i_out=0;
+static u16 i_out=0;
 
+#define LCD_VAL_LG_spb_low   600
 #define LCD_VAL_LG_low	     200
 #define LCD_VAL_LG_middle    50
 #define LCD_VAL_LG_hi        5
-static u8 i_max_out=LCD_VAL_LG_middle;
+static u16 i_max_out=LCD_VAL_LG_spb_low;//LCD_VAL_LG_middle;
 
 static void demo_timer_irq(u8 *arg)
 {
@@ -357,31 +370,31 @@ static void demo_timer_irq(u8 *arg)
 
 	u8 i_HiHour=i_5643_hour/10;
 	u8 i_LoHour=i_5643_hour%10;
-	u8 i_HiMin=i_5643_min/10;
-	u8 i_LoMin=i_5643_min%10;
+	u8 i_HiMin = i_5643_min/10;
+	u8 i_LoMin = i_5643_min%10;
         //printf("timer irq hh:mm %d%d:%d%d \n",i_HiHour,i_LoHour,i_HiMin,i_LoMin);
 
 switch(i_out)
 {
  case 0:
  {
- lcd5643printDigit(1,i_HiHour);
+ lcd5643printDigit(OUT_DIG_1,i_HiHour);
  };break;
  case 1:
  {
- lcd5643printDigit(2,i_LoHour);
+ lcd5643printDigit(OUT_DIG_2,i_LoHour);
  };break;
  case 2:
  {
- lcd5643printDigit(3,i_HiMin);
+ lcd5643printDigit(OUT_DIG_3,i_HiMin);
  };break;
  case 3:
  {
- lcd5643printDigit(4,i_LoMin);
+ lcd5643printDigit(OUT_DIG_4,i_LoMin);
  };break;
  case 4:
  {
- lcd5643printDigit(0,u8_sec_state); // on sec state
+ lcd5643printDigit(OUT_SEC_IND,u8_sec_state); // on sec state
  };break;
  default:
  {
@@ -414,9 +427,10 @@ static void demo_gpio_isr_callback(void *context)
                   {
                   switch(i_max_out)// градации яркости, 5-все 4 циры подряд выводит, а далее, чем больше, тем больше пропустит циклов вызова таймера для вывода
                    {
-                   case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_hi    ;break;
-                   case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low   ;break;
-                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_middle;break;
+                   case LCD_VAL_LG_spb_low : i_max_out=LCD_VAL_LG_hi        ;break;
+                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_middle    ;break;
+                   case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low       ;break;
+                   case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_spb_low   ;break;
                    }
                   i_dreb=1;
                   }
@@ -436,7 +450,7 @@ void demo_console_task(void *sdata)
    //timer_cfg.unit = TLS_TIMER_UNIT_MS;
    //timer_cfg.timeout = 1;//4
    timer_cfg.unit = TLS_TIMER_UNIT_US;
-   timer_cfg.timeout = 100;
+   timer_cfg.timeout   = 25;
    timer_cfg.is_repeat = 1;
    timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
    timer_cfg.arg = NULL;
@@ -483,7 +497,7 @@ void demo_console_task(void *sdata)
     {
 
     tls_gpio_write(WM_IO_PB_05, u8_sec_state);	
-    tls_os_time_delay(500);
+    tls_os_time_delay(300);
 
     struct tm tblock;
     tls_get_rtc(&tblock);
