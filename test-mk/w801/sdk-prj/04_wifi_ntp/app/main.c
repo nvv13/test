@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 //#include "wm_type_def.h"
 //#include "wm_uart.h"
 #include "wm_gpio.h"
@@ -26,20 +27,24 @@
 #include "wm_regs.h"
 #include "wm_rtc.h"
 #include "wm_timer.h"
-#include "wm_watchdog.h"
-
+//#include "wm_watchdog.h"
 //#include "wm_cpu.h"
 //#include "csi_core.h"
 
 #include "w_wifi.h"
 #include "w_ntp.h"
+#include "w_flash_cfg.h"
 
 
 #define    DEMO_TASK_SIZE      2048
 static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
 #define  DEMO_TASK_PRIO			                32
 
-u32 reg_set_num(u32 reg_temp,u8 i_num)
+
+
+
+
+u32 reg_set_num(u32 reg_temp,u8 i_num) // на вход reg_temp с пинами, уже в каком то состоянии, к ним нужно добавить состояние пинов для цифры i_num (0...9)
 {
 /*
 PB_21 1
@@ -361,6 +366,7 @@ static u16 i_out=0;
 #define LCD_VAL_LG_spb_low   600
 #define LCD_VAL_LG_low	     200
 #define LCD_VAL_LG_middle    50
+#define LCD_VAL_LG_spb_hi    10
 #define LCD_VAL_LG_hi        5
 static u16 i_max_out=LCD_VAL_LG_spb_low;//LCD_VAL_LG_middle;
 
@@ -428,7 +434,8 @@ static void demo_gpio_isr_callback(void *context)
                   switch(i_max_out)// градации яркости, 5-все 4 циры подряд выводит, а далее, чем больше, тем больше пропустит циклов вызова таймера для вывода
                    {
                    case LCD_VAL_LG_spb_low : i_max_out=LCD_VAL_LG_hi        ;break;
-                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_middle    ;break;
+                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_spb_hi    ;break;
+                   case LCD_VAL_LG_spb_hi  : i_max_out=LCD_VAL_LG_middle    ;break;
                    case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low       ;break;
                    case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_spb_low   ;break;
                    }
@@ -439,10 +446,20 @@ static void demo_gpio_isr_callback(void *context)
 	}
 }
 
+#define MEM_CELL_FROM_LIGTH_LEVEL 0
+
 //console task use UART0 as communication port with PC
 void demo_console_task(void *sdata)
 {
    printf("wifi test app\n");
+
+   flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
+   printf("flash_cfg_load_u16=%d\n",i_max_out);
+   if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
+     i_max_out=LCD_VAL_LG_middle;
+   i_5643_hour=i_max_out/100;
+   i_5643_min =i_max_out%100;
+
 
    u8 timer_id;
    struct tls_timer_cfg timer_cfg;
@@ -496,6 +513,7 @@ void demo_console_task(void *sdata)
     while(u8_wifi_state==1)
     {
 
+
     tls_gpio_write(WM_IO_PB_05, u8_sec_state);	
     tls_os_time_delay(300);
 
@@ -503,22 +521,45 @@ void demo_console_task(void *sdata)
     tls_get_rtc(&tblock);
     //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
 
-    i_5643_hour=tblock.tm_hour;
-    i_5643_min =tblock.tm_min;
-    //i_5643_hour=tblock.tm_min;
-    //i_5643_min =tblock.tm_sec;
     u8_sec_state=~u8_sec_state;
 
-    i_dreb=0;// защита от ддребезга контактов для кнопки
+    if(i_dreb==1) //нажали кнопку, сохраним значение
+     {
+     i_5643_hour=i_max_out/100;
+     i_5643_min =i_max_out%100;
+     printf("flash_cfg_store_u16=%d\n",i_max_out);
+     flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
+     i_dreb=0;// защита от ддребезга контактов для кнопки
+     }
+     else
+     {
+     i_5643_hour=tblock.tm_hour;
+     i_5643_min =tblock.tm_min;
+     //i_5643_hour=tblock.tm_min;
+     //i_5643_min =tblock.tm_sec;
+     }
 
-    //if(tblock.tm_hour==3 && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, синхр время
+
     if(tblock.tm_hour==3 && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, синхр время
             {
             u8_wifi_state=0;
     	    //tls_sys_reset();
             }
 
+
+    if(tblock.tm_hour==23 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out!=LCD_VAL_LG_spb_low) // ночь, установить минимальную яркость!
+            {
+            i_max_out=LCD_VAL_LG_spb_low;
+            }
+
+    if(tblock.tm_hour==6 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out==LCD_VAL_LG_spb_low) // утро, восстановить яркость!
+            {
+            flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
+            }
+
+
     }
+
   }
 
 }

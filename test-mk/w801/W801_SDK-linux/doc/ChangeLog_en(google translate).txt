@@ -1,0 +1,188 @@
+===================================================== ========
+| CHANGELOG: WinnerMicro Software Development Kit |
+ ===================================================== ========
+W800 SDK v1.00.04 | 2021/10/30
+===========================
+*********
+SDK Features
+*********
+1. Drive related
+  *When the low-speed SPI is the master, the default IO multiplexing is PB2, PB3, PB4, PB5 (consistent with DEMO)
+  *Add UART5 function
+  *Fix the problem of inaccuracy caused by 32K not calibrated when using 40M frequency division, there is basically no problem with the accuracy when RTC uses 40M frequency division
+  * Fix LCD function not working issue
+  *Add the function of ADC to obtain power supply voltage
+  *Increase the OTP operation of Flash, and increase the operation of reading Unique ID
+  *Add touch function
+  *Modified the problem that some read operations of the Flash driver are not protected
+  *Fixed the problem of turning off the entire IO interrupt when enabling a certain IO interrupt enable bit
+  
+2. DEMO related
+  *Increase access to supply voltage DEMO
+  *Add PMU demo to select clock to use
+
+3. Debug related
+  *Added print port can be set as configurable operation of UART0/UART1 (UART0 is used by default)
+
+4. Distribution network related
+  *Optimize the memory usage of Lian Shengde one-key distribution network
+  *Add TLS_CONFIG_BLE_WIFI_ONESHOT macro definition
+
+5. Compilation and packaging related:
+  * Clean up some invalid code
+  *Fixed the problem that the PPP_SUPPORT macro definition was opened and the compilation error was reported
+  *Fixed the problem that the TLS_CONFIG_HOSTIF macro was closed and the RMMS compilation error was reported
+  *wm_tool.c packaging tool is updated to solve the problem that the packaged file cannot be upgraded successfully when the upgrade file is less than 1024Byte
+  *Add the flash driver for CKLINK debugging download (tools/w800/utilities/W800_Flash_Tool.elf)
+
+6. Bluetooth related
+  *Fix the problem that the Bluetooth wm_ble_client_demo_on_mtu does not set the limit when setting the MTU
+
+7. Wi-Fi related
+  *Fixed the problem that automatic networking in the tls_sys.c file still triggers when the ssid is empty
+  *Fixed the problem that the hotspot can still be created successfully when the apssid is empty
+  * Optimized for Wi-Fi networking
+  *Optimize networking for low power consumption
+  * Fix hotspot mode Beacon frame sending issue
+
+8. AT related
+  *When UART is used as AT command transmission channel, it can be specified as any UART except UART0.
+  *Fix the problem that when the IP is fixed in STA mode, the AT command is added to the network for the second time, and the network status cannot be queried
+  
+9. Added AT commands that support production testing alone (in the src/app/factorycmd directory)
+  *Support send test
+  *Support receiving test
+  * Support frequency offset compensation (AT+FREQ)
+  *Support calibration query (AT+&CALFIN)
+
+W800 SDK v1.00.02 | 2021/5/13
+===========================
+*********
+SDK Features
+*********
+1. Simplify RAM allocation adjustment, see wm_ram_config.h for details (except HSPI and WiFi must use static memory).
+
+2. Code space adjustment instructions:
+   1) Adjust the LENGTH value of I-SRAM in the ld file. If the LENGTH value plus the ORIGIN value has exceeded the FLASH capacity, adjust the initial value of ORIGIN
+   2) Depending on whether the CDK compiles the project, or directly make to choose the adjustment
+      (1) In the CDK project, to adjust the code space size, in addition to step 1), to adjust the tools\w800\uitilities\aft_build_project.sh file
+run_img_header and run_img_pos, run_img_pos should be the same as ORIGIN value; run_img_header is ORIGIN value minus 0x400
+      (2) For command line compilation, except step 1), adjust the values ​​of CONFIG_W800_IMAGE_HEADER and CONFIG_W800_RUN_ADDRESS, the method is the same as (1)
+   3) As the code space becomes larger, the user space will become smaller, so you need to pay attention to the location of the user space as a limitation of use.
+
+3. Bluetooth:
+  1) The ble host is switched to nimble, the default Bluetooth protocol stack used
+  2) Added ble multi-connection example
+  3) Bluetooth controller code optimization
+  4) Standard Bluetooth part: br_edr lib files are provided: libbtcontroller_br_edr.a and libbthost_br_edr.a
+       If you need to use standard Bluetooth, you need to do:
+       (1) Set the macro TLS_CONFIG_BR_EDR in wm_config.h to CFG_ON
+       (2) When compiling:
+           If you use the command line to compile, you need to make menuconfig, in the compile options menu, to enable nimble options, or modify the .config file, remove NIMBLE_FTR
+           If you use CDK to compile, you need to set DNIMBLE_FTR to 0, in the CDK compilation settings
+       (3) Correspondingly, it is necessary to change libbtcontroller_br_edr.a and libbthost_br_edr.a to libbtcontroller.a and libbthost.a
+       (4) You also need to compile the src/app directory separately (command line compilation)
+       (5) Due to the increased Code Size of Bluetooth, the space of I-SRAM in the gcc.ld file needs to be expanded
+
+   5) Bluetooth task deletion is uniformly modified to delete by handle
+   6) The code of the Bluetooth host is unified and open source, and the location is located in the directory: src\bt
+
+4. Wi-Fi optimization:
+   1) STA energy saving processing optimization
+   2) The soft ap function does not support the wmm function for the time being
+
+5. Handling of driver problems:
+   DMA: Fix the problem that the interrupt is not generated due to incorrect processing of the loop address when the DMA is in the loop mode
+   ADC: The DMA callback interface is unified, and the memory is used to dynamically apply for memory during DMA; the ADC callback function is uniformly processed
+   GPIO: Fix the problem that GPIOB does not operate correctly when the interrupt is closed
+   FLASH: Fix the operand exception of Flash lock operation
+   PMU: Remove duplicate csi_kernel_intrpt_exit calls in PMU interrupt handling to trigger scheduling operations
+   7816: Added 7816 interface demo
+   SPI: low-speed main SPI, when using DMA transmission, the memory used is dynamically allocated memory
+   IO multiplexing: Added the IO multiplexing function setting interface of W801
+   uart: In order to adapt to some platforms, the added single character is the callback interface.
+
+6. OS:
+   1) Add the operation of deleting tasks through task handles (wm_osal_rtos.c, tasks.c)
+   2) Improve the operation of deleting tasks by priority (wm_osal_rtos.c, tasks.c)
+   3) Some os adaptation interfaces have added protection for use in interrupts (wm_osal_rtos.c)
+
+7. Modification of the network part:
+    1) Change the network host name to the format of the last 2 fields of the WinnerMicro_+mac address. (ethernetif.c)
+2) Repair the queue delete function in sys_arch.c, no longer use switch interrupt protection
+
+8. The main task in wm_main.c adds a delete operation, which can be deleted after the task in wm_main is used by opening the macro switch.
+
+9. The encapsulation function of memory allocation (wm_mem.c) is only managed by semaphore
+
+10. Apply fixes:
+   1) The FATFS file system adds reentrancy protection processing, and handles the non-4-byte alignment when writing SD cards connected to the SDIO HOST part.
+   2) SSL no longer uses the previous version and uses mbed TLS 2.7.10 instead
+   3) Fix the problem that the oneshot macro is closed and the link fails
+
+11. Clean up some compilation warnings
+
+
+W800 SDK v1.00.01 | 2020/12/29
+===========================
+*********
+SDK Features
+*********
+*ld adjustment:
+     Due to the addition of BT function, the code space exceeds 1MB, the current setting is 1MB+64KB, and the corresponding user area should be reduced by 64KB
+     User area macro adjustment (wm_flash_map.h): #define USER_ADDR_START (0x81E0000UL)
+     The current upgrade area is more than 1MB, you can only choose to use compressed ota firmware
+
+*Secondary BOOT update:
+    1) The operation of adding the secboot.bin file to generate img in the release SDK, so that when the customer adjusts the starting address of the running area, the upgrade fls cannot be started because the header information of secboot does not match with it.
+
+*Bluetooth:
+     1) Provide three kinds of bluetooth libraries, lib for both bt and ble, lib for standard bt alone, lib for ble alone
+        Users can rename the related lib to libbt.a according to the actual needs with the settings of TLS_CONFIG_BR_EDR and TLS_CONFIG_BLE in wm_config.h.
+     2) The lib that ble has by default is used when publishing
+3) Optimize Bluetooth parameters
+4) Add bluetooth demo
+
+*Wi-Fi:
+    1) Optimize low power consumption functions
+2) Optimize exception recovery processing
+
+*System parameters and drivers:
+    1) Increase the key parameter area write protection operation
+2) Optimize the use of memory in the parameter area and use only one piece of static memory instead
+    3) Solve the problem of SDIO multi-block write operation failure
+4) The task stack used by the Master SPI is changed to use the application to create tasks, and no longer uses static memory
+
+*Modification of the sleep and standby functions of the chip:
+    1) Modification of entry conditions for sleep and standby
+    2) The chip Sleep and standby functions required by AT+ENTS in the at command are moved from wifi lib to wm_cmdp.c
+
+
+W800 SDK v1.00.00 | 2020/08/04
+===========================
+*********
+SDK Features
+*********
+*ld adjustment:
+     Due to the addition of BT function, the code space exceeds 1MB, the current setting is 1MB+64KB, and the corresponding user area should be reduced by 64KB
+     User area macro adjustment (wm_flash_map.h): #define USER_ADDR_START (0x81E0000UL)
+     The current upgrade area is more than 1MB, you can only choose to use compressed ota firmware
+*Bluetooth:
+     1) Support BT function and provide API related to Audio sink and hands-free phone
+     2) Provide three kinds of bluetooth libraries, lib for both bt and ble, lib for standard bt alone, lib for ble alone
+        Users can rename the related lib to libbt.a according to the actual needs with the settings of TLS_CONFIG_BR_EDR and TLS_CONFIG_BLE in wm_config.h.
+     3) The lib that both bt and ble are used by default when released
+*Wi-Fi:
+    1) Solve the problem of setting parameter scan, the number of scans is too small, but the number of scans is too long
+*Add DSP function (provided in lib and demo)
+* Provide relevant demo of dsp function, see the relevant code contained in DEMO_DSP macro for details
+*Added IO pull-down function configuration
+*Modify GPIO demo, add pull-down function, GPIO output high or low test
+*Modify the ADC function to provide the test of chip temperature and external input voltage, but does not support the detection function of chip power supply voltage.
+*Modify the PWM demo to support the test demo of two groups of PWM multiplexing
+*SDK provides CDK compilation project (compilation limit path length within 80 characters)
+*CDK (CSKY Development Kit) version: >V2.2.2, access path: https://occ.t-head.cn/community/download?id=575997419775328256
+*Add demo of BLE data communication
+
+W800 SDK v0.00.06 | 2020/07/07
+=====================
