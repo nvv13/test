@@ -368,9 +368,9 @@ static u16 i_out=0;
 #define LCD_VAL_LG_middle    50
 #define LCD_VAL_LG_spb_hi    10
 #define LCD_VAL_LG_hi        5
-static u16 i_max_out=LCD_VAL_LG_spb_low;//LCD_VAL_LG_middle;
+static u16 i_max_out=LCD_VAL_LG_spb_low;// 
 
-static void demo_timer_irq(u8 *arg)
+static void demo_timer_irq(u8 *arg)  // здесь будет вывод на LCD
 {
 //        printf("timer irq hour=%d,min=%d\n",i_5643_hour,i_5643_min);
 
@@ -404,7 +404,7 @@ switch(i_out)
  };break;
  default:
  {
- lcd5643printDigit(5,0); // off 
+ lcd5643printDigit(5,0); // off  пока i_out будет больше 4, - выключить LCD
  };break;
 }
 
@@ -415,7 +415,7 @@ if(i_out++>i_max_out) // от 5 ...
 
 }
 
-static u8 i_dreb=0;
+static u8 i_dreb=0; // от дребезга кнопки
 
 #define DEMO_ISR_IO		WM_IO_PA_01
 static void demo_gpio_isr_callback(void *context)
@@ -453,20 +453,13 @@ void demo_console_task(void *sdata)
 {
    printf("wifi test app\n");
 
-   flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
-   printf("flash_cfg_load_u16=%d\n",i_max_out);
-   if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
-     i_max_out=LCD_VAL_LG_middle;
-   i_5643_hour=i_max_out/100;
-   i_5643_min =i_max_out%100;
-
 
    u8 timer_id;
    struct tls_timer_cfg timer_cfg;
 
    //timer_cfg.unit = TLS_TIMER_UNIT_MS;
    //timer_cfg.timeout = 1;//4
-   timer_cfg.unit = TLS_TIMER_UNIT_US;
+   timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на минимальной яркости, пришлось сделать время таймера поменьше
    timer_cfg.timeout   = 25;
    timer_cfg.is_repeat = 1;
    timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
@@ -485,7 +478,7 @@ void demo_console_task(void *sdata)
 
 
    u8 u8_wifi_state=0;
-   for(;;)
+   for(;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
     while(u8_wifi_state==0)
 	{
@@ -509,56 +502,63 @@ void demo_console_task(void *sdata)
 	    tls_os_time_delay(5000);
             }
 	}
-
-    while(u8_wifi_state==1)
-    {
-
-
-    tls_gpio_write(WM_IO_PB_05, u8_sec_state);	
-    tls_os_time_delay(300);
-
+     
     struct tm tblock;
     tls_get_rtc(&tblock);
-    //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
-
-    u8_sec_state=~u8_sec_state;
-
-    if(i_dreb==1) //нажали кнопку, сохраним значение
-     {
-     i_5643_hour=i_max_out/100;
-     i_5643_min =i_max_out%100;
-     printf("flash_cfg_store_u16=%d\n",i_max_out);
-     flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
-     i_dreb=0;// защита от ддребезга контактов для кнопки
-     }
+    
+    if(tblock.tm_hour>=23 || tblock.tm_hour<6) // ночь, установить минимальную яркость!
+     i_max_out>LCD_VAL_LG_spb_low;
      else
      {
-     i_5643_hour=tblock.tm_hour;
-     i_5643_min =tblock.tm_min;
-     //i_5643_hour=tblock.tm_min;
-     //i_5643_min =tblock.tm_sec;
+     flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
+     printf("flash_cfg_load_u16=%d\n",i_max_out);
+     if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
+       i_max_out=LCD_VAL_LG_middle;
+     i_5643_hour=i_max_out/100;
+     i_5643_min =i_max_out%100;
      }
 
 
-    if(tblock.tm_hour==3 && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, синхр время
+    while(u8_wifi_state==1) // основной цикл(2)
+     {
+     tls_os_time_delay(300);
+     tls_get_rtc(&tblock);// получаем текущее время
+     //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
+     u8_sec_state=~u8_sec_state;
+
+     if(i_dreb==1) //нажали кнопку, сохраним значение
+      {
+      i_5643_hour=i_max_out/100;
+      i_5643_min =i_max_out%100;
+      printf("flash_cfg_store_u16=%d\n",i_max_out);
+      flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
+      i_dreb=0;// защита от ддребезга контактов для кнопки
+      }
+      else
+      {
+      i_5643_hour=tblock.tm_hour;
+      i_5643_min =tblock.tm_min;
+      }
+
+     if(tblock.tm_hour==3 && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, - синхр время раз в сутки
             {
-            u8_wifi_state=0;
-    	    //tls_sys_reset();
+            u8_wifi_state=0; // переход на цикл(1)
+     	    //tls_sys_reset(); так то, это не надо, вроде все стабильно работает
             }
-
-
-    if(tblock.tm_hour==23 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out!=LCD_VAL_LG_spb_low) // ночь, установить минимальную яркость!
+ 
+     if(tblock.tm_hour==23 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out!=LCD_VAL_LG_spb_low) // ночь, установить минимальную яркость!
             {
             i_max_out=LCD_VAL_LG_spb_low;
             }
 
-    if(tblock.tm_hour==6 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out==LCD_VAL_LG_spb_low) // утро, восстановить яркость!
+     if(tblock.tm_hour==6 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out==LCD_VAL_LG_spb_low) // утро, восстановить яркость!
             {
             flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
+            if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
+              i_max_out=LCD_VAL_LG_middle;
             }
-
-
-    }
+     //
+     }
 
   }
 
@@ -568,8 +568,6 @@ void UserMain(void)
 {
 	printf("user task\n");
 	
-	tls_gpio_cfg(WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-
 	tls_gpio_cfg(WM_IO_PB_21, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
 	tls_gpio_cfg(WM_IO_PB_22, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 2
 	tls_gpio_cfg(WM_IO_PB_23, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 3
