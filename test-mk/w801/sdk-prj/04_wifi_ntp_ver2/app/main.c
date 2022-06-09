@@ -36,10 +36,13 @@
 #include "w_flash_cfg.h"
 
 
-#define    DEMO_TASK_SIZE      2048
+#define  DEMO_TASK_SIZE      2048
 static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
 #define  DEMO_TASK_PRIO			                32
 
+#define  DEMO_SOCK_S_TASK_SIZE      512
+static OS_STK   sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
+#define  DEMO_SOCK_S_PRIO 	                (DEMO_TASK_PRIO+1)
 
 
 
@@ -565,6 +568,27 @@ void demo_console_task(void *sdata)
 
 }
 
+
+void sock_s_task(void *sdata)
+{
+
+    struct tls_ethif * ethif;
+    while(1)
+    {
+     while(1)
+	{
+		tls_os_time_delay(500);
+		ethif = tls_netif_get_ethif();
+		if(ethif->status)
+			break;
+	}
+     int i_port=5555;
+     printf("create_socket_server  i_port=%d\n", i_port);
+     create_socket_server(i_port);
+    }
+
+}
+
 void UserMain(void)
 {
 	printf("user task\n");
@@ -589,6 +613,14 @@ void UserMain(void)
                        (void *)DemoTaskStk,          /* task's stack start address */
                        DEMO_TASK_SIZE * sizeof(u32), /* task's stack size, unit:byte */
                        DEMO_TASK_PRIO,
+                       0);
+
+    tls_os_task_create(NULL, NULL,
+                       sock_s_task,
+                       NULL,
+                       (void *)sock_s_task_stk,          /* task's stack start address */
+                       DEMO_SOCK_S_TASK_SIZE * sizeof(u32), /* task's stack size, unit:byte */
+                       DEMO_SOCK_S_PRIO,
                        0);
 
 	
