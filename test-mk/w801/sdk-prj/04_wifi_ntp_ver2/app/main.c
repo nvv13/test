@@ -27,7 +27,7 @@
 #include "wm_regs.h"
 #include "wm_rtc.h"
 #include "wm_timer.h"
-//#include "wm_watchdog.h"
+#include "wm_watchdog.h"
 //#include "wm_cpu.h"
 //#include "csi_core.h"
 
@@ -371,7 +371,7 @@ static u16 i_out=0;
 #define LCD_VAL_LG_middle    50
 #define LCD_VAL_LG_spb_hi    10
 #define LCD_VAL_LG_hi        5
-static u16 i_max_out=LCD_VAL_LG_spb_low;// 
+u16 i_max_out=LCD_VAL_LG_spb_low;// 
 
 static void demo_timer_irq(u8 *arg)  // здесь будет вывод на LCD
 {
@@ -479,6 +479,7 @@ void demo_console_task(void *sdata)
    tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
    printf("\nbutton gpio %d rising isr\n",gpio_pin);
 
+   tls_watchdog_init(60 * 1000 * 1000);//u32 usec около 1-2 минуты
    u8 i_start_reCheck=0;
    u8 u8_wifi_state=0;
    for(;;) // цикл(1) с подсоединением к wifi и запросом времени
@@ -525,6 +526,7 @@ void demo_console_task(void *sdata)
     while(u8_wifi_state==1) // основной цикл(2)
      {
      tls_os_time_delay(300);
+     tls_watchdog_clr();
      tls_get_rtc(&tblock);// получаем текущее время
      //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
      u8_sec_state=~u8_sec_state;
@@ -543,6 +545,9 @@ void demo_console_task(void *sdata)
       i_5643_min =tblock.tm_min;
       }
 
+     //if((tblock.tm_min==0 || tblock.tm_min==10 || tblock.tm_min==20 || tblock.tm_min==30 || tblock.tm_min==40 || tblock.tm_min==50 ||
+     //    tblock.tm_min==5 || tblock.tm_min==15 || tblock.tm_min==25 || tblock.tm_min==35 || tblock.tm_min==45 || tblock.tm_min==55
+     //   ) && tblock.tm_sec==0) // запросим снова ntp, - синхр время раз в сутки
      if((tblock.tm_hour==3 || i_start_reCheck<2 /* было, мигнул свет и... , вообщим добавим еще разок другой */ ) && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, - синхр время раз в сутки
             {
 	    i_start_reCheck++;
