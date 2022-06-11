@@ -1,4 +1,4 @@
-project - version 2
+project - version 2 
 
 board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button
 
@@ -6,9 +6,12 @@ board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1 + button
 При старте, подсоеденяемся к сети Wifi,
 далее, синхронизация времени с ntp сервером в интернете, и еще, повторы синхронизации в 3 часа ночи
 
-В дополнеии, есть кнопка изменения яркости дисплея.
+так-же, есть кнопка изменения яркости дисплея.
 4 уровня яркости, после установки - запоминает во внутреннеё флэш.
 После 23:00 и до 6:00, яркость переключаеться на минимальную.
+
++ добавил прием соединения по tcp, все взято из demo sdk, и немного доработано...
+
 
 фото 1 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/04_wifi_ntp/w801_quad_digit_led_display.jpg" alt="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1" title="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1" /></p>

@@ -3,6 +3,7 @@
 //#include "wm_demo.h"
 #include "wm_wifi_oneshot.h"
 #include "wm_osal.h"
+#include "wm_rtc.h"
 
 //#include "lwip/api.h"
 
@@ -34,7 +35,14 @@ if (len > 5 &&	strncmp((char *)sock_rx, "light", 5) == 0) {
 if (strncmp((char *)sock_rx, "time", 4) == 0) {
     struct tm tblock;
     tls_get_rtc(&tblock);
-    i_len_ret=sprintf(sock_rx," sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
+    i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d\n"
+           ,tblock.tm_year+1900
+           ,tblock.tm_mon+1
+           ,tblock.tm_mday
+           ,tblock.tm_hour
+           ,tblock.tm_min
+           ,tblock.tm_sec
+         );
  }
 
 
