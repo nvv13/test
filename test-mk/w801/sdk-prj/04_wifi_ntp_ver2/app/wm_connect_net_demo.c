@@ -176,12 +176,14 @@ int create_socket_server(int port)
          i_ret=setsockopt(new_fd, SOL_SOCKET, SO_RCVTIMEO,(struct timeval *)&tmv,sizeof(struct timeval));
        	 printf("new_fd setsockopt SO_RCVTIMEO i_ret=%d\n",i_ret);
          ret=-1;
-         while(ret==-1 && new_fd !=-1 ) // это сделано, чтоб в этом месте программа не застряла, при переподключении к wifi
+         u8 u8_count_max_to_recive_timeout=100;// 3 сек * 100 = 5 мин ждем, и отсоединяем, если нет комманды....
+         while(ret==-1 && new_fd !=-1 && u8_count_max_to_recive_timeout>0) // это сделано, чтоб в этом месте программа не застряла, при переподключении к wifi
           {
     	  //printf("start recv\n");
           i_start_recive=new_fd;
           ret = recv(new_fd, sock_rx, sizeof(sock_rx)-1, 0); 
           i_start_recive=-1;
+          u8_count_max_to_recive_timeout--;
      	  //printf("recv ret=%d %d\n", ret,i_ret++);
           }
 
