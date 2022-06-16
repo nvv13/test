@@ -26,7 +26,7 @@ KY-040
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/04_wifi_ntp_ver3/ky-040.jpg" alt="KY-040" title="KY-040" /></p>
 
 видео 
-https://youtu.be/yVC3PTPEEaM
+https://youtu.be/WgEfQ8s8r3g
 
 
 соединения
