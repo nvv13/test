@@ -529,7 +529,7 @@ void demo_console_task(void *sdata)
 
 
 
-   tls_watchdog_init(60 * 1000 * 1000);//u32 usec около 1-2 минуты
+   tls_watchdog_init(60 * 1000 * 1000);//u32 usec около 1 минуты
    u8 i_start_reCheck=0;
    u8 u8_wifi_state=0;
    for(;;) // цикл(1) с подсоединением к wifi и запросом времени
@@ -576,7 +576,7 @@ void demo_console_task(void *sdata)
     while(u8_wifi_state==1) // основной цикл(2)
      {
      tls_os_time_delay(300);
-     tls_watchdog_clr();
+     tls_watchdog_clr();//сбросить
      tls_get_rtc(&tblock);// получаем текущее время
      //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
      u8_sec_state=~u8_sec_state;

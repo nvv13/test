@@ -429,7 +429,7 @@ static void demo_gpio_isr_callback(void *context)
 	if(ret)
 	{
 		tls_clr_gpio_irq_status(DEMO_ISR_IO);
-		if(ret == tls_gpio_read(DEMO_ISR_IO)) // button ok
+		//if(ret == tls_gpio_read(DEMO_ISR_IO)) // button ok
                  {
 		 printf("\nbutton io =%d i_dreb=%d i_max_out=%d\n",ret,i_dreb,i_max_out);
                  if(i_dreb==0)// защита от ддребезга контактов для кнопки
