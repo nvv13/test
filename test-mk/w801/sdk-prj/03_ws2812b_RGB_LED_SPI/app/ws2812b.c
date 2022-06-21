@@ -1,0 +1,264 @@
+/**
+ * @ingroup     drivers_ws2812b
+ * @{
+ *
+ * @file
+ * @brief       WS2812B RGB LED driver implementation
+ *
+ *
+ * @}
+ */
+
+#include <string.h>
+
+#include "assert.h"
+
+#include "wm_type_def.h"
+#include "wm_cpu.h"
+#include "wm_regs.h"
+#include "wm_gpio.h"
+#include "wm_osal.h"
+
+
+
+#include "csi_core.h"
+extern uint32_t csi_coret_get_load(void);
+extern uint32_t csi_coret_get_value(void);
+
+
+#include "ws2812b.h"
+
+#include "ws2812b_params.h"
+#include "wm_mem.h"
+#include "wm_hostspi.h"
+#include "wm_gpio_afsel.h"
+#define SPI_DATA_LEN    (WS2812B_PARAM_LED_NUMOF*12)  // num LED * 24 * 4 / 8 = buf SPI
+
+
+#define BLUE            (0xff0000)
+#define GREEN           (0x00ff00)
+#define RED             (0x0000ff)
+#define BLUE_SHIFT      (16U)
+#define GREEN_SHIFT     (8U)
+
+
+/*
+Data transfer time( TH+TL=1.25 μs ±600n s )
+
+0:
+T0H 0 code ,high voltage time 0.4us ±150ns
+T0L 0 code , low voltage time 0.85us ±150ns
+
+1:
+T1H 1 code ,high voltage time 0.85us ±150ns
+T1L 1 code ,low voltage time 0.4us ±150ns
+
+RES low voltage time Above 50μs
+*/
+
+static char *tx_buf = NULL;
+
+
+int ws2812b_init(ws2812b_t *dev, const ws2812b_params_t *params)
+{
+    assert(dev && params);
+
+    *dev = *params;
+
+	/*MASTER SPI configuratioin*/
+	wm_spi_cs_config(WM_IO_PB_04);
+	wm_spi_ck_config(WM_IO_PB_02);
+	wm_spi_di_config(WM_IO_PB_03);
+	wm_spi_do_config(WM_IO_PB_00);
+	printf("cs--PB04, ck--PB02, di--PB03, do--PB05;\r\n");  
+        // подключать к do, то есть к WM_IO_PB_05
+
+/*
+	1,25 µs	=	800000 Hz										
+	0,3   µs	=	3333333.3333333 Hz										
+	0.31  µs	=	3225806.4516129 Hz										
+	0.313	=	3194888.1789137 Hz										
+									LED =	RGB =	SPI tx =	bit =	буффер, байт =
+SPI ?	4 имп по 0,3 мкс					нужно 4 бита на каждый бит			60	24	4	5760	720
+		0,15								24	4	12	
+	0,31	0,31	0,31	0,31	1,24				60			12	720
+	0,3	0,3	0,3	0,3	1,2								
+													
+bit													
+0	0,35		0,9		1,25								
+													
+1		0,9		0,35									
+													
+													
+Если мы передаём ноль, то сначала мы устанавливаем высокий уровень сигнала, держим его в таком состоянии 0,35 микросекунды (допускается отклонение 150 наносекунд или 0,15 микросекунды). По прошествии данного времени мы устанавливаем на ножке низкий уровень и держим его до передачи следующего бита 0,9 микросекунды (допускается такое же отклонение — 150 наносекунд)													
+													
+Единица передаётся наоборот. Мы также устанавливаем высокий уровень, ждём 0,9 микросекунды (отклонение то же), затем опускаем уровень, ждём 0,35 микросекунды (отклонение такое же — 150 наносекунд)													
+
+
+int master_spi_send_data(int clk, int type)
+{
+*/
+	
+        //int clk = 3225806;          /* default 1M */
+        int clk = 10000;          /* default 1M */
+
+        tls_spi_trans_type(2);
+
+/**
+ * @brief          This function is used to setup the spi controller.
+ *
+ * @param[in]      mode         is CPOL and CPHA type defined in TLS_SPI_MODE_0 to TLS_SPI_MODE_3
+ * @param[in]      cs_active    is cs mode, defined as TLS_SPI_CS_LOW or TLS_SPI_CS_HIGH
+ * @param[in]      fclk            is spi clock,the unit is HZ.
+ *
+ * @retval         TLS_SPI_STATUS_OK			if setup success
+ * @retval         TLS_SPI_STATUS_EMODENOSUPPORT	if mode is not support
+ * @retval         TLS_SPI_STATUS_EINVAL			if cs_active is not support
+ * @retval         TLS_SPI_STATUS_ECLKNOSUPPORT	if fclk is not support
+ *
+ * @note           None
+ */
+
+    switch(tls_spi_setup(TLS_SPI_MODE_0, TLS_SPI_CS_LOW, clk))
+    {
+	case TLS_SPI_STATUS_OK:
+   		{
+        	printf("tls_spi_setup TLS_SPI_STATUS_OK\n");
+		};break;
+	case TLS_SPI_STATUS_EMODENOSUPPORT:
+   		{
+        	printf("tls_spi_setup TLS_SPI_STATUS_EMODENOSUPPORT\n");
+                return WM_FAILED;
+		};break;
+	case TLS_SPI_STATUS_EINVAL:
+   		{
+        	printf("tls_spi_setup TLS_SPI_STATUS_EINVAL\n");
+                return WM_FAILED;
+		};break;
+	case TLS_SPI_STATUS_ECLKNOSUPPORT:
+   		{
+        	printf("tls_spi_setup TLS_SPI_STATUS_ECLKNOSUPPORT\n");
+                return WM_FAILED;
+		};break;
+    }
+
+
+    tx_buf = tls_mem_alloc(SPI_DATA_LEN);
+    if (NULL == tx_buf)
+    {
+        printf("\nspi_demo tx mem err\n");
+        return WM_FAILED;
+    }	
+
+   // memset(tx_buf,  0, SPI_DATA_LEN);
+/*
+    strcpy(tx_buf, "data");
+    p = (int *)&tx_buf[4];
+    *p = 1500;
+    p ++;
+    for(i = 0;i < (SPI_DATA_LEN-8)/4;i ++)    
+    {
+        *p = 0x12345678;
+         p ++;
+    }
+*/
+
+//    tls_mem_free(tx_buf);
+	
+//    printf("after send\n");
+	return WM_SUCCESS;
+
+
+
+//    tls_gpio_cfg(dev->data_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+//    tls_gpio_write(dev->data_pin, 0);	
+    
+
+}
+
+void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
+{
+    assert(dev && vals);
+
+    memset(tx_buf,  0, SPI_DATA_LEN);
+
+    int iPosBit=0;
+
+    for (int i = 0; i < dev->led_numof; i++) {
+        uint32_t data = 0;//HEAD;
+        /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
+         * 3 leas significant bits */
+        data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)<< BLUE_SHIFT);
+        data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha )<< GREEN_SHIFT);
+        data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+
+        data = 0; 
+//        shift(offset, reg, pin, data);
+    for (int i = 23; i >= 0; i--) {
+
+        if( ((data >> i) & 0x01) )
+        {//1 -> 1110
+        int iByte=0;
+        if(iPosBit>0)iByte=iPosBit/8;
+        int iBit=iPosBit-(iByte*8);
+        tx_buf[iByte] |= ( (1 << iBit) | (1 << (iBit+1)) | (1 << (iBit+2) ) );
+        iPosBit+=4;
+        }
+        else
+        {//0 -> 1000
+        int iByte=0;
+        if(iPosBit>0)iByte=iPosBit/8;
+        int iBit=iPosBit-(iByte*8);
+        tx_buf[iByte] |= ( (1 << iBit) );
+        iPosBit+=4;
+        }
+     }
+
+    }
+
+ //   printf("SPI Master send %d byte, modeA, little endian\n",  SPI_DATA_LEN);    
+
+/**
+ * @brief          This function is used to synchronous write data by SPI.
+ *
+ * @param[in]      buf          data to be sent.
+ * @param[in]      len          data length.
+ *
+ * @retval         TLS_SPI_STATUS_OK			if write success.
+ * @retval         TLS_SPI_STATUS_EINVAL		if argument is invalid.
+ * @retval         TLS_SPI_STATUS_ENOMEM			if there is no enough memory.
+ * @retval         TLS_SPI_STATUS_ESHUTDOWN		if SPI driver does not installed.
+ *
+ * @note           None
+ */
+    memset(tx_buf,  0x03, SPI_DATA_LEN);
+
+    switch(tls_spi_write((u8 *)tx_buf, SPI_DATA_LEN))
+    {
+	case TLS_SPI_STATUS_OK:
+   		{
+        	//printf("tls_spi_write TLS_SPI_STATUS_OK\n");
+		};break;
+	case TLS_SPI_STATUS_EINVAL:
+   		{
+        	printf("tls_spi_write TLS_SPI_STATUS_EINVAL\n");
+        //        return WM_FAILED;
+		};break;
+	case TLS_SPI_STATUS_ENOMEM:
+   		{
+        	printf("tls_spi_write TLS_SPI_STATUS_ENOMEM\n");
+        //        return WM_FAILED;
+		};break;
+	case TLS_SPI_STATUS_ESHUTDOWN:
+   		{
+        	printf("tls_spi_write TLS_SPI_STATUS_ESHUTDOWN\n");
+        //        return WM_FAILED;
+		};break;
+    }
+
+    // RES above 50μs
+//    tic_delay(13000);
+
+
+
+}
