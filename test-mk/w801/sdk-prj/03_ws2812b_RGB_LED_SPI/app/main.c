@@ -250,10 +250,10 @@ void UserMain(void)
 {
 	printf("user task\n");
 	
-	//tls_sys_clk sysclk;
-	//tls_sys_clk_get(&sysclk);
-	//printf("  sysclk.apbclk %d\n",sysclk.apbclk);
-	//printf("  sysclk.cpuclk %d\n",sysclk.cpuclk);
+	tls_sys_clk sysclk;
+	tls_sys_clk_get(&sysclk);
+	printf("  sysclk.apbclk %d\n",sysclk.apbclk);
+	printf("  sysclk.cpuclk %d\n",sysclk.cpuclk);
 
     tls_os_task_create(NULL, NULL,
                        demo_console_task,

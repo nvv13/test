@@ -70,7 +70,7 @@ int ws2812b_init(ws2812b_t *dev, const ws2812b_params_t *params)
 	wm_spi_ck_config(WM_IO_PB_02);
 	wm_spi_di_config(WM_IO_PB_03);
 	wm_spi_do_config(WM_IO_PB_00);
-	printf("cs--PB04, ck--PB02, di--PB03, do--PB05;\r\n");  
+	printf("cs--PB04, ck--PB02, di--PB03, do--PB00;\r\n");  
         // подключать к do, то есть к WM_IO_PB_05
 
 /*
@@ -94,6 +94,41 @@ bit
 													
 Единица передаётся наоборот. Мы также устанавливаем высокий уровень, ждём 0,9 микросекунды (отклонение то же), затем опускаем уровень, ждём 0,35 микросекунды (отклонение такое же — 150 наносекунд)													
 
+вот, такая-же идея (почти, до табл, перекодировки я не додумалься)
+https://michaeltien8901.github.io/stm32/2018/07/19/Using-STM32-SPI-For-LED-STRIP.html
+git clone https://bitbucket.org/mtien888/stm32-for-ws2812b-using-spi/src/ .\neopixel
+
+
+apbclk 		SPI  	
+MHz     div     MHz             KHz		Hz
+40	2	20		20000		20000000
+40	4	10		10000		10000000
+40	8	5		5000		5000000
+40	16	2,5		2500		2500000
+40	32	1,25		1250		1250000
+40	64	0,625		625		625000
+40	128	0,3125		312,5		312500
+40	256	0,15625		156,25		156250
+40	512	0,078125	78,125		78125
+40	1024	0,0390625	39,0625		39062,5
+40	2048	0,01953125	19,53125	19531,25
+40	4096	0,009765625	9,765625	9765,625
+40	8192	0,004882813	4,8828125	4882,8125
+40	16384	0,002441406	2,44140625	2441,40625
+40	32768	0,001220703	1,220703125	1220,703125
+40	40000	0,001		1		1000
+может еще возможно делители, то что кратно 10... 1000 Hz же есть!
+
+
+https://www.hackster.io/RVLAD/neopixel-ws2812b-spi-driver-with-ada-on-stm32f4-discovery-d330ea
+тут использовали spi, 1 байт на 1 бит
+передача 0 это 0хC0 = 0x11000000b
+передача 1 это 0хF8 = 0x11111000b
+reset передача 0x00 = 0x00000000b
+
+это на частоте 8 * 800 Kbit/s = 6.4 Mbit/s
+
+
 
 int master_spi_send_data(int clk, int type)
 {
@@ -102,7 +137,7 @@ int master_spi_send_data(int clk, int type)
         //int clk = 3225806;          /* default 1M */
         int clk = 10000;          /* default 1M */
 
-        tls_spi_trans_type(2);
+        tls_spi_trans_type(SPI_DMA_TRANSFER);
 
 /**
  * @brief          This function is used to setup the spi controller.

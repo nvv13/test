@@ -52,14 +52,20 @@ int ntp_demo(void)
         printf("waiting for wifi connected......\n");
     }
 
-    t = tls_ntp_client() - 3600 * 5; // отнимаем 5 часов, кооректировка на нашу TimeZone
+    t = tls_ntp_client(); 
+    if(t!=0)
+     {
+     t= ( t - 3600 * 5 ); // отнимаем 5 часов, кооректировка на нашу TimeZone
+     printf("now Time :   %s\n", ctime((const time_t *)&t));
+     tblock = localtime((const time_t *)&t);	//switch to local time
+     //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock->tm_sec,tblock->tm_min,tblock->tm_hour,tblock->tm_mon,tblock->tm_year);
+     tls_set_rtc(tblock);
 
-    printf("now Time :   %s\n", ctime((const time_t *)&t));
-    tblock = localtime((const time_t *)&t);	//switch to local time
-    //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock->tm_sec,tblock->tm_min,tblock->tm_hour,tblock->tm_mon,tblock->tm_year);
-    tls_set_rtc(tblock);
+     return WM_SUCCESS;
+     }
 
-    return WM_SUCCESS;
+return WM_FAILED;
+
 }
 
 
