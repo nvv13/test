@@ -48,6 +48,8 @@ static const char *https_request = "GET /weather-arkhangelsk-3915/now/ HTTP/1.0\
                                    "accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7\r\n"
                                    "\r\n";
 
+static char recvbuf[HTTPS_RECV_BUF_LEN_MAX+1];
+
 extern struct netif *tls_get_netif(void);
 extern int wm_printf(const char *fmt, ...);
 
@@ -80,7 +82,6 @@ static void https_demo_task(void *p)
     int fd;
     struct hostent *hp;
     struct sockaddr_in server;
-    char *recvbuf;
     int total = 0;
     struct tls_ethif *ether_if = tls_netif_get_ethif();
     int i_count=1;
@@ -129,21 +130,21 @@ static void https_demo_task(void *p)
                         break;
                     }
 
-                    recvbuf = tls_mem_alloc(HTTPS_RECV_BUF_LEN_MAX + 1);
-                    if (!recvbuf)
-                    {
-                        wm_printf("https malloc error\r\n");
-                        HTTPWrapperSSLClose(ssl_p, fd);
-                        close(fd);
-                        break;
-                    }
+                    //recvbuf = tls_mem_alloc(HTTPS_RECV_BUF_LEN_MAX + 1);
+                    //if (!recvbuf)
+                    //{
+                    //    wm_printf("https malloc error\r\n");
+                    //    HTTPWrapperSSLClose(ssl_p, fd);
+                    //    close(fd);
+                    //    break;
+                    //}
 
                     wm_printf("step 2: send https request [%s]\r\n", https_request);
                     ret = HTTPWrapperSSLSend(ssl_p, fd, (char *)https_request, strlen(https_request), 0);
                     if (ret < 0)
                     {
                         wm_printf("https send error\r\n");
-                        tls_mem_free(recvbuf);
+                        //tls_mem_free(recvbuf);
                         HTTPWrapperSSLClose(ssl_p, fd);
                         close(fd);
                         break;
@@ -178,12 +179,21 @@ static void https_demo_task(void *p)
 
                     wm_printf("step 3: recvd https resp total %d bytes.\r\n", total);
 
-                    tls_mem_free(recvbuf);
+                    //tls_mem_free(recvbuf);
                     HTTPWrapperSSLClose(ssl_p, fd);
                     close(fd);
 
                     wm_printf("\r\nhttps demo end. %d\r\n", i_count++);
   	            tls_os_time_delay(1000 * 300); // 600 
+        	    printf("https check wifi\n");
+        	    while(1)
+	 		{
+			ether_if = tls_netif_get_ethif();
+			if(ether_if->status) //ждем wifi 
+                  	  break;
+        		printf("https wait wifi\n");
+			tls_os_time_delay(5000);
+	 		}
                 }
                 while (1);
 
