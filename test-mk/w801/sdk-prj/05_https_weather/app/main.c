@@ -31,10 +31,18 @@
 //#include "wm_cpu.h"
 //#include "csi_core.h"
 
+
+//#include "../../../../../../w_wifi_pass.h"
+//#define MY_WIFI_AP	"bred8"
+//#define MY_WIFI_PASS    "123123123"
+#define MY_WIFI_AP	"bred1"
+#define MY_WIFI_PASS    "9115676369"
+
 #include "w_wifi.h"
 #include "w_ntp.h"
 #include "w_flash_cfg.h"
 #include "w_https.h"
+#include "my_recognize.h"
 
 
 #define  DEMO_TASK_SIZE      2048
@@ -211,16 +219,20 @@ return reg_temp;
 
 
 #define OUT_SEC_IND 0
-#define OUT_DIG_1   1
+//#define OUT_DIG_1   1
 #define OUT_DIG_2   2
 #define OUT_DIG_3   3
-#define OUT_DIG_4   4
+//#define OUT_DIG_4   4
+
+#define OUT_SIG_1   1
+#define OUT_C_4     4
+
 
 static u8 i_off=0;
 
 void lcd5643printDigit(u8 i_pos,u8 i_num)
 {
-if(i_pos>OUT_DIG_4 && i_off==1)return; //выключть свет, а он уже выключен = сразу выйти
+if(i_pos>OUT_C_4 && i_off==1)return; //выключть свет, а он уже выключен = сразу выйти
 /*
 LCD display 5643AS-1
      12 pin
@@ -272,6 +284,7 @@ PB_15 12
 i_off=0; 
 switch(i_pos)
 {
+/*
  case OUT_SEC_IND: //sec indicator, 0=9,11.7.4.2.1.10.5 1=12,8,6 - i_num=3
  {
         reg_temp=reg_temp 
@@ -288,12 +301,29 @@ switch(i_pos)
               & (~(1 << 21))
               & (~(1 << 11))
               & (~(1 << 25))
-                 ;/* write low */
+                 ;// write low 
         if(i_num==0)
            reg_temp=reg_temp  & (~(1 << 23)); // 3
            else
            reg_temp=reg_temp  | (1 << 23);    // 3
  };break;
+*/
+
+ case OUT_SIG_1: //digit 1, 0=12 1=9,8,6 - i_num=11.7.4.2.1.10.5
+ {
+        reg_temp=reg_temp 
+         | (1 << 16)    //9
+         | (1 << 17)    //8
+         | (1 << 26);   //6
+        reg_temp=reg_temp 
+              & (~(1 << 15)); //12
+        if(i_num==1) //минус
+           reg_temp=reg_temp  & (~(1 << 25)); // -
+           else
+           reg_temp=reg_temp  | (1 << 25);    // -
+ };break;
+
+/*
  case OUT_DIG_1: //digit 1, 0=12 1=9,8,6 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
@@ -304,6 +334,7 @@ switch(i_pos)
               & (~(1 << 15)); //12
         reg_temp=reg_set_num(reg_temp,i_num);
  };break;
+*/
  case OUT_DIG_2: //digit 2, 0=9 1=12,8,6 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
@@ -324,6 +355,7 @@ switch(i_pos)
               & (~(1 << 17)); //8
         reg_temp=reg_set_num(reg_temp,i_num);
  };break;
+/*
  case OUT_DIG_4: //digit 4, 0=6 1=12,9,8 - i_num=11.7.4.2.1.10.5
  {
         reg_temp=reg_temp 
@@ -334,6 +366,28 @@ switch(i_pos)
               & (~(1 << 26)); //6
         reg_temp=reg_set_num(reg_temp,i_num);
  };break;
+  */
+ case OUT_C_4: //digit 4, 0=6 1=12,9,8 - i_num=11.7.4.2.1.10.5
+ {
+        reg_temp=reg_temp 
+         | (1 << 15)    //12
+         | (1 << 16)    //9
+         | (1 << 17);   //8
+        reg_temp=reg_temp 
+              & (~(1 << 26)); //6
+         reg_temp=reg_temp 
+         | (1 << 10) //11 A
+         | (1 << 22) //2  D
+         | (1 << 21) //1  E
+         | (1 << 11) //10 F
+        ;  // 
+        reg_temp=reg_temp 
+              & (~(1 << 18)) //1  B
+              & (~(1 << 25)) //1  G
+              & (~(1 << 24)) //1  C
+         ;
+ };break;
+
  default: // off ligth
  {
         reg_temp=reg_temp 
@@ -374,37 +428,52 @@ static u16 i_out=0;
 #define LCD_VAL_LG_hi        5
 u16 i_max_out=LCD_VAL_LG_spb_low;// 
 
+static int i_5643_t_sign     =0;
+static int i_5643_t_value    =0;
+static int i_5643_t_mantissa =0;
+
 static void demo_timer_irq(u8 *arg)  // здесь будет вывод на LCD
 {
 //        printf("timer irq hour=%d,min=%d\n",i_5643_hour,i_5643_min);
 
-	u8 i_HiHour=i_5643_hour/10;
-	u8 i_LoHour=i_5643_hour%10;
-	u8 i_HiMin = i_5643_min/10;
-	u8 i_LoMin = i_5643_min%10;
+//	u8 i_HiHour=i_5643_hour/10;
+//	u8 i_LoHour=i_5643_hour%10;
+//	u8 i_HiMin = i_5643_min/10;
+//	u8 i_LoMin = i_5643_min%10;
+
         //printf("timer irq hh:mm %d%d:%d%d \n",i_HiHour,i_LoHour,i_HiMin,i_LoMin);
+int i_t=i_5643_t_value;
+if(i_5643_t_mantissa>5)i_t++;
 
 switch(i_out)
 {
  case 0:
  {
- lcd5643printDigit(OUT_DIG_1,i_HiHour);
+// lcd5643printDigit(OUT_DIG_1,i_HiHour);
+ if(i_5643_t_value>0)
+  lcd5643printDigit(OUT_SIG_1,1);
+  else
+  lcd5643printDigit(OUT_SIG_1,0);
+
  };break;
  case 1:
  {
- lcd5643printDigit(OUT_DIG_2,i_LoHour);
+// lcd5643printDigit(OUT_DIG_2,i_LoHour);
+ lcd5643printDigit(OUT_DIG_2,i_t/10);
  };break;
  case 2:
  {
- lcd5643printDigit(OUT_DIG_3,i_HiMin);
+ //lcd5643printDigit(OUT_DIG_3,i_HiMin);
+ lcd5643printDigit(OUT_DIG_3,i_t%10);
  };break;
  case 3:
  {
- lcd5643printDigit(OUT_DIG_4,i_LoMin);
+ //lcd5643printDigit(OUT_DIG_4,i_LoMin);
+ lcd5643printDigit(OUT_C_4,0);
  };break;
  case 4:
  {
- lcd5643printDigit(OUT_SEC_IND,u8_sec_state); // on sec state
+ //lcd5643printDigit(OUT_SEC_IND,u8_sec_state); // on sec state
  };break;
  default:
  {
@@ -418,6 +487,39 @@ if(i_out++>i_max_out) // от 5 ...
  }
 
 }
+
+static u8 i_dreb=0; // от дребезга кнопки
+
+#define DEMO_ISR_IO		WM_IO_PA_01
+static void demo_gpio_isr_callback(void *context)
+{
+
+	u16 ret = tls_get_gpio_irq_status(DEMO_ISR_IO);
+	//printf("\nint flag =%d\n",ret);
+	if(ret)
+	{
+		tls_clr_gpio_irq_status(DEMO_ISR_IO);
+		//if(ret == tls_gpio_read(DEMO_ISR_IO)) // button ok
+                 //{
+		 printf("\nbutton io =%d i_dreb=%d i_max_out=%d\n",ret,i_dreb,i_max_out);
+                 if(i_dreb==0)// защита от ддребезга контактов для кнопки
+                  {
+                  switch(i_max_out)// градации яркости, 5-все 4 циры подряд выводит, а далее, чем больше, тем больше пропустит циклов вызова таймера для вывода
+                   {
+                   case LCD_VAL_LG_spb_low : i_max_out=LCD_VAL_LG_hi        ;break;
+                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_spb_hi    ;break;
+                   case LCD_VAL_LG_spb_hi  : i_max_out=LCD_VAL_LG_middle    ;break;
+                   case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low       ;break;
+                   case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_spb_low   ;break;
+                   default:i_max_out=LCD_VAL_LG_spb_hi    ;break;
+                   }
+                  i_dreb=1;
+                  }
+		 //}
+		//printf("\nafter int io =%d\n",ret);
+	}
+}
+
 
 
 #define MEM_CELL_FROM_LIGTH_LEVEL 0
@@ -442,6 +544,13 @@ void demo_console_task(void *sdata)
    tls_timer_start(timer_id);
    printf("timer start\n");	
 
+   u16 gpio_pin;
+   gpio_pin = DEMO_ISR_IO;
+   //
+   tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
+   tls_gpio_isr_register(gpio_pin, demo_gpio_isr_callback, NULL);
+   tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
+   printf("\nbutton gpio %d rising isr\n",gpio_pin);
 
    tls_watchdog_init(60 * 1000 * 1000);//u32 usec около 1-2 минуты
    u8 i_start_reCheck=0;
@@ -451,7 +560,7 @@ void demo_console_task(void *sdata)
     while(u8_wifi_state==0)
 	{
         printf("trying to connect wifi\n");
-	if(u8_wifi_state==0 && demo_connect_net("bred1","9115676369")==WM_SUCCESS)
+	if(u8_wifi_state==0 && demo_connect_net(MY_WIFI_AP,MY_WIFI_PASS)==WM_SUCCESS)
 	    u8_wifi_state=1;
    	    else
             {
@@ -497,8 +606,27 @@ void demo_console_task(void *sdata)
      //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
      u8_sec_state=~u8_sec_state;
 
+     if(i_dreb==1) //нажали кнопку, сохраним значение
+      {
+      i_5643_hour=i_max_out/100;
+      i_5643_min =i_max_out%100;
+      printf("flash_cfg_store_u16=%d\n",i_max_out);
+      flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
+      i_dreb=0;// защита от ддребезга контактов для кнопки
+      }
+      else
+      {
+      i_5643_hour=tblock.tm_hour;
+      i_5643_min =tblock.tm_min;
+      }
+
+
      i_5643_hour=tblock.tm_hour;
      i_5643_min =tblock.tm_min;
+
+     i_5643_t_sign     =my_recognize_ret_cur_temperature_sign();
+     i_5643_t_value    =my_recognize_ret_cur_temperature();
+     i_5643_t_mantissa =my_recognize_ret_cur_temperature_mantissa();
 
      //if((tblock.tm_min==0 || tblock.tm_min==10 || tblock.tm_min==20 || tblock.tm_min==30 || tblock.tm_min==40 || tblock.tm_min==50 ||
      //    tblock.tm_min==5 || tblock.tm_min==15 || tblock.tm_min==25 || tblock.tm_min==35 || tblock.tm_min==45 || tblock.tm_min==55
@@ -521,6 +649,23 @@ void demo_console_task(void *sdata)
             if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
               i_max_out=LCD_VAL_LG_middle;
             }
+     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%5==0) )&& tblock.tm_sec==0 
+        && my_recognize_ret_cur_temperature()!=MY_RECOGNIZE_NO_VALUE)
+      {
+      printf("cur_temperature=%d,%d\n"
+            ,my_recognize_ret_cur_temperature_sign() * my_recognize_ret_cur_temperature()
+            ,my_recognize_ret_cur_temperature_mantissa());
+      printf("    date %d.%02d.%02d %02d:%02d:%02d\n"
+           ,tblock.tm_year+1900
+           ,tblock.tm_mon+1
+           ,tblock.tm_mday
+           ,tblock.tm_hour
+           ,tblock.tm_min
+           ,tblock.tm_sec
+         );
+      tls_os_time_delay(1000 - 300);
+      }
+
      //
      }
 
@@ -575,7 +720,8 @@ void UserMain(void)
                        DEMO_SOCK_S_PRIO,
                        0);
 
-	
+//    tls_os_time_delay(1000 * 10);
+//    tls_os_disp_task_stat_info();
 //	while(1)
 //	{
 //	}

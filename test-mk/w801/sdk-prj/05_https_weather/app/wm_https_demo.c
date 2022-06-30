@@ -25,6 +25,8 @@
 
 #include "w_https.h"
 
+#include "my_recognize.h"
+
 #if DEMO_HTTPS
 
 #define HTTPS_DEMO_TASK_PRIO             38
@@ -158,7 +160,8 @@ static void https_demo_task(void *p)
                             if (SOCKET_SSL_MORE_DATA == ret)
                             {
                                 recvbuf[HTTPS_RECV_BUF_LEN_MAX] = '\0';
-                                wm_printf("step 3: recvd https resp %d bytes [%s]\r\n", HTTPS_RECV_BUF_LEN_MAX, recvbuf);
+                                //wm_printf("step 3.1: recvd https resp %d bytes [%s]\r\n", HTTPS_RECV_BUF_LEN_MAX, recvbuf);
+				my_recognize_http(recvbuf, HTTPS_RECV_BUF_LEN_MAX);
                                 total += HTTPS_RECV_BUF_LEN_MAX;
                                 ret = 1;
                             }
@@ -171,17 +174,19 @@ static void https_demo_task(void *p)
                         else
                         {
                             recvbuf[ret] = '\0';
-                            wm_printf("step 3: recvd https resp %d bytes [%s]\r\n", ret, recvbuf);
+                            //wm_printf("step 3.2: recvd https resp %d bytes [%s]\r\n", ret, recvbuf);
+			    my_recognize_http(recvbuf,ret);
                             total += ret;
                         }
                     }
                     while (ret > 0);
 
-                    wm_printf("step 3: recvd https resp total %d bytes.\r\n", total);
+                    wm_printf("step 3.3: recvd https resp total %d bytes.\r\n", total);
 
                     //tls_mem_free(recvbuf);
                     HTTPWrapperSSLClose(ssl_p, fd);
                     close(fd);
+                    my_recognize_http_reset();
 
                     wm_printf("\r\nhttps demo end. %d\r\n", i_count++);
   	            tls_os_time_delay(1000 * 300); // 600 
