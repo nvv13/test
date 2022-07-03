@@ -192,8 +192,8 @@ static void https_demo_task(void *p)
                     close(fd);
                     my_recognize_http_reset();
 
-                    wm_printf("\r\nhttps demo end. %d\r\n", i_count++);
-  	            tls_os_time_delay(1000 * 300); // 300 сек = 5 минут 
+                    wm_printf("\r\nhttps demo end. %d   HZ=%d\r\n", i_count++, HZ);
+  	            tls_os_time_delay(HZ * 300); // 300 сек = 5 минут 
         	    printf("https check wifi\n");
         	    while(1)
 	 		{
