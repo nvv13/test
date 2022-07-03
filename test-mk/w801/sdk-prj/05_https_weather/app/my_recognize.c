@@ -9,7 +9,12 @@
 static int i_temperature_c=MY_RECOGNIZE_NO_VALUE;
 static int i_sign=1;
 static int i_temperature_mantissa_c=0;
+static struct tm t_last_query;
 
+struct tm my_recognize_ret_t_last_query(void)
+{
+return t_last_query;
+}
 int my_recognize_ret_cur_temperature(void)
 {
 return i_temperature_c;
@@ -71,6 +76,14 @@ i_POS_PRE5=0;
 i_POS_PRE6=0;
 i_POS_PRE7=0;
 u8_buf_pos_temperatura=0;
+}
+
+void my_recognize_http_error(void)
+{
+my_recognize_http_reset();
+i_temperature_c=MY_RECOGNIZE_NO_VALUE;
+i_sign=1;
+i_temperature_mantissa_c=0;
 }
 
 void my_recognize_http(char * recvbuf, int i_len)
@@ -170,6 +183,7 @@ for(int iInd=0;iInd<i_len;iInd++)
      buf_temperatura[u8_buf_pos_temperatura++]=0x00;
      i_temperature_c=atoi(buf_temperatura);
      u8_status_find=RG_FIND_END;
+     tls_get_rtc(&t_last_query);
      }
     }
 

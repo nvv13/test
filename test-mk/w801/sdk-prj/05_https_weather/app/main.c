@@ -529,7 +529,7 @@ void demo_console_task(void *sdata)
 {
    printf("wifi test app\n");
 
-
+   u8 cnt_no_value=0;
    u8 timer_id;
    struct tls_timer_cfg timer_cfg;
 
@@ -624,9 +624,12 @@ void demo_console_task(void *sdata)
      i_5643_hour=tblock.tm_hour;
      i_5643_min =tblock.tm_min;
 
-     i_5643_t_sign     =my_recognize_ret_cur_temperature_sign();
-     i_5643_t_value    =my_recognize_ret_cur_temperature();
-     i_5643_t_mantissa =my_recognize_ret_cur_temperature_mantissa();
+     if(my_recognize_ret_cur_temperature()!=MY_RECOGNIZE_NO_VALUE)
+      {
+      i_5643_t_sign     =my_recognize_ret_cur_temperature_sign();
+      i_5643_t_value    =my_recognize_ret_cur_temperature();
+      i_5643_t_mantissa =my_recognize_ret_cur_temperature_mantissa();
+      }
 
      //if((tblock.tm_min==0 || tblock.tm_min==10 || tblock.tm_min==20 || tblock.tm_min==30 || tblock.tm_min==40 || tblock.tm_min==50 ||
      //    tblock.tm_min==5 || tblock.tm_min==15 || tblock.tm_min==25 || tblock.tm_min==35 || tblock.tm_min==45 || tblock.tm_min==55
@@ -649,12 +652,18 @@ void demo_console_task(void *sdata)
             if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
               i_max_out=LCD_VAL_LG_middle;
             }
-     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%5==0) )&& tblock.tm_sec==0 
-        && my_recognize_ret_cur_temperature()!=MY_RECOGNIZE_NO_VALUE)
+
+     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%5==0) )&& tblock.tm_sec==0 ) //каждые 5 минут
       {
-      printf("cur_temperature=%d,%d\n"
+      if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE && cnt_no_value++>3)
+       {
+       u8_wifi_state=0; // переход на цикл(1)
+       //tls_sys_reset(); так то, это не надо, вроде все стабильно работает
+       cnt_no_value=0;
+       }
+      printf("cur_temperature=%d,%d  cnt_no_value=%d\n"
             ,my_recognize_ret_cur_temperature_sign() * my_recognize_ret_cur_temperature()
-            ,my_recognize_ret_cur_temperature_mantissa());
+            ,my_recognize_ret_cur_temperature_mantissa(), cnt_no_value);
       printf("    date %d.%02d.%02d %02d:%02d:%02d\n"
            ,tblock.tm_year+1900
            ,tblock.tm_mon+1

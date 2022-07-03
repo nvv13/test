@@ -94,6 +94,7 @@ clip < ~/.ssh/id_rsa.pub
 
 ssh -T git@github.com
 При этом вы получите просьбу ввести пароль шифрования закрытого ключа.
+ (у ssh -T git@gitflik.ru , может так красиво не получится, переходим сразу к "Добавить доступ удаленный" к репозитарию)
 
 После ввода пароля вы можете получить что-то вроде:
 
@@ -135,10 +136,12 @@ PubkeyAcceptedKeyTypes +ssh-rsa
 
 
 *Далее Добавить доступ удаленный ( https://stackoverflow.com/questions/14762034/push-to-github-without-a-password-using-ssh-key )
- вида
+ вида (перед этим перходим в каталог проекта)
 git remote set-url origin git@github.com:<Username>/<Project>.git
  например
 git remote set-url origin git@github.com:nvv13/test.git
+ или
+git remote set-url origin git@gitflik.ru:nvv13/test.git
 
 
 

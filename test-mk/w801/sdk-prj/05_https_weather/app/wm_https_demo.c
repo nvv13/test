@@ -107,6 +107,7 @@ static void https_demo_task(void *p)
                     hp = gethostbyname(HTTPS_DEMO_SERVER);
                     if (hp == NULL )
                     {
+			my_recognize_http_error();
                         wm_printf("get address error\r\n");
                         break;
                     }
@@ -114,6 +115,7 @@ static void https_demo_task(void *p)
                     fd = socket(AF_INET, SOCK_STREAM, 0);
                     if (fd < 0)
                     {
+			my_recognize_http_error();
                         wm_printf("create socket error\r\n");
                         break;
                     }
@@ -127,6 +129,7 @@ static void https_demo_task(void *p)
                     ret = HTTPWrapperSSLConnect(&ssl_p, fd, (const struct sockaddr *)&server, sizeof(server), HTTPS_DEMO_SERVER);
                     if (ret < 0)
                     {
+			my_recognize_http_error();
                         wm_printf("https connect error\r\n");
                         close(fd);
                         break;
@@ -145,6 +148,7 @@ static void https_demo_task(void *p)
                     ret = HTTPWrapperSSLSend(ssl_p, fd, (char *)https_request, strlen(https_request), 0);
                     if (ret < 0)
                     {
+			my_recognize_http_error();
                         wm_printf("https send error\r\n");
                         //tls_mem_free(recvbuf);
                         HTTPWrapperSSLClose(ssl_p, fd);
@@ -189,7 +193,7 @@ static void https_demo_task(void *p)
                     my_recognize_http_reset();
 
                     wm_printf("\r\nhttps demo end. %d\r\n", i_count++);
-  	            tls_os_time_delay(1000 * 300); // 600 
+  	            tls_os_time_delay(1000 * 300); // 300 сек = 5 минут 
         	    printf("https check wifi\n");
         	    while(1)
 	 		{

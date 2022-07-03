@@ -8,6 +8,7 @@
 //#include "lwip/api.h"
 
 #include "w_wifi.h"
+#include "my_recognize.h"
 
 #if DEMO_CONNECT_NET
 
@@ -35,16 +36,34 @@ if (len > 5 &&	strncmp((char *)sock_rx, "light", 5) == 0) {
 if (strncmp((char *)sock_rx, "time", 4) == 0) {
     struct tm tblock;
     tls_get_rtc(&tblock);
-    i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d\n"
+    struct tm t_last_query=my_recognize_ret_t_last_query();
+    i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d  currrent temperature=%d,%d  last query=%d.%02d.%02d %02d:%02d:%02d\n"
            ,tblock.tm_year+1900
            ,tblock.tm_mon+1
            ,tblock.tm_mday
            ,tblock.tm_hour
            ,tblock.tm_min
            ,tblock.tm_sec
+            ,my_recognize_ret_cur_temperature_sign() * my_recognize_ret_cur_temperature()
+            ,my_recognize_ret_cur_temperature_mantissa()
+           ,t_last_query.tm_year+1900
+           ,t_last_query.tm_mon+1
+           ,t_last_query.tm_mday
+           ,t_last_query.tm_hour
+           ,t_last_query.tm_min
+           ,t_last_query.tm_sec
          );
+
+
  }
 
+if (strncmp((char *)sock_rx, "help", 4) == 0) {
+    struct tm tblock;
+    tls_get_rtc(&tblock);
+    i_len_ret=sprintf(sock_rx,"help\ntime\nlightXXX - где XXX число от 4 до 2000, если 0 то выдаст текущее значение яркости\n"         );
+
+
+ }
 
 return i_len_ret;
 }
