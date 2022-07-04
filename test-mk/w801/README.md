@@ -170,6 +170,15 @@ Sequence  Command             Description
 sdk-prj
 
 сделал несколько тестовых проектов
+~~~
+01_blink           - пробовал, какие частоты может выдавать плата
+02_task_blink      - rtos blink
+03_ws2812b_RGB_LED - управлени адресной лентой ws2812b 
+04_wifi_ntp        - часы по NTP протоколу     
+05_https_weather   - запрос погоды по протоколу https 
+~~~
+
+
 
 
 5) еще, 
