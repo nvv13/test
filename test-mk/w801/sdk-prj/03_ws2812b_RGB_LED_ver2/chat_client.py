@@ -5,7 +5,7 @@ import sys, socket, select
  
 def chat_client():
     host = '192.168.1.33'
-    port = 5556
+    port = 5555
 
     #if(len(sys.argv) < 3) :
         #print( 'Usage : python chat_client.py hostname port' )

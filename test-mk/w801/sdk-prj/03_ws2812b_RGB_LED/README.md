@@ -2,6 +2,20 @@ project
 
 board HLK-W801-KIT-V1.1 + ws2812b RGB address LED
 
+соединения
+
+ws2812b
+надо соеденить по схеме:
+~~~
+connect to
+W801  ws2812b
+GPIO  PIN
+PB_01 data
++5v   +5v
+GND   GND
+~~~
+
+
 в итоге, работает так
 
 https://youtu.be/7E6WU3hryAg

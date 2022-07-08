@@ -19,6 +19,8 @@
 extern uint32_t csi_coret_get_load(void);
 extern uint32_t csi_coret_get_value(void);
 
+extern void delay_cnt(int count);
+
 /*
 static void my_mdelay(void)
 {
@@ -59,11 +61,13 @@ void mymdelay(uint32_t ms)
 
 */
 
+
 static void tic_delay(uint32_t cnt)
 {
     if (cnt == 0) {
         return;
     }
+
     uint32_t load = csi_coret_get_load();
     uint32_t start = csi_coret_get_value();
     uint32_t cur;
@@ -155,8 +159,18 @@ void UserMain(void)
             //tic_delay(140);// freg 689.648  KHz CPU_CLK_240M
             //tic_delay(160);// freg 606.054  KHz CPU_CLK_240M     half period 0.8 us
             //tic_delay(170);// freg 588.233  KHz CPU_CLK_240M     half period 0.83 us
-            tic_delay(173);// freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
+          //tic_delay(173);// freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
             //tic_delay(180);// freg 555.549  KHz CPU_CLK_240M     half 0.88 period us
+
+           // delay_cnt(1);//freg 2.857161 MHz  CPU_CLK_240M
+           // delay_cnt(10);//freg 1.250008 Mhz  CPU_CLK_240M   half period 0.4 us
+           // delay_cnt(20);//freg 769.235569 KHz CPU_CLK_240M  
+           // delay_cnt(27);//freg 606.064264 KHz  CPU_CLK_240M   half period 0.8 us
+           // delay_cnt(28);//freg 588.238941 KHz  CPU_CLK_240M   half period 0.8
+            delay_cnt(29);//freg 571.432091 KHz  CPU_CLK_240M   half period 0.85 us
+           // delay_cnt(30);//freg 555.559022 KHz  CPU_CLK_240M  
+          //  delay_cnt(100);//freg 188.68043 Khz  CPU_CLK_240M
+
 
 	    u8_led_state=~u8_led_state;
 	}

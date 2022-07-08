@@ -40,11 +40,11 @@
 
 #define  DEMO_TASK_SIZE      1024
 static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
-#define  DEMO_TASK_PRIO			                32
+#define  DEMO_TASK_PRIO			           60
 
 #define  DEMO_SOCK_S_TASK_SIZE      1024
 static OS_STK   sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
-#define  DEMO_SOCK_S_PRIO 	                (DEMO_TASK_PRIO+1)
+#define  DEMO_SOCK_S_PRIO 	                (32)
 
 
 u16 i_light=10;
@@ -239,7 +239,7 @@ void sock_s_task(void *sdata)
 
     while(1)
     {
-     int i_port=5556;
+     int i_port=5555;
      printf("create_socket_server  i_port=%d\n", i_port);
      create_socket_server(i_port);
     }
