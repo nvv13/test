@@ -655,12 +655,14 @@ void demo_console_task(void *sdata)
 
      if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%5==0) )&& tblock.tm_sec==0 ) //каждые 5 минут
       {
-      if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE && cnt_no_value++>3)
+      if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
        {
-       u8_wifi_state=0; // переход на цикл(1)
-       //tls_sys_reset(); так то, это не надо, вроде все стабильно работает
-       cnt_no_value=0;
+       cnt_no_value++;
+       if(cnt_no_value==3)u8_wifi_state=0; // переход на цикл(1) wifi по новой
+       if(cnt_no_value>4)tls_sys_reset(); 
        }
+       else
+       cnt_no_value=0;
       printf("cur_temperature=%d,%d  cnt_no_value=%d\n"
             ,my_recognize_ret_cur_temperature_sign() * my_recognize_ret_cur_temperature()
             ,my_recognize_ret_cur_temperature_mantissa(), cnt_no_value);

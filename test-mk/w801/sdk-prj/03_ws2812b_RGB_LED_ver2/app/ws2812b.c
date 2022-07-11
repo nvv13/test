@@ -19,11 +19,7 @@
 #include "wm_gpio.h"
 #include "wm_osal.h"
 
-#include "csi_core.h"
-extern uint32_t csi_coret_get_load(void);
-extern uint32_t csi_coret_get_value(void);
 
-extern void delay_cnt(int count);
 
 #include "ws2812b.h"
 
@@ -34,10 +30,11 @@ extern void delay_cnt(int count);
 #define GREEN_SHIFT     (8U)
 
 
-           // delay_cnt(10);//freg 1.250008 Mhz  CPU_CLK_240M   half period 0.4 us
-           // delay_cnt(27);//freg 606.064264 KHz  CPU_CLK_240M   half period 0.8 us
-           // delay_cnt(28);//freg 588.238941 KHz  CPU_CLK_240M   half period 0.8
-//            delay_cnt(29);//freg 571.432091 KHz  CPU_CLK_240M   half period 0.85 us
+extern void delay_cnt(int count);
+   // delay_cnt(10);//freg 1.250008 Mhz    CPU_CLK_240M   half period 0.4 us
+   // delay_cnt(27);//freg 606.064264 KHz  CPU_CLK_240M   half period 0.8 us
+   // delay_cnt(28);//freg 588.238941 KHz  CPU_CLK_240M   half period 0.8
+   // delay_cnt(29);//freg 571.432091 KHz  CPU_CLK_240M   half period 0.85 us
 
 
 
@@ -56,10 +53,12 @@ T1L 1 code ,low voltage time 0.4us ±150ns
 RES low voltage time Above 50μs
 */
 
-static inline void shift(const u16 offset, const u32 reg, const u8 pin, uint32_t data)
+static inline void shift(const u16 offset, const u32 reg, const u8 pin, uint32_t data, const bool b_last_byte)
 {
     for (int i = 23; i >= 0; i--) {
-
+        
+    if(!b_last_byte)
+    {
         if( ((data >> i) & 0x01) )
         {//1
 	tls_reg_write32(HR_GPIO_DATA + offset, reg |  (1 << pin));	/* write high */
@@ -75,6 +74,7 @@ static inline void shift(const u16 offset, const u32 reg, const u8 pin, uint32_t
         delay_cnt(29);//tic_delay(163);// freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
         }
     }
+  }
 }
 
 void ws2812b_init(ws2812b_t *dev, const ws2812b_params_t *params)
@@ -125,15 +125,15 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
 
 	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
 
-    for (int i = 0; i < dev->led_numof; i++) {
-        uint32_t data = 0;//HEAD;
-        /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
-         * 3 leas significant bits */
-        data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)<< BLUE_SHIFT);
-        data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha )<< GREEN_SHIFT);
-        data |= vals[i].color.r & (uint32_t)vals[i].alpha;
-        shift(offset, reg, pin, data);
-    }
+        for (int i = 0; i < dev->led_numof; i++) {
+         uint32_t data = 0;//HEAD;
+         /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
+          * 3 leas significant bits */
+         data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)<< BLUE_SHIFT);
+         data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha )<< GREEN_SHIFT);
+         data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+         shift(offset, reg, pin, data, i>=(dev->led_numof-2) );
+        }
 
         tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));/* write low from pin */
 
@@ -143,7 +143,7 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
 
     // RES above 50μs
    // tic_delay(13000);
-    delay_cnt(13000);//
+      delay_cnt(5000);//
 
     switch(sysclk.cpuclk) // восстанавливаем частоту
     {
