@@ -82,7 +82,7 @@ static void https_demo_task(void *p)
     void *msg;
     tls_ssl_t *ssl_p;
     int fd;
-    struct hostent *hp;
+    struct hostent *hp = NULL;
     struct sockaddr_in server;
     int total = 0;
     struct tls_ethif *ether_if = tls_netif_get_ethif();
@@ -104,7 +104,7 @@ static void https_demo_task(void *p)
             case HTTPS_DEMO_CMD_START:
                 do
                 {
-                    hp = gethostbyname(HTTPS_DEMO_SERVER);
+                    if (hp == NULL ) hp = gethostbyname(HTTPS_DEMO_SERVER);
                     if (hp == NULL )
                     {
 			my_recognize_http_error();
@@ -127,11 +127,12 @@ static void https_demo_task(void *p)
 
                     wm_printf("step 1: ssl connect to...\r\n");
                     ret = HTTPWrapperSSLConnect(&ssl_p, fd, (const struct sockaddr *)&server, sizeof(server), HTTPS_DEMO_SERVER);
-                    if (ret < 0)
+                    if (ret != 0)
                     {
 			my_recognize_http_error();
-                        wm_printf("https connect error\r\n");
+                        wm_printf("https connect error ret=%d\r\n",ret);
                         close(fd);
+                        fd = -1;
                         break;
                     }
 
@@ -141,6 +142,7 @@ static void https_demo_task(void *p)
                     //    wm_printf("https malloc error\r\n");
                     //    HTTPWrapperSSLClose(ssl_p, fd);
                     //    close(fd);
+                    //    fd = -1;
                     //    break;
                     //}
 
@@ -153,6 +155,7 @@ static void https_demo_task(void *p)
                         //tls_mem_free(recvbuf);
                         HTTPWrapperSSLClose(ssl_p, fd);
                         close(fd);
+                        fd = -1;
                         break;
                     }
 
@@ -190,10 +193,11 @@ static void https_demo_task(void *p)
                     //tls_mem_free(recvbuf);
                     HTTPWrapperSSLClose(ssl_p, fd);
                     close(fd);
+                    fd = -1;
                     my_recognize_http_reset();
 
                     wm_printf("\r\nhttps demo end. %d   HZ=%d\r\n", i_count++, HZ);
-  	            tls_os_time_delay(HZ * 300); // 300 сек = 5 минут 
+  	            tls_os_time_delay(HZ * 300); // 300 сек = 5 минут , 180 - 3 
         	    printf("https check wifi\n");
         	    while(1)
 	 		{
@@ -201,7 +205,7 @@ static void https_demo_task(void *p)
 			if(ether_if->status) //ждем wifi 
                   	  break;
         		printf("https wait wifi\n");
-			tls_os_time_delay(5000);
+			tls_os_time_delay(3000);
 	 		}
                 }
                 while (1);

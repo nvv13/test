@@ -15,6 +15,7 @@
 #define     DEMO_SOCK_BUF_SIZE     	512
 
 extern u16 i_max_out;
+extern struct tm t_last_start_main_task;
 
 // static const char *sock_tx = "message from server";
 static char sock_rx[DEMO_SOCK_BUF_SIZE] = {0};
@@ -37,7 +38,9 @@ if (strncmp((char *)sock_rx, "time", 4) == 0) {
     struct tm tblock;
     tls_get_rtc(&tblock);
     struct tm t_last_query=my_recognize_ret_t_last_query();
-    i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d  currrent temperature=%d,%d  last query=%d.%02d.%02d %02d:%02d:%02d\n"
+    i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d  currrent temperature=%d,%d  \n"
+                              "last query=%d.%02d.%02d %02d:%02d:%02d\n"
+                              "t_last_start_main_task=%d.%02d.%02d %02d:%02d:%02d\n"
            ,tblock.tm_year+1900
            ,tblock.tm_mon+1
            ,tblock.tm_mday
@@ -52,6 +55,12 @@ if (strncmp((char *)sock_rx, "time", 4) == 0) {
            ,t_last_query.tm_hour
            ,t_last_query.tm_min
            ,t_last_query.tm_sec
+           ,t_last_start_main_task.tm_year+1900
+           ,t_last_start_main_task.tm_mon+1
+           ,t_last_start_main_task.tm_mday
+           ,t_last_start_main_task.tm_hour
+           ,t_last_start_main_task.tm_min
+           ,t_last_start_main_task.tm_sec
          );
 
 

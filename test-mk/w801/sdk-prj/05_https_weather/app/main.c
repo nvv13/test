@@ -49,11 +49,11 @@
 static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
 #define  DEMO_TASK_PRIO			                32
 
-#define  DEMO_SOCK_S_TASK_SIZE      512
+#define  DEMO_SOCK_S_TASK_SIZE      1024
 static OS_STK   sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define  DEMO_SOCK_S_PRIO 	                (DEMO_TASK_PRIO+1)
 
-
+struct tm t_last_start_main_task;
 
 
 u32 reg_set_num(u32 reg_temp,u8 i_num) // на вход reg_temp с пинами, уже в каком то состоянии, к ним нужно добавить состояние пинов для цифры i_num (0...9)
@@ -555,6 +555,9 @@ void demo_console_task(void *sdata)
    tls_watchdog_init(60 * 1000 * 1000);//u32 usec около 1-2 минуты
    u8 i_start_reCheck=0;
    u8 u8_wifi_state=0;
+
+   tls_get_rtc(&t_last_start_main_task);
+
    for(;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
     while(u8_wifi_state==0)
@@ -658,8 +661,8 @@ void demo_console_task(void *sdata)
       if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
        {
        cnt_no_value++;
-       if(cnt_no_value==3)u8_wifi_state=0; // переход на цикл(1) wifi по новой
-       if(cnt_no_value>4)tls_sys_reset(); 
+       if(cnt_no_value==2)u8_wifi_state=0; // переход на цикл(1) wifi по новой
+       if(cnt_no_value>=3)tls_sys_reset(); 
        }
        else
        cnt_no_value=0;
