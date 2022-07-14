@@ -54,6 +54,7 @@ static char recvbuf[HTTPS_RECV_BUF_LEN_MAX+1];
 
 extern struct netif *tls_get_netif(void);
 extern int wm_printf(const char *fmt, ...);
+extern struct tm t_last_start_main_task;
 
 static void https_demo_net_status(u8 status)
 {
@@ -62,13 +63,14 @@ static void https_demo_net_status(u8 status)
     switch(status)
     {
     case NETIF_WIFI_JOIN_FAILED:
-        wm_printf("sta join net failed\n");
+        wm_printf("htpps sta join net failed\n");
         break;
     case NETIF_WIFI_DISCONNECTED:
-        wm_printf("sta net disconnected\n");
+        wm_printf("https sta net disconnected\n");
         break;
     case NETIF_IP_NET_UP:
-        wm_printf("sta ip: %v\n", netif->ip_addr.addr);
+        wm_printf("https sta ip: %v\n", netif->ip_addr.addr);
+        tls_os_time_delay(3000);
         tls_os_queue_send(https_demo_task_queue, (void *)HTTPS_DEMO_CMD_START, 0);
         break;
     default:
@@ -104,7 +106,7 @@ static void https_demo_task(void *p)
             case HTTPS_DEMO_CMD_START:
                 do
                 {
-                    if (hp == NULL ) hp = gethostbyname(HTTPS_DEMO_SERVER);
+                    hp = gethostbyname(HTTPS_DEMO_SERVER);
                     if (hp == NULL )
                     {
 			my_recognize_http_error();
@@ -146,7 +148,8 @@ static void https_demo_task(void *p)
                     //    break;
                     //}
 
-                    wm_printf("step 2: send https request [%s]\r\n", https_request);
+                    //wm_printf("step 2: send https request [%s]\r\n", https_request);
+                    wm_printf("step 2: send https request\r\n");
                     ret = HTTPWrapperSSLSend(ssl_p, fd, (char *)https_request, strlen(https_request), 0);
                     if (ret < 0)
                     {
@@ -196,19 +199,37 @@ static void https_demo_task(void *p)
                     fd = -1;
                     my_recognize_http_reset();
 
-                    wm_printf("\r\nhttps demo end. %d   HZ=%d\r\n", i_count++, HZ);
-  	            tls_os_time_delay(HZ * 300); // 300 сек = 5 минут , 180 - 3 
-        	    printf("https check wifi\n");
-        	    while(1)
-	 		{
-			ether_if = tls_netif_get_ethif();
-			if(ether_if->status) //ждем wifi 
-                  	  break;
-        		printf("https wait wifi\n");
-			tls_os_time_delay(3000);
-	 		}
+                    struct tm t_last_query=my_recognize_ret_t_last_query();
+                    wm_printf("\r\nhttps demo end. %d   HZ=%d\r\n"
+                            "last query=%d.%02d.%02d %02d:%02d:%02d\n"
+                            "t_last_start_main_task=%d.%02d.%02d %02d:%02d:%02d\n"
+                	   , i_count++, HZ
+		           ,t_last_query.tm_year+1900
+		           ,t_last_query.tm_mon+1
+			   ,t_last_query.tm_mday
+		           ,t_last_query.tm_hour
+	        	   ,t_last_query.tm_min
+		           ,t_last_query.tm_sec
+		           ,t_last_start_main_task.tm_year+1900
+	        	   ,t_last_start_main_task.tm_mon+1
+		           ,t_last_start_main_task.tm_mday
+		           ,t_last_start_main_task.tm_hour
+	        	   ,t_last_start_main_task.tm_min
+		           ,t_last_start_main_task.tm_sec
+		             );
+
+  	            //tls_os_time_delay(HZ * 120); // 300 сек = 5 минут , 180 - 3 
+        	    //printf("https check wifi\n");
+        	    //while(1)
+	 		//{
+			//ether_if = tls_netif_get_ethif();
+			//if(ether_if->status) //ждем wifi 
+                  	//  break;
+        		//printf("https wait wifi\n");
+			//tls_os_time_delay(3000);
+	 		//}
                 }
-                while (1);
+                while (0);
 
 
                 break;

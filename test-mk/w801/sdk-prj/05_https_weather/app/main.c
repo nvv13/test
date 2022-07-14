@@ -552,7 +552,7 @@ void demo_console_task(void *sdata)
    tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
    printf("\nbutton gpio %d rising isr\n",gpio_pin);
 
-   tls_watchdog_init(60 * 1000 * 1000);//u32 usec около 1-2 минуты
+   tls_watchdog_init(12 * 1000 * 1000);//u32 usec около 6 сек --около 1-2 минуты
    u8 i_start_reCheck=0;
    u8 u8_wifi_state=0;
 
@@ -656,19 +656,36 @@ void demo_console_task(void *sdata)
               i_max_out=LCD_VAL_LG_middle;
             }
 
-     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%5==0) )&& tblock.tm_sec==0 ) //каждые 5 минут
+     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) )&& tblock.tm_sec==0 ) //каждые 5 минут
       {
+      u8_wifi_state=0; // переход на цикл(1) wifi по новой
       if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
        {
        cnt_no_value++;
-       if(cnt_no_value==2)u8_wifi_state=0; // переход на цикл(1) wifi по новой
+       //if(cnt_no_value==2)u8_wifi_state=0; // переход на цикл(1) wifi по новой
        if(cnt_no_value>=3)tls_sys_reset(); 
        }
        else
        cnt_no_value=0;
+      struct tm t_last_query=my_recognize_ret_t_last_query();
       printf("cur_temperature=%d,%d  cnt_no_value=%d\n"
-            ,my_recognize_ret_cur_temperature_sign() * my_recognize_ret_cur_temperature()
-            ,my_recognize_ret_cur_temperature_mantissa(), cnt_no_value);
+                            "last query=%d.%02d.%02d %02d:%02d:%02d\n"
+                            "t_last_start_main_task=%d.%02d.%02d %02d:%02d:%02d\n"
+              ,my_recognize_ret_cur_temperature_sign() * my_recognize_ret_cur_temperature()
+              ,my_recognize_ret_cur_temperature_mantissa(), cnt_no_value
+           ,t_last_query.tm_year+1900
+           ,t_last_query.tm_mon+1
+           ,t_last_query.tm_mday
+           ,t_last_query.tm_hour
+           ,t_last_query.tm_min
+           ,t_last_query.tm_sec
+           ,t_last_start_main_task.tm_year+1900
+           ,t_last_start_main_task.tm_mon+1
+           ,t_last_start_main_task.tm_mday
+           ,t_last_start_main_task.tm_hour
+           ,t_last_start_main_task.tm_min
+           ,t_last_start_main_task.tm_sec
+         );
       printf("    date %d.%02d.%02d %02d:%02d:%02d\n"
            ,tblock.tm_year+1900
            ,tblock.tm_mon+1
@@ -677,6 +694,7 @@ void demo_console_task(void *sdata)
            ,tblock.tm_min
            ,tblock.tm_sec
          );
+
       tls_os_time_delay(1000 - 300);
       }
 
