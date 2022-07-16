@@ -1,0 +1,185 @@
+это пульт от вентилятора Aceline SFJ-1650RC
+
+кнопка "таймер"
+Protocol=UNKNOWN Hash=0xE0984BB6 12 bits (incl. gap and start) received
+
+Raw result in internal ticks (50 us) - with leading gap
+rawData[24]: 
+     -65535
+     +  26,-   7     +  26,-   7     +  10,-  23     +  26,-   8
+     +  25,-   8     +   9,-  24     +  10,-  23     +   9,-  24
+     +  26,-   7     +  10,-  23     +  10,-  24     +   9
+Raw result in microseconds - with leading gap
+rawData[24]: 
+     -3276750
+     +1300,- 350     +1300,- 350     + 500,-1150     +1300,- 400
+     +1250,- 400     + 450,-1200     + 500,-1150     + 450,-1200
+     +1300,- 350     + 500,-1150     + 500,-1200     + 450
+
+Result as internal ticks (50 us) array - compensated with MARK_EXCESS_MICROS=20
+uint8_t rawTicks[23] = {26,7, 26,7, 10,23, 26,8, 25,8, 9,24, 10,23, 9,24, 26,7, 10,23, 10,24, 9};  // Protocol=UNKNOWN Hash=0xE0984BB6 12 bits (incl. gap and start) received
+
+Result as microseconds array - compensated with MARK_EXCESS_MICROS=20
+uint16_t rawData[23] = {1280,370, 1280,370, 480,1170, 1280,420, 1230,420, 430,1220, 480,1170, 430,1220, 1280,370, 480,1170, 480,1220, 430};  // Protocol=UNKNOWN Hash=0xE0984BB6 12 bits (incl. gap and start) received
+
+Pronto Hex as string
+char prontoData[] = "0000 006D 000C 0000 0033 000D 0033 000D 0014 002B 0033 000F 0031 000F 0012 002D 0014 002B 0012 002D 0033 000D 0014 002B 0014 002D 0012 06C3 ";
+
+
+
+
+
+
+
+кнопка "поворот"
+Protocol=UNKNOWN Hash=0x39D41DC6 12 bits (incl. gap and start) received
+
+Raw result in internal ticks (50 us) - with leading gap
+rawData[24]: 
+     -28284
+     +  26,-   7     +  26,-   7     +   9,-  24     +  26,-   7
+     +  26,-   8     +   9,-  24     +   9,-  24     +  26,-   7
+     +   9,-  24     +   9,-  24     +  10,-  24     +   9
+Raw result in microseconds - with leading gap
+rawData[24]: 
+     -1414200
+     +1300,- 350     +1300,- 350     + 450,-1200     +1300,- 350
+     +1300,- 400     + 450,-1200     + 450,-1200     +1300,- 350
+     + 450,-1200     + 450,-1200     + 500,-1200     + 450
+
+Result as internal ticks (50 us) array - compensated with MARK_EXCESS_MICROS=20
+uint8_t rawTicks[23] = {26,7, 26,7, 9,24, 26,7, 26,8, 9,24, 9,24, 26,7, 9,24, 9,24, 10,24, 9};  // Protocol=UNKNOWN Hash=0x39D41DC6 12 bits (incl. gap and start) received
+
+Result as microseconds array - compensated with MARK_EXCESS_MICROS=20
+uint16_t rawData[23] = {1280,370, 1280,370, 430,1220, 1280,370, 1280,420, 430,1220, 430,1220, 1280,370, 430,1220, 430,1220, 480,1220, 430};  // Protocol=UNKNOWN Hash=0x39D41DC6 12 bits (incl. gap and start) received
+
+Pronto Hex as string
+char prontoData[] = "0000 006D 000C 0000 0033 000D 0033 000D 0012 002D 0033 000D 0033 000F 0012 002D 0012 002D 0033 000D 0012 002D 0012 002D 0014 002D 0012 06C3 ";
+
+
+
+
+
+
+
+
+
+кнопка "выкл."
+Protocol=UNKNOWN Hash=0xA32AB931 12 bits (incl. gap and start) received
+
+Raw result in internal ticks (50 us) - with leading gap
+rawData[24]: 
+     -51437
+     +  26,-   7     +  26,-   7     +   9,-  24     +  26,-   7
+     +  27,-   6     +  10,-  23     +  10,-  24     +   9,-  24
+     +   9,-  24     +   9,-  24     +  10,-  23     +  26
+Raw result in microseconds - with leading gap
+rawData[24]: 
+     -2571850
+     +1300,- 350     +1300,- 350     + 450,-1200     +1300,- 350
+     +1350,- 300     + 500,-1150     + 500,-1200     + 450,-1200
+     + 450,-1200     + 450,-1200     + 500,-1150     +1300
+
+Result as internal ticks (50 us) array - compensated with MARK_EXCESS_MICROS=20
+uint8_t rawTicks[23] = {26,7, 26,7, 9,24, 26,7, 27,6, 10,23, 10,24, 9,24, 9,24, 9,24, 10,23, 26};  // Protocol=UNKNOWN Hash=0xA32AB931 12 bits (incl. gap and start) received
+
+Result as microseconds array - compensated with MARK_EXCESS_MICROS=20
+uint16_t rawData[23] = {1280,370, 1280,370, 430,1220, 1280,370, 1330,320, 480,1170, 480,1220, 430,1220, 430,1220, 430,1220, 480,1170, 1280};  // Protocol=UNKNOWN Hash=0xA32AB931 12 bits (incl. gap and start) received
+
+Pronto Hex as string
+char prontoData[] = "0000 006D 000C 0000 0033 000D 0033 000D 0012 002D 0033 000D 0035 000B 0014 002B 0014 002D 0012 002D 0012 002D 0012 002D 0014 002B 0033 06C3 ";
+
+
+
+
+
+
+
+кнопка "подсветка"
+Protocol=UNKNOWN Hash=0x4EA240AE 12 bits (incl. gap and start) received
+
+Raw result in internal ticks (50 us) - with leading gap
+rawData[24]: 
+     -25917
+     +  26,-   7     +  26,-   7     +   9,-  24     +  26,-   7
+     +  26,-   8     +  25,-   8     +   9,-  24     +   9,-  24
+     +   9,-  24     +   9,-  24     +  26,-   7     +  26
+Raw result in microseconds - with leading gap
+rawData[24]: 
+     -1295850
+     +1300,- 350     +1300,- 350     + 450,-1200     +1300,- 350
+     +1300,- 400     +1250,- 400     + 450,-1200     + 450,-1200
+     + 450,-1200     + 450,-1200     +1300,- 350     +1300
+
+Result as internal ticks (50 us) array - compensated with MARK_EXCESS_MICROS=20
+uint8_t rawTicks[23] = {26,7, 26,7, 9,24, 26,7, 26,8, 25,8, 9,24, 9,24, 9,24, 9,24, 26,7, 26};  // Protocol=UNKNOWN Hash=0x4EA240AE 12 bits (incl. gap and start) received
+
+Result as microseconds array - compensated with MARK_EXCESS_MICROS=20
+uint16_t rawData[23] = {1280,370, 1280,370, 430,1220, 1280,370, 1280,420, 1230,420, 430,1220, 430,1220, 430,1220, 430,1220, 1280,370, 1280};  // Protocol=UNKNOWN Hash=0x4EA240AE 12 bits (incl. gap and start) received
+
+Pronto Hex as string
+char prontoData[] = "0000 006D 000C 0000 0033 000D 0033 000D 0012 002D 0033 000D 0033 000F 0031 000F 0012 002D 0012 002D 0012 002D 0012 002D 0033 000D 0033 06C3 ";
+
+
+
+
+
+
+
+
+кнопка "режим"
+Protocol=UNKNOWN Hash=0x371A3C86 12 bits (incl. gap and start) received
+
+Raw result in internal ticks (50 us) - with leading gap
+rawData[24]: 
+     -21183
+     +  26,-   7     +  26,-   7     +  10,-  23     +  27,-   7
+     +  25,-   8     +   9,-  24     +   9,-  24     +   9,-  24
+     +   9,-  24     +  27,-   6     +  10,-  24     +   9
+Raw result in microseconds - with leading gap
+rawData[24]: 
+     -1059150
+     +1300,- 350     +1300,- 350     + 500,-1150     +1350,- 350
+     +1250,- 400     + 450,-1200     + 450,-1200     + 450,-1200
+     + 450,-1200     +1350,- 300     + 500,-1200     + 450
+
+Result as internal ticks (50 us) array - compensated with MARK_EXCESS_MICROS=20
+uint8_t rawTicks[23] = {26,7, 26,7, 10,23, 27,7, 25,8, 9,24, 9,24, 9,24, 9,24, 27,6, 10,24, 9};  // Protocol=UNKNOWN Hash=0x371A3C86 12 bits (incl. gap and start) received
+
+Result as microseconds array - compensated with MARK_EXCESS_MICROS=20
+uint16_t rawData[23] = {1280,370, 1280,370, 480,1170, 1330,370, 1230,420, 430,1220, 430,1220, 430,1220, 430,1220, 1330,320, 480,1220, 430};  // Protocol=UNKNOWN Hash=0x371A3C86 12 bits (incl. gap and start) received
+
+Pronto Hex as string
+char prontoData[] = "0000 006D 000C 0000 0033 000D 0033 000D 0014 002B 0035 000D 0031 000F 0012 002D 0012 002D 0012 002D 0012 002D 0035 000B 0014 002D 0012 06C3 ";
+
+
+
+
+
+
+кнопка "вкл.скорость"
+Protocol=UNKNOWN Hash=0x143226DB 12 bits (incl. gap and start) received
+
+Raw result in internal ticks (50 us) - with leading gap
+rawData[24]: 
+     -23291
+     +  26,-   7     +  26,-   8     +   9,-  24     +  25,-   8
+     +  26,-   7     +   9,-  24     +   9,-  24     +   9,-  24
+     +  10,-  24     +   9,-  24     +  26,-   7     +   9
+Raw result in microseconds - with leading gap
+rawData[24]: 
+     -1164550
+     +1300,- 350     +1300,- 400     + 450,-1200     +1250,- 400
+     +1300,- 350     + 450,-1200     + 450,-1200     + 450,-1200
+     + 500,-1200     + 450,-1200     +1300,- 350     + 450
+
+Result as internal ticks (50 us) array - compensated with MARK_EXCESS_MICROS=20
+uint8_t rawTicks[23] = {26,7, 26,8, 9,24, 25,8, 26,7, 9,24, 9,24, 9,24, 10,24, 9,24, 26,7, 9};  // Protocol=UNKNOWN Hash=0x143226DB 12 bits (incl. gap and start) received
+
+Result as microseconds array - compensated with MARK_EXCESS_MICROS=20
+uint16_t rawData[23] = {1280,370, 1280,420, 430,1220, 1230,420, 1280,370, 430,1220, 430,1220, 430,1220, 480,1220, 430,1220, 1280,370, 430};  // Protocol=UNKNOWN Hash=0x143226DB 12 bits (incl. gap and start) received
+
+Pronto Hex as string
+char prontoData[] = "0000 006D 000C 0000 0033 000D 0033 000F 0012 002D 0031 000F 0033 000D 0012 002D 0012 002D 0012 002D 0014 002D 0012 002D 0033 000D 0012 06C3 ";
+
+
