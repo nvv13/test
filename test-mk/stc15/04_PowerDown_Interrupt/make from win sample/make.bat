@@ -1,1 +1,0 @@
-C:\project.win\unixtools\make.exe %1 %2 %3

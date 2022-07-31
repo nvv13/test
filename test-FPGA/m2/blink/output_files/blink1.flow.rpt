@@ -1,5 +1,5 @@
 Flow report for blink1
-Wed Jul 28 19:48:05 2021
+Sun Jul 31 16:19:37 2022
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Flow Summary                                                        ;
 +-----------------------+---------------------------------------------+
-; Flow Status           ; Successful - Wed Jul 28 19:48:03 2021       ;
+; Flow Status           ; Successful - Sun Jul 31 16:19:37 2022       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; blink1                                      ;
 ; Top-level Entity Name ; blink1                                      ;
 ; Family                ; MAX II                                      ;
 ; Device                ; EPM240T100C5                                ;
 ; Timing Models         ; Final                                       ;
-; Total logic elements  ; 54 / 240 ( 23 % )                           ;
-; Total pins            ; 4 / 80 ( 5 % )                              ;
+; Total logic elements  ; 60                                          ;
+; Total pins            ; 4                                           ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 +-----------------------+---------------------------------------------+
@@ -60,7 +60,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/28/2021 19:47:47 ;
+; Start date & time ; 07/31/2022 16:19:31 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; blink1              ;
 +-------------------+---------------------+
@@ -71,7 +71,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------+---------------------------------+---------------+-------------+------------+
 ; Assignment Name                       ; Value                           ; Default Value ; Entity Name ; Section Id ;
 +---------------------------------------+---------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID                 ; 163683365598573.162749086703589 ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                 ; 128454782033912.165927357102565 ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP                ; 85                              ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP                ; 0                               ; --            ; --          ; --         ;
 ; NUM_PARALLEL_PROCESSORS               ; All                             ; --            ; --          ; --         ;
@@ -86,11 +86,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:13     ; 1.0                     ; 556 MB              ; 00:00:28                           ;
-; Fitter               ; 00:00:01     ; 1.0                     ; 992 MB              ; 00:00:02                           ;
-; Assembler            ; 00:00:00     ; 1.0                     ; 544 MB              ; 00:00:00                           ;
-; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 569 MB              ; 00:00:01                           ;
-; Total                ; 00:00:15     ; --                      ; --                  ; 00:00:31                           ;
+; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 557 MB              ; 00:00:14                           ;
+; Total                ; 00:00:06     ; --                      ; --                  ; 00:00:14                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -100,9 +97,6 @@ https://fpgasoftware.intel.com/eula.
 ; Module Name          ; Machine Hostname ; OS Name     ; OS Version  ; Processor type ;
 +----------------------+------------------+-------------+-------------+----------------+
 ; Analysis & Synthesis ; gdb70            ; Fedora Core ; Fedora Core ; x86_64         ;
-; Fitter               ; gdb70            ; Fedora Core ; Fedora Core ; x86_64         ;
-; Assembler            ; gdb70            ; Fedora Core ; Fedora Core ; x86_64         ;
-; Timing Analyzer      ; gdb70            ; Fedora Core ; Fedora Core ; x86_64         ;
 +----------------------+------------------+-------------+-------------+----------------+
 
 
@@ -110,9 +104,6 @@ https://fpgasoftware.intel.com/eula.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off blink1 -c blink1
-quartus_fit --read_settings_files=off --write_settings_files=off blink1 -c blink1
-quartus_asm --read_settings_files=off --write_settings_files=off blink1 -c blink1
-quartus_sta blink1 -c blink1
 
 
 
