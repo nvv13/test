@@ -1,23 +1,19 @@
-/* ------------------------------------------------ --------------------- */ 
-/* --- STC MCU Limited ------------------- ----------------------------- */ 
-/* --- Пример запроса прерывания SPI для одного ведущего устройства серии SPC15F4K60S4 --- ------------------ */ 
-/* --- Мобильный: (86) 13922805190 ------------------- --------------------- */ 
-/* --- Факс: 86-0513-55012956,55012947,55012969 ----------- ------------- */ 
-/* --- Тел: 86-0513-55012928,55012929,55012966 ------------------- ------ */ 
-/* --- Веб: www.STCMCU.com ------------------------------ -------------- */ 
-/* --- Веб: www.GXWMCU.com ---------------------- ---------------------- */ 
-/* Если вы хотите использовать этот код в своей программе, пожалуйста, укажите информацию и процедуры, используя STC в программе */ 
-/* Если вы хотите применить этот код в статье, пожалуйста, укажите информацию и процедуры, используя STC в статье */ 
-/* ------------------------------------------------ --------------------- */
+/*--------------------------------------------------------------------------------------------------------------*/
+/* --- STC MCU International Limited -----------------------------------------------------------------*/
+/* --- STC 1T Series MCU SPI Demo (Each other as the master-slave) ---------------------------*/
+/* If you want to use the program or the program referenced in the ------------------------------*/
+/* article, please specify in which data and procedures from STC -------------------------------*/
+/*---- In Keil C development environment, select the Intel 8052 to compiling -------------------*/
+/*---- And only contain < reg51.h > as header file ---------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------*/
+//suppose the frequency of test chip is 18.432MHz
 
-// В этом примере в среде разработки Keil выберите модель микросхемы Intel 8058 для компиляции 
-// если не указано иное, рабочая частота обычно составляет 11,0592 МГц 
-
-
+	
 #include "stc15.h"
-//#include <compiler.h>
+#include <compiler.h>
 //#include <stdint.h>
 //#include <stdio.h>
+
 
 
 //Частота задается в makefile для проги прошивающий флэш
@@ -32,7 +28,6 @@
 //#define FOSC    24000000UL //24 Mhz
 //#define FOSC    33177000UL //33.177 Mhz
 #define FOSC    35000000UL //35 Mhz
-
 
 
 // Macro, constant definition
@@ -58,20 +53,21 @@ typedef unsigned long DWORD;
                // 1: использовать режим 0 таймера 1 (16-разрядный режим автоматической перезагрузки) в качестве генератора скорости передачи 
                // 2: использовать режим 2 таймера 1 (8-разрядный режим автоматической перезагрузки) в качестве генератора скорости передачи 
 
+
 /*
 sfr T2H   = 0xd6;               // старшие 8 битов таймера 2 
 sfr T2L   = 0xd7;               // младшие 8 битов таймера 2 
 
-sfr P1M1 = 0x91;    //PxM1.n,PxM0.n     =00--->Standard,    01--->push-pull
-sfr P1M0 = 0x92;    //                  =10--->pure input,  11--->open drain
 sfr P0M1 = 0x93;
 sfr P0M0 = 0x94;
+sfr P1M1 = 0x91;
+sfr P1M0 = 0x92;
 sfr P2M1 = 0x95;
 sfr P2M0 = 0x96;
-sfr P3M1 = 0xB1;
-sfr P3M0 = 0xB2;
-sfr P4M1 = 0xB3;
-sfr P4M0 = 0xB4;
+sfr P3M1 = 0xb1;
+sfr P3M0 = 0xb2;
+sfr P4M1 = 0xb3;
+sfr P4M0 = 0xb4;
 sfr P5M1 = 0xC9;
 sfr P5M0 = 0xCA;
 sfr P6M1 = 0xCB;
@@ -102,13 +98,18 @@ sfr SPDAT       =   0xcf;       //SPI Регистр данных SPI
 */
                                // Когда SPI является ведущим мульти-ведомым В этом режиме используйте обычный порт ввода-вывода хоста для подключения к SS-порту 
 #define SPISS       P1_1       //SPI  Порт выбора ведомого SPI, подключиться к порту SS другого MCU 
+                               
+/*
+sfr IE2         =   0xAF;       //interrupt enable rgister 2
+*/
+#define ESPI        0x02        //IE2.1
 
 void InitUart();
 void InitSPI();
-void SendUart(BYTE dat);        //отправка данных на ПК. 
-BYTE RecvUart();                //прием с ПК. Data 
-BYTE SPISwap(BYTE dat);         //Обмен данными между ведущим и ведомым 
+void SendUart(BYTE dat);        //send data to PC
+BYTE RecvUart();                //receive data from PC
 
+BYTE MSSEL;                      //1: master 0:slave
 
 ///////////////////////////////////////////////////////////
 
@@ -131,17 +132,45 @@ void main()
     P7M0 = 0x00;
     P7M1 = 0x00;
 
-    InitUart();                 //Инициализация последовательного порта   
-    InitSPI();                  //Инициализация SPI     
+    InitUart(); //initial UART
+    InitSPI();  //initial SPI
+
+    IE2 |= ESPI;
+    EA = 1;
 
     while (1)
     {
-#ifdef MASTER                   //Для хоста (получает данные последовательного порта и отправляет их на ведомое устройство, 
-                                // получает данные SPI от подчиненного устройства и возвращает их на ПК) 
-        SendUart(SPISwap(RecvUart()));
-#else                           //Для подчиненного устройства (получает данные SPI от хоста) , в то время как 
-        ACC = SPISwap(ACC);     //      отправить предыдущие данные SPI на хост)
-#endif
+        if (RI)
+        {
+            SPCTL = SPEN | MSTR; //set as master
+            MSSEL = 1;
+            ACC = RecvUart();
+            SPISS = 0;           //pull low slave SS
+            SPDAT = ACC;         //trigger SPI send
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////
+
+/* Interrupt numbers: address = (number * 8) + 3 */
+//        9*8+3=75 = 4b
+//#define SPI_VECTOR      9       /* 0x4b SPI */
+//INTERRUPT(spi_isr, SPI_VECTOR)   
+//void spi_isr() interrupt 9 using 1     //SPI interrupt routine 9 (004BH)
+void spi_isr(void) __interrupt (9) __using (1)
+{
+    SPSTAT = SPIF | WCOL;       //clear SPI status
+    if (MSSEL)
+    {
+        SPCTL = SPEN;           //reset as slave
+        MSSEL = 0;
+        SPISS = 1;              //push high slave SS
+        SendUart(SPDAT);        //return received SPI data
+    }
+    else
+    {                           //for salve (receive SPI data from master and
+        SPDAT = SPDAT;          // send previous SPI data to master)
     }
 }
 
@@ -169,50 +198,31 @@ void InitUart()
 #endif
 }
 
+
 ///////////////////////////////////////////////////////////
 
 void InitSPI()
 {
-    SPDAT = 0;                  // Инициализация данных SPI 
-    SPSTAT = SPIF | WCOL;       //Сбросить бит состояния SPI # 
-#ifdef MASTER
-    SPCTL = SPEN | MSTR | SPDHH;        //Режим хоста # 
-#else
-    SPCTL = SPEN | SPDHH;               // Режим ведомого устройства # 
-#endif
+    SPDAT = 0;                  //initial SPI data
+    SPSTAT = SPIF | WCOL;       //clear SPI status
+    SPCTL = SPEN;               //slave mode
 }
 
 ///////////////////////////////////////////////////////////
 
 void SendUart(BYTE dat)
 {
-    while (!TI);                //ожидание отправки завершения 
-    TI = 0;                     //сбросить флаг отправки
-    SBUF = dat;                 //Отправка данных последовательного порта 
+    while (!TI);                //wait pre-data sent
+    TI = 0;                     //clear TI flag
+    SBUF = dat;                 //send current data
 }
 
 ///////////////////////////////////////////////////////////
 
 BYTE RecvUart()
 {
-    while (!RI);                //ожидание завершения приема последовательных данных 
-    RI = 0;                     //сбросить флаг приема 
-    return SBUF;                //Возврат к данным последовательного порта 
-}
-
-///////////////////////////////////////////////////////////
-
-BYTE SPISwap(BYTE dat)
-{
-#ifdef MASTER
-    SPISS = 0;                  //Замедление SS подчиненного устройства 
-#endif
-    SPDAT = dat;                //вызвать SPI для отправки данных, 
-    while (!(SPSTAT & SPIF));   //Ожидание завершения отправки 
-    SPSTAT = SPIF | WCOL;       //Очистить бит состояния SPI
-#ifdef MASTER
-    SPISS = 1;                  //Поднять подчиненный SS 
-#endif
-    return SPDAT;               //вернуть данные SPI 
+    while (!RI);                //wait receive complete
+    RI = 0;                     //clear RI flag
+    return SBUF;                //return receive data
 }
 

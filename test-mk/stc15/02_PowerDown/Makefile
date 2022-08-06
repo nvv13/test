@@ -7,6 +7,7 @@ STCGALPORT ?= /dev/ttyUSB0
 STCGALPROT ?= stc15
 FLASHFILE ?= main.hex
 SYSCLK ?= 35000
+MKDIR_BUILD ?= mkdir -p build
 
 #33177 
 #11059
@@ -22,6 +23,7 @@ build/%.rel: src/%.c src/%.h
 	$(SDCC) $(SDCCOPTS) -o $@ -c $<
 
 main: $(OBJ)
+	$(MKDIR_BUILD)
 	$(SDCC) -o build/ src/$@.c $(SDCCOPTS) $^
 	@ tail -n 5 build/main.mem | head -n 2
 	@ tail -n 1 build/main.mem

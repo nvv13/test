@@ -44,6 +44,9 @@
 #include "w_https.h"
 #include "my_recognize.h"
 
+#include "decode_cmd.h"
+#include "wm_http_fwup.h"
+extern int t_http_fwup(char *url);
 
 #define  DEMO_TASK_SIZE      2048
 static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
@@ -521,6 +524,8 @@ static void demo_gpio_isr_callback(void *context)
 }
 
 
+u8 u8_wait_start_ota_upgrade;
+
 
 #define MEM_CELL_FROM_LIGTH_LEVEL 0
 
@@ -529,6 +534,7 @@ void demo_console_task(void *sdata)
 {
    printf("wifi test app\n");
 
+   u8_wait_start_ota_upgrade=0;
    u8 cnt_no_value=0;
    u8 timer_id;
    struct tls_timer_cfg timer_cfg;
@@ -697,7 +703,17 @@ void demo_console_task(void *sdata)
 
       tls_os_time_delay(1000 - 300);
       }
-
+     
+     if(u8_wait_start_ota_upgrade)
+       {
+       u8_wait_start_ota_upgrade=0;
+       printf("OTA upgrade start, try = " OTA_PATH_FILE "\n" );
+       tls_timer_stop(timer_id);
+       tls_watchdog_clr();
+       t_http_fwup(OTA_PATH_FILE);
+       printf("OTA upgrade stop, error\n" );//если в это мксто попало, значит какая-то ошибка случилась и прошивка не скачалась
+       tls_timer_start(timer_id);
+       }
      //
      }
 

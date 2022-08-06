@@ -10,6 +10,7 @@ STCGALPORT ?= /dev/ttyUSB0
 STCGALPROT ?= stc15
 FLASHFILE ?= main.hex
 SYSCLK ?= 35000
+MKDIR_BUILD ?= cmd.exe /C IF NOT exist build ( mkdir build )
 
 #33177 
 #11059
@@ -25,6 +26,7 @@ build/%.rel: src/%.c src/%.h
 	$(SDCC) $(SDCCOPTS) -o $@ -c $<
 
 main: $(OBJ)
+	$(MKDIR_BUILD)
 	$(SDCC) -o build/ src/$@.c $(SDCCOPTS) $^
 	@ $(TAIL) -n 5 build/main.mem | $(HEAD) -n 2
 	@ $(TAIL) -n 1 build/main.mem

@@ -3,7 +3,7 @@
 
 void my_recognize_http_reset(void);
 void my_recognize_http_error(void);
-void my_recognize_http(char * recvbuf, int i_len);
+void my_recognize_http(const char * recvbuf, int i_len);
 
 #define MY_RECOGNIZE_NO_VALUE -100000
 

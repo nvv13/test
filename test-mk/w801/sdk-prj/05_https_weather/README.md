@@ -2,13 +2,25 @@ project
 
 board HLK-W801-KIT-V1.1 + wifi + 5643AS-1 + button + htpps weather
 
+~~~
 При старте, подсоеденяемся к сети Wifi,
-далее, запрашиваем температуру в нашем городе... и так каждые 5 минут
+далее, запрашиваем температуру в нашем городе... и так каждые 2-5 минут
 
 
 В дополнеии, есть кнопка изменения яркости дисплея.
 4 уровня яркости, после установки - запоминает во внутреннеё флэш.
 После 23:00 и до 6:00, яркость переключаеться на минимальную.
+
+также, можно подцепиться по сети, на порт 5555, терминалом, для управления
+пример програмки для соединения chat_client.py
+сделаны комманды
+      "help - данная справка"
+      "time - время и прочие состояния"
+      "lightXXX - установить/узнать яркость индикатора, где XXX число от 4 до 2000, если 0 то выдаст текущее значение яркости"        
+      "upgrade - обновить прошивку по OTA, лезет на http://192.168.1.69/ota/weather/w800_ota.img"
+
+~~~
+ 
 
 фото 1 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/04_wifi_ntp/w801_quad_digit_led_display.jpg" alt="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1" title="board HLK-W801-KIT-V1.1 + wifi + ntp + 5643AS-1" /></p>
@@ -93,3 +105,25 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
   поэтому делаем CTRL + A + G   - это комманда picocom - RTS down, (нажимать надо достаточно быстро, (одновременно, но сначала CTRL))
   и пользуемся ...
           выход из picocom - CTRL + A + Q  (это выход без сброса порта (Skipping tty reset...))
+
+
+
+~~~
+ для OTA, развернуть сервер
+https://habr.com/ru/company/ruvds/blog/528428/
+sudo apt-get install apache2 phpy libapache2-mod-php
+sudo service apache2 restart
+
+в каталог /var/www/ota/weather
+
+ложим файл прошивки, вида:
+w800_ota.img
+~~~
+
+
+
+
+
+
+
+

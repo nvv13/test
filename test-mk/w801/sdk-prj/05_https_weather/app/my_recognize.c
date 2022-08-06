@@ -88,7 +88,7 @@ i_sign=1;
 i_temperature_mantissa_c=0;
 }
 
-void my_recognize_http(char * recvbuf, int i_len)
+void my_recognize_http(const char * recvbuf, int i_len)
 {
 for(int iInd=0;iInd<i_len;iInd++)
  {
