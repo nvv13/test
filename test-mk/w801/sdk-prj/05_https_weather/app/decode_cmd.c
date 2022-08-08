@@ -9,14 +9,14 @@ int fast_decode_cmd(char* sock_rx, int len)
 int i_len_ret=len;
 if (len > 5 &&	strncmp((char *)sock_rx, "light", 5) == 0) {
  int i_out = atoi((char *)sock_rx + 5);
+ extern u16 i_max_out;
  if(i_out>4 && i_out<2001) 
   {
-  extern u16 i_max_out;
   i_max_out=i_out;
   i_len_ret=sprintf(sock_rx, "ok, set i_max_out=%d", i_out);
   }
   else
-  i_len_ret=sprintf(sock_rx, "error value=%d", i_out);
+  i_len_ret=sprintf(sock_rx, "error value=%d, cur i_max_out=%d", i_out,i_max_out);
  }
 
 
@@ -56,7 +56,7 @@ if (strncmp((char *)sock_rx, "time", 4) == 0) {
 
 if (strncmp((char *)sock_rx, "upgrade", 7) == 0) {
     i_len_ret=sprintf(sock_rx,
-      "OTA upgrade start, try = http://192.168.1.69/ota/weather_ota.img \n"
+      "OTA upgrade start, try = " OTA_PATH_FILE " \n"
        );
     extern u8 u8_wait_start_ota_upgrade;
     u8_wait_start_ota_upgrade=1;
@@ -66,7 +66,7 @@ if (strncmp((char *)sock_rx, "help", 4) == 0) {
     struct tm tblock;
     tls_get_rtc(&tblock);
     i_len_ret=sprintf(sock_rx,
-      "help - данная справка (ver2)\n"
+      "help - данная справка (flash ver0.6)\n"
       "time - время и прочие состояния\n"
       "lightXXX - установить/узнать яркость индикатора, где XXX число от 4 до 2000, если 0 то выдаст текущее значение яркости\n"        
       "upgrade - обновить прошивку по OTA, лезет на "

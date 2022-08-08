@@ -59,364 +59,7 @@ static OS_STK   sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 struct tm t_last_start_main_task;
 
 
-u32 reg_set_num(u32 reg_temp,u8 i_num) // на вход reg_temp с пинами, уже в каком то состоянии, к ним нужно добавить состояние пинов для цифры i_num (0...9)
-{
-/*
-PB_21 1
-PB_22 2
-PB_23 3
-PB_24 4
-PB_25 5
-PB_26 6
-PB_18 7
-PB_17 8
-PB_16 9
-PB_11 10
-PB_10 11
-PB_15 12
-*/
-//i_num=11.7.4.2.1.10.5
-switch(i_num)
-{
- case 0: // 0=5  1=11 7 4 2 1 10
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 18) //7  B
-         | (1 << 24) //4  C
-         | (1 << 22) //2  D
-         | (1 << 21) //1  E
-         | (1 << 11) //10 F
-         ;
- reg_temp=reg_temp 
-              & (~(1 << 25)) //5 G
-             ;/* write low */
- };break;
- case 1: // 
- {
- reg_temp=reg_temp 
-         | (1 << 18) //7  B
-         | (1 << 24) //4  C
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 10)) //11 A
-              & (~(1 << 22)) //2  D
-              & (~(1 << 21)) //1  E
-              & (~(1 << 11)) //10 F
-              & (~(1 << 25)) //5 G
-             ;/* write low */
- };break;
- case 2: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 18) //7  B
-         | (1 << 22) //2  D
-         | (1 << 21) //1  E
-         | (1 << 25) //5 G
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 11)) //10 F
-              & (~(1 << 24)) //4  C
-             ;/* write low */
- };break;
- case 3: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 18) //7  B
-         | (1 << 22) //2  D
-         | (1 << 24) //4  C
-         | (1 << 25) //5 G
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 11)) //10 F
-              & (~(1 << 21)) //1  E
-             ;/* write low */
- };break;
- case 4: // 
- {
- reg_temp=reg_temp 
-         | (1 << 18) //7  B
-         | (1 << 24) //4  C
-         | (1 << 11) //10 F
-         | (1 << 25) //5 G
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 10)) //11 A
-              & (~(1 << 22)) //2  D
-              & (~(1 << 21)) //1  E
-             ;/* write low */
- };break;
- case 5: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 24) //4  C
-         | (1 << 22) //2  D
-         | (1 << 11) //10 F
-         | (1 << 25) //5 G
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 18)) //7  B
-              & (~(1 << 21)) //1  E
-             ;/* write low */
- };break;
- case 6: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 24) //4  C
-         | (1 << 22) //2  D
-         | (1 << 21) //1  E
-         | (1 << 11) //10 F
-         | (1 << 25) //5 G
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 18)) //7  B
-             ;/* write low */
- };break;
- case 7: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 18) //7  B
-         | (1 << 24) //4  C
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 22)) //2  D
-              & (~(1 << 21)) //1  E
-              & (~(1 << 11)) //10 F
-              & (~(1 << 25)) //5 G
-             ;/* write low */
- };break;
- case 8: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 18) //7  B
-         | (1 << 24) //4  C
-         | (1 << 22) //2  D
-         | (1 << 21) //1  E
-         | (1 << 11) //10 F
-         | (1 << 25) //5 G
-        ;  // 
- };break;
- case 9: // 
- {
- reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 18) //7  B
-         | (1 << 24) //4  C
-         | (1 << 22) //2  D
-         | (1 << 11) //10 F
-         | (1 << 25) //5 G
-        ;  // 
- reg_temp=reg_temp 
-              & (~(1 << 21)) //1  E
-        ;  // 
- };break;
-}
-return reg_temp;
-}
-
-
-#define OUT_SEC_IND 0
-//#define OUT_DIG_1   1
-#define OUT_DIG_2   2
-#define OUT_DIG_3   3
-//#define OUT_DIG_4   4
-
-#define OUT_SIG_1   1
-#define OUT_C_4     4
-
-
-static u8 i_off=0;
-
-void lcd5643printDigit(u8 i_pos,u8 i_num)
-{
-if(i_pos>OUT_C_4 && i_off==1)return; //выключть свет, а он уже выключен = сразу выйти
-/*
-LCD display 5643AS-1
-     12 pin
-
-connect to
-W801  5643AS-1 
-GPIO  PIN
-PB_21 1
-PB_22 2
-PB_23 3
-PB_24 4
-PB_25 5
-PB_26 6
-PB_18 7
-PB_17 8
-PB_16 9
-PB_11 10
-PB_10 11
-PB_15 12
-
-*/
-
-	u32 cpu_sr = cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
-
-        u16 offset = TLS_IO_AB_OFFSET;
-	u32 reg;
-	u32 reg_en;
-
-	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
-	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en 
-         | (1 << 21)
-         | (1 << 22)
-         | (1 << 23)
-         | (1 << 24)
-         | (1 << 25)
-         | (1 << 26)
-         | (1 << 18)
-         | (1 << 17)
-         | (1 << 16)
-         | (1 << 11)
-         | (1 << 10)
-         | (1 << 15)
-           ); // enabled control reg from need pin
-
-	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
-
-	u32 reg_temp=reg;
-
-i_off=0; 
-switch(i_pos)
-{
-/*
- case OUT_SEC_IND: //sec indicator, 0=9,11.7.4.2.1.10.5 1=12,8,6 - i_num=3
- {
-        reg_temp=reg_temp 
-         | (1 << 15)   // 12
-         | (1 << 17)   // 8
-         | (1 << 26);  // 6
-
-        reg_temp=reg_temp 
-              & (~(1 << 16))
-              & (~(1 << 10))
-              & (~(1 << 18))
-              & (~(1 << 24))
-              & (~(1 << 22))
-              & (~(1 << 21))
-              & (~(1 << 11))
-              & (~(1 << 25))
-                 ;// write low 
-        if(i_num==0)
-           reg_temp=reg_temp  & (~(1 << 23)); // 3
-           else
-           reg_temp=reg_temp  | (1 << 23);    // 3
- };break;
-*/
-
- case OUT_SIG_1: //digit 1, 0=12 1=9,8,6 - i_num=11.7.4.2.1.10.5
- {
-        reg_temp=reg_temp 
-         | (1 << 16)    //9
-         | (1 << 17)    //8
-         | (1 << 26);   //6
-        reg_temp=reg_temp 
-              & (~(1 << 15)); //12
-        if(i_num==1) //минус
-           reg_temp=reg_temp  & (~(1 << 25)); // -
-           else
-           reg_temp=reg_temp  | (1 << 25);    // -
- };break;
-
-/*
- case OUT_DIG_1: //digit 1, 0=12 1=9,8,6 - i_num=11.7.4.2.1.10.5
- {
-        reg_temp=reg_temp 
-         | (1 << 16)    //9
-         | (1 << 17)    //8
-         | (1 << 26);   //6
-        reg_temp=reg_temp 
-              & (~(1 << 15)); //12
-        reg_temp=reg_set_num(reg_temp,i_num);
- };break;
-*/
- case OUT_DIG_2: //digit 2, 0=9 1=12,8,6 - i_num=11.7.4.2.1.10.5
- {
-        reg_temp=reg_temp 
-         | (1 << 15)    //12
-         | (1 << 17)    //8
-         | (1 << 26);   //6
-        reg_temp=reg_temp 
-              & (~(1 << 16)); //9
-        reg_temp=reg_set_num(reg_temp,i_num);
- };break;
- case OUT_DIG_3: //digit 3, 0=8 1=12,9,6 - i_num=11.7.4.2.1.10.5
- {
-        reg_temp=reg_temp 
-         | (1 << 15)    //12
-         | (1 << 16)    //9
-         | (1 << 26);   //6
-        reg_temp=reg_temp 
-              & (~(1 << 17)); //8
-        reg_temp=reg_set_num(reg_temp,i_num);
- };break;
-/*
- case OUT_DIG_4: //digit 4, 0=6 1=12,9,8 - i_num=11.7.4.2.1.10.5
- {
-        reg_temp=reg_temp 
-         | (1 << 15)    //12
-         | (1 << 16)    //9
-         | (1 << 17);   //8
-        reg_temp=reg_temp 
-              & (~(1 << 26)); //6
-        reg_temp=reg_set_num(reg_temp,i_num);
- };break;
-  */
- case OUT_C_4: //digit 4, 0=6 1=12,9,8 - i_num=11.7.4.2.1.10.5
- {
-        reg_temp=reg_temp 
-         | (1 << 15)    //12
-         | (1 << 16)    //9
-         | (1 << 17);   //8
-        reg_temp=reg_temp 
-              & (~(1 << 26)); //6
-         reg_temp=reg_temp 
-         | (1 << 10) //11 A
-         | (1 << 22) //2  D
-         | (1 << 21) //1  E
-         | (1 << 11) //10 F
-        ;  // 
-        reg_temp=reg_temp 
-              & (~(1 << 18)) //1  B
-              & (~(1 << 25)) //1  G
-              & (~(1 << 24)) //1  C
-         ;
- };break;
-
- default: // off ligth
- {
-        reg_temp=reg_temp 
-              & (~(1 << 15))
-              & (~(1 << 17))
-              & (~(1 << 26))
-              & (~(1 << 16))
-              & (~(1 << 10))
-              & (~(1 << 18))
-              & (~(1 << 24))
-              & (~(1 << 22))
-              & (~(1 << 21))
-              & (~(1 << 11))
-              & (~(1 << 25))
-              & (~(1 << 23))
-                 ;/* write low */
-        i_off=1; 
- };break;
-}
-	tls_reg_write32(HR_GPIO_DATA + offset,reg_temp );  /* write  */
-
-        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
-
-	tls_os_release_critical(cpu_sr); // enable Interrupt
-
-}
+#include "lcd5643.h"
 
 
 static u8 i_5643_hour =0;
@@ -429,58 +72,78 @@ static u16 i_out=0;
 #define LCD_VAL_LG_middle    50
 #define LCD_VAL_LG_spb_hi    10
 #define LCD_VAL_LG_hi        5
-u16 i_max_out=LCD_VAL_LG_spb_low;// 
+u16 i_max_out=LCD_VAL_LG_spb_hi;// 
 
 static int i_5643_t_sign     =0;
 static int i_5643_t_value    =0;
 static int i_5643_t_mantissa =0;
 
+static u8 iMode=MODE_WEATHER;
+
 static void demo_timer_irq(u8 *arg)  // здесь будет вывод на LCD
 {
 //        printf("timer irq hour=%d,min=%d\n",i_5643_hour,i_5643_min);
+u8 i_HiHour;
+u8 i_LoHour;
+u8 i_HiMin ;
+u8 i_LoMin ;
 
-//	u8 i_HiHour=i_5643_hour/10;
-//	u8 i_LoHour=i_5643_hour%10;
-//	u8 i_HiMin = i_5643_min/10;
-//	u8 i_LoMin = i_5643_min%10;
+if(iMode==MODE_CLOCK)
+ {
+	i_HiHour=i_5643_hour/10;
+	i_LoHour=i_5643_hour%10;
+	i_HiMin = i_5643_min/10;
+	i_LoMin = i_5643_min%10;
+ }
 
         //printf("timer irq hh:mm %d%d:%d%d \n",i_HiHour,i_LoHour,i_HiMin,i_LoMin);
 int i_t=i_5643_t_value;
 if(i_5643_t_mantissa>5)i_t++;
 
+
 switch(i_out)
 {
  case 0:
  {
-// lcd5643printDigit(OUT_DIG_1,i_HiHour);
- if(i_5643_t_value>0)
-  lcd5643printDigit(OUT_SIG_1,1);
+ if(iMode==MODE_CLOCK)
+  lcd5643printDigit(OUT_DIG_1,i_HiHour,iMode);
   else
-  lcd5643printDigit(OUT_SIG_1,0);
-
+  {
+  if(i_5643_t_value>0)
+   lcd5643printDigit(OUT_SIG_1,1,iMode);// "+"
+   else
+   lcd5643printDigit(OUT_SIG_1,0,iMode);// "-"
+  }
  };break;
  case 1:
  {
-// lcd5643printDigit(OUT_DIG_2,i_LoHour);
- lcd5643printDigit(OUT_DIG_2,i_t/10);
+ if(iMode==MODE_CLOCK)
+  lcd5643printDigit(OUT_DIG_2,i_LoHour,iMode);
+  else
+  lcd5643printDigit(OUT_DIG_2,i_t/10,iMode);
  };break;
  case 2:
  {
- //lcd5643printDigit(OUT_DIG_3,i_HiMin);
- lcd5643printDigit(OUT_DIG_3,i_t%10);
+ if(iMode==MODE_CLOCK)
+  lcd5643printDigit(OUT_DIG_3,i_HiMin,iMode);
+  else
+  lcd5643printDigit(OUT_DIG_3,i_t%10,iMode);
  };break;
  case 3:
  {
- //lcd5643printDigit(OUT_DIG_4,i_LoMin);
- lcd5643printDigit(OUT_C_4,0);
+ if(iMode==MODE_CLOCK)
+  lcd5643printDigit(OUT_DIG_4,i_LoMin,iMode);
+  else
+  lcd5643printDigit(OUT_C_4,0,iMode);
  };break;
  case 4:
  {
- //lcd5643printDigit(OUT_SEC_IND,u8_sec_state); // on sec state
+ if(iMode==MODE_CLOCK)
+  lcd5643printDigit(OUT_SEC_IND,u8_sec_state,iMode); // on sec state
  };break;
  default:
  {
- lcd5643printDigit(5,0); // off  пока i_out будет больше 4, - выключить LCD
+ lcd5643printDigit(5,0,iMode); // off  пока i_out будет больше 4, - выключить LCD
  };break;
 }
 
@@ -600,7 +263,7 @@ void demo_console_task(void *sdata)
      flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
      printf("flash_cfg_load_u16=%d\n",i_max_out);
      if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
-       i_max_out=LCD_VAL_LG_middle;
+       i_max_out=LCD_VAL_LG_hi;
      i_5643_hour=i_max_out/100;
      i_5643_min =i_max_out%100;
      }
@@ -662,7 +325,7 @@ void demo_console_task(void *sdata)
               i_max_out=LCD_VAL_LG_middle;
             }
 
-     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) )&& tblock.tm_sec==0 ) //каждые 5 минут
+     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) )&& tblock.tm_sec==0 ) //каждые 2 минуты
       {
       u8_wifi_state=0; // переход на цикл(1) wifi по новой
       if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
@@ -713,6 +376,15 @@ void demo_console_task(void *sdata)
        t_http_fwup(OTA_PATH_FILE);
        printf("OTA upgrade stop, error\n" );//если в это мксто попало, значит какая-то ошибка случилась и прошивка не скачалась
        tls_timer_start(timer_id);
+       }
+
+     if( tblock.tm_sec%6==0 && iMode!=MODE_CLOCK ) //показать время на 3 секунды
+       {
+       iMode=MODE_CLOCK;
+       }
+     if( (tblock.tm_sec+3)%6==0 && iMode!=MODE_WEATHER ) // переключаем на погоду
+       {
+       iMode=MODE_WEATHER;
        }
      //
      }
