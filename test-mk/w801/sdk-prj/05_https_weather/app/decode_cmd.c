@@ -1,5 +1,7 @@
 #include <string.h>
 #include <stdio.h>
+#include "wm_type_def.h"
+#include "w_flash_cfg.h"
 #include "decode_cmd.h"
 #include "my_recognize.h"
 
@@ -13,6 +15,7 @@ if (len > 5 &&	strncmp((char *)sock_rx, "light", 5) == 0) {
  if(i_out>4 && i_out<2001) 
   {
   i_max_out=i_out;
+  flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
   i_len_ret=sprintf(sock_rx, "ok, set i_max_out=%d", i_out);
   }
   else
@@ -62,13 +65,28 @@ if (strncmp((char *)sock_rx, "upgrade", 7) == 0) {
     u8_wait_start_ota_upgrade=1;
  }
 
+
+if (len > 5 &&	strncmp((char *)sock_rx, "mode=", 5) == 0) {
+ int i_out = atoi((char *)sock_rx + 5);
+ extern u16 i_mode_global;
+ if(i_out>0 && i_out<4) 
+  {
+  i_mode_global=i_out;
+  flash_cfg_store_u16(i_mode_global, MEM_CELL_FROM_GL_MODE);
+  i_len_ret=sprintf(sock_rx, "ok, set i_mode_global=%d", i_out);
+  }
+  else
+  i_len_ret=sprintf(sock_rx, "error value=%d, cur i_mode_global=%d", i_out,i_mode_global);
+ }
+
 if (strncmp((char *)sock_rx, "help", 4) == 0) {
     struct tm tblock;
     tls_get_rtc(&tblock);
-    i_len_ret=sprintf(sock_rx,
-      "help - данная справка (flash ver0.6)\n"
+    i_len_ret=sprintf(sock_rx,  // внимание, буффер всего лишь 1024 байт, проверяй чтоб вошло, или увеличь буффер
+      "help - данная справка (flash ver-"VERSION_FLASH")\n"
       "time - время и прочие состояния\n"
       "lightXXX - установить/узнать яркость индикатора, где XXX число от 4 до 2000, если 0 то выдаст текущее значение яркости\n"        
+      "mode=X - режим, где X, только 1-погода, 2-погода и время, 3-только время\n"
       "upgrade - обновить прошивку по OTA, лезет на "
       OTA_PATH_FILE 
       "\n"

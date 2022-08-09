@@ -5,7 +5,7 @@
 #include "w_wifi.h"
 #include "decode_cmd.h"
 
-#define     DEMO_SOCK_BUF_SIZE     	512
+#define     DEMO_SOCK_BUF_SIZE     	1024
 static char sock_rx[DEMO_SOCK_BUF_SIZE] = {0};
 
 static int new_fd = -1;

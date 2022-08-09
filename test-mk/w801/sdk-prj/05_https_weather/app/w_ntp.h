@@ -23,7 +23,6 @@
 //#include "wm_regs.h"
 
 
-#define DEMO_NTP 1
 
 //#ifdef __cplusplus
 //extern "C" {

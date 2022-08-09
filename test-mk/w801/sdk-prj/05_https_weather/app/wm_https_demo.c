@@ -27,7 +27,6 @@
 
 #include "my_recognize.h"
 
-#if DEMO_HTTPS
 
 #define HTTPS_DEMO_TASK_PRIO             38
 #define HTTPS_DEMO_TASK_SIZE             2048 //1024
@@ -37,14 +36,13 @@
 
 #define HTTPS_DEMO_CMD_START             0x1
 
-#define HTTPS_DEMO_SERVER               "www.gismeteo.ru"
-#define HTTPS_DEMO_PORT                  443
 
 static bool https_demo_inited = FALSE;
 static OS_STK https_demo_task_stk[HTTPS_DEMO_TASK_SIZE];
 static tls_os_queue_t *https_demo_task_queue = NULL;
 
-static const char *https_request = "GET /weather-arkhangelsk-3915/now/ HTTP/1.0\r\n"
+
+static const char *https_request = "GET "HTTPS_DEMO_GET" HTTP/1.0\r\n"
                                    "Host: "HTTPS_DEMO_SERVER"\r\n"
                                    "User-Agent: W80X\r\n"
                                    "accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7\r\n"
@@ -262,5 +260,4 @@ int https_demo(void)
     return WM_SUCCESS;
 }
 
-#endif
 

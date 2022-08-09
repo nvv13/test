@@ -1,2 +1,0 @@
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ar qc libriscv.a CMakeFiles/__idf_riscv.dir/instruction_decode.c.obj CMakeFiles/__idf_riscv.dir/interrupt.c.obj CMakeFiles/__idf_riscv.dir/vectors.S.obj
-/home/nvv/.espressif/tools/riscv32-esp-elf/esp-2021r2-8.4.0/riscv32-esp-elf/bin/riscv32-esp-elf-ranlib libriscv.a

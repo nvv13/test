@@ -17,7 +17,6 @@
 
 #include "w_ntp.h"
 
-#if DEMO_NTP
 extern const char DEMO_SET_NTP_S[];
 
 static int isNetworkOk(void)
@@ -99,4 +98,3 @@ int ntp_query_cfg(void)
     return WM_SUCCESS;
 }
 
-#endif

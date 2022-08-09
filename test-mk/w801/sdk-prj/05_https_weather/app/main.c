@@ -61,6 +61,7 @@ struct tm t_last_start_main_task;
 
 #include "lcd5643.h"
 
+u16 i_mode_global=GL_MODE_WEATHER_CLOCK;// 
 
 static u8 i_5643_hour =0;
 static u8 i_5643_min  =0;
@@ -190,7 +191,6 @@ static void demo_gpio_isr_callback(void *context)
 u8 u8_wait_start_ota_upgrade;
 
 
-#define MEM_CELL_FROM_LIGTH_LEVEL 0
 
 //console task use UART0 as communication port with PC
 void demo_console_task(void *sdata)
@@ -255,7 +255,6 @@ void demo_console_task(void *sdata)
     struct tm tblock;
     tls_get_rtc(&tblock);
 
-
     if(tblock.tm_hour>=23 || tblock.tm_hour<6) // ночь, установить минимальную яркость!
      i_max_out=LCD_VAL_LG_spb_low;
      else
@@ -268,6 +267,14 @@ void demo_console_task(void *sdata)
      i_5643_min =i_max_out%100;
      }
 
+    flash_cfg_load_u16(&i_mode_global,MEM_CELL_FROM_GL_MODE);
+    if(i_mode_global<GL_MODE_WEATHER || i_mode_global>GL_MODE_CLOCK)
+     i_mode_global=GL_MODE_WEATHER_CLOCK;
+
+    if(i_mode_global==GL_MODE_CLOCK)
+     iMode=MODE_CLOCK;
+     else
+     iMode=MODE_WEATHER;
     https_demo();
 
     while(u8_wifi_state==1) // основной цикл(2)
@@ -306,7 +313,8 @@ void demo_console_task(void *sdata)
      //if((tblock.tm_min==0 || tblock.tm_min==10 || tblock.tm_min==20 || tblock.tm_min==30 || tblock.tm_min==40 || tblock.tm_min==50 ||
      //    tblock.tm_min==5 || tblock.tm_min==15 || tblock.tm_min==25 || tblock.tm_min==35 || tblock.tm_min==45 || tblock.tm_min==55
      //   ) && tblock.tm_sec==0) // запросим снова ntp, - синхр время раз в сутки
-     if((tblock.tm_hour==3 || i_start_reCheck<2 /* было, мигнул свет и... , вообщим добавим еще разок другой */ ) && tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, - синхр время раз в сутки
+     if((tblock.tm_hour==3 || i_start_reCheck<2 /* было, мигнул свет и... , вообщим добавим еще разок другой */ ) && 
+        tblock.tm_min==0 && tblock.tm_sec==0) // запросим снова ntp, - синхр время раз в сутки
             {
 	    i_start_reCheck++;
             u8_wifi_state=0; // переход на цикл(1)
@@ -325,7 +333,9 @@ void demo_console_task(void *sdata)
               i_max_out=LCD_VAL_LG_middle;
             }
 
-     if((tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) )&& tblock.tm_sec==0 ) //каждые 2 минуты
+     if(i_mode_global!=GL_MODE_CLOCK && 
+        (tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) ) && 
+        tblock.tm_sec==0 ) //каждые 2 минуты
       {
       u8_wifi_state=0; // переход на цикл(1) wifi по новой
       if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
@@ -374,18 +384,25 @@ void demo_console_task(void *sdata)
        tls_timer_stop(timer_id);
        tls_watchdog_clr();
        t_http_fwup(OTA_PATH_FILE);
-       printf("OTA upgrade stop, error\n" );//если в это мксто попало, значит какая-то ошибка случилась и прошивка не скачалась
+       printf("OTA upgrade stop, error\n" );//если в это место попало, значит какая-то ошибка случилась и прошивка не скачалась
        tls_timer_start(timer_id);
        }
 
-     if( tblock.tm_sec%6==0 && iMode!=MODE_CLOCK ) //показать время на 3 секунды
-       {
+      if(i_mode_global==GL_MODE_CLOCK)
        iMode=MODE_CLOCK;
-       }
-     if( (tblock.tm_sec+3)%6==0 && iMode!=MODE_WEATHER ) // переключаем на погоду
+       else
        {
-       iMode=MODE_WEATHER;
+       if(i_mode_global==GL_MODE_WEATHER)
+        iMode=MODE_WEATHER;
+        else
+        {
+        if( tblock.tm_sec%10==0 && iMode!=MODE_CLOCK ) //показать время на 3 секунды, каждые 10 сек
+          iMode=MODE_CLOCK;
+        if( (tblock.tm_sec+7)%10==0 && iMode!=MODE_WEATHER ) // через 3 сек, переключаем на погоду
+          iMode=MODE_WEATHER;
+        }
        }
+
      //
      }
 
