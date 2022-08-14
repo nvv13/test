@@ -1,3 +1,5 @@
+REOT OS
+
 Expected result
 ===============
 If everything is running as supposed to, you should see a 1KHz PWM with oscillating duty cycle
