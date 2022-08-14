@@ -22,17 +22,19 @@
 //#include "wm_regs.h"
 
 
-#define DEMO_CONNECT_NET 1
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+//#ifdef __cplusplus
+//extern "C" {
+//#endif
 
 
-int demo_connect_net(char *ssid, char *pwd);
+int demo_connect_net(const char *ssid,const char *pwd);
 
-int create_socket_server(int port);
+int create_socket_server(const int port);
 
+//#ifdef __cplusplus
+//extern }
+//#endif
 
 
 #endif /* W_WIFI_H */

@@ -29,6 +29,8 @@
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
 //#include "wm_regs.h"
+//#include "wm_timer.h"
+#include "wm_rtc.h"
 #include "wm_watchdog.h"
 
 #include "ws2812b.h"
@@ -36,6 +38,7 @@
 
 #include "w_wifi.h"
 #include "w_flash_cfg.h"
+#include "decode_cmd.h"
 
 
 #define  DEMO_TASK_SIZE      1024
@@ -49,6 +52,7 @@ static OS_STK   sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 
 u16 i_light=10;
 u16 i_swith=2;
+struct tm t_last_start_main_task;
 
 
 #define US_PER_MS	1
@@ -153,8 +157,14 @@ void ef_2(void)
         puts("ef_2 done");
 }
 
+u8 u8_wait_start_ota_upgrade;
+
+
 void demo_console_task(void *sdata)
 {
+   u8_wait_start_ota_upgrade=0;
+   tls_get_rtc(&t_last_start_main_task);
+
 //    ws2812b_params_t param;
 //    param.led_numof = WS2812B_PARAM_LED_NUMOF;
     //param.data_pin  = WM_IO_PB_01;
@@ -227,6 +237,19 @@ for(;;) // цикл(1) с подсоединением к wifi и запросо
 	}
 
         tls_watchdog_clr();//сбросить
+
+
+     if(u8_wait_start_ota_upgrade)
+       {
+       u8_wait_start_ota_upgrade=0;
+       printf("OTA upgrade start, try = " OTA_PATH_FILE "\n" );
+       //tls_timer_stop(timer_id);
+       tls_watchdog_clr();
+       t_http_fwup(OTA_PATH_FILE);
+       printf("OTA upgrade stop, error\n" );//если в это место попало, значит какая-то ошибка случилась и прошивка не скачалась
+       //tls_timer_start(timer_id);
+       }
+
     }
 
  }

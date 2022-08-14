@@ -45,8 +45,6 @@
 #include "my_recognize.h"
 
 #include "decode_cmd.h"
-#include "wm_http_fwup.h"
-extern int t_http_fwup(char *url);
 
 #define  DEMO_TASK_SIZE      2048
 static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
@@ -373,7 +371,7 @@ void demo_console_task(void *sdata)
            ,tblock.tm_min
            ,tblock.tm_sec
          );
-
+      //tls_mem_alloc_info();
       tls_os_time_delay(1000 - 300);
       }
      

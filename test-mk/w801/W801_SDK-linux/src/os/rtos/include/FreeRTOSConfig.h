@@ -68,28 +68,28 @@
  * See http://www.freertos.org/a00110.html.
  *----------------------------------------------------------*/
 
-#define configUSE_PREEMPTION		1	//Ê¹ÓÃÇÀÏÈÊ½ÄÚºË
-#define configUSE_IDLE_HOOK			1	//Ê¹ÓÃ¿ÕÏĞ¹³×Ó
-#define configUSE_TICK_HOOK			0	//²»Ê¹ÓÃÊ±¼äÆ¬¹³×Ó
+#define configUSE_PREEMPTION		1	//Use a preemptive kernel //ˆá¯®«ì§®¢ âì ¢ëâ¥á­ïîé¥¥ ï¤à®
+#define configUSE_IDLE_HOOK			1	//Use idle hooks
+#define configUSE_TICK_HOOK			0	//Do not use the time slice hook
 
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 40000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. *///ÄÚ²¿´¦ÀíÆ÷Ö´ĞĞÆµÂÊ
+#define configCPU_CLOCK_HZ			( ( unsigned long ) 40000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. *///Internal processor execution frequency
 
-#define configTICK_RATE_HZ			( ( portTickType ) 500u )	//Ê±¼äÆ¬ÖĞ¶ÏµÄÆµÂÊ
-#define configMAX_PRIORITIES		( ( unsigned portBASE_TYPE ) 63)	//Ó¦ÓÃ³ÌĞòÖĞ¿ÉÓÃÓÅÏÈ¼¶µÄÊıÄ¿
-#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 90 )	//¿ÕÏĞÈÎÎñÊ¹ÓÃµÄ¶ÑÕ»´óĞ¡
-#define configTOTAL_HEAP_SIZE		( ( size_t ) 12 * 1024 )		//ÄÚºËÖĞ¿ÉÓÃµÄRAMÊıÁ¿,heap2Ê¹ÓÃ
-#define configMAX_TASK_NAME_LEN		( 8 )	//´´½¨ÈÎÎñÃû³Æ×î´óÔÊĞí³¤¶È
-#define configUSE_TRACE_FACILITY	1		//ÊÇ·ñÊ¹ÓÃ¿ÉÊÓ»¯×·×Ù
-#define configUSE_16_BIT_TICKS		0	//¶¨ÒåportTickType
-#define configIDLE_SHOULD_YIELD		1	//½²×èÖ¹¿ÕÏĞÈÎÎñÈÃ³öÊ±¼äÖ±µ½ËûµÄÊ±¼äÆ¬ÓÃÍê
+#define configTICK_RATE_HZ			( ( portTickType ) 500u )	//Frequency of time slice interrupts
+#define configMAX_PRIORITIES		( ( unsigned portBASE_TYPE ) 63)	//Number of priorities available in the application
+#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 90 )	//stack size used by idle tasks
+#define configTOTAL_HEAP_SIZE		( ( size_t ) 12 * 1024 )		//The amount of RAM available in the kernel, heap2 uses
+#define configMAX_TASK_NAME_LEN		( 8 )	//Create task name maximum allowed length
+#define configUSE_TRACE_FACILITY	1		//Whether to use visual tracking
+#define configUSE_16_BIT_TICKS		0	//Define portTickType
+#define configIDLE_SHOULD_YIELD		1	//Talk about preventing an idle task from giving up time until its time slice runs out
 #define configUSE_HEAP3				0
 
 #define configQUEUE_REGISTRY_SIZE 	0
-#define configSEMAPHORE_INIT_VALUE	5	//´´½¨ĞÅºÅÁ¿µÄ×î´ó¼ÆÊıÖµ
+#define configSEMAPHORE_INIT_VALUE	5	//Create the maximum count value of the semaphore
 
 /* Co-routine definitions. */
-#define configUSE_CO_ROUTINES 		0	//²»Ê¹ÓÃºÏ×÷ÂÖ×ªÊ½³ÌĞò
-#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )	//ºÏ×÷Ê½Ó¦ÓÃ³ÌĞòÖĞ¿ÉÓÃµÄÓÅÏÈ¼¶ÊıÄ¿
+#define configUSE_CO_ROUTINES 		0	//Does not use a cooperative carousel
+#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )	//Number of priorities available in cooperative applications
 
 #define configTIMER_TASK_STACK_DEPTH 400
 
@@ -108,7 +108,7 @@ to exclude the API function. */
 #define configUSE_MUTEXES               1
 #define configUSE_RECURSIVE_MUTEXES     1
 
-#define INCLUDE_xTaskGetCurrentTaskHandle   1 //¿ÉÒÔ»ñÈ¡µ±Ç°ÈÎÎñ
+#define INCLUDE_xTaskGetCurrentTaskHandle   1 //can get the current task
 
 
 #endif /* FREERTOS_CONFIG_H */

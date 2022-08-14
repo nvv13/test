@@ -19,6 +19,7 @@
 #include "wm_gpio.h"
 #include "wm_osal.h"
 
+#include "core_804.h"
 
 
 #include "ws2812b.h"
@@ -100,7 +101,7 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
          tls_sys_clk_set(CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
          }
 
-	u32 cpu_sr = 0;
+	uint32_t cpu_sr = 0;
 	u32 reg;
 	u32	reg_en;
         u8  pin;
@@ -118,7 +119,8 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
         }
 
 	
-	cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+	//cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+        cpu_sr = csi_irq_save();
 	
 	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
 	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin)); // enabled control reg from need pin
@@ -132,14 +134,17 @@ void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[])
          data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)<< BLUE_SHIFT);
          data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha )<< GREEN_SHIFT);
          data |= vals[i].color.r & (uint32_t)vals[i].alpha;
-         shift(offset, reg, pin, data, i>=(dev->led_numof-2) );
+         shift(offset, reg, pin, data, false);//i>=(dev->led_numof-2) );
         }
 
         tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));/* write low from pin */
 
         tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
 
-	tls_os_release_critical(cpu_sr); // enable Interrupt
+	//tls_os_release_critical(cpu_sr); // enable Interrupt
+      delay_cnt(5000);//
+        csi_irq_restore(cpu_sr);
+
 
     // RES above 50μs
    // tic_delay(13000);

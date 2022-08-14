@@ -1,69 +1,12 @@
 #include <string.h>
-//#include "wm_include.h"
-//#include "wm_demo.h"
-#include "wm_wifi_oneshot.h"
+//#include "wm_wifi_oneshot.h"
 #include "wm_osal.h"
-#include "wm_rtc.h"
-
-//#include "lwip/api.h"
 
 #include "w_wifi.h"
+#include "decode_cmd.h"
 
-#if DEMO_CONNECT_NET
-
-#define     DEMO_SOCK_BUF_SIZE     	512
-
-extern u16 i_light;
-extern u16 i_swith;
-
-// static const char *sock_tx = "message from server";
+#define     DEMO_SOCK_BUF_SIZE     	1024
 static char sock_rx[DEMO_SOCK_BUF_SIZE] = {0};
-
-int fast_decode_cmd(int len)
-{
-int i_len_ret=len;
-if (len > 5 &&	strncmp((char *)sock_rx, "light", 5) == 0) {
- int i_out = atoi((char *)sock_rx + 5);
- if(i_out>4 && i_out<2001) 
-  {
-  i_light=i_out;
-  i_len_ret=sprintf(sock_rx, "ok, set i_light=%d", i_out);
-  }
-  else
-  i_len_ret=sprintf(sock_rx, "error value=%d", i_out);
- }
-
-if (len > 2 &&	strncmp((char *)sock_rx, "dr", 2) == 0) {
- int i_out = atoi((char *)sock_rx + 2);
-  if(i_out==0)
-   i_len_ret=sprintf(sock_rx, "ok, get i_swith=%d", i_swith);
-   else
-   {
-   i_swith=i_out;
-   i_len_ret=sprintf(sock_rx, "ok, set i_swith=%d", i_swith);
-   }
- }
-
-
-if (strncmp((char *)sock_rx, "time", 4) == 0) {
-    struct tm tblock;
-    tls_get_rtc(&tblock);
-    i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d\n"
-           ,tblock.tm_year+1900
-           ,tblock.tm_mon+1
-           ,tblock.tm_mday
-           ,tblock.tm_hour
-           ,tblock.tm_min
-           ,tblock.tm_sec
-         );
- }
-
-
-return i_len_ret;
-}
-
-
-
 
 static int new_fd = -1;
 static int server_fd = -1;
@@ -108,7 +51,7 @@ static void con_net_status_changed_event(u8 status )
 }
 
 
-int create_socket_server(int port)
+int create_socket_server(const int port)
 {
    
     struct sockaddr_in client_addr; // connector's address information
@@ -217,7 +160,7 @@ int create_socket_server(int port)
            sock_rx[ret] = 0;
 	   printf("\nReceive %d bytes from %s\n", ret, inet_ntoa(client_addr.sin_addr.s_addr));
 	   printf("%s\n",sock_rx);
-	   int i_len_ret=fast_decode_cmd(ret); //atoi((char *)buf + 11);
+	   int i_len_ret=fast_decode_cmd(sock_rx,ret); //atoi((char *)buf + 11);
            if(i_len_ret>0)
             {
 	    ret = send(new_fd, sock_rx, i_len_ret, 0);
@@ -242,6 +185,7 @@ return 0;
 }
 
 
+/*
 int demo_oneshot(void)
 {
     printf("waiting for oneshot \n");
@@ -265,10 +209,10 @@ int demo_webserver_config(void)
     tls_wifi_set_oneshot_flag(3);
     return 0;
 }
-
+*/
 
 //acitve connect to specified AP, use command as: t-connet("ssid","pwd");
-int demo_connect_net(char *ssid, char *pwd)
+int demo_connect_net(const char *ssid, const char *pwd)
 {
     struct tls_param_ip *ip_param = NULL;
     u8 wireless_protocol = 0;
@@ -330,5 +274,4 @@ int demo_connect_net(char *ssid, char *pwd)
 
     return WM_SUCCESS;
 }
-#endif
 

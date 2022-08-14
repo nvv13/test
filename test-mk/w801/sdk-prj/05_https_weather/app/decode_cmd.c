@@ -28,10 +28,12 @@ if (strncmp((char *)sock_rx, "time", 4) == 0) {
     tls_get_rtc(&tblock);
     struct tm t_last_query=my_recognize_ret_t_last_query();
     extern struct tm t_last_start_main_task;
-    //не проверил, сколько буфер, а он 512 байт
+    extern u32 total_mem_size;
+    //не проверил, сколько буфер, а он 1024 байт
     i_len_ret=sprintf(sock_rx,"date %d.%02d.%02d %02d:%02d:%02d  currrent temperature=%d,%d  \n"
                               "last query=%d.%02d.%02d %02d:%02d:%02d\n"
                               "t_last_start_main_task=%d.%02d.%02d %02d:%02d:%02d\n"
+                               "total_mem_size=%d"
            ,tblock.tm_year+1900
            ,tblock.tm_mon+1
            ,tblock.tm_mday
@@ -52,6 +54,7 @@ if (strncmp((char *)sock_rx, "time", 4) == 0) {
            ,t_last_start_main_task.tm_hour
            ,t_last_start_main_task.tm_min
            ,t_last_start_main_task.tm_sec
+             ,total_mem_size
          );
 
 
