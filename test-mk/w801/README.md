@@ -1,6 +1,38 @@
 платка 
 HLK-W801-KIT-V1.1
 
+~~~
+описание есть на https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2
+
+HLK-W801 board specifications:
+
+MCU – WinnerMicro W801 32-bit Alibaba XT804 microcontroller @ 240 MHz (Xuantie E804 IP, c-sky 4-конвеера)
+  with 2MB Flash, 288KB RAM, FPU, DSP, crypto engine, 2.4 GHz radio
+
+Connectivity
+ 802.11b/g/n WiFi 4 up to 150 Mbps supporting station, soft AP and station+soft AP modes, WPA2 security
+ Bluetooth 4.2
+
+Expansion – 2x 24-pin headers with
+ 1x SDIO host with support for SDIO 2.0, SDHC, MMC 4.2
+ 1x SDIO device up to 200 Mbps
+ Up to 6x UART, 1x I2C
+ 1x SPI slave up to 50 MHz, 1x master/slave SPI
+ LCD controller with support for 4×32 interface
+ 1x I2S
+ Up to 4x ADC (16-bit, 1KHz sampling rate)
+ Up to 44x GPIOs, 5x PWM
+ Up to 15 touch sensors
+ ISO/IEC 7816 smart card interface
+ Reset, Wakeup, 3.3V, and GND signals
+Debugging – CH340 via USB-C port
+Misc – Reset and Boot buttons, 7x user LEDs including two connected to PWM capable pins
+Power Supply – 5V via USB-C port
+Power consumption – Standby: Less than 10 uA for W801 MCU, not the board itself
+Dimensions – About 70 x 26 mm
+~~~
+
+
 фото 1 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/HLK-W801-KIT-V1.1.jpg" alt="HLK-W801-KIT-V1.1" title="HLK-W801-KIT-V1.1" /></p>
 
@@ -19,8 +51,6 @@ W800 Clock Structure
 W800 address mapping
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/W800%20address%20mapping.jpg" alt="W800 address mapping" title="W800 address mapping" /></p>
 
-
-описание есть на https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2
 
 подробнее на https://chowdera.com/2022/03/202203272225090142.html
 

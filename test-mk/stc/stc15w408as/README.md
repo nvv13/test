@@ -32,7 +32,7 @@ Int/High-reliable
  Reset         = 16 level
 внутренние высокостабильные 
           часы = есть 
-Output cloc and Reset
+Output clock and Reset
     signal MCU = есть 
 Encruption download
 (protect code) = есть 
