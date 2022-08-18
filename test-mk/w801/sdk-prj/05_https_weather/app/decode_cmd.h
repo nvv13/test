@@ -7,6 +7,8 @@
 #include "wm_http_fwup.h"
 extern int t_http_fwup(char *url);
 
+#define MODE_CLOCK     0
+#define MODE_WEATHER   1
 
 #define GL_MODE_WEATHER       1
 #define GL_MODE_WEATHER_CLOCK 2

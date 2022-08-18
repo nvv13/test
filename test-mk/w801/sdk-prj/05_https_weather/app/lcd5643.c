@@ -2,6 +2,8 @@
 #include "wm_gpio.h"
 #include "wm_osal.h"
 #include "wm_regs.h"
+
+#include "decode_cmd.h"
 #include "lcd5643.h"
 
 

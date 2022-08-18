@@ -10,8 +10,6 @@
 #define OUT_DIG_4   4
 #define OUT_C_4     4
 
-#define MODE_CLOCK     0
-#define MODE_WEATHER   1
 
 void lcd5643printDigit(u8 i_pos,u8 i_num,u8 iMode);
 

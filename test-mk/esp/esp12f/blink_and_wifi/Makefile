@@ -8,8 +8,7 @@ BOARD ?= esp8266-esp-12x
 #PORT ?= /dev/ttyUSB0
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../../RIOT
-
+RIOTBASE ?= $(CURDIR)/../../../../../../RIOT
 
 
 

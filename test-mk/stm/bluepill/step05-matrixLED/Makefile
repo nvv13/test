@@ -6,7 +6,7 @@ PORT=/dev/ttyUSB0
 
 #include ../Makefile.tests_common
 
-RIOTBASE ?= $(CURDIR)/../../../../RIOT
+RIOTBASE ?= $(CURDIR)/../../../../../../RIOT
 
 PROGRAMMER_QUIET = 0
 
