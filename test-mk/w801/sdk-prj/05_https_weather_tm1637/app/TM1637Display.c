@@ -21,19 +21,18 @@
 #include "wm_gpio.h"
 
 #include <TM1637Display.h>
-//#include "xtimer.h"
 
-   void bitDelay(void);
+   static void bitDelay(void);
 
-   void start(void);
+   static void start(void);
 
-   void stop(void);
+   static void stop(void);
 
-   uint8_t writeByte(uint8_t b);
+   static uint8_t writeByte(uint8_t b);
 
-   void showDots(uint8_t dots, uint8_t* digits);
+   static void showDots(uint8_t dots, uint8_t* digits);
   
-   void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots , uint8_t leading_zero , uint8_t length , uint8_t pos );
+   static void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots , uint8_t leading_zero , uint8_t length , uint8_t pos );
 
 #define TM1637_I2C_COMM1    0x40
 #define TM1637_I2C_COMM2    0xC0
@@ -47,7 +46,7 @@
 //  E |   | C
 //     ---
 //      D
-const uint8_t digitToSegment[] = {
+static const uint8_t digitToSegment[] = {
  // XGFEDCBA
   0b00111111,    // 0
   0b00000110,    // 1
@@ -66,11 +65,6 @@ const uint8_t digitToSegment[] = {
   0b01111001,    // E
   0b01110001     // F
   };
-const uint8_t signToSegment[] = {
- // XGFEDCBA
-  0b00000000,    // empty
-  0b01000000,    // "-"
-  };
 
 static const uint8_t minusSegments = 0b01000000;
 
@@ -82,6 +76,8 @@ static 	unsigned int m_bitDelay;
 
 void TM1637Display(enum tls_io_name pinClk,enum tls_io_name pinDIO, unsigned int bitDelay)
 {
+        m_bitDelay = bitDelay;
+
 	// Copy the pin numbers
 	m_pinClk = pinClk;
 	m_pinDIO = pinDIO;
@@ -92,8 +88,8 @@ void TM1637Display(enum tls_io_name pinClk,enum tls_io_name pinDIO, unsigned int
 	tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
 	tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
 
-	tls_gpio_write(m_pinClk, 0);
-	tls_gpio_write(m_pinDIO, 0);
+	//tls_gpio_write(m_pinClk, 0);
+	//tls_gpio_write(m_pinDIO, 0);
 }
 
 void setBrightness(uint8_t brightness, uint8_t on)
@@ -147,7 +143,7 @@ void showNumberHexEx(uint16_t num, uint8_t dots, uint8_t leading_zero,
   showNumberBaseEx(16, num, dots, leading_zero, length, pos);
 }
 
-void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots, uint8_t leading_zero,
+static void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots, uint8_t leading_zero,
                                     uint8_t length, uint8_t pos)
 {
     uint8_t negative = false;
@@ -200,19 +196,118 @@ void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots, uint8_t leading_z
     setSegments(digits, length, pos);
 }
 
+
+static void start(void)
+{
+  tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+  tls_gpio_write(m_pinDIO, 0);
+  bitDelay();
+}
+
+
+static void stop(void)
+{
+        tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+        tls_gpio_write(m_pinDIO, 0);
+	bitDelay();
+	tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
+	bitDelay();
+        tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
+	bitDelay();
+}
+
+
+static uint8_t writeByte(uint8_t b)
+{
+  uint8_t data = b;
+
+  // 8 Data Bits
+  for(uint8_t i = 0; i < 8; i++) {
+    // CLK low
+    tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+    tls_gpio_write(m_pinClk, 0);
+    bitDelay();
+
+	// Set data bit
+    if (data & 0x01)
+      tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
+    else
+      {
+      tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+      tls_gpio_write(m_pinDIO, 0);
+      }
+
+    bitDelay();
+
+	// CLK high
+    tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
+    bitDelay();
+    data = data >> 1;
+  }
+
+  // Wait for acknowledge
+  // CLK to zero
+  tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+  tls_gpio_write(m_pinClk, 0);
+  tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
+  bitDelay();
+
+  // CLK to high
+  tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
+  bitDelay();
+  uint8_t ack = tls_gpio_read(m_pinDIO);
+  if (ack == 0)
+    { 
+    tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+    tls_gpio_write(m_pinDIO, 0);
+    }
+
+
+  bitDelay();
+  tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);// 0
+  tls_gpio_write(m_pinClk, 0);
+  bitDelay();
+
+  return ack;
+}
+
+static void showDots(uint8_t dots, uint8_t* digits)
+{
+    for(int i = 0; i < 4; ++i)
+    {
+        digits[i] |= (dots & 0x80);
+        dots <<= 1;
+    }
+}
+
+uint8_t encodeDigit(uint8_t digit)
+{
+	return digitToSegment[digit & 0x0f];
+}
+
+uint8_t encodeSign(uint8_t sign)
+{
+if(sign & 0x01)
+  return minusSegments;
+  else
+  return 0x00;
+}
+
+
 #include "csi_core.h"
+#include "wm_cpu.h"
 extern uint32_t csi_coret_get_load(void);
 extern uint32_t csi_coret_get_value(void);
-
-static void tic_delay(uint32_t cnt)
+static void bitDelay(void)
 {
-    if (cnt == 0) {
-        return;
-    }
-    // нашел данный алгоритм в исходниках SDK, там все что может понадобиться - есть
     uint32_t load = csi_coret_get_load();
     uint32_t start = csi_coret_get_value();
     uint32_t cur;
+    uint32_t cnt;
+    tls_sys_clk sysclk;
+
+    tls_sys_clk_get(&sysclk);
+    cnt = sysclk.cpuclk * m_bitDelay;
 
     while (1) {
         cur = csi_coret_get_value();
@@ -229,89 +324,3 @@ static void tic_delay(uint32_t cnt)
     }
 }
 
-void bitDelay(void)
-{
-tic_delay(150);//0 * m_bitDelay);
-}
-
-void start(void)
-{
-  tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-  bitDelay();
-}
-
-
-void stop(void)
-{
-        tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-	bitDelay();
-	tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
-	bitDelay();
-        tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
-	bitDelay();
-}
-
-
-uint8_t writeByte(uint8_t b)
-{
-  uint8_t data = b;
-
-  // 8 Data Bits
-  for(uint8_t i = 0; i < 8; i++) {
-    // CLK low
-    tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-    bitDelay();
-
-	// Set data bit
-    if (data & 0x01)
-      tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
-    else
-      tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-
-    bitDelay();
-
-	// CLK high
-    tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
-    bitDelay();
-    data = data >> 1;
-  }
-
-  // Wait for acknowledge
-  // CLK to zero
-  tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-  tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
-  bitDelay();
-
-  // CLK to high
-  tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);// 1
-  bitDelay();
-  uint8_t ack = tls_gpio_read(m_pinDIO);
-  if (ack == 0)
-    tls_gpio_cfg(m_pinDIO, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-
-
-  bitDelay();
-  tls_gpio_cfg(m_pinClk, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);// 1
-  bitDelay();
-
-  return ack;
-}
-
-void showDots(uint8_t dots, uint8_t* digits)
-{
-    for(int i = 0; i < 4; ++i)
-    {
-        digits[i] |= (dots & 0x80);
-        dots <<= 1;
-    }
-}
-
-uint8_t encodeDigit(uint8_t digit)
-{
-	return digitToSegment[digit & 0x0f];
-}
-
-uint8_t encodeSign(uint8_t sign)
-{
-	return signToSegment[sign & 0x01];
-}

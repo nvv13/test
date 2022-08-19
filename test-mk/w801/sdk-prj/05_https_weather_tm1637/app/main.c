@@ -78,38 +78,6 @@ static int i_5643_t_mantissa =0;
 
 static u8 iMode=MODE_WEATHER;
 
-static u8 i_dreb=0; // от дребезга кнопки
-
-#define DEMO_ISR_IO		WM_IO_PA_01
-static void demo_gpio_isr_callback(void *context)
-{
-
-	u16 ret = tls_get_gpio_irq_status(DEMO_ISR_IO);
-	//printf("\nint flag =%d\n",ret);
-	if(ret)
-	{
-		tls_clr_gpio_irq_status(DEMO_ISR_IO);
-		//if(ret == tls_gpio_read(DEMO_ISR_IO)) // button ok
-                 //{
-		 printf("\nbutton io =%d i_dreb=%d i_max_out=%d\n",ret,i_dreb,i_max_out);
-                 if(i_dreb==0)// защита от ддребезга контактов для кнопки
-                  {
-                  switch(i_max_out)// градации яркости, 5-все 4 циры подряд выводит, а далее, чем больше, тем больше пропустит циклов вызова таймера для вывода
-                   {
-                   case LCD_VAL_LG_spb_low : i_max_out=LCD_VAL_LG_hi        ;break;
-                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_spb_hi    ;break;
-                   case LCD_VAL_LG_spb_hi  : i_max_out=LCD_VAL_LG_middle    ;break;
-                   case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low       ;break;
-                   case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_spb_low   ;break;
-                   default:i_max_out=LCD_VAL_LG_spb_hi    ;break;
-                   }
-                  i_dreb=1;
-                  }
-		 //}
-		//printf("\nafter int io =%d\n",ret);
-	}
-}
-
 
 u8 u8_wait_start_ota_upgrade;
 
@@ -120,14 +88,6 @@ void demo_console_task(void *sdata)
   
    u8_wait_start_ota_upgrade=0;
    u8 cnt_no_value=0;
-
-   u16 gpio_pin;
-   gpio_pin = DEMO_ISR_IO;
-   //
-   tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-   tls_gpio_isr_register(gpio_pin, demo_gpio_isr_callback, NULL);
-   tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
-   printf("\nbutton gpio %d rising isr\n",gpio_pin);
 
    tls_watchdog_init(12 * 1000 * 1000);//u32 usec около 6 сек --около 1-2 минуты
    u8 i_start_reCheck=0;
@@ -204,20 +164,8 @@ void demo_console_task(void *sdata)
       i_max_out_last=i_max_out;
       }
 
-
-     if(i_dreb==1) //нажали кнопку, сохраним значение
-      {
-      i_5643_hour=i_max_out/100;
-      i_5643_min =i_max_out%100;
-      printf("flash_cfg_store_u16=%d\n",i_max_out);
-      flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
-      i_dreb=0;// защита от ддребезга контактов для кнопки
-      }
-      else
-      {
-      i_5643_hour=tblock.tm_hour;
-      i_5643_min =tblock.tm_min;
-      }
+     i_5643_hour=tblock.tm_hour;
+     i_5643_min =tblock.tm_min;
 
      if(my_recognize_ret_cur_temperature()!=MY_RECOGNIZE_NO_VALUE)
       {
@@ -253,11 +201,10 @@ void demo_console_task(void *sdata)
         (tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) ) && 
         tblock.tm_sec==0 ) //каждые 2 минуты
       {
-      u8_wifi_state=0; // переход на цикл(1) wifi по новой
+      //u8_wifi_state=0; // переход на цикл(1) wifi по новой
       if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
        {
        cnt_no_value++;
-       //if(cnt_no_value==2)u8_wifi_state=0; // переход на цикл(1) wifi по новой
        if(cnt_no_value>=3)tls_sys_reset(); 
        }
        else
@@ -292,7 +239,7 @@ void demo_console_task(void *sdata)
       //tls_mem_alloc_info();
       tls_os_time_delay(1000 - 300);
       }
-     
+
      if(u8_wait_start_ota_upgrade)
        {
        u8_wait_start_ota_upgrade=0;
@@ -334,15 +281,13 @@ void demo_console_task(void *sdata)
        int i_t=i_5643_t_value;
        if(i_5643_t_mantissa>5)i_t++;
        PointData=0x00;
-       data[0] = encodeSign(i_5643_t_sign) ;
+       data[0] = encodeSign((i_5643_t_sign==1?0:1)) ;
        data[1] = encodeDigit(i_t/10) ;
        data[2] = encodeDigit(i_t%10) ;
        data[3] = encodeDigit(0x0C)   ;
        setSegments(data,4,0);
        }
 
-
-     //
      }
 
   }
@@ -366,7 +311,7 @@ void UserMain(void)
 {
     printf("user task\n");
 
-    tls_sys_clk_set(CPU_CLK_240M); 
+    //tls_sys_clk_set(CPU_CLK_240M); 
 
     TM1637Display(WM_IO_PB_21, WM_IO_PB_22, DEFAULT_BIT_DELAY);
 
