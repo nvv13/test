@@ -201,7 +201,7 @@ void demo_console_task(void *sdata)
         (tblock.tm_min==0 || (tblock.tm_min>0 && tblock.tm_min%2==0) ) && 
         tblock.tm_sec==0 ) //каждые 2 минуты
       {
-      //u8_wifi_state=0; // переход на цикл(1) wifi по новой
+      u8_wifi_state=0; // переход на цикл(1) wifi по новой и запрос температуры
       if(my_recognize_ret_cur_temperature()==MY_RECOGNIZE_NO_VALUE)
        {
        cnt_no_value++;
