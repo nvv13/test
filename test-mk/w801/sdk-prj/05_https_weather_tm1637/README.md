@@ -2,6 +2,9 @@ project
 
 board HLK-W801-KIT-V1.1 + wifi + tm1637 + WDT + rtos + htpps weather + ntp + OTA upgrade 
 
+видео:
+https://youtu.be/Hg9dpII8_EY
+
 ~~~
 При старте: подсоединяемся к сети Wifi, запрашиваем время по ntp.
 В работе: запрашиваем температуру в нашем городе... и так каждые 2-5 минут,  
