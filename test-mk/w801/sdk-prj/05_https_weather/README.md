@@ -1,6 +1,6 @@
 project
 
-board HLK-W801-KIT-V1.1 + wifi + 5643AS-1 + button + WDT + rtos + htpps weather + ntp + OTA upgrade 
+board HLK-W801-KIT-V1.1 + wifi + 5643AS-1 + button + WDT + rtos + https weather + ntp + OTA upgrade 
 
 ~~~
 При старте: подсоеденяемся к сети Wifi, запрашиваем время по ntp.

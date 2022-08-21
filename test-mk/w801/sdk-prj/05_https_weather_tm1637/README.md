@@ -1,6 +1,6 @@
 project
 
-board HLK-W801-KIT-V1.1 + wifi + tm1637 + WDT + rtos + htpps weather + ntp + OTA upgrade 
+board HLK-W801-KIT-V1.1 + wifi + tm1637 + WDT + rtos + https weather + ntp + OTA upgrade 
 
 видео:
 https://youtu.be/Hg9dpII8_EY
