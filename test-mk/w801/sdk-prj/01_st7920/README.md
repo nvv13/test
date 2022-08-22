@@ -15,16 +15,19 @@ LCD display st7920
 connect to
 st7920   W801  descreption
 ------   ----  ------------------------------------------------------
-CS(17)   PB21  (Serial mode: Chip select.
+CS(RS)   PB21  (Serial mode: Chip select.
 				1: chip enabled;
 				0: chip disabled.
 				When chip is disabled, SID and SCLK
 				should be set as “H” or “L”. Transcient
 				of SID and SCLK is not allowed.)
-SCLK(19) PB22  (Serial Mode: Serial clock.)
-SID(18)  PB23  (Serial Mode: Sserial data input.)
+SCLK(E)  PB22  (Serial Mode: Serial clock.)
+SID(RW)  PB23  (Serial Mode: Sserial data input.)
 
-PSB(23)  GND.  (0: serial mode st7920)
+PSB      GND.  (0: serial mode st7920)
+
+BLA      VCC (Backlight positive supply)
+BLK      GND (Backlight Negative supply)
 
 VCC      VCC
 GND      GND

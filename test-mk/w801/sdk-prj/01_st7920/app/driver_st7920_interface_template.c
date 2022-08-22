@@ -70,6 +70,7 @@ uint8_t st7920_interface_cs_gpio_init(void)
  */
 uint8_t st7920_interface_cs_gpio_deinit(void)
 {
+    tls_gpio_cfg(PIN_CS, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
     return 0;
 }
 
@@ -109,6 +110,7 @@ uint8_t st7920_interface_sclk_gpio_init(void)
  */
 uint8_t st7920_interface_sclk_gpio_deinit(void)
 {
+    tls_gpio_cfg(PIN_SCLK, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
     return 0;
 }
 
@@ -148,6 +150,7 @@ uint8_t st7920_interface_sid_gpio_init(void)
  */
 uint8_t st7920_interface_sid_gpio_deinit(void)
 {
+    tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
     return 0;
 }
 
@@ -194,6 +197,8 @@ extern uint32_t csi_coret_get_value(void);
  */
 void st7920_interface_delay_us(uint32_t us)
 {
+    if(us==0)return;
+
     uint32_t load = csi_coret_get_load();
     uint32_t start = csi_coret_get_value();
     uint32_t cur;
@@ -225,5 +230,18 @@ void st7920_interface_delay_us(uint32_t us)
  */
 void st7920_interface_debug_print(const char *const fmt, ...)
 {
+
+    char str[256];
+    //uint8_t len;
+    va_list args;
     
+    memset((char *)str, 0, sizeof(char) * 256); 
+    va_start(args, fmt);
+    vsnprintf((char *)str, 256, (char const *)fmt, args);
+    va_end(args);
+        
+    //len = strlen((char *)str);
+    //(void)uart1_write((uint8_t *)str, len);
+    printf("%s", str);
+  
 }
