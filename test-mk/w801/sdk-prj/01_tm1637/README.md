@@ -1,3 +1,4 @@
+
 project
 
 board HLK-W801-KIT-V1.1 + tm1637
@@ -61,7 +62,8 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
-
+PS:
+исходники драйвера tm1637 - https://github.com/avishorp/TM1637.
 
 
 

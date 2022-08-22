@@ -99,6 +99,8 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
+PS:
+исходники драйвера tm1637 - https://github.com/avishorp/TM1637.
 
 
 
