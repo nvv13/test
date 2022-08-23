@@ -89,15 +89,59 @@ static void tic_delay(uint32_t cnt)
 
 
 
+void st7920_interface_delay_us(uint32_t us)
+{
+    if(us==0)return;
+
+    uint32_t load = csi_coret_get_load();
+    uint32_t start = csi_coret_get_value();
+    uint32_t cur;
+    uint32_t cnt;
+    tls_sys_clk sysclk;
+
+    tls_sys_clk_get(&sysclk);
+    cnt = sysclk.cpuclk * us;
+
+    while (1) {
+        cur = csi_coret_get_value();
+
+        if (start > cur) {
+            if (start - cur >= cnt) {
+                return;
+            }
+        } else {
+            if (load - cur + start > cnt) {
+                return;
+            }
+        }
+    }
+}
+
+void st7920_interface_delay_ms(uint32_t ms)
+{
+if(ms==0)return;
+do
+ {
+ st7920_interface_delay_us(1000);
+ }while((--ms)>0);
+}
+
+
+
+
+
 void UserMain(void)
 {
         enum tls_io_name gpio_pin=WM_IO_PB_01;
 
 	printf("user task\n");
 
-	tls_sys_clk_set(CPU_CLK_240M); // freq = 5,714309 MHz
-	//tls_sys_clk_set(CPU_CLK_80M);//   freq = 3,636382 MHz
-	
+	//tls_sys_clk_set(CPU_CLK_240M); // freq = 5,714309 MHz
+	tls_sys_clk_set(CPU_CLK_40M);//   freq = 3,636382 MHz
+	tic_delay(0);
+        st7920_interface_delay_ms(0);
+        st7920_interface_delay_us(0);
+
 	tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
 
 	tls_sys_clk sysclk;
@@ -167,10 +211,15 @@ void UserMain(void)
            // delay_cnt(20);//freg 769.235569 KHz CPU_CLK_240M  
            // delay_cnt(27);//freg 606.064264 KHz  CPU_CLK_240M   half period 0.8 us
            // delay_cnt(28);//freg 588.238941 KHz  CPU_CLK_240M   half period 0.8
-            delay_cnt(29);//freg 571.432091 KHz  CPU_CLK_240M   half period 0.85 us
+//            delay_cnt(29);//freg 571.432091 KHz  CPU_CLK_240M   half period 0.85 us
            // delay_cnt(30);//freg 555.559022 KHz  CPU_CLK_240M  
           //  delay_cnt(100);//freg 188.68043 Khz  CPU_CLK_240M
-
+  //st7920_interface_delay_us(10);// 240m 48.602 Khz half period = 10 us
+  //st7920_interface_delay_us(100);// 240m 4.986 Khz half period = 100 us
+  //st7920_interface_delay_us(10);// 80m 47.056 Khz half period = 10.4 us
+  //st7920_interface_delay_us(100);// 80m 4.986 Khz half period = 100 us
+  //st7920_interface_delay_us(100);// 40m 4.943 Khz half period = 101 us
+  st7920_interface_delay_ms(10);// 40m 49.940 hz half period = 10 ms
 
 	    u8_led_state=~u8_led_state;
 	}
