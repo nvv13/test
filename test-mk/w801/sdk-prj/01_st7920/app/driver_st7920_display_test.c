@@ -623,6 +623,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: init ok.\n");
     
     /* set basic function */
     res = st7920_set_function(&gs_handle, ST7920_INTERFACE_BUS_BIT_8, ST7920_COMMAND_MODE_BASIC);
@@ -633,6 +634,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: set function ok.\n");
     
     /* set enry mode */
     res = st7920_set_enry_mode(&gs_handle, ST7920_DISPLAY_SHIFT_RIGHT, ST7920_ADDRESS_COUNTER_MODE_INCREASE);
@@ -643,6 +645,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: set set enry mode ok.\n");
     
     /* set display shift mode */
     res = st7920_set_display_shift_mode(&gs_handle, ST7920_DISPLAY_SHIFT_MODE_HH);
@@ -653,6 +656,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: set display shift mode ok.\n");
     
     /* set cgram address */
     res = st7920_set_cgram_address(&gs_handle, 0x00);
@@ -663,6 +667,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: set cgram address ok.\n");
     
     /* set ddram address */
     res = st7920_set_ddram_address(&gs_handle, 0x00);
@@ -673,6 +678,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: set ddram address ok.\n");
     
     /* display clear */
     res = st7920_display_clear(&gs_handle);
@@ -683,6 +689,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: display clear ok.\n");
     
     /* return home */
     res = st7920_return_home(&gs_handle);
@@ -693,6 +700,7 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
+    st7920_interface_debug_print("st7920: return home ok.\n");
     
     /* set display control */
     res = st7920_set_display_control(&gs_handle, ST7920_BOOL_TRUE, ST7920_BOOL_FALSE, ST7920_BOOL_FALSE);
@@ -703,7 +711,8 @@ uint8_t st7920_display_test(void)
         
         return 1;
     }
-    
+    st7920_interface_debug_print("st7920: display control ok.\n");
+
     /* write string test */
     st7920_interface_debug_print("st7920: write string test.\n");
     
