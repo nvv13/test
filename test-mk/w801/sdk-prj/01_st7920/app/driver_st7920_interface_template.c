@@ -84,6 +84,7 @@ uint8_t st7920_interface_cs_gpio_deinit(void)
  */
 uint8_t st7920_interface_cs_gpio_write(uint8_t value)
 {
+    tls_gpio_cfg(PIN_CS, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
     if (value)
     {
         tls_gpio_write(PIN_CS, 1);
@@ -92,6 +93,7 @@ uint8_t st7920_interface_cs_gpio_write(uint8_t value)
     {
         tls_gpio_write(PIN_CS, 0);
     }
+    //printf("*st7920_interface_cs_gpio_write(%d)", value);
     return 0;
 }
 
@@ -139,6 +141,7 @@ uint8_t st7920_interface_sclk_gpio_write(uint8_t value)
     {
         tls_gpio_write(PIN_SCLK, 0);
     }
+    //printf("*st7920_interface_sclk_gpio_write(%d)", value);
     return 0;
 }
 
@@ -182,6 +185,7 @@ uint8_t st7920_interface_sid_gpio_write(uint8_t value)
 {
     tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
     tls_gpio_write(PIN_SID, value);
+    //printf("*st7920_interface_sid_gpio_write(%d)", value);
     return 0;
 }
 
@@ -194,6 +198,7 @@ uint8_t st7920_interface_sid_gpio_write(uint8_t value)
  */
 void st7920_interface_delay_ms(uint32_t ms)
 {
+//printf("*st7920_interface_delay_ms(%d)\n\r", ms);
 if(ms==0)return;
 do
  {
@@ -214,6 +219,12 @@ extern uint32_t csi_coret_get_value(void);
  */
 void st7920_interface_delay_us(uint32_t us)
 {
+    if(us>1000)
+     {
+     st7920_interface_delay_ms(us/1000);
+     us=us%1000;
+     }
+//    printf("*st7920_interface_delay_us(%d)\n\r", us);
     if(us==0)return;
 
     uint32_t load = csi_coret_get_load();

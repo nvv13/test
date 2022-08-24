@@ -951,18 +951,22 @@ uint8_t st7920_display_clear(st7920_handle_t *handle)
         }
     }
     
+    //handle->debug_print("*st7920:display clear enter\n");                                        
     if (handle->basic_extended == 0)
     {
+        //handle->debug_print("*st7920:basic_extended == 0: display clear enter.\n");                                        
         if (a_st7920_write_byte(handle, ST7920_WRITE, ST7920_CMD,
-                                ST7920_CMD_BASIC_DISPLAY_CLEAR, 2000) != 0)                                 /* write command */
+                                ST7920_CMD_BASIC_DISPLAY_CLEAR, 2000) != 0)  //2000                               /* write command */
         {
             handle->debug_print("st7920: display clear failed.\n");                                         /* display clear failed */
             
             return 1;                                                                                       /* return error */
         }
+        //handle->debug_print("*st7920:basic_extended == 0: display clear ok.\n");                                        
     }
     else
     {
+        //handle->debug_print("*st7920:basic_extended == 1: display clear enter.\n");                                        
         for (i = 0; i < 64; i++)
         {
             if (a_st7920_write_byte(handle, ST7920_WRITE, ST7920_CMD,
