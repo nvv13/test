@@ -41,7 +41,7 @@ void UserMain(void)
 {
     printf("user task\n");
 
-    tls_sys_clk_set(CPU_CLK_240M); 
+    //tls_sys_clk_set(CPU_CLK_240M); 
 
     for(;;)
      {

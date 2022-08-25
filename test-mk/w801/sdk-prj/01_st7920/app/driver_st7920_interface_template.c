@@ -85,7 +85,7 @@ uint8_t st7920_interface_cs_gpio_deinit(void)
  */
 uint8_t st7920_interface_cs_gpio_write(uint8_t value)
 {
-    tls_gpio_cfg(PIN_CS, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
+    //tls_gpio_cfg(PIN_CS, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
     if (value)
     {
         tls_gpio_write(PIN_CS, 1);
