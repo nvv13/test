@@ -10,7 +10,7 @@ CPU
   32-bit processor, maximum operating frequency 240MHz
 
 Flash 
-  2MByte, with on-chip file system
+  2MByte, with on-chip file system (*air103 1MByte)
 
 Lua available memory 
   176-232KB, default 176KB
@@ -26,34 +26,56 @@ serial port
 SPI
   Support 1 SPI interface
   Only supports master
-  Support 1 channel hardware I2C interface
-  Rate: 100KHz-400KHz
 
 I2C
+  Support 1 channel hardware I2C interface
+  Rate: 100KHz-400KHz
   Only supports master
   LuatOS software supports multi-channel soft I2C, the speed is lower
 
 ADC
   Support 2 channels of 16-bit ADC, the highest sampling rate is 1KHz
+  Support reading core temperature
 
 GPIO
-  Support reading core temperature
   Supports up to 18 GPIOs
-  Support 1 channel SDIO interface
 
 SDIO
+  Support 1 channel SDIO interface
   Only supports master
   Only supports SD card reading and writing
+
+PWM  
   Support 5 PWM outputs
   Frequency range: 3Hz - 160KHz
-
-PWM  Duty cycle maximum accuracy: 1/256
-     The width of the counter inserted in the dead zone: 8bit
+  Duty cycle maximum accuracy: 1/256
+  The width of the counter inserted in the dead zone: 8bit
 
 ~~~
 
 
-
+~~~
+	Pin Mapping Table 
+GPIO number	name	Default and extended functions
+0		PA0	BOOT
+1		PA1	I2C_SCL/ADC0
+4		PA4	I2C_SDA/ADC1
+7		PA7	GPIO/PWM4
+16		PB0	GPIO/PWM0/UART3_TX
+17		PB1	GPIO/PWM1/UART3_RX
+18		PB2	SPI_SCK/PWM2/UART2_TX
+19		PB3	SPI_MISO/PWM3/UART2_RX
+20		PB4	SPI_CS/UART4_TX
+21		PB5	SPI_MOSI/UART4_RX
+22		PB6	UART1_TX
+23		PB7	UART1_RX
+24		PB8	GPIO
+25		PB9	GPIO
+26		PB10	GPIO
+27		PB11	GPIO
+35		PB19	UART0_TX
+36		PB20	UART0_RX
+~~~
 
 о luatos для чипа Air101/Air103
  https://gitee.com/openLuat/luatos-soc-air101

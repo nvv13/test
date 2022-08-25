@@ -36,6 +36,7 @@
 
 #include "driver_st7920_interface.h"
 
+#include "n_delay.h"
 #include "wm_type_def.h"
 #include "wm_io.h"
 #include "wm_gpio.h"
@@ -190,7 +191,6 @@ uint8_t st7920_interface_sid_gpio_write(uint8_t value)
 }
 
 
-
 /**
  * @brief     interface delay ms
  * @param[in] ms
@@ -198,20 +198,9 @@ uint8_t st7920_interface_sid_gpio_write(uint8_t value)
  */
 void st7920_interface_delay_ms(uint32_t ms)
 {
-//printf("*st7920_interface_delay_ms(%d)\n\r", ms);
-if(ms==0)return;
-do
- {
- st7920_interface_delay_us(1000);
- }while((--ms)>0);
+    n_delay_ms(ms);
 }
 
-
-#include "wm_type_def.h"
-#include "csi_core.h"
-#include "wm_cpu.h"
-extern uint32_t csi_coret_get_load(void);
-extern uint32_t csi_coret_get_value(void);
 /**
  * @brief     interface delay us
  * @param[in] us
@@ -219,36 +208,7 @@ extern uint32_t csi_coret_get_value(void);
  */
 void st7920_interface_delay_us(uint32_t us)
 {
-    if(us>1000)
-     {
-     st7920_interface_delay_ms(us/1000);
-     us=us%1000;
-     }
-//    printf("*st7920_interface_delay_us(%d)\n\r", us);
-    if(us==0)return;
-
-    uint32_t load = csi_coret_get_load();
-    uint32_t start = csi_coret_get_value();
-    uint32_t cur;
-    uint32_t cnt;
-    tls_sys_clk sysclk;
-
-    tls_sys_clk_get(&sysclk);
-    cnt = sysclk.cpuclk * us;
-
-    while (1) {
-        cur = csi_coret_get_value();
-
-        if (start > cur) {
-            if (start - cur >= cnt) {
-                return;
-            }
-        } else {
-            if (load - cur + start > cnt) {
-                return;
-            }
-        }
-    }
+    n_delay_us(us);
 }
 
 /**
