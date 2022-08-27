@@ -208,7 +208,7 @@ void st7920_interface_delay_ms(uint32_t ms)
  */
 void st7920_interface_delay_us(uint32_t us)
 {
-    n_delay_us(us);
+    n_delay_us(us/10);
 }
 
 /**
