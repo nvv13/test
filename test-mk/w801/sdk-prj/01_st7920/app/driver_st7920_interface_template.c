@@ -71,7 +71,7 @@ uint8_t st7920_interface_cs_gpio_init(void)
  */
 uint8_t st7920_interface_cs_gpio_deinit(void)
 {
-    tls_gpio_cfg(PIN_CS, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
+    //tls_gpio_cfg(PIN_CS, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
     return 0;
 }
 
@@ -120,7 +120,7 @@ uint8_t st7920_interface_sclk_gpio_init(void)
  */
 uint8_t st7920_interface_sclk_gpio_deinit(void)
 {
-    tls_gpio_cfg(PIN_SCLK, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
+    //tls_gpio_cfg(PIN_SCLK, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
     return 0;
 }
 
@@ -156,8 +156,8 @@ uint8_t st7920_interface_sclk_gpio_write(uint8_t value)
 uint8_t st7920_interface_sid_gpio_init(void)
 {
     tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
-    tls_gpio_write(PIN_SID, 1);
-    tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_PULLHIGH);
+//    tls_gpio_write(PIN_SID, 1);
+//    tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_PULLHIGH);
     return 0;
 }
 
@@ -170,7 +170,7 @@ uint8_t st7920_interface_sid_gpio_init(void)
  */
 uint8_t st7920_interface_sid_gpio_deinit(void)
 {
-    tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
+    //tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
     return 0;
 }
 
@@ -184,7 +184,7 @@ uint8_t st7920_interface_sid_gpio_deinit(void)
  */
 uint8_t st7920_interface_sid_gpio_write(uint8_t value)
 {
-    tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
+    //tls_gpio_cfg(PIN_SID, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
     tls_gpio_write(PIN_SID, value);
     //printf("*st7920_interface_sid_gpio_write(%d)", value);
     return 0;
