@@ -1,7 +1,7 @@
 #ifndef DECODE_CMD_H
 #define DECODE_CMD_H
 
-#define VERSION_FLASH "0.9"
+#define VERSION_FLASH "0.92"
 
 #define OTA_PATH_FILE "http://192.168.1.69/ota/weather/w800_ota.img"
 #include "wm_http_fwup.h"

@@ -153,42 +153,7 @@ if(i_out++>i_max_out) // от 5 ...
 
 }
 
-static u8 i_dreb=0; // от дребезга кнопки
-
-#define DEMO_ISR_IO		WM_IO_PA_01
-static void demo_gpio_isr_callback(void *context)
-{
-
-	u16 ret = tls_get_gpio_irq_status(DEMO_ISR_IO);
-	//printf("\nint flag =%d\n",ret);
-	if(ret)
-	{
-		tls_clr_gpio_irq_status(DEMO_ISR_IO);
-		//if(ret == tls_gpio_read(DEMO_ISR_IO)) // button ok
-                 //{
-		 printf("\nbutton io =%d i_dreb=%d i_max_out=%d\n",ret,i_dreb,i_max_out);
-                 if(i_dreb==0)// защита от ддребезга контактов для кнопки
-                  {
-                  switch(i_max_out)// градации яркости, 5-все 4 циры подряд выводит, а далее, чем больше, тем больше пропустит циклов вызова таймера для вывода
-                   {
-                   case LCD_VAL_LG_spb_low : i_max_out=LCD_VAL_LG_hi        ;break;
-                   case LCD_VAL_LG_hi      : i_max_out=LCD_VAL_LG_spb_hi    ;break;
-                   case LCD_VAL_LG_spb_hi  : i_max_out=LCD_VAL_LG_middle    ;break;
-                   case LCD_VAL_LG_middle  : i_max_out=LCD_VAL_LG_low       ;break;
-                   case LCD_VAL_LG_low     : i_max_out=LCD_VAL_LG_spb_low   ;break;
-                   default:i_max_out=LCD_VAL_LG_spb_hi    ;break;
-                   }
-                  i_dreb=1;
-                  }
-		 //}
-		//printf("\nafter int io =%d\n",ret);
-	}
-}
-
-
 u8 u8_wait_start_ota_upgrade;
-
-
 
 //console task use UART0 as communication port with PC
 void demo_console_task(void *sdata)
@@ -210,14 +175,6 @@ void demo_console_task(void *sdata)
    timer_id = tls_timer_create(&timer_cfg);
    tls_timer_start(timer_id);
    printf("timer start\n");	
-
-   u16 gpio_pin;
-   gpio_pin = DEMO_ISR_IO;
-   //
-   tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-   tls_gpio_isr_register(gpio_pin, demo_gpio_isr_callback, NULL);
-   tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
-   printf("\nbutton gpio %d rising isr\n",gpio_pin);
 
    tls_watchdog_init(12 * 1000 * 1000);//u32 usec около 6 сек --около 1-2 минуты
    u8 i_start_reCheck=0;
@@ -283,21 +240,6 @@ void demo_console_task(void *sdata)
      //printf(" sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
      u8_sec_state=~u8_sec_state;
 
-     if(i_dreb==1) //нажали кнопку, сохраним значение
-      {
-      i_5643_hour=i_max_out/100;
-      i_5643_min =i_max_out%100;
-      printf("flash_cfg_store_u16=%d\n",i_max_out);
-      flash_cfg_store_u16(i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
-      i_dreb=0;// защита от ддребезга контактов для кнопки
-      }
-      else
-      {
-      i_5643_hour=tblock.tm_hour;
-      i_5643_min =tblock.tm_min;
-      }
-
-
      i_5643_hour=tblock.tm_hour;
      i_5643_min =tblock.tm_min;
 
@@ -319,16 +261,14 @@ void demo_console_task(void *sdata)
      	    //tls_sys_reset(); так то, это не надо, вроде все стабильно работает
             }
  
-     if(tblock.tm_hour==23 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out!=LCD_VAL_LG_spb_low) // ночь, установить минимальную яркость!
+     if(tblock.tm_hour==23 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out!=LCD_VAL_LG_spb_hi) // ночь, установить минимальную яркость!
             {
-            i_max_out=LCD_VAL_LG_spb_low;
+            i_max_out=LCD_VAL_LG_spb_hi;
             }
 
-     if(tblock.tm_hour==6 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out==LCD_VAL_LG_spb_low) // утро, восстановить яркость!
+     if(tblock.tm_hour==6 && tblock.tm_min==0 && tblock.tm_sec==0 && i_max_out==LCD_VAL_LG_spb_hi) // утро, восстановить яркость!
             {
-            flash_cfg_load_u16(&i_max_out,MEM_CELL_FROM_LIGTH_LEVEL);
-            if(i_max_out<LCD_VAL_LG_hi || i_max_out>LCD_VAL_LG_spb_low)
-              i_max_out=LCD_VAL_LG_middle;
+            i_max_out=LCD_VAL_LG_hi;
             }
 
      if(i_mode_global!=GL_MODE_CLOCK && 
