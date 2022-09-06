@@ -1,21 +1,25 @@
 #include "n_delay.h"
+#include "wm_cpu.h"
 
-extern uint32_t csi_coret_get_load(void);
-extern uint32_t csi_coret_get_value(void);
+extern uint32_t csi_coret_get_load (void);
+extern uint32_t csi_coret_get_value (void);
 
 /**
  * @brief     interface delay ms
  * @param[in] ms
  * @note      none
  */
-void n_delay_ms(uint32_t ms)
+void
+n_delay_ms (uint32_t ms)
 {
-//printf("*st7920_interface_delay_ms(%d)\n\r", ms);
-if(ms==0)return;
-do
- {
- n_delay_us(1000);
- }while((--ms)>0);
+  // printf("*st7920_interface_delay_ms(%d)\n\r", ms);
+  if (ms == 0)
+    return;
+  do
+    {
+      n_delay_us (1000);
+    }
+  while ((--ms) > 0);
 }
 
 /**
@@ -23,35 +27,43 @@ do
  * @param[in] us
  * @note      none
  */
-void n_delay_us(uint32_t us)
+void
+n_delay_us (uint32_t us)
 {
-    if(us>1000) //надо так, иначе зависнет, уже 2000 перебор, поэтому так
-     {
-     n_delay_ms(us/1000);
-     us=us%1000;
-     }
-//    printf("*st7920_interface_delay_us(%d)\n\r", us);
-    if(us==0)return;
+  if (us > 1000) //надо так, иначе зависнет, уже 2000 перебор, поэтому так
+    {
+      n_delay_ms (us / 1000);
+      us = us % 1000;
+    }
+  //    printf("*st7920_interface_delay_us(%d)\n\r", us);
+  if (us == 0)
+    return;
 
-    uint32_t load = csi_coret_get_load();
-    uint32_t start = csi_coret_get_value();
-    uint32_t cur;
-    uint32_t cnt;
-    tls_sys_clk sysclk;
+  uint32_t load = csi_coret_get_load ();
+  uint32_t start = csi_coret_get_value ();
+  uint32_t cur;
+  uint32_t cnt;
+  tls_sys_clk sysclk;
 
-    tls_sys_clk_get(&sysclk);
-    cnt = sysclk.cpuclk * us;
+  tls_sys_clk_get (&sysclk);
+  cnt = sysclk.cpuclk * us;
 
-    while (1) {
-        cur = csi_coret_get_value();
+  while (1)
+    {
+      cur = csi_coret_get_value ();
 
-        if (start > cur) {
-            if (start - cur >= cnt) {
-                return;
+      if (start > cur)
+        {
+          if (start - cur >= cnt)
+            {
+              return;
             }
-        } else {
-            if (load - cur + start > cnt) {
-                return;
+        }
+      else
+        {
+          if (load - cur + start > cnt)
+            {
+              return;
             }
         }
     }

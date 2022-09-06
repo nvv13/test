@@ -21,20 +21,16 @@
 #include "wm_mem.h"
 //#include "wm_regs.h"
 
-
-
 //#ifdef __cplusplus
-//extern "C" {
+// extern "C" {
 //#endif
 
+int demo_connect_net (const char *ssid, const char *pwd);
 
-int demo_connect_net(const char *ssid,const char *pwd);
-
-int create_socket_server(const int port);
+int create_socket_server (const int port);
 
 //#ifdef __cplusplus
-//extern }
+// extern }
 //#endif
-
 
 #endif /* W_WIFI_H */

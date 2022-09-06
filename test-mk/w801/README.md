@@ -222,3 +222,12 @@ $ make distclean
 
 $ make erase
 
+
+
+отформатировать исходный текст (ставим $ dnf install clang-tools-extra)
+
+$ clang-format --style=GNU --verbose -i *.c* *.h*
+
+или (я добавил в make)
+
+$ make fmt

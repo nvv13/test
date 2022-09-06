@@ -43,3 +43,5 @@ clean:
 	rm -f *.ihx *.hex *.bin
 	rm -rf build/*
 
+fmt:
+	clang-format --style=GNU --verbose -i src/*.c src/*.h

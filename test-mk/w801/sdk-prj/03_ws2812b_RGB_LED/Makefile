@@ -96,3 +96,5 @@ sinclude $(TOP_DIR)/tools/$(CONFIG_ARCH_TYPE)/rules.mk
 FORCE:
     
 
+fmt:
+	clang-format --style=GNU --verbose -i app/*.c app/*.h 
