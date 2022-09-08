@@ -164,7 +164,7 @@ u8x8_byte_hw_spi_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
 
   /*MASTER SPI configuratioin*/
   wm_spi_cs_config (WM_IO_PB_04);
-  wm_spi_ck_config (WM_IO_PB_02);
+  wm_spi_ck_config (WM_IO_PB_01);
   wm_spi_di_config (WM_IO_PB_03);
   wm_spi_do_config (WM_IO_PB_05);
   printf (

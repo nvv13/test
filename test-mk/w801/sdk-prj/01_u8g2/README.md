@@ -56,7 +56,7 @@ st7920      W801 descreption
 				of SID and SCLK is not allowed.)
                  RS — (CS) Начало/окончание передачи данных (1 — начало, 0 — окончание)
           
-6 SCLK(E)   PB02 (Serial Mode: Serial clock.)
+6 SCLK(E)   PB01 (Serial Mode: Serial clock.)
                   E — (SCLK) Строб
  
 5 SID(RW)   PB05 (Serial Mode: Sserial data input.)
