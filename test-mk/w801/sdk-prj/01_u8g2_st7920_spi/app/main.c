@@ -61,16 +61,14 @@ static const uint8_t logo[] = {
 };
 
 /*
-        printf("cs--PB04, ck--PB02, di--PB03, do--PB05;\r\n");
-
-LCD		W801
-
+LCD	       - W801
+--------------- --------------------------------
 1 GND          - GND
-2 VCC (+5V)    - +3.3V
+2 VCC (+5V)    - +5V
 3 Vo
-4 RS (CS)      - PB04 (spi1 nss)
-5 R/W (MOSI)   - PB05 (spi1 mosi)
-6 E (SCK)      - PB02 (spi1 sck)
+4 RS (CS)      - PB21 (spi1 nss)
+5 R/W (MOSI)   - PB17 (spi1 mosi)
+6 E (SCK)      - PB15 (spi1 sck)
 7  DB0
 8  DB1
 9  DB2
@@ -79,13 +77,12 @@ LCD		W801
 12 DB5
 13 DB6
 14 DB7
-15 PSB        - GND (0- serial input/1-parralel)
+15 PSB         - GND (0- serial input/1-parralel)
 16 NC
-17 RST        - PB22
+17 RST         - PB22
 18 Vout
-19 BLA        - +3.3v
-20 BLK        - GND
-
+19 BLA         - +3.3v
+20 BLK         - GND
 */
 void
 UserMain (void)

@@ -1,6 +1,6 @@
 project
 
-board HLK-W801-KIT-V1.1 + u8g2
+board HLK-W801-KIT-V1.1 + u8g2 + st7920 + spi
 
 
 исходники u8g2, взяты с сайта https://github.com/olikraus/u8g2
@@ -48,7 +48,7 @@ INCLUDES += -I ./u8g2
 connect to
 st7920      W801 descreption
 ------      ---- ------------------------------------------------------
-4 CS(RS)    PB04 (Serial mode: Chip select.
+4 CS(RS)    PB21 (Serial mode: Chip select.
 				1: chip enabled;
 				0: chip disabled.
 				When chip is disabled, SID and SCLK
@@ -56,10 +56,10 @@ st7920      W801 descreption
 				of SID and SCLK is not allowed.)
                  RS — (CS) Начало/окончание передачи данных (1 — начало, 0 — окончание)
           
-6 SCLK(E)   PB01 (Serial Mode: Serial clock.)
+6 SCLK(E)   PB15 (Serial Mode: Serial clock.)
                   E — (SCLK) Строб
  
-5 SID(RW)   PB05 (Serial Mode: Sserial data input.)
+5 SID(RW)   PB17 (Serial Mode: Sserial data input.)
                  RW — (SID) Шина данных
  
 
@@ -79,12 +79,8 @@ st7920      W801 descreption
                  можно подключить через подстроечный резистор 10 ком - регулировать контрасность
                  а можно оставить свободным, т.к. с обратной стороны имеется потенциометр для настройки контраста.
 
-2 VCC       3.3v
+2 VCC       5v
 1 GND       GND
-
-
-
-
 ~~~
 
 
