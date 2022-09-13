@@ -2,8 +2,13 @@ project
 
 board HLK-W801-KIT-V1.1 + u8g2 + st7920 + spi
 
+Видео
+https://youtu.be/ZmhRPNjVMo0
 
 исходники u8g2, взяты с сайта https://github.com/olikraus/u8g2
+
+пример адаптации взят из https://github.com/RIOT-OS/RIOT, (хотя можно было взять из LuatOS, к примеру)
+
 ~~~
 в Makefile директории /app
 
