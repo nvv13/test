@@ -53,7 +53,8 @@ INCLUDES += -I ./u8g2
 connect to
 st7920      W801 descreption
 ------      ---- ------------------------------------------------------
-4 CS(RS)    PB21 (Serial mode: Chip select.
+4 CS(RS)    PB21 (PB14, не подходит)
+                 (Serial mode: Chip select.
 				1: chip enabled;
 				0: chip disabled.
 				When chip is disabled, SID and SCLK
@@ -84,7 +85,7 @@ st7920      W801 descreption
                  можно подключить через подстроечный резистор 10 ком - регулировать контрасность
                  а можно оставить свободным, т.к. с обратной стороны имеется потенциометр для настройки контраста.
 
-2 VCC       5v
+2 VCC       5v (3.3 вольт, почему-то не сработало)
 1 GND       GND
 ~~~
 

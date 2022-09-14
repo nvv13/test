@@ -184,12 +184,10 @@ u8x8_byte_hw_spi_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
       wm_spi_do_config (WM_IO_PB_17);
       //printf (
       //"MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, do--PB17;\r\n");
-      tls_spi_trans_type (2); // byte , word, dma
-      tls_spi_setup (u8x8_spi_mode_to_spi_conf (u8g2->display_info->spi_mode),
-                     //TLS_SPI_MODE_3,
+      tls_spi_trans_type(SPI_DMA_TRANSFER); // byte , word, dma
+      tls_spi_setup (u8x8_spi_mode_to_spi_conf (u8g2->display_info->spi_mode),//TLS_SPI_MODE_3,
                      TLS_SPI_CS_HIGH,//TLS_SPI_CS_LOW,
-                     //400000//
- u8x8_pulse_width_to_spi_speed (    u8g2->display_info->sck_pulse_width_ns)
+                     u8x8_pulse_width_to_spi_speed(u8g2->display_info->sck_pulse_width_ns)// clk 400000
                      );
 
       u8x8_gpio_SetCS (u8g2, u8g2->display_info->chip_enable_level);

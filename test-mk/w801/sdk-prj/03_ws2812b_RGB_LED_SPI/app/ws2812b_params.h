@@ -13,7 +13,8 @@
 //#include "board.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /**
@@ -21,25 +22,24 @@ extern "C" {
  * @{
  */
 #ifndef WS2812B_PARAM_LED_NUMOF
-#define WS2812B_PARAM_LED_NUMOF      (60)    /* many have 60 per meter... */
+#define WS2812B_PARAM_LED_NUMOF (60) /* many have 60 per meter... */
 #endif
 #ifndef WS2812B_PARAM_DATA_PIN
-#define WS2812B_PARAM_DATA_PIN       (WM_IO_PB_05)
+#define WS2812B_PARAM_DATA_PIN (WM_IO_PB_05)
 #endif
 
 #ifndef WS2812B_PARAMS
-#define WS2812B_PARAMS               { .led_numof = WS2812B_PARAM_LED_NUMOF, \
-                                       .data_pin  = WS2812B_PARAM_DATA_PIN  }
+#define WS2812B_PARAMS                                                        \
+  {                                                                           \
+    .led_numof = WS2812B_PARAM_LED_NUMOF, .data_pin = WS2812B_PARAM_DATA_PIN  \
+  }
 #endif
-/**@}*/
+  /**@}*/
 
-/**
- * @brief   WS2812B configuration
- */
-static const  ws2812b_params_t ws2812b_params[] =
-{
-    WS2812B_PARAMS
-};
+  /**
+   * @brief   WS2812B configuration
+   */
+  static const ws2812b_params_t ws2812b_params[] = { WS2812B_PARAMS };
 
 #ifdef __cplusplus
 }

@@ -17,43 +17,45 @@
 #include "wm_gpio.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-/**
- * @brief   Configuration parameters for (chained) WS2812B LEDs
- */
-typedef struct {
-    int led_numof;          /**< number of chained LEDs */
-    enum tls_io_name data_pin;        /**< data pin */
-} ws2812b_params_t;
+  /**
+   * @brief   Configuration parameters for (chained) WS2812B LEDs
+   */
+  typedef struct
+  {
+    int led_numof;             /**< number of chained LEDs */
+    enum tls_io_name data_pin; /**< data pin */
+  } ws2812b_params_t;
 
-/**
- * @brief   Device descriptor definition for WS2812B LEDs
- */
-typedef ws2812b_params_t ws2812b_t;
+  /**
+   * @brief   Device descriptor definition for WS2812B LEDs
+   */
+  typedef ws2812b_params_t ws2812b_t;
 
-/**
- * @brief   Initialize (chained) WS2812B LEDs
- *
- * @param[out] dev      device descriptor
- * @param[in]  params   device configuration
- *
- * @pre     @p dev != NULL
- * @pre     @p params != NULL
- */
-int ws2812b_init(ws2812b_t *dev, const ws2812b_params_t *params);
+  /**
+   * @brief   Initialize (chained) WS2812B LEDs
+   *
+   * @param[out] dev      device descriptor
+   * @param[in]  params   device configuration
+   *
+   * @pre     @p dev != NULL
+   * @pre     @p params != NULL
+   */
+  int ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params);
 
-/**
- * @brief   Apply the given color values to the connected LED(s)
- *
- * @param[in] dev       device descriptor
- * @param[in] vals      color values, MUST be of size `dev->led_numof`
- *
- * @pre     @p dev != NULL
- * @pre     @p vals != NULL
- */
-void ws2812b_load_rgba(const ws2812b_t *dev, const color_rgba_t vals[]);
+  /**
+   * @brief   Apply the given color values to the connected LED(s)
+   *
+   * @param[in] dev       device descriptor
+   * @param[in] vals      color values, MUST be of size `dev->led_numof`
+   *
+   * @pre     @p dev != NULL
+   * @pre     @p vals != NULL
+   */
+  void ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[]);
 
 #ifdef __cplusplus
 }
