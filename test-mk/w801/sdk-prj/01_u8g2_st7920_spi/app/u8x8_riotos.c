@@ -28,7 +28,6 @@
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
 
-
 #ifdef MODULE_PERIPH_SPI
 #include "wm_hostspi.h"
 #endif
@@ -42,18 +41,22 @@ u8x8_pulse_width_to_spi_speed (uint32_t pulse_width)
 {
   const uint32_t cycle_time = 2 * pulse_width;
 
-      if (cycle_time < 100) {
-          return 10000000;//SPI_CLK_10MHZ;
-      }
-      else if (cycle_time < 200) {
-          return 5000000;//SPI_CLK_5MHZ;
-      }
-      else if (cycle_time < 1000) {
-          return 1000000;//SPI_CLK_1MHZ;
-      }
-      else if (cycle_time < 2500) {
-          return 400000 ;//SPI_CLK_400KHZ;
-      }
+  if (cycle_time < 100)
+    {
+      return 10000000; // SPI_CLK_10MHZ;
+    }
+  else if (cycle_time < 200)
+    {
+      return 5000000; // SPI_CLK_5MHZ;
+    }
+  else if (cycle_time < 1000)
+    {
+      return 1000000; // SPI_CLK_1MHZ;
+    }
+  else if (cycle_time < 2500)
+    {
+      return 400000; // SPI_CLK_400KHZ;
+    }
 
   return 100000; // SPI_CLK_100KHZ;
 }
@@ -126,7 +129,8 @@ u8x8_gpio_and_delay_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
     case U8X8_MSG_GPIO_CS:
       if (u8x8_riot_ptr != NULL && gpio_is_valid (u8x8_riot_ptr->pin_cs))
         {
-          tls_gpio_write (u8x8_riot_ptr->pin_cs, arg_int ); //(arg_int==0?1:0) );
+          tls_gpio_write (u8x8_riot_ptr->pin_cs,
+                          arg_int); //(arg_int==0?1:0) );
         }
       break;
     case U8X8_MSG_GPIO_DC:
@@ -160,7 +164,6 @@ u8x8_byte_hw_spi_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
 
   // spi_t dev = SPI_DEV(u8x8_riot_ptr->device_index);
 
-
   switch (msg)
     {
     case U8X8_MSG_BYTE_SEND:
@@ -182,13 +185,16 @@ u8x8_byte_hw_spi_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
       wm_spi_ck_config (WM_IO_PB_15);
       wm_spi_di_config (WM_IO_PB_16);
       wm_spi_do_config (WM_IO_PB_17);
-      //printf (
-      //"MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, do--PB17;\r\n");
-      tls_spi_trans_type(SPI_DMA_TRANSFER); // byte , word, dma
-      tls_spi_setup (u8x8_spi_mode_to_spi_conf (u8g2->display_info->spi_mode),//TLS_SPI_MODE_3,
-                     TLS_SPI_CS_HIGH,//TLS_SPI_CS_LOW,
-                     u8x8_pulse_width_to_spi_speed(u8g2->display_info->sck_pulse_width_ns)// clk 400000
-                     );
+      // printf (
+      //"MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16,
+      // do--PB17;\r\n");
+      tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
+      tls_spi_setup (u8x8_spi_mode_to_spi_conf (
+                         u8g2->display_info->spi_mode), // TLS_SPI_MODE_3,
+                     TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
+                     u8x8_pulse_width_to_spi_speed (
+                         u8g2->display_info->sck_pulse_width_ns) // clk 400000
+      );
 
       u8x8_gpio_SetCS (u8g2, u8g2->display_info->chip_enable_level);
       u8g2->gpio_and_delay_cb (u8g2, U8X8_MSG_DELAY_NANO,

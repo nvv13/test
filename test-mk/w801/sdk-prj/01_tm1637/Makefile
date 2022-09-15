@@ -7,6 +7,7 @@ GEN_BINS = $(TARGET).bin
 SUBDIRS = \
     $(TOP_DIR)/app #\
 #    $(TOP_DIR)/demo
+MYAPPDIRS = $(TOP_DIR)/app
 endif # } PDIR
 
 ifndef PDIR # {
@@ -97,4 +98,4 @@ FORCE:
     
 
 fmt:
-	clang-format --style=GNU --verbose -i app/*.c app/*.h 
+	clang-format --style=GNU --verbose -i $(MYAPPDIRS)/*.c $(MYAPPDIRS)/*.h

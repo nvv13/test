@@ -3,6 +3,7 @@ sinclude $(TOP_DIR)/tools/w800/conf.mk
 
 ifndef PDIR
 GEN_LIBS = libuser$(LIB_EXT)
+MYAPPDIRS = .
 endif
 
 #DEFINES +=

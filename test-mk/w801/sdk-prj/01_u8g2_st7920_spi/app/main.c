@@ -144,11 +144,11 @@ UserMain (void)
               u8g2_DrawStr (&u8g2, 4, 42, "Everything Ok !");
               break;
             case 6:
-	      u8g2_DrawDisc (&u8g2,10,18,9,U8G2_DRAW_ALL);
-	      u8g2_DrawCircle (&u8g2,10,18+30,9,U8G2_DRAW_ALL);
-	      u8g2_DrawLine(&u8g2, 7, 10, 40, 55);
-	      u8g2_DrawBox(&u8g2  ,50,10,20,10);
-	      u8g2_DrawFrame(&u8g2,50,10+30,20,10);
+              u8g2_DrawDisc (&u8g2, 10, 18, 9, U8G2_DRAW_ALL);
+              u8g2_DrawCircle (&u8g2, 10, 18 + 30, 9, U8G2_DRAW_ALL);
+              u8g2_DrawLine (&u8g2, 7, 10, 40, 55);
+              u8g2_DrawBox (&u8g2, 50, 10, 20, 10);
+              u8g2_DrawFrame (&u8g2, 50, 10 + 30, 20, 10);
               break;
             }
         }

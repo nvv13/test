@@ -32,10 +32,12 @@
 #include "wm_mem.h"
 #include "ws2812b_params.h"
 #define MY_SPI_DATA_LEN                                                       \
-  (WS2812B_PARAM_LED_NUMOF * 24) // num LED * 24  = buf SPI
+  (WS2812B_PARAM_LED_NUMOF * 12) // num LED * 24 * 4 / 8 = buf SPI
 /*
                                     один LED это, R G B - три светодиода по 8 бит,
                                     8*3=24 бит, значит нужен буфер 24*колич.LED бит
+                                    каждый бит предается 4 битами по SPI 
+                                    потом это разделит на 8 (в 1 байте буфура 8 бит)
 */                                       
 #define BLUE (0xff0000)
 #define GREEN (0x00ff00)
@@ -146,7 +148,7 @@ ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
 
   //int clk = 3225806;          /* default 1M */
   //int clk = 4000000; /* default 1M */
-  int clk = 5800000; /* default 1M */
+  int clk = 2300000; /* default 1M */
   tls_spi_trans_type (SPI_DMA_TRANSFER);
 
   /**
@@ -243,51 +245,36 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
                << GREEN_SHIFT);
       data |= vals[i].color.r & (uint32_t)vals[i].alpha;
 
+      data = 0;
       //        shift(offset, reg, pin, data);
       for (int i = 23; i >= 0; i--)
         {
 
           if (((data >> i) & 0x01))
-            { //
-//  передача 1 это 0хF8 = 0x11111000b
-              tx_buf[iPosBit] = 0xF8;
-              iPosBit += 1;
+            { // 1 -> 1110
+              int iByte = 0;
+              if (iPosBit > 0)
+                iByte = iPosBit / 8;
+              int iBit = iPosBit - (iByte * 8);
+              tx_buf[iByte]
+                  |= ((1 << iBit) | (1 << (iBit + 1)) | (1 << (iBit + 2)));
+              iPosBit += 4;
             }
           else
-            { //
-//  передача 0 это 0хC0 = 0x11000000b
-              tx_buf[iPosBit] = 0xC0;
-              iPosBit += 1;
+            { // 0 -> 1000
+              int iByte = 0;
+              if (iPosBit > 0)
+                iByte = iPosBit / 8;
+              int iBit = iPosBit - (iByte * 8);
+              tx_buf[iByte] |= ((1 << iBit));
+              iPosBit += 4;
             }
         }
     }
 
   //   printf("SPI Master send %d byte, modeA, little endian\n",
   //   MY_SPI_DATA_LEN);
-/*
-
-1.25/5=0.25
-  11000
-0.25*2=0.5
-  11100
-0.25*3=0.75
-
-1.25/4=0.3125
-  1000
-0.3125*1=0.3125
-  1110
-0.3125*3=0.937
-
-1.25/8=0,15625
-  11100000
-0,15625*3=0.46875
-  11111000
-0,15625*5=0.78125
-
-*/
-
- // memset (tx_buf, 0xC0 , MY_SPI_DATA_LEN);
- // memset (tx_buf, 0xF8 , MY_SPI_DATA_LEN);
+  //memset (tx_buf, 0x8E , MY_SPI_DATA_LEN);
   switch (tls_spi_write ((u8 *)tx_buf, MY_SPI_DATA_LEN))
     {
     case TLS_SPI_STATUS_OK:

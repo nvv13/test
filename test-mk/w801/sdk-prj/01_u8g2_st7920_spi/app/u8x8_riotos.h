@@ -22,7 +22,6 @@
 #ifndef U8X8_RIOTOS_H
 #define U8X8_RIOTOS_H
 
-
 #include "u8x8.h"
 
 #include "wm_type_def.h"
