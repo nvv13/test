@@ -53,12 +53,12 @@ u16 i_swith = 1;
 /**
  * @brief   Switch to the next LED every 10ms
  */
-#define STEP (10 * US_PER_MS)
+#define STEP (1 * US_PER_MS)
 
 /**
  * @brief   Interval for dimming colors
  */
-#define DIM (10 * US_PER_MS)
+#define DIM (1 * US_PER_MS)
 
 /**
  * @brief   Step through brightness levels (0-255) in 32 steps

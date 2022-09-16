@@ -22,7 +22,7 @@ extern "C"
  * @{
  */
 #ifndef WS2812B_PARAM_LED_NUMOF
-#define WS2812B_PARAM_LED_NUMOF (384) /* many have 60 per meter... 680 для 4 бит максимум !*/
+#define WS2812B_PARAM_LED_NUMOF (680) /* many have 60 per meter... */
 #endif
 #ifndef WS2812B_PARAM_DATA_PIN
 #define WS2812B_PARAM_DATA_PIN (WM_IO_PB_05)

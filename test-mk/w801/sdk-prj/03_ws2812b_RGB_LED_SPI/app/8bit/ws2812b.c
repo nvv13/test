@@ -32,12 +32,10 @@
 #include "wm_mem.h"
 #include "ws2812b_params.h"
 #define MY_SPI_DATA_LEN                                                       \
-  (WS2812B_PARAM_LED_NUMOF * 12) // num LED * 24 * 4 / 8 = buf SPI
+  (WS2812B_PARAM_LED_NUMOF * 24) // num LED * 24  = buf SPI
 /*
                                     один LED это, R G B - три светодиода по 8 бит,
                                     8*3=24 бит, значит нужен буфер 24*колич.LED бит
-                                    каждый бит предается 4 битами по SPI 
-                                    потом это разделит на 8 (в 1 байте буфура 8 бит)
 */                                       
 #define BLUE (0xff0000)
 #define GREEN (0x00ff00)
@@ -148,7 +146,7 @@ ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
 
   //int clk = 3225806;          /* default 1M */
   //int clk = 4000000; /* default 1M */
-  int clk = 3265000; /* default 1M */
+  int clk = 6400000; /* default 1M */
   tls_spi_trans_type (SPI_DMA_TRANSFER);
 
   /**
@@ -250,30 +248,16 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
         {
 
           if (((data >> i) & 0x01))
-            { // 1 -> 1110
-              int iByte = 0;
-              if (iPosBit > 0)
-                iByte = iPosBit / 8;
-              u8 iBit = iPosBit  - (iByte * 8);
-              tx_buf[iByte] |= (1 << (7-iBit));
-              iPosBit += 1;
-              iBit = iPosBit  - (iByte * 8);
-              tx_buf[iByte] |= (1 << (7-iBit));
-              iPosBit += 1;
-              iBit = iPosBit  - (iByte * 8);
-              tx_buf[iByte] |= (1 << (7-iBit));
-              iPosBit += 1;
+            { //
+// 8 бит передача 1 это 0хF8 = 0x11111000b
+              tx_buf[iPosBit] = 0xF8;
               iPosBit += 1;
             }
           else
-            { // 0 -> 1000
-              int iByte = 0;
-              if (iPosBit > 0)
-                iByte = iPosBit / 8;
-              u8 iBit = iPosBit  - (iByte * 8);
-              tx_buf[iByte] |= (1 << (7-iBit));
+            { //
+// 8 бит передача 0 это 0хC0 = 0x11000000b
+              tx_buf[iPosBit] = 0xC0;
               iPosBit += 1;
-              iPosBit += 3;
             }
         }
     }
@@ -296,7 +280,7 @@ MAX_LED=8192/3/3=910
 0.3125*1=0.3125
   1110
 0.3125*3=0.937
-MAX_LED=8192/4/3=680
+MAX_LED=8192/4/3=682
 
 Для 5 бит
        частота 4000000Hz
@@ -332,7 +316,7 @@ MAX_LED=8192/7/3=390
 0,15625*2=0,3125   надо 0,4us ±150ns    0,25 0,4 0,55
   11111000
 0,15625*5=0.78125  надо 0,85us ±150ns   0,7 0,85 1,0
-MAX_LED=8192/8/3=341
+MAX_LED=8192/8/3=340 !!!
 
 Data transfer time( TH+TL=1.25 μs ±600n s )
  0:
@@ -345,7 +329,8 @@ T1L 1 code ,low voltage time 0.4us ±150ns
 RES low voltage time Above 50μs
 */
 
-  //memset (tx_buf, 0x8E , MY_SPI_DATA_LEN);
+ // memset (tx_buf, 0xC0 , MY_SPI_DATA_LEN);
+ // memset (tx_buf, 0xF8 , MY_SPI_DATA_LEN);
   switch (tls_spi_write ((u8 *)tx_buf, MY_SPI_DATA_LEN))
     {
     case TLS_SPI_STATUS_OK:
