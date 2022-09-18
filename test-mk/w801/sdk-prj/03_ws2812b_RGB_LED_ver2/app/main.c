@@ -179,7 +179,7 @@ tls_sys_clk_set(CPU_CLK_240M); // нам мужно 240MHz, под это всё
 
     ws2812b_params_t param;
     param.led_numof = WS2812B_PARAM_LED_NUMOF;
-    param.data_pin  = WM_IO_PB_01;
+    param.data_pin  = WM_IO_PB_17;
 
     ws2812b_init(&dev, &param );
 

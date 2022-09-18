@@ -101,8 +101,8 @@ void demo_console_task(void *sdata)
 
 
     ws2812b_params_t param;
-    param.led_numof = 60;
-    param.data_pin  = WM_IO_PB_01;
+    param.led_numof = WS2812B_PARAM_LED_NUMOF;
+    param.data_pin  = WM_IO_PB_17;
 
     ws2812b_init(&dev, &param );
 
