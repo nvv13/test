@@ -32,12 +32,14 @@
 #include "wm_mem.h"
 #include "ws2812b_params.h"
 #define MY_SPI_DATA_LEN                                                       \
-  ((WS2812B_PARAM_LED_NUMOF+3) * 18) // num LED * 24 * 6 / 8 = buf SPI
+  (WS2812B_PARAM_LED_NUMOF * 18 + 8*3*2) // num LED * 24 * 6 / 8 = buf SPI
 /*
                                     один LED это, R G B - три светодиода по 8
    бит, 8*3=24 бит, значит нужен буфер 24*колич.LED бит каждый бит предается 6
    битами по SPI потом это разделит на 8 (в 1 байте буфура 8 бит)
 */
+//reset code? в начале.... и в конце ну допустим, 8*3*2, три байта
+
 #define BLUE (0xff0000)
 #define GREEN (0x00ff00)
 #define RED (0x0000ff)
@@ -130,7 +132,7 @@ ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
   40	40000	0,001		1		1000
   может еще возможно делители, то что кратно 10... 1000 Hz же есть!
 
-
+   ?A reset code should be sent before and after sending the data?
   https://www.hackster.io/RVLAD/neopixel-ws2812b-spi-driver-with-ada-on-stm32f4-discovery-d330ea
   тут использовали spi, 1 байт на 1 бит
   передача 0 это 0хC0 = 0x11000000b
@@ -229,7 +231,7 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
 
   memset (tx_buf, 0, MY_SPI_DATA_LEN);
 
-  int iPosBit = 0;
+  int iPosBit = 8*3; //reset code? в начале.... ну допустим, 8*3, три байта
 
   for (int i = 0; i < dev->led_numof; i++)
     {

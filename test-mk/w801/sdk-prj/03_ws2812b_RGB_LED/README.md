@@ -10,7 +10,7 @@ ws2812b
 connect to
 W801  ws2812b
 GPIO  PIN
-PB_01 data
+PB17  data
 +5v   +5v
 GND   GND
 ~~~
