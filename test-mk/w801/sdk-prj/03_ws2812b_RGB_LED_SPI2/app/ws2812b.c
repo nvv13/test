@@ -19,10 +19,6 @@
 #include "wm_osal.h"
 #include "wm_regs.h"
 
-//#include "csi_core.h"
-// extern uint32_t csi_coret_get_load (void);
-// extern uint32_t csi_coret_get_value (void);
-
 #include "n_delay.h"
 
 #include "ws2812b.h"
@@ -30,17 +26,6 @@
 #include "wm_gpio_afsel.h"
 #include "wm_hostspi.h"
 #include "wm_mem.h"
-
-#define MY_SPI_DATA_LEN 8192
-
-//#define MY_SPI_DATA_LEN
-//  (WS2812B_PARAM_LED_NUMOF * 18 + 8*3*2) // num LED * 24 * 6 / 8 = buf SPI
-/*
-                                    один LED это, R G B - три светодиода по 8
-   бит, 8*3=24 бит, значит нужен буфер 24*колич.LED бит каждый бит предается 6
-   битами по SPI потом это разделит на 8 (в 1 байте буфура 8 бит)
-*/
-// reset code? в начале.... и в конце ну допустим, 8*3*2, три байта
 
 #define BLUE (0xff0000)
 #define GREEN (0x00ff00)
@@ -51,14 +36,6 @@
 #include "csi_core.h"
 extern uint32_t csi_coret_get_load (void);
 extern uint32_t csi_coret_get_value (void);
-
-#include "ws2812b.h"
-
-#define BLUE (0xff0000)
-#define GREEN (0x00ff00)
-#define RED (0x0000ff)
-#define BLUE_SHIFT (16U)
-#define GREEN_SHIFT (8U)
 
 static void
 tic_delay (uint32_t cnt)
@@ -228,19 +205,7 @@ pin_mode_ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
     }
 }
 
-/*
-Data transfer time( TH+TL=1.25 μs ±600n s )
-
-0:
-T0H 0 code ,high voltage time 0.4us ±150ns
-T0L 0 code , low voltage time 0.85us ±150ns
-
-1:
-T1H 1 code ,high voltage time 0.85us ±150ns
-T1L 1 code ,low voltage time 0.4us ±150ns
-
-RES low voltage time Above 50μs
-*/
+#define MY_SPI_DATA_LEN 8192 // максимальный размер буфера для DMA = 8192 байт!
 
 static char tx_buf[MY_SPI_DATA_LEN];
 
@@ -483,15 +448,12 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
   for (int i = 0; i < dev->led_numof; i++)
     {
       uint32_t data = 0; // HEAD;
-      /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
-       * 3 leas significant bits */
       data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
                << BLUE_SHIFT);
       data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
                << GREEN_SHIFT);
       data |= vals[i].color.r & (uint32_t)vals[i].alpha;
 
-      //        shift(offset, reg, pin, data);
       for (int i = 23; i >= 0; i--)
         {
           if (((data >> i) & 0x01))

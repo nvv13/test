@@ -1,16 +1,13 @@
 !!!В РАБОТЕ!!!
-!!!NO WORK!!!
-
-!!!В РАБОТЕ!!!
-!!!NO WORK!!!
+!!!underway!!!
 
 
 project
 
-board HLK-W801-KIT-V1.1 + ws2812b RGB address LED
+board HLK-W801-KIT-V1.1 + ws2812b RGB address LED 
 
 
-
+эксперементы с управлением лентой, через  SPI + DMA
 
 
 
