@@ -31,13 +31,15 @@ fast_decode_cmd (char *sock_rx, int len)
     {
       extern u16 i_swith;
       int i_out = atoi ((char *)sock_rx + 2);
-      if (i_out == 0)
-        i_len_ret = sprintf (sock_rx, "ok, get i_swith=%d", i_swith);
-      else
+      if (i_out >= 0 && i_out <= 999)
         {
           i_swith = i_out;
+          // flash_cfg_store_u16 (i_mode_global, MEM_CELL_FROM_GL_MODE);
           i_len_ret = sprintf (sock_rx, "ok, set i_swith=%d", i_swith);
         }
+      else
+        i_len_ret = sprintf (sock_rx, "error value=%d, cur dev.mode=%d", i_out,
+                             i_swith);
     }
 
   if (strncmp ((char *)sock_rx, "time", 4) == 0)
@@ -161,7 +163,7 @@ fast_decode_cmd (char *sock_rx, int len)
                    // чтоб вошло, или увеличь буффер
           "help - данная справка (flash ver-" VERSION_FLASH ")\n"
           "time - время и прочие состояния\n"
-          "drX - режим ленты, где X, только 1-, 2-, 3-выкл.\n"
+          "drX - режим ленты, где X, только 1...999.\n"
           "spd=A - где A - скорость\n"
           "mode=Y - режим драйвера ленты, где Y, 0-PIN_MODE, SPI_MODE: "
           "1-3bit, 2-4bit, 3-5bit, 4-6bit, 5-7bit, 6-8bit\n"

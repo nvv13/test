@@ -6,6 +6,11 @@ project
 
 board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade 
 
+
+эффекты взяты отсюда: https://github.com/AlexGyver/WS2812_FX
+                      https://alexgyver.ru/ws2812b-fx/ 
+
+
 ~~~
 
 Удаленное управление: можно подцепиться к платке по сети, на порт 5555,

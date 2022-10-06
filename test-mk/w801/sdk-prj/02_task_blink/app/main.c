@@ -1,11 +1,11 @@
-/***************************************************************************** 
-* 
-* File Name : main.c
-* 
-* Description: main 
-* 
-* Date : 2022-05-19
-*****************************************************************************/ 
+/*****************************************************************************
+ *
+ * File Name : main.c
+ *
+ * Description: main
+ *
+ * Date : 2022-05-19
+ *****************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,50 +27,49 @@
 
 
 
-#define    DEMO_TASK_SIZE      2048
-static OS_STK 			DemoTaskStk[DEMO_TASK_SIZE];
-#define  DEMO_TASK_PRIO			                32
+//extern void UserMain(void);
 
 
-//console task use UART0 as communication port with PC
-void demo_console_task(void *sdata)
+#define DEMO_TASK_SIZE 2048
+static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
+#define DEMO_TASK_PRIO 32
+
+
+// console task use UART0 as communication port with PC
+void
+demo_console_task (void *sdata)
 {
+  printf ("user task\n");
 
-    u8 u8_led_state=0;
+  tls_gpio_cfg (WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (WM_IO_PB_11, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (WM_IO_PB_16, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (WM_IO_PB_25, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
 
-    for(;;)
+  u8 u8_led_state = 0;
+
+  for (;;)
     {
-	    tls_gpio_write(WM_IO_PB_05, u8_led_state);	
-	    tls_gpio_write(WM_IO_PB_11, u8_led_state);
-	    tls_gpio_write(WM_IO_PB_16, ~u8_led_state);
-	    tls_gpio_write(WM_IO_PB_25, ~u8_led_state);
-	    tls_os_time_delay(500);
-	    u8_led_state=~u8_led_state;
+      tls_gpio_write (WM_IO_PB_05, u8_led_state);
+      tls_gpio_write (WM_IO_PB_11, u8_led_state);
+      tls_gpio_write (WM_IO_PB_16, ~u8_led_state);
+      tls_gpio_write (WM_IO_PB_25, ~u8_led_state);
+      tls_os_time_delay (HZ / 2);
+      u8_led_state = ~u8_led_state;
     }
 }
 
-void UserMain(void)
+void
+UserMain (void)
 {
-	printf("user task\n");
-	
-	tls_gpio_cfg(WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_11, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_16, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_25, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
 
+  tls_os_task_create (NULL, NULL, demo_console_task, NULL,
+                      (void *)DemoTaskStk, /* task's stack start address */
+                      DEMO_TASK_SIZE
+                          * sizeof (u32), /* task's stack size, unit:byte */
+                      DEMO_TASK_PRIO, 0);
 
-    tls_os_task_create(NULL, NULL,
-                       demo_console_task,
-                       NULL,
-                       (void *)DemoTaskStk,          /* task's stack start address */
-                       DEMO_TASK_SIZE * sizeof(u32), /* task's stack size, unit:byte */
-                       DEMO_TASK_PRIO,
-                       0);
-
-	
-//	while(1)
-//	{
-//	}
-
+  //	while(1)
+  //	{
+  //	}
 }
-

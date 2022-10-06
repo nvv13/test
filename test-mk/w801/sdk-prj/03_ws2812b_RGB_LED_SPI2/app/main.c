@@ -48,7 +48,7 @@ static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
 
 u16 i_light = 10;
-u16 i_swith = 1;
+u16 i_swith = 0;
 u8 u8_wait_start_ota_upgrade = 0;
 u8 u8_start_reconfigure = 0;
 u16 i_mode_global = 0;
@@ -65,7 +65,7 @@ demo_console_task (void *sdata)
   tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
 
   dev.led_numof = 100;
-  dev.mode = WS_SPI_MODE_6bit;
+  dev.mode = WS_SPI_MODE_8bit;
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();
@@ -93,31 +93,7 @@ demo_console_task (void *sdata)
       while (u8_wifi_state)
         {
 
-          switch (i_swith)
-            {
-            case 1:
-              {
-                ef_1 ();
-              };
-              break;
-            case 2:
-              {
-                ef_2 ();
-              };
-              break;
-            case 3:
-              {
-                /* reset color values */
-                el_init ();
-                tls_os_time_delay (ef_count_delay_STEP ());
-              };
-              break;
-            default:
-              {
-                tls_os_time_delay (ef_count_delay_STEP ());
-              };
-              break;
-            }
+          el_loop (i_swith);
 
           tls_watchdog_clr (); //сбросить
           if (u8_wait_start_ota_upgrade)
