@@ -66,7 +66,7 @@ setcolor (int color, uint8_t alpha)
     }
 }
 
-void
+static void
 one_color_all (u8 r, u8 g, u8 b)
 { //-SET ALL LEDS TO ONE COLOR (r g b)
   for (int i = 0; i < dev.led_numof; i++)
@@ -79,17 +79,19 @@ one_color_all (u8 r, u8 g, u8 b)
 
 static int TOP_INDEX = 0;
 static int EVENODD = 0;
+static int max_bright = 51; // максимальная яркость (0 - 255)
 void
 el_init (void)
 {
   /* initialize all LED color values to black (off) */
   memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
   /* reset color values */
-  setcolor (-1, 255);
+  setcolor (-1, max_bright);
   ws2812b_load_rgba (&dev, leds);
 
   TOP_INDEX = dev.led_numof / 2;
   EVENODD = dev.led_numof % 2;
+  ef_count_delay_STEP();
 }
 
 void
@@ -115,7 +117,7 @@ ef_1 (void)
     }
 
   /* reset color values */
-  setcolor (-1, 255);
+  setcolor (-1, max_bright);
   ws2812b_load_rgba (&dev, leds);
 
   //  puts ("Color Fading done");
@@ -154,7 +156,7 @@ ef_2 (void)
   //  puts ("ef_2 done");
 }
 
-// static int max_bright = 51; // максимальная яркость (0 - 255)
+
 static int ledMode = 3;
 /*
   Стартовый режим
@@ -170,13 +172,8 @@ static u8 ballColors[3][3] = {
   { 0xff, 0xff, 0xff },
   { 0, 0, 0xff },
 };
-
 // ---------------СЛУЖЕБНЫЕ ПЕРЕМЕННЫЕ-----------------
 static int BOTTOM_INDEX = 0; // светодиод начала отсчёта
-// int TOP_INDEX = int(LED_COUNT / 2);
-// int EVENODD = LED_COUNT % 2;
-// struct CRGB leds[LED_COUNT];
-
 static uint8_t ledsX[MAX_WS2812B_LED_NUMOF]
                     [3]; //-ARRAY FOR COPYING WHATS IN THE LED STRIP CURRENTLY
                          //(FOR CELL-AUTOMATA, MARCH, ETC)

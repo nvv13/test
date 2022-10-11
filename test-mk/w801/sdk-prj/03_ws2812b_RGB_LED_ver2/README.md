@@ -32,19 +32,98 @@ https://youtu.be/7E6WU3hryAg
 
 
 
-сборка (кратко):
-
-1) качаем
-
-   https://github.com/droppingy/W801_SDK-linux.git
-
-   там же есть инструкции как его собирать, или читаем https://github.com/nvv13/test/blob/main/test-mk/w801/README.md
 
 
-2) заменяем папку app на нашу app из проекта
+сборка:
+~~~
+   делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
+   у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет
+
+1) сначала, один раз, ставим утилиты для сборки c-sky (архитектура w806, w801 мк)
+   благодоря пользователю droppingy это очень просто!  
+
+$ sudo git clone https://github.com/droppingy/hlk-w80x-toolchain.git /opt/w80x-tools
+
+   так чтобы в итоге получилось /opt/w80x-tools/bin
+   это чтоб в menuconfig не переделывать, такой там путь по умолчанию
+   (еще, в этом мануале https://github.com/IOsetting/wm-sdk-w806, есть ссылки как получить данный Toolchain на другие архитектуры, типа i386)
+
+2) далее качаем SDK
+
+    перемещаемся в домашнюю директорию
+ 
+$ cd ~
+
+    делаем директорию для проекта
+
+$ mkdir w801
+
+$ cd w801  
+
+$ git clone https://github.com/droppingy/W801_SDK-linux.git
+
+3) далее, собираем приложение
+
+$ cd W801_SDK-linux
+
+     если тут запустить make, то собирёться демо приложение которое идет вместе с SDK, об этом я писал кратко в https://github.com/nvv13/test/tree/main/test-mk/w801 
+     но мы хотим собрать другой проект
+     для этого удаляем, лишнии директории, 
+      где app demo - директории с демо приложением
+          bin - директория где в результате будет собранное приложение, создасться заново в процессе сборки
+
+$ rm -R app demo bin
+
+     делаем директорию для приложения
+
+$ mkdir app
+
+     и, в даном случае, качаем файлики приложения, 
+     для примера, возьмем отсюда https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/02_task_blink
+     но, принцип тот же самый и для другох...
+
+$ cd app
+
+$ wget https://github.com/nvv13/test/raw/main/test-mk/w801/sdk-prj/02_task_blink/app/Makefile
+
+$ wget https://github.com/nvv13/test/raw/main/test-mk/w801/sdk-prj/02_task_blink/app/main.c
+
+     возвращаемся в директорию SDK
+
+$ cd ..
+
+     заменяем головной wget Makefile на наш (удалено обращение к директории demo)
+
+$ rm Makefile
+
+$ wget https://github.com/nvv13/test/raw/main/test-mk/w801/sdk-prj/02_task_blink/Makefile
 
 
-3) далее сборка make, и прошивка make flash
+     перед сборкой, очистить проект, иногда надо
+
+$ make distclean
+
+
+    сборка
+
+$ make 
+
+
+    перед прошивкой, стереть флэш в микроконтроллере, иногда надо, !когда, допустим был проект с wifi, а стал без него!
+
+$ make erase
+
+    записать прошивку
+
+$ make flash
+
+
+    Всё!
+
+~~~
+
+
+
 
 
 
