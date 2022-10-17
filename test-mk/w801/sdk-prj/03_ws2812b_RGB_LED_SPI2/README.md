@@ -32,6 +32,18 @@ board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade
 ~~~
 
 
+соединения
+
+ws2812b
+надо соеденить по схеме:
+~~~
+connect to
+W801  ws2812b
+GPIO  PIN
+PB17  data
++5v   +5v
+GND   GND
+~~~
 
 
 

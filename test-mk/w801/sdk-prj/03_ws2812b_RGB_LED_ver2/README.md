@@ -1,35 +1,44 @@
 !!!В РАБОТЕ!!!
-!!!NO WORK!!!
+!!!underway!!!
 
-!!!В РАБОТЕ!!!
-!!!NO WORK!!!
 
 project
 
-board HLK-W801-KIT-V1.1 + ws2812b RGB address LED
+board HLK-W801-KIT-V1.1 + ws2812b RGB address LED 
 
 
+эффекты взяты отсюда: https://github.com/AlexGyver/WS2812_FX
+                      https://alexgyver.ru/ws2812b-fx/ 
+
+
+для тестирования эффектов
+
+соединения
 
 ws2812b
 надо соеденить по схеме:
 ~~~
 connect to
-W801  ws2812b
-GPIO  PIN
-PB17  data
-+5v   +5v
-GND   GND
+W801 GPIO | ws2812b PIN
+PB17  		data
++5v   		+5v
+GND   		GND
 ~~~
 
+дисплей
 
+LCD display tm1637
+     4 pin
 
-
-в итоге, работает так
-
-https://youtu.be/7E6WU3hryAg
-
-
-
+надо соеденить по схеме:
+~~~
+connect to
+W801 GPIO | tm1637 PIN
+PB_21 		CLK
+PB_22 		DIO
+3.3V  		VCC
+GND   		GND
+~~~
 
 
 
