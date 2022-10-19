@@ -156,7 +156,7 @@ ef_2 (void)
   //  puts ("ef_2 done");
 }
 
-static int ledMode = 3;
+volatile static int ledMode = 3;
 /*
   Стартовый режим
   0 - все выключены
