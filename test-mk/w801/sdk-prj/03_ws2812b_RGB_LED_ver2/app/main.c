@@ -42,7 +42,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-u16 i_swith = 1;
+u16 i_swith = 18;
 u16 i_cnt = 0;
 u8 u8_start_reconfigure = 0;
 u8 u8_tic = 0;
@@ -55,11 +55,12 @@ ws2812b_t dev;
 void
 demo_console_task (void *sdata)
 {
-  //tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
+  // tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
 
   dev.led_numof = 60;
-  dev.mode = WS_PIN_MODE;dev.data_pin = WM_IO_PB_17;
-  //dev.mode = WS_SPI_MODE_4bit;
+  dev.mode = WS_PIN_MODE;
+  dev.data_pin = WM_IO_PB_17;
+  // dev.mode = WS_SPI_MODE_4bit;
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();
@@ -79,7 +80,7 @@ demo_console_task (void *sdata)
 
       el_loop (i_swith);
 
-      u8_tic=~u8_tic;
+      u8_tic = ~u8_tic;
       // PointData = 0x00;
       data[0] = encodeSign (u8_tic);
       data[1] = encodeDigit (i_swith / 10);

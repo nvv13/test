@@ -91,7 +91,7 @@ el_init (void)
 
   TOP_INDEX = dev.led_numof / 2;
   EVENODD = dev.led_numof % 2;
-  ef_count_delay_STEP();
+  ef_count_delay_STEP ();
 }
 
 void
@@ -156,8 +156,7 @@ ef_2 (void)
   //  puts ("ef_2 done");
 }
 
-
-static int ledMode = 3;
+volatile static int ledMode = 3;
 /*
   Стартовый режим
   0 - все выключены
@@ -197,16 +196,15 @@ static float tcount = 0.0;      //-INC VAR FOR SIN LOOPS
 static int lcount = 0;          //-ANOTHER COUNTING VAR
 // ---------------СЛУЖЕБНЫЕ ПЕРЕМЕННЫЕ-----------------
 
-static color_rgb_t
-CHSV (float h, float s, float v)
+static void
+CHSV (color_rgb_t *rgb, float h, float s, float v)
 {
-  color_rgb_t rgb;
   color_hsv_t hsv;
-  hsv.h = ihue;
-  hsv.s = thissat;
-  hsv.v = 255;
-  color_hsv2rgb (&hsv, &rgb);
-  return rgb;
+  hsv.h = h;
+  hsv.s = s;
+  hsv.v = v;
+  color_hsv2rgb (&hsv, rgb);
+  return;
 }
 
 //------------------------------------- UTILITY FXNS
@@ -325,7 +323,7 @@ rainbow_fade ()
     }
   for (int idex = 0; idex < dev.led_numof; idex++)
     {
-      leds[idex].color = CHSV (ihue, thissat, 255);
+      CHSV (&leds[idex].color, ihue, thissat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
@@ -344,7 +342,7 @@ rainbow_loop ()
     {
       ihue = 0;
     }
-  leds[idex].color = CHSV (ihue, thissat, 255);
+  CHSV (&leds[idex].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
 }
@@ -375,7 +373,7 @@ random_burst ()
 { //-m4-RANDOM INDEX/COLOR
   idex = random (0, dev.led_numof);
   ihue = random (0, 255);
-  leds[idex].color = CHSV (ihue, thissat, 255);
+  CHSV (&leds[idex].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
 }
@@ -404,11 +402,11 @@ color_bounce ()
     {
       if (i == idex)
         {
-          leds[i].color = CHSV (thishue, thissat, 255);
+          CHSV (&leds[idex].color, thishue, thissat, 255);
         }
       else
         {
-          leds[i].color = CHSV (0, 0, 0);
+          CHSV (&leds[idex].color, 0, 0, 0);
         }
     }
   ws2812b_load_rgba (&dev, leds);
@@ -445,35 +443,35 @@ color_bounceFADE ()
     {
       if (i == idex)
         {
-          leds[i].color = CHSV (thishue, thissat, 255);
+          CHSV (&leds[i].color, thishue, thissat, 255);
         }
       else if (i == iL1)
         {
-          leds[i].color = CHSV (thishue, thissat, 150);
+          CHSV (&leds[i].color, thishue, thissat, 150);
         }
       else if (i == iL2)
         {
-          leds[i].color = CHSV (thishue, thissat, 80);
+          CHSV (&leds[i].color, thishue, thissat, 80);
         }
       else if (i == iL3)
         {
-          leds[i].color = CHSV (thishue, thissat, 20);
+          CHSV (&leds[i].color, thishue, thissat, 20);
         }
       else if (i == iR1)
         {
-          leds[i].color = CHSV (thishue, thissat, 150);
+          CHSV (&leds[i].color, thishue, thissat, 150);
         }
       else if (i == iR2)
         {
-          leds[i].color = CHSV (thishue, thissat, 80);
+          CHSV (&leds[i].color, thishue, thissat, 80);
         }
       else if (i == iR3)
         {
-          leds[i].color = CHSV (thishue, thissat, 20);
+          CHSV (&leds[i].color, thishue, thissat, 20);
         }
       else
         {
-          leds[i].color = CHSV (0, 0, 0);
+          CHSV (&leds[i].color, 0, 0, 0);
         }
     }
   ws2812b_load_rgba (&dev, leds);
@@ -495,15 +493,15 @@ ems_lightsONE ()
     {
       if (i == idexR)
         {
-          leds[i].color = CHSV (thishue, thissat, 255);
+          CHSV (&leds[i].color, thishue, thissat, 255);
         }
       else if (i == idexB)
         {
-          leds[i].color = CHSV (thathue, thissat, 255);
+          CHSV (&leds[i].color, thathue, thissat, 255);
         }
       else
         {
-          leds[i].color = CHSV (0, 0, 0);
+          CHSV (&leds[i].color, 0, 0, 0);
         }
     }
   ws2812b_load_rgba (&dev, leds);
@@ -521,8 +519,8 @@ ems_lightsALL ()
   int idexR = idex;
   int idexB = antipodal_index (idexR);
   int thathue = (thishue + 160) % 255;
-  leds[idexR].color = CHSV (thishue, thissat, 255);
-  leds[idexB].color = CHSV (thathue, thissat, 255);
+  CHSV (&leds[idexR].color, thishue, thissat, 255);
+  CHSV (&leds[idexB].color, thathue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
 }
@@ -537,7 +535,7 @@ flicker ()
     {
       for (int i = 0; i < dev.led_numof; i++)
         {
-          leds[i].color = CHSV (thishue, thissat, random_bright);
+          CHSV (&leds[i].color, thishue, thissat, random_bright);
         }
       ws2812b_load_rgba (&dev, leds);
       tls_os_time_delay (random_delay);
@@ -565,7 +563,7 @@ pulse_one_color_all ()
     }
   for (int idex = 0; idex < dev.led_numof; idex++)
     {
-      leds[idex].color = CHSV (thishue, thissat, ibright);
+      CHSV (&leds[idex].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
@@ -592,7 +590,7 @@ pulse_one_color_all_rev ()
     }
   for (int idex = 0; idex < dev.led_numof; idex++)
     {
-      leds[idex].color = CHSV (thishue, isat, 255);
+      CHSV (&leds[idex].color, thishue, isat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
@@ -613,8 +611,8 @@ fade_vertical ()
     {
       ibright = 0;
     }
-  leds[idexA].color = CHSV (thishue, thissat, ibright);
-  leds[idexB].color = CHSV (thishue, thissat, ibright);
+  CHSV (&leds[idexA].color, thishue, thissat, ibright);
+  CHSV (&leds[idexB].color, thishue, thissat, ibright);
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
 }
@@ -698,12 +696,12 @@ random_march ()
 { //-m14-RANDOM MARCH CCW
   copy_led_array ();
   int iCCW;
-  leds[0].color = CHSV (random (0, 255), 255, 255);
+  CHSV (&leds[0].color, random (0, 255), 255, 255);
   for (int idex = 1; idex < dev.led_numof; idex++)
     {
       iCCW = adjacent_ccw (idex);
       leds[idex].color.r = ledsX[iCCW][0];
-      leds[idex].color.g = ledsX[iCCW][1];
+      leds[idex].color.g = ledsX[iCCW][1];                                              		
       leds[idex].color.b = ledsX[iCCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
@@ -766,9 +764,9 @@ radiation ()
       int j0 = (i + dev.led_numof - N12) % dev.led_numof;
       int j1 = (j0 + N3) % dev.led_numof;
       int j2 = (j1 + N3) % dev.led_numof;
-      leds[j0].color = CHSV (thishue, thissat, ibright);
-      leds[j1].color = CHSV (thishue, thissat, ibright);
-      leds[j2].color = CHSV (thishue, thissat, ibright);
+      CHSV (&leds[j0].color, thishue, thissat, ibright);
+      CHSV (&leds[j1].color, thishue, thissat, ibright);
+      CHSV (&leds[j2].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
@@ -803,12 +801,14 @@ color_loop_vardelay ()
       idex = 0;
     }
   int di = abs (TOP_INDEX - idex);
+  //printf (" color_loop_vardelay TOP_INDEX%d idex%d di%d\n",TOP_INDEX,idex, di);
+  if(di==0)di=1;
   int t = constrain ((10 / di) * 10, 10, 500);
   for (int i = 0; i < dev.led_numof; i++)
     {
       if (i == idex)
         {
-          leds[i].color = CHSV (0, thissat, 255);
+          CHSV (&leds[i].color, 0, thissat, 255);
         }
       else
         {
@@ -818,6 +818,7 @@ color_loop_vardelay ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
+  //printf (" color_loop_vardelay  tls_os_time_delay %d\n", t);
   tls_os_time_delay (t);
 }
 
@@ -883,7 +884,7 @@ white_temps ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (100);
+  tls_os_time_delay (10);
 }
 
 static void
@@ -897,7 +898,7 @@ sin_bright_wave ()
           tcount = 0.0;
         }
       ibright = (sin (tcount) * 255);
-      leds[i].color = CHSV (thishue, thissat, ibright);
+      CHSV (&leds[i].color, thishue, thissat, ibright);
       ws2812b_load_rgba (&dev, leds);
       tls_os_time_delay (u32_STEP);
     }
@@ -926,7 +927,7 @@ pop_horizontal ()
     {
       if (i == ix)
         {
-          leds[i].color = CHSV (thishue, thissat, 255);
+          CHSV (&leds[i].color, thishue, thissat, 255);
         }
       else
         {
@@ -959,7 +960,7 @@ quad_bright_curve ()
       float iquad = -(ax * ax * a) + (ax * b) + c; //-ax2+bx+c
       float hquad = -(TOP_INDEX * TOP_INDEX * a) + (TOP_INDEX * b) + c;
       ibright = ((iquad / hquad) * 255);
-      leds[x].color = CHSV (thishue, thissat, ibright);
+      CHSV (&leds[x].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
@@ -978,9 +979,9 @@ flame ()
   for (int i = 0; i <= TOP_INDEX; i++)
     {
       ihue = ihue + hinc;
-      leds[i].color = CHSV (ihue, thissat, 255);
+      CHSV (&leds[i].color, ihue, thissat, 255);
       int ih = horizontal_index (i);
-      leds[ih].color = CHSV (ihue, thissat, 255);
+      CHSV (&leds[ih].color, ihue, thissat, 255);
       leds[TOP_INDEX].color.r = 255;
       leds[TOP_INDEX].color.g = 255;
       leds[TOP_INDEX].color.b = 255;
@@ -1004,8 +1005,8 @@ rainbow_vertical ()
     }
   int idexA = idex;
   int idexB = horizontal_index (idexA);
-  leds[idexA].color = CHSV (ihue, thissat, 255);
-  leds[idexB].color = CHSV (ihue, thissat, 255);
+  CHSV (&leds[idexA].color, ihue, thissat, 255);
+  CHSV (&leds[idexB].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
 }
@@ -1084,7 +1085,7 @@ random_color_pop ()
   idex = random (0, dev.led_numof);
   ihue = random (0, 255);
   one_color_all (0, 0, 0);
-  leds[idex].color = CHSV (ihue, thissat, 255);
+  CHSV (&leds[idex].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
 }
@@ -1098,7 +1099,7 @@ ems_lightsSTROBE ()
     {
       for (int i = 0; i < TOP_INDEX; i++)
         {
-          leds[i].color = CHSV (thishue, thissat, 255);
+          CHSV (&leds[i].color, thishue, thissat, 255);
         }
       ws2812b_load_rgba (&dev, leds);
       tls_os_time_delay (u32_STEP);
@@ -1110,7 +1111,7 @@ ems_lightsSTROBE ()
     {
       for (int i = TOP_INDEX; i < dev.led_numof; i++)
         {
-          leds[i].color = CHSV (thathue, thissat, 255);
+          CHSV (&leds[i].color, thathue, thissat, 255);
         }
       ws2812b_load_rgba (&dev, leds);
       tls_os_time_delay (u32_STEP);
@@ -1134,9 +1135,9 @@ rgb_propeller ()
       int j0 = (idex + i + dev.led_numof - N12) % dev.led_numof;
       int j1 = (j0 + N6) % dev.led_numof;
       int j2 = (j1 + N3) % dev.led_numof;
-      leds[j0].color = CHSV (thishue, thissat, 255);
-      leds[j1].color = CHSV (ghue, thissat, 255);
-      leds[j2].color = CHSV (bhue, thissat, 255);
+      CHSV (&leds[j0].color, thishue, thissat, 255);
+      CHSV (&leds[j1].color, ghue, thissat, 255);
+      CHSV (&leds[j2].color, bhue, thissat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
   tls_os_time_delay (u32_STEP);
@@ -1148,15 +1149,15 @@ kitt ()
   int rand = random (0, TOP_INDEX);
   for (int i = 0; i < rand; i++)
     {
-      leds[TOP_INDEX + i].color = CHSV (thishue, thissat, 255);
-      leds[TOP_INDEX - i].color = CHSV (thishue, thissat, 255);
+      CHSV (&leds[TOP_INDEX + i].color, thishue, thissat, 255);
+      CHSV (&leds[TOP_INDEX - i].color, thishue, thissat, 255);
       ws2812b_load_rgba (&dev, leds);
       tls_os_time_delay (thisdelay / rand);
     }
   for (int i = rand; i > 0; i--)
     {
-      leds[TOP_INDEX + i].color = CHSV (thishue, thissat, 0);
-      leds[TOP_INDEX - i].color = CHSV (thishue, thissat, 0);
+      CHSV (&leds[TOP_INDEX + i].color, thishue, thissat, 0);
+      CHSV (&leds[TOP_INDEX - i].color, thishue, thissat, 0);
       ws2812b_load_rgba (&dev, leds);
       tls_os_time_delay (thisdelay / rand);
     }
@@ -1168,11 +1169,11 @@ matrix ()
   int rand = random (0, 100);
   if (rand > 90)
     {
-      leds[0].color = CHSV (thishue, thissat, 255);
+      CHSV (&leds[0].color, thishue, thissat, 255);
     }
   else
     {
-      leds[0].color = CHSV (thishue, thissat, 0);
+      CHSV (&leds[0].color, thishue, thissat, 0);
     }
   copy_led_array ();
   for (int i = 1; i < dev.led_numof; i++)
@@ -1227,7 +1228,7 @@ fill_rainbow (color_rgba_t pFirstLED[], int numToFill, uint8_t initialhue)
   hsv.s = 240;
   for (int i = 0; i < numToFill; i++)
     {
-      pFirstLED[i].color = CHSV (hsv.h, hsv.s, hsv.v);
+      CHSV (&pFirstLED[i].color, hsv.h, hsv.s, hsv.v);
       hsv.h += deltahue;
     }
 }
@@ -2338,5 +2339,5 @@ el_loop (int new_mode)
       demo_modeB ();
       break; // короткое демо
     }
-    tls_os_time_delay (1);
+  tls_os_time_delay (1);
 }
