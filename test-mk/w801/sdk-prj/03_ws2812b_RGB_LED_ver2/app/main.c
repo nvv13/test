@@ -95,7 +95,7 @@ demo_console_task (void *sdata)
           ws2812b_init (&dev);
         }
 
-      if (i_cnt++ > 1000)
+      if (i_cnt++ > 100)
         {
           i_cnt = 0;
           if (i_swith++ > 48)
