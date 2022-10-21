@@ -28,8 +28,8 @@
 #include "wm_mem.h"
 
 #define GREEN (0xff0000)
-#define RED   (0x00ff00)
-#define BLUE  (0x0000ff)
+#define RED (0x00ff00)
+#define BLUE (0x0000ff)
 #define GREEN_SHIFT (16U)
 #define RED_SHIFT (8U)
 
@@ -162,11 +162,64 @@ pin_mode_ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
       uint32_t data = 0; // HEAD;
       /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
        * 3 leas significant bits */
-      data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
-               << GREEN_SHIFT);
-      data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
-               << RED_SHIFT);
-      data |= vals[i].color.b & (uint32_t)vals[i].alpha;
+      switch ((u8)dev->rgb)
+        {
+        case WS_GRB_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.b & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_RGB_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.b & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_GBR_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_RBG_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.g & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_BGR_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+          };
+          break;
+        default:
+          {
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.g & (uint32_t)vals[i].alpha;
+          };
+          break;
+        }
+
       shift (offset, reg, pin, data);
     }
 
@@ -215,6 +268,7 @@ ws2812b_init (ws2812b_t *dev)
 
   assert (dev);
 
+  // dev->rgb=WS_RGB_MODE;
   if (dev->mode == WS_PIN_MODE)
     {
       printf ("ws2812b_init: PIN_MODE;\r\n");
@@ -448,11 +502,64 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
   for (int i = 0; i < dev->led_numof; i++)
     {
       uint32_t data = 0; // HEAD;
-      data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
-               << GREEN_SHIFT);
-      data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
-               << RED_SHIFT);
-      data |= vals[i].color.b & (uint32_t)vals[i].alpha;
+
+      switch ((u8)dev->rgb)
+        {
+        case WS_GRB_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.b & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_RGB_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.b & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_GBR_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_RBG_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.g & (uint32_t)vals[i].alpha;
+          };
+          break;
+        case WS_BGR_MODE:
+          {
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+          };
+          break;
+        default:
+          {
+            data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
+                     << GREEN_SHIFT);
+            data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+                     << RED_SHIFT);
+            data |= vals[i].color.g & (uint32_t)vals[i].alpha;
+          };
+          break;
+        }
 
       for (int i = 23; i >= 0; i--)
         {

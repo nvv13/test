@@ -45,7 +45,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-volatile u16 i_swith = 2;
+volatile u16 i_swith = 49;
 u16 i_cnt = 0;
 u8 u8_start_reconfigure = 0;
 u8 u8_tic = 0;
@@ -71,8 +71,9 @@ demo_console_task (void *sdata)
 
   dev.led_numof = 60;
   dev.data_pin = WM_IO_PB_17;
-  dev.mode = WS_PIN_MODE;
-  //dev.mode = WS_SPI_MODE_8bit;
+  // dev.mode = WS_PIN_MODE;
+  dev.mode = WS_SPI_MODE_8bit;
+  dev.rgb = WS_RGB_MODE;
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();

@@ -30,10 +30,12 @@ fast_decode_cmd (char *sock_rx, int len)
   if (len > 2 && strncmp ((char *)sock_rx, "dr", 2) == 0)
     {
       extern u16 i_swith;
+      extern volatile bool changeFlag;
       int i_out = atoi ((char *)sock_rx + 2);
       if (i_out >= 0 && i_out <= 999)
         {
           i_swith = i_out;
+          changeFlag = true;
           // flash_cfg_store_u16 (i_mode_global, MEM_CELL_FROM_GL_MODE);
           i_len_ret = sprintf (sock_rx, "ok, set i_swith=%d", i_swith);
         }

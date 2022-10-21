@@ -39,6 +39,15 @@ extern "C"
     WS_SPI_MODE_8bit = 6  /* ((8192-6)*8)/3/24=341 */
   } _ws2812b_mode;
 
+  typedef enum rgb_mode
+  {
+    WS_RGB_MODE = 0,
+    WS_GRB_MODE = 1,
+    WS_GBR_MODE = 2,
+    WS_RBG_MODE = 3,
+    WS_BGR_MODE = 4,
+  } _rgb_mode;
+
   typedef struct
   {
     u16 led_numof;             /**< number of chained LEDs */
@@ -49,6 +58,7 @@ extern "C"
                       устанавливаеться автоматически */
     u8 spi_off_bit; /* сколько бит на передачу 0 , а потом, можно поменять для
                        пробы типа */
+    enum rgb_mode rgb;
   } ws2812b_params_t;
 
   /**

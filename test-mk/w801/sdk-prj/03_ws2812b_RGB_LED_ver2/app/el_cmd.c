@@ -2368,17 +2368,17 @@ el_loop (int new_mode)
       ef_2 ();
       break; //
 
-    case 49://RED
+    case 49: // RED
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (0, max_bright);
       ws2812b_load_rgba (&dev, leds);
       break; //
-    case 50://GREEN
+    case 50: // GREEN
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (1, max_bright);
       ws2812b_load_rgba (&dev, leds);
       break; //
-    case 51://BLUE
+    case 51: // BLUE
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (2, max_bright);
       ws2812b_load_rgba (&dev, leds);
