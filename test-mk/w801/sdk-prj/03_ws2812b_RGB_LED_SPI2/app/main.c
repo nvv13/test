@@ -64,8 +64,10 @@ demo_console_task (void *sdata)
 {
   tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
 
-  dev.led_numof = 100;
-  dev.mode = WS_SPI_MODE_8bit;
+  dev.led_numof = 60;
+  //dev.mode = WS_SPI_MODE_8bit;
+  dev.data_pin = WM_IO_PB_17;
+  dev.mode = WS_PIN_MODE;
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();

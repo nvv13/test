@@ -45,7 +45,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-volatile u16 i_swith = 5;
+volatile u16 i_swith = 2;
 u16 i_cnt = 0;
 u8 u8_start_reconfigure = 0;
 u8 u8_tic = 0;
@@ -58,7 +58,7 @@ ws2812b_t dev;
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-  if (i_swith++ > 48)
+  if (i_swith++ > 50)
     i_swith = 1;
   extern volatile bool changeFlag;
   changeFlag = true;
@@ -70,9 +70,9 @@ demo_console_task (void *sdata)
   // tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
 
   dev.led_numof = 60;
-  dev.mode = WS_PIN_MODE;
   dev.data_pin = WM_IO_PB_17;
-  // dev.mode = WS_SPI_MODE_4bit;
+  dev.mode = WS_PIN_MODE;
+  //dev.mode = WS_SPI_MODE_8bit;
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();
@@ -93,7 +93,7 @@ demo_console_task (void *sdata)
   timer_cfg.unit = TLS_TIMER_UNIT_MS;
   // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
   // минимальной яркости, пришлось сделать время таймера поменьше
-  timer_cfg.timeout = 1000 * 10;
+  timer_cfg.timeout = 1000 * 30;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;

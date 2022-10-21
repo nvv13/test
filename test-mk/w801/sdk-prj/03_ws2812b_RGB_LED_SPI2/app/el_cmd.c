@@ -79,6 +79,21 @@ one_color_all (u8 r, u8 g, u8 b)
 }
 
 volatile bool changeFlag;
+static bool
+safeDelay (int delTime)
+{
+  while ((--delTime) >= 0)
+    {
+      tls_os_time_delay (1);
+      if (changeFlag)
+        {
+          changeFlag = false;
+          return true;
+        }
+    }
+  return false;
+}
+
 static int TOP_INDEX = 0;
 static int EVENODD = 0;
 static int max_bright = 51; // максимальная яркость (0 - 255)
@@ -108,14 +123,14 @@ ef_1 (void)
         {
           setcolor (col, (uint8_t)i);
           ws2812b_load_rgba (&dev, leds);
-          tls_os_time_delay (u32_DIM);
+          safeDelay (u32_DIM);
         }
       i -= BSTEP;
       for (; i >= 0; i -= BSTEP)
         {
           setcolor (col, (uint8_t)i);
           ws2812b_load_rgba (&dev, leds);
-          tls_os_time_delay (u32_DIM);
+          safeDelay (u32_DIM);
         }
     }
 
@@ -154,7 +169,7 @@ ef_2 (void)
       step *= -1;
     }
 
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 
   //  puts ("ef_2 done");
 }
@@ -329,7 +344,7 @@ rainbow_fade ()
       CHSV (&leds[idex].color, ihue, thissat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -347,7 +362,7 @@ rainbow_loop ()
     }
   CHSV (&leds[idex].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static int
@@ -378,7 +393,7 @@ random_burst ()
   ihue = random (0, 255);
   CHSV (&leds[idex].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -413,7 +428,7 @@ color_bounce ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -478,7 +493,7 @@ color_bounceFADE ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -508,7 +523,7 @@ ems_lightsONE ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -525,7 +540,7 @@ ems_lightsALL ()
   CHSV (&leds[idexR].color, thishue, thissat, 255);
   CHSV (&leds[idexB].color, thathue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -541,7 +556,7 @@ flicker ()
           CHSV (&leds[i].color, thishue, thissat, random_bright);
         }
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (random_delay);
+      safeDelay (random_delay);
     }
 }
 
@@ -569,7 +584,7 @@ pulse_one_color_all ()
       CHSV (&leds[idex].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -596,7 +611,7 @@ pulse_one_color_all_rev ()
       CHSV (&leds[idex].color, thishue, isat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -617,7 +632,7 @@ fade_vertical ()
   CHSV (&leds[idexA].color, thishue, thissat, ibright);
   CHSV (&leds[idexB].color, thishue, thissat, ibright);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -691,7 +706,7 @@ rule30 ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -708,7 +723,7 @@ random_march ()
       leds[idex].color.b = ledsX[iCCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -747,7 +762,7 @@ rwb_march ()
       leds[i].color.b = ledsX[iCCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -772,7 +787,7 @@ radiation ()
       CHSV (&leds[j2].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 /*
@@ -823,8 +838,8 @@ color_loop_vardelay ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  // printf (" color_loop_vardelay  tls_os_time_delay %d\n", t);
-  tls_os_time_delay (t);
+  // printf (" color_loop_vardelay  safeDelay %d\n", t);
+  safeDelay (t);
 }
 
 static void
@@ -889,7 +904,7 @@ white_temps ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (10);
+  safeDelay (10);
 }
 
 static void
@@ -905,7 +920,7 @@ sin_bright_wave ()
       ibright = (sin (tcount) * 255);
       CHSV (&leds[i].color, thishue, thissat, ibright);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_STEP);
+      safeDelay (u32_STEP);
     }
 }
 
@@ -942,7 +957,7 @@ pop_horizontal ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -968,7 +983,7 @@ quad_bright_curve ()
       CHSV (&leds[x].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -991,7 +1006,7 @@ flame ()
       leds[TOP_INDEX].color.g = 255;
       leds[TOP_INDEX].color.b = 255;
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (idelay);
+      safeDelay (idelay);
     }
 }
 
@@ -1013,7 +1028,7 @@ rainbow_vertical ()
   CHSV (&leds[idexA].color, ihue, thissat, 255);
   CHSV (&leds[idexB].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1081,7 +1096,7 @@ pacman ()
       leds[s + 2].color.b = 0;
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1092,7 +1107,7 @@ random_color_pop ()
   one_color_all (0, 0, 0);
   CHSV (&leds[idex].color, ihue, thissat, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1107,10 +1122,10 @@ ems_lightsSTROBE ()
           CHSV (&leds[i].color, thishue, thissat, 255);
         }
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_STEP);
+      safeDelay (u32_STEP);
       one_color_all (0, 0, 0);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_STEP);
+      safeDelay (u32_STEP);
     }
   for (int x = 0; x < 5; x++)
     {
@@ -1119,10 +1134,10 @@ ems_lightsSTROBE ()
           CHSV (&leds[i].color, thathue, thissat, 255);
         }
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_STEP);
+      safeDelay (u32_STEP);
       one_color_all (0, 0, 0);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_STEP);
+      safeDelay (u32_STEP);
     }
 }
 
@@ -1145,7 +1160,7 @@ rgb_propeller ()
       CHSV (&leds[j2].color, bhue, thissat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1157,14 +1172,14 @@ kitt ()
       CHSV (&leds[TOP_INDEX + i].color, thishue, thissat, 255);
       CHSV (&leds[TOP_INDEX - i].color, thishue, thissat, 255);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (thisdelay / rand);
+      safeDelay (thisdelay / rand);
     }
   for (int i = rand; i > 0; i--)
     {
       CHSV (&leds[TOP_INDEX + i].color, thishue, thissat, 0);
       CHSV (&leds[TOP_INDEX - i].color, thishue, thissat, 0);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (thisdelay / rand);
+      safeDelay (thisdelay / rand);
     }
 }
 
@@ -1188,7 +1203,7 @@ matrix ()
       leds[i].color.b = ledsX[i - 1][2];
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1204,7 +1219,7 @@ strip_march_cw ()
       leds[i].color.b = ledsX[iCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1220,7 +1235,7 @@ strip_march_ccw ()
       leds[i].color.b = ledsX[iCCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1244,7 +1259,7 @@ new_rainbow_loop ()
   ihue -= 1;
   fill_rainbow (leds, dev.led_numof, ihue);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_STEP);
+  safeDelay (u32_STEP);
 }
 
 static void
@@ -1297,7 +1312,7 @@ demo_modeA ()
   thissat = 255;
   one_color_all (255, 255, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
   for (int i = 0; i < r * 25; i++)
     {
       rainbow_fade ();
@@ -1437,22 +1452,22 @@ demo_modeA ()
     }
   one_color_all (255, 0, 0);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
   one_color_all (0, 255, 0);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
   one_color_all (0, 0, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
   one_color_all (255, 255, 0);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
   one_color_all (0, 255, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
   one_color_all (255, 0, 255);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (1200);
+  safeDelay (1200);
 }
 
 //-----------------------------плавное заполнение
@@ -1464,7 +1479,7 @@ colorWipe (u8 red, u8 green, u8 blue, int SpeedDelay)
     {
       setPixel (i, red, green, blue);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
 }
 
@@ -1485,10 +1500,10 @@ CylonBounce (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
         }
       setPixel (i + EyeSize + 1, red / 10, green / 10, blue / 10);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
 
-  tls_os_time_delay (ReturnDelay);
+  safeDelay (ReturnDelay);
 
   for (int i = dev.led_numof - EyeSize - 2; i > 0; i--)
     {
@@ -1500,10 +1515,10 @@ CylonBounce (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
         }
       setPixel (i + EyeSize + 1, red / 10, green / 10, blue / 10);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
 
-  tls_os_time_delay (ReturnDelay);
+  safeDelay (ReturnDelay);
 }
 
 static void
@@ -1575,7 +1590,7 @@ Fire (int Cooling, int Sparking, int SpeedDelay)
     }
 
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_DIM);
+  safeDelay (u32_DIM);
 }
 
 //-------------------------------newKITT---------------------------------------
@@ -1603,9 +1618,9 @@ CenterToOutside (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
                 blue / 10);
 
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
-  tls_os_time_delay (ReturnDelay);
+  safeDelay (ReturnDelay);
 }
 
 static void
@@ -1632,9 +1647,9 @@ OutsideToCenter (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
                 blue / 10);
 
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
-  tls_os_time_delay (ReturnDelay);
+  safeDelay (ReturnDelay);
 }
 
 static void
@@ -1651,9 +1666,9 @@ LeftToRight (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
         }
       setPixel (i + EyeSize + 1, red / 10, green / 10, blue / 10);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
-  tls_os_time_delay (ReturnDelay);
+  safeDelay (ReturnDelay);
 }
 
 static void
@@ -1670,9 +1685,9 @@ RightToLeft (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
         }
       setPixel (i + EyeSize + 1, red / 10, green / 10, blue / 10);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
-  tls_os_time_delay (ReturnDelay);
+  safeDelay (ReturnDelay);
 }
 
 static void
@@ -1733,7 +1748,7 @@ rainbowCycle (int SpeedDelay)
           setPixel (i, *c, *(c + 1), *(c + 2));
         }
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
     }
 }
 
@@ -1748,14 +1763,14 @@ TwinkleRandom (int Count, int SpeedDelay, bool OnlyOne)
       setPixel (random (0, dev.led_numof), random (0, 255), random (0, 255),
                 random (0, 255));
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (u32_DIM);
+      safeDelay (u32_DIM);
       if (OnlyOne)
         {
           setAll (0, 0, 0);
         }
     }
 
-  tls_os_time_delay (u32_DIM);
+  safeDelay (u32_DIM);
 }
 
 //-------------------------------RunningLights---------------------------------------
@@ -1779,7 +1794,7 @@ RunningLights (u8 red, u8 green, u8 blue, int WaveDelay)
         }
 
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (WaveDelay);
+      safeDelay (WaveDelay);
     }
 }
 
@@ -1790,7 +1805,7 @@ Sparkle (u8 red, u8 green, u8 blue, int SpeedDelay)
   int Pixel = random (0, dev.led_numof);
   setPixel (Pixel, red, green, blue);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_DIM);
+  safeDelay (u32_DIM);
   setPixel (Pixel, 0, 0, 0);
 }
 
@@ -1803,10 +1818,10 @@ SnowSparkle (u8 red, u8 green, u8 blue, int SparkleDelay, int SpeedDelay)
   int Pixel = random (0, dev.led_numof);
   setPixel (Pixel, 0xff, 0xff, 0xff);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (SparkleDelay);
+  safeDelay (SparkleDelay);
   setPixel (Pixel, red, green, blue);
   ws2812b_load_rgba (&dev, leds);
-  tls_os_time_delay (u32_DIM);
+  safeDelay (u32_DIM);
 }
 
 //-------------------------------theaterChase---------------------------------------
@@ -1822,7 +1837,7 @@ theaterChase (u8 red, u8 green, u8 blue, int SpeedDelay)
               setPixel (i + q, red, green, blue); // turn every third pixel on
             }
           ws2812b_load_rgba (&dev, leds);
-          tls_os_time_delay (u32_DIM);
+          safeDelay (u32_DIM);
           for (int i = 0; i < dev.led_numof; i = i + 3)
             {
               setPixel (i + q, 0, 0, 0); // turn every third pixel off
@@ -1848,7 +1863,7 @@ theaterChaseRainbow (int SpeedDelay)
                         *(c + 2)); // turn every third pixel on
             }
           ws2812b_load_rgba (&dev, leds);
-          tls_os_time_delay (u32_DIM);
+          safeDelay (u32_DIM);
           for (int i = 0; i < dev.led_numof; i = i + 3)
             {
               setPixel (i + q, 0, 0, 0); // turn every third pixel off
@@ -1866,13 +1881,13 @@ Strobe (u8 red, u8 green, u8 blue, int StrobeCount, int FlashDelay,
     {
       setAll (red, green, blue);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (FlashDelay);
+      safeDelay (FlashDelay);
       setAll (0, 0, 0);
       ws2812b_load_rgba (&dev, leds);
-      tls_os_time_delay (FlashDelay);
+      safeDelay (FlashDelay);
     }
 
-  tls_os_time_delay (EndPause);
+  safeDelay (EndPause);
 }
 
 //-------------------------------BouncingBalls---------------------------------------
@@ -1908,7 +1923,7 @@ BouncingBalls (u8 red, u8 green, u8 blue, int BallCount)
           return;
         }
       tls_watchdog_clr (); //сбросить
-      tls_os_time_delay (1);
+      safeDelay (1);
       for (int i = 0; i < BallCount; i++)
         {
           TimeSinceLastBounce[i]
@@ -1972,7 +1987,7 @@ BouncingColoredBalls (int BallCount, u8 colors[][3])
           return;
         }
       tls_watchdog_clr (); //сбросить
-      tls_os_time_delay (1);
+      safeDelay (1);
       for (int i = 0; i < BallCount; i++)
         {
           TimeSinceLastBounce[i]
@@ -2119,9 +2134,11 @@ change_mode (int newmode)
       break; //---NEW RAINBOW LOOP
     case 31:
       thisdelay = 100;
+      random_red ();
       break; //---MARCH STRIP NOW CCW
     case 32:
       thisdelay = 100;
+      random_red ();
       break; //---MARCH STRIP NOW CCW
     case 33:
       thisdelay = 50;
@@ -2351,6 +2368,22 @@ el_loop (int new_mode)
       ef_2 ();
       break; //
 
+    case 49://RED
+      memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
+      setcolor (0, max_bright);
+      ws2812b_load_rgba (&dev, leds);
+      break; //
+    case 50://GREEN
+      memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
+      setcolor (1, max_bright);
+      ws2812b_load_rgba (&dev, leds);
+      break; //
+    case 51://BLUE
+      memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
+      setcolor (2, max_bright);
+      ws2812b_load_rgba (&dev, leds);
+      break; //
+
     case 888:
       demo_modeA ();
       break; // длинное демо
@@ -2358,5 +2391,5 @@ el_loop (int new_mode)
       demo_modeB ();
       break; // короткое демо
     }
-  tls_os_time_delay (1);
+  safeDelay (1);
 }

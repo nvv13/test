@@ -27,11 +27,11 @@
 #include "wm_hostspi.h"
 #include "wm_mem.h"
 
-#define BLUE (0xff0000)
-#define GREEN (0x00ff00)
-#define RED (0x0000ff)
-#define BLUE_SHIFT (16U)
-#define GREEN_SHIFT (8U)
+#define GREEN (0xff0000)
+#define RED   (0x00ff00)
+#define BLUE  (0x0000ff)
+#define GREEN_SHIFT (16U)
+#define RED_SHIFT (8U)
 
 #include "csi_core.h"
 extern uint32_t csi_coret_get_load (void);
@@ -162,11 +162,11 @@ pin_mode_ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
       uint32_t data = 0; // HEAD;
       /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
        * 3 leas significant bits */
-      data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
-               << BLUE_SHIFT);
       data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
                << GREEN_SHIFT);
-      data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+      data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+               << RED_SHIFT);
+      data |= vals[i].color.b & (uint32_t)vals[i].alpha;
       shift (offset, reg, pin, data);
     }
 
@@ -448,11 +448,11 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
   for (int i = 0; i < dev->led_numof; i++)
     {
       uint32_t data = 0; // HEAD;
-      data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
-               << BLUE_SHIFT);
       data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
                << GREEN_SHIFT);
-      data |= vals[i].color.r & (uint32_t)vals[i].alpha;
+      data |= (((uint32_t)vals[i].color.r & (uint32_t)vals[i].alpha)
+               << RED_SHIFT);
+      data |= vals[i].color.b & (uint32_t)vals[i].alpha;
 
       for (int i = 23; i >= 0; i--)
         {
