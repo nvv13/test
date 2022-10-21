@@ -6,6 +6,7 @@
 #include "wm_type_def.h"
 
 #include "wm_osal.h"
+#include "wm_watchdog.h"
 
 #include "ws2812b.h"
 
@@ -77,6 +78,7 @@ one_color_all (u8 r, u8 g, u8 b)
     }
 }
 
+volatile bool changeFlag;
 static int TOP_INDEX = 0;
 static int EVENODD = 0;
 static int max_bright = 51; // максимальная яркость (0 - 255)
@@ -91,6 +93,7 @@ el_init (void)
 
   TOP_INDEX = dev.led_numof / 2;
   EVENODD = dev.led_numof % 2;
+  changeFlag = false;
   ef_count_delay_STEP ();
 }
 
@@ -402,11 +405,11 @@ color_bounce ()
     {
       if (i == idex)
         {
-          CHSV (&leds[idex].color, thishue, thissat, 255);
+          CHSV (&leds[i].color, thishue, thissat, 255);
         }
       else
         {
-          CHSV (&leds[idex].color, 0, 0, 0);
+          CHSV (&leds[i].color, 0, 0, 0);
         }
     }
   ws2812b_load_rgba (&dev, leds);
@@ -701,7 +704,7 @@ random_march ()
     {
       iCCW = adjacent_ccw (idex);
       leds[idex].color.r = ledsX[iCCW][0];
-      leds[idex].color.g = ledsX[iCCW][1];                                              		
+      leds[idex].color.g = ledsX[iCCW][1];
       leds[idex].color.b = ledsX[iCCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
@@ -801,8 +804,10 @@ color_loop_vardelay ()
       idex = 0;
     }
   int di = abs (TOP_INDEX - idex);
-  //printf (" color_loop_vardelay TOP_INDEX%d idex%d di%d\n",TOP_INDEX,idex, di);
-  if(di==0)di=1;
+  // printf (" color_loop_vardelay TOP_INDEX%d idex%d di%d\n",TOP_INDEX,idex,
+  // di);
+  if (di == 0)
+    di = 1;
   int t = constrain ((10 / di) * 10, 10, 500);
   for (int i = 0; i < dev.led_numof; i++)
     {
@@ -818,7 +823,7 @@ color_loop_vardelay ()
         }
     }
   ws2812b_load_rgba (&dev, leds);
-  //printf (" color_loop_vardelay  tls_os_time_delay %d\n", t);
+  // printf (" color_loop_vardelay  tls_os_time_delay %d\n", t);
   tls_os_time_delay (t);
 }
 
@@ -1897,6 +1902,13 @@ BouncingBalls (u8 red, u8 green, u8 blue, int BallCount)
 
   while (true)
     {
+      if (changeFlag)
+        {
+          changeFlag = false;
+          return;
+        }
+      tls_watchdog_clr (); //сбросить
+      tls_os_time_delay (1);
       for (int i = 0; i < BallCount; i++)
         {
           TimeSinceLastBounce[i]
@@ -1954,6 +1966,13 @@ BouncingColoredBalls (int BallCount, u8 colors[][3])
 
   while (true)
     {
+      if (changeFlag)
+        {
+          changeFlag = false;
+          return;
+        }
+      tls_watchdog_clr (); //сбросить
+      tls_os_time_delay (1);
       for (int i = 0; i < BallCount; i++)
         {
           TimeSinceLastBounce[i]

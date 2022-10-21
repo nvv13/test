@@ -12,6 +12,7 @@
 #include "wm_type_def.h"
 
 #include "wm_cpu.h"
+//#include <time.h>
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <string.h>
@@ -25,10 +26,12 @@
 //#include "wm_pwm.h"
 //#include "wm_params.h"
 #include "wm_osal.h"
+//#include "wm_rtc.h"
 //#include "wm_netif.h"
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
 //#include "wm_regs.h"
+#include "wm_timer.h"
 #include "wm_watchdog.h"
 
 #include "ws2812b.h"
@@ -42,7 +45,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-u16 i_swith = 18;
+volatile u16 i_swith = 5;
 u16 i_cnt = 0;
 u8 u8_start_reconfigure = 0;
 u8 u8_tic = 0;
@@ -51,6 +54,15 @@ u8 u8_tic = 0;
  * @brief   Allocate the device descriptor
  */
 ws2812b_t dev;
+
+static void
+demo_timer_irq (u8 *arg) // здесь будет смена режима
+{
+  if (i_swith++ > 48)
+    i_swith = 1;
+  extern volatile bool changeFlag;
+  changeFlag = true;
+}
 
 void
 demo_console_task (void *sdata)
@@ -75,6 +87,20 @@ demo_console_task (void *sdata)
   setSegments (data, 4, 0);
   // uint8_t PointData = 0x00;
 
+  u8 timer_id;
+  struct tls_timer_cfg timer_cfg;
+
+  timer_cfg.unit = TLS_TIMER_UNIT_MS;
+  // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
+  // минимальной яркости, пришлось сделать время таймера поменьше
+  timer_cfg.timeout = 1000 * 10;
+  timer_cfg.is_repeat = 1;
+  timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
+  timer_cfg.arg = NULL;
+  timer_id = tls_timer_create (&timer_cfg);
+  tls_timer_start (timer_id);
+  printf ("timer start\n");
+
   for (;;)
     {
 
@@ -93,13 +119,6 @@ demo_console_task (void *sdata)
         {
           u8_start_reconfigure = 0;
           ws2812b_init (&dev);
-        }
-
-      if (i_cnt++ > 100)
-        {
-          i_cnt = 0;
-          if (i_swith++ > 48)
-            i_swith = 1;
         }
     }
 }
