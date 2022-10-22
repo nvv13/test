@@ -197,14 +197,20 @@ ef_2 (void)
   ws2812b_load_rgba (&dev, leds);
 
   /* switch direction once reaching an end of the strip */
-  if ((pos == (dev.led_numof - 1)) || (pos == 0))
+  if (pos >= (dev.led_numof - 1) )
     {
-      step *= -1;
+      step = -1;
     }
+
+  if (pos <= 0)
+    {
+      step = 1;
+    }
+
+  //printf (" el2 pos%d col.h%f\n",pos,col.h);
 
   safeDelay (u32_STEP);
 
-  //  puts ("ef_2 done");
 }
 
 volatile static int ledMode = 3;
@@ -685,6 +691,32 @@ random_red ()
         }
       leds[i].color.b = 0;
       leds[i].color.g = 0;
+    }
+  ws2812b_load_rgba (&dev, leds);
+}
+
+static void
+random_rgb ()
+{ // QUICK 'N DIRTY RANDOMIZE TO GET CELL AUTOMATA STARTED
+  int temprand;
+  for (int i = 0; i < dev.led_numof; i++)
+    {
+      leds[i].color.r = 0;
+      leds[i].color.b = 0;
+      leds[i].color.g = 0;
+      temprand = random (0, 100);
+      if (temprand > 50 && temprand <= 65)
+        {
+          leds[i].color.r = 255;
+        }
+      if (temprand > 65 && temprand <= 85)
+        {
+          leds[i].color.g = 255;
+        }
+      if (temprand > 85)
+        {
+          leds[i].color.b = 255;
+        }
     }
   ws2812b_load_rgba (&dev, leds);
 }
@@ -1242,6 +1274,12 @@ matrix ()
 static void
 strip_march_cw ()
 { //-m50-MARCH STRIP CW
+  if (bouncedirection == 0)
+    {
+      // random_red ();
+      random_rgb ();
+      bouncedirection = 1;
+    }
   copy_led_array ();
   int iCW;
   for (int i = 0; i < dev.led_numof; i++)
@@ -1258,6 +1296,12 @@ strip_march_cw ()
 static void
 strip_march_ccw ()
 { //-m51-MARCH STRIP CCW
+  if (bouncedirection == 0)
+    {
+      // random_red ();
+      random_rgb ();
+      bouncedirection = 1;
+    }
   copy_led_array ();
   int iCCW;
   for (int i = 0; i < dev.led_numof; i++)
@@ -1853,6 +1897,10 @@ rainbowCycle (int SpeedDelay)
     { // 5 cycles of all colors on wheel
       for (i = 0; i < dev.led_numof; i++)
         {
+          if (changeFlag)
+            {
+              return;
+            }
           c = Wheel (((i * 256 / dev.led_numof) + j) & 255);
           setPixel (i, *c, *(c + 1), *(c + 2));
         }
@@ -1893,6 +1941,10 @@ RunningLights (u8 red, u8 green, u8 blue, int WaveDelay)
       Position++; // = 0; //Position + Rate;
       for (int i = 0; i < dev.led_numof; i++)
         {
+          if (changeFlag)
+            {
+              return;
+            }
           // sine wave, 3 offset waves make a rainbow!
           // float level = sin(i+Position) * 127 + 128;
           // setPixel(i,level,0,0);
@@ -2185,7 +2237,6 @@ change_mode (int newmode)
       break; //---VERTICAL SOMETHING
     case 13:
       thisdelay = 100;
-      bouncedirection = 0;
       break; //---CELL AUTO - RULE 30 (RED)
     case 14:
       thisdelay = 40;
@@ -2418,10 +2469,10 @@ el_loop (int new_mode)
       break; // крутая плавная вращающаяся радуга
     case 31:
       strip_march_ccw ();
-      break; // чёт сломалось
+      break; // вправо
     case 32:
       strip_march_cw ();
-      break; // чёт сломалось
+      break; // влево
     case 33:
       colorWipe (0x00, 0xff, 0x00, thisdelay);
       colorWipe (0x00, 0x00, 0x00, thisdelay);
@@ -2492,7 +2543,7 @@ el_loop (int new_mode)
       ws2812b_load_rgba (&dev, leds);
       break; //
 
-    case 52: // 
+    case 52: //
       random_red ();
       break; //
 
@@ -2503,6 +2554,7 @@ el_loop (int new_mode)
       demo_modeB ();
       break; // короткое демо
     }
+
   changeFlag = false;
   tls_os_time_delay (1);
 }
