@@ -138,6 +138,7 @@ el_init (void)
   EVENODD = dev.led_numof % 2;
   changeFlag = false;
   ef_count_delay_STEP ();
+  srand (tls_os_get_time ()); // time(NULL));
 }
 
 void
@@ -413,7 +414,6 @@ random (int min_num, int max_num)
       hi_num = min_num + 1; // include max_num in output
     }
 
-  srand (tls_os_get_time ()); // time(NULL));
   result = (rand () % (hi_num - low_num)) + low_num;
   result = constrain (result, low_num, hi_num - 1);
   return result;
@@ -2185,6 +2185,7 @@ change_mode (int newmode)
       break; //---VERTICAL SOMETHING
     case 13:
       thisdelay = 100;
+      bouncedirection = 0;
       break; //---CELL AUTO - RULE 30 (RED)
     case 14:
       thisdelay = 40;
@@ -2489,6 +2490,10 @@ el_loop (int new_mode)
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (2, max_bright);
       ws2812b_load_rgba (&dev, leds);
+      break; //
+
+    case 52: // 
+      random_red ();
       break; //
 
     case 888:

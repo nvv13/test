@@ -45,7 +45,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-volatile u16 i_swith = 49;
+volatile u16 i_swith = 13;
 u16 i_cnt = 0;
 u8 u8_start_reconfigure = 0;
 u8 u8_tic = 0;
@@ -58,7 +58,7 @@ ws2812b_t dev;
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-  if (i_swith++ > 50)
+  if (i_swith++ > 51)
     i_swith = 1;
   extern volatile bool changeFlag;
   changeFlag = true;
