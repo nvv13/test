@@ -39,6 +39,26 @@ ef_count_delay_STEP (void)
   return u32_STEP;
 }
 
+/*
+constrain(x, a, b)
+Функция проверяет и если надо задает новое значение,
+так чтобы оно была в области допустимых значений, заданной параметрами.
+
+Параметры
+x: проверяемое значение, любой тип
+a: нижняя граница области допустимых значений, любой тип
+b: верхняя граница области допустимых значений, любой тип
+*/
+static int
+constrain (int x, int a, int b)
+{
+  if (x < a)
+    return a;
+  if (x > b)
+    return b;
+  return x;
+}
+
 /**
  * @brief   Allocate a color_rgb_t struct for each LED on the strip
  */
@@ -51,18 +71,21 @@ setcolor (int color, uint8_t alpha)
   for (int i = 0; i < (int)dev.led_numof; i++)
     {
       leds[i].alpha = alpha;
-      memset (&leds[i].color, 0, sizeof (color_rgb_t));
-      switch (color)
+      if (color != -2)
         {
-        case 0:
-          leds[i].color.r = 255;
-          break;
-        case 1:
-          leds[i].color.g = 255;
-          break;
-        case 2:
-          leds[i].color.b = 255;
-          break;
+          memset (&leds[i].color, 0, sizeof (color_rgb_t));
+          switch (color)
+            {
+            case 0:
+              leds[i].color.r = 255;
+              break;
+            case 1:
+              leds[i].color.g = 255;
+              break;
+            case 2:
+              leds[i].color.b = 255;
+              break;
+            }
         }
     }
 }
@@ -86,17 +109,22 @@ safeDelay (int delTime)
     {
       tls_os_time_delay (1);
       if (changeFlag)
-        {
-          changeFlag = false;
-          return true;
-        }
+        return true;
     }
   return false;
 }
 
+static int max_bright = 51; // максимальная яркость (0 - 255)
+void
+set_max_bright (int i_max_bright)
+{
+  max_bright = i_max_bright;
+  setcolor (-2, max_bright);
+}
+
 static int TOP_INDEX = 0;
 static int EVENODD = 0;
-static int max_bright = 51; // максимальная яркость (0 - 255)
+
 void
 el_init (void)
 {
@@ -118,6 +146,10 @@ ef_1 (void)
   /* set to each red, green, and blue, and fade each color in and out */
   for (int col = 0; col <= 2; col++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       int i = 0;
       for (; i <= (int)UINT8_MAX; i += BSTEP)
         {
@@ -135,8 +167,8 @@ ef_1 (void)
     }
 
   /* reset color values */
-  setcolor (-1, max_bright);
-  ws2812b_load_rgba (&dev, leds);
+  //  setcolor (-1, max_bright);
+  //  ws2812b_load_rgba (&dev, leds);
 
   //  puts ("Color Fading done");
 }
@@ -377,12 +409,13 @@ random (int min_num, int max_num)
     }
   else
     {
-      low_num = max_num + 1; // include max_num in output
-      hi_num = min_num;
+      low_num = max_num;
+      hi_num = min_num + 1; // include max_num in output
     }
 
   srand (tls_os_get_time ()); // time(NULL));
   result = (rand () % (hi_num - low_num)) + low_num;
+  result = constrain (result, low_num, hi_num - 1);
   return result;
 }
 
@@ -579,9 +612,9 @@ pulse_one_color_all ()
           bouncedirection = 0;
         }
     }
-  for (int idex = 0; idex < dev.led_numof; idex++)
+  for (int i = 0; i < dev.led_numof; i++)
     {
-      CHSV (&leds[idex].color, thishue, thissat, ibright);
+      CHSV (&leds[i].color, thishue, thissat, ibright);
     }
   ws2812b_load_rgba (&dev, leds);
   safeDelay (u32_STEP);
@@ -606,9 +639,9 @@ pulse_one_color_all_rev ()
           bouncedirection = 0;
         }
     }
-  for (int idex = 0; idex < dev.led_numof; idex++)
+  for (int i = 0; i < dev.led_numof; i++)
     {
-      CHSV (&leds[idex].color, thishue, isat, 255);
+      CHSV (&leds[i].color, thishue, isat, 255);
     }
   ws2812b_load_rgba (&dev, leds);
   safeDelay (u32_STEP);
@@ -715,12 +748,12 @@ random_march ()
   copy_led_array ();
   int iCCW;
   CHSV (&leds[0].color, random (0, 255), 255, 255);
-  for (int idex = 1; idex < dev.led_numof; idex++)
+  for (int i = 1; i < dev.led_numof; i++)
     {
-      iCCW = adjacent_ccw (idex);
-      leds[idex].color.r = ledsX[iCCW][0];
-      leds[idex].color.g = ledsX[iCCW][1];
-      leds[idex].color.b = ledsX[iCCW][2];
+      iCCW = adjacent_ccw (i);
+      leds[i].color.r = ledsX[iCCW][0];
+      leds[i].color.g = ledsX[iCCW][1];
+      leds[i].color.b = ledsX[iCCW][2];
     }
   ws2812b_load_rgba (&dev, leds);
   safeDelay (u32_STEP);
@@ -788,26 +821,6 @@ radiation ()
     }
   ws2812b_load_rgba (&dev, leds);
   safeDelay (u32_STEP);
-}
-
-/*
-constrain(x, a, b)
-Функция проверяет и если надо задает новое значение,
-так чтобы оно была в области допустимых значений, заданной параметрами.
-
-Параметры
-x: проверяемое значение, любой тип
-a: нижняя граница области допустимых значений, любой тип
-b: верхняя граница области допустимых значений, любой тип
-*/
-static int
-constrain (int x, int a, int b)
-{
-  if (x < a)
-    return a;
-  if (x > b)
-    return b;
-  return x;
 }
 
 static void
@@ -912,6 +925,10 @@ sin_bright_wave ()
 { //-m19-BRIGHTNESS SINE WAVE
   for (int i = 0; i < dev.led_numof; i++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       tcount = tcount + .1;
       if (tcount > 3.14)
         {
@@ -1117,6 +1134,10 @@ ems_lightsSTROBE ()
   int thathue = (thishue + 160) % 255;
   for (int x = 0; x < 5; x++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       for (int i = 0; i < TOP_INDEX; i++)
         {
           CHSV (&leds[i].color, thishue, thissat, 255);
@@ -1129,6 +1150,10 @@ ems_lightsSTROBE ()
     }
   for (int x = 0; x < 5; x++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       for (int i = TOP_INDEX; i < dev.led_numof; i++)
         {
           CHSV (&leds[i].color, thathue, thissat, 255);
@@ -1169,6 +1194,10 @@ kitt ()
   int rand = random (0, TOP_INDEX);
   for (int i = 0; i < rand; i++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       CHSV (&leds[TOP_INDEX + i].color, thishue, thissat, 255);
       CHSV (&leds[TOP_INDEX - i].color, thishue, thissat, 255);
       ws2812b_load_rgba (&dev, leds);
@@ -1176,6 +1205,10 @@ kitt ()
     }
   for (int i = rand; i > 0; i--)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       CHSV (&leds[TOP_INDEX + i].color, thishue, thissat, 0);
       CHSV (&leds[TOP_INDEX - i].color, thishue, thissat, 0);
       ws2812b_load_rgba (&dev, leds);
@@ -1273,6 +1306,10 @@ demo_modeB ()
     {
       random_color_pop ();
     }
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r / 2; i++)
     {
       ems_lightsSTROBE ();
@@ -1286,6 +1323,10 @@ demo_modeB ()
   ws2812b_load_rgba (&dev, leds);
   thisdelay = 100;
   thishue = 0;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 3; i++)
     {
       kitt ();
@@ -1294,6 +1335,10 @@ demo_modeB ()
   ws2812b_load_rgba (&dev, leds);
   thisdelay = 30;
   thishue = 95;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 25; i++)
     {
       matrix ();
@@ -1317,13 +1362,25 @@ demo_modeA ()
     {
       rainbow_fade ();
     }
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 20; i++)
     {
       rainbow_loop ();
     }
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 20; i++)
     {
       random_burst ();
+    }
+  if (changeFlag)
+    {
+      return;
     }
   for (int i = 0; i < r * 12; i++)
     {
@@ -1333,6 +1390,10 @@ demo_modeA ()
   for (int i = 0; i < r * 12; i++)
     {
       color_bounceFADE ();
+    }
+  if (changeFlag)
+    {
+      return;
     }
   for (int i = 0; i < r * 6; i++)
     {
@@ -1344,6 +1405,10 @@ demo_modeA ()
     }
   thishue = 160;
   thissat = 50;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 40; i++)
     {
       flicker ();
@@ -1357,6 +1422,10 @@ demo_modeA ()
     {
       pulse_one_color_all ();
     }
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 40; i++)
     {
       pulse_one_color_all_rev ();
@@ -1369,6 +1438,10 @@ demo_modeA ()
     }
   random_red ();
   thisdelay = 100;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 5; i++)
     {
       rule30 ();
@@ -1377,6 +1450,10 @@ demo_modeA ()
   for (int i = 0; i < r * 8; i++)
     {
       random_march ();
+    }
+  if (changeFlag)
+    {
+      return;
     }
   thisdelay = 80;
   for (int i = 0; i < r * 5; i++)
@@ -1388,6 +1465,10 @@ demo_modeA ()
   ws2812b_load_rgba (&dev, leds);
   thisdelay = 60;
   thishue = 95;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 15; i++)
     {
       radiation ();
@@ -1395,6 +1476,10 @@ demo_modeA ()
   for (int i = 0; i < r * 15; i++)
     {
       color_loop_vardelay ();
+    }
+  if (changeFlag)
+    {
+      return;
     }
   for (int i = 0; i < r * 5; i++)
     {
@@ -1414,6 +1499,10 @@ demo_modeA ()
     }
   thisdelay = 100;
   thishue = 180;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 4; i++)
     {
       quad_bright_curve ();
@@ -1431,6 +1520,10 @@ demo_modeA ()
     }
   thisdelay = 50;
   thisstep = 15;
+  if (changeFlag)
+    {
+      return;
+    }
   for (int i = 0; i < r * 12; i++)
     {
       rainbow_vertical ();
@@ -1439,6 +1532,10 @@ demo_modeA ()
   for (int i = 0; i < r * 3; i++)
     {
       strip_march_ccw ();
+    }
+  if (changeFlag)
+    {
+      return;
     }
   for (int i = 0; i < r * 3; i++)
     {
@@ -1477,6 +1574,10 @@ colorWipe (u8 red, u8 green, u8 blue, int SpeedDelay)
 {
   for (uint16_t i = 0; i < dev.led_numof; i++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setPixel (i, red, green, blue);
       ws2812b_load_rgba (&dev, leds);
       safeDelay (u32_DIM);
@@ -1492,6 +1593,10 @@ CylonBounce (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 
   for (int i = 0; i < dev.led_numof - EyeSize - 2; i++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setAll (0, 0, 0);
       setPixel (i, red / 10, green / 10, blue / 10);
       for (int j = 1; j <= EyeSize; j++)
@@ -1507,6 +1612,10 @@ CylonBounce (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 
   for (int i = dev.led_numof - EyeSize - 2; i > 0; i--)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setAll (0, 0, 0);
       setPixel (i, red / 10, green / 10, blue / 10);
       for (int j = 1; j <= EyeSize; j++)
@@ -1919,7 +2028,6 @@ BouncingBalls (u8 red, u8 green, u8 blue, int BallCount)
     {
       if (changeFlag)
         {
-          changeFlag = false;
           return;
         }
       tls_watchdog_clr (); //сбросить
@@ -1983,7 +2091,6 @@ BouncingColoredBalls (int BallCount, u8 colors[][3])
     {
       if (changeFlag)
         {
-          changeFlag = false;
           return;
         }
       tls_watchdog_clr (); //сбросить
@@ -2368,17 +2475,17 @@ el_loop (int new_mode)
       ef_2 ();
       break; //
 
-    case 49: // RED
+    case 49: // RED, для проверки, калибровки, цвета.
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (0, max_bright);
       ws2812b_load_rgba (&dev, leds);
       break; //
-    case 50: // GREEN
+    case 50: // GREEN, для проверки, калибровки, цвета.
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (1, max_bright);
       ws2812b_load_rgba (&dev, leds);
       break; //
-    case 51: // BLUE
+    case 51: // BLUE, для проверки, калибровки, цвета.
       memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
       setcolor (2, max_bright);
       ws2812b_load_rgba (&dev, leds);
@@ -2391,5 +2498,6 @@ el_loop (int new_mode)
       demo_modeB ();
       break; // короткое демо
     }
-  safeDelay (1);
+  changeFlag = false;
+  tls_os_time_delay (1);
 }
