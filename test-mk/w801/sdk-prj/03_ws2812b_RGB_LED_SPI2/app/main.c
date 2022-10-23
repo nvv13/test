@@ -62,7 +62,6 @@ ws2812b_t dev;
 void
 demo_console_task (void *sdata)
 {
-  tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
 
   dev.led_numof = 60;
   dev.data_pin = WM_IO_PB_17;
@@ -135,6 +134,7 @@ UserMain (void)
 {
   printf ("user task\n");
 
+  tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
   tls_sys_clk sysclk;
   tls_sys_clk_get (&sysclk);
   printf ("  sysclk.apbclk %d\n", sysclk.apbclk);

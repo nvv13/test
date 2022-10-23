@@ -14,17 +14,17 @@
 
 extern ws2812b_t dev;
 
-u32 u32_US_PER_MS = 1;
+u32 u32_US_PER_MS = 2;
 
 /**
  * @brief   Switch to the next LED every 10ms
  */
-static u32 u32_STEP = 6;
+static u32 u32_STEP = 9;
 
 /**
  * @brief   Interval for dimming colors
  */
-static u32 u32_DIM = 3;
+static u32 u32_DIM = 4;
 
 /**
  * @brief   Step through brightness levels (0-255) in 32 steps
@@ -197,7 +197,7 @@ ef_2 (void)
   ws2812b_load_rgba (&dev, leds);
 
   /* switch direction once reaching an end of the strip */
-  if (pos >= (dev.led_numof - 1) )
+  if (pos >= (dev.led_numof - 1))
     {
       step = -1;
     }
@@ -207,10 +207,9 @@ ef_2 (void)
       step = 1;
     }
 
-  //printf (" el2 pos%d col.h%f\n",pos,col.h);
+  // printf (" el2 pos%d col.h%f\n",pos,col.h);
 
   safeDelay (u32_STEP);
-
 }
 
 volatile static int ledMode = 3;
@@ -1753,6 +1752,10 @@ CenterToOutside (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 {
   for (int i = ((dev.led_numof - EyeSize) / 2); i >= 0; i--)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setAll (0, 0, 0);
 
       setPixel (i, red / 10, green / 10, blue / 10);
@@ -1782,6 +1785,10 @@ OutsideToCenter (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 {
   for (int i = 0; i <= ((dev.led_numof - EyeSize) / 2); i++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setAll (0, 0, 0);
 
       setPixel (i, red / 10, green / 10, blue / 10);
@@ -1811,6 +1818,10 @@ LeftToRight (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 {
   for (int i = 0; i < dev.led_numof - EyeSize - 2; i++)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setAll (0, 0, 0);
       setPixel (i, red / 10, green / 10, blue / 10);
       for (int j = 1; j <= EyeSize; j++)
@@ -1830,6 +1841,10 @@ RightToLeft (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 {
   for (int i = dev.led_numof - EyeSize - 2; i > 0; i--)
     {
+      if (changeFlag)
+        {
+          return;
+        }
       setAll (0, 0, 0);
       setPixel (i, red / 10, green / 10, blue / 10);
       for (int j = 1; j <= EyeSize; j++)
@@ -1858,6 +1873,8 @@ NewKITT (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 }
 
 //-------------------------------newKITT---------------------------------------
+
+
 static u8 *
 Wheel (u8 WheelPos)
 {
@@ -2017,6 +2034,10 @@ theaterChaseRainbow (int SpeedDelay)
     { // cycle all 256 colors in the wheel
       for (int q = 0; q < 3; q++)
         {
+          if (changeFlag)
+            {
+              return;
+            }
           for (int i = 0; i < dev.led_numof; i = i + 3)
             {
               c = Wheel ((i + j) % 255);

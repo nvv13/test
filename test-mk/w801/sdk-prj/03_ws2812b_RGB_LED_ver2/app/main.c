@@ -54,19 +54,20 @@ u8 u8_tic = 0;
  */
 ws2812b_t dev;
 
-static u8 i_dreb = 0; // от дребезга кнопки
+//static u8 i_dreb = 0; // от дребезга кнопки
 
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-  if (i_dreb > 0)
-    i_dreb--;
-  //  if (i_swith++ > 51)
-  //    i_swith = 1;
-  //  extern volatile bool changeFlag;
-  //  changeFlag = true;
+  //if (i_dreb > 0)
+  //  i_dreb--;
+    if (i_swith++ > 51)
+      i_swith = 1;
+    extern volatile bool changeFlag;
+    changeFlag = true;
 }
 
+/*
 #define DEMO_ISR_IO WM_IO_PA_01
 static void
 demo_gpio_isr_callback (void *context)
@@ -75,30 +76,28 @@ demo_gpio_isr_callback (void *context)
   if (ret)
     {
       tls_clr_gpio_irq_status (DEMO_ISR_IO);
-      //if (ret == tls_gpio_read (DEMO_ISR_IO)) // button ok
-        {
-          if (i_dreb == 0) // защита от ддребезга контактов для кнопки
-            {
-              if (i_swith++ > 51)
-                i_swith = 1;
-              extern volatile bool changeFlag;
-              changeFlag = true;
-              i_dreb = 2;
-            }
-        }
-      // printf("\nafter int io =%d\n",ret);
+      {
+        if (i_dreb == 0) // защита от ддребезга контактов для кнопки
+          {
+            if (i_swith++ > 51)
+              i_swith = 1;
+            extern volatile bool changeFlag;
+            changeFlag = true;
+            i_dreb = 2;
+          }
+      }
     }
 }
+  */
 
 void
 demo_console_task (void *sdata)
 {
-  // tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
 
   dev.led_numof = 60;
   dev.data_pin = WM_IO_PB_17;
   dev.mode = WS_PIN_MODE;
-  // dev.mode = WS_SPI_MODE_8bit;
+  //dev.mode = WS_SPI_MODE_8bit;
   dev.rgb = WS_GRB_MODE;
   // dev.rgb = WS_RGB_MODE;
   ws2812b_init (&dev);
@@ -120,7 +119,8 @@ demo_console_task (void *sdata)
   timer_cfg.unit = TLS_TIMER_UNIT_MS;
   // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
   // минимальной яркости, пришлось сделать время таймера поменьше
-  timer_cfg.timeout = 100; // 0 * 30;
+  //timer_cfg.timeout = 100; // 0 * 30;
+  timer_cfg.timeout = 1000 * 30;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -131,6 +131,7 @@ demo_console_task (void *sdata)
       printf ("timer start\n");
     }
 
+/*
   u16 gpio_pin;
   gpio_pin = DEMO_ISR_IO;
   tls_gpio_cfg (gpio_pin, WM_GPIO_DIR_INPUT,
@@ -138,6 +139,7 @@ demo_console_task (void *sdata)
   tls_gpio_isr_register (gpio_pin, demo_gpio_isr_callback, NULL);
   tls_gpio_irq_enable (gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
   printf ("\nbutton gpio %d rising isr\n", gpio_pin);
+*/
 
   for (;;)
     {
@@ -166,6 +168,7 @@ UserMain (void)
 {
   printf ("user task\n");
 
+  tls_sys_clk_set (CPU_CLK_240M); // нам мужно 240MHz, под это всё подогнано
   tls_sys_clk sysclk;
   tls_sys_clk_get (&sysclk);
   printf ("  sysclk.apbclk %d\n", sysclk.apbclk);
