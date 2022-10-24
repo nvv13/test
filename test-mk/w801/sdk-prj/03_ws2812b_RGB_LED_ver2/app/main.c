@@ -45,7 +45,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-volatile u16 i_swith = 47;
+volatile u16 i_swith = 26;
 u8 u8_start_reconfigure = 0;
 u8 u8_tic = 0;
 
@@ -54,17 +54,17 @@ u8 u8_tic = 0;
  */
 ws2812b_t dev;
 
-//static u8 i_dreb = 0; // от дребезга кнопки
+// static u8 i_dreb = 0; // от дребезга кнопки
 
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-  //if (i_dreb > 0)
+  // if (i_dreb > 0)
   //  i_dreb--;
-    if (i_swith++ > 51)
-      i_swith = 1;
-    extern volatile bool changeFlag;
-    changeFlag = true;
+  if (i_swith++ > 51)
+    i_swith = 1;
+  extern volatile bool changeFlag;
+  changeFlag = true;
 }
 
 /*
@@ -97,7 +97,7 @@ demo_console_task (void *sdata)
   dev.led_numof = 60;
   dev.data_pin = WM_IO_PB_17;
   dev.mode = WS_PIN_MODE;
-  //dev.mode = WS_SPI_MODE_8bit;
+  // dev.mode = WS_SPI_MODE_8bit;
   dev.rgb = WS_GRB_MODE;
   // dev.rgb = WS_RGB_MODE;
   ws2812b_init (&dev);
@@ -119,7 +119,7 @@ demo_console_task (void *sdata)
   timer_cfg.unit = TLS_TIMER_UNIT_MS;
   // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
   // минимальной яркости, пришлось сделать время таймера поменьше
-  //timer_cfg.timeout = 100; // 0 * 30;
+  // timer_cfg.timeout = 100; // 0 * 30;
   timer_cfg.timeout = 1000 * 30;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
@@ -131,15 +131,15 @@ demo_console_task (void *sdata)
       printf ("timer start\n");
     }
 
-/*
-  u16 gpio_pin;
-  gpio_pin = DEMO_ISR_IO;
-  tls_gpio_cfg (gpio_pin, WM_GPIO_DIR_INPUT,
-                WM_GPIO_ATTR_PULLHIGH); // WM_GPIO_ATTR_FLOATING);
-  tls_gpio_isr_register (gpio_pin, demo_gpio_isr_callback, NULL);
-  tls_gpio_irq_enable (gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
-  printf ("\nbutton gpio %d rising isr\n", gpio_pin);
-*/
+  /*
+    u16 gpio_pin;
+    gpio_pin = DEMO_ISR_IO;
+    tls_gpio_cfg (gpio_pin, WM_GPIO_DIR_INPUT,
+                  WM_GPIO_ATTR_PULLHIGH); // WM_GPIO_ATTR_FLOATING);
+    tls_gpio_isr_register (gpio_pin, demo_gpio_isr_callback, NULL);
+    tls_gpio_irq_enable (gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
+    printf ("\nbutton gpio %d rising isr\n", gpio_pin);
+  */
 
   for (;;)
     {

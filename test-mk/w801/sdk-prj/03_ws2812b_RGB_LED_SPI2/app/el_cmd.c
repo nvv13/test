@@ -121,6 +121,11 @@ set_max_bright (int i_max_bright)
   max_bright = i_max_bright;
   setcolor (-2, max_bright);
 }
+int
+get_max_bright (void)
+{
+  return max_bright;
+}
 
 static int TOP_INDEX = 0;
 static int EVENODD = 0;
@@ -1873,7 +1878,6 @@ NewKITT (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 }
 
 //-------------------------------newKITT---------------------------------------
-
 
 static u8 *
 Wheel (u8 WheelPos)

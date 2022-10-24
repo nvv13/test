@@ -15,16 +15,15 @@ fast_decode_cmd (char *sock_rx, int len)
   if (len > 5 && strncmp ((char *)sock_rx, "light", 5) == 0)
     {
       int i_out = atoi ((char *)sock_rx + 5);
-      extern u16 i_max_out;
-      if (i_out > 0 && i_out < 9)
+      if (i_out > 0 && i_out <= 255)
         {
-          i_max_out = i_out;
-          flash_cfg_store_u16 (i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
-          i_len_ret = sprintf (sock_rx, "ok, set i_max_out=%d", i_out);
+          // flash_cfg_store_u16 (i_out, MEM_CELL_FROM_LIGTH_LEVEL);
+          set_max_bright (i_out);
+          i_len_ret = sprintf (sock_rx, "ok, set_max_brigh=%d", i_out);
         }
       else
-        i_len_ret = sprintf (sock_rx, "error value=%d, cur i_max_out=%d",
-                             i_out, i_max_out);
+        i_len_ret = sprintf (sock_rx, "error value=%d, cur max_brigh=%d",
+                             i_out, get_max_bright ());
     }
 
   if (len > 2 && strncmp ((char *)sock_rx, "dr", 2) == 0)
@@ -51,21 +50,22 @@ fast_decode_cmd (char *sock_rx, int len)
       extern u16 i_swith;
       struct tm tblock;
       tls_get_rtc (&tblock);
-      i_len_ret = sprintf (sock_rx,
-                           "date %d.%02d.%02d %02d:%02d:%02d\n"
-                           "led_numof=%d\n"
-                           "data_pin=%d\n"
-                           "mode=%d\n"
-                           "spi_clk=%d\n"
-                           "spi_on_bit=%d\n"
-                           "spi_off_bit=%d\n"
-                           "dr=%d\n"
-                           "spd=%d\n",
-                           tblock.tm_year + 1900, tblock.tm_mon + 1,
-                           tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
-                           tblock.tm_sec, dev.led_numof, (int)dev.data_pin,
-                           (int)dev.mode, dev.spi_clk, dev.spi_on_bit,
-                           dev.spi_off_bit, i_swith, u32_US_PER_MS);
+      i_len_ret = sprintf (
+          sock_rx,
+          "date %d.%02d.%02d %02d:%02d:%02d\n"
+          "led_numof=%d\n"
+          "data_pin=%d\n"
+          "mode=%d\n"
+          "spi_clk=%d\n"
+          "spi_on_bit=%d\n"
+          "spi_off_bit=%d\n"
+          "dr=%d\n"
+          "spd=%d\n"
+          "light=%d\n",
+          tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
+          tblock.tm_hour, tblock.tm_min, tblock.tm_sec, dev.led_numof,
+          (int)dev.data_pin, (int)dev.mode, dev.spi_clk, dev.spi_on_bit,
+          dev.spi_off_bit, i_swith, u32_US_PER_MS, get_max_bright ());
     }
 
   if (strncmp ((char *)sock_rx, "upgrade", 7) == 0)
@@ -166,11 +166,11 @@ fast_decode_cmd (char *sock_rx, int len)
           "help - данная справка (flash ver-" VERSION_FLASH ")\n"
           "time - время и прочие состояния\n"
           "drX - режим ленты, где X, только 1...999.\n"
+          "lightX - яркость, где X от 1 до 255.\n"
           "spd=A - где A - скорость\n"
           "mode=Y - режим драйвера ленты, где Y, 0-PIN_MODE, SPI_MODE: "
           "1-3bit, 2-4bit, 3-5bit, 4-6bit, 5-7bit, 6-8bit\n"
-          "on=Z, где Z - бит для 1 в SPI_MODE, можно менять для эксперементов "
-          "от 0 до 8\n"
+          "on=Z, где Z - бит для 1 в SPI_MODE, от 0 до 8\n"
           "off=V,где V - бит для 0\n"
           "clk=K,где K - частота в Герцах для SPI_MODE\n"
           "upgrade - обновить прошивку по OTA, лезет на " OTA_PATH_FILE "\n");

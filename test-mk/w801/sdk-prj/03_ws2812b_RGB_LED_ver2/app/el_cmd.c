@@ -121,6 +121,11 @@ set_max_bright (int i_max_bright)
   max_bright = i_max_bright;
   setcolor (-2, max_bright);
 }
+int
+get_max_bright (void)
+{
+  return max_bright;
+}
 
 static int TOP_INDEX = 0;
 static int EVENODD = 0;
@@ -1043,7 +1048,8 @@ flame ()
   float hdif = hmax - hmin;
   int randtemp = random (0, 3);
   float hinc = (hdif / (float)TOP_INDEX) + randtemp;
-  int ihue = hmin;
+  //int 
+  float ihue = hmin;
   for (int i = 0; i <= TOP_INDEX; i++)
     {
       ihue = ihue + hinc;
@@ -1162,7 +1168,8 @@ static void
 ems_lightsSTROBE ()
 { //-m26-EMERGENCY LIGHTS (STROBE LEFT/RIGHT)
   int thishue = 0;
-  int thathue = (thishue + 160) % 255;
+  //int thathue = (thishue + 160) % 255;
+  int thathue = (thishue + 240) % 255;
   for (int x = 0; x < 5; x++)
     {
       if (changeFlag)
@@ -1202,7 +1209,8 @@ rgb_propeller ()
 { //-m27-RGB PROPELLER
   idex++;
   int ghue = (thishue + 80) % 255;
-  int bhue = (thishue + 160) % 255;
+  //int bhue = (thishue + 160) % 255;
+  int bhue = (thishue + 240) % 255;
   int N3 = (dev.led_numof / 3);
   int N6 = (dev.led_numof / 6);
   int N12 = (dev.led_numof / 12);
@@ -1873,7 +1881,6 @@ NewKITT (u8 red, u8 green, u8 blue, int EyeSize, int SpeedDelay,
 }
 
 //-------------------------------newKITT---------------------------------------
-
 
 static u8 *
 Wheel (u8 WheelPos)
