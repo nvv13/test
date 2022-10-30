@@ -222,7 +222,7 @@ demo_console_task (void *sdata)
 
       if (tblock.tm_hour >= 23
           || tblock.tm_hour < 6) // ночь, установить минимальную яркость!
-        i_max_out = LCD_VAL_LG_spb_low;
+        i_max_out = LCD_VAL_LG_spb_hi;//LCD_VAL_LG_spb_low; переделал, так как на кухне теперь устройство нахрдится
       else
         {
           flash_cfg_load_u16 (&i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
