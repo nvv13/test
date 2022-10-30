@@ -71,6 +71,8 @@ static u16 i_out = 0;
 #define LCD_VAL_LG_hi 5
 u16 i_max_out = LCD_VAL_LG_spb_hi; //
 
+#define LCD_VAL_night LCD_VAL_LG_spb_hi // ночь, установить минимальную яркость! или другую
+
 static int i_5643_t_sign = 0;
 static int i_5643_t_value = 0;
 static int i_5643_t_mantissa = 0;
@@ -222,7 +224,7 @@ demo_console_task (void *sdata)
 
       if (tblock.tm_hour >= 23
           || tblock.tm_hour < 6) // ночь, установить минимальную яркость!
-        i_max_out = LCD_VAL_LG_spb_hi;//LCD_VAL_LG_spb_low; переделал, так как на кухне теперь устройство нахрдится
+        i_max_out = LCD_VAL_night; 
       else
         {
           flash_cfg_load_u16 (&i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
@@ -278,10 +280,10 @@ demo_console_task (void *sdata)
             }
 
           if (tblock.tm_hour == 23 && tblock.tm_min == 0 && tblock.tm_sec == 0
-              && i_max_out != LCD_VAL_LG_spb_hi) // ночь, установить
+              && i_max_out != LCD_VAL_night) // ночь, установить
                                                  // минимальную яркость!
             {
-              i_max_out = LCD_VAL_LG_spb_hi;
+              i_max_out = LCD_VAL_night;
             }
 
           if (tblock.tm_hour == 6 && tblock.tm_min == 0 && tblock.tm_sec == 0
