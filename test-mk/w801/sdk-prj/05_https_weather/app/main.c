@@ -74,7 +74,7 @@ u16 i_max_out = LCD_VAL_LG_spb_hi; //
 #define LCD_VAL_night LCD_VAL_LG_spb_hi // ночь, установить минимальную яркость! или другую
 
 static int i_5643_t_sign = 0;
-static int i_5643_t_value = 0;
+static int i_5643_t_value = 88;
 static int i_5643_t_mantissa = 0;
 
 static u8 iMode = MODE_WEATHER;

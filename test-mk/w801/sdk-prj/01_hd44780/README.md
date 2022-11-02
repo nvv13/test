@@ -1,49 +1,40 @@
+!!!В РАБОТЕ!!!
+!!!underway!!!
 
 
 project
 
-board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade 
+board HLK-W801-KIT-V1.1 + hd44780
 
-
-эффекты взяты отсюда: https://github.com/AlexGyver/WS2812_FX
-                      https://alexgyver.ru/ws2812b-fx/ 
-
-
-~~~
-
-Удаленное управление: можно подцепиться к платке по сети, на порт 5555,
- пример программки для соединения chat_client.py
- команды
-          help - данная справка (flash ver- )
-          time - время и прочие состояния
-          drX - режим ленты, где X, только 1...51."
-          lightX - яркость, где X от 1 до 255."
-          spd=A - где A - скорость
-          mode=Y - режим драйвера ленты, где Y, 0-PIN_MODE, SPI_MODE: 
-                                          1-3bit, 2-4bit, 3-5bit, 4-6bit, 5-7bit, 6-8bit
-          on=Z, где Z - бит для 1 в SPI_MODE, можно менять для эксперементов 
-          от 0 до 8
-          off=V,где V - бит для 0
-          clk=K,где K - частота в Герцах для SPI_MODE
-          upgrade - обновить прошивку по OTA, лезет на "http://192.168.1.69/ota/ws2812b/w800_ota.img"
-
-
-
-~~~
 
 
 соединения
 
-ws2812b
+дисплей
+
+LCD display 16x2
+
 надо соеденить по схеме:
 ~~~
 connect to
-W801  ws2812b
+W801  hd44780
 GPIO  PIN
-PB17  data
-+5v   +5v
+PB_21 RS
+PB_22 RW
+PB_23 EN
+PB_24 DO
+PB_25 D1
+PB_26 D2
+PB_18 D3
+VCC   VCC
 GND   GND
+
+
 ~~~
+
+
+
+
 
 
 
@@ -127,7 +118,6 @@ $ make flash
 
     Всё!
 
-
 ~~~
 
 
@@ -135,7 +125,10 @@ $ make flash
 
 
 
-  далее подцепляемся к платке, если интересует вывод на консоль
+
+Прочее:
+
+  подцепляемся к платке, если интересует вывод на консоль (используеться в проекте)
 
 $ picocom --echo -b 115200 /dev/ttyUSB0
 
@@ -149,6 +142,9 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
+
+PS:
+исходники драйвера tm1637 - https://github.com/avishorp/TM1637.
 
 
 

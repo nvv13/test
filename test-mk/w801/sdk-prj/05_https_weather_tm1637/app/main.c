@@ -71,7 +71,7 @@ static u8 u8_sec_state = 0;
 u16 i_max_out = LCD_VAL_LG_spb_hi; //
 
 static int i_5643_t_sign = 0;
-static int i_5643_t_value = 0;
+static int i_5643_t_value = 88;
 static int i_5643_t_mantissa = 0;
 
 static u8 iMode = MODE_WEATHER;
