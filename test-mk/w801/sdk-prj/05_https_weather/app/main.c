@@ -71,7 +71,8 @@ static u16 i_out = 0;
 #define LCD_VAL_LG_hi 5
 u16 i_max_out = LCD_VAL_LG_spb_hi; //
 
-#define LCD_VAL_night LCD_VAL_LG_spb_hi // ночь, установить минимальную яркость! или другую
+#define LCD_VAL_night                                                         \
+  LCD_VAL_LG_spb_hi // ночь, установить минимальную яркость! или другую
 
 static int i_5643_t_sign = 0;
 static int i_5643_t_value = 88;
@@ -109,7 +110,7 @@ demo_timer_irq (u8 *arg) // здесь будет вывод на LCD
           lcd5643printDigit (OUT_DIG_1, i_HiHour, iMode);
         else
           {
-            if (i_5643_t_value > 0)
+            if (i_5643_t_sign > 0)
               lcd5643printDigit (OUT_SIG_1, 1, iMode); // "+"
             else
               lcd5643printDigit (OUT_SIG_1, 0, iMode); // "-"
@@ -224,7 +225,7 @@ demo_console_task (void *sdata)
 
       if (tblock.tm_hour >= 23
           || tblock.tm_hour < 6) // ночь, установить минимальную яркость!
-        i_max_out = LCD_VAL_night; 
+        i_max_out = LCD_VAL_night;
       else
         {
           flash_cfg_load_u16 (&i_max_out, MEM_CELL_FROM_LIGTH_LEVEL);
@@ -281,7 +282,7 @@ demo_console_task (void *sdata)
 
           if (tblock.tm_hour == 23 && tblock.tm_min == 0 && tblock.tm_sec == 0
               && i_max_out != LCD_VAL_night) // ночь, установить
-                                                 // минимальную яркость!
+                                             // минимальную яркость!
             {
               i_max_out = LCD_VAL_night;
             }

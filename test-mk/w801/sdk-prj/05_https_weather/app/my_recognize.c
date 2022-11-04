@@ -37,6 +37,7 @@ enum
   RG_START_FIND = 0,
   RG_FIND_PRE2,
   RG_FIND_PRE3,
+  RG_FIND_PRE3_M,
   RG_FIND_PRE4,
   RG_FIND_PRE5,
   RG_FIND_PRE6,
@@ -119,7 +120,7 @@ my_recognize_http (const char *recvbuf, int i_len)
 
         case RG_FIND_PRE2:
           {
-            if (ch == c_PRE2[i_POS_PRE2]) // "unit_temperature_c";
+            if (ch == c_PRE2[i_POS_PRE2]) // "unit_temperature_c"; span class="unit unit_temperature_c"><span class="sign">&minus;</span>4<span class="lower">,3</span> 
               i_POS_PRE2++;
             else
               {
@@ -147,8 +148,20 @@ my_recognize_http (const char *recvbuf, int i_len)
                     else
                       i_sign = 1;
                     u8_status_find = RG_FIND_PRE4;
+                    if (ch == '&')
+                      u8_status_find = RG_FIND_PRE3_M;
                   }
               }
+          };
+          break;
+
+        case RG_FIND_PRE3_M:
+          {
+                    if (ch == 'm')
+                      i_sign = -1;
+                    else
+                      i_sign = 1;
+                    u8_status_find = RG_FIND_PRE4;
           };
           break;
 
