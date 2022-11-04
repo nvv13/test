@@ -40,7 +40,8 @@ UserMain (void)
 
   tls_sys_clk_set (CPU_CLK_240M);
 
-  LCD44780_init ();
+  // LCD44780_init (X_GPIO_MODE);
+  LCD44780_init (X_I2C_MODE);
 
   int i_cnt = 0;
 
@@ -51,7 +52,7 @@ UserMain (void)
       LCD44780_return_home ();
       LCD44780_printf ("i_cnt=%d", i_cnt);
 
-      if (++i_cnt > 9999)
+      if (++i_cnt > 999999)
         i_cnt = 0;
     }
 }

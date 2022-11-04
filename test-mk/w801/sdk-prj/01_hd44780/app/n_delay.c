@@ -12,6 +12,7 @@ extern uint32_t csi_coret_get_value (void);
 void
 n_delay_ms (uint32_t ms)
 {
+  // printf("*st7920_interface_delay_ms(%d)\n\r", ms);
   if (ms == 0)
     return;
   do
