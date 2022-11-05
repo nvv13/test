@@ -42,6 +42,8 @@ UserMain (void)
 
   // LCD44780_init (X_GPIO_MODE);
   LCD44780_init (X_I2C_MODE);
+  LCD44780_SET_BACKLIGHT(1);
+  //LCD44780_on ();
 
   int i_cnt = 0;
 

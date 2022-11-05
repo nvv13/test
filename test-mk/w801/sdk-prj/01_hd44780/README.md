@@ -16,6 +16,18 @@ LCD display 16x2
 
 надо соеденить по схеме:
 ~~~
+
+для I2C
+connect to
+W801  pcf58741
+GPIO  PIN
+PA_01 SCL
+PA_04 SDA
+VCC   VCC
+GND   GND
+
+или
+
 connect to
 W801  hd44780
 GPIO  PIN
@@ -26,10 +38,10 @@ PB_24 DO
 PB_25 D1
 PB_26 D2
 PB_18 D3
+PA_01 SCL
+PA_04 SDA
 VCC   VCC
 GND   GND
-
-
 ~~~
 
 

@@ -16,4 +16,7 @@ void PCF857X_Init (u32 u32_FREQ, enum tls_io_name pinSCL,
                    enum tls_io_name pinSDA);
 void PCF857X_gpio_write (u8 num_pin, u8 value);
 
+void PCF857X_buf_write (u8 num_pin, u8 value);
+void PCF857X_buf_to_gpio_write (void);
+
 #endif // __PCF857X__

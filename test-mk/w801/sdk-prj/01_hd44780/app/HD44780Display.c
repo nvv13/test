@@ -80,8 +80,11 @@ x_gpio_write (enum tls_io_name gpio_pin, u8 value)
           num_pin = 1;
           break; /* Bit 1 */
         case LCD44780_EN:
-          num_pin = 3;
+          num_pin = 2;
           break; /* Bit 2 */
+        case LCD44780_BACKLIGHT:
+          num_pin = 3;
+          break; /* Bit 3 */
         case LCD44780_D0:
           num_pin = 4;
           break;
@@ -97,6 +100,11 @@ x_gpio_write (enum tls_io_name gpio_pin, u8 value)
         }
       PCF857X_gpio_write (num_pin, value);
     }
+}
+
+void LCD44780_SET_BACKLIGHT(uint8_t value)
+{
+x_gpio_write (LCD44780_BACKLIGHT, value);
 }
 
 void LCD44780_send (uint8_t value, uint8_t mode);
