@@ -28,21 +28,21 @@
 #define LCD44780_RS WM_IO_PB_21
 #define LCD44780_RW WM_IO_PB_22
 #define LCD44780_EN WM_IO_PB_23
-#define LCD44780_D0 WM_IO_PB_24
-#define LCD44780_D1 WM_IO_PB_25
-#define LCD44780_D2 WM_IO_PB_26
-#define LCD44780_D3 WM_IO_PB_18
+#define LCD44780_D4 WM_IO_PB_24
+#define LCD44780_D5 WM_IO_PB_25
+#define LCD44780_D6 WM_IO_PB_26
+#define LCD44780_D7 WM_IO_PB_18
 #define LCD44780_BACKLIGHT WM_IO_PB_17
 //#endif
 
-#define LCD44780_I2C_FREQ (200000)
+#define LCD44780_I2C_FREQ (100000)
 #define LCD44780_I2C_SCL WM_IO_PA_01
 #define LCD44780_I2C_SDA WM_IO_PA_04
 
-//#define LCD44780_COL_COUNT 16
-//#define LCD44780_ROW_COUNT 2
-#define LCD44780_COL_COUNT 20
-#define LCD44780_ROW_COUNT 4
+#define LCD44780_COL_COUNT 16
+#define LCD44780_ROW_COUNT 2
+//#define LCD44780_COL_COUNT 20
+//#define LCD44780_ROW_COUNT 4
 
 typedef enum x_out_mode
 {
@@ -52,7 +52,7 @@ typedef enum x_out_mode
 
 void LCD44780_init (enum x_out_mode inModeOut);
 
-void LCD44780_SET_BACKLIGHT(uint8_t value);
+void LCD44780_SET_BACKLIGHT (uint8_t value);
 
 void LCD44780_command (uint8_t command);
 void LCD44780_write (uint8_t value);

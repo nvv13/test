@@ -62,6 +62,40 @@
 static enum x_out_mode ModeOut = X_GPIO_MODE;
 
 static void
+x_PCF857X_buf_write (enum tls_io_name gpio_pin, u8 value)
+{
+  u8 num_pin = 0;
+  switch ((int)gpio_pin)
+    {
+    case LCD44780_RS:
+      num_pin = 0;
+      break; /* Bit 0 */
+    case LCD44780_RW:
+      num_pin = 1;
+      break; /* Bit 1 */
+    case LCD44780_EN:
+      num_pin = 2;
+      break; /* Bit 2 */
+    case LCD44780_BACKLIGHT:
+      num_pin = 3;
+      break; /* Bit 3 */
+    case LCD44780_D4:
+      num_pin = 4;
+      break;
+    case LCD44780_D5:
+      num_pin = 5;
+      break;
+    case LCD44780_D6:
+      num_pin = 6;
+      break;
+    case LCD44780_D7:
+      num_pin = 7;
+      break;
+    }
+  PCF857X_buf_write (num_pin, value);
+}
+
+static void
 x_gpio_write (enum tls_io_name gpio_pin, u8 value)
 {
   if (ModeOut == X_GPIO_MODE)
@@ -70,41 +104,15 @@ x_gpio_write (enum tls_io_name gpio_pin, u8 value)
     }
   else
     {
-      u8 num_pin = 0;
-      switch ((int)gpio_pin)
-        {
-        case LCD44780_RS:
-          num_pin = 0;
-          break; /* Bit 0 */
-        case LCD44780_RW:
-          num_pin = 1;
-          break; /* Bit 1 */
-        case LCD44780_EN:
-          num_pin = 2;
-          break; /* Bit 2 */
-        case LCD44780_BACKLIGHT:
-          num_pin = 3;
-          break; /* Bit 3 */
-        case LCD44780_D0:
-          num_pin = 4;
-          break;
-        case LCD44780_D1:
-          num_pin = 5;
-          break;
-        case LCD44780_D2:
-          num_pin = 6;
-          break;
-        case LCD44780_D3:
-          num_pin = 7;
-          break;
-        }
-      PCF857X_gpio_write (num_pin, value);
+      x_PCF857X_buf_write (gpio_pin, value);
+      PCF857X_buf_to_gpio_write ();
     }
 }
 
-void LCD44780_SET_BACKLIGHT(uint8_t value)
+void
+LCD44780_SET_BACKLIGHT (uint8_t value)
 {
-x_gpio_write (LCD44780_BACKLIGHT, value);
+  x_gpio_write (LCD44780_BACKLIGHT, value);
 }
 
 void LCD44780_send (uint8_t value, uint8_t mode);
@@ -139,40 +147,50 @@ LCD44780_send (uint8_t value, uint8_t mode)
 
   x_gpio_write (LCD44780_RW, 0);
 
-  LCD44780_write_nibble (value >> 4);
-  LCD44780_write_nibble (value);
+  LCD44780_write_nibble (value >> 4 & 0x0F);
+  LCD44780_write_nibble (value & 0x0F);
 }
 
 void
 LCD44780_write_nibble (uint8_t nibble)
 {
-  enum tls_io_name data_pin = LCD44780_D0;
+  enum tls_io_name data_pin = LCD44780_D4;
 
   for (int i = 0; i >= 3; i++)
     {
       if (((nibble >> i) & 0x01))
         { // 1
-          x_gpio_write (data_pin, 1);
+          if (ModeOut == X_GPIO_MODE)
+            x_gpio_write (data_pin, 1);
+          else
+            x_PCF857X_buf_write (data_pin, 1);
         }
       else
         { // 0
-          x_gpio_write (data_pin, 0);
+          if (ModeOut == X_GPIO_MODE)
+            x_gpio_write (data_pin, 0);
+          else
+            x_PCF857X_buf_write (data_pin, 0);
         }
       switch ((int)data_pin)
         {
-        case LCD44780_D0:
-          data_pin = LCD44780_D1;
+        case LCD44780_D6:
+          data_pin = LCD44780_D7;
           break;
-        case LCD44780_D1:
-          data_pin = LCD44780_D2;
+        case LCD44780_D5:
+          data_pin = LCD44780_D6;
           break;
-        case LCD44780_D2:
-          data_pin = LCD44780_D3;
+        case LCD44780_D4:
+          data_pin = LCD44780_D5;
           break;
         }
     }
 
-  x_gpio_write (LCD44780_EN, 0);
+  if (ModeOut != X_GPIO_MODE)
+    PCF857X_buf_to_gpio_write ();
+  else
+    x_gpio_write (LCD44780_EN, 0);
+
   n_delay_us (1);
   x_gpio_write (LCD44780_EN, 1);
   n_delay_us (1);
@@ -195,42 +213,41 @@ LCD44780_init (enum x_out_mode inModeOut)
                     WM_GPIO_ATTR_FLOATING); // 22
       tls_gpio_cfg (LCD44780_EN, WM_GPIO_DIR_OUTPUT,
                     WM_GPIO_ATTR_FLOATING); // 23
-      tls_gpio_cfg (LCD44780_D0, WM_GPIO_DIR_OUTPUT,
+      tls_gpio_cfg (LCD44780_D4, WM_GPIO_DIR_OUTPUT,
                     WM_GPIO_ATTR_FLOATING); // 24
-      tls_gpio_cfg (LCD44780_D1, WM_GPIO_DIR_OUTPUT,
+      tls_gpio_cfg (LCD44780_D5, WM_GPIO_DIR_OUTPUT,
                     WM_GPIO_ATTR_FLOATING); // 25
-      tls_gpio_cfg (LCD44780_D2, WM_GPIO_DIR_OUTPUT,
+      tls_gpio_cfg (LCD44780_D6, WM_GPIO_DIR_OUTPUT,
                     WM_GPIO_ATTR_FLOATING); // 26
-      tls_gpio_cfg (LCD44780_D3, WM_GPIO_DIR_OUTPUT,
+      tls_gpio_cfg (LCD44780_D7, WM_GPIO_DIR_OUTPUT,
                     WM_GPIO_ATTR_FLOATING); // 18
+
+      x_gpio_write (LCD44780_EN, 0);
+      x_gpio_write (LCD44780_RS, 0);
+      x_gpio_write (LCD44780_RW, 0);
     }
   else
     {
       PCF857X_Init (LCD44780_I2C_FREQ, LCD44780_I2C_SCL, LCD44780_I2C_SDA);
+      PCF857X_buf_to_gpio_write ();
     }
 
   // Wait for LCD to become ready (docs say 15ms+)
-  n_delay_ms (15);
-
-  x_gpio_write (LCD44780_EN, 0);
-  x_gpio_write (LCD44780_RS, 0);
-  x_gpio_write (LCD44780_RW, 0);
-
-  n_delay_us (4100);
+  n_delay_ms (50);
 
   LCD44780_write_nibble (0x03); // Switch to 4 bit mode
-  n_delay_us (4100);
-
+  n_delay_us (4500);
   LCD44780_write_nibble (0x03); // 2nd time
-  n_delay_us (4100);
-
+  n_delay_us (200);
   LCD44780_write_nibble (0x03); // 3rd time
-  n_delay_us (4100);
-
-  LCD44780_write_nibble (0x02); // Set 8-bit mode (?)
+  n_delay_us (200);
+  LCD44780_write_nibble (0x02); // // finally, set to 4-bit interface
 
   LCD44780_command (LCD44780_FUNCTIONSET | LCD44780_4BITMODE | LCD44780_2LINE
                     | LCD44780_5x8DOTS);
+  //  LCD44780_command (LCD44780_FUNCTIONSET | LCD44780_4BITMODE |
+  //  LCD44780_2LINE
+  //                    | LCD44780_5x10DOTS);
 
   LCD44780_displayparams = LCD44780_CURSOROFF | LCD44780_BLINKOFF;
   LCD44780_command (LCD44780_DISPLAYCONTROL | LCD44780_displayparams);

@@ -156,7 +156,7 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 PS:
-исходники драйвера tm1637 - https://github.com/avishorp/TM1637.
+исходники драйвера https://github.com/mathertel/LiquidCrystal_PCF8574.git
 
 
 
