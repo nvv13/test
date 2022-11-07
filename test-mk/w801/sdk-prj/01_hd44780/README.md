@@ -19,14 +19,15 @@ LCD display 16x2
 
 для I2C
 connect to
-W801  pcf58741
+W801  pcf5874T
 GPIO  PIN
 PA_01 SCL
 PA_04 SDA
 VCC   VCC
 GND   GND
 
-или
+
+или эта схема (пока не опробована, у меня нет 1602 без I2C адаптера)
 
 connect to
 W801  hd44780
@@ -156,7 +157,9 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 PS:
-исходники драйвера https://github.com/mathertel/LiquidCrystal_PCF8574.git
+исходники драйвера 
+  https://github.com/mathertel/LiquidCrystal_PCF8574.git
+  https://github.com/aostanin/avr-hd44780.git
 
 
 
