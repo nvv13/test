@@ -38,7 +38,7 @@ UserMain (void)
 {
   printf ("user task\n");
 
-  // tls_sys_clk_set (CPU_CLK_240M);
+  tls_sys_clk_set (CPU_CLK_240M);
 
   // LCD44780_init (X_GPIO_MODE);
   LCD44780_init (X_I2C_MODE);

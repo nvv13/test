@@ -53,6 +53,13 @@
 #define LCD44780_5x10DOTS 0x04
 #define LCD44780_5x8DOTS 0x00
 
+#define HD44780_CMD_WAIT (2000U)
+#define HD44780_INIT_WAIT_XXL (50000U)
+#define HD44780_INIT_WAIT_LONG (4500U)
+#define HD44780_INIT_WAIT_SHORT (150U)
+#define HD44780_PULSE_WAIT_SHORT (1U)
+#define HD44780_PULSE_WAIT_LONG (100U)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -93,7 +100,7 @@
 #define PCF8574_GPIO_PIN_NUM (8)  /**< PCF8574 has 8 I/O pins */
 #define PCF8574A_GPIO_PIN_NUM (8) /**< PCF8574A has 8 I/O pins */
 
-static enum x_out_mode ModeOut = X_GPIO_MODE;
+static enum x_out_mode ModeOut = X_I2C_MODE;
 static u8 _backlight = 1;
 static u8 addr = PCF8574_BASE_ADDR;
 
@@ -149,12 +156,13 @@ LiquidCrystal_PCF8574_writeNibble (uint8_t halfByte, bool isData)
       tls_gpio_write (LCD44780_D6, (halfByte & 0x04 ? 1 : 0));
       tls_gpio_write (LCD44780_D7, (halfByte & 0x08 ? 1 : 0));
 
-      tls_gpio_write (LCD44780_EN, 1);
-      n_delay_us (1);
       tls_gpio_write (LCD44780_EN, 0);
-      tls_os_time_delay (1);
-      n_delay_us (
-          37); // delayMicroseconds(37); // commands need > 37us to settle
+      n_delay_us (HD44780_PULSE_WAIT_SHORT);
+      tls_gpio_write (LCD44780_EN, 1);
+      n_delay_us (HD44780_PULSE_WAIT_SHORT);
+      tls_gpio_write (LCD44780_EN, 0);
+      n_delay_us (HD44780_PULSE_WAIT_LONG);
+          // delayMicroseconds(37); // commands need > 37us to settle
     }
   else
     {
@@ -182,15 +190,25 @@ LiquidCrystal_PCF8574_writeNibble (uint8_t halfByte, bool isData)
       // >10 clock cycles. Hence, no additional delays are necessary even
       // when the I2C bus is operated beyond the chip's spec in fast mode
       // at 400 kHz.
+
+      tls_i2c_write_byte (data, 0);
+      tls_i2c_wait_ack ();
+      n_delay_us (HD44780_PULSE_WAIT_SHORT);
+
       tls_i2c_write_byte (
           data | (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN)), 0);
       tls_i2c_wait_ack ();
+      n_delay_us (HD44780_PULSE_WAIT_SHORT);
       // delayMicroseconds(1); // enable pulse must be >450ns
-      // n_delay_us (1);
+
       tls_i2c_write_byte (data, 0);
       tls_i2c_wait_ack ();
       // delayMicroseconds(37); // commands need > 37us to settle
       // n_delay_us (37);
+      n_delay_us (HD44780_PULSE_WAIT_LONG);
+
+//      printf ("LiquidCrystal_PCF8574_writeNibble (halfByte=%d, isData=%d,Data=%d,LCD44780_EN=%d)\n",halfByte,(isData?1:0),data,gpio_pin_to_num_pin_PCF857X (LCD44780_EN));
+
     }
 } // _writeNibble
 
@@ -217,11 +235,17 @@ LiquidCrystal_PCF8574_send (uint8_t value, bool isData)
       // write high 4 bits
       LiquidCrystal_PCF8574_writeNibble ((value >> 4 & 0x0F), isData);
 
+      tls_i2c_stop ();
+      tls_os_time_delay (1);
+
+      tls_i2c_write_byte (addr, 1);
+      tls_i2c_wait_ack ();
+
       // write low 4 bits
       LiquidCrystal_PCF8574_writeNibble ((value & 0x0F), isData);
 
       tls_i2c_stop ();
-      //tls_os_time_delay (1);
+      tls_os_time_delay (1);
     }
 } // _send()
 
@@ -239,7 +263,7 @@ LiquidCrystal_PCF8574_sendNibble (uint8_t halfByte, bool isData)
       tls_i2c_wait_ack ();
       LiquidCrystal_PCF8574_writeNibble (halfByte, isData);
       tls_i2c_stop ();
-      //tls_os_time_delay (1);
+      tls_os_time_delay (1);
     }
 } // _sendNibble
 
@@ -265,7 +289,7 @@ LiquidCrystal_PCF8574_write2Wire (uint8_t data, bool isData, bool enable)
       tls_i2c_write_byte (data, 0);
       tls_i2c_wait_ack ();
       tls_i2c_stop ();
-      //tls_os_time_delay (1);
+      tls_os_time_delay (1);
     }
 } // write2Wire
 
@@ -337,19 +361,26 @@ LCD44780_init (enum x_out_mode inModeOut)
     }
 
   // Wait for LCD to become ready (docs say 15ms+)
-  n_delay_ms (50);
+  /* see hitachi HD44780 datasheet pages 45/46 for init specs */
+  n_delay_us (HD44780_INIT_WAIT_XXL);
 
   LiquidCrystal_PCF8574_sendNibble (0x03, true); // Switch to 4 bit mode
-  n_delay_us (4500);
+  n_delay_us (HD44780_INIT_WAIT_LONG);
+
   LiquidCrystal_PCF8574_sendNibble (0x03, true); // 2nd time
-  n_delay_us (200);
+  n_delay_us (HD44780_INIT_WAIT_LONG);
+
   LiquidCrystal_PCF8574_sendNibble (0x03, true); // 3rd time
-  n_delay_us (200);
+  n_delay_us (HD44780_INIT_WAIT_SHORT);
+
   LiquidCrystal_PCF8574_sendNibble (
       0x02, true); // // finally, set to 4-bit interface
 
   LCD44780_command (LCD44780_FUNCTIONSET | LCD44780_4BITMODE | LCD44780_2LINE
                     | LCD44780_5x8DOTS);
+
+  LCD44780_on ();
+  LCD44780_clear ();
 
   LCD44780_displayparams = LCD44780_CURSOROFF | LCD44780_BLINKOFF;
   LCD44780_command (LCD44780_DISPLAYCONTROL | LCD44780_displayparams);
@@ -373,14 +404,14 @@ void
 LCD44780_clear (void)
 {
   LCD44780_command (LCD44780_CLEARDISPLAY);
-  n_delay_ms (2);
+  n_delay_us (HD44780_CMD_WAIT);
 }
 
 void
 LCD44780_return_home (void)
 {
   LCD44780_command (LCD44780_RETURNHOME);
-  n_delay_ms (2);
+  n_delay_us (HD44780_CMD_WAIT);
 }
 
 void
