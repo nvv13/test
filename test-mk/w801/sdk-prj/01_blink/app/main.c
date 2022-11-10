@@ -99,12 +99,12 @@ tic_delay (uint32_t cnt)
 void
 UserMain (void)
 {
-  enum tls_io_name gpio_pin = WM_IO_PB_01;
+  enum tls_io_name gpio_pin = WM_IO_PB_05;
 
   printf ("user task\n");
 
   // tls_sys_clk_set(CPU_CLK_2M);
-  tls_sys_clk_set (CPU_CLK_40M);
+  // tls_sys_clk_set (CPU_CLK_40M);
   // tls_sys_clk_set(CPU_CLK_80M);
   // tls_sys_clk_set(CPU_CLK_160M);
   // tls_sys_clk_set(CPU_CLK_240M); // freq = 5,714309 MHz
@@ -193,7 +193,10 @@ UserMain (void)
       // n_delay_us(10);// 80m 47.056 Khz half period = 10.4 us
       // n_delay_us(100);// 80m 4.986 Khz half period = 100 us
       // n_delay_us(100);// 40m 4.943 Khz half period = 101 us
-      n_delay_ms (10); // 40m 49.940 hz half period = 10 ms
+      //n_delay_ms (10); // 40m 49.940 hz half period = 10 ms
+      //n_delay_ms (10); // 40m 49.940 hz half period = 10 ms
+
+      n_delay_us (1000 * 1000);
 
       u8_led_state = ~u8_led_state;
     }
