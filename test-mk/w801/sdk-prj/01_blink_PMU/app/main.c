@@ -42,7 +42,7 @@ UserMain (void)
 
       tls_gpio_write (WM_IO_PB_05, u8_led_state);
       tls_gpio_write (WM_IO_PB_11, u8_led_state);
-      tls_gpio_write (WM_IO_PB_16, ~u8_led_state);
-      tls_gpio_write (WM_IO_PB_25, ~u8_led_state);
+      tls_gpio_write (WM_IO_PB_16, u8_led_state);
+      tls_gpio_write (WM_IO_PB_25, u8_led_state);
     }
 }

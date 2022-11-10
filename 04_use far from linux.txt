@@ -1,0 +1,35 @@
+Far для Linux
+
+хорошая статья
+https://habr.com/ru/post/698450/
+
+
+есть "портативные" версии для Линукс
+https://github.com/unxed/far2l-deb/tree/master/portable
+
+
+
+или собираем:
+
+
+подготовка
+~~~
+$ dnf install -y gawk m4 gcc-c++ wxGTK3-devel cmake git
+$ dnf install -y libssh-devel libsmbclient-devel libnfs-devel libarchive-devel neon-devel
+$ dnf install -y uchardet uchardet-devel spdlog spdlog-devel python-devel xerces-c xerces-c-devel
+~~~
+
+
+собрать и установить
+~~~
+$ git clone https://github.com/elfmz/far2l.git
+$ cd far2l
+
+$ mkdir _build
+$ cd _build
+
+$ cmake -DUSEWX=yes -DCMAKE_BUILD_TYPE=Release ..
+$ cmake --build . -j$(nproc --all)
+$ sudo make install
+~~~
+

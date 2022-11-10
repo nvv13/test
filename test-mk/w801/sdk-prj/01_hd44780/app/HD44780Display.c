@@ -168,20 +168,20 @@ LiquidCrystal_PCF8574_writeNibble (uint8_t halfByte, bool isData)
     {
       // map the data to the given pin connections
       uint8_t data
-          = isData ? (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_RS)) : 0;
+          = isData ? (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_RS)) : 0;
       // _rw_mask is not used here.
       if (_backlight > 0)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_BACKLIGHT));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_BACKLIGHT));
 
       // allow for arbitrary pin configuration
       if (halfByte & 0x01)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_D4));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_D4));
       if (halfByte & 0x02)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_D5));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_D5));
       if (halfByte & 0x04)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_D6));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_D6));
       if (halfByte & 0x08)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_D7));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_D7));
 
       // Note that the specified speed of the PCF8574 chip is 100KHz.
       // Transmitting a single byte takes 9 clock ticks at 100kHz -> 90us.
@@ -196,7 +196,7 @@ LiquidCrystal_PCF8574_writeNibble (uint8_t halfByte, bool isData)
       n_delay_us (HD44780_PULSE_WAIT_SHORT);
 
       tls_i2c_write_byte (
-          data | (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN)), 0);
+          data | (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN)), 0);
       tls_i2c_wait_ack ();
       n_delay_us (HD44780_PULSE_WAIT_SHORT);
       // delayMicroseconds(1); // enable pulse must be >450ns
@@ -277,12 +277,12 @@ LiquidCrystal_PCF8574_write2Wire (uint8_t data, bool isData, bool enable)
   else
     {
       if (isData)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_RS));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_RS));
       // _rw_mask is not used here.
       if (enable)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN));
       if (_backlight > 0)
-        data |= (1 << gpio_pin_to_num_pin_PCF857X (LCD44780_BACKLIGHT));
+        data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_BACKLIGHT));
 
       tls_i2c_write_byte (addr, 1);
       tls_i2c_wait_ack ();

@@ -162,4 +162,5 @@ PS:
   https://github.com/aostanin/avr-hd44780.git
 
 
-
+про I2C
+http://easyelectronics.ru/interface-bus-iic-i2c.html
