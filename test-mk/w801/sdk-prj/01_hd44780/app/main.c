@@ -51,7 +51,8 @@ UserMain (void)
     {
       tls_os_time_delay (HZ);
 
-      LCD44780_return_home ();
+      //LCD44780_return_home ();
+      LCD44780_set_cursor (1, 1);
       LCD44780_printf ("i_cnt=%d", i_cnt);
 
       if (++i_cnt > 999999)

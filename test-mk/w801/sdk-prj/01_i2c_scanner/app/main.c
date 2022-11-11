@@ -19,20 +19,6 @@ uint8_t
 i2c_send_addr (uint8_t addr)
 {
 
-  /*
-
-    I2C->TX_RX = addr; // кладем адрес слейва в регистр данных I2C
-    I2C->CR_SR = I2C_CR_STA | I2C_CR_WR
-                 | I2C_CR_STO; // выдаем на шину START, запуcкаем передачу, по
-                               // окончании передачи байта выдаем STOP
-    while (I2C->CR_SR & I2C_SR_TIP)
-      {
-      }; // ждем окончания отправки
-    return (I2C->CR_SR & I2C_SR_NAK); // если обнаружили NACK, возвращаем "1",
-                                      // если ACK - то "0"
-
-  */
-
   tls_reg_write32 (HR_I2C_TX_RX,
                    addr); // кладем адрес слейва в регистр данных I2C
   tls_reg_write32 (
@@ -52,6 +38,7 @@ void
 UserMain (void)
 {
 
+  u8 u8_tic = HZ * 3;
   wm_i2c_scl_config (WM_IO_PA_01);
   wm_i2c_sda_config (WM_IO_PA_04);
   tls_i2c_init (I2C_FREQ);
@@ -63,10 +50,23 @@ UserMain (void)
         {
           sprintf (char_buff, "0x%.2X addr ACK found!\n\r", addr);
           printf (char_buff);
+          u8_tic=HZ>>2;
         }
     }
   printf ("I2C Address scan finished \n\r");
+
+  u8 u8_led_state = 0;
+  tls_gpio_cfg (WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (WM_IO_PB_11, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (WM_IO_PB_16, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (WM_IO_PB_25, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
   while (1)
     {
+      u8_led_state = ~u8_led_state;
+      tls_gpio_write (WM_IO_PB_05, u8_led_state);
+      tls_gpio_write (WM_IO_PB_11, u8_led_state);
+      tls_gpio_write (WM_IO_PB_16, u8_led_state);
+      tls_gpio_write (WM_IO_PB_25, u8_led_state);
+      tls_os_time_delay (u8_tic);
     };
 }

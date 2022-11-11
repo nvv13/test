@@ -100,9 +100,47 @@
 #define PCF8574_GPIO_PIN_NUM (8)  /**< PCF8574 has 8 I/O pins */
 #define PCF8574A_GPIO_PIN_NUM (8) /**< PCF8574A has 8 I/O pins */
 
+uint8_t
+i2c_send_one_byte (uint8_t addr, uint8_t data)
+{
+  tls_reg_write32 (HR_I2C_TX_RX,
+                   addr); // заносим в регистр данных адрес слейва
+
+  tls_reg_write32 (
+      HR_I2C_CR_SR,
+      I2C_CR_STA | I2C_CR_WR); // включаем модуль на передачу и выдаем START
+
+  while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
+    ; // ждем окончания передачи
+
+
+
+  if (tls_reg_read32 (HR_I2C_CR_SR)
+      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+    {
+      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+        ;       // ожидаем освобождения шины
+      return 1; // возвращаем код ошибки "1"
+    }           // если есть ответ от слейва
+
+  tls_reg_write32 (HR_I2C_TX_RX,
+                   data); // заносим в регистр данных байт на отправку
+  tls_reg_write32 (
+      HR_I2C_CR_SR,
+      I2C_CR_WR | I2C_CR_STO); // передаем байт и по окончании передачи - STOP
+  while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+    ;       // ожидаем освобождения шины
+
+  printf ("i2c_send_one_byte data= 0x%.2X \n",data);
+
+  return 0; // возвращаем "0" - передача успешна
+}
+
+
 static enum x_out_mode ModeOut = X_I2C_MODE;
 static u8 _backlight = 1;
-static u8 addr = PCF8574_BASE_ADDR;
+static u8 u8_addr = PCF8574_BASE_ADDR;
 
 static u8
 gpio_pin_to_num_pin_PCF857X (enum tls_io_name gpio_pin)
@@ -162,7 +200,7 @@ LiquidCrystal_PCF8574_writeNibble (uint8_t halfByte, bool isData)
       n_delay_us (HD44780_PULSE_WAIT_SHORT);
       tls_gpio_write (LCD44780_EN, 0);
       n_delay_us (HD44780_PULSE_WAIT_LONG);
-          // delayMicroseconds(37); // commands need > 37us to settle
+      // delayMicroseconds(37); // commands need > 37us to settle
     }
   else
     {
@@ -191,24 +229,28 @@ LiquidCrystal_PCF8574_writeNibble (uint8_t halfByte, bool isData)
       // when the I2C bus is operated beyond the chip's spec in fast mode
       // at 400 kHz.
 
-      tls_i2c_write_byte (data, 0);
-      tls_i2c_wait_ack ();
+      // tls_i2c_write_byte (data, 0);
+      // tls_i2c_wait_ack ();
+      i2c_send_one_byte (u8_addr, data);
       n_delay_us (HD44780_PULSE_WAIT_SHORT);
 
-      tls_i2c_write_byte (
-          data | (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN)), 0);
-      tls_i2c_wait_ack ();
+      //      tls_i2c_write_byte (
+      //          data | (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN)),
+      //          0);
+      //      tls_i2c_wait_ack ();
+      i2c_send_one_byte (
+          u8_addr, data | (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_EN)));
       n_delay_us (HD44780_PULSE_WAIT_SHORT);
       // delayMicroseconds(1); // enable pulse must be >450ns
 
-      tls_i2c_write_byte (data, 0);
-      tls_i2c_wait_ack ();
+      // tls_i2c_write_byte (data, 0);
+      // tls_i2c_wait_ack ();
+      i2c_send_one_byte (u8_addr, data);
       // delayMicroseconds(37); // commands need > 37us to settle
       // n_delay_us (37);
       n_delay_us (HD44780_PULSE_WAIT_LONG);
 
-//      printf ("LiquidCrystal_PCF8574_writeNibble (halfByte=%d, isData=%d,Data=%d,LCD44780_EN=%d)\n",halfByte,(isData?1:0),data,gpio_pin_to_num_pin_PCF857X (LCD44780_EN));
-
+      printf ("LiquidCrystal_PCF8574_writeNibble (halfByte=0x%.2X,isData=%d,Data=0x%.2X)\n",halfByte,(isData?1:0),data);
     }
 } // _writeNibble
 
@@ -229,23 +271,23 @@ LiquidCrystal_PCF8574_send (uint8_t value, bool isData)
       // An I2C transmission has a significant overhead of ~10+1 I2C clock
       // cycles. We consequently only perform it only once per _send().
 
-      tls_i2c_write_byte (addr, 1);
-      tls_i2c_wait_ack ();
+      //      tls_i2c_write_byte (addr, 1);
+      //      tls_i2c_wait_ack ();
 
       // write high 4 bits
       LiquidCrystal_PCF8574_writeNibble ((value >> 4 & 0x0F), isData);
 
-      tls_i2c_stop ();
-      tls_os_time_delay (1);
+      //      tls_i2c_stop ();
+      //      tls_os_time_delay (1);
 
-      tls_i2c_write_byte (addr, 1);
-      tls_i2c_wait_ack ();
+      //      tls_i2c_write_byte (addr, 1);
+      //      tls_i2c_wait_ack ();
 
       // write low 4 bits
       LiquidCrystal_PCF8574_writeNibble ((value & 0x0F), isData);
 
-      tls_i2c_stop ();
-      tls_os_time_delay (1);
+      //      tls_i2c_stop ();
+      //      tls_os_time_delay (1);
     }
 } // _send()
 
@@ -259,11 +301,11 @@ LiquidCrystal_PCF8574_sendNibble (uint8_t halfByte, bool isData)
     }
   else
     {
-      tls_i2c_write_byte (addr, 1);
-      tls_i2c_wait_ack ();
+      //      tls_i2c_write_byte (addr, 1);
+      //      tls_i2c_wait_ack ();
       LiquidCrystal_PCF8574_writeNibble (halfByte, isData);
-      tls_i2c_stop ();
-      tls_os_time_delay (1);
+      //      tls_i2c_stop ();
+      //      tls_os_time_delay (1);
     }
 } // _sendNibble
 
@@ -284,12 +326,14 @@ LiquidCrystal_PCF8574_write2Wire (uint8_t data, bool isData, bool enable)
       if (_backlight > 0)
         data |= (0x01 << gpio_pin_to_num_pin_PCF857X (LCD44780_BACKLIGHT));
 
-      tls_i2c_write_byte (addr, 1);
-      tls_i2c_wait_ack ();
-      tls_i2c_write_byte (data, 0);
-      tls_i2c_wait_ack ();
-      tls_i2c_stop ();
-      tls_os_time_delay (1);
+      i2c_send_one_byte (u8_addr, data);
+
+      //      tls_i2c_write_byte (addr, 1);
+      //      tls_i2c_wait_ack ();
+      //      tls_i2c_write_byte (data, 0);
+      //      tls_i2c_wait_ack ();
+      //      tls_i2c_stop ();
+      //      tls_os_time_delay (1);
     }
 } // write2Wire
 
