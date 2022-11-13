@@ -115,6 +115,7 @@ void HD44780LCD_PCF8574_LCDClearScreen (void);
 void HD44780LCD_PCF8574_LCDClearScreenCmd (void);
 void HD44780LCD_PCF8574_LCDHome (void);
 void HD44780LCD_PCF8574_LCDChangeEntryMode (LCDEntryMode_e mode);
+void HD44780LCD_PCF8574_printf (char *format, ...);
 
 //		virtual size_t HD44780LCD_write(uint8_t);
 

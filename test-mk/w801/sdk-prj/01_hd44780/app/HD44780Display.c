@@ -1,9 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "wm_i2c.h"
+
+#include "wm_gpio.h"
+#include "wm_gpio_afsel.h"
 
 // Section : Includes
 #include "HD44780Display.h"
 #include "n_delay.h"
 
+#define LCD44780_I2C_FREQ (100000)
+#define LCD44780_I2C_SCL WM_IO_PA_01
+#define LCD44780_I2C_SDA WM_IO_PA_04
+
 #define DISPLAY_DELAY_INIT 50 // mS
+
+// #define LCD_SERIAL_DEBUG
 
 static void HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd);
 static void HD44780LCD_PCF8574_LCDSendData (unsigned char data);
@@ -21,19 +35,97 @@ static uint8_t _NumColsLCD = 16;
 void
 wire_begin (void)
 {
+  wm_i2c_scl_config (LCD44780_I2C_SCL);
+  wm_i2c_sda_config (LCD44780_I2C_SDA);
+  tls_i2c_init (LCD44780_I2C_FREQ);
 }
-void
+u8
 wire_beginTransmission (u8 AddresI2C)
 {
+  tls_reg_write32 (HR_I2C_TX_RX,
+                   (AddresI2C << 1)); // заносим в регистр данных адрес слейва
+
+  tls_reg_write32 (
+      HR_I2C_CR_SR,
+      I2C_CR_STA | I2C_CR_WR); // включаем модуль на передачу и выдаем START
+
+  while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
+    ; // ждем окончания передачи
+
+  if (tls_reg_read32 (HR_I2C_CR_SR)
+      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+    {
+      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+        ; // ожидаем освобождения шины
+      printf ("wire_beginTransmission error ASK AddresI2C= 0x%.2X \n",
+              AddresI2C);
+      return 1; // возвращаем код ошибки "1"
+    }           // если есть ответ от слейва
+
+  return 0; // возвращаем "0" - передача успешна
 }
-void
+u8
 wire_write (u8 *cmdI2C, u8 u8_Len)
 {
+  for (u8 u8_index = 0; u8_index < u8_Len; u8_index++)
+    {
+      u8 data = cmdI2C[u8_index];
+
+      tls_reg_write32 (HR_I2C_TX_RX,
+                       data); // заносим в регистр данных байт на отправку
+      if (u8_index == (u8_Len - 1))
+        {
+          tls_reg_write32 (HR_I2C_CR_SR, // I2C_CR_NAK |
+                           I2C_CR_WR
+                               | I2C_CR_STO); // передаем байт и по окончании
+                                              // передачи - STOP
+#ifdef LCD_SERIAL_DEBUG
+          printf ("i2c wire_write I2C_CR_STO data= 0x%.2X \n", data);
+#endif
+        }
+      else
+        {
+          tls_reg_write32 (
+              HR_I2C_CR_SR, // I2C_CR_NAK |
+              I2C_CR_WR); // передаем байт и по окончании передачи - STOP
+#ifdef LCD_SERIAL_DEBUG
+          printf ("i2c wire_write data= 0x%.2X \n", data);
+#endif
+        }
+
+      // while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+      //  ;       // ожидаем освобождения шины
+      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
+        ; // ждем окончания передачи
+
+      if (tls_reg_read32 (HR_I2C_CR_SR)
+          & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+        {
+          tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+          while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+            ; // ожидаем освобождения шины
+          printf ("i2c wire_write error ASK data= 0x%.2X \n", data);
+          return 1; // возвращаем код ошибки "1"
+        }           // если есть ответ от слейва
+    }
+  return 0; // возвращаем "0" - передача успешна
 }
+
 u8
 wire_endTransmission (void)
 {
-  return 0;
+  if (tls_reg_read32 (HR_I2C_CR_SR)
+      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+    {
+      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+        ; // ожидаем освобождения шины
+      printf ("wire_endTransmission error ASK\n");
+      return 1; // возвращаем код ошибки "1"
+    }           // если есть ответ от слейва
+
+  return 0; // возвращаем "0" - передача успешна
 }
 
 // Section : constructor
@@ -45,6 +137,7 @@ HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol, uint8_t I2Caddress)
   _NumColsLCD = NumCol;
   _LCDSlaveAddresI2C = I2Caddress;
   //	  wire = twi;
+
   n_delay_ms (DISPLAY_DELAY_INIT);
 }
 
@@ -61,7 +154,7 @@ HD44780LCD_PCF8574_LCDSendData (unsigned char data)
 
   dataLower = (data << 4) & 0xf0; // select lower nibble by moving it to the
                                   // upper nibble position
-  dataUpper = data & 0xf0; // select upper nibble
+  dataUpper = data & 0xf0;        // select upper nibble
   dataI2C[0] = dataUpper
                | (LCD_DATA_BYTE_ON
                   & _LCDBackLight); // enable=1 and rs =1 1101  YYYY-X-en-X-rs
@@ -81,10 +174,10 @@ HD44780LCD_PCF8574_LCDSendData (unsigned char data)
   if (TransmissionCode != 0)
     {
 #ifdef LCD_SERIAL_DEBUG
-      Serial.print ("1203 : ");
-      Serial.print ("I2C error  wire.endTransmission : ");
-      Serial.print ("Tranmission code : ");
-      Serial.println (TransmissionCode);
+      printf ("1203 : ");
+      printf ("I2C error  wire.endTransmission : ");
+      printf ("Tranmission code : ");
+      printf ("0x%.2X\n", TransmissionCode);
       n_delay_ms (100);
 #endif
     }
@@ -102,7 +195,7 @@ HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd)
 
   cmdLower = (cmd << 4) & 0xf0; // select lower nibble by moving it to the
                                 // upper nibble position
-  cmdupper = cmd & 0xf0; // select upper nibble
+  cmdupper = cmd & 0xf0;        // select upper nibble
   cmdI2C[0]
       = cmdupper
         | (LCD_CMD_BYTE_ON
@@ -126,10 +219,10 @@ HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd)
   if (TransmissionCode != 0)
     {
 #ifdef LCD_SERIAL_DEBUG
-      Serial.print ("1202 : ");
-      Serial.print ("I2C error  wire.endTransmission : ");
-      Serial.print ("Tranmission code : ");
-      Serial.println (TransmissionCode);
+      printf ("1202 : ");
+      printf ("I2C error  wire.endTransmission : ");
+      printf ("Tranmission code : ");
+      printf ("0x%.2X\n", TransmissionCode);
       n_delay_ms (100);
 #endif
     }
@@ -389,17 +482,17 @@ HD44780LCD_PCF8574_LCD_I2C_ON ()
   if (TransmissionCode != 0)
     {
 #ifdef LCD_SERIAL_DEBUG
-      Serial.print ("1201 : ");
-      Serial.print ("I2C error  wire.endTransmission : ");
-      Serial.print ("Tranmission code : ");
-      Serial.println (TransmissionCode);
+      printf ("1201 : ");
+      printf ("I2C error  wire.endTransmission : ");
+      printf ("Tranmission code : ");
+      printf ("0x%.2X\n", TransmissionCode);
 #endif
       return false; // Check if the PCF8574 is connected
     }
   else
     {
 #ifdef LCD_SERIAL_DEBUG
-      Serial.print ("I2C Success Init : ");
+      printf ("I2C Success Init : ");
 #endif
       return true;
     }
@@ -452,6 +545,23 @@ HD44780LCD_PCF8574_LCDChangeEntryMode (LCDEntryMode_e newEntryMode)
 {
   HD44780LCD_PCF8574_LCDSendCmd (newEntryMode);
   n_delay_ms (3); // Requires a delay
+}
+
+static char LCD44780_buffer[21];
+void
+HD44780LCD_PCF8574_printf (char *format, ...)
+{
+  va_list args;
+
+  va_start (args, format);
+  vsnprintf (LCD44780_buffer, _NumColsLCD + 1, format, args);
+  va_end (args);
+
+  HD44780LCD_PCF8574_LCDSendString (LCD44780_buffer);
+
+#ifdef LCD_SERIAL_DEBUG
+  printf ("HD44780LCD_PCF8574_printf  %s \n", LCD44780_buffer);
+#endif
 }
 
 // **** EOF ****

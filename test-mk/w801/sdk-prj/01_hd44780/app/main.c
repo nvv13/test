@@ -38,12 +38,8 @@ UserMain (void)
 {
   printf ("user task\n");
 
-  tls_sys_clk_set (CPU_CLK_240M);
+  // tls_sys_clk_set (CPU_CLK_240M);
 
-  // LCD44780_init (X_GPIO_MODE);
-  // LCD44780_init (X_I2C_MODE);
-  // LCD44780_SET_BACKLIGHT (1);
-  // LCD44780_on ();
   HD44780LCD_HD44780LCD (2, 16, 0x27); // instantiate an object
 
   HD44780LCD_PCF8574_LCDInit (LCDCursorTypeOn);
@@ -56,18 +52,17 @@ UserMain (void)
   for (;;)
     {
       tls_os_time_delay (HZ);
-      //      LCD44780_SET_BACKLIGHT (1);
 
-      // LCD44780_return_home ();
-      //      LCD44780_set_cursor (1, 1);
-      //      LCD44780_printf ("i_cnt=%d", i_cnt);
+      HD44780LCD_PCF8574_LCDBackLightSet (true);
+
+      HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberOne, 0);
 
       char testString[] = "Hello World";
       HD44780LCD_PCF8574_LCDSendString (testString);
       HD44780LCD_PCF8574_LCDSendChar ('!'); // Display a single character
 
-      tls_os_time_delay (HZ);
-      //    LCD44780_SET_BACKLIGHT (0);
+      HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberTwo, 0);
+      HD44780LCD_PCF8574_printf ("i_cnt=%d", i_cnt);
 
       if (++i_cnt > 999999)
         i_cnt = 0;

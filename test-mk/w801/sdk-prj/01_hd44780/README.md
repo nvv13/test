@@ -1,12 +1,9 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
 
 project
 
-board HLK-W801-KIT-V1.1 + hd44780
+board HLK-W801-KIT-V1.1 + pcf5874T + hd44780
 
-
+https://youtu.be/M23B33LpYNs
 
 соединения
 
@@ -23,27 +20,12 @@ W801  pcf5874T
 GPIO  PIN
 PA_01 SCL
 PA_04 SDA
-VCC   VCC
+5v    VCC
 GND   GND
 
 
-или эта схема (пока не опробована, у меня нет 1602 без I2C адаптера)
-
-connect to
-W801  hd44780
-GPIO  PIN
-PB_21 RS
-PB_22 RW
-PB_23 EN
-PB_24 DO
-PB_25 D1
-PB_26 D2
-PB_18 D3
-PA_01 SCL
-PA_04 SDA
-VCC   VCC
-GND   GND
 ~~~
+
 
 
 
@@ -158,9 +140,9 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 PS:
 исходники драйвера 
-  https://github.com/mathertel/LiquidCrystal_PCF8574.git
-  https://github.com/aostanin/avr-hd44780.git
+  https://github.com/gavinlyonsrepo/HD44780_LCD_PCF8574.git
 
 
 про I2C
 http://easyelectronics.ru/interface-bus-iic-i2c.html
+
