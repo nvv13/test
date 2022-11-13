@@ -1,88 +1,121 @@
-//  Author: aostanin
-//  https://github.com/aostanin/avr-hd44780.git
-//   After (aostanin) buying the SC1602BS LCD module,
-//   I couldn't find an avr-gcc library that drives the display correctly.
-//   Arduino's LiquidCrystal library was the only library that worked so
-//   this is a simple avr-gcc version of that library.
-//
-//  This library is free software; you can redistribute it and/or
-//  modify it under the terms of the GNU Lesser General Public
-//  License as published by the Free Software Foundation; either
-//  version 2.1 of the License, or (at your option) any later version.
-//
-//  This library is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-//  Lesser General Public License for more details.
+/*
+ * File: HD44780_LCD_PCF8574.h
+ * Description:
+ * HD44780-based character LCD 16x02 I2C(PCF8574) library header file for
+ * arduino eco system Author: Gavin Lyons. Created : March 2022 Description:
+ * See URL for full details. URL:
+ * https://github.com/gavinlyonsrepo/HD44780_LCD_PCF8574
+ */
+
+//#include "Wire.h"
 
 #ifndef __HD44780DISPLAY__
 #define __HD44780DISPLAY__
 
-//#include <inttypes.h>
-#include "wm_io.h"
 #include "wm_type_def.h"
-//#include "wm_gpio.h"
 
-//#ifndef LCD44780_RS
-//#warning "LCD Using default pin"
-#define LCD44780_RS WM_IO_PB_21
-#define LCD44780_RW WM_IO_PB_22
-#define LCD44780_EN WM_IO_PB_23
-#define LCD44780_D4 WM_IO_PB_24
-#define LCD44780_D5 WM_IO_PB_25
-#define LCD44780_D6 WM_IO_PB_26
-#define LCD44780_D7 WM_IO_PB_18
-#define LCD44780_BACKLIGHT WM_IO_PB_17
-//#endif
+// Section: Defines
 
-#define LCD44780_I2C_FREQ (100000)
-#define LCD44780_I2C_SCL WM_IO_PA_01
-#define LCD44780_I2C_SDA WM_IO_PA_04
+//#define LCD_SERIAL_DEBUG // comment in for serial debug I2C errors
 
-#define LCD44780_COL_COUNT 16
-#define LCD44780_ROW_COUNT 2
-//#define LCD44780_COL_COUNT 20
-//#define LCD44780_ROW_COUNT 4
+// Command Byte Codes See  URL : dinceraydin.com/lcd/commands.htm for HD44780
+// CMDs
 
-typedef enum x_out_mode
+#define LCD_MODE_8BIT                                                         \
+  0x38 // Function set (8-bit interface, 2 lines, 5*7 Pixels)
+#define LCD_MODE_4BIT                                                         \
+  0x28 // Function set (4-bit interface, 2 lines, 5*7 Pixels)
+
+#define LCD_SCROLL_RIGHT 0x1E // Scroll display one character right (all lines)
+#define LCD_SCROLL_LEFT 0x18  // Scroll display one character left (all lines)
+#define LCD_HOME 0x02 // Home (move cursor to top/left character position)
+
+#define LCD_MOV_CURSOR_LEFT 0x10  // Move cursor one character left
+#define LCD_MOV_CURSOR_RIGHT 0x14 // Move cursor one character right
+
+#define LCD_DISPLAY_ON 0x0C  // Restore the display (with cursor hidden)
+#define LCD_DISPLAY_OFF 0x08 // Blank the display (without clearing)
+#define LCD_CLRSCR 0x01      // clear screen
+
+#define LCD_LINE_ADR1 0x80 // Set cursor position (DDRAM address) 80+ addr
+#define LCD_LINE_ADR2                                                         \
+  0xC0 // Set cursor position line 2 (DDRAM address) C0+ addr
+#define LCD_LINE_ADR3_20 0x94 // line 3 untested, no part, for 20x04
+#define LCD_LINE_ADR4_20 0xD4 // line 4 untested, no part, for 20x04
+#define LCD_LINE_ADR3_16 0x90 // line 3 untested, no part, for 16x04
+#define LCD_LINE_ADR4_16 0xD0 // line 4 untested, no part, for 16x04
+#define LCD_CG_RAM                                                            \
+  0x40 // Set pointer in character-generator RAM (CG RAM address)
+
+// Codes for I2C byte,
+// Byte = DATA-led-en-rw-rs (en=enable rs = reg select)(led always on rw always
+// write)
+#define LCD_DATA_BYTE_ON 0x0D     // enable=1 and rs =1 1101  DATA-led-en-rw-rs
+#define LCD_DATA_BYTE_OFF 0x09    // enable=0 and rs =1 1001 DATA-led-en-rw-rs
+#define LCD_CMD_BYTE_ON 0x0C      // enable=1 and rs =0 1100 COMD-led-en-rw-rs
+#define LCD_CMD_BYTE_OFF 0x08     // enable=0 and rs =0 1000 COMD-led-en-rw-rs
+#define LCD_BACKLIGHTON_MASK 0x0F // XXXX-1111 , XXXX = don't care
+#define LCD_BACKLIGHTOFF_MASK 0x07 // XXXX-0111
+
+// Section :: enums
+
+typedef enum
 {
-  X_GPIO_MODE = 0,
-  X_I2C_MODE = 1,
-} _x_out_mode;
+  LCDEntryModeOne = 0x04, // Display Shift :OFF Decrement Address Counter
+  LCDEntryModeTwo = 0x05, // Display Shift :ON  Decrement Address Counter
+  LCDEntryModeThree
+  = 0x06, // Display Shift :OFF Increment Address Counter, default
+  LCDEntryModeFour = 0x07, // Display Shift :ON Increment Address Counter
+} LCDEntryMode_e;          // Entry mode  set command
 
-void LCD44780_init (enum x_out_mode inModeOut);
+typedef enum
+{
+  LCDCursorTypeOff = 0x0C,   // Make cursor invisible
+  LCDCursorTypeBlink = 0x0D, // Turn on blinking-block cursor
+  LCDCursorTypeOn = 0x0E,    // Turn on visible  underline cursor
+  LCDCursorTypeOnBlink
+  = 0x0F,          // Turn on blinking-block cursor + visible underline cursor
+} LCDCursorType_e; // Cursor mode
 
-void LCD44780_SET_BACKLIGHT (uint8_t value);
+typedef enum
+{
+  LCDMoveRight = 1,   // move right
+  LCDMoveLeft = 2,    // move left
+} LCDDirectionType_e; // Direction mode for scroll and move
 
-void LCD44780_command (uint8_t command);
-void LCD44780_write (uint8_t value);
+typedef enum
+{
+  LCDLineNumberOne = 1,   // row 1
+  LCDLineNumberTwo = 2,   // row 2
+  LCDLineNumberThree = 3, // row 3
+  LCDLineNumberFour = 4,  // row 4
+} LCDLineNumber_e;        // line number
 
-void LCD44780_on (void);
-void LCD44780_off (void);
+// Section: Class's
 
-void LCD44780_clear (void);
-void LCD44780_return_home (void);
+void HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol,
+                            uint8_t I2Caddress);
 
-void LCD44780_enable_blinking (void);
-void LCD44780_disable_blinking (void);
+void HD44780LCD_PCF8574_LCDInit (LCDCursorType_e);
+void HD44780LCD_PCF8574_LCDDisplayON (bool);
+void HD44780LCD_PCF8574_LCDResetScreen (LCDCursorType_e);
+void HD44780LCD_PCF8574_LCDBackLightSet (bool);
 
-void LCD44780_enable_cursor (void);
-void LCD44780_disable_cursor (void);
+void HD44780LCD_PCF8574_LCDSendString (char *str);
+void HD44780LCD_PCF8574_LCDSendChar (char data);
+void HD44780LCD_PCF8574_LCDCreateCustomChar (uint8_t location,
+                                             uint8_t *charmap);
+void HD44780LCD_PCF8574_LCDPrintCustomChar (uint8_t location);
 
-void LCD44780_scroll_left (void);
-void LCD44780_scroll_right (void);
+void HD44780LCD_PCF8574_LCDMoveCursor (LCDDirectionType_e, uint8_t moveSize);
+void HD44780LCD_PCF8574_LCDScroll (LCDDirectionType_e, uint8_t ScrollSize);
+void HD44780LCD_PCF8574_LCDGOTO (LCDLineNumber_e lineNo, uint8_t col);
+void HD44780LCD_PCF8574_LCDClearLine (LCDLineNumber_e lineNo);
+void HD44780LCD_PCF8574_LCDClearScreen (void);
+void HD44780LCD_PCF8574_LCDClearScreenCmd (void);
+void HD44780LCD_PCF8574_LCDHome (void);
+void HD44780LCD_PCF8574_LCDChangeEntryMode (LCDEntryMode_e mode);
 
-void LCD44780_set_left_to_right (void);
-void LCD44780_set_right_to_left (void);
-
-void LCD44780_enable_autoscroll (void);
-void LCD44780_disable_autoscroll (void);
-
-void LCD44780_create_char (uint8_t location, uint8_t *charmap);
-
-void LCD44780_set_cursor (uint8_t col, uint8_t row);
-
-void LCD44780_puts (char *string);
-void LCD44780_printf (char *format, ...);
+//		virtual size_t HD44780LCD_write(uint8_t);
 
 #endif // __HD44780DISPLAY__
