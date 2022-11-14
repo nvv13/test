@@ -7,7 +7,6 @@
  * https://github.com/gavinlyonsrepo/HD44780_LCD_PCF8574
  */
 
-
 #ifndef __HD44780LCD_PCF8574__
 #define __HD44780LCD_PCF8574__
 
@@ -19,14 +18,14 @@
 
 // Section: Defines
 
-//#define LCD_SERIAL_DEBUG // comment in for serial debug I2C errors and flow I2C
+//#define LCD_SERIAL_DEBUG // comment in for serial debug I2C errors and flow
+// I2C
 
-#define LCD44780_I2C_FREQ (100000)   // 100Khz I2C 
+#define LCD44780_I2C_FREQ (100000)   // 100Khz I2C
 #define LCD44780_I2C_SCL WM_IO_PA_01 // WM_IO_PA_01 or WM_IO_PB_20
 #define LCD44780_I2C_SDA WM_IO_PA_04 // WM_IO_PA_04 or WM_IO_PB_19
 
-#define DISPLAY_DELAY_INIT 50 // mS 
-
+#define DISPLAY_DELAY_INIT 50 // mS
 
 // Command Byte Codes See  URL : dinceraydin.com/lcd/commands.htm for HD44780
 // CMDs
