@@ -7,16 +7,28 @@
  * https://github.com/gavinlyonsrepo/HD44780_LCD_PCF8574
  */
 
-//#include "Wire.h"
-
-#ifndef __HD44780DISPLAY__
-#define __HD44780DISPLAY__
+#ifndef __HD44780LCD__
+#define __HD44780LCD__
 
 #include "wm_type_def.h"
 
+#include "wm_gpio.h"
+#include "wm_gpio_afsel.h"
+
 // Section: Defines
 
-//#define LCD_SERIAL_DEBUG // comment in for serial debug I2C errors
+//#define LCD_SERIAL_DEBUG // comment in for serial debug errors and flow
+
+#define LCD44780_RS WM_IO_PB_21
+#define LCD44780_RW WM_IO_PB_22
+#define LCD44780_EN WM_IO_PB_23
+#define LCD44780_D4 WM_IO_PB_24
+#define LCD44780_D5 WM_IO_PB_25
+#define LCD44780_D6 WM_IO_PB_26
+#define LCD44780_D7 WM_IO_PB_18
+#define LCD44780_BACKLIGHT WM_IO_PB_17
+
+#define DISPLAY_DELAY_INIT 50 // mS
 
 // Command Byte Codes See  URL : dinceraydin.com/lcd/commands.htm for HD44780
 // CMDs
@@ -93,30 +105,26 @@ typedef enum
 
 // Section: Class's
 
-void HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol,
-                            uint8_t I2Caddress);
+void HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol);
 
-void HD44780LCD_PCF8574_LCDInit (LCDCursorType_e);
-void HD44780LCD_PCF8574_LCDDisplayON (bool);
-void HD44780LCD_PCF8574_LCDResetScreen (LCDCursorType_e);
-void HD44780LCD_PCF8574_LCDBackLightSet (bool);
+void HD44780LCD_LCDInit (LCDCursorType_e);
+void HD44780LCD_LCDDisplayON (bool);
+void HD44780LCD_LCDResetScreen (LCDCursorType_e);
+void HD44780LCD_LCDBackLightSet (bool);
 
-void HD44780LCD_PCF8574_LCDSendString (char *str);
-void HD44780LCD_PCF8574_LCDSendChar (char data);
-void HD44780LCD_PCF8574_LCDCreateCustomChar (uint8_t location,
-                                             uint8_t *charmap);
-void HD44780LCD_PCF8574_LCDPrintCustomChar (uint8_t location);
+void HD44780LCD_LCDSendString (char *str);
+void HD44780LCD_LCDSendChar (char data);
+void HD44780LCD_LCDCreateCustomChar (uint8_t location, uint8_t *charmap);
+void HD44780LCD_LCDPrintCustomChar (uint8_t location);
 
-void HD44780LCD_PCF8574_LCDMoveCursor (LCDDirectionType_e, uint8_t moveSize);
-void HD44780LCD_PCF8574_LCDScroll (LCDDirectionType_e, uint8_t ScrollSize);
-void HD44780LCD_PCF8574_LCDGOTO (LCDLineNumber_e lineNo, uint8_t col);
-void HD44780LCD_PCF8574_LCDClearLine (LCDLineNumber_e lineNo);
-void HD44780LCD_PCF8574_LCDClearScreen (void);
-void HD44780LCD_PCF8574_LCDClearScreenCmd (void);
-void HD44780LCD_PCF8574_LCDHome (void);
-void HD44780LCD_PCF8574_LCDChangeEntryMode (LCDEntryMode_e mode);
-void HD44780LCD_PCF8574_printf (char *format, ...);
+void HD44780LCD_LCDMoveCursor (LCDDirectionType_e, uint8_t moveSize);
+void HD44780LCD_LCDScroll (LCDDirectionType_e, uint8_t ScrollSize);
+void HD44780LCD_LCDGOTO (LCDLineNumber_e lineNo, uint8_t col);
+void HD44780LCD_LCDClearLine (LCDLineNumber_e lineNo);
+void HD44780LCD_LCDClearScreen (void);
+void HD44780LCD_LCDClearScreenCmd (void);
+void HD44780LCD_LCDHome (void);
+void HD44780LCD_LCDChangeEntryMode (LCDEntryMode_e mode);
+void HD44780LCD_printf (char *format, ...);
 
-//		virtual size_t HD44780LCD_write(uint8_t);
-
-#endif // __HD44780DISPLAY__
+#endif // __HD44780LCD__

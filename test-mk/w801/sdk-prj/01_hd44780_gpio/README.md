@@ -1,11 +1,11 @@
+!!!В РАБОТЕ!!!
+!!!underway!!!
 
 project
 
-board HLK-W801-KIT-V1.1 + pcf5874T + hd44780
+board HLK-W801-KIT-V1.1 + hd44780
 
-видео
-https://youtu.be/M23B33LpYNs
-
+эта схема пока не опробована, у меня нет 1602 без I2C адаптера
 
 
 соединения
@@ -19,8 +19,15 @@ LCD display 16x2
 
 connect to
 ----- --------
-W801  pcf5874T
+W801  hd44780
 ----- --------
+PB_21 RS
+PB_22 RW
+PB_23 EN
+PB_24 DO
+PB_25 D1
+PB_26 D2
+PB_18 D3
 PA_01 SCL
 PA_04 SDA
 5v    VCC

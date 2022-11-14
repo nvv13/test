@@ -31,7 +31,7 @@
 #include "wm_watchdog.h"
 //#include "csi_core.h"
 
-#include "HD44780LCD_PCF8574.h"
+#include "HD44780LCD.h"
 
 void
 UserMain (void)
@@ -40,12 +40,12 @@ UserMain (void)
 
   // tls_sys_clk_set (CPU_CLK_240M);
 
-  HD44780LCD_HD44780LCD (2, 16, 0x27); // instantiate an object
+  HD44780LCD_HD44780LCD (2, 16); // instantiate an object
 
-  HD44780LCD_PCF8574_LCDInit (LCDCursorTypeOn);
-  HD44780LCD_PCF8574_LCDClearScreen ();
-  HD44780LCD_PCF8574_LCDBackLightSet (true);
-  HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberOne, 0);
+  HD44780LCD_LCDInit (LCDCursorTypeOn);
+  HD44780LCD_LCDClearScreen ();
+  HD44780LCD_LCDBackLightSet (true);
+  HD44780LCD_LCDGOTO (LCDLineNumberOne, 0);
 
   int i_cnt = 0;
 
@@ -53,16 +53,16 @@ UserMain (void)
     {
       tls_os_time_delay (HZ);
 
-      HD44780LCD_PCF8574_LCDBackLightSet (true);
+      HD44780LCD_LCDBackLightSet (true);
 
-      HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberOne, 0);
+      HD44780LCD_LCDGOTO (LCDLineNumberOne, 0);
 
       char testString[] = "Hello World";
-      HD44780LCD_PCF8574_LCDSendString (testString);
-      HD44780LCD_PCF8574_LCDSendChar ('!'); // Display a single character
+      HD44780LCD_LCDSendString (testString);
+      HD44780LCD_LCDSendChar ('!'); // Display a single character
 
-      HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberTwo, 0);
-      HD44780LCD_PCF8574_printf ("i_cnt=%d", i_cnt);
+      HD44780LCD_LCDGOTO (LCDLineNumberTwo, 0);
+      HD44780LCD_printf ("i_cnt=%d", i_cnt);
 
       if (++i_cnt > 999999)
         i_cnt = 0;

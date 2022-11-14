@@ -2,141 +2,104 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "wm_i2c.h"
-
-#include "wm_gpio.h"
-#include "wm_gpio_afsel.h"
-
 // Section : Includes
-#include "HD44780Display.h"
+#include "HD44780LCD.h"
 #include "n_delay.h"
 
-#define LCD44780_I2C_FREQ (100000)
-#define LCD44780_I2C_SCL WM_IO_PA_01
-#define LCD44780_I2C_SDA WM_IO_PA_04
+#define HD44780_CMD_WAIT (2000U)
+#define HD44780_INIT_WAIT_XXL (50000U)
+#define HD44780_INIT_WAIT_LONG (4500U)
+#define HD44780_INIT_WAIT_SHORT (150U)
+#define HD44780_PULSE_WAIT_SHORT (1U)
+#define HD44780_PULSE_WAIT_LONG (100U)
 
-#define DISPLAY_DELAY_INIT 50 // mS
-
-// #define LCD_SERIAL_DEBUG
-
-static void HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd);
-static void HD44780LCD_PCF8574_LCDSendData (unsigned char data);
-static bool HD44780LCD_PCF8574_LCD_I2C_ON (void);
+static void HD44780LCD_LCDSendCmd (unsigned char cmd);
+static void HD44780LCD_LCDSendData (unsigned char data);
+static bool HD44780LCD_LCD_I2C_ON (void);
 
 static uint8_t _LCDBackLight = LCD_BACKLIGHTON_MASK;
 // I2C  address for I2C module PCF8574 backpack on LCD
-static uint8_t _LCDSlaveAddresI2C = 0x27;
 static uint8_t _NumRowsLCD = 2;
 static uint8_t _NumColsLCD = 16;
 
 // static	TwoWire *wire;
 // static	u8 *wire;
 
-void
+static void
 wire_begin (void)
 {
-  wm_i2c_scl_config (LCD44780_I2C_SCL);
-  wm_i2c_sda_config (LCD44780_I2C_SDA);
-  tls_i2c_init (LCD44780_I2C_FREQ);
+  // Configure pins as output
+  tls_gpio_cfg (LCD44780_RS, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 21 PULLLOW ? PULLHIGH ?
+  tls_gpio_cfg (LCD44780_RW, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 22
+  tls_gpio_cfg (LCD44780_EN, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 23
+  tls_gpio_cfg (LCD44780_D4, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 24
+  tls_gpio_cfg (LCD44780_D5, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 25
+  tls_gpio_cfg (LCD44780_D6, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 26
+  tls_gpio_cfg (LCD44780_D7, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 18
+
+  tls_gpio_cfg (LCD44780_BACKLIGHT, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // 17 not use ?
+
+  tls_gpio_write (LCD44780_EN, 0);
+  tls_gpio_write (LCD44780_RS, 0);
+  tls_gpio_write (LCD44780_RW, 0);
 }
-u8
-wire_beginTransmission (u8 AddresI2C)
+static u8
+wire_beginTransmission (void)
 {
-  tls_reg_write32 (HR_I2C_TX_RX,
-                   (AddresI2C << 1)); // заносим в регистр данных адрес слейва
-
-  tls_reg_write32 (
-      HR_I2C_CR_SR,
-      I2C_CR_STA | I2C_CR_WR); // включаем модуль на передачу и выдаем START
-
-  while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
-    ; // ждем окончания передачи
-
-  if (tls_reg_read32 (HR_I2C_CR_SR)
-      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
-    {
-      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
-      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
-        ; // ожидаем освобождения шины
-      printf ("wire_beginTransmission error ASK AddresI2C= 0x%.2X \n",
-              AddresI2C);
-      return 1; // возвращаем код ошибки "1"
-    }           // если есть ответ от слейва
-
   return 0; // возвращаем "0" - передача успешна
 }
-u8
+static u8
 wire_write (u8 *cmdI2C, u8 u8_Len)
 {
   for (u8 u8_index = 0; u8_index < u8_Len; u8_index++)
     {
       u8 data = cmdI2C[u8_index];
 
-      tls_reg_write32 (HR_I2C_TX_RX,
-                       data); // заносим в регистр данных байт на отправку
-      if (u8_index == (u8_Len - 1))
+      if (!(data & 0x04))
         {
-          tls_reg_write32 (HR_I2C_CR_SR, // I2C_CR_NAK |
-                           I2C_CR_WR
-                               | I2C_CR_STO); // передаем байт и по окончании
-                                              // передачи - STOP
-#ifdef LCD_SERIAL_DEBUG
-          printf ("i2c wire_write I2C_CR_STO data= 0x%.2X \n", data);
-#endif
+          tls_gpio_write (LCD44780_EN, 0);
         }
-      else
+      tls_gpio_write (LCD44780_RS, data & 0x01 ? 1 : 0);
+      tls_gpio_write (LCD44780_RW, data & 0x02 ? 1 : 0);
+      tls_gpio_write (LCD44780_BACKLIGHT, data & 0x08 ? 1 : 0);
+      tls_gpio_write (LCD44780_D4, data & 0x10 ? 1 : 0);
+      tls_gpio_write (LCD44780_D5, data & 0x20 ? 1 : 0);
+      tls_gpio_write (LCD44780_D6, data & 0x40 ? 1 : 0);
+      tls_gpio_write (LCD44780_D7, data & 0x80 ? 1 : 0);
+      if ((data & 0x04))
         {
-          tls_reg_write32 (
-              HR_I2C_CR_SR, // I2C_CR_NAK |
-              I2C_CR_WR); // передаем байт и по окончании передачи - STOP
-#ifdef LCD_SERIAL_DEBUG
-          printf ("i2c wire_write data= 0x%.2X \n", data);
-#endif
+          tls_gpio_write (LCD44780_EN, 1);
         }
+      n_delay_us (HD44780_PULSE_WAIT_SHORT);
 
-      // while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
-      //  ;       // ожидаем освобождения шины
-      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
-        ; // ждем окончания передачи
-
-      if (tls_reg_read32 (HR_I2C_CR_SR)
-          & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
-        {
-          tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
-          while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
-            ; // ожидаем освобождения шины
-          printf ("i2c wire_write error ASK data= 0x%.2X \n", data);
-          return 1; // возвращаем код ошибки "1"
-        }           // если есть ответ от слейва
+#ifdef LCD_SERIAL_DEBUG
+      printf ("wire_write data= 0x%.2X \n", data);
+#endif
     }
   return 0; // возвращаем "0" - передача успешна
 }
 
-u8
+static u8
 wire_endTransmission (void)
 {
-  if (tls_reg_read32 (HR_I2C_CR_SR)
-      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
-    {
-      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
-      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
-        ; // ожидаем освобождения шины
-      printf ("wire_endTransmission error ASK\n");
-      return 1; // возвращаем код ошибки "1"
-    }           // если есть ответ от слейва
-
   return 0; // возвращаем "0" - передача успешна
 }
 
 // Section : constructor
 
 void
-HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol, uint8_t I2Caddress)
+HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol)
 {
   _NumRowsLCD = NumRow;
   _NumColsLCD = NumCol;
-  _LCDSlaveAddresI2C = I2Caddress;
-  //	  wire = twi;
 
   n_delay_ms (DISPLAY_DELAY_INIT);
 }
@@ -145,8 +108,8 @@ HD44780LCD_HD44780LCD (uint8_t NumRow, uint8_t NumCol, uint8_t I2Caddress)
 
 //  Func Desc: Send data byte to  LCD via I2C
 //  Param1: data byte
-void
-HD44780LCD_PCF8574_LCDSendData (unsigned char data)
+static void
+HD44780LCD_LCDSendData (unsigned char data)
 {
   unsigned char dataLower, dataUpper;
   uint8_t dataI2C[4];
@@ -168,7 +131,7 @@ HD44780LCD_PCF8574_LCDSendData (unsigned char data)
                | (LCD_DATA_BYTE_OFF
                   & _LCDBackLight); // enable=0 and rs =1 1001 YYYY-X-en-X-rs
 
-  wire_beginTransmission (_LCDSlaveAddresI2C);
+  wire_beginTransmission ();
   wire_write (dataI2C, 4);
   TransmissionCode = wire_endTransmission ();
   if (TransmissionCode != 0)
@@ -186,8 +149,8 @@ HD44780LCD_PCF8574_LCDSendData (unsigned char data)
 //  Func Desc: Send command byte to  lcd
 //  Param1: command byte
 
-void
-HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd)
+static void
+HD44780LCD_LCDSendCmd (unsigned char cmd)
 {
   unsigned char cmdLower, cmdupper;
   uint8_t cmdI2C[4];
@@ -213,7 +176,7 @@ HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd)
         | (LCD_CMD_BYTE_OFF
            & _LCDBackLight); // YYYY-1000 YYYY-led-en-rw-rs ,enable=0 and rs =0
 
-  wire_beginTransmission (_LCDSlaveAddresI2C);
+  wire_beginTransmission ();
   wire_write (cmdI2C, 4);
   TransmissionCode = wire_endTransmission ();
   if (TransmissionCode != 0)
@@ -232,34 +195,34 @@ HD44780LCD_PCF8574_LCDSendCmd (unsigned char cmd)
 // Param1: enum LCDLineNumber_e lineNo  1-4
 
 void
-HD44780LCD_PCF8574_LCDClearLine (LCDLineNumber_e lineNo)
+HD44780LCD_LCDClearLine (LCDLineNumber_e lineNo)
 {
 
   switch (lineNo)
     {
     case LCDLineNumberOne:
-      HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR1);
+      HD44780LCD_LCDSendCmd (LCD_LINE_ADR1);
       break;
     case LCDLineNumberTwo:
-      HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR2);
+      HD44780LCD_LCDSendCmd (LCD_LINE_ADR2);
       break;
     case LCDLineNumberThree:
       if (_NumColsLCD == 20)
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR3_20);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR3_20);
       else
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR3_16);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR3_16);
       break;
     case LCDLineNumberFour:
       if (_NumColsLCD == 20)
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR4_20);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR4_20);
       else
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR4_16);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR4_16);
       break;
     }
 
   for (uint8_t i = 0; i < _NumColsLCD; i++)
     {
-      HD44780LCD_PCF8574_LCDSendData (' ');
+      HD44780LCD_LCDSendData (' ');
     }
 }
 
@@ -267,34 +230,34 @@ HD44780LCD_PCF8574_LCDClearLine (LCDLineNumber_e lineNo)
 // Note : See also LCDClearScreenCmd for software command  clear alternative.
 
 void
-HD44780LCD_PCF8574_LCDClearScreen (void)
+HD44780LCD_LCDClearScreen (void)
 {
   if (_NumRowsLCD < 1 || _NumRowsLCD > 4)
     {
       return;
     }
 
-  HD44780LCD_PCF8574_LCDClearLine (LCDLineNumberOne);
+  HD44780LCD_LCDClearLine (LCDLineNumberOne);
 
   if (_NumRowsLCD >= 2)
-    HD44780LCD_PCF8574_LCDClearLine (LCDLineNumberTwo);
+    HD44780LCD_LCDClearLine (LCDLineNumberTwo);
   if (_NumRowsLCD >= 3)
-    HD44780LCD_PCF8574_LCDClearLine (LCDLineNumberThree);
+    HD44780LCD_LCDClearLine (LCDLineNumberThree);
   if (_NumRowsLCD == 4)
-    HD44780LCD_PCF8574_LCDClearLine (LCDLineNumberFour);
+    HD44780LCD_LCDClearLine (LCDLineNumberFour);
 }
 
 // Func Desc: Reset screen
 // Param1: enum LCDCursorType_e cursor type, 4 choices
 
 void
-HD44780LCD_PCF8574_LCDResetScreen (LCDCursorType_e CursorType)
+HD44780LCD_LCDResetScreen (LCDCursorType_e CursorType)
 {
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_MODE_4BIT);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_DISPLAY_ON);
-  HD44780LCD_PCF8574_LCDSendCmd (CursorType);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_CLRSCR);
-  HD44780LCD_PCF8574_LCDSendCmd (LCDEntryModeThree);
+  HD44780LCD_LCDSendCmd (LCD_MODE_4BIT);
+  HD44780LCD_LCDSendCmd (LCD_DISPLAY_ON);
+  HD44780LCD_LCDSendCmd (CursorType);
+  HD44780LCD_LCDSendCmd (LCD_CLRSCR);
+  HD44780LCD_LCDSendCmd (LCDEntryModeThree);
   n_delay_ms (5);
 }
 
@@ -302,10 +265,10 @@ HD44780LCD_PCF8574_LCDResetScreen (LCDCursorType_e CursorType)
 // Param1: passed bool, True = display on , false = display off
 
 void
-HD44780LCD_PCF8574_LCDDisplayON (bool OnOff)
+HD44780LCD_LCDDisplayON (bool OnOff)
 {
-  OnOff ? HD44780LCD_PCF8574_LCDSendCmd (LCD_DISPLAY_ON)
-        : HD44780LCD_PCF8574_LCDSendCmd (LCD_DISPLAY_OFF);
+  OnOff ? HD44780LCD_LCDSendCmd (LCD_DISPLAY_ON)
+        : HD44780LCD_LCDSendCmd (LCD_DISPLAY_OFF);
   n_delay_ms (5);
 }
 
@@ -313,27 +276,27 @@ HD44780LCD_PCF8574_LCDDisplayON (bool OnOff)
 // Param1: enum LCDCursorType_e cursor type, 4 choices.
 
 void
-HD44780LCD_PCF8574_LCDInit (LCDCursorType_e CursorType)
+HD44780LCD_LCDInit (LCDCursorType_e CursorType)
 {
 
-  if (HD44780LCD_PCF8574_LCD_I2C_ON () != true)
+  if (HD44780LCD_LCD_I2C_ON () != true)
     {
       n_delay_ms (2000);
       return;
     }
 
   n_delay_ms (15);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_HOME);
+  HD44780LCD_LCDSendCmd (LCD_HOME);
   n_delay_ms (5);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_HOME);
+  HD44780LCD_LCDSendCmd (LCD_HOME);
   n_delay_ms (5);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_HOME);
+  HD44780LCD_LCDSendCmd (LCD_HOME);
   n_delay_ms (5);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_MODE_4BIT);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_DISPLAY_ON);
-  HD44780LCD_PCF8574_LCDSendCmd (CursorType);
-  HD44780LCD_PCF8574_LCDSendCmd (LCDEntryModeThree);
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_CLRSCR);
+  HD44780LCD_LCDSendCmd (LCD_MODE_4BIT);
+  HD44780LCD_LCDSendCmd (LCD_DISPLAY_ON);
+  HD44780LCD_LCDSendCmd (CursorType);
+  HD44780LCD_LCDSendCmd (LCDEntryModeThree);
+  HD44780LCD_LCDSendCmd (LCD_CLRSCR);
   n_delay_ms (5);
 }
 
@@ -341,18 +304,18 @@ HD44780LCD_PCF8574_LCDInit (LCDCursorType_e CursorType)
 // Param1: Pointer to the char array
 
 void
-HD44780LCD_PCF8574_LCDSendString (char *str)
+HD44780LCD_LCDSendString (char *str)
 {
   while (*str)
-    HD44780LCD_PCF8574_LCDSendData (*str++);
+    HD44780LCD_LCDSendData (*str++);
 }
 
 // Func Desc: Sends a character to screen , simply wraps SendData command.
 // Param1: Character to display
 void
-HD44780LCD_PCF8574_LCDSendChar (char data)
+HD44780LCD_LCDSendChar (char data)
 {
-  HD44780LCD_PCF8574_LCDSendData (data);
+  HD44780LCD_LCDSendData (data);
 }
 
 // Func Desc: Moves cursor
@@ -360,22 +323,21 @@ HD44780LCD_PCF8574_LCDSendChar (char data)
 // Param2. uint8_t number of spaces to move
 
 void
-HD44780LCD_PCF8574_LCDMoveCursor (LCDDirectionType_e direction,
-                                  uint8_t moveSize)
+HD44780LCD_LCDMoveCursor (LCDDirectionType_e direction, uint8_t moveSize)
 {
   uint8_t i = 0;
   if (direction == LCDMoveRight)
     {
       for (i = 0; i < moveSize; i++)
         {
-          HD44780LCD_PCF8574_LCDSendCmd (LCD_MOV_CURSOR_RIGHT);
+          HD44780LCD_LCDSendCmd (LCD_MOV_CURSOR_RIGHT);
         }
     }
   else
     {
       for (i = 0; i < moveSize; i++)
         {
-          HD44780LCD_PCF8574_LCDSendCmd (LCD_MOV_CURSOR_LEFT);
+          HD44780LCD_LCDSendCmd (LCD_MOV_CURSOR_LEFT);
         }
     }
 }
@@ -385,21 +347,21 @@ HD44780LCD_PCF8574_LCDMoveCursor (LCDDirectionType_e direction,
 // Param2. uint8_t number of spaces to scroll
 
 void
-HD44780LCD_PCF8574_LCDScroll (LCDDirectionType_e direction, uint8_t ScrollSize)
+HD44780LCD_LCDScroll (LCDDirectionType_e direction, uint8_t ScrollSize)
 {
   uint8_t i = 0;
   if (direction == LCDMoveRight)
     {
       for (i = 0; i < ScrollSize; i++)
         {
-          HD44780LCD_PCF8574_LCDSendCmd (LCD_SCROLL_RIGHT);
+          HD44780LCD_LCDSendCmd (LCD_SCROLL_RIGHT);
         }
     }
   else
     {
       for (i = 0; i < ScrollSize; i++)
         {
-          HD44780LCD_PCF8574_LCDSendCmd (LCD_SCROLL_LEFT);
+          HD44780LCD_LCDSendCmd (LCD_SCROLL_LEFT);
         }
     }
 }
@@ -407,27 +369,27 @@ HD44780LCD_PCF8574_LCDScroll (LCDDirectionType_e direction, uint8_t ScrollSize)
 // Param1: enum LCDLineNumber_e  row 1-4
 // Param2: uint8_t col 0-15
 void
-HD44780LCD_PCF8574_LCDGOTO (LCDLineNumber_e line, uint8_t col)
+HD44780LCD_LCDGOTO (LCDLineNumber_e line, uint8_t col)
 {
   switch (line)
     {
     case LCDLineNumberOne:
-      HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR1 | col);
+      HD44780LCD_LCDSendCmd (LCD_LINE_ADR1 | col);
       break;
     case LCDLineNumberTwo:
-      HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR2 | col);
+      HD44780LCD_LCDSendCmd (LCD_LINE_ADR2 | col);
       break;
     case LCDLineNumberThree:
       if (_NumColsLCD == 20)
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR3_20 + col);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR3_20 + col);
       else
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR3_16 | col);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR3_16 | col);
       break;
     case LCDLineNumberFour:
       if (_NumColsLCD == 20)
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR4_20 + col);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR4_20 + col);
       else
-        HD44780LCD_PCF8574_LCDSendCmd (LCD_LINE_ADR4_16 | col);
+        HD44780LCD_LCDSendCmd (LCD_LINE_ADR4_16 | col);
       ;
       break;
     }
@@ -437,16 +399,16 @@ HD44780LCD_PCF8574_LCDGOTO (LCDLineNumber_e line, uint8_t col)
 // Param1: CG_RAM location 0-7 we only have 8 locations 0-7
 // Param2: An array of 8 bytes representing a custom character data
 void
-HD44780LCD_PCF8574_LCDCreateCustomChar (uint8_t location, uint8_t *charmap)
+HD44780LCD_LCDCreateCustomChar (uint8_t location, uint8_t *charmap)
 {
   if (location >= 8)
     {
       return;
     }
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_CG_RAM | (location << 3));
+  HD44780LCD_LCDSendCmd (LCD_CG_RAM | (location << 3));
   for (uint8_t i = 0; i < 8; i++)
     {
-      HD44780LCD_PCF8574_LCDSendData (charmap[i]);
+      HD44780LCD_LCDSendData (charmap[i]);
     }
 }
 
@@ -454,7 +416,7 @@ HD44780LCD_PCF8574_LCDCreateCustomChar (uint8_t location, uint8_t *charmap)
 // Param1: passed bool True = LED on , false = display LED off
 // Note: another data or command must be issued before it takes effect.
 void
-HD44780LCD_PCF8574_LCDBackLightSet (bool OnOff)
+HD44780LCD_LCDBackLightSet (bool OnOff)
 {
   OnOff ? (_LCDBackLight = LCD_BACKLIGHTON_MASK)
         : (_LCDBackLight = LCD_BACKLIGHTOFF_MASK);
@@ -470,14 +432,14 @@ HD44780LCD_PCF8574_LCDBackLightSet (bool OnOff)
 //     2 : NACK on transmit of the address.
 //     3 : NACK on transmit of the data.
 //    4 :  Some other error
-bool
-HD44780LCD_PCF8574_LCD_I2C_ON ()
+static bool
+HD44780LCD_LCD_I2C_ON ()
 {
   uint8_t TransmissionCode = 0;
 
   wire_begin ();
   // Wire.setClock(100000UL); // V 1.2.0
-  wire_beginTransmission (_LCDSlaveAddresI2C);
+  wire_beginTransmission ();
   TransmissionCode = wire_endTransmission ();
   if (TransmissionCode != 0)
     {
@@ -501,20 +463,20 @@ HD44780LCD_PCF8574_LCD_I2C_ON ()
 // Print out a customer character from CGRAM
 // Param1 CGRAM location 0-7
 void
-HD44780LCD_PCF8574_LCDPrintCustomChar (uint8_t location)
+HD44780LCD_LCDPrintCustomChar (uint8_t location)
 {
   if (location >= 8)
     {
       return;
     }
-  HD44780LCD_PCF8574_LCDSendData (location);
+  HD44780LCD_LCDSendData (location);
 }
 
 // Called by print class, used to print out numerical data types etc
 size_t
 HD44780LCD_write (uint8_t c)
 {
-  HD44780LCD_PCF8574_LCDSendChar (c);
+  HD44780LCD_LCDSendChar (c);
   return 1;
 }
 
@@ -522,18 +484,18 @@ HD44780LCD_write (uint8_t c)
 // See also LCDClearScreen for manual clear
 
 void
-HD44780LCD_PCF8574_LCDClearScreenCmd (void)
+HD44780LCD_LCDClearScreenCmd (void)
 {
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_CLRSCR);
+  HD44780LCD_LCDSendCmd (LCD_CLRSCR);
   n_delay_ms (3); // Requires a delay
 }
 
 // Set Cursor position to zero
 
 void
-HD44780LCD_PCF8574_LCDHome (void)
+HD44780LCD_LCDHome (void)
 {
-  HD44780LCD_PCF8574_LCDSendCmd (LCD_HOME);
+  HD44780LCD_LCDSendCmd (LCD_HOME);
   n_delay_ms (3); // Requires a delay
 }
 
@@ -541,15 +503,15 @@ HD44780LCD_PCF8574_LCDHome (void)
 // Param1 enum LCDEntryMode_e 1-4 , 4 choices.
 
 void
-HD44780LCD_PCF8574_LCDChangeEntryMode (LCDEntryMode_e newEntryMode)
+HD44780LCD_LCDChangeEntryMode (LCDEntryMode_e newEntryMode)
 {
-  HD44780LCD_PCF8574_LCDSendCmd (newEntryMode);
+  HD44780LCD_LCDSendCmd (newEntryMode);
   n_delay_ms (3); // Requires a delay
 }
 
 static char LCD44780_buffer[21];
 void
-HD44780LCD_PCF8574_printf (char *format, ...)
+HD44780LCD_printf (char *format, ...)
 {
   va_list args;
 
@@ -557,10 +519,10 @@ HD44780LCD_PCF8574_printf (char *format, ...)
   vsnprintf (LCD44780_buffer, _NumColsLCD + 1, format, args);
   va_end (args);
 
-  HD44780LCD_PCF8574_LCDSendString (LCD44780_buffer);
+  HD44780LCD_LCDSendString (LCD44780_buffer);
 
 #ifdef LCD_SERIAL_DEBUG
-  printf ("HD44780LCD_PCF8574_printf  %s \n", LCD44780_buffer);
+  printf ("HD44780LCD_printf  %s \n", LCD44780_buffer);
 #endif
 }
 
