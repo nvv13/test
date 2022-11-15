@@ -53,14 +53,17 @@ void customChar (void);
 void backLightTest (void);
 void endTest (void);
 
+u8 u8_row = 4;
+u8 u8_col = 20;
+
 void
 UserMain (void)
 {
-  printf ("user task\n");
+  printf ("user task LCD test u8_row=%d, u8_col=%d\n", u8_row, u8_col);
 
   // tls_sys_clk_set (CPU_CLK_240M);
 
-  HD44780LCD_HD44780LCD (2, 16, 0x27); // instantiate an object
+  HD44780LCD_HD44780LCD (u8_row, u8_col, 0x27); // instantiate an object
 
   HD44780LCD_PCF8574_LCDInit (LCDCursorTypeOn);
   HD44780LCD_PCF8574_LCDClearScreen ();
@@ -90,9 +93,11 @@ helloWorld (void)
 {
   char teststr1[] = "Hello";
   char teststr2[] = "World";
-  HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberOne, 0);
+  HD44780LCD_PCF8574_LCDGOTO (u8_row > 2 ? LCDLineNumberTwo : LCDLineNumberOne,
+                              0);
   HD44780LCD_PCF8574_LCDSendString (teststr1);
-  HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberTwo, 0);
+  HD44780LCD_PCF8574_LCDGOTO (
+      u8_row > 2 ? LCDLineNumberTwo : LCDLineNumberThree, 0);
   HD44780LCD_PCF8574_LCDSendString (teststr2); // Display a string
   HD44780LCD_PCF8574_LCDSendChar ('!');        // Display a single character
   n_delay_ms (DISPLAY_DELAY_1);
@@ -121,12 +126,24 @@ scrollTest (void)
 void
 gotoTest (void)
 {
-  char teststr3[] = "Line 2";
+  char teststr1[] = "Line 1";
+  char teststr2[] = "Line 2";
+  char teststr3[] = "Line 3";
+  char teststr4[] = "Line 4";
   HD44780LCD_PCF8574_LCDClearScreen ();
-  HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberOne, 10);
+  HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberOne, 2);
   HD44780LCD_PCF8574_LCDSendChar ('A');
+  HD44780LCD_PCF8574_LCDSendString (teststr1);
   HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberTwo, 2);
-  HD44780LCD_PCF8574_LCDSendString (teststr3);
+  HD44780LCD_PCF8574_LCDSendString (teststr2);
+
+  if (u8_row > 2)
+    {
+      HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberThree, 2);
+      HD44780LCD_PCF8574_LCDSendString (teststr3);
+      HD44780LCD_PCF8574_LCDGOTO (LCDLineNumberFour, 2);
+      HD44780LCD_PCF8574_LCDSendString (teststr4);
+    }
   n_delay_ms (DISPLAY_DELAY);
 }
 

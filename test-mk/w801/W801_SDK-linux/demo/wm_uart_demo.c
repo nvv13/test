@@ -94,7 +94,7 @@ static void demo_uart_task(void *sdata)
             opt.charlength = TLS_UART_CHSIZE_8BIT;
             opt.flow_ctrl = TLS_UART_FLOW_CTRL_NONE;
 
-            //选择待使用的引脚及具体的复用功能
+            //Select the pin to be used and the specific alternate function
             /* UART1_RX-PB07  UART1_TX-PB06 */
             wm_uart1_rx_config(WM_IO_PB_07);
             wm_uart1_tx_config(WM_IO_PB_06);
@@ -163,8 +163,8 @@ int uart_demo(int bandrate, int parity, int stopbits)
         tls_os_task_create(NULL, NULL,
                            demo_uart_task,
                            (void *) demo_uart,
-                           (void *) demo_uart_task_stk, /** 任务栈的起始地址 */
-                           DEMO_UART_TAST_STK_SIZE,                         /** 任务栈的大小     */
+                           (void *) demo_uart_task_stk, /** The starting address of the task stack */
+                           DEMO_UART_TAST_STK_SIZE,                         /** task stack size   */
                            DEMO_UART_TASK_PRIO, 0);
     }
     if (-1 == bandrate)

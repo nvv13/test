@@ -371,11 +371,13 @@ static void mqtt_demo_task(void *p)
 }
 
 
+
 //mqtt demo
-//测试服务器:mqtt.yichen.link:3883
-//服务器端用于发送的订阅主题为:winnermicro/mqtt_tx_demo
-//服务器端用于接收的订阅主题为:winnermicro/mqtt_rx_demo
-//工作流程: 接收到winnermicro/mqtt_tx_demo推送的消息后打印在屏幕上，并再次推送到winnermicro/mqtt_rx_demo
+//Test server: mqtt.yichen.link:3883
+//The subscription topic used by the server to send is: winnermicro/mqtt_tx_demo
+//The subscription topic for receiving on the server side is: winnermicro/mqtt_rx_demo
+//Workflow: After receiving the message pushed by winnermicro/mqtt_tx_demo, print it on the screen and push it to winnermicro/mqtt_rx_demo again
+
 int mqtt_demo(void)
 {
     if (!mqtt_demo_inited)
