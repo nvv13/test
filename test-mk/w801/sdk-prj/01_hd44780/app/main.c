@@ -53,8 +53,8 @@ void customChar (void);
 void backLightTest (void);
 void endTest (void);
 
-u8 u8_row = 4;
-u8 u8_col = 20;
+const u8 u8_row = 4;
+const u8 u8_col = 20;
 
 void
 UserMain (void)
@@ -97,7 +97,7 @@ helloWorld (void)
                               0);
   HD44780LCD_PCF8574_LCDSendString (teststr1);
   HD44780LCD_PCF8574_LCDGOTO (
-      u8_row > 2 ? LCDLineNumberTwo : LCDLineNumberThree, 0);
+      u8_row > 2 ? LCDLineNumberThree : LCDLineNumberTwo, 0);
   HD44780LCD_PCF8574_LCDSendString (teststr2); // Display a string
   HD44780LCD_PCF8574_LCDSendChar ('!');        // Display a single character
   n_delay_ms (DISPLAY_DELAY_1);
