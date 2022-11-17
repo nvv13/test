@@ -20,108 +20,108 @@ static OS_STK FatfsTaskStk[FATFS_TASK_SIZE];
 static int console_cmd = 0;
 
 
-//FAT功能测试：格式化测试，文件写入测试，文件读取测试（基本功能）
+//FAT Functional test: formatting test, file writing test, file reading test (basic function)
 int fatfs_func(void)
 {
-	FATFS fs; //FatFs文件系统对象
-	FIL fnew; //文件对象
-	FRESULT res_sd;//文件操作结果
-	UINT fnum; //文件成功读写数量
+	FATFS fs; //FatFs file system object
+	FIL fnew; // file object
+	FRESULT res_sd;// file operation results
+	UINT fnum; // The number of files successfully read and written
 	BYTE ReadBuffer[256] = {0};
 	BYTE work[FF_MAX_SS];
-	BYTE WriteBuffer[] = "成功移植了FatFs文件系统！\r\n"; //写缓存区
+	BYTE WriteBuffer[] = "Successfully ported the FatFs file system!\r\n"; //write buffer
 	
 
  	wm_sdio_host_config(0);
 
-	//挂载SD卡
+	//mount SD card
 	res_sd = f_mount(&fs, "0:", 1);
 	
-	//***********************格式化测试****************************
+	//***********************formatting test****************************
 	if(res_sd == FR_NO_FILESYSTEM)
 	{
 		while(1)
 		{
-			TEST_DEBUG("SD卡没有文件系统，即将进行格式化...\r\n");
-			//格式化
+			TEST_DEBUG("SD The card has no file system and will be formatted soon...\r\n");
+			//format
 			
 			res_sd = f_mkfs("0:", 0, work, sizeof(work));
 			
 			if(res_sd == FR_OK)
 			{
-				TEST_DEBUG("SD卡成功格式化！\r\n");
-				//格式化后先取消挂载
+				TEST_DEBUG("SD Card successfully formatted!\r\n");
+				// Unmount first after formatting
 				res_sd = f_mount(NULL, "0:", 1);
-				//再重新挂载
+				// remount
 				res_sd = f_mount(&fs, "0:", 1);
 				break;
 			}
 			else
 			{
-				TEST_DEBUG("文件格式化失败！错误代码：%d; will try again...\r\n",res_sd);
+				TEST_DEBUG("File formatting failed! error code: %d; will try again...\r\n",res_sd);
 			}
 		}
 	}
 	else if(res_sd != FR_OK)
 	{
-		TEST_DEBUG("挂载文件系统失败！可能是因为文件初始化失败！错误代码：%d\r\n", res_sd);
+		TEST_DEBUG("Failed to mount file system! Probably because the file initialization failed! error code:%d\r\n", res_sd);
 	}
 	else
 	{
-		TEST_DEBUG("文件系统挂载成功， 可进行读写测试！\r\n");
+		TEST_DEBUG("The file system is successfully mounted, and the read and write test can be performed!\r\n");
 	}
 	
-	//***********************写测试****************************
-	//打开文件，如果文件不存在则创建它
-	TEST_DEBUG("即将进行文件写入测试....\r\n");
-	//打开文件，若不存在就创建
-	res_sd = f_open(&fnew, "0:FatFs读写测试文件.txt", FA_CREATE_ALWAYS | FA_WRITE);
-	//文件打开成功
+	//***********************write tests****************************
+	//Open the file, creating it if it doesn't exist
+	TEST_DEBUG("A file write test is about to take place.....\r\n");
+	//Open the file, create it if it does not exist
+	res_sd = f_open(&fnew, "0:FatFs_test_files.txt", FA_CREATE_ALWAYS | FA_WRITE);
+	//file opened successfully?
 	if(res_sd == FR_OK)
 	{
-		TEST_DEBUG("打开文件成功！开始写入数据！\r\n");
+		TEST_DEBUG("Open file successfully! Start writing data!\r\n");
 		res_sd= f_write(&fnew, WriteBuffer, sizeof(WriteBuffer), &fnum);
 		
 		if(res_sd == FR_OK)
 		{
-			TEST_DEBUG("数据写入成功，共写入%d个字符！\r\n", fnum);
-			TEST_DEBUG("数据：%s", WriteBuffer);
+			TEST_DEBUG("The data was written successfully, a total of %d characters were written\r\n", fnum);
+			TEST_DEBUG("data: %s", WriteBuffer);
 		}
 		else
 		{
-			TEST_DEBUG("数据写入失败！\r\n");
+			TEST_DEBUG("Data writing failed!\r\n");
 		}
 		
-		//关闭文件
+		//close file
 		f_close(&fnew);
 	}
 	
-	//***********************读测试****************************
-	//打开文件，如果文件不存在则创建它
-	TEST_DEBUG("即将进行文件读取测试....\r\n");
-	//打开文件，若不存在就创建
-	res_sd = f_open(&fnew, "0:FatFs读写测试文件.txt", FA_OPEN_EXISTING | FA_READ);
-	//文件打开成功
+	//***********************read test****************************
+	//Open the file
+	TEST_DEBUG("File reading test coming soon....\r\n");
+	//Open the file
+	res_sd = f_open(&fnew, "0:FatFs_test_files.txt", FA_OPEN_EXISTING | FA_READ);
+	//file opened successfully?
 	if(res_sd == FR_OK)
 	{
-		TEST_DEBUG("打开文件成功！开始读取数据！\r\n");
+		TEST_DEBUG("Open file successfully! Start reading data!\r\n");
 		res_sd= f_read(&fnew, ReadBuffer, sizeof(ReadBuffer), &fnum);
 		
 		if(res_sd == FR_OK)
 		{
-			TEST_DEBUG("数据读取成功！\r\n");
-			TEST_DEBUG("数据：%s\r\n", ReadBuffer);
+			TEST_DEBUG("Data read successfully!\r\n");
+			TEST_DEBUG("data: %s\r\n", ReadBuffer);
 		}
 		else
 		{
-			TEST_DEBUG("数据读取失败！\r\n");
+			TEST_DEBUG("Data reading failed!\r\n");
 		}
 		
-		//关闭文件
+		//close file
 		f_close(&fnew);
 	}
 	
-	//取消挂载文件系统
+	//unmount file system
 	f_mount(NULL, "0:", 1);
 
 	return 0;
