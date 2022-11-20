@@ -12,7 +12,7 @@ https://youtu.be/M23B33LpYNs
 
 дисплей
 
-LCD display 16x2
+LCD display 16x2 or 20x4
 
 надо соеденить по схеме:
 ~~~

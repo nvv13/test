@@ -1048,7 +1048,7 @@ flame ()
   float hdif = hmax - hmin;
   int randtemp = random (0, 3);
   float hinc = (hdif / (float)TOP_INDEX) + randtemp;
-  //int 
+  // int
   float ihue = hmin;
   for (int i = 0; i <= TOP_INDEX; i++)
     {
@@ -1168,7 +1168,7 @@ static void
 ems_lightsSTROBE ()
 { //-m26-EMERGENCY LIGHTS (STROBE LEFT/RIGHT)
   int thishue = 0;
-  //int thathue = (thishue + 160) % 255;
+  // int thathue = (thishue + 160) % 255;
   int thathue = (thishue + 240) % 255;
   for (int x = 0; x < 5; x++)
     {
@@ -1209,7 +1209,7 @@ rgb_propeller ()
 { //-m27-RGB PROPELLER
   idex++;
   int ghue = (thishue + 80) % 255;
-  //int bhue = (thishue + 160) % 255;
+  // int bhue = (thishue + 160) % 255;
   int bhue = (thishue + 240) % 255;
   int N3 = (dev.led_numof / 3);
   int N6 = (dev.led_numof / 6);

@@ -57,7 +57,7 @@ static void SpiMasterInit(u8 mode, u8 cs_active, u32 fclk)
     SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
     while (SPIM_CHCFG_REG & SPI_CLEAR_FIFOS) cs_active = cs_active;
 
-	tls_sys_clk_get(&sysclk);						//获取实际频率
+	tls_sys_clk_get(&sysclk);						//get actual frequency
 
     SPIM_CLKCFG_REG = sysclk.apbclk*UNIT_MHZ/(fclk*2) - 1;;
     SPIM_SPICFG_REG = 0;
@@ -127,7 +127,7 @@ static int SpiDmaBlockWrite(u8 * data, u32 len, u8 ifusecmd, u32 cmd)
 
     if (len % 4)
     {
-        txlen = len & 0xfffffffc;   // 不够字的最后单独发
+        txlen = len & 0xfffffffc;   // If there are not enough words, I will post it separately at the end
     }
     else
     {
@@ -186,7 +186,7 @@ static int SpiDmaBlockWrite(u8 * data, u32 len, u8 ifusecmd, u32 cmd)
         }
         tls_dma_free(dmaCh);
     }
-    // tx 不够一个整字的几个字节
+    // tx   A few bytes that are not enough for a whole word
     if (len > txlenbk)
     {
         u32 word32 = 0;
@@ -198,7 +198,8 @@ static int SpiDmaBlockWrite(u8 * data, u32 len, u8 ifusecmd, u32 cmd)
         SPIM_TXDATA_REG = word32;
         SPIM_MODECFG_REG = SPI_RX_TRIGGER_LEVEL(0) | SPI_TX_TRIGGER_LEVEL(0);
         SPIM_SPITIMEOUT_REG = SPI_TIMER_EN | SPI_TIME_OUT((u32) 0xffff);
-        if (ifusecmd && 0 == txcmdover) // 需要发送命令，但是命令还没有发送出去，发送的字节数需要增加4
+        if (ifusecmd && 0 == txcmdover) // The command needs to be sent, 
+                                   // but the command has not been sent, and the number of bytes sent needs to be increased by 4
             temp = 4;
         SPIM_CHCFG_REG = SPI_FORCE_SPI_CS_OUT | SPI_TX_CHANNEL_ON | SPI_CONTINUE_MODE |
                             SPI_START | SPI_VALID_CLKS_NUM(((temp + len - txlenbk) * 8));
@@ -240,7 +241,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
 
     if (len % 4)
     {
-        rxlen = len & 0xfffffffc;   // 不够字的最后单独取
+        rxlen = len & 0xfffffffc;   // If there are not enough words, take it alone at the end
     }
     else
     {
@@ -271,7 +272,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
     {
         if (rxlenbk > 0)
         {
-        // 说明接收的数据大于4
+        // Indicates that the received data is greater than 4
         // printf("\ni =%d\n",i);
             DmaDesc.dest_addr = (int) (data + i * SPI_DMA_MAX_TRANS_SIZE);
             blocksize = (rxlen > SPI_DMA_MAX_TRANS_SIZE) ? SPI_DMA_MAX_TRANS_SIZE : rxlen;
@@ -293,7 +294,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
         }
         else
         {
-            SPIM_MODECFG_REG = SPI_RX_TRIGGER_LEVEL(0) | SPI_TX_TRIGGER_LEVEL(0);   // rx数据少于4个byte，不用开DMA
+            SPIM_MODECFG_REG = SPI_RX_TRIGGER_LEVEL(0) | SPI_TX_TRIGGER_LEVEL(0);   // rx data is less than 4 bytes, no need to open DMA
         }
         SPIM_SPITIMEOUT_REG = SPI_TIMER_EN | SPI_TIME_OUT((u32) 0xffff);
         if (0 == blocknum)
@@ -305,7 +306,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
         }
         else
         {
-            if (0 == i)         // 第一次需要打开TX
+            if (0 == i)         // TX needs to be turned on for the first time
             {
                 SPIM_CHCFG_REG =
                     SPI_FORCE_SPI_CS_OUT | SPI_RX_CHANNEL_ON | SPI_TX_CHANNEL_ON
@@ -341,7 +342,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
     }
     tls_dma_free(dmaCh);
 
-    if (len > rxlenbk)          // 取最后的不够一个字的几个byte
+    if (len > rxlenbk)          // Take the last few bytes that are not enough for a word
     {
         word32 = SPIM_RXDATA_REG;
         *((int *) data + rxlenbk / 4) = word32;
@@ -424,7 +425,7 @@ static u32 spi_fill_txfifo(struct tls_spi_transfer *current_transfer,
 // TLS_DBGPRT_SPI("write to spi fifo words - %d, bytes - %d.\n", rw_words,
 // rw_bytes);
 
-//下面代码17us
+//The following code 17us
     for (i = 0; i < rw_words; i++)
     {
         if (current_transfer->tx_buf)
@@ -508,7 +509,7 @@ static u32 spi_get_rxfifo(struct tls_spi_transfer *current_transfer,
 
 // TLS_DBGPRT_SPI("rx data: %d words, %d bytes.\n", rw_words, rw_bytes);
 
-//下面代码大概10us
+//The following code is about 10us
     for (i = 0; i < rw_words; i++)
     {
 
@@ -972,7 +973,7 @@ int tls_spi_read(u8 * buf, u32 len)
         u32 i;
         tls_os_sem_acquire(spi_port->lock, 0);
         tls_open_peripheral_clock(TLS_PERIPHERAL_TYPE_LSPI);
-         // 直接传输，这样做的原因是DMA不能连续读取4个字节以内的数据,SPI FIFO读取单位为word
+        // Direct transmission, the reason for this is that DMA cannot continuously read data within 4 bytes, and the SPI FIFO reading unit is word
         if (len <= 4)
         {
             SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
@@ -996,7 +997,7 @@ int tls_spi_read(u8 * buf, u32 len)
             SPIM_CHCFG_REG = 0x00000000;
             SPIM_MODECFG_REG = 0x00000000;
         }
-        else                    // DMA传输
+        else                    // DMA transfer
         {
             if (len > SPI_DMA_BUF_MAX_SIZE)
             {
@@ -1066,7 +1067,7 @@ int tls_spi_write(const u8 * buf, u32 len)
         u32 i;
         tls_os_sem_acquire(spi_port->lock, 0);
         tls_open_peripheral_clock(TLS_PERIPHERAL_TYPE_LSPI);
-        if (len <= 4)           // 直接传输，这样做的原因是DMA不能连续传输少于4个字节的数据，SPI
+        if (len <= 4) // Direct transmission, the reason for this is that DMA cannot continuously transmit data less than 4 bytes, SPI
         {
             SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
             while (SPIM_CHCFG_REG & SPI_CLEAR_FIFOS);
@@ -1087,7 +1088,7 @@ int tls_spi_write(const u8 * buf, u32 len)
             SPIM_CHCFG_REG = 0x00000000;
             SPIM_MODECFG_REG = 0x00000000;
         }
-        else                    // DMA传输
+        else                    // DMA transfer
         {
             if (len > SPI_DMA_BUF_MAX_SIZE)
             {
@@ -1340,7 +1341,7 @@ int tls_spi_init(void)
     }
 
 
-    port->speed_hz = SPI_DEFAULT_SPEED; /* 默认2M */
+    port->speed_hz = SPI_DEFAULT_SPEED; /* Default 2M */
     port->cs_active = SPI_CS_ACTIVE_MODE;
     port->mode = SPI_DEFAULT_MODE;  /* CPHA = 0,CPOL = 0 */
     port->reconfig = 0;
@@ -1361,8 +1362,8 @@ int tls_spi_init(void)
     spi_set_endian(1);
     tls_spi_trans_type(SPI_BYTE_TRANSFER);
     spi_set_mode(spi_port->mode);
-    spi_set_chipselect_mode(SPI_CS_INACTIVE_MODE);  /* cs=1 ,片选无效 */
-    spi_force_cs_out(1);        /* 片选由软件控制 */
+    spi_set_chipselect_mode(SPI_CS_INACTIVE_MODE);  /* cs=1 , chip selection is invalid */
+    spi_force_cs_out(1);        /* Chip select controlled by software */
     spi_set_sclk(spi_port->speed_hz);
 
     spi_set_tx_trigger_level(0);
@@ -1462,7 +1463,7 @@ int tls_spi_exit(void)
 void tls_spi_slave_sel(u16 slave)
 {
 // u16 ret;
-/*gpio0控制cs信号*/
+/*gpio0 control cs signal*/
     tls_gpio_cfg((enum tls_io_name) SPI_SLAVE_CONTROL_PIN, WM_GPIO_DIR_OUTPUT,
                  WM_GPIO_ATTR_FLOATING);
     if (SPI_SLAVE_FLASH == slave)
