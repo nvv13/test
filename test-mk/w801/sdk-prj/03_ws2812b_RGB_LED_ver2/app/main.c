@@ -96,8 +96,8 @@ demo_console_task (void *sdata)
 
   dev.led_numof = 60;
   dev.data_pin = WM_IO_PB_17;
-  dev.mode = WS_PIN_MODE;
-  // dev.mode = WS_SPI_MODE_8bit;
+  //dev.mode = WS_PIN_MODE;
+  dev.mode = WS_SPI_MODE_8bit;
   dev.rgb = WS_GRB_MODE;
   // dev.rgb = WS_RGB_MODE;
   ws2812b_init (&dev);
@@ -120,7 +120,7 @@ demo_console_task (void *sdata)
   // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
   // минимальной яркости, пришлось сделать время таймера поменьше
   // timer_cfg.timeout = 100; // 0 * 30;
-  timer_cfg.timeout = 1000 * 30;
+  timer_cfg.timeout = 1000 * 10;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;

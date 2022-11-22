@@ -248,10 +248,11 @@ ws2812b_init (ws2812b_t *dev)
     case WS_I2S_MODE:
       {
         dev->data_pin = WM_IO_PB_11; // подключать к do, то есть к WM_IO_PB_11
-        wm_i2s_ck_config (WM_IO_PB_08);// bit clock
-        wm_i2s_ws_config (WM_IO_PB_09);//        0=left cannel,1=right cannel
-        wm_i2s_di_config (WM_IO_PB_10);//
-        wm_i2s_do_config (WM_IO_PB_11);// transmit  MSB -> LSB, MSB -> LSB, ...
+        wm_i2s_ck_config (WM_IO_PB_08); // bit clock
+        wm_i2s_ws_config (WM_IO_PB_09); //        0=left cannel,1=right cannel
+        wm_i2s_di_config (WM_IO_PB_10); //
+        wm_i2s_do_config (
+            WM_IO_PB_11); // transmit  MSB -> LSB, MSB -> LSB, ...
         printf ("ws2812b_init: I2S configuration ck--PB08, ws--PB09, "
                 "di--PB10, do--PB11;\r\n");
       };
@@ -483,7 +484,8 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
     }
 
   memset (tx_buf, 0, MY_SPI_DATA_LEN);
-  u16 iPosBit = 8 * 3; // reset code? в начале.... ну допустим, 8*3, три байта
+  u32 iPosBit
+      = 8 * 2; // reset code? в начале.... ну допустим, 8*2, два байта
 
   u8 spi_on_bit = dev->spi_on_bit;
   u8 spi_off_bit = dev->spi_off_bit;
@@ -583,12 +585,19 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
               iPosBit += (u8_bit - spi_off_bit);
             }
 
-          if ((iPosBit / 8) > (MY_SPI_DATA_LEN - 10))
+          if ((iPosBit / 8) > (MY_SPI_DATA_LEN - 20))
             break;
         }
     }
 
-  iPosBit += 8 * 3;
+  iPosBit += 8 * 4; //
+  if (((iPosBit / 8) % 4))
+    iPosBit += 8 * 4; //добавим 4 байта (потом обрежет под нужное кратное 4)
+  /*передоваемый обьем по DMA должен быть кратным 4 байтам,
+     иначе после DMA будет еще обычный досыл будет*/
+
+  u32 len = ((iPosBit / 8) / 4) * 4; // сделаем кратное 4 байта
+
   //   printf("SPI Master send %d byte, modeA, little endian\n",
   //   MY_SPI_DATA_LEN);
   /*
@@ -653,7 +662,7 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
 
   RES low voltage time Above 50μs
   */
-  switch (tls_spi_write ((u8 *)tx_buf, (iPosBit / 8)))
+  switch (tls_spi_write ((u8 *)tx_buf, len))
     {
     case TLS_SPI_STATUS_OK:
       {
@@ -681,7 +690,7 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
     }
 
   // RES above 50μs
-  n_delay_us (500);
+  n_delay_us (5000);
 }
 
 /** Use this one if you are using WS2811 or WS2812 neopixels */
@@ -746,7 +755,7 @@ static I2S_InitDef i2s_config
         I2S_Standard,    I2S_DataFormat_16, 8000,
         5000000 };
 
-#define UNIT_SIZE 2 * 4096 //1024
+#define UNIT_SIZE 2 * 4096 // 1024
 #define PCM_ADDRDSS 0x100000
 #define FIRM_SIZE 940
 
@@ -755,21 +764,21 @@ int16_t data_1[2][UNIT_SIZE];
 void
 i2s_demo_callback_play (uint32_t *data, uint16_t *len)
 {
-/*
-  static int number = 0;
+  /*
+    static int number = 0;
 
-  tls_fls_read (PCM_ADDRDSS + number * UNIT_SIZE * 2, (u8 *)data,
-                UNIT_SIZE * 2);
+    tls_fls_read (PCM_ADDRDSS + number * UNIT_SIZE * 2, (u8 *)data,
+                  UNIT_SIZE * 2);
 
-  number++;
-  if (number > FIRM_SIZE / UNIT_SIZE / 1024 / 2)
-    {
-      number = 0;
-      *len = 0xFFFF;
-    }
-  printf ("%d, %x\n", number, data[0]);
-*/
-printf ("i2s_demo_callback_play data[0] =  %x\n", data[0]);
+    number++;
+    if (number > FIRM_SIZE / UNIT_SIZE / 1024 / 2)
+      {
+        number = 0;
+        *len = 0xFFFF;
+      }
+    printf ("%d, %x\n", number, data[0]);
+  */
+  printf ("i2s_demo_callback_play data[0] =  %x\n", data[0]);
 }
 
 static void
