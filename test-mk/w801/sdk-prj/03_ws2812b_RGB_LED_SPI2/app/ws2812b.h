@@ -36,7 +36,8 @@ extern "C"
     WS_SPI_MODE_5bit = 3, /* ((8192-6)*8)/5/24=545 */
     WS_SPI_MODE_6bit = 4, /* ((8192-6)*8)/6/24=454 */
     WS_SPI_MODE_7bit = 5, /* ((8192-6)*8)/3/24=389 */
-    WS_SPI_MODE_8bit = 6  /* ((8192-6)*8)/3/24=341 */
+    WS_SPI_MODE_8bit = 6, /* ((8192-6)*8)/3/24=341 */
+    WS_I2S_MODE = 7       /* */
   } _ws2812b_mode;
 
   typedef enum rgb_mode

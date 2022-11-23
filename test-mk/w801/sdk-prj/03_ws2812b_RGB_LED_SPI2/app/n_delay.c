@@ -67,3 +67,37 @@ n_delay_us (uint32_t us)
         }
     }
 }
+
+void
+n_delay_tic (uint32_t cnt)
+{
+  if (cnt == 0)
+    {
+      return;
+    }
+  // нашел данный алгоритм в исходниках SDK, там все что может понадобиться -
+  // есть
+  uint32_t load = csi_coret_get_load ();
+  uint32_t start = csi_coret_get_value ();
+  uint32_t cur;
+
+  while (1)
+    {
+      cur = csi_coret_get_value ();
+
+      if (start > cur)
+        {
+          if (start - cur >= cnt)
+            {
+              return;
+            }
+        }
+      else
+        {
+          if (load - cur + start > cnt)
+            {
+              return;
+            }
+        }
+    }
+}

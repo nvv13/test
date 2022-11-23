@@ -18,4 +18,7 @@ void n_delay_ms (uint32_t ms);
  */
 void n_delay_us (uint32_t us);
 
+void n_delay_tic (uint32_t cnt);
+
+
 #endif /* N_DELAY_H */

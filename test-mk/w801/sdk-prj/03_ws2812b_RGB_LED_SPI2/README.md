@@ -1,3 +1,5 @@
+!!!В РАБОТЕ!!!
+!!!underway!!!
 
 
 project
@@ -38,12 +40,15 @@ ws2812b
 надо соеденить по схеме:
 ~~~
 connect to
-W801  ws2812b
-GPIO  PIN
-PB17  data
-+5v   +5v
-GND   GND
+W801 GPIO | ws2812b PIN
+PB17---200R-_---data
+GND   	  220pF-GND
++5v   		+5v
 ~~~
+между PB17 и DATA, резистор 200 ом +
+между DATA и GND, конденсатор 200 пФ 
+иначе помехи, 
+
 
 
 

@@ -59,23 +59,23 @@ shift (const u16 offset, const u32 reg, const u8 pin, uint32_t data)
         { // 1
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg | (1 << pin)); /* write high */
-          n_delay_us (
+          n_delay_tic (
               170); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us,
                     // + - значения чуть подравлены с учетом операторов в цикле
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg & (~(1 << pin))); /* write low */
-          n_delay_us (
+          n_delay_tic (
               61); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
         }
       else
         { // 0
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg | (1 << pin)); /* write high */
-          n_delay_us (
+          n_delay_tic (
               60); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg & (~(1 << pin))); /* write low */
-          n_delay_us (
+          n_delay_tic (
               163); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
         }
     }
@@ -195,7 +195,7 @@ pin_mode_ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
   tls_os_release_critical (cpu_sr); // enable Interrupt
 
   // RES above 50μs
-  n_delay_us (13000);
+  n_delay_us (1300);
 
   if (sysclk.cpuclk != 240)
     {

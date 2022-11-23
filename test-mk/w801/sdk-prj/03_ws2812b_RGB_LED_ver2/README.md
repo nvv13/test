@@ -20,10 +20,14 @@ ws2812b
 ~~~
 connect to
 W801 GPIO | ws2812b PIN
-PB17  		data
+PB17---200R-_---data
+GND   	  220pF-GND
 +5v   		+5v
-GND   		GND
 ~~~
+между PB17 и DATA, резистор 200 ом +
+между DATA и GND, конденсатор 200 пФ 
+иначе помехи, 
+
 
 дисплей
 

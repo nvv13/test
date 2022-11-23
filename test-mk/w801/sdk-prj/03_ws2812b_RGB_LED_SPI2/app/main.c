@@ -67,7 +67,8 @@ demo_console_task (void *sdata)
   dev.data_pin = WM_IO_PB_17;
   // dev.mode = WS_PIN_MODE;
   dev.mode = WS_SPI_MODE_8bit;
-  dev.rgb = WS_RGB_MODE;
+  dev.rgb = WS_RGB_MODE; // для ...
+  //dev.rgb = WS_GRB_MODE; // для ws2812b обычно
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();
