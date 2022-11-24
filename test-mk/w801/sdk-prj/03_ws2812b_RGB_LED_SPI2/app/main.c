@@ -48,7 +48,7 @@ static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
 
 u16 i_light = 10;
-u16 i_swith = 0;
+u16 i_swith = 46;
 u8 u8_wait_start_ota_upgrade = 0;
 u8 u8_start_reconfigure = 0;
 u16 i_mode_global = 0;
@@ -63,7 +63,7 @@ void
 demo_console_task (void *sdata)
 {
 
-  dev.led_numof = 60;
+  dev.led_numof = 50;
   dev.data_pin = WM_IO_PB_17;
   // dev.mode = WS_PIN_MODE;
   dev.mode = WS_SPI_MODE_8bit;
