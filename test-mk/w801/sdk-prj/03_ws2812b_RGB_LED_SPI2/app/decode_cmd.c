@@ -74,6 +74,8 @@ fast_decode_cmd (char *sock_rx, int len)
           = sprintf (sock_rx, "OTA upgrade start, try = " OTA_PATH_FILE " \n");
       extern u8 u8_wait_start_ota_upgrade;
       u8_wait_start_ota_upgrade = 1;
+      extern volatile bool changeFlag;
+      changeFlag = true;
     }
 
   if (len > 5 && strncmp ((char *)sock_rx, "mode=", 5) == 0)
@@ -165,7 +167,7 @@ fast_decode_cmd (char *sock_rx, int len)
                    // чтоб вошло, или увеличь буффер
           "help - данная справка (flash ver-" VERSION_FLASH ")\n"
           "time - время и прочие состояния\n"
-          "drX - режим ленты, где X, только 1...999.\n"
+          "drX - режим ленты, где X, только 1..52, 1000-demo mode (default)\n"
           "lightX - яркость, где X от 1 до 255.\n"
           "spd=A - где A - скорость\n"
           "mode=Y - режим драйвера ленты, где Y, 0-PIN_MODE, SPI_MODE: "

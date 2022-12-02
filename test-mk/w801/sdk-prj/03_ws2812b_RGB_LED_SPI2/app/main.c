@@ -29,6 +29,7 @@
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
 //#include "wm_regs.h"
+#include "wm_timer.h"
 #include "wm_watchdog.h"
 
 #include "ws2812b.h"
@@ -47,12 +48,26 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
 
+#define DEMO_MODE_SW 1000
 u16 i_light = 10;
-u16 i_swith = 46;
+u16 i_swith = DEMO_MODE_SW;
+static u16 i_swith_demo = 2; // 1...52
 u8 u8_wait_start_ota_upgrade = 0;
 u8 u8_start_reconfigure = 0;
 u16 i_mode_global = 0;
 u16 i_max_out = 0;
+
+static void
+demo_timer_irq (u8 *arg) // здесь будет смена режима
+{
+  if (i_swith == DEMO_MODE_SW)
+    {
+      if (i_swith_demo++ > 52)
+        i_swith_demo = 1;
+      extern volatile bool changeFlag;
+      changeFlag = true;
+    }
+}
 
 /**
  * @brief   Allocate the device descriptor
@@ -68,10 +83,28 @@ demo_console_task (void *sdata)
   // dev.mode = WS_PIN_MODE;
   dev.mode = WS_SPI_MODE_8bit;
   dev.rgb = WS_RGB_MODE; // для ...
-  //dev.rgb = WS_GRB_MODE; // для ws2812b обычно
+  // dev.rgb = WS_GRB_MODE; // для ws2812b обычно
   ws2812b_init (&dev);
   /* initialize all LED color values to black (off) */
   el_init ();
+
+  u8 timer_id;
+  struct tls_timer_cfg timer_cfg;
+  timer_cfg.unit = TLS_TIMER_UNIT_MS;
+  // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
+  // минимальной яркости, пришлось сделать время таймера поменьше
+  // timer_cfg.timeout = 100; // 0 * 30;
+  timer_cfg.timeout = 1000 * 15;
+  timer_cfg.is_repeat = 1;
+  timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
+  timer_cfg.arg = NULL;
+  timer_id = tls_timer_create (&timer_cfg);
+  if (true)
+    {
+      tls_timer_start (timer_id);
+      printf ("timer start\n");
+    }
+
   puts ("Initialization done.");
 
   tls_watchdog_init (60 * 1000 * 1000); // u32 usec около 1 минуты
@@ -96,7 +129,10 @@ demo_console_task (void *sdata)
       while (u8_wifi_state)
         {
 
-          el_loop (i_swith);
+          if (i_swith == DEMO_MODE_SW)
+            el_loop (i_swith_demo);
+          else
+            el_loop (i_swith);
 
           tls_watchdog_clr (); //сбросить
           if (u8_wait_start_ota_upgrade)
