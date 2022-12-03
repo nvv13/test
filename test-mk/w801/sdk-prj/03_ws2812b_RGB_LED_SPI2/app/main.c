@@ -57,16 +57,49 @@ u8 u8_wait_start_ota_upgrade = 0;
 u8 u8_start_reconfigure = 0;
 u16 i_mode_global = 0;
 u16 i_max_out = 0;
+static u8 u8_dreb = 2; // от дребезга кнопки
+
+static u16 u16_delay_timer_sw = 0;
 
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-  if (i_swith == DEMO_MODE_SW)
+  if (u8_dreb > 0)
+    u8_dreb--;
+  //
+  if (u16_delay_timer_sw++ > 150) // 15 sec
     {
-      if (i_swith_demo++ > 52)
-        i_swith_demo = 1;
-      extern volatile bool changeFlag;
-      changeFlag = true;
+      if (i_swith == DEMO_MODE_SW)
+        {
+          if (i_swith_demo++ > 52)
+            i_swith_demo = 1;
+          extern volatile bool changeFlag;
+          changeFlag = true;
+        }
+      u16_delay_timer_sw = 0;
+    }
+}
+
+#define DEMO_ISR_IO WM_IO_PA_01
+static void
+demo_gpio_isr_callback (void *context)
+{
+  u16 ret = tls_get_gpio_irq_status (DEMO_ISR_IO);
+  if (ret)
+    {
+      tls_clr_gpio_irq_status (DEMO_ISR_IO);
+      {
+        if (u8_dreb == 0) // защита от ддребезга контактов для кнопки
+          {
+            if (i_swith == DEMO_MODE_SW)
+              i_swith = 2;
+            if (i_swith++ > 52)
+              i_swith = DEMO_MODE_SW;
+            extern volatile bool changeFlag;
+            changeFlag = true;
+            u8_dreb = 2;
+          }
+      }
     }
 }
 
@@ -89,19 +122,19 @@ demo_console_task (void *sdata)
   /* initialize all LED color values to black (off) */
   el_init ();
 
+  TM1637Display (WM_IO_PB_21, WM_IO_PB_22, DEFAULT_BIT_DELAY);
+
   setBrightness (20, 1);
   uint8_t data[] = { 0xff, 0xff, 0xff, 0xff };
   setSegments (data, 4, 0);
-  uint8_t PointData = 0x00;
   u8 u8_tic = 0;
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
   timer_cfg.unit = TLS_TIMER_UNIT_MS;
-  // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
-  // минимальной яркости, пришлось сделать время таймера поменьше
-  // timer_cfg.timeout = 100; // 0 * 30;
-  timer_cfg.timeout = 1000 * 15; //
+  // timer_cfg.unit = TLS_TIMER_UNIT_US; //
+  timer_cfg.timeout = 100; // 0 * 30;
+  // timer_cfg.timeout = 1000 * 15; //
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -111,6 +144,14 @@ demo_console_task (void *sdata)
       tls_timer_start (timer_id);
       printf ("timer start\n");
     }
+
+  u16 gpio_pin;
+  gpio_pin = DEMO_ISR_IO;
+  tls_gpio_cfg (gpio_pin, WM_GPIO_DIR_INPUT,
+                WM_GPIO_ATTR_PULLHIGH); // WM_GPIO_ATTR_FLOATING);
+  tls_gpio_isr_register (gpio_pin, demo_gpio_isr_callback, NULL);
+  tls_gpio_irq_enable (gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
+  printf ("\nbutton gpio %d rising isr\n", gpio_pin);
 
   puts ("Initialization done.");
 
@@ -136,20 +177,23 @@ demo_console_task (void *sdata)
       while (u8_wifi_state)
         {
 
-          if (i_swith == DEMO_MODE_SW)
-            el_loop (i_swith_demo);
-          else
-            el_loop (i_swith);
-
           u8_tic = ~u8_tic;
           if (i_swith == DEMO_MODE_SW)
-            PointData = VIEW_POINT_DATA;
+            {
+              el_loop (i_swith_demo);
+              data[0] = encodeSign (u8_tic) + (VIEW_POINT_DATA);
+              data[1] = encodeDigit (i_swith_demo / 10) + (VIEW_POINT_DATA);
+              data[2] = encodeDigit (i_swith_demo % 10) + (VIEW_POINT_DATA);
+              data[3] = encodeSign (u8_tic) + (VIEW_POINT_DATA & u8_tic);
+            }
           else
-            PointData = 0x00;
-          data[0] = encodeSign (u8_tic) + PointData;
-          data[1] = encodeDigit (i_swith / 10) + PointData;
-          data[2] = encodeDigit (i_swith % 10) + PointData;
-          data[3] = encodeSign (u8_tic) + PointData;
+            {
+              el_loop (i_swith);
+              data[0] = encodeSign (u8_tic);
+              data[1] = encodeDigit (i_swith / 10);
+              data[2] = encodeDigit (i_swith % 10);
+              data[3] = encodeSign (u8_tic);
+            }
           setSegments (data, 4, 0);
 
           tls_watchdog_clr (); //сбросить

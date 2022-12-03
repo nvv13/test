@@ -67,6 +67,14 @@ GND   		GND
 ~~~
 
 
+кнопка
+~~~
+connect to
+W801 GPIO | botton PIN
+PA_01 		1 pin
+GND   		2 pin
+~~~
+
 
 
 
