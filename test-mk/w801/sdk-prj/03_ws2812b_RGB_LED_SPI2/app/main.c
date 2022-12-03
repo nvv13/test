@@ -34,6 +34,7 @@
 
 #include "ws2812b.h"
 
+#include "TM1637Display.h"
 #include "w_flash_cfg.h"
 #include "w_wifi.h"
 
@@ -88,13 +89,19 @@ demo_console_task (void *sdata)
   /* initialize all LED color values to black (off) */
   el_init ();
 
+  setBrightness (20, 1);
+  uint8_t data[] = { 0xff, 0xff, 0xff, 0xff };
+  setSegments (data, 4, 0);
+  uint8_t PointData = 0x00;
+  u8 u8_tic = 0;
+
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
   timer_cfg.unit = TLS_TIMER_UNIT_MS;
   // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
   // минимальной яркости, пришлось сделать время таймера поменьше
   // timer_cfg.timeout = 100; // 0 * 30;
-  timer_cfg.timeout = 1000 * 15;
+  timer_cfg.timeout = 1000 * 15; //
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -133,6 +140,17 @@ demo_console_task (void *sdata)
             el_loop (i_swith_demo);
           else
             el_loop (i_swith);
+
+          u8_tic = ~u8_tic;
+          if (i_swith == DEMO_MODE_SW)
+            PointData = VIEW_POINT_DATA;
+          else
+            PointData = 0x00;
+          data[0] = encodeSign (u8_tic) + PointData;
+          data[1] = encodeDigit (i_swith / 10) + PointData;
+          data[2] = encodeDigit (i_swith % 10) + PointData;
+          data[3] = encodeSign (u8_tic) + PointData;
+          setSegments (data, 4, 0);
 
           tls_watchdog_clr (); //сбросить
           if (u8_wait_start_ota_upgrade)
