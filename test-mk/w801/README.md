@@ -224,10 +224,23 @@ $ make erase
 
 
 
-отформатировать исходный текст (ставим $ dnf install clang-tools-extra)
+
+
+6) отформатировать исходный текст (ставим $ dnf install clang-tools-extra)
 
 $ clang-format --style=GNU --verbose -i *.c* *.h*
 
 или (я добавил в make)
 
 $ make fmt
+
+
+
+
+7) еще, для 
+make menuconfig
+
+  надо поставить ncurses-devel
+
+$ dnf install ncurses-devel
+

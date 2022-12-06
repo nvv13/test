@@ -45,7 +45,7 @@ COMPONENTS_$(TARGET) += \
     $(TOP_DIR)/src/app/libapp$(LIB_EXT)
 ifeq ($(USE_NIMBLE), 1)
 COMPONENTS_$(TARGET) += \
-	$(TOP_DIR)/src/bt/libblehost$(LIB_EXT) 
+	$(TOP_DIR)/src/bt/libblehost$(LIB_EXT)  
 else
 COMPONENTS_$(TARGET) += \
 	$(TOP_DIR)/src/bt/libbthost$(LIB_EXT)
@@ -70,10 +70,10 @@ LINKLIB += \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmsys$(LIB_EXT)
 ifeq ($(USE_NIMBLE), 1)
 LINKLIB += \
-	$(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libblehost$(LIB_EXT)
+	$(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libblehost$(LIB_EXT) 
 else
 LINKLIB += \
-	$(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libbthost$(LIB_EXT)
+	$(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libbthost$(LIB_EXT) 
 endif	
 endif
 
