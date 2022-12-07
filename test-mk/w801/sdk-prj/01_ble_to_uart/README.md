@@ -4,9 +4,6 @@ project ble to uart
 board HLK-W801-KIT-V1.1 
 
 
-
-
-
 надо соеденить по схеме:
 ~~~
 connect to
@@ -16,6 +13,11 @@ RX PB_07  - TX
 GND       - GND
 ~~~
 
+видео  https://youtu.be/NMjXbppHeVs
+
+в видео используеться программка BLE Terminal  
+
+https://play.google.com/store/apps/details?id=com.edodm85.bluetoothbleterminal.free
 
 
 
