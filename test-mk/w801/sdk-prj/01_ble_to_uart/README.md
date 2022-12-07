@@ -1,7 +1,20 @@
 
-project bt server
+project ble to uart
 
 board HLK-W801-KIT-V1.1 
+
+
+
+
+
+надо соеденить по схеме:
+~~~
+connect to
+W801        Устройство с TTL Уровнями COM порта
+TX PB_06  - RX
+RX PB_07  - TX
+GND       - GND
+~~~
 
 
 
