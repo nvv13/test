@@ -3,15 +3,17 @@ project ble to uart
 
 board HLK-W801-KIT-V1.1 
 
+работает, пока только на отправку.
 
 надо соеденить по схеме:
 ~~~
 connect to
-W801        Устройство с TTL Уровнями COM порта
+W801        Устройство с TTL Уровнями Uart
 TX PB_06  - RX
 RX PB_07  - TX
 GND       - GND
 ~~~
+
 
 видео  https://youtu.be/NMjXbppHeVs
 
