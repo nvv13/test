@@ -3,7 +3,7 @@ project ble to uart
 
 board HLK-W801-KIT-V1.1 
 
-работает, пока только на отправку.
+работает, прием/отправка. 
 
 надо соеденить по схеме:
 ~~~
@@ -17,11 +17,14 @@ GND       - GND
 
 видео  https://youtu.be/NMjXbppHeVs
 
-в видео используеться программка BLE Terminal  
+в видео используется программка BLE Terminal, в ней работает только отправка..
 
 https://play.google.com/store/apps/details?id=com.edodm85.bluetoothbleterminal.free
 
 
+в этой программе, работает и отправка(WM_GATT_WRITE_UUID) и прием (WM_GATT_INDICATE_UUID)
+
+https://play.google.com/store/apps/details?id=com.punchthrough.lightblueexplorer
 
 
 
