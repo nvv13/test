@@ -112,7 +112,7 @@ void
 demo_console_task (void *sdata)
 {
 
-  dev.led_numof = 50;
+  dev.led_numof = 100;
   dev.data_pin = WM_IO_PB_17;
   // dev.mode = WS_PIN_MODE;
   dev.mode = WS_SPI_MODE_8bit;
