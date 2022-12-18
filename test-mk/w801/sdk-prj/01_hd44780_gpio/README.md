@@ -21,17 +21,22 @@ connect to
 ----- --------
 W801  hd44780
 ----- --------
-PB_21 RS
-PB_22 RW
-PB_23 EN
-PB_24 DO
-PB_25 D1
-PB_26 D2
-PB_18 D3
-PA_01 SCL
-PA_04 SDA
-5v    VCC
-GND   GND
+GND   Vss Pin1
+5v    Vdd Pin2
+      Vo  Pin3  --1K resistor-- to GND
+PB_21 RS  Pin4
+PB_22 RW  Pin5
+PB_23 EN  Pin6
+      D0  Pin7 
+      D1  Pin8
+      D2  Pin9
+      D3  Pin10
+PB_24 D4  Pin11
+PB_25 D5  Pin12
+PB_26 D6  Pin13
+PB_18 D7  Pin14
+PB_17 A   Pin15  -- BACKLIGHT --
+GND   K   Pin16  -- BACKLIGHT --
 ----- --------
 
 

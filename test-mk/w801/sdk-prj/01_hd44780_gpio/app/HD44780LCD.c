@@ -9,9 +9,13 @@
 #define HD44780_CMD_WAIT (2000U)
 #define HD44780_INIT_WAIT_XXL (50000U)
 #define HD44780_INIT_WAIT_LONG (4500U)
-#define HD44780_INIT_WAIT_SHORT (150U)
-#define HD44780_PULSE_WAIT_SHORT (1U)
-#define HD44780_PULSE_WAIT_LONG (100U)
+#define HD44780_INIT_WAIT_SHORT (250U)
+#define HD44780_PULSE_WAIT_SHORT (10U) // 1U
+#define HD44780_PULSE_WAIT_LONG (200U) // 100U
+
+#define HD44780_WAIT_CMD3 (5U)
+#define HD44780_WAIT_CMD5 (10U)
+#define HD44780_WAIT_CMD100 (200U)
 
 static void HD44780LCD_LCDSendCmd (unsigned char cmd);
 static void HD44780LCD_LCDSendData (unsigned char data);
@@ -141,7 +145,7 @@ HD44780LCD_LCDSendData (unsigned char data)
       printf ("I2C error  wire.endTransmission : ");
       printf ("Tranmission code : ");
       printf ("0x%.2X\n", TransmissionCode);
-      n_delay_ms (100);
+      n_delay_ms (HD44780_WAIT_CMD100);
 #endif
     }
 }
@@ -186,7 +190,7 @@ HD44780LCD_LCDSendCmd (unsigned char cmd)
       printf ("I2C error  wire.endTransmission : ");
       printf ("Tranmission code : ");
       printf ("0x%.2X\n", TransmissionCode);
-      n_delay_ms (100);
+      n_delay_ms (HD44780_WAIT_CMD100);
 #endif
     }
 }
@@ -258,7 +262,7 @@ HD44780LCD_LCDResetScreen (LCDCursorType_e CursorType)
   HD44780LCD_LCDSendCmd (CursorType);
   HD44780LCD_LCDSendCmd (LCD_CLRSCR);
   HD44780LCD_LCDSendCmd (LCDEntryModeThree);
-  n_delay_ms (5);
+  n_delay_ms (HD44780_WAIT_CMD5);
 }
 
 // Func Desc: Turn Screen on and off
@@ -269,7 +273,7 @@ HD44780LCD_LCDDisplayON (bool OnOff)
 {
   OnOff ? HD44780LCD_LCDSendCmd (LCD_DISPLAY_ON)
         : HD44780LCD_LCDSendCmd (LCD_DISPLAY_OFF);
-  n_delay_ms (5);
+  n_delay_ms (HD44780_WAIT_CMD5);
 }
 
 // Func Desc: Initialise LCD
@@ -285,19 +289,19 @@ HD44780LCD_LCDInit (LCDCursorType_e CursorType)
       return;
     }
 
-  n_delay_ms (15);
+  n_delay_ms (HD44780_WAIT_CMD5*3);
   HD44780LCD_LCDSendCmd (LCD_HOME);
-  n_delay_ms (5);
+  n_delay_ms (HD44780_WAIT_CMD5);
   HD44780LCD_LCDSendCmd (LCD_HOME);
-  n_delay_ms (5);
+  n_delay_ms (HD44780_WAIT_CMD5);
   HD44780LCD_LCDSendCmd (LCD_HOME);
-  n_delay_ms (5);
+  n_delay_ms (HD44780_WAIT_CMD5);
   HD44780LCD_LCDSendCmd (LCD_MODE_4BIT);
   HD44780LCD_LCDSendCmd (LCD_DISPLAY_ON);
   HD44780LCD_LCDSendCmd (CursorType);
   HD44780LCD_LCDSendCmd (LCDEntryModeThree);
   HD44780LCD_LCDSendCmd (LCD_CLRSCR);
-  n_delay_ms (5);
+  n_delay_ms (HD44780_WAIT_CMD5);
 }
 
 // Func Desc: Send string to LCD
@@ -487,7 +491,7 @@ void
 HD44780LCD_LCDClearScreenCmd (void)
 {
   HD44780LCD_LCDSendCmd (LCD_CLRSCR);
-  n_delay_ms (3); // Requires a delay
+  n_delay_ms (HD44780_WAIT_CMD3); // Requires a delay
 }
 
 // Set Cursor position to zero
@@ -496,7 +500,7 @@ void
 HD44780LCD_LCDHome (void)
 {
   HD44780LCD_LCDSendCmd (LCD_HOME);
-  n_delay_ms (3); // Requires a delay
+  n_delay_ms (HD44780_WAIT_CMD3); // Requires a delay
 }
 
 // Change entry mode
@@ -506,7 +510,7 @@ void
 HD44780LCD_LCDChangeEntryMode (LCDEntryMode_e newEntryMode)
 {
   HD44780LCD_LCDSendCmd (newEntryMode);
-  n_delay_ms (3); // Requires a delay
+  n_delay_ms (HD44780_WAIT_CMD3); // Requires a delay
 }
 
 static char LCD44780_buffer[21];
