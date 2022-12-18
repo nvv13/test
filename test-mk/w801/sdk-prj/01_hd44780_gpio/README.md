@@ -1,11 +1,9 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
 
 project
 
-board HLK-W801-KIT-V1.1 + hd44780
+board HLK-W801-KIT-V1.1 + hd44780 
 
-эта схема пока не опробована, у меня нет 1602 без I2C адаптера
+LCD1602 
 
 
 соединения
@@ -23,7 +21,8 @@ W801  hd44780
 ----- --------
 GND   Vss Pin1
 5v    Vdd Pin2
-      Vo  Pin3  --1K resistor-- to GND
+      Vo  Pin3  -- 10K variable resistor -- to GND to 5v -- Reg contrast !
+                 or -- 1K resistor -- to GND
 PB_21 RS  Pin4
 PB_22 RW  Pin5
 PB_23 EN  Pin6
@@ -35,7 +34,7 @@ PB_24 D4  Pin11
 PB_25 D5  Pin12
 PB_26 D6  Pin13
 PB_18 D7  Pin14
-PB_17 A   Pin15  -- BACKLIGHT --
+PB_17 A   Pin15  -- BACKLIGHT -- (check for inner display module resistor)
 GND   K   Pin16  -- BACKLIGHT --
 ----- --------
 

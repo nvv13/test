@@ -93,11 +93,9 @@ helloWorld (void)
 {
   char teststr1[] = "Hello";
   char teststr2[] = "World";
-  HD44780LCD_LCDGOTO (u8_row > 2 ? LCDLineNumberTwo : LCDLineNumberOne,
-                              0);
+  HD44780LCD_LCDGOTO (u8_row > 2 ? LCDLineNumberTwo : LCDLineNumberOne, 0);
   HD44780LCD_LCDSendString (teststr1);
-  HD44780LCD_LCDGOTO (
-      u8_row > 2 ? LCDLineNumberThree : LCDLineNumberTwo, 0);
+  HD44780LCD_LCDGOTO (u8_row > 2 ? LCDLineNumberThree : LCDLineNumberTwo, 0);
   HD44780LCD_LCDSendString (teststr2); // Display a string
   HD44780LCD_LCDSendChar ('!');        // Display a single character
   n_delay_ms (DISPLAY_DELAY_1);
@@ -319,5 +317,3 @@ entryModeTest (void)
   HD44780LCD_LCDClearScreenCmd ();
   n_delay_ms (DISPLAY_DELAY_1);
 }
-
-

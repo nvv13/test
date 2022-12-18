@@ -11,7 +11,7 @@ MCU – WinnerMicro W801 32-bit Alibaba XT804 microcontroller @ 240 MHz (Xuantie
 
 Connectivity
  802.11b/g/n WiFi 4 up to 150 Mbps supporting station, soft AP and station+soft AP modes, WPA2 security
- Bluetooth 4.2
+ Bluetooth/BLE 4.2
 
 Expansion – 2x 24-pin headers with
  1x SDIO host with support for SDIO 2.0, SDHC, MMC 4.2

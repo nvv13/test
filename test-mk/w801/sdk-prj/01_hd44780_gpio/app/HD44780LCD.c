@@ -289,7 +289,7 @@ HD44780LCD_LCDInit (LCDCursorType_e CursorType)
       return;
     }
 
-  n_delay_ms (HD44780_WAIT_CMD5*3);
+  n_delay_ms (HD44780_WAIT_CMD5 * 3);
   HD44780LCD_LCDSendCmd (LCD_HOME);
   n_delay_ms (HD44780_WAIT_CMD5);
   HD44780LCD_LCDSendCmd (LCD_HOME);
