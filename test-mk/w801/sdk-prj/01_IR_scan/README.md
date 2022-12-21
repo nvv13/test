@@ -23,7 +23,18 @@ LCD display 16x2
 надо соеденить по схеме:
 ~~~
 
-connect to
+connect to IR sensor
+----- --------
+W801  tsop78
+----- --------
+PA1   Pin1
+GND   Pin2
+3.3v  Pin3
+----- --------
+
+
+
+connect to LCD1602
 ----- --------
 W801  hd44780
 ----- --------
@@ -47,14 +58,6 @@ GND   K   Pin16  -- BACKLIGHT --
 ----- --------
 
 
-connect to
------ --------
-W801  tsop78
------ --------
-PA1   Pin1
-GND   Pin2
-3.3v  Pin3
------ --------
 
 
 ~~~
@@ -172,11 +175,6 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
-PS:
-исходники драйвера 
-  https://github.com/gavinlyonsrepo/HD44780_LCD_PCF8574.git
 
 
-про I2C
-http://easyelectronics.ru/interface-bus-iic-i2c.html
 

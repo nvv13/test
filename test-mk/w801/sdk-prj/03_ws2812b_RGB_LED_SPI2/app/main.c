@@ -38,6 +38,7 @@
 #include "w_flash_cfg.h"
 #include "w_wifi.h"
 
+#include "IR_Scan.h"
 #include "decode_cmd.h"
 #include "el_cmd.h"
 
@@ -49,6 +50,10 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
 
+#define USER_APP1_TASK_SIZE 1024
+static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
+#define USER_APP1_TASK_PRIO (DEMO_TASK_PRIO + 2)
+
 #define DEMO_MODE_SW 1000
 u16 i_light = 10;
 u16 i_swith = DEMO_MODE_SW;
@@ -57,9 +62,12 @@ u8 u8_wait_start_ota_upgrade = 0;
 u8 u8_start_reconfigure = 0;
 u16 i_mode_global = 0;
 u16 i_max_out = 0;
-static u8 u8_dreb = 2; // от дребезга кнопки
+static u8 volatile u8_dreb = 2; // от дребезга кнопки
 
-static u16 u16_delay_timer_sw = 0;
+static u16 volatile u16_delay_timer_sw = 0;
+
+static int volatile i_delay_timer_IR = -1;
+static int volatile i_IR_decode = 0;
 
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
@@ -77,6 +85,23 @@ demo_timer_irq (u8 *arg) // здесь будет смена режима
           changeFlag = true;
         }
       u16_delay_timer_sw = 0;
+    }
+
+  if (i_delay_timer_IR >= 0)
+    {
+      if ((i_delay_timer_IR++) > 20) // 2 sec
+        {
+          i_delay_timer_IR = -1;
+          if (i_IR_decode > 0)
+            {
+              i_swith = i_IR_decode;
+              i_IR_decode = 0;
+              if (i_swith++ > 52)
+                i_swith = DEMO_MODE_SW;
+              extern volatile bool changeFlag;
+              changeFlag = true;
+            }
+        }
     }
 }
 
@@ -132,9 +157,7 @@ demo_console_task (void *sdata)
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
   timer_cfg.unit = TLS_TIMER_UNIT_MS;
-  // timer_cfg.unit = TLS_TIMER_UNIT_US; //
-  timer_cfg.timeout = 100; // 0 * 30;
-  // timer_cfg.timeout = 1000 * 15; //
+  timer_cfg.timeout = 100; //
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -229,6 +252,32 @@ sock_s_task (void *sdata)
 }
 
 void
+user_app1_task (void *sdata)
+{
+  printf ("user_app1_task start\n");
+
+  tls_os_queue_t *ir_code_msg_q = NULL;
+  tls_os_queue_create (&ir_code_msg_q, IR_QUEUE_SIZE);
+  printf ("tls_os_queue_create - recive_ir_msg_q\n");
+
+  IR_Scan_create (WM_IO_PA_02, &ir_code_msg_q);
+  printf ("IR_Scan_create\n");
+
+  void *scan_IR_msg;
+
+  for (;;)
+    {
+      tls_os_queue_receive (ir_code_msg_q, (void **)&scan_IR_msg, 0, 0);
+      printf ("0x%08x\n", ((u32)scan_IR_msg));
+      if ((u32)scan_IR_msg == 0xff0011) // нажата 0...9
+        {
+          i_IR_decode = (i_IR_decode * 10) + 1;
+          i_delay_timer_IR = 0; // подождем, вдруг еще цифра будет
+        }
+    }
+}
+
+void
 UserMain (void)
 {
   printf ("user task\n");
@@ -251,6 +300,11 @@ UserMain (void)
                           * sizeof (u32), /* task's stack size, unit:byte */
                       DEMO_SOCK_S_PRIO, 0);
 
+  tls_os_task_create (NULL, NULL, user_app1_task, NULL,
+                      (void *)UserApp1TaskStk, /* task's stack start address */
+                      USER_APP1_TASK_SIZE
+                          * sizeof (u32), /* task's stack size, unit:byte */
+                      USER_APP1_TASK_PRIO, 0);
   //	while(1)
   //	{
   //	}

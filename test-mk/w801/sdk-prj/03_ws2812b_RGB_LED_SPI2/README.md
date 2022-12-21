@@ -76,6 +76,19 @@ GND   		2 pin
 ~~~
 
 
+IR sensor
+~~~
+connect to 
+----- --------
+W801  tsop78
+----- --------
+PA_02 Pin1
+GND   Pin2
+3.3v  Pin3
+----- --------
+~~~
+
+
 
 
 
