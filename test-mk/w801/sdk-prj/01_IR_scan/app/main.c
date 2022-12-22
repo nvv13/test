@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "wm_cpu.h"
 //#include "wm_watchdog.h"
 
 #include "HD44780LCD.h"
@@ -43,8 +45,6 @@ user_app1_task (void *sdata)
   IR_Scan_create (WM_IO_PA_01, ir_code_msg_q);
   printf ("IR_Scan_create\n");
 
-  tls_os_queue_send (ir_code_msg_q, (void *)100, 0);
-
   u32 scan_IR_msg = 0;
   u16 u16_total_count = 0;
 
@@ -61,7 +61,7 @@ void
 UserMain (void)
 {
   printf ("UserMain start");
-  // tls_sys_clk_set (CPU_CLK_240M);
+  tls_sys_clk_set (CPU_CLK_240M);
 
   tls_os_task_create (NULL, NULL, user_app1_task, NULL,
                       (void *)UserApp1TaskStk, /* task's stack start address */

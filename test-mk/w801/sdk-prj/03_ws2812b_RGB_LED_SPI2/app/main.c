@@ -263,15 +263,29 @@ user_app1_task (void *sdata)
   IR_Scan_create (WM_IO_PA_02, &ir_code_msg_q);
   printf ("IR_Scan_create\n");
 
-  void *scan_IR_msg;
+  u32 scan_IR_msg;
 
   for (;;)
     {
       tls_os_queue_receive (ir_code_msg_q, (void **)&scan_IR_msg, 0, 0);
-      printf ("0x%08x\n", ((u32)scan_IR_msg));
-      if ((u32)scan_IR_msg == 0xff0011) // нажата 0...9
+      printf ("0x%08x\n", scan_IR_msg);
+      u8 u8_dig=255;
+      switch(scan_IR_msg)
+      {
+      case 0xbb44ff00 : u8_dig=1;break;
+      case 0xbc43ff00 : u8_dig=2;break;
+      case 0xf807ff00 : u8_dig=3;break;
+      case 0xf609ff00 : u8_dig=4;break;
+      case 0xe916ff00 : u8_dig=5;break;
+      case 0xf20dff00 : u8_dig=6;break;
+      case 0xf30cff00 : u8_dig=7;break;
+      case 0xa15eff00 : u8_dig=8;break;
+      case 0xf708ff00 : u8_dig=9;break;
+      case 0xa55aff00 : u8_dig=0;break;
+      }
+      if (u8_dig!=255) // нажата 1
         {
-          i_IR_decode = (i_IR_decode * 10) + 1;
+          i_IR_decode = (i_IR_decode * 10) + u8_dig;
           i_delay_timer_IR = 0; // подождем, вдруг еще цифра будет
         }
     }
