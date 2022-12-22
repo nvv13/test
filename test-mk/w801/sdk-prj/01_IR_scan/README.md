@@ -1,21 +1,12 @@
+project IRdecode
+
+board HLK-W801-KIT-V1.1 + hd44780 + tsop48 + LCD1602 
 
 
-project
-
-board HLK-W801-KIT-V1.1 + hd44780 + tsop48
-
-
-
-LCD1602 
-
-
+видео https://youtu.be/YmEWTExZXCI
 
 
 соединения
-
-дисплей
-
-LCD display 16x2
 
 надо соеденить по схеме:
 ~~~
