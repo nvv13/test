@@ -22,6 +22,11 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
+#define USER_APP2_TASK_SIZE 2048
+static OS_STK UserApp2TaskStk[USER_APP2_TASK_SIZE];
+#define USER_APP2_TASK_PRIO 33
+
+
 void
 user_app1_task (void *sdata)
 {
@@ -58,6 +63,22 @@ user_app1_task (void *sdata)
 }
 
 void
+user_app2_task (void *sdata)
+{
+  printf ("user_app2_task start\n");
+  tls_gpio_cfg (WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  u8 u8_led_state = 0;
+
+  for (;;)
+    {
+      tls_gpio_write (WM_IO_PB_05, u8_led_state);
+      tls_os_time_delay (HZ);
+      u8_led_state = ~u8_led_state;
+    }
+}
+
+
+void
 UserMain (void)
 {
   printf ("UserMain start");
@@ -68,4 +89,10 @@ UserMain (void)
                       USER_APP1_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
                       USER_APP1_TASK_PRIO, 0);
+
+  tls_os_task_create (NULL, NULL, user_app2_task, NULL,
+                      (void *)UserApp2TaskStk, /* task's stack start address */
+                      USER_APP2_TASK_SIZE
+                          * sizeof (u32), /* task's stack size, unit:byte */
+                      USER_APP2_TASK_PRIO, 0);
 }
