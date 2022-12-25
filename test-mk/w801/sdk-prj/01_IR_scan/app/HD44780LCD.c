@@ -17,6 +17,19 @@
 #define HD44780_WAIT_CMD5 (10U)
 #define HD44780_WAIT_CMD100 (200U)
 
+/*
+#define HD44780_CMD_WAIT (3000U)
+#define HD44780_INIT_WAIT_XXL (60000U)
+#define HD44780_INIT_WAIT_LONG (5500U)
+#define HD44780_INIT_WAIT_SHORT (350U)
+#define HD44780_PULSE_WAIT_SHORT (15U)   // 1U
+#define HD44780_PULSE_WAIT_LONG  (1500U) // 100U
+
+#define HD44780_WAIT_CMD3 (15U)
+#define HD44780_WAIT_CMD5 (20U)
+#define HD44780_WAIT_CMD100 (300U)
+*/
+
 static void HD44780LCD_LCDSendCmd (unsigned char cmd);
 static void HD44780LCD_LCDSendData (unsigned char data);
 static bool HD44780LCD_LCD_I2C_ON (void);

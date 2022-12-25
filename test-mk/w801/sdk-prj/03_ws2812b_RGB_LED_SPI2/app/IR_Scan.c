@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "wm_irq.h"
 #include "wm_gpio.h"
+#include "wm_irq.h"
 #include "wm_osal.h"
 #include "wm_timer.h"
 
@@ -13,7 +13,6 @@
 #ifndef UINT32_MAX
 #define UINT32_MAX (4294967295U)
 #endif
-
 
 #define TIC_PAUSE 12500
 
@@ -33,12 +32,13 @@ static volatile u16 u16_raw_buf_pos = 0;
 #define ST_LOAD3 5
 static volatile u8 u8_status = ST_IDLE;
 
+volatile u32 u32_IR_scan_result = 0;
 static volatile u32 u32_scan_code = 0;
 static volatile u8 u8_scan_pos = 0;
 
 static tls_os_queue_t *recive_ir_msg_q = NULL;
 
-// #define IR_SCAN_SERIAL_DEBUG
+#define IR_SCAN_SERIAL_DEBUG
 
 static void
 tic_timer_irq (
@@ -66,13 +66,12 @@ tic_timer_irq (
 
                   if (u8_status == ST_LOAD3) // прием 1 это или 0
                     {
-                      if (i_rawbuf[i] > -650 
-                          && i_rawbuf[i] < -30 )
+                      if (i_rawbuf[i] > -650 && i_rawbuf[i] < -30)
                         {
                           u8_status = ST_LOAD21; // отложенный на след. цикл
                                                  // ST_LOAD21
 
-                          if (i_rawbuf[i] > -140 ) // это 0
+                          if (i_rawbuf[i] > -140) // это 0
                             {
                               u8_scan_pos++;
 #ifdef IR_SCAN_SERIAL_DEBUG
@@ -86,8 +85,36 @@ tic_timer_irq (
                               printf (" 1 ");
 #endif
                               u8_scan_pos++;
-                              if (u8_scan_pos > 31)
-                                u8_status = ST_IDLE;
+                              if (u8_scan_pos
+                                  > 31) //все биты считаны (предполагееться
+                                        //такой протокол)
+                                {
+                                  u8_status = ST_IDLE;
+                                  u32_IR_scan_result = u32_scan_code;
+                                  if (recive_ir_msg_q != NULL)
+                                    {
+                                      if (tls_os_queue_send (
+                                              recive_ir_msg_q,
+                                              (void *)u32_scan_code, 0)
+                                          == TLS_OS_ERROR)
+                                        {
+#ifdef IR_SCAN_SERIAL_DEBUG
+                                          printf (
+                                              "\n DEBUG: tls_os_queue_send "
+                                              "Error\n");
+#endif
+                                        }
+                                    }
+
+#ifdef IR_SCAN_SERIAL_DEBUG
+                                  printf (
+                                      "\n DEBUG: u8_scan_pos > 31 0x%08x\n",
+                                      u32_scan_code);
+#endif
+                                  u32_scan_code = 0; // обнулить для накопления
+                                  u8_scan_pos = 0; // позиция принимаемого
+                                                   // бита, порядок LSB
+                                }
                             }
                         }
                       else
@@ -96,8 +123,8 @@ tic_timer_irq (
 
                   if (u8_status == ST_LOAD2)
                     {
-                      if (i_rawbuf[i] > 50 
-                          && i_rawbuf[i] < 150 ) // что ожидалось
+                      if (i_rawbuf[i] > 50
+                          && i_rawbuf[i] < 150) // что ожидалось
                         u8_status = ST_LOAD3; // считываем 1 это или 0
                       else
                         u8_status = ST_IDLE;
@@ -105,8 +132,8 @@ tic_timer_irq (
 
                   if (u8_status == ST_LOAD1)
                     {
-                      if (i_rawbuf[i] > -1000 
-                          && i_rawbuf[i] < -300 ) // что ожидалось
+                      if (i_rawbuf[i] > -1000
+                          && i_rawbuf[i] < -300) // что ожидалось
                         u8_status = ST_LOAD2;
                       else
                         u8_status = ST_IDLE;
@@ -114,28 +141,34 @@ tic_timer_irq (
 
                   if (u8_status == ST_START)
                     {
-                      if (i_rawbuf[i] > 600 
-                          && i_rawbuf[i] < 2000 ) // что ожидалось
+                      if (i_rawbuf[i] > 600
+                          && i_rawbuf[i] < 2000) // что ожидалось
                         u8_status = ST_LOAD1;
                       else
                         u8_status = ST_IDLE;
                     }
 
                   if (u8_status == ST_IDLE
-                      && i_rawbuf[i] < -1000 ) // детектор старта
+                      && i_rawbuf[i] < -1000) // детектор старта
                     {
                       u8_status = ST_START;
                       if (u32_scan_code
                           != 0) // есть предыдущий результат, отправим
-                        if (tls_os_queue_send (recive_ir_msg_q,
-                                               (void *)u32_scan_code, 0)
-                            == TLS_OS_ERROR)
-                          {
+                        {
+                          u32_IR_scan_result = u32_scan_code;
+                          if (recive_ir_msg_q != NULL)
+                            {
+                              if (tls_os_queue_send (recive_ir_msg_q,
+                                                     (void *)u32_scan_code, 0)
+                                  == TLS_OS_ERROR)
+                                {
 #ifdef IR_SCAN_SERIAL_DEBUG
-                            printf ("\n DEBUG: tls_os_queue_send Error\n");
+                                  printf (
+                                      "\n DEBUG: tls_os_queue_send Error\n");
 #endif
-                          }
-
+                                }
+                            }
+                        }
 #ifdef IR_SCAN_SERIAL_DEBUG
                       printf ("\n DEBUG: 0x%08x\n", u32_scan_code);
 #endif
@@ -196,15 +229,14 @@ IR_Scan_create (enum tls_io_name ir_pin, tls_os_queue_t *ir_code_msg_q)
   if (recive_ir_msg_q == NULL)
     {
 #ifdef IR_SCAN_SERIAL_DEBUG
-      printf ("IR_Scan_create : error ir_code_msg_q\n");
+      printf ("IR_Scan_create : ir_code_msg_q = NULL , no query send ! \n");
 #endif
-      return WM_FAILED;
     }
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
   timer_cfg.unit = TLS_TIMER_UNIT_US; /**< microsecond level(us) */
-  timer_cfg.timeout = 8;  // 8 us = 125KHz
+  timer_cfg.timeout = 8;              // 8 us = 125KHz
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)tic_timer_irq;
   timer_cfg.arg = NULL;

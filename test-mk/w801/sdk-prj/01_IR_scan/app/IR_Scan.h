@@ -9,8 +9,12 @@
 
 /**
  * @brief     interface IR_Scan_create
- * @param[in] ir_pin - куда подключен датчик, ir_code_msg_q - очередь сообщений
- * с результатом сканирования
+ *
+ * @param[in] ir_pin - куда подключен датчик
+ * @param[in]  ir_code_msg_q - очередь сообщений * с результатом сканирования
+ *      если      ir_code_msg_q = NULL -  то тогда используем переменную 
+ *                      extern volatile u32 u32_IR_scan_result;
+ *
  * @retval         WM_SUCCESS    success
  * @retval         WM_FAILED     failed
  * @note      none

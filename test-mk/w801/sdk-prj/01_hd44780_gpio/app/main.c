@@ -62,6 +62,10 @@ UserMain (void)
   printf ("user task LCD test u8_row=%d, u8_col=%d\n", u8_row, u8_col);
 
   // tls_sys_clk_set (CPU_CLK_240M);
+  // tls_sys_clk_set (CPU_CLK_160M);
+  // tls_sys_clk_set (CPU_CLK_80M);
+  // tls_sys_clk_set (CPU_CLK_40M);
+  // tls_sys_clk_set (CPU_CLK_2M);
 
   HD44780LCD_HD44780LCD (u8_row, u8_col); // instantiate an object
 
@@ -69,8 +73,21 @@ UserMain (void)
   HD44780LCD_LCDClearScreen ();
   HD44780LCD_LCDBackLightSet (true);
 
+  tls_sys_clk sysclk;
+
   for (;;)
     {
+  tls_sys_clk_get (&sysclk);
+  printf ("  sysclk.apbclk %d\n", sysclk.apbclk);
+  printf ("  sysclk.cpuclk %d\n", sysclk.cpuclk);
+
+  HD44780LCD_LCDGOTO (LCDLineNumberOne, 0);
+  HD44780LCD_printf ("clk.apbclk %d", sysclk.apbclk);
+  HD44780LCD_LCDGOTO (LCDLineNumberTwo, 0); // B
+  HD44780LCD_printf ("clk.cpuclk %d", sysclk.cpuclk);
+  n_delay_ms (DISPLAY_DELAY);
+  HD44780LCD_LCDClearScreen ();
+
       helloWorld ();
       cursorMoveTest ();
       scrollTest ();
@@ -83,6 +100,32 @@ UserMain (void)
       writeNumTest ();  // Print numerical data using print() test
       customChar ();    // Custom character from CGRAM test
       backLightTest ();
+
+    switch(sysclk.cpuclk) // восстанавливаем частоту
+    {
+     case 2:
+       {
+       tls_sys_clk_set(CPU_CLK_40M); 
+       };break;
+     case 40:
+       {
+       tls_sys_clk_set(CPU_CLK_80M); 
+       };break;
+     case 80:
+       {
+       tls_sys_clk_set(CPU_CLK_160M); 
+       };break;
+     case 160:
+       {
+       tls_sys_clk_set(CPU_CLK_240M); 
+       };break;
+     case 240:
+       {
+       tls_sys_clk_set(CPU_CLK_2M); 
+       };break;
+    }
+
+
     }
 }
 

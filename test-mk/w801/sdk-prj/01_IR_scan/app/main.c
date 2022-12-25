@@ -26,7 +26,6 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 static OS_STK UserApp2TaskStk[USER_APP2_TASK_SIZE];
 #define USER_APP2_TASK_PRIO 33
 
-
 void
 user_app1_task (void *sdata)
 {
@@ -76,7 +75,6 @@ user_app2_task (void *sdata)
       u8_led_state = ~u8_led_state;
     }
 }
-
 
 void
 UserMain (void)

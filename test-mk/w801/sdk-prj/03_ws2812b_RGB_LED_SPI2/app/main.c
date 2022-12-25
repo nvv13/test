@@ -50,10 +50,6 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
 
-#define USER_APP1_TASK_SIZE 1024
-static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
-#define USER_APP1_TASK_PRIO (DEMO_TASK_PRIO + 2)
-
 #define DEMO_MODE_SW 1000
 u16 i_light = 10;
 u16 i_swith = DEMO_MODE_SW;
@@ -66,6 +62,7 @@ static u8 volatile u8_dreb = 2; // от дребезга кнопки
 
 static u16 volatile u16_delay_timer_sw = 0;
 
+extern volatile u32 u32_IR_scan_result;
 static int volatile i_delay_timer_IR = -1;
 static int volatile i_IR_decode = 0;
 
@@ -87,6 +84,50 @@ demo_timer_irq (u8 *arg) // здесь будет смена режима
       u16_delay_timer_sw = 0;
     }
 
+  if (u32_IR_scan_result != 0)
+    {
+      u8 u8_dig = 255;
+      switch (u32_IR_scan_result)
+        {
+        case 0xbb44ff00:
+          u8_dig = 1;
+          break;
+        case 0xbc43ff00:
+          u8_dig = 2;
+          break;
+        case 0xf807ff00:
+          u8_dig = 3;
+          break;
+        case 0xf609ff00:
+          u8_dig = 4;
+          break;
+        case 0xe916ff00:
+          u8_dig = 5;
+          break;
+        case 0xf20dff00:
+          u8_dig = 6;
+          break;
+        case 0xf30cff00:
+          u8_dig = 7;
+          break;
+        case 0xa15eff00:
+          u8_dig = 8;
+          break;
+        case 0xf708ff00:
+          u8_dig = 9;
+          break;
+        case 0xa55aff00:
+          u8_dig = 0;
+          break;
+        }
+      if (u8_dig != 255) // нажата 1
+        {
+          i_IR_decode = (i_IR_decode * 10) + u8_dig;
+          i_delay_timer_IR = 0; // подождем, вдруг еще цифра будет
+        }
+      u32_IR_scan_result = 0;
+    }
+
   if (i_delay_timer_IR >= 0)
     {
       if ((i_delay_timer_IR++) > 20) // 2 sec
@@ -96,7 +137,7 @@ demo_timer_irq (u8 *arg) // здесь будет смена режима
             {
               i_swith = i_IR_decode;
               i_IR_decode = 0;
-              if (i_swith++ > 52)
+              if (i_swith > 52)
                 i_swith = DEMO_MODE_SW;
               extern volatile bool changeFlag;
               changeFlag = true;
@@ -176,6 +217,9 @@ demo_console_task (void *sdata)
   tls_gpio_irq_enable (gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
   printf ("\nbutton gpio %d rising isr\n", gpio_pin);
 
+  IR_Scan_create (WM_IO_PA_02, NULL);
+  printf ("IR_Scan_create\n");
+
   puts ("Initialization done.");
 
   tls_watchdog_init (60 * 1000 * 1000); // u32 usec около 1 минуты
@@ -252,46 +296,6 @@ sock_s_task (void *sdata)
 }
 
 void
-user_app1_task (void *sdata)
-{
-  printf ("user_app1_task start\n");
-
-  tls_os_queue_t *ir_code_msg_q = NULL;
-  tls_os_queue_create (&ir_code_msg_q, IR_QUEUE_SIZE);
-  printf ("tls_os_queue_create - recive_ir_msg_q\n");
-
-  IR_Scan_create (WM_IO_PA_02, &ir_code_msg_q);
-  printf ("IR_Scan_create\n");
-
-  u32 scan_IR_msg;
-
-  for (;;)
-    {
-      tls_os_queue_receive (ir_code_msg_q, (void **)&scan_IR_msg, 0, 0);
-      printf ("0x%08x\n", scan_IR_msg);
-      u8 u8_dig=255;
-      switch(scan_IR_msg)
-      {
-      case 0xbb44ff00 : u8_dig=1;break;
-      case 0xbc43ff00 : u8_dig=2;break;
-      case 0xf807ff00 : u8_dig=3;break;
-      case 0xf609ff00 : u8_dig=4;break;
-      case 0xe916ff00 : u8_dig=5;break;
-      case 0xf20dff00 : u8_dig=6;break;
-      case 0xf30cff00 : u8_dig=7;break;
-      case 0xa15eff00 : u8_dig=8;break;
-      case 0xf708ff00 : u8_dig=9;break;
-      case 0xa55aff00 : u8_dig=0;break;
-      }
-      if (u8_dig!=255) // нажата 1
-        {
-          i_IR_decode = (i_IR_decode * 10) + u8_dig;
-          i_delay_timer_IR = 0; // подождем, вдруг еще цифра будет
-        }
-    }
-}
-
-void
 UserMain (void)
 {
   printf ("user task\n");
@@ -314,11 +318,6 @@ UserMain (void)
                           * sizeof (u32), /* task's stack size, unit:byte */
                       DEMO_SOCK_S_PRIO, 0);
 
-  tls_os_task_create (NULL, NULL, user_app1_task, NULL,
-                      (void *)UserApp1TaskStk, /* task's stack start address */
-                      USER_APP1_TASK_SIZE
-                          * sizeof (u32), /* task's stack size, unit:byte */
-                      USER_APP1_TASK_PRIO, 0);
   //	while(1)
   //	{
   //	}

@@ -32,12 +32,13 @@ static volatile u16 u16_raw_buf_pos = 0;
 #define ST_LOAD3 5
 static volatile u8 u8_status = ST_IDLE;
 
+volatile u32 u32_IR_scan_result = 0;
 static volatile u32 u32_scan_code = 0;
 static volatile u8 u8_scan_pos = 0;
 
 static tls_os_queue_t *recive_ir_msg_q = NULL;
 
-// #define IR_SCAN_SERIAL_DEBUG
+#define IR_SCAN_SERIAL_DEBUG
 
 static void
 tic_timer_irq (
@@ -84,8 +85,36 @@ tic_timer_irq (
                               printf (" 1 ");
 #endif
                               u8_scan_pos++;
-                              if (u8_scan_pos > 31)
-                                u8_status = ST_IDLE;
+                              if (u8_scan_pos
+                                  > 31) //все биты считаны (предполагееться
+                                        //такой протокол)
+                                {
+                                  u8_status = ST_IDLE;
+                                  u32_IR_scan_result = u32_scan_code;
+                                  if (recive_ir_msg_q != NULL)
+                                    {
+                                      if (tls_os_queue_send (
+                                              recive_ir_msg_q,
+                                              (void *)u32_scan_code, 0)
+                                          == TLS_OS_ERROR)
+                                        {
+#ifdef IR_SCAN_SERIAL_DEBUG
+                                          printf (
+                                              "\n DEBUG: tls_os_queue_send "
+                                              "Error\n");
+#endif
+                                        }
+                                    }
+
+#ifdef IR_SCAN_SERIAL_DEBUG
+                                  printf (
+                                      "\n DEBUG: u8_scan_pos > 31 0x%08x\n",
+                                      u32_scan_code);
+#endif
+                                  u32_scan_code = 0; // обнулить для накопления
+                                  u8_scan_pos = 0; // позиция принимаемого
+                                                   // бита, порядок LSB
+                                }
                             }
                         }
                       else
@@ -125,15 +154,21 @@ tic_timer_irq (
                       u8_status = ST_START;
                       if (u32_scan_code
                           != 0) // есть предыдущий результат, отправим
-                        if (tls_os_queue_send (recive_ir_msg_q,
-                                               (void *)u32_scan_code, 0)
-                            == TLS_OS_ERROR)
-                          {
+                        {
+                          u32_IR_scan_result = u32_scan_code;
+                          if (recive_ir_msg_q != NULL)
+                            {
+                              if (tls_os_queue_send (recive_ir_msg_q,
+                                                     (void *)u32_scan_code, 0)
+                                  == TLS_OS_ERROR)
+                                {
 #ifdef IR_SCAN_SERIAL_DEBUG
-                            printf ("\n DEBUG: tls_os_queue_send Error\n");
+                                  printf (
+                                      "\n DEBUG: tls_os_queue_send Error\n");
 #endif
-                          }
-
+                                }
+                            }
+                        }
 #ifdef IR_SCAN_SERIAL_DEBUG
                       printf ("\n DEBUG: 0x%08x\n", u32_scan_code);
 #endif
@@ -194,9 +229,8 @@ IR_Scan_create (enum tls_io_name ir_pin, tls_os_queue_t *ir_code_msg_q)
   if (recive_ir_msg_q == NULL)
     {
 #ifdef IR_SCAN_SERIAL_DEBUG
-      printf ("IR_Scan_create : error ir_code_msg_q\n");
+      printf ("IR_Scan_create : ir_code_msg_q = NULL , no query send ! \n");
 #endif
-      return WM_FAILED;
     }
 
   u8 timer_id;
