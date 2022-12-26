@@ -38,7 +38,7 @@ static volatile u8 u8_scan_pos = 0;
 
 static tls_os_queue_t *recive_ir_msg_q = NULL;
 
-#define IR_SCAN_SERIAL_DEBUG
+// #define IR_SCAN_SERIAL_DEBUG
 
 static void
 tic_timer_irq (

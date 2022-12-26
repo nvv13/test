@@ -1,10 +1,7 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
 
 project
 
-board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade 
+board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade + IR remote
 
 
 эффекты взяты отсюда: https://github.com/AlexGyver/WS2812_FX
@@ -34,6 +31,7 @@ board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade
 ~~~
 
 
+
 соединения
 
 ws2812b
@@ -53,6 +51,7 @@ GND   	  220pF-GND
 
 
 
+
 дисплей, (если надо)
 LCD display tm1637
      4 pin
@@ -67,6 +66,7 @@ GND   		GND
 ~~~
 
 
+
 кнопка
 ~~~
 connect to
@@ -74,6 +74,7 @@ W801 GPIO | botton PIN
 PA_01 		1 pin
 GND   		2 pin
 ~~~
+
 
 
 IR sensor
@@ -87,6 +88,13 @@ GND   Pin2
 3.3v  Pin3
 ----- --------
 ~~~
+
+IR управление, подогнано под такую лентяйку: 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/03_ws2812b_RGB_LED_SPI2/jpg/remote1.jpg" alt="remote1" title="remote1" /></p>
+
+
+если нужно под другую (найти кода и т.д.), можно начать с 
+https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_IR_scan
 
 
 
