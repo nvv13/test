@@ -46,7 +46,7 @@ GND   	  220pF-GND
 между PB17 и DATA, резистор 200 ом +
 между DATA и GND, конденсатор 200 пФ 
 иначе помехи, 
- * еще можно прнобразователь уровней 3,3v -> 5v добавить
+ * еще можно преобразователь уровней 3,3v -> 5v добавить
    хотя работает и без него....
 
 
@@ -81,7 +81,7 @@ IR sensor
 ~~~
 connect to 
 ----- --------
-W801  tsop78
+W801  tsop48
 ----- --------
 PA_02 Pin1
 GND   Pin2
@@ -89,12 +89,15 @@ GND   Pin2
 ----- --------
 ~~~
 
+
 IR управление, подогнано под такую лентяйку: 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/03_ws2812b_RGB_LED_SPI2/jpg/remote1.jpg" alt="remote1" title="remote1" /></p>
 
 
 если нужно под другую (найти кода и т.д.), можно начать с 
 https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_IR_scan
+
+
 
 
 

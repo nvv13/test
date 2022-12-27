@@ -16,7 +16,7 @@
 
 //#include "wm_bt_util.h"
 
-#include "wm_ble_server_api_demo.h"
+#include "mm_ble_server_api_demo.h"
 
 extern int demo_bt_enable (void);
 
@@ -41,7 +41,7 @@ UserMain (void)
   printf ("demo_bt_enable... delay 5 sec\n");
   tls_os_time_delay (HZ * 5);
 
-  int i_Res = tls_ble_server_demo_api_init (&my_output_func_ptr);
+  int i_Res = mls_ble_server_demo_api_init (&my_output_func_ptr);
   printf ("tls_ble_server_demo_api_init=%d\n", i_Res);
 
 

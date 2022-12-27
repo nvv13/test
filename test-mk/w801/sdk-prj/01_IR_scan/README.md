@@ -13,7 +13,7 @@ board HLK-W801-KIT-V1.1 + hd44780 + tsop48 + LCD1602
 
 connect to IR sensor
 ----- --------
-W801  tsop78
+W801  tsop48
 ----- --------
 PA1   Pin1
 GND   Pin2
