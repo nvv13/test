@@ -146,6 +146,10 @@ demo_timer_irq (u8 *arg) // здесь будет смена режима
     }
 }
 
+/*
+
+  кнопка (убрал в прошивке, часто ловила помехи) 
+
 #define DEMO_ISR_IO WM_IO_PA_01
 static void
 demo_gpio_isr_callback (void *context)
@@ -168,6 +172,7 @@ demo_gpio_isr_callback (void *context)
       }
     }
 }
+*/
 
 /**
  * @brief   Allocate the device descriptor
@@ -209,13 +214,17 @@ demo_console_task (void *sdata)
       printf ("timer start\n");
     }
 
-  u16 gpio_pin;
+ /*
+  кнопка (убрал в прошивке, часто ловила помехи) 
+
+  u16 gpio_pin;       
   gpio_pin = DEMO_ISR_IO;
   tls_gpio_cfg (gpio_pin, WM_GPIO_DIR_INPUT,
                 WM_GPIO_ATTR_PULLHIGH); // WM_GPIO_ATTR_FLOATING);
   tls_gpio_isr_register (gpio_pin, demo_gpio_isr_callback, NULL);
   tls_gpio_irq_enable (gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);
   printf ("\nbutton gpio %d rising isr\n", gpio_pin);
+*/
 
   IR_Scan_create (WM_IO_PA_02, NULL);
   printf ("IR_Scan_create\n");
