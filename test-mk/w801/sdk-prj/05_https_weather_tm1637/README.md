@@ -64,6 +64,11 @@ sudo service apache2 restart
 
 ложим файл прошивки, вида:
 w800_ota.img
+
+
+немного позже, развернул сервер apache2 на устройстве keenetic-giga (KN-1011)
+навела на это статья https://kotyara12.ru/iot/keenetic-mqtt/
+
 ~~~
 
 

@@ -1,9 +1,9 @@
 #ifndef DECODE_CMD_H
 #define DECODE_CMD_H
 
-#define VERSION_FLASH "0.97"
+#define VERSION_FLASH "0.98"
 
-#define OTA_PATH_FILE "http://192.168.1.69/ota/weather2/w800_ota.img"
+#define OTA_PATH_FILE "http://192.168.1.1:8088/ota/weather2/w800_ota.img"
 #include "wm_http_fwup.h"
 extern int t_http_fwup (char *url);
 
