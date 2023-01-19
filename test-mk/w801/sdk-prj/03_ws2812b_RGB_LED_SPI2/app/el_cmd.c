@@ -2549,6 +2549,8 @@ el_loop (int new_mode)
       ef_1 ();
       break; //
     case 48:
+      memset (leds, 0, sizeof (color_rgba_t) * MAX_WS2812B_LED_NUMOF);
+      setcolor (3, max_bright);
       ef_2 ();
       break; //
 
