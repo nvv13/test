@@ -14,7 +14,7 @@
 #include "wm_cpu.h"
 //#include <stdio.h>
 //#include <stdlib.h>
-//#include <string.h>
+#include <string.h>
 //#include "wm_uart.h"
 //#include "wm_gpio.h"
 //#include "wm_hostspi.h"
@@ -182,7 +182,7 @@ ws2812b_t dev;
 void
 demo_console_task (void *sdata)
 {
-
+  memset(&dev,0,sizeof(ws2812b_t));
   dev.led_numof = 100;
   dev.data_pin = WM_IO_PB_17;
   // dev.mode = WS_PIN_MODE;

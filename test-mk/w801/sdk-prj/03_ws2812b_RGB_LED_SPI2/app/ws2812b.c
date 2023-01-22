@@ -335,44 +335,44 @@ ws2812b_init (ws2812b_t *dev)
           {
           case WS_SPI_MODE_3bit:
             {
-              dev->spi_clk = 2000000;
-              dev->spi_on_bit = 2;
-              dev->spi_off_bit = 1;
+              if(dev->spi_clk==0)dev->spi_clk = 2000000;
+              if(dev->spi_on_bit==0)dev->spi_on_bit = 2;
+              if(dev->spi_off_bit==0)dev->spi_off_bit = 1;
             };
             break;
           case WS_SPI_MODE_4bit:
             {
-              dev->spi_clk = 3265000;
-              dev->spi_on_bit = 3;
-              dev->spi_off_bit = 1;
+              if(dev->spi_clk==0)dev->spi_clk = 3265000;
+              if(dev->spi_on_bit==0)dev->spi_on_bit = 3;
+              if(dev->spi_off_bit==0)dev->spi_off_bit = 1;
             };
             break;
           case WS_SPI_MODE_5bit:
             {
-              dev->spi_clk = 4000000;
-              dev->spi_on_bit = 4;
-              dev->spi_off_bit = 2;
+              if(dev->spi_clk==0)dev->spi_clk = 4000000;
+              if(dev->spi_on_bit==0)dev->spi_on_bit = 4;
+              if(dev->spi_off_bit==0)dev->spi_off_bit = 2;
             };
             break;
           case WS_SPI_MODE_6bit:
             {
-              dev->spi_clk = 4800000;
-              dev->spi_on_bit = 4;
-              dev->spi_off_bit = 2;
+              if(dev->spi_clk==0)dev->spi_clk = 4800000;
+              if(dev->spi_on_bit==0)dev->spi_on_bit = 4;
+              if(dev->spi_off_bit==0)dev->spi_off_bit = 2;
             };
             break;
           case WS_SPI_MODE_7bit:
             {
-              dev->spi_clk = 5600000;
-              dev->spi_on_bit = 5;
-              dev->spi_off_bit = 2;
+              if(dev->spi_clk==0)dev->spi_clk = 5600000;
+              if(dev->spi_on_bit==0)dev->spi_on_bit = 5;
+              if(dev->spi_off_bit==0)dev->spi_off_bit = 2;
             };
             break;
           case WS_SPI_MODE_8bit:
             {
-              dev->spi_clk = 6400000;
-              dev->spi_on_bit = 5;
-              dev->spi_off_bit = 2;
+              if(dev->spi_clk==0)dev->spi_clk = 6400000;
+              if(dev->spi_on_bit==0)dev->spi_on_bit = 5;
+              if(dev->spi_off_bit==0)dev->spi_off_bit = 2;
             };
             break;
           }
