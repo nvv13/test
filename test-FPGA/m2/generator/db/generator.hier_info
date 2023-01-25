@@ -1,14 +1,15 @@
 |generator
 clk => comb.DATAIN
-LED << binary_up_down_counter:o_cnt1.port4
-b1[0] << binary_up_down_counter:o_cnt1.port4
-b1[1] << binary_up_down_counter:o_cnt1.port4
-b1[2] << binary_up_down_counter:o_cnt1.port4
-b1[3] << binary_up_down_counter:o_cnt1.port4
-b1[4] << binary_up_down_counter:o_cnt1.port4
-b1[5] << binary_up_down_counter:o_cnt1.port4
-b1[6] << binary_up_down_counter:o_cnt1.port4
-b1[7] << binary_up_down_counter:o_cnt1.port4
+LED <= binary_up_down_counter:o_cnt1.port4
+b1[0] <= binary_up_down_counter:o_cnt1.port4
+b1[1] <= binary_up_down_counter:o_cnt1.port4
+b1[2] <= binary_up_down_counter:o_cnt1.port4
+b1[3] <= binary_up_down_counter:o_cnt1.port4
+b1[4] <= binary_up_down_counter:o_cnt1.port4
+b1[5] <= binary_up_down_counter:o_cnt1.port4
+b1[6] <= binary_up_down_counter:o_cnt1.port4
+b1[7] <= binary_up_down_counter:o_cnt1.port4
+m1 <= clk.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |generator|binary_up_down_counter:o_cnt1

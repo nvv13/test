@@ -1,5 +1,5 @@
 Timing Analyzer report for generator
-Sat Dec 26 17:20:29 2020
+Thu Jan 26 00:06:35 2023
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -24,9 +24,11 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
  16. Report RSKM
  17. Unconstrained Paths Summary
  18. Clock Status Summary
- 19. Unconstrained Output Ports
+ 19. Unconstrained Input Ports
  20. Unconstrained Output Ports
- 21. Timing Analyzer Messages
+ 21. Unconstrained Input Ports
+ 22. Unconstrained Output Ports
+ 23. Timing Analyzer Messages
 
 
 
@@ -73,11 +75,10 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 2           ;
+; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -394,10 +395,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 0     ; 0    ;
-; Unconstrained Input Port Paths  ; 0     ; 0    ;
-; Unconstrained Output Ports      ; 9     ; 9    ;
-; Unconstrained Output Port Paths ; 9     ; 9    ;
+; Unconstrained Input Ports       ; 1     ; 1    ;
+; Unconstrained Input Port Paths  ; 1     ; 1    ;
+; Unconstrained Output Ports      ; 10    ; 10   ;
+; Unconstrained Output Port Paths ; 10    ; 10   ;
 +---------------------------------+-------+------+
 
 
@@ -410,21 +411,13 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +--------+-------+------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------+
-; Unconstrained Output Ports                                                                          ;
-+-------------+---------------------------------------------------------------------------------------+
-; Output Port ; Comment                                                                               ;
-+-------------+---------------------------------------------------------------------------------------+
-; LED         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[1]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[2]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[3]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[4]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[6]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-; b1[7]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
-+-------------+---------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; clk        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------+
@@ -441,6 +434,34 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; b1[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; b1[6]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; b1[7]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; m1          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                         ;
++------------+--------------------------------------------------------------------------------------+
+; Input Port ; Comment                                                                              ;
++------------+--------------------------------------------------------------------------------------+
+; clk        ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; LED         ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[1]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[2]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[3]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[4]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[5]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[6]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; b1[7]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; m1          ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-------------+---------------------------------------------------------------------------------------+
 
 
@@ -450,7 +471,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Dec 26 17:20:28 2020
+    Info: Processing started: Thu Jan 26 00:06:34 2023
 Info: Command: quartus_sta generator -c generator
 Info: qsta_default_script.tcl version: #1
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -484,8 +505,8 @@ Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 2 warnings
     Info: Peak virtual memory: 569 megabytes
-    Info: Processing ended: Sat Dec 26 17:20:29 2020
+    Info: Processing ended: Thu Jan 26 00:06:35 2023
     Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
 
 

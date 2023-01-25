@@ -63,14 +63,14 @@ CHIP  "generator"  ASSIGNED TO AN: EPM240T100C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
-b1[0]                        : 1         : output : 3.3-V LVTTL       :         : 2         : Y              
-b1[1]                        : 2         : output : 3.3-V LVTTL       :         : 1         : Y              
-b1[2]                        : 3         : output : 3.3-V LVTTL       :         : 1         : Y              
-b1[3]                        : 4         : output : 3.3-V LVTTL       :         : 1         : Y              
-b1[4]                        : 5         : output : 3.3-V LVTTL       :         : 1         : Y              
-b1[5]                        : 6         : output : 3.3-V LVTTL       :         : 1         : Y              
-b1[6]                        : 7         : output : 3.3-V LVTTL       :         : 1         : Y              
-b1[7]                        : 8         : output : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 1         :        :                   :         : 2         :                
+m1                           : 2         : output : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 3         :        :                   :         : 1         :                
+b1[0]                        : 4         : output : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 5         :        :                   :         : 1         :                
+b1[1]                        : 6         : output : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 7         :        :                   :         : 1         :                
+b1[2]                        : 8         : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 9         : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 10        : gnd    :                   :         :           :                
 GNDINT                       : 11        : gnd    :                   :         :           :                
@@ -78,18 +78,18 @@ clk                          : 12        : input  : 3.3-V LVTTL       :         
 VCCINT                       : 13        : power  :                   : 2.5V/3.3V :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 14        :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 15        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 16        :        :                   :         : 1         :                
+b1[3]                        : 16        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 17        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 18        :        :                   :         : 1         :                
+b1[4]                        : 18        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 19        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 20        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 21        :        :                   :         : 1         :                
+b1[5]                        : 20        : output : 3.3-V LVTTL       :         : 1         : Y              
+b1[6]                        : 21        : output : 3.3-V LVTTL       :         : 1         : Y              
 TMS                          : 22        : input  :                   :         : 1         :                
 TDI                          : 23        : input  :                   :         : 1         :                
 TCK                          : 24        : input  :                   :         : 1         :                
 TDO                          : 25        : output :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 26        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 27        :        :                   :         : 1         :                
+b1[7]                        : 27        : output : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 28        :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 29        :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 30        :        :                   :         : 1         :                

@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EPM240T100) Path("/home/nvv/fpga_prg/m2/generator/output_files/") File("generator.pof") MfrSpec(OpMask(1) SEC_Device(EPM240T100) Child_OpMask(2 1 1));
+		Device PartName(EPM240T100) Path("/home/nvv/gitflic.ru/test/test-FPGA/m2/generator/output_files/") File("generator.pof") MfrSpec(OpMask(1) SEC_Device(EPM240T100) Child_OpMask(2 1 1));
 
 ChainEnd;
 

@@ -1,5 +1,5 @@
 Fitter report for generator
-Sat Dec 26 17:20:25 2020
+Thu Jan 26 00:06:33 2023
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -55,7 +55,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------+
 ; Fitter Summary                                                      ;
 +-----------------------+---------------------------------------------+
-; Fitter Status         ; Successful - Sat Dec 26 17:20:25 2020       ;
+; Fitter Status         ; Successful - Thu Jan 26 00:06:33 2023       ;
 ; Quartus Prime Version ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name         ; generator                                   ;
 ; Top-level Entity Name ; generator                                   ;
@@ -63,7 +63,7 @@ https://fpgasoftware.intel.com/eula.
 ; Device                ; EPM240T100C5                                ;
 ; Timing Models         ; Final                                       ;
 ; Total logic elements  ; 26 / 240 ( 11 % )                           ;
-; Total pins            ; 10 / 80 ( 13 % )                            ;
+; Total pins            ; 11 / 80 ( 14 % )                            ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 +-----------------------+---------------------------------------------+
@@ -132,15 +132,15 @@ https://fpgasoftware.intel.com/eula.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.4%      ;
-;     Processors 3-4         ;   0.4%      ;
+;     Processor 2            ;   0.3%      ;
+;     Processors 3-4         ;   0.2%      ;
 +----------------------------+-------------+
 
 
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/generator.pin.
+The pin-out file can be found in /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/output_files/generator.pin.
 
 
 +------------------------------------------------------------------+
@@ -172,7 +172,7 @@ The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/ge
 ; Total LABs                                  ; 3 / 24 ( 13 % )    ;
 ; Logic elements in carry chains              ; 25                 ;
 ; Virtual pins                                ; 0                  ;
-; I/O pins                                    ; 10 / 80 ( 13 % )   ;
+; I/O pins                                    ; 11 / 80 ( 14 % )   ;
 ;     -- Clock pins                           ; 1 / 4 ( 25 % )     ;
 ;                                             ;                    ;
 ; UFM blocks                                  ; 0 / 1 ( 0 % )      ;
@@ -183,12 +183,12 @@ The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/ge
 ; Global signals                              ; 1                  ;
 ;     -- Global clocks                        ; 1 / 4 ( 25 % )     ;
 ; JTAGs                                       ; 0 / 1 ( 0 % )      ;
-; Average interconnect usage (total/H/V)      ; 0.5% / 0.4% / 0.7% ;
-; Peak interconnect usage (total/H/V)         ; 0.5% / 0.4% / 0.7% ;
-; Maximum fan-out                             ; 26                 ;
+; Average interconnect usage (total/H/V)      ; 0.8% / 0.6% / 1.0% ;
+; Peak interconnect usage (total/H/V)         ; 0.8% / 0.6% / 1.0% ;
+; Maximum fan-out                             ; 27                 ;
 ; Highest non-global fan-out                  ; 5                  ;
-; Total fan-out                               ; 104                ;
-; Average fan-out                             ; 2.89               ;
+; Total fan-out                               ; 105                ;
+; Average fan-out                             ; 2.84               ;
 +---------------------------------------------+--------------------+
 
 
@@ -197,7 +197,7 @@ The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/ge
 +------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
 ; Name ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Location assigned by ; Slow Slew Rate ;
 +------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
-; clk  ; 12    ; 1        ; 1            ; 3            ; 3           ; 26                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
+; clk  ; 12    ; 1        ; 1            ; 3            ; 3           ; 27                    ; 0                  ; yes    ; no              ; no       ; Off          ; 3.3-V LVTTL  ; User                 ; no             ;
 +------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+-----------------+----------+--------------+--------------+----------------------+----------------+
 
 
@@ -207,25 +207,26 @@ The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/ge
 ; Name  ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Slow Slew Rate ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Fast Output Connection ; Location assigned by ; Load  ; Output Enable Source ; Output Enable Group ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
 ; LED   ; 77    ; 2        ; 7            ; 5            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[0] ; 1     ; 2        ; 2            ; 5            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[1] ; 2     ; 1        ; 1            ; 4            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[2] ; 3     ; 1        ; 1            ; 4            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[3] ; 4     ; 1        ; 1            ; 4            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[4] ; 5     ; 1        ; 1            ; 4            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[5] ; 6     ; 1        ; 1            ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[6] ; 7     ; 1        ; 1            ; 3            ; 1           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
-; b1[7] ; 8     ; 1        ; 1            ; 3            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[0] ; 4     ; 1        ; 1            ; 4            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[1] ; 6     ; 1        ; 1            ; 3            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[2] ; 8     ; 1        ; 1            ; 3            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[3] ; 16    ; 1        ; 1            ; 2            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[4] ; 18    ; 1        ; 1            ; 1            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[5] ; 20    ; 1        ; 1            ; 1            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[6] ; 21    ; 1        ; 1            ; 1            ; 3           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; b1[7] ; 27    ; 1        ; 2            ; 0            ; 2           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
+; m1    ; 2     ; 1        ; 1            ; 4            ; 0           ; no              ; no             ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 16mA             ; no                     ; User                 ; 10 pF ; -                    ; -                   ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------+----------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+------------------------+----------------------+-------+----------------------+---------------------+
 
 
-+-----------------------------------------------------------+
-; I/O Bank Usage                                            ;
-+----------+-----------------+---------------+--------------+
-; I/O Bank ; Usage           ; VCCIO Voltage ; VREF Voltage ;
-+----------+-----------------+---------------+--------------+
-; 1        ; 8 / 38 ( 21 % ) ; 3.3V          ; --           ;
-; 2        ; 2 / 42 ( 5 % )  ; 3.3V          ; --           ;
-+----------+-----------------+---------------+--------------+
++------------------------------------------------------------+
+; I/O Bank Usage                                             ;
++----------+------------------+---------------+--------------+
+; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
++----------+------------------+---------------+--------------+
+; 1        ; 10 / 38 ( 26 % ) ; 3.3V          ; --           ;
+; 2        ; 1 / 42 ( 2 % )   ; 3.3V          ; --           ;
++----------+------------------+---------------+--------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -233,14 +234,14 @@ The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/ge
 +----------+------------+----------+---------------------------------+--------+--------------+-----------+------------+-----------------+----------+--------------+
 ; Location ; Pad Number ; I/O Bank ; Pin Name/Usage                  ; Dir.   ; I/O Standard ; Voltage   ; I/O Type   ; User Assignment ; Bus Hold ; Weak Pull Up ;
 +----------+------------+----------+---------------------------------+--------+--------------+-----------+------------+-----------------+----------+--------------+
-; 1        ; 83         ; 2        ; b1[0]                           ; output ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
-; 2        ; 0          ; 1        ; b1[1]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
-; 3        ; 1          ; 1        ; b1[2]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
-; 4        ; 2          ; 1        ; b1[3]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
-; 5        ; 3          ; 1        ; b1[4]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
-; 6        ; 4          ; 1        ; b1[5]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
-; 7        ; 5          ; 1        ; b1[6]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
-; 8        ; 6          ; 1        ; b1[7]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
+; 1        ; 83         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Column I/O ;                 ; no       ; On           ;
+; 2        ; 0          ; 1        ; m1                              ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
+; 3        ; 1          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
+; 4        ; 2          ; 1        ; b1[0]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
+; 5        ; 3          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
+; 6        ; 4          ; 1        ; b1[1]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
+; 7        ; 5          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
+; 8        ; 6          ; 1        ; b1[2]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
 ; 9        ;            ; 1        ; VCCIO1                          ; power  ;              ; 3.3V      ; --         ;                 ; --       ; --           ;
 ; 10       ;            ;          ; GNDIO                           ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
 ; 11       ;            ;          ; GNDINT                          ; gnd    ;              ;           ; --         ;                 ; --       ; --           ;
@@ -248,18 +249,18 @@ The pin-out file can be found in /home/nvv/fpga_prg/m2/generator/output_files/ge
 ; 13       ;            ;          ; VCCINT                          ; power  ;              ; 2.5V/3.3V ; --         ;                 ; --       ; --           ;
 ; 14       ; 8          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
 ; 15       ; 9          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
-; 16       ; 10         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
+; 16       ; 10         ; 1        ; b1[3]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
 ; 17       ; 11         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
-; 18       ; 12         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
+; 18       ; 12         ; 1        ; b1[4]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
 ; 19       ; 13         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
-; 20       ; 14         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
-; 21       ; 15         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Row I/O    ;                 ; no       ; On           ;
+; 20       ; 14         ; 1        ; b1[5]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
+; 21       ; 15         ; 1        ; b1[6]                           ; output ; 3.3-V LVTTL  ;           ; Row I/O    ; Y               ; no       ; Off          ;
 ; 22       ; 16         ; 1        ; #TMS                            ; input  ;              ;           ; --         ;                 ; --       ; --           ;
 ; 23       ; 17         ; 1        ; #TDI                            ; input  ;              ;           ; --         ;                 ; --       ; --           ;
 ; 24       ; 18         ; 1        ; #TCK                            ; input  ;              ;           ; --         ;                 ; --       ; --           ;
 ; 25       ; 19         ; 1        ; #TDO                            ; output ;              ;           ; --         ;                 ; --       ; --           ;
 ; 26       ; 20         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Column I/O ;                 ; no       ; On           ;
-; 27       ; 21         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Column I/O ;                 ; no       ; On           ;
+; 27       ; 21         ; 1        ; b1[7]                           ; output ; 3.3-V LVTTL  ;           ; Column I/O ; Y               ; no       ; Off          ;
 ; 28       ; 22         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Column I/O ;                 ; no       ; On           ;
 ; 29       ; 23         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Column I/O ;                 ; no       ; On           ;
 ; 30       ; 24         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;           ; Column I/O ;                 ; no       ; On           ;
@@ -358,7 +359,7 @@ Note: User assignments will override these defaults. The user specified values a
 +------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node         ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                      ; Entity Name            ; Library Name ;
 +------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------------+--------------+
-; |generator                         ; 26 (0)      ; 26           ; 0          ; 10   ; 0            ; 0 (0)        ; 0 (0)             ; 26 (0)           ; 25 (0)          ; 0 (0)      ; |generator                               ; generator              ; work         ;
+; |generator                         ; 26 (0)      ; 26           ; 0          ; 11   ; 0            ; 0 (0)        ; 0 (0)             ; 26 (0)           ; 25 (0)          ; 0 (0)      ; |generator                               ; generator              ; work         ;
 ;    |binary_up_down_counter:o_cnt1| ; 26 (26)     ; 26           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 26 (26)          ; 25 (25)         ; 0 (0)      ; |generator|binary_up_down_counter:o_cnt1 ; binary_up_down_counter ; work         ;
 +------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -378,7 +379,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; b1[5] ; Output   ; --            ;
 ; b1[6] ; Output   ; --            ;
 ; b1[7] ; Output   ; --            ;
-; clk   ; Input    ; (0)           ;
+; m1    ; Output   ; --            ;
+; clk   ; Input    ; (1)           ;
 +-------+----------+---------------+
 
 
@@ -387,7 +389,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------+----------+---------+-------+--------+----------------------+------------------+
 ; Name ; Location ; Fan-Out ; Usage ; Global ; Global Resource Used ; Global Line Name ;
 +------+----------+---------+-------+--------+----------------------+------------------+
-; clk  ; PIN_12   ; 26      ; Clock ; yes    ; Global Clock         ; GCLK0            ;
+; clk  ; PIN_12   ; 27      ; Clock ; yes    ; Global Clock         ; GCLK0            ;
 +------+----------+---------+-------+--------+----------------------+------------------+
 
 
@@ -396,7 +398,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------+----------+---------+----------------------+------------------+
 ; Name ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ;
 +------+----------+---------+----------------------+------------------+
-; clk  ; PIN_12   ; 26      ; Global Clock         ; GCLK0            ;
+; clk  ; PIN_12   ; 27      ; Global Clock         ; GCLK0            ;
 +------+----------+---------+----------------------+------------------+
 
 
@@ -405,13 +407,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-------------------+
 ; Routing Resource Type ; Usage             ;
 +-----------------------+-------------------+
-; C4s                   ; 5 / 784 ( < 1 % ) ;
-; Direct links          ; 3 / 888 ( < 1 % ) ;
+; C4s                   ; 8 / 784 ( 1 % )   ;
+; Direct links          ; 0 / 888 ( 0 % )   ;
 ; Global clocks         ; 1 / 4 ( 25 % )    ;
-; LAB clocks            ; 3 / 32 ( 9 % )    ;
+; LAB clocks            ; 4 / 32 ( 13 % )   ;
 ; LUT chains            ; 0 / 216 ( 0 % )   ;
-; Local interconnects   ; 9 / 888 ( 1 % )   ;
-; R4s                   ; 3 / 704 ( < 1 % ) ;
+; Local interconnects   ; 10 / 888 ( 1 % )  ;
+; R4s                   ; 5 / 704 ( < 1 % ) ;
 +-----------------------+-------------------+
 
 
@@ -527,7 +529,8 @@ Info (332111): Found 1 clocks
     Info (332111): ======== ============
     Info (332111):    1.000          clk
 Info (186079): Completed User Assigned Global Signals Promotion Operation
-Info (186215): Automatically promoted signal "clk" to use Global clock in PIN 12 File: /home/nvv/fpga_prg/m2/generator/generator.v Line: 5
+Info (186216): Automatically promoted some destinations of signal "clk" to use Global clock in PIN 12 File: /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v Line: 3
+    Info (186217): Destination "m1" may be non-global or may not use global clock File: /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v Line: 7
 Info (186079): Completed Auto Global Promotion Operation
 Info (176234): Starting register packing
 Info (186468): Started processing fast register assignments
@@ -546,11 +549,11 @@ Info (170195): Router estimated average interconnect usage is 0% of the availabl
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.07 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.05 seconds.
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Info: Quartus Prime Fitter was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 992 megabytes
-    Info: Processing ended: Sat Dec 26 17:20:25 2020
+    Info: Peak virtual memory: 996 megabytes
+    Info: Processing ended: Thu Jan 26 00:06:33 2023
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for generator
-Sat Dec 26 17:20:23 2020
+Thu Jan 26 00:06:32 2023
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -45,13 +45,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Sat Dec 26 17:20:23 2020       ;
+; Analysis & Synthesis Status ; Successful - Thu Jan 26 00:06:32 2023       ;
 ; Quartus Prime Version       ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name               ; generator                                   ;
 ; Top-level Entity Name       ; generator                                   ;
 ; Family                      ; MAX II                                      ;
 ; Total logic elements        ; 26                                          ;
-; Total pins                  ; 10                                          ;
+; Total pins                  ; 11                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -145,13 +145,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                              ;
-+----------------------------------+-----------------+------------------------+---------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                ; Library ;
-+----------------------------------+-----------------+------------------------+---------------------------------------------+---------+
-; generator.v                      ; yes             ; User Verilog HDL File  ; /home/nvv/fpga_prg/m2/generator/generator.v ;         ;
-+----------------------------------+-----------------+------------------------+---------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                               ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                 ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------+---------+
+; generator.v                      ; yes             ; User Verilog HDL File  ; /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -181,11 +181,11 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;       ;
 ; Total registers                             ; 26    ;
 ; Total logic cells in carry chains           ; 25    ;
-; I/O pins                                    ; 10    ;
+; I/O pins                                    ; 11    ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 26    ;
-; Total fan-out                               ; 86    ;
-; Average fan-out                             ; 2.39  ;
+; Maximum fan-out                             ; 27    ;
+; Total fan-out                               ; 87    ;
+; Average fan-out                             ; 2.35  ;
 +---------------------------------------------+-------+
 
 
@@ -194,7 +194,7 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node         ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name                      ; Entity Name            ; Library Name ;
 +------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------------+--------------+
-; |generator                         ; 26 (0)      ; 26           ; 0          ; 10   ; 0            ; 0 (0)        ; 0 (0)             ; 26 (0)           ; 25 (0)          ; 0 (0)      ; |generator                               ; generator              ; work         ;
+; |generator                         ; 26 (0)      ; 26           ; 0          ; 11   ; 0            ; 0 (0)        ; 0 (0)             ; 26 (0)           ; 25 (0)          ; 0 (0)      ; |generator                               ; generator              ; work         ;
 ;    |binary_up_down_counter:o_cnt1| ; 26 (26)     ; 26           ; 0          ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 26 (26)          ; 25 (25)         ; 0 (0)      ; |generator|binary_up_down_counter:o_cnt1 ; binary_up_down_counter ; work         ;
 +------------------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -220,16 +220,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------+--------+------+------------------------+
 ; Assignment ; Value  ; From ; To                     ;
 +------------+--------+------+------------------------+
-; LOCATION   ; Pin_8  ; -    ; b1[7]                  ;
-; LOCATION   ; Pin_7  ; -    ; b1[6]                  ;
-; LOCATION   ; Pin_6  ; -    ; b1[5]                  ;
-; LOCATION   ; Pin_5  ; -    ; b1[4]                  ;
-; LOCATION   ; Pin_4  ; -    ; b1[3]                  ;
-; LOCATION   ; Pin_3  ; -    ; b1[2]                  ;
-; LOCATION   ; Pin_2  ; -    ; b1[1]                  ;
-; LOCATION   ; Pin_1  ; -    ; b1[0]                  ;
+; LOCATION   ; Pin_27 ; -    ; b1[7]                  ;
+; LOCATION   ; Pin_21 ; -    ; b1[6]                  ;
+; LOCATION   ; Pin_20 ; -    ; b1[5]                  ;
+; LOCATION   ; Pin_18 ; -    ; b1[4]                  ;
+; LOCATION   ; Pin_16 ; -    ; b1[3]                  ;
+; LOCATION   ; Pin_8  ; -    ; b1[2]                  ;
+; LOCATION   ; Pin_6  ; -    ; b1[1]                  ;
+; LOCATION   ; Pin_4  ; -    ; b1[0]                  ;
 ; LOCATION   ; Pin_12 ; -    ; clk                    ;
 ; LOCATION   ; Pin_77 ; -    ; LED                    ;
+; LOCATION   ; Pin_2  ; -    ; m1                     ;
 +------------+--------+------+------------------------+
 
 
@@ -271,25 +272,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Sat Dec 26 17:20:12 2020
+    Info: Processing started: Thu Jan 26 00:06:26 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off generator -c generator
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 2 design units, including 2 entities, in source file generator.v
-    Info (12023): Found entity 1: generator File: /home/nvv/fpga_prg/m2/generator/generator.v Line: 2
-    Info (12023): Found entity 2: binary_up_down_counter File: /home/nvv/fpga_prg/m2/generator/generator.v Line: 24
+    Info (12023): Found entity 1: generator File: /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v Line: 1
+    Info (12023): Found entity 2: binary_up_down_counter File: /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v Line: 22
 Info (12127): Elaborating entity "generator" for the top level hierarchy
-Info (12128): Elaborating entity "binary_up_down_counter" for hierarchy "binary_up_down_counter:o_cnt1" File: /home/nvv/fpga_prg/m2/generator/generator.v Line: 12
-Warning (10230): Verilog HDL assignment warning at generator.v(37): truncated value with size 32 to match size of target (26) File: /home/nvv/fpga_prg/m2/generator/generator.v Line: 37
+Info (12128): Elaborating entity "binary_up_down_counter" for hierarchy "binary_up_down_counter:o_cnt1" File: /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v Line: 11
+Warning (10230): Verilog HDL assignment warning at generator.v(35): truncated value with size 32 to match size of target (26) File: /home/nvv/gitflic.ru/test/test-FPGA/m2/generator/generator.v Line: 35
 Info (13014): Ignored 1 buffer(s)
     Info (13019): Ignored 1 SOFT buffer(s)
-Info (21057): Implemented 36 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 37 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 1 input pins
-    Info (21059): Implemented 9 output pins
+    Info (21059): Implemented 10 output pins
     Info (21061): Implemented 26 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 556 megabytes
-    Info: Processing ended: Sat Dec 26 17:20:23 2020
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:26
+    Info: Processing ended: Thu Jan 26 00:06:32 2023
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:14
 
 
