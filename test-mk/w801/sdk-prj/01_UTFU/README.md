@@ -1,9 +1,12 @@
-project IRdecode
+!!!В РАБОТЕ!!!
+!!!underway!!!
 
-board HLK-W801-KIT-V1.1 + hd44780 + tsop48 + LCD1602 
+
+project UTFT
+
+board HLK-W801-KIT-V1.1 + 
 
 
-видео https://youtu.be/YmEWTExZXCI
 
 
 соединения
@@ -11,47 +14,18 @@ board HLK-W801-KIT-V1.1 + hd44780 + tsop48 + LCD1602
 надо соеденить по схеме:
 ~~~
 
-connect to IR sensor
+connect to 
 ----- --------
-W801  tsop48
------ --------
-PA1   Pin1
-GND   Pin2
-3.3v  Pin3
------ --------
-
-
-
-connect to LCD1602
------ --------
-W801  hd44780
+W801  
 ----- --------
 GND   Vss Pin1
 5v    Vdd Pin2
-      Vo  Pin3  -- 10K variable resistor -- to GND to 5v -- Reg contrast !
-                 or -- 1K resistor -- to GND
-PB_21 RS  Pin4
-PB_22 RW  Pin5
-PB_23 EN  Pin6
-      D0  Pin7 
-      D1  Pin8
-      D2  Pin9
-      D3  Pin10
-PB_24 D4  Pin11
-PB_25 D5  Pin12
-PB_26 D6  Pin13
-PB_18 D7  Pin14
-PB_17 A   Pin15  -- BACKLIGHT -- (check for inner display module resistor)
-GND   K   Pin16  -- BACKLIGHT --
 ----- --------
 
 
 
 
 ~~~
-
-альтернативный пример использования в елочной гирлянде (без использования tls_os_queue_t) 
-https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/03_ws2812b_RGB_LED_SPI2
 
 
 
@@ -162,7 +136,8 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
-
+исходники библиотеки, взяты отсюда: 
+https://wiki.iarduino.ru/page/rabota-s-cvetnym-graficheskim-displeem/
 
 
 
