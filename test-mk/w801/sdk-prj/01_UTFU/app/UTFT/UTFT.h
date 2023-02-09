@@ -75,6 +75,7 @@
 #define ILI9341_MEGA	33
 #define ILI9327_UNO		34
 #define HX8357C		    35
+#define ILI9225B		36
 
 #define ITDB32			0	// HX8347-A (16bit)
 #define ITDB32WC		1	// ILI9327  (16bit)
@@ -178,13 +179,6 @@ typedef u16 word;
 
 #include "hardware/sky/HW_SKY_defines.h"
 
-//#define pgm_read_word(data) *data
-//#define pgm_read_byte(data) *data
-//#define bitmapdatatype unsigned short*
-
-//#define regtype volatile uint32_t
-//#define regsize uint32_t
-
 typedef struct 
 {
 	uint8_t* font;
@@ -199,7 +193,9 @@ typedef _current_font_t _current_font;
 typedef bool boolean;
 
 		void    UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER);
+   		           //UTFT(byte model, int RS, int WR, int CS, int RST, int SER=0);
 		void	UTFT_InitLCD(byte orientation);
+		           //InitLCD(byte orientation=LANDSCAPE);
 		void	UTFT_clrScr();
 		void	UTFT_drawPixel(int x, int y);
 		void	UTFT_drawLine(int x1, int y1, int x2, int y2);
@@ -218,14 +214,18 @@ typedef bool boolean;
 		void	UTFT_setBackColor2(uint32_t color);
 		word	UTFT_getBackColor();
 		void	UTFT_print(char *st, int x, int y, int deg);
+		           //print(char *st, int x, int y, int deg=0);
 		//void	UTFT_print2(String st, int x, int y, int deg);
 		void	UTFT_printNumI(long num, int x, int y, int length, char filler);
+		           //printNumI(long num, int x, int y, int length=0, char filler=' ');
 		void	UTFT_printNumF(double num, byte dec, int x, int y, char divider, int length, char filler);
+	  	           //printNumF(double num, byte dec, int x, int y, char divider='.', int length=0, char filler=' ');
 		void	UTFT_setFont(uint8_t* font);
 		uint8_t* UTFT_getFont();
 		uint8_t	UTFT_getFontXsize();
 		uint8_t	UTFT_getFontYsize();
 		void	UTFT_drawBitmap(int x, int y, int sx, int sy, bitmapdatatype data, int scale);
+		           //drawBitmap(int x, int y, int sx, int sy, bitmapdatatype data, int scale=1);
 		void	UTFT_drawBitmap2(int x, int y, int sx, int sy, bitmapdatatype data, int deg, int rox, int roy);
 		void	UTFT_lcdOff();
 		void	UTFT_lcdOn();
@@ -235,36 +235,6 @@ typedef bool boolean;
 		void	UTFT_setBrightness(byte br);
 		void	UTFT_setDisplayPage(byte page);
 		void	UTFT_setWritePage(byte page);
-
-/*
-	The functions and variables below should not normally be used.
-	They have been left publicly available for use in add-on libraries
-	that might need access to the lower level functions of UTFT.
-
-	Please note that these functions and variables are not documented
-	and I do not provide support on how to use them.
-*/
-
-
-
-
-		void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode);
-		void UTFT_LCD_Write_COM(char VL);
-		void UTFT_LCD_Write_DATA(char VH,char VL);
-		void UTFT_LCD_Write_DATA2(char VL);
-		void UTFT_LCD_Write_COM_DATA(char com1,int dat1);
-		void UTFT__hw_special_init();
-		void UTFT_setPixel(word color);
-		void UTFT_drawHLine(int x, int y, int l);
-		void UTFT_drawVLine(int x, int y, int l);
-		void UTFT_printChar(byte c, int x, int y);
-		void UTFT_setXY(word x1, word y1, word x2, word y2);
-		void UTFT_clrXY();
-		void UTFT_rotateChar(byte c, int x, int y, int pos, int deg);
-		void UTFT__set_direction_registers(byte mode);
-		void UTFT__fast_fill_16(int ch, int cl, long pix);
-		void UTFT__fast_fill_8(int ch, long pix);
-		void UTFT__convert_float(char *buf, double num, int width, byte prec);
 
 
 #endif

@@ -38,8 +38,102 @@
 #include "memorysaver.h"
 
 
+#include "wm_io.h"
+#include "wm_gpio.h"
+#include "wm_gpio_afsel.h"
 
+#define LOW	0
+#define OUTPUT	1
 
+static void pinMode(byte PIN,byte b_mode){tls_gpio_cfg ((enum tls_io_name)PIN, WM_GPIO_DIR_OUTPUT,WM_GPIO_ATTR_FLOATING);};
+//volatile 
+static uint32_t* portOutputRegister(u8 PIN)
+{
+        if (PIN >= WM_IO_PB_00) 
+        {
+        return (uint32_t*) TLS_IO_AB_OFFSET;
+        }
+        else
+        {
+         return (uint32_t*) 0;
+        }
+};
+static u8 digitalPinToPort(byte PIN){return PIN;};
+static u8 digitalPinToBitMask(byte PIN){return PIN;};
+static void digitalWrite(byte PIN,int LEVEL){tls_gpio_write ((enum tls_io_name)PIN, LEVEL ? 1 : 0 );};
+
+//		P_RS	= portOutputRegister(digitalPinToPort(RS));
+//		B_RS	= digitalPinToBitMask(RS);
+
+static void cbi(uint32_t* PORT_REG, u8 PIN)
+{
+	u32 cpu_sr = 0;
+        u32 reg;
+	u32	reg_en;
+        u8  pin;
+        u16 offset;
+
+        if (PIN >= WM_IO_PB_00) // w801 chip, only two GPIO port, PA (GPIOA - 16 bit) and PB (GPIOB - 32 bit), max power 12ma
+        {
+          pin    = PIN - WM_IO_PB_00;
+          offset = TLS_IO_AB_OFFSET;
+        }
+        else
+        {
+          pin    = PIN;
+          offset = 0;
+        }
+
+	
+	cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+	
+	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
+	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin)); // enabled control reg from need pin
+
+	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
+
+        tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));/* write low from pin */
+
+        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
+
+	tls_os_release_critical(cpu_sr); // enable Interrupt
+
+}
+
+static void sbi(uint32_t* PORT_REG, u8 PIN)
+{
+	u32 cpu_sr = 0;
+        u32 reg;
+	u32	reg_en;
+        u8  pin;
+        u16 offset;
+
+        if (PIN >= WM_IO_PB_00) // w801 chip, only two GPIO port, PA (GPIOA - 16 bit) and PB (GPIOB - 32 bit), max power 12ma
+        {
+          pin    = PIN - WM_IO_PB_00;
+          offset = TLS_IO_AB_OFFSET;
+        }
+        else
+        {
+          pin    = PIN;
+          offset = 0;
+        }
+
+	
+	cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+	
+	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
+	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin)); // enabled control reg from need pin
+
+	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
+
+        tls_reg_write32(HR_GPIO_DATA + offset, reg | (1 << pin));/* write Hi from pin */
+
+        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
+
+	tls_os_release_critical(cpu_sr); // enable Interrupt
+
+}
 
 
 /*
@@ -50,27 +144,45 @@
 	Please note that these functions and variables are not documented
 	and I do not provide support on how to use them.
 */
-		byte			fch, fcl, bch, bcl;
-		byte			orient;
-		long			disp_x_size, disp_y_size;
-		byte			display_model, display_transfer_mode, display_serial_mode;
-		regtype			*P_RS, *P_WR, *P_CS, *P_RST, *P_SDA, *P_SCL, *P_ALE;
-		regsize			B_RS, B_WR, B_CS, B_RST, B_SDA, B_SCL, B_ALE;
-		byte			__p1, __p2, __p3, __p4, __p5;
-		_current_font	cfont;
-		boolean			_transparent;
-		boolean			LCD_Write_1byte_Flag = 0;
+static		byte			fch, fcl, bch, bcl;
+static		byte			orient;
+static		long			disp_x_size, disp_y_size;
+static		byte			display_model, display_transfer_mode, display_serial_mode;
+static		regtype			*P_RS, *P_WR, *P_CS, *P_RST, *P_SDA, *P_SCL, *P_ALE;
+static		regsize			B_RS, B_WR, B_CS, B_RST, B_SDA, B_SCL, B_ALE;
+static		byte			__p1, __p2, __p3, __p4, __p5;
+static		_current_font	cfont;
+static		boolean			_transparent;
+static		boolean			LCD_Write_1byte_Flag = 0;
+
+
+
+static			void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode);
+static			void UTFT_LCD_Write_COM(char VL);
+static			void UTFT_LCD_Write_DATA(char VH,char VL);
+static			void UTFT_LCD_Write_DATA2(char VL);
+static			void UTFT_LCD_Write_COM_DATA(char com1,int dat1);
+static			void UTFT__hw_special_init();
+static			void UTFT_setPixel(word color);
+static			void UTFT_drawHLine(int x, int y, int l);
+static			void UTFT_drawVLine(int x, int y, int l);
+static			void UTFT_printChar(byte c, int x, int y);
+static			void UTFT_setXY(word x1, word y1, word x2, word y2);
+static			void UTFT_clrXY();
+static			void UTFT_rotateChar(byte c, int x, int y, int pos, int deg);
+static			void UTFT__set_direction_registers(byte mode);
+static			void UTFT__fast_fill_16(int ch, int cl, long pix);
+static			void UTFT__fast_fill_8(int ch, long pix);
+static			void UTFT__convert_float(char *buf, double num, int width, byte prec);
 
 
 // Подключение аппаратно-зависимых функций, для правильной работы микроконтроллеров
 #include "hardware/sky/HW_SKY.h"
 #include "hardware/sky/HW_W801.h"
 
-#define OUTPUT	1
-void pinMode(byte __p1,byte b_mode){};
-
 extern void n_delay_ms (uint32_t ms);
 static void delay(int ms){n_delay_ms(ms);};
+
 
 
 void UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER){
@@ -106,7 +218,7 @@ void UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER){
 		display_transfer_mode=1;
 		display_serial_mode=SERIAL_5PIN;
 	}
-/*
+
 	if (display_transfer_mode!=1)
 	{
 		UTFT__set_direction_registers(display_transfer_mode);
@@ -123,8 +235,8 @@ void UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER){
 			P_ALE	= portOutputRegister(digitalPinToPort(SER));
 			B_ALE	= digitalPinToBitMask(SER);
 			cbi(P_ALE, B_ALE);
-			pinMode(8,OUTPUT);
-			digitalWrite(8, LOW);
+			pinMode(SER,OUTPUT);
+			digitalWrite(SER, LOW);
 		}
 		if (display_model==ILI9341_UNO || display_model==ILI9341_MEGA || ILI9327_UNO){
 			P_ALE	= portOutputRegister(digitalPinToPort(SER));
@@ -151,7 +263,7 @@ void UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER){
 			B_RS	= digitalPinToBitMask(SER);
 		}
 	}
-*/
+
 }
 
 void UTFT_LCD_Write_COM(char VL)  
@@ -316,6 +428,9 @@ void UTFT_InitLCD(byte orientation)
 #ifndef DISABLE_HX8357C
 	#include "tft_drivers/hx8357c/initlcd.h"
 #endif
+#ifndef DISABLE_ILI9225B
+	#include "tft_drivers/ili9225b/initlcd.h"
+#endif
 	}
 	sbi (P_CS, B_CS); 
 
@@ -427,6 +542,9 @@ void UTFT_setXY(word x1, word y1, word x2, word y2)
 #endif
 #ifndef DISABLE_HX8357C
 	#include "tft_drivers/hx8357c/setxy.h"
+#endif
+#ifndef DISABLE_ILI9225B
+	#include "tft_drivers/ili9225b/setxy.h"
 #endif
 	}
 }
