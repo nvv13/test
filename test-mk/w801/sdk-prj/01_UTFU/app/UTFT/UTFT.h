@@ -192,7 +192,7 @@ typedef _current_font_t _current_font;
 
 typedef bool boolean;
 
-		void    UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER);
+		void    UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER);
    		           //UTFT(byte model, int RS, int WR, int CS, int RST, int SER=0);
 		void	UTFT_InitLCD(byte orientation);
 		           //InitLCD(byte orientation=LANDSCAPE);
@@ -203,7 +203,7 @@ typedef bool boolean;
 		void	UTFT_fillScr2(word color);
 		void	UTFT_drawRect(int x1, int y1, int x2, int y2);
 		void	UTFT_drawRoundRect(int x1, int y1, int x2, int y2);
-		void	UTFT_fillRect2(int x1, int y1, int x2, int y2);
+		void	UTFT_fillRect(int x1, int y1, int x2, int y2);
 		void	UTFT_fillRoundRect2(int x1, int y1, int x2, int y2);
 		void	UTFT_drawCircle(int x, int y, int radius);
 		void	UTFT_fillCircle(int x, int y, int radius);

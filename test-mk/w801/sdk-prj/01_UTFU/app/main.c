@@ -39,42 +39,113 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-#define USER_APP2_TASK_SIZE 2048
-static OS_STK UserApp2TaskStk[USER_APP2_TASK_SIZE];
-#define USER_APP2_TASK_PRIO 33
+extern uint8_t SmallFont[]; // подключаем маленький шрифт
+extern uint8_t BigFont[];   // подключаем большой шрифт
+extern uint8_t
+    SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 
 void
 user_app1_task (void *sdata)
 {
   printf ("user_app1_task start\n");
 
+  //Цветной графический дисплей 3.2 TFT 480x320 MEGA
+  // http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html
+  // подключаем библиотеку UTFT
+  UTFT_UTFT (TFT32MEGA_2, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
+             (u8)WM_IO_PA_04, 0);
+  //                               byte RS,         byte WR,         byte CS,
+  //                               byte RST, byte SER
+  // объявляем объект myGLCD класса библиотеки UTFT указывая тип дисплея
+  // TFT32MEGA и номера выводов Arduino к которым подключён дисплей: RS, WR,
+  // CS, RST. Выводы параллельной шины данных не указываются
+  //          TFT32MEGA_2                        // если изображение на дисплее
+  //          отображается зеркально, значит для инициализации Вашего дисплея,
+  //          нужно указать не TFT32MEGA, а TFT32MEGA_2.
+  // (тип TFT32MEGA - для дисплеев на базе чипа ILI9481, а тип TFT32MEGA_2 -
+  // для дисплеев на базе чипа HX8357С).
+  //
+  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+  // UTFT_clrScr();                            // стираем всю информацию с
+  // дисплея
+  //
+  while (1)
+    { //
 
+      UTFT_clrScr (); // стираем всю информацию с дисплея
 
-//Цветной графический дисплей 3.2 TFT 480x320 MEGA http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html
-                // подключаем библиотеку UTFT
-UTFT_UTFT(TFT32MEGA_2, 38,39,40,41,0);           // объявляем объект myGLCD класса библиотеки UTFT указывая тип дисплея TFT32MEGA и номера выводов Arduino к которым подключён дисплей: RS, WR, CS, RST. Выводы параллельной шины данных не указываются
-//          TFT32MEGA_2                        // если изображение на дисплее отображается зеркально, значит для инициализации Вашего дисплея, нужно указать не TFT32MEGA, а TFT32MEGA_2.
-                                               // (тип TFT32MEGA - для дисплеев на базе чипа ILI9481, а тип TFT32MEGA_2 - для дисплеев на базе чипа HX8357С).
-                                               //
-   UTFT_InitLCD(LANDSCAPE);                           // инициируем дисплей
-   UTFT_clrScr();                            // стираем всю информацию с дисплея
-                                               //
-for(;;){                                   //
-   UTFT_fillScr2(VGA_RED   ); tls_os_time_delay(HZ);    // заливаем дисплей красным,     ждём 1 секунду
-   UTFT_fillScr2(VGA_GREEN ); tls_os_time_delay(HZ);    // заливаем дисплей зелёным,     ждём 1 секунду
-   UTFT_fillScr2(VGA_BLUE  ); tls_os_time_delay(HZ);    // заливаем дисплей синим,       ждём 1 секунду
-   UTFT_fillScr2(VGA_SILVER); tls_os_time_delay(HZ);    // заливаем дисплей серебристым, ждём 1 секунду
-   UTFT_fillScr2(VGA_MAROON); tls_os_time_delay(HZ);    // заливаем дисплей бордовым,    ждём 1 секунду
-   UTFT_fillScr2(VGA_NAVY  ); tls_os_time_delay(HZ);    // заливаем дисплей тем. синим,  ждём 1 секунду
-}                                              //
+      UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
+      UTFT_drawRect (10, 20, 170,
+                     100); // Рисуем прямоугольник (с противоположными углами в
+                           // координатах 10x20 - 170x100)
 
+      UTFT_setColor2 (VGA_RED); // Устанавливаем красный цвет
+      UTFT_drawLine (
+          10, 10, 170,
+          10); // Рисуем линию (через точки с координатами 10x10 - 170x10)
 
-}
+      UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
+      UTFT_drawRoundRect (
+          10, 110, 170,
+          210); // Рисуем прямоугольник со скруглёнными углами (с
+                // противоположными углами в координатах 10x110 - 170x210)
+                //
+      UTFT_setColor2 (VGA_LIME); // Устанавливаем лаймовый цвет
+      UTFT_fillRect (
+          10, 220, 170,
+          310); // Рисуем закрашенный прямоугольник (с противоположными углами
+                // в координатах 10x220 - 170x310)
+                //
+      UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
+      UTFT_drawCircle (
+          350, 90,
+          70); // Рисуем окружность (с центром в точке 350x90 и радиусом 70)
 
-void
-user_app2_task (void *sdata)
-{
-  printf ("user_app2_task start\n");
+      UTFT_fillCircle (350, 240, 70); // Рисуем закрашенную окружность (с
+                                      // центром в точке 350x240 и радиусом 70)
+
+      tls_os_time_delay (HZ * 3);
+
+      UTFT_fillScr2 (VGA_RED);
+      tls_os_time_delay (HZ); // заливаем
+      //   дисплей красным,     ждём 1 секунду
+
+      UTFT_fillScr2 (VGA_GREEN);
+      tls_os_time_delay (HZ); // заливаем
+      //   дисплей зелёным,     ждём 1 секунду
+
+      UTFT_fillScr2 (VGA_BLUE);
+      tls_os_time_delay (HZ); // заливаем дисплей синим,       ждём 1   секунду
+
+      UTFT_fillScr2 (VGA_SILVER);
+      tls_os_time_delay (HZ); //   заливаем дисплей серебристым, ждём 1 секунду
+
+      UTFT_fillScr2 (VGA_MAROON);
+      tls_os_time_delay (HZ); // заливаем  дисплей бордовым,    ждём 1 секунду
+
+      UTFT_fillScr2 (VGA_NAVY);
+      tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
+
+      UTFT_clrScr (); // стираем всю информацию с дисплея
+      UTFT_setFont (BigFont); // устанавливаем большой шрифт
+      UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
+      UTFT_print ("BigFont", CENTER, 100,
+                  0); // выводим текст на дисплей (выравнивание по ширине -
+                      // центр дисплея, координата по высоте 100 точек)
+      UTFT_print ("12345678", CENTER, 115,
+                  0); // выводим текст на дисплей (выравнивание по ширине -
+                      // центр дисплея, координата по высоте 115 точек)
+      tls_os_time_delay (HZ * 3);
+      //
+      UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
+                                      // семисегментный индикатор
+      UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+      UTFT_print ("1234567890", CENTER, 150,
+                  0); // выводим текст на дисплей (выравнивание по ширине -
+                      // центр дисплея, координата по высоте 150 точек)
+      tls_os_time_delay (HZ * 3);
+
+    } //
 }
 
 void
@@ -82,16 +153,14 @@ UserMain (void)
 {
   printf ("UserMain start");
   tls_sys_clk_set (CPU_CLK_240M);
+  // tls_sys_clk_set (CPU_CLK_2M);
+  // tls_sys_clk_set (CPU_CLK_40M);
+  // tls_sys_clk_set (CPU_CLK_80M);
+  // tls_sys_clk_set (CPU_CLK_160M);
 
   tls_os_task_create (NULL, NULL, user_app1_task, NULL,
                       (void *)UserApp1TaskStk, /* task's stack start address */
                       USER_APP1_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
                       USER_APP1_TASK_PRIO, 0);
-
-  tls_os_task_create (NULL, NULL, user_app2_task, NULL,
-                      (void *)UserApp2TaskStk, /* task's stack start address */
-                      USER_APP2_TASK_SIZE
-                          * sizeof (u32), /* task's stack size, unit:byte */
-                      USER_APP2_TASK_PRIO, 0);
 }

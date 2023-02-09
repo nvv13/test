@@ -4,23 +4,44 @@
 
 project UTFT
 
-board HLK-W801-KIT-V1.1 + 
+board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей Ultra HD 320X480 HX8367C
 
-
+Видео
+https://youtu.be/ULZDZhmtduk
 
 
 соединения
 
 надо соеденить по схеме:
 ~~~
+на LCD если смотреть сверху на экран, и разьем с правой стороны
+то, соединения такие
+connect to TFT32MEGA_2 
+---- --------- ----
+W801 LCD   LCD W801
+---- --------- ----
+5v    5v   5v		 
+PB17 VH0   VH1 PB18
+PB26 VH2   VH3 PB25 
+PB24 VH4   VH5 PB23 
+PB22 VH6   VH7 PB21 
+PB16 VL7   VL6 PB11  
+PB10 VL5   VL4 PB15 
+PB14 VL3   VL2 PB13 
+PB12 VL1   VL0 PB09 
+PA1  RS	    WR PA2	
+PA3  CS    RST PA4
+     -*-   -*-
+     -*-   RD
+     -*-   -*-
+     -*-   -*-
+ MISO SD   SD MOSI
+  SCK SD   SD CS
+gnd  GND   GND
+---- --------- ----
+W801 LCD   LCD W801
+---- --------- ----
 
-connect to 
------ --------
-W801  
------ --------
-GND   Vss Pin1
-5v    Vdd Pin2
------ --------
 
 
 
@@ -141,15 +162,16 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
-исходники библиотеки, взяты отсюда:   
-https://wiki.iarduino.ru/page/rabota-s-cvetnym-graficheskim-displeem/  
+исходники библиотеки, взяты отсюда: 
+https://wiki.iarduino.ru/page/rabota-s-cvetnym-graficheskim-displeem/ 
 
-добавлен ILI9225B из:  
-https://github.com/gnulabis/UTFT-ESP.git   
+добавлен ILI9225B из: 
+https://github.com/gnulabis/UTFT-ESP.git 
 
-главный источник:  
+главный источник: 
 ## License and Credits 
 This project is based on the original [UTFT library](http://www.rinkydinkelectronics.com/library.php?id=51) developed and maintained by Henning Karlsen, and licensed under [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
+
 
 
 

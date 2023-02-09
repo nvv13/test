@@ -185,7 +185,7 @@ static void delay(int ms){n_delay_ms(ms);};
 
 
 
-void UTFT_UTFT(byte model, int RS, int WR, int CS, int RST, int SER){
+void UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER){
 //	обозначение:				--		--		CTE32		--		DMTFT24104	--		--		--		CTE32W	    --			LPH9135		--		--		CTE50		--		--		ELEE32_REVA	--			--			ELEE32_REVB	CTE70		CTE32HR		CTE28		CTE22		--		DMTFT28105	MI0283QT9	CTE35IPS	CTE40		CTE50CPLD	DMTFT18101	--		--		--		--		--
 //						--		--		--		--		DMTFT28103	--		--		--		--	    --			--		--		--		EHOUSE50	--		--		INFINIT32	--			--			--		EHOUSE70	--		--		DMTFT22102	--		--		--		--		--		CTE70CPLD	--		--		--		--		--		--
 //						ITDB32		ITDB32WC	ITDB32S		ITDB24		ITDB28		--		ITDB22		ITDB22SP	ITDB32WD    ITDB18SP		--		ITDB25H		ITDB43		ITDB50		ITDB24E_8	--		--		--			--			--		--		--		--		--		--		--		--		--		--		EHOUSE50CPLD    --		--		--		--		--		--
