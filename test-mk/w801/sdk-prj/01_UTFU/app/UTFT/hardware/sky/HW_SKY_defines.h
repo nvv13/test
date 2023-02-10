@@ -29,6 +29,7 @@
 #define regtype uint32_t
 #define regsize u8
 
+//!ВНИМАНИЕ! PIN0 - PIN15, использовать только PB порт GPIO !ВНИМАНИЕ!
 #define PIN0 WM_IO_PB_21
 #define PIN1 WM_IO_PB_22
 #define PIN2 WM_IO_PB_23
@@ -46,6 +47,8 @@
 #define PIN13 WM_IO_PB_13
 #define PIN14 WM_IO_PB_12
 #define PIN15 WM_IO_PB_09
+//!ВНИМАНИЕ! PIN0 - PIN15, использовать только PB порт GPIO !ВНИМАНИЕ!
+
 
 #endif /* HW_SKY_DEFINES_H */
 

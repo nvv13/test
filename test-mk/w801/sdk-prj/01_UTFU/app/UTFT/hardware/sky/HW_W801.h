@@ -92,6 +92,8 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 		pulse_low(P_WR, B_WR);
 		break;
 	case 16:
+		{
+/*
 		tls_gpio_write (PIN0, VH & 0x80 ? 1 : 0);
 		tls_gpio_write (PIN1, VH & 0x40 ? 1 : 0);
 		tls_gpio_write (PIN2, VH & 0x20 ? 1 : 0);
@@ -108,7 +110,59 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 		tls_gpio_write (PIN13, VL & 0x04 ? 1 : 0);
 		tls_gpio_write (PIN14, VL & 0x02 ? 1 : 0);
 		tls_gpio_write (PIN15, VL & 0x01 ? 1 : 0);
+*/
+		//!ВНИМАНИЕ! PIN0 - PIN15, использовать только PB порт GPIO !ВНИМАНИЕ!
+		u32 cpu_sr = 0;
+        	u32 reg;
+		u32 reg_en;
+		cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+		reg_en = tls_reg_read32(HR_GPIO_DATA_EN + TLS_IO_AB_OFFSET);
+		tls_reg_write32(HR_GPIO_DATA_EN + TLS_IO_AB_OFFSET, reg_en 
+                        | (1 << (PIN0 - WM_IO_PB_00))
+                        | (1 << (PIN1 - WM_IO_PB_00))
+                        | (1 << (PIN2 - WM_IO_PB_00))
+                        | (1 << (PIN3 - WM_IO_PB_00))
+                        | (1 << (PIN4 - WM_IO_PB_00))
+                        | (1 << (PIN5 - WM_IO_PB_00))
+                        | (1 << (PIN6 - WM_IO_PB_00))
+                        | (1 << (PIN7 - WM_IO_PB_00))
+                        | (1 << (PIN8 - WM_IO_PB_00))
+                        | (1 << (PIN9 - WM_IO_PB_00))
+                        | (1 << (PIN10 - WM_IO_PB_00))
+                        | (1 << (PIN11 - WM_IO_PB_00))
+                        | (1 << (PIN12 - WM_IO_PB_00))
+                        | (1 << (PIN13 - WM_IO_PB_00))
+                        | (1 << (PIN14 - WM_IO_PB_00))
+                        | (1 << (PIN15 - WM_IO_PB_00))
+                        ); // enabled control reg from need pin
+	
+		reg = tls_reg_read32(HR_GPIO_DATA + TLS_IO_AB_OFFSET); // load all pins from port
+    
+                if(VH & 0x80)reg |= (1 << (PIN0 - WM_IO_PB_00)); else reg &= (~(1 << (PIN0 - WM_IO_PB_00)));
+                if(VH & 0x40)reg |= (1 << (PIN1 - WM_IO_PB_00)); else reg &= (~(1 << (PIN1 - WM_IO_PB_00)));
+                if(VH & 0x20)reg |= (1 << (PIN2 - WM_IO_PB_00)); else reg &= (~(1 << (PIN2 - WM_IO_PB_00)));
+                if(VH & 0x10)reg |= (1 << (PIN3 - WM_IO_PB_00)); else reg &= (~(1 << (PIN3 - WM_IO_PB_00)));
+                if(VH & 0x08)reg |= (1 << (PIN4 - WM_IO_PB_00)); else reg &= (~(1 << (PIN4 - WM_IO_PB_00)));
+                if(VH & 0x04)reg |= (1 << (PIN5 - WM_IO_PB_00)); else reg &= (~(1 << (PIN5 - WM_IO_PB_00)));
+                if(VH & 0x02)reg |= (1 << (PIN6 - WM_IO_PB_00)); else reg &= (~(1 << (PIN6 - WM_IO_PB_00)));
+                if(VH & 0x01)reg |= (1 << (PIN7 - WM_IO_PB_00)); else reg &= (~(1 << (PIN7 - WM_IO_PB_00)));
+
+                if(VL & 0x80)reg |= (1 << (PIN8 - WM_IO_PB_00)); else reg &= (~(1 << (PIN8 - WM_IO_PB_00)));
+                if(VL & 0x40)reg |= (1 << (PIN9 - WM_IO_PB_00)); else reg &= (~(1 << (PIN9 - WM_IO_PB_00)));
+                if(VL & 0x20)reg |= (1 << (PIN10- WM_IO_PB_00)); else reg &= (~(1 << (PIN10- WM_IO_PB_00)));
+                if(VL & 0x10)reg |= (1 << (PIN11- WM_IO_PB_00)); else reg &= (~(1 << (PIN11- WM_IO_PB_00)));
+                if(VL & 0x08)reg |= (1 << (PIN12- WM_IO_PB_00)); else reg &= (~(1 << (PIN12- WM_IO_PB_00)));
+                if(VL & 0x04)reg |= (1 << (PIN13- WM_IO_PB_00)); else reg &= (~(1 << (PIN13- WM_IO_PB_00)));
+                if(VL & 0x02)reg |= (1 << (PIN14- WM_IO_PB_00)); else reg &= (~(1 << (PIN14- WM_IO_PB_00)));
+                if(VL & 0x01)reg |= (1 << (PIN15- WM_IO_PB_00)); else reg &= (~(1 << (PIN15- WM_IO_PB_00)));
+
+	        tls_reg_write32(HR_GPIO_DATA + TLS_IO_AB_OFFSET, reg );/* write reg all enabled pin port B */
+	
+	        tls_reg_write32(HR_GPIO_DATA_EN + TLS_IO_AB_OFFSET, reg_en); // reg_en return
+		tls_os_release_critical(cpu_sr); // enable Interrupt
+
 		pulse_low(P_WR, B_WR);
+		}
 		break;
 	}
 }
