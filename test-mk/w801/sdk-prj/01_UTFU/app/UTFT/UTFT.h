@@ -235,6 +235,6 @@ typedef bool boolean;
 		void	UTFT_setBrightness(byte br);
 		void	UTFT_setDisplayPage(byte page);
 		void	UTFT_setWritePage(byte page);
-
+                word    UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename);
 
 #endif

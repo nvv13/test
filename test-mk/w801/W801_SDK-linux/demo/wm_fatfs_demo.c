@@ -3,6 +3,7 @@
 #include "wm_gpio_afsel.h"
 #include "ff.h"
 #include "wm_demo.h"
+#include "wm_pmu.h"
 
 #if DEMO_FATFS
 

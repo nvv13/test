@@ -39,14 +39,14 @@
 #define PIN6 WM_IO_PB_18
 #define PIN7 WM_IO_PB_17
 
-#define PIN8 WM_IO_PB_16
-#define PIN9 WM_IO_PB_11
-#define PIN10 WM_IO_PB_10
+#define PIN8  WM_IO_PB_16
+#define PIN9  WM_IO_PB_01  // WM_IO_PB_11 Освободил контакты для SD Card
+#define PIN10 WM_IO_PB_02  // WM_IO_PB_10 Освободил контакты для SD Card
 #define PIN11 WM_IO_PB_15
 #define PIN12 WM_IO_PB_14
 #define PIN13 WM_IO_PB_13
 #define PIN14 WM_IO_PB_12
-#define PIN15 WM_IO_PB_09
+#define PIN15 WM_IO_PB_00  // WM_IO_PB_09 Освободил контакты для SD Card
 //!ВНИМАНИЕ! PIN0 - PIN15, использовать только PB порт GPIO !ВНИМАНИЕ!
 
 

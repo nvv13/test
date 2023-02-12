@@ -20,17 +20,17 @@ connect to TFT32MEGA_2
 ---- --------- ----
 W801 LCD   LCD W801
 ---- --------- ----
-5v    5v   5v		 
+5v    5v   5v	
 PB17 VH0   VH1 PB18
 PB26 VH2   VH3 PB25 
 PB24 VH4   VH5 PB23 
 PB22 VH6   VH7 PB21 
-PB16 VL7   VL6 PB11  
-PB10 VL5   VL4 PB15 
+PB16 VL7   VL6 PB01
+PB02 VL5   VL4 PB15 
 PB14 VL3   VL2 PB13 
-PB12 VL1   VL0 PB09 
-PA1  RS	    WR PA2	
-PA3  CS    RST PA4
+PB12 VL1   VL0 PB00
+PA01 RS	    WR PA02	
+PA03 CS    RST PA04
      -*-   -*-
      -*-   RD
      -*-   -*-
@@ -42,6 +42,33 @@ gnd  GND   GND
 W801 LCD   LCD W801
 ---- --------- ----
 
+
+
+sdio host
+Подключаем SD Card по схеме
+W801	Pin #	SD 4-bit Mode	Описание
+-----  -------------------------------------------------
+ PB11	1	CD/DAT[3]	Data Line 3
+ PB07	2	CMD		Command Line
+ Gnd	3	VSS1		Ground
+ 3.3v	4	VDD		Supply Voltage
+ PB06	5	CLK		Clock
+ Gnd	6	Vss2		Ground
+ PB08	7	DAT[0]		Data Line 0
+ PB09	8	DAT[1]		Data Line 1 / Interrupt
+PB10	9	DAT[2]		Data Line 2 /Read Wait
+-----  -------------------------------------------------
+
+
+SD Card 
+Вид со стороны контактов (с низу)
+  ---------
+ |12345678|
+|9        |
+|         |
+| SD Card |
+|         |
+-----------
 
 
 
