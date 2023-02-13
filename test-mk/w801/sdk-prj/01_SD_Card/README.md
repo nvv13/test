@@ -4,17 +4,15 @@
 
 project UTFT
 
-board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей Ultra HD 320X480 HX8367C
+board HLK-W801-KIT-V1.1 + SD Card, SDIO
 
 Видео
-https://youtu.be/ULZDZhmtduk
 
 
-Дисплей
+
+Дисплей 3.2 TFT Ultra HD 320X480 HX8367C
 фото 1 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113125.jpg" alt="back side" title="back side" /></p>
-фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113136.jpg" alt="top side" title="top side" /></p>
 
 
 
@@ -49,6 +47,46 @@ gnd  GND   GND
 ---- --------- ----
 W801 LCD   LCD W801
 ---- --------- ----
+
+
+
+sdio host
+Подключаем SD Card по схеме
+W801	Pin #	SD 4-bit Mode	Описание
+-----  -------------------------------------------------
+ PB11	1	CD/DAT[3]	Data Line 3
+ PB07	2	CMD		Command Line
+ Gnd	3	VSS1		Ground
+ 3.3v	4	VDD		Supply Voltage
+ PB06	5	CLK		Clock
+ Gnd	6	Vss2		Ground
+ PB08	7	DAT[0]		Data Line 0
+ PB09	8	DAT[1]		Data Line 1 / Interrupt
+PB10	9	DAT[2]		Data Line 2 /Read Wait
+-----  -------------------------------------------------
+
+
+SD Card 
+Вид со стороны контактов (с низу)
+  ---------
+ |12345678|
+|9        |
+|         |
+| SD Card |
+|         |
+-----------
+
+
+в makefile 
+библиотека libapp.a, 
+заменена на директорию mod1 (поменял кодировку на 866, для файловой системы)
+/lib/w800/mod1/libapp.a
+
+
+на SD Card, копируем файлы изображений из директории raw
+
+они подготовлены с помощью конверторов идущих с библиотекой UTFT
+http://www.rinkydinkelectronics.com/library.php?id=51
 
 
 
