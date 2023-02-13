@@ -1,13 +1,10 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
 
-
-project UTFT
+project SD Card, SDIO
 
 board HLK-W801-KIT-V1.1 + SD Card, SDIO
 
 Видео
-
+https://youtu.be/7m1QFUearHA
 
 
 Дисплей 3.2 TFT Ultra HD 320X480 HX8367C
