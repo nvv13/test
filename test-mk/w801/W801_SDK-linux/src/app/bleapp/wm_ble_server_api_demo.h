@@ -2,6 +2,11 @@
 #define __WM_BLE_SERVER_DEMO_H__
 #include "wm_bt.h"
 
+//add by zxx start
+extern tls_os_queue_t 	*ble_q;
+//add by zxx end
+
+
 int tls_ble_server_demo_api_init(tls_ble_output_func_ptr output_func_ptr);
 int tls_ble_server_demo_api_deinit();
 uint32_t tls_ble_server_demo_api_get_mtu();

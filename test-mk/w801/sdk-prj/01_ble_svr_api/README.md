@@ -7,6 +7,21 @@ project ble server api
 board HLK-W801-KIT-V1.1 
 
 
+~~~
+
+в makefile 
+библиотека libapp.a, 
+заменена на директорию mod1 
+/lib/w800/mod1/libapp.a
+в ней добавленны функции для работы с bleapp
+собственно в сами исходники
+
+исходники модификации от zxx
+ https://github.com/xiansenzhao/W800-KIT-bt-cht8305c.git
+описание
+ https://blog.csdn.net/qq_37280428/article/details/124188328?spm=1001.2014.3001.5502
+
+~~~
 
 
 

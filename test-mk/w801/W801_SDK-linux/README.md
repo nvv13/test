@@ -17,3 +17,10 @@ Serial debug tool: [**picocom**](https://github.com/npat-efault/picocom)
 # Ref
 https://www.cnblogs.com/milton/p/15621540.html
 
+
+
+
+# original source:
+https://gitee.com/iosetting/wm-sdk-w80x.git
+Apache License, Version 2.0, January 2004
+

@@ -2,7 +2,7 @@
  *
  * File Name : main.c
  *
- * Description: pin PB1, freq = 5,714309 MHz CPU_CLK_240M
+ * Description: 
  *
  * Date : 2022-05-20
  *****************************************************************************/
@@ -11,38 +11,72 @@
 #include <string.h>
 
 #include "wm_type_def.h"
-
 #include "wm_gpio_afsel.h"
 
-//#include "wm_bt_util.h"
 
-#include "mm_ble_server_api_demo.h"
+#include "../src/app/bleapp/wm_bt_app.h"
+#include "../src/app/bleapp/wm_ble_server_api_demo.h"
 
 extern int demo_bt_enable (void);
+extern int demo_ble_server_on(void);
+extern int tls_ble_server_demo_api_send_notify_msg(uint8_t *data, int data_len);
 
-static u8 buffer_out[512];
 
-static void
-my_output_func_ptr (uint8_t *p_data, uint32_t length)
+//BT
+#define    MYBLE_TASK_SIZE      2048
+static OS_STK 			MyBLETaskStk[MYBLE_TASK_SIZE];
+#define  MYBLE_TASK_PRIO               32
+
+
+void my_ble_msg_task(void *sdata)
 {
-  memcpy (buffer_out, p_data, length);
-  buffer_out[length] = 0;
-  printf ("my_output_func_ptr length=%d, p_data=%s\n", length, buffer_out);
-  //int i_len_ret = sprintf ((char *)buffer_out, "ok, light=%d\r\n", length);
+	u8 msg_state[4];
+	u8 *msg;
+	
+	demo_bt_enable();
+	while(bt_adapter_state == WM_BT_STATE_OFF)
+	{
+		tls_os_time_delay (HZ * 5);
+	}
+	tls_os_time_delay (HZ * 5);
+	demo_ble_server_on();
+	printf("ble_server_on ok \r\n");
+	while(1)
+	{
+		//Receive the data sent by the mobile phone, note that the data is received in bytes
+		//msg[0] indicates that the data length already contains '\0'
+		tls_os_queue_receive(ble_q,((void **)&msg), 0, 0);
+		printf("rev main:%s len:%d\n",&msg[1] ,msg[0]);
+		//Extract the first 4 bits, the first 4 bits are status flags
+		strncpy((char*)msg_state,(char *)&msg[1],4);
+		//Judge the state of the first four digits
+
+                //отправим обратно 
+		tls_ble_server_demo_api_send_notify_msg(msg_state,sizeof(msg_state));
+		
+	}
+	
 }
+
+
 
 void
 UserMain (void)
 {
+	//Bluetooth receive message queue
+	if(tls_os_queue_create(&ble_q, 32)!=TLS_OS_SUCCESS)
+	{
+		printf("create queue fail\n");
+		return;
+	}
 
-  printf ("user task\n");
-
-  demo_bt_enable ();
-  printf ("demo_bt_enable... delay 5 sec\n");
-  tls_os_time_delay (HZ * 5);
-
-  int i_Res = mls_ble_server_demo_api_init (&my_output_func_ptr);
-  printf ("tls_ble_server_demo_api_init=%d\n", i_Res);
+	tls_os_task_create(NULL, NULL,
+                       my_ble_msg_task,		//Bluetooth receiving task
+                       NULL,
+                       (void *)MyBLETaskStk,          /* task's stack start address */
+                       MYBLE_TASK_SIZE * sizeof(u32), /* task's stack size, unit:byte */
+                       MYBLE_TASK_PRIO,
+                       0);
 
 
   return;

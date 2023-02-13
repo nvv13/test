@@ -41,12 +41,24 @@ uint16_t g_ble_demo_attr_indicate_handle;
 uint16_t g_ble_demo_attr_write_handle;
 uint16_t g_ble_demo_conn_handle ;
 
+//add by zxx start
+uint16_t g_ble_demo_attr_notify_handle;
+//add by zxx end
 
 
 #define WM_GATT_SVC_UUID      0xFFF0
 #define WM_GATT_INDICATE_UUID 0xFFF1
 #define WM_GATT_WRITE_UUID    0xFFF2
 
+
+/*
+What is the difference between an Indication and a Notification?
+
+In this sense Indications are akin to TCP and Notifications are akin to UDP.
+*/
+//add by zxx start
+#define WM_GATT_NOTIFY_UUID   0xFFF3
+//add by zxx end
 
 static int
 gatt_svr_chr_demo_access_func(uint16_t conn_handle, uint16_t attr_handle,
@@ -62,6 +74,11 @@ static int
 gatt_svr_chr_demo_write_func(uint16_t conn_handle, uint16_t attr_handle,
                               struct ble_gatt_access_ctxt *ctxt, void *arg);
 
+//notify_test The function has no effect, and the Bluetooth initialization will fail if the notify method is not added.
+static int notify_test()
+{
+return 0;
+}
 
 static const struct ble_gatt_svc_def gatt_demo_svr_svcs[] = {
     {
@@ -73,12 +90,25 @@ static const struct ble_gatt_svc_def gatt_demo_svr_svcs[] = {
                 .val_handle = &g_ble_demo_attr_write_handle,
                 .access_cb = gatt_svr_chr_demo_access_func,
                 .flags = BLE_GATT_CHR_F_WRITE,
-            },{
+            }
+           ,{
                 .uuid = BLE_UUID16_DECLARE(WM_GATT_INDICATE_UUID),
                 .val_handle = &g_ble_demo_attr_indicate_handle,
                 .access_cb = gatt_svr_chr_demo_access_func,
                 .flags = BLE_GATT_CHR_F_INDICATE,
-            },{
+            }
+
+			//add by zxx start
+			,{
+                .uuid = BLE_UUID16_DECLARE(WM_GATT_NOTIFY_UUID),
+                .val_handle = &g_ble_demo_attr_notify_handle,
+                .access_cb = notify_test, //This function will not be called, but must have,
+                .flags = BLE_GATT_CHR_F_NOTIFY,
+            }
+			//add by zxx end
+
+
+	     ,{
               0, /* No more characteristics in this service */
             } 
          },
@@ -151,6 +181,23 @@ int wm_ble_server_api_demo_adv(bool enable)
  */
 
 static int
+gatt_svr_chr_demo_write_func(uint16_t conn_handle, uint16_t attr_handle,
+                              struct ble_gatt_access_ctxt *ctxt, void *arg)
+{
+  printf("gatt_svr_chr_demo_write_func \r\n");
+}
+
+
+//add by zxx start
+tls_os_queue_t 	*ble_q = NULL;
+
+// redefine a data uff
+//ble_data[0] indicates the length of the data, followed by data
+u8 ble_data[255]  = {0};
+
+//add by zxx end
+
+static int
 gatt_svr_chr_demo_access_func(uint16_t conn_handle, uint16_t attr_handle,
                                struct ble_gatt_access_ctxt *ctxt, void *arg)
 {
@@ -166,7 +213,22 @@ gatt_svr_chr_demo_access_func(uint16_t conn_handle, uint16_t attr_handle,
                     
                   }else
                   {
-                     print_bytes(om->om_data, om->om_len); 
+
+					//add by zxx start
+					  //print_bytes(om->om_data, om->om_len);
+					  //The first byte is the length, you need to add a '\0', so add one to the byte length
+					  uint16_t u16_om_len=om->om_len;
+					  if(u16_om_len>253)
+                                             u16_om_len=253;//подстрахуемся
+					  ble_data[0] = u16_om_len+1;
+					  memcpy(&ble_data[1],om->om_data,u16_om_len);
+					  //Add end of string -  ble_data[0...254] (255)
+					  ble_data[u16_om_len+1] = '\0';
+					  printf("rec: %s len:%d len send:%d\n",(char *)(ble_data+1),om->om_len,u16_om_len);
+					  if(om->om_len>0)
+						tls_os_queue_send(ble_q,ble_data, 0);
+					//add by zxx end
+
                   }
                   om = SLIST_NEXT(om, om_next);
               }
@@ -216,7 +278,10 @@ static void ble_server_indication_sent_cb(int conn_id, int status)
         memset(g_ind_data, ss, sizeof(g_ind_data));
         ss++;
         if(ss > 0xFE) ss = 0x00;
-    	tls_ble_server_demo_api_send_msg(g_ind_data, g_mtu); 
+		TLS_BT_APPL_TRACE_DEBUG("aaaaaaaaaaaaaaaaaaa\r\n");
+		//add by zxx start After this function is turned on, the development board will always send data to the mobile phone, so it is blocked
+    	//tls_ble_server_demo_api_send_msg(g_ind_data, g_mtu); 
+		//add by zxx end
 
     }else
     {
@@ -554,6 +619,40 @@ int tls_ble_server_demo_api_send_msg(uint8_t *data, int data_len)
     }
     return rc;
 }
+
+
+
+
+//add by zxx start
+int tls_ble_server_demo_api_send_notify_msg(uint8_t *data, int data_len)
+{
+    int rc;
+    struct os_mbuf *om;
+    
+    //TLS_BT_APPL_TRACE_DEBUG("### %s len=%d\r\n", __FUNCTION__, data_len);
+    //if(g_send_pending) return BLE_HS_EBUSY;
+
+    if(data_len<=0 || data == NULL)
+    {
+        return BLE_HS_EINVAL;
+    }
+    
+    om = ble_hs_mbuf_from_flat(data, data_len);
+    if (!om) {
+        return BLE_HS_ENOMEM;
+    }
+    rc = ble_gattc_notify_custom(g_ble_demo_conn_handle,g_ble_demo_attr_notify_handle, om); 
+    /*
+	if(rc == 0)
+    {
+        g_send_pending = 1;
+    }
+	*/
+    return rc;
+}
+//add by zxx end
+
+
 
 #endif
 

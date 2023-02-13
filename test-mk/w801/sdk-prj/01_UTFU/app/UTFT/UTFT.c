@@ -1404,7 +1404,6 @@ word UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename)
 	UINT fnum; // The number of files successfully read and written
 
 	int cx, cy, cp;
-	word result;
 
  	wm_sdio_host_config(0);
 
@@ -1438,63 +1437,71 @@ word UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename)
 #ifdef SERIAL_DEBUG
                 printf ("Open file successfully! Start reading data!\r\n");
 #endif
-		res_sd= f_read(&fnew, file_buffer, sizeof(file_buffer), &fnum);
-		if(res_sd == FR_OK)
+		cbi(P_CS, B_CS);
+		cx=0;
+		cy=0;
+		fnum=sizeof(file_buffer);
+		if (orient==PORTRAIT)
 		{
+			UTFT_setXY(x, y, x+sx-1, y+sy-1);
+		}
+		while(fnum==sizeof(file_buffer))
+		{
+			res_sd= f_read(&fnew, file_buffer, sizeof(file_buffer), &fnum);
+			if(res_sd == FR_OK)
+			{
 #ifdef SERIAL_DEBUG
                         printf ("Data read successfully!\r\n");
                         printf ("data: %s\r\n", file_buffer);
 #endif
-		cbi(P_CS, B_CS);
-		cx=0;
-		cy=0;
-		result=512;
-		if (orient==PORTRAIT)
-		{
-			UTFT_setXY(x, y, x+sx-1, y+sy-1);
-			for (int i=0; i<result; i+=2)
-				UTFT_LCD_Write_DATA(file_buffer[i],file_buffer[i+1]);
-		}
-		else
-		{
-			cp=0;
-			while (cp<result)
-			{
-				if (((result-cp)/2)<(sx-cx))
-				{
-					UTFT_setXY(x+cx, y+cy, x+cx+((result-cp)/2)-1, y+cy);
-					for (int i=(result-cp)-2; i>=0; i-=2)
-						UTFT_LCD_Write_DATA(file_buffer[cp+i],file_buffer[cp+i+1]);
-					cx+=((result-cp)/2);
-					cp=result;
-				}
-				else
-				{
-					UTFT_setXY(x+cx, y+cy, x+sx-1, y+cy);
-					for (int i=sx-cx-1; i>=0; i--)
-						UTFT_LCD_Write_DATA(file_buffer[cp+(i*2)],file_buffer[cp+(i*2)+1]);
-					cp+=(sx-cx)*2;
-					cx=0;
-					cy++;
-				}
+					if (orient==PORTRAIT)
+					{
+						for (int i=0; i<fnum; i+=2)
+							UTFT_LCD_Write_DATA(file_buffer[i],file_buffer[i+1]);
+					}
+					else
+					{
+						cp=0;
+						while (cp<fnum)
+						{
+							if (((fnum-cp)/2)<(sx-cx))
+							{
+								UTFT_setXY(x+cx, y+cy, x+cx+((fnum-cp)/2)-1, y+cy);
+								for (int i=(fnum-cp)-2; i>=0; i-=2)
+									UTFT_LCD_Write_DATA(file_buffer[cp+i],file_buffer[cp+i+1]);
+								cx+=((fnum-cp)/2);
+								cp=fnum;
+							}
+							else
+							{
+								UTFT_setXY(x+cx, y+cy, x+sx-1, y+cy);
+								for (int i=sx-cx-1; i>=0; i--)
+									UTFT_LCD_Write_DATA(file_buffer[cp+(i*2)],file_buffer[cp+(i*2)+1]);
+								cp+=(sx-cx)*2;
+								cx=0;
+								cy++;
+							}
+						}
+					}
+
 			}
-		}
-      		UTFT_setXY(0,0,UTFT_getDisplayXSize()-1,UTFT_getDisplayYSize()-1);
-		sbi(P_CS, B_CS);
-		}
-		else
-		{
+			else
+			{
 #ifdef SERIAL_DEBUG
                         printf ("Data reading failed!\r\n");
 #endif
+			break;
+			}
 		}
 		//close file
 		f_close(&fnew);
+		UTFT_setXY(0,0,UTFT_getDisplayXSize()-1,UTFT_getDisplayYSize()-1);
+		sbi(P_CS, B_CS);
 	}
 	
 	//unmount file system
 	f_mount(NULL, "0:", 1);
-	return 0;
+	return res_sd;
 
 /*
 	int res;

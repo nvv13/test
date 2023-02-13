@@ -10,6 +10,14 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей Ultra HD 320X480 HX8367C
 https://youtu.be/ULZDZhmtduk
 
 
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113125.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113136.jpg" alt="top side" title="top side" /></p>
+
+
+
 соединения
 
 надо соеденить по схеме:
@@ -70,6 +78,11 @@ SD Card
 |         |
 -----------
 
+
+в makefile 
+библиотека libapp.a, 
+заменена на директорию mod1 (поменял кодировку на 866, для файловой системы)
+/lib/w800/mod1/libapp.a
 
 
 
