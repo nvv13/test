@@ -281,3 +281,9 @@ void UTFT__fast_fill_8(int ch, long pix)
 			pulse_low(P_WR, B_WR);pulse_low(P_WR, B_WR);
 		}
 }
+
+
+
+extern void n_delay_ms (uint32_t ms);
+static void delay(int ms){n_delay_ms(ms);};
+

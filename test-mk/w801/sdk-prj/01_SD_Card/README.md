@@ -73,11 +73,13 @@ SD Card
 |         |
 -----------
 
+рядом с считывателем
+Контакты 1,2,7,8,9 - подключаем через резисторы, примерно ~10кОм...100кОм к +3.3v контакт 4
+К контактам Gnd(3,6) и +3.3v(4) - подключам конденсаторы, керамический ~0,047мКф и электролит ~10мКф от помех...
 
-в makefile 
-библиотека libapp.a, 
-заменена на директорию mod1 (поменял кодировку на 866, для файловой системы)
-/lib/w800/mod1/libapp.a
+
+
+~~~
 
 
 на SD Card, копируем файлы изображений из директории raw
@@ -85,9 +87,21 @@ SD Card
 они подготовлены с помощью конверторов идущих с библиотекой UTFT
 http://www.rinkydinkelectronics.com/library.php?id=51
 
+для Linux, это можно сделать с помощью утилиты convert, входящую в состав ImageMagick.
+[Руководство пользователя ImageMagick v. 7.1.0](https://coollib.net/b/558566-ivan-georgievich-titarenko-rukovodstvo-polzovatelya-imagemagick-v-710)
+как нибуть попробую, дополню инфу.
+
+----
 
 
-~~~
+в makefile 
+библиотека libapp.a, 
+заменена на директорию mod1 (поменял кодировку на 866, для файловой системы)
+/lib/w800/mod1/libapp.a
+
+
+
+----
 
 
 
@@ -198,6 +212,9 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
+----
+
+
 
 
 
@@ -215,6 +232,7 @@ This project is based on the original [UTFT library](http://www.rinkydinkelectro
 
 
 
+----
 
 
 
