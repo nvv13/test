@@ -25,6 +25,9 @@
 #define pgm_read_byte(data) *data
 #define bitmapdatatype unsigned short*
 
+#define PROGMEM
+#define fontdatatype const unsigned char
+
 //#define regtype volatile uint32_t
 #define regtype uint32_t
 #define regsize u8

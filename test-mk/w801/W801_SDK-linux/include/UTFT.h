@@ -177,7 +177,7 @@
 typedef u8  byte;
 typedef u16 word;
 
-#include "hardware/sky/HW_SKY_defines.h"
+#define bitmapdatatype unsigned short*
 
 typedef struct 
 {

@@ -51,6 +51,16 @@ W801 LCD   LCD W801
 ---- --------- ----
 
 
+после сборки, файл libUTFT.a 
+лежит ./bin/build/w800/lib/libUTFT.a
+
+нужно закинуть в общие библиотеки ./lib/w800/mod1
+
+также фалик UTFT.h
+ лежит ./app/UTFT
+ скоприровать в директорию ./include
+
+это для других проектов
 
 ~~~
 
@@ -173,6 +183,9 @@ https://wiki.iarduino.ru/page/rabota-s-cvetnym-graficheskim-displeem/
 
 добавлен ILI9225B из: 
 https://github.com/gnulabis/UTFT-ESP.git 
+
+добавлены русские буквы из: 
+https://github.com/twsdwf/UTFT-rus.git
 
 главный источник: 
 ## License and Credits 

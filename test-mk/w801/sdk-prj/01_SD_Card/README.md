@@ -95,10 +95,13 @@ http://www.rinkydinkelectronics.com/library.php?id=51
 
 
 в makefile 
+
 библиотека libapp.a, 
 заменена на директорию mod1 (поменял кодировку на 866, для файловой системы)
-/lib/w800/mod1/libapp.a
+./lib/w800/mod1/libapp.a
 
+также собраная библиотека берётся из
+./lib/w800/mod1/libUTFT.a
 
 
 ----

@@ -5,8 +5,7 @@ ifndef PDIR # {
 GEN_IMAGES = $(TARGET).elf
 GEN_BINS = $(TARGET).bin
 SUBDIRS = \
-    $(TOP_DIR)/app \
-    $(TOP_DIR)/app/UTFT #\
+    $(TOP_DIR)/app #\
 #    $(TOP_DIR)/demo
 MYAPPDIRS = $(TOP_DIR)/app
 endif # } PDIR
@@ -32,8 +31,7 @@ endif
 endif
 
 COMPONENTS_$(TARGET) =	\
-    $(TOP_DIR)/app/libuser$(LIB_EXT) \
-    $(TOP_DIR)/app/libUTFT$(LIB_EXT) #\
+    $(TOP_DIR)/app/libuser$(LIB_EXT) #\
 #    $(TOP_DIR)/demo/libdemo$(LIB_EXT)
 
 ifeq ($(USE_LIB), 0)
@@ -63,6 +61,7 @@ LINKLIB = 	\
 
 ifeq ($(USE_LIB), 1)
 LINKLIB += $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libapp$(LIB_EXT)  \
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libUTFT$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmarch$(LIB_EXT)      \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmcommon$(LIB_EXT)    \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libdrivers$(LIB_EXT)     \

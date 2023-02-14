@@ -43,6 +43,7 @@ extern uint8_t SmallFont[]; // подключаем маленький шриф�
 extern uint8_t BigFont[];   // подключаем большой шрифт
 extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
+extern uint8_t SmallSymbolFont[];
 
 void
 user_app1_task (void *sdata)
@@ -154,6 +155,31 @@ user_app1_task (void *sdata)
       UTFT_print ("1234567890", CENTER, 150,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
+      tls_os_time_delay (HZ * 3);
+
+      UTFT_setFont (BigFont);
+      UTFT_setColor2 (VGA_WHITE);
+      UTFT_setBackColor2 (VGA_TRANSPARENT);
+      UTFT_print ("BigF(c \xA3"
+                  "o"
+                  "\x99\x99"
+                  "ep"
+                  "\x9b\x9f"
+                  "o"
+                  "\x9e"
+                  " pycc"
+                  "\x9f"
+                  "o"
+                  "\x98"
+                  "o):",
+                  CENTER, 200, 0);
+
+      //      UTFT_print ("АБВГДЕЁЖЗИЙКЛМН", CENTER, 150, 0);
+      tls_os_time_delay (HZ * 3);
+
+      UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
+      UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 130,
+                  0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
 
     } //
