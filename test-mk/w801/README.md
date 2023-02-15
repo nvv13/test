@@ -252,8 +252,8 @@ $ dnf install ncurses-devel
 https://github.com/leoay/wm-sdk-w80x-2023.git
 и добавил перевод изменений, w801_pinout, из
 https://github.com/Gusev-Roman/wm-sdk-w80x-2023.git
-
-
+интерестная статья по теме
+http://we.easyelectronics.ru/part/w801-zhk-ekranchik-i-lozhechka-degtya.html
 
 -----------
 
