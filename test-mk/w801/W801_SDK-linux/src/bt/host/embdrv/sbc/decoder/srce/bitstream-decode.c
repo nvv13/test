@@ -58,13 +58,10 @@ PRIVATE OI_UINT8 OI_BITSTREAM_ReadUINT4Aligned(OI_BITSTREAM *bs)
     OI_ASSERT(bs->bitPtr < 16);
     OI_ASSERT(bs->bitPtr % 4 == 0);
 
-    if(bs->bitPtr == 8)
-    {
+    if(bs->bitPtr == 8) {
         result = bs->value << 8;
         bs->bitPtr = 12;
-    }
-    else
-    {
+    } else {
         result = bs->value << 12;
         bs->value = (bs->value << 8) | *bs->ptr.r++;
         bs->bitPtr = 8;

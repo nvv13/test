@@ -29,6 +29,7 @@
 
 #include <assert.h>
 
+#include <stdio.h>
 
 #include "bluetooth.h"
 #include "gki.h"
@@ -44,35 +45,34 @@
 
 /* Run-time configuration file for BLE*/
 #ifndef BTE_BLE_STACK_CONF_FILE
-    // TODO(armansito): Find a better way than searching by a hardcoded path.
-    #if defined(OS_GENERIC)
-        #define BTE_BLE_STACK_CONF_FILE "ble_stack.conf"
-    #else  // !defined(OS_GENERIC)
-        #define BTE_BLE_STACK_CONF_FILE "/etc/bluetooth/ble_stack.conf"
-    #endif  // defined(OS_GENERIC)
+// TODO(armansito): Find a better way than searching by a hardcoded path.
+#if defined(OS_GENERIC)
+#define BTE_BLE_STACK_CONF_FILE "ble_stack.conf"
+#else  // !defined(OS_GENERIC)
+#define BTE_BLE_STACK_CONF_FILE "/etc/bluetooth/ble_stack.conf"
+#endif  // defined(OS_GENERIC)
 #endif  // BT_BLE_STACK_CONF_FILE
 /* if not specified in .txt file then use this as default  */
 #ifndef HCI_LOGGING_FILENAME
-    #define HCI_LOGGING_FILENAME  "/data/misc/bluedroid/btsnoop_hci.log"
+#define HCI_LOGGING_FILENAME  "/data/misc/bluedroid/btsnoop_hci.log"
 #endif
 
 
 /* Stack preload process timeout period  */
 #ifndef PRELOAD_START_TIMEOUT_MS
-    #define PRELOAD_START_TIMEOUT_MS 3000  // 3 seconds
+#define PRELOAD_START_TIMEOUT_MS 3000  // 3 seconds
 #endif
 
 /* Stack preload process maximum retry attempts  */
 #ifndef PRELOAD_MAX_RETRY_ATTEMPTS
-    #define PRELOAD_MAX_RETRY_ATTEMPTS 0
+#define PRELOAD_MAX_RETRY_ATTEMPTS 0
 #endif
 
 /******************************************************************************
 **  Variables
 ******************************************************************************/
 /* Preload retry control block */
-typedef struct
-{
+typedef struct {
     int     retry_counts;
     uint8_t timer_created;
     int timer_id;
@@ -104,6 +104,9 @@ static void bte_hci_disable(void);
 static void preload_start_wait_timer(void);
 static void preload_stop_wait_timer(void);
 
+void bta_sys_free(void);
+
+
 /*******************************************************************************
 **  Externs
 *******************************************************************************/
@@ -116,6 +119,9 @@ void BTE_UnloadStack(void);
 extern void scru_flip_bda(BD_ADDR dst, const BD_ADDR src);
 extern void bte_load_conf(const char *p_path);
 extern void bte_load_ble_conf(const char *p_path);
+extern void BTE_InitStack(void);
+extern void BTE_DeinitStack(void);
+
 extern tls_bt_addr_t btif_local_bd_addr;
 
 /******************************************************************************
@@ -130,8 +136,7 @@ extern tls_bt_addr_t btif_local_bd_addr;
 static void bte_main_in_hw_init(void)
 {
     if((bt_hc_if = (bt_hc_interface_t *) bt_hc_get_interface()) \
-            == NULL)
-    {
+            == NULL) {
         assert(0);
     }
 
@@ -148,19 +153,17 @@ static void bte_main_in_hw_init(void)
 ******************************************************************************/
 void bte_main_boot_entry(void)
 {
-    #if 0
+#if 0
     module_init(get_module(INTEROP_MODULE));
     hci = hci_layer_get_interface();
 
-    if(!hci)
-    {
+    if(!hci) {
         LOG_ERROR(LOG_TAG, "%s could not get hci layer interface.", __func__);
     }
 
     btu_hci_msg_queue = fixed_queue_new(SIZE_MAX);
 
-    if(btu_hci_msg_queue == NULL)
-    {
+    if(btu_hci_msg_queue == NULL) {
         LOG_ERROR(LOG_TAG, "%s unable to allocate hci message queue.", __func__);
         return;
     }
@@ -168,16 +171,16 @@ void bte_main_boot_entry(void)
     data_dispatcher_register_default(hci->event_dispatcher, btu_hci_msg_queue);
     hci->set_data_queue(btu_hci_msg_queue);
     module_init(get_module(STACK_CONFIG_MODULE));
-    #else
+#else
     /* initialize OS */
     GKI_init();
     bte_main_in_hw_init();
     //bte_load_conf(BTE_STACK_CONF_FILE);
-    #if (defined(BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
+#if (defined(BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
     //bte_load_ble_conf(BTE_BLE_STACK_CONF_FILE);
     //hci_dbg_msg("!!bte_load_ble_conf omitted\r\n");
-    #endif
-    #endif
+#endif
+#endif
 }
 
 /******************************************************************************
@@ -191,16 +194,16 @@ void bte_main_boot_entry(void)
 ******************************************************************************/
 void bte_main_cleanup()
 {
-    #if 0
+#if 0
     data_dispatcher_register_default(hci_layer_get_interface()->event_dispatcher, NULL);
     hci->set_data_queue(NULL);
     fixed_queue_free(btu_hci_msg_queue, NULL);
     btu_hci_msg_queue = NULL;
     module_clean_up(get_module(STACK_CONFIG_MODULE));
     module_clean_up(get_module(INTEROP_MODULE));
-    #else
+#else
     GKI_shutdown();
-    #endif
+#endif
 }
 
 /******************************************************************************
@@ -240,10 +243,10 @@ void bte_main_disable(void)
     bte_hci_disable();
     GKI_destroy_task(BTU_TASK);
 #if (defined(BTA_INCLUDED) && BTA_INCLUDED == TRUE)
-	bta_sys_free();
+    bta_sys_free();
 #endif
-	BTE_DeinitStack();
-	btu_free_core();
+    BTE_DeinitStack();
+    btu_free_core();
 }
 
 /******************************************************************************
@@ -273,18 +276,16 @@ static void bte_hci_enable(void)
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
     preload_start_wait_timer();
 
-    if(bt_hc_if)
-    {
+    if(bt_hc_if) {
         int result = bt_hc_if->init(&hc_callbacks, btif_local_bd_addr.address);
         APPL_TRACE_EVENT("libbt-hci init returns %d", result);
         assert(result == BT_HC_STATUS_SUCCESS);
 
-        if(hci_logging_enabled == TRUE || hci_logging_config == TRUE)
-        {
+        if(hci_logging_enabled == TRUE || hci_logging_config == TRUE) {
             bt_hc_if->logging(BT_HC_LOGGING_ON, hci_logfile, hci_save_log);
         }
 
-        #if (defined (BT_CLEAN_TURN_ON_DISABLED) && BT_CLEAN_TURN_ON_DISABLED == TRUE)
+#if (defined (BT_CLEAN_TURN_ON_DISABLED) && BT_CLEAN_TURN_ON_DISABLED == TRUE)
         APPL_TRACE_DEBUG("%s  Not Turninig Off the BT before Turninig ON", __FUNCTION__);
         /* Do not power off the chip before powering on  if BT_CLEAN_TURN_ON_DISABLED flag
          is defined and set to TRUE to avoid below mentioned issue.
@@ -296,11 +297,11 @@ static void bte_hci_enable(void)
 
          This is only a workaround and when the issue is fixed in the kernel this work around
          should be removed. */
-        #else
+#else
         /* toggle chip power to ensure we will reset chip in case
            a previous stack shutdown wasn't completed gracefully */
         bt_hc_if->set_power(BT_HC_CHIP_PWR_OFF);
-        #endif
+#endif
         bt_hc_if->set_power(BT_HC_CHIP_PWR_ON);
         bt_hc_if->preload(NULL);
     }
@@ -319,16 +320,14 @@ static void bte_hci_disable(void)
 {
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
 
-    if(!bt_hc_if)
-    {
+    if(!bt_hc_if) {
         return;
     }
 
     // Cleanup is not thread safe and must be protected.
     //pthread_mutex_lock(&cleanup_lock);
 
-    if(hci_logging_enabled == TRUE ||  hci_logging_config == TRUE)
-    {
+    if(hci_logging_enabled == TRUE ||  hci_logging_config == TRUE) {
         bt_hc_if->logging(BT_HC_LOGGING_OFF, hci_logfile, hci_save_log);
     }
 
@@ -345,26 +344,23 @@ static void bte_hci_disable(void)
 ** Returns         None
 **
 *******************************************************************************/
+#if 0
 static void preload_wait_timeout()
 {
-    // UNUSED(arg);
     APPL_TRACE_ERROR("...preload_wait_timeout (retried:%d/max-retry:%d)...",
                      preload_retry_cb.retry_counts,
                      PRELOAD_MAX_RETRY_ATTEMPTS);
 
-    if(preload_retry_cb.retry_counts++ < PRELOAD_MAX_RETRY_ATTEMPTS)
-    {
+    if(preload_retry_cb.retry_counts++ < PRELOAD_MAX_RETRY_ATTEMPTS) {
         bte_hci_disable();
         GKI_delay(100);
         bte_hci_enable();
-    }
-    else
-    {
+    } else {
         /* Notify BTIF_TASK that the init procedure had failed*/
         GKI_send_event(BTIF_TASK, BT_EVT_HARDWARE_INIT_FAIL);
     }
 }
-
+#endif
 /*******************************************************************************
 **
 ** Function        preload_start_wait_timer
@@ -376,7 +372,8 @@ static void preload_wait_timeout()
 *******************************************************************************/
 static void preload_start_wait_timer(void)
 {
-    APPL_TRACE_DEBUG("%s is omitted, the adapter driver downloaded the firmware already\n", __FUNCTION__);
+    APPL_TRACE_DEBUG("%s is omitted, the adapter driver downloaded the firmware already\n",
+                     __FUNCTION__);
 }
 
 /*******************************************************************************
@@ -404,8 +401,7 @@ static void preload_stop_wait_timer(void)
 ******************************************************************************/
 void bte_main_postload_cfg(void)
 {
-    if(bt_hc_if)
-    {
+    if(bt_hc_if) {
         bt_hc_if->postload(NULL);
     }
 }
@@ -425,9 +421,12 @@ void bte_main_enable_lpm(uint8_t enable)
     int result = -1;
 
     if(bt_hc_if)
+    {
         result = bt_hc_if->lpm(\
                                (enable == TRUE) ? BT_HC_LPM_ENABLE : BT_HC_LPM_DISABLE \
                               );
+    }
+	(void)result;
 
     APPL_TRACE_EVENT("HC lib lpm enable=%d return %d\n", enable, result);
 }
@@ -445,9 +444,9 @@ void bte_main_lpm_allow_bt_device_sleep()
 {
     int result = -1;
 
-    if((bt_hc_if) && (lpm_enabled == TRUE))
-    {
+    if((bt_hc_if) && (lpm_enabled == TRUE)) {
         result = bt_hc_if->lpm(BT_HC_LPM_WAKE_DEASSERT);
+		(void)result;
     }
 }
 
@@ -464,9 +463,9 @@ void bte_main_lpm_wake_bt_device()
 {
     int result = -1;
 
-    if((bt_hc_if) && (lpm_enabled == TRUE))
-    {
+    if((bt_hc_if) && (lpm_enabled == TRUE)) {
         result = bt_hc_if->lpm(BT_HC_LPM_WAKE_ASSERT);
+		(void)result;
     }
 
     APPL_TRACE_DEBUG("HC lib lpm assertion return %d", result);
@@ -478,15 +477,13 @@ void bte_main_lpm_wake_bt_device()
  *  Definitions for audio state structure, this type needs to match to
  *  the bt_vendor_op_audio_state_t type defined in bt_vendor_lib.h
  */
-typedef struct
-{
+typedef struct {
     uint16_t  handle;
     uint16_t  peer_codec;
     uint16_t  state;
 } bt_hc_audio_state_t;
 
-struct bt_audio_state_tag
-{
+struct bt_audio_state_tag {
     BT_HDR hdr;
     bt_hc_audio_state_t audio;
 };
@@ -512,15 +509,13 @@ int set_audio_state(uint16_t handle, uint16_t codec, uint8_t state, void *param)
     printf("set_audio_state(handle: %d, codec: 0x%x, state: %d)", handle,
            codec, state);
 
-    if(NULL != param)
-    {
+    if(NULL != param) {
         APPL_TRACE_WARNING("set_audio_state() non-null param not supported");
     }
 
     p_msg = (struct bt_audio_state_tag *)GKI_getbuf(sizeof(*p_msg));
 
-    if(!p_msg)
-    {
+    if(!p_msg) {
         return result;
     }
 
@@ -534,8 +529,7 @@ int set_audio_state(uint16_t handle, uint16_t codec, uint8_t state, void *param)
      * 0 means no return message is expected. */
     p_msg->hdr.layer_specific = 0;
 
-    if(bt_hc_if)
-    {
+    if(bt_hc_if) {
         bt_hc_if->tx_cmd((TRANSAC)p_msg, (char *)(&p_msg->audio), sizeof(*p_msg));
     }
 
@@ -561,19 +555,15 @@ void bte_main_hci_send(BT_HDR *p_msg, uint16_t event)
     p_msg->event = event;
 
     if((sub_event == LOCAL_BR_EDR_CONTROLLER_ID) || \
-            (sub_event == LOCAL_BLE_CONTROLLER_ID))
-    {
+            (sub_event == LOCAL_BLE_CONTROLLER_ID)) {
         if(bt_hc_if)
             bt_hc_if->transmit_buf((TRANSAC)p_msg, \
                                    (char *)(p_msg + 1), \
                                    p_msg->len);
-        else
-        {
+        else {
             GKI_freebuf(p_msg);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("Invalid Controller ID. Discarding message.");
         GKI_freebuf(p_msg);
     }
@@ -591,6 +581,7 @@ void bte_main_hci_send(BT_HDR *p_msg, uint16_t event)
 ******************************************************************************/
 void bte_main_post_reset_init()
 {
+	extern void BTM_ContinueReset(void);
     BTM_ContinueReset();
 }
 
@@ -615,8 +606,7 @@ static void preload_cb(TRANSAC transac, bt_hc_preload_result_t result)
     UNUSED(transac);
     APPL_TRACE_EVENT("HC preload_cb %d [0:SUCCESS 1:FAIL]", result);
 
-    if(result == BT_HC_PRELOAD_SUCCESS)
-    {
+    if(result == BT_HC_PRELOAD_SUCCESS) {
         preload_stop_wait_timer();
         /* notify BTU task that libbt-hci is ready */
         GKI_send_event(BTU_TASK, BT_EVT_PRELOAD_CMPL);
@@ -689,8 +679,7 @@ static char *alloc(int size)
     */
 
     /* Requested buffer size cannot exceed GKI_MAX_BUF_SIZE. */
-    if(size > GKI_MAX_BUF_SIZE)
-    {
+    if(size > GKI_MAX_BUF_SIZE) {
         APPL_TRACE_ERROR("HCI DATA SIZE %d greater than MAX %d",
                          size, GKI_MAX_BUF_SIZE);
         return NULL;
@@ -698,8 +687,7 @@ static char *alloc(int size)
 
     p_hdr = (BT_HDR *) GKI_getbuf((uint16_t) size);
 
-    if(p_hdr == NULL)
-    {
+    if(p_hdr == NULL) {
         APPL_TRACE_WARNING("alloc returns NO BUFFER! (sz %d)", size);
     }
 
@@ -707,7 +695,7 @@ static char *alloc(int size)
 }
 static char *alloc_from_pool(int id)
 {
-	return GKI_getpoolbuf(id);
+    return GKI_getpoolbuf(id);
 }
 
 
@@ -751,7 +739,7 @@ static void dealloc(TRANSAC transac)
 ******************************************************************************/
 static int data_ind(TRANSAC transac, char *p_buf, int len)
 {
-    BT_HDR *p_msg = (BT_HDR *) transac;
+    //BT_HDR *p_msg = (BT_HDR *) transac;
     UNUSED(p_buf);
     UNUSED(len);
     /*
@@ -787,12 +775,9 @@ static int tx_result(TRANSAC transac, char *p_buf, bt_hc_transmit_result_t resul
 
     //APPL_TRACE_EVENT("HC tx_result %d (event=0x%04X)\n", result, ((BT_HDR *)transac)->event);
 
-    if(result == BT_HC_TX_FRAGMENT)
-    {
+    if(result == BT_HC_TX_FRAGMENT) {
         GKI_send_msg(BTU_TASK, BTU_HCI_RCV_MBOX, transac);
-    }
-    else
-    {
+    } else {
         APPL_TRACE_EVENT("GKI_freebuf:0x%08x\r\n", transac);
         GKI_freebuf(transac);
     }
@@ -803,8 +788,7 @@ static int tx_result(TRANSAC transac, char *p_buf, bt_hc_transmit_result_t resul
 /*****************************************************************************
 **   The libbt-hci Callback Functions Table
 *****************************************************************************/
-static const bt_hc_callbacks_t hc_callbacks =
-{
+static const bt_hc_callbacks_t hc_callbacks = {
     sizeof(bt_hc_callbacks_t),
     preload_cb,
     postload_cb,

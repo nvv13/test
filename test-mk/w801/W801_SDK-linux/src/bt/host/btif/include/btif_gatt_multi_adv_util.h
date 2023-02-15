@@ -33,8 +33,7 @@
 #define ADV_FLAGS_LIMITED BTA_DM_LIMITED_DISC
 #define ADV_FLAGS_GENERAL BTA_DM_GENERAL_DISC
 
-typedef struct
-{
+typedef struct {
     int client_if;
     uint8_t set_scan_rsp;
     uint8_t include_name;
@@ -51,8 +50,7 @@ typedef struct
 } btif_adv_data_t;
 
 
-typedef struct
-{
+typedef struct {
     uint8_t client_if;
     tBTA_BLE_AD_MASK mask;
     tBTA_BLE_ADV_DATA data;
@@ -61,8 +59,7 @@ typedef struct
     int timeout_s;
 } btgatt_multi_adv_inst_cb;
 
-typedef struct
-{
+typedef struct {
     int8_t *clntif_map;
     // Includes the stored data for standard LE instance
     btgatt_multi_adv_inst_cb *inst_cb;

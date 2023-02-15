@@ -119,6 +119,8 @@ typedef volatile unsigned int TLS_REG;    /* Hardware register definition */
 #define HR_FLASH_CMD_START          (HR_FLASH_BASE_ADDR + 0x004)
 #define HR_FLASH_CR                 (HR_FLASH_BASE_ADDR + 0x008)
 #define HR_FLASH_ADDR               (HR_FLASH_BASE_ADDR + 0x010)
+#define HR_FLASH_ENCRYPT_CTRL       (HR_FLASH_BASE_ADDR + 0x014)
+#define HR_FLASH_KEY_STATUS         (HR_FLASH_BASE_ADDR + 0x018)
 /***************************************************************
  * SDIO WRAPPER Register
  ***************************************************************/

@@ -45,50 +45,43 @@ OI_STATUS OI_CODEC_SBC_DecoderConfigureRaw(OI_CODEC_SBC_DECODER_CONTEXT *context
         OI_UINT8 alloc,
         OI_UINT8 maxBitpool)
 {
-    if(frequency > SBC_FREQ_48000)
-    {
+    if(frequency > SBC_FREQ_48000) {
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    if(enhanced)
-    {
-        #ifdef SBC_ENHANCED
+    if(enhanced) {
+#ifdef SBC_ENHANCED
 
-        if(subbands != SBC_SUBBANDS_8)
-        {
+        if(subbands != SBC_SUBBANDS_8) {
             return OI_STATUS_INVALID_PARAMETERS;
         }
 
-        #else
+#else
         return OI_STATUS_INVALID_PARAMETERS;
-        #endif
+#endif
     }
 
-    if(mode > SBC_JOINT_STEREO)
-    {
-        return OI_STATUS_INVALID_PARAMETERS;
-    }
-
-    if(subbands > SBC_SUBBANDS_8)
-    {
+    if(mode > SBC_JOINT_STEREO) {
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    if(blocks > SBC_BLOCKS_16)
-    {
+    if(subbands > SBC_SUBBANDS_8) {
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    if(alloc > SBC_SNR)
-    {
+    if(blocks > SBC_BLOCKS_16) {
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    #ifdef SBC_ENHANCED
+    if(alloc > SBC_SNR) {
+        return OI_STATUS_INVALID_PARAMETERS;
+    }
+
+#ifdef SBC_ENHANCED
     context->common.frameInfo.enhanced = enhanced;
-    #else
+#else
     context->common.frameInfo.enhanced = FALSE;
-    #endif
+#endif
     context->common.frameInfo.freqIndex = frequency;
     context->common.frameInfo.mode = mode;
     context->common.frameInfo.subbands = subbands;
@@ -97,8 +90,7 @@ OI_STATUS OI_CODEC_SBC_DecoderConfigureRaw(OI_CODEC_SBC_DECODER_CONTEXT *context
     context->common.frameInfo.bitpool = maxBitpool;
     OI_SBC_ExpandFrameFields(&context->common.frameInfo);
 
-    if(context->common.frameInfo.nrof_channels >= context->common.pcmStride)
-    {
+    if(context->common.frameInfo.nrof_channels >= context->common.pcmStride) {
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
@@ -126,16 +118,13 @@ OI_STATUS OI_CODEC_SBC_DecoderLimit(OI_CODEC_SBC_DECODER_CONTEXT *context,
                                     OI_BOOL                       enhanced,
                                     OI_UINT8                      subbands)
 {
-    if(enhanced)
-    {
-        #ifdef SBC_ENHANCED
+    if(enhanced) {
+#ifdef SBC_ENHANCED
         context->enhancedEnabled = TRUE;
-        #else
+#else
         context->enhancedEnabled = FALSE;
-        #endif
-    }
-    else
-    {
+#endif
+    } else {
         context->enhancedEnabled = FALSE;
     }
 

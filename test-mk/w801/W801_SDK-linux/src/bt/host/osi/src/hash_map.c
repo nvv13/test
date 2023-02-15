@@ -25,13 +25,11 @@
 
 struct hash_map_t;
 
-typedef struct hash_map_bucket_t
-{
+typedef struct hash_map_bucket_t {
     list_t *list;
 } hash_map_bucket_t;
 
-typedef struct hash_map_t
-{
+typedef struct hash_map_t {
     hash_map_bucket_t *bucket;
     size_t num_bucket;
     size_t hash_size;
@@ -63,8 +61,7 @@ hash_map_t *hash_map_new_internal(
     assert(num_bucket > 0);
     hash_map_t *hash_map = (hash_map_t *)GKI_getbuf(sizeof(hash_map_t));
 
-    if(hash_map == NULL)
-    {
+    if(hash_map == NULL) {
         return NULL;
     }
 
@@ -76,8 +73,7 @@ hash_map_t *hash_map_new_internal(
     hash_map->num_bucket = num_bucket;
     hash_map->bucket = (hash_map_bucket_t *)GKI_getbuf(sizeof(hash_map_bucket_t) * num_bucket);
 
-    if(hash_map->bucket == NULL)
-    {
+    if(hash_map->bucket == NULL) {
         GKI_freebuf(hash_map);
         return NULL;
     }
@@ -97,8 +93,7 @@ hash_map_t *hash_map_new(
 
 void hash_map_free(hash_map_t *hash_map)
 {
-    if(hash_map == NULL)
-    {
+    if(hash_map == NULL) {
         return;
     }
 
@@ -140,12 +135,10 @@ uint8_t hash_map_set(hash_map_t *hash_map, const void *key, void *data)
     assert(data != NULL);
     hash_index_t hash_key = hash_map->hash_fn(key) % hash_map->num_bucket;
 
-    if(hash_map->bucket[hash_key].list == NULL)
-    {
+    if(hash_map->bucket[hash_key].list == NULL) {
         hash_map->bucket[hash_key].list = list_new_internal(bucket_free_);
 
-        if(hash_map->bucket[hash_key].list == NULL)
-        {
+        if(hash_map->bucket[hash_key].list == NULL) {
             return false;
         }
     }
@@ -153,21 +146,17 @@ uint8_t hash_map_set(hash_map_t *hash_map, const void *key, void *data)
     list_t *hash_bucket_list = hash_map->bucket[hash_key].list;
     hash_map_entry_t *hash_map_entry = find_bucket_entry_(hash_bucket_list, key);
 
-    if(hash_map_entry)
-    {
+    if(hash_map_entry) {
         // Calls hash_map callback to delete the hash_map_entry.
         uint8_t rc = list_remove(hash_bucket_list, hash_map_entry);
         assert(rc == true);
-    }
-    else
-    {
+    } else {
         hash_map->hash_size++;
     }
 
     hash_map_entry = (hash_map_entry_t *)GKI_getbuf(sizeof(hash_map_entry_t));
 
-    if(hash_map_entry == NULL)
-    {
+    if(hash_map_entry == NULL) {
         return false;
     }
 
@@ -184,8 +173,7 @@ uint8_t hash_map_erase(hash_map_t *hash_map, const void *key)
     list_t *hash_bucket_list = hash_map->bucket[hash_key].list;
     hash_map_entry_t *hash_map_entry = find_bucket_entry_(hash_bucket_list, key);
 
-    if(hash_map_entry == NULL)
-    {
+    if(hash_map_entry == NULL) {
         return false;
     }
 
@@ -200,8 +188,7 @@ void *hash_map_get(const hash_map_t *hash_map, const void *key)
     list_t *hash_bucket_list = hash_map->bucket[hash_key].list;
     hash_map_entry_t *hash_map_entry = find_bucket_entry_(hash_bucket_list, key);
 
-    if(hash_map_entry != NULL)
-    {
+    if(hash_map_entry != NULL) {
         return hash_map_entry->data;
     }
 
@@ -212,10 +199,8 @@ void hash_map_clear(hash_map_t *hash_map)
 {
     assert(hash_map != NULL);
 
-    for(hash_index_t i = 0; i < hash_map->num_bucket; i++)
-    {
-        if(hash_map->bucket[i].list == NULL)
-        {
+    for(hash_index_t i = 0; i < hash_map->num_bucket; i++) {
+        if(hash_map->bucket[i].list == NULL) {
             continue;
         }
 
@@ -229,21 +214,17 @@ void hash_map_foreach(hash_map_t *hash_map, hash_map_iter_cb callback, void *con
     assert(hash_map != NULL);
     assert(callback != NULL);
 
-    for(hash_index_t i = 0; i < hash_map->num_bucket; ++i)
-    {
-        if(hash_map->bucket[i].list == NULL)
-        {
+    for(hash_index_t i = 0; i < hash_map->num_bucket; ++i) {
+        if(hash_map->bucket[i].list == NULL) {
             continue;
         }
 
         for(const list_node_t *iter = list_begin(hash_map->bucket[i].list);
                 iter != list_end(hash_map->bucket[i].list);
-                iter = list_next(iter))
-        {
+                iter = list_next(iter)) {
             hash_map_entry_t *hash_map_entry = (hash_map_entry_t *)list_node(iter);
 
-            if(!callback(hash_map_entry, context))
-            {
+            if(!callback(hash_map_entry, context)) {
                 return;
             }
         }
@@ -256,13 +237,11 @@ static void bucket_free_(void *data)
     hash_map_entry_t *hash_map_entry = (hash_map_entry_t *)data;
     const hash_map_t *hash_map = hash_map_entry->hash_map;
 
-    if(hash_map->key_fn)
-    {
+    if(hash_map->key_fn) {
         hash_map->key_fn((void *)hash_map_entry->key);
     }
 
-    if(hash_map->data_fn)
-    {
+    if(hash_map->data_fn) {
         hash_map->data_fn(hash_map_entry->data);
     }
 
@@ -272,19 +251,16 @@ static void bucket_free_(void *data)
 static hash_map_entry_t *find_bucket_entry_(list_t *hash_bucket_list,
         const void *key)
 {
-    if(hash_bucket_list == NULL)
-    {
+    if(hash_bucket_list == NULL) {
         return NULL;
     }
 
     for(const list_node_t *iter = list_begin(hash_bucket_list);
             iter != list_end(hash_bucket_list);
-            iter = list_next(iter))
-    {
+            iter = list_next(iter)) {
         hash_map_entry_t *hash_map_entry = (hash_map_entry_t *)list_node(iter);
 
-        if(hash_map_entry->hash_map->keys_are_equal(hash_map_entry->key, key))
-        {
+        if(hash_map_entry->hash_map->keys_are_equal(hash_map_entry->key, key)) {
             return hash_map_entry;
         }
     }

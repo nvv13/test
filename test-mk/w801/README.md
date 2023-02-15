@@ -244,3 +244,16 @@ make menuconfig
 
 $ dnf install ncurses-devel
 
+
+
+-----------
+
+02-2023 SDK обновил из:
+https://github.com/leoay/wm-sdk-w80x-2023.git
+и добавил перевод изменений, w801_pinout, из
+https://github.com/Gusev-Roman/wm-sdk-w80x-2023.git
+
+
+
+-----------
+

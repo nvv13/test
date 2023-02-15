@@ -36,15 +36,23 @@ endif
 DL_PORT ?= $(subst ",,$(CONFIG_W800_DOWNLOAD_PORT))
 DL_BAUD ?= $(CONFIG_W800_DOWNLOAD_RATE)
 
-IMG_TYPE := $(CONFIG_W800_IMAGE_TYPE)
 IMG_HEADER := $(CONFIG_W800_IMAGE_HEADER)
 RUN_ADDRESS := $(CONFIG_W800_RUN_ADDRESS)
 UPD_ADDRESS := $(CONFIG_W800_UPDATE_ADDRESS)
 
-PRIKEY_SEL := $(CONFIG_W800_PRIKEY_SEL)
 SIGNATURE := $(CONFIG_W800_IMAGE_SIGNATURE)
 CODE_ENCRYPT := $(CONFIG_W800_CODE_ENCRYPT)
-SIGN_PUBKEY_SRC := $(CONFIG_W800_SIGN_PUBKEY_SRC)
+
+#real image type include basic image type, key number in chip, encrypt flag, signature flag, signature pubkey flag
+IMG_TYPE :=$(shell expr $(CONFIG_W800_IMAGE_TYPE) + $(CONFIG_W800_PRIKEY_SEL) '*' 32 + $(CONFIG_W800_CODE_ENCRYPT) '*' 16 + $(CONFIG_W800_IMAGE_SIGNATURE) '*' 256)
+SECBOOT_IMG_TYPE :=$(shell expr $(CONFIG_W800_SECBOOT_IMAGE_TYPE) + $(CONFIG_W800_IMAGE_SIGNATURE) '*' 256)
+
+#when encrypt image info, real key number must be CONFIG_W800_PRIKEY_SEL plus 1
+ifeq ($(CONFIG_W800_CODE_ENCRYPT), 0)
+PRIKEY_SEL := $(CONFIG_W800_PRIKEY_SEL)
+else
+PRIKEY_SEL := $(shell expr $(CONFIG_W800_PRIKEY_SEL) + 1)
+endif
 
 optimization ?= -O2
 
@@ -91,19 +99,37 @@ else
 endif
 
 LDDIR = $(TOP_DIR)/ld/$(CONFIG_ARCH_TYPE)
+ifeq ($(CONFIG_W800_USE_NIMBLE),y)
 LD_FILE = $(LDDIR)/gcc_csky.ld
-
+else
+LD_FILE = $(LDDIR)/gcc_csky_bt.ld
+endif
 LIB_EXT = .a
 
 CCFLAGS := -Wall \
     -DTLS_CONFIG_CPU_XT804=1 \
     -DGCC_COMPILE=1 \
+    -DNO_PERSISTENCE=1 \
+    -DUSE_SELECT=1 \
+    -DHIGH_PERFORMANCE=1 \
+    -DUSE_MBEDTLS=1 \
     -mcpu=ck804ef \
     $(optimization) \
     -std=gnu99 \
     -c  \
     -mhard-float  \
-    -Wall  \
+    -fdata-sections  \
+    -ffunction-sections
+
+CXXFLAGS := -Wall \
+    -DTLS_CONFIG_CPU_XT804=1 \
+    -DGCC_COMPILE=1 \
+    -mcpu=ck804ef \
+    $(optimization) \
+    -c  \
+	-MMD \
+	-MP \
+    -mhard-float  \
     -fdata-sections  \
     -ffunction-sections
 
@@ -130,22 +156,5 @@ LINKFLAGS := -mcpu=ck804ef \
     -Wl,-T$(LD_FILE)
 
 MAP := -Wl,-ckmap=$(IMAGEODIR)/$(TARGET).map
-
-ifneq ($(PRIKEY_SEL),0)
-    $(IMG_TYPE) = $(IMG_TYPE) + 32 * $(PRIKEY_SEL)
-endif
-
-ifeq ($(CODE_ENCRYPT),1)
-    $(IMG_TYPE) = $(IMG_TYPE) + 16
-    $(PRIKEY_SEL) = $(PRIKEY_SEL) + 1
-endif
-
-ifeq ($(SIGNATURE),1)
-    $(IMG_TYPE) = $(IMG_TYPE) + 256
-endif
-
-ifeq ($(SIGN_PUBKEY_SRC),1)
-    $(IMG_TYPE) = $(IMG_TYPE) + 512
-endif
 
 sinclude $(TOP_DIR)/tools/w800/inc.mk

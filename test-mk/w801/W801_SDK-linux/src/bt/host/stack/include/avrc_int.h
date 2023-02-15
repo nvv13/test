@@ -44,7 +44,7 @@
 #define AVRC_NUM_PROTO_ELEMS     2
 
 #ifndef AVRC_MIN_CMD_LEN
-    #define AVRC_MIN_CMD_LEN    20
+#define AVRC_MIN_CMD_LEN    20
 #endif
 
 #define AVRC_UNIT_OPRND_BYTES   5
@@ -98,29 +98,26 @@
 
 #if (AVRC_METADATA_INCLUDED == TRUE)
 /* type for Metadata fragmentation control block */
-typedef struct
-{
+typedef struct {
     BT_HDR              *p_fmsg;        /* the fragmented message */
     uint8_t               frag_pdu;       /* the PDU ID for fragmentation */
     uint8_t             frag_enabled;   /* fragmentation flag */
 } tAVRC_FRAG_CB;
 
 /* type for Metadata re-assembly control block */
-typedef struct
-{
+typedef struct {
     BT_HDR              *p_rmsg;        /* the received message */
     uint16_t              rasm_offset;    /* re-assembly flag, the offset of the start fragment */
     uint8_t               rasm_pdu;       /* the PDU ID for re-assembly */
 } tAVRC_RASM_CB;
 #endif
 
-typedef struct
-{
+typedef struct {
     tAVRC_CONN_CB       ccb[AVCT_NUM_CONN];
-    #if (AVRC_METADATA_INCLUDED == TRUE)
+#if (AVRC_METADATA_INCLUDED == TRUE)
     tAVRC_FRAG_CB       fcb[AVCT_NUM_CONN];
     tAVRC_RASM_CB       rcb[AVCT_NUM_CONN];
-    #endif
+#endif
     tAVRC_FIND_CBACK    *p_cback;       /* pointer to application callback */
     tSDP_DISCOVERY_DB   *p_db;          /* pointer to discovery database */
     uint16_t              service_uuid;   /* service UUID to search */

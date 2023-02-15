@@ -46,6 +46,7 @@
 #include "fsdata.h"
 #include "wm_flash.h"
 #include "lwip/memp.h"
+#include "wm_wifi_oneshot.h"
 
 #include "httpd.h"
 
@@ -59,14 +60,10 @@
 #define FS_ROOT  (FSDATA_BASE_ADDR+4)
 #else
 
-#if WEB_SERVER_RUSSIAN 
-#include "fsdata_lwip_russian.c"
-#elif WEB_SERVER_BASIC
-#include "fsdata_lwip_basic.c"
-#elif WEB_SERVER_RUIGONG
-#include "fsdata_lwip_ruigong.c"
+#if TLS_CONFIG_AP_MODE_ONESHOT
+#include "fsdata_ap_config.c"
 #else
-#include "fsdata_lwip.c"
+#include "fsdata.c"
 #endif
 
 #endif
@@ -81,11 +78,10 @@ extern u16  Web_parse_line(char * id_char,u16 * after_id_len,char * idvalue,u16 
 /* Define the file system memory allocation structure. */
 struct fs_table {
   struct fs_file file;
-  int inuse;
 };
 
 /* Allocate file system memory */
-struct fs_table fs_memory[LWIP_MAX_OPEN_FILES];
+struct fs_table *fs_memory[LWIP_MAX_OPEN_FILES];
 #if WEB_SERVER_RUSSIAN
 INT gCurHtmlFile = 0;		// 1: russian html 0: english
 #endif
@@ -95,10 +91,17 @@ static struct fs_file *fs_malloc(void)
 	int i;
 	for(i = 0; i < LWIP_MAX_OPEN_FILES; i++) 
 	{
-		if(fs_memory[i].inuse == 0) 
+		if(NULL == fs_memory[i]) 
 		{
-			fs_memory[i].inuse = 1;
-			return(&fs_memory[i].file);
+			fs_memory[i] = tls_mem_alloc(sizeof(struct fs_table));
+			if (fs_memory[i])
+			{
+				return(&fs_memory[i]->file);
+			}
+			else
+			{
+				return NULL;
+			}
 		}
 	}
 	return(NULL);
@@ -110,9 +113,10 @@ static void fs_free(struct fs_file *file)
 	int i;
 	for(i = 0; i < LWIP_MAX_OPEN_FILES; i++) 
 	{
-		if(&fs_memory[i].file == file) 
+		if(fs_memory[i] && (&fs_memory[i]->file == file))
 		{
-			fs_memory[i].inuse = 0;
+			tls_mem_free(fs_memory[i]);
+			fs_memory[i] = NULL;
 			break;
 		}
   }
@@ -206,11 +210,11 @@ struct fs_file *fs_open(char *name)
 		return NULL;
 	}
 #if WEB_SERVER_RUSSIAN  
-	if(!strcmp(name, "/hed_basic_ru.html"))
+	if(!strcmp(name, "/basic_ru.html"))
 	{
 		gCurHtmlFile = 1;
 	}
-	else if(!strcmp(name, "/hed_basic_en.html"))
+	else if(!strcmp(name, "/basic_en.html"))
 	{
 		gCurHtmlFile = 0;
 	}

@@ -22,7 +22,6 @@
 
 // Represents a page of device feature enabled/disabled bits returned
 // by the local controller. See the bluetooth spec for bit indexes.
-typedef struct
-{
+typedef struct {
     uint8_t as_array[8];
 } bt_device_features_t;

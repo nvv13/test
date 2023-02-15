@@ -33,8 +33,7 @@
 #define SRVC_ACT_RSP        1
 #define SRVC_ACT_PENDING    2
 
-typedef struct
-{
+typedef struct {
     uint8_t         in_use;
     uint16_t          conn_id;
     uint8_t         connected;
@@ -48,8 +47,7 @@ typedef struct
 
 
 /* service engine control block */
-typedef struct
-{
+typedef struct {
     tSRVC_CLCB              clcb[SRVC_MAX_APPS]; /* connection link*/
     tGATT_IF                gatt_if;
     uint8_t                 enabled;

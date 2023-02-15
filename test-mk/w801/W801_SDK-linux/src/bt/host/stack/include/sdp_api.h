@@ -72,20 +72,17 @@
 typedef void (tSDP_DISC_CMPL_CB)(uint16_t result);
 typedef void (tSDP_DISC_CMPL_CB2)(uint16_t result, void *user_data);
 
-typedef struct
-{
+typedef struct {
     BD_ADDR         peer_addr;
     uint16_t          peer_mtu;
 } tSDP_DR_OPEN;
 
-typedef struct
-{
+typedef struct {
     uint8_t           *p_data;
     uint16_t          data_len;
 } tSDP_DR_DATA;
 
-typedef union
-{
+typedef union {
     tSDP_DR_OPEN    open;
     tSDP_DR_DATA    data;
 } tSDP_DATA;
@@ -94,10 +91,8 @@ typedef union
 typedef void (tSDP_DISC_RES_CB)(uint16_t event, tSDP_DATA *p_data);
 
 /* Define a structure to hold the discovered service information. */
-typedef struct
-{
-    union
-    {
+typedef struct {
+    union {
         uint8_t       u8;                         /* 8-bit integer            */
         uint16_t      u16;                        /* 16-bit integer           */
         uint32_t      u32;                        /* 32-bit integer           */
@@ -107,24 +102,21 @@ typedef struct
 
 } tSDP_DISC_ATVAL;
 
-typedef struct t_sdp_disc_attr
-{
+typedef struct t_sdp_disc_attr {
     struct t_sdp_disc_attr *p_next_attr;        /* Addr of next linked attr     */
     uint16_t                  attr_id;            /* Attribute ID                 */
     uint16_t                  attr_len_type;      /* Length and type fields       */
     tSDP_DISC_ATVAL         attr_value;         /* Variable length entry data   */
 } tSDP_DISC_ATTR;
 
-typedef struct t_sdp_disc_rec
-{
+typedef struct t_sdp_disc_rec {
     tSDP_DISC_ATTR          *p_first_attr;      /* First attribute of record    */
     struct t_sdp_disc_rec   *p_next_rec;        /* Addr of next linked record   */
     uint32_t                  time_read;          /* The time the record was read */
     BD_ADDR                 remote_bd_addr;     /* Remote BD address            */
 } tSDP_DISC_REC;
 
-typedef struct
-{
+typedef struct {
     uint32_t          mem_size;                   /* Memory size of the DB        */
     uint32_t          mem_free;                   /* Memory still available       */
     tSDP_DISC_REC   *p_first_rec;               /* Addr of first record in DB   */
@@ -133,23 +125,22 @@ typedef struct
     uint16_t          num_attr_filters;           /* Number of attribute filters  */
     uint16_t          attr_filters[SDP_MAX_ATTR_FILTERS]; /* Attributes to filter */
     uint8_t           *p_free_mem;                /* Pointer to free memory       */
-    #if (SDP_RAW_DATA_INCLUDED == TRUE)
-    uint8_t           *raw_data;                  /* Received record from server. allocated/released by client  */
+#if (SDP_RAW_DATA_INCLUDED == TRUE)
+    uint8_t
+    *raw_data;                  /* Received record from server. allocated/released by client  */
     uint32_t          raw_size;                   /* size of raw_data */
     uint32_t          raw_used;                   /* length of raw_data used */
-    #endif
+#endif
 } tSDP_DISCOVERY_DB;
 
 /* This structure is used to add protocol lists and find protocol elements */
-typedef struct
-{
+typedef struct {
     uint16_t      protocol_uuid;
     uint16_t      num_params;
     uint16_t      params[SDP_MAX_PROTOCOL_PARAMS];
 } tSDP_PROTOCOL_ELEM;
 
-typedef struct
-{
+typedef struct {
     uint16_t              num_elems;
     tSDP_PROTOCOL_ELEM  list_elem[SDP_MAX_LIST_ELEMS];
 } tSDP_PROTO_LIST_ELEM;
@@ -157,8 +148,7 @@ typedef struct
 /* Device Identification (DI) data structure
 */
 /* Used to set the DI record */
-typedef struct t_sdp_di_record
-{
+typedef struct t_sdp_di_record {
     uint16_t       vendor;
     uint16_t       vendor_id_source;
     uint16_t       product;
@@ -170,8 +160,7 @@ typedef struct t_sdp_di_record
 } tSDP_DI_RECORD;
 
 /* Used to get the DI record */
-typedef struct t_sdp_di_get_record
-{
+typedef struct t_sdp_di_get_record {
     uint16_t          spec_id;
     tSDP_DI_RECORD  rec;
 } tSDP_DI_GET_RECORD;

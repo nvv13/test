@@ -14,11 +14,13 @@
 #include "wm_include.h"
 #include "wm_watchdog.h"
 #include "wm_config.h"
+#include "wm_ram_config.h"
 
 /*****************************************************************
 	EXTERN FUNC
 *****************************************************************/
 extern int demo_connect_net(void *, ...);
+extern int demo_connect_net_with_specific_info(void *, ...);
 extern int demo_socket_client(void *, ...);
 extern int demo_socket_server(void *, ...);
 extern int demo_oneshot(void *, ...);
@@ -63,6 +65,8 @@ extern int CreateMCastDemoTask(void *, ...);
 extern int adc_input_voltage_demo(void *, ...);
 extern int adc_chip_temperature_demo(void*,...);
 extern int adc_power_voltage_demo(void *, ...);
+extern int adc_input_voltage_cal_demo(void *, ...);
+extern int adc_input_voltage_multipoint_cal_demo(void *, ...);
 extern int sd_card_test(void *, ...);
 
 extern int demo_wps_pbc(void *, ...);
@@ -73,17 +77,24 @@ extern int demo_wps_get_pin(void *, ...);
 extern int demo_iperf_auto_test(void *, ...);
 extern int CreateSSLServerDemoTask(void *, ...);
 extern int lwsDemoTest(void *, ...);
-extern int tls_i2s_io_init(void);
+extern int tls_i2s_io_init(void *, ...);
 extern int tls_i2s_demo(void *, ...);
 extern int i2c_demo(void *, ...);
 extern int scan_demo(void *, ...);
-
+extern int scan_format2_demo(void *, ...);
+extern int scan_specified_demo(void *, ...);
 extern int https_demo(void *, ...);
 extern int mqtt_demo(void *, ...);
 extern int fatfs_test(void *, ...);
 extern int mbedtls_demo(void *, ...);
 
 extern int dsp_demo(void *,...);
+
+#if (TLS_CONFIG_BLE == CFG_ON)
+extern int demo_ble_config(void *, ...); /*wifi connection by ble configuration*/
+#endif
+
+
 
 #if DEMO_BT
 extern int demo_bt_enable(void *, ...);
@@ -108,6 +119,10 @@ extern int demo_bt_app_off(void *, ...);
 #if DEMO_TOUCHSENSOR
 extern int demo_touchsensor(void *, ...);
 #endif
+#if DEMO_LCD
+extern void lcd_test(void);
+#endif
+extern int avoid_copy_entry(void *, ...);
 
 /*****************************************************************
 		LOCAL FUNC
@@ -136,8 +151,8 @@ struct demo_console_info_t
     char *info;
 };
 
-#define DEMO_CONSOLE_CMD		1		//±»½âÎö³Écmd
-#define DEMO_CONSOLE_SHORT_CMD	2		//CMDµÄÒ»²¿·Ö£¬Ã»ÓÐ½âÎöÍê
+#define DEMO_CONSOLE_CMD		1		//è¢«è§£æžæˆcmd
+#define DEMO_CONSOLE_SHORT_CMD	2		//CMDçš„ä¸€éƒ¨åˆ†ï¼Œæ²¡æœ‰è§£æžå®Œ
 #define DEMO_CONSOLE_WRONG_CMD  3
 
 #define DEMO_BUF_SIZE		TLS_UART_RX_BUF_SIZE
@@ -151,9 +166,13 @@ struct demo_console_info_t  console_tbl[] =
     //To Do When Add New Demo
 #if DEMO_CONNECT_NET
     {"t-connect", 	demo_connect_net, 0, 2, "Test connecting ap;t-connect(\"ssid\",\"pwd\"); For open ap, pwd should be empty"},
+    {"t-connect_ss", demo_connect_net_with_specific_info, 0x1C, 5, "Test connecting ap;t-connect_ss(\"ssid\",\"pwd\",timeout,pci_en,scan_mode); For open ap, pwd should be empty"},	
     {"t-oneshot",     demo_oneshot,  0, 0, "Test Oneshot  configuration"},
     //	{"t-socketcfg",  demo_socket_config, 0, 0, "Test socket configuration"},
     {"t-webcfg",      demo_webserver_config, 0, 0, "Test web server configuration"},
+#if (TLS_CONFIG_BLE == CFG_ON) 
+	{"t-blecfg",      demo_ble_config, 0, 0, "Test ble mode configuration"},
+#endif
 #endif
 
 #if DEMO_APSTA
@@ -173,6 +192,8 @@ struct demo_console_info_t  console_tbl[] =
 
 #if DEMO_SCAN
     {"t-scan",	scan_demo,	0x0,	0,  "Test wifi scan"},
+    {"t-scanf2", scan_format2_demo,	0x0,	0,  "Test wifi scan format2"},	
+	{"t-ss", scan_specified_demo, 0x3c, 6, "Test specified scan t-ss(\"ssid\",\"mac\",chan,scan_type,min_interval,max_interval)"},
 #endif
 
 /************************************************************************/
@@ -241,6 +262,8 @@ struct demo_console_info_t  console_tbl[] =
     {"t-adctemp",  adc_chip_temperature_demo,   0x0,    0, "(ADC)Test chip temperature"},
     {"t-adcvolt",  adc_input_voltage_demo,   0x1,    1, "(ADC)Test input voltage,0-PA1(chan0), 1-PA4(chan1),8-different"},    
 	{"t-adcpower", adc_power_voltage_demo, 0x0, 0, "(ADC)Sample power supply voltage"},
+	{"t-adccal",   adc_input_voltage_cal_demo, 0x3, 2, "(ADC)Calibrate input voltage"},
+	{"t-adccalmp", adc_input_voltage_multipoint_cal_demo, 0x1F, 5, "(ADC) mulitpoint Calibrate t-adccalmp(chanbitmap,chan1ref,chan2ref,chan3ref,chan4ref),unit:mV"},
 #endif
 
 #if DEMO_7816
@@ -303,7 +326,7 @@ struct demo_console_info_t  console_tbl[] =
 #endif
 
 #if DEMO_MQTT
-    {"t-mqtt",	mqtt_demo,	0x0,	0,  "Test mqtt"},
+    {"t-mqtt",	mqtt_demo,	0x1,	1,  "Test mqtt: 0-TCP; 1-TLS; 2-WS; 3-WSS"},
 #endif
 
 #if DEMO_FATFS
@@ -341,11 +364,19 @@ struct demo_console_info_t  console_tbl[] =
 	{"t-touch", demo_touchsensor, 0x1, 1, "Test Touch sensor function,0:all, 1:touch sensor 1... 15:touch sensor 15"},
 #endif
 
-    //¿ØÖÆÌ¨ÉÏÏÔÊ¾µÄ×îºóÒ»¸öÃüÁî£¬Èç¹ûÒªÈÃÃüÁîÏÔÊ¾ÔÚ¿ØÖÆÌ¨ÉÏ£¬ÐèÒª·ÅÔÚ¸ÃÐÐµÄÉÏÃæ
+#if DEMO_LCD
+	{"t-lcd", (void *)lcd_test, 0, 0, "Test LCD output, eg: t-lcd"},
+#endif
+
+#if DEMO_AVOID_COPY
+	{"t-avoidcopy", avoid_copy_entry, 0x0, 0, "Test Avoid Copy function"},
+#endif
+
+    //æŽ§åˆ¶å°ä¸Šæ˜¾ç¤ºçš„æœ€åŽä¸€ä¸ªå‘½ä»¤ï¼Œå¦‚æžœè¦è®©å‘½ä»¤æ˜¾ç¤ºåœ¨æŽ§åˆ¶å°ä¸Šï¼Œéœ€è¦æ”¾åœ¨è¯¥è¡Œçš„ä¸Šé¢
     {"demohelp", 	demo_console_show_help,	0, 0,	"Display Help information"},
-    //ÏÂÃæµÄÃüÁîÓÃÓÚÄÚ²¿²âÊÔ£¬²»ÏÔÊ¾ÔÚ¿ØÖÆÌ¨ÉÏ
+    //ä¸‹é¢çš„å‘½ä»¤ç”¨äºŽå†…éƒ¨æµ‹è¯•ï¼Œä¸æ˜¾ç¤ºåœ¨æŽ§åˆ¶å°ä¸Š
     {"reset", 		demo_sys_reset, 0, 0, "Reset System"},
-    //×îºóÒ»¸öÃüÁî£¬¼ìË÷ÃüÁîÊ±ÅÐ¶Ï½áÊø±êÊ¶
+    //æœ€åŽä¸€ä¸ªå‘½ä»¤ï¼Œæ£€ç´¢å‘½ä»¤æ—¶åˆ¤æ–­ç»“æŸæ ‡è¯†
     {"lastcmd", 	NULL,	0, 0,			"Table Terminal Flag; MUST BE THE LAST ONE"}
 };
 
@@ -397,6 +428,7 @@ static int demo_console_show_help(void *p, ...)
 
 int demo_sys_reset(void *p, ...)
 {
+	tls_sys_set_reboot_reason(REBOOT_REASON_ACTIVE);
     tls_sys_reset();
     return WM_SUCCESS;
 }

@@ -20,6 +20,7 @@
 
 #define DEMO_DATA_SIZE        (1024)
 
+extern int wm_i2s_tranceive_dma(uint32_t i2s_mode, wm_dma_handler_type *hdma_tx, wm_dma_handler_type *hdma_rx, uint16_t *data_tx, uint16_t *data_rx, uint16_t len);
 
 enum 
 {

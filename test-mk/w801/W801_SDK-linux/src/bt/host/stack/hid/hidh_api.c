@@ -37,7 +37,7 @@
 #include "btm_int.h"
 
 #if HID_DYNAMIC_MEMORY == FALSE
-    tHID_HOST_CTB   hh_cb;
+tHID_HOST_CTB   hh_cb;
 #endif
 
 static void hidh_search_callback(uint16_t sdp_result);
@@ -56,8 +56,7 @@ tHID_STATUS HID_HostGetSDPRecord(BD_ADDR addr, tSDP_DISCOVERY_DB *p_db, uint32_t
 {
     tSDP_UUID   uuid_list;
 
-    if(hh_cb.sdp_busy)
-    {
+    if(hh_cb.sdp_busy) {
         return HID_ERR_SDP_BUSY;
     }
 
@@ -66,14 +65,11 @@ tHID_STATUS HID_HostGetSDPRecord(BD_ADDR addr, tSDP_DISCOVERY_DB *p_db, uint32_t
     hh_cb.p_sdp_db = p_db;
     SDP_InitDiscoveryDb(p_db, db_len, 1, &uuid_list, 0, NULL);
 
-    if(SDP_ServiceSearchRequest(addr, p_db, hidh_search_callback))
-    {
+    if(SDP_ServiceSearchRequest(addr, p_db, hidh_search_callback)) {
         hh_cb.sdp_cback = sdp_cback ;
         hh_cb.sdp_busy = TRUE;
         return HID_SUCCESS;
-    }
-    else
-    {
+    } else {
         return HID_ERR_NO_RESOURCES;
     }
 }
@@ -83,21 +79,15 @@ void hidh_get_str_attr(tSDP_DISC_REC *p_rec, uint16_t attr_id, uint16_t max_len,
     tSDP_DISC_ATTR          *p_attr;
     uint16_t                  name_len;
 
-    if((p_attr = SDP_FindAttributeInRec(p_rec, attr_id)) != NULL)
-    {
-        if((name_len = SDP_DISC_ATTR_LEN(p_attr->attr_len_type)) < max_len)
-        {
+    if((p_attr = SDP_FindAttributeInRec(p_rec, attr_id)) != NULL) {
+        if((name_len = SDP_DISC_ATTR_LEN(p_attr->attr_len_type)) < max_len) {
             wm_memcpy(str, (char *) p_attr->attr_value.v.array, name_len);
             str[name_len] = '\0';
-        }
-        else
-        {
+        } else {
             wm_memcpy(str, (char *) p_attr->attr_value.v.array, max_len - 1);
             str[max_len - 1] = '\0';
         }
-    }
-    else
-    {
+    } else {
         str[0] = '\0';
     }
 }
@@ -115,14 +105,12 @@ static void hidh_search_callback(uint16_t sdp_result)
     hid_uuid.uu.uuid16 = UUID_SERVCLASS_HUMAN_INTERFACE;
     hh_cb.sdp_busy = FALSE;
 
-    if(sdp_result != SDP_SUCCESS)
-    {
+    if(sdp_result != SDP_SUCCESS) {
         hh_cb.sdp_cback(sdp_result, 0, NULL);
         return;
     }
 
-    if((p_rec = SDP_FindServiceUUIDInDb(p_db, &hid_uuid, NULL)) == NULL)
-    {
+    if((p_rec = SDP_FindServiceUUIDInDb(p_db, &hid_uuid, NULL)) == NULL) {
         hh_cb.sdp_cback(HID_SDP_NO_SERV_UUID, 0, NULL);
         return;
     }
@@ -136,50 +124,42 @@ static void hidh_search_callback(uint16_t sdp_result)
             || (SDP_DISC_ATTR_TYPE(p_subattr1->attr_len_type) != DATA_ELE_SEQ_DESC_TYPE)
             || ((p_subattr2 = p_subattr1->attr_value.v.p_sub_attr) == NULL)
             || ((p_repdesc = p_subattr2->p_next_attr) == NULL)
-            || (SDP_DISC_ATTR_TYPE(p_repdesc->attr_len_type) != TEXT_STR_DESC_TYPE))
-    {
+            || (SDP_DISC_ATTR_TYPE(p_repdesc->attr_len_type) != TEXT_STR_DESC_TYPE)) {
         hh_cb.sdp_cback(HID_SDP_MANDATORY_MISSING, 0, NULL);
         return;
     }
 
-    if((p_nvi->dscp_info.dl_len = SDP_DISC_ATTR_LEN(p_repdesc->attr_len_type)) != 0)
-    {
+    if((p_nvi->dscp_info.dl_len = SDP_DISC_ATTR_LEN(p_repdesc->attr_len_type)) != 0) {
         p_nvi->dscp_info.dsc_list = (uint8_t *) &p_repdesc->attr_value;
     }
 
     if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_VIRTUAL_CABLE)) != NULL) &&
-            (p_attr->attr_value.v.u8))
-    {
+            (p_attr->attr_value.v.u8)) {
         attr_mask |= HID_VIRTUAL_CABLE;
     }
 
     if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_RECONNECT_INITIATE)) != NULL) &&
-            (p_attr->attr_value.v.u8))
-    {
+            (p_attr->attr_value.v.u8)) {
         attr_mask |= HID_RECONN_INIT;
     }
 
     if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_NORMALLY_CONNECTABLE)) != NULL) &&
-            (p_attr->attr_value.v.u8))
-    {
+            (p_attr->attr_value.v.u8)) {
         attr_mask |= HID_NORMALLY_CONNECTABLE;
     }
 
     if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_SDP_DISABLE)) != NULL) &&
-            (p_attr->attr_value.v.u8))
-    {
+            (p_attr->attr_value.v.u8)) {
         attr_mask |= HID_SDP_DISABLE;
     }
 
     if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_BATTERY_POWER)) != NULL) &&
-            (p_attr->attr_value.v.u8))
-    {
+            (p_attr->attr_value.v.u8)) {
         attr_mask |= HID_BATTERY_POWER;
     }
 
     if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_REMOTE_WAKE)) != NULL) &&
-            (p_attr->attr_value.v.u8))
-    {
+            (p_attr->attr_value.v.u8)) {
         attr_mask |= HID_REMOTE_WAKE;
     }
 
@@ -187,49 +167,38 @@ static void hidh_search_callback(uint16_t sdp_result)
     hidh_get_str_attr(p_rec, ATTR_ID_SERVICE_DESCRIPTION, HID_MAX_SVC_DESCR_LEN, p_nvi->svc_descr);
     hidh_get_str_attr(p_rec, ATTR_ID_PROVIDER_NAME, HID_MAX_PROV_NAME_LEN, p_nvi->prov_name);
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_DEVICE_RELNUM)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_DEVICE_RELNUM)) != NULL)) {
         p_nvi->rel_num = p_attr->attr_value.v.u16;
     }
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_COUNTRY_CODE)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_COUNTRY_CODE)) != NULL)) {
         p_nvi->ctry_code = p_attr->attr_value.v.u8;
     }
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_DEVICE_SUBCLASS)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_DEVICE_SUBCLASS)) != NULL)) {
         p_nvi->sub_class = p_attr->attr_value.v.u8;
     }
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_PARSER_VERSION)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_PARSER_VERSION)) != NULL)) {
         p_nvi->hpars_ver = p_attr->attr_value.v.u16;
     }
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_LINK_SUPERVISION_TO)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_LINK_SUPERVISION_TO)) != NULL)) {
         attr_mask |= HID_SUP_TOUT_AVLBL;
         p_nvi->sup_timeout = p_attr->attr_value.v.u16;
     }
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_SSR_HOST_MAX_LAT)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_SSR_HOST_MAX_LAT)) != NULL)) {
         attr_mask |= HID_SSR_MAX_LATENCY;
         p_nvi->ssr_max_latency = p_attr->attr_value.v.u16;
-    }
-    else
-    {
+    } else {
         p_nvi->ssr_max_latency = HID_SSR_PARAM_INVALID;
     }
 
-    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_SSR_HOST_MIN_TOUT)) != NULL))
-    {
+    if(((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HID_SSR_HOST_MIN_TOUT)) != NULL)) {
         attr_mask |= HID_SSR_MIN_TOUT;
         p_nvi->ssr_min_tout = p_attr->attr_value.v.u16;
-    }
-    else
-    {
+    } else {
         p_nvi->ssr_min_tout = HID_SSR_PARAM_INVALID;
     }
 
@@ -251,17 +220,16 @@ void HID_HostInit(void)
 {
     wm_memset(&hh_cb, 0, sizeof(tHID_HOST_CTB));
 
-    for(size_t i = 0; i < HID_HOST_MAX_DEVICES; i++)
-    {
+    for(size_t i = 0; i < HID_HOST_MAX_DEVICES; i++) {
         hh_cb.devices[i].conn.process_repage_timer =
                         alarm_new("hid_devices_conn.process_repage_timer");
     }
 
-    #if defined(HID_INITIAL_TRACE_LEVEL)
+#if defined(HID_INITIAL_TRACE_LEVEL)
     hh_cb.trace_level = HID_INITIAL_TRACE_LEVEL;
-    #else
+#else
     hh_cb.trace_level = BT_TRACE_LEVEL_NONE;
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -276,8 +244,7 @@ void HID_HostInit(void)
 *******************************************************************************/
 uint8_t HID_HostSetTraceLevel(uint8_t new_level)
 {
-    if(new_level != 0xFF)
-    {
+    if(new_level != 0xFF) {
         hh_cb.trace_level = new_level;
     }
 
@@ -297,19 +264,16 @@ tHID_STATUS HID_HostRegister(tHID_HOST_DEV_CALLBACK *dev_cback)
 {
     tHID_STATUS st;
 
-    if(hh_cb.reg_flag)
-    {
+    if(hh_cb.reg_flag) {
         return HID_ERR_ALREADY_REGISTERED;
     }
 
-    if(dev_cback == NULL)
-    {
+    if(dev_cback == NULL) {
         return HID_ERR_INVALID_PARAM;
     }
 
     /* Register with L2CAP */
-    if((st = hidh_conn_reg()) != HID_SUCCESS)
-    {
+    if((st = hidh_conn_reg()) != HID_SUCCESS) {
         return st;
     }
 
@@ -331,13 +295,11 @@ tHID_STATUS HID_HostDeregister(void)
 {
     uint8_t i;
 
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         return (HID_ERR_NOT_REGISTERED);
     }
 
-    for(i = 0; i < HID_HOST_MAX_DEVICES; i++)
-    {
+    for(i = 0; i < HID_HOST_MAX_DEVICES; i++) {
         HID_HostRemoveDev(i) ;
     }
 
@@ -360,46 +322,37 @@ tHID_STATUS HID_HostAddDev(BD_ADDR addr, uint16_t attr_mask, uint8_t *handle)
     int i;
 
     /* Find an entry for this device in hh_cb.devices array */
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         return (HID_ERR_NOT_REGISTERED);
     }
 
-    for(i = 0; i < HID_HOST_MAX_DEVICES; i++)
-    {
+    for(i = 0; i < HID_HOST_MAX_DEVICES; i++) {
         if((hh_cb.devices[i].in_use) &&
-                (!memcmp(addr, hh_cb.devices[i].addr, BD_ADDR_LEN)))
-        {
+                (!memcmp(addr, hh_cb.devices[i].addr, BD_ADDR_LEN))) {
             break;
         }
     }
 
-    if(i == HID_HOST_MAX_DEVICES)
-    {
-        for(i = 0; i < HID_HOST_MAX_DEVICES; i++)
-        {
-            if(!hh_cb.devices[i].in_use)
-            {
+    if(i == HID_HOST_MAX_DEVICES) {
+        for(i = 0; i < HID_HOST_MAX_DEVICES; i++) {
+            if(!hh_cb.devices[i].in_use) {
                 break;
             }
         }
     }
 
-    if(i == HID_HOST_MAX_DEVICES)
-    {
+    if(i == HID_HOST_MAX_DEVICES) {
         return HID_ERR_NO_RESOURCES;
     }
 
-    if(!hh_cb.devices[i].in_use)
-    {
+    if(!hh_cb.devices[i].in_use) {
         hh_cb.devices[i].in_use = TRUE;
         wm_memcpy(hh_cb.devices[i].addr, addr, sizeof(BD_ADDR)) ;
         hh_cb.devices[i].state = HID_DEV_NO_CONN;
         hh_cb.devices[i].conn_tries = 0 ;
     }
 
-    if(attr_mask != HID_ATTR_MASK_IGNORE)
-    {
+    if(attr_mask != HID_ATTR_MASK_IGNORE) {
         hh_cb.devices[i].attr_mask = attr_mask;
     }
 
@@ -419,13 +372,11 @@ tHID_STATUS HID_HostAddDev(BD_ADDR addr, uint16_t attr_mask, uint8_t *handle)
 *******************************************************************************/
 tHID_STATUS HID_HostRemoveDev(uint8_t dev_handle)
 {
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         return (HID_ERR_NOT_REGISTERED);
     }
 
-    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use))
-    {
+    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use)) {
         return HID_ERR_INVALID_PARAM;
     }
 
@@ -449,18 +400,15 @@ tHID_STATUS HID_HostRemoveDev(uint8_t dev_handle)
 *******************************************************************************/
 tHID_STATUS HID_HostOpenDev(uint8_t dev_handle)
 {
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         return (HID_ERR_NOT_REGISTERED);
     }
 
-    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use))
-    {
+    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use)) {
         return HID_ERR_INVALID_PARAM;
     }
 
-    if(hh_cb.devices[dev_handle].state != HID_DEV_NO_CONN)
-    {
+    if(hh_cb.devices[dev_handle].state != HID_DEV_NO_CONN) {
         return HID_ERR_ALREADY_CONN;
     }
 
@@ -485,30 +433,22 @@ tHID_STATUS HID_HostWriteDev(uint8_t dev_handle, uint8_t t_type,
 {
     tHID_STATUS status = HID_SUCCESS;
 
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         HIDH_TRACE_ERROR("HID_ERR_NOT_REGISTERED");
         status = HID_ERR_NOT_REGISTERED;
     }
 
-    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use))
-    {
+    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use)) {
         HIDH_TRACE_ERROR("HID_ERR_INVALID_PARAM");
         status = HID_ERR_INVALID_PARAM;
+    } else if(hh_cb.devices[dev_handle].state != HID_DEV_CONNECTED) {
+        HIDH_TRACE_ERROR("HID_ERR_NO_CONNECTION dev_handle %d", dev_handle);
+        status = HID_ERR_NO_CONNECTION;
     }
-    else
-        if(hh_cb.devices[dev_handle].state != HID_DEV_CONNECTED)
-        {
-            HIDH_TRACE_ERROR("HID_ERR_NO_CONNECTION dev_handle %d", dev_handle);
-            status = HID_ERR_NO_CONNECTION;
-        }
 
-    if(status != HID_SUCCESS)
-    {
+    if(status != HID_SUCCESS) {
         GKI_freebuf(pbuf);
-    }
-    else
-    {
+    } else {
         status = hidh_conn_snd_data(dev_handle, t_type, param, data, report_id, pbuf);
     }
 
@@ -526,18 +466,15 @@ tHID_STATUS HID_HostWriteDev(uint8_t dev_handle, uint8_t t_type,
 *******************************************************************************/
 tHID_STATUS HID_HostCloseDev(uint8_t dev_handle)
 {
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         return (HID_ERR_NOT_REGISTERED);
     }
 
-    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use))
-    {
+    if((dev_handle >= HID_HOST_MAX_DEVICES) || (!hh_cb.devices[dev_handle].in_use)) {
         return HID_ERR_INVALID_PARAM;
     }
 
-    if(hh_cb.devices[dev_handle].state != HID_DEV_CONNECTED)
-    {
+    if(hh_cb.devices[dev_handle].state != HID_DEV_CONNECTED) {
         return HID_ERR_NO_CONNECTION;
     }
 
@@ -549,43 +486,37 @@ tHID_STATUS HID_HostCloseDev(uint8_t dev_handle)
 tHID_STATUS HID_HostSetSecurityLevel(char serv_name[], uint8_t sec_lvl)
 {
     if(!BTM_SetSecurityLevel(FALSE, serv_name, BTM_SEC_SERVICE_HIDH_SEC_CTRL,
-                             sec_lvl, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_SEC_CHN))
-    {
+                             sec_lvl, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_SEC_CHN)) {
         HIDH_TRACE_ERROR("Security Registration 1 failed");
         return (HID_ERR_NO_RESOURCES);
     }
 
     if(!BTM_SetSecurityLevel(TRUE, serv_name, BTM_SEC_SERVICE_HIDH_SEC_CTRL,
-                             sec_lvl, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_SEC_CHN))
-    {
+                             sec_lvl, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_SEC_CHN)) {
         HIDH_TRACE_ERROR("Security Registration 2 failed");
         return (HID_ERR_NO_RESOURCES);
     }
 
     if(!BTM_SetSecurityLevel(FALSE, serv_name, BTM_SEC_SERVICE_HIDH_NOSEC_CTRL,
-                             BTM_SEC_NONE, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_NOSEC_CHN))
-    {
+                             BTM_SEC_NONE, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_NOSEC_CHN)) {
         HIDH_TRACE_ERROR("Security Registration 3 failed");
         return (HID_ERR_NO_RESOURCES);
     }
 
     if(!BTM_SetSecurityLevel(TRUE, serv_name, BTM_SEC_SERVICE_HIDH_NOSEC_CTRL,
-                             BTM_SEC_NONE, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_NOSEC_CHN))
-    {
+                             BTM_SEC_NONE, HID_PSM_CONTROL, BTM_SEC_PROTO_HID, HID_NOSEC_CHN)) {
         HIDH_TRACE_ERROR("Security Registration 4 failed");
         return (HID_ERR_NO_RESOURCES);
     }
 
     if(!BTM_SetSecurityLevel(TRUE, serv_name, BTM_SEC_SERVICE_HIDH_INTR,
-                             BTM_SEC_NONE, HID_PSM_INTERRUPT, BTM_SEC_PROTO_HID, 0))
-    {
+                             BTM_SEC_NONE, HID_PSM_INTERRUPT, BTM_SEC_PROTO_HID, 0)) {
         HIDH_TRACE_ERROR("Security Registration 5 failed");
         return (HID_ERR_NO_RESOURCES);
     }
 
     if(!BTM_SetSecurityLevel(FALSE, serv_name, BTM_SEC_SERVICE_HIDH_INTR,
-                             BTM_SEC_NONE, HID_PSM_INTERRUPT, BTM_SEC_PROTO_HID, 0))
-    {
+                             BTM_SEC_NONE, HID_PSM_INTERRUPT, BTM_SEC_PROTO_HID, 0)) {
         HIDH_TRACE_ERROR("Security Registration 6 failed");
         return (HID_ERR_NO_RESOURCES);
     }
@@ -607,41 +538,33 @@ uint8_t hid_known_hid_device(BD_ADDR bd_addr)
     uint8_t i;
     tBTM_INQ_INFO *p_inq_info = BTM_InqDbRead(bd_addr);
 
-    if(!hh_cb.reg_flag)
-    {
+    if(!hh_cb.reg_flag) {
         return FALSE;
     }
 
     /* First  check for class of device , if Inq DB has information about this device*/
-    if(p_inq_info != NULL)
-    {
+    if(p_inq_info != NULL) {
         /* Check if remote major device class is of type BTM_COD_MAJOR_PERIPHERAL */
         if((p_inq_info->results.dev_class[1] & BTM_COD_MAJOR_CLASS_MASK)
-                == BTM_COD_MAJOR_PERIPHERAL)
-        {
+                == BTM_COD_MAJOR_PERIPHERAL) {
             HIDH_TRACE_DEBUG("hid_known_hid_device:dev found in InqDB & COD matches HID dev");
             return TRUE;
         }
-    }
-    else
-    {
+    } else {
         /* Look for this device in security device DB */
         tBTM_SEC_DEV_REC  *p_dev_rec = btm_find_dev(bd_addr);
 
         if((p_dev_rec != NULL) &&
-                ((p_dev_rec->dev_class[1] & BTM_COD_MAJOR_CLASS_MASK) == BTM_COD_MAJOR_PERIPHERAL))
-        {
+                ((p_dev_rec->dev_class[1] & BTM_COD_MAJOR_CLASS_MASK) == BTM_COD_MAJOR_PERIPHERAL)) {
             HIDH_TRACE_DEBUG("hid_known_hid_device:dev found in SecDevDB & COD matches HID dev");
             return TRUE;
         }
     }
 
     /* Find an entry for this device in hh_cb.devices array */
-    for(i = 0; i < HID_HOST_MAX_DEVICES; i++)
-    {
+    for(i = 0; i < HID_HOST_MAX_DEVICES; i++) {
         if((hh_cb.devices[i].in_use) &&
-                (memcmp(bd_addr, hh_cb.devices[i].addr, BD_ADDR_LEN) == 0))
-        {
+                (memcmp(bd_addr, hh_cb.devices[i].addr, BD_ADDR_LEN) == 0)) {
             return TRUE;
         }
     }

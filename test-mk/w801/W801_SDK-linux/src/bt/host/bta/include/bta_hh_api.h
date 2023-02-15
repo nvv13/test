@@ -22,22 +22,22 @@
 #include "hidh_api.h"
 
 #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-    #include "gatt_api.h"
+#include "gatt_api.h"
 #endif
 
 /*****************************************************************************
 **  Constants and Type Definitions
 *****************************************************************************/
 #ifndef BTA_HH_DEBUG
-    #define BTA_HH_DEBUG    TRUE
+#define BTA_HH_DEBUG    TRUE
 #endif
 
 #ifndef BTA_HH_SSR_MAX_LATENCY_DEF
-    #define BTA_HH_SSR_MAX_LATENCY_DEF  800 /* 500 ms*/
+#define BTA_HH_SSR_MAX_LATENCY_DEF  800 /* 500 ms*/
 #endif
 
 #ifndef BTA_HH_SSR_MIN_TOUT_DEF
-    #define BTA_HH_SSR_MIN_TOUT_DEF     2
+#define BTA_HH_SSR_MIN_TOUT_DEF     2
 #endif
 
 /* BTA HID Host callback events */
@@ -78,11 +78,11 @@ typedef uint16_t tBTA_HH_EVT;
 #define BTA_HH_MAX_KNOWN        HID_HOST_MAX_DEVICES
 
 #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-    /* GATT_MAX_PHY_CHANNEL can not exceed 14 for the design of BTA HH */
-    #define BTA_HH_LE_MAX_KNOWN     GATT_MAX_PHY_CHANNEL
-    #define BTA_HH_MAX_DEVICE        (HID_HOST_MAX_DEVICES + GATT_MAX_PHY_CHANNEL)
+/* GATT_MAX_PHY_CHANNEL can not exceed 14 for the design of BTA HH */
+#define BTA_HH_LE_MAX_KNOWN     GATT_MAX_PHY_CHANNEL
+#define BTA_HH_MAX_DEVICE        (HID_HOST_MAX_DEVICES + GATT_MAX_PHY_CHANNEL)
 #else
-    #define BTA_HH_MAX_DEVICE       HID_HOST_MAX_DEVICES
+#define BTA_HH_MAX_DEVICE       HID_HOST_MAX_DEVICES
 #endif
 /* invalid device handle */
 #define BTA_HH_INVALID_HANDLE   0xff
@@ -93,8 +93,7 @@ typedef uint16_t tBTA_HH_EVT;
 #define BTA_HH_PROTO_UNKNOWN                    (0xff)
 typedef uint8_t   tBTA_HH_PROTO_MODE;
 
-enum
-{
+enum {
     BTA_HH_KEYBD_RPT_ID  =               1,
     BTA_HH_MOUSE_RPT_ID
 };
@@ -114,8 +113,7 @@ typedef uint8_t tBTA_HH_BOOT_RPT_ID;
 #define BTA_HH_DEVT_OTHER        0x80
 typedef uint8_t  tBTA_HH_DEVT;
 
-enum
-{
+enum {
     BTA_HH_OK,
     BTA_HH_HS_HID_NOT_READY,    /* handshake error : device not ready */
     BTA_HH_HS_INVALID_RPT_ID,   /* handshake error : invalid report ID */
@@ -149,22 +147,19 @@ typedef uint8_t tBTA_HH_STATUS;
 typedef uint16_t tBTA_HH_ATTR_MASK;
 
 /* supported type of device and corresponding application ID */
-typedef struct
-{
+typedef struct {
     tBTA_HH_DEVT        tod;        /* type of device               */
     uint8_t               app_id;     /* corresponding application ID */
 } tBTA_HH_SPT_TOD;
 
 /* configuration struct */
-typedef struct
-{
+typedef struct {
     uint8_t                max_devt_spt; /* max number of types of devices spt */
     tBTA_HH_SPT_TOD     *p_devt_list;  /* supported types of device list     */
     uint16_t               sdp_db_size;
 } tBTA_HH_CFG;
 
-enum
-{
+enum {
     BTA_HH_RPTT_RESRV,      /* reserved         */
     BTA_HH_RPTT_INPUT,      /* input report     */
     BTA_HH_RPTT_OUTPUT,     /* output report    */
@@ -174,8 +169,7 @@ typedef uint8_t tBTA_HH_RPT_TYPE;
 
 /* HID_CONTROL operation code used in BTA_HhSendCtrl()
 */
-enum
-{
+enum {
     BTA_HH_CTRL_NOP         = 0 + HID_PAR_CONTROL_NOP, /* mapping from BTE */
     BTA_HH_CTRL_HARD_RESET,                            /* hard reset       */
     BTA_HH_CTRL_SOFT_RESET,                            /* soft reset       */
@@ -194,47 +188,43 @@ typedef tHID_DEV_DSCP_INFO tBTA_HH_DEV_DESCR;
 
 
 /* report descriptor information */
-typedef struct
-{
+typedef struct {
     uint16_t              vendor_id;      /* vendor ID */
     uint16_t              product_id;     /* product ID */
     uint16_t              version;        /* version */
     uint16_t              ssr_max_latency;    /* SSR max latency, BTA_HH_SSR_PARAM_INVALID if unknown */
     uint16_t              ssr_min_tout;       /* SSR min timeout, BTA_HH_SSR_PARAM_INVALID if unknown */
     uint8_t               ctry_code;      /*Country Code.*/
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
 #define BTA_HH_LE_REMOTE_WAKE       0x01
 #define BTA_HH_LE_NORMAL_CONN       0x02
 
     uint8_t               flag;
-    #endif
+#endif
     tBTA_HH_DEV_DESCR   descriptor;
 } tBTA_HH_DEV_DSCP_INFO;
 
 /* callback event data for BTA_HH_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bda;                /* HID device bd address    */
     tBTA_HH_STATUS  status;             /* operation status         */
     uint8_t           handle;             /* device handle            */
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     uint8_t         le_hid;             /* is LE devices? */
     uint8_t         scps_supported;     /* scan parameter service supported */
-    #endif
+#endif
 
 } tBTA_HH_CONN;
 
 typedef tBTA_HH_CONN tBTA_HH_DEV_INFO;
 
 /* callback event data */
-typedef struct
-{
+typedef struct {
     tBTA_HH_STATUS              status;     /* operation status         */
     uint8_t                       handle;     /* device handle            */
 } tBTA_HH_CBDATA;
 
-enum
-{
+enum {
     BTA_HH_MOD_CTRL_KEY,
     BTA_HH_MOD_SHFT_KEY,
     BTA_HH_MOD_ALT_KEY,
@@ -243,8 +233,7 @@ enum
 };
 
 /* parsed boot mode keyboard report */
-typedef struct
-{
+typedef struct {
     uint8_t               this_char[6];       /* virtual key code     */
     uint8_t             mod_key[BTA_HH_MOD_MAX_KEY];
     /* ctrl, shift, Alt, GUI */
@@ -257,31 +246,26 @@ typedef struct
 } tBTA_HH_KEYBD_RPT;
 
 /* parsed boot mode mouse report */
-typedef struct
-{
+typedef struct {
     uint8_t               mouse_button;       /* mouse button is clicked   */
     int8_t                delta_x;            /* displacement x            */
     int8_t                delta_y;            /* displacement y            */
 } tBTA_HH_MICE_RPT;
 
 /* parsed Boot report */
-typedef struct
-{
+typedef struct {
     tBTA_HH_BOOT_RPT_ID dev_type;           /* type of device report */
-    union
-    {
+    union {
         tBTA_HH_KEYBD_RPT   keybd_rpt;      /* keyboard report      */
         tBTA_HH_MICE_RPT    mice_rpt;       /* mouse report         */
     }                   data_rpt;
 } tBTA_HH_BOOT_RPT;
 
 /* handshake data */
-typedef struct
-{
+typedef struct {
     tBTA_HH_STATUS  status;                 /* handshake status */
     uint8_t           handle;                 /* device handle    */
-    union
-    {
+    union {
         tBTA_HH_PROTO_MODE      proto_mode; /* GET_PROTO_EVT :protocol mode */
         BT_HDR                  *p_rpt_data;   /* GET_RPT_EVT   : report data  */
         uint8_t                   idle_rate;  /* GET_IDLE_EVT  : idle rate    */
@@ -290,8 +274,7 @@ typedef struct
 } tBTA_HH_HSDATA;
 
 /* union of data associated with HD callback */
-typedef union
-{
+typedef union {
     tBTA_HH_DEV_INFO        dev_info;           /* BTA_HH_ADD_DEV_EVT, BTA_HH_RMV_DEV_EVT   */
     tBTA_HH_CONN            conn;               /* BTA_HH_OPEN_EVT      */
     tBTA_HH_CBDATA          dev_status;         /* BTA_HH_CLOSE_EVT,

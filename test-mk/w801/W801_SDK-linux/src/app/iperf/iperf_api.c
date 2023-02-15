@@ -769,21 +769,43 @@ char *itoa(int num,char *str,int radix){
     return str;
 }
 
+#define USE_MALLOC_FREE_BUF 1
+#if !USE_MALLOC_FREE_BUF
 char pstring[256];
 char optbuf[128];
-
+#endif
 int
 package_parameters(struct iperf_test *test)
 {
-    
+#if USE_MALLOC_FREE_BUF
+    char *pstring = NULL;
+	char *optbuf = NULL;
+
+	pstring = malloc(256);
+	optbuf = malloc(128);
+	if (pstring == NULL || optbuf == NULL)
+	{
+		if (pstring)
+		{
+			free(pstring);
+			pstring = NULL;
+		}
+		if (optbuf)
+		{
+			free(optbuf);
+			optbuf = NULL;
+		}
+		return -1;
+	}
+#endif	
     memset(pstring, 0, 256*sizeof(char));
 	  //char * tmp;
     *pstring = ' ';
 
     if (test->protocol->id == Ptcp) {
-        strncat(pstring, "-p ", sizeof(pstring));
+        strncat(pstring, "-p ", strlen("-p "));
     } else if (test->protocol->id == Pudp) {
-        strncat(pstring, "-u ", sizeof(pstring));
+        strncat(pstring, "-u ", strlen("-u "));
     }
 
 #if 0
@@ -802,54 +824,54 @@ package_parameters(struct iperf_test *test)
 	printf("optbuf=%s, pstring=%s\n", optbuf, pstring);
 #endif	
 //    snprintf(optbuf, sizeof(optbuf), "-P %d ", test->num_streams);
-	snprintf(optbuf, sizeof(optbuf), "-P %d ", test->num_streams);
-    strncat(pstring, optbuf, sizeof(optbuf));
+	snprintf(optbuf, 128, "-P %d ", test->num_streams);
+    strncat(pstring, optbuf, strlen(optbuf));
 
     if (test->reverse)
-        strncat(pstring, "-R ", sizeof(optbuf));
+        strncat(pstring, "-R ", strlen(optbuf));
     
     if (test->settings->socket_bufsize) {
-        snprintf(optbuf, sizeof(optbuf), "-w %d ", test->settings->socket_bufsize);
-        strncat(pstring, optbuf, sizeof(optbuf));
+        snprintf(optbuf, 128, "-w %d ", test->settings->socket_bufsize);
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->settings->rate) {
-        snprintf(optbuf, sizeof(optbuf), "-b %llu ", test->settings->rate);
+        snprintf(optbuf, 128, "-b %llu ", test->settings->rate);
         //snprintf(optbuf, sizeof(optbuf), "-b %d ", test->settings->rate);
-        strncat(pstring, optbuf, sizeof(optbuf));
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->settings->mss) {
 //        snprintf(optbuf, sizeof(optbuf), "-m %d ", test->settings->mss);
-		snprintf(optbuf, sizeof(optbuf), "-m %d ", test->settings->mss);
-        strncat(pstring, optbuf, sizeof(optbuf));
+		snprintf(optbuf, 128, "-m %d ", test->settings->mss);
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->no_delay) {
-        snprintf(optbuf, sizeof(optbuf), "-N ");
-        strncat(pstring, optbuf, sizeof(optbuf));
+        snprintf(optbuf, 128, "-N ");
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->settings->bytes) {
-        snprintf(optbuf, sizeof(optbuf), "-n %llu ", test->settings->bytes);
+        snprintf(optbuf, 128, "-n %llu ", test->settings->bytes);
         //snprintf(optbuf, sizeof(optbuf), "-n %d ", test->settings->bytes);
-        strncat(pstring, optbuf, sizeof(optbuf));
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->duration) {
  //       snprintf(optbuf, sizeof(optbuf), "-t %d ", test->duration);
-		snprintf(optbuf, sizeof(optbuf), "-t %d ", test->duration);
-        strncat(pstring, optbuf, sizeof(optbuf));
+		snprintf(optbuf, 128, "-t %d ", test->duration);
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->settings->blksize) {
-        snprintf(optbuf, sizeof(optbuf), "-l %d ", test->settings->blksize);
-        strncat(pstring, optbuf, sizeof(optbuf));
+        snprintf(optbuf, 128, "-l %d ", test->settings->blksize);
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     if (test->settings->tos) {
-        snprintf(optbuf, sizeof(optbuf), "-S %d ", test->settings->tos);
-        strncat(pstring, optbuf, sizeof(optbuf));
+        snprintf(optbuf, 128, "-S %d ", test->settings->tos);
+        strncat(pstring, optbuf, strlen(optbuf));
     }
 
     *pstring = (char) (strlen(pstring) - 1);
@@ -857,9 +879,32 @@ package_parameters(struct iperf_test *test)
 
     if (Nwrite(test->ctrl_sck, pstring, strlen(pstring), Ptcp) < 0) {
         i_errno = IESENDPARAMS;
+#if USE_MALLOC_FREE_BUF		
+		if (pstring)
+		{
+			free(pstring);
+			pstring = NULL;
+		}
+		if (optbuf)
+		{
+			free(optbuf);
+			optbuf = NULL;
+		}
+#endif		
         return (-1);
     }
-
+#if USE_MALLOC_FREE_BUF	
+	if (pstring)
+	{
+		free(pstring);
+		pstring = NULL;
+	}
+	if (optbuf)
+	{
+		free(optbuf);
+		optbuf = NULL;
+	}
+#endif
     return 0;
 }
  /****************************************************************************** 
@@ -1014,7 +1059,15 @@ parse_parameters(struct iperf_test *test)
     int ch;
 
 	IPF_DBG("\n");
-    char pstring[256];
+    //char pstring[256];
+    char *pstring = NULL;
+
+	pstring = malloc(256);
+	if (NULL == pstring)
+	{
+		i_errno = IERECVPARAMS;
+		return -1;
+	}
 
     memset(pstring, 0, 256 * sizeof(char));
 
@@ -1031,6 +1084,7 @@ parse_parameters(struct iperf_test *test)
 
     for (param = strtok(pstring, " "), n = 1, params = NULL; param; param = strtok(NULL, " ")) {
         if ((params = realloc(params, (n+1)*sizeof(char *))) == NULL) {
+			free(pstring);
             i_errno = IERECVPARAMS;
             return (-1);
         }
@@ -1087,6 +1141,7 @@ parse_parameters(struct iperf_test *test)
     optind = 1;
 
     free(params);
+	free(pstring);
 
     return (0);
 }
@@ -2155,17 +2210,15 @@ iperf_init_stream(struct iperf_stream *sp, struct iperf_test *test)
     }
     /* Set IP TOS */
     if ((opt = test->settings->tos)!=0) {
-        if (test->settings->domain == AF_INET6) {
 #ifdef IPV6_TCLASS
+        if (test->settings->domain == AF_INET6) {
             if (setsockopt(sp->socket, IPPROTO_IPV6, IPV6_TCLASS, &opt, sizeof(opt)) < 0) {
                 i_errno = IESETCOS;
                 return (-1);
             }
-#else
-            i_errno = IESETCOS;
-            return (-1);
+        } else 
 #endif
-        } else {
+        {
             if (setsockopt(sp->socket, IPPROTO_IP, IP_TOS, &opt, sizeof(opt)) < 0) {
                 i_errno = IESETTOS;
                 return (-1);

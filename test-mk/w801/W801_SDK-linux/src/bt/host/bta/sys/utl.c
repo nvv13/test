@@ -45,31 +45,24 @@ int16_t utl_str2int(const char *p_s)
 
     for(; *p_s == ' ' && *p_s != 0; p_s++);
 
-    if(*p_s == 0)
-    {
+    if(*p_s == 0) {
         return -1;
     }
 
-    for(;;)
-    {
-        if((*p_s < '0') || (*p_s > '9'))
-        {
+    for(;;) {
+        if((*p_s < '0') || (*p_s > '9')) {
             return -1;
         }
 
         val += (int32_t)(*p_s++ - '0');
 
-        if(val > 32767)
-        {
+        if(val > 32767) {
             return -1;
         }
 
-        if(*p_s == 0)
-        {
+        if(*p_s == 0) {
             return (int16_t) val;
-        }
-        else
-        {
+        } else {
             val *= 10;
         }
     }
@@ -92,29 +85,24 @@ int utl_strucmp(const char *p_s, const char *p_t)
 {
     char c;
 
-    while(*p_s && *p_t)
-    {
+    while(*p_s && *p_t) {
         c = *p_t++;
 
-        if(c >= 'a' && c <= 'z')
-        {
+        if(c >= 'a' && c <= 'z') {
             c -= 0x20;
         }
 
-        if(*p_s++ != c)
-        {
+        if(*p_s++ != c) {
             return -1;
         }
     }
 
     /* if p_t hit null first, no match */
-    if(*p_t == 0 && *p_s != 0)
-    {
+    if(*p_t == 0 && *p_s != 0) {
         return 1;
     }
     /* else p_s hit null first, count as match */
-    else
-    {
+    else {
         return 0;
     }
 }
@@ -137,20 +125,15 @@ uint8_t utl_itoa(uint16_t i, char *p_s)
     char    *p = p_s;
     uint8_t fill = FALSE;
 
-    if(i == 0)
-    {
+    if(i == 0) {
         /* take care of zero case */
         *p++ = '0';
-    }
-    else
-    {
-        for(j = 10000; j > 0; j /= 10)
-        {
+    } else {
+        for(j = 10000; j > 0; j /= 10) {
             k = i / j;
             i %= j;
 
-            if(k > 0 || fill)
-            {
+            if(k > 0 || fill) {
                 *p++ = k + '0';
                 fill = TRUE;
             }
@@ -191,8 +174,7 @@ uint8_t utl_set_device_class(tBTA_UTL_COD *p_cod, uint8_t cmd)
     BTM_COD_MINOR_CLASS(minor, dev);
     BTM_COD_MAJOR_CLASS(major, dev);
 
-    switch(cmd)
-    {
+    switch(cmd) {
         case BTA_UTL_SET_COD_MAJOR_MINOR:
             minor = p_cod->minor & BTM_COD_MINOR_CLASS_MASK;
             major = p_cod->major & BTM_COD_MAJOR_CLASS_MASK;
@@ -229,8 +211,7 @@ uint8_t utl_set_device_class(tBTA_UTL_COD *p_cod, uint8_t cmd)
     /* convert the fields into the device class type */
     FIELDS_TO_COD(dev_class, minor, major, service);
 
-    if(BTM_SetDeviceClass(dev_class) == BTM_SUCCESS)
-    {
+    if(BTM_SetDeviceClass(dev_class) == BTM_SUCCESS) {
         return TRUE;
     }
 
@@ -252,10 +233,8 @@ uint8_t utl_isintstr(const char *p_s)
 {
     uint16_t i = 0;
 
-    for(i = 0; p_s[i] != 0; i++)
-    {
-        if(((p_s[i] < '0') || (p_s[i] > '9')) && (p_s[i] != ';'))
-        {
+    for(i = 0; p_s[i] != 0; i++) {
+        if(((p_s[i] < '0') || (p_s[i] > '9')) && (p_s[i] != ';')) {
             return FALSE;
         }
     }
@@ -278,14 +257,12 @@ uint8_t utl_isdialstr(const char *p_s)
 {
     uint16_t i = 0;
 
-    for(i = 0; p_s[i] != 0; i++)
-    {
+    for(i = 0; p_s[i] != 0; i++) {
         if(!(((p_s[i] >= '0') && (p_s[i] <= '9'))
                 || (p_s[i] == '*') || (p_s[i] == '+') || (p_s[i] == '#') || (p_s[i] == ';')
                 || ((p_s[i] >= 'A') && (p_s[i] <= 'C'))
                 || ((p_s[i] == 'p') || (p_s[i] == 'P')
-                    || (p_s[i] == 'w') || (p_s[i] == 'W'))))
-        {
+                    || (p_s[i] == 'w') || (p_s[i] == 'W')))) {
             return FALSE;
         }
     }

@@ -31,7 +31,8 @@
 
 typedef tls_bt_status_t (*btif_connect_cb_t)(tls_bt_addr_t *bda, uint16_t uuid);
 
-tls_bt_status_t btif_queue_connect(uint16_t uuid, const tls_bt_addr_t *bda, btif_connect_cb_t connect_cb);
+tls_bt_status_t btif_queue_connect(uint16_t uuid, const tls_bt_addr_t *bda,
+                                   btif_connect_cb_t connect_cb);
 void btif_queue_advance();
 tls_bt_status_t btif_queue_connect_next(void);
 void btif_queue_release();

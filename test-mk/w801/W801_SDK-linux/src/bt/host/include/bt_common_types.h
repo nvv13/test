@@ -24,8 +24,7 @@
 
 #include "bluetooth.h"
 
-typedef struct
-{
+typedef struct {
     uint8_t  client_if;
     uint8_t  filt_index;
     uint8_t  advertiser_state;

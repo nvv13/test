@@ -24,8 +24,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef enum
-{
+typedef enum {
     USERIAL_PORT_1,
     USERIAL_PORT_2,
     USERIAL_PORT_3,

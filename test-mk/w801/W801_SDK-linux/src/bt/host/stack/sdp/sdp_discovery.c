@@ -39,7 +39,7 @@
 
 
 #ifndef SDP_DEBUG_RAW
-    #define SDP_DEBUG_RAW       FALSE
+#define SDP_DEBUG_RAW       FALSE
 #endif
 
 /********************************************************************************/
@@ -57,7 +57,7 @@ static uint8_t         *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_
 /* Safety check in case we go crazy */
 #define MAX_NEST_LEVELS     5
 #ifdef USE_ALARM
-    extern fixed_queue_t *btu_general_alarm_queue;
+extern fixed_queue_t *btu_general_alarm_queue;
 #endif
 
 /*******************************************************************************
@@ -82,24 +82,17 @@ static uint8_t *sdpu_build_uuid_seq(uint8_t *p_out, uint16_t num_uuids, tSDP_UUI
     p_out += 1;
 
     /* Now, loop through and put in all the UUID(s) */
-    for(xx = 0; xx < num_uuids; xx++, p_uuid_list++)
-    {
-        if(p_uuid_list->len == 2)
-        {
+    for(xx = 0; xx < num_uuids; xx++, p_uuid_list++) {
+        if(p_uuid_list->len == 2) {
             UINT8_TO_BE_STREAM(p_out, (UUID_DESC_TYPE << 3) | SIZE_TWO_BYTES);
             UINT16_TO_BE_STREAM(p_out, p_uuid_list->uu.uuid16);
+        } else if(p_uuid_list->len == 4) {
+            UINT8_TO_BE_STREAM(p_out, (UUID_DESC_TYPE << 3) | SIZE_FOUR_BYTES);
+            UINT32_TO_BE_STREAM(p_out, p_uuid_list->uu.uuid32);
+        } else {
+            UINT8_TO_BE_STREAM(p_out, (UUID_DESC_TYPE << 3) | SIZE_SIXTEEN_BYTES);
+            ARRAY_TO_BE_STREAM(p_out, p_uuid_list->uu.uuid128, p_uuid_list->len);
         }
-        else
-            if(p_uuid_list->len == 4)
-            {
-                UINT8_TO_BE_STREAM(p_out, (UUID_DESC_TYPE << 3) | SIZE_FOUR_BYTES);
-                UINT32_TO_BE_STREAM(p_out, p_uuid_list->uu.uuid32);
-            }
-            else
-            {
-                UINT8_TO_BE_STREAM(p_out, (UUID_DESC_TYPE << 3) | SIZE_SIXTEEN_BYTES);
-                ARRAY_TO_BE_STREAM(p_out, p_uuid_list->uu.uuid128, p_uuid_list->len);
-            }
     }
 
     /* Now, put in the length */
@@ -133,19 +126,18 @@ static void sdp_snd_service_search_req(tCONN_CB *p_ccb, uint8_t cont_len, uint8_
     p_param_len = p;
     p += 2;
     /* Build the UID sequence. */
-    #if (defined(SDP_BROWSE_PLUS) && SDP_BROWSE_PLUS == TRUE)
+#if (defined(SDP_BROWSE_PLUS) && SDP_BROWSE_PLUS == TRUE)
     p = sdpu_build_uuid_seq(p, 1, &p_ccb->p_db->uuid_filters[p_ccb->cur_uuid_idx]);
-    #else
+#else
     p = sdpu_build_uuid_seq(p, p_ccb->p_db->num_uuid_filters, p_ccb->p_db->uuid_filters);
-    #endif
+#endif
     /* Set max service record count */
     UINT16_TO_BE_STREAM(p, sdp_cb.max_recs_per_search);
     /* Set continuation state */
     UINT8_TO_BE_STREAM(p, cont_len);
 
     /* if this is not the first request */
-    if(cont_len && p_cont)
-    {
+    if(cont_len && p_cont) {
         wm_memcpy(p, p_cont, cont_len);
         p += cont_len;
     }
@@ -156,19 +148,20 @@ static void sdp_snd_service_search_req(tCONN_CB *p_ccb, uint8_t cont_len, uint8_
     p_ccb->disc_state = SDP_DISC_WAIT_HANDLES;
     /* Set the length of the SDP data in the buffer */
     p_cmd->len = (uint16_t)(p - p_start);
-    #if (SDP_DEBUG_RAW == TRUE)
-    SDP_TRACE_WARNING("sdp_snd_service_search_req cont_len :%d disc_state:%d", cont_len, p_ccb->disc_state);
-    #endif
+#if (SDP_DEBUG_RAW == TRUE)
+    SDP_TRACE_WARNING("sdp_snd_service_search_req cont_len :%d disc_state:%d", cont_len,
+                      p_ccb->disc_state);
+#endif
     L2CA_DataWrite(p_ccb->connection_id, p_cmd);
     /* Start inactivity timer */
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_set_on_queue(p_ccb->sdp_conn_timer, SDP_INACT_TIMEOUT_MS,
                        sdp_conn_timer_timeout, p_ccb, btu_general_alarm_queue);
-    #else
+#else
     p_ccb->sdp_conn_timer.p_cback = (TIMER_CBACK *)&sdp_conn_timer_timeout;
     p_ccb->sdp_conn_timer.param = (TIMER_PARAM_TYPE)p_ccb;
     btu_start_timer(&p_ccb->sdp_conn_timer, BTU_TTYPE_SDP, SDP_INACT_TIMEOUT_MS / 1000);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -183,13 +176,10 @@ static void sdp_snd_service_search_req(tCONN_CB *p_ccb, uint8_t cont_len, uint8_
 *******************************************************************************/
 void sdp_disc_connected(tCONN_CB *p_ccb)
 {
-    if(p_ccb->is_attr_search)
-    {
+    if(p_ccb->is_attr_search) {
         p_ccb->disc_state = SDP_DISC_WAIT_SEARCH_ATTR;
         process_service_search_attr_rsp(p_ccb, NULL);
-    }
-    else
-    {
+    } else {
         /* First step is to get a list of the handles from the server. */
         /* We are not searching for a specific attribute, so we will   */
         /* first search for the service, then get all attributes of it */
@@ -212,25 +202,23 @@ void sdp_disc_server_rsp(tCONN_CB *p_ccb, BT_HDR *p_msg)
 {
     uint8_t           *p, rsp_pdu;
     uint8_t         invalid_pdu = TRUE;
-    #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
     SDP_TRACE_WARNING("sdp_disc_server_rsp disc_state:%d", p_ccb->disc_state);
-    #endif
+#endif
     /* stop inactivity timer when we receive a response */
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_cancel(p_ccb->sdp_conn_timer);
-    #else
+#else
     btu_stop_timer(&p_ccb->sdp_conn_timer);
-    #endif
+#endif
     /* Got a reply!! Check what we got back */
     p = (uint8_t *)(p_msg + 1) + p_msg->offset;
     BE_STREAM_TO_UINT8(rsp_pdu, p);
     p_msg->len--;
 
-    switch(rsp_pdu)
-    {
+    switch(rsp_pdu) {
         case SDP_PDU_SERVICE_SEARCH_RSP:
-            if(p_ccb->disc_state == SDP_DISC_WAIT_HANDLES)
-            {
+            if(p_ccb->disc_state == SDP_DISC_WAIT_HANDLES) {
                 process_service_search_rsp(p_ccb, p);
                 invalid_pdu = FALSE;
             }
@@ -238,8 +226,7 @@ void sdp_disc_server_rsp(tCONN_CB *p_ccb, BT_HDR *p_msg)
             break;
 
         case SDP_PDU_SERVICE_ATTR_RSP:
-            if(p_ccb->disc_state == SDP_DISC_WAIT_ATTR)
-            {
+            if(p_ccb->disc_state == SDP_DISC_WAIT_ATTR) {
                 process_service_attr_rsp(p_ccb, p);
                 invalid_pdu = FALSE;
             }
@@ -247,8 +234,7 @@ void sdp_disc_server_rsp(tCONN_CB *p_ccb, BT_HDR *p_msg)
             break;
 
         case SDP_PDU_SERVICE_SEARCH_ATTR_RSP:
-            if(p_ccb->disc_state == SDP_DISC_WAIT_SEARCH_ATTR)
-            {
+            if(p_ccb->disc_state == SDP_DISC_WAIT_SEARCH_ATTR) {
                 process_service_search_attr_rsp(p_ccb, p);
                 invalid_pdu = FALSE;
             }
@@ -256,8 +242,7 @@ void sdp_disc_server_rsp(tCONN_CB *p_ccb, BT_HDR *p_msg)
             break;
     }
 
-    if(invalid_pdu)
-    {
+    if(invalid_pdu) {
         SDP_TRACE_WARNING("SDP - Unexp. PDU: %d in state: %d", rsp_pdu, p_ccb->disc_state);
         sdp_disconnect(p_ccb, SDP_GENERIC_ERROR);
     }
@@ -285,44 +270,36 @@ static void process_service_search_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
     orig = p_ccb->num_handles;
     p_ccb->num_handles += cur_handles;
 
-    if(p_ccb->num_handles == 0)
-    {
+    if(p_ccb->num_handles == 0) {
         SDP_TRACE_WARNING("SDP - Rcvd ServiceSearchRsp, no matches");
         sdp_disconnect(p_ccb, SDP_NO_RECS_MATCH);
         return;
     }
 
     /* Save the handles that match. We will can only process a certain number. */
-    if(total > sdp_cb.max_recs_per_search)
-    {
+    if(total > sdp_cb.max_recs_per_search) {
         total = sdp_cb.max_recs_per_search;
     }
 
-    if(p_ccb->num_handles > sdp_cb.max_recs_per_search)
-    {
+    if(p_ccb->num_handles > sdp_cb.max_recs_per_search) {
         p_ccb->num_handles = sdp_cb.max_recs_per_search;
     }
 
-    for(xx = orig; xx < p_ccb->num_handles; xx++)
-    {
+    for(xx = orig; xx < p_ccb->num_handles; xx++) {
         BE_STREAM_TO_UINT32(p_ccb->handles[xx], p_reply);
     }
 
     BE_STREAM_TO_UINT8(cont_len, p_reply);
 
-    if(cont_len != 0)
-    {
-        if(cont_len > SDP_MAX_CONTINUATION_LEN)
-        {
+    if(cont_len != 0) {
+        if(cont_len > SDP_MAX_CONTINUATION_LEN) {
             sdp_disconnect(p_ccb, SDP_INVALID_CONT_STATE);
             return;
         }
 
         /* stay in the same state */
         sdp_snd_service_search_req(p_ccb, cont_len, p_reply);
-    }
-    else
-    {
+    } else {
         /* change state */
         p_ccb->disc_state = SDP_DISC_WAIT_ATTR;
         /* Kick off the first attribute request */
@@ -347,39 +324,35 @@ static void sdp_copy_raw_data(tCONN_CB *p_ccb, uint8_t offset)
     uint32_t          list_len;
     uint8_t           *p;
     uint8_t           type;
-    #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
     uint8_t num_array[SDP_MAX_LIST_BYTE_COUNT];
     uint32_t i;
 
-    for(i = 0; i < p_ccb->list_len; i++)
-    {
+    for(i = 0; i < p_ccb->list_len; i++) {
         sprintf((char *)&num_array[i * 2], "%02X", (uint8_t)(p_ccb->rsp_list[i]));
     }
 
     SDP_TRACE_WARNING("result :%s", num_array);
-    #endif
+#endif
 
-    if(p_ccb->p_db->raw_data)
-    {
+    if(p_ccb->p_db->raw_data) {
         cpy_len = p_ccb->p_db->raw_size - p_ccb->p_db->raw_used;
         list_len = p_ccb->list_len;
         p = &p_ccb->rsp_list[0];
 
-        if(offset)
-        {
+        if(offset) {
             type = *p++;
             p = sdpu_get_len_from_type(p, type, &list_len);
         }
 
-        if(list_len && list_len < cpy_len)
-        {
+        if(list_len && list_len < cpy_len) {
             cpy_len = list_len;
         }
 
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("list_len :%d cpy_len:%d raw_size:%d raw_used:%d",
                           list_len, cpy_len, p_ccb->p_db->raw_size, p_ccb->p_db->raw_used);
-        #endif
+#endif
         wm_memcpy(&p_ccb->p_db->raw_data[p_ccb->p_db->raw_used], p, cpy_len);
         p_ccb->p_db->raw_used += cpy_len;
     }
@@ -401,71 +374,63 @@ static void process_service_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
     uint8_t           *p_start, *p_param_len;
     uint16_t          param_len, list_byte_count;
     uint8_t         cont_request_needed = FALSE;
-    #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
     SDP_TRACE_WARNING("process_service_attr_rsp raw inc:%d",
                       SDP_RAW_DATA_INCLUDED);
-    #endif
+#endif
 
     /* If p_reply is NULL, we were called after the records handles were read */
-    if(p_reply)
-    {
-        #if (SDP_DEBUG_RAW == TRUE)
+    if(p_reply) {
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("ID & len: 0x%02x-%02x-%02x-%02x",
                           p_reply[0], p_reply[1], p_reply[2], p_reply[3]);
-        #endif
+#endif
         /* Skip transaction ID and length */
         p_reply += 4;
         BE_STREAM_TO_UINT16(list_byte_count, p_reply);
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("list_byte_count:%d", list_byte_count);
-        #endif
+#endif
 
         /* Copy the response to the scratchpad. First, a safety check on the length */
-        if((p_ccb->list_len + list_byte_count) > SDP_MAX_LIST_BYTE_COUNT)
-        {
+        if((p_ccb->list_len + list_byte_count) > SDP_MAX_LIST_BYTE_COUNT) {
             sdp_disconnect(p_ccb, SDP_INVALID_PDU_SIZE);
             return;
         }
 
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("list_len: %d, list_byte_count: %d",
                           p_ccb->list_len, list_byte_count);
-        #endif
+#endif
 
-        if(p_ccb->rsp_list == NULL)
-        {
+        if(p_ccb->rsp_list == NULL) {
             p_ccb->rsp_list = (uint8_t *)GKI_getbuf(SDP_MAX_LIST_BYTE_COUNT);
         }
 
         wm_memcpy(&p_ccb->rsp_list[p_ccb->list_len], p_reply, list_byte_count);
         p_ccb->list_len += list_byte_count;
         p_reply         += list_byte_count;
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("list_len: %d(attr_rsp)", p_ccb->list_len);
         /* Check if we need to request a continuation */
         SDP_TRACE_WARNING("*p_reply:%d(%d)", *p_reply, SDP_MAX_CONTINUATION_LEN);
-        #endif
+#endif
 
-        if(*p_reply)
-        {
-            if(*p_reply > SDP_MAX_CONTINUATION_LEN)
-            {
+        if(*p_reply) {
+            if(*p_reply > SDP_MAX_CONTINUATION_LEN) {
                 sdp_disconnect(p_ccb, SDP_INVALID_CONT_STATE);
                 return;
             }
 
             cont_request_needed = TRUE;
-        }
-        else
-        {
-            #if (SDP_RAW_DATA_INCLUDED == TRUE)
+        } else {
+#if (SDP_RAW_DATA_INCLUDED == TRUE)
             SDP_TRACE_WARNING("process_service_attr_rsp");
             sdp_copy_raw_data(p_ccb, FALSE);
-            #endif
+#endif
 
             /* Save the response in the database. Stop on any error */
-            if(!save_attr_seq(p_ccb, &p_ccb->rsp_list[0], &p_ccb->rsp_list[p_ccb->list_len]))
-            {
+            if(!save_attr_seq(p_ccb, &p_ccb->rsp_list[0], &p_ccb->rsp_list[p_ccb->list_len])) {
                 sdp_disconnect(p_ccb, SDP_DB_FULL);
                 return;
             }
@@ -476,8 +441,7 @@ static void process_service_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
     }
 
     /* Now, ask for the next handle. Re-use the buffer we just got. */
-    if(p_ccb->cur_handle < p_ccb->num_handles)
-    {
+    if(p_ccb->cur_handle < p_ccb->num_handles) {
         BT_HDR  *p_msg = (BT_HDR *)GKI_getbuf(SDP_DATA_BUF_SIZE);
         uint8_t   *p;
         p_msg->offset = L2CAP_MIN_OFFSET;
@@ -494,23 +458,17 @@ static void process_service_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
         UINT16_TO_BE_STREAM(p, sdp_cb.max_attr_list_size);
 
         /* If no attribute filters, build a wildcard attribute sequence */
-        if(p_ccb->p_db->num_attr_filters)
-        {
+        if(p_ccb->p_db->num_attr_filters) {
             p = sdpu_build_attrib_seq(p, p_ccb->p_db->attr_filters, p_ccb->p_db->num_attr_filters);
-        }
-        else
-        {
+        } else {
             p = sdpu_build_attrib_seq(p, NULL, 0);
         }
 
         /* Was this a continuation request ? */
-        if(cont_request_needed)
-        {
+        if(cont_request_needed) {
             wm_memcpy(p, p_reply, *p_reply + 1);
             p += *p_reply + 1;
-        }
-        else
-        {
+        } else {
             UINT8_TO_BE_STREAM(p, 0);
         }
 
@@ -521,18 +479,16 @@ static void process_service_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
         p_msg->len = (uint16_t)(p - p_start);
         L2CA_DataWrite(p_ccb->connection_id, p_msg);
         /* Start inactivity timer */
-        #if USE_ALARM
+#if USE_ALARM
         alarm_set_on_queue(p_ccb->sdp_conn_timer, SDP_INACT_TIMEOUT_MS,
                            sdp_conn_timer_timeout, p_ccb,
                            btu_general_alarm_queue);
-        #else
+#else
         p_ccb->sdp_conn_timer.p_cback = (TIMER_CBACK *)&sdp_conn_timer_timeout;
         p_ccb->sdp_conn_timer.param = (TIMER_PARAM_TYPE)p_ccb;
         btu_start_timer(&p_ccb->sdp_conn_timer, BTU_TTYPE_SDP, SDP_INACT_TIMEOUT_MS / 1000);
-        #endif
-    }
-    else
-    {
+#endif
+    } else {
         sdp_disconnect(p_ccb, SDP_SUCCESS);
         return;
     }
@@ -556,54 +512,49 @@ static void process_service_search_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
     uint32_t          seq_len;
     uint16_t          param_len, lists_byte_count = 0;
     uint8_t         cont_request_needed = FALSE;
-    #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
     SDP_TRACE_WARNING("process_service_search_attr_rsp");
-    #endif
+#endif
 
     /* If p_reply is NULL, we were called for the initial read */
-    if(p_reply)
-    {
-        #if (SDP_DEBUG_RAW == TRUE)
+    if(p_reply) {
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("ID & len: 0x%02x-%02x-%02x-%02x",
                           p_reply[0], p_reply[1], p_reply[2], p_reply[3]);
-        #endif
+#endif
         /* Skip transaction ID and length */
         p_reply += 4;
         BE_STREAM_TO_UINT16(lists_byte_count, p_reply);
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("lists_byte_count:%d", lists_byte_count);
-        #endif
+#endif
 
         /* Copy the response to the scratchpad. First, a safety check on the length */
-        if((p_ccb->list_len + lists_byte_count) > SDP_MAX_LIST_BYTE_COUNT)
-        {
+        if((p_ccb->list_len + lists_byte_count) > SDP_MAX_LIST_BYTE_COUNT) {
             sdp_disconnect(p_ccb, SDP_INVALID_PDU_SIZE);
             return;
         }
 
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("list_len: %d, list_byte_count: %d",
                           p_ccb->list_len, lists_byte_count);
-        #endif
+#endif
 
-        if(p_ccb->rsp_list == NULL)
-        {
+        if(p_ccb->rsp_list == NULL) {
             p_ccb->rsp_list = (uint8_t *)GKI_getbuf(SDP_MAX_LIST_BYTE_COUNT);
         }
 
         wm_memcpy(&p_ccb->rsp_list[p_ccb->list_len], p_reply, lists_byte_count);
         p_ccb->list_len += lists_byte_count;
         p_reply         += lists_byte_count;
-        #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
         SDP_TRACE_WARNING("list_len: %d(search_attr_rsp)", p_ccb->list_len);
         /* Check if we need to request a continuation */
         SDP_TRACE_WARNING("*p_reply:%d(%d)", *p_reply, SDP_MAX_CONTINUATION_LEN);
-        #endif
+#endif
 
-        if(*p_reply)
-        {
-            if(*p_reply > SDP_MAX_CONTINUATION_LEN)
-            {
+        if(*p_reply) {
+            if(*p_reply > SDP_MAX_CONTINUATION_LEN) {
                 sdp_disconnect(p_ccb, SDP_INVALID_CONT_STATE);
                 return;
             }
@@ -612,13 +563,12 @@ static void process_service_search_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
         }
     }
 
-    #if (SDP_DEBUG_RAW == TRUE)
+#if (SDP_DEBUG_RAW == TRUE)
     SDP_TRACE_WARNING("cont_request_needed:%d", cont_request_needed);
-    #endif
+#endif
 
     /* If continuation request (or first time request) */
-    if((cont_request_needed) || (!p_reply))
-    {
+    if((cont_request_needed) || (!p_reply)) {
         BT_HDR  *p_msg = (BT_HDR *)GKI_getbuf(SDP_DATA_BUF_SIZE);
         uint8_t   *p;
         p_msg->offset = L2CAP_MIN_OFFSET;
@@ -631,32 +581,26 @@ static void process_service_search_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
         p_param_len = p;
         p += 2;
         /* Build the UID sequence. */
-        #if (defined(SDP_BROWSE_PLUS) && SDP_BROWSE_PLUS == TRUE)
+#if (defined(SDP_BROWSE_PLUS) && SDP_BROWSE_PLUS == TRUE)
         p = sdpu_build_uuid_seq(p, 1, &p_ccb->p_db->uuid_filters[p_ccb->cur_uuid_idx]);
-        #else
+#else
         p = sdpu_build_uuid_seq(p, p_ccb->p_db->num_uuid_filters, p_ccb->p_db->uuid_filters);
-        #endif
+#endif
         /* Max attribute byte count */
         UINT16_TO_BE_STREAM(p, sdp_cb.max_attr_list_size);
 
         /* If no attribute filters, build a wildcard attribute sequence */
-        if(p_ccb->p_db->num_attr_filters)
-        {
+        if(p_ccb->p_db->num_attr_filters) {
             p = sdpu_build_attrib_seq(p, p_ccb->p_db->attr_filters, p_ccb->p_db->num_attr_filters);
-        }
-        else
-        {
+        } else {
             p = sdpu_build_attrib_seq(p, NULL, 0);
         }
 
         /* No continuation for first request */
-        if(p_reply)
-        {
+        if(p_reply) {
             wm_memcpy(p, p_reply, *p_reply + 1);
             p += *p_reply + 1;
-        }
-        else
-        {
+        } else {
             UINT8_TO_BE_STREAM(p, 0);
         }
 
@@ -667,31 +611,30 @@ static void process_service_search_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
         p_msg->len = p - p_start;
         L2CA_DataWrite(p_ccb->connection_id, p_msg);
         /* Start inactivity timer */
-        #ifdef USE_ALARM
+#ifdef USE_ALARM
         alarm_set_on_queue(p_ccb->sdp_conn_timer, SDP_INACT_TIMEOUT_MS,
                            sdp_conn_timer_timeout, p_ccb,
                            btu_general_alarm_queue);
-        #else
+#else
         p_ccb->sdp_conn_timer.p_cback = (TIMER_CBACK *)&sdp_conn_timer_timeout;
         p_ccb->sdp_conn_timer.param = (TIMER_PARAM_TYPE)p_ccb;
         btu_start_timer(&p_ccb->sdp_conn_timer, BTU_TTYPE_SDP, SDP_INACT_TIMEOUT_MS / 1000);
-        #endif
+#endif
         return;
     }
 
     /*******************************************************************/
     /* We now have the full response, which is a sequence of sequences */
     /*******************************************************************/
-    #if (SDP_RAW_DATA_INCLUDED == TRUE)
+#if (SDP_RAW_DATA_INCLUDED == TRUE)
     SDP_TRACE_WARNING("process_service_search_attr_rsp");
     sdp_copy_raw_data(p_ccb, TRUE);
-    #endif
+#endif
     p = &p_ccb->rsp_list[0];
     /* The contents is a sequence of attribute sequences */
     type = *p++;
 
-    if((type >> 3) != DATA_ELE_SEQ_DESC_TYPE)
-    {
+    if((type >> 3) != DATA_ELE_SEQ_DESC_TYPE) {
         SDP_TRACE_WARNING("SDP - Wrong type: 0x%02x in attr_rsp", type);
         return;
     }
@@ -699,18 +642,15 @@ static void process_service_search_attr_rsp(tCONN_CB *p_ccb, uint8_t *p_reply)
     p = sdpu_get_len_from_type(p, type, &seq_len);
     p_end = &p_ccb->rsp_list[p_ccb->list_len];
 
-    if((p + seq_len) != p_end)
-    {
+    if((p + seq_len) != p_end) {
         sdp_disconnect(p_ccb, SDP_INVALID_CONT_STATE);
         return;
     }
 
-    while(p < p_end)
-    {
+    while(p < p_end) {
         p = save_attr_seq(p_ccb, p, &p_ccb->rsp_list[p_ccb->list_len]);
 
-        if(!p)
-        {
+        if(!p) {
             sdp_disconnect(p_ccb, SDP_DB_FULL);
             return;
         }
@@ -738,16 +678,14 @@ static uint8_t *save_attr_seq(tCONN_CB *p_ccb, uint8_t *p, uint8_t *p_msg_end)
     tSDP_DISC_REC *p_rec;
     type = *p++;
 
-    if((type >> 3) != DATA_ELE_SEQ_DESC_TYPE)
-    {
+    if((type >> 3) != DATA_ELE_SEQ_DESC_TYPE) {
         SDP_TRACE_WARNING("SDP - Wrong type: 0x%02x in attr_rsp", type);
         return (NULL);
     }
 
     p = sdpu_get_len_from_type(p, type, &seq_len);
 
-    if((p + seq_len) > p_msg_end)
-    {
+    if((p + seq_len) > p_msg_end) {
         SDP_TRACE_WARNING("SDP - Bad len in attr_rsp %d", seq_len);
         return (NULL);
     }
@@ -755,22 +693,19 @@ static uint8_t *save_attr_seq(tCONN_CB *p_ccb, uint8_t *p, uint8_t *p_msg_end)
     /* Create a record */
     p_rec = add_record(p_ccb->p_db, p_ccb->device_address);
 
-    if(!p_rec)
-    {
+    if(!p_rec) {
         SDP_TRACE_WARNING("SDP - DB full add_record");
         return (NULL);
     }
 
     p_seq_end = p + seq_len;
 
-    while(p < p_seq_end)
-    {
+    while(p < p_seq_end) {
         /* First get the attribute ID */
         type = *p++;
         p = sdpu_get_len_from_type(p, type, &attr_len);
 
-        if(((type >> 3) != UINT_DESC_TYPE) || (attr_len != 2))
-        {
+        if(((type >> 3) != UINT_DESC_TYPE) || (attr_len != 2)) {
             SDP_TRACE_WARNING("SDP - Bad type: 0x%02x or len: %d in attr_rsp", type, attr_len);
             return (NULL);
         }
@@ -779,8 +714,7 @@ static uint8_t *save_attr_seq(tCONN_CB *p_ccb, uint8_t *p, uint8_t *p_msg_end)
         /* Now, add the attribute value */
         p = add_attr(p, p_ccb->p_db, p_rec, attr_id, NULL, 0);
 
-        if(!p)
-        {
+        if(!p) {
             SDP_TRACE_WARNING("SDP - DB full add_attr");
             return (NULL);
         }
@@ -804,8 +738,7 @@ tSDP_DISC_REC *add_record(tSDP_DISCOVERY_DB *p_db, BD_ADDR p_bda)
     tSDP_DISC_REC   *p_rec;
 
     /* See if there is enough space in the database */
-    if(p_db->mem_free < sizeof(tSDP_DISC_REC))
-    {
+    if(p_db->mem_free < sizeof(tSDP_DISC_REC)) {
         return (NULL);
     }
 
@@ -817,16 +750,12 @@ tSDP_DISC_REC *add_record(tSDP_DISCOVERY_DB *p_db, BD_ADDR p_bda)
     wm_memcpy(p_rec->remote_bd_addr, p_bda, BD_ADDR_LEN);
 
     /* Add the record to the end of chain */
-    if(!p_db->p_first_rec)
-    {
+    if(!p_db->p_first_rec) {
         p_db->p_first_rec = p_rec;
-    }
-    else
-    {
+    } else {
         tSDP_DISC_REC   *p_rec1 = p_db->p_first_rec;
 
-        while(p_rec1->p_next_rec)
-        {
+        while(p_rec1->p_next_rec) {
             p_rec1 = p_rec1->p_next_rec;
         }
 
@@ -865,12 +794,9 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
     attr_type = (type >> 3) & 0x0f;
 
     /* See if there is enough space in the database */
-    if(attr_len > 4)
-    {
+    if(attr_len > 4) {
         total_len = attr_len - 4 + (uint16_t)sizeof(tSDP_DISC_ATTR);
-    }
-    else
-    {
+    } else {
         total_len = sizeof(tSDP_DISC_ATTR);
     }
 
@@ -878,8 +804,7 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
     total_len = (total_len + 3) & ~3;
 
     /* See if there is enough space in the database */
-    if(p_db->mem_free < total_len)
-    {
+    if(p_db->mem_free < total_len) {
         return (NULL);
     }
 
@@ -889,19 +814,14 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
     p_attr->p_next_attr = NULL;
 
     /* Store the attribute value */
-    switch(attr_type)
-    {
+    switch(attr_type) {
         case UINT_DESC_TYPE:
-            if((is_additional_list != 0) && (attr_len == 2))
-            {
+            if((is_additional_list != 0) && (attr_len == 2)) {
                 BE_STREAM_TO_UINT16(id, p);
 
-                if(id != ATTR_ID_PROTOCOL_DESC_LIST)
-                {
+                if(id != ATTR_ID_PROTOCOL_DESC_LIST) {
                     p -= 2;
-                }
-                else
-                {
+                } else {
                     /* Reserve the memory for the attribute now, as we need to add sub-attributes */
                     p_db->p_free_mem += sizeof(tSDP_DISC_ATTR);
                     p_db->mem_free   -= sizeof(tSDP_DISC_ATTR);
@@ -909,8 +829,7 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
                     total_len         = 0;
 
                     /* SDP_TRACE_DEBUG ("SDP - attr nest level:%d(list)", nest_level); */
-                    if(nest_level >= MAX_NEST_LEVELS)
-                    {
+                    if(nest_level >= MAX_NEST_LEVELS) {
                         SDP_TRACE_ERROR("SDP - attr nesting too deep");
                         return (p_end);
                     }
@@ -924,8 +843,7 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
         /* Case falls through */
 
         case TWO_COMP_INT_DESC_TYPE:
-            switch(attr_len)
-            {
+            switch(attr_len) {
                 case 1:
                     p_attr->attr_value.v.u8 = *p++;
                     break;
@@ -946,8 +864,7 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
             break;
 
         case UUID_DESC_TYPE:
-            switch(attr_len)
-            {
+            switch(attr_len) {
                 case 2:
                     BE_STREAM_TO_UINT16(p_attr->attr_value.v.u16, p);
                     break;
@@ -955,8 +872,7 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
                 case 4:
                     BE_STREAM_TO_UINT32(p_attr->attr_value.v.u32, p);
 
-                    if(p_attr->attr_value.v.u32 < 0x10000)
-                    {
+                    if(p_attr->attr_value.v.u32 < 0x10000) {
                         attr_len = 2;
                         p_attr->attr_len_type = (uint16_t)attr_len | (attr_type << 12);
                         p_attr->attr_value.v.u16 = (uint16_t) p_attr->attr_value.v.u32;
@@ -967,24 +883,18 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
                 case 16:
 
                     /* See if we can compress his UUID down to 16 or 32bit UUIDs */
-                    if(sdpu_is_base_uuid(p))
-                    {
-                        if((p[0] == 0) && (p[1] == 0))
-                        {
+                    if(sdpu_is_base_uuid(p)) {
+                        if((p[0] == 0) && (p[1] == 0)) {
                             p_attr->attr_len_type = (p_attr->attr_len_type & ~SDP_DISC_ATTR_LEN_MASK) | 2;
                             p += 2;
                             BE_STREAM_TO_UINT16(p_attr->attr_value.v.u16, p);
                             p += MAX_UUID_SIZE - 4;
-                        }
-                        else
-                        {
+                        } else {
                             p_attr->attr_len_type = (p_attr->attr_len_type & ~SDP_DISC_ATTR_LEN_MASK) | 4;
                             BE_STREAM_TO_UINT32(p_attr->attr_value.v.u32, p);
                             p += MAX_UUID_SIZE - 4;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         /* coverity[overrun-local] */
                         /*
                            Event overrun-local: Overrun of static array "p_attr->attr_value.v.array" of size 4 at position 15 with index variable "ijk"
@@ -1013,26 +923,22 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
             total_len         = 0;
 
             /* SDP_TRACE_DEBUG ("SDP - attr nest level:%d", nest_level); */
-            if(nest_level >= MAX_NEST_LEVELS)
-            {
+            if(nest_level >= MAX_NEST_LEVELS) {
                 SDP_TRACE_ERROR("SDP - attr nesting too deep");
                 return (p_end);
             }
 
-            if(is_additional_list != 0 || attr_id == ATTR_ID_ADDITION_PROTO_DESC_LISTS)
-            {
+            if(is_additional_list != 0 || attr_id == ATTR_ID_ADDITION_PROTO_DESC_LISTS) {
                 nest_level |= SDP_ADDITIONAL_LIST_MASK;
             }
 
             /* SDP_TRACE_DEBUG ("SDP - attr nest level:0x%x(finish)", nest_level); */
 
-            while(p < p_end)
-            {
+            while(p < p_end) {
                 /* Now, add the list entry */
                 p = add_attr(p, p_db, p_rec, 0, p_attr, (uint8_t)(nest_level + 1));
 
-                if(!p)
-                {
+                if(!p) {
                     return (NULL);
                 }
             }
@@ -1045,8 +951,7 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
             break;
 
         case BOOLEAN_DESC_TYPE:
-            switch(attr_len)
-            {
+            switch(attr_len) {
                 case 1:
                     p_attr->attr_value.v.u8 = *p++;
                     break;
@@ -1066,40 +971,29 @@ static uint8_t *add_attr(uint8_t *p, tSDP_DISCOVERY_DB *p_db, tSDP_DISC_REC *p_r
     p_db->mem_free   -= total_len;
 
     /* Add the attribute to the end of the chain */
-    if(!p_parent_attr)
-    {
-        if(!p_rec->p_first_attr)
-        {
+    if(!p_parent_attr) {
+        if(!p_rec->p_first_attr) {
             p_rec->p_first_attr = p_attr;
-        }
-        else
-        {
+        } else {
             tSDP_DISC_ATTR  *p_attr1 = p_rec->p_first_attr;
 
-            while(p_attr1->p_next_attr)
-            {
+            while(p_attr1->p_next_attr) {
                 p_attr1 = p_attr1->p_next_attr;
             }
 
             p_attr1->p_next_attr = p_attr;
         }
-    }
-    else
-    {
-        if(!p_parent_attr->attr_value.v.p_sub_attr)
-        {
+    } else {
+        if(!p_parent_attr->attr_value.v.p_sub_attr) {
             p_parent_attr->attr_value.v.p_sub_attr = p_attr;
             /* SDP_TRACE_DEBUG ("parent:0x%x(id:%d), ch:0x%x(id:%d)",
                 p_parent_attr, p_parent_attr->attr_id, p_attr, p_attr->attr_id); */
-        }
-        else
-        {
+        } else {
             tSDP_DISC_ATTR  *p_attr1 = p_parent_attr->attr_value.v.p_sub_attr;
             /* SDP_TRACE_DEBUG ("parent:0x%x(id:%d), ch1:0x%x(id:%d)",
                 p_parent_attr, p_parent_attr->attr_id, p_attr1, p_attr1->attr_id); */
 
-            while(p_attr1->p_next_attr)
-            {
+            while(p_attr1->p_next_attr) {
                 p_attr1 = p_attr1->p_next_attr;
             }
 

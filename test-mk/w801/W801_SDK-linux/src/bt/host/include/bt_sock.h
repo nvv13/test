@@ -24,16 +24,14 @@
 #define BTSOCK_FLAG_AUTH_MITM (1 << 3)
 #define BTSOCK_FLAG_AUTH_16_DIGIT (1 << 4)
 
-typedef enum
-{
+typedef enum {
     BTSOCK_RFCOMM = 1,
     BTSOCK_SCO = 2,
     BTSOCK_L2CAP = 3
 } btsock_type_t;
 
 /** Represents the standard BT SOCKET interface. */
-typedef struct
-{
+typedef struct {
     short size;
     tls_bt_addr_t bd_addr;
     int channel;
@@ -48,8 +46,7 @@ typedef struct
     unsigned short max_rx_packet_size;
 } __attribute__((packed)) sock_connect_signal_t;
 
-typedef struct
-{
+typedef struct {
     /** set to size of this struct*/
     size_t          size;
 
@@ -63,7 +60,7 @@ typedef struct
      * used for traffic accounting purposes.
      */
     tls_bt_status_t (*listen)(btsock_type_t type, const char *service_name,
-                          const uint8_t *service_uuid, int channel, int *sock_fd, int flags, int callingUid);
+                              const uint8_t *service_uuid, int channel, int *sock_fd, int flags, int callingUid);
 
     /**
      * Connect to a RFCOMM UUID channel of remote device, It returns the socket fd from which
@@ -72,7 +69,7 @@ typedef struct
      * used for traffic accounting purposes.
      */
     tls_bt_status_t (*connect)(const tls_bt_addr_t *bd_addr, btsock_type_t type, const uint8_t *uuid,
-                           int channel, int *sock_fd, int flags, int callingUid);
+                               int channel, int *sock_fd, int flags, int callingUid);
 } btsock_interface_t;
 
 

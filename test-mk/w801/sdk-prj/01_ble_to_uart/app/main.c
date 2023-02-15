@@ -14,7 +14,7 @@
 
 #include "wm_gpio_afsel.h"
 
-#include "wm_ble_uart_if.h"
+#include "../src/app/bleapp/wm_ble_uart_if.h"
 
 extern int demo_bt_enable (void);
 

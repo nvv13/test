@@ -29,15 +29,14 @@
 
 
 #ifndef BTA_AR_DEBUG
-    #define BTA_AR_DEBUG    FALSE
+#define BTA_AR_DEBUG    FALSE
 #endif
 
 #define BTA_AR_AV_MASK      0x01
 #define BTA_AR_AVK_MASK     0x02
 
 /* data associated with BTA_AR */
-typedef struct
-{
+typedef struct {
     tAVDT_CTRL_CBACK *p_av_conn_cback;       /* av connection callback function */
     tAVDT_CTRL_CBACK *p_avk_conn_cback;      /* avk connection callback function */
     uint8_t           avdt_registered;
@@ -55,10 +54,10 @@ typedef struct
 
 /* control block declaration */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    extern tBTA_AR_CB bta_ar_cb;
+extern tBTA_AR_CB bta_ar_cb;
 #else
-    extern tBTA_AR_CB *bta_ar_cb_ptr;
-    #define bta_ar_cb (*bta_ar_cb_ptr)
+extern tBTA_AR_CB *bta_ar_cb_ptr;
+#define bta_ar_cb (*bta_ar_cb_ptr)
 #endif
 
 #endif /* BTA_AR_INT_H */

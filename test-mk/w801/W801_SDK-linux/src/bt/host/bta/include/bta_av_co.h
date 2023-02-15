@@ -33,7 +33,7 @@
 
 /* TRUE to use SCMS-T content protection */
 #ifndef BTA_AV_CO_CP_SCMS_T
-    #define BTA_AV_CO_CP_SCMS_T     FALSE
+#define BTA_AV_CO_CP_SCMS_T     FALSE
 #endif
 
 /* the content protection IDs assigned by BT SIG */
@@ -50,8 +50,7 @@
 
 #define BTA_AV_CO_DEFAULT_AUDIO_OFFSET      AVDT_MEDIA_OFFSET
 
-enum
-{
+enum {
     BTA_AV_CO_ST_INIT,
     BTA_AV_CO_ST_IN,
     BTA_AV_CO_ST_OUT,
@@ -61,8 +60,7 @@ enum
 
 
 /* data type for the Audio Codec Information*/
-typedef struct
-{
+typedef struct {
     uint16_t  bit_rate;       /* SBC encoder bit rate in kbps */
     uint16_t  bit_rate_busy;  /* SBC encoder bit rate in kbps */
     uint16_t  bit_rate_swampd;/* SBC encoder bit rate in kbps */

@@ -42,8 +42,7 @@
 *****************************************************************************/
 
 /** for utl_set_device_class() **/
-typedef struct
-{
+typedef struct {
     uint8_t       minor;
     uint8_t       major;
     uint16_t      service;

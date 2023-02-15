@@ -29,17 +29,16 @@
 #include "hid_conn.h"
 #include "l2c_api.h"
 
-enum
-{
+enum {
     HID_DEV_NO_CONN,
     HID_DEV_CONNECTED
 };
 
-typedef struct per_device_ctb
-{
+typedef struct per_device_ctb {
     uint8_t        in_use;
     BD_ADDR        addr;  /* BD-Addr of the host device */
-    uint16_t         attr_mask; /* 0x01- virtual_cable; 0x02- normally_connectable; 0x03- reconn_initiate;
+    uint16_t
+    attr_mask; /* 0x01- virtual_cable; 0x02- normally_connectable; 0x03- reconn_initiate;
                                  0x04- sdp_disable; */
     uint8_t          state;  /* Device state if in HOST-KNOWN mode */
     uint8_t          conn_substate;
@@ -48,8 +47,7 @@ typedef struct per_device_ctb
     tHID_CONN      conn; /* L2CAP channel info */
 } tHID_HOST_DEV_CTB;
 
-typedef struct host_ctb
-{
+typedef struct host_ctb {
     tHID_HOST_DEV_CTB       devices[HID_HOST_MAX_DEVICES];
     tHID_HOST_DEV_CALLBACK  *callback;             /* Application callbacks */
     tL2CAP_CFG_INFO         l2cap_cfg;

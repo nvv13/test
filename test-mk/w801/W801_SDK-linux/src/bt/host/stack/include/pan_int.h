@@ -41,8 +41,7 @@
 
 /* Define the PAN Connection Control Block
 */
-typedef struct
-{
+typedef struct {
 #define PAN_STATE_IDLE              0
 #define PAN_STATE_CONN_START        1
 #define PAN_STATE_CONNECTED         2
@@ -67,8 +66,7 @@ typedef struct
 
 /*  The main PAN control block
 */
-typedef struct
-{
+typedef struct {
     uint8_t                       role;
     uint8_t                       active_role;
     uint8_t                       prv_active_role;
@@ -113,7 +111,8 @@ extern void pan_conn_ind_cb(uint16_t handle,
                             tBT_UUID *remote_uuid,
                             tBT_UUID *local_uuid,
                             uint8_t is_role_change);
-extern void pan_connect_state_cb(uint16_t handle, BD_ADDR rem_bda, tBNEP_RESULT result, uint8_t is_role_change);
+extern void pan_connect_state_cb(uint16_t handle, BD_ADDR rem_bda, tBNEP_RESULT result,
+                                 uint8_t is_role_change);
 extern void pan_data_ind_cb(uint16_t handle,
                             uint8_t *src,
                             uint8_t *dst,

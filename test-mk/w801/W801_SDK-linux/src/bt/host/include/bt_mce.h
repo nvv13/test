@@ -20,8 +20,7 @@
 
 
 /** MAS instance description */
-typedef struct
-{
+typedef struct {
     int  id;
     int  scn;
     int  msg_types;
@@ -32,15 +31,13 @@ typedef struct
 typedef void (*btmce_remote_mas_instances_callback)(tls_bt_status_t status, tls_bt_addr_t *bd_addr,
         int num_instances, btmce_mas_instance_t *instances);
 
-typedef struct
-{
+typedef struct {
     /** set to sizeof(btmce_callbacks_t) */
     size_t      size;
     btmce_remote_mas_instances_callback  remote_mas_instances_cb;
 } btmce_callbacks_t;
 
-typedef struct
-{
+typedef struct {
     /** set to size of this struct */
     size_t size;
 

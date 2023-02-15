@@ -15,9 +15,9 @@
 tls_bt_status_t btsock_l2cap_init(int handle, uid_set_t *set);
 tls_bt_status_t btsock_l2cap_cleanup();
 tls_bt_status_t btsock_l2cap_listen(const char *name, int channel,
-                                int *sock_fd, int flags, int app_uid);
+                                    int *sock_fd, int flags, int app_uid);
 tls_bt_status_t btsock_l2cap_connect(const tls_bt_addr_t *bd_addr,
-                                 int channel, int *sock_fd, int flags, int app_uid);
+                                     int channel, int *sock_fd, int flags, int app_uid);
 void btsock_l2cap_signaled(int fd, int flags, uint32_t user_id);
 void on_l2cap_psm_assigned(int id, int psm);
 

@@ -48,15 +48,12 @@ void bta_ag_ci_rx_write(uint16_t handle, char *p_data, uint16_t len)
     uint16_t len_remaining = len;
     char *p_data_area;
 
-    if(len > (RFCOMM_DATA_BUF_SIZE - sizeof(tBTA_AG_CI_RX_WRITE) - 1))
-    {
+    if(len > (RFCOMM_DATA_BUF_SIZE - sizeof(tBTA_AG_CI_RX_WRITE) - 1)) {
         len = RFCOMM_DATA_BUF_SIZE - sizeof(tBTA_AG_CI_RX_WRITE) - 1;
     }
 
-    while(len_remaining)
-    {
-        if(len_remaining < len)
-        {
+    while(len_remaining) {
+        if(len_remaining < len) {
             len = len_remaining;
         }
 

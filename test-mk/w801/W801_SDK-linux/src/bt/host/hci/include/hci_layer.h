@@ -63,8 +63,7 @@ typedef struct low_power_manager_t low_power_manager_t;
 typedef unsigned char *bdaddr_t;
 typedef uint16_t command_opcode_t;
 
-typedef enum
-{
+typedef enum {
     LPM_DISABLE,
     LPM_ENABLE,
     LPM_WAKE_ASSERT,
@@ -74,8 +73,7 @@ typedef enum
 typedef void (*command_complete_cb)(BT_HDR *response, void *context);
 typedef void (*command_status_cb)(uint8_t status, BT_HDR *command, void *context);
 
-typedef struct hci_t
-{
+typedef struct hci_t {
     // Send a low power command, if supported and the low power manager is enabled.
     void (*send_low_power_command)(low_power_command_t command);
 

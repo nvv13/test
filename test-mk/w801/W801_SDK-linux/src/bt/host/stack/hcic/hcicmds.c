@@ -41,8 +41,7 @@ uint8_t btsnd_hcic_inquiry(const LAP inq_lap, uint8_t duration, uint8_t response
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_INQUIRY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_INQUIRY)) == NULL) {
         return (FALSE);
     }
 
@@ -63,8 +62,7 @@ uint8_t btsnd_hcic_inq_cancel(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_INQ_CANCEL)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_INQ_CANCEL)) == NULL) {
         return (FALSE);
     }
 
@@ -83,8 +81,7 @@ uint8_t btsnd_hcic_per_inq_mode(uint16_t max_period, uint16_t min_period,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PER_INQ_MODE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PER_INQ_MODE)) == NULL) {
         return (FALSE);
     }
 
@@ -107,8 +104,7 @@ uint8_t btsnd_hcic_exit_per_inq(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_EXIT_PER_INQ)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_EXIT_PER_INQ)) == NULL) {
         return (FALSE);
     }
 
@@ -129,32 +125,31 @@ uint8_t btsnd_hcic_create_conn(BD_ADDR dest, uint16_t packet_types,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CREATE_CONN)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CREATE_CONN)) == NULL) {
         return (FALSE);
     }
 
     pp = (uint8_t *)(p + 1);
-    #ifndef BT_10A
+#ifndef BT_10A
     p->len    = HCIC_PREAMBLE_SIZE + HCIC_PARAM_SIZE_CREATE_CONN;
-    #else
+#else
     p->len    = HCIC_PREAMBLE_SIZE + HCIC_PARAM_SIZE_CREATE_CONN - 1;
-    #endif
+#endif
     p->offset = 0;
     UINT16_TO_STREAM(pp, HCI_CREATE_CONNECTION);
-    #ifndef BT_10A
+#ifndef BT_10A
     UINT8_TO_STREAM(pp, HCIC_PARAM_SIZE_CREATE_CONN);
-    #else
+#else
     UINT8_TO_STREAM(pp, (HCIC_PARAM_SIZE_CREATE_CONN - 1));
-    #endif
+#endif
     BDADDR_TO_STREAM(pp, dest);
     UINT16_TO_STREAM(pp, packet_types);
     UINT8_TO_STREAM(pp, page_scan_rep_mode);
     UINT8_TO_STREAM(pp, page_scan_mode);
     UINT16_TO_STREAM(pp, clock_offset);
-    #if !defined (BT_10A)
+#if !defined (BT_10A)
     UINT8_TO_STREAM(pp, allow_switch);
-    #endif
+#endif
     btm_acl_paging(p, dest);
     return (TRUE);
 }
@@ -164,8 +159,7 @@ uint8_t btsnd_hcic_disconnect(uint16_t handle, uint8_t reason)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_DISCONNECT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_DISCONNECT)) == NULL) {
         return (FALSE);
     }
 
@@ -186,8 +180,7 @@ uint8_t btsnd_hcic_add_SCO_conn(uint16_t handle, uint16_t packet_types)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ADD_SCO_CONN)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ADD_SCO_CONN)) == NULL) {
         return (FALSE);
     }
 
@@ -208,8 +201,7 @@ uint8_t btsnd_hcic_create_conn_cancel(BD_ADDR dest)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CREATE_CONN_CANCEL)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CREATE_CONN_CANCEL)) == NULL) {
         return (FALSE);
     }
 
@@ -228,8 +220,7 @@ uint8_t btsnd_hcic_accept_conn(BD_ADDR dest, uint8_t role)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ACCEPT_CONN)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ACCEPT_CONN)) == NULL) {
         return (FALSE);
     }
 
@@ -249,8 +240,7 @@ uint8_t btsnd_hcic_reject_conn(BD_ADDR dest, uint8_t reason)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REJECT_CONN)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REJECT_CONN)) == NULL) {
         return (FALSE);
     }
 
@@ -270,8 +260,7 @@ uint8_t btsnd_hcic_link_key_req_reply(BD_ADDR bd_addr, LINK_KEY link_key)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LINK_KEY_REQ_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LINK_KEY_REQ_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -291,8 +280,7 @@ uint8_t btsnd_hcic_link_key_neg_reply(BD_ADDR bd_addr)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LINK_KEY_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LINK_KEY_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -313,8 +301,7 @@ uint8_t btsnd_hcic_pin_code_req_reply(BD_ADDR bd_addr, uint8_t pin_code_len,
     uint8_t  *pp;
     int i;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PIN_CODE_REQ_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PIN_CODE_REQ_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -326,13 +313,11 @@ uint8_t btsnd_hcic_pin_code_req_reply(BD_ADDR bd_addr, uint8_t pin_code_len,
     BDADDR_TO_STREAM(pp, bd_addr);
     UINT8_TO_STREAM(pp, pin_code_len);
 
-    for(i = 0; i < pin_code_len; i++)
-    {
+    for(i = 0; i < pin_code_len; i++) {
         *pp++ = *pin_code++;
     }
 
-    for(; i < PIN_CODE_LEN; i++)
-    {
+    for(; i < PIN_CODE_LEN; i++) {
         *pp++ = 0;
     }
 
@@ -345,8 +330,7 @@ uint8_t btsnd_hcic_pin_code_neg_reply(BD_ADDR bd_addr)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PIN_CODE_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PIN_CODE_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -365,8 +349,7 @@ uint8_t btsnd_hcic_change_conn_type(uint16_t handle, uint16_t packet_types)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CHANGE_CONN_TYPE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CHANGE_CONN_TYPE)) == NULL) {
         return (FALSE);
     }
 
@@ -386,8 +369,7 @@ uint8_t btsnd_hcic_auth_request(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -406,8 +388,7 @@ uint8_t btsnd_hcic_set_conn_encrypt(uint16_t handle, uint8_t enable)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_CONN_ENCRYPT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_CONN_ENCRYPT)) == NULL) {
         return (FALSE);
     }
 
@@ -428,8 +409,7 @@ uint8_t btsnd_hcic_rmt_name_req(BD_ADDR bd_addr, uint8_t page_scan_rep_mode,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RMT_NAME_REQ)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RMT_NAME_REQ)) == NULL) {
         return (FALSE);
     }
 
@@ -451,8 +431,7 @@ uint8_t btsnd_hcic_rmt_name_req_cancel(BD_ADDR bd_addr)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RMT_NAME_REQ_CANCEL)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RMT_NAME_REQ_CANCEL)) == NULL) {
         return (FALSE);
     }
 
@@ -471,8 +450,7 @@ uint8_t btsnd_hcic_rmt_features_req(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -491,8 +469,7 @@ uint8_t btsnd_hcic_rmt_ext_features(uint16_t handle, uint8_t page_num)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RMT_EXT_FEATURES)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RMT_EXT_FEATURES)) == NULL) {
         return (FALSE);
     }
 
@@ -512,8 +489,7 @@ uint8_t btsnd_hcic_rmt_ver_req(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -532,8 +508,7 @@ uint8_t btsnd_hcic_read_rmt_clk_offset(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -552,8 +527,7 @@ uint8_t btsnd_hcic_read_lmp_handle(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -574,8 +548,7 @@ uint8_t btsnd_hcic_setup_esco_conn(uint16_t handle, uint32_t tx_bw,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SETUP_ESCO)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SETUP_ESCO)) == NULL) {
         return (FALSE);
     }
 
@@ -603,8 +576,7 @@ uint8_t btsnd_hcic_accept_esco_conn(BD_ADDR bd_addr, uint32_t tx_bw,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ACCEPT_ESCO)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ACCEPT_ESCO)) == NULL) {
         return (FALSE);
     }
 
@@ -629,8 +601,7 @@ uint8_t btsnd_hcic_reject_esco_conn(BD_ADDR bd_addr, uint8_t reason)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REJECT_ESCO)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REJECT_ESCO)) == NULL) {
         return (FALSE);
     }
 
@@ -651,8 +622,7 @@ uint8_t btsnd_hcic_hold_mode(uint16_t handle, uint16_t max_hold_period,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_HOLD_MODE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_HOLD_MODE)) == NULL) {
         return (FALSE);
     }
 
@@ -675,8 +645,7 @@ uint8_t btsnd_hcic_sniff_mode(uint16_t handle, uint16_t max_sniff_period,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SNIFF_MODE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SNIFF_MODE)) == NULL) {
         return (FALSE);
     }
 
@@ -699,8 +668,7 @@ uint8_t btsnd_hcic_exit_sniff_mode(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -720,8 +688,7 @@ uint8_t btsnd_hcic_park_mode(uint16_t handle, uint16_t beacon_max_interval,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PARK_MODE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_PARK_MODE)) == NULL) {
         return (FALSE);
     }
 
@@ -742,8 +709,7 @@ uint8_t btsnd_hcic_exit_park_mode(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -764,8 +730,7 @@ uint8_t btsnd_hcic_qos_setup(uint16_t handle, uint8_t flags, uint8_t service_typ
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_QOS_SETUP)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_QOS_SETUP)) == NULL) {
         return (FALSE);
     }
 
@@ -790,8 +755,7 @@ uint8_t btsnd_hcic_switch_role(BD_ADDR bd_addr, uint8_t role)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SWITCH_ROLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SWITCH_ROLE)) == NULL) {
         return (FALSE);
     }
 
@@ -811,8 +775,7 @@ uint8_t btsnd_hcic_write_policy_set(uint16_t handle, uint16_t settings)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_POLICY_SET)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_POLICY_SET)) == NULL) {
         return (FALSE);
     }
 
@@ -832,8 +795,7 @@ uint8_t btsnd_hcic_write_def_policy_set(uint16_t settings)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_DEF_POLICY_SET)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_DEF_POLICY_SET)) == NULL) {
         return (FALSE);
     }
 
@@ -855,8 +817,7 @@ uint8_t btsnd_hcic_flow_specification(uint16_t handle, uint8_t flags, uint8_t fl
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_FLOW_SPEC)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_FLOW_SPEC)) == NULL) {
         return (FALSE);
     }
 
@@ -882,8 +843,7 @@ uint8_t btsnd_hcic_set_event_mask(uint8_t local_controller_id, BT_EVENT_MASK eve
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_EVENT_MASK)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_EVENT_MASK)) == NULL) {
         return (FALSE);
     }
 
@@ -902,8 +862,7 @@ uint8_t btsnd_hcic_set_event_mask_page_2(uint8_t local_controller_id, BT_EVENT_M
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_EVENT_MASK_PAGE_2)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_EVENT_MASK_PAGE_2)) == NULL) {
         return (FALSE);
     }
 
@@ -922,8 +881,7 @@ uint8_t btsnd_hcic_reset(uint8_t local_controller_id)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RESET)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_RESET)) == NULL) {
         return (FALSE);
     }
 
@@ -934,15 +892,14 @@ uint8_t btsnd_hcic_reset(uint8_t local_controller_id)
     UINT8_TO_STREAM(pp, HCIC_PARAM_SIZE_RESET);
     btu_hcif_send_cmd(local_controller_id,  p);
     /* If calling from LMP_TEST or ScriptEngine, then send HCI command immediately */
-    #if (!defined (LMP_TEST) && !defined(BTISE))
+#if (!defined (LMP_TEST) && !defined(BTISE))
 
-    if(local_controller_id == LOCAL_BR_EDR_CONTROLLER_ID)
-    {
+    if(local_controller_id == LOCAL_BR_EDR_CONTROLLER_ID) {
         btm_acl_reset_paging();
         btm_acl_set_discing(FALSE);
     }
 
-    #endif
+#endif
     return (TRUE);
 }
 uint8_t btsnd_hcic_set_event_filter(uint8_t filt_type, uint8_t filt_cond_type,
@@ -952,8 +909,7 @@ uint8_t btsnd_hcic_set_event_filter(uint8_t filt_type, uint8_t filt_cond_type,
     uint8_t *pp;
 
     /* Use buffer large enough to hold all sizes in this command */
-    if((p = HCI_GET_CMD_BUF(2 + filt_cond_len)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(2 + filt_cond_len)) == NULL) {
         return (FALSE);
     }
 
@@ -961,36 +917,28 @@ uint8_t btsnd_hcic_set_event_filter(uint8_t filt_type, uint8_t filt_cond_type,
     p->offset = 0;
     UINT16_TO_STREAM(pp, HCI_SET_EVENT_FILTER);
 
-    if(filt_type)
-    {
+    if(filt_type) {
         p->len = (uint16_t)(HCIC_PREAMBLE_SIZE + 2 + filt_cond_len);
         UINT8_TO_STREAM(pp, (uint8_t)(2 + filt_cond_len));
         UINT8_TO_STREAM(pp, filt_type);
         UINT8_TO_STREAM(pp, filt_cond_type);
 
-        if(filt_cond_type == HCI_FILTER_COND_DEVICE_CLASS)
-        {
+        if(filt_cond_type == HCI_FILTER_COND_DEVICE_CLASS) {
             DEVCLASS_TO_STREAM(pp, filt_cond);
             filt_cond += DEV_CLASS_LEN;
             DEVCLASS_TO_STREAM(pp, filt_cond);
             filt_cond += DEV_CLASS_LEN;
             filt_cond_len -= (2 * DEV_CLASS_LEN);
+        } else if(filt_cond_type == HCI_FILTER_COND_BD_ADDR) {
+            BDADDR_TO_STREAM(pp, filt_cond);
+            filt_cond += BD_ADDR_LEN;
+            filt_cond_len -= BD_ADDR_LEN;
         }
-        else
-            if(filt_cond_type == HCI_FILTER_COND_BD_ADDR)
-            {
-                BDADDR_TO_STREAM(pp, filt_cond);
-                filt_cond += BD_ADDR_LEN;
-                filt_cond_len -= BD_ADDR_LEN;
-            }
 
-        if(filt_cond_len)
-        {
+        if(filt_cond_len) {
             ARRAY_TO_STREAM(pp, filt_cond, filt_cond_len);
         }
-    }
-    else
-    {
+    } else {
         p->len = (uint16_t)(HCIC_PREAMBLE_SIZE + 1);
         UINT8_TO_STREAM(pp, 1);
         UINT8_TO_STREAM(pp, filt_type);
@@ -1005,8 +953,7 @@ uint8_t btsnd_hcic_write_pin_type(uint8_t type)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -1025,8 +972,7 @@ uint8_t btsnd_hcic_delete_stored_key(BD_ADDR bd_addr, uint8_t delete_all_flag)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_DELETE_STORED_KEY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_DELETE_STORED_KEY)) == NULL) {
         return (FALSE);
     }
 
@@ -1047,8 +993,7 @@ uint8_t btsnd_hcic_change_name(BD_NAME name)
     uint8_t *pp;
     uint16_t len = strlen((char *)name) + 1;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CHANGE_NAME)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CHANGE_NAME)) == NULL) {
         return (FALSE);
     }
 
@@ -1059,8 +1004,7 @@ uint8_t btsnd_hcic_change_name(BD_NAME name)
     UINT16_TO_STREAM(pp, HCI_CHANGE_LOCAL_NAME);
     UINT8_TO_STREAM(pp, HCIC_PARAM_SIZE_CHANGE_NAME);
 
-    if(len > HCIC_PARAM_SIZE_CHANGE_NAME)
-    {
+    if(len > HCIC_PARAM_SIZE_CHANGE_NAME) {
         len = HCIC_PARAM_SIZE_CHANGE_NAME;
     }
 
@@ -1074,8 +1018,7 @@ uint8_t btsnd_hcic_read_name(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1093,8 +1036,7 @@ uint8_t btsnd_hcic_write_page_tout(uint16_t timeout)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM2)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM2)) == NULL) {
         return (FALSE);
     }
 
@@ -1113,8 +1055,7 @@ uint8_t btsnd_hcic_write_scan_enable(uint8_t flag)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -1133,8 +1074,7 @@ uint8_t btsnd_hcic_write_pagescan_cfg(uint16_t interval, uint16_t window)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PAGESCAN_CFG)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PAGESCAN_CFG)) == NULL) {
         return (FALSE);
     }
 
@@ -1154,8 +1094,7 @@ uint8_t btsnd_hcic_write_inqscan_cfg(uint16_t interval, uint16_t window)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_INQSCAN_CFG)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_INQSCAN_CFG)) == NULL) {
         return (FALSE);
     }
 
@@ -1175,8 +1114,7 @@ uint8_t btsnd_hcic_write_auth_enable(uint8_t flag)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -1195,8 +1133,7 @@ uint8_t btsnd_hcic_write_dev_class(DEV_CLASS dev_class)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM3)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM3)) == NULL) {
         return (FALSE);
     }
 
@@ -1215,8 +1152,7 @@ uint8_t btsnd_hcic_write_voice_settings(uint16_t flags)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM2)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM2)) == NULL) {
         return (FALSE);
     }
 
@@ -1235,8 +1171,7 @@ uint8_t btsnd_hcic_write_auto_flush_tout(uint16_t handle, uint16_t tout)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_AUTO_FLUSH_TOUT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_AUTO_FLUSH_TOUT)) == NULL) {
         return (FALSE);
     }
 
@@ -1256,8 +1191,7 @@ uint8_t btsnd_hcic_read_tx_power(uint16_t handle, uint8_t type)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_TX_POWER)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_TX_POWER)) == NULL) {
         return (FALSE);
     }
 
@@ -1277,8 +1211,7 @@ uint8_t btsnd_hcic_read_sco_flow_enable(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1296,8 +1229,7 @@ uint8_t btsnd_hcic_write_sco_flow_enable(uint8_t flag)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -1316,8 +1248,7 @@ uint8_t btsnd_hcic_set_host_flow_ctrl(uint8_t value)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -1337,8 +1268,7 @@ uint8_t btsnd_hcic_set_host_buf_size(uint16_t acl_len, uint8_t sco_len,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_HOST_BUF_SIZE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_HOST_BUF_SIZE)) == NULL) {
         return (FALSE);
     }
 
@@ -1362,8 +1292,7 @@ uint8_t btsnd_hcic_host_num_xmitted_pkts(uint8_t num_handles, uint16_t *handle,
     uint8_t *pp;
     int j;
 
-    if((p = HCI_GET_CMD_BUF(1 + (num_handles * 4))) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(1 + (num_handles * 4))) == NULL) {
         return (FALSE);
     }
 
@@ -1374,8 +1303,7 @@ uint8_t btsnd_hcic_host_num_xmitted_pkts(uint8_t num_handles, uint16_t *handle,
     UINT8_TO_STREAM(pp, p->len - HCIC_PREAMBLE_SIZE);
     UINT8_TO_STREAM(pp, num_handles);
 
-    for(j = 0; j < num_handles; j++)
-    {
+    for(j = 0; j < num_handles; j++) {
         UINT16_TO_STREAM(pp, handle[j]);
         UINT16_TO_STREAM(pp, num_pkts[j]);
     }
@@ -1384,13 +1312,13 @@ uint8_t btsnd_hcic_host_num_xmitted_pkts(uint8_t num_handles, uint16_t *handle,
     return (TRUE);
 }
 
-uint8_t btsnd_hcic_write_link_super_tout(uint8_t local_controller_id, uint16_t handle, uint16_t timeout)
+uint8_t btsnd_hcic_write_link_super_tout(uint8_t local_controller_id, uint16_t handle,
+        uint16_t timeout)
 {
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_LINK_SUPER_TOUT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_LINK_SUPER_TOUT)) == NULL) {
         return (FALSE);
     }
 
@@ -1411,8 +1339,7 @@ uint8_t btsnd_hcic_write_cur_iac_lap(uint8_t num_cur_iac, LAP *const iac_lap)
     uint8_t *pp;
     int i;
 
-    if((p = HCI_GET_CMD_BUF(1 + (LAP_LEN * num_cur_iac))) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(1 + (LAP_LEN * num_cur_iac))) == NULL) {
         return (FALSE);
     }
 
@@ -1423,8 +1350,7 @@ uint8_t btsnd_hcic_write_cur_iac_lap(uint8_t num_cur_iac, LAP *const iac_lap)
     UINT8_TO_STREAM(pp, p->len - HCIC_PREAMBLE_SIZE);
     UINT8_TO_STREAM(pp, num_cur_iac);
 
-    for(i = 0; i < num_cur_iac; i++)
-    {
+    for(i = 0; i < num_cur_iac; i++) {
         LAP_TO_STREAM(pp, iac_lap[i]);
     }
 
@@ -1443,8 +1369,7 @@ uint8_t btsnd_hcic_sniff_sub_rate(uint16_t handle, uint16_t max_lat,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SNIFF_SUB_RATE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SNIFF_SUB_RATE)) == NULL) {
         return (FALSE);
     }
 
@@ -1481,8 +1406,7 @@ uint8_t btsnd_hcic_write_simple_pairing_mode(uint8_t mode)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_W_SIMP_PAIR)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_W_SIMP_PAIR)) == NULL) {
         return (FALSE);
     }
 
@@ -1501,8 +1425,7 @@ uint8_t btsnd_hcic_read_simple_pairing_mode(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_SIMP_PAIR)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_SIMP_PAIR)) == NULL) {
         return (FALSE);
     }
 
@@ -1520,8 +1443,7 @@ uint8_t btsnd_hcic_write_simp_pair_debug_mode(uint8_t debug_mode)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SIMP_PAIR_DBUG)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SIMP_PAIR_DBUG)) == NULL) {
         return (FALSE);
     }
 
@@ -1541,8 +1463,7 @@ uint8_t btsnd_hcic_io_cap_req_reply(BD_ADDR bd_addr, uint8_t capability,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_IO_CAP_RESP)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_IO_CAP_RESP)) == NULL) {
         return (FALSE);
     }
 
@@ -1564,8 +1485,7 @@ uint8_t btsnd_hcic_io_cap_req_neg_reply(BD_ADDR bd_addr, uint8_t err_code)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_IO_CAP_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_IO_CAP_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -1585,8 +1505,7 @@ uint8_t btsnd_hcic_read_local_oob_data(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_LOCAL_OOB)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_LOCAL_OOB)) == NULL) {
         return (FALSE);
     }
 
@@ -1604,8 +1523,7 @@ uint8_t btsnd_hcic_user_conf_reply(BD_ADDR bd_addr, uint8_t is_yes)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_UCONF_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_UCONF_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -1613,13 +1531,10 @@ uint8_t btsnd_hcic_user_conf_reply(BD_ADDR bd_addr, uint8_t is_yes)
     p->len    = HCIC_PREAMBLE_SIZE + HCIC_PARAM_SIZE_UCONF_REPLY;
     p->offset = 0;
 
-    if(!is_yes)
-    {
+    if(!is_yes) {
         /* Negative reply */
         UINT16_TO_STREAM(pp, HCI_USER_CONF_VALUE_NEG_REPLY);
-    }
-    else
-    {
+    } else {
         /* Confirmation */
         UINT16_TO_STREAM(pp, HCI_USER_CONF_REQUEST_REPLY);
     }
@@ -1635,8 +1550,7 @@ uint8_t btsnd_hcic_user_passkey_reply(BD_ADDR bd_addr, uint32_t value)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_U_PKEY_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_U_PKEY_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -1656,8 +1570,7 @@ uint8_t btsnd_hcic_user_passkey_neg_reply(BD_ADDR bd_addr)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_U_PKEY_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_U_PKEY_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -1676,8 +1589,7 @@ uint8_t btsnd_hcic_rem_oob_reply(BD_ADDR bd_addr, uint8_t *p_c, uint8_t *p_r)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REM_OOB_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REM_OOB_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -1698,8 +1610,7 @@ uint8_t btsnd_hcic_rem_oob_neg_reply(BD_ADDR bd_addr)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REM_OOB_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REM_OOB_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -1719,8 +1630,7 @@ uint8_t btsnd_hcic_read_inq_tx_power(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_TX_POWER)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_TX_POWER)) == NULL) {
         return (FALSE);
     }
 
@@ -1738,8 +1648,7 @@ uint8_t btsnd_hcic_write_inq_tx_power(int8_t level)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_W_TX_POWER)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_W_TX_POWER)) == NULL) {
         return (FALSE);
     }
 
@@ -1759,8 +1668,7 @@ uint8_t btsnd_hcic_read_default_erroneous_data_rpt(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_ERR_DATA_RPT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_R_ERR_DATA_RPT)) == NULL) {
         return (FALSE);
     }
 
@@ -1779,8 +1687,7 @@ uint8_t btsnd_hcic_write_default_erroneous_data_rpt(uint8_t flag)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_W_ERR_DATA_RPT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_W_ERR_DATA_RPT)) == NULL) {
         return (FALSE);
     }
 
@@ -1799,8 +1706,7 @@ uint8_t btsnd_hcic_send_keypress_notif(BD_ADDR bd_addr, uint8_t notif)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SEND_KEYPRESS_NOTIF)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SEND_KEYPRESS_NOTIF)) == NULL) {
         return (FALSE);
     }
 
@@ -1823,8 +1729,7 @@ uint8_t btsnd_hcic_enhanced_flush(uint16_t handle, uint8_t packet_type)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ENHANCED_FLUSH)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ENHANCED_FLUSH)) == NULL) {
         return (FALSE);
     }
 
@@ -1849,8 +1754,7 @@ uint8_t btsnd_hcic_read_local_ver(uint8_t local_controller_id)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1868,8 +1772,7 @@ uint8_t btsnd_hcic_read_local_supported_cmds(uint8_t local_controller_id)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1887,8 +1790,7 @@ uint8_t btsnd_hcic_read_local_features(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1906,8 +1808,7 @@ uint8_t btsnd_hcic_read_local_ext_features(uint8_t page_num)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LOCAL_EXT_FEATURES)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LOCAL_EXT_FEATURES)) == NULL) {
         return (FALSE);
     }
 
@@ -1926,8 +1827,7 @@ uint8_t btsnd_hcic_read_buffer_size(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1945,8 +1845,7 @@ uint8_t btsnd_hcic_read_country_code(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1964,8 +1863,7 @@ uint8_t btsnd_hcic_read_bd_addr(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -1983,8 +1881,7 @@ uint8_t btsnd_hcic_read_fail_contact_count(uint8_t local_controller_id, uint16_t
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -2003,8 +1900,7 @@ uint8_t btsnd_hcic_reset_fail_contact_count(uint8_t local_controller_id, uint16_
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -2023,8 +1919,7 @@ uint8_t btsnd_hcic_get_link_quality(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -2043,8 +1938,7 @@ uint8_t btsnd_hcic_read_rssi(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CMD_HANDLE)) == NULL) {
         return (FALSE);
     }
 
@@ -2063,8 +1957,7 @@ uint8_t btsnd_hcic_enable_test_mode(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -2082,8 +1975,7 @@ uint8_t btsnd_hcic_write_inqscan_type(uint8_t type)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -2102,8 +1994,7 @@ uint8_t btsnd_hcic_write_inquiry_mode(uint8_t mode)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -2122,8 +2013,7 @@ uint8_t btsnd_hcic_write_pagescan_type(uint8_t type)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -2139,7 +2029,7 @@ uint8_t btsnd_hcic_write_pagescan_type(uint8_t type)
 
 /* Must have room to store BT_HDR + max VSC length + callback pointer */
 #if (HCI_CMD_BUF_SIZE < 268)
-    #error "HCI_CMD_BUF_SIZE must be larger than 268"
+#error "HCI_CMD_BUF_SIZE must be larger than 268"
 #endif
 
 void btsnd_hcic_vendor_spec_cmd(void *buffer, uint16_t opcode, uint8_t len,
@@ -2157,7 +2047,8 @@ void btsnd_hcic_vendor_spec_cmd(void *buffer, uint16_t opcode, uint8_t len,
     btu_hcif_send_cmd(LOCAL_BR_EDR_CONTROLLER_ID,  p);
 }
 
-void btsnd_hcic_data(BT_HDR *p_buf, uint16_t len, uint16_t handle, uint8_t boundary, uint8_t broadcast)
+void btsnd_hcic_data(BT_HDR *p_buf, uint16_t len, uint16_t handle, uint8_t boundary,
+                     uint8_t broadcast)
 {
     uint8_t   *p;
     /* Higher layer should have left 4 bytes for us to fill the header */
@@ -2175,8 +2066,7 @@ uint8_t btsnd_hcic_nop(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 

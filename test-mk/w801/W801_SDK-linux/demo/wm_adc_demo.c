@@ -17,12 +17,89 @@
 
 
 #if DEMO_ADC
+#define TMAC2STR(a) (a)[0], (a)[1], (a)[2], (a)[3], (a)[4], (a)[5]
+#define TMACSTR "%02x:%02x:%02x:%02x:%02x:%02x"
+int adc_input_voltage_cal_demo(u8 chan, signed short refvoltage)
+{
+	int ret =0;
+	u8 mac[6];
+
+	tls_get_mac_addr(mac);
+	printf("Mac["TMACSTR"],Cch[%d], Refvol[%d] ", TMAC2STR(mac), chan, refvoltage);
+
+    ret = adc_offset_calibration(chan, refvoltage);
+	if (ret == 0)
+	{
+		printf("Calok ");
+	}
+	else
+	{
+		printf("Calerr \r\n");
+		return 0;
+	}
+
+	int voltage =0;
+	int i =0 ;
+	for (i = 0; i < 4; i++)
+	{
+		if (i != chan)
+		{
+	    	wm_adc_config(i);
+		    voltage = adc_get_inputVolt(i);
+			printf("Mch[%d]-%d(mV) ", i, voltage);
+		}
+	}
+	printf("\r\n");
+
+    return 0;
+}
+
+int adc_input_voltage_multipoint_cal_demo(int chanused,int chan0ref, int chan1ref, int chan2ref, int chan3ref)
+{
+	int ret =0;
+	u8 mac[6];
+	int refvol[4] = {chan0ref, chan1ref, chan2ref, chan3ref};
+
+	tls_get_mac_addr(mac);
+	printf("Mac["TMACSTR"],", TMAC2STR(mac));
+	for (int i = 0; i < 4; i++)
+	{
+		if (chanused&(1<<i))
+		{
+			printf("ch[%d], refvol[%d] ", i, refvol[i]);
+		}
+	}
+	
+	ret = adc_multipoint_calibration(chanused, refvol);
+	if (ret == 0)
+	{
+		printf("Calok \r\n");
+	}
+	else
+	{
+		printf("Calerr \r\n");
+		return 0;
+	}
+
+	int voltage =0;
+	int i =0 ;
+	for (i = 0; i < 2; i++)
+	{
+    	wm_adc_config(i);
+	    voltage = adc_get_inputVolt(i);
+		printf("Mch[%d]-%d(mV) \r\n", i, voltage);
+	}
+
+    return 0;
+}
+
+
 
 int adc_input_voltage_demo(u8 chan)
 {
 	int voltage =0;
 
-	if (chan <= 1)
+	if (chan < 4)
 	{
     	wm_adc_config(chan);
 	}
@@ -30,6 +107,15 @@ int adc_input_voltage_demo(u8 chan)
 	{
     	wm_adc_config(0);		
     	wm_adc_config(1);				
+	}
+	else if (chan == 9)
+	{
+    	wm_adc_config(2);	
+    	wm_adc_config(3);			
+	}
+	else
+	{
+		return -1;
 	}
     voltage = adc_get_inputVolt(chan);
 	if (voltage < 0)

@@ -35,6 +35,7 @@
 #include "bta_av_int.h"
 #include "bt_common.h"
 #include "gki.h"
+#include "compat.h"
 
 
 
@@ -42,8 +43,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_av_reg =
-{
+static const tBTA_SYS_REG bta_av_reg = {
     bta_av_hdl_event,
     BTA_AvDisable
 };
@@ -112,12 +112,9 @@ void BTA_AvRegister(tBTA_AV_CHNL chnl, const char *p_service_name, uint8_t app_i
     p_buf->hdr.layer_specific = chnl;
     p_buf->hdr.event = BTA_AV_API_REGISTER_EVT;
 
-    if(p_service_name)
-    {
+    if(p_service_name) {
         strlcpy(p_buf->p_service_name, p_service_name, BTA_SERVICE_NAME_LEN);
-    }
-    else
-    {
+    } else {
         p_buf->p_service_name[0] = 0;
     }
 
@@ -268,13 +265,13 @@ void BTA_AvOffloadStartRsp(tBTA_AV_HNDL hndl, tBTA_AV_STATUS status)
 *******************************************************************************/
 void BTA_AvEnable_Sink(int enable)
 {
-    #if (BTA_AV_SINK_INCLUDED == TRUE)
+#if (BTA_AV_SINK_INCLUDED == TRUE)
     BT_HDR *p_buf =
                     (BT_HDR *)GKI_getbuf(sizeof(BT_HDR));
     p_buf->event = BTA_AV_API_SINK_ENABLE_EVT;
     p_buf->layer_specific = enable;
     bta_sys_sendmsg(p_buf);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -345,12 +342,9 @@ void BTA_AvProtectReq(tBTA_AV_HNDL hndl, uint8_t *p_data, uint16_t len)
     p_buf->hdr.event = BTA_AV_API_PROTECT_REQ_EVT;
     p_buf->len = len;
 
-    if(p_data == NULL)
-    {
+    if(p_data == NULL) {
         p_buf->p_data = NULL;
-    }
-    else
-    {
+    } else {
         p_buf->p_data = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->p_data, p_data, len);
     }
@@ -379,12 +373,9 @@ void BTA_AvProtectRsp(tBTA_AV_HNDL hndl, uint8_t error_code, uint8_t *p_data, ui
     p_buf->len = len;
     p_buf->error_code = error_code;
 
-    if(p_data == NULL)
-    {
+    if(p_data == NULL) {
         p_buf->p_data = NULL;
-    }
-    else
-    {
+    } else {
         p_buf->p_data = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->p_data, p_data, len);
     }
@@ -441,12 +432,9 @@ void BTA_AvRemoteVendorUniqueCmd(uint8_t rc_handle, uint8_t label,
     p_buf->msg.state = key_state;
     p_buf->msg.pass_len = buf_len;
 
-    if(p_msg == NULL)
-    {
+    if(p_msg == NULL) {
         p_buf->msg.p_pass_data = NULL;
-    }
-    else
-    {
+    } else {
         p_buf->msg.p_pass_data = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->msg.p_pass_data, p_msg, buf_len);
     }
@@ -465,7 +453,8 @@ void BTA_AvRemoteVendorUniqueCmd(uint8_t rc_handle, uint8_t label,
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_AvVendorCmd(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE cmd_code, uint8_t *p_data, uint16_t len)
+void BTA_AvVendorCmd(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE cmd_code, uint8_t *p_data,
+                     uint16_t len)
 {
     tBTA_AV_API_VENDOR *p_buf =
                     (tBTA_AV_API_VENDOR *)GKI_getbuf(sizeof(tBTA_AV_API_VENDOR) + len);
@@ -478,12 +467,9 @@ void BTA_AvVendorCmd(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE cmd_code, ui
     p_buf->label = label;
     p_buf->msg.vendor_len = len;
 
-    if(p_data == NULL)
-    {
+    if(p_data == NULL) {
         p_buf->msg.p_vendor_data = NULL;
-    }
-    else
-    {
+    } else {
         p_buf->msg.p_vendor_data = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->msg.p_vendor_data, p_data, len);
     }
@@ -503,7 +489,8 @@ void BTA_AvVendorCmd(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE cmd_code, ui
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_AvVendorRsp(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE rsp_code, uint8_t *p_data, uint16_t len, uint32_t company_id)
+void BTA_AvVendorRsp(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE rsp_code, uint8_t *p_data,
+                     uint16_t len, uint32_t company_id)
 {
     tBTA_AV_API_VENDOR *p_buf =
                     (tBTA_AV_API_VENDOR *)GKI_getbuf(sizeof(tBTA_AV_API_VENDOR) + len);
@@ -513,24 +500,18 @@ void BTA_AvVendorRsp(uint8_t rc_handle, uint8_t label, tBTA_AV_CODE rsp_code, ui
     p_buf->msg.hdr.subunit_type = AVRC_SUB_PANEL;
     p_buf->msg.hdr.subunit_id = 0;
 
-    if(company_id)
-    {
+    if(company_id) {
         p_buf->msg.company_id = company_id;
-    }
-    else
-    {
+    } else {
         p_buf->msg.company_id = p_bta_av_cfg->company_id;
     }
 
     p_buf->label = label;
     p_buf->msg.vendor_len = len;
 
-    if(p_data == NULL)
-    {
+    if(p_data == NULL) {
         p_buf->msg.p_vendor_data = NULL;
-    }
-    else
-    {
+    } else {
         p_buf->msg.p_vendor_data = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->msg.p_vendor_data, p_data, len);
     }

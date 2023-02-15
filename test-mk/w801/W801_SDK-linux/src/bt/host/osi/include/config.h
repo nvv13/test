@@ -69,13 +69,15 @@ int config_get_int(const config_t *config, const char *section, const char *key,
 // Returns the boolean value for a given |key| in |section|. If |section|
 // or |key| do not exist, or the value cannot be converted to a boolean, this
 // function returns |def_value|. |config|, |section|, and |key| must not be NULL.
-uint8_t config_get_bool(const config_t *config, const char *section, const char *key, uint8_t def_value);
+uint8_t config_get_bool(const config_t *config, const char *section, const char *key,
+                        uint8_t def_value);
 
 // Returns the string value for a given |key| in |section|. If |section| or
 // |key| do not exist, this function returns |def_value|. The returned string
 // is owned by the config module and must not be freed. |config|, |section|,
 // and |key| must not be NULL. |def_value| may be NULL.
-const char *config_get_string(const config_t *config, const char *section, const char *key, const char *def_value);
+const char *config_get_string(const config_t *config, const char *section, const char *key,
+                              const char *def_value);
 
 // Sets an integral value for the |key| in |section|. If |key| or |section| do
 // not already exist, this function creates them. |config|, |section|, and |key|

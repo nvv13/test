@@ -37,24 +37,22 @@
 const char *dev_path = "/dev/uhid";
 
 #if (BLE_INCLUDED == TRUE && BTA_HH_LE_INCLUDED == TRUE)
-    #include "btif_config.h"
-    #define BTA_HH_NV_LOAD_MAX       16
-    static tBTA_HH_RPT_CACHE_ENTRY sReportCache[BTA_HH_NV_LOAD_MAX];
+#include "btif_config.h"
+#define BTA_HH_NV_LOAD_MAX       16
+static tBTA_HH_RPT_CACHE_ENTRY sReportCache[BTA_HH_NV_LOAD_MAX];
 #endif
 
 void uhid_set_non_blocking(int fd)
 {
     int opts = fcntl(fd, F_GETFL);
 
-    if(opts < 0)
-    {
+    if(opts < 0) {
         APPL_TRACE_ERROR("%s() Getting flags failed (%s)", __func__, strerror(errno));
     }
 
     opts |= O_NONBLOCK;
 
-    if(fcntl(fd, F_SETFL, opts) < 0)
-    {
+    if(fcntl(fd, F_SETFL, opts) < 0) {
         APPL_TRACE_EVENT("%s() Setting non-blocking flag failed (%s)", __func__, strerror(errno));
     }
 }
@@ -65,20 +63,16 @@ static int uhid_write(int fd, const struct uhid_event *ev)
     ssize_t ret;
     OSI_NO_INTR(ret = write(fd, ev, sizeof(*ev)));
 
-    if(ret < 0)
-    {
+    if(ret < 0) {
         int rtn = -errno;
         APPL_TRACE_ERROR("%s: Cannot write to uhid:%s",
                          __FUNCTION__, strerror(errno));
         return rtn;
+    } else if(ret != (ssize_t)sizeof(*ev)) {
+        APPL_TRACE_ERROR("%s: Wrong size written to uhid: %zd != %zu",
+                         __FUNCTION__, ret, sizeof(*ev));
+        return -EFAULT;
     }
-    else
-        if(ret != (ssize_t)sizeof(*ev))
-        {
-            APPL_TRACE_ERROR("%s: Wrong size written to uhid: %zd != %zu",
-                             __FUNCTION__, ret, sizeof(*ev));
-            return -EFAULT;
-        }
 
     return 0;
 }
@@ -92,34 +86,25 @@ static int uhid_read_event(btif_hh_device_t *p_dev)
     ssize_t ret;
     OSI_NO_INTR(ret = read(p_dev->fd, &ev, sizeof(ev)));
 
-    if(ret == 0)
-    {
+    if(ret == 0) {
         APPL_TRACE_ERROR("%s: Read HUP on uhid-cdev %s", __FUNCTION__,
                          strerror(errno));
         return -EFAULT;
-    }
-    else
-        if(ret < 0)
-        {
-            APPL_TRACE_ERROR("%s: Cannot read uhid-cdev: %s", __FUNCTION__,
-                             strerror(errno));
-            return -errno;
+    } else if(ret < 0) {
+        APPL_TRACE_ERROR("%s: Cannot read uhid-cdev: %s", __FUNCTION__,
+                         strerror(errno));
+        return -errno;
+    } else if((ev.type == UHID_OUTPUT) || (ev.type == UHID_OUTPUT_EV)) {
+        // Only these two types havae payload,
+        // ensure we read full event descriptor
+        if(ret < (ssize_t)sizeof(ev)) {
+            APPL_TRACE_ERROR("%s: Invalid size read from uhid-dev: %ld != %lu",
+                             __FUNCTION__, ret, sizeof(ev.type));
+            return -EFAULT;
         }
-        else
-            if((ev.type == UHID_OUTPUT) || (ev.type == UHID_OUTPUT_EV))
-            {
-                // Only these two types havae payload,
-                // ensure we read full event descriptor
-                if(ret < (ssize_t)sizeof(ev))
-                {
-                    APPL_TRACE_ERROR("%s: Invalid size read from uhid-dev: %ld != %lu",
-                                     __FUNCTION__, ret, sizeof(ev.type));
-                    return -EFAULT;
-                }
-            }
+    }
 
-    switch(ev.type)
-    {
+    switch(ev.type) {
         case UHID_START:
             APPL_TRACE_DEBUG("UHID_START from uhid-dev\n");
             p_dev->ready_for_data = TRUE;
@@ -141,8 +126,7 @@ static int uhid_read_event(btif_hh_device_t *p_dev)
             break;
 
         case UHID_OUTPUT:
-            if(ret < (ssize_t)(sizeof(ev.type) + sizeof(ev.u.output)))
-            {
+            if(ret < (ssize_t)(sizeof(ev.type) + sizeof(ev.u.output))) {
                 APPL_TRACE_ERROR("%s: Invalid size read from uhid-dev: %zd < %zu",
                                  __FUNCTION__, ret,
                                  sizeof(ev.type) + sizeof(ev.u.output));
@@ -156,13 +140,12 @@ static int uhid_read_event(btif_hh_device_t *p_dev)
             if(ev.u.output.rtype == UHID_FEATURE_REPORT)
                 btif_hh_setreport(p_dev, BTHH_FEATURE_REPORT,
                                   ev.u.output.size, ev.u.output.data);
+            else if(ev.u.output.rtype == UHID_OUTPUT_REPORT)
+                btif_hh_setreport(p_dev, BTHH_OUTPUT_REPORT,
+                                  ev.u.output.size, ev.u.output.data);
             else
-                if(ev.u.output.rtype == UHID_OUTPUT_REPORT)
-                    btif_hh_setreport(p_dev, BTHH_OUTPUT_REPORT,
-                                      ev.u.output.size, ev.u.output.data);
-                else
-                    btif_hh_setreport(p_dev, BTHH_INPUT_REPORT,
-                                      ev.u.output.size, ev.u.output.data);
+                btif_hh_setreport(p_dev, BTHH_INPUT_REPORT,
+                                  ev.u.output.size, ev.u.output.data);
 
             break;
 
@@ -202,8 +185,7 @@ static inline pthread_t create_thread(void *(*start_routine)(void *), void *arg)
     pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_JOINABLE);
     pthread_t thread_id = -1;
 
-    if(pthread_create(&thread_id, &thread_attr, start_routine, arg) != 0)
-    {
+    if(pthread_create(&thread_id, &thread_attr, start_routine, arg) != 0) {
         APPL_TRACE_ERROR("pthread_create : %s", strerror(errno));
         return -1;
     }
@@ -231,24 +213,20 @@ static void *btif_hh_poll_event_thread(void *arg)
     // Set the uhid fd as non-blocking to ensure we never block the BTU thread
     uhid_set_non_blocking(p_dev->fd);
 
-    while(p_dev->hh_keep_polling)
-    {
+    while(p_dev->hh_keep_polling) {
         int ret;
         OSI_NO_INTR(ret = poll(pfds, 1, 50));
 
-        if(ret < 0)
-        {
+        if(ret < 0) {
             APPL_TRACE_ERROR("%s: Cannot poll for fds: %s\n", __func__, strerror(errno));
             break;
         }
 
-        if(pfds[0].revents & POLLIN)
-        {
+        if(pfds[0].revents & POLLIN) {
             APPL_TRACE_DEBUG("%s: POLLIN", __func__);
             ret = uhid_read_event(p_dev);
 
-            if(ret != 0)
-            {
+            if(ret != 0) {
                 break;
             }
         }
@@ -263,8 +241,7 @@ static inline void btif_hh_close_poll_thread(btif_hh_device_t *p_dev)
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
     p_dev->hh_keep_polling = 0;
 
-    if(p_dev->hh_poll_thread_id > 0)
-    {
+    if(p_dev->hh_poll_thread_id > 0) {
         pthread_join(p_dev->hh_poll_thread_id, NULL);
     }
 
@@ -289,8 +266,7 @@ int bta_hh_co_write(int fd, uint8_t *rpt, uint16_t len)
     ev.type = UHID_INPUT;
     ev.u.input.size = len;
 
-    if(len > sizeof(ev.u.input.data))
-    {
+    if(len > sizeof(ev.u.input.data)) {
         APPL_TRACE_WARNING("%s: Report size greater than allowed size",
                            __FUNCTION__);
         return -1;
@@ -316,20 +292,17 @@ void bta_hh_co_open(uint8_t dev_handle, uint8_t sub_class, tBTA_HH_ATTR_MASK att
     uint32_t i;
     btif_hh_device_t *p_dev = NULL;
 
-    if(dev_handle == BTA_HH_INVALID_HANDLE)
-    {
+    if(dev_handle == BTA_HH_INVALID_HANDLE) {
         APPL_TRACE_WARNING("%s: Oops, dev_handle (%d) is invalid...",
                            __FUNCTION__, dev_handle);
         return;
     }
 
-    for(i = 0; i < BTIF_HH_MAX_HID; i++)
-    {
+    for(i = 0; i < BTIF_HH_MAX_HID; i++) {
         p_dev = &btif_hh_cb.devices[i];
 
         if(p_dev->dev_status != BTHH_CONN_STATE_UNKNOWN &&
-                p_dev->dev_handle == dev_handle)
-        {
+                p_dev->dev_handle == dev_handle) {
             // We found a device with the same handle. Must be a device reconnected.
             APPL_TRACE_WARNING("%s: Found an existing device with the same handle "
                                "dev_status = %d", __FUNCTION__,
@@ -340,18 +313,14 @@ void bta_hh_co_open(uint8_t dev_handle, uint8_t sub_class, tBTA_HH_ATTR_MASK att
             APPL_TRACE_WARNING("%s:     attr_mask = 0x%04x, sub_class = 0x%02x, app_id = %d",
                                __FUNCTION__, p_dev->attr_mask, p_dev->sub_class, p_dev->app_id);
 
-            if(p_dev->fd < 0)
-            {
+            if(p_dev->fd < 0) {
                 p_dev->fd = open(dev_path, O_RDWR | O_CLOEXEC);
 
-                if(p_dev->fd < 0)
-                {
+                if(p_dev->fd < 0) {
                     APPL_TRACE_ERROR("%s: Error: failed to open uhid, err:%s",
                                      __FUNCTION__, strerror(errno));
                     return;
-                }
-                else
-                {
+                } else {
                     APPL_TRACE_DEBUG("%s: uhid fd = %d", __FUNCTION__, p_dev->fd);
                 }
             }
@@ -364,13 +333,10 @@ void bta_hh_co_open(uint8_t dev_handle, uint8_t sub_class, tBTA_HH_ATTR_MASK att
         p_dev = NULL;
     }
 
-    if(p_dev == NULL)
-    {
+    if(p_dev == NULL) {
         // Did not find a device reconnection case. Find an empty slot now.
-        for(i = 0; i < BTIF_HH_MAX_HID; i++)
-        {
-            if(btif_hh_cb.devices[i].dev_status == BTHH_CONN_STATE_UNKNOWN)
-            {
+        for(i = 0; i < BTIF_HH_MAX_HID; i++) {
+            if(btif_hh_cb.devices[i].dev_status == BTHH_CONN_STATE_UNKNOWN) {
                 p_dev = &btif_hh_cb.devices[i];
                 p_dev->dev_handle = dev_handle;
                 p_dev->attr_mask  = attr_mask;
@@ -381,14 +347,11 @@ void bta_hh_co_open(uint8_t dev_handle, uint8_t sub_class, tBTA_HH_ATTR_MASK att
                 // This is a new device,open the uhid driver now.
                 p_dev->fd = open(dev_path, O_RDWR | O_CLOEXEC);
 
-                if(p_dev->fd < 0)
-                {
+                if(p_dev->fd < 0) {
                     APPL_TRACE_ERROR("%s: Error: failed to open uhid, err:%s",
                                      __FUNCTION__, strerror(errno));
                     return;
-                }
-                else
-                {
+                } else {
                     APPL_TRACE_DEBUG("%s: uhid fd = %d", __FUNCTION__, p_dev->fd);
                     p_dev->hh_keep_polling = 1;
                     p_dev->hh_poll_thread_id = create_thread(btif_hh_poll_event_thread, p_dev);
@@ -399,8 +362,7 @@ void bta_hh_co_open(uint8_t dev_handle, uint8_t sub_class, tBTA_HH_ATTR_MASK att
         }
     }
 
-    if(p_dev == NULL)
-    {
+    if(p_dev == NULL) {
         APPL_TRACE_ERROR("%s: Error: too many HID devices are connected", __FUNCTION__);
         return;
     }
@@ -428,18 +390,15 @@ void bta_hh_co_close(uint8_t dev_handle, uint8_t app_id)
     btif_hh_device_t *p_dev = NULL;
     APPL_TRACE_WARNING("%s: dev_handle = %d, app_id = %d", __FUNCTION__, dev_handle, app_id);
 
-    if(dev_handle == BTA_HH_INVALID_HANDLE)
-    {
+    if(dev_handle == BTA_HH_INVALID_HANDLE) {
         APPL_TRACE_WARNING("%s: Oops, dev_handle (%d) is invalid...", __FUNCTION__, dev_handle);
         return;
     }
 
-    for(i = 0; i < BTIF_HH_MAX_HID; i++)
-    {
+    for(i = 0; i < BTIF_HH_MAX_HID; i++) {
         p_dev = &btif_hh_cb.devices[i];
 
-        if(p_dev->dev_status != BTHH_CONN_STATE_UNKNOWN && p_dev->dev_handle == dev_handle)
-        {
+        if(p_dev->dev_status != BTHH_CONN_STATE_UNKNOWN && p_dev->dev_handle == dev_handle) {
             APPL_TRACE_WARNING("%s: Found an existing device with the same handle "
                                "dev_status = %d, dev_handle =%d"
                                , __FUNCTION__, p_dev->dev_status
@@ -477,19 +436,15 @@ void bta_hh_co_data(uint8_t dev_handle, uint8_t *p_rpt, uint16_t len, tBTA_HH_PR
                      __FUNCTION__, dev_handle, sub_class, mode, ctry_code, app_id);
     p_dev = btif_hh_find_connected_dev_by_handle(dev_handle);
 
-    if(p_dev == NULL)
-    {
+    if(p_dev == NULL) {
         APPL_TRACE_WARNING("%s: Error: unknown HID device handle %d", __FUNCTION__, dev_handle);
         return;
     }
 
     // Send the HID data to the kernel.
-    if((p_dev->fd >= 0) && p_dev->ready_for_data)
-    {
+    if((p_dev->fd >= 0) && p_dev->ready_for_data) {
         bta_hh_co_write(p_dev->fd, p_rpt, len);
-    }
-    else
-    {
+    } else {
         APPL_TRACE_WARNING("%s: Error: fd = %d, ready %d, len = %d", __FUNCTION__, p_dev->fd,
                            p_dev->ready_for_data, len);
     }
@@ -515,8 +470,7 @@ void bta_hh_co_send_hid_info(btif_hh_device_t *p_dev, char *dev_name, uint16_t v
     int result;
     struct uhid_event ev;
 
-    if(p_dev->fd < 0)
-    {
+    if(p_dev->fd < 0) {
         APPL_TRACE_WARNING("%s: Error: fd = %d, dscp_len = %d", __FUNCTION__, p_dev->fd, dscp_len);
         return;
     }
@@ -547,8 +501,7 @@ void bta_hh_co_send_hid_info(btif_hh_device_t *p_dev, char *dev_name, uint16_t v
     APPL_TRACE_WARNING("%s: wrote descriptor to fd = %d, dscp_len = %d, result = %d", __FUNCTION__,
                        p_dev->fd, dscp_len, result);
 
-    if(result)
-    {
+    if(result) {
         APPL_TRACE_WARNING("%s: Error: failed to send DSCP, result = %d", __FUNCTION__, result);
         /* The HID report descriptor is corrupted. Close the driver. */
         close(p_dev->fd);
@@ -584,14 +537,12 @@ void bta_hh_le_co_rpt_info(BD_ADDR remote_bda, tBTA_HH_RPT_CACHE_ENTRY *p_entry,
             remote_bda[3], remote_bda[4], remote_bda[5]);
     size_t len = btif_config_get_bin_length(bdstr, "HidReport");
 
-    if(len >= sizeof(tBTA_HH_RPT_CACHE_ENTRY) && len <= sizeof(sReportCache))
-    {
+    if(len >= sizeof(tBTA_HH_RPT_CACHE_ENTRY) && len <= sizeof(sReportCache)) {
         btif_config_get_bin(bdstr, "HidReport", (uint8_t *)sReportCache, &len);
         idx = len / sizeof(tBTA_HH_RPT_CACHE_ENTRY);
     }
 
-    if(idx < BTA_HH_NV_LOAD_MAX)
-    {
+    if(idx < BTA_HH_NV_LOAD_MAX) {
         wm_memcpy(&sReportCache[idx++], p_entry, sizeof(tBTA_HH_RPT_CACHE_ENTRY));
         btif_config_set_bin(bdstr, "HidReport", (const uint8_t *)sReportCache,
                             idx * sizeof(tBTA_HH_RPT_CACHE_ENTRY));
@@ -625,13 +576,11 @@ tBTA_HH_RPT_CACHE_ENTRY *bta_hh_le_co_cache_load(BD_ADDR remote_bda,
             remote_bda[3], remote_bda[4], remote_bda[5]);
     size_t len = btif_config_get_bin_length(bdstr, "HidReport");
 
-    if(!p_num_rpt && len < sizeof(tBTA_HH_RPT_CACHE_ENTRY))
-    {
+    if(!p_num_rpt && len < sizeof(tBTA_HH_RPT_CACHE_ENTRY)) {
         return NULL;
     }
 
-    if(len > sizeof(sReportCache))
-    {
+    if(len > sizeof(sReportCache)) {
         len = sizeof(sReportCache);
     }
 

@@ -52,19 +52,26 @@ int btif_config_init();
 int btif_config_exist(const char *section, const char *key, const char *name);
 int btif_config_get_int(const char *section, const char *key, const char *name, int *value);
 int btif_config_set_int(const char *section, const char *key, const char *name, int value);
-int btif_config_get_str(const char *section, const char *key, const char *name, char *value, int *bytes);
+int btif_config_get_str(const char *section, const char *key, const char *name, char *value,
+                        int *bytes);
 int btif_config_set_str(const char *section, const char *key, const char *name, const char *value);
 
-int btif_config_get(const char *section, const char *key, const char *name, char *value, int *bytes, int *type);
-int btif_config_set(const char *section, const char *key, const char *name, const char  *value, int bytes, int type);
+int btif_config_get(const char *section, const char *key, const char *name, char *value, int *bytes,
+                    int *type);
+int btif_config_set(const char *section, const char *key, const char *name, const char  *value,
+                    int bytes, int type);
 
 int btif_config_remove(const char *section, const char *key, const char *name);
-int btif_config_filter_remove(const char *section, const char *filter[], int filter_count, int max_allowed);
+int btif_config_filter_remove(const char *section, const char *filter[], int filter_count,
+                              int max_allowed);
 
-short btif_config_next_key(short current_key_pos, const char *section, char *key_name, int *key_name_bytes);
-short btif_config_next_value(short pos, const char *section, const char *key, char *value_name, int *value_name_bytes);
+short btif_config_next_key(short current_key_pos, const char *section, char *key_name,
+                           int *key_name_bytes);
+short btif_config_next_value(short pos, const char *section, const char *key, char *value_name,
+                             int *value_name_bytes);
 
-typedef void (*btif_config_enum_callback)(void *user_data, const char *section, const char *key, const char *name,
+typedef void (*btif_config_enum_callback)(void *user_data, const char *section, const char *key,
+        const char *name,
         const char  *value, int bytes, int type);
 int btif_config_enum(btif_config_enum_callback cb, void *user_data);
 

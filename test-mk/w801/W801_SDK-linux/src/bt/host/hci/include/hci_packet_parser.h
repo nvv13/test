@@ -27,8 +27,7 @@
 #include "features.h"
 #include "version.h"
 
-typedef struct
-{
+typedef struct {
     void (*parse_generic_command_complete)(BT_HDR *response);
 
     void (*parse_read_buffer_size_response)(

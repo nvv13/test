@@ -25,8 +25,7 @@
 
 
 /** BT-GATT callbacks */
-typedef struct
-{
+typedef struct {
     /** Set to sizeof(btgatt_callbacks_t) */
     size_t size;
 
@@ -46,8 +45,7 @@ typedef struct
 } btgatt_callbacks_t;
 
 /** Represents the standard Bluetooth GATT interface. */
-typedef struct
-{
+typedef struct {
     /** Set to sizeof(btgatt_interface_t) */
     size_t          size;
 
@@ -67,8 +65,7 @@ typedef struct
 } btgatt_interface_t;
 
 /** Add one BLE dm interface for GATT. */
-typedef struct
-{
+typedef struct {
     /** Set to sizeof(btgatt_dm_interface_t)*/
 
     /**

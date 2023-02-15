@@ -26,16 +26,21 @@
 
 
 #define FT_MAGICNUM_ADDR		(FLASH_BASE_ADDR)
+#define FT_PARAM_RUNTIME_ADDR	(FT_MAGICNUM_ADDR + 0x1000)
 #define MAGICNUM_LEN			(4)
-#define MAC_ADDR_LEN			(8)
+#define MAC_ADDR_LEN			(6)
 #define FT_GAIN_LEN				(84)
+
+#define FT_PARAM_EXT_REVERSED_LEN   32
 
 typedef struct FT_PARAM
 {
 	unsigned int		magic_no;
 	unsigned int 		checksum;
 	unsigned char		wifi_mac_addr[MAC_ADDR_LEN];
+	unsigned short      version_no;
 	unsigned char		bt_mac_addr[MAC_ADDR_LEN];
+	unsigned short      ext_param_len;
 	unsigned int		tx_dcoffset;
 	unsigned int		rx_dcoffset;	
 	unsigned int		tx_iq_gain;
@@ -45,30 +50,44 @@ typedef struct FT_PARAM
 	unsigned char		tx_gain[FT_GAIN_LEN];	
 }FT_PARAM_ST;
 
+typedef struct FT_PARAM_EXT_1
+{
+	unsigned int        rf_freq_err;
+	unsigned int        rf_cal_flag;
+	FT_ADC_CAL_ST       adc_cal_param;
+	FT_TEMP_CAL_ST      temp_cal_param;
+}FT_PARAM_ST_EXT_1;
+
+typedef struct FT_PARAM_VER1
+{
+	FT_PARAM_ST         ft_param;
+	unsigned int 		ext_checksum;
+	FT_PARAM_ST_EXT_1   ft_ext1;
+	unsigned char       _reversed[FT_PARAM_EXT_REVERSED_LEN];
+}FT_PARAM_ST_VER1;
+
 static u8 default_mac[6] = {0x00,0x25,0x08,0x09,0x01,0x0F};
 
-FT_PARAM_ST gftParam;
-int tls_ft_param_init(void)
+FT_PARAM_ST_VER1  gftParamVer1;
+
+FT_PARAM_ST *gftParam = (FT_PARAM_ST *)&gftParamVer1;
+static int _ft_ext1_valid(FT_PARAM_ST *pft)
 {
-	u32 crcvalue = 0;
-	psCrcContext_t ctx;	
-	FT_PARAM_ST *pft = NULL;
-	
-	if (gftParam.magic_no == SIGNATURE_WORD)
+	//printf("version_no %d, ext_param_len %x\n", pft->version_no, pft->ext_param_len);
+	if (pft->version_no > 0 && pft->version_no < 0xFFFF && pft->ext_param_len >= sizeof(FT_PARAM_ST_EXT_1) && 
+				pft->ext_param_len <= (sizeof(FT_PARAM_ST_EXT_1) + FT_PARAM_EXT_REVERSED_LEN))
 	{
 		return TRUE;
 	}
-
-	pft = tls_mem_alloc(sizeof(FT_PARAM_ST));
-	if (pft == NULL)
-	{
-		return FALSE;
-	}
-
-	memset(pft, 0xFF, sizeof(FT_PARAM_ST));
-	memset(&gftParam, 0xFF, sizeof(FT_PARAM_ST));
-
-	tls_fls_read(FT_MAGICNUM_ADDR, (unsigned char *)pft, sizeof(FT_PARAM_ST));
+	return FALSE;
+}
+static int _ft_param_init(u32 ft_addr, FT_PARAM_ST *pft)
+{
+	u32 crcvalue = 0;
+	psCrcContext_t ctx;	
+	FT_PARAM_ST_VER1 *pft_ver1 = NULL;
+	
+	tls_fls_read(ft_addr, (unsigned char *)pft, sizeof(FT_PARAM_ST_VER1));
 	if (pft->magic_no == SIGNATURE_WORD)
 	{
 		tls_crypto_init();
@@ -77,42 +96,131 @@ int tls_ft_param_init(void)
 		tls_crypto_crc_final(&ctx, &crcvalue);		
 		if (pft->checksum != crcvalue)
 		{
-			tls_mem_free(pft);
+			//tls_mem_free(pft);
 			return FALSE;
 		}
 
-		if (gftParam.magic_no != SIGNATURE_WORD)
+		do
 		{
-			memcpy(&gftParam, pft, sizeof(FT_PARAM_ST));
-		}
+			if (_ft_ext1_valid(pft))
+			{
+				pft_ver1 = (FT_PARAM_ST_VER1 *)pft;
+				tls_crypto_crc_init(&ctx, 0xFFFFFFFF, CRYPTO_CRC_TYPE_32, INPUT_REFLECT | OUTPUT_REFLECT);
+				tls_crypto_crc_update(&ctx, (unsigned char *)&pft_ver1->ft_ext1, pft->ext_param_len);
+				tls_crypto_crc_final(&ctx, &crcvalue);	
+				if(pft_ver1->ext_checksum == crcvalue)
+				{
+					return 1;
+				}
+				else
+				{
+					return FALSE;
+				}
+			}
+			pft->version_no = 0xFFFF;
+			pft->ext_param_len = 0xFFFF;
+		}while(0);
+		return 2;
+	}
+	return FALSE;
+}
+int tls_ft_param_init(void)
+{
+	int ret = 0;
+	FT_PARAM_ST *pft = NULL;
+	
+	if (gftParam->magic_no == SIGNATURE_WORD)
+	{
+		return TRUE;
+	}
+	memset(gftParam, 0xFF, sizeof(FT_PARAM_ST_VER1));
+
+	pft = tls_mem_alloc(sizeof(FT_PARAM_ST_VER1));
+	if (pft == NULL)
+	{
+		return FALSE;
+	}
+	memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+	ret = _ft_param_init(FT_PARAM_RUNTIME_ADDR, pft);
+	if(FALSE == ret)
+	{
+		memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+		ret = _ft_param_init(FT_MAGICNUM_ADDR, pft);
+	}
+	if(1 == ret)
+	{
+		memcpy((unsigned char *)gftParam, (unsigned char *)pft, sizeof(FT_PARAM_ST_VER1));
+	}
+	else if(2 == ret)
+	{
+		memcpy((unsigned char *)gftParam, (unsigned char *)pft, sizeof(FT_PARAM_ST));	
 	}
 	tls_mem_free(pft);
 
 	/*lock parameter*/
 	tls_flash_unlock();
-	return TRUE;
+	return ret;
 }
 
 int tls_ft_param_get(unsigned int opnum, void *data, unsigned int rdlen)
 {
+	int ret = 0;
 	switch (opnum)
 	{
+		case CMD_FREQ_ERR:
+			if(_ft_ext1_valid(gftParam))
+			{
+				memcpy(data, (char *)&gftParamVer1.ft_ext1.rf_freq_err, FREQERR_LEN);
+			}
+			else
+			{
+				ret = tls_fls_read(FREQERR_ADDR, data, FREQERR_LEN);
+				if(ret)
+				{
+					return -1;
+				}
+			}
+			break;
+		case CMD_RF_CAL_FLAG:
+			if(_ft_ext1_valid(gftParam))
+			{
+				memcpy(data, (char *)&gftParamVer1.ft_ext1.rf_cal_flag, CAL_FLAG_LEN);
+			}
+			else
+			{
+				ret = tls_fls_read(CAL_FLAG_ADDR, data, CAL_FLAG_LEN);
+				if(ret)
+				{
+					return -1;
+				}
+			}
+			break;
+		case CMD_TX_ADC_CAL:
+			if(_ft_ext1_valid(gftParam))
+			{
+				memcpy(data, (unsigned char *)&gftParamVer1.ft_ext1.adc_cal_param, rdlen);
+			}
+			else
+			{
+				return -1;
+			}
+			break;
 		case CMD_WIFI_MAC:	/*MAC*/
-			if ((gftParam.wifi_mac_addr[0]&0x1)
-				||(0 == (gftParam.wifi_mac_addr[0]|gftParam.wifi_mac_addr[1]|gftParam.wifi_mac_addr[2]|gftParam.wifi_mac_addr[3]|gftParam.wifi_mac_addr[4]|gftParam.wifi_mac_addr[5])))		
+			if ((gftParam->wifi_mac_addr[0]&0x1)
+				||(0 == (gftParam->wifi_mac_addr[0]|gftParam->wifi_mac_addr[1]|gftParam->wifi_mac_addr[2]|gftParam->wifi_mac_addr[3]|gftParam->wifi_mac_addr[4]|gftParam->wifi_mac_addr[5])))		
 			{
 				memcpy(data, default_mac, rdlen);
 			}
 			else
 			{
-				memcpy(data, gftParam.wifi_mac_addr, rdlen);
+				memcpy(data, gftParam->wifi_mac_addr, rdlen);
 			}
 		break;
 		case CMD_BT_MAC:	/*MAC*/
             {
                 u8 invalid_bt_mac[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
                 u8 invalid_bt_mac1[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-			    if ((memcmp(gftParam.bt_mac_addr, invalid_bt_mac, 6) == 0)||(memcmp(gftParam.bt_mac_addr, invalid_bt_mac1, 6) == 0))     
+			    if ((memcmp(gftParam->bt_mac_addr, invalid_bt_mac, 6) == 0)||(memcmp(gftParam->bt_mac_addr, invalid_bt_mac1, 6) == 0))     
 			    {
 				    memcpy(data, default_mac, rdlen);
                     *((u8*)data+5) +=1;      /*defalut plus 1*/
@@ -120,7 +228,7 @@ int tls_ft_param_get(unsigned int opnum, void *data, unsigned int rdlen)
 			    }
 			    else
 			    {
-				    memcpy(data, gftParam.bt_mac_addr, rdlen);
+				    memcpy(data, gftParam->bt_mac_addr, rdlen);
 			    }
            }
 		break;
@@ -128,37 +236,37 @@ int tls_ft_param_get(unsigned int opnum, void *data, unsigned int rdlen)
 
 		
 		case CMD_TX_DC: /*tx_dcoffset*/
-			*(unsigned int *)data = gftParam.tx_dcoffset;
+			*(unsigned int *)data = gftParam->tx_dcoffset;
 		break;	
 		
 		case CMD_RX_DC: /*rx_dcoffset*/
-			*(unsigned int *)data = gftParam.rx_dcoffset;
+			*(unsigned int *)data = gftParam->rx_dcoffset;
 		break;	
 		
 		case CMD_TX_IQ_GAIN:
-			*(unsigned int *)data = gftParam.tx_iq_gain;
+			*(unsigned int *)data = gftParam->tx_iq_gain;
 		break;	
 		
 		case CMD_RX_IQ_GAIN:
-			*(unsigned int *)data = gftParam.rx_iq_gain;
+			*(unsigned int *)data = gftParam->rx_iq_gain;
 		break;
 		
 		case CMD_TX_IQ_PHASE:
-			*(unsigned int *)data = gftParam.tx_iq_phase;
+			*(unsigned int *)data = gftParam->tx_iq_phase;
 		break;	
 		
 		case CMD_RX_IQ_PHASE:
-			*(unsigned int *)data = gftParam.rx_iq_phase;
+			*(unsigned int *)data = gftParam->rx_iq_phase;
 		break;
 		
 		case CMD_TX_GAIN: /*gain*/
 			if (rdlen < FT_GAIN_LEN)
 			{
-				memcpy(data, gftParam.tx_gain, rdlen);
+				memcpy(data, gftParam->tx_gain, rdlen);
 			}
 			else
 			{
-				memcpy(data, gftParam.tx_gain, FT_GAIN_LEN);
+				memcpy(data, gftParam->tx_gain, FT_GAIN_LEN);
 			}
 		break;
 		
@@ -173,45 +281,87 @@ int tls_ft_param_set(unsigned int opnum, void *data, unsigned int len)
 {
 	psCrcContext_t ctx;
 	unsigned int writelen = 0;
+	FT_PARAM_ST *pft = NULL;
+	int ret = 0;
 
 	if (!data || !len)
 	{
 		return -1;
 	}
-	//printf("tls_ft_param_set: opnum=%d, val=%x\n", opnum, *(unsigned int *)data);
-	//tls_fls_read(FT_MAGICNUM_ADDR, (unsigned char *)&gftParam, sizeof(gftParam));
+	
+	pft = tls_mem_alloc(sizeof(FT_PARAM_ST_VER1));
+	if (pft == NULL)
+	{
+		return -1;
+	}
+	memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+	ret = _ft_param_init(FT_PARAM_RUNTIME_ADDR, pft);
+	if(ret)
+	{
+		memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+		ret = _ft_param_init(FT_MAGICNUM_ADDR, pft);
+		if(!ret || memcmp(pft, gftParam, sizeof(FT_PARAM_ST_VER1)))
+		{
+			tls_flash_unlock();
+			tls_fls_write(FT_MAGICNUM_ADDR, (unsigned char *)gftParam, sizeof(FT_PARAM_ST_VER1));
+			memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+			ret = _ft_param_init(FT_MAGICNUM_ADDR, pft);
+			if(!ret || memcmp(pft, gftParam, sizeof(FT_PARAM_ST_VER1)))
+			{
+				memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+				tls_mem_free(pft);
+				return -1;
+			}
+		}
+	}
+	if(!_ft_ext1_valid(gftParam))
+	{
+		gftParam->version_no = 1;
+		gftParam->ext_param_len = sizeof(FT_PARAM_ST_EXT_1);
+		memset((char *)&gftParamVer1.ft_ext1, 0xFF, gftParam->ext_param_len);
+	}
 	switch (opnum)
 	{
+		case CMD_FREQ_ERR:
+			memcpy((char *)&gftParamVer1.ft_ext1.rf_freq_err, (char *)data, FREQERR_LEN);
+			break;
+		case CMD_RF_CAL_FLAG:
+			memcpy((char *)&gftParamVer1.ft_ext1.rf_cal_flag, (char *)data, CAL_FLAG_LEN);
+			break;
+		case CMD_TX_ADC_CAL:
+			memcpy((unsigned char *)&gftParamVer1.ft_ext1.adc_cal_param, data, len);
+		break;
+		
 		case CMD_WIFI_MAC:	/*MAC*/
-			memcpy(gftParam.wifi_mac_addr, (unsigned char *)data, len);
+			memcpy(gftParam->wifi_mac_addr, (unsigned char *)data, len);
 		break;
 
 		case CMD_BT_MAC:	/*BT MAC*/
-			memcpy(gftParam.bt_mac_addr, (unsigned char *)data, len);
+			memcpy(gftParam->bt_mac_addr, (unsigned char *)data, len);
 		break;
 
 		case CMD_TX_DC:	/*tx_dcoffset*/
-			gftParam.tx_dcoffset = *(unsigned int *)data;
+			gftParam->tx_dcoffset = *(unsigned int *)data;
 		break;	
 		
 		case CMD_RX_DC:	/*rx_dcoffset*/
-			gftParam.rx_dcoffset = *(unsigned int *)data;
+			gftParam->rx_dcoffset = *(unsigned int *)data;
 		break;	
 		
 		case CMD_TX_IQ_GAIN:
-			gftParam.tx_iq_gain = *(unsigned int *)data;
+			gftParam->tx_iq_gain = *(unsigned int *)data;
 		break;	
 		
 		case CMD_RX_IQ_GAIN:
-			gftParam.rx_iq_gain = *(unsigned int *) data;			
+			gftParam->rx_iq_gain = *(unsigned int *) data;			
 		break;	
 		
 		case CMD_TX_IQ_PHASE:
-			gftParam.tx_iq_phase = *(unsigned int *)data;
+			gftParam->tx_iq_phase = *(unsigned int *)data;
 		break;	
 		
 		case CMD_RX_IQ_PHASE:
-			gftParam.rx_iq_phase = *(unsigned int *) data;			
+			gftParam->rx_iq_phase = *(unsigned int *) data;			
 		break;	
 		
 		case CMD_TX_GAIN: /*gain*/
@@ -223,21 +373,48 @@ int tls_ft_param_set(unsigned int opnum, void *data, unsigned int len)
 			{
 				writelen = len;
 			}
-			memcpy(gftParam.tx_gain, data, writelen);
+			memcpy(gftParam->tx_gain, data, writelen);
 		break;
 		
 		default:
-		return -1;
+			tls_mem_free(pft);
+			return -1;
 	}
 
 	tls_crypto_init();
+	/*len to write to flash*/
+	writelen = sizeof(FT_PARAM_ST_VER1);
 	tls_crypto_crc_init(&ctx, 0xFFFFFFFF, CRYPTO_CRC_TYPE_32, INPUT_REFLECT | OUTPUT_REFLECT);
-	gftParam.magic_no = SIGNATURE_WORD;
-	tls_crypto_crc_update(&ctx, (unsigned char *)&gftParam + 8, sizeof(gftParam) -8);
-	tls_crypto_crc_final(&ctx, &gftParam.checksum);
+	tls_crypto_crc_update(&ctx, (unsigned char *)&gftParamVer1.ft_ext1, gftParam->ext_param_len);
+	tls_crypto_crc_final(&ctx, &gftParamVer1.ext_checksum);
+
+	gftParam->magic_no = SIGNATURE_WORD;
+	tls_crypto_crc_init(&ctx, 0xFFFFFFFF, CRYPTO_CRC_TYPE_32, INPUT_REFLECT | OUTPUT_REFLECT);
+	tls_crypto_crc_update(&ctx, (unsigned char *)gftParam + 8, sizeof(FT_PARAM_ST) -8);
+	tls_crypto_crc_final(&ctx, &gftParam->checksum);
+
 	tls_flash_unlock();
-	tls_fls_write(FT_MAGICNUM_ADDR, (unsigned char *)&gftParam, sizeof(gftParam));
-	tls_flash_lock();
+	tls_fls_write(FT_PARAM_RUNTIME_ADDR, (unsigned char *)gftParam, writelen);
+	memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+	ret = _ft_param_init(FT_PARAM_RUNTIME_ADDR, pft);
+	if(!ret || memcmp(pft, gftParam, sizeof(FT_PARAM_ST_VER1)))
+	{
+		memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+		tls_mem_free(pft);
+		return -1;
+	}
+	tls_fls_write(FT_MAGICNUM_ADDR, (unsigned char *)gftParam, writelen);
+	memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+	ret = _ft_param_init(FT_MAGICNUM_ADDR, pft);
+	if(!ret || memcmp(pft, gftParam, sizeof(FT_PARAM_ST_VER1)))
+	{
+		memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+		tls_mem_free(pft);
+		return -1;
+	}
+	memset(pft, 0xFF, sizeof(FT_PARAM_ST_VER1));
+	tls_mem_free(pft);
+	//tls_flash_lock();
 	return 0;
 }
 
@@ -429,15 +606,28 @@ int tls_set_rx_iq_phase(u8 *rxPhase)
 int tls_freq_err_op(u8 *freqerr, u8 flag)
 {
 	int ret = 0;
-	tls_flash_unlock();
+	int value = 0;
 	if (flag){
-		ret = tls_fls_write(FREQERR_ADDR, freqerr, FREQERR_LEN);
+		ret = tls_ft_param_set(CMD_FREQ_ERR, freqerr, FREQERR_LEN);
 	}
 	else
 	{
-		ret = tls_fls_read(FREQERR_ADDR, freqerr, FREQERR_LEN);
+		ret = tls_ft_param_get(CMD_FREQ_ERR, freqerr, FREQERR_LEN);
+		if(!ret)
+		{
+			memcpy(&value, freqerr, FREQERR_LEN);
+			if (value > 200000) /*when freq offset is out of range (-200KHz, 200KHz),do not use it*/
+			{
+				value = 200000;
+				memcpy((char *)freqerr, (char *)&value, FREQERR_LEN);
+			}
+			else if (value < -200000)
+			{
+				value = -200000;
+				memcpy((char *)freqerr, (char *)&value, FREQERR_LEN);
+			}
+		}
 	}
-	tls_flash_lock();
 	if (ret == 0)
 	{
 		return TLS_EFUSE_STATUS_OK;
@@ -451,15 +641,13 @@ int tls_freq_err_op(u8 *freqerr, u8 flag)
 int tls_rf_cal_finish_op(u8 *calflag, u8 flag)
 {
 	int ret = 0;
-	tls_flash_unlock();
 	if (flag){
-		ret = tls_fls_write(CAL_FLAG_ADDR, calflag, CAL_FLAG_LEN);
+		ret = tls_ft_param_set(CMD_RF_CAL_FLAG, calflag, CAL_FLAG_LEN);
 	}
 	else
 	{
-		ret = tls_fls_read(CAL_FLAG_ADDR, calflag, CAL_FLAG_LEN);
+		ret = tls_ft_param_get(CMD_RF_CAL_FLAG, calflag, CAL_FLAG_LEN);
 	}
-	tls_flash_lock();
 
 	if (ret == 0)
 	{
@@ -500,6 +688,30 @@ int tls_set_tx_gain(u8 *txgain)
 
 }
 
+/**
+* @brief 	This function is used to get adc cal param
+*
+* @param[out]	adc_cal		adc cal param
+*
+* @retval	 	TLS_EFUSE_STATUS_OK			get success
+* @retval		TLS_EFUSE_STATUS_EIO		get failed
+*/
+int tls_get_adc_cal_param(FT_ADC_CAL_ST *adc_cal)
+{
+	return tls_ft_param_get(CMD_TX_ADC_CAL, adc_cal, sizeof(FT_ADC_CAL_ST));
+}
 
+/**
+* @brief 	This function is used to set adc cal param
+*
+* @param[out]	adc_cal		adc cal param
+*
+* @retval	 	TLS_EFUSE_STATUS_OK			get success
+* @retval		TLS_EFUSE_STATUS_EIO		get failed
+*/
+int tls_set_adc_cal_param(FT_ADC_CAL_ST *adc_cal)
+{
+	return tls_ft_param_set(CMD_TX_ADC_CAL, adc_cal, sizeof(FT_ADC_CAL_ST));
+}
 
 

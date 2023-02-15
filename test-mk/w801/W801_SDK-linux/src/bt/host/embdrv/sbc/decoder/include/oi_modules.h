@@ -51,8 +51,7 @@ extern "C" {
  *      access to the configuration table
  */
 
-typedef enum
-{
+typedef enum {
     /* profiles and protocols  --> Updates to oi_debug.c and oi_config_table.c */
 
     /*   XX --> Keep Enum values up-to-date! */

@@ -59,8 +59,7 @@
 *****************************************************************************/
 
 /* Define the result codes from PAN */
-enum
-{
+enum {
     PAN_SUCCESS,                                                /* Success                           */
     PAN_DISCONNECTED            = BNEP_CONN_DISCONNECTED,       /* Connection terminated   */
     PAN_CONN_FAILED             = BNEP_CONN_FAILED,             /* Connection failed                 */
@@ -94,7 +93,8 @@ typedef uint8_t tPAN_RESULT;
 **      to the application. The second parameter TRUE means
 **      to create the bridge and FALSE means to remove it.
 */
-typedef void (tPAN_CONN_STATE_CB)(uint16_t handle, BD_ADDR bd_addr, tPAN_RESULT state, uint8_t is_role_change,
+typedef void (tPAN_CONN_STATE_CB)(uint16_t handle, BD_ADDR bd_addr, tPAN_RESULT state,
+                                  uint8_t is_role_change,
                                   uint8_t src_role, uint8_t dst_role);
 
 
@@ -198,8 +198,7 @@ typedef void (tPAN_MFILTER_IND_CB)(uint16_t handle,
 /* This structure is used to register with PAN profile
 ** It is passed as a parameter to PAN_Register call.
 */
-typedef struct
-{
+typedef struct {
     tPAN_CONN_STATE_CB          *pan_conn_state_cb;     /* Connection state callback */
     tPAN_BRIDGE_REQ_CB          *pan_bridge_req_cb;     /* Bridge request callback */
     tPAN_DATA_IND_CB            *pan_data_ind_cb;       /* Data indication callback */
@@ -306,7 +305,8 @@ extern tPAN_RESULT PAN_SetRole(uint8_t role,
 **                                           allowed at that point of time
 **
 *******************************************************************************/
-extern tPAN_RESULT PAN_Connect(BD_ADDR rem_bda, uint8_t src_role, uint8_t dst_role, uint16_t *handle);
+extern tPAN_RESULT PAN_Connect(BD_ADDR rem_bda, uint8_t src_role, uint8_t dst_role,
+                               uint16_t *handle);
 
 /*******************************************************************************
 **

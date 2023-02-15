@@ -22,8 +22,7 @@
 
 typedef struct hci_t hci_t;
 
-typedef struct hci_inject_t
-{
+typedef struct hci_inject_t {
     // Starts the HCI injection module. Returns true on success, false on failure.
     // Once started, this module must be shut down with |close|.
     uint8_t (*open)(const hci_t *hci_interface);

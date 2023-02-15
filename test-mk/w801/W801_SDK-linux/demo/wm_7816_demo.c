@@ -55,7 +55,7 @@ s16 uart2_rx_cb(uint16_t len)
 void wm_sc_atr_test()
 {
 	char sdata[4] = {0xff, 0x10, 0x95};
-	char rdata[4] = {0xa,0xb,0xc,0xd};
+	//char rdata[4] = {0xa,0xb,0xc,0xd};
 	char parity_byte = (uint8_t)(0xff ^ (uint8_t)0x10 ^ 0x95);
 	sdata[3] = parity_byte;	
 	char  test[32];
@@ -70,7 +70,7 @@ void wm_sc_atr_test()
 	sc_io.io_opt = WM_IO_OPTION3;
 	sc_io.initialed = 1;
 
-	sc_rx.buf = test;
+	sc_rx.buf = (uint8_t *)test;
 	sc_rx.buf_len = 32;
 	sc_rx.require_len = 20;
 	sc_rx.current_len = 0;
@@ -83,7 +83,7 @@ void wm_sc_atr_test()
 	tls_uart_set_stop_bits(2, TLS_UART_TWO_STOPBITS);
 	wm_sc_set_bcwt(0x1ff);
 	
-	tls_uart_rx_callback_register((u16) TLS_UART_2, uart2_rx_cb, NULL);
+	tls_uart_rx_callback_register((u16) TLS_UART_2, (void *)uart2_rx_cb, NULL);
 	tls_uart_tx_callback_register(2, (s16(*) (struct tls_uart_port *))tls_uart_free_tx_sent_data);
 	
 	while(1)
@@ -117,7 +117,7 @@ void wm_sc_atr_test()
 					sc_rx.require_len = 1;
 					sc_rx.current_len = 0;
 					sc_rx.timeout = 0;
-					tls_uart_write(2, i2d_cmd, 5);
+					tls_uart_write(2, (char *)i2d_cmd, 5);
 				}
 				break;
 			case 3:
@@ -126,7 +126,7 @@ void wm_sc_atr_test()
 					sc_rx.require_len = 2;
 					sc_rx.current_len = 0;
 					sc_rx.timeout = 0;
-					tls_uart_write(2, &i2d_cmd[5], 16);
+					tls_uart_write(2, (char *)&i2d_cmd[5], 16);
 				}
 				break;
 			case 4:

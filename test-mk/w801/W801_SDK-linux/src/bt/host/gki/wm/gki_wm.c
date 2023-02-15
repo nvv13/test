@@ -14,6 +14,7 @@
 #include "gki.h"
 #include "wm_timer.h"
 #include "core_804.h"
+#include "wm_osal.h"
 #include "wm_mem.h"
 
 
@@ -21,7 +22,7 @@
 /* Define the structure that holds the GKI variables
 */
 #if GKI_DYNAMIC_MEMORY == FALSE
-    tGKI_CB   gki_cb;
+tGKI_CB   gki_cb;
 #endif
 
 static uint8_t bt_current_task = -1;
@@ -105,11 +106,7 @@ uint32_t GKI_get_os_tick_count(void)
 *******************************************************************************/
 uint8_t GKI_create_task(TASKPTR task_entry, TASKPTR task_ptr, uint8_t task_id, int8_t *taskname)
 {
-    uint16_t  i;
-    uint8_t   *p;
-
-    if(task_id >= GKI_MAX_TASKS)
-    {
+    if(task_id >= GKI_MAX_TASKS) {
         return (GKI_FAILURE);
     }
 
@@ -149,10 +146,8 @@ void GKI_run(void *p_task_id)
     uint16_t flag;
     bt_current_task = -1;
 
-    for(i = 0; i < GKI_MAX_TASKS; i++)
-    {
-        if(gki_cb.com.OSRdyTbl[i] == TASK_READY)
-        {
+    for(i = 0; i < GKI_MAX_TASKS; i++) {
+        if(gki_cb.com.OSRdyTbl[i] == TASK_READY) {
             /* Return only those bits which user wants... */
             flag = gki_cb.com.OSWaitForEvt[i];
             /* Clear the wait for event mask */
@@ -172,14 +167,12 @@ void GKI_run(void *p_task_id)
 
 void GKI_service()
 {
-    if(bdroid_cmp_ticks != tls_os_get_time())
-    {
+    if(bdroid_cmp_ticks != tls_os_get_time()) {
         bdroid_cmp_ticks = tls_os_get_time();
         GKI_run(NULL);
         bdroid_run_ticks++;
 
-        if(bdroid_run_ticks >= 10)
-        {
+        if(bdroid_run_ticks >= 10) {
             bdroid_run_ticks = 0;
             GKI_timer_update(1);
         }
@@ -315,34 +308,28 @@ void GKI_sched_unlock(void)
 *******************************************************************************/
 uint16_t GKI_wait(uint16_t flag, uint32_t timeout)
 {
-    uint16_t  evt;
     uint8_t   rtask;
     rtask = GKI_get_taskid();
     gki_cb.com.OSWaitForEvt[rtask] = flag;
 
     /* Check if anything in any of the mailboxes. Possible race condition. */
-    if(gki_cb.com.OSTaskQFirst[rtask][0])
-    {
+    if(gki_cb.com.OSTaskQFirst[rtask][0]) {
         gki_cb.com.OSWaitEvt[rtask] |= TASK_MBOX_0_EVT_MASK;
     }
 
-    if(gki_cb.com.OSTaskQFirst[rtask][1])
-    {
+    if(gki_cb.com.OSTaskQFirst[rtask][1]) {
         gki_cb.com.OSWaitEvt[rtask] |= TASK_MBOX_1_EVT_MASK;
     }
 
-    if(gki_cb.com.OSTaskQFirst[rtask][2])
-    {
+    if(gki_cb.com.OSTaskQFirst[rtask][2]) {
         gki_cb.com.OSWaitEvt[rtask] |= TASK_MBOX_2_EVT_MASK;
     }
 
-    if(gki_cb.com.OSTaskQFirst[rtask][3])
-    {
+    if(gki_cb.com.OSTaskQFirst[rtask][3]) {
         gki_cb.com.OSWaitEvt[rtask] |= TASK_MBOX_3_EVT_MASK;
     }
 
-    if(!(gki_cb.com.OSWaitEvt[rtask] & flag))
-    {
+    if(!(gki_cb.com.OSWaitEvt[rtask] & flag)) {
         //      printf("task %d now waiting\n", rtask);
         gki_cb.com.OSRdyTbl[rtask] = TASK_WAIT;
         gki_cb.com.OSWaitTmr[rtask] = timeout;
@@ -371,8 +358,7 @@ void GKI_delay(uint32_t timeout)
     uint32_t timeout_ticks = 0;
     timeout_ticks = GKI_MS_TO_TICKS(timeout);     /* convert from milliseconds to ticks */
 
-    if(timeout_ticks == 0)
-    {
+    if(timeout_ticks == 0) {
         timeout_ticks = 1;
     }
 
@@ -385,8 +371,7 @@ void GKI_delay(uint32_t timeout)
     **      if you do not implement task killing, you do not
     **      need this check.
     */
-    if(rtask && gki_cb.com.OSRdyTbl[rtask] == TASK_DEAD)
-    {
+    if(rtask && gki_cb.com.OSRdyTbl[rtask] == TASK_DEAD) {
         /* TODO - add code here to exit the task*/
     }
 
@@ -411,11 +396,21 @@ void GKI_delay(uint32_t timeout)
 *******************************************************************************/
 uint8_t GKI_send_event(uint8_t task_id, uint16_t event)
 {
-    if(task_id >= GKI_MAX_TASKS)
-    {
+    if(task_id >= GKI_MAX_TASKS) {
         return (GKI_FAILURE);
     }
 
+    uint32_t task_event = event | task_id << 16;
+#ifndef CONFIG_KERNEL_NONE
+    extern void active_host_task(uint32_t event);
+    active_host_task(task_event);
+#endif
+    return (GKI_SUCCESS);
+}
+void GKI_event_process(uint32_t task_event)
+{
+    uint8_t task_id = task_event >> 16 & 0xFF;
+    uint16_t event = task_event & 0xFFFF;
     GKI_disable();
     /* Set the event bit */
     gki_cb.com.OSWaitEvt[task_id] |= event;
@@ -423,12 +418,8 @@ uint8_t GKI_send_event(uint8_t task_id, uint16_t event)
     //printf("task %d now ready with event=0x%08x\n", task_id, event);
     GKI_enable();
     /* TODO - add code here to send an event to the task*/
-    #ifndef CONFIG_KERNEL_NONE
-    active_host_task();
-    #endif
-    return (GKI_SUCCESS);
+    GKI_run(NULL);
 }
-
 
 /*******************************************************************************
 **
@@ -451,8 +442,7 @@ uint8_t GKI_send_event(uint8_t task_id, uint16_t event)
 *******************************************************************************/
 uint8_t GKI_isend_event(uint8_t task_id, uint16_t event)
 {
-    if(task_id >= GKI_MAX_TASKS)
-    {
+    if(task_id >= GKI_MAX_TASKS) {
         return (GKI_FAILURE);
     }
 
@@ -501,19 +491,13 @@ uint8_t GKI_get_taskid(void)
 *******************************************************************************/
 int8_t *GKI_map_taskname(uint8_t task_id)
 {
-    if(task_id < GKI_MAX_TASKS)
-    {
+    if(task_id < GKI_MAX_TASKS) {
         return (gki_cb.com.OSTName[task_id]);
+    } else if(task_id == GKI_MAX_TASKS) {
+        return (gki_cb.com.OSTName[GKI_get_taskid()]);
+    } else {
+        return (int8_t *)"BAD";
     }
-    else
-        if(task_id == GKI_MAX_TASKS)
-        {
-            return (gki_cb.com.OSTName[GKI_get_taskid()]);
-        }
-        else
-        {
-            return "BAD";
-        }
 }
 
 
@@ -569,11 +553,10 @@ void GKI_disable(void)
 
 void GKI_exception(uint16_t code, char *msg)
 {
-    #if (GKI_DEBUG == TRUE)
+#if (GKI_DEBUG == TRUE)
     GKI_disable();
 
-    if(gki_cb.com.ExceptionCnt < GKI_MAX_EXCEPTION)
-    {
+    if(gki_cb.com.ExceptionCnt < GKI_MAX_EXCEPTION) {
         EXCEPTION_T *pExp;
         pExp =  &gki_cb.com.Exception[gki_cb.com.ExceptionCnt++];
         pExp->type = code;
@@ -582,7 +565,7 @@ void GKI_exception(uint16_t code, char *msg)
     }
 
     GKI_enable();
-    #endif
+#endif
     printf("xxxGKI_exception...code[%d], msg=%s\r\n", code, msg);
     /* TODO - add code here to display the message and reset the device*/
     return;
@@ -672,16 +655,16 @@ void GKI_register_mempool(void *p_mem)
 **                  dynamic memory allocation is used. (see dyn_mem.h)
 **
 *******************************************************************************/
-void *GKI_os_malloc_debug(uint32_t size, const char* file, int line)
+void *GKI_os_malloc_debug(uint32_t size, const char *file, int line)
 {
-    printf("%d bytes, %s, %d\r\n", size,file, line);
+    printf("%d bytes, %s, %d\r\n", size, file, line);
     void *pByte = tls_mem_alloc(size);
     return pByte;
 }
 void *GKI_os_malloc(uint32_t size)
 {
     void *pByte = tls_mem_alloc(size);
-    return pByte;    
+    return pByte;
 }
 
 /*******************************************************************************
@@ -701,8 +684,7 @@ void *GKI_os_malloc(uint32_t size)
 *******************************************************************************/
 void GKI_os_free(void *p_mem)
 {
-    if(p_mem)
-    {
+    if(p_mem) {
         tls_mem_free(p_mem);
     }
 

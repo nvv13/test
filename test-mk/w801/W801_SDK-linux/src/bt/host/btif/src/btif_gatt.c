@@ -59,7 +59,6 @@
 *******************************************************************************/
 static tls_bt_status_t btif_gatt_init(const btgatt_callbacks_t *callbacks, int valid_type)
 {
-
     return TLS_BT_STATUS_SUCCESS;
 }
 
@@ -74,8 +73,8 @@ static tls_bt_status_t btif_gatt_init(const btgatt_callbacks_t *callbacks, int v
 *******************************************************************************/
 static void  btif_gatt_cleanup(int valid_type)
 {
-	BTA_GATTC_Disable();
-	BTA_GATTS_Disable();
+    BTA_GATTC_Disable();
+    BTA_GATTS_Disable();
 }
 
 

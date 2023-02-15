@@ -17,8 +17,7 @@
 /**********************************************************************
 ** OS specific definitions
 */
-typedef struct
-{
+typedef struct {
     /* OS specific variables here */
     TASKPTR task_ptr[GKI_MAX_TASKS];
     uint16_t flag;
@@ -26,8 +25,7 @@ typedef struct
 
 
 /* Contains common control block as well as OS specific variables */
-typedef struct
-{
+typedef struct {
     tGKI_OS     os;
     tGKI_COM_CB com;
 } tGKI_CB;

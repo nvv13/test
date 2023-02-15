@@ -68,31 +68,28 @@
  * See http://www.freertos.org/a00110.html.
  *----------------------------------------------------------*/
 
-#define configUSE_PREEMPTION		1	//Use a preemptive kernel //ˆá¯®«ì§®¢ âì ¢ëâ¥á­ïîé¥¥ ï¤à®
-#define configUSE_IDLE_HOOK			1	//Use idle hooks
-#define configUSE_TICK_HOOK			0	//Do not use the time slice hook
+#define configUSE_PREEMPTION		1	
+#define configUSE_IDLE_HOOK			1	//Ê¹ÓÃ¿ÕÏÐ¹³×Ó
+#define configUSE_TICK_HOOK			0	
 
-#define configCPU_CLOCK_HZ			( ( unsigned long ) 40000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. *///Internal processor execution frequency
+#define configCPU_CLOCK_HZ			( ( unsigned long ) 40000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. *///???????????????
 
-#define configTICK_RATE_HZ			( ( portTickType ) 500u )	//Frequency of time slice interrupts
-#define configMAX_PRIORITIES		( ( unsigned portBASE_TYPE ) 63)	//Number of priorities available in the application
-#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 90 )	//stack size used by idle tasks
-#define configTOTAL_HEAP_SIZE		( ( size_t ) 12 * 1024 )		//The amount of RAM available in the kernel, heap2 uses
-#define configMAX_TASK_NAME_LEN		( 8 )	//Create task name maximum allowed length
-#define configUSE_TRACE_FACILITY	1		//Whether to use visual tracking
-#define configUSE_16_BIT_TICKS		0	//Define portTickType
-#define configIDLE_SHOULD_YIELD		1	//Talk about preventing an idle task from giving up time until its time slice runs out
+#define configTICK_RATE_HZ			( ( portTickType ) 500u )	
+#define configMAX_PRIORITIES		(63)
+#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 256 )	
+#define configTOTAL_HEAP_SIZE		( ( size_t ) 12 * 1024 )	
+#define configMAX_TASK_NAME_LEN		( 10 )	//´´½¨ÈÎÎñÃû³Æ×î´óÔÊÐí³¤¶È
+#define configUSE_TRACE_FACILITY	1		
+#define configUSE_16_BIT_TICKS		0	
+#define configIDLE_SHOULD_YIELD		1	
 #define configUSE_HEAP3				0
 
 #define configQUEUE_REGISTRY_SIZE 	0
-#define configSEMAPHORE_INIT_VALUE	5	//Create the maximum count value of the semaphore
+#define configSEMAPHORE_INIT_VALUE	5	
 
 /* Co-routine definitions. */
-#define configUSE_CO_ROUTINES 		0	//Does not use a cooperative carousel
-#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )	//Number of priorities available in cooperative applications
-
-#define configTIMER_TASK_STACK_DEPTH 400
-
+#define configUSE_CO_ROUTINES 		0	
+#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )	
 
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */
@@ -105,10 +102,25 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelayUntil			1
 #define INCLUDE_vTaskDelay				1
 
-#define configUSE_MUTEXES               1
-#define configUSE_RECURSIVE_MUTEXES     1
+#define configUSE_COUNTING_SEMAPHORES    1
+#define configSUPPORT_STATIC_ALLOCATION  1
+#define configTIMER_TASK_PRIORITY       ( 1 )
+#define configTIMER_QUEUE_LENGTH        ( 128 )
+#define configTIMER_TASK_STACK_DEPTH    ( 512 )
+#define configUSE_TIMERS                1
+#define configUSE_MUTEXES                (1)
+#define configUSE_STATS_FORMATTING_FUNCTIONS  (1)
+#define INCLUDE_xTaskGetCurrentTaskHandle  (1)
 
-#define INCLUDE_xTaskGetCurrentTaskHandle   1 //can get the current task
+#define configUSE_APPLICATION_TASK_TAG 1
+#define INCLUDE_xQueueGetMutexHolder   1
 
+#define configUSE_PORT_OPTIMISED_TASK_SELECTION  0
+
+#define configUSE_RECURSIVE_MUTEXES    1
+extern void vPortCleanUpTCB(void *pxTCB);
+#define portCLEAN_UP_TCB( pxTCB )          vPortCleanUpTCB( pxTCB )
+extern int printf( const char *format, ... );
+#define configASSERT( a )   do {if ((a)==0){printf("Assert : %s %d\r\n", __FILE__, __LINE__);while(1);}}while(0)
 
 #endif /* FREERTOS_CONFIG_H */

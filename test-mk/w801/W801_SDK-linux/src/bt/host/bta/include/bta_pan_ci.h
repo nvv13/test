@@ -95,7 +95,8 @@ extern void bta_pan_ci_tx_flow(uint16_t handle, uint8_t enable);
 ** Returns          TRUE if flow enabled
 **
 *******************************************************************************/
-extern void bta_pan_ci_rx_writebuf(uint16_t handle, BD_ADDR src, BD_ADDR dst, uint16_t protocol, BT_HDR *p_buf, uint8_t ext);
+extern void bta_pan_ci_rx_writebuf(uint16_t handle, BD_ADDR src, BD_ADDR dst, uint16_t protocol,
+                                   BT_HDR *p_buf, uint8_t ext);
 
 /*******************************************************************************
 **
@@ -123,7 +124,8 @@ extern BT_HDR *bta_pan_ci_readbuf(uint16_t handle, BD_ADDR src, BD_ADDR dst, uin
 ** Returns          void
 **
 *******************************************************************************/
-extern void bta_pan_ci_set_pfilters(uint16_t handle, uint16_t num_filters, uint16_t *p_start_array, uint16_t *p_end_array);
+extern void bta_pan_ci_set_pfilters(uint16_t handle, uint16_t num_filters, uint16_t *p_start_array,
+                                    uint16_t *p_end_array);
 
 
 /*******************************************************************************
@@ -136,7 +138,8 @@ extern void bta_pan_ci_set_pfilters(uint16_t handle, uint16_t num_filters, uint1
 ** Returns          void
 **
 *******************************************************************************/
-extern void bta_pan_ci_set_mfilters(uint16_t handle, uint16_t num_mcast_filters, uint8_t *p_start_array,
+extern void bta_pan_ci_set_mfilters(uint16_t handle, uint16_t num_mcast_filters,
+                                    uint8_t *p_start_array,
                                     uint8_t *p_end_array);
 
 #ifdef __cplusplus

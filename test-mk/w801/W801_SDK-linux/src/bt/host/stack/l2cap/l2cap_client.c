@@ -32,8 +32,7 @@
 #include "osi/include/osi.h"
 #include "stack/include/l2c_api.h"
 
-struct l2cap_client_t
-{
+struct l2cap_client_t {
     l2cap_client_callbacks_t callbacks;
     void *context;
 
@@ -62,8 +61,7 @@ static l2cap_client_t *find(uint16_t local_channel_id);
 static const uint16_t L2CAP_MTU_DEFAULT = 672;
 static const uint16_t L2CAP_MTU_MINIMUM = 48;
 
-static const tL2CAP_APPL_INFO l2cap_callbacks =
-{
+static const tL2CAP_APPL_INFO l2cap_callbacks = {
     .pL2CA_ConnectCfm_Cb       = connect_completed_cb,
     .pL2CA_ConfigInd_Cb        = config_request_cb,
     .pL2CA_ConfigCfm_Cb        = config_completed_cb,
@@ -81,8 +79,7 @@ buffer_t *l2cap_buffer_new(size_t size)
     buffer_t *buf = buffer_new(size + L2CAP_MIN_OFFSET);
     buffer_t *slice = NULL;
 
-    if(buf)
-    {
+    if(buf) {
         slice = buffer_new_slice(buf, size);
     }
 
@@ -98,12 +95,10 @@ l2cap_client_t *l2cap_client_new(const l2cap_client_callbacks_t *callbacks, void
     assert(callbacks->read_ready != NULL);
     assert(callbacks->write_ready != NULL);
 
-    if(!l2cap_clients)
-    {
+    if(!l2cap_clients) {
         l2cap_clients = list_new(NULL);
 
-        if(!l2cap_clients)
-        {
+        if(!l2cap_clients) {
             LOG_ERROR(LOG_TAG, "%s unable to allocate space for L2CAP client list.", __func__);
             return NULL;
         }
@@ -115,8 +110,7 @@ l2cap_client_t *l2cap_client_new(const l2cap_client_callbacks_t *callbacks, void
     ret->remote_mtu = L2CAP_MTU_DEFAULT;
     ret->outbound_fragments = list_new(NULL);
 
-    if(!ret)
-    {
+    if(!ret) {
         LOG_ERROR(LOG_TAG, "%s unable to allocate outbound L2CAP fragment list.", __func__);
         goto error;
     }
@@ -131,8 +125,7 @@ error:
 
 void l2cap_client_free(l2cap_client_t *client)
 {
-    if(!client)
-    {
+    if(!client) {
         return;
     }
 
@@ -142,7 +135,8 @@ void l2cap_client_free(l2cap_client_t *client)
     GKI_freebuf(client);
 }
 
-uint8_t l2cap_client_connect(l2cap_client_t *client, const tls_bt_addr_t *remote_bdaddr, uint16_t psm)
+uint8_t l2cap_client_connect(l2cap_client_t *client, const tls_bt_addr_t *remote_bdaddr,
+                             uint16_t psm)
 {
     assert(client != NULL);
     assert(remote_bdaddr != NULL);
@@ -154,8 +148,7 @@ uint8_t l2cap_client_connect(l2cap_client_t *client, const tls_bt_addr_t *remote
     assert(!L2C_INVALID_PSM(psm));
     client->local_channel_id = L2CA_ConnectReq(psm, (uint8_t *)remote_bdaddr);
 
-    if(!client->local_channel_id)
-    {
+    if(!client->local_channel_id) {
         LOG_ERROR(LOG_TAG, "%s unable to create L2CAP connection.", __func__);
         return false;
     }
@@ -168,9 +161,9 @@ void l2cap_client_disconnect(l2cap_client_t *client)
 {
     assert(client != NULL);
 
-    if(client->local_channel_id && !L2CA_DisconnectReq(client->local_channel_id))
-    {
-        LOG_ERROR(LOG_TAG, "%s unable to send disconnect message for LCID 0x%04x.", __func__, client->local_channel_id);
+    if(client->local_channel_id && !L2CA_DisconnectReq(client->local_channel_id)) {
+        LOG_ERROR(LOG_TAG, "%s unable to send disconnect message for LCID 0x%04x.", __func__,
+                  client->local_channel_id);
     }
 
     client->local_channel_id = 0;
@@ -179,8 +172,8 @@ void l2cap_client_disconnect(l2cap_client_t *client)
     client->configured_peer = false;
     client->is_congested = false;
 
-    for(const list_node_t *node = list_begin(client->outbound_fragments); node != list_end(client->outbound_fragments); node = list_next(node))
-    {
+    for(const list_node_t *node = list_begin(client->outbound_fragments);
+            node != list_end(client->outbound_fragments); node = list_next(node)) {
         GKI_freebuf(list_node(node));
     }
 
@@ -199,8 +192,7 @@ uint8_t l2cap_client_write(l2cap_client_t *client, buffer_t *packet)
     assert(packet != NULL);
     assert(l2cap_client_is_connected(client));
 
-    if(client->is_congested)
-    {
+    if(client->is_congested) {
         return false;
     }
 
@@ -214,14 +206,12 @@ static void connect_completed_cb(uint16_t local_channel_id, uint16_t error_code)
     assert(local_channel_id != 0);
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
+    if(!client) {
         LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client for LCID 0x%04x.", __func__, local_channel_id);
         return;
     }
 
-    if(error_code != L2CAP_CONN_OK)
-    {
+    if(error_code != L2CAP_CONN_OK) {
         LOG_ERROR(LOG_TAG, "%s error connecting L2CAP channel: %d.", __func__, error_code);
         client->callbacks.disconnected(client, client->context);
         return;
@@ -231,8 +221,7 @@ static void connect_completed_cb(uint16_t local_channel_id, uint16_t error_code)
     tL2CAP_CFG_INFO desired_parameters;
     wm_memset(&desired_parameters, 0, sizeof(desired_parameters));
 
-    if(!L2CA_ConfigReq(local_channel_id, &desired_parameters))
-    {
+    if(!L2CA_ConfigReq(local_channel_id, &desired_parameters)) {
         LOG_ERROR(LOG_TAG, "%s error sending L2CAP config parameters.", __func__);
         client->callbacks.disconnected(client, client->context);
     }
@@ -243,35 +232,29 @@ static void config_request_cb(uint16_t local_channel_id, tL2CAP_CFG_INFO *reques
     tL2CAP_CFG_INFO response;
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
-        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__, local_channel_id);
+    if(!client) {
+        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__,
+                  local_channel_id);
         return;
     }
 
     wm_memset(&response, 0, sizeof(response));
     response.result = L2CAP_CFG_OK;
 
-    if(requested_parameters->mtu_present)
-    {
+    if(requested_parameters->mtu_present) {
         // Make sure the peer chose an MTU at least as large as the minimum L2CAP MTU defined
         // by the Bluetooth Core spec.
-        if(requested_parameters->mtu < L2CAP_MTU_MINIMUM)
-        {
+        if(requested_parameters->mtu < L2CAP_MTU_MINIMUM) {
             response.mtu = L2CAP_MTU_MINIMUM;
             response.mtu_present = true;
             response.result = L2CAP_CFG_UNACCEPTABLE_PARAMS;
-        }
-        else
-        {
+        } else {
             client->remote_mtu = requested_parameters->mtu;
         }
     }
 
-    if(requested_parameters->fcr_present)
-    {
-        if(requested_parameters->fcr.mode != L2CAP_FCR_BASIC_MODE)
-        {
+    if(requested_parameters->fcr_present) {
+        if(requested_parameters->fcr.mode != L2CAP_FCR_BASIC_MODE) {
             response.fcr_present = true;
             response.fcr = requested_parameters->fcr;
             response.fcr.mode = L2CAP_FCR_BASIC_MODE;
@@ -279,9 +262,9 @@ static void config_request_cb(uint16_t local_channel_id, tL2CAP_CFG_INFO *reques
         }
     }
 
-    if(!L2CA_ConfigRsp(local_channel_id, &response))
-    {
-        LOG_ERROR(LOG_TAG, "%s unable to send config response for LCID 0x%04x.", __func__, local_channel_id);
+    if(!L2CA_ConfigRsp(local_channel_id, &response)) {
+        LOG_ERROR(LOG_TAG, "%s unable to send config response for LCID 0x%04x.", __func__,
+                  local_channel_id);
         l2cap_client_disconnect(client);
         return;
     }
@@ -289,8 +272,7 @@ static void config_request_cb(uint16_t local_channel_id, tL2CAP_CFG_INFO *reques
     // If we've configured both endpoints, let the listener know we've connected.
     client->configured_peer = true;
 
-    if(l2cap_client_is_connected(client))
-    {
+    if(l2cap_client_is_connected(client)) {
         client->callbacks.connected(client, client->context);
     }
 }
@@ -299,14 +281,13 @@ static void config_completed_cb(uint16_t local_channel_id, tL2CAP_CFG_INFO *nego
 {
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
-        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__, local_channel_id);
+    if(!client) {
+        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__,
+                  local_channel_id);
         return;
     }
 
-    switch(negotiated_parameters->result)
-    {
+    switch(negotiated_parameters->result) {
         // We'll get another configuration response later.
         case L2CAP_CFG_PENDING:
             break;
@@ -321,8 +302,7 @@ static void config_completed_cb(uint16_t local_channel_id, tL2CAP_CFG_INFO *nego
             // If we've configured both endpoints, let the listener know we've connected.
             client->configured_self = true;
 
-            if(l2cap_client_is_connected(client))
-            {
+            if(l2cap_client_is_connected(client)) {
                 client->callbacks.connected(client, client->context);
             }
 
@@ -330,7 +310,8 @@ static void config_completed_cb(uint16_t local_channel_id, tL2CAP_CFG_INFO *nego
 
         // Failure, no further parameter negotiation possible.
         default:
-            LOG_WARN(LOG_TAG, "%s L2CAP parameter negotiation failed with error code %d.", __func__, negotiated_parameters->result);
+            LOG_WARN(LOG_TAG, "%s L2CAP parameter negotiation failed with error code %d.", __func__,
+                     negotiated_parameters->result);
             l2cap_client_disconnect(client);
             break;
     }
@@ -340,14 +321,12 @@ static void disconnect_request_cb(uint16_t local_channel_id, uint8_t ack_require
 {
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
+    if(!client) {
         LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client with LCID 0x%04x.", __func__, local_channel_id);
         return;
     }
 
-    if(ack_required)
-    {
+    if(ack_required) {
         L2CA_DisconnectRsp(local_channel_id);
     }
 
@@ -362,8 +341,7 @@ static void disconnect_completed_cb(uint16_t local_channel_id, UNUSED_ATTR uint1
     assert(local_channel_id != 0);
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
+    if(!client) {
         LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client with LCID 0x%04x.", __func__, local_channel_id);
         return;
     }
@@ -378,23 +356,21 @@ static void congestion_cb(uint16_t local_channel_id, uint8_t is_congested)
     assert(local_channel_id != 0);
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
-        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__, local_channel_id);
+    if(!client) {
+        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__,
+                  local_channel_id);
         return;
     }
 
     client->is_congested = is_congested;
 
-    if(!is_congested)
-    {
+    if(!is_congested) {
         // If we just decongested, dispatch whatever we have left over in our queue.
         // Once that's done, if we're still decongested, notify the listener so it
         // can start writing again.
         dispatch_fragments(client);
 
-        if(!client->is_congested)
-        {
+        if(!client->is_congested) {
             client->callbacks.write_ready(client, client->context);
         }
     }
@@ -405,9 +381,9 @@ static void read_ready_cb(uint16_t local_channel_id, BT_HDR *packet)
     assert(local_channel_id != 0);
     l2cap_client_t *client = find(local_channel_id);
 
-    if(!client)
-    {
-        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__, local_channel_id);
+    if(!client) {
+        LOG_ERROR(LOG_TAG, "%s unable to find L2CAP client matching LCID 0x%04x.", __func__,
+                  local_channel_id);
         return;
     }
 
@@ -419,7 +395,8 @@ static void read_ready_cb(uint16_t local_channel_id, BT_HDR *packet)
     buffer_free(buffer);
 }
 
-static void write_completed_cb(UNUSED_ATTR uint16_t local_channel_id, UNUSED_ATTR uint16_t packets_completed)
+static void write_completed_cb(UNUSED_ATTR uint16_t local_channel_id,
+                               UNUSED_ATTR uint16_t packets_completed)
 {
     // Do nothing. We update congestion state based on the congestion callback
     // and we've already removed items from outbound_fragments list so we don't
@@ -436,16 +413,11 @@ static void fragment_packet(l2cap_client_t *client, buffer_t *packet)
     bt_packet->len = buffer_length(packet);
     wm_memcpy(bt_packet->data + bt_packet->offset, buffer_ptr(packet), buffer_length(packet));
 
-    for(;;)
-    {
-        if(bt_packet->len <= client->remote_mtu)
-        {
-            if(bt_packet->len > 0)
-            {
+    for(;;) {
+        if(bt_packet->len <= client->remote_mtu) {
+            if(bt_packet->len > 0) {
                 list_append(client->outbound_fragments, bt_packet);
-            }
-            else
-            {
+            } else {
                 GKI_freebuf(bt_packet);
             }
 
@@ -455,7 +427,8 @@ static void fragment_packet(l2cap_client_t *client, buffer_t *packet)
         BT_HDR *fragment = GKI_getbuf(client->remote_mtu + L2CAP_MIN_OFFSET);
         fragment->offset = L2CAP_MIN_OFFSET;
         fragment->len = client->remote_mtu;
-        wm_memcpy(fragment->data + fragment->offset, bt_packet->data + bt_packet->offset, client->remote_mtu);
+        wm_memcpy(fragment->data + fragment->offset, bt_packet->data + bt_packet->offset,
+                  client->remote_mtu);
         list_append(client->outbound_fragments, fragment);
         bt_packet->offset += client->remote_mtu;
         bt_packet->len -= client->remote_mtu;
@@ -467,19 +440,18 @@ static void dispatch_fragments(l2cap_client_t *client)
     assert(client != NULL);
     assert(!client->is_congested);
 
-    while(!list_is_empty(client->outbound_fragments))
-    {
+    while(!list_is_empty(client->outbound_fragments)) {
         BT_HDR *packet = (BT_HDR *)list_front(client->outbound_fragments);
         list_remove(client->outbound_fragments, packet);
 
-        switch(L2CA_DataWrite(client->local_channel_id, packet))
-        {
+        switch(L2CA_DataWrite(client->local_channel_id, packet)) {
             case L2CAP_DW_CONGESTED:
                 client->is_congested = true;
                 return;
 
             case L2CAP_DW_FAILED:
-                LOG_ERROR(LOG_TAG, "%s error writing data to L2CAP connection LCID 0x%04x; disconnecting.", __func__, client->local_channel_id);
+                LOG_ERROR(LOG_TAG, "%s error writing data to L2CAP connection LCID 0x%04x; disconnecting.",
+                          __func__, client->local_channel_id);
                 l2cap_client_disconnect(client);
                 return;
 
@@ -493,12 +465,11 @@ static l2cap_client_t *find(uint16_t local_channel_id)
 {
     assert(local_channel_id != 0);
 
-    for(const list_node_t *node = list_begin(l2cap_clients); node != list_end(l2cap_clients); node = list_next(node))
-    {
+    for(const list_node_t *node = list_begin(l2cap_clients); node != list_end(l2cap_clients);
+            node = list_next(node)) {
         l2cap_client_t *client = (l2cap_client_t *)list_node(node);
 
-        if(client->local_channel_id == local_channel_id)
-        {
+        if(client->local_channel_id == local_channel_id) {
             return client;
         }
     }

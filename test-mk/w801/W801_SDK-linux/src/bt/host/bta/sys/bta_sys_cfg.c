@@ -29,21 +29,20 @@
 
 /* GKI task mailbox event for BTA. */
 #ifndef BTA_MBOX_EVT
-    #define BTA_MBOX_EVT                TASK_MBOX_2_EVT_MASK
+#define BTA_MBOX_EVT                TASK_MBOX_2_EVT_MASK
 #endif
 
 /* GKI task mailbox for BTA. */
 #ifndef BTA_MBOX
-    #define BTA_MBOX                    TASK_MBOX_2
+#define BTA_MBOX                    TASK_MBOX_2
 #endif
 
 /* GKI timer id used for protocol timer for BTA. */
 #ifndef BTA_TIMER
-    #define BTA_TIMER                   TIMER_1
+#define BTA_TIMER                   TIMER_1
 #endif
 
-const tBTA_SYS_CFG bta_sys_cfg =
-{
+const tBTA_SYS_CFG bta_sys_cfg = {
     BTA_MBOX_EVT,               /* GKI mailbox event */
     BTA_MBOX,                   /* GKI mailbox id */
     BTA_TIMER,                  /* GKI timer id */

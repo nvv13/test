@@ -17,9 +17,12 @@
 
 #if DEMO_UARTx
 #include "wm_gpio_afsel.h"
-//#include "wm_dma.h"
 
-//extern int tls_uart_dma_off(u16 uart_no);
+#define USE_DMA_TX_FTR  0
+#if USE_DMA_TX_FTR
+#include "wm_dma.h"
+extern int tls_uart_dma_off(u16 uart_no);
+#endif
 
 #define DEMO_UART_TAST_STK_SIZE	1024
 #define DEMO_UART_RX_BUF_SIZE	1024
@@ -45,12 +48,11 @@ typedef struct DEMO_UART
 
 static DEMO_UART_ST *demo_uart = NULL;
 
-#if 0
+#if USE_DMA_TX_FTR
 static void uart_dma_done(void *uart_no)
 {
     u16 ch = *((u16 *)uart_no);
     tls_uart_dma_off(ch);
-    tls_dma_free(2);
 }
 #endif
 static s16 demo_uart_rx(u16 len)
@@ -94,7 +96,7 @@ static void demo_uart_task(void *sdata)
             opt.charlength = TLS_UART_CHSIZE_8BIT;
             opt.flow_ctrl = TLS_UART_FLOW_CTRL_NONE;
 
-            //Select the pin to be used and the specific alternate function
+            //选择待使用的引脚及具体的复用功能
             /* UART1_RX-PB07  UART1_TX-PB06 */
             wm_uart1_rx_config(WM_IO_PB_07);
             wm_uart1_tx_config(WM_IO_PB_06);
@@ -124,8 +126,11 @@ static void demo_uart_task(void *sdata)
                 rx_len -= ret;
                 uart->rx_data_len -= ret;
 
+#if USE_DMA_TX_FTR
+                tls_uart_dma_write(uart->rx_buf, len, uart_dma_done, TLS_UART_1);
+#else
                 tls_uart_write(TLS_UART_1, uart->rx_buf, ret);  /* output */
-                //tls_uart_dma_write(uart->rx_buf, len, uart_dma_done, TLS_UART_1);
+#endif
             }
             if (uart->rx_msg_num > 0)
             {
@@ -163,8 +168,8 @@ int uart_demo(int bandrate, int parity, int stopbits)
         tls_os_task_create(NULL, NULL,
                            demo_uart_task,
                            (void *) demo_uart,
-                           (void *) demo_uart_task_stk, /** The starting address of the task stack */
-                           DEMO_UART_TAST_STK_SIZE,                         /** task stack size   */
+                           (void *) demo_uart_task_stk, /** 任务栈的起始地址 */
+                           DEMO_UART_TAST_STK_SIZE*4,                         /** 任务栈的大小     */
                            DEMO_UART_TASK_PRIO, 0);
     }
     if (-1 == bandrate)

@@ -85,8 +85,7 @@ uint32_t devclass2uint(DEV_CLASS dev_class)
 {
     uint32_t cod = 0;
 
-    if(dev_class != NULL)
-    {
+    if(dev_class != NULL) {
         /* if COD is 0, irrespective of the device type set it to Unclassified device */
         cod = (dev_class[2]) | (dev_class[1] << 8) | (dev_class[0] << 16);
     }
@@ -117,8 +116,7 @@ uint8_t string_to_uuid(const char *str, tls_bt_uuid_t *p_uuid)
 {
     assert(p_uuid);
 
-    if(str == NULL)
-    {
+    if(str == NULL) {
         return false;
     }
 
@@ -127,8 +125,7 @@ uint8_t string_to_uuid(const char *str, tls_bt_uuid_t *p_uuid)
     int rc = sscanf(str, "%08x-%04hx-%04hx-%04hx-%08x%04hx",
                     &uuid0, &uuid1, &uuid2, &uuid3, &uuid4, &uuid5);
 
-    if(rc != 6)
-    {
+    if(rc != 6) {
         return false;
     }
 
@@ -176,27 +173,19 @@ int ascii_2_hex(const char *p_ascii, int len, uint8_t *p_hex)
     int     x;
     uint8_t   c;
 
-    for(x = 0; (x < len) && (*p_ascii); x++)
-    {
-        if(ISDIGIT(*p_ascii))
-        {
+    for(x = 0; (x < len) && (*p_ascii); x++) {
+        if(ISDIGIT(*p_ascii)) {
             c = (*p_ascii - '0') << 4;
-        }
-        else
-        {
+        } else {
             c = (toupper(*p_ascii) - 'A' + 10) << 4;
         }
 
         p_ascii++;
 
-        if(*p_ascii)
-        {
-            if(ISDIGIT(*p_ascii))
-            {
+        if(*p_ascii) {
+            if(ISDIGIT(*p_ascii)) {
                 c |= (*p_ascii - '0');
-            }
-            else
-            {
+            } else {
                 c |= (toupper(*p_ascii) - 'A' + 10);
             }
 
@@ -211,8 +200,7 @@ int ascii_2_hex(const char *p_ascii, int len, uint8_t *p_hex)
 
 const char *dump_dm_search_event(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_DM_INQ_RES_EVT)
             CASE_RETURN_STR(BTA_DM_INQ_CMPL_EVT)
             CASE_RETURN_STR(BTA_DM_DISC_RES_EVT)
@@ -228,8 +216,7 @@ const char *dump_dm_search_event(uint16_t event)
 
 const char *dump_property_type(tls_bt_property_type_t type)
 {
-    switch(type)
-    {
+    switch(type) {
             CASE_RETURN_STR(WM_BT_PROPERTY_BDNAME)
             CASE_RETURN_STR(WM_BT_PROPERTY_BDADDR)
             CASE_RETURN_STR(WM_BT_PROPERTY_UUIDS)
@@ -248,8 +235,7 @@ const char *dump_property_type(tls_bt_property_type_t type)
 
 const char *dump_dm_event(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_DM_ENABLE_EVT)
             CASE_RETURN_STR(BTA_DM_DISABLE_EVT)
             CASE_RETURN_STR(BTA_DM_PIN_REQ_EVT)
@@ -284,8 +270,7 @@ const char *dump_dm_event(uint16_t event)
 
 const char *dump_hf_event(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_AG_ENABLE_EVT)
             CASE_RETURN_STR(BTA_AG_REGISTER_EVT)
             CASE_RETURN_STR(BTA_AG_OPEN_EVT)
@@ -297,9 +282,9 @@ const char *dump_hf_event(uint16_t event)
             CASE_RETURN_STR(BTA_AG_MIC_EVT)
             CASE_RETURN_STR(BTA_AG_AT_CKPD_EVT)
             CASE_RETURN_STR(BTA_AG_DISABLE_EVT)
-            #if (BTM_WBS_INCLUDED == TRUE )
+#if (BTM_WBS_INCLUDED == TRUE )
             CASE_RETURN_STR(BTA_AG_WBS_EVT)
-            #endif
+#endif
             CASE_RETURN_STR(BTA_AG_AT_A_EVT)
             CASE_RETURN_STR(BTA_AG_AT_D_EVT)
             CASE_RETURN_STR(BTA_AG_AT_CHLD_EVT)
@@ -326,8 +311,7 @@ const char *dump_hf_event(uint16_t event)
 
 const char *dump_hf_client_event(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_HF_CLIENT_ENABLE_EVT)
             CASE_RETURN_STR(BTA_HF_CLIENT_REGISTER_EVT)
             CASE_RETURN_STR(BTA_HF_CLIENT_OPEN_EVT)
@@ -359,8 +343,7 @@ const char *dump_hf_client_event(uint16_t event)
 
 const char *dump_hh_event(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_HH_ENABLE_EVT)
             CASE_RETURN_STR(BTA_HH_DISABLE_EVT)
             CASE_RETURN_STR(BTA_HH_OPEN_EVT)
@@ -384,8 +367,7 @@ const char *dump_hh_event(uint16_t event)
 
 const char *dump_hf_conn_state(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTHF_CONNECTION_STATE_DISCONNECTED)
             CASE_RETURN_STR(BTHF_CONNECTION_STATE_CONNECTING)
             CASE_RETURN_STR(BTHF_CONNECTION_STATE_CONNECTED)
@@ -399,8 +381,7 @@ const char *dump_hf_conn_state(uint16_t event)
 
 const char *dump_hf_call_state(bthf_call_state_t call_state)
 {
-    switch(call_state)
-    {
+    switch(call_state) {
             CASE_RETURN_STR(BTHF_CALL_STATE_IDLE)
             CASE_RETURN_STR(BTHF_CALL_STATE_HELD)
             CASE_RETURN_STR(BTHF_CALL_STATE_DIALING)
@@ -416,8 +397,7 @@ const char *dump_hf_call_state(bthf_call_state_t call_state)
 
 const char *dump_hf_audio_state(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTHF_AUDIO_STATE_DISCONNECTED)
             CASE_RETURN_STR(BTHF_AUDIO_STATE_CONNECTING)
             CASE_RETURN_STR(BTHF_AUDIO_STATE_CONNECTED)
@@ -430,8 +410,7 @@ const char *dump_hf_audio_state(uint16_t event)
 
 const char *dump_av_conn_state(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTAV_CONNECTION_STATE_DISCONNECTED)
             CASE_RETURN_STR(BTAV_CONNECTION_STATE_CONNECTING)
             CASE_RETURN_STR(BTAV_CONNECTION_STATE_CONNECTED)
@@ -444,8 +423,7 @@ const char *dump_av_conn_state(uint16_t event)
 
 const char *dump_av_audio_state(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTAV_AUDIO_STATE_REMOTE_SUSPEND)
             CASE_RETURN_STR(BTAV_AUDIO_STATE_STOPPED)
             CASE_RETURN_STR(BTAV_AUDIO_STATE_STARTED)
@@ -457,8 +435,7 @@ const char *dump_av_audio_state(uint16_t event)
 
 const char *dump_adapter_scan_mode(bt_scan_mode_t mode)
 {
-    switch(mode)
-    {
+    switch(mode) {
             CASE_RETURN_STR(BT_SCAN_MODE_NONE)
             CASE_RETURN_STR(BT_SCAN_MODE_CONNECTABLE)
             CASE_RETURN_STR(BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE)
@@ -470,8 +447,7 @@ const char *dump_adapter_scan_mode(bt_scan_mode_t mode)
 
 const char *dump_bt_status(tls_bt_status_t status)
 {
-    switch(status)
-    {
+    switch(status) {
             CASE_RETURN_STR(TLS_BT_STATUS_SUCCESS)
             CASE_RETURN_STR(TLS_BT_STATUS_FAIL)
             CASE_RETURN_STR(TLS_BT_STATUS_NOT_READY)
@@ -486,8 +462,7 @@ const char *dump_bt_status(tls_bt_status_t status)
 
 const char *dump_rc_event(uint8_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_AV_RC_OPEN_EVT)
             CASE_RETURN_STR(BTA_AV_RC_CLOSE_EVT)
             CASE_RETURN_STR(BTA_AV_REMOTE_CMD_EVT)
@@ -504,8 +479,7 @@ const char *dump_rc_event(uint8_t event)
 
 const char *dump_rc_notification_event_id(uint8_t event_id)
 {
-    switch(event_id)
-    {
+    switch(event_id) {
             CASE_RETURN_STR(AVRC_EVT_PLAY_STATUS_CHANGE)
             CASE_RETURN_STR(AVRC_EVT_TRACK_CHANGE)
             CASE_RETURN_STR(AVRC_EVT_TRACK_REACHED_END)
@@ -523,8 +497,7 @@ const char *dump_rc_notification_event_id(uint8_t event_id)
 
 const char  *dump_rc_pdu(uint8_t pdu)
 {
-    switch(pdu)
-    {
+    switch(pdu) {
             CASE_RETURN_STR(AVRC_PDU_LIST_PLAYER_APP_ATTR)
             CASE_RETURN_STR(AVRC_PDU_LIST_PLAYER_APP_VALUES)
             CASE_RETURN_STR(AVRC_PDU_GET_CUR_PLAYER_APP_VALUE)

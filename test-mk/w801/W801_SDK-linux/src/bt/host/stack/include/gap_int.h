@@ -27,8 +27,7 @@
 #include "gatt_api.h"
 #define GAP_MAX_BLOCKS 2        /* Concurrent GAP commands pending at a time*/
 /* Define the Generic Access Profile control structure */
-typedef struct
-{
+typedef struct {
     void          *p_data;      /* Pointer to any data returned in callback */
     tGAP_CALLBACK *gap_cback;   /* Pointer to users callback function */
     tGAP_CALLBACK *gap_inq_rslt_cback; /* Used for inquiry results */
@@ -38,8 +37,7 @@ typedef struct
 } tGAP_INFO;
 
 /* Define the control block for the FindAddrByName operation (Only 1 active at a time) */
-typedef struct
-{
+typedef struct {
     tGAP_CALLBACK           *p_cback;
     tBTM_INQ_INFO           *p_cur_inq; /* Pointer to the current inquiry database entry */
     tGAP_FINDADDR_RESULTS    results;
@@ -48,8 +46,7 @@ typedef struct
 
 /* Define the GAP Connection Control Block.
 */
-typedef struct
-{
+typedef struct {
 #define GAP_CCB_STATE_IDLE              0
 #define GAP_CCB_STATE_LISTENING         1
 #define GAP_CCB_STATE_CONN_SETUP        2
@@ -89,13 +86,12 @@ typedef struct
     tL2CAP_LE_CFG_INFO peer_coc_cfg;        /* local configuration for LE Coc */
 } tGAP_CCB;
 
-typedef struct
-{
-    #if AMP_INCLUDED == TRUE
+typedef struct {
+#if AMP_INCLUDED == TRUE
     tAMP_APPL_INFO    reg_info;
-    #else
+#else
     tL2CAP_APPL_INFO  reg_info;                     /* L2CAP Registration info */
-    #endif
+#endif
     tGAP_CCB    ccb_pool[GAP_MAX_CONNECTIONS];
 } tGAP_CONN;
 
@@ -103,8 +99,7 @@ typedef struct
 #if BLE_INCLUDED == TRUE
 #define GAP_MAX_CHAR_NUM          4
 
-typedef struct
-{
+typedef struct {
     uint16_t                  handle;
     uint16_t                  uuid;
     tGAP_BLE_ATTR_VALUE     attr_value;
@@ -116,14 +111,12 @@ typedef struct
 
 #define GAP_MAX_CL GATT_CL_MAX_LCB
 
-typedef struct
-{
+typedef struct {
     uint16_t uuid;
     tGAP_BLE_CMPL_CBACK *p_cback;
 } tGAP_BLE_REQ;
 
-typedef struct
-{
+typedef struct {
     BD_ADDR                 bda;
     tGAP_BLE_CMPL_CBACK     *p_cback;
     uint16_t                  conn_id;
@@ -134,33 +127,32 @@ typedef struct
 
 } tGAP_CLCB;
 
-typedef struct
-{
+typedef struct {
     tGAP_INFO        blk[GAP_MAX_BLOCKS];
     tBTM_CMPL_CB    *btm_cback[GAP_MAX_BLOCKS];
     uint8_t            trace_level;
     tGAP_FINDADDR_CB findaddr_cb;   /* Contains the control block for finding a device addr */
     tBTM_INQ_INFO   *cur_inqptr;
 
-    #if GAP_CONN_INCLUDED == TRUE
+#if GAP_CONN_INCLUDED == TRUE
     tGAP_CONN        conn;
-    #endif
+#endif
 
     /* LE GAP attribute database */
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tGAP_ATTR               gatt_attr[GAP_MAX_CHAR_NUM];
     tGAP_CLCB               clcb[GAP_MAX_CL]; /* connection link*/
     tGATT_IF                gatt_if;
-    #endif
+#endif
 } tGAP_CB;
 
 
 extern tGAP_CB  gap_cb;
 #if (GAP_CONN_INCLUDED == TRUE)
-    extern void gap_conn_init(void);
+extern void gap_conn_init(void);
 #endif
 #if (BLE_INCLUDED == TRUE)
-    extern void gap_attr_db_init(void);
+extern void gap_attr_db_init(void);
 #endif
 
 #endif

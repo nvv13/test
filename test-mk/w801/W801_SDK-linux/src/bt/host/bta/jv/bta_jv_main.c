@@ -33,7 +33,7 @@
 *****************************************************************************/
 
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_JV_CB bta_jv_cb;
+tBTA_JV_CB bta_jv_cb;
 #endif
 
 /* state machine action enumeration list */
@@ -43,8 +43,7 @@
 typedef void (*tBTA_JV_ACTION)(tBTA_JV_MSG *p_data);
 
 /* action function list */
-const tBTA_JV_ACTION bta_jv_action[] =
-{
+const tBTA_JV_ACTION bta_jv_action[] = {
     bta_jv_enable,                  /* BTA_JV_API_ENABLE_EVT */
     bta_jv_disable,                 /* BTA_JV_API_DISABLE_EVT */
     bta_jv_get_channel_id,          /* BTA_JV_API_GET_CHANNEL_EVT */
@@ -88,8 +87,7 @@ uint8_t bta_jv_sm_execute(BT_HDR *p_msg)
     uint16_t action = (p_msg->event & 0x00ff);
     /* execute action functions */
 
-    if(action < BTA_JV_NUM_ACTIONS)
-    {
+    if(action < BTA_JV_NUM_ACTIONS) {
         (*bta_jv_action[action])((tBTA_JV_MSG *)p_msg);
         ret = TRUE;
     }

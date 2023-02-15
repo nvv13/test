@@ -61,8 +61,7 @@
 **      This following definitions are used to indicate the security
 **      requirements for a service.
 */
-typedef struct
-{
+typedef struct {
     uint8_t   level;
     uint8_t   mask;
 } tBT_SECURITY;

@@ -23,16 +23,14 @@
 #define BTPAN_ROLE_PANNAP    1
 #define BTPAN_ROLE_PANU      2
 
-typedef enum
-{
+typedef enum {
     BTPAN_STATE_CONNECTED       = 0,
     BTPAN_STATE_CONNECTING      = 1,
     BTPAN_STATE_DISCONNECTED    = 2,
     BTPAN_STATE_DISCONNECTING   = 3
 } btpan_connection_state_t;
 
-typedef enum
-{
+typedef enum {
     BTPAN_STATE_ENABLED = 0,
     BTPAN_STATE_DISABLED = 1
 } btpan_control_state_t;
@@ -40,19 +38,18 @@ typedef enum
 /**
 * Callback for pan connection state
 */
-typedef void (*btpan_connection_state_callback)(btpan_connection_state_t state, tls_bt_status_t error,
+typedef void (*btpan_connection_state_callback)(btpan_connection_state_t state,
+        tls_bt_status_t error,
         const tls_bt_addr_t *bd_addr, int local_role, int remote_role);
 typedef void (*btpan_control_state_callback)(btpan_control_state_t state, int local_role,
         tls_bt_status_t error, const char *ifname);
 
-typedef struct
-{
+typedef struct {
     size_t size;
     btpan_control_state_callback control_state_cb;
     btpan_connection_state_callback connection_state_cb;
 } btpan_callbacks_t;
-typedef struct
-{
+typedef struct {
     /** set to size of this struct*/
     size_t          size;
     /**

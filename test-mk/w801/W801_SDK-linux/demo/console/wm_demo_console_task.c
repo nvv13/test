@@ -223,10 +223,13 @@ int demo_cmd_execute(Demo_Console *sys)
 			}
 			else if (str_r && str_n)
 			{
-				if (((str_r > str_n) && (str_r > strfirst))
-					||((str_r < str_n) && (str_n > strfirst)))
+				if (((str_r > str_n) && (str_r > strfirst)))
 				{
 					strfirst[str_n - strfirst] = '\0';
+				}
+				else if ((str_r < str_n) && (str_n > strfirst))
+				{
+					strfirst[str_r - strfirst] = '\0';
 				}
 			}
 
@@ -241,6 +244,11 @@ int demo_cmd_execute(Demo_Console *sys)
 					{
 						continue;
 					}
+				}
+				if(!pparam_begin)
+				{
+				    printf("\ndemo cmd short\n");
+				    return DEMO_CONSOLE_SHORT_CMD;
 				}
 			}
 			else
@@ -261,7 +269,7 @@ int demo_cmd_execute(Demo_Console *sys)
             if (!pparam_begin && !pparam_end)
             {
                 /*No Parameter,use default parameter to execute*/
-                printf("[CMD]%s", console_tbl[i].cmd);
+                printf("\n[CMD]%s\n", console_tbl[i].cmd);
                 for (j = 0; j < console_tbl[i].param_cnt; j++)
                 {
                     if (!((console_tbl[i].type >> j) & 0x1))
@@ -363,6 +371,8 @@ int demo_cmd_execute(Demo_Console *sys)
                     }
                 }
 
+                printf("\n[CMD]%s\n", console_tbl[i].cmd);
+
                 ret = demo_call_fn((int (*)())console_tbl[i].callfn, param, console_tbl[i].param_cnt);
                 if(WM_FAILED == ret)
                 {
@@ -375,6 +385,7 @@ int demo_cmd_execute(Demo_Console *sys)
             }
             else if (pparam_begin && !pparam_end)
             {
+                printf("\ndemo cmd short\n");
                 return DEMO_CONSOLE_SHORT_CMD;
             }
             else
@@ -390,6 +401,7 @@ int demo_cmd_execute(Demo_Console *sys)
         {
             /*wrong cmd parameter,discard this cmd*/
             //demo_console_show_help(NULL);
+            printf("\nwrong cmd\n");
             return DEMO_CONSOLE_WRONG_CMD;
         }
     }
@@ -407,6 +419,7 @@ void demo_console_task(void *sdata)
     demo_console_show_help(NULL);
     demo_console_malloc();
     gstConsole.rptr = 0;
+    gstConsole.rx_data_len = DEMO_CONSOLE_BUF_SIZE;
     tls_uart_set_baud_rate(TLS_UART_0, 115200);
 	tls_uart_rx_callback_register(TLS_UART_0, demo_console_rx, NULL);
 
@@ -416,22 +429,36 @@ void demo_console_task(void *sdata)
         switch((u32)msg)
         {
         case 1:
-            ret = tls_uart_read(TLS_UART_0, gstConsole.rx_buf + gstConsole.rptr, gstConsole.rx_data_len);
-            if(ret <= 0)
+            while(1)
+            {
+                ret = tls_uart_read(TLS_UART_0, gstConsole.rx_buf + gstConsole.rptr, gstConsole.rx_data_len);
+                if(ret <= 0)
+                    break;
+                gstConsole.rx_data_len -= ret;
+                gstConsole.rptr += ret;
+                if(gstConsole.rx_data_len <= 0)
+                    break;
+                tls_os_time_delay(20);
+            }
+            if(gstConsole.rptr == 0)
                 break;
-            gstConsole.rx_data_len -= ret;
-            gstConsole.rptr += ret;
             ret = demo_cmd_execute(&gstConsole);	//parse command and execute if needed
-            if((DEMO_CONSOLE_CMD == ret) || (DEMO_CONSOLE_WRONG_CMD == ret))	
+            if(DEMO_CONSOLE_CMD == ret)	
             {
                 /*modify*/
-                memset(gstConsole.rx_buf, 0, DEMO_CONSOLE_BUF_SIZE);	/*After command finished transfering, clear buffer*/
-                gstConsole.rptr = 0;
+                //printf("Demo cmd is finished\r\n");
+            }
+            else if(DEMO_CONSOLE_WRONG_CMD == ret)
+            {
+                //printf("Demo cmd is wrong\r\n");
             }
             else if(DEMO_CONSOLE_SHORT_CMD == ret)
             {
                 //param not passed all, do nothing.
+                //printf("Demo cmd is short\r\n");
             }
+            memset(gstConsole.rx_buf, 0, DEMO_CONSOLE_BUF_SIZE);	/*After command finished transfering, clear buffer*/
+            gstConsole.rptr = 0;
 
             if(gstConsole.MsgNum)
                 gstConsole.MsgNum --;
@@ -453,7 +480,5 @@ void CreateDemoTask(void)
                        DEMO_TASK_PRIO,
                        0);
 }
-
-
 #endif	//DEMO_CONSOLE
 

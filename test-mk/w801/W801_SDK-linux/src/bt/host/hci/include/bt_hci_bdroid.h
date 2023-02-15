@@ -31,7 +31,7 @@
 
 #include "bt_hci_lib.h"
 #ifdef HAS_BDROID_BUILDCFG
-    #include "bdroid_buildcfg.h"
+#include "bdroid_buildcfg.h"
 #endif
 
 /******************************************************************************
@@ -39,28 +39,27 @@
 ******************************************************************************/
 
 #if __STDC_VERSION__ < 199901L
-    #ifndef FALSE
-        #define FALSE 0
-    #endif
-    #ifndef TRUE
-        #define TRUE (!FALSE)
-    #endif
+#ifndef FALSE
+#define FALSE 0
+#endif
+#ifndef TRUE
+#define TRUE (!FALSE)
+#endif
 #else
-    #include <stdbool.h>
-    #ifndef FALSE
-        #define FALSE  false
-    #endif
-    #ifndef TRUE
-        #define TRUE   true
-    #endif
+#include <stdbool.h>
+#ifndef FALSE
+#define FALSE  false
+#endif
+#ifndef TRUE
+#define TRUE   true
+#endif
 #endif
 
 #define HCI_ACL_MAX_SIZE 1024
 #define HCI_MAX_FRAME_SIZE (HCI_ACL_MAX_SIZE + 4)
 
 /* Host/Controller lib internal event ID */
-typedef enum
-{
+typedef enum {
     HC_EVENT_LPM_IDLE_TIMEOUT,
 } bthc_event_t;
 
@@ -89,8 +88,7 @@ typedef enum
 **  Type definitions and return values
 ******************************************************************************/
 
-typedef struct
-{
+typedef struct {
     uint16_t          event;
     uint16_t          len;
     uint16_t          offset;
@@ -100,8 +98,7 @@ typedef struct
 
 #define BT_HC_HDR_SIZE (sizeof(HC_BT_HDR))
 
-typedef struct _hc_buffer_hdr
-{
+typedef struct _hc_buffer_hdr {
     struct _hc_buffer_hdr *p_next;   /* next buffer in the queue */
     uint8_t   reserved1;
     uint8_t   reserved2;

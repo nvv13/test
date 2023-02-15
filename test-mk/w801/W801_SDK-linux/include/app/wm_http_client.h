@@ -126,6 +126,8 @@ typedef signed long             LONG;
 #define HTTP_CLIENT_ERROR_TLS_NEGO			30
 /** Feature is not (yet) implemented */
 #define HTTP_CLIENT_ERROR_NOT_IMPLEMENTED   64
+/** Connection closed.       */
+#define HTTP_CLIENT_ERROR_CONNECTION_CLOSE	500
 /** HTTP end of stream message */
 #define HTTP_CLIENT_EOS                     1000
 
@@ -180,7 +182,7 @@ typedef struct _HTTP_CLIENT
     UINT32        HTTPStatusCode;                 // HTTP Status code (200 OK)
     UINT32		    RequestBodyLengthSent;          // Total bytes sent (body only)
     UINT32		    ResponseBodyLengthReceived;     // Total bytes received (body only)
-    UINT32		    TotalResponseBodyLength;        // as extracted from the ìcontent-length" header
+    UINT32		    TotalResponseBodyLength;        // as extracted from the Êè∑ontent-length" header
     UINT32        HttpState;
 } HTTP_CLIENT;
 

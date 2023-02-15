@@ -80,9 +80,11 @@ typedef uint8_t tMCA_RESULT;
 **  Type Definitions
 *****************************************************************************/
 typedef uint8_t  tMCA_HANDLE; /* the handle for registration. 1 based index to rcb */
-typedef uint8_t  tMCA_CL;     /* the handle for a control channel; reported at MCA_CONNECT_IND_EVT */
+typedef uint8_t
+tMCA_CL;     /* the handle for a control channel; reported at MCA_CONNECT_IND_EVT */
 typedef uint8_t  tMCA_DEP;    /* the handle for MCA_CreateDep. This is also the local mdep_id */
-typedef uint16_t tMCA_DL;     /* the handle for the data channel. This is reported at MCA_OPEN_CFM_EVT or MCA_OPEN_IND_EVT */
+typedef uint16_t
+tMCA_DL;     /* the handle for the data channel. This is reported at MCA_OPEN_CFM_EVT or MCA_OPEN_IND_EVT */
 
 /* This is the data callback function.  It is executed when MCAP has a data
 ** packet ready for the application.
@@ -91,8 +93,7 @@ typedef void (tMCA_DATA_CBACK)(tMCA_DL mdl, BT_HDR *p_pkt);
 
 
 /* This structure contains parameters which are set at registration. */
-typedef struct
-{
+typedef struct {
     uint32_t      rsp_tout;   /* MCAP signaling response timeout */
     uint16_t      ctrl_psm;   /* L2CAP PSM for the MCAP control channel */
     uint16_t      data_psm;   /* L2CAP PSM for the MCAP data channel */
@@ -100,9 +101,9 @@ typedef struct
 } tMCA_REG;
 
 /* This structure contains parameters to create a MDEP. */
-typedef struct
-{
-    uint8_t           type;       /* MCA_TDEP_DATA, or MCA_TDEP_ECHO. a regiatration may have only one MCA_TDEP_ECHO MDEP */
+typedef struct {
+    uint8_t
+    type;       /* MCA_TDEP_DATA, or MCA_TDEP_ECHO. a regiatration may have only one MCA_TDEP_ECHO MDEP */
     uint8_t           max_mdl;    /* The maximum number of MDLs for this MDEP (max is MCA_NUM_MDLS) */
     tMCA_DATA_CBACK *p_data_cback;  /* Data callback function */
 } tMCA_CS;
@@ -115,8 +116,7 @@ typedef struct
 typedef uint8_t tMCA_FCS_OPT;
 
 /* This structure contains L2CAP configuration parameters for the channel. */
-typedef struct
-{
+typedef struct {
     tL2CAP_FCR_OPTS fcr_opt;
     uint16_t          user_rx_buf_size;
     uint16_t          user_tx_buf_size;
@@ -128,23 +128,20 @@ typedef struct
 
 
 /* Header structure for callback event parameters. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* The associated MDL ID */
     uint8_t           op_code;    /* The op (request/response) code */
 } tMCA_EVT_HDR;
 
 /* Response Header structure for callback event parameters. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* The associated MDL ID */
     uint8_t           op_code;    /* The op (request/response) code */
     uint8_t           rsp_code;   /* The response code */
 } tMCA_RSP_EVT;
 
 /* This data structure is associated with the MCA_CREATE_IND_EVT. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* The associated MDL ID */
     uint8_t           op_code;    /* The op (request/response) code */
     uint8_t           dep_id;     /* MDEP ID */
@@ -152,8 +149,7 @@ typedef struct
 } tMCA_CREATE_IND;
 
 /* This data structure is associated with the MCA_CREATE_CFM_EVT. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* The associated MDL ID */
     uint8_t           op_code;    /* The op (request/response) code */
     uint8_t           rsp_code;   /* The response code. */
@@ -161,46 +157,40 @@ typedef struct
 } tMCA_CREATE_CFM;
 
 /* This data structure is associated with MCA_CONNECT_IND_EVT. */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;    /* The peer address */
     uint16_t          mtu;        /* peer mtu */
 } tMCA_CONNECT_IND;
 
 /* This data structure is associated with MCA_DISCONNECT_IND_EVT. */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;    /* The peer address */
     uint16_t          reason;     /* disconnect reason given by L2CAP */
 } tMCA_DISCONNECT_IND;
 
 /* This data structure is associated with MCA_OPEN_IND_EVT, and MCA_OPEN_CFM_EVT. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* The associated MDL ID */
     tMCA_DL         mdl;        /* The handle for the data channel */
     uint16_t          mtu;        /* peer mtu */
 } tMCA_DL_OPEN;
 
 /* This data structure is associated with MCA_CLOSE_IND_EVT and MCA_CLOSE_CFM_EVT. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* The associated MDL ID */
     tMCA_DL         mdl;        /* The handle for the data channel */
     uint16_t          reason;     /* disconnect reason given by L2CAP */
 } tMCA_DL_CLOSE;
 
 /* This data structure is associated with MCA_CONG_CHG_EVT. */
-typedef struct
-{
+typedef struct {
     uint16_t          mdl_id;     /* N/A - This is a place holder */
     tMCA_DL         mdl;        /* The handle for the data channel */
     uint8_t         cong;       /* TRUE, if the channel is congested */
 } tMCA_CONG_CHG;
 
 /* Union of all control callback event data structures */
-typedef union
-{
+typedef union {
     tMCA_EVT_HDR        hdr;
     tMCA_RSP_EVT        rsp;
     tMCA_CREATE_IND     create_ind;

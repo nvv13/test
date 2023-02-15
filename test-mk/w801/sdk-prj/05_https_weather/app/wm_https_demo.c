@@ -21,7 +21,7 @@
 #include "wm_sockets.h"
 
 #include "HTTPClientWrapper.h"
-#include "wm_sockets2.0.3.h"
+#include "wm_sockets2.1.3.h"
 
 #include "w_https.h"
 

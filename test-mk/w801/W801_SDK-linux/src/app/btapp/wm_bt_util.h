@@ -8,8 +8,7 @@
 #define TLS_TRACE_TYPE_EVENT            0x00000003
 #define TLS_TRACE_TYPE_DEBUG            0x00000004
 
-typedef struct 
-{
+typedef struct {
     uint32_t total;
     uint32_t available;
     uint8_t *base;
@@ -19,20 +18,20 @@ typedef struct
 
 uint16_t app_uuid128_to_uuid16(tls_bt_uuid_t *uuid);
 
-tls_bt_uuid_t * app_uuid16_to_uuid128(uint16_t uuid16);
+tls_bt_uuid_t *app_uuid16_to_uuid128(uint16_t uuid16);
 
 /* define log for application */
 #if 1
-#define TLS_BT_APPL_TRACE_ERROR(...)				 {if (tls_appl_trace_level >= TLS_BT_LOG_ERROR) tls_bt_log(TLS_TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-#define TLS_BT_APPL_TRACE_WARNING(...) 				 {if (tls_appl_trace_level >= TLS_BT_LOG_WARNING) tls_bt_log(TLS_TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-#define TLS_BT_APPL_TRACE_API(...) 					 {if (tls_appl_trace_level >= TLS_BT_LOG_API) tls_bt_log( TLS_TRACE_TYPE_API, ##__VA_ARGS__);}
-#define TLS_BT_APPL_TRACE_EVENT(...)			     {if (tls_appl_trace_level >= TLS_BT_LOG_EVENT) tls_bt_log(TLS_TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-#define TLS_BT_APPL_TRACE_DEBUG(...)				 {if (tls_appl_trace_level >= TLS_BT_LOG_DEBUG) tls_bt_log(TLS_TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-#define TLS_BT_APPL_TRACE_VERBOSE(...) 				 {if (tls_appl_trace_level >= TLS_BT_LOG_VERBOSE) tls_bt_log(TLS_TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define TLS_BT_APPL_TRACE_ERROR(...)                 {if (tls_appl_trace_level >= TLS_BT_LOG_ERROR) tls_bt_log(TLS_TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define TLS_BT_APPL_TRACE_WARNING(...)               {if (tls_appl_trace_level >= TLS_BT_LOG_WARNING) tls_bt_log(TLS_TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define TLS_BT_APPL_TRACE_API(...)                   {if (tls_appl_trace_level >= TLS_BT_LOG_API) tls_bt_log( TLS_TRACE_TYPE_API, ##__VA_ARGS__);}
+#define TLS_BT_APPL_TRACE_EVENT(...)                 {if (tls_appl_trace_level >= TLS_BT_LOG_EVENT) tls_bt_log(TLS_TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define TLS_BT_APPL_TRACE_DEBUG(...)                 {if (tls_appl_trace_level >= TLS_BT_LOG_DEBUG) tls_bt_log(TLS_TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define TLS_BT_APPL_TRACE_VERBOSE(...)               {if (tls_appl_trace_level >= TLS_BT_LOG_VERBOSE) tls_bt_log(TLS_TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
 #define TLS_BT_APPL_TRACE_ERROR(...)
 #define TLS_BT_APPL_TRACE_WARNING(...)
-#define TLS_BT_APPL_TRACE_API(...) 
+#define TLS_BT_APPL_TRACE_API(...)
 #define TLS_BT_APPL_TRACE_EVENT(...)
 #define TLS_BT_APPL_TRACE_DEBUG(...)
 #define TLS_BT_APPL_TRACE_VERBOSE(...)

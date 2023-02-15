@@ -43,9 +43,9 @@
 **  Local Function prototypes
 *****************************************************************************/
 #if (BTA_HL_DEBUG == TRUE && BT_TRACE_VERBOSE == TRUE)
-    static char *bta_hl_mcap_evt_code(uint8_t evt_code);
-    static char *bta_hl_dch_oper_code(tBTA_HL_DCH_OPER oper_code);
-    static char *bta_hl_cback_evt_code(uint8_t evt_code);
+static char *bta_hl_mcap_evt_code(uint8_t evt_code);
+static char *bta_hl_dch_oper_code(tBTA_HL_DCH_OPER oper_code);
+static char *bta_hl_cback_evt_code(uint8_t evt_code);
 #endif
 static void bta_hl_sdp_cback(uint8_t sdp_op, uint8_t app_idx, uint8_t mcl_idx,
                              uint8_t mdl_idx, uint16_t status);
@@ -58,8 +58,7 @@ static void bta_hl_sdp_cback5(uint16_t status);
 static void bta_hl_sdp_cback6(uint16_t status);
 
 
-static tSDP_DISC_CMPL_CB *const bta_hl_sdp_cback_arr[] =
-{
+static tSDP_DISC_CMPL_CB *const bta_hl_sdp_cback_arr[] = {
     bta_hl_sdp_cback0,
     bta_hl_sdp_cback1,
     bta_hl_sdp_cback2,
@@ -88,11 +87,11 @@ void bta_hl_dch_mca_cong_change(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_id
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tMCA_CONG_CHG       *p_cong_chg = &p_data->mca_evt.mca_data.cong_chg;
     tBTA_HL             evt_data;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_cong_change mdl_id=%d cong=%d",
                      p_cong_chg->mdl_id,
                      p_cong_chg->cong);
-    #endif
+#endif
     evt_data.dch_cong_ind.cong          =
                     p_dcb->cong                         = p_cong_chg->cong;
     evt_data.dch_cong_ind.mdl_handle    = p_dcb->mdl_handle;
@@ -119,9 +118,9 @@ void bta_hl_dch_echo_test(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     UNUSED(p_data);
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_echo_test");
-    #endif
+#endif
     p_dcb->echo_oper = BTA_HL_ECHO_OP_CI_GET_ECHO_DATA;
     p_dcb->cout_oper |= BTA_HL_CO_GET_ECHO_DATA_MASK;
     bta_hl_co_get_echo_data(p_acb->app_id, p_mcb->mcl_handle,
@@ -143,32 +142,25 @@ void bta_hl_dch_sdp_init(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
 {
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_sdp_init");
-    #endif
+#endif
 
-    if(p_mcb->sdp_oper == BTA_HL_SDP_OP_NONE)
-    {
+    if(p_mcb->sdp_oper == BTA_HL_SDP_OP_NONE) {
         p_mcb->sdp_mdl_idx = mdl_idx;
 
-        if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_OPEN)
-        {
+        if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_OPEN) {
             p_mcb->sdp_oper = BTA_HL_SDP_OP_DCH_OPEN_INIT;
-        }
-        else
-        {
+        } else {
             p_mcb->sdp_oper = BTA_HL_SDP_OP_DCH_RECONNECT_INIT;
         }
 
-        if(bta_hl_init_sdp(p_mcb->sdp_oper, app_idx, mcl_idx, mdl_idx) != BTA_HL_STATUS_OK)
-        {
+        if(bta_hl_init_sdp(p_mcb->sdp_oper, app_idx, mcl_idx, mdl_idx) != BTA_HL_STATUS_OK) {
             APPL_TRACE_ERROR("SDP INIT failed");
             p_mcb->sdp_oper = BTA_HL_SDP_OP_NONE;
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_SDP_FAIL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("SDP in use");
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_SDP_FAIL_EVT, p_data);
     }
@@ -188,12 +180,11 @@ void bta_hl_dch_close_echo_test(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_id
                                 tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MDL_CB          *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_close_echo_test");
-    #endif
+#endif
 
-    switch(p_dcb->echo_oper)
-    {
+    switch(p_dcb->echo_oper) {
         case BTA_HL_ECHO_OP_DCH_CLOSE_CFM:
         case BTA_HL_ECHO_OP_OPEN_IND:
         case BTA_HL_ECHO_OP_ECHO_PKT:
@@ -207,8 +198,7 @@ void bta_hl_dch_close_echo_test(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_id
             break;
     }
 
-    if(MCA_CloseReq((tMCA_DL) p_dcb->mdl_handle) != MCA_SUCCESS)
-    {
+    if(MCA_CloseReq((tMCA_DL) p_dcb->mdl_handle) != MCA_SUCCESS) {
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
     }
 }
@@ -229,17 +219,14 @@ void bta_hl_dch_mca_rcv_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_APP_CB      *p_acb  = BTA_HL_GET_APP_CB_PTR(app_idx);
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_rcv_data");
-    #endif
+#endif
 
-    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID)
-    {
-        switch(p_dcb->echo_oper)
-        {
+    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID) {
+        switch(p_dcb->echo_oper) {
             case  BTA_HL_ECHO_OP_ECHO_PKT:
-                if(MCA_WriteReq((tMCA_DL) p_dcb->mdl_handle, p_data->mca_rcv_data_evt.p_pkt) != MCA_SUCCESS)
-                {
+                if(MCA_WriteReq((tMCA_DL) p_dcb->mdl_handle, p_data->mca_rcv_data_evt.p_pkt) != MCA_SUCCESS) {
                     GKI_free_and_reset_buf((void **)&p_data->mca_rcv_data_evt.p_pkt);
                     bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_ECHO_TEST_EVT, p_data);
                 }
@@ -261,9 +248,7 @@ void bta_hl_dch_mca_rcv_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                 APPL_TRACE_ERROR("Unknonw echo_oper=%d", p_dcb->echo_oper);
                 break;
         }
-    }
-    else
-    {
+    } else {
         p_dcb->cout_oper |= BTA_HL_CO_PUT_RX_DATA_MASK;
         p_dcb->p_rx_pkt = p_data->mca_rcv_data_evt.p_pkt;
         bta_hl_co_put_rx_data(p_acb->app_id, p_dcb->mdl_handle,
@@ -288,9 +273,9 @@ void bta_hl_dch_ci_put_echo_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_i
                                  tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_ci_put_echo_data");
-    #endif
+#endif
     p_dcb->cout_oper &= ~BTA_HL_CO_PUT_ECHO_DATA_MASK;
     GKI_free_and_reset_buf((void **)&p_dcb->p_echo_rx_pkt);
     p_dcb->ci_put_echo_data_status = p_data->ci_get_put_echo_data.status;
@@ -315,27 +300,21 @@ void bta_hl_dch_ci_get_echo_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_i
 {
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tBTA_HL_STATUS      status;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_ci_get_echo_data");
-    #endif
+#endif
     p_dcb->cout_oper &= ~BTA_HL_CO_GET_ECHO_DATA_MASK;
 
-    if(!p_dcb->abort_oper)
-    {
+    if(!p_dcb->abort_oper) {
         status = p_data->ci_get_put_echo_data.status;
 
-        if(status == BTA_HL_STATUS_OK)
-        {
+        if(status == BTA_HL_STATUS_OK) {
             p_dcb->echo_oper = BTA_HL_ECHO_OP_MDL_CREATE_CFM;
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_OPEN_EVT, p_data);
-        }
-        else
-        {
+        } else {
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
     }
 }
@@ -357,9 +336,9 @@ void bta_hl_dch_ci_put_rx_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tBTA_HL             evt_data;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_ci_put_rx_data");
-    #endif
+#endif
     p_dcb->cout_oper &= ~BTA_HL_CO_PUT_RX_DATA_MASK;
     GKI_free_and_reset_buf((void **)&p_dcb->p_rx_pkt);
     bta_hl_build_rcv_data_ind(&evt_data,
@@ -368,10 +347,8 @@ void bta_hl_dch_ci_put_rx_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
                               p_dcb->mdl_handle);
     p_acb->p_cback(BTA_HL_DCH_RCV_DATA_IND_EVT, (tBTA_HL *) &evt_data);
 
-    if(p_dcb->close_pending)
-    {
-        if(!p_dcb->cout_oper)
-        {
+    if(p_dcb->close_pending) {
+        if(!p_dcb->cout_oper) {
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_EVT, p_data);
         }
     }
@@ -400,44 +377,33 @@ void bta_hl_dch_ci_get_tx_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
     uint8_t             free_buf = FALSE;
     uint8_t             close_dch = FALSE;
     tBTA_HL             evt_data;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_ci_get_tx_data");
-    #endif
+#endif
     p_dcb->cout_oper &= ~BTA_HL_CO_GET_TX_DATA_MASK;
 
-    if(p_dcb->close_pending)
-    {
+    if(p_dcb->close_pending) {
         status = BTA_HL_STATUS_FAIL;
         free_buf = TRUE;
 
-        if(!p_dcb->cout_oper)
-        {
+        if(!p_dcb->cout_oper) {
             close_dch = TRUE;
         }
-    }
-    else
-    {
-        if((result = MCA_WriteReq((tMCA_DL) p_dcb->mdl_handle, p_dcb->p_tx_pkt)) != MCA_SUCCESS)
-        {
-            if(result == MCA_BUSY)
-            {
+    } else {
+        if((result = MCA_WriteReq((tMCA_DL) p_dcb->mdl_handle, p_dcb->p_tx_pkt)) != MCA_SUCCESS) {
+            if(result == MCA_BUSY) {
                 status = BTA_HL_STATUS_DCH_BUSY;
-            }
-            else
-            {
+            } else {
                 status = BTA_HL_STATUS_FAIL;
             }
 
             free_buf = TRUE;
-        }
-        else
-        {
+        } else {
             p_dcb->p_tx_pkt = NULL;
         }
     }
 
-    if(free_buf)
-    {
+    if(free_buf) {
         GKI_free_and_reset_buf((void **)&p_dcb->p_tx_pkt);
     }
 
@@ -448,8 +414,7 @@ void bta_hl_dch_ci_get_tx_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
                                status);
     p_acb->p_cback(BTA_HL_DCH_SEND_DATA_CFM_EVT, (tBTA_HL *) &evt_data);
 
-    if(close_dch)
-    {
+    if(close_dch) {
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_EVT, p_data);
     }
 }
@@ -472,36 +437,29 @@ void bta_hl_dch_send_data(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tBTA_HL             evt_data;
     uint8_t             success = TRUE;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_send_data");
-    #endif
+#endif
 
-    if(!(p_dcb->cout_oper & BTA_HL_CO_GET_TX_DATA_MASK))
-    {
+    if(!(p_dcb->cout_oper & BTA_HL_CO_GET_TX_DATA_MASK)) {
         // p_dcb->chnl_cfg.fcs may be BTA_HL_MCA_USE_FCS (0x11) or BTA_HL_MCA_NO_FCS (0x10) or BTA_HL_DEFAULT_SOURCE_FCS (1)
         uint8_t fcs_use = (uint8_t)(p_dcb->chnl_cfg.fcs & BTA_HL_MCA_FCS_USE_MASK);
 
-        if((p_dcb->p_tx_pkt = bta_hl_get_buf(p_data->api_send_data.pkt_size, fcs_use)) != NULL)
-        {
+        if((p_dcb->p_tx_pkt = bta_hl_get_buf(p_data->api_send_data.pkt_size, fcs_use)) != NULL) {
             bta_hl_co_get_tx_data(p_acb->app_id,
                                   p_dcb->mdl_handle,
                                   p_data->api_send_data.pkt_size,
                                   BTA_HL_GET_BUF_PTR(p_dcb->p_tx_pkt),
                                   BTA_HL_CI_GET_TX_DATA_EVT);
             p_dcb->cout_oper |= BTA_HL_CO_GET_TX_DATA_MASK;
-        }
-        else
-        {
+        } else {
             success = FALSE;
         }
-    }
-    else
-    {
+    } else {
         success = FALSE;
     }
 
-    if(!success)
-    {
+    if(!success) {
         bta_hl_build_send_data_cfm(&evt_data,
                                    p_acb->app_handle,
                                    p_mcb->mcl_handle,
@@ -530,48 +488,40 @@ void bta_hl_dch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_EVT         event = 0;
     uint8_t             send_evt = TRUE;
     tBTA_HL_STATUS      status;
-    #if (BTA_HL_DEBUG == TRUE)
-    #if (BT_TRACE_VERBOSE == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_close_cmpl dch oper=%s", bta_hl_dch_oper_code(p_dcb->dch_oper));
-    #else
+#else
     APPL_TRACE_DEBUG("bta_hl_dch_close_cmpl dch oper=%d", p_dcb->dch_oper);
-    #endif
-    #endif
+#endif
+#endif
 
-    switch(p_dcb->dch_oper)
-    {
+    switch(p_dcb->dch_oper) {
         case BTA_HL_DCH_OP_LOCAL_OPEN:
         case BTA_HL_DCH_OP_LOCAL_RECONNECT:
-            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK)
-            {
+            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK) {
                 bta_hl_build_abort_cfm(&evt_data,
                                        p_acb->app_handle,
                                        p_mcb->mcl_handle,
                                        BTA_HL_STATUS_OK);
                 event = BTA_HL_DCH_ABORT_CFM_EVT;
-            }
-            else
-                if(p_dcb->abort_oper & BTA_HL_ABORT_REMOTE_MASK)
-                {
-                    bta_hl_build_abort_ind(&evt_data,
-                                           p_acb->app_handle,
-                                           p_mcb->mcl_handle);
-                    event = BTA_HL_DCH_ABORT_IND_EVT;
-                }
-                else
-                {
-                    bta_hl_build_dch_open_cfm(&evt_data,
-                                              p_acb->app_handle,
-                                              p_mcb->mcl_handle,
-                                              BTA_HL_INVALID_MDL_HANDLE,
-                                              0, 0, 0, 0, 0, BTA_HL_STATUS_FAIL);
-                    event = BTA_HL_DCH_OPEN_CFM_EVT;
+            } else if(p_dcb->abort_oper & BTA_HL_ABORT_REMOTE_MASK) {
+                bta_hl_build_abort_ind(&evt_data,
+                                       p_acb->app_handle,
+                                       p_mcb->mcl_handle);
+                event = BTA_HL_DCH_ABORT_IND_EVT;
+            } else {
+                bta_hl_build_dch_open_cfm(&evt_data,
+                                          p_acb->app_handle,
+                                          p_mcb->mcl_handle,
+                                          BTA_HL_INVALID_MDL_HANDLE,
+                                          0, 0, 0, 0, 0, BTA_HL_STATUS_FAIL);
+                event = BTA_HL_DCH_OPEN_CFM_EVT;
 
-                    if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_RECONNECT)
-                    {
-                        event = BTA_HL_DCH_RECONNECT_CFM_EVT;
-                    }
+                if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_RECONNECT) {
+                    event = BTA_HL_DCH_RECONNECT_CFM_EVT;
                 }
+            }
 
             break;
 
@@ -597,31 +547,25 @@ void bta_hl_dch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
             break;
 
         case BTA_HL_DCH_OP_REMOTE_OPEN:
-            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK)
-            {
+            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK) {
                 bta_hl_build_abort_cfm(&evt_data,
                                        p_acb->app_handle,
                                        p_mcb->mcl_handle,
                                        BTA_HL_STATUS_OK);
                 event = BTA_HL_DCH_ABORT_CFM_EVT;
-            }
-            else
-                if(p_dcb->abort_oper & BTA_HL_ABORT_REMOTE_MASK)
-                {
-                    bta_hl_build_abort_ind(&evt_data,
+            } else if(p_dcb->abort_oper & BTA_HL_ABORT_REMOTE_MASK) {
+                bta_hl_build_abort_ind(&evt_data,
+                                       p_acb->app_handle,
+                                       p_mcb->mcl_handle);
+                event = BTA_HL_DCH_ABORT_IND_EVT;
+            } else {
+                bta_hl_build_dch_close_ind(&evt_data,
                                            p_acb->app_handle,
-                                           p_mcb->mcl_handle);
-                    event = BTA_HL_DCH_ABORT_IND_EVT;
-                }
-                else
-                {
-                    bta_hl_build_dch_close_ind(&evt_data,
-                                               p_acb->app_handle,
-                                               p_mcb->mcl_handle,
-                                               p_dcb->mdl_handle,
-                                               p_dcb->intentional_close);
-                    event = BTA_HL_DCH_CLOSE_IND_EVT;
-                }
+                                           p_mcb->mcl_handle,
+                                           p_dcb->mdl_handle,
+                                           p_dcb->intentional_close);
+                event = BTA_HL_DCH_CLOSE_IND_EVT;
+            }
 
             break;
 
@@ -634,26 +578,23 @@ void bta_hl_dch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
             break;
 
         default:
-            #if (BTA_HL_DEBUG == TRUE)
-            #if (BT_TRACE_VERBOSE == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
             APPL_TRACE_ERROR("DCH operation not found oper=%s", bta_hl_dch_oper_code(p_dcb->dch_oper));
-            #else
+#else
             APPL_TRACE_ERROR("DCH operation not found oper=%d", p_dcb->dch_oper);
-            #endif
-            #endif
+#endif
+#endif
             send_evt = FALSE;
             break;
     }
 
-    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID)
-    {
+    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID) {
         p_mcb->echo_test = FALSE;
         send_evt = FALSE;
 
-        if(p_dcb->dch_oper != BTA_HL_DCH_OP_LOCAL_CLOSE_ECHO_TEST)
-        {
-            switch(p_dcb->echo_oper)
-            {
+        if(p_dcb->dch_oper != BTA_HL_DCH_OP_LOCAL_CLOSE_ECHO_TEST) {
+            switch(p_dcb->echo_oper) {
                 case BTA_HL_ECHO_OP_CI_GET_ECHO_DATA:
                 case BTA_HL_ECHO_OP_SDP_INIT:
                 case BTA_HL_ECHO_OP_MDL_CREATE_CFM:
@@ -671,15 +612,12 @@ void bta_hl_dch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                     APPL_TRACE_ERROR("Invalid echo_oper=%d", p_dcb->echo_oper);
                     break;
             }
-        }
-        else
-        {
+        } else {
             status = p_dcb->ci_put_echo_data_status;
             send_evt = TRUE;
         }
 
-        if(send_evt)
-        {
+        if(send_evt) {
             bta_hl_build_echo_test_cfm(&evt_data,
                                        p_acb->app_handle,
                                        p_mcb->mcl_handle,
@@ -690,17 +628,15 @@ void bta_hl_dch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
 
     bta_hl_clean_mdl_cb(app_idx, mcl_idx, mdl_idx);
 
-    if(send_evt)
-    {
-        if(p_acb->p_cback)
-        {
-            #if (BTA_HL_DEBUG == TRUE)
-            #if (BT_TRACE_VERBOSE == TRUE)
+    if(send_evt) {
+        if(p_acb->p_cback) {
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
             APPL_TRACE_DEBUG("Send Event: %s",  bta_hl_cback_evt_code(event));
-            #else
+#else
             APPL_TRACE_DEBUG("Send Event: 0x%02x", event);
-            #endif
-            #endif
+#endif
+#endif
             p_acb->p_cback(event, (tBTA_HL *) &evt_data);
         }
     }
@@ -721,32 +657,27 @@ void bta_hl_dch_mca_close_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                               tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
-    #if (BT_TRACE_VERBOSE == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_close_ind dch oper=%s", bta_hl_dch_oper_code(p_dcb->dch_oper));
-    #else
+#else
     APPL_TRACE_DEBUG("bta_hl_dch_mca_close_ind dch oper=%d", p_dcb->dch_oper);
-    #endif
-    #endif
+#endif
+#endif
     p_dcb->intentional_close = FALSE;
 
-    if(p_data->mca_evt.mca_data.close_ind.reason == L2CAP_DISC_OK)
-    {
+    if(p_data->mca_evt.mca_data.close_ind.reason == L2CAP_DISC_OK) {
         p_dcb->intentional_close = TRUE;
     }
 
-    if(!p_dcb->cout_oper)
-    {
+    if(!p_dcb->cout_oper) {
         if((p_dcb->dch_oper != BTA_HL_DCH_OP_REMOTE_OPEN) &&
-                (p_dcb->dch_oper != BTA_HL_DCH_OP_REMOTE_RECONNECT))
-        {
+                (p_dcb->dch_oper != BTA_HL_DCH_OP_REMOTE_RECONNECT)) {
             p_dcb->dch_oper = BTA_HL_DCH_OP_REMOTE_CLOSE;
         }
 
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
-    }
-    else
-    {
+    } else {
         p_dcb->close_pending = TRUE;
     }
 }
@@ -764,16 +695,15 @@ void bta_hl_dch_mca_close_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                               tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
-    #if (BT_TRACE_VERBOSE == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_close_cfm dch_oper=%s", bta_hl_dch_oper_code(p_dcb->dch_oper));
-    #else
+#else
     APPL_TRACE_DEBUG("bta_hl_dch_mca_close_cfm dch_oper=%d", p_dcb->dch_oper);
-    #endif
-    #endif
+#endif
+#endif
 
-    switch(p_dcb->dch_oper)
-    {
+    switch(p_dcb->dch_oper) {
         case BTA_HL_DCH_OP_LOCAL_CLOSE:
         case BTA_HL_DCH_OP_LOCAL_OPEN:
         case BTA_HL_DCH_OP_LOCAL_RECONNECT:
@@ -785,13 +715,13 @@ void bta_hl_dch_mca_close_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
             break;
 
         default:
-            #if (BTA_HL_DEBUG == TRUE)
-            #if (BT_TRACE_VERBOSE == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
             APPL_TRACE_ERROR("Invalid dch_oper=%s for close cfm", bta_hl_dch_oper_code(p_dcb->dch_oper));
-            #else
+#else
             APPL_TRACE_ERROR("Invalid dch_oper=%d for close cfm", p_dcb->dch_oper);
-            #endif
-            #endif
+#endif
+#endif
             break;
     }
 }
@@ -813,26 +743,21 @@ void bta_hl_dch_mca_close(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MDL_CB          *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tBTA_HL_STATUS          status = BTA_HL_STATUS_OK;
     tBTA_HL                 evt_data;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_close");
-    #endif
+#endif
 
-    if(!p_dcb->cout_oper)
-    {
+    if(!p_dcb->cout_oper) {
         p_dcb->close_pending = FALSE;
 
-        if(MCA_CloseReq((tMCA_DL)p_dcb->mdl_handle) == MCA_SUCCESS)
-        {
+        if(MCA_CloseReq((tMCA_DL)p_dcb->mdl_handle) == MCA_SUCCESS) {
             p_dcb->dch_oper = BTA_HL_DCH_OP_LOCAL_CLOSE;
-        }
-        else
-        {
+        } else {
             status = BTA_HL_STATUS_FAIL;
         }
 
         if((status != BTA_HL_STATUS_OK) &&
-                (p_mcb->cch_close_dch_oper != BTA_HL_CCH_CLOSE_OP_DCH_CLOSE))
-        {
+                (p_mcb->cch_close_dch_oper != BTA_HL_CCH_CLOSE_OP_DCH_CLOSE)) {
             bta_hl_build_dch_close_cfm(&evt_data,
                                        p_acb->app_handle,
                                        p_mcb->mcl_handle,
@@ -840,9 +765,7 @@ void bta_hl_dch_mca_close(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                                        status);
             p_acb->p_cback(BTA_HL_DCH_CLOSE_CFM_EVT, (tBTA_HL *) &evt_data);
         }
-    }
-    else
-    {
+    } else {
         p_dcb->close_pending = TRUE;
     }
 }
@@ -868,13 +791,12 @@ void bta_hl_dch_mca_open_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_EVT         event;
     uint8_t               old_dch_oper = BTA_HL_DCH_OP_NONE;
     uint8_t             send_event = FALSE;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_open_ind");
-    #endif
+#endif
 
     if((p_dcb->dch_oper == BTA_HL_DCH_OP_REMOTE_OPEN) ||
-            (p_dcb->dch_oper == BTA_HL_DCH_OP_REMOTE_RECONNECT))
-    {
+            (p_dcb->dch_oper == BTA_HL_DCH_OP_REMOTE_RECONNECT)) {
         p_dcb->mdl_handle = (tBTA_HL_MDL_HANDLE) p_open_ind->mdl;
         p_dcb->mtu        = p_open_ind->mtu;
         evt_data.dch_open_ind.mdl_handle = p_dcb->mdl_handle;
@@ -884,17 +806,13 @@ void bta_hl_dch_mca_open_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
         evt_data.dch_open_ind.mdl_id = p_dcb->mdl_id;
         evt_data.dch_open_ind.mtu = p_dcb->mtu;
 
-        if(p_dcb->chnl_cfg.fcr_opt.mode == L2CAP_FCR_ERTM_MODE)
-        {
+        if(p_dcb->chnl_cfg.fcr_opt.mode == L2CAP_FCR_ERTM_MODE) {
             evt_data.dch_open_ind.dch_mode = BTA_HL_DCH_MODE_RELIABLE;
 
-            if(!bta_hl_is_the_first_reliable_existed(app_idx, mcl_idx))
-            {
+            if(!bta_hl_is_the_first_reliable_existed(app_idx, mcl_idx)) {
                 p_dcb->is_the_first_reliable = TRUE;
             }
-        }
-        else
-        {
+        } else {
             evt_data.dch_open_ind.dch_mode = BTA_HL_DCH_MODE_STREAMING;
         }
 
@@ -903,39 +821,29 @@ void bta_hl_dch_mca_open_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
         p_dcb->dch_oper = BTA_HL_DCH_OP_NONE;
     }
 
-    switch(old_dch_oper)
-    {
+    switch(old_dch_oper) {
         case BTA_HL_DCH_OP_REMOTE_OPEN:
             p_dcb->dch_mode = evt_data.dch_open_ind.dch_mode;
 
-            if(p_dcb->local_mdep_id != BTA_HL_ECHO_TEST_MDEP_ID)
-            {
+            if(p_dcb->local_mdep_id != BTA_HL_ECHO_TEST_MDEP_ID) {
                 bta_hl_save_mdl_cfg(app_idx, mcl_idx, mdl_idx);
                 event = BTA_HL_DCH_OPEN_IND_EVT;
                 send_event = TRUE;
-            }
-            else
-            {
+            } else {
                 p_dcb->echo_oper = BTA_HL_ECHO_OP_ECHO_PKT;
             }
 
             break;
 
         case BTA_HL_DCH_OP_REMOTE_RECONNECT:
-            if(bta_hl_validate_chan_cfg(app_idx, mcl_idx, mdl_idx))
-            {
+            if(bta_hl_validate_chan_cfg(app_idx, mcl_idx, mdl_idx)) {
                 bta_hl_save_mdl_cfg(app_idx, mcl_idx, mdl_idx);
                 event = BTA_HL_DCH_RECONNECT_IND_EVT;
                 send_event = TRUE;
-            }
-            else
-            {
-                if(MCA_CloseReq((tMCA_DL) p_dcb->mdl_handle) == MCA_SUCCESS)
-                {
+            } else {
+                if(MCA_CloseReq((tMCA_DL) p_dcb->mdl_handle) == MCA_SUCCESS) {
                     p_dcb->dch_oper = BTA_HL_DCH_OP_LOCAL_CLOSE_RECONNECT;
-                }
-                else
-                {
+                } else {
                     APPL_TRACE_ERROR("Unabel to close DCH for reconnect cfg mismatch");
                 }
             }
@@ -946,8 +854,7 @@ void bta_hl_dch_mca_open_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
             break;
     }
 
-    if(send_event)
-    {
+    if(send_event) {
         p_acb->p_cback(event, (tBTA_HL *) &evt_data);
     }
 }
@@ -973,28 +880,23 @@ void bta_hl_dch_mca_open_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     uint8_t               old_dch_oper = BTA_HL_DCH_OP_NONE;
     tBTA_HL_DCH_MODE    dch_mode = BTA_HL_DCH_MODE_STREAMING;
     uint8_t             send_event = FALSE;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_open_cfm");
-    #endif
+#endif
 
     if((p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_OPEN) ||
-            (p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_RECONNECT))
-    {
+            (p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_RECONNECT)) {
         p_dcb->mdl_handle = (tBTA_HL_MDL_HANDLE) p_open_cfm->mdl;
         p_dcb->mtu        = p_open_cfm->mtu;
 
         /*todo verify dch_mode, mtu and fcs for reconnect */
-        if(p_dcb->chnl_cfg.fcr_opt.mode == L2CAP_FCR_ERTM_MODE)
-        {
+        if(p_dcb->chnl_cfg.fcr_opt.mode == L2CAP_FCR_ERTM_MODE) {
             dch_mode = BTA_HL_DCH_MODE_RELIABLE;
         }
 
-        if(p_dcb->local_mdep_id != BTA_HL_ECHO_TEST_MDEP_ID)
-        {
-            if(dch_mode == BTA_HL_DCH_MODE_RELIABLE)
-            {
-                if(!bta_hl_is_the_first_reliable_existed(app_idx, mcl_idx))
-                {
+        if(p_dcb->local_mdep_id != BTA_HL_ECHO_TEST_MDEP_ID) {
+            if(dch_mode == BTA_HL_DCH_MODE_RELIABLE) {
+                if(!bta_hl_is_the_first_reliable_existed(app_idx, mcl_idx)) {
                     p_dcb->is_the_first_reliable = TRUE;
                 }
             }
@@ -1010,34 +912,25 @@ void bta_hl_dch_mca_open_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                                   BTA_HL_STATUS_OK);
         old_dch_oper = p_dcb->dch_oper;
         p_dcb->dch_oper = BTA_HL_DCH_OP_NONE;
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("Error dch oper =%d",  p_dcb->dch_oper);
         return;
     }
 
-    switch(old_dch_oper)
-    {
+    switch(old_dch_oper) {
         case BTA_HL_DCH_OP_LOCAL_OPEN:
             p_dcb->dch_mode = dch_mode;
 
-            if(p_dcb->local_mdep_id != BTA_HL_ECHO_TEST_MDEP_ID)
-            {
+            if(p_dcb->local_mdep_id != BTA_HL_ECHO_TEST_MDEP_ID) {
                 bta_hl_save_mdl_cfg(app_idx, mcl_idx, mdl_idx);
                 event = BTA_HL_DCH_OPEN_CFM_EVT;
                 send_event = TRUE;
-            }
-            else
-            {
+            } else {
                 p_dcb->echo_oper = BTA_HL_ECHO_OP_LOOP_BACK;
 
-                if(MCA_WriteReq((tMCA_DL) p_dcb->mdl_handle, p_dcb->p_echo_tx_pkt) != MCA_SUCCESS)
-                {
+                if(MCA_WriteReq((tMCA_DL) p_dcb->mdl_handle, p_dcb->p_echo_tx_pkt) != MCA_SUCCESS) {
                     bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_ECHO_TEST_EVT, p_data);
-                }
-                else
-                {
+                } else {
                     p_dcb->p_echo_tx_pkt = NULL;
                 }
             }
@@ -1045,20 +938,14 @@ void bta_hl_dch_mca_open_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
             break;
 
         case BTA_HL_DCH_OP_LOCAL_RECONNECT:
-            if(bta_hl_validate_chan_cfg(app_idx, mcl_idx, mdl_idx))
-            {
+            if(bta_hl_validate_chan_cfg(app_idx, mcl_idx, mdl_idx)) {
                 bta_hl_save_mdl_cfg(app_idx, mcl_idx, mdl_idx);
                 event = BTA_HL_DCH_RECONNECT_CFM_EVT;
                 send_event = TRUE;
-            }
-            else
-            {
-                if(MCA_CloseReq((tMCA_DL) p_dcb->mdl_handle) == MCA_SUCCESS)
-                {
+            } else {
+                if(MCA_CloseReq((tMCA_DL) p_dcb->mdl_handle) == MCA_SUCCESS) {
                     p_dcb->dch_oper = BTA_HL_DCH_OP_LOCAL_CLOSE_RECONNECT;
-                }
-                else
-                {
+                } else {
                     APPL_TRACE_ERROR("Unabel to close DCH for reconnect cfg mismatch");
                 }
             }
@@ -1069,8 +956,7 @@ void bta_hl_dch_mca_open_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
             break;
     }
 
-    if(send_event)
-    {
+    if(send_event) {
         p_acb->p_cback(event, (tBTA_HL *) &evt_data);
     }
 }
@@ -1089,9 +975,9 @@ void bta_hl_dch_mca_abort_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                               tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_abort_ind");
-    #endif
+#endif
     p_dcb->abort_oper |= BTA_HL_ABORT_REMOTE_MASK;
     bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
 }
@@ -1112,30 +998,23 @@ void bta_hl_dch_mca_abort_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tBTA_HL             evt_data;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_abort_cfm");
-    #endif
+#endif
 
-    if(p_dcb->abort_oper)
-    {
-        if(p_data->mca_evt.mca_data.abort_cfm.rsp_code != MCA_RSP_SUCCESS)
-        {
-            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK)
-            {
+    if(p_dcb->abort_oper) {
+        if(p_data->mca_evt.mca_data.abort_cfm.rsp_code != MCA_RSP_SUCCESS) {
+            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK) {
                 bta_hl_build_abort_cfm(&evt_data,
                                        p_acb->app_handle,
                                        p_mcb->mcl_handle,
                                        BTA_HL_STATUS_FAIL);
                 p_acb->p_cback(BTA_HL_DCH_ABORT_CFM_EVT, (tBTA_HL *) &evt_data);
             }
-        }
-        else
-        {
+        } else {
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("Not expecting Abort CFM ");
     }
 }
@@ -1160,30 +1039,21 @@ void bta_hl_dch_mca_abort(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
 
     if(((p_mcb->sdp_oper == BTA_HL_SDP_OP_DCH_OPEN_INIT) ||
             (p_mcb->sdp_oper == BTA_HL_SDP_OP_DCH_RECONNECT_INIT)) &&
-            (p_mcb->sdp_mdl_idx == mdl_idx))
-    {
+            (p_mcb->sdp_mdl_idx == mdl_idx)) {
+        p_dcb->abort_oper |= BTA_HL_ABORT_PENDING_MASK;
+        return;
+    } else if(p_dcb->echo_oper == BTA_HL_ECHO_OP_CI_GET_ECHO_DATA) {
         p_dcb->abort_oper |= BTA_HL_ABORT_PENDING_MASK;
         return;
     }
-    else
-        if(p_dcb->echo_oper == BTA_HL_ECHO_OP_CI_GET_ECHO_DATA)
-        {
-            p_dcb->abort_oper |= BTA_HL_ABORT_PENDING_MASK;
-            return;
-        }
 
     p_dcb->abort_oper &= ~BTA_HL_ABORT_PENDING_MASK;
 
-    if((mca_result = MCA_Abort((tMCA_CL) p_mcb->mcl_handle)) != MCA_SUCCESS)
-    {
-        if(mca_result == MCA_NO_RESOURCES)
-        {
+    if((mca_result = MCA_Abort((tMCA_CL) p_mcb->mcl_handle)) != MCA_SUCCESS) {
+        if(mca_result == MCA_NO_RESOURCES) {
             p_dcb->abort_oper |= BTA_HL_ABORT_PENDING_MASK;
-        }
-        else
-        {
-            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK)
-            {
+        } else {
+            if(p_dcb->abort_oper & BTA_HL_ABORT_LOCAL_MASK) {
                 bta_hl_build_abort_cfm(&evt_data,
                                        p_acb->app_handle,
                                        p_mcb->mcl_handle,
@@ -1195,9 +1065,9 @@ void bta_hl_dch_mca_abort(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
         }
     }
 
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_abort abort_oper=0x%x", p_dcb->abort_oper);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1218,18 +1088,15 @@ void bta_hl_dch_mca_reconnect_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_
     tMCA_EVT_HDR        *p_reconnect_ind = &p_data->mca_evt.mca_data.reconnect_ind;
     uint8_t               mdl_cfg_idx, in_use_mdl_idx, mdep_cfg_idx;
     uint8_t               rsp_code = MCA_RSP_SUCCESS;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_reconnect_ind mdl_id=%d", p_reconnect_ind->mdl_id);
-    #endif
+#endif
 
-    if(bta_hl_find_mdl_cfg_idx(app_idx, mcl_idx, p_reconnect_ind->mdl_id, &mdl_cfg_idx))
-    {
-        if(!bta_hl_find_mdl_idx(app_idx, mcl_idx, p_reconnect_ind->mdl_id, &in_use_mdl_idx))
-        {
+    if(bta_hl_find_mdl_cfg_idx(app_idx, mcl_idx, p_reconnect_ind->mdl_id, &mdl_cfg_idx)) {
+        if(!bta_hl_find_mdl_idx(app_idx, mcl_idx, p_reconnect_ind->mdl_id, &in_use_mdl_idx)) {
             p_mdl_cfg =  BTA_HL_GET_MDL_CFG_PTR(app_idx, mdl_cfg_idx);
 
-            if(bta_hl_find_mdep_cfg_idx(app_idx, p_mdl_cfg->local_mdep_id, &mdep_cfg_idx))
-            {
+            if(bta_hl_find_mdep_cfg_idx(app_idx, p_mdl_cfg->local_mdep_id, &mdep_cfg_idx)) {
                 p_dcb->in_use               = TRUE;
                 p_dcb->dch_oper             = BTA_HL_DCH_OP_REMOTE_RECONNECT;
                 p_dcb->sec_mask             = (BTA_SEC_AUTHENTICATE | BTA_SEC_ENCRYPT);
@@ -1245,19 +1112,13 @@ void bta_hl_dch_mca_reconnect_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_
                                            &p_dcb->max_rx_apdu_size,
                                            &p_dcb->max_tx_apdu_size);
                 bta_hl_set_dch_chan_cfg(app_idx, mcl_idx, mdl_idx, p_data);
-            }
-            else
-            {
+            } else {
                 rsp_code = MCA_RSP_BAD_MDL;
             }
-        }
-        else
-        {
+        } else {
             rsp_code = MCA_RSP_BAD_MDL;
         }
-    }
-    else
-    {
+    } else {
         rsp_code = MCA_RSP_BAD_MDL;
     }
 
@@ -1265,8 +1126,7 @@ void bta_hl_dch_mca_reconnect_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_
                            p_dcb->local_mdep_id,
                            p_dcb->mdl_id,
                            rsp_code,
-                           &p_dcb->chnl_cfg) != MCA_SUCCESS)
-    {
+                           &p_dcb->chnl_cfg) != MCA_SUCCESS) {
         MCA_Abort((tMCA_CL) p_mcb->mcl_handle);
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
     }
@@ -1287,32 +1147,26 @@ void bta_hl_dch_mca_reconnect_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tMCA_RSP_EVT        *p_reconnect_cfm = &p_data->mca_evt.mca_data.reconnect_cfm;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_reconnect_cfm");
-    #endif
+#endif
 
-    if(p_dcb->abort_oper & BTA_HL_ABORT_PENDING_MASK)
-    {
+    if(p_dcb->abort_oper & BTA_HL_ABORT_PENDING_MASK) {
         p_dcb->abort_oper &= ~BTA_HL_ABORT_PENDING_MASK;
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_ABORT_EVT, p_data);
         return;
     }
 
-    if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_RECONNECT)
-    {
-        if(p_reconnect_cfm->rsp_code == MCA_RSP_SUCCESS)
-        {
+    if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_RECONNECT) {
+        if(p_reconnect_cfm->rsp_code == MCA_RSP_SUCCESS) {
             bta_hl_set_dch_chan_cfg(app_idx, mcl_idx, mdl_idx, p_data);
 
-            if(MCA_DataChnlCfg((tMCA_CL) p_mcb->mcl_handle, &p_dcb->chnl_cfg) != MCA_SUCCESS)
-            {
+            if(MCA_DataChnlCfg((tMCA_CL) p_mcb->mcl_handle, &p_dcb->chnl_cfg) != MCA_SUCCESS) {
                 /* should be able to abort so no checking of the return code */
                 MCA_Abort((tMCA_CL) p_mcb->mcl_handle);
                 bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
             }
-        }
-        else
-        {
+        } else {
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
         }
     }
@@ -1334,25 +1188,21 @@ void bta_hl_dch_mca_reconnect(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tMCA_CHNL_CFG       *p_chnl_cfg = NULL;
     uint8_t               sdp_idx;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_reconnect");
-    #endif
+#endif
 
-    if(bta_hl_find_sdp_idx_using_ctrl_psm(&p_mcb->sdp, p_mcb->ctrl_psm, &sdp_idx))
-    {
+    if(bta_hl_find_sdp_idx_using_ctrl_psm(&p_mcb->sdp, p_mcb->ctrl_psm, &sdp_idx)) {
         p_mcb->data_psm = p_mcb->sdp.sdp_rec[sdp_idx].data_psm;
 
         if(MCA_ReconnectMdl((tMCA_CL) p_mcb->mcl_handle,
                             p_dcb->local_mdep_id,
                             p_mcb->data_psm,
                             p_dcb->mdl_id,
-                            p_chnl_cfg) != MCA_SUCCESS)
-        {
+                            p_chnl_cfg) != MCA_SUCCESS) {
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
     }
 }
@@ -1374,18 +1224,15 @@ void bta_hl_dch_create_rsp(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MDL_CB              *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tBTA_HL_API_DCH_CREATE_RSP  *p_create_rsp = &p_data->api_dch_create_rsp;
     uint8_t                       mca_rsp_code = MCA_RSP_SUCCESS;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_create_rsp");
-    #endif
+#endif
 
-    if(p_create_rsp->rsp_code == BTA_HL_DCH_CREATE_RSP_SUCCESS)
-    {
+    if(p_create_rsp->rsp_code == BTA_HL_DCH_CREATE_RSP_SUCCESS) {
         p_dcb->dch_oper             = BTA_HL_DCH_OP_REMOTE_OPEN;
         p_dcb->local_cfg            = p_create_rsp->cfg_rsp;
         bta_hl_set_dch_chan_cfg(app_idx, mcl_idx, mdl_idx, p_data);
-    }
-    else
-    {
+    } else {
         mca_rsp_code = MCA_RSP_CFG_REJ;
     }
 
@@ -1394,8 +1241,7 @@ void bta_hl_dch_create_rsp(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                         p_dcb->mdl_id,
                         p_dcb->local_cfg,
                         mca_rsp_code,
-                        &p_dcb->chnl_cfg) != MCA_SUCCESS)
-    {
+                        &p_dcb->chnl_cfg) != MCA_SUCCESS) {
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
     }
 }
@@ -1422,16 +1268,13 @@ void bta_hl_dch_mca_create_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
     uint8_t             send_create_ind_evt = FALSE;
     tBTA_HL             evt_data;
     tBTA_HL_ECHO_CFG    *p_echo_cfg;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_create_ind");
-    #endif
+#endif
 
-    if(bta_hl_find_mdep_cfg_idx(app_idx, p_create_ind->dep_id, &mdep_cfg_idx))
-    {
-        if(p_create_ind->dep_id == BTA_HL_ECHO_TEST_MDEP_ID)
-        {
-            if(bta_hl_find_echo_cfg_rsp(app_idx, mcl_idx, mdep_cfg_idx, p_create_ind->cfg, &cfg_rsp))
-            {
+    if(bta_hl_find_mdep_cfg_idx(app_idx, p_create_ind->dep_id, &mdep_cfg_idx)) {
+        if(p_create_ind->dep_id == BTA_HL_ECHO_TEST_MDEP_ID) {
+            if(bta_hl_find_echo_cfg_rsp(app_idx, mcl_idx, mdep_cfg_idx, p_create_ind->cfg, &cfg_rsp)) {
                 p_dcb->in_use               = TRUE;
                 p_dcb->dch_oper             = BTA_HL_DCH_OP_REMOTE_OPEN;
                 p_dcb->local_mdep_id        = p_create_ind->dep_id  ;
@@ -1444,14 +1287,10 @@ void bta_hl_dch_mca_create_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
                 p_dcb->max_rx_apdu_size         = p_echo_cfg->max_rx_apdu_size;
                 p_dcb->max_tx_apdu_size         = p_echo_cfg->max_tx_apdu_size;
                 bta_hl_set_dch_chan_cfg(app_idx, mcl_idx, mdl_idx, p_data);
-            }
-            else
-            {
+            } else {
                 rsp_code = MCA_RSP_CFG_REJ;
             }
-        }
-        else
-        {
+        } else {
             p_dcb->in_use               = TRUE;
             p_dcb->dch_oper             = BTA_HL_DCH_OP_REMOTE_CREATE;
             p_dcb->local_mdep_id        = p_create_ind->dep_id  ;
@@ -1465,14 +1304,11 @@ void bta_hl_dch_mca_create_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
                                        &p_dcb->max_tx_apdu_size);
             send_create_ind_evt = TRUE;
         }
-    }
-    else
-    {
+    } else {
         rsp_code = MCA_RSP_BAD_MDEP;
     }
 
-    if(send_create_ind_evt)
-    {
+    if(send_create_ind_evt) {
         evt_data.dch_create_ind.mcl_handle =  p_mcb->mcl_handle;
         evt_data.dch_create_ind.app_handle =  p_acb->app_handle;
         evt_data.dch_create_ind.local_mdep_id = p_dcb->local_mdep_id;
@@ -1480,22 +1316,16 @@ void bta_hl_dch_mca_create_ind(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
         evt_data.dch_create_ind.cfg = p_dcb->remote_cfg;
         bdcpy(evt_data.dch_create_ind.bd_addr, p_mcb->bd_addr);
         p_acb->p_cback(BTA_HL_DCH_CREATE_IND_EVT, (tBTA_HL *) &evt_data);
-    }
-    else
-    {
+    } else {
         if(MCA_CreateMdlRsp((tMCA_CL) p_mcb->mcl_handle,
                             p_dcb->local_mdep_id,
                             p_dcb->mdl_id,
                             p_dcb->local_cfg,
                             rsp_code,
-                            &p_dcb->chnl_cfg) != MCA_SUCCESS)
-        {
+                            &p_dcb->chnl_cfg) != MCA_SUCCESS) {
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
-        }
-        else
-        {
-            if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID)
-            {
+        } else {
+            if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID) {
                 p_mcb->echo_test = TRUE;
                 p_dcb->echo_oper = BTA_HL_ECHO_OP_OPEN_IND;
             }
@@ -1518,48 +1348,36 @@ void bta_hl_dch_mca_create_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tMCA_CREATE_CFM     *p_create_cfm = &p_data->mca_evt.mca_data.create_cfm;
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_mca_create_cfm");
-    #endif
+#endif
 
-    if(p_dcb->abort_oper & BTA_HL_ABORT_PENDING_MASK)
-    {
+    if(p_dcb->abort_oper & BTA_HL_ABORT_PENDING_MASK) {
         p_dcb->abort_oper &= ~BTA_HL_ABORT_PENDING_MASK;
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_ABORT_EVT, p_data);
         return;
     }
 
-    if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_OPEN)
-    {
-        if(p_create_cfm->rsp_code == MCA_RSP_SUCCESS)
-        {
-            if(bta_hl_validate_cfg(app_idx, mcl_idx, mdl_idx, p_create_cfm->cfg))
-            {
+    if(p_dcb->dch_oper == BTA_HL_DCH_OP_LOCAL_OPEN) {
+        if(p_create_cfm->rsp_code == MCA_RSP_SUCCESS) {
+            if(bta_hl_validate_cfg(app_idx, mcl_idx, mdl_idx, p_create_cfm->cfg)) {
                 bta_hl_set_dch_chan_cfg(app_idx, mcl_idx, mdl_idx, p_data);
 
-                if(MCA_DataChnlCfg((tMCA_CL) p_mcb->mcl_handle, &p_dcb->chnl_cfg) != MCA_SUCCESS)
-                {
+                if(MCA_DataChnlCfg((tMCA_CL) p_mcb->mcl_handle, &p_dcb->chnl_cfg) != MCA_SUCCESS) {
                     /* this should not happen */
                     APPL_TRACE_ERROR("Unable to create data channel");
                     MCA_Abort((tMCA_CL) p_mcb->mcl_handle);
                     bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
-                }
-                else
-                {
-                    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID)
-                    {
+                } else {
+                    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID) {
                         p_dcb->echo_oper = BTA_HL_ECHO_OP_DCH_OPEN_CFM;
                     }
                 }
-            }
-            else
-            {
+            } else {
                 MCA_Abort((tMCA_CL) p_mcb->mcl_handle);
                 bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
             }
-        }
-        else
-        {
+        } else {
             APPL_TRACE_ERROR("MCA Create- failed");
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
         }
@@ -1582,16 +1400,15 @@ void bta_hl_dch_mca_create(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
     tBTA_HL_MDL_CB      *p_dcb  = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
     tMCA_RESULT         result;
     uint8_t               sdp_idx;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_dch_mca_create");
-    #endif
+#endif
 
     if(bta_hl_find_sdp_idx_using_ctrl_psm(&p_mcb->sdp, p_mcb->ctrl_psm, &sdp_idx) &&
             bta_hl_validate_peer_cfg(app_idx, mcl_idx, mdl_idx,
                                      p_dcb->peer_mdep_id,
                                      p_dcb->peer_mdep_role,
-                                     sdp_idx))
-    {
+                                     sdp_idx)) {
         p_mcb->data_psm = p_mcb->sdp.sdp_rec[sdp_idx].data_psm;
 
         if((result = MCA_CreateMdl((tMCA_CL) p_mcb->mcl_handle,
@@ -1600,14 +1417,11 @@ void bta_hl_dch_mca_create(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                                    p_dcb->mdl_id,
                                    p_dcb->peer_mdep_id,
                                    p_dcb->local_cfg,
-                                   NULL)) != MCA_SUCCESS)
-        {
+                                   NULL)) != MCA_SUCCESS) {
             APPL_TRACE_ERROR("MCA_CreateMdl FAIL mca_result=%d", result);
             bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("MCA Create- SDP idx or peer MDEP cfg not found");
         bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
     }
@@ -1625,9 +1439,9 @@ void bta_hl_dch_mca_create(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
 void bta_hl_dch_sdp_fail(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                          tBTA_HL_DATA *p_data)
 {
-    #if (BTA_HL_DEBUG == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
     APPL_TRACE_DEBUG("bta_hl_dch_sdp_fail");
-    #endif
+#endif
     bta_hl_dch_sm_execute(app_idx, mcl_idx, mdl_idx, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
 }
 
@@ -1662,59 +1476,44 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
     tBTA_HL_MDL_CB                  *p_dcb;
     uint16_t                          service_uuid;
     uint16_t                          name_len;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_sdp_cback status:%d sdp_oper=%d app_idx=%d, mcl_idx=%d,   mdl_idx=%d",
                      status, sdp_oper, app_idx, mcl_idx, mdl_idx);
-    #endif
+#endif
     rec_cnt = 0;
     service_uuid = bta_hl_get_service_uuids(sdp_oper, app_idx, mcl_idx, mdl_idx);
 
-    if(status == SDP_SUCCESS || status == SDP_DB_FULL)
-    {
+    if(status == SDP_SUCCESS || status == SDP_DB_FULL) {
         wm_memset(&p_cb->sdp, 0, sizeof(tBTA_HL_SDP));
 
-        do
-        {
-            if(bta_hl_find_service_in_db(app_idx, mcl_idx, service_uuid, &p_rec))
-            {
+        do {
+            if(bta_hl_find_service_in_db(app_idx, mcl_idx, service_uuid, &p_rec)) {
                 p_hdp_rec = &p_cb->sdp.sdp_rec[rec_cnt];
                 p_cb->sdp.num_recs = rec_cnt + 1;
-            }
-            else
-            {
+            } else {
                 break;
             }
 
-            if(SDP_FindProtocolListElemInRec(p_rec, UUID_PROTOCOL_L2CAP, &pe))
-            {
+            if(SDP_FindProtocolListElemInRec(p_rec, UUID_PROTOCOL_L2CAP, &pe)) {
                 p_hdp_rec->ctrl_psm  = (uint16_t) pe.params[0];
-            }
-            else
-            {
+            } else {
                 APPL_TRACE_WARNING("Control PSM not found");
                 break;
             }
 
-            if(SDP_FindAddProtoListsElemInRec(p_rec, UUID_PROTOCOL_L2CAP, &pe))
-            {
+            if(SDP_FindAddProtoListsElemInRec(p_rec, UUID_PROTOCOL_L2CAP, &pe)) {
                 p_hdp_rec->data_psm = (uint16_t) pe.params[0];
-            }
-            else
-            {
+            } else {
                 APPL_TRACE_WARNING("Data PSM not found");
                 break;
             }
 
             p_hdp_rec->srv_name[0] = '\0';
 
-            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_SERVICE_NAME)) != NULL)
-            {
-                if(SDP_DISC_ATTR_LEN(p_attr->attr_len_type) < BT_MAX_SERVICE_NAME_LEN)
-                {
+            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_SERVICE_NAME)) != NULL) {
+                if(SDP_DISC_ATTR_LEN(p_attr->attr_len_type) < BT_MAX_SERVICE_NAME_LEN) {
                     name_len = (uint16_t)SDP_DISC_ATTR_LEN(p_attr->attr_len_type);
-                }
-                else
-                {
+                } else {
                     name_len = BT_MAX_SERVICE_NAME_LEN;
                 }
 
@@ -1723,14 +1522,10 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
 
             p_hdp_rec->srv_desp[0] = '\0';
 
-            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_SERVICE_DESCRIPTION)) != NULL)
-            {
-                if(SDP_DISC_ATTR_LEN(p_attr->attr_len_type) < BT_MAX_SERVICE_NAME_LEN)
-                {
+            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_SERVICE_DESCRIPTION)) != NULL) {
+                if(SDP_DISC_ATTR_LEN(p_attr->attr_len_type) < BT_MAX_SERVICE_NAME_LEN) {
                     name_len = (uint16_t)SDP_DISC_ATTR_LEN(p_attr->attr_len_type);
-                }
-                else
-                {
+                } else {
                     name_len = BT_MAX_SERVICE_NAME_LEN;
                 }
 
@@ -1739,71 +1534,54 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
 
             p_hdp_rec->provider_name[0] = '\0';
 
-            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_PROVIDER_NAME)) != NULL)
-            {
-                if(SDP_DISC_ATTR_LEN(p_attr->attr_len_type) < BT_MAX_SERVICE_NAME_LEN)
-                {
+            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_PROVIDER_NAME)) != NULL) {
+                if(SDP_DISC_ATTR_LEN(p_attr->attr_len_type) < BT_MAX_SERVICE_NAME_LEN) {
                     name_len = (uint16_t)SDP_DISC_ATTR_LEN(p_attr->attr_len_type);
-                }
-                else
-                {
+                } else {
                     name_len = BT_MAX_SERVICE_NAME_LEN;
                 }
 
                 wm_memcpy(p_hdp_rec->provider_name, p_attr->attr_value.v.array, name_len);
             }
 
-            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HDP_MCAP_SUP_PROC)) != NULL)
-            {
+            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HDP_MCAP_SUP_PROC)) != NULL) {
                 p_hdp_rec->mcap_sup_proc = p_attr->attr_value.v.u8;
-            }
-            else
-            {
+            } else {
                 APPL_TRACE_WARNING("MCAP SUP PROC not found");
                 break;
             }
 
-            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HDP_SUP_FEAT_LIST)) != NULL)
-            {
-                if(bta_hl_fill_sup_feature_list(p_attr, &sup_feature))
-                {
+            if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_HDP_SUP_FEAT_LIST)) != NULL) {
+                if(bta_hl_fill_sup_feature_list(p_attr, &sup_feature)) {
                     p_hdp_rec->num_mdeps = (uint8_t) sup_feature.num_elems;
                     APPL_TRACE_WARNING("bta_hl_sdp_cback num_mdeps %d", sup_feature.num_elems);
 
-                    for(i = 0; i < sup_feature.num_elems; i++)
-                    {
+                    for(i = 0; i < sup_feature.num_elems; i++) {
                         p_hdp_rec->mdep_cfg[i].data_type = sup_feature.list_elem[i].data_type;
                         p_hdp_rec->mdep_cfg[i].mdep_id = sup_feature.list_elem[i].mdep_id;
                         p_hdp_rec->mdep_cfg[i].mdep_role = sup_feature.list_elem[i].mdep_role;
 
                         /* Check MDEP Description pointer to prevent crash due to null pointer */
-                        if(sup_feature.list_elem[i].p_mdep_desp != NULL)
-                        {
+                        if(sup_feature.list_elem[i].p_mdep_desp != NULL) {
                             strlcpy(p_hdp_rec->mdep_cfg[i].mdep_desp,
                                     sup_feature.list_elem[i].p_mdep_desp,
                                     BTA_HL_MDEP_DESP_LEN);
-                        }
-                        else
-                        {
+                        } else {
                             APPL_TRACE_ERROR("bta_hl_sdp_cback Incorrect Mdep[%d] Description (Null ptr)", i);
                         }
                     }
 
                     sdp_parsing_ok = TRUE;
-                }
-                else
-                {
+                } else {
                     APPL_TRACE_WARNING("HDP supported feature list fill failed");
                     break;
                 }
-            }
-            else
-            {
+            } else {
                 APPL_TRACE_WARNING("HDP supported feature list not found");
                 break;
             }
 
-            #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
             APPL_TRACE_DEBUG("record=%d ctrl_psm=%0x data_psm=%x",
                              rec_cnt + 1,
                              p_hdp_rec->ctrl_psm,
@@ -1811,8 +1589,7 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
             APPL_TRACE_DEBUG("srv_name=[%s]", (p_hdp_rec->srv_name[0] != '\0') ? p_hdp_rec->srv_name : "NULL");
             APPL_TRACE_DEBUG("srv_desp=[%s]", (p_hdp_rec->srv_desp[0] != '\0') ? p_hdp_rec->srv_desp : "NULL");
 
-            for(i = 0; i < sup_feature.num_elems; i++)
-            {
+            for(i = 0; i < sup_feature.num_elems; i++) {
                 APPL_TRACE_DEBUG("index=0x%02x mdep_id=0x%04x data type=0x%04x mdep role=%s(0x%02x)",
                                  (i + 1),
                                  p_hdp_rec->mdep_cfg[i].mdep_id,
@@ -1821,14 +1598,14 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
                                  p_hdp_rec->mdep_cfg[i].mdep_role);
             }
 
-            APPL_TRACE_DEBUG("provider_name=[%s]", (p_hdp_rec->provider_name[0] != '\0') ? p_hdp_rec->provider_name : "NULL");
+            APPL_TRACE_DEBUG("provider_name=[%s]",
+                             (p_hdp_rec->provider_name[0] != '\0') ? p_hdp_rec->provider_name : "NULL");
             APPL_TRACE_DEBUG("found MCAP sup procedure=%d",
                              p_cb->sdp.sdp_rec[rec_cnt].mcap_sup_proc);
-            #endif
+#endif
             rec_cnt++;
 
-            if(rec_cnt >= BTA_HL_NUM_SDP_RECS)
-            {
+            if(rec_cnt >= BTA_HL_NUM_SDP_RECS) {
                 APPL_TRACE_WARNING("No more spaces for SDP recs max_rec_cnt=%d", BTA_HL_NUM_SDP_RECS);
                 break;
             }
@@ -1839,50 +1616,36 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
 
     if((status == SDP_SUCCESS || status == SDP_DB_FULL) &&
             p_cb->sdp.num_recs  &&
-            sdp_parsing_ok)
-    {
+            sdp_parsing_ok) {
         result = TRUE;
-    }
-    else
-    {
+    } else {
         APPL_TRACE_WARNING("SDP Failed sdp_status=%d num_recs=%d sdp_parsing_ok=%d ",
                            status, p_cb->sdp.num_recs, sdp_parsing_ok);
     }
 
     p_cb->sdp_oper = BTA_HL_SDP_OP_NONE;
 
-    switch(sdp_oper)
-    {
+    switch(sdp_oper) {
         case BTA_HL_SDP_OP_CCH_INIT:
         case BTA_HL_SDP_OP_SDP_QUERY_NEW:
         case BTA_HL_SDP_OP_SDP_QUERY_CURRENT:
             /* send result in event back to BTA */
             p_cch_buf = (tBTA_HL_CCH_SDP *)GKI_getbuf(sizeof(tBTA_HL_CCH_SDP));
 
-            if(result)
-            {
-                if(sdp_oper == BTA_HL_SDP_OP_CCH_INIT)
-                {
+            if(result) {
+                if(sdp_oper == BTA_HL_SDP_OP_CCH_INIT) {
                     event = BTA_HL_CCH_SDP_OK_EVT;
 
-                    if(p_cb->close_pending)
-                    {
+                    if(p_cb->close_pending) {
                         event = BTA_HL_CCH_SDP_FAIL_EVT;
                     }
-                }
-                else
-                {
+                } else {
                     event = BTA_HL_SDP_QUERY_OK_EVT;
                 }
-            }
-            else
-            {
-                if(sdp_oper == BTA_HL_SDP_OP_CCH_INIT)
-                {
+            } else {
+                if(sdp_oper == BTA_HL_SDP_OP_CCH_INIT) {
                     event = BTA_HL_CCH_SDP_FAIL_EVT;
-                }
-                else
-                {
+                } else {
                     event = BTA_HL_SDP_QUERY_FAIL_EVT;
                 }
             }
@@ -1892,8 +1655,7 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
             p_cch_buf->mcl_idx = mcl_idx;
             p_cch_buf->release_mcl_cb = FALSE;
 
-            if(sdp_oper == BTA_HL_SDP_OP_SDP_QUERY_NEW)
-            {
+            if(sdp_oper == BTA_HL_SDP_OP_SDP_QUERY_NEW) {
                 p_cch_buf->release_mcl_cb = TRUE;
             }
 
@@ -1909,27 +1671,19 @@ static void bta_hl_sdp_cback(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
             p_dch_buf->mdl_idx = mdl_idx;
             p_dcb = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
 
-            if(p_dcb->abort_oper & BTA_HL_ABORT_PENDING_MASK)
-            {
+            if(p_dcb->abort_oper & BTA_HL_ABORT_PENDING_MASK) {
                 p_dcb->abort_oper &= ~BTA_HL_ABORT_PENDING_MASK;
                 result = FALSE;
             }
 
-            if(result)
-            {
-                if(sdp_oper == BTA_HL_SDP_OP_DCH_OPEN_INIT)
-                {
-                    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID)
-                    {
+            if(result) {
+                if(sdp_oper == BTA_HL_SDP_OP_DCH_OPEN_INIT) {
+                    if(p_dcb->local_mdep_id == BTA_HL_ECHO_TEST_MDEP_ID) {
                         p_dch_buf->hdr.event = BTA_HL_DCH_ECHO_TEST_EVT;
-                    }
-                    else
-                    {
+                    } else {
                         p_dch_buf->hdr.event = BTA_HL_DCH_OPEN_EVT;
                     }
-                }
-                else
-                {
+                } else {
                     p_dch_buf->hdr.event = BTA_HL_DCH_RECONNECT_EVT;
                 }
             }
@@ -2097,9 +1851,9 @@ void bta_hl_deallocate_spd_cback(uint8_t sdp_cback_idx)
 {
     tBTA_HL_SDP_CB *p_spd_cb = &bta_hl_cb.scb[sdp_cback_idx];
     wm_memset(p_spd_cb, 0, sizeof(tBTA_HL_SDP_CB));
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_deallocate_spd_cback index=%d", sdp_cback_idx);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -2113,17 +1867,16 @@ void bta_hl_deallocate_spd_cback(uint8_t sdp_cback_idx)
 **                        FALSE not found
 **
 *******************************************************************************/
-tSDP_DISC_CMPL_CB *bta_hl_allocate_spd_cback(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
+tSDP_DISC_CMPL_CB *bta_hl_allocate_spd_cback(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx,
+        uint8_t mcl_idx,
         uint8_t mdl_idx,
         uint8_t *p_sdp_cback_idx)
 {
     uint8_t i;
     tSDP_DISC_CMPL_CB *p_cbcak = NULL;
 
-    for(i = 0; i < BTA_HL_NUM_SDP_CBACKS ; i ++)
-    {
-        if(!bta_hl_cb.scb[i].in_use)
-        {
+    for(i = 0; i < BTA_HL_NUM_SDP_CBACKS ; i ++) {
+        if(!bta_hl_cb.scb[i].in_use) {
             p_cbcak = bta_hl_sdp_cback_arr[i];
             bta_hl_cb.scb[i].in_use = TRUE;
             bta_hl_cb.scb[i].sdp_oper = sdp_oper;
@@ -2135,20 +1888,17 @@ tSDP_DISC_CMPL_CB *bta_hl_allocate_spd_cback(tBTA_HL_SDP_OPER sdp_oper, uint8_t 
         }
     }
 
-    if(i == BTA_HL_NUM_SDP_CBACKS)
-    {
+    if(i == BTA_HL_NUM_SDP_CBACKS) {
         APPL_TRACE_WARNING("No scb is available to allocate")
-    }
-    else
-    {
-        #if BTA_HL_DEBUG == TRUE
+    } else {
+#if BTA_HL_DEBUG == TRUE
         APPL_TRACE_DEBUG("bta_hl_allocate_spd_cback cback_idx=%d ", i);
         APPL_TRACE_DEBUG("sdp_oper=%d, app_idx=%d, mcl_idx=%d,  mdl_idx=%d",
                          bta_hl_cb.scb[i].sdp_oper,
                          bta_hl_cb.scb[i].app_idx,
                          bta_hl_cb.scb[i].mcl_idx,
                          bta_hl_cb.scb[i].mdl_idx);
-        #endif
+#endif
     }
 
     return p_cbcak;
@@ -2173,15 +1923,14 @@ tBTA_HL_STATUS bta_hl_init_sdp(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx, uint8
     uint16_t              num_attrs = BTA_HL_NUM_SRCH_ATTR;
     tBTA_HL_STATUS      status;
     uint8_t               sdp_cback_idx;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_init_sdp sdp_oper=%d app_idx=%d mcl_idx=%d, mdl_idx=%d",
                      sdp_oper, app_idx, mcl_idx, mdl_idx);
-    #endif
+#endif
 
-    if((p_cb->sdp_cback = bta_hl_allocate_spd_cback(sdp_oper, app_idx, mcl_idx, mdl_idx, &sdp_cback_idx)) != NULL)
-    {
-        if(p_cb->p_db == NULL)
-        {
+    if((p_cb->sdp_cback = bta_hl_allocate_spd_cback(sdp_oper, app_idx, mcl_idx, mdl_idx,
+                          &sdp_cback_idx)) != NULL) {
+        if(p_cb->p_db == NULL) {
             (p_cb->p_db = (tSDP_DISCOVERY_DB *)GKI_getbuf(BTA_HL_DISC_SIZE));
         }
 
@@ -2199,26 +1948,19 @@ tBTA_HL_STATUS bta_hl_init_sdp(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx, uint8
         uuid_list.uu.uuid16 = UUID_SERVCLASS_HDP_PROFILE;
         SDP_InitDiscoveryDb(p_cb->p_db, BTA_HL_DISC_SIZE, 1, &uuid_list, num_attrs, attr_list);
 
-        if(!SDP_ServiceSearchAttributeRequest(p_cb->bd_addr, p_cb->p_db, p_cb->sdp_cback))
-        {
+        if(!SDP_ServiceSearchAttributeRequest(p_cb->bd_addr, p_cb->p_db, p_cb->sdp_cback)) {
             status = BTA_HL_STATUS_FAIL;
-        }
-        else
-        {
+        } else {
             status = BTA_HL_STATUS_OK;
         }
-    }
-    else
-    {
+    } else {
         status = BTA_HL_STATUS_SDP_NO_RESOURCE;
     }
 
-    if(status != BTA_HL_STATUS_OK)
-    {
+    if(status != BTA_HL_STATUS_OK) {
         GKI_free_and_reset_buf((void **)&p_cb->p_db);
 
-        if(status != BTA_HL_STATUS_SDP_NO_RESOURCE)
-        {
+        if(status != BTA_HL_STATUS_SDP_NO_RESOURCE) {
             bta_hl_deallocate_spd_cback(sdp_cback_idx);
         }
     }
@@ -2238,23 +1980,19 @@ tBTA_HL_STATUS bta_hl_init_sdp(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx, uint8
 void bta_hl_cch_sdp_init(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MCL_CB      *p_cb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_init_sdp");
-    #endif
+#endif
 
-    if(p_cb->sdp_oper == BTA_HL_SDP_OP_NONE)
-    {
+    if(p_cb->sdp_oper == BTA_HL_SDP_OP_NONE) {
         p_cb->app_id = p_data->api_cch_open.app_id;
         p_cb->sdp_oper = BTA_HL_SDP_OP_CCH_INIT;
 
-        if(bta_hl_init_sdp(p_cb->sdp_oper, app_idx, mcl_idx, 0xFF) != BTA_HL_STATUS_OK)
-        {
+        if(bta_hl_init_sdp(p_cb->sdp_oper, app_idx, mcl_idx, 0xFF) != BTA_HL_STATUS_OK) {
             p_cb->sdp_oper = BTA_HL_SDP_OP_NONE;
             bta_hl_cch_sm_execute(app_idx, mcl_idx, BTA_HL_CCH_SDP_FAIL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("SDP in use");
         bta_hl_cch_sm_execute(app_idx, mcl_idx, BTA_HL_CCH_SDP_FAIL_EVT, p_data);
     }
@@ -2274,25 +2012,21 @@ void bta_hl_cch_mca_open(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_data
     tBTA_HL_APP_CB      *p_acb  = BTA_HL_GET_APP_CB_PTR(app_idx);
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     uint8_t               sdp_idx;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_mca_open");
-    #endif
+#endif
 
-    if(bta_hl_find_sdp_idx_using_ctrl_psm(&p_mcb->sdp, p_mcb->req_ctrl_psm, &sdp_idx))
-    {
+    if(bta_hl_find_sdp_idx_using_ctrl_psm(&p_mcb->sdp, p_mcb->req_ctrl_psm, &sdp_idx)) {
         p_mcb->ctrl_psm = p_mcb->sdp.sdp_rec[sdp_idx].ctrl_psm;
         p_mcb->data_psm = p_mcb->sdp.sdp_rec[sdp_idx].data_psm;
 
         if(MCA_ConnectReq((tMCA_HANDLE) p_acb->app_handle,
                           p_mcb->bd_addr,
                           p_mcb->ctrl_psm,
-                          p_mcb->sec_mask) != MCA_SUCCESS)
-        {
+                          p_mcb->sec_mask) != MCA_SUCCESS) {
             bta_hl_cch_sm_execute(app_idx, mcl_idx, BTA_HL_CCH_CLOSE_CMPL_EVT, p_data);
         }
-    }
-    else
-    {
+    } else {
         bta_hl_cch_sm_execute(app_idx, mcl_idx, BTA_HL_CCH_CLOSE_CMPL_EVT, p_data);
     }
 }
@@ -2309,27 +2043,20 @@ void bta_hl_cch_mca_open(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_data
 void bta_hl_cch_mca_close(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_mca_close mcl_handle=%d", p_mcb->mcl_handle);
-    #endif
+#endif
 
-    if(p_mcb->sdp_oper != BTA_HL_SDP_OP_CCH_INIT)
-    {
-        if(p_mcb->mcl_handle)
-        {
-            if(MCA_DisconnectReq((tMCA_HANDLE) p_mcb->mcl_handle) != MCA_SUCCESS)
-            {
+    if(p_mcb->sdp_oper != BTA_HL_SDP_OP_CCH_INIT) {
+        if(p_mcb->mcl_handle) {
+            if(MCA_DisconnectReq((tMCA_HANDLE) p_mcb->mcl_handle) != MCA_SUCCESS) {
                 bta_hl_cch_sm_execute(app_idx, mcl_idx, BTA_HL_CCH_CLOSE_CMPL_EVT, p_data);
             }
-        }
-        else
-        {
+        } else {
             p_mcb->close_pending = TRUE;
             APPL_TRACE_DEBUG("No valid mcl_handle to stop the CCH setup now so wait until CCH is up then close it");
         }
-    }
-    else
-    {
+    } else {
         p_mcb->close_pending = TRUE;
         APPL_TRACE_DEBUG("can not stop the CCH setup becasue SDP is in progress so wait until it is done");
     }
@@ -2351,19 +2078,17 @@ void bta_hl_cch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_da
     tBTA_HL             evt_data;
     tBTA_HL_EVT         event;
     uint8_t             send_evt = TRUE;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_close_cmpl");
-    #endif
+#endif
     bta_sys_conn_close(BTA_ID_HL, p_acb->app_id, p_mcb->bd_addr);
 
-    if(p_mcb->cch_oper == BTA_HL_CCH_OP_LOCAL_CLOSE && p_mcb->force_close_local_cch_opening)
-    {
+    if(p_mcb->cch_oper == BTA_HL_CCH_OP_LOCAL_CLOSE && p_mcb->force_close_local_cch_opening) {
         p_mcb->cch_oper = BTA_HL_CCH_OP_LOCAL_OPEN;
         APPL_TRACE_DEBUG("change cch_oper from BTA_HL_CCH_OP_LOCAL_CLOSE to BTA_HL_CCH_OP_LOCAL_OPEN");
     }
 
-    switch(p_mcb->cch_oper)
-    {
+    switch(p_mcb->cch_oper) {
         case BTA_HL_CCH_OP_LOCAL_OPEN:
             bta_hl_build_cch_open_cfm(&evt_data, p_mcb->app_id, p_acb->app_handle,
                                       p_mcb->mcl_handle,
@@ -2394,8 +2119,7 @@ void bta_hl_cch_close_cmpl(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_da
 
     wm_memset(p_mcb, 0, sizeof(tBTA_HL_MCL_CB));
 
-    if(send_evt)
-    {
+    if(send_evt) {
         p_acb->p_cback(event, (tBTA_HL *) &evt_data);
     }
 
@@ -2416,28 +2140,22 @@ void bta_hl_cch_mca_disconnect(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
     tBTA_HL_MDL_CB      *p_dcb;
     uint8_t              i;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_mca_disconnect");
-    #endif
+#endif
     p_mcb->intentional_close = FALSE;
 
-    if(p_data->mca_evt.mca_data.disconnect_ind.reason == L2CAP_DISC_OK)
-    {
+    if(p_data->mca_evt.mca_data.disconnect_ind.reason == L2CAP_DISC_OK) {
         p_mcb->intentional_close = TRUE;
     }
 
-    for(i = 0; i < BTA_HL_NUM_MDLS_PER_MCL; i++)
-    {
+    for(i = 0; i < BTA_HL_NUM_MDLS_PER_MCL; i++) {
         p_dcb = BTA_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, i);
 
-        if(p_dcb->in_use && (p_dcb->dch_state != BTA_HL_DCH_IDLE_ST))
-        {
-            if(p_mcb->cch_oper == BTA_HL_CCH_OP_LOCAL_CLOSE)
-            {
+        if(p_dcb->in_use && (p_dcb->dch_state != BTA_HL_DCH_IDLE_ST)) {
+            if(p_mcb->cch_oper == BTA_HL_CCH_OP_LOCAL_CLOSE) {
                 bta_hl_dch_sm_execute(app_idx, mcl_idx, i, BTA_HL_DCH_CLOSE_CMPL_EVT, p_data);
-            }
-            else
-            {
+            } else {
                 bta_hl_dch_sm_execute(app_idx, mcl_idx, i, BTA_HL_MCA_CLOSE_IND_EVT, p_data);
             }
         }
@@ -2458,9 +2176,10 @@ void bta_hl_cch_mca_disconnect(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *
 void bta_hl_cch_mca_disc_open(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
-    #if BTA_HL_DEBUG == TRUE
-    APPL_TRACE_DEBUG("bta_hl_cch_mca_disc_open mcl_handle=0x%x close_pending=%d", p_data->mca_evt.mcl_handle, p_mcb->close_pending);
-    #endif
+#if BTA_HL_DEBUG == TRUE
+    APPL_TRACE_DEBUG("bta_hl_cch_mca_disc_open mcl_handle=0x%x close_pending=%d",
+                     p_data->mca_evt.mcl_handle, p_mcb->close_pending);
+#endif
     p_mcb->close_pending = FALSE;
     p_mcb->mcl_handle = p_data->mca_evt.mcl_handle;
     bta_hl_cch_mca_close(app_idx, mcl_idx, p_data);
@@ -2478,9 +2197,9 @@ void bta_hl_cch_mca_disc_open(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p
 void bta_hl_cch_mca_rsp_tout(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_data)
 {
     tBTA_HL_MCL_CB      *p_mcb  = BTA_HL_GET_MCL_CB_PTR(app_idx, mcl_idx);
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_mca_rsp_tout");
-    #endif
+#endif
     p_mcb->rsp_tout = TRUE;
     bta_hl_check_cch_close(app_idx, mcl_idx, p_data, TRUE);
 }
@@ -2501,16 +2220,15 @@ void bta_hl_cch_mca_connect(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_d
     tBTA_HL             evt_data;
     tBTA_HL_EVT         event;
     uint8_t             send_event = TRUE;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_cch_mca_connect mcl_handle=%d ", p_data->mca_evt.mcl_handle);
-    #endif
+#endif
     p_mcb->mcl_handle = p_data->mca_evt.mcl_handle;
     bdcpy(p_mcb->bd_addr, p_data->mca_evt.mca_data.connect_ind.bd_addr);
     p_mcb->cch_mtu = p_data->mca_evt.mca_data.connect_ind.mtu;
     bta_sys_conn_open(BTA_ID_HL, p_acb->app_id, p_mcb->bd_addr);
 
-    switch(p_mcb->cch_oper)
-    {
+    switch(p_mcb->cch_oper) {
         case BTA_HL_CCH_OP_LOCAL_OPEN:
             bta_hl_build_cch_open_cfm(&evt_data, p_mcb->app_id, p_acb->app_handle,
                                       p_mcb->mcl_handle,
@@ -2533,8 +2251,7 @@ void bta_hl_cch_mca_connect(uint8_t app_idx, uint8_t mcl_idx,  tBTA_HL_DATA *p_d
 
     p_mcb->cch_oper = BTA_HL_CCH_OP_NONE;
 
-    if(send_event)
-    {
+    if(send_event) {
         p_acb->p_cback(event, (tBTA_HL *) &evt_data);
     }
 }
@@ -2553,16 +2270,15 @@ void bta_hl_mcap_ctrl_cback(tMCA_HANDLE handle, tMCA_CL mcl, uint8_t event,
 {
     uint8_t send_event = TRUE;
     uint16_t mca_event;
-    #if (BTA_HL_DEBUG == TRUE)
-    #if (BT_TRACE_VERBOSE == TRUE)
+#if (BTA_HL_DEBUG == TRUE)
+#if (BT_TRACE_VERBOSE == TRUE)
     APPL_TRACE_EVENT("bta_hl_mcap_ctrl_cback event[%s]", bta_hl_mcap_evt_code(event));
-    #else
+#else
     APPL_TRACE_EVENT("bta_hl_mcap_ctrl_cback event[0x%02x]", event);
-    #endif
-    #endif
+#endif
+#endif
 
-    switch(event)
-    {
+    switch(event) {
         case MCA_CREATE_IND_EVT:
             mca_event = (uint16_t) BTA_HL_MCA_CREATE_IND_EVT;
             break;
@@ -2633,8 +2349,7 @@ void bta_hl_mcap_ctrl_cback(tMCA_HANDLE handle, tMCA_CL mcl, uint8_t event,
             break;
     }
 
-    if(send_event)
-    {
+    if(send_event) {
         tBTA_HL_MCA_EVT *p_msg =
                         (tBTA_HL_MCA_EVT *)GKI_getbuf(sizeof(tBTA_HL_MCA_EVT));
         p_msg->hdr.event = mca_event;
@@ -2658,8 +2373,7 @@ void bta_hl_mcap_data_cback(tMCA_DL mdl, BT_HDR *p_pkt)
 {
     uint8_t app_idx, mcl_idx, mdl_idx;
 
-    if(bta_hl_find_mdl_idx_using_handle((tBTA_HL_MDL_HANDLE)mdl, &app_idx, &mcl_idx, &mdl_idx))
-    {
+    if(bta_hl_find_mdl_idx_using_handle((tBTA_HL_MDL_HANDLE)mdl, &app_idx, &mcl_idx, &mdl_idx)) {
         tBTA_HL_MCA_RCV_DATA_EVT *p_msg =
                         (tBTA_HL_MCA_RCV_DATA_EVT *)GKI_getbuf(sizeof(tBTA_HL_MCA_RCV_DATA_EVT));
         p_msg->hdr.event = BTA_HL_MCA_RCV_DATA_EVT;
@@ -2687,8 +2401,7 @@ void bta_hl_mcap_data_cback(tMCA_DL mdl, BT_HDR *p_pkt)
 *******************************************************************************/
 static char *bta_hl_mcap_evt_code(uint8_t evt_code)
 {
-    switch(evt_code)
-    {
+    switch(evt_code) {
         case MCA_ERROR_RSP_EVT:
             return "MCA_ERROR_RSP_EVT";
 
@@ -2757,8 +2470,7 @@ static char *bta_hl_mcap_evt_code(uint8_t evt_code)
 *******************************************************************************/
 static char *bta_hl_cback_evt_code(uint8_t evt_code)
 {
-    switch(evt_code)
-    {
+    switch(evt_code) {
         case BTA_HL_CCH_OPEN_IND_EVT:
             return "BTA_HL_CCH_OPEN_IND_EVT";
 
@@ -2840,8 +2552,7 @@ static char *bta_hl_cback_evt_code(uint8_t evt_code)
 *******************************************************************************/
 static char *bta_hl_dch_oper_code(tBTA_HL_DCH_OPER oper_code)
 {
-    switch(oper_code)
-    {
+    switch(oper_code) {
         case BTA_HL_DCH_OP_NONE:
             return "BTA_HL_DCH_OP_NONE";
 

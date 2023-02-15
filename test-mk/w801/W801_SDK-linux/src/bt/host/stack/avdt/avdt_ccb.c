@@ -40,8 +40,7 @@
 #if AVDT_DEBUG == TRUE
 
 /* verbose state strings for trace */
-const char *const avdt_ccb_st_str[] =
-{
+const char *const avdt_ccb_st_str[] = {
     "CCB_IDLE_ST",
     "CCB_OPENING_ST",
     "CCB_OPEN_ST",
@@ -49,8 +48,7 @@ const char *const avdt_ccb_st_str[] =
 };
 
 /* verbose event strings for trace */
-const char *const avdt_ccb_evt_str[] =
-{
+const char *const avdt_ccb_evt_str[] = {
     "API_DISCOVER_REQ_EVT",
     "API_GETCAP_REQ_EVT",
     "API_START_REQ_EVT",
@@ -85,8 +83,7 @@ const char *const avdt_ccb_evt_str[] =
 
 
 /* action function list */
-const tAVDT_CCB_ACTION avdt_ccb_action[] =
-{
+const tAVDT_CCB_ACTION avdt_ccb_action[] = {
     avdt_ccb_chan_open,
     avdt_ccb_chan_close,
     avdt_ccb_chk_close,
@@ -131,8 +128,7 @@ const tAVDT_CCB_ACTION avdt_ccb_action[] =
 #define AVDT_CCB_NUM_COLS           3       /* number of columns in state tables */
 
 /* state table for idle state */
-const uint8_t avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] =
-{
+const uint8_t avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] = {
     /* Event                      Action 1                    Action 2                    Next state */
     /* API_DISCOVER_REQ_EVT */   {AVDT_CCB_SND_DISCOVER_CMD,  AVDT_CCB_CHAN_OPEN,         AVDT_CCB_OPENING_ST},
     /* API_GETCAP_REQ_EVT */     {AVDT_CCB_SND_GETCAP_CMD,    AVDT_CCB_CHAN_OPEN,         AVDT_CCB_OPENING_ST},
@@ -165,8 +161,7 @@ const uint8_t avdt_ccb_st_idle[][AVDT_CCB_NUM_COLS] =
 };
 
 /* state table for opening state */
-const uint8_t avdt_ccb_st_opening[][AVDT_CCB_NUM_COLS] =
-{
+const uint8_t avdt_ccb_st_opening[][AVDT_CCB_NUM_COLS] = {
     /* Event                      Action 1                    Action 2                    Next state */
     /* API_DISCOVER_REQ_EVT */   {AVDT_CCB_SND_DISCOVER_CMD,  AVDT_CCB_IGNORE,            AVDT_CCB_OPENING_ST},
     /* API_GETCAP_REQ_EVT */     {AVDT_CCB_SND_GETCAP_CMD,    AVDT_CCB_IGNORE,            AVDT_CCB_OPENING_ST},
@@ -199,8 +194,7 @@ const uint8_t avdt_ccb_st_opening[][AVDT_CCB_NUM_COLS] =
 };
 
 /* state table for open state */
-const uint8_t avdt_ccb_st_open[][AVDT_CCB_NUM_COLS] =
-{
+const uint8_t avdt_ccb_st_open[][AVDT_CCB_NUM_COLS] = {
     /* Event                      Action 1                    Action 2                    Next state */
     /* API_DISCOVER_REQ_EVT */   {AVDT_CCB_SND_DISCOVER_CMD,  AVDT_CCB_SND_CMD,           AVDT_CCB_OPEN_ST},
     /* API_GETCAP_REQ_EVT */     {AVDT_CCB_SND_GETCAP_CMD,    AVDT_CCB_SND_CMD,           AVDT_CCB_OPEN_ST},
@@ -233,8 +227,7 @@ const uint8_t avdt_ccb_st_open[][AVDT_CCB_NUM_COLS] =
 };
 
 /* state table for closing state */
-const uint8_t avdt_ccb_st_closing[][AVDT_CCB_NUM_COLS] =
-{
+const uint8_t avdt_ccb_st_closing[][AVDT_CCB_NUM_COLS] = {
     /* Event                      Action 1                    Action 2                    Next state */
     /* API_DISCOVER_REQ_EVT */   {AVDT_CCB_SET_RECONN,        AVDT_CCB_SND_DISCOVER_CMD,  AVDT_CCB_CLOSING_ST},
     /* API_GETCAP_REQ_EVT */     {AVDT_CCB_SET_RECONN,        AVDT_CCB_SND_GETCAP_CMD,    AVDT_CCB_CLOSING_ST},
@@ -270,8 +263,7 @@ const uint8_t avdt_ccb_st_closing[][AVDT_CCB_NUM_COLS] =
 typedef const uint8_t (*tAVDT_CCB_ST_TBL)[AVDT_CCB_NUM_COLS];
 
 /* state table */
-const tAVDT_CCB_ST_TBL avdt_ccb_st_tbl[] =
-{
+const tAVDT_CCB_ST_TBL avdt_ccb_st_tbl[] = {
     avdt_ccb_st_idle,
     avdt_ccb_st_opening,
     avdt_ccb_st_open,
@@ -309,27 +301,23 @@ void avdt_ccb_event(tAVDT_CCB *p_ccb, uint8_t event, tAVDT_CCB_EVT *p_data)
     tAVDT_CCB_ST_TBL    state_table;
     uint8_t               action;
     int                 i;
-    #if AVDT_DEBUG == TRUE
-    AVDT_TRACE_EVENT("CCB ccb=%d event=%s state=%s", avdt_ccb_to_idx(p_ccb), avdt_ccb_evt_str[event], avdt_ccb_st_str[p_ccb->state]);
-    #endif
+#if AVDT_DEBUG == TRUE
+    AVDT_TRACE_EVENT("CCB ccb=%d event=%s state=%s", avdt_ccb_to_idx(p_ccb), avdt_ccb_evt_str[event],
+                     avdt_ccb_st_str[p_ccb->state]);
+#endif
     /* look up the state table for the current state */
     state_table = avdt_ccb_st_tbl[p_ccb->state];
 
     /* set next state */
-    if(p_ccb->state != state_table[event][AVDT_CCB_NEXT_STATE])
-    {
+    if(p_ccb->state != state_table[event][AVDT_CCB_NEXT_STATE]) {
         p_ccb->state = state_table[event][AVDT_CCB_NEXT_STATE];
     }
 
     /* execute action functions */
-    for(i = 0; i < AVDT_CCB_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != AVDT_CCB_IGNORE)
-        {
+    for(i = 0; i < AVDT_CCB_ACTIONS; i++) {
+        if((action = state_table[event][i]) != AVDT_CCB_IGNORE) {
             (*avdt_cb.p_ccb_act[action])(p_ccb, p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
@@ -351,17 +339,14 @@ tAVDT_CCB *avdt_ccb_by_bd(BD_ADDR bd_addr)
     tAVDT_CCB   *p_ccb = &avdt_cb.ccb[0];
     int         i;
 
-    for(i = 0; i < AVDT_NUM_LINKS; i++, p_ccb++)
-    {
+    for(i = 0; i < AVDT_NUM_LINKS; i++, p_ccb++) {
         /* if allocated ccb has matching ccb */
-        if(p_ccb->allocated && (!memcmp(p_ccb->peer_addr, bd_addr, BD_ADDR_LEN)))
-        {
+        if(p_ccb->allocated && (!memcmp(p_ccb->peer_addr, bd_addr, BD_ADDR_LEN))) {
             break;
         }
     }
 
-    if(i == AVDT_NUM_LINKS)
-    {
+    if(i == AVDT_NUM_LINKS) {
         /* if no ccb found */
         p_ccb = NULL;
         AVDT_TRACE_DEBUG("No ccb for addr %02x-%02x-%02x-%02x-%02x-%02x",
@@ -386,26 +371,23 @@ tAVDT_CCB *avdt_ccb_alloc(BD_ADDR bd_addr)
     tAVDT_CCB   *p_ccb = &avdt_cb.ccb[0];
     int         i;
 
-    for(i = 0; i < AVDT_NUM_LINKS; i++, p_ccb++)
-    {
-        if(!p_ccb->allocated)
-        {
+    for(i = 0; i < AVDT_NUM_LINKS; i++, p_ccb++) {
+        if(!p_ccb->allocated) {
             p_ccb->allocated = TRUE;
             wm_memcpy(p_ccb->peer_addr, bd_addr, BD_ADDR_LEN);
             p_ccb->cmd_q = fixed_queue_new(SIZE_MAX);
             p_ccb->rsp_q = fixed_queue_new(SIZE_MAX);
-            #ifdef USE_ALARM
+#ifdef USE_ALARM
             p_ccb->idle_ccb_timer = alarm_new("avdt_ccb.idle_ccb_timer");
             p_ccb->ret_ccb_timer = alarm_new("avdt_ccb.ret_ccb_timer");
             p_ccb->rsp_ccb_timer = alarm_new("avdt_ccb.rsp_ccb_timer");
-            #endif
+#endif
             AVDT_TRACE_DEBUG("avdt_ccb_alloc %d", i);
             break;
         }
     }
 
-    if(i == AVDT_NUM_LINKS)
-    {
+    if(i == AVDT_NUM_LINKS) {
         /* out of ccbs */
         p_ccb = NULL;
         AVDT_TRACE_WARNING("Out of ccbs");
@@ -428,15 +410,15 @@ void avdt_ccb_dealloc(tAVDT_CCB *p_ccb, tAVDT_CCB_EVT *p_data)
 {
     UNUSED(p_data);
     AVDT_TRACE_DEBUG("avdt_ccb_dealloc %d", avdt_ccb_to_idx(p_ccb));
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_free(p_ccb->idle_ccb_timer);
     alarm_free(p_ccb->ret_ccb_timer);
     alarm_free(p_ccb->rsp_ccb_timer);
-    #else
+#else
     btu_stop_timer(&p_ccb->idle_ccb_timer);
     btu_stop_timer(&p_ccb->ret_ccb_timer);
     btu_stop_timer(&p_ccb->rsp_ccb_timer);
-    #endif
+#endif
     fixed_queue_free(p_ccb->cmd_q, NULL);
     fixed_queue_free(p_ccb->rsp_q, NULL);
     wm_memset(p_ccb, 0, sizeof(tAVDT_CCB));
@@ -473,12 +455,9 @@ tAVDT_CCB *avdt_ccb_by_idx(uint8_t idx)
     tAVDT_CCB   *p_ccb;
 
     /* verify index */
-    if(idx < AVDT_NUM_LINKS)
-    {
+    if(idx < AVDT_NUM_LINKS) {
         p_ccb = &avdt_cb.ccb[idx];
-    }
-    else
-    {
+    } else {
         p_ccb = NULL;
         AVDT_TRACE_WARNING("No ccb for idx %d", idx);
     }

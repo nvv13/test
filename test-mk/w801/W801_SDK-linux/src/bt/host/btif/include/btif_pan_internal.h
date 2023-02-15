@@ -40,14 +40,14 @@
 #define ETH_ADDR_LEN        6
 #define TAP_MAX_PKT_WRITE_LEN 2000
 #ifndef PAN_SECURITY
-    #define PAN_SECURITY (BTM_SEC_IN_AUTHENTICATE | BTM_SEC_OUT_AUTHENTICATE | BTM_SEC_IN_ENCRYPT | BTM_SEC_OUT_ENCRYPT)
+#define PAN_SECURITY (BTM_SEC_IN_AUTHENTICATE | BTM_SEC_OUT_AUTHENTICATE | BTM_SEC_IN_ENCRYPT | BTM_SEC_OUT_ENCRYPT)
 #endif
 
 #define PAN_STATE_UNKNOWN   0
 #define PAN_STATE_OPEN      1
 #define PAN_STATE_CLOSE     2
 #ifndef PAN_ROLE_INACTIVE
-    #define PAN_ROLE_INACTIVE 0
+#define PAN_ROLE_INACTIVE 0
 #endif
 
 
@@ -55,15 +55,13 @@
 **  Type definitions and return values
 ********************************************************************************/
 
-typedef struct eth_hdr
-{
+typedef struct eth_hdr {
     unsigned char h_dest[ETH_ADDR_LEN];
     unsigned char h_src[ETH_ADDR_LEN];
     short         h_proto;
 } tETH_HDR;
 
-typedef struct
-{
+typedef struct {
     int handle;
     int state;
     uint16_t protocol;
@@ -73,8 +71,7 @@ typedef struct
     unsigned char eth_addr[ETH_ADDR_LEN];
 } btpan_conn_t;
 
-typedef struct
-{
+typedef struct {
     int btl_if_handle;
     int btl_if_handle_panu;
     int tap_fd;
@@ -109,8 +106,7 @@ static inline int is_empty_eth_addr(const BD_ADDR addr)
     int i;
 
     for(i = 0; i < BD_ADDR_LEN; i++)
-        if(addr[i] != 0)
-        {
+        if(addr[i] != 0) {
             return 0;
         }
 
@@ -119,8 +115,7 @@ static inline int is_empty_eth_addr(const BD_ADDR addr)
 
 static inline int is_valid_bt_eth_addr(const BD_ADDR addr)
 {
-    if(is_empty_eth_addr(addr))
-    {
+    if(is_empty_eth_addr(addr)) {
         return 0;
     }
 

@@ -39,8 +39,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_jv_reg =
-{
+static const tBTA_SYS_REG bta_jv_reg = {
     bta_jv_sm_execute,
     NULL
 };
@@ -65,21 +64,18 @@ tBTA_JV_STATUS BTA_JvEnable(tBTA_JV_DM_CBACK *p_cback)
     int i;
     APPL_TRACE_API("BTA_JvEnable");
 
-    if(p_cback && FALSE == bta_sys_is_register(BTA_ID_JV))
-    {
+    if(p_cback && FALSE == bta_sys_is_register(BTA_ID_JV)) {
         wm_memset(&bta_jv_cb, 0, sizeof(tBTA_JV_CB));
 
         /* set handle to invalid value by default */
-        for(i = 0; i < BTA_JV_PM_MAX_NUM; i++)
-        {
+        for(i = 0; i < BTA_JV_PM_MAX_NUM; i++) {
             bta_jv_cb.pm_cb[i].handle = BTA_JV_PM_HANDLE_CLEAR;
         }
 
         /* register with BTA system manager */
         bta_sys_register(BTA_ID_JV, &bta_jv_reg);
 
-        if(p_cback)
-        {
+        if(p_cback) {
             tBTA_JV_API_ENABLE *p_buf =
                             (tBTA_JV_API_ENABLE *)GKI_getbuf(sizeof(tBTA_JV_API_ENABLE));
             p_buf->hdr.event = BTA_JV_API_ENABLE_EVT;
@@ -87,9 +83,7 @@ tBTA_JV_STATUS BTA_JvEnable(tBTA_JV_DM_CBACK *p_cback)
             bta_sys_sendmsg(p_buf);
             status = BTA_JV_SUCCESS;
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("JVenable fails");
     }
 
@@ -130,11 +124,9 @@ uint8_t BTA_JvIsEncrypted(BD_ADDR bd_addr)
     uint8_t sec_flags, le_flags;
 
     if(BTM_GetSecurityFlags(bd_addr, &sec_flags) &&
-            BTM_GetSecurityFlagsByTransport(bd_addr, &le_flags, BT_TRANSPORT_LE))
-    {
+            BTM_GetSecurityFlagsByTransport(bd_addr, &le_flags, BT_TRANSPORT_LE)) {
         if(sec_flags & BTM_SEC_FLAG_ENCRYPTED ||
-                le_flags & BTM_SEC_FLAG_ENCRYPTED)
-        {
+                le_flags & BTM_SEC_FLAG_ENCRYPTED) {
             is_encrypted = TRUE;
         }
     }
@@ -243,7 +235,7 @@ tBTA_JV_STATUS BTA_JvStartDiscovery(BD_ADDR bd_addr, uint16_t num_uuid,
 **                  BTA_JV_FAILURE, otherwise.
 **
 *******************************************************************************/
-tBTA_JV_STATUS BTA_JvCreateRecordByUser(const char *name, uint32_t channel,void *user_data)
+tBTA_JV_STATUS BTA_JvCreateRecordByUser(const char *name, uint32_t channel, void *user_data)
 {
     tBTA_JV_API_CREATE_RECORD *p_msg =
                     (tBTA_JV_API_CREATE_RECORD *)GKI_getbuf(sizeof(tBTA_JV_API_CREATE_RECORD));
@@ -299,8 +291,7 @@ tBTA_JV_STATUS BTA_JvL2capConnectLE(tBTA_SEC sec_mask, tBTA_JV_ROLE role,
 {
     APPL_TRACE_API("%s", __func__);
 
-    if(p_cback == NULL)
-    {
+    if(p_cback == NULL) {
         return BTA_JV_FAILURE;    /* Nothing to do */
     }
 
@@ -312,23 +303,17 @@ tBTA_JV_STATUS BTA_JvL2capConnectLE(tBTA_SEC sec_mask, tBTA_JV_ROLE role,
     p_msg->remote_chan  = remote_chan;
     p_msg->rx_mtu       = rx_mtu;
 
-    if(cfg != NULL)
-    {
+    if(cfg != NULL) {
         p_msg->has_cfg = TRUE;
         p_msg->cfg = *cfg;
-    }
-    else
-    {
+    } else {
         p_msg->has_cfg = FALSE;
     }
 
-    if(ertm_info != NULL)
-    {
+    if(ertm_info != NULL) {
         p_msg->has_ertm_info = TRUE;
         p_msg->ertm_info = *ertm_info;
-    }
-    else
-    {
+    } else {
         p_msg->has_ertm_info = FALSE;
     }
 
@@ -361,8 +346,7 @@ tBTA_JV_STATUS BTA_JvL2capConnect(int conn_type, tBTA_SEC sec_mask, tBTA_JV_ROLE
 {
     APPL_TRACE_API("%s", __func__);
 
-    if(p_cback == NULL)
-    {
+    if(p_cback == NULL) {
         return BTA_JV_FAILURE;    /* Nothing to do */
     }
 
@@ -375,23 +359,17 @@ tBTA_JV_STATUS BTA_JvL2capConnect(int conn_type, tBTA_SEC sec_mask, tBTA_JV_ROLE
     p_msg->remote_psm   = remote_psm;
     p_msg->rx_mtu       = rx_mtu;
 
-    if(cfg != NULL)
-    {
+    if(cfg != NULL) {
         p_msg->has_cfg = TRUE;
         p_msg->cfg = *cfg;
-    }
-    else
-    {
+    } else {
         p_msg->has_cfg = FALSE;
     }
 
-    if(ertm_info != NULL)
-    {
+    if(ertm_info != NULL) {
         p_msg->has_ertm_info = TRUE;
         p_msg->ertm_info = *ertm_info;
-    }
-    else
-    {
+    } else {
         p_msg->has_ertm_info = FALSE;
     }
 
@@ -417,8 +395,7 @@ tBTA_JV_STATUS BTA_JvL2capClose(uint32_t handle)
     tBTA_JV_STATUS status = BTA_JV_FAILURE;
     APPL_TRACE_API("%s", __func__);
 
-    if(handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback)
-    {
+    if(handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback) {
         tBTA_JV_API_L2CAP_CLOSE *p_msg =
                         (tBTA_JV_API_L2CAP_CLOSE *)GKI_getbuf(sizeof(tBTA_JV_API_L2CAP_CLOSE));
         p_msg->hdr.event = BTA_JV_API_L2CAP_CLOSE_EVT;
@@ -473,8 +450,7 @@ tBTA_JV_STATUS BTA_JvL2capStartServer(int conn_type, tBTA_SEC sec_mask, tBTA_JV_
 {
     APPL_TRACE_API("%s", __func__);
 
-    if(p_cback == NULL)
-    {
+    if(p_cback == NULL) {
         return BTA_JV_FAILURE;    /* Nothing to do */
     }
 
@@ -487,23 +463,17 @@ tBTA_JV_STATUS BTA_JvL2capStartServer(int conn_type, tBTA_SEC sec_mask, tBTA_JV_
     p_msg->local_psm = local_psm;
     p_msg->rx_mtu = rx_mtu;
 
-    if(cfg != NULL)
-    {
+    if(cfg != NULL) {
         p_msg->has_cfg = TRUE;
         p_msg->cfg = *cfg;
-    }
-    else
-    {
+    } else {
         p_msg->has_cfg = FALSE;
     }
 
-    if(ertm_info != NULL)
-    {
+    if(ertm_info != NULL) {
         p_msg->has_ertm_info = TRUE;
         p_msg->ertm_info = *ertm_info;
-    }
-    else
-    {
+    } else {
         p_msg->has_ertm_info = FALSE;
     }
 
@@ -533,8 +503,7 @@ tBTA_JV_STATUS BTA_JvL2capStartServerLE(tBTA_SEC sec_mask, tBTA_JV_ROLE role,
 {
     APPL_TRACE_API("%s", __func__);
 
-    if(p_cback == NULL)
-    {
+    if(p_cback == NULL) {
         return BTA_JV_FAILURE;    /* Nothing to do */
     }
 
@@ -546,23 +515,17 @@ tBTA_JV_STATUS BTA_JvL2capStartServerLE(tBTA_SEC sec_mask, tBTA_JV_ROLE role,
     p_msg->local_chan = local_chan;
     p_msg->rx_mtu = rx_mtu;
 
-    if(cfg != NULL)
-    {
+    if(cfg != NULL) {
         p_msg->has_cfg = TRUE;
         p_msg->cfg = *cfg;
-    }
-    else
-    {
+    } else {
         p_msg->has_cfg = FALSE;
     }
 
-    if(ertm_info != NULL)
-    {
+    if(ertm_info != NULL) {
         p_msg->has_ertm_info = TRUE;
         p_msg->ertm_info = *ertm_info;
-    }
-    else
-    {
+    } else {
         p_msg->has_ertm_info = FALSE;
     }
 
@@ -638,8 +601,7 @@ tBTA_JV_STATUS BTA_JvL2capRead(uint32_t handle, uint32_t req_id, uint8_t *p_data
     tBTA_JV_L2CAP_READ evt_data;
     APPL_TRACE_API("%s", __func__);
 
-    if(handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback)
-    {
+    if(handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback) {
         status = BTA_JV_SUCCESS;
         evt_data.status = BTA_JV_FAILURE;
         evt_data.handle = handle;
@@ -647,8 +609,7 @@ tBTA_JV_STATUS BTA_JvL2capRead(uint32_t handle, uint32_t req_id, uint8_t *p_data
         evt_data.p_data = p_data;
         evt_data.len    = 0;
 
-        if(BT_PASS == GAP_ConnReadData((uint16_t)handle, p_data, len, &evt_data.len))
-        {
+        if(BT_PASS == GAP_ConnReadData((uint16_t)handle, p_data, len, &evt_data.len)) {
             evt_data.status = BTA_JV_SUCCESS;
         }
 
@@ -675,12 +636,10 @@ tBTA_JV_STATUS BTA_JvL2capReady(uint32_t handle, uint32_t *p_data_size)
     tBTA_JV_STATUS status = BTA_JV_FAILURE;
     APPL_TRACE_API("%s: %d", __func__, handle);
 
-    if(p_data_size && handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback)
-    {
+    if(p_data_size && handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback) {
         *p_data_size = 0;
 
-        if(BT_PASS == GAP_GetRxQueueCnt((uint16_t)handle, p_data_size))
-        {
+        if(BT_PASS == GAP_GetRxQueueCnt((uint16_t)handle, p_data_size)) {
             status = BTA_JV_SUCCESS;
         }
     }
@@ -708,8 +667,7 @@ tBTA_JV_STATUS BTA_JvL2capWrite(uint32_t handle, uint32_t req_id, uint8_t *p_dat
     tBTA_JV_STATUS status = BTA_JV_FAILURE;
     APPL_TRACE_API("%s", __func__);
 
-    if(handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback)
-    {
+    if(handle < BTA_JV_MAX_L2C_CONN && bta_jv_cb.l2c_cb[handle].p_cback) {
         tBTA_JV_API_L2CAP_WRITE *p_msg =
                         (tBTA_JV_API_L2CAP_WRITE *)GKI_getbuf(sizeof(tBTA_JV_API_L2CAP_WRITE));
         p_msg->hdr.event = BTA_JV_API_L2CAP_WRITE_EVT;
@@ -778,8 +736,7 @@ tBTA_JV_STATUS BTA_JvRfcommConnect(tBTA_SEC sec_mask,
 {
     APPL_TRACE_API("%s", __func__);
 
-    if(p_cback == NULL)
-    {
+    if(p_cback == NULL) {
         return BTA_JV_FAILURE;    /* Nothing to do */
     }
 
@@ -814,8 +771,7 @@ tBTA_JV_STATUS BTA_JvRfcommClose(uint32_t handle, void *user_data)
     APPL_TRACE_API("%s", __func__);
 
     if(hi < BTA_JV_MAX_RFC_CONN && bta_jv_cb.rfc_cb[hi].p_cback &&
-            si < BTA_JV_MAX_RFC_SR_SESSION && bta_jv_cb.rfc_cb[hi].rfc_hdl[si])
-    {
+            si < BTA_JV_MAX_RFC_SR_SESSION && bta_jv_cb.rfc_cb[hi].rfc_hdl[si]) {
         tBTA_JV_API_RFCOMM_CLOSE *p_msg =
                         (tBTA_JV_API_RFCOMM_CLOSE *)GKI_getbuf(sizeof(tBTA_JV_API_RFCOMM_CLOSE));
         p_msg->hdr.event = BTA_JV_API_RFCOMM_CLOSE_EVT;
@@ -851,21 +807,18 @@ tBTA_JV_STATUS BTA_JvRfcommStartServer(tBTA_SEC sec_mask,
 {
     APPL_TRACE_API("%s", __func__);
 
-    if(p_cback == NULL)
-    {
+    if(p_cback == NULL) {
         return BTA_JV_FAILURE;    /* Nothing to do */
     }
 
     tBTA_JV_API_RFCOMM_SERVER *p_msg =
                     (tBTA_JV_API_RFCOMM_SERVER *)GKI_getbuf(sizeof(tBTA_JV_API_RFCOMM_SERVER));
 
-    if(max_session == 0)
-    {
+    if(max_session == 0) {
         max_session = 1;
     }
 
-    if(max_session > BTA_JV_MAX_RFC_SR_SESSION)
-    {
+    if(max_session > BTA_JV_MAX_RFC_SR_SESSION) {
         APPL_TRACE_DEBUG("max_session is too big. use max (%d)", max_session, BTA_JV_MAX_RFC_SR_SESSION);
         max_session = BTA_JV_MAX_RFC_SR_SESSION;
     }
@@ -920,12 +873,9 @@ uint16_t BTA_JvRfcommGetPortHdl(uint32_t handle)
     uint32_t  si = BTA_JV_RFC_HDL_TO_SIDX(handle);
 
     if(hi < BTA_JV_MAX_RFC_CONN &&
-            si < BTA_JV_MAX_RFC_SR_SESSION && bta_jv_cb.rfc_cb[hi].rfc_hdl[si])
-    {
+            si < BTA_JV_MAX_RFC_SR_SESSION && bta_jv_cb.rfc_cb[hi].rfc_hdl[si]) {
         return bta_jv_cb.port_cb[bta_jv_cb.rfc_cb[hi].rfc_hdl[si] - 1].port_handle;
-    }
-    else
-    {
+    } else {
         return 0xffff;
     }
 }
@@ -940,7 +890,7 @@ uint16_t BTA_JvRfcommGetPortHdl(uint32_t handle)
 **                  BTA_JV_FAILURE, otherwise.
 **
 *******************************************************************************/
-tBTA_JV_STATUS BTA_JvRfcommWrite(uint32_t handle, uint32_t req_id,int len, uint8_t *p_data)
+tBTA_JV_STATUS BTA_JvRfcommWrite(uint32_t handle, uint32_t req_id, int len, uint8_t *p_data)
 {
     tBTA_JV_STATUS status = BTA_JV_FAILURE;
     uint32_t  hi = ((handle & BTA_JV_RFC_HDL_MASK) & ~BTA_JV_RFCOMM_MASK) - 1;
@@ -949,8 +899,7 @@ tBTA_JV_STATUS BTA_JvRfcommWrite(uint32_t handle, uint32_t req_id,int len, uint8
     APPL_TRACE_DEBUG("handle:0x%x, hi:%d, si:%d", handle, hi, si);
 
     if(hi < BTA_JV_MAX_RFC_CONN && bta_jv_cb.rfc_cb[hi].p_cback &&
-            si < BTA_JV_MAX_RFC_SR_SESSION && bta_jv_cb.rfc_cb[hi].rfc_hdl[si])
-    {
+            si < BTA_JV_MAX_RFC_SR_SESSION && bta_jv_cb.rfc_cb[hi].rfc_hdl[si]) {
         tBTA_JV_API_RFCOMM_WRITE *p_msg =
                         (tBTA_JV_API_RFCOMM_WRITE *)GKI_getbuf(sizeof(tBTA_JV_API_RFCOMM_WRITE));
         p_msg->hdr.event = BTA_JV_API_RFCOMM_WRITE_EVT;

@@ -16,6 +16,7 @@ INCLUDES += -I $(TOP_DIR)/platform/common/params
 INCLUDES += -I $(TOP_DIR)/platform/inc
 INCLUDES += -I $(TOP_DIR)/platform/sys
 
+INCLUDES += -I $(TOP_DIR)/src/app
 INCLUDES += -I $(TOP_DIR)/src/app/wm_atcmd
 INCLUDES += -I $(TOP_DIR)/src/app/dhcpserver
 INCLUDES += -I $(TOP_DIR)/src/app/dnsserver
@@ -37,12 +38,12 @@ INCLUDES += -I $(TOP_DIR)/src/app/libwebsockets-2.1-stable
 INCLUDES += -I $(TOP_DIR)/src/app/fatfs
 INCLUDES += -I $(TOP_DIR)/src/app/mbedtls/include
 INCLUDES += -I $(TOP_DIR)/src/app/mbedtls/ports
-INCLUDES += -I $(TOP_DIR)/src/network/api2.0.3
-INCLUDES += -I $(TOP_DIR)/src/network/lwip2.0.3/include
+INCLUDES += -I $(TOP_DIR)/src/network/api_wm
+INCLUDES += -I $(TOP_DIR)/src/network/lwip2.1.3/include
 INCLUDES += -I $(TOP_DIR)/src/os/rtos/include
 
 INCLUDES += -I $(TOP_DIR)/src/app/factorycmd
-
+INCLUDES += -I $(TOP_DIR)/src/app/bleapp
 INCLUDES += -I $(TOP_DIR)/demo
 #nimble host
 INCLUDES += -I $(TOP_DIR)/src/bt/blehost/ext/tinycrypt/include

@@ -35,6 +35,8 @@
 #include "wm_efuse.h"
 #include "wm_dhcp_server.h"
 #include "wm_wifi_oneshot.h"
+#include "wm_ram_config.h"
+#include "wm_pmu.h"
 
 extern const char FirmWareVer[];
 extern const char HwVer[];
@@ -177,6 +179,7 @@ int hostif_cipher2host(int cipher, int proto)
 
 static void ResetTimerProc(void *ptmr, void *parg)
 {
+	tls_sys_set_reboot_reason(REBOOT_REASON_ACTIVE);
     tls_sys_reset();
 }
 
@@ -344,7 +347,7 @@ int tls_cmd_scan( enum tls_cmd_mode mode)
     return CMD_ERR_OK;
 }
 
-int tls_cmd_scan_by_param( enum tls_cmd_mode mode, u16 channellist, u32 times, u16 switchinterval)
+int tls_cmd_scan_by_param( enum tls_cmd_mode mode, u16 channellist, u32 times, u16 switchinterval, u16 scantype)
 {
 
     int ret=0;
@@ -362,6 +365,7 @@ int tls_cmd_scan_by_param( enum tls_cmd_mode mode, u16 channellist, u32 times, u
     tls_wifi_scan_result_cb_register(hostif_wscan_cmplt);
     
     /* trigger the scan */
+	scan_param.scan_type = scantype;
     scan_param.scan_chanlist = channellist;
     scan_param.scan_chinterval = switchinterval;
     scan_param.scan_times = times;

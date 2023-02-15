@@ -44,8 +44,7 @@
 *****************************************************************************/
 
 /* AT command table element */
-typedef struct
-{
+typedef struct {
     const char  *p_cmd;         /* AT command string */
     uint8_t       arg_type;       /* allowable argument type syntax */
     uint8_t       fmt;            /* whether arg is int or string */
@@ -61,8 +60,7 @@ typedef void (tBTA_AG_AT_CMD_CBACK)(void *p_user, uint16_t cmd, uint8_t arg_type
 typedef void (tBTA_AG_AT_ERR_CBACK)(void *p_user, uint8_t unknown, char *p_arg);
 
 /* AT command parsing control block */
-typedef struct
-{
+typedef struct {
     tBTA_AG_AT_CMD          *p_at_tbl;      /* AT command table */
     tBTA_AG_AT_CMD_CBACK    *p_cmd_cback;   /* command callback */
     tBTA_AG_AT_ERR_CBACK    *p_err_cback;   /* error callback */

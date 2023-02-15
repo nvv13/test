@@ -16,39 +16,40 @@ u8 sever_ip[16];
 u16 iperfLocalPort = 0;
 
 extern 	tls_os_queue_t *tht_q;
-extern struct tht_param gThtSys;
+extern struct tht_param *gThtSys;
 extern void CreateThroughputTask(void);
 
 void iperf_start(u8 mode, u8 chnl, u8 interval, u32 maxcnt, u16 localport, u32 severIp)
 {
-    struct tht_param *tht = (struct tht_param *)(&gThtSys);
 
     CreateThroughputTask();
+	if (gThtSys)
+	{
+	    if(mode)
+	    {
+	        gThtSys->role = 's';
+	    }
+	    else
+	    {
+	        gThtSys->role = 'c';
 
-    if(mode)
-    {
-        tht->role = 's';
-    }
-    else
-    {
-        tht->role = 'c';
+	        inet_ntoa_r(severIp, (char *)sever_ip, 16);
+	        strcpy(gThtSys->server_hostname, (char *)sever_ip);
+	        printf("ipaddr:%s\n", gThtSys->server_hostname);
 
-        inet_ntoa_r(severIp, (char *)sever_ip, 16);
-        strcpy(tht->server_hostname, (char *)sever_ip);
-        printf("ipaddr:%s\n", tht->server_hostname);
+	        gThtSys->protocol = Pudp;
+	        gThtSys->rate = 0;
+	        gThtSys->block_size = 0;
+	    }
 
-        tht->protocol = Pudp;
-        tht->rate = 0;
-        tht->block_size = 0;
-    }
+	    gThtSys->localport = localport;
 
-    tht->localport = localport;
+	    gThtSys->report_interval = interval;
+	    gThtSys->duration = maxcnt;
+	    gThtSys->port = chnl + PORT - 1;
 
-    tht->report_interval = interval;
-    tht->duration = maxcnt;
-    tht->port = chnl + PORT - 1;
-
-    tls_os_queue_send(tht_q, (void *)TLS_MSG_WIFI_PERF_TEST_START, 0);
+	    tls_os_queue_send(tht_q, (void *)TLS_MSG_WIFI_PERF_TEST_START, 0);
+	}
 }
 
 

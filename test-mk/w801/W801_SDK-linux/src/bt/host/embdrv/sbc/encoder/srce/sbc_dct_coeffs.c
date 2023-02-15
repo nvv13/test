@@ -26,8 +26,7 @@
 #include "sbc_encoder.h"
 /*DCT coeff for 4 sub-band case.*/
 #if (SBC_FAST_DCT == FALSE)
-const SINT16 gas16AnalDCTcoeff4[] =
-{
+const SINT16 gas16AnalDCTcoeff4[] = {
     (SINT16)(0.7071 * 32768),
     (SINT16)(0.9239 * 32768),
     (SINT16)(1.0000 * 32767),
@@ -66,8 +65,7 @@ const SINT16 gas16AnalDCTcoeff4[] =
 };
 
 /*DCT coeff for 8 sub-band case.*/
-const SINT16 gas16AnalDCTcoeff8[] =
-{
+const SINT16 gas16AnalDCTcoeff8[] = {
     (SINT16)(0.7071 * 32768),
     (SINT16)(0.8315 * 32768),
     (SINT16)(0.9239 * 32768),

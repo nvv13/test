@@ -38,8 +38,7 @@
 #if BT_TRACE_VERBOSE == TRUE
 
 /* verbose state strings for trace */
-const char *const avct_lcb_st_str[] =
-{
+const char *const avct_lcb_st_str[] = {
     "LCB_IDLE_ST",
     "LCB_OPENING_ST",
     "LCB_OPEN_ST",
@@ -47,8 +46,7 @@ const char *const avct_lcb_st_str[] =
 };
 
 /* verbose event strings for trace */
-const char *const avct_lcb_evt_str[] =
-{
+const char *const avct_lcb_evt_str[] = {
     "UL_BIND_EVT",
     "UL_UNBIND_EVT",
     "UL_MSG_EVT",
@@ -62,8 +60,7 @@ const char *const avct_lcb_evt_str[] =
 #endif
 
 /* lcb state machine states */
-enum
-{
+enum {
     AVCT_LCB_IDLE_ST,
     AVCT_LCB_OPENING_ST,
     AVCT_LCB_OPEN_ST,
@@ -71,8 +68,7 @@ enum
 };
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     AVCT_LCB_CHNL_OPEN,
     AVCT_LCB_CHNL_DISC,
     AVCT_LCB_SEND_MSG,
@@ -98,8 +94,7 @@ enum
 typedef void (*tAVCT_LCB_ACTION)(tAVCT_LCB *p_ccb, tAVCT_LCB_EVT *p_data);
 
 /* action function list */
-const tAVCT_LCB_ACTION avct_lcb_action[] =
-{
+const tAVCT_LCB_ACTION avct_lcb_action[] = {
     avct_lcb_chnl_open,
     avct_lcb_chnl_disc,
     avct_lcb_send_msg,
@@ -124,8 +119,7 @@ const tAVCT_LCB_ACTION avct_lcb_action[] =
 #define AVCT_LCB_NUM_COLS           3       /* number of columns in state tables */
 
 /* state table for idle state */
-const uint8_t avct_lcb_st_idle[][AVCT_LCB_NUM_COLS] =
-{
+const uint8_t avct_lcb_st_idle[][AVCT_LCB_NUM_COLS] = {
     /* Event                Action 1                    Action 2                    Next state */
     /* UL_BIND_EVT */       {AVCT_LCB_CHNL_OPEN,        AVCT_LCB_IGNORE,            AVCT_LCB_OPENING_ST},
     /* UL_UNBIND_EVT */     {AVCT_LCB_UNBIND_DISC,      AVCT_LCB_IGNORE,            AVCT_LCB_IDLE_ST},
@@ -138,8 +132,7 @@ const uint8_t avct_lcb_st_idle[][AVCT_LCB_NUM_COLS] =
 };
 
 /* state table for opening state */
-const uint8_t avct_lcb_st_opening[][AVCT_LCB_NUM_COLS] =
-{
+const uint8_t avct_lcb_st_opening[][AVCT_LCB_NUM_COLS] = {
     /* Event                Action 1                    Action 2                    Next state */
     /* UL_BIND_EVT */       {AVCT_LCB_IGNORE,           AVCT_LCB_IGNORE,            AVCT_LCB_OPENING_ST},
     /* UL_UNBIND_EVT */     {AVCT_LCB_UNBIND_DISC,      AVCT_LCB_IGNORE,            AVCT_LCB_OPENING_ST},
@@ -152,8 +145,7 @@ const uint8_t avct_lcb_st_opening[][AVCT_LCB_NUM_COLS] =
 };
 
 /* state table for open state */
-const uint8_t avct_lcb_st_open[][AVCT_LCB_NUM_COLS] =
-{
+const uint8_t avct_lcb_st_open[][AVCT_LCB_NUM_COLS] = {
     /* Event                Action 1                    Action 2                    Next state */
     /* UL_BIND_EVT */       {AVCT_LCB_BIND_CONN,        AVCT_LCB_IGNORE,            AVCT_LCB_OPEN_ST},
     /* UL_UNBIND_EVT */     {AVCT_LCB_CHK_DISC,         AVCT_LCB_IGNORE,            AVCT_LCB_OPEN_ST},
@@ -166,8 +158,7 @@ const uint8_t avct_lcb_st_open[][AVCT_LCB_NUM_COLS] =
 };
 
 /* state table for closing state */
-const uint8_t avct_lcb_st_closing[][AVCT_LCB_NUM_COLS] =
-{
+const uint8_t avct_lcb_st_closing[][AVCT_LCB_NUM_COLS] = {
     /* Event                Action 1                    Action 2                    Next state */
     /* UL_BIND_EVT */       {AVCT_LCB_BIND_FAIL,        AVCT_LCB_IGNORE,            AVCT_LCB_CLOSING_ST},
     /* UL_UNBIND_EVT */     {AVCT_LCB_IGNORE,           AVCT_LCB_IGNORE,            AVCT_LCB_CLOSING_ST},
@@ -183,8 +174,7 @@ const uint8_t avct_lcb_st_closing[][AVCT_LCB_NUM_COLS] =
 typedef const uint8_t (*tAVCT_LCB_ST_TBL)[AVCT_LCB_NUM_COLS];
 
 /* state table */
-const tAVCT_LCB_ST_TBL avct_lcb_st_tbl[] =
-{
+const tAVCT_LCB_ST_TBL avct_lcb_st_tbl[] = {
     avct_lcb_st_idle,
     avct_lcb_st_opening,
     avct_lcb_st_open,
@@ -206,25 +196,22 @@ void avct_lcb_event(tAVCT_LCB *p_lcb, uint8_t event, tAVCT_LCB_EVT *p_data)
     tAVCT_LCB_ST_TBL    state_table;
     uint8_t               action;
     int                 i;
-    #if BT_TRACE_VERBOSE == TRUE
-    AVCT_TRACE_EVENT("LCB lcb=%d event=%s state=%s", p_lcb->allocated, avct_lcb_evt_str[event], avct_lcb_st_str[p_lcb->state]);
-    #else
+#if BT_TRACE_VERBOSE == TRUE
+    AVCT_TRACE_EVENT("LCB lcb=%d event=%s state=%s", p_lcb->allocated, avct_lcb_evt_str[event],
+                     avct_lcb_st_str[p_lcb->state]);
+#else
     AVCT_TRACE_EVENT("LCB lcb=%d event=%d state=%d", p_lcb->allocated, event, p_lcb->state);
-    #endif
+#endif
     /* look up the state table for the current state */
     state_table = avct_lcb_st_tbl[p_lcb->state];
     /* set next state */
     p_lcb->state = state_table[event][AVCT_LCB_NEXT_STATE];
 
     /* execute action functions */
-    for(i = 0; i < AVCT_LCB_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != AVCT_LCB_IGNORE)
-        {
+    for(i = 0; i < AVCT_LCB_ACTIONS; i++) {
+        if((action = state_table[event][i]) != AVCT_LCB_IGNORE) {
             (*avct_lcb_action[action])(p_lcb, p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
@@ -246,25 +233,22 @@ void avct_bcb_event(tAVCT_BCB *p_bcb, uint8_t event, tAVCT_LCB_EVT *p_data)
     tAVCT_LCB_ST_TBL    state_table;
     uint8_t               action;
     int                 i;
-    #if BT_TRACE_VERBOSE == TRUE
-    AVCT_TRACE_EVENT("BCB lcb=%d event=%s state=%s", p_bcb->allocated, avct_lcb_evt_str[event], avct_lcb_st_str[p_bcb->state]);
-    #else
+#if BT_TRACE_VERBOSE == TRUE
+    AVCT_TRACE_EVENT("BCB lcb=%d event=%s state=%s", p_bcb->allocated, avct_lcb_evt_str[event],
+                     avct_lcb_st_str[p_bcb->state]);
+#else
     AVCT_TRACE_EVENT("BCB lcb=%d event=%d state=%d", p_bcb->allocated, event, p_bcb->state);
-    #endif
+#endif
     /* look up the state table for the current state */
     state_table = avct_lcb_st_tbl[p_bcb->state];
     /* set next state */
     p_bcb->state = state_table[event][AVCT_LCB_NEXT_STATE];
 
     /* execute action functions */
-    for(i = 0; i < AVCT_LCB_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != AVCT_LCB_IGNORE)
-        {
+    for(i = 0; i < AVCT_LCB_ACTIONS; i++) {
+        if((action = state_table[event][i]) != AVCT_LCB_IGNORE) {
             (*avct_bcb_action[action])(p_bcb, p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
@@ -286,17 +270,14 @@ tAVCT_LCB *avct_lcb_by_bd(BD_ADDR bd_addr)
     tAVCT_LCB   *p_lcb = &avct_cb.lcb[0];
     int         i;
 
-    for(i = 0; i < AVCT_NUM_LINKS; i++, p_lcb++)
-    {
+    for(i = 0; i < AVCT_NUM_LINKS; i++, p_lcb++) {
         /* if allocated lcb has matching lcb */
-        if(p_lcb->allocated && (!memcmp(p_lcb->peer_addr, bd_addr, BD_ADDR_LEN)))
-        {
+        if(p_lcb->allocated && (!memcmp(p_lcb->peer_addr, bd_addr, BD_ADDR_LEN))) {
             break;
         }
     }
 
-    if(i == AVCT_NUM_LINKS)
-    {
+    if(i == AVCT_NUM_LINKS) {
         /* if no lcb found */
         p_lcb = NULL;
         AVCT_TRACE_DEBUG("No lcb for addr %02x-%02x-%02x-%02x-%02x-%02x",
@@ -321,10 +302,8 @@ tAVCT_LCB *avct_lcb_alloc(BD_ADDR bd_addr)
     tAVCT_LCB   *p_lcb = &avct_cb.lcb[0];
     int         i;
 
-    for(i = 0; i < AVCT_NUM_LINKS; i++, p_lcb++)
-    {
-        if(!p_lcb->allocated)
-        {
+    for(i = 0; i < AVCT_NUM_LINKS; i++, p_lcb++) {
+        if(!p_lcb->allocated) {
             p_lcb->allocated = (uint8_t)(i + 1);
             wm_memcpy(p_lcb->peer_addr, bd_addr, BD_ADDR_LEN);
             AVCT_TRACE_DEBUG("avct_lcb_alloc %d", p_lcb->allocated);
@@ -333,8 +312,7 @@ tAVCT_LCB *avct_lcb_alloc(BD_ADDR bd_addr)
         }
     }
 
-    if(i == AVCT_NUM_LINKS)
-    {
+    if(i == AVCT_NUM_LINKS) {
         /* out of lcbs */
         p_lcb = NULL;
         AVCT_TRACE_WARNING("Out of lcbs");
@@ -360,10 +338,8 @@ void avct_lcb_dealloc(tAVCT_LCB *p_lcb, tAVCT_LCB_EVT *p_data)
     // Check if the LCB is still referenced
     tAVCT_CCB *p_ccb = &avct_cb.ccb[0];
 
-    for(size_t i = 0; i < AVCT_NUM_CONN; i++, p_ccb++)
-    {
-        if(p_ccb->allocated && p_ccb->p_lcb == p_lcb)
-        {
+    for(size_t i = 0; i < AVCT_NUM_CONN; i++, p_ccb++) {
+        if(p_ccb->allocated && p_ccb->p_lcb == p_lcb) {
             AVCT_TRACE_DEBUG("%s LCB in use; lcb index: %d", __func__, i);
             return;
         }
@@ -391,16 +367,13 @@ tAVCT_LCB *avct_lcb_by_lcid(uint16_t lcid)
     tAVCT_LCB   *p_lcb = &avct_cb.lcb[0];
     int         i;
 
-    for(i = 0; i < AVCT_NUM_LINKS; i++, p_lcb++)
-    {
-        if(p_lcb->allocated && ((p_lcb->ch_lcid == lcid) || (p_lcb->conflict_lcid == lcid)))
-        {
+    for(i = 0; i < AVCT_NUM_LINKS; i++, p_lcb++) {
+        if(p_lcb->allocated && ((p_lcb->ch_lcid == lcid) || (p_lcb->conflict_lcid == lcid))) {
             break;
         }
     }
 
-    if(i == AVCT_NUM_LINKS)
-    {
+    if(i == AVCT_NUM_LINKS) {
         /* out of lcbs */
         p_lcb = NULL;
         AVCT_TRACE_WARNING("No lcb for lcid %x", lcid);
@@ -424,10 +397,8 @@ tAVCT_CCB *avct_lcb_has_pid(tAVCT_LCB *p_lcb, uint16_t pid)
     tAVCT_CCB   *p_ccb = &avct_cb.ccb[0];
     int         i;
 
-    for(i = 0; i < AVCT_NUM_CONN; i++, p_ccb++)
-    {
-        if(p_ccb->allocated && (p_ccb->p_lcb == p_lcb) && (p_ccb->cc.pid == pid))
-        {
+    for(i = 0; i < AVCT_NUM_CONN; i++, p_ccb++) {
+        if(p_ccb->allocated && (p_ccb->p_lcb == p_lcb) && (p_ccb->cc.pid == pid)) {
             return p_ccb;
         }
     }
@@ -451,13 +422,11 @@ uint8_t avct_lcb_last_ccb(tAVCT_LCB *p_lcb, tAVCT_CCB *p_ccb_last)
     int         i;
     AVCT_TRACE_WARNING("avct_lcb_last_ccb");
 
-    for(i = 0; i < AVCT_NUM_CONN; i++, p_ccb++)
-    {
+    for(i = 0; i < AVCT_NUM_CONN; i++, p_ccb++) {
         AVCT_TRACE_WARNING("%x: aloc:%d, lcb:0x%x/0x%x, ccb:0x%x/0x%x",
                            i, p_ccb->allocated, p_ccb->p_lcb, p_lcb, p_ccb, p_ccb_last);
 
-        if(p_ccb->allocated && (p_ccb->p_lcb == p_lcb) && (p_ccb != p_ccb_last))
-        {
+        if(p_ccb->allocated && (p_ccb->p_lcb == p_lcb) && (p_ccb != p_ccb_last)) {
             return FALSE;
         }
     }

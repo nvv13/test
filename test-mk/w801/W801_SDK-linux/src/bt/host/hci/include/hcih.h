@@ -63,19 +63,18 @@ typedef void (*tHCI_ACL_DATA_LEN_HDLR)(void);
 **  Extern variables and functions
 ******************************************************************************/
 
-typedef struct
-{
+typedef struct {
     tHCI_INIT init;
     tHCI_CLEANUP cleanup;
     tHCI_SEND send;
     tHCI_SEND_INT send_int_cmd;
     tHCI_ACL_DATA_LEN_HDLR get_acl_max_len;
-    #ifdef HCI_USE_MCT
+#ifdef HCI_USE_MCT
     tHCI_RCV evt_rcv;
     tHCI_RCV acl_rcv;
-    #else
+#else
     tHCI_RCV rcv;
-    #endif
+#endif
 } tHCI_IF;
 
 /******************************************************************************

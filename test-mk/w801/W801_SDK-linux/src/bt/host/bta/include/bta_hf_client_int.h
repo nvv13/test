@@ -38,11 +38,10 @@
 
 /* Time (in milliseconds) to wait for retry in case of collision */
 #ifndef BTA_HF_CLIENT_COLLISION_TIMER_MS
-    #define BTA_HF_CLIENT_COLLISION_TIMER_MS        2411
+#define BTA_HF_CLIENT_COLLISION_TIMER_MS        2411
 #endif
 
-enum
-{
+enum {
     /* these events are handled by the state machine */
     BTA_HF_CLIENT_API_REGISTER_EVT = BTA_SYS_EVT_START(BTA_ID_HS),
     BTA_HF_CLIENT_API_DEREGISTER_EVT,
@@ -76,15 +75,13 @@ enum
 *****************************************************************************/
 
 /* data type for BTA_HF_CLIENT_API_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR                     hdr;
     tBTA_HF_CLIENT_CBACK      *p_cback;
 } tBTA_HF_CLIENT_API_ENABLE;
 
 /* data type for BTA_HF_CLIENT_API_REGISTER_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR                     hdr;
     tBTA_HF_CLIENT_CBACK      *p_cback;
     tBTA_SEC                   sec_mask;
@@ -93,30 +90,26 @@ typedef struct
 } tBTA_HF_CLIENT_API_REGISTER;
 
 /* data type for BTA_HF_CLIENT_API_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     BD_ADDR             bd_addr;
     tBTA_SEC            sec_mask;
 } tBTA_HF_CLIENT_API_OPEN;
 
 /* data type for BTA_HF_CLIENT_DISC_RESULT_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     uint16_t          status;
 } tBTA_HF_CLIENT_DISC_RESULT;
 
 /* data type for RFCOMM events */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     uint16_t          port_handle;
 } tBTA_HF_CLIENT_RFC;
 
 /* generic purpose data type for other events */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     uint8_t         bool_val;
     uint8_t           uint8_val;
@@ -126,8 +119,7 @@ typedef struct
 } tBTA_HF_CLIENT_DATA_VAL;
 
 /* union of all event datatypes */
-typedef union
-{
+typedef union {
     BT_HDR                         hdr;
     tBTA_HF_CLIENT_API_ENABLE      api_enable;
     tBTA_HF_CLIENT_API_REGISTER    api_register;
@@ -139,8 +131,7 @@ typedef union
 } tBTA_HF_CLIENT_DATA;
 
 /* type for each service control block */
-typedef struct
-{
+typedef struct {
     uint16_t              serv_handle;    /* RFCOMM server handle */
     BD_ADDR             peer_addr;      /* peer bd address */
     tSDP_DISCOVERY_DB   *p_disc_db;     /* pointer to discovery database */
@@ -168,8 +159,7 @@ typedef struct
 } tBTA_HF_CLIENT_SCB;
 
 /* sco states */
-enum
-{
+enum {
     BTA_HF_CLIENT_SCO_SHUTDOWN_ST,  /* no listening, no connection */
     BTA_HF_CLIENT_SCO_LISTEN_ST,    /* listening */
     BTA_HF_CLIENT_SCO_OPENING_ST,   /* connection opening */
@@ -181,8 +171,7 @@ enum
 };
 
 /* type for AG control block */
-typedef struct
-{
+typedef struct {
     tBTA_HF_CLIENT_SCB         scb;             /* service control block */
     uint32_t                     sdp_handle;
     uint8_t                      scn;
@@ -292,7 +281,8 @@ extern void bta_hf_client_operator_name(char *name);
 extern void bta_hf_client_clip(char *number);
 extern void bta_hf_client_ccwa(char *number);
 extern void bta_hf_client_at_result(tBTA_HF_CLIENT_AT_RESULT_TYPE type, uint16_t cme);
-extern void bta_hf_client_clcc(uint32_t idx, uint8_t incoming, uint8_t status, uint8_t mpty, char *number);
+extern void bta_hf_client_clcc(uint32_t idx, uint8_t incoming, uint8_t status, uint8_t mpty,
+                               char *number);
 extern void bta_hf_client_cnum(char *number, uint16_t service);
 extern void bta_hf_client_binp(char *number);
 

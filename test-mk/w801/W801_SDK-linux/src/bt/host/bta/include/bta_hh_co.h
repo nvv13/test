@@ -26,8 +26,7 @@
 
 #include "bta_hh_api.h"
 
-typedef struct
-{
+typedef struct {
     uint16_t              rpt_uuid;
     uint8_t               rpt_id;
     tBTA_HH_RPT_TYPE    rpt_type;

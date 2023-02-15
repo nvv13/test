@@ -180,8 +180,7 @@ BT_HDR *bta_pan_ci_readbuf(uint16_t handle, BD_ADDR src, BD_ADDR dst, uint16_t *
     p_scb = bta_pan_scb_by_handle(handle);
     p_buf = (BT_HDR *)fixed_queue_try_dequeue(p_scb->data_queue);
 
-    if(p_buf != NULL)
-    {
+    if(p_buf != NULL) {
         bdcpy(src, ((tBTA_PAN_DATA_PARAMS *)p_buf)->src);
         bdcpy(dst, ((tBTA_PAN_DATA_PARAMS *)p_buf)->dst);
         *p_protocol = ((tBTA_PAN_DATA_PARAMS *)p_buf)->protocol;
@@ -220,7 +219,8 @@ void bta_pan_ci_set_mfilters(uint16_t handle, uint16_t num_mcast_filters, uint8_
 ** Returns          void
 **
 *******************************************************************************/
-void bta_pan_ci_set_pfilters(uint16_t handle, uint16_t num_filters, uint16_t *p_start_array, uint16_t *p_end_array)
+void bta_pan_ci_set_pfilters(uint16_t handle, uint16_t num_filters, uint16_t *p_start_array,
+                             uint16_t *p_end_array)
 {
     PAN_SetProtocolFilters(handle, num_filters, p_start_array, p_end_array);
 }

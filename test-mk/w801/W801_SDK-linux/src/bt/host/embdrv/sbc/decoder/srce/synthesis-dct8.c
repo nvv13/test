@@ -47,7 +47,7 @@
 /** Scales x by y bits to the right, adding a rounding factor.
  */
 #ifndef SCALE
-    #define SCALE(x, y) (((x) + (1 <<((y)-1))) >> (y))
+#define SCALE(x, y) (((x) + (1 <<((y)-1))) >> (y))
 #endif
 
 /**
@@ -231,7 +231,7 @@ PRIVATE void dct2_8(SBC_BUFFER_T *RESTRICT out, OI_INT32 const *RESTRICT in)
     OI_INT32 L25;
     OI_INT32 in0, in1, in2, in3;
     OI_INT32 in4, in5, in6, in7;
-    #if DCTII_8_SHIFT_IN != 0
+#if DCTII_8_SHIFT_IN != 0
     in0 = SCALE(in[0], DCTII_8_SHIFT_IN);
     in1 = SCALE(in[1], DCTII_8_SHIFT_IN);
     in2 = SCALE(in[2], DCTII_8_SHIFT_IN);
@@ -240,7 +240,7 @@ PRIVATE void dct2_8(SBC_BUFFER_T *RESTRICT out, OI_INT32 const *RESTRICT in)
     in5 = SCALE(in[5], DCTII_8_SHIFT_IN);
     in6 = SCALE(in[6], DCTII_8_SHIFT_IN);
     in7 = SCALE(in[7], DCTII_8_SHIFT_IN);
-    #else
+#else
     in0 = in[0];
     in1 = in[1];
     in2 = in[2];
@@ -249,7 +249,7 @@ PRIVATE void dct2_8(SBC_BUFFER_T *RESTRICT out, OI_INT32 const *RESTRICT in)
     in5 = in[5];
     in6 = in[6];
     in7 = in[7];
-    #endif
+#endif
     L00 = in0 + in7;
     L01 = in1 + in6;
     L02 = in2 + in5;
@@ -290,12 +290,12 @@ PRIVATE void dct2_8(SBC_BUFFER_T *RESTRICT out, OI_INT32 const *RESTRICT in)
     out[7] = (OI_INT16)SCALE(L06, DCTII_8_SHIFT_7 - 1);
     out[1] = (OI_INT16)SCALE(L07, DCTII_8_SHIFT_1 - 1);
 #undef BUTTERFLY
-    #ifdef DEBUG_DCT
+#ifdef DEBUG_DCT
     {
         float float_out[8];
         float_dct2_8(float_out, in);
     }
-    #endif
+#endif
 }
 
 /**@}*/

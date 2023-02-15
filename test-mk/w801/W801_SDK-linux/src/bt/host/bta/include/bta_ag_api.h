@@ -151,36 +151,36 @@ typedef uint16_t tBTA_AG_PEER_CODEC;
 #define BTA_AG_ERR_SIP_RESP_CODE    35      /* SIP 3 digit response code */
 
 #if 0   /* Not Used in Bluetooth HFP 1.5 Specification */
-    #define BTA_AG_ERR_PHADAP_LNK_RES   2       /* Phone-adapter link reserved */
-    #define BTA_AG_ERR_PHFSIM_PIN_REQ   6       /* PH-FSIM PIN required */
-    #define BTA_AG_ERR_PHFSIM_PUK_REQ   7       /* PH-FSIM PUK required */
-    #define BTA_AG_ERR_SIM_WRONG        15      /* SIM wrong */
-    #define BTA_AG_ERR_NOT_FOUND        22      /* Not found */
-    #define BTA_AG_ERR_NETWORK_TIMEOUT  31      /* Network timeout */
-    #define BTA_AG_ERR_NET_PIN_REQ      40      /* Network personalization PIN required */
-    #define BTA_AG_ERR_NET_PUK_REQ      41      /* Network personalization PUK required */
-    #define BTA_AG_ERR_SUBSET_PIN_REQ   42      /* Network subset personalization PIN required */
-    #define BTA_AG_ERR_SUBSET_PUK_REQ   43      /* Network subset personalization PUK required */
-    #define BTA_AG_ERR_SERVPRO_PIN_REQ  44      /* Service provider personalization PIN required */
-    #define BTA_AG_ERR_SERVPRO_PUK_REQ  45      /* Service provider personalization PUK required */
-    #define BTA_AG_ERR_CORP_PIN_REQ     46      /* Corporate personalization PIN required */
-    #define BTA_AG_ERR_CORP_PUK_REQ     47      /* Corporate personalization PUK required */
-    #define BTA_AG_ERR_UNKNOWN          100    /* Unknown error */
-    /* GPRS-related errors */
-    #define BTA_AG_ERR_ILL_MS           103    /* Illegal MS (#3) */
-    #define BTA_AG_ERR_ILL_ME           106    /* Illegal ME (#6) */
-    #define BTA_AG_ERR_GPRS_NOT_ALLOWED 107    /* GPRS services not allowed (#7) */
-    #define BTA_AG_ERR_PLMN_NOT_ALLOWED 111    /* PLMN services not allowed (#11) */
-    #define BTA_AG_ERR_LOC_NOT_ALLOWED  112    /* Location area not allowed (#12) */
-    #define BTA_AG_ERR_ROAM_NOT_ALLOWED 113    /* Roaming not allowed in this location area (#13) */
-    /* Errors related to a failure to Activate a Context */
-    #define BTA_AG_ERR_OPT_NOT_SUPP     132    /* Service option not supported (#32) */
-    #define BTA_AG_ERR_OPT_NOT_SUBSCR   133    /* Requested service option not subscribed (#33) */
-    #define BTA_AG_ERR_OPT_OUT_OF_ORDER 134    /* Service option temporarily out of order (#34) */
-    #define BTA_AG_ERR_PDP_AUTH_FAILURE 149    /* PDP authentication failure */
-    /* Other GPRS errors */
-    #define BTA_AG_ERR_INV_MOBILE_CLASS 150    /* Invalid mobile class */
-    #define BTA_AG_ERR_UNSPEC_GPRS_ERR  148    /* Unspecified GPRS error */
+#define BTA_AG_ERR_PHADAP_LNK_RES   2       /* Phone-adapter link reserved */
+#define BTA_AG_ERR_PHFSIM_PIN_REQ   6       /* PH-FSIM PIN required */
+#define BTA_AG_ERR_PHFSIM_PUK_REQ   7       /* PH-FSIM PUK required */
+#define BTA_AG_ERR_SIM_WRONG        15      /* SIM wrong */
+#define BTA_AG_ERR_NOT_FOUND        22      /* Not found */
+#define BTA_AG_ERR_NETWORK_TIMEOUT  31      /* Network timeout */
+#define BTA_AG_ERR_NET_PIN_REQ      40      /* Network personalization PIN required */
+#define BTA_AG_ERR_NET_PUK_REQ      41      /* Network personalization PUK required */
+#define BTA_AG_ERR_SUBSET_PIN_REQ   42      /* Network subset personalization PIN required */
+#define BTA_AG_ERR_SUBSET_PUK_REQ   43      /* Network subset personalization PUK required */
+#define BTA_AG_ERR_SERVPRO_PIN_REQ  44      /* Service provider personalization PIN required */
+#define BTA_AG_ERR_SERVPRO_PUK_REQ  45      /* Service provider personalization PUK required */
+#define BTA_AG_ERR_CORP_PIN_REQ     46      /* Corporate personalization PIN required */
+#define BTA_AG_ERR_CORP_PUK_REQ     47      /* Corporate personalization PUK required */
+#define BTA_AG_ERR_UNKNOWN          100    /* Unknown error */
+/* GPRS-related errors */
+#define BTA_AG_ERR_ILL_MS           103    /* Illegal MS (#3) */
+#define BTA_AG_ERR_ILL_ME           106    /* Illegal ME (#6) */
+#define BTA_AG_ERR_GPRS_NOT_ALLOWED 107    /* GPRS services not allowed (#7) */
+#define BTA_AG_ERR_PLMN_NOT_ALLOWED 111    /* PLMN services not allowed (#11) */
+#define BTA_AG_ERR_LOC_NOT_ALLOWED  112    /* Location area not allowed (#12) */
+#define BTA_AG_ERR_ROAM_NOT_ALLOWED 113    /* Roaming not allowed in this location area (#13) */
+/* Errors related to a failure to Activate a Context */
+#define BTA_AG_ERR_OPT_NOT_SUPP     132    /* Service option not supported (#32) */
+#define BTA_AG_ERR_OPT_NOT_SUBSCR   133    /* Requested service option not subscribed (#33) */
+#define BTA_AG_ERR_OPT_OUT_OF_ORDER 134    /* Service option temporarily out of order (#34) */
+#define BTA_AG_ERR_PDP_AUTH_FAILURE 149    /* PDP authentication failure */
+/* Other GPRS errors */
+#define BTA_AG_ERR_INV_MOBILE_CLASS 150    /* Invalid mobile class */
+#define BTA_AG_ERR_UNSPEC_GPRS_ERR  148    /* Unspecified GPRS error */
 #endif  /* Unused error codes */
 
 
@@ -198,19 +198,17 @@ typedef uint16_t tBTA_AG_PEER_CODEC;
 
 /* ASCII character string of arguments to the AT command or result */
 #ifndef BTA_AG_AT_MAX_LEN
-    #define BTA_AG_AT_MAX_LEN           256
+#define BTA_AG_AT_MAX_LEN           256
 #endif
 
 /* data associated with BTA_AG_IND_RES */
-typedef struct
-{
+typedef struct {
     uint16_t          id;
     uint16_t          value;
 } tBTA_AG_IND;
 
 /* data type for BTA_AgResult() */
-typedef struct
-{
+typedef struct {
     char            str[BTA_AG_AT_MAX_LEN + 1];
     tBTA_AG_IND     ind;
     uint16_t          num;
@@ -233,7 +231,7 @@ typedef struct
 #define BTA_AG_AT_CKPD_EVT      9  /* CKPD from the HS */
 #define BTA_AG_DISABLE_EVT      30 /* AG disabled       */
 #if (BTM_WBS_INCLUDED == TRUE )
-    #define BTA_AG_WBS_EVT          31 /* SCO codec info */
+#define BTA_AG_WBS_EVT          31 /* SCO codec info */
 #endif
 /* Values below are for HFP only */
 #define BTA_AG_AT_A_EVT         10 /* Answer a call */
@@ -258,23 +256,20 @@ typedef struct
 typedef uint8_t tBTA_AG_EVT;
 
 /* data associated with most non-AT events */
-typedef struct
-{
+typedef struct {
     uint16_t              handle;
     uint8_t               app_id;
     tBTA_AG_STATUS      status;
 } tBTA_AG_HDR;
 
 /* data associated with BTA_AG_REGISTER_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AG_HDR         hdr;
     tBTA_AG_STATUS      status;
 } tBTA_AG_REGISTER;
 
 /* data associated with BTA_AG_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AG_HDR         hdr;
     BD_ADDR             bd_addr;
     tBTA_SERVICE_ID     service_id;
@@ -282,15 +277,13 @@ typedef struct
 } tBTA_AG_OPEN;
 
 /* data associated with BTA_AG_CLOSE_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AG_HDR         hdr;
     BD_ADDR             bd_addr;
 } tBTA_AG_CLOSE;
 
 /* data associated with BTA_AG_CONN_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AG_HDR         hdr;
     tBTA_AG_PEER_FEAT   peer_feat;
     BD_ADDR             bd_addr;
@@ -298,8 +291,7 @@ typedef struct
 } tBTA_AG_CONN;
 
 /* data associated with AT command event */
-typedef struct
-{
+typedef struct {
     tBTA_AG_HDR         hdr;
     BD_ADDR             bd_addr;
     char                str[BTA_AG_AT_MAX_LEN + 1];
@@ -308,8 +300,7 @@ typedef struct
 } tBTA_AG_VAL;
 
 /* union of data associated with AG callback */
-typedef union
-{
+typedef union {
     tBTA_AG_HDR         hdr;
     tBTA_AG_REGISTER    reg;
     tBTA_AG_OPEN        open;
@@ -369,8 +360,7 @@ typedef void (tBTA_AG_CBACK)(tBTA_AG_EVT event, tBTA_AG *p_data);
 #define BTA_AG_BEARER_RES3          7   /* Reserved     */
 
 /* AG configuration structure */
-typedef struct
-{
+typedef struct {
     char         *cind_info;
     int32_t        conn_tout;
     uint16_t       sco_pkt_types;

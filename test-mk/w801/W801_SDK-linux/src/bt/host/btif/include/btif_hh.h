@@ -43,8 +43,7 @@
 **  Type definitions and return values
 ********************************************************************************/
 
-typedef enum
-{
+typedef enum {
     BTIF_HH_DISABLED =   0,
     BTIF_HH_ENABLED,
     BTIF_HH_DISABLING,
@@ -54,8 +53,7 @@ typedef enum
     BTIF_HH_DEV_DISCONNECTED
 } BTIF_HH_STATUS;
 
-typedef struct
-{
+typedef struct {
     bthh_connection_state_t       dev_status;
     uint8_t                         dev_handle;
     tls_bt_addr_t                   bd_addr;
@@ -71,8 +69,7 @@ typedef struct
 } btif_hh_device_t;
 
 /* Control block to maintain properties of devices */
-typedef struct
-{
+typedef struct {
     uint8_t             dev_handle;
     tls_bt_addr_t       bd_addr;
     tBTA_HH_ATTR_MASK attr_mask;
@@ -82,8 +79,7 @@ typedef struct
  * BTIF-HH control block to maintain added devices and currently
  * connected hid devices
  */
-typedef struct
-{
+typedef struct {
     BTIF_HH_STATUS          status;
     btif_hh_device_t        devices[BTIF_HH_MAX_HID];
     uint32_t                  device_num;

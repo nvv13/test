@@ -20,8 +20,7 @@
 
 
 /* Bluetooth AV connection states */
-typedef enum
-{
+typedef enum {
     BTAV_CONNECTION_STATE_DISCONNECTED = 0,
     BTAV_CONNECTION_STATE_CONNECTING,
     BTAV_CONNECTION_STATE_CONNECTED,
@@ -29,8 +28,7 @@ typedef enum
 } btav_connection_state_t;
 
 /* Bluetooth AV datapath states */
-typedef enum
-{
+typedef enum {
     BTAV_AUDIO_STATE_REMOTE_SUSPEND = 0,
     BTAV_AUDIO_STATE_STOPPED,
     BTAV_AUDIO_STATE_STARTED,
@@ -60,8 +58,7 @@ typedef void (* btav_audio_config_callback)(tls_bt_addr_t *bd_addr,
         uint8_t channel_count);
 
 /** BT-AV callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(btav_callbacks_t) */
     size_t      size;
     btav_connection_state_callback  connection_state_cb;
@@ -82,8 +79,7 @@ typedef struct
 /** Represents the standard BT-AV interface.
  *  Used for both the A2DP source and sink interfaces.
  */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(btav_interface_t) */
     size_t          size;

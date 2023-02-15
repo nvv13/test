@@ -35,8 +35,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_gattc_reg =
-{
+static const tBTA_SYS_REG bta_gattc_reg = {
     bta_gattc_hdl_event,
     BTA_GATTC_Disable
 };
@@ -55,8 +54,7 @@ static const tBTA_SYS_REG bta_gattc_reg =
 *******************************************************************************/
 void BTA_GATTC_Disable(void)
 {
-    if(bta_sys_is_register(BTA_ID_GATTC) == FALSE)
-    {
+    if(bta_sys_is_register(BTA_ID_GATTC) == FALSE) {
         APPL_TRACE_WARNING("GATTC Module not enabled/already disabled");
         return;
     }
@@ -85,15 +83,13 @@ void BTA_GATTC_AppRegister(tBT_UUID *p_app_uuid, tBTA_GATTC_CBACK *p_client_cb)
     tBTA_GATTC_API_REG *p_buf =
                     (tBTA_GATTC_API_REG *)GKI_getbuf(sizeof(tBTA_GATTC_API_REG));
 
-    if(bta_sys_is_register(BTA_ID_GATTC) == FALSE)
-    {
+    if(bta_sys_is_register(BTA_ID_GATTC) == FALSE) {
         bta_sys_register(BTA_ID_GATTC, &bta_gattc_reg);
     }
 
     p_buf->hdr.event = BTA_GATTC_API_REG_EVT;
 
-    if(p_app_uuid != NULL)
-    {
+    if(p_app_uuid != NULL) {
         wm_memcpy(&p_buf->app_uuid, p_app_uuid, sizeof(tBT_UUID));
     }
 
@@ -240,13 +236,10 @@ void BTA_GATTC_ServiceSearchRequest(uint16_t conn_id, tBT_UUID *p_srvc_uuid)
     p_buf->hdr.event = BTA_GATTC_API_SEARCH_EVT;
     p_buf->hdr.layer_specific = conn_id;
 
-    if(p_srvc_uuid)
-    {
+    if(p_srvc_uuid) {
         p_buf->p_srvc_uuid = (tBT_UUID *)(p_buf + 1);
         wm_memcpy(p_buf->p_srvc_uuid, p_srvc_uuid, sizeof(tBT_UUID));
-    }
-    else
-    {
+    } else {
         p_buf->p_srvc_uuid = NULL;
     }
 
@@ -392,8 +385,7 @@ void BTA_GATTC_ReadMultiple(uint16_t conn_id, tBTA_GATTC_MULTI *p_read_multi,
     p_buf->auth_req = auth_req;
     p_buf->num_attr = p_read_multi->num_attr;
 
-    if(p_buf->num_attr > 0)
-    {
+    if(p_buf->num_attr > 0) {
         wm_memcpy(p_buf->handles, p_read_multi->handles, sizeof(uint16_t) * p_read_multi->num_attr);
     }
 
@@ -432,8 +424,7 @@ void BTA_GATTC_WriteCharValue(uint16_t conn_id,
     p_buf->write_type = write_type;
     p_buf->len = len;
 
-    if(p_value && len > 0)
-    {
+    if(p_value && len > 0) {
         p_buf->p_value = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->p_value, p_value, len);
     }
@@ -463,8 +454,7 @@ void BTA_GATTC_WriteCharDescr(uint16_t conn_id,
 {
     size_t len = sizeof(tBTA_GATTC_API_WRITE);
 
-    if(p_data != NULL)
-    {
+    if(p_data != NULL) {
         len += p_data->len;
     }
 
@@ -476,8 +466,7 @@ void BTA_GATTC_WriteCharDescr(uint16_t conn_id,
     p_buf->cmpl_evt = BTA_GATTC_WRITE_DESCR_EVT;
     p_buf->write_type = write_type;
 
-    if(p_data && p_data->len != 0)
-    {
+    if(p_data && p_data->len != 0) {
         p_buf->p_value  = (uint8_t *)(p_buf + 1);
         p_buf->len      = p_data->len;
         /* pack the descr data */
@@ -516,8 +505,7 @@ void BTA_GATTC_PrepareWrite(uint16_t conn_id, uint16_t handle,
     p_buf->offset   = offset;
     p_buf->len = len;
 
-    if(p_value && len > 0)
-    {
+    if(p_value && len > 0) {
         p_buf->p_value = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->p_value, p_value, len);
     }
@@ -590,32 +578,25 @@ tBTA_GATT_STATUS BTA_GATTC_RegisterForNotifications(tBTA_GATTC_IF client_if,
     tBTA_GATT_STATUS    status = BTA_GATT_ILLEGAL_PARAMETER;
     uint8_t               i;
 
-    if(!handle)
-    {
+    if(!handle) {
         APPL_TRACE_ERROR("deregistration failed, handle is 0");
         return status;
     }
 
-    if((p_clreg = bta_gattc_cl_get_regcb(client_if)) != NULL)
-    {
-        for(i = 0; i < BTA_GATTC_NOTIF_REG_MAX; i ++)
-        {
+    if((p_clreg = bta_gattc_cl_get_regcb(client_if)) != NULL) {
+        for(i = 0; i < BTA_GATTC_NOTIF_REG_MAX; i ++) {
             if(p_clreg->notif_reg[i].in_use &&
                     !memcmp(p_clreg->notif_reg[i].remote_bda, bda, BD_ADDR_LEN) &&
-                    p_clreg->notif_reg[i].handle == handle)
-            {
+                    p_clreg->notif_reg[i].handle == handle) {
                 APPL_TRACE_WARNING("notification already registered");
                 status = BTA_GATT_OK;
                 break;
             }
         }
 
-        if(status != BTA_GATT_OK)
-        {
-            for(i = 0; i < BTA_GATTC_NOTIF_REG_MAX; i ++)
-            {
-                if(!p_clreg->notif_reg[i].in_use)
-                {
+        if(status != BTA_GATT_OK) {
+            for(i = 0; i < BTA_GATTC_NOTIF_REG_MAX; i ++) {
+                if(!p_clreg->notif_reg[i].in_use) {
                     wm_memset((void *)&p_clreg->notif_reg[i], 0, sizeof(tBTA_GATTC_NOTIF_REG));
                     p_clreg->notif_reg[i].in_use = TRUE;
                     wm_memcpy(p_clreg->notif_reg[i].remote_bda, bda, BD_ADDR_LEN);
@@ -625,15 +606,12 @@ tBTA_GATT_STATUS BTA_GATTC_RegisterForNotifications(tBTA_GATTC_IF client_if,
                 }
             }
 
-            if(i == BTA_GATTC_NOTIF_REG_MAX)
-            {
+            if(i == BTA_GATTC_NOTIF_REG_MAX) {
                 status = BTA_GATT_NO_RESOURCES;
                 APPL_TRACE_ERROR("Max Notification Reached, registration failed.");
             }
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("Client_if: %d Not Registered", client_if);
     }
 
@@ -656,27 +634,23 @@ tBTA_GATT_STATUS BTA_GATTC_RegisterForNotifications(tBTA_GATTC_IF client_if,
 tBTA_GATT_STATUS BTA_GATTC_DeregisterForNotifications(tBTA_GATTC_IF client_if,
         BD_ADDR bda, uint16_t handle)
 {
-    if(!handle)
-    {
+    if(!handle) {
         APPL_TRACE_ERROR("%s: deregistration failed, handle is 0", __func__);
         return BTA_GATT_ILLEGAL_PARAMETER;
     }
 
     tBTA_GATTC_RCB *p_clreg = bta_gattc_cl_get_regcb(client_if);
 
-    if(p_clreg == NULL)
-    {
+    if(p_clreg == NULL) {
         APPL_TRACE_ERROR("%s client_if: %d not registered bd_addr:%02x:%02x:%02x:%02x:%02x:%02x",
                          __func__, client_if, bda[0], bda[1], bda[2], bda[3], bda[4], bda[5]);
         return BTA_GATT_ILLEGAL_PARAMETER;
     }
 
-    for(int i = 0; i < BTA_GATTC_NOTIF_REG_MAX; i ++)
-    {
+    for(int i = 0; i < BTA_GATTC_NOTIF_REG_MAX; i ++) {
         if(p_clreg->notif_reg[i].in_use &&
                 !memcmp(p_clreg->notif_reg[i].remote_bda, bda, BD_ADDR_LEN) &&
-                p_clreg->notif_reg[i].handle == handle)
-        {
+                p_clreg->notif_reg[i].handle == handle) {
             APPL_TRACE_DEBUG("%s deregistered bd_addr:%02x:%02x:%02x:%02x:%02x:%02x",
                              __func__, bda[0], bda[1], bda[2], bda[3], bda[4], bda[5]);
             wm_memset(&p_clreg->notif_reg[i], 0, sizeof(tBTA_GATTC_NOTIF_REG));
@@ -732,13 +706,10 @@ void BTA_GATTC_Listen(tBTA_GATTC_IF client_if, uint8_t start, BD_ADDR_PTR target
     p_buf->client_if = client_if;
     p_buf->start = start;
 
-    if(target_bda)
-    {
+    if(target_bda) {
         p_buf->remote_bda = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->remote_bda, target_bda, BD_ADDR_LEN);
-    }
-    else
-    {
+    } else {
         p_buf->remote_bda = NULL;
     }
 

@@ -83,42 +83,37 @@
 
 /* Max length we support for any attribute */
 #ifdef SDP_MAX_ATTR_LEN
-    #define MAX_ATTR_LEN SDP_MAX_ATTR_LEN
+#define MAX_ATTR_LEN SDP_MAX_ATTR_LEN
 #else
-    #define     MAX_ATTR_LEN            256
+#define     MAX_ATTR_LEN            256
 #endif
 
 /* Internal UUID sequence representation */
-typedef struct
-{
+typedef struct {
     uint16_t     len;
     uint8_t      value[MAX_UUID_SIZE];
 } tUID_ENT;
 
-typedef struct
-{
+typedef struct {
     uint16_t      num_uids;
     tUID_ENT    uuid_entry[MAX_UUIDS_PER_SEQ];
 } tSDP_UUID_SEQ;
 
 
 /* Internal attribute sequence definitions */
-typedef struct
-{
+typedef struct {
     uint16_t      start;
     uint16_t      end;
 } tATT_ENT;
 
-typedef struct
-{
+typedef struct {
     uint16_t      num_attr;
     tATT_ENT    attr_entry[MAX_ATTR_PER_SEQ];
 } tSDP_ATTR_SEQ;
 
 
 /* Define the attribute element of the SDP database record */
-typedef struct
-{
+typedef struct {
     uint32_t  len;           /* Number of bytes in the entry */
     uint8_t   *value_ptr;    /* Points to attr_pad */
     uint16_t  id;
@@ -126,8 +121,7 @@ typedef struct
 } tSDP_ATTRIBUTE;
 
 /* An SDP record consists of a handle, and 1 or more attributes */
-typedef struct
-{
+typedef struct {
     uint32_t              record_handle;
     uint32_t              free_pad_ptr;
     uint16_t              num_attributes;
@@ -137,34 +131,32 @@ typedef struct
 
 
 /* Define the SDP database */
-typedef struct
-{
+typedef struct {
     uint32_t         di_primary_handle;       /* Device ID Primary record or NULL if nonexistent */
     uint16_t         num_records;
     tSDP_RECORD    record[SDP_MAX_RECORDS];
 } tSDP_DB;
 
-enum
-{
+enum {
     SDP_IS_SEARCH,
     SDP_IS_ATTR_SEARCH,
 };
 
 #if SDP_SERVER_ENABLED == TRUE
 /* Continuation information for the SDP server response */
-typedef struct
-{
+typedef struct {
     uint16_t            next_attr_index; /* attr index for next continuation response */
-    uint16_t            next_attr_start_id;  /* attr id to start with for the attr index in next cont. response */
+    uint16_t
+    next_attr_start_id;  /* attr id to start with for the attr index in next cont. response */
     tSDP_RECORD       *prev_sdp_rec; /* last sdp record that was completely sent in the response */
     uint8_t           last_attr_seq_desc_sent; /* whether attr seq length has been sent previously */
-    uint16_t            attr_offset; /* offset within the attr to keep trak of partial attributes in the responses */
+    uint16_t
+    attr_offset; /* offset within the attr to keep trak of partial attributes in the responses */
 } tSDP_CONT_INFO;
 #endif  /* SDP_SERVER_ENABLED == TRUE */
 
 /* Define the SDP Connection Control Block */
-typedef struct
-{
+typedef struct {
 #define SDP_STATE_IDLE              0
 #define SDP_STATE_CONN_SETUP        1
 #define SDP_STATE_CFG_SETUP         2
@@ -183,19 +175,20 @@ typedef struct
     uint16_t            list_len;                 /* length of the response in the GKI buffer */
     uint8_t             *rsp_list;                /* pointer to GKI buffer holding response */
 
-    #if SDP_CLIENT_ENABLED == TRUE
+#if SDP_CLIENT_ENABLED == TRUE
     tSDP_DISCOVERY_DB *p_db;                    /* Database to save info into   */
     tSDP_DISC_CMPL_CB *p_cb;                    /* Callback for discovery done  */
-    tSDP_DISC_CMPL_CB2 *p_cb2;                   /* Callback for discovery done piggy back with the user data */
+    tSDP_DISC_CMPL_CB2
+    *p_cb2;                   /* Callback for discovery done piggy back with the user data */
     void               *user_data;              /* piggy back user data */
     uint32_t            handles[SDP_MAX_DISC_SERVER_RECS]; /* Discovered server record handles */
     uint16_t            num_handles;              /* Number of server handles     */
     uint16_t            cur_handle;               /* Current handle being processed */
     uint16_t            transaction_id;
     uint16_t            disconnect_reason;        /* Disconnect reason            */
-    #if (defined(SDP_BROWSE_PLUS) && SDP_BROWSE_PLUS == TRUE)
+#if (defined(SDP_BROWSE_PLUS) && SDP_BROWSE_PLUS == TRUE)
     uint16_t            cur_uuid_idx;
-    #endif
+#endif
 
 #define SDP_DISC_WAIT_CONN          0
 #define SDP_DISC_WAIT_HANDLES       1
@@ -205,24 +198,24 @@ typedef struct
 
     uint8_t             disc_state;
     uint8_t             is_attr_search;
-    #endif  /* SDP_CLIENT_ENABLED == TRUE */
+#endif  /* SDP_CLIENT_ENABLED == TRUE */
 
-    #if SDP_SERVER_ENABLED == TRUE
+#if SDP_SERVER_ENABLED == TRUE
     uint16_t            cont_offset;              /* Continuation state data in the server response */
-    tSDP_CONT_INFO    cont_info;                /* structure to hold continuation information for the server response */
-    #endif  /* SDP_SERVER_ENABLED == TRUE */
+    tSDP_CONT_INFO
+    cont_info;                /* structure to hold continuation information for the server response */
+#endif  /* SDP_SERVER_ENABLED == TRUE */
 
 } tCONN_CB;
 
 
 /*  The main SDP control block */
-typedef struct
-{
+typedef struct {
     tL2CAP_CFG_INFO   l2cap_my_cfg;             /* My L2CAP config     */
     tCONN_CB          ccb[SDP_MAX_CONNECTIONS];
-    #if SDP_SERVER_ENABLED == TRUE
+#if SDP_SERVER_ENABLED == TRUE
     tSDP_DB           server_db;
-    #endif
+#endif
     tL2CAP_APPL_INFO  reg_info;                 /* L2CAP Registration info */
     uint16_t            max_attr_list_size;       /* Max attribute list size to use   */
     uint16_t            max_recs_per_search;      /* Max records we want per seaarch  */
@@ -246,11 +239,11 @@ extern tSDP_CB *sdp_cb_ptr;
 
 /* Functions provided by sdp_main.c */
 extern void     sdp_init(void);
-extern void 	sdp_deinit(void);
+extern void     sdp_deinit(void);
 extern void     sdp_disconnect(tCONN_CB *p_ccb, uint16_t reason);
 
 #if (defined(SDP_DEBUG) && SDP_DEBUG == TRUE)
-    extern uint16_t sdp_set_max_attr_list_size(uint16_t max_size);
+extern uint16_t sdp_set_max_attr_list_size(uint16_t max_size);
 #endif
 
 /* Functions provided by sdp_conn.c
@@ -277,14 +270,16 @@ extern void      sdpu_release_ccb(tCONN_CB *p_ccb);
 
 extern uint8_t    *sdpu_build_attrib_seq(uint8_t *p_out, uint16_t *p_attr, uint16_t num_attrs);
 extern uint8_t    *sdpu_build_attrib_entry(uint8_t *p_out, tSDP_ATTRIBUTE *p_attr);
-extern void      sdpu_build_n_send_error(tCONN_CB *p_ccb, uint16_t trans_num, uint16_t error_code, char *p_error_text);
+extern void      sdpu_build_n_send_error(tCONN_CB *p_ccb, uint16_t trans_num, uint16_t error_code,
+        char *p_error_text);
 
 extern uint8_t    *sdpu_extract_attr_seq(uint8_t *p, uint16_t param_len, tSDP_ATTR_SEQ *p_seq);
 extern uint8_t    *sdpu_extract_uid_seq(uint8_t *p, uint16_t param_len, tSDP_UUID_SEQ *p_seq);
 
 extern uint8_t    *sdpu_get_len_from_type(uint8_t *p, uint8_t type, uint32_t *p_len);
 extern uint8_t  sdpu_is_base_uuid(uint8_t *p_uuid);
-extern uint8_t  sdpu_compare_uuid_arrays(uint8_t *p_uuid1, uint32_t len1, uint8_t *p_uuid2, uint16_t len2);
+extern uint8_t  sdpu_compare_uuid_arrays(uint8_t *p_uuid1, uint32_t len1, uint8_t *p_uuid2,
+        uint16_t len2);
 extern uint8_t  sdpu_compare_bt_uuids(tBT_UUID *p_uuid1, tBT_UUID *p_uuid2);
 extern uint8_t  sdpu_compare_uuid_with_attr(tBT_UUID *p_btuuid, tSDP_DISC_ATTR *p_attr);
 
@@ -292,32 +287,34 @@ extern void     sdpu_sort_attr_list(uint16_t num_attr, tSDP_DISCOVERY_DB *p_db);
 extern uint16_t sdpu_get_list_len(tSDP_UUID_SEQ   *uid_seq, tSDP_ATTR_SEQ   *attr_seq);
 extern uint16_t sdpu_get_attrib_seq_len(tSDP_RECORD *p_rec, tSDP_ATTR_SEQ *attr_seq);
 extern uint16_t sdpu_get_attrib_entry_len(tSDP_ATTRIBUTE *p_attr);
-extern uint8_t *sdpu_build_partial_attrib_entry(uint8_t *p_out, tSDP_ATTRIBUTE *p_attr, uint16_t len, uint16_t *offset);
+extern uint8_t *sdpu_build_partial_attrib_entry(uint8_t *p_out, tSDP_ATTRIBUTE *p_attr,
+        uint16_t len, uint16_t *offset);
 extern void sdpu_uuid16_to_uuid128(uint16_t uuid16, uint8_t *p_uuid128);
 
 /* Functions provided by sdp_db.c
 */
 extern tSDP_RECORD    *sdp_db_service_search(tSDP_RECORD *p_rec, tSDP_UUID_SEQ *p_seq);
 extern tSDP_RECORD    *sdp_db_find_record(uint32_t handle);
-extern tSDP_ATTRIBUTE *sdp_db_find_attr_in_rec(tSDP_RECORD *p_rec, uint16_t start_attr, uint16_t end_attr);
+extern tSDP_ATTRIBUTE *sdp_db_find_attr_in_rec(tSDP_RECORD *p_rec, uint16_t start_attr,
+        uint16_t end_attr);
 
 
 /* Functions provided by sdp_server.c
 */
 #if SDP_SERVER_ENABLED == TRUE
-    extern void     sdp_server_handle_client_req(tCONN_CB *p_ccb, BT_HDR *p_msg);
+extern void     sdp_server_handle_client_req(tCONN_CB *p_ccb, BT_HDR *p_msg);
 #else
-    #define sdp_server_handle_client_req(p_ccb, p_msg)
+#define sdp_server_handle_client_req(p_ccb, p_msg)
 #endif
 
 /* Functions provided by sdp_discovery.c
 */
 #if SDP_CLIENT_ENABLED == TRUE
-    extern void sdp_disc_connected(tCONN_CB *p_ccb);
-    extern void sdp_disc_server_rsp(tCONN_CB *p_ccb, BT_HDR *p_msg);
+extern void sdp_disc_connected(tCONN_CB *p_ccb);
+extern void sdp_disc_server_rsp(tCONN_CB *p_ccb, BT_HDR *p_msg);
 #else
-    #define sdp_disc_connected(p_ccb)
-    #define sdp_disc_server_rsp(p_ccb, p_msg)
+#define sdp_disc_connected(p_ccb)
+#define sdp_disc_server_rsp(p_ccb, p_msg)
 #endif
 
 

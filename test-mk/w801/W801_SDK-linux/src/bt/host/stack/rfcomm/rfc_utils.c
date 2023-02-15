@@ -38,7 +38,7 @@
 
 #include <string.h>
 #ifdef USE_ALARM
-    extern fixed_queue_t *btu_general_alarm_queue;
+extern fixed_queue_t *btu_general_alarm_queue;
 #endif
 
 /*******************************************************************************
@@ -48,8 +48,7 @@
 ** Description      Reversed CRC Table , 8-bit, poly=0x07
 **                  (GSM 07.10 TS 101 369 V6.3.0)
 *******************************************************************************/
-static const uint8_t rfc_crctable[] =
-{
+static const uint8_t rfc_crctable[] = {
     0x00, 0x91, 0xE3, 0x72, 0x07, 0x96, 0xE4, 0x75,  0x0E, 0x9F, 0xED, 0x7C, 0x09, 0x98, 0xEA, 0x7B,
     0x1C, 0x8D, 0xFF, 0x6E, 0x1B, 0x8A, 0xF8, 0x69,  0x12, 0x83, 0xF1, 0x60, 0x15, 0x84, 0xF6, 0x67,
     0x38, 0xA9, 0xDB, 0x4A, 0x3F, 0xAE, 0xDC, 0x4D,  0x36, 0xA7, 0xD5, 0x44, 0x31, 0xA0, 0xD2, 0x43,
@@ -87,8 +86,7 @@ uint8_t rfc_calc_fcs(uint16_t len, uint8_t *p)
 {
     uint8_t  fcs = 0xFF;
 
-    while(len--)
-    {
+    while(len--) {
         fcs = rfc_crctable[fcs ^ *p++];
     }
 
@@ -113,8 +111,7 @@ uint8_t rfc_check_fcs(uint16_t len, uint8_t *p, uint8_t received_fcs)
 {
     uint8_t  fcs = 0xFF;
 
-    while(len--)
-    {
+    while(len--) {
         fcs = rfc_crctable[fcs ^ *p++];
     }
 
@@ -141,8 +138,7 @@ tRFC_MCB *rfc_alloc_multiplexer_channel(BD_ADDR bd_addr, uint8_t is_initiator)
                        bd_addr[0], bd_addr[1], bd_addr[2], bd_addr[3], bd_addr[4], bd_addr[5]);
     RFCOMM_TRACE_DEBUG("rfc_alloc_multiplexer_channel:is_initiator:%d", is_initiator);
 
-    for(i = 0; i < MAX_BD_CONNECTIONS; i++)
-    {
+    for(i = 0; i < MAX_BD_CONNECTIONS; i++) {
         RFCOMM_TRACE_DEBUG("rfc_alloc_multiplexer_channel rfc_cb.port.rfc_mcb[%d].state:%d",
                            i, rfc_cb.port.rfc_mcb[i].state);
         RFCOMM_TRACE_DEBUG("(rfc_cb.port.rfc_mcb[i].bd_addr:%02x:%02x:%02x:%02x:%02x:%02x",
@@ -151,12 +147,10 @@ tRFC_MCB *rfc_alloc_multiplexer_channel(BD_ADDR bd_addr, uint8_t is_initiator)
                            rfc_cb.port.rfc_mcb[i].bd_addr[4], rfc_cb.port.rfc_mcb[i].bd_addr[5]);
 
         if((rfc_cb.port.rfc_mcb[i].state != RFC_MX_STATE_IDLE)
-                && (!memcmp(rfc_cb.port.rfc_mcb[i].bd_addr, bd_addr, BD_ADDR_LEN)))
-        {
+                && (!memcmp(rfc_cb.port.rfc_mcb[i].bd_addr, bd_addr, BD_ADDR_LEN))) {
             /* Multiplexer channel found do not change anything */
             /* If there was an inactivity timer running stop it now */
-            if(rfc_cb.port.rfc_mcb[i].state == RFC_MX_STATE_CONNECTED)
-            {
+            if(rfc_cb.port.rfc_mcb[i].state == RFC_MX_STATE_CONNECTED) {
                 rfc_timer_stop(&rfc_cb.port.rfc_mcb[i]);
             }
 
@@ -167,29 +161,26 @@ tRFC_MCB *rfc_alloc_multiplexer_channel(BD_ADDR bd_addr, uint8_t is_initiator)
     }
 
     /* connection with bd_addr does not exist */
-    for(i = 0, j = rfc_cb.rfc.last_mux + 1; i < MAX_BD_CONNECTIONS; i++, j++)
-    {
-        if(j >= MAX_BD_CONNECTIONS)
-        {
+    for(i = 0, j = rfc_cb.rfc.last_mux + 1; i < MAX_BD_CONNECTIONS; i++, j++) {
+        if(j >= MAX_BD_CONNECTIONS) {
             j = 0;
         }
 
         p_mcb = &rfc_cb.port.rfc_mcb[j];
 
-        if(rfc_cb.port.rfc_mcb[j].state == RFC_MX_STATE_IDLE)
-        {
+        if(rfc_cb.port.rfc_mcb[j].state == RFC_MX_STATE_IDLE) {
             /* New multiplexer control block */
-            #ifdef USE_ALARM
+#ifdef USE_ALARM
             alarm_free(p_mcb->mcb_timer);
-            #endif
+#endif
             fixed_queue_free(p_mcb->cmd_q, NULL);
             wm_memset(p_mcb, 0, sizeof(tRFC_MCB));
             wm_memcpy(p_mcb->bd_addr, bd_addr, BD_ADDR_LEN);
             RFCOMM_TRACE_DEBUG("rfc_alloc_multiplexer_channel:is_initiator:%d, create new p_mcb:%p, index:%d",
                                is_initiator, &rfc_cb.port.rfc_mcb[j], j);
-            #ifdef USE_ALARM
+#ifdef USE_ALARM
             p_mcb->mcb_timer = alarm_new("rfcomm_mcb.mcb_timer");
-            #endif
+#endif
             p_mcb->cmd_q = fixed_queue_new(SIZE_MAX);
             p_mcb->is_initiator = is_initiator;
             rfc_timer_start(p_mcb, RFC_MCB_INIT_INACT_TIMER);
@@ -215,18 +206,16 @@ void rfc_release_multiplexer_channel(tRFC_MCB *p_mcb)
     rfc_save_lcid_mcb(NULL, p_mcb->lcid);
 
     /* Remove the MCB from the ports */
-    for(int i = 0; i < MAX_RFC_PORTS; i++)
-    {
-        if(rfc_cb.port.port[i].rfc.p_mcb == p_mcb)
-        {
+    for(int i = 0; i < MAX_RFC_PORTS; i++) {
+        if(rfc_cb.port.port[i].rfc.p_mcb == p_mcb) {
             rfc_cb.port.port[i].rfc.p_mcb = NULL;
         }
     }
 
     rfc_timer_stop(p_mcb);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_free(p_mcb->mcb_timer);
-    #endif
+#endif
     fixed_queue_free(p_mcb->cmd_q, GKI_freebuf);
     wm_memset(p_mcb, 0, sizeof(tRFC_MCB));
     p_mcb->state = RFC_MX_STATE_IDLE;
@@ -243,17 +232,17 @@ void rfc_release_multiplexer_channel(tRFC_MCB *p_mcb)
 void rfc_timer_start(tRFC_MCB *p_mcb, uint16_t timeout)
 {
     RFCOMM_TRACE_EVENT("%s - timeout:%d seconds", __func__, timeout);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     uint64_t interval_ms = timeout * 1000;
     alarm_set_on_queue(p_mcb->mcb_timer, interval_ms,
                        rfcomm_mcb_timer_timeout, p_mcb,
                        btu_general_alarm_queue);
-    #else
+#else
     TIMER_LIST_ENT *p_tle = &p_mcb->mcb_timer;
     p_tle->p_cback = (TIMER_CBACK *)&rfcomm_mcb_timer_timeout;
     p_tle->param = (TIMER_PARAM_TYPE)p_mcb;
     btu_start_timer(&p_mcb->mcb_timer, BTU_TTYPE_RFCOMM_MFC, timeout);
-    #endif
+#endif
 }
 
 
@@ -267,11 +256,11 @@ void rfc_timer_start(tRFC_MCB *p_mcb, uint16_t timeout)
 void rfc_timer_stop(tRFC_MCB *p_mcb)
 {
     RFCOMM_TRACE_EVENT("%s", __func__);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_cancel(p_mcb->mcb_timer);
-    #else
+#else
     btu_stop_timer(&p_mcb->mcb_timer);
-    #endif
+#endif
 }
 
 
@@ -285,17 +274,17 @@ void rfc_timer_stop(tRFC_MCB *p_mcb)
 void rfc_port_timer_start(tPORT *p_port, uint16_t timeout)
 {
     RFCOMM_TRACE_EVENT("%s - timeout:%d seconds", __func__, timeout);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     uint64_t interval_ms = timeout * 1000;
     alarm_set_on_queue(p_port->rfc.port_timer, interval_ms,
                        rfcomm_port_timer_timeout, p_port,
                        btu_general_alarm_queue);
-    #else
+#else
     TIMER_LIST_ENT *p_tle = &p_port->rfc.port_timer;
     p_tle->p_cback = (TIMER_CBACK *)&rfcomm_port_timer_timeout;
     p_tle->param = (TIMER_PARAM_TYPE)p_port;
     btu_start_timer(&p_port->rfc.port_timer, BTU_TTYPE_RFCOMM_PORT, timeout);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -308,11 +297,11 @@ void rfc_port_timer_start(tPORT *p_port, uint16_t timeout)
 void rfc_port_timer_stop(tPORT *p_port)
 {
     RFCOMM_TRACE_EVENT("%s", __func__);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_cancel(p_port->rfc.port_timer);
-    #else
+#else
     btu_stop_timer(&p_port->rfc.port_timer);
-    #endif
+#endif
 }
 
 
@@ -330,10 +319,8 @@ void rfc_check_mcb_active(tRFC_MCB *p_mcb)
 {
     uint16_t i;
 
-    for(i = 0; i < RFCOMM_MAX_DLCI; i++)
-    {
-        if(p_mcb->port_inx[i] != 0)
-        {
+    for(i = 0; i < RFCOMM_MAX_DLCI; i++) {
+        if(p_mcb->port_inx[i] != 0) {
             p_mcb->is_disc_initiator = FALSE;
             return;
         }
@@ -341,13 +328,10 @@ void rfc_check_mcb_active(tRFC_MCB *p_mcb)
 
     /* The last port was DISCed.  On the client side start disconnecting Mx */
     /* On the server side start inactivity timer */
-    if(p_mcb->is_disc_initiator)
-    {
+    if(p_mcb->is_disc_initiator) {
         p_mcb->is_disc_initiator = FALSE;
         rfc_mx_sm_execute(p_mcb, RFC_MX_EVENT_CLOSE_REQ, NULL);
-    }
-    else
-    {
+    } else {
         rfc_timer_start(p_mcb, RFC_MCB_RELEASE_INACT_TIMER);
     }
 }
@@ -383,8 +367,7 @@ void rfc_sec_check_complete(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_re
     /* Verify that PORT is still waiting for Security to complete */
     if(!p_port->in_use
             || ((p_port->rfc.state != RFC_STATE_ORIG_WAIT_SEC_CHECK)
-                && (p_port->rfc.state != RFC_STATE_TERM_WAIT_SEC_CHECK)))
-    {
+                && (p_port->rfc.state != RFC_STATE_TERM_WAIT_SEC_CHECK))) {
         return;
     }
 
@@ -411,8 +394,7 @@ void rfc_port_closed(tPORT *p_port)
     p_port->rfc.state = RFC_STATE_CLOSED;
 
     /* If multiplexer channel was up mark it as down */
-    if(p_mcb)
-    {
+    if(p_mcb) {
         p_mcb->port_inx[p_port->dlci] = 0;
         /* If there are no more ports opened on this MCB release it */
         rfc_check_mcb_active(p_mcb);
@@ -435,13 +417,11 @@ void rfc_port_closed(tPORT *p_port)
 *******************************************************************************/
 void rfc_inc_credit(tPORT *p_port, uint8_t credit)
 {
-    if(p_port->rfc.p_mcb->flow == PORT_FC_CREDIT)
-    {
+    if(p_port->rfc.p_mcb->flow == PORT_FC_CREDIT) {
         p_port->credit_tx += credit;
         RFCOMM_TRACE_EVENT("rfc_inc_credit:%d", p_port->credit_tx);
 
-        if(p_port->tx.peer_fc == TRUE)
-        {
+        if(p_port->tx.peer_fc == TRUE) {
             PORT_FlowInd(p_port->rfc.p_mcb, p_port->dlci, TRUE);
         }
     }
@@ -460,15 +440,12 @@ void rfc_inc_credit(tPORT *p_port, uint8_t credit)
 *******************************************************************************/
 void rfc_dec_credit(tPORT *p_port)
 {
-    if(p_port->rfc.p_mcb->flow == PORT_FC_CREDIT)
-    {
-        if(p_port->credit_tx > 0)
-        {
+    if(p_port->rfc.p_mcb->flow == PORT_FC_CREDIT) {
+        if(p_port->credit_tx > 0) {
             p_port->credit_tx--;
         }
 
-        if(p_port->credit_tx == 0)
-        {
+        if(p_port->credit_tx == 0) {
             p_port->tx.peer_fc = TRUE;
         }
     }
@@ -488,10 +465,8 @@ void rfc_dec_credit(tPORT *p_port)
 void rfc_check_send_cmd(tRFC_MCB *p_mcb, BT_HDR *p_buf)
 {
     /* if passed a buffer queue it */
-    if(p_buf != NULL)
-    {
-        if(p_mcb->cmd_q == NULL)
-        {
+    if(p_buf != NULL) {
+        if(p_mcb->cmd_q == NULL) {
             RFCOMM_TRACE_ERROR("%s: empty queue: p_mcb = %p p_mcb->lcid = %u cached p_mcb = %p",
                                __func__, p_mcb, p_mcb->lcid,
                                rfc_find_lcid_mcb(p_mcb->lcid));
@@ -501,12 +476,10 @@ void rfc_check_send_cmd(tRFC_MCB *p_mcb, BT_HDR *p_buf)
     }
 
     /* handle queue if L2CAP not congested */
-    while(p_mcb->l2cap_congested == FALSE)
-    {
+    while(p_mcb->l2cap_congested == FALSE) {
         BT_HDR *p = (BT_HDR *)fixed_queue_try_dequeue(p_mcb->cmd_q);
 
-        if(p == NULL)
-        {
+        if(p == NULL) {
             break;
         }
 

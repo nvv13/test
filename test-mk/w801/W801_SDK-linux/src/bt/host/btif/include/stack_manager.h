@@ -22,8 +22,7 @@
 
 #include "osi/include/future.h"
 
-typedef struct
-{
+typedef struct {
     void (*init_stack)(void);
     void (*start_up_stack_async)(void);
     void (*shut_down_stack_async)(void);

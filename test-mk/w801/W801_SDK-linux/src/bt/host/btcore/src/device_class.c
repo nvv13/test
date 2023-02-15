@@ -23,8 +23,7 @@
 #include "btcore/include/device_class.h"
 #include "osi/include/osi.h"
 
-typedef struct _bt_device_class_t
-{
+typedef struct _bt_device_class_t {
     uint32_t unused : 2;          // LSBs
     uint32_t minor_device : 6;
     uint32_t major_device : 5;
@@ -39,8 +38,7 @@ typedef struct _bt_device_class_t
 COMPILE_ASSERT(sizeof(_bt_device_class_t) == sizeof(bt_device_class_t));
 
 // [Major Service Classes](https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband)
-enum
-{
+enum {
     DC_LIMITED_DISCOVERABLE_MODE = 0x0001,
     DC_RESERVED14 = 0x0002,
     DC_RESERVED15 = 0x0004,
@@ -71,8 +69,7 @@ int device_class_to_stream(const bt_device_class_t *dc, uint8_t *data, size_t le
     assert(data != NULL);
     assert(len >= sizeof(bt_device_class_t));
 
-    for(size_t i = 0; i < sizeof(bt_device_class_t); ++i)
-    {
+    for(size_t i = 0; i < sizeof(bt_device_class_t); ++i) {
         data[i] = dc->_[i];
     }
 
@@ -107,7 +104,7 @@ uint8_t device_class_copy(bt_device_class_t *dest, const bt_device_class_t *src)
 {
     assert(dest != NULL);
     assert(src != NULL);
-    return (wm_memcpy(dest, src, sizeof(bt_device_class_t)) == dest);
+    return (memcpy(dest, src, sizeof(bt_device_class_t)) == dest);
 }
 
 int device_class_get_major_device(const bt_device_class_t *dc)
@@ -144,12 +141,9 @@ void device_class_set_information(bt_device_class_t *dc, uint8_t set)
 {
     assert(dc != NULL);
 
-    if(set)
-    {
+    if(set) {
         device_class_set_major_service_(dc, DC_INFORMATION);
-    }
-    else
-    {
+    } else {
         device_class_clr_major_service_(dc, DC_INFORMATION);
     }
 }
@@ -164,12 +158,9 @@ void device_class_set_limited(bt_device_class_t *dc, uint8_t set)
 {
     assert(dc != NULL);
 
-    if(set)
-    {
+    if(set) {
         device_class_set_major_service_(dc, DC_LIMITED_DISCOVERABLE_MODE);
-    }
-    else
-    {
+    } else {
         device_class_clr_major_service_(dc, DC_LIMITED_DISCOVERABLE_MODE);
     }
 }

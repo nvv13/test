@@ -37,8 +37,7 @@
 
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     BTA_GATTC_OPEN,
     BTA_GATTC_OPEN_FAIL,
     BTA_GATTC_OPEN_ERROR,
@@ -72,8 +71,7 @@ enum
 typedef void (*tBTA_GATTC_ACTION)(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data);
 
 /* action function list */
-const tBTA_GATTC_ACTION bta_gattc_action[] =
-{
+const tBTA_GATTC_ACTION bta_gattc_action[] = {
     bta_gattc_open,
     bta_gattc_open_fail,
     bta_gattc_open_error,
@@ -109,8 +107,7 @@ const tBTA_GATTC_ACTION bta_gattc_action[] =
 #define BTA_GATTC_NUM_COLS            2       /* number of columns in state tables */
 
 /* state table for idle state */
-static const uint8_t bta_gattc_st_idle[][BTA_GATTC_NUM_COLS] =
-{
+static const uint8_t bta_gattc_st_idle[][BTA_GATTC_NUM_COLS] = {
     /* Event                            Action 1                  Next state */
     /* BTA_GATTC_API_OPEN_EVT           */   {BTA_GATTC_OPEN,              BTA_GATTC_W4_CONN_ST},
     /* BTA_GATTC_INT_OPEN_FAIL_EVT      */   {BTA_GATTC_IGNORE,            BTA_GATTC_IDLE_ST},
@@ -138,8 +135,7 @@ static const uint8_t bta_gattc_st_idle[][BTA_GATTC_NUM_COLS] =
 };
 
 /* state table for wait for open state */
-static const uint8_t bta_gattc_st_w4_conn[][BTA_GATTC_NUM_COLS] =
-{
+static const uint8_t bta_gattc_st_w4_conn[][BTA_GATTC_NUM_COLS] = {
     /* Event                            Action 1                             Next state */
     /* BTA_GATTC_API_OPEN_EVT           */   {BTA_GATTC_OPEN,              BTA_GATTC_W4_CONN_ST},
     /* BTA_GATTC_INT_OPEN_FAIL_EVT      */   {BTA_GATTC_OPEN_FAIL,         BTA_GATTC_IDLE_ST},
@@ -167,8 +163,7 @@ static const uint8_t bta_gattc_st_w4_conn[][BTA_GATTC_NUM_COLS] =
 };
 
 /* state table for open state */
-static const uint8_t bta_gattc_st_connected[][BTA_GATTC_NUM_COLS] =
-{
+static const uint8_t bta_gattc_st_connected[][BTA_GATTC_NUM_COLS] = {
     /* Event                            Action 1                            Next state */
     /* BTA_GATTC_API_OPEN_EVT           */   {BTA_GATTC_OPEN,               BTA_GATTC_CONN_ST},
     /* BTA_GATTC_INT_OPEN_FAIL_EVT      */   {BTA_GATTC_IGNORE,             BTA_GATTC_CONN_ST},
@@ -197,8 +192,7 @@ static const uint8_t bta_gattc_st_connected[][BTA_GATTC_NUM_COLS] =
 };
 
 /* state table for discover state */
-static const uint8_t bta_gattc_st_discover[][BTA_GATTC_NUM_COLS] =
-{
+static const uint8_t bta_gattc_st_discover[][BTA_GATTC_NUM_COLS] = {
     /* Event                            Action 1                            Next state */
     /* BTA_GATTC_API_OPEN_EVT           */   {BTA_GATTC_OPEN,               BTA_GATTC_DISCOVER_ST},
     /* BTA_GATTC_INT_OPEN_FAIL_EVT      */   {BTA_GATTC_IGNORE,             BTA_GATTC_DISCOVER_ST},
@@ -229,8 +223,7 @@ static const uint8_t bta_gattc_st_discover[][BTA_GATTC_NUM_COLS] =
 typedef const uint8_t (*tBTA_GATTC_ST_TBL)[BTA_GATTC_NUM_COLS];
 
 /* state table */
-const tBTA_GATTC_ST_TBL bta_gattc_st_tbl[] =
-{
+const tBTA_GATTC_ST_TBL bta_gattc_st_tbl[] = {
     bta_gattc_st_idle,
     bta_gattc_st_w4_conn,
     bta_gattc_st_connected,
@@ -243,14 +236,14 @@ const tBTA_GATTC_ST_TBL bta_gattc_st_tbl[] =
 
 /* GATTC control block */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_GATTC_CB  bta_gattc_cb;
+tBTA_GATTC_CB  bta_gattc_cb;
 #else
-	tBTA_GATTC_CB  *bta_gattc_cb_ptr;
+tBTA_GATTC_CB  *bta_gattc_cb_ptr;
 #endif
 
 #if BTA_GATT_DEBUG == TRUE
-    static char *gattc_evt_code(tBTA_GATTC_INT_EVT evt_code);
-    static char *gattc_state_code(tBTA_GATTC_STATE state_code);
+static char *gattc_evt_code(tBTA_GATTC_INT_EVT evt_code);
+static char *gattc_state_code(tBTA_GATTC_STATE state_code);
 #endif
 
 /*******************************************************************************
@@ -270,14 +263,14 @@ uint8_t bta_gattc_sm_execute(tBTA_GATTC_CLCB *p_clcb, uint16_t event, tBTA_GATTC
     uint8_t               action;
     int                 i;
     uint8_t             rt = TRUE;
-    #if BTA_GATT_DEBUG == TRUE
+#if BTA_GATT_DEBUG == TRUE
     tBTA_GATTC_STATE in_state = p_clcb->state;
     uint16_t         in_event = event;
     APPL_TRACE_DEBUG("bta_gattc_sm_execute: State 0x%02x [%s], Event 0x%x[%s]", in_state,
                      gattc_state_code(in_state),
                      in_event,
                      gattc_evt_code(in_event));
-    #endif
+#endif
     /* look up the state table for the current state */
     state_table = bta_gattc_st_tbl[p_clcb->state];
     event &= 0x00FF;
@@ -285,37 +278,31 @@ uint8_t bta_gattc_sm_execute(tBTA_GATTC_CLCB *p_clcb, uint16_t event, tBTA_GATTC
     p_clcb->state = state_table[event][BTA_GATTC_NEXT_STATE];
 
     /* execute action functions */
-    for(i = 0; i < BTA_GATTC_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != BTA_GATTC_IGNORE)
-        {
+    for(i = 0; i < BTA_GATTC_ACTIONS; i++) {
+        if((action = state_table[event][i]) != BTA_GATTC_IGNORE) {
             (*bta_gattc_action[action])(p_clcb, p_data);
 
-            if(p_clcb->p_q_cmd == p_data)
-            {
+            if(p_clcb->p_q_cmd == p_data) {
                 /* buffer is queued, don't free in the bta dispatcher.
                  * we free it ourselves when a completion event is received.
                  */
                 rt = FALSE;
             }
-        }
-        else
-        {
+        } else {
             break;
         }
     }
 
-    #if BTA_GATT_DEBUG == TRUE
+#if BTA_GATT_DEBUG == TRUE
 
-    if(in_state != p_clcb->state)
-    {
+    if(in_state != p_clcb->state) {
         APPL_TRACE_DEBUG("GATTC State Change: [%s] -> [%s] after Event [%s]",
                          gattc_state_code(in_state),
                          gattc_state_code(p_clcb->state),
                          gattc_evt_code(in_event));
     }
 
-    #endif
+#endif
     return rt;
 }
 
@@ -335,12 +322,11 @@ uint8_t bta_gattc_hdl_event(BT_HDR *p_msg)
     tBTA_GATTC_CLCB *p_clcb = NULL;
     tBTA_GATTC_RCB      *p_clreg;
     uint8_t             rt = TRUE;
-    #if BTA_GATT_DEBUG == TRUE
+#if BTA_GATT_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_gattc_hdl_event: Event [%s]", gattc_evt_code(p_msg->event));
-    #endif
+#endif
 
-    switch(p_msg->event)
-    {
+    switch(p_msg->event) {
         case BTA_GATTC_API_DISABLE_EVT:
             bta_gattc_disable(p_cb);
             break;
@@ -369,7 +355,7 @@ uint8_t bta_gattc_hdl_event(BT_HDR *p_msg)
         case BTA_GATTC_API_REFRESH_EVT:
             bta_gattc_process_api_refresh(p_cb, (tBTA_GATTC_DATA *) p_msg);
             break;
-            #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
 
         case BTA_GATTC_API_LISTEN_EVT:
             bta_gattc_listen(p_cb, (tBTA_GATTC_DATA *) p_msg);
@@ -378,33 +364,24 @@ uint8_t bta_gattc_hdl_event(BT_HDR *p_msg)
         case BTA_GATTC_API_BROADCAST_EVT:
             bta_gattc_broadcast(p_cb, (tBTA_GATTC_DATA *) p_msg);
             break;
-            #endif
+#endif
 
         case BTA_GATTC_ENC_CMPL_EVT:
             bta_gattc_process_enc_cmpl(p_cb, (tBTA_GATTC_DATA *) p_msg);
             break;
 
         default:
-            if(p_msg->event == BTA_GATTC_INT_CONN_EVT)
-            {
+            if(p_msg->event == BTA_GATTC_INT_CONN_EVT) {
                 p_clcb = bta_gattc_find_int_conn_clcb((tBTA_GATTC_DATA *) p_msg);
+            } else if(p_msg->event == BTA_GATTC_INT_DISCONN_EVT) {
+                p_clcb = bta_gattc_find_int_disconn_clcb((tBTA_GATTC_DATA *) p_msg);
+            } else {
+                p_clcb = bta_gattc_find_clcb_by_conn_id(p_msg->layer_specific);
             }
-            else
-                if(p_msg->event == BTA_GATTC_INT_DISCONN_EVT)
-                {
-                    p_clcb = bta_gattc_find_int_disconn_clcb((tBTA_GATTC_DATA *) p_msg);
-                }
-                else
-                {
-                    p_clcb = bta_gattc_find_clcb_by_conn_id(p_msg->layer_specific);
-                }
 
-            if(p_clcb != NULL)
-            {
+            if(p_clcb != NULL) {
                 rt = bta_gattc_sm_execute(p_clcb, p_msg->event, (tBTA_GATTC_DATA *) p_msg);
-            }
-            else
-            {
+            } else {
                 APPL_TRACE_DEBUG("Ignore unknown conn ID: %d", p_msg->layer_specific);
             }
 
@@ -431,8 +408,7 @@ uint8_t bta_gattc_hdl_event(BT_HDR *p_msg)
 *******************************************************************************/
 static char *gattc_evt_code(tBTA_GATTC_INT_EVT evt_code)
 {
-    switch(evt_code)
-    {
+    switch(evt_code) {
         case BTA_GATTC_API_OPEN_EVT:
             return "BTA_GATTC_API_OPEN_EVT";
 
@@ -518,8 +494,7 @@ static char *gattc_evt_code(tBTA_GATTC_INT_EVT evt_code)
 *******************************************************************************/
 static char *gattc_state_code(tBTA_GATTC_STATE state_code)
 {
-    switch(state_code)
-    {
+    switch(state_code) {
         case BTA_GATTC_IDLE_ST:
             return "GATTC_IDLE_ST";
 

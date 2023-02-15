@@ -24,8 +24,7 @@
 #include "osi/include/thread.h"
 #include "vendor.h"
 
-typedef enum
-{
+typedef enum {
     DATA_TYPE_COMMAND = 1,
     DATA_TYPE_ACL     = 2,
     DATA_TYPE_SCO     = 3,
@@ -34,8 +33,7 @@ typedef enum
 
 typedef void (*data_ready_cb)(serial_data_type_t type);
 
-typedef struct
-{
+typedef struct {
     // Called when the HAL detects inbound data.
     // Data |type| may be ACL, SCO, or EVENT.
     // Executes in the context of the thread supplied to |init|.
@@ -48,8 +46,7 @@ typedef struct
     */
 } hci_hal_callbacks_t;
 
-typedef struct hci_hal_t
-{
+typedef struct hci_hal_t {
     // Initialize the HAL, with |upper_callbacks| and |upper_thread| to run in the context of.
     uint8_t (*init)(const hci_hal_callbacks_t *upper_callbacks, thread_t *upper_thread);
 

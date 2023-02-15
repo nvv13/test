@@ -24,8 +24,7 @@
 **  Type definitions
 ******************************************************************************/
 
-typedef struct
-{
+typedef struct {
     void        *p_first;
     void        *p_last;
     uint16_t    count;

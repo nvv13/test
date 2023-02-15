@@ -24,3 +24,19 @@ https://www.cnblogs.com/milton/p/15621540.html
 https://gitee.com/iosetting/wm-sdk-w80x.git
 Apache License, Version 2.0, January 2004
 
+
+
+-------
+
+# next source:
+https://github.com/droppingy/W801_SDK-linux.git
+-------
+
+02-2023 SDK обновил из:
+https://github.com/leoay/wm-sdk-w80x-2023.git
+и добавил перевод изменений, w801_pinout, из
+https://github.com/Gusev-Roman/wm-sdk-w80x-2023.git
+
+
+
+

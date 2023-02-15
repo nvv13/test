@@ -20,8 +20,7 @@
 
 #include <stdint.h>
 
-typedef enum
-{
+typedef enum {
     DEVICE_TYPE_UNKNOWN,
     DEVICE_TYPE_BREDR,
     DEVICE_TYPE_LE,
@@ -35,8 +34,7 @@ typedef enum
 void metrics_pair_event(uint32_t disconnect_reason, uint64_t timestamp_ms,
                         uint32_t device_class, device_type_t device_type);
 
-typedef enum
-{
+typedef enum {
     WAKE_EVENT_UNKNOWN,
     WAKE_EVENT_ACQUIRED,
     WAKE_EVENT_RELEASED,
@@ -49,8 +47,7 @@ typedef enum
 void metrics_wake_event(wake_event_type_t type, const char *requestor,
                         const char *name, uint64_t timestamp_ms);
 
-typedef enum
-{
+typedef enum {
     SCAN_TYPE_UNKNOWN,
     SCAN_TECH_TYPE_LE,
     SCAN_TECH_TYPE_BREDR,

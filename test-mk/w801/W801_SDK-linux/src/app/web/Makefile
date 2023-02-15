@@ -1,10 +1,8 @@
 TOP_DIR = ../../..
 sinclude $(TOP_DIR)/tools/w800/conf.mk
 
-EXCLUDES = fsdata_lwip.c \
-           fsdata_lwip_basic.c \
-           fsdata_lwip_ruigong.c \
-           fsdata_lwip_russian.c
+EXCLUDES = fsdata_ap_config.c \
+           fsdata.c
 CSRCS = $(filter-out $(EXCLUDES), $(wildcard *.c))
 
 ifndef PDIR

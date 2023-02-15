@@ -23,11 +23,11 @@
 
 
 #ifndef NULL
-    #define NULL     0
+#define NULL     0
 #endif
 
 #ifndef FALSE
-    #define FALSE  0
+#define FALSE  0
 #endif
 
 
@@ -36,21 +36,22 @@ typedef unsigned char   uint8_t;
 typedef uint32_t          TIME_STAMP;
 
 #ifndef TRUE
-    #define TRUE   (!FALSE)
+#define TRUE   (!FALSE)
 #endif
 
 typedef unsigned char   UBYTE;
 
 #ifdef __arm
-    #define PACKED  __packed
-    #define INLINE  __inline
+#define PACKED  __packed
+#define INLINE  __inline
 #else
-    #define PACKED
-    #define INLINE
+#define PACKED
+#define INLINE
 #endif
 
+#ifndef BIG_ENDIAN
 #define BIG_ENDIAN FALSE
-
+#endif
 #define UINT16_LOW_BYTE(x)      ((x) & 0xff)
 #define UINT16_HI_BYTE(x)       ((x) >> 8)
 

@@ -26,8 +26,7 @@
 
 #include "osi/include/log.h"
 
-struct buffer_t
-{
+struct buffer_t {
     buffer_t *root;
     size_t refcount;
     size_t length;
@@ -65,27 +64,21 @@ buffer_t *buffer_new_slice(const buffer_t *buf, size_t slice_size)
 
 void buffer_free(buffer_t *buffer)
 {
-    if(!buffer)
-    {
+    if(!buffer) {
         return;
     }
 
-    if(buffer->root != buffer)
-    {
+    if(buffer->root != buffer) {
         // We're a leaf node. Delete the root node if we're the last referent.
-        if(--buffer->root->refcount == 0)
-        {
+        if(--buffer->root->refcount == 0) {
             GKI_freebuf(buffer->root);
         }
 
         GKI_freebuf(buffer);
+    } else if(--buffer->refcount == 0) {
+        // We're a root node. Roots are only deleted when their refcount goes to 0.
+        GKI_freebuf(buffer);
     }
-    else
-        if(--buffer->refcount == 0)
-        {
-            // We're a root node. Roots are only deleted when their refcount goes to 0.
-            GKI_freebuf(buffer);
-        }
 }
 
 void *buffer_ptr(const buffer_t *buf)

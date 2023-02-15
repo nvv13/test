@@ -108,8 +108,7 @@
 
 /* Define the BNEP Connection Control Block
 */
-typedef struct
-{
+typedef struct {
 #define BNEP_STATE_IDLE              0
 #define BNEP_STATE_CONN_START        1
 #define BNEP_STATE_CFG_SETUP         2
@@ -165,8 +164,7 @@ typedef struct
 
 /*  The main BNEP control block
 */
-typedef struct
-{
+typedef struct {
     tL2CAP_CFG_INFO         l2cap_my_cfg;                   /* My L2CAP config     */
     tBNEP_CONN              bcb[BNEP_MAX_CONNECTIONS];
 
@@ -224,7 +222,8 @@ extern void        test_bnepu_build_bnep_hdr(tBNEP_CONN *p_bcb, BT_HDR *p_buf, u
 extern tBNEP_CONN *bnepu_get_route_to_dest(uint8_t *p_bda);
 extern void        bnepu_check_send_packet(tBNEP_CONN *p_bcb, BT_HDR *p_buf);
 extern void        bnep_send_command_not_understood(tBNEP_CONN *p_bcb, uint8_t cmd_code);
-extern void        bnepu_process_peer_filter_set(tBNEP_CONN *p_bcb, uint8_t *p_filters, uint16_t len);
+extern void        bnepu_process_peer_filter_set(tBNEP_CONN *p_bcb, uint8_t *p_filters,
+        uint16_t len);
 extern void        bnepu_process_peer_filter_rsp(tBNEP_CONN *p_bcb, uint8_t *p_data);
 extern void        bnepu_process_multicast_filter_rsp(tBNEP_CONN *p_bcb, uint8_t *p_data);
 extern void        bnep_send_conn_req(tBNEP_CONN *p_bcb);
@@ -235,7 +234,8 @@ extern uint8_t       *bnep_process_control_packet(tBNEP_CONN *p_bcb, uint8_t *p,
         uint8_t is_ext);
 extern void        bnep_sec_check_complete(BD_ADDR bd_addr, tBT_TRANSPORT trasnport,
         void *p_ref_data, uint8_t result);
-extern tBNEP_RESULT bnep_is_packet_allowed(tBNEP_CONN *p_bcb, BD_ADDR p_dest_addr, uint16_t protocol,
+extern tBNEP_RESULT bnep_is_packet_allowed(tBNEP_CONN *p_bcb, BD_ADDR p_dest_addr,
+        uint16_t protocol,
         uint8_t fw_ext_present, uint8_t *p_data);
 extern uint32_t      bnep_get_uuid32(tBT_UUID *src_uuid);
 

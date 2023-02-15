@@ -105,36 +105,59 @@ static void sock_client_recv_task(void *sdata)
 {
     ST_Demo_Sock_C *sock_c = (ST_Demo_Sock_C *)sdata;
     int ret = 0;
+    fd_set fdsr;
+    struct timeval tv;
 
     for(;;)
     {
         if (sock_c->socket_ok)
         {
-            ret = 0;
-            ret = recv(sock_c->socket_num, sock_c->sock_rx, DEMO_SOCK_BUF_SIZE, 0);
+        	FD_ZERO(&fdsr);
+			FD_SET(sock_c->socket_num, &fdsr);
+			tv.tv_sec = 1;
+			tv.tv_usec = 0;
+			ret = select(sock_c->socket_num+1, &fdsr, NULL, NULL, &tv);
+			if (0 == ret)
+			{
+				//			  printf("select ret=%d\n",ret);
+				continue;
+			}
+			else if (-1 == ret)
+			{
+				printf("select error\n");
+				continue;
+			}
 
-            if(ret > 0)
-            {
-                sock_c->rcv_data_len += ret;
+			if (FD_ISSET(sock_c->socket_num, &fdsr))
+			{
+				FD_CLR(sock_c->socket_num, &fdsr);
 
-                if(sock_c->uart_trans)
-                {
-                    tls_uart_write(TLS_UART_1, sock_c->sock_rx, ret);
-                }
-                else
-                {
-                    printf("rcv: %d\n", sock_c->rcv_data_len);
-                }
-            }
-            else
-            {
-                sock_c->socket_ok = FALSE;
-                closesocket(sock_c->socket_num);
-                printf("closesocket: %d\n", sock_c->socket_num);
-                sock_c->socket_num = 0;
-                tls_os_queue_send(sock_c->sock_c_q, (void *)DEMO_MSG_SOCKET_ERR, 0);
-            }
-            continue;
+	            ret = 0;
+	            ret = recv(sock_c->socket_num, sock_c->sock_rx, DEMO_SOCK_BUF_SIZE, 0);
+
+	            if(ret > 0)
+	            {
+	                sock_c->rcv_data_len += ret;
+
+	                if(sock_c->uart_trans)
+	                {
+	                    tls_uart_write(TLS_UART_1, sock_c->sock_rx, ret);
+	                }
+	                else
+	                {
+	                    printf("rcv: %d\n", sock_c->rcv_data_len);
+	                }
+	            }
+	            else
+	            {
+	                sock_c->socket_ok = FALSE;
+	                closesocket(sock_c->socket_num);
+	                printf("closesocket: %d\n", sock_c->socket_num);
+	                sock_c->socket_num = 0;
+	                tls_os_queue_send(sock_c->sock_c_q, (void *)DEMO_MSG_SOCKET_ERR, 0);
+	            }
+	            continue;
+			}
         }
         tls_os_time_delay(1);
     }
@@ -338,6 +361,11 @@ static void demo_sock_c_task(void *sdata)
 
                 readlen = (demo_sockc_uart.rxlen > DEMO_SOCK_BUF_SIZE) ?
                           DEMO_SOCK_BUF_SIZE : demo_sockc_uart.rxlen;
+				if (readlen == 0)
+				{
+					continue;
+				}
+
                 demo_sockc_uart.rxbuf = tls_mem_alloc(readlen);
                 if(demo_sockc_uart.rxbuf == NULL)
                 {
@@ -357,8 +385,14 @@ static void demo_sock_c_task(void *sdata)
                 do
                 {
                     ret = send(sock_c->socket_num, demo_sockc_uart.rxbuf + offset, readlen, 0);
-                    offset += ret;
-                    readlen -= ret;
+					if (ret < 0)
+					{
+					}
+					else
+					{
+	                    offset += ret;
+	                    readlen -= ret;
+					}
                 }
                 while(readlen);
                 tls_mem_free(demo_sockc_uart.rxbuf);

@@ -40,8 +40,7 @@
 *****************************************************************************/
 
 /* Header structure for api/received request/response. */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;        /* layer specific information */
     uint8_t           op_code;    /* the request/response opcode */
     uint8_t           rsp_code;   /* valid only if op_code is a response */
@@ -54,24 +53,21 @@ typedef struct
 } tMCA_CCB_MSG;
 
 /* This data structure is associated with the AVDT_OPEN_IND_EVT and AVDT_OPEN_CFM_EVT. */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;                /* Event header */
     uint16_t          peer_mtu;           /* Transport channel L2CAP MTU of the peer */
     uint16_t          lcid;               /* L2CAP LCID  */
     uint8_t           param;
 } tMCA_OPEN;
 
-typedef struct
-{
+typedef struct {
     uint16_t          reason;     /* disconnect reason from L2CAP */
     uint8_t           param;      /* MCA_INT or MCA_ACP */
     uint16_t          lcid;       /* L2CAP LCID  */
 } tMCA_CLOSE;
 
 /* Header structure for state machine event parameters. */
-typedef union
-{
+typedef union {
     BT_HDR          hdr;        /* layer specific information */
     tMCA_CCB_MSG    api;
     uint8_t         llcong;
@@ -81,8 +77,7 @@ typedef union
 } tMCA_CCB_EVT;
 
 /* control channel states */
-enum
-{
+enum {
     MCA_CCB_NULL_ST,        /* not allocated */
     MCA_CCB_OPENING_ST,
     MCA_CCB_OPEN_ST,        /* open */
@@ -92,8 +87,7 @@ enum
 typedef uint8_t tMCA_CCB_STATE;
 
 /* control channel events */
-enum
-{
+enum {
     MCA_CCB_API_CONNECT_EVT,    /* application initiates a connect request. */
     MCA_CCB_API_DISCONNECT_EVT, /* application initiates a disconnect request. */
     MCA_CCB_API_REQ_EVT,        /* application initiates a request. The request may be create_mdl, delete_mdl, reconnect_mdl or abort_mdl. */
@@ -108,8 +102,7 @@ enum
 };
 
 /* Header structure for callback event parameters. */
-typedef union
-{
+typedef union {
     tMCA_OPEN       open;
     tMCA_CLOSE      close;
     BT_HDR          hdr;        /* layer specific information */
@@ -122,8 +115,7 @@ typedef union
 } tMCA_DCB_EVT;
 
 /* data channel states */
-enum
-{
+enum {
     MCA_DCB_NULL_ST,        /* not allocated */
     MCA_DCB_OPENING_ST,     /* create/reconnect sequence is successful, waiting for data channel connection */
     MCA_DCB_OPEN_ST,        /* open */
@@ -133,8 +125,7 @@ enum
 typedef uint8_t tMCA_DCB_STATE;
 
 /* data channel events */
-enum
-{
+enum {
     MCA_DCB_API_CLOSE_EVT,      /* This event is sent when the application wants to disconnect the data channel.*/
     MCA_DCB_API_WRITE_EVT,      /* This event is sent when the application wants to send a data packet to the peer.*/
     MCA_DCB_TC_OPEN_EVT,        /* Transport Channel open.  This event is sent when the channel is open.*/
@@ -169,8 +160,7 @@ enum
 #define MCA_CTRL_TCID       0   /* to identify control channel by tMCA_TC_TBL.tcid */
 
 /* transport channel table */
-typedef struct
-{
+typedef struct {
     uint16_t  peer_mtu;       /* L2CAP mtu of the peer device */
     uint16_t  my_mtu;         /* Our MTU for this channel */
     uint16_t  lcid;           /* L2CAP LCID */
@@ -182,22 +172,19 @@ typedef struct
 } tMCA_TC_TBL;
 
 /* transport control block */
-typedef struct
-{
+typedef struct {
     tMCA_TC_TBL     tc_tbl[MCA_NUM_TC_TBL];
     uint8_t           lcid_tbl[MAX_L2CAP_CHANNELS];   /* map LCID to tc_tbl index */
 } tMCA_TC;
 
 /* registration control block */
-typedef struct
-{
+typedef struct {
     tMCA_REG        reg;                /* the parameter at register */
     tMCA_CS         dep[MCA_NUM_DEPS];  /* the registration info for each MDEP */
     tMCA_CTRL_CBACK *p_cback;           /* control callback function */
 } tMCA_RCB;
 
-enum
-{
+enum {
     MCA_CCB_STAT_NORM,      /* normal operation (based on ccb state) */
     MCA_CCB_STAT_PENDING,   /* waiting for data channel  */
     MCA_CCB_STAT_RECONN,    /* reinitiate connection after transitioning from CLOSING to IDLE state  */
@@ -211,15 +198,15 @@ typedef uint8_t tMCA_CCB_STAT;
  * ccb[MCA_NUM_LINKS*1]...ccb[MCA_NUM_LINKS*2-1] -> rcb[1]
  * ccb[MCA_NUM_LINKS*2]...ccb[MCA_NUM_LINKS*3-1] -> rcb[2]
  */
-typedef struct
-{
+typedef struct {
     tMCA_RCB        *p_rcb;             /* the associated registration control block */
     TIMER_LIST_ENT mca_ccb_timer;     /* MCA CCB timer entry */
     tMCA_CCB_MSG    *p_tx_req;          /* Current request being sent/awaiting response */
     tMCA_CCB_MSG    *p_rx_msg;          /* Current message received/being processed */
     BD_ADDR         peer_addr;          /* BD address of peer */
     uint16_t          sec_mask;           /* Security mask for connections as initiator */
-    uint16_t          ctrl_vpsm;          /* The virtual PSM that peer is listening for control channel */
+    uint16_t
+    ctrl_vpsm;          /* The virtual PSM that peer is listening for control channel */
     uint16_t          data_vpsm;          /* The virtual PSM that peer is listening for data channel. */
     uint16_t          lcid;               /* L2CAP lcid for this control channel */
     uint8_t           state;              /* The CCB state machine state */
@@ -228,8 +215,7 @@ typedef struct
 } tMCA_CCB;
 typedef void (*tMCA_CCB_ACTION)(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data);
 
-enum
-{
+enum {
     MCA_DCB_STAT_NORM,      /* normal operation (based on dcb state) */
     MCA_DCB_STAT_DEL,       /* MCA_Delete is called. waiting for the DL to detach */
     MCA_DCB_STAT_DISC       /* MCA_CloseReq is called. waiting for the DL to detach */
@@ -247,11 +233,11 @@ typedef uint8_t tMCA_DCB_STAT;
  * dcb[MCA_NUM_MDLS*1*MCA_NUM_LINKS*1]...dcb[MCA_NUM_MDLS*2*MCA_NUM_LINKS*2-1] -> rcb[1]
  * dcb[MCA_NUM_MDLS*2*MCA_NUM_LINKS*2]...dcb[MCA_NUM_MDLS*3*MCA_NUM_LINKS*3-1] -> rcb[2]
  */
-typedef struct
-{
+typedef struct {
     tMCA_CCB            *p_ccb;         /* the associated control control block */
     BT_HDR              *p_data;        /* data packet held due to L2CAP channel congestion */
-    tMCA_CS             *p_cs;          /* the associated MDEP info. p_cs->type is the mdep id(internal use) */
+    tMCA_CS
+    *p_cs;          /* the associated MDEP info. p_cs->type is the mdep id(internal use) */
     const tMCA_CHNL_CFG *p_chnl_cfg;    /* cfg params for L2CAP channel */
     uint16_t              mdl_id;         /* the MDL ID for this data channel */
     uint16_t              lcid;           /* L2CAP lcid */
@@ -263,8 +249,7 @@ typedef struct
 typedef void (*tMCA_DCB_ACTION)(tMCA_DCB *p_ccb, tMCA_DCB_EVT *p_data);
 
 /* Control block for MCA */
-typedef struct
-{
+typedef struct {
     tMCA_RCB        rcb[MCA_NUM_REGS];  /* registration control block */
     tMCA_CCB        ccb[MCA_NUM_CCBS];  /* control channel control blocks */
     tMCA_DCB        dcb[MCA_NUM_DCBS];  /* data channel control blocks */

@@ -42,7 +42,7 @@ tls_bt_addr_t *bdaddr_copy(tls_bt_addr_t *dest, const tls_bt_addr_t *src)
 {
     assert(dest != NULL);
     assert(src != NULL);
-    return (tls_bt_addr_t *)wm_memcpy(dest, src, sizeof(tls_bt_addr_t));
+    return (tls_bt_addr_t *)memcpy(dest, src, sizeof(tls_bt_addr_t));
 }
 
 const char *bdaddr_to_string(const tls_bt_addr_t *addr, char *string, size_t size)
@@ -50,8 +50,7 @@ const char *bdaddr_to_string(const tls_bt_addr_t *addr, char *string, size_t siz
     assert(addr != NULL);
     assert(string != NULL);
 
-    if(size < 18)
-    {
+    if(size < 18) {
         return NULL;
     }
 
@@ -66,8 +65,7 @@ const char *bd_to_string(const uint8_t *addr, char *string, size_t size)
     assert(addr != NULL);
     assert(string != NULL);
 
-    if(size < 18)
-    {
+    if(size < 18) {
         return NULL;
     }
 
@@ -84,22 +82,18 @@ uint8_t string_is_bdaddr(const char *string)
     assert(string != NULL);
     size_t len = strlen(string);
 
-    if(len != 17)
-    {
+    if(len != 17) {
         return false;
     }
 
-    for(size_t i = 0; i < len; ++i)
-    {
+    for(size_t i = 0; i < len; ++i) {
         // Every 3rd char must be ':'.
-        if(((i + 1) % 3) == 0 && string[i] != ':')
-        {
+        if(((i + 1) % 3) == 0 && string[i] != ':') {
             return false;
         }
 
         // All other chars must be a hex digit.
-        if(((i + 1) % 3) != 0 && !isxdigit(string[i]))
-        {
+        if(((i + 1) % 3) != 0 && !isxdigit(string[i])) {
             return false;
         }
     }
@@ -116,8 +110,7 @@ uint8_t string_to_bdaddr(const char *string, tls_bt_addr_t *addr)
     uint8_t ret = sscanf(string, "%02hhx:%02hhx:%02hhx:%02hhx:%02hhx:%02hhx",
                          &ptr[0], &ptr[1], &ptr[2], &ptr[3], &ptr[4], &ptr[5]) == 6;
 
-    if(ret)
-    {
+    if(ret) {
         memcpy(addr, &new_addr, sizeof(tls_bt_addr_t));
     }
 
@@ -129,8 +122,7 @@ hash_index_t hash_function_bdaddr(const void *key)
     hash_index_t hash = 5381;
     const char *bytes = (const char *)key;
 
-    for(size_t i = 0; i < sizeof(tls_bt_addr_t); ++i)
-    {
+    for(size_t i = 0; i < sizeof(tls_bt_addr_t); ++i) {
         hash = ((hash << 5) + hash) + bytes[i];
     }
 

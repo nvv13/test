@@ -39,7 +39,7 @@ typedef uint16_t (tBTA_HL_ALLOCATE_PSM)(void);
 *****************************************************************************/
 
 #ifndef BTA_HL_DISC_SIZE
-    #define BTA_HL_DISC_SIZE                1600
+#define BTA_HL_DISC_SIZE                1600
 #endif
 #define BTA_HL_NUM_SRCH_ATTR            10
 #define BTA_HL_MIN_SDP_MDEP_LEN         7
@@ -129,16 +129,14 @@ typedef uint8_t tBTA_HL_ECHO_OPER;
 #define BTA_HL_CO_GET_ECHO_DATA_MASK 0x04
 #define BTA_HL_CO_PUT_ECHO_DATA_MASK 0x08
 
-typedef struct
-{
+typedef struct {
     uint16_t      mtu;
     uint8_t       fcs;                    /* '0' No FCS, otherwise '1' */
 } tBTA_HL_L2CAP_CFG_INFO;
 
 
 /* State Machine Events */
-enum
-{
+enum {
     /* these events are handled by the state machine */
     BTA_HL_CCH_OPEN_EVT     = BTA_SYS_EVT_START(BTA_ID_HL),
     BTA_HL_CCH_SDP_OK_EVT,
@@ -209,8 +207,7 @@ typedef uint16_t tBTA_HL_INT_EVT;
 
 
 /* state machine states */
-enum
-{
+enum {
     BTA_HL_CCH_IDLE_ST = 0,      /* Idle  */
     BTA_HL_CCH_OPENING_ST,       /* Opening a connection*/
     BTA_HL_CCH_OPEN_ST,          /* Connection is open */
@@ -218,8 +215,7 @@ enum
 };
 typedef uint8_t tBTA_HL_CCH_STATE;
 
-enum
-{
+enum {
     BTA_HL_DCH_IDLE_ST = 0,      /* Idle  */
     BTA_HL_DCH_OPENING_ST,       /* Opening a connection*/
     BTA_HL_DCH_OPEN_ST,          /* Connection is open */
@@ -228,48 +224,49 @@ enum
 typedef uint8_t tBTA_HL_DCH_STATE;
 
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_HL_CTRL_CBACK  *p_cback;        /* pointer to control callback function */
 } tBTA_HL_API_ENABLE;
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     uint8_t               app_id;
     uint8_t             is_register;        /* Update HL application due to register or deregister */
     tBTA_HL_CBACK       *p_cback;           /* pointer to application callback function */
     tBTA_HL_DEVICE_TYPE dev_type;           /* sink, source or dual roles */
     tBTA_SEC            sec_mask;           /* security mask for accepting conenction*/
-    char                srv_name[BTA_SERVICE_NAME_LEN + 1];       /* service name to be used in the SDP; null terminated*/
-    char                srv_desp[BTA_SERVICE_DESP_LEN + 1];       /* service description to be used in the SDP; null terminated */
-    char                provider_name[BTA_PROVIDER_NAME_LEN + 1];  /* provide name to be used in the SDP; null terminated */
+    char                srv_name[BTA_SERVICE_NAME_LEN +
+                                                      1];       /* service name to be used in the SDP; null terminated*/
+    char                srv_desp[BTA_SERVICE_DESP_LEN +
+                                                      1];       /* service description to be used in the SDP; null terminated */
+    char                provider_name[BTA_PROVIDER_NAME_LEN +
+                                                            1];  /* provide name to be used in the SDP; null terminated */
 
 } tBTA_HL_API_UPDATE;
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     uint8_t               app_id;
     tBTA_HL_CBACK       *p_cback;        /* pointer to application callback function */
     tBTA_HL_DEVICE_TYPE dev_type;           /* sink, source or dual roles */
     tBTA_SEC            sec_mask;           /* security mask for accepting conenction*/
-    char                srv_name[BTA_SERVICE_NAME_LEN + 1];       /* service name to be used in the SDP; null terminated*/
-    char                srv_desp[BTA_SERVICE_DESP_LEN + 1];       /* service description to be used in the SDP; null terminated */
-    char                provider_name[BTA_PROVIDER_NAME_LEN + 1];  /* provide name to be used in the SDP; null terminated */
+    char                srv_name[BTA_SERVICE_NAME_LEN +
+                                                      1];       /* service name to be used in the SDP; null terminated*/
+    char                srv_desp[BTA_SERVICE_DESP_LEN +
+                                                      1];       /* service description to be used in the SDP; null terminated */
+    char                provider_name[BTA_PROVIDER_NAME_LEN +
+                                                            1];  /* provide name to be used in the SDP; null terminated */
 } tBTA_HL_API_REGISTER;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     uint8_t                   app_id;
     tBTA_HL_CBACK           *p_cback;        /* pointer to application callback function */
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_API_DEREGISTER;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     uint8_t                   app_id;
     tBTA_HL_APP_HANDLE      app_handle;
@@ -279,16 +276,14 @@ typedef struct
 } tBTA_HL_API_CCH_OPEN;
 
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MCL_HANDLE      mcl_handle;
 } tBTA_HL_API_CCH_CLOSE;
 
 
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     uint16_t                  ctrl_psm;
@@ -299,8 +294,7 @@ typedef struct
 } tBTA_HL_API_DCH_OPEN;
 
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
 
     tBTA_HL_MCL_HANDLE      mcl_handle;
@@ -308,35 +302,30 @@ typedef struct
     tBTA_HL_MDL_ID          mdl_id;
 } tBTA_HL_API_DCH_RECONNECT;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MDL_HANDLE      mdl_handle;
 } tBTA_HL_API_DCH_CLOSE;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_MDL_ID          mdl_id;
 } tBTA_HL_API_DELETE_MDL;
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_HL_MCL_HANDLE mcl_handle;
 } tBTA_HL_API_DCH_ABORT;
 
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_HL_MDL_HANDLE  mdl_handle;
     uint16_t              pkt_size;
 } tBTA_HL_API_SEND_DATA;
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_HL_MCL_HANDLE  mcl_handle;
     uint16_t              ctrl_psm;
@@ -344,8 +333,7 @@ typedef struct
     tBTA_HL_DCH_CFG     local_cfg;
 } tBTA_HL_API_DCH_ECHO_TEST;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     uint8_t                   app_idx;
     uint8_t                   mcl_idx;
@@ -354,8 +342,7 @@ typedef struct
 
 
 /* MCA callback event parameters. */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_HL_APP_HANDLE  app_handle;
     tBTA_HL_MCL_HANDLE  mcl_handle;
@@ -364,8 +351,7 @@ typedef struct
 
 
 /* MCA callback event parameters. */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     uint8_t           app_idx;
     uint8_t           mcl_idx;
@@ -374,24 +360,21 @@ typedef struct
 } tBTA_HL_MCA_RCV_DATA_EVT;
 
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     uint8_t                   app_idx;
     uint8_t                   mcl_idx;
     uint8_t                   mdl_idx;
 } tBTA_HL_DCH_SDP;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_APP_HANDLE      app_handle;
     uint8_t                   app_id;
     BD_ADDR                 bd_addr;        /* Address of peer device */
 } tBTA_HL_API_SDP_QUERY;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_MDL_ID          mdl_id;
@@ -400,23 +383,20 @@ typedef struct
     tBTA_HL_DCH_CFG         cfg_rsp;
 } tBTA_HL_API_DCH_CREATE_RSP;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_STATUS          status;
 } tBTA_HL_CI_GET_PUT_DATA;
 
-typedef struct
-{
+typedef struct {
     BT_HDR                  hdr;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_STATUS          status;
 } tBTA_HL_CI_ECHO_DATA;
 
 /* union of all state machine event data types */
-typedef union
-{
+typedef union {
     BT_HDR                      hdr;
     tBTA_HL_API_ENABLE          api_enable; /* data for BTA_MSE_API_ENABLE_EVT */
     tBTA_HL_API_UPDATE          api_update;
@@ -443,8 +423,7 @@ typedef union
 } tBTA_HL_DATA;
 
 
-typedef struct
-{
+typedef struct {
     uint8_t                 in_use;
     uint16_t                  mdl_id;
     tBTA_HL_MDL_HANDLE      mdl_handle;
@@ -481,8 +460,7 @@ typedef struct
     tBTA_HL_STATUS          ci_put_echo_data_status;
 } tBTA_HL_MDL_CB;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDL_CB          mdl[BTA_HL_NUM_MDLS_PER_MCL];
     tBTA_HL_DELETE_MDL      delete_mdl;
     uint8_t                 in_use;
@@ -511,8 +489,7 @@ typedef struct
     uint8_t                   app_id;
 } tBTA_HL_MCL_CB;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MCL_CB       mcb[BTA_HL_NUM_MCLS]; /* application Control Blocks */
     tBTA_HL_CBACK        *p_cback;            /* pointer to control callback function */
     uint8_t              in_use;              /* this CB is in use*/
@@ -527,17 +504,19 @@ typedef struct
     uint16_t               data_psm;   /* L2CAP PSM for the MCAP data channel */
     uint16_t               sec_mask;   /* Security mask for BTM_SetSecurityLevel() */
 
-    char                 srv_name[BTA_SERVICE_NAME_LEN + 1];       /* service name to be used in the SDP; null terminated*/
-    char                 srv_desp[BTA_SERVICE_DESP_LEN + 1];       /* service description to be used in the SDP; null terminated */
-    char                 provider_name[BTA_PROVIDER_NAME_LEN + 1];  /* provide name to be used in the SDP; null terminated */
+    char                 srv_name[BTA_SERVICE_NAME_LEN +
+                                                       1];       /* service name to be used in the SDP; null terminated*/
+    char                 srv_desp[BTA_SERVICE_DESP_LEN +
+                                                       1];       /* service description to be used in the SDP; null terminated */
+    char                 provider_name[BTA_PROVIDER_NAME_LEN +
+                                                             1];  /* provide name to be used in the SDP; null terminated */
 
     tMCA_CTRL_CBACK      *p_mcap_cback;            /* pointer to MCAP callback function */
     tMCA_DATA_CBACK      *p_data_cback;
 } tBTA_HL_APP_CB;
 
 
-typedef struct
-{
+typedef struct {
     uint8_t             in_use;
     tBTA_HL_SDP_OPER    sdp_oper;
     uint8_t               app_idx;
@@ -545,15 +524,13 @@ typedef struct
     uint8_t               mdl_idx;
 } tBTA_HL_SDP_CB;
 
-typedef struct
-{
+typedef struct {
     uint8_t         in_use;
     uint8_t           app_idx;
     uint8_t           mcl_idx;
 } tBTA_HL_TIMER_CB;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_APP_CB        acb[BTA_HL_NUM_APPS];      /* HL Control Blocks */
     tBTA_HL_CTRL_CBACK    *p_ctrl_cback;            /* pointer to control callback function */
     uint8_t               enable;
@@ -576,10 +553,10 @@ typedef struct
 
 /* HL control block */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    extern tBTA_HL_CB  bta_hl_cb;
+extern tBTA_HL_CB  bta_hl_cb;
 #else
-    extern tBTA_HL_CB *bta_hl_cb_ptr;
-    #define bta_hl_cb (*bta_hl_cb_ptr)
+extern tBTA_HL_CB *bta_hl_cb_ptr;
+#define bta_hl_cb (*bta_hl_cb_ptr)
 #endif
 
 #define BTA_HL_GET_CB_PTR() &(bta_hl_cb)
@@ -675,7 +652,8 @@ extern void bta_hl_dch_mca_create_cfm(uint8_t app_idx, uint8_t mcl_idx, uint8_t 
 extern void bta_hl_dch_mca_create(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                                   tBTA_HL_DATA *p_data);
 extern void bta_hl_deallocate_spd_cback(uint8_t sdp_cback_idx);
-extern tSDP_DISC_CMPL_CB *bta_hl_allocate_spd_cback(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
+extern tSDP_DISC_CMPL_CB *bta_hl_allocate_spd_cback(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx,
+        uint8_t mcl_idx,
         uint8_t mdl_idx,
         uint8_t *p_sdp_cback_idx);
 extern tBTA_HL_STATUS bta_hl_init_sdp(tBTA_HL_SDP_OPER sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
@@ -717,7 +695,8 @@ extern uint8_t bta_hl_find_service_in_db(uint8_t app_idx, uint8_t mcl_idx,
         tSDP_DISC_REC **pp_rec);
 extern uint16_t bta_hl_get_service_uuids(uint8_t sdp_oper, uint8_t app_idx, uint8_t mcl_idx,
         uint8_t mdl_idx);
-extern uint8_t bta_hl_find_echo_cfg_rsp(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdep_idx, uint8_t cfg,
+extern uint8_t bta_hl_find_echo_cfg_rsp(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdep_idx,
+                                        uint8_t cfg,
                                         uint8_t *p_cfg_rsp);
 extern uint8_t bta_hl_validate_cfg(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
                                    uint8_t cfg);
@@ -787,7 +766,8 @@ extern tBTA_HL_STATUS bta_hl_app_update(uint8_t app_id, uint8_t is_register);
 extern tBTA_HL_STATUS bta_hl_app_registration(uint8_t app_idx);
 extern void bta_hl_discard_data(uint16_t event, tBTA_HL_DATA *p_data);
 extern void bta_hl_save_mdl_cfg(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx);
-extern void bta_hl_set_dch_chan_cfg(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx, tBTA_HL_DATA *p_data);
+extern void bta_hl_set_dch_chan_cfg(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx,
+                                    tBTA_HL_DATA *p_data);
 extern uint8_t bta_hl_get_l2cap_cfg(tBTA_HL_MDL_HANDLE mdl_hnd, tBTA_HL_L2CAP_CFG_INFO *p_cfg);
 extern uint8_t bta_hl_validate_chan_cfg(uint8_t app_idx, uint8_t mcl_idx, uint8_t mdl_idx);
 extern uint8_t bta_hl_is_cong_on(uint8_t app_id, BD_ADDR bd_addr, tBTA_HL_MDL_ID mdl_id);

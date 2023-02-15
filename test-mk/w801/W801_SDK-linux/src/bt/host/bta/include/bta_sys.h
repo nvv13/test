@@ -43,8 +43,7 @@ typedef void (tBTA_SYS_DISABLE)(void);
 
 
 /* HW modules */
-enum
-{
+enum {
     BTA_SYS_HW_BLUETOOTH,
     BTA_SYS_HW_RT,
 
@@ -54,7 +53,7 @@ enum
 typedef uint16_t tBTA_SYS_HW_MODULE;
 
 #ifndef BTA_DM_NUM_JV_ID
-    #define BTA_DM_NUM_JV_ID    2
+#define BTA_DM_NUM_JV_ID    2
 #endif
 
 /* SW sub-systems */
@@ -138,26 +137,25 @@ typedef uint8_t tBTA_SYS_CONN_STATUS;
 typedef uint8_t tBTA_SYS_PREF_ROLES;
 
 /* conn callback for role / low power manager*/
-typedef void (tBTA_SYS_CONN_CBACK)(tBTA_SYS_CONN_STATUS status, uint8_t id, uint8_t app_id, BD_ADDR peer_addr);
+typedef void (tBTA_SYS_CONN_CBACK)(tBTA_SYS_CONN_STATUS status, uint8_t id, uint8_t app_id,
+                                   BD_ADDR peer_addr);
 
 /* conn callback for role / low power manager*/
 typedef void (tBTA_SYS_SSR_CFG_CBACK)(uint8_t id, uint8_t app_id, uint16_t latency, uint16_t tout);
 
 #if (BTA_EIR_CANNED_UUID_LIST != TRUE)
-    /* eir callback for adding/removeing UUID */
-    typedef void (tBTA_SYS_EIR_CBACK)(uint16_t uuid16, uint8_t adding);
+/* eir callback for adding/removeing UUID */
+typedef void (tBTA_SYS_EIR_CBACK)(uint16_t uuid16, uint8_t adding);
 #endif
 
 /* registration structure */
-typedef struct
-{
+typedef struct {
     tBTA_SYS_EVT_HDLR   *evt_hdlr;
     tBTA_SYS_DISABLE    *disable;
 } tBTA_SYS_REG;
 
 /* system manager configuration structure */
-typedef struct
-{
+typedef struct {
     uint16_t          mbox_evt;                       /* GKI mailbox event */
     uint8_t           mbox;                           /* GKI mailbox id */
     uint8_t           timer;                          /* GKI timer id */
@@ -165,8 +163,7 @@ typedef struct
 } tBTA_SYS_CFG;
 
 /* data type to send events to BTA SYS HW manager */
-typedef struct
-{
+typedef struct {
     BT_HDR                hdr;
     tBTA_SYS_HW_MODULE   hw_module;
 } tBTA_SYS_HW_MSG;
@@ -190,8 +187,7 @@ extern uint8_t appl_trace_level;
 *****************************************************************************/
 
 /* events sent to SYS HW manager - must be kept synchronized with tables in bta_sys_main.c */
-enum
-{
+enum {
     /* device manager local device API events */
     BTA_SYS_API_ENABLE_EVT = BTA_SYS_EVT_START(BTA_ID_SYS),
     BTA_SYS_EVT_ENABLED_EVT,
@@ -206,8 +202,7 @@ enum
 
 
 /* SYS HW status events - returned by SYS HW manager to other modules. */
-enum
-{
+enum {
     BTA_SYS_HW_OFF_EVT,
     BTA_SYS_HW_ON_EVT,
     BTA_SYS_HW_STARTING_EVT,
@@ -268,7 +263,8 @@ extern void bta_sys_busy(uint8_t id, uint8_t app_id, BD_ADDR peer_addr);
 
 #if (BTM_SSR_INCLUDED == TRUE)
 extern void bta_sys_ssr_cfg_register(tBTA_SYS_SSR_CFG_CBACK *p_cback);
-extern void bta_sys_chg_ssr_config(uint8_t id, uint8_t app_id, uint16_t max_latency, uint16_t min_tout);
+extern void bta_sys_chg_ssr_config(uint8_t id, uint8_t app_id, uint16_t max_latency,
+                                   uint16_t min_tout);
 #endif
 
 extern void bta_sys_role_chg_register(tBTA_SYS_CONN_CBACK *p_cback);

@@ -128,90 +128,90 @@
                           (unsigned long long)(((unsigned long long)(x) & 0xff00000000000000ULL) >> 56) ))
 
 #if BIG_ENDIAN
-    /** Convert ulong n/w to host */
-    #define ntohl(x) x
-    /** Convert host ulong to n/w */
-    #define htonl(x) x
-    /** Convert n/w to host */
-    #define ntohs(x)  x
-    /** Convert host to n/w */
-    #define htons(x)  x
+/** Convert ulong n/w to host */
+#define ntohl(x) x
+/** Convert host ulong to n/w */
+#define htonl(x) x
+/** Convert n/w to host */
+#define ntohs(x)  x
+/** Convert host to n/w */
+#define htons(x)  x
 
 
-    /** Convert from 16 bit little endian format to CPU format */
-    #define le16_to_cpu(x) swap_byte_16(x)
-    /** Convert from 32 bit little endian format to CPU format */
-    #define le32_to_cpu(x) swap_byte_32(x)
-    /** Convert from 64 bit little endian format to CPU format */
-    #define le64_to_cpu(x) swap_byte_64(x)
-    /** Convert to 16 bit little endian format from CPU format */
-
-
-
-    #define cpu_to_le16(x) swap_byte_16(x)
-    /** Convert to 32 bit little endian format from CPU format */
-    #define cpu_to_le32(x) swap_byte_32(x)
-    /** Convert to 64 bit little endian format from CPU format */
-    #define cpu_to_le64(x) swap_byte_64(x)
+/** Convert from 16 bit little endian format to CPU format */
+#define le16_to_cpu(x) swap_byte_16(x)
+/** Convert from 32 bit little endian format to CPU format */
+#define le32_to_cpu(x) swap_byte_32(x)
+/** Convert from 64 bit little endian format to CPU format */
+#define le64_to_cpu(x) swap_byte_64(x)
+/** Convert to 16 bit little endian format from CPU format */
 
 
 
-    #define cpu_to_be16(x) x
-    /** Convert to 32 bit big endian format from CPU format */
-    #define cpu_to_be32(x) x
-    /** Convert to 64 bit big endian format from CPU format */
-    #define cpu_to_be64(x) x
+#define cpu_to_le16(x) swap_byte_16(x)
+/** Convert to 32 bit little endian format from CPU format */
+#define cpu_to_le32(x) swap_byte_32(x)
+/** Convert to 64 bit little endian format from CPU format */
+#define cpu_to_le64(x) swap_byte_64(x)
 
-    /** Convert from 16 bit big endian format to CPU format */
-    #define be16_to_cpu(x) swap_byte_16(x)
-    /** Convert from 32 bit big endian format to CPU format */
-    #define be32_to_cpu(x) swap_byte_32(x)
-    /** Convert from 64 bit big endian format to CPU format */
-    #define be64_to_cpu(x) swap_byte_64(x)
-    /** Convert to 16 bit big endian format from CPU format */
+
+
+#define cpu_to_be16(x) x
+/** Convert to 32 bit big endian format from CPU format */
+#define cpu_to_be32(x) x
+/** Convert to 64 bit big endian format from CPU format */
+#define cpu_to_be64(x) x
+
+/** Convert from 16 bit big endian format to CPU format */
+#define be16_to_cpu(x) swap_byte_16(x)
+/** Convert from 32 bit big endian format to CPU format */
+#define be32_to_cpu(x) swap_byte_32(x)
+/** Convert from 64 bit big endian format to CPU format */
+#define be64_to_cpu(x) swap_byte_64(x)
+/** Convert to 16 bit big endian format from CPU format */
 #else
 
-    /** Convert ulong n/w to host */
-    #define ntohl(x) swap_byte_32(x)
-    /** Convert host ulong to n/w */
-    #define htonl(x) swap_byte_32(x)
-    /** Convert n/w to host */
-    #define ntohs(x)  swap_byte_16(x)
-    /** Convert host to n/w */
-    #define htons(x)  swap_byte_16(x)
+/** Convert ulong n/w to host */
+#define ntohl(x) swap_byte_32(x)
+/** Convert host ulong to n/w */
+#define htonl(x) swap_byte_32(x)
+/** Convert n/w to host */
+#define ntohs(x)  swap_byte_16(x)
+/** Convert host to n/w */
+#define htons(x)  swap_byte_16(x)
 
 
-    /** Convert from 16 bit little endian format to CPU format */
-    #define le16_to_cpu(x) x
-    /** Convert from 32 bit little endian format to CPU format */
-    #define le32_to_cpu(x) x
-    /** Convert from 64 bit little endian format to CPU format */
-    #define le64_to_cpu(x) x
-    /** Convert to 16 bit little endian format from CPU format */
-
-
-
-    #define cpu_to_le16(x) x
-    /** Convert to 32 bit little endian format from CPU format */
-    #define cpu_to_le32(x) x
-    /** Convert to 64 bit little endian format from CPU format */
-    #define cpu_to_le64(x) x
+/** Convert from 16 bit little endian format to CPU format */
+#define le16_to_cpu(x) x
+/** Convert from 32 bit little endian format to CPU format */
+#define le32_to_cpu(x) x
+/** Convert from 64 bit little endian format to CPU format */
+#define le64_to_cpu(x) x
+/** Convert to 16 bit little endian format from CPU format */
 
 
 
-    #define cpu_to_be16(x) swap_byte_16(x)
-    /** Convert to 32 bit big endian format from CPU format */
-    #define cpu_to_be32(x) swap_byte_32(x)
-    /** Convert to 64 bit big endian format from CPU format */
-    #define cpu_to_be64(x) swap_byte_64(x)
+#define cpu_to_le16(x) x
+/** Convert to 32 bit little endian format from CPU format */
+#define cpu_to_le32(x) x
+/** Convert to 64 bit little endian format from CPU format */
+#define cpu_to_le64(x) x
 
-    /** Convert from 16 bit big endian format to CPU format */
-    #define be16_to_cpu(x) swap_byte_16(x)
-    /** Convert from 32 bit big endian format to CPU format */
-    #define be32_to_cpu(x) swap_byte_32(x)
-    /** Convert from 64 bit big endian format to CPU format */
-    #define be64_to_cpu(x) swap_byte_64(x)
-    /** Convert to 16 bit big endian format from CPU format */
+
+
+#define cpu_to_be16(x) swap_byte_16(x)
+/** Convert to 32 bit big endian format from CPU format */
+#define cpu_to_be32(x) swap_byte_32(x)
+/** Convert to 64 bit big endian format from CPU format */
+#define cpu_to_be64(x) swap_byte_64(x)
+
+/** Convert from 16 bit big endian format to CPU format */
+#define be16_to_cpu(x) swap_byte_16(x)
+/** Convert from 32 bit big endian format to CPU format */
+#define be32_to_cpu(x) swap_byte_32(x)
+/** Convert from 64 bit big endian format to CPU format */
+#define be64_to_cpu(x) swap_byte_64(x)
+/** Convert to 16 bit big endian format from CPU format */
 
 #endif
 

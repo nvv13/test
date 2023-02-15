@@ -23,7 +23,7 @@
 MEMORY
 {
 	I-SRAM : ORIGIN = 0x080d0400 , LENGTH = 0x120000 /* I-SRAM  1M+128KB */ 
-	D-SRAM : ORIGIN = 0x20000100 , LENGTH = 0x47f00   /* D-SRAM  288KB */
+	D-SRAM : ORIGIN = 0x20000100 , LENGTH = 0x47EFC   /* D-SRAM  288KB */
 	V-SRAM : ORIGIN = 0x20000000 , LENGTH = 0x100   /* off-chip SRAM 8MB */
 }
 
@@ -74,16 +74,20 @@ SECTIONS
   *(.rodata*)
   *(.rodata.*)
   *(.rodata.str1.4)
+  . = ALIGN(0x4) ;
+  __ctor_start__ = .;
   KEEP (*crtbegin.o(.ctors))
   KEEP (*crtbegin?.o(.ctors))
   KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
   KEEP (*(SORT(.ctors.*)))
   KEEP (*(.ctors))
+  __ctor_end__ = .;
   KEEP (*crtbegin.o(.dtors))
   KEEP (*crtbegin?.o(.dtors))
   KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
   KEEP (*(SORT(.dtors.*)))
   KEEP (*(.dtors))
+  __dtor_end__ = .;
   . = ALIGN(0x4) ;
   __erodata = .;
  } > REGION_RODATA

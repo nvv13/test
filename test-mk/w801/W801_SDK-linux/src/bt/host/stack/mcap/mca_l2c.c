@@ -34,8 +34,7 @@
 
 
 /* L2CAP callback function structure */
-const tL2CAP_APPL_INFO mca_l2c_int_appl =
-{
+const tL2CAP_APPL_INFO mca_l2c_int_appl = {
     NULL,
     mca_l2c_connect_cfm_cback,
     NULL,
@@ -50,8 +49,7 @@ const tL2CAP_APPL_INFO mca_l2c_int_appl =
 };
 
 /* Control channel eL2CAP default options */
-const tL2CAP_FCR_OPTS mca_l2c_fcr_opts_def =
-{
+const tL2CAP_FCR_OPTS mca_l2c_fcr_opts_def = {
     L2CAP_FCR_ERTM_MODE,            /* Mandatory for MCAP */
     MCA_FCR_OPT_TX_WINDOW_SIZE,     /* Tx window size */
     MCA_FCR_OPT_MAX_TX_B4_DISCNT,   /* Maximum transmissions before disconnecting */
@@ -71,7 +69,8 @@ const tL2CAP_FCR_OPTS mca_l2c_fcr_opts_def =
 ** Returns          void
 **
 *******************************************************************************/
-static void mca_sec_check_complete_term(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_ref_data, uint8_t res)
+static void mca_sec_check_complete_term(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_ref_data,
+                                        uint8_t res)
 {
     tMCA_TC_TBL     *p_tbl = (tMCA_TC_TBL *)p_ref_data;
     tL2CAP_CFG_INFO cfg;
@@ -79,8 +78,7 @@ static void mca_sec_check_complete_term(BD_ADDR bd_addr, tBT_TRANSPORT transport
     UNUSED(transport);
     MCA_TRACE_DEBUG("mca_sec_check_complete_term res: %d", res);
 
-    if(res == BTM_SUCCESS)
-    {
+    if(res == BTM_SUCCESS) {
         MCA_TRACE_DEBUG("lcid:x%x id:x%x", p_tbl->lcid, p_tbl->id);
         /* Set the FCR options: control channel mandates ERTM */
         ertm_info.preferred_mode    = mca_l2c_fcr_opts_def.mode;
@@ -96,9 +94,7 @@ static void mca_sec_check_complete_term(BD_ADDR bd_addr, tBT_TRANSPORT transport
         /* Send L2CAP config req */
         mca_set_cfg_by_tbl(&cfg, p_tbl);
         L2CA_ConfigReq(p_tbl->lcid, &cfg);
-    }
-    else
-    {
+    } else {
         L2CA_ConnectRsp(bd_addr, p_tbl->id, p_tbl->lcid, L2CAP_CONN_SECURITY_BLOCK, L2CAP_CONN_OK);
         mca_tc_close_ind(p_tbl, L2CAP_CONN_SECURITY_BLOCK);
     }
@@ -114,7 +110,8 @@ static void mca_sec_check_complete_term(BD_ADDR bd_addr, tBT_TRANSPORT transport
 ** Returns          void
 **
 *******************************************************************************/
-static void mca_sec_check_complete_orig(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_ref_data, uint8_t res)
+static void mca_sec_check_complete_orig(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_ref_data,
+                                        uint8_t res)
 {
     tMCA_TC_TBL     *p_tbl = (tMCA_TC_TBL *)p_ref_data;
     tL2CAP_CFG_INFO cfg;
@@ -122,16 +119,13 @@ static void mca_sec_check_complete_orig(BD_ADDR bd_addr, tBT_TRANSPORT transport
     UNUSED(transport);
     MCA_TRACE_DEBUG("mca_sec_check_complete_orig res: %d", res);
 
-    if(res == BTM_SUCCESS)
-    {
+    if(res == BTM_SUCCESS) {
         /* set channel state */
         p_tbl->state = MCA_TC_ST_CFG;
         /* Send L2CAP config req */
         mca_set_cfg_by_tbl(&cfg, p_tbl);
         L2CA_ConfigReq(p_tbl->lcid, &cfg);
-    }
-    else
-    {
+    } else {
         L2CA_DisconnectReq(p_tbl->lcid);
         mca_tc_close_ind(p_tbl, L2CAP_CONN_SECURITY_BLOCK);
     }
@@ -157,11 +151,9 @@ void mca_l2c_cconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
     MCA_TRACE_EVENT("mca_l2c_cconn_ind_cback: lcid:x%x psm:x%x id:x%x", lcid, psm, id);
 
     /* do we already have a control channel for this peer? */
-    if((p_ccb = mca_ccb_by_bd(handle, bd_addr)) == NULL)
-    {
+    if((p_ccb = mca_ccb_by_bd(handle, bd_addr)) == NULL) {
         /* no, allocate ccb */
-        if((p_ccb = mca_ccb_alloc(handle, bd_addr)) != NULL)
-        {
+        if((p_ccb = mca_ccb_alloc(handle, bd_addr)) != NULL) {
             /* allocate and set up entry */
             p_ccb->lcid     = lcid;
             p_tbl           = mca_tc_tbl_calloc(p_ccb);
@@ -172,8 +164,7 @@ void mca_l2c_cconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
             rc = btm_sec_mx_access_request(bd_addr, psm, FALSE, BTM_SEC_PROTO_MCA, 0,
                                            &mca_sec_check_complete_term, p_tbl);
 
-            if(rc == BTM_CMD_STARTED)
-            {
+            if(rc == BTM_CMD_STARTED) {
                 /* Set the FCR options: control channel mandates ERTM */
                 ertm_info.preferred_mode    = mca_l2c_fcr_opts_def.mode;
                 ertm_info.allowed_modes     = L2CAP_FCR_CHAN_OPT_ERTM;
@@ -183,9 +174,7 @@ void mca_l2c_cconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
                 ertm_info.fcr_tx_buf_size   = MCA_FCR_TX_BUF_SIZE;
                 p_ertm_info = &ertm_info;
                 result = L2CAP_CONN_PENDING;
-            }
-            else
-            {
+            } else {
                 result = L2CAP_CONN_OK;
             }
         }
@@ -195,15 +184,13 @@ void mca_l2c_cconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
 
     /* else reject their connection */
 
-    if(!p_tbl || (p_tbl->state != MCA_TC_ST_CFG))
-    {
+    if(!p_tbl || (p_tbl->state != MCA_TC_ST_CFG)) {
         /* Send L2CAP connect rsp */
         L2CA_ErtmConnectRsp(bd_addr, id, lcid, result, L2CAP_CONN_OK, p_ertm_info);
 
         /* if result ok, proceed with connection and send L2CAP
            config req */
-        if(result == L2CAP_CONN_OK)
-        {
+        if(result == L2CAP_CONN_OK) {
             /* set channel state */
             p_tbl->state = MCA_TC_ST_CFG;
             /* Send L2CAP config req */
@@ -237,8 +224,7 @@ void mca_l2c_dconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
 
     if(((p_ccb = mca_ccb_by_bd(handle, bd_addr)) != NULL) &&        /* find the CCB */
             (p_ccb->status == MCA_CCB_STAT_PENDING) &&   /* this CCB is expecting a MDL */
-            (p_ccb->p_tx_req && (p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx)) != NULL))
-    {
+            (p_ccb->p_tx_req && (p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx)) != NULL)) {
         /* found the associated dcb in listening mode */
         /* proceed with connection */
         p_dcb->lcid     = lcid;
@@ -256,9 +242,7 @@ void mca_l2c_dconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
         ertm_info.fcr_tx_buf_size   = p_chnl_cfg->fcr_tx_buf_size;
         p_ertm_info = &ertm_info;
         result = L2CAP_CONN_OK;
-    }
-    else
-    {
+    } else {
         /* else we're not listening for traffic channel; reject
          * (this error code is specified by MCAP spec) */
         result = L2CAP_CONN_NO_RESOURCES;
@@ -268,8 +252,7 @@ void mca_l2c_dconn_ind_cback(BD_ADDR bd_addr, uint16_t lcid, uint16_t psm, uint8
     L2CA_ErtmConnectRsp(bd_addr, id, lcid, result, result, p_ertm_info);
 
     /* if result ok, proceed with connection */
-    if(result == L2CAP_CONN_OK)
-    {
+    if(result == L2CAP_CONN_OK) {
         /* transition to configuration state */
         p_tbl->state = MCA_TC_ST_CFG;
         /* Send L2CAP config req */
@@ -297,34 +280,25 @@ void mca_l2c_connect_cfm_cback(uint16_t lcid, uint16_t result)
                     lcid, result);
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
         MCA_TRACE_DEBUG("p_tbl state: %d, tcid: %d", p_tbl->state, p_tbl->tcid);
 
         /* if in correct state */
-        if(p_tbl->state == MCA_TC_ST_CONN)
-        {
+        if(p_tbl->state == MCA_TC_ST_CONN) {
             /* if result successful */
-            if(result == L2CAP_CONN_OK)
-            {
-                if(p_tbl->tcid != 0)
-                {
+            if(result == L2CAP_CONN_OK) {
+                if(p_tbl->tcid != 0) {
                     /* set channel state */
                     p_tbl->state = MCA_TC_ST_CFG;
                     /* Send L2CAP config req */
                     mca_set_cfg_by_tbl(&cfg, p_tbl);
                     L2CA_ConfigReq(lcid, &cfg);
-                }
-                else
-                {
+                } else {
                     p_ccb = mca_ccb_by_hdl((tMCA_CL)p_tbl->cb_idx);
 
-                    if(p_ccb == NULL)
-                    {
+                    if(p_ccb == NULL) {
                         result = L2CAP_CONN_NO_RESOURCES;
-                    }
-                    else
-                    {
+                    } else {
                         /* set channel state */
                         p_tbl->state    = MCA_TC_ST_SEC_INT;
                         p_tbl->lcid     = lcid;
@@ -339,8 +313,7 @@ void mca_l2c_connect_cfm_cback(uint16_t lcid, uint16_t result)
             }
 
             /* failure; notify adaption that channel closed */
-            if(result != L2CAP_CONN_OK)
-            {
+            if(result != L2CAP_CONN_OK) {
                 p_tbl->cfg_flags |= MCA_L2C_CFG_DISCN_INT;
                 mca_tc_close_ind(p_tbl, result);
             }
@@ -363,26 +336,21 @@ void mca_l2c_config_cfm_cback(uint16_t lcid, tL2CAP_CFG_INFO *p_cfg)
     tMCA_TC_TBL    *p_tbl;
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
         /* if in correct state */
-        if(p_tbl->state == MCA_TC_ST_CFG)
-        {
+        if(p_tbl->state == MCA_TC_ST_CFG) {
             /* if result successful */
-            if(p_cfg->result == L2CAP_CONN_OK)
-            {
+            if(p_cfg->result == L2CAP_CONN_OK) {
                 /* update cfg_flags */
                 p_tbl->cfg_flags |= MCA_L2C_CFG_CFM_DONE;
 
                 /* if configuration complete */
-                if(p_tbl->cfg_flags & MCA_L2C_CFG_IND_DONE)
-                {
+                if(p_tbl->cfg_flags & MCA_L2C_CFG_IND_DONE) {
                     mca_tc_open_ind(p_tbl);
                 }
             }
             /* else failure */
-            else
-            {
+            else {
                 /* Send L2CAP disconnect req */
                 L2CA_DisconnectReq(lcid);
             }
@@ -406,38 +374,32 @@ void mca_l2c_config_ind_cback(uint16_t lcid, tL2CAP_CFG_INFO *p_cfg)
     uint16_t          result = L2CAP_CFG_OK;
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
         /* store the mtu in tbl */
-        if(p_cfg->mtu_present)
-        {
+        if(p_cfg->mtu_present) {
             p_tbl->peer_mtu = p_cfg->mtu;
 
-            if(p_tbl->peer_mtu < MCA_MIN_MTU)
-            {
+            if(p_tbl->peer_mtu < MCA_MIN_MTU) {
                 result = L2CAP_CFG_UNACCEPTABLE_PARAMS;
             }
-        }
-        else
-        {
+        } else {
             p_tbl->peer_mtu = L2CAP_DEFAULT_MTU;
         }
 
-        MCA_TRACE_DEBUG("peer_mtu: %d, lcid: x%x mtu_present:%d", p_tbl->peer_mtu, lcid, p_cfg->mtu_present);
+        MCA_TRACE_DEBUG("peer_mtu: %d, lcid: x%x mtu_present:%d", p_tbl->peer_mtu, lcid,
+                        p_cfg->mtu_present);
         /* send L2CAP configure response */
         wm_memset(p_cfg, 0, sizeof(tL2CAP_CFG_INFO));
         p_cfg->result = result;
         L2CA_ConfigRsp(lcid, p_cfg);
 
         /* if first config ind */
-        if((p_tbl->cfg_flags & MCA_L2C_CFG_IND_DONE) == 0)
-        {
+        if((p_tbl->cfg_flags & MCA_L2C_CFG_IND_DONE) == 0) {
             /* update cfg_flags */
             p_tbl->cfg_flags |= MCA_L2C_CFG_IND_DONE;
 
             /* if configuration complete */
-            if(p_tbl->cfg_flags & MCA_L2C_CFG_CFM_DONE)
-            {
+            if(p_tbl->cfg_flags & MCA_L2C_CFG_CFM_DONE) {
                 mca_tc_open_ind(p_tbl);
             }
         }
@@ -462,18 +424,15 @@ void mca_l2c_disconnect_ind_cback(uint16_t lcid, uint8_t ack_needed)
                     lcid, ack_needed);
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
-        if(ack_needed)
-        {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
+        if(ack_needed) {
             /* send L2CAP disconnect response */
             L2CA_DisconnectRsp(lcid);
         }
 
         p_tbl->cfg_flags = MCA_L2C_CFG_DISCN_ACP;
 
-        if(ack_needed)
-        {
+        if(ack_needed) {
             reason = L2CAP_DISC_OK;
         }
 
@@ -498,8 +457,7 @@ void mca_l2c_disconnect_cfm_cback(uint16_t lcid, uint16_t result)
                     lcid, result);
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
         p_tbl->cfg_flags = MCA_L2C_CFG_DISCN_INT;
         mca_tc_close_ind(p_tbl, result);
     }
@@ -521,8 +479,7 @@ void mca_l2c_congestion_ind_cback(uint16_t lcid, uint8_t is_congested)
     tMCA_TC_TBL    *p_tbl;
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
         mca_tc_cong_ind(p_tbl, is_congested);
     }
 }
@@ -542,12 +499,9 @@ void mca_l2c_data_ind_cback(uint16_t lcid, BT_HDR *p_buf)
     tMCA_TC_TBL    *p_tbl;
 
     /* look up info for this channel */
-    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL)
-    {
+    if((p_tbl = mca_tc_tbl_by_lcid(lcid)) != NULL) {
         mca_tc_data_ind(p_tbl, p_buf);
-    }
-    else /* prevent buffer leak */
-    {
+    } else { /* prevent buffer leak */
         GKI_freebuf(p_buf);
     }
 }
@@ -566,17 +520,14 @@ uint16_t mca_l2c_open_req(BD_ADDR bd_addr, uint16_t psm, const tMCA_CHNL_CFG *p_
 {
     tL2CAP_ERTM_INFO ertm_info;
 
-    if(p_chnl_cfg)
-    {
+    if(p_chnl_cfg) {
         ertm_info.preferred_mode    = p_chnl_cfg->fcr_opt.mode;
         ertm_info.allowed_modes     = (1 << p_chnl_cfg->fcr_opt.mode);
         ertm_info.user_rx_buf_size  = p_chnl_cfg->user_rx_buf_size;
         ertm_info.user_tx_buf_size  = p_chnl_cfg->user_tx_buf_size;
         ertm_info.fcr_rx_buf_size   = p_chnl_cfg->fcr_rx_buf_size;
         ertm_info.fcr_tx_buf_size   = p_chnl_cfg->fcr_tx_buf_size;
-    }
-    else
-    {
+    } else {
         ertm_info.preferred_mode    = mca_l2c_fcr_opts_def.mode;
         ertm_info.allowed_modes     = L2CAP_FCR_CHAN_OPT_ERTM;
         ertm_info.user_rx_buf_size  = MCA_USER_RX_BUF_SIZE;

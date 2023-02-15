@@ -103,8 +103,19 @@ static s16 HspiRxCmdCb(char *buf)
 static void HspiInit(int type)
 {
 
-    
-    wm_hspi_gpio_config(0);
+    if(type == HSPI_INTERFACE_SPI)
+    {   
+	    wm_hspi_gpio_config(0);
+	}
+	else if (type == HSPI_INTERFACE_SDIO)
+	{
+		wm_sdio_slave_config(0);
+	}
+	else
+	{
+		printf("do not support interface\n");
+		return;
+	}
 
     tls_slave_spi_init();
     tls_set_high_speed_interface_type(type);
@@ -119,16 +130,17 @@ int slave_spi_demo(int type)
     if(type == 0)
     {
         type = HSPI_INTERFACE_SPI;
+        printf("\r\ntype:%s\r\n", "HSPI_SLAVE");		
+        HspiInit(type);		
     }
     else
     {
         type = HSPI_INTERFACE_SDIO;
+        printf("\r\ntype:%s\r\n", "SDIO_SLAVE");
+        HspiInit(type);		
     }
-    printf("\r\ntype:%d\r\n", type);
 
-    HspiInit(type);
-
-    return WM_SUCCESS;
+	return WM_SUCCESS;
 }
 
 

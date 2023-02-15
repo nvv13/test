@@ -101,7 +101,7 @@ btif_sm_state_t btif_sm_get_state(btif_sm_handle_t handle);
 **
 ******************************************************************************/
 tls_bt_status_t btif_sm_dispatch(btif_sm_handle_t handle, btif_sm_event_t event,
-                             void *data);
+                                 void *data);
 
 /*****************************************************************************
 **

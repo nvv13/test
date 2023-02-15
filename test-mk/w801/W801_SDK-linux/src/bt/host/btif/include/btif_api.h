@@ -133,7 +133,8 @@ tls_bt_status_t btif_get_adapter_property(tls_bt_property_type_t type);
 ** Returns          bt_status_t
 **
 *******************************************************************************/
-tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property, uint8_t update_to_flash);
+tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property,
+        uint8_t update_to_flash);
 
 /*******************************************************************************
 **
@@ -279,7 +280,7 @@ uint16_t btif_dm_get_connection_state(const tls_bt_addr_t *bd_addr);
 **
 *******************************************************************************/
 tls_bt_status_t btif_dm_pin_reply(const tls_bt_addr_t *bd_addr, uint8_t accept,
-                              uint8_t pin_len, bt_pin_code_t *pin_code);
+                                  uint8_t pin_len, tls_bt_pin_code_t *pin_code);
 
 /*******************************************************************************
 **
@@ -291,7 +292,7 @@ tls_bt_status_t btif_dm_pin_reply(const tls_bt_addr_t *bd_addr, uint8_t accept,
 **
 *******************************************************************************/
 tls_bt_status_t btif_dm_passkey_reply(const tls_bt_addr_t *bd_addr,
-                                  uint8_t accept, uint32_t passkey);
+                                      uint8_t accept, uint32_t passkey);
 
 /*******************************************************************************
 **
@@ -303,8 +304,8 @@ tls_bt_status_t btif_dm_passkey_reply(const tls_bt_addr_t *bd_addr,
 **
 *******************************************************************************/
 tls_bt_status_t btif_dm_ssp_reply(const tls_bt_addr_t *bd_addr,
-                              tls_bt_ssp_variant_t variant, uint8_t accept,
-                              uint32_t passkey);
+                                  tls_bt_ssp_variant_t variant, uint8_t accept,
+                                  uint32_t passkey);
 
 /*******************************************************************************
 **
@@ -408,14 +409,4 @@ void btif_dm_read_energy_info();
 *******************************************************************************/
 tls_bt_status_t btif_config_hci_snoop_log(uint8_t enable);
 
-/*******************************************************************************
-**
-** Function         btif_debug_bond_event_dump
-**
-** Description     Dump bond event information
-**
-** Returns          void
-**
-*******************************************************************************/
-void btif_debug_bond_event_dump(int fd);
 #endif /* BTIF_API_H */

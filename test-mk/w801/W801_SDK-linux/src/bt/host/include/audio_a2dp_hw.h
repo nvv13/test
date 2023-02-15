@@ -41,8 +41,7 @@
 #define AUDIO_STREAM_OUTPUT_BUFFER_SZ      (20*512)
 #define AUDIO_SKT_DISCONNECTED             (-1)
 
-typedef enum
-{
+typedef enum {
     A2DP_CTRL_CMD_NONE,
     A2DP_CTRL_CMD_CHECK_READY,
     A2DP_CTRL_CMD_START,
@@ -51,8 +50,7 @@ typedef enum
     A2DP_CTRL_GET_AUDIO_CONFIG,
 } tA2DP_CTRL_CMD;
 
-typedef enum
-{
+typedef enum {
     A2DP_CTRL_ACK_SUCCESS,
     A2DP_CTRL_ACK_FAILURE,
     A2DP_CTRL_ACK_INCALL_FAILURE, /* Failure when in Call*/

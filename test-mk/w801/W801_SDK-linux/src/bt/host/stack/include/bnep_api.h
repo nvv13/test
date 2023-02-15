@@ -45,8 +45,7 @@
 
 /* Define the result codes from BNEP
 */
-enum
-{
+enum {
     BNEP_SUCCESS,                       /* Success                           */
     BNEP_CONN_DISCONNECTED,             /* Connection terminated   */
     BNEP_NO_RESOURCES,                  /* No resources                      */
@@ -185,8 +184,7 @@ typedef void (tBNEP_MFILTER_IND_CB)(uint16_t handle,
                                     uint8_t *p_mfilters);
 
 /* This is the structure used by profile to register with BNEP */
-typedef struct
-{
+typedef struct {
     tBNEP_CONNECT_IND_CB    *p_conn_ind_cb;     /* To indicate the conn request */
     tBNEP_CONN_STATE_CB     *p_conn_state_cb;   /* To indicate conn state change */
     tBNEP_DATA_IND_CB       *p_data_ind_cb;     /* To pass the data received */
@@ -200,8 +198,7 @@ typedef struct
 
 
 /* This is the structure used by profile to get the status of BNEP */
-typedef struct
-{
+typedef struct {
 #define BNEP_STATUS_FAILE            0
 #define BNEP_STATUS_CONNECTED        1
     uint8_t             con_status;

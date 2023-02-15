@@ -32,22 +32,22 @@
 #define AES_H
 
 #if 1
-    #define AES_ENC_PREKEYED  /* AES encryption with a precomputed key schedule  */
+#define AES_ENC_PREKEYED  /* AES encryption with a precomputed key schedule  */
 #endif
 #if 1
-    #define AES_DEC_PREKEYED  /* AES decryption with a precomputed key schedule  */
+#define AES_DEC_PREKEYED  /* AES decryption with a precomputed key schedule  */
 #endif
 #if 1
-    #define AES_ENC_128_OTFK  /* AES encryption with 'on the fly' 128 bit keying */
+#define AES_ENC_128_OTFK  /* AES encryption with 'on the fly' 128 bit keying */
 #endif
 #if 1
-    #define AES_DEC_128_OTFK  /* AES decryption with 'on the fly' 128 bit keying */
+#define AES_DEC_128_OTFK  /* AES decryption with 'on the fly' 128 bit keying */
 #endif
 #if 1
-    #define AES_ENC_256_OTFK  /* AES encryption with 'on the fly' 256 bit keying */
+#define AES_ENC_256_OTFK  /* AES encryption with 'on the fly' 256 bit keying */
 #endif
 #if 1
-    #define AES_DEC_256_OTFK  /* AES decryption with 'on the fly' 256 bit keying */
+#define AES_DEC_256_OTFK  /* AES decryption with 'on the fly' 256 bit keying */
 #endif
 
 #define N_ROW                   4
@@ -65,8 +65,7 @@ typedef uint_8t return_type;
 
 typedef uint_8t length_type;
 
-typedef struct
-{
+typedef struct {
     uint_8t ksch[(N_MAX_ROUNDS + 1) * N_BLOCK];
     uint_8t rnd;
 } aes_context;

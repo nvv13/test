@@ -64,8 +64,7 @@
 typedef int tBTIF_STATUS;
 
 /* tBTIF_MEDIA_INIT_AUDIO msg structure */
-typedef struct
-{
+typedef struct {
     BT_HDR hdr;
     uint16_t SamplingFreq; /* 16k, 32k, 44.1k or 48k*/
     uint8_t ChannelMode; /* mono, dual, stereo or joint stereo*/
@@ -77,8 +76,7 @@ typedef struct
 
 #if (BTA_AV_INCLUDED == TRUE)
 /* tBTIF_MEDIA_UPDATE_AUDIO msg structure */
-typedef struct
-{
+typedef struct {
     BT_HDR hdr;
     uint16_t MinMtuSize; /* Minimum peer mtu size */
     uint8_t MaxBitPool; /* Maximum peer bitpool */
@@ -86,29 +84,25 @@ typedef struct
 } tBTIF_MEDIA_UPDATE_AUDIO;
 
 /* tBTIF_MEDIA_INIT_AUDIO_FEEDING msg structure */
-typedef struct
-{
+typedef struct {
     BT_HDR hdr;
     tBTIF_AV_FEEDING_MODE feeding_mode;
     tBTIF_AV_MEDIA_FEEDINGS feeding;
 } tBTIF_MEDIA_INIT_AUDIO_FEEDING;
 
-typedef struct
-{
+typedef struct {
     BT_HDR hdr;
     uint8_t codec_info[AVDT_CODEC_SIZE];
 } tBTIF_MEDIA_SINK_CFG_UPDATE;
 #endif
 
 #ifdef USE_AUDIO_TRACK
-typedef enum
-{
+typedef enum {
     BTIF_MEDIA_FOCUS_NOT_GRANTED = 0,
     BTIF_MEDIA_FOCUS_GRANTED
 } btif_media_audio_focus_state;
 
-typedef struct
-{
+typedef struct {
     BT_HDR hdr;
     uint8_t focus_state;
 } tBTIF_MEDIA_SINK_FOCUS_UPDATE;
@@ -152,7 +146,7 @@ extern uint8_t btif_media_task_enc_init_req(tBTIF_MEDIA_INIT_AUDIO *p_msg);
  **
  *******************************************************************************/
 #if (BTA_AV_INCLUDED == TRUE)
-    extern uint8_t btif_media_task_enc_update_req(tBTIF_MEDIA_UPDATE_AUDIO *p_msg);
+extern uint8_t btif_media_task_enc_update_req(tBTIF_MEDIA_UPDATE_AUDIO *p_msg);
 #endif
 
 /*******************************************************************************
@@ -246,21 +240,21 @@ extern uint8_t btif_media_av_writebuf(uint8_t *p_media, uint32_t media_len,
                                       uint32_t timestamp, uint16_t seq_num);
 
 #if (BTA_AV_INCLUDED == TRUE)
-    /*******************************************************************************
-    **
-    ** Function         btif_media_task_audio_feeding_init_req
-    **
-    ** Description      Request to initialize audio feeding
-    **
-    ** Returns          TRUE is success
-    **
-    *******************************************************************************/
+/*******************************************************************************
+**
+** Function         btif_media_task_audio_feeding_init_req
+**
+** Description      Request to initialize audio feeding
+**
+** Returns          TRUE is success
+**
+*******************************************************************************/
 
-    extern uint8_t btif_media_task_audio_feeding_init_req(tBTIF_MEDIA_INIT_AUDIO_FEEDING *p_msg);
+extern uint8_t btif_media_task_audio_feeding_init_req(tBTIF_MEDIA_INIT_AUDIO_FEEDING *p_msg);
 #endif
 
 #if (BTA_AV_SINK_INCLUDED == TRUE)
-    extern int btif_co_avk_data_incoming(uint8_t type, uint8_t *p_data, uint16_t length);
+extern int btif_co_avk_data_incoming(uint8_t type, uint8_t *p_data, uint16_t length);
 #endif
 /*******************************************************************************
  **
@@ -301,8 +295,8 @@ int btif_a2dp_get_track_frequency(uint8_t frequency);
 int btif_a2dp_get_track_channel_count(uint8_t channeltype);
 void btif_a2dp_set_peer_sep(uint8_t sep);
 #ifdef USE_AUDIO_TRACK
-    void btif_a2dp_set_audio_focus_state(btif_media_audio_focus_state state);
-    void btif_a2dp_set_audio_track_gain(float gain);
+void btif_a2dp_set_audio_focus_state(btif_media_audio_focus_state state);
+void btif_a2dp_set_audio_track_gain(float gain);
 #endif
 
 void btif_debug_a2dp_dump(int fd);

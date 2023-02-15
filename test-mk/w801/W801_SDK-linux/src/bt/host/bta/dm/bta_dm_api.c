@@ -37,18 +37,17 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_dm_reg =
-{
+static const tBTA_SYS_REG bta_dm_reg = {
     bta_dm_sm_execute,
     bta_dm_sm_disable
 };
 
-static const tBTA_SYS_REG bta_dm_search_reg =
-{
+static const tBTA_SYS_REG bta_dm_search_reg = {
     bta_dm_search_sm_execute,
     bta_dm_search_sm_disable
 };
 
+extern size_t strlcpy(char *dst, const char *src, size_t siz);
 /*******************************************************************************
 **
 ** Function         BTA_EnableBluetooth
@@ -63,8 +62,7 @@ static const tBTA_SYS_REG bta_dm_search_reg =
 tBTA_STATUS BTA_EnableBluetooth(tBTA_DM_SEC_CBACK *p_cback)
 {
     /* Bluetooth disabling is in progress */
-    if(bta_dm_cb.disabling)
-    {
+    if(bta_dm_cb.disabling) {
         return BTA_FAILURE;
     }
 
@@ -166,7 +164,8 @@ void BTA_DmSetDeviceName(char *p_name)
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode, uint8_t pairable_mode, uint8_t conn_filter)
+void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode, uint8_t pairable_mode,
+                         uint8_t conn_filter)
 {
     tBTA_DM_API_SET_VISIBILITY *p_msg =
                     (tBTA_DM_API_SET_VISIBILITY *)GKI_getbuf(sizeof(tBTA_DM_MSG));
@@ -264,10 +263,10 @@ void BTA_DmDiscoverUUID(BD_ADDR bd_addr, tSDP_UUID *uuid,
     p_msg->services = BTA_USER_SERVICE_MASK; //Not exposed at API level
     p_msg->p_cback = p_cback;
     p_msg->sdp_search = sdp_search;
-    #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
     p_msg->num_uuid = 0;
     p_msg->p_uuid = NULL;
-    #endif
+#endif
     wm_memcpy(&p_msg->uuid, uuid, sizeof(tSDP_UUID));
     bta_sys_sendmsg(p_msg);
 }
@@ -354,8 +353,7 @@ void BTA_DmPinReply(BD_ADDR bd_addr, uint8_t accept, uint8_t pin_len, uint8_t *p
     bdcpy(p_msg->bd_addr, bd_addr);
     p_msg->accept = accept;
 
-    if(accept)
-    {
+    if(accept) {
         p_msg->pin_len = pin_len;
         wm_memcpy(p_msg->p_pin, p_pin, pin_len);
     }
@@ -427,16 +425,14 @@ void BTA_DmAddDevice(BD_ADDR bd_addr, DEV_CLASS dev_class, LINK_KEY link_key,
     p_msg->is_trusted = is_trusted;
     p_msg->io_cap = io_cap;
 
-    if(link_key)
-    {
+    if(link_key) {
         p_msg->link_key_known = TRUE;
         p_msg->key_type = key_type;
         wm_memcpy(p_msg->link_key, link_key, LINK_KEY_LEN);
     }
 
     /* Load device class if specified */
-    if(dev_class)
-    {
+    if(dev_class) {
         p_msg->dc_known = TRUE;
         wm_memcpy(p_msg->dc, dev_class, DEV_CLASS_LEN);
     }
@@ -490,14 +486,11 @@ void BTA_GetEirService(uint8_t *p_eir, tBTA_SERVICE_MASK *p_services)
     tBTA_SERVICE_MASK mask;
     BTM_GetEirUuidList(p_eir, LEN_UUID_16, &num_uuid, uuid_list, max_num_uuid);
 
-    for(xx = 0; xx < num_uuid; xx++)
-    {
+    for(xx = 0; xx < num_uuid; xx++) {
         mask = 1;
 
-        for(yy = 0; yy < BTA_MAX_SERVICE_ID; yy++)
-        {
-            if(*(p_uuid16 + xx) == bta_service_id_to_uuid_lkup_tbl[yy])
-            {
+        for(yy = 0; yy < BTA_MAX_SERVICE_ID; yy++) {
+            if(*(p_uuid16 + xx) == bta_service_id_to_uuid_lkup_tbl[yy]) {
                 *p_services |= mask;
                 break;
             }
@@ -506,18 +499,15 @@ void BTA_GetEirService(uint8_t *p_eir, tBTA_SERVICE_MASK *p_services)
         }
 
         /* for HSP v1.2 only device */
-        if(*(p_uuid16 + xx) == UUID_SERVCLASS_HEADSET_HS)
-        {
+        if(*(p_uuid16 + xx) == UUID_SERVCLASS_HEADSET_HS) {
             *p_services |= BTA_HSP_SERVICE_MASK;
         }
 
-        if(*(p_uuid16 + xx) == UUID_SERVCLASS_HDP_SOURCE)
-        {
+        if(*(p_uuid16 + xx) == UUID_SERVCLASS_HDP_SOURCE) {
             *p_services |= BTA_HL_SERVICE_MASK;
         }
 
-        if(*(p_uuid16 + xx) == UUID_SERVCLASS_HDP_SINK)
-        {
+        if(*(p_uuid16 + xx) == UUID_SERVCLASS_HDP_SINK) {
             *p_services |= BTA_HL_SERVICE_MASK;
         }
     }
@@ -556,12 +546,9 @@ tBTA_STATUS BTA_DmSetLocalDiRecord(tBTA_DI_RECORD *p_device_info,
 {
     tBTA_STATUS  status = BTA_FAILURE;
 
-    if(bta_dm_di_cb.di_num < BTA_DI_NUM_MAX)
-    {
-        if(SDP_SetLocalDiRecord((tSDP_DI_RECORD *)p_device_info, p_handle) == SDP_SUCCESS)
-        {
-            if(!p_device_info->primary_record)
-            {
+    if(bta_dm_di_cb.di_num < BTA_DI_NUM_MAX) {
+        if(SDP_SetLocalDiRecord((tSDP_DI_RECORD *)p_device_info, p_handle) == SDP_SUCCESS) {
+            if(!p_device_info->primary_record) {
                 bta_dm_di_cb.di_handle[bta_dm_di_cb.di_num] = *p_handle;
                 bta_dm_di_cb.di_num ++;
             }
@@ -613,7 +600,7 @@ void bta_dmexecutecallback(tBTA_DM_EXEC_CBACK *p_callback, void *p_param)
 *******************************************************************************/
 void BTA_DmAddBleKey(BD_ADDR bd_addr, tBTA_LE_KEY_VALUE *p_le_key, tBTA_LE_KEY_TYPE key_type)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_ADD_BLEKEY *p_msg =
                     (tBTA_DM_API_ADD_BLEKEY *)GKI_getbuf(sizeof(tBTA_DM_API_ADD_BLEKEY));
     p_msg->hdr.event = BTA_DM_API_ADD_BLEKEY_EVT;
@@ -621,7 +608,7 @@ void BTA_DmAddBleKey(BD_ADDR bd_addr, tBTA_LE_KEY_VALUE *p_le_key, tBTA_LE_KEY_T
     bdcpy(p_msg->bd_addr, bd_addr);
     wm_memcpy(&p_msg->blekey, p_le_key, sizeof(tBTA_LE_KEY_VALUE));
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -641,7 +628,7 @@ void BTA_DmAddBleKey(BD_ADDR bd_addr, tBTA_LE_KEY_VALUE *p_le_key, tBTA_LE_KEY_T
 *******************************************************************************/
 void BTA_DmAddBleDevice(BD_ADDR bd_addr, tBLE_ADDR_TYPE addr_type, tBT_DEVICE_TYPE dev_type)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_ADD_BLE_DEVICE *p_msg =
                     (tBTA_DM_API_ADD_BLE_DEVICE *)GKI_getbuf(sizeof(tBTA_DM_API_ADD_BLE_DEVICE));
     p_msg->hdr.event = BTA_DM_API_ADD_BLEDEVICE_EVT;
@@ -649,7 +636,7 @@ void BTA_DmAddBleDevice(BD_ADDR bd_addr, tBLE_ADDR_TYPE addr_type, tBT_DEVICE_TY
     p_msg->addr_type = addr_type;
     p_msg->dev_type = dev_type;
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -668,20 +655,19 @@ void BTA_DmAddBleDevice(BD_ADDR bd_addr, tBLE_ADDR_TYPE addr_type, tBT_DEVICE_TY
 *******************************************************************************/
 void BTA_DmBlePasskeyReply(BD_ADDR bd_addr, uint8_t accept, uint32_t passkey)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_PASSKEY_REPLY *p_msg =
                     (tBTA_DM_API_PASSKEY_REPLY *)GKI_getbuf(sizeof(tBTA_DM_API_PASSKEY_REPLY));
     p_msg->hdr.event = BTA_DM_API_BLE_PASSKEY_REPLY_EVT;
     bdcpy(p_msg->bd_addr, bd_addr);
     p_msg->accept = accept;
 
-    if(accept)
-    {
+    if(accept) {
         p_msg->passkey = passkey;
     }
 
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -698,14 +684,14 @@ void BTA_DmBlePasskeyReply(BD_ADDR bd_addr, uint8_t accept, uint32_t passkey)
 *******************************************************************************/
 void BTA_DmBleConfirmReply(BD_ADDR bd_addr, uint8_t accept)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_CONFIRM *p_msg =
                     (tBTA_DM_API_CONFIRM *)GKI_getbuf(sizeof(tBTA_DM_API_CONFIRM));
     p_msg->hdr.event = BTA_DM_API_BLE_CONFIRM_REPLY_EVT;
     bdcpy(p_msg->bd_addr, bd_addr);
     p_msg->accept = accept;
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -722,14 +708,14 @@ void BTA_DmBleConfirmReply(BD_ADDR bd_addr, uint8_t accept)
 *******************************************************************************/
 void BTA_DmBleSecurityGrant(BD_ADDR bd_addr, tBTA_DM_BLE_SEC_GRANT res)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_BLE_SEC_GRANT *p_msg =
                     (tBTA_DM_API_BLE_SEC_GRANT *)GKI_getbuf(sizeof(tBTA_DM_API_BLE_SEC_GRANT));
     p_msg->hdr.event = BTA_DM_API_BLE_SEC_GRANT_EVT;
     bdcpy(p_msg->bd_addr, bd_addr);
     p_msg->res = res;
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -755,7 +741,7 @@ void BTA_DmSetBlePrefConnParams(BD_ADDR bd_addr,
                                 uint16_t min_conn_int, uint16_t max_conn_int,
                                 uint16_t slave_latency, uint16_t supervision_tout)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_BLE_CONN_PARAMS *p_msg =
                     (tBTA_DM_API_BLE_CONN_PARAMS *)GKI_getbuf(sizeof(tBTA_DM_API_BLE_CONN_PARAMS));
     p_msg->hdr.event = BTA_DM_API_BLE_CONN_PARAM_EVT;
@@ -765,7 +751,7 @@ void BTA_DmSetBlePrefConnParams(BD_ADDR bd_addr,
     p_msg->slave_latency = slave_latency;
     p_msg->supervision_tout = supervision_tout;
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -783,14 +769,14 @@ void BTA_DmSetBlePrefConnParams(BD_ADDR bd_addr,
 *******************************************************************************/
 void BTA_DmSetBleConnScanParams(uint32_t scan_interval, uint32_t scan_window)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_BLE_SCAN_PARAMS *p_msg =
                     (tBTA_DM_API_BLE_SCAN_PARAMS *)GKI_getbuf(sizeof(tBTA_DM_API_BLE_SCAN_PARAMS));
     p_msg->hdr.event = BTA_DM_API_BLE_CONN_SCAN_PARAM_EVT;
     p_msg->scan_int = scan_interval;
     p_msg->scan_window = scan_window;
     bta_sys_sendmsg(p_msg);
-    #endif  // BLE_INCLUDED == TRUE
+#endif  // BLE_INCLUDED == TRUE
 }
 
 /*******************************************************************************
@@ -829,7 +815,7 @@ void BTA_DmSetBleScanParams(tGATT_IF client_if, uint32_t scan_interval,
 #if BLE_INCLUDED == TRUE
 uint8_t BTA_DmGetBleScanState()
 {
-	return BTM_IsBleScanActive();
+    return BTM_IsBleScanActive();
 }
 #endif  // BLE_INCLUDED == TRUE
 
@@ -848,7 +834,7 @@ uint8_t BTA_DmGetBleScanState()
 void BTA_DmSetBleAdvParams(uint16_t adv_int_min, uint16_t adv_int_max,
                            tBLE_BD_ADDR *p_dir_bda)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_BLE_ADV_PARAMS *p_msg =
                     (tBTA_DM_API_BLE_ADV_PARAMS *)GKI_getbuf(sizeof(tBTA_DM_API_BLE_ADV_PARAMS));
     APPL_TRACE_API("BTA_DmSetBleAdvParam: %d, %d", adv_int_min, adv_int_max);
@@ -856,14 +842,13 @@ void BTA_DmSetBleAdvParams(uint16_t adv_int_min, uint16_t adv_int_max,
     p_msg->adv_int_min = adv_int_min;
     p_msg->adv_int_max = adv_int_max;
 
-    if(p_dir_bda != NULL)
-    {
+    if(p_dir_bda != NULL) {
         p_msg->p_dir_bda = (tBLE_BD_ADDR *)(p_msg + 1);
         wm_memcpy(p_msg->p_dir_bda, p_dir_bda, sizeof(tBLE_BD_ADDR));
     }
 
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 /*******************************************************************************
 **
@@ -879,10 +864,11 @@ void BTA_DmSetBleAdvParams(uint16_t adv_int_min, uint16_t adv_int_max,
 *******************************************************************************/
 
 
-void BTA_DmSetBleAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max,uint8_t adv_type, uint8_t own_addr_type,
-										tBTM_BLE_ADV_CHNL_MAP chnl_map, uint8_t afp, uint8_t peer_addr_type, tBLE_BD_ADDR *p_dir_bda)
+void BTA_DmSetBleAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max, uint8_t adv_type,
+                              uint8_t own_addr_type,
+                              tBTM_BLE_ADV_CHNL_MAP chnl_map, uint8_t afp, uint8_t peer_addr_type, tBLE_BD_ADDR *p_dir_bda)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_BLE_ADV_EXT_PARAMS *p_msg =
                     (tBTA_DM_API_BLE_ADV_EXT_PARAMS *)GKI_getbuf(sizeof(tBTA_DM_API_BLE_ADV_EXT_PARAMS));
     APPL_TRACE_API("BTA_DmSetBleAdvExtParam: %d, %d", adv_int_min, adv_int_max);
@@ -895,14 +881,13 @@ void BTA_DmSetBleAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max,uint8_t
     p_msg->own_addr_type = own_addr_type;
     p_msg->peer_addr_type = peer_addr_type;
 
-    if(p_dir_bda != NULL)
-    {
+    if(p_dir_bda != NULL) {
         p_msg->p_dir_bda = (tBLE_BD_ADDR *)(p_msg + 1);
         wm_memcpy(p_msg->p_dir_bda, p_dir_bda, sizeof(tBLE_BD_ADDR));
     }
 
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 
@@ -914,7 +899,7 @@ void BTA_DmSetBleAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max,uint8_t
 
 uint8_t BTA_DmGetBleAdvertiseState()
 {
-	return BTM_IsBleAdvertiseActive();
+    return BTM_IsBleAdvertiseActive();
 }
 
 /*******************************************************************************
@@ -1149,16 +1134,17 @@ extern void BTA_DmBleBroadcast(uint8_t start, uint16_t duration, tBTA_BLE_MULTI_
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_DmBleSetBgConnType(tBTA_DM_BLE_CONN_TYPE bg_conn_type, tBTA_DM_BLE_SEL_CBACK *p_select_cback)
+void BTA_DmBleSetBgConnType(tBTA_DM_BLE_CONN_TYPE bg_conn_type,
+                            tBTA_DM_BLE_SEL_CBACK *p_select_cback)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_BLE_SET_BG_CONN_TYPE *p_msg =
                     (tBTA_DM_API_BLE_SET_BG_CONN_TYPE *)GKI_getbuf(sizeof(tBTA_DM_API_BLE_SET_BG_CONN_TYPE));
     p_msg->hdr.event = BTA_DM_API_BLE_SET_BG_CONN_TYPE;
     p_msg->bg_conn_type = bg_conn_type;
     p_msg->p_select_cback = p_select_cback;
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1185,20 +1171,18 @@ static void bta_dm_discover_send_msg(BD_ADDR bd_addr, tBTA_SERVICE_MASK_EXT *p_s
     p_msg->sdp_search = sdp_search;
     p_msg->transport    = transport;
 
-    if(p_services != NULL)
-    {
-        #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
+    if(p_services != NULL) {
+#if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
         p_msg->services = p_services->srvc_mask;
         p_msg->num_uuid = p_services->num_uuid;
 
-        if(p_services->num_uuid != 0)
-        {
+        if(p_services->num_uuid != 0) {
             p_msg->p_uuid = (tBT_UUID *)(p_msg + 1);
             wm_memcpy(p_msg->p_uuid, p_services->p_uuid,
                       sizeof(tBT_UUID) * p_services->num_uuid);
         }
 
-        #endif
+#endif
     }
 
     bta_sys_sendmsg(p_msg);
@@ -1225,9 +1209,9 @@ void BTA_DmDiscoverByTransport(BD_ADDR bd_addr, tBTA_SERVICE_MASK_EXT *p_service
                                tBTA_DM_SEARCH_CBACK *p_cback, uint8_t sdp_search,
                                tBTA_TRANSPORT transport)
 {
-    #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
     bta_dm_discover_send_msg(bd_addr, p_services, p_cback, sdp_search, transport);
-    #endif
+#endif
 }
 
 
@@ -1249,9 +1233,9 @@ void BTA_DmDiscoverByTransport(BD_ADDR bd_addr, tBTA_SERVICE_MASK_EXT *p_service
 void BTA_DmDiscoverExt(BD_ADDR bd_addr, tBTA_SERVICE_MASK_EXT *p_services,
                        tBTA_DM_SEARCH_CBACK *p_cback, uint8_t sdp_search)
 {
-    #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
     bta_dm_discover_send_msg(bd_addr, p_services, p_cback, sdp_search, BTA_TRANSPORT_UNKNOWN);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1273,9 +1257,10 @@ void BTA_DmDiscoverExt(BD_ADDR bd_addr, tBTA_SERVICE_MASK_EXT *p_services,
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_DmSearchExt(tBTA_DM_INQ *p_dm_inq, tBTA_SERVICE_MASK_EXT *p_services, tBTA_DM_SEARCH_CBACK *p_cback)
+void BTA_DmSearchExt(tBTA_DM_INQ *p_dm_inq, tBTA_SERVICE_MASK_EXT *p_services,
+                     tBTA_DM_SEARCH_CBACK *p_cback)
 {
-    #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
     const size_t len = p_services ?
                        (sizeof(tBTA_DM_API_SEARCH) + sizeof(tBT_UUID) * p_services->num_uuid)
                        : sizeof(tBTA_DM_API_SEARCH);
@@ -1285,29 +1270,25 @@ void BTA_DmSearchExt(tBTA_DM_INQ *p_dm_inq, tBTA_SERVICE_MASK_EXT *p_services, t
     p_msg->p_cback = p_cback;
     p_msg->rs_res  = BTA_DM_RS_NONE;
 
-    if(p_services != NULL)
-    {
+    if(p_services != NULL) {
         p_msg->services = p_services->srvc_mask;
         p_msg->num_uuid = p_services->num_uuid;
 
-        if(p_services->num_uuid != 0)
-        {
+        if(p_services->num_uuid != 0) {
             p_msg->p_uuid = (tBT_UUID *)(p_msg + 1);
             wm_memcpy(p_msg->p_uuid, p_services->p_uuid,
                       sizeof(tBT_UUID) * p_services->num_uuid);
-        }
-        else
-        {
+        } else {
             p_msg->p_uuid = NULL;
         }
     }
 
     bta_sys_sendmsg(p_msg);
-    #else
+#else
     UNUSED(p_dm_inq);
     UNUSED(p_services);
     UNUSED(p_cback);
-    #endif
+#endif
 }
 /*******************************************************************************
 **
@@ -1328,7 +1309,7 @@ void BTA_DmBleUpdateConnectionParam(BD_ADDR bd_addr, uint16_t min_int,
                                     uint16_t max_int, uint16_t latency,
                                     uint16_t timeout)
 {
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_DM_API_UPDATE_CONN_PARAM *p_msg =
                     (tBTA_DM_API_UPDATE_CONN_PARAM *)GKI_getbuf(sizeof(tBTA_DM_API_UPDATE_CONN_PARAM));
     p_msg->hdr.event = BTA_DM_API_UPDATE_CONN_PARAM_EVT;
@@ -1338,7 +1319,7 @@ void BTA_DmBleUpdateConnectionParam(BD_ADDR bd_addr, uint16_t min_int,
     p_msg->latency = latency;
     p_msg->timeout = timeout;
     bta_sys_sendmsg(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1354,15 +1335,15 @@ void BTA_DmBleUpdateConnectionParam(BD_ADDR bd_addr, uint16_t min_int,
 *******************************************************************************/
 void BTA_DmBleConfigLocalPrivacy(uint8_t privacy_enable)
 {
-    #if BLE_INCLUDED == TRUE && BLE_PRIVACY_SPT == TRUE
+#if BLE_INCLUDED == TRUE && BLE_PRIVACY_SPT == TRUE
     tBTA_DM_API_LOCAL_PRIVACY *p_msg =
                     (tBTA_DM_API_LOCAL_PRIVACY *)GKI_getbuf(sizeof(tBTA_DM_API_ENABLE_PRIVACY));
     p_msg->hdr.event = BTA_DM_API_LOCAL_PRIVACY_EVT;
     p_msg->privacy_enable   = privacy_enable;
     bta_sys_sendmsg(p_msg);
-    #else
+#else
     UNUSED(privacy_enable);
-    #endif
+#endif
 }
 
 #if BLE_INCLUDED == TRUE
@@ -1392,8 +1373,7 @@ void BTA_BleEnableAdvInstance(tBTA_BLE_ADV_PARAMS *p_params,
     p_msg->hdr.event = BTA_DM_API_BLE_MULTI_ADV_ENB_EVT;
     p_msg->p_cback = (void *)p_cback;
 
-    if(p_params != NULL)
-    {
+    if(p_params != NULL) {
         p_msg->p_params = (void *)(p_msg + 1);
         wm_memcpy(p_msg->p_params, p_params, sizeof(tBTA_BLE_ADV_PARAMS));
     }
@@ -1504,17 +1484,15 @@ void BTA_DmBleCfgFilterCondition(tBTA_DM_BLE_SCAN_COND_OP action,
                                  tBTA_DM_BLE_PF_CFG_CBACK *p_cmpl_cback,
                                  tBTA_DM_BLE_REF_VALUE ref_value)
 {
-    #if BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE
+#if BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE
     tBTA_DM_API_CFG_FILTER_COND *p_msg;
     APPL_TRACE_API("BTA_DmBleCfgFilterCondition: %d, %d", action, cond_type);
     uint16_t  len = sizeof(tBTA_DM_API_CFG_FILTER_COND) +
                     sizeof(tBTA_DM_BLE_PF_COND_PARAM);
     uint8_t *p;
 
-    if(NULL != p_cond)
-    {
-        switch(cond_type)
-        {
+    if(NULL != p_cond) {
+        switch(cond_type) {
             case BTA_DM_BLE_PF_SRVC_DATA_PATTERN:
             case BTA_DM_BLE_PF_MANU_DATA:
                 /* Length of pattern and pattern mask and other elements in */
@@ -1545,77 +1523,65 @@ void BTA_DmBleCfgFilterCondition(tBTA_DM_BLE_SCAN_COND_OP action,
     p_msg->p_filt_cfg_cback = p_cmpl_cback;
     p_msg->ref_value = ref_value;
 
-    if(p_cond)
-    {
+    if(p_cond) {
         p_msg->p_cond_param = (tBTA_DM_BLE_PF_COND_PARAM *)(p_msg + 1);
         wm_memcpy(p_msg->p_cond_param, p_cond, sizeof(tBTA_DM_BLE_PF_COND_PARAM));
         p = (uint8_t *)(p_msg->p_cond_param + 1);
 
         if(cond_type == BTA_DM_BLE_PF_SRVC_DATA_PATTERN ||
-                cond_type == BTA_DM_BLE_PF_MANU_DATA)
-        {
+                cond_type == BTA_DM_BLE_PF_MANU_DATA) {
             p_msg->p_cond_param->manu_data.p_pattern = p;
             p_msg->p_cond_param->manu_data.data_len = p_cond->manu_data.data_len;
             wm_memcpy(p_msg->p_cond_param->manu_data.p_pattern, p_cond->manu_data.p_pattern,
                       p_cond->manu_data.data_len);
             p += p_cond->manu_data.data_len;
 
-            if(cond_type == BTA_DM_BLE_PF_MANU_DATA)
-            {
+            if(cond_type == BTA_DM_BLE_PF_MANU_DATA) {
                 p_msg->p_cond_param->manu_data.company_id_mask =
                                 p_cond->manu_data.company_id_mask;
 
-                if(p_cond->manu_data.p_pattern_mask != NULL)
-                {
+                if(p_cond->manu_data.p_pattern_mask != NULL) {
                     p_msg->p_cond_param->manu_data.p_pattern_mask = p;
                     wm_memcpy(p_msg->p_cond_param->manu_data.p_pattern_mask,
                               p_cond->manu_data.p_pattern_mask,
                               p_cond->manu_data.data_len);
                 }
             }
-        }
-        else
-            if(cond_type == BTA_DM_BLE_PF_LOCAL_NAME)
-            {
-                p_msg->p_cond_param->local_name.p_data = p;
-                p_msg->p_cond_param->local_name.data_len =
-                                p_cond->local_name.data_len;
-                wm_memcpy(p_msg->p_cond_param->local_name.p_data,
-                          p_cond->local_name.p_data, p_cond->local_name.data_len);
+        } else if(cond_type == BTA_DM_BLE_PF_LOCAL_NAME) {
+            p_msg->p_cond_param->local_name.p_data = p;
+            p_msg->p_cond_param->local_name.data_len =
+                            p_cond->local_name.data_len;
+            wm_memcpy(p_msg->p_cond_param->local_name.p_data,
+                      p_cond->local_name.p_data, p_cond->local_name.data_len);
+        } else if(cond_type == BTM_BLE_PF_SRVC_UUID ||
+                  cond_type == BTM_BLE_PF_SRVC_SOL_UUID) {
+            if(p_cond->srvc_uuid.p_target_addr != NULL) {
+                p_msg->p_cond_param->srvc_uuid.p_target_addr = (tBLE_BD_ADDR *)(p);
+                p_msg->p_cond_param->srvc_uuid.p_target_addr->type =
+                                p_cond->srvc_uuid.p_target_addr->type;
+                wm_memcpy(p_msg->p_cond_param->srvc_uuid.p_target_addr->bda,
+                          p_cond->srvc_uuid.p_target_addr->bda, BD_ADDR_LEN);
+                p = (uint8_t *)(p_msg->p_cond_param->srvc_uuid.p_target_addr + 1);
             }
-            else
-                if(cond_type == BTM_BLE_PF_SRVC_UUID ||
-                        cond_type == BTM_BLE_PF_SRVC_SOL_UUID)
-                {
-                    if(p_cond->srvc_uuid.p_target_addr != NULL)
-                    {
-                        p_msg->p_cond_param->srvc_uuid.p_target_addr = (tBLE_BD_ADDR *)(p);
-                        p_msg->p_cond_param->srvc_uuid.p_target_addr->type =
-                                        p_cond->srvc_uuid.p_target_addr->type;
-                        wm_memcpy(p_msg->p_cond_param->srvc_uuid.p_target_addr->bda,
-                                  p_cond->srvc_uuid.p_target_addr->bda, BD_ADDR_LEN);
-                        p = (uint8_t *)(p_msg->p_cond_param->srvc_uuid.p_target_addr + 1);
-                    }
 
-                    if(p_cond->srvc_uuid.p_uuid_mask)
-                    {
-                        p_msg->p_cond_param->srvc_uuid.p_uuid_mask = (tBTA_DM_BLE_PF_COND_MASK *)p;
-                        wm_memcpy(p_msg->p_cond_param->srvc_uuid.p_uuid_mask,
-                                  p_cond->srvc_uuid.p_uuid_mask,
-                                  sizeof(tBTA_DM_BLE_PF_COND_MASK));
-                    }
-                }
+            if(p_cond->srvc_uuid.p_uuid_mask) {
+                p_msg->p_cond_param->srvc_uuid.p_uuid_mask = (tBTA_DM_BLE_PF_COND_MASK *)p;
+                wm_memcpy(p_msg->p_cond_param->srvc_uuid.p_uuid_mask,
+                          p_cond->srvc_uuid.p_uuid_mask,
+                          sizeof(tBTA_DM_BLE_PF_COND_MASK));
+            }
+        }
     }
 
     bta_sys_sendmsg(p_msg);
-    #else
+#else
     UNUSED(action);
     UNUSED(cond_type);
     UNUSED(filt_index);
     UNUSED(p_cond);
     UNUSED(p_cmpl_cback);
     UNUSED(ref_value);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1641,7 +1607,7 @@ void BTA_DmBleScanFilterSetup(uint8_t action,
                               tBTA_DM_BLE_PF_PARAM_CBACK *p_cmpl_cback,
                               tBTA_DM_BLE_REF_VALUE ref_value)
 {
-    #if BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE
+#if BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE
     const size_t len = sizeof(tBTA_DM_API_SCAN_FILTER_PARAM_SETUP) +
                        sizeof(tBLE_BD_ADDR);
     tBTA_DM_API_SCAN_FILTER_PARAM_SETUP *p_msg =
@@ -1651,8 +1617,7 @@ void BTA_DmBleScanFilterSetup(uint8_t action,
     p_msg->action = action;
     p_msg->filt_index = filt_index;
 
-    if(p_filt_params)
-    {
+    if(p_filt_params) {
         wm_memcpy(&p_msg->filt_params, p_filt_params,
                   sizeof(tBTA_DM_BLE_PF_FILT_PARAMS));
     }
@@ -1660,21 +1625,20 @@ void BTA_DmBleScanFilterSetup(uint8_t action,
     p_msg->p_filt_param_cback = p_cmpl_cback;
     p_msg->ref_value        = ref_value;
 
-    if(p_target)
-    {
+    if(p_target) {
         p_msg->p_target = (tBLE_BD_ADDR *)(p_msg + 1);
         wm_memcpy(p_msg->p_target, p_target, sizeof(tBLE_BD_ADDR));
     }
 
     bta_sys_sendmsg(p_msg);
-    #else
+#else
     UNUSED(action);
     UNUSED(filt_index);
     UNUSED(p_filt_params);
     UNUSED(p_target);
     UNUSED(p_cmpl_cback);
     UNUSED(ref_value);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1714,7 +1678,7 @@ void BTA_DmBleGetEnergyInfo(tBTA_BLE_ENERGY_INFO_CBACK *p_cmpl_cback)
 void BTA_DmEnableScanFilter(uint8_t action, tBTA_DM_BLE_PF_STATUS_CBACK *p_cmpl_cback,
                             tBTA_DM_BLE_REF_VALUE ref_value)
 {
-    #if BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE
+#if BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE
     const size_t len = sizeof(tBTA_DM_API_ENABLE_SCAN_FILTER) +
                        sizeof(tBLE_BD_ADDR);
     tBTA_DM_API_ENABLE_SCAN_FILTER *p_msg =
@@ -1725,11 +1689,11 @@ void BTA_DmEnableScanFilter(uint8_t action, tBTA_DM_BLE_PF_STATUS_CBACK *p_cmpl_
     p_msg->ref_value = ref_value;
     p_msg->p_filt_status_cback = p_cmpl_cback;
     bta_sys_sendmsg(p_msg);
-    #else
+#else
     UNUSED(action);
     UNUSED(p_cmpl_cback);
     UNUSED(ref_value);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1805,10 +1769,12 @@ void BTA_DmBleSetDataLength(BD_ADDR remote_device, uint16_t tx_data_length)
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_DmSetEncryption(BD_ADDR bd_addr, tBTA_TRANSPORT transport, tBTA_DM_ENCRYPT_CBACK *p_callback,
+void BTA_DmSetEncryption(BD_ADDR bd_addr, tBTA_TRANSPORT transport,
+                         tBTA_DM_ENCRYPT_CBACK *p_callback,
                          tBTA_DM_BLE_SEC_ACT sec_act)
 {
-    tBTA_DM_API_SET_ENCRYPTION *p_msg = (tBTA_DM_API_SET_ENCRYPTION *)GKI_getbuf(sizeof(tBTA_DM_API_SET_ENCRYPTION));
+    tBTA_DM_API_SET_ENCRYPTION *p_msg = (tBTA_DM_API_SET_ENCRYPTION *)GKI_getbuf(sizeof(
+            tBTA_DM_API_SET_ENCRYPTION));
     APPL_TRACE_API("%s", __func__);
     p_msg->hdr.event = BTA_DM_API_SET_ENCRYPTION_EVT;
     wm_memcpy(p_msg->bd_addr, bd_addr, BD_ADDR_LEN);
@@ -1899,29 +1865,27 @@ void BTA_VendorCleanup(void)
 {
     tBTM_BLE_VSC_CB cmn_ble_vsc_cb;
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
-    #if (BLE_INCLUDED == TRUE && BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE)
+#if (BLE_INCLUDED == TRUE && BLE_ANDROID_CONTROLLER_SCAN_FILTER == TRUE)
 
-    if(cmn_ble_vsc_cb.max_filter > 0)
-    {
+    if(cmn_ble_vsc_cb.max_filter > 0) {
         btm_ble_adv_filter_cleanup();
-        #if BLE_PRIVACY_SPT == TRUE
+#if BLE_PRIVACY_SPT == TRUE
         btm_ble_resolving_list_cleanup();
-        #endif
+#endif
     }
 
-    if(cmn_ble_vsc_cb.tot_scan_results_strg > 0)
-    {
+    if(cmn_ble_vsc_cb.tot_scan_results_strg > 0) {
         btm_ble_batchscan_cleanup();
     }
 
-    #endif
+#endif
+#if (BLE_VND_INCLUDED == TRUE)
 
-    #if (BLE_VND_INCLUDED == TRUE)
-    if(cmn_ble_vsc_cb.adv_inst_max > 0)
-    {
+    if(cmn_ble_vsc_cb.adv_inst_max > 0) {
         btm_ble_multi_adv_cleanup();
     }
-    #endif
+
+#endif
 }
 
 #endif

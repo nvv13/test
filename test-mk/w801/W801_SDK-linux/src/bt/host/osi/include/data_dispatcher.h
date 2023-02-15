@@ -41,7 +41,8 @@ void data_dispatcher_free(data_dispatcher_t *dispatcher);
 // sent under |type| ends up in |queue|. If |type| is already registered,
 // it is replaced. If |queue| is NULL, the existing registration is
 // removed, if it exists. |dispatcher| may not be NULL.
-void data_dispatcher_register(data_dispatcher_t *dispatcher, data_dispatcher_type_t type, fixed_queue_t *queue);
+void data_dispatcher_register(data_dispatcher_t *dispatcher, data_dispatcher_type_t type,
+                              fixed_queue_t *queue);
 
 // Registers a default queue to send data to when there is not a specific
 // type/queue relationship registered. If a default queue is already registered,
@@ -53,4 +54,5 @@ void data_dispatcher_register_default(data_dispatcher_t *dispatcher, fixed_queue
 // exists, it is dispatched to the default queue if it exists.
 // Neither |dispatcher| nor |data| may be NULL.
 // Returns true if data dispatch was successful.
-uint8_t data_dispatcher_dispatch(data_dispatcher_t *dispatcher, data_dispatcher_type_t type, void *data);
+uint8_t data_dispatcher_dispatch(data_dispatcher_t *dispatcher, data_dispatcher_type_t type,
+                                 void *data);

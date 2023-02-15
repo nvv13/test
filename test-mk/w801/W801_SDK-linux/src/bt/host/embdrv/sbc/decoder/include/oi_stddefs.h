@@ -83,8 +83,7 @@ extern "C" {
  */
 
 /** unsigned 64-bit integer as a structure of two unsigned 32-bit integers */
-typedef struct
-{
+typedef struct {
     OI_UINT32 I1; /**< most significant 32 bits */
     OI_UINT32 I2; /**< least significant 32 bits */
 } OI_UINT64;
@@ -93,8 +92,7 @@ typedef struct
 #define OI_UINT64_MAX { (OI_UINT32)0XFFFFFFFF, (OI_UINT32)0XFFFFFFFF }
 
 /** signed 64-bit integer as a structure of one unsigned 32-bit integer and one signed 32-bit integer */
-typedef struct
-{
+typedef struct {
     OI_INT32  I1; /**< most significant 32 bits  as a signed integer */
     OI_UINT32 I2; /**< least significant 32 bits as an unsigned integer */
 } OI_INT64;
@@ -103,8 +101,7 @@ typedef struct
 #define OI_INT64_MAX { (OI_INT32)0X7FFFFFFF, (OI_UINT32)0XFFFFFFFF }
 
 /** unsigned 128-bit integer as a structure of four unsigned 32-bit integers */
-typedef struct
-{
+typedef struct {
     OI_UINT32 I1; /**< most significant 32 bits */
     OI_UINT32 I2; /**< second-most significant 32 bits */
     OI_UINT32 I3; /**< third-most significant 32 bits */
@@ -115,8 +112,7 @@ typedef struct
 #define OI_UINT128_MAX { (OI_UINT32)0XFFFFFFFF, (OI_UINT32)0XFFFFFFFF,  (OI_UINT32)0XFFFFFFFF, (OI_UINT32)0XFFFFFFFF }
 
 /** signed 128-bit integer as a structure of three unsigned 32-bit integers and one signed 32-bit integer */
-typedef struct
-{
+typedef struct {
     OI_INT32  I1;  /**< most significant 32 bits as a signed integer */
     OI_UINT32 I2;  /**< second-most significant 32 bits as an unsigned integer */
     OI_UINT32 I3;  /**< third-most significant 32 bits as an unsigned integer */

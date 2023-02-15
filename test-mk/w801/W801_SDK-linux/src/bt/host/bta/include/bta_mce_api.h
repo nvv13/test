@@ -50,8 +50,7 @@ typedef uint8_t tBTA_MCE_STATUS;
 
 typedef uint16_t tBTA_MCE_EVT;
 
-typedef struct
-{
+typedef struct {
     uint8_t   scn;
     char    *p_srv_name;
     uint16_t  srv_name_len;
@@ -60,8 +59,7 @@ typedef struct
 } tBTA_MCE_MAS_INFO;
 
 /* data associated with BTA_MCE_MAS_DISCOVERY_COMP_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_MCE_STATUS    status;
     BD_ADDR            remote_addr;
     int                num_mas;
@@ -69,8 +67,7 @@ typedef struct
 } tBTA_MCE_MAS_DISCOVERY_COMP;
 
 /* union of data associated with MCE callback */
-typedef union
-{
+typedef union {
     tBTA_MCE_STATUS              status;         /* BTA_MCE_ENABLE_EVT */
     tBTA_MCE_MAS_DISCOVERY_COMP  mas_disc_comp;  /* BTA_MCE_MAS_DISCOVERY_COMP_EVT */
 } tBTA_MCE;
@@ -79,8 +76,7 @@ typedef union
 typedef void (tBTA_MCE_DM_CBACK)(tBTA_MCE_EVT event, tBTA_MCE *p_data, void *user_data);
 
 /* MCE configuration structure */
-typedef struct
-{
+typedef struct {
     uint16_t  sdp_db_size;            /* The size of p_sdp_db */
     tSDP_DISCOVERY_DB   *p_sdp_db;  /* The data buffer to keep SDP database */
 } tBTA_MCE_CFG;

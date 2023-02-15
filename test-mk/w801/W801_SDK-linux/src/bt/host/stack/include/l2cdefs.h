@@ -77,8 +77,8 @@
 /* Define the packet boundary flags
 */
 #if (L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE)
-    #define L2CAP_PKT_START_FLUSHABLE       2
-    #define L2CAP_PKT_START_NON_FLUSHABLE   0
+#define L2CAP_PKT_START_FLUSHABLE       2
+#define L2CAP_PKT_START_NON_FLUSHABLE   0
 #endif
 #define L2CAP_COMPLETE_AMP_PKT          3       /* complete L2CAP packet on AMP HCI */
 #define L2CAP_PKT_START                 2
@@ -263,12 +263,12 @@
 
 /* Mask for locally supported features used in Information Response (default to none) */
 #ifndef L2CAP_EXTFEA_SUPPORTED_MASK
-    #define L2CAP_EXTFEA_SUPPORTED_MASK 0
+#define L2CAP_EXTFEA_SUPPORTED_MASK 0
 #endif
 
 /* Mask for LE supported features used in Information Response (default to none) */
 #ifndef L2CAP_BLE_EXTFEA_MASK
-    #define L2CAP_BLE_EXTFEA_MASK 0
+#define L2CAP_BLE_EXTFEA_MASK 0
 #endif
 
 /* Define a value that tells L2CAP to use the default HCI ACL buffer size */

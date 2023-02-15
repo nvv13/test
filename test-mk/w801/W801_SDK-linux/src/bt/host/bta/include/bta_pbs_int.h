@@ -47,10 +47,10 @@
 
 
 /* Configuration structure */
-typedef struct
-{
+typedef struct {
     uint8_t       realm_charset;          /* Server only */
-    uint8_t     userid_req;             /* TRUE if user id is required during obex authentication (Server only) */
+    uint8_t
+    userid_req;             /* TRUE if user id is required during obex authentication (Server only) */
     uint8_t       supported_features;     /* Server supported features */
     uint8_t       supported_repositories; /* Server supported repositories */
 

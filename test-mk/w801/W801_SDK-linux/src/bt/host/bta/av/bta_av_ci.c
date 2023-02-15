@@ -79,13 +79,10 @@ void bta_av_ci_setconfig(tBTA_AV_HNDL hndl, uint8_t err_code, uint8_t category,
     p_buf->num_seid = num_seid;
     p_buf->avdt_handle = avdt_handle;
 
-    if(p_seid && num_seid)
-    {
+    if(p_seid && num_seid) {
         p_buf->p_seid   = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->p_seid, p_seid, num_seid);
-    }
-    else
-    {
+    } else {
         p_buf->p_seid   = NULL;
         p_buf->num_seid = 0;
     }

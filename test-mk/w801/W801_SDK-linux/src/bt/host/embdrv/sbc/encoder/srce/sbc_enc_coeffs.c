@@ -27,8 +27,7 @@
 #if (SBC_ARM_ASM_OPT==FALSE && SBC_IPAQ_OPT==FALSE)
 #if (SBC_IS_64_MULT_IN_WINDOW_ACCU ==  FALSE)
 /*Window coeff for 4 sub band case*/
-const SINT16 gas32CoeffFor4SBs[] =
-{
+const SINT16 gas32CoeffFor4SBs[] = {
     (SINT16)((SINT32)0x00000000 >> 16), (SINT16)0x00000000,
     (SINT16)((SINT32)0x001194E6 >> 16), (SINT16)0x001194E6,
     (SINT16)((SINT32)0x0030E2D3 >> 16), (SINT16)0x0030E2D3,
@@ -76,8 +75,7 @@ const SINT16 gas32CoeffFor4SBs[] =
 };
 
 /*Window coeff for 8 sub band case*/
-const SINT16 gas32CoeffFor8SBs[] =
-{
+const SINT16 gas32CoeffFor8SBs[] = {
     (SINT16)((SINT32)0x00000000 >> 16), (SINT16)0x00000000,
     (SINT16)((SINT32)0x00052173 >> 16), (SINT16)0x00052173,
     (SINT16)((SINT32)0x000B3F71 >> 16), (SINT16)0x000B3F71,
@@ -172,8 +170,7 @@ const SINT16 gas32CoeffFor8SBs[] =
 #else
 
 /*Window coeff for 4 sub band case*/
-const SINT32 gas32CoeffFor4SBs[] =
-{
+const SINT32 gas32CoeffFor4SBs[] = {
     (SINT32)0x00000000,
     (SINT32)0x001194E6,
     (SINT32)0x0030E2D3,
@@ -221,8 +218,7 @@ const SINT32 gas32CoeffFor4SBs[] =
 };
 
 /*Window coeff for 8 sub band case*/
-const SINT32 gas32CoeffFor8SBs[] =
-{
+const SINT32 gas32CoeffFor8SBs[] = {
     (SINT32)0x00000000,
     (SINT32)0x00052173,
     (SINT32)0x000B3F71,

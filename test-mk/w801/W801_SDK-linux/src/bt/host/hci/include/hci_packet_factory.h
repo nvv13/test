@@ -21,11 +21,11 @@
 #include "bt_types.h"
 #include "event_mask.h"
 
-typedef struct
-{
+typedef struct {
     BT_HDR *(*make_reset)(void);
     BT_HDR *(*make_read_buffer_size)(void);
-    BT_HDR *(*make_host_buffer_size)(uint16_t acl_size, uint8_t sco_size, uint16_t acl_count, uint16_t sco_count);
+    BT_HDR *(*make_host_buffer_size)(uint16_t acl_size, uint8_t sco_size, uint16_t acl_count,
+                                     uint16_t sco_count);
     BT_HDR *(*make_read_local_version_info)(void);
     BT_HDR *(*make_read_bd_addr)(void);
     BT_HDR *(*make_read_local_supported_commands)(void);

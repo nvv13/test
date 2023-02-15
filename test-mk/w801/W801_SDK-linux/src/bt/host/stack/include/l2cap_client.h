@@ -25,8 +25,7 @@
 typedef struct buffer_t buffer_t;
 typedef struct l2cap_client_t l2cap_client_t;
 
-typedef struct
-{
+typedef struct {
     void (*connected)(l2cap_client_t *client, void *context);
     void (*disconnected)(l2cap_client_t *client, void *context);
     void (*read_ready)(l2cap_client_t *client, buffer_t *packet, void *context);
@@ -57,7 +56,8 @@ void l2cap_client_free(l2cap_client_t *client);
 // This function must not be called while a connect operation is in progress or
 // while |l2cap_client_is_connected|. |client| and |remote_bdaddr| must not be NULL.
 // |psm| must be greater than zero.
-uint8_t l2cap_client_connect(l2cap_client_t *client, const tls_bt_addr_t *remote_bdaddr, uint16_t psm);
+uint8_t l2cap_client_connect(l2cap_client_t *client, const tls_bt_addr_t *remote_bdaddr,
+                             uint16_t psm);
 
 // Disconnects a connected |client|. This function is asynchronous and idempotent. It
 // will indicate completion with a 'disconnected' callback. |client| must not be NULL.

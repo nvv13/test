@@ -19,9 +19,9 @@
 #pragma once
 
 #if defined(OS_GENERIC)
-    #define PROPERTY_VALUE_MAX 92
+#define PROPERTY_VALUE_MAX 92
 #else
-    #include <cutils/properties.h>
+#include <cutils/properties.h>
 #endif  // defined(OS_GENERIC)
 
 // Get value associated with key |key| into |value|.

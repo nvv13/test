@@ -23,15 +23,15 @@
 #include "bte_appl.h"
 
 #ifdef USE_UID_SET
-    #include "btif_uid.h"
+#include "btif_uid.h"
 #endif
 /************************************************************************************
 **  Functions
 ********************************************************************************/
 #ifdef USE_UID_SET
 
-    void btif_dm_init(uid_set_t *set);
-    void btif_dm_cleanup(void);
+void btif_dm_init(uid_set_t *set);
+void btif_dm_cleanup(void);
 #endif
 
 /**
@@ -63,14 +63,13 @@ void btif_dm_set_oob_for_io_req(tBTA_OOB_DATA  *p_oob_data);
 void btif_dm_set_oob_for_le_io_req(BD_ADDR bd_addr, tBTA_OOB_DATA  *p_oob_data,
                                    tBTA_LE_AUTH_REQ *p_auth_req);
 #if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
-    void btif_dm_load_local_oob(void);
-    void btif_dm_proc_loc_oob(uint8_t valid, BT_OCTET16 c, BT_OCTET16 r);
-    uint8_t btif_dm_proc_rmt_oob(BD_ADDR bd_addr,  BT_OCTET16 p_c, BT_OCTET16 p_r);
+void btif_dm_load_local_oob(void);
+void btif_dm_proc_loc_oob(uint8_t valid, BT_OCTET16 c, BT_OCTET16 r);
+uint8_t btif_dm_proc_rmt_oob(BD_ADDR bd_addr,  BT_OCTET16 p_c, BT_OCTET16 p_r);
 #endif /* BTIF_DM_OOB_TEST */
 #if (BLE_INCLUDED == TRUE)
 
-typedef struct
-{
+typedef struct {
     uint8_t                   is_penc_key_rcvd;
     tBTM_LE_PENC_KEYS         penc_key;       /* received peer encryption key */
     uint8_t                   is_pcsrk_key_rcvd;
@@ -78,7 +77,8 @@ typedef struct
     uint8_t                   is_pid_key_rcvd;
     tBTM_LE_PID_KEYS          pid_key;        /* peer device ID key */
     uint8_t                   is_lenc_key_rcvd;
-    tBTM_LE_LENC_KEYS         lenc_key;       /* local encryption reproduction keys LTK = = d1(ER,DIV,0)*/
+    tBTM_LE_LENC_KEYS
+    lenc_key;       /* local encryption reproduction keys LTK = = d1(ER,DIV,0)*/
     uint8_t                   is_lcsrk_key_rcvd;
     tBTM_LE_LCSRK_KEYS        lcsrk_key;      /* local device CSRK = d1(ER,DIV,1)*/
     uint8_t                   is_lidk_key_rcvd;   /* local identity key received */

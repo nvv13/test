@@ -64,14 +64,11 @@ void utils_enqueue(BUFFER_Q *p_q, void *p_buf)
 
     //pthread_mutex_lock(&utils_mutex);
 
-    if(p_q->p_last)
-    {
+    if(p_q->p_last) {
         HC_BUFFER_HDR_T *p_last_hdr = \
                                       (HC_BUFFER_HDR_T *)((uint8_t *)p_q->p_last - BT_HC_BUFFER_HDR_SIZE);
         p_last_hdr->p_next = p_hdr;
-    }
-    else
-    {
+    } else {
         p_q->p_first = p_buf;
     }
 
@@ -110,19 +107,15 @@ void *utils_dequeue_unlocked(BUFFER_Q *p_q)
 {
     HC_BUFFER_HDR_T    *p_hdr;
 
-    if(!p_q || !p_q->count)
-    {
+    if(!p_q || !p_q->count) {
         return (NULL);
     }
 
     p_hdr = (HC_BUFFER_HDR_T *)((uint8_t *)p_q->p_first - BT_HC_BUFFER_HDR_SIZE);
 
-    if(p_hdr->p_next)
-    {
+    if(p_hdr->p_next) {
         p_q->p_first = ((uint8_t *)p_hdr->p_next + BT_HC_BUFFER_HDR_SIZE);
-    }
-    else
-    {
+    } else {
         p_q->p_first = NULL;
         p_q->p_last  = NULL;
     }
@@ -148,12 +141,9 @@ void *utils_getnext(void *p_buf)
     HC_BUFFER_HDR_T    *p_hdr;
     p_hdr = (HC_BUFFER_HDR_T *)((uint8_t *) p_buf - BT_HC_BUFFER_HDR_SIZE);
 
-    if(p_hdr->p_next)
-    {
+    if(p_hdr->p_next) {
         return ((uint8_t *)p_hdr->p_next + BT_HC_BUFFER_HDR_SIZE);
-    }
-    else
-    {
+    } else {
         return (NULL);
     }
 }
@@ -188,24 +178,20 @@ void *utils_remove_from_queue_unlocked(BUFFER_Q *p_q, void *p_buf)
     HC_BUFFER_HDR_T    *p_prev;
     HC_BUFFER_HDR_T    *p_buf_hdr;
 
-    if(p_buf == p_q->p_first)
-    {
+    if(p_buf == p_q->p_first) {
         return (utils_dequeue_unlocked(p_q));
     }
 
     p_buf_hdr = (HC_BUFFER_HDR_T *)((uint8_t *)p_buf - BT_HC_BUFFER_HDR_SIZE);
     p_prev = (HC_BUFFER_HDR_T *)((uint8_t *)p_q->p_first - BT_HC_BUFFER_HDR_SIZE);
 
-    for(; p_prev; p_prev = p_prev->p_next)
-    {
+    for(; p_prev; p_prev = p_prev->p_next) {
         /* If the previous points to this one, move the pointers around */
-        if(p_prev->p_next == p_buf_hdr)
-        {
+        if(p_prev->p_next == p_buf_hdr) {
             p_prev->p_next = p_buf_hdr->p_next;
 
             /* If we are removing the last guy in the queue, update p_last */
-            if(p_buf == p_q->p_last)
-            {
+            if(p_buf == p_q->p_last) {
                 p_q->p_last = p_prev + 1;
             }
 
@@ -232,19 +218,18 @@ void *utils_remove_from_queue_unlocked(BUFFER_Q *p_q, void *p_buf)
 void utils_delay(uint32_t timeout)
 {
     //UTIL_delay_msec(timeout, 1);
-    #if 0
+#if 0
     struct timespec delay;
     int err;
     delay.tv_sec = timeout / 1000;
     delay.tv_nsec = 1000 * 1000 * (timeout % 1000);
 
     /* [u]sleep can't be used because it uses SIGALRM */
-    do
-    {
+    do {
         err = nanosleep(&delay, &delay);
     } while(err < 0 && errno == EINTR);
 
-    #endif
+#endif
 }
 
 /*******************************************************************************

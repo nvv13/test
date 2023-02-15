@@ -29,16 +29,14 @@
 
 typedef uint8_t btrc_uid_t[BTRC_UID_SIZE];
 
-typedef enum
-{
+typedef enum {
     BTRC_FEAT_NONE = 0x00,    /* AVRCP 1.0 */
     BTRC_FEAT_METADATA = 0x01,    /* AVRCP 1.3 */
     BTRC_FEAT_ABSOLUTE_VOLUME = 0x02,    /* Supports TG role and volume sync */
     BTRC_FEAT_BROWSE = 0x04,    /* AVRCP 1.4 and up, with Browsing support */
 } btrc_remote_features_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_PLAYSTATE_STOPPED = 0x00,    /* Stopped */
     BTRC_PLAYSTATE_PLAYING = 0x01,    /* Playing */
     BTRC_PLAYSTATE_PAUSED = 0x02,    /* Paused  */
@@ -47,8 +45,7 @@ typedef enum
     BTRC_PLAYSTATE_ERROR = 0xFF,    /* Error   */
 } btrc_play_status_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_EVT_PLAY_STATUS_CHANGED = 0x01,
     BTRC_EVT_TRACK_CHANGE = 0x02,
     BTRC_EVT_TRACK_REACHED_END = 0x03,
@@ -57,22 +54,19 @@ typedef enum
     BTRC_EVT_APP_SETTINGS_CHANGED = 0x08,
 } btrc_event_id_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_NOTIFICATION_TYPE_INTERIM = 0,
     BTRC_NOTIFICATION_TYPE_CHANGED = 1,
 } btrc_notification_type_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_PLAYER_ATTR_EQUALIZER = 0x01,
     BTRC_PLAYER_ATTR_REPEAT = 0x02,
     BTRC_PLAYER_ATTR_SHUFFLE = 0x03,
     BTRC_PLAYER_ATTR_SCAN = 0x04,
 } btrc_player_attr_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_MEDIA_ATTR_TITLE = 0x01,
     BTRC_MEDIA_ATTR_ARTIST = 0x02,
     BTRC_MEDIA_ATTR_ALBUM = 0x03,
@@ -82,23 +76,20 @@ typedef enum
     BTRC_MEDIA_ATTR_PLAYING_TIME = 0x07,
 } btrc_media_attr_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_PLAYER_VAL_OFF_REPEAT = 0x01,
     BTRC_PLAYER_VAL_SINGLE_REPEAT = 0x02,
     BTRC_PLAYER_VAL_ALL_REPEAT = 0x03,
     BTRC_PLAYER_VAL_GROUP_REPEAT = 0x04
 } btrc_player_repeat_val_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_PLAYER_VAL_OFF_SHUFFLE = 0x01,
     BTRC_PLAYER_VAL_ALL_SHUFFLE = 0x02,
     BTRC_PLAYER_VAL_GROUP_SHUFFLE = 0x03
 } btrc_player_shuffle_val_t;
 
-typedef enum
-{
+typedef enum {
     BTRC_STS_BAD_CMD        = 0x00, /* Invalid command */
     BTRC_STS_BAD_PARAM      = 0x01, /* Invalid parameter */
     BTRC_STS_NOT_FOUND      = 0x02, /* Specified parameter is wrong or not found */
@@ -106,23 +97,20 @@ typedef enum
     BTRC_STS_NO_ERROR       = 0x04  /* Operation Success */
 } btrc_status_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t num_attr;
     uint8_t attr_ids[BTRC_MAX_APP_SETTINGS];
     uint8_t attr_values[BTRC_MAX_APP_SETTINGS];
 } btrc_player_settings_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t   val;
     uint16_t  charset_id;
     uint16_t  str_len;
     uint8_t   *p_str;
 } btrc_player_app_ext_attr_val_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t   attr_id;
     uint16_t  charset_id;
     uint16_t  str_len;
@@ -131,15 +119,13 @@ typedef struct
     btrc_player_app_ext_attr_val_t ext_attr_val[BTRC_MAX_APP_ATTR_SIZE];
 } btrc_player_app_ext_attr_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t attr_id;
     uint8_t num_val;
     uint8_t attr_val[BTRC_MAX_APP_ATTR_SIZE];
 } btrc_player_app_attr_t;
 
-typedef struct
-{
+typedef struct {
     uint32_t start_item;
     uint32_t end_item;
     uint32_t size;
@@ -147,22 +133,19 @@ typedef struct
     uint8_t  attr_count;
 } btrc_getfolderitem_t;
 
-typedef union
-{
+typedef union {
     btrc_play_status_t play_status;
     btrc_uid_t track; /* queue position in NowPlaying */
     uint32_t song_pos;
     btrc_player_settings_t player_setting;
 } btrc_register_notification_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t id; /* can be attr_id or value_id */
     uint8_t text[BTRC_MAX_ATTR_STR_LEN];
 } btrc_player_setting_text_t;
 
-typedef struct
-{
+typedef struct {
     uint32_t attr_id;
     uint8_t text[BTRC_MAX_ATTR_STR_LEN];
 } btrc_element_attr_val_t;
@@ -188,12 +171,14 @@ typedef void (* btrc_get_player_app_value_callback)(uint8_t num_attr, btrc_playe
 /** Callback for getting the player application settings attributes' text
 **  num_attr: specifies the number of attribute ids contained in p_attrs
 */
-typedef void (* btrc_get_player_app_attrs_text_callback)(uint8_t num_attr, btrc_player_attr_t *p_attrs);
+typedef void (* btrc_get_player_app_attrs_text_callback)(uint8_t num_attr,
+        btrc_player_attr_t *p_attrs);
 
 /** Callback for getting the player application settings values' text
 **  num_attr: specifies the number of value ids contained in p_vals
 */
-typedef void (* btrc_get_player_app_values_text_callback)(uint8_t attr_id, uint8_t num_val, uint8_t *p_vals);
+typedef void (* btrc_get_player_app_values_text_callback)(uint8_t attr_id, uint8_t num_val,
+        uint8_t *p_vals);
 
 /** Callback for setting the player application settings values */
 typedef void (* btrc_set_player_app_value_callback)(btrc_player_settings_t *p_vals);
@@ -218,8 +203,7 @@ typedef void (* btrc_volume_change_callback)(uint8_t volume, uint8_t ctype);
 typedef void (* btrc_passthrough_cmd_callback)(int id, int key_state);
 
 /** BT-RC Target callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(BtRcCallbacks) */
     size_t      size;
     btrc_remote_features_callback               remote_features_cb;
@@ -237,8 +221,7 @@ typedef struct
 } btrc_callbacks_t;
 
 /** Represents the standard BT-RC AVRCP Target interface. */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(BtRcInterface) */
     size_t          size;
@@ -252,7 +235,8 @@ typedef struct
     **  2. Song duration/length
     **  3. Song position
     */
-    tls_bt_status_t (*get_play_status_rsp)(btrc_play_status_t play_status, uint32_t song_len, uint32_t song_pos);
+    tls_bt_status_t (*get_play_status_rsp)(btrc_play_status_t play_status, uint32_t song_len,
+                                           uint32_t song_pos);
 
     /** Lists the support player application attributes (Shuffle/Repeat/...)
     **  num_attr: Specifies the number of attributes contained in the pointer p_attrs
@@ -318,9 +302,11 @@ typedef void (* btrc_connection_state_callback)(uint8_t state, tls_bt_addr_t *bd
 
 typedef void (* btrc_ctrl_getrcfeatures_callback)(tls_bt_addr_t *bd_addr, int features);
 
-typedef void (* btrc_ctrl_setabsvol_cmd_callback)(tls_bt_addr_t *bd_addr, uint8_t abs_vol, uint8_t label);
+typedef void (* btrc_ctrl_setabsvol_cmd_callback)(tls_bt_addr_t *bd_addr, uint8_t abs_vol,
+        uint8_t label);
 
-typedef void (* btrc_ctrl_registernotification_abs_vol_callback)(tls_bt_addr_t *bd_addr, uint8_t label);
+typedef void (* btrc_ctrl_registernotification_abs_vol_callback)(tls_bt_addr_t *bd_addr,
+        uint8_t label);
 
 typedef void (* btrc_ctrl_setplayerapplicationsetting_rsp_callback)(tls_bt_addr_t *bd_addr,
         uint8_t accepted);
@@ -344,8 +330,7 @@ typedef void (* btrc_ctrl_play_status_changed_callback)(tls_bt_addr_t *bd_addr,
         btrc_play_status_t play_status);
 
 /** BT-RC Controller callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(BtRcCallbacks) */
     size_t      size;
     btrc_passthrough_rsp_callback                               passthrough_rsp_cb;
@@ -363,8 +348,7 @@ typedef struct
 } btrc_ctrl_callbacks_t;
 
 /** Represents the standard BT-RC AVRCP Controller interface. */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(BtRcInterface) */
     size_t          size;
@@ -375,7 +359,7 @@ typedef struct
 
     /** send pass through command to target */
     tls_bt_status_t (*send_pass_through_cmd)(tls_bt_addr_t *bd_addr, uint8_t key_code,
-                                         uint8_t key_state);
+            uint8_t key_state);
 
     /** send group navigation command to target */
     tls_bt_status_t (*send_group_navigation_cmd)(tls_bt_addr_t *bd_addr, uint8_t key_code,
@@ -390,7 +374,7 @@ typedef struct
 
     /** send notificaiton rsp for abs vol to target */
     tls_bt_status_t (*register_abs_vol_rsp)(tls_bt_addr_t *bd_addr, btrc_notification_type_t rsp_type,
-                                        uint8_t abs_vol, uint8_t label);
+                                            uint8_t abs_vol, uint8_t label);
 
     /** Closes the interface. */
     void (*cleanup)(void);

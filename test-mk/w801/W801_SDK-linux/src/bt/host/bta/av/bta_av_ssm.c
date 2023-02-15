@@ -35,8 +35,7 @@
 *****************************************************************************/
 
 /* state machine states */
-enum
-{
+enum {
     BTA_AV_INIT_SST,
     BTA_AV_INCOMING_SST,
     BTA_AV_OPENING_SST,
@@ -47,8 +46,7 @@ enum
 
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     BTA_AV_DO_DISC,
     BTA_AV_CLEANUP,
     BTA_AV_FREE_SDB,
@@ -112,8 +110,7 @@ enum
 #define BTA_AV_NUM_COLS              3       /* number of columns in state tables */
 
 /* state table for init state */
-static const uint8_t bta_av_sst_init[][BTA_AV_NUM_COLS] =
-{
+static const uint8_t bta_av_sst_init[][BTA_AV_NUM_COLS] = {
     /* Event                     Action 1               Action 2               Next state */
     /* AP_OPEN_EVT */           {BTA_AV_DO_DISC,        BTA_AV_SIGNORE,        BTA_AV_OPENING_SST },
     /* AP_CLOSE_EVT */          {BTA_AV_CLEANUP,        BTA_AV_SIGNORE,        BTA_AV_INIT_SST },
@@ -154,8 +151,7 @@ static const uint8_t bta_av_sst_init[][BTA_AV_NUM_COLS] =
 };
 
 /* state table for incoming state */
-static const uint8_t bta_av_sst_incoming[][BTA_AV_NUM_COLS] =
-{
+static const uint8_t bta_av_sst_incoming[][BTA_AV_NUM_COLS] = {
     /* Event                     Action 1               Action 2               Next state */
     /* AP_OPEN_EVT */           {BTA_AV_OPEN_AT_INC,    BTA_AV_SIGNORE,        BTA_AV_INCOMING_SST },
     /* AP_CLOSE_EVT */          {BTA_AV_CCO_CLOSE,      BTA_AV_DISCONNECT_REQ, BTA_AV_CLOSING_SST },
@@ -196,8 +192,7 @@ static const uint8_t bta_av_sst_incoming[][BTA_AV_NUM_COLS] =
 };
 
 /* state table for opening state */
-static const uint8_t bta_av_sst_opening[][BTA_AV_NUM_COLS] =
-{
+static const uint8_t bta_av_sst_opening[][BTA_AV_NUM_COLS] = {
     /* Event                     Action 1               Action 2               Next state */
     /* AP_OPEN_EVT */           {BTA_AV_SIGNORE,        BTA_AV_SIGNORE,        BTA_AV_OPENING_SST },
     /* AP_CLOSE_EVT */          {BTA_AV_DO_CLOSE,       BTA_AV_SIGNORE,        BTA_AV_CLOSING_SST },
@@ -238,8 +233,7 @@ static const uint8_t bta_av_sst_opening[][BTA_AV_NUM_COLS] =
 };
 
 /* state table for open state */
-static const uint8_t bta_av_sst_open[][BTA_AV_NUM_COLS] =
-{
+static const uint8_t bta_av_sst_open[][BTA_AV_NUM_COLS] = {
     /* Event                     Action 1               Action 2               Next state */
     /* AP_OPEN_EVT */           {BTA_AV_SIGNORE,        BTA_AV_SIGNORE,        BTA_AV_OPEN_SST },
     /* AP_CLOSE_EVT */          {BTA_AV_DO_CLOSE,       BTA_AV_SIGNORE,        BTA_AV_CLOSING_SST },
@@ -280,8 +274,7 @@ static const uint8_t bta_av_sst_open[][BTA_AV_NUM_COLS] =
 };
 
 /* state table for reconfig state */
-static const uint8_t bta_av_sst_rcfg[][BTA_AV_NUM_COLS] =
-{
+static const uint8_t bta_av_sst_rcfg[][BTA_AV_NUM_COLS] = {
     /* Event                     Action 1               Action 2               Next state */
     /* AP_OPEN_EVT */           {BTA_AV_SIGNORE,        BTA_AV_SIGNORE,        BTA_AV_RCFG_SST },
     /* AP_CLOSE_EVT */          {BTA_AV_DISCONNECT_REQ, BTA_AV_SIGNORE,        BTA_AV_CLOSING_SST },
@@ -322,8 +315,7 @@ static const uint8_t bta_av_sst_rcfg[][BTA_AV_NUM_COLS] =
 };
 
 /* state table for closing state */
-static const uint8_t bta_av_sst_closing[][BTA_AV_NUM_COLS] =
-{
+static const uint8_t bta_av_sst_closing[][BTA_AV_NUM_COLS] = {
     /* Event                     Action 1               Action 2               Next state */
     /* AP_OPEN_EVT */           {BTA_AV_SIGNORE,        BTA_AV_SIGNORE,        BTA_AV_CLOSING_SST },
     /* AP_CLOSE_EVT */          {BTA_AV_DISCONNECT_REQ, BTA_AV_SIGNORE,        BTA_AV_CLOSING_SST },
@@ -367,8 +359,7 @@ static const uint8_t bta_av_sst_closing[][BTA_AV_NUM_COLS] =
 typedef const uint8_t (*tBTA_AV_SST_TBL)[BTA_AV_NUM_COLS];
 
 /* state table */
-static const tBTA_AV_SST_TBL bta_av_sst_tbl[] =
-{
+static const tBTA_AV_SST_TBL bta_av_sst_tbl[] = {
     bta_av_sst_init,
     bta_av_sst_incoming,
     bta_av_sst_opening,
@@ -380,7 +371,9 @@ static const tBTA_AV_SST_TBL bta_av_sst_tbl[] =
 
 
 #if (defined(BTA_AV_DEBUG) && BTA_AV_DEBUG == TRUE)
-    static char *bta_av_sst_code(uint8_t state);
+#if (BT_USE_TRACES == TRUE && BT_TRACE_APPL == TRUE)
+static char *bta_av_sst_code(uint8_t state);
+#endif
 #endif
 
 /*******************************************************************************
@@ -397,10 +390,8 @@ uint8_t bta_av_is_rcfg_sst(tBTA_AV_SCB *p_scb)
 {
     uint8_t is_rcfg_sst = FALSE;
 
-    if(p_scb != NULL)
-    {
-        if(p_scb->state == BTA_AV_RCFG_SST)
-        {
+    if(p_scb != NULL) {
+        if(p_scb->state == BTA_AV_RCFG_SST) {
             is_rcfg_sst = TRUE;
         }
     }
@@ -424,8 +415,7 @@ void bta_av_ssm_execute(tBTA_AV_SCB *p_scb, uint16_t event, tBTA_AV_DATA *p_data
     uint8_t               action;
     int                 i, xx;
 
-    if(p_scb == NULL)
-    {
+    if(p_scb == NULL) {
         /* this stream is not registered */
         APPL_TRACE_EVENT("AV channel not registered");
         return;
@@ -435,14 +425,10 @@ void bta_av_ssm_execute(tBTA_AV_SCB *p_scb, uint16_t event, tBTA_AV_DATA *p_data
     /* When ACP_CONNECT_EVT was received, we put first available scb to    */
     /* to Incoming state. Later, when STR_CONFIG_IND_EVT is coming, we     */
     /* know if it is A2DP or VDP.                                          */
-    if((p_scb->state == BTA_AV_INIT_SST) && (event == BTA_AV_STR_CONFIG_IND_EVT))
-    {
-        for(xx = 0; xx < BTA_AV_NUM_STRS; xx++)
-        {
-            if(bta_av_cb.p_scb[xx])
-            {
-                if(bta_av_cb.p_scb[xx]->state == BTA_AV_INCOMING_SST)
-                {
+    if((p_scb->state == BTA_AV_INIT_SST) && (event == BTA_AV_STR_CONFIG_IND_EVT)) {
+        for(xx = 0; xx < BTA_AV_NUM_STRS; xx++) {
+            if(bta_av_cb.p_scb[xx]) {
+                if(bta_av_cb.p_scb[xx]->state == BTA_AV_INCOMING_SST) {
                     bta_av_cb.p_scb[xx]->state = BTA_AV_INIT_SST;
                     bta_av_cb.p_scb[xx]->coll_mask = 0;
                     p_scb->state = BTA_AV_INCOMING_SST;
@@ -452,12 +438,12 @@ void bta_av_ssm_execute(tBTA_AV_SCB *p_scb, uint16_t event, tBTA_AV_DATA *p_data
         }
     }
 
-    #if (defined(BTA_AV_DEBUG) && BTA_AV_DEBUG == TRUE)
+#if (defined(BTA_AV_DEBUG) && BTA_AV_DEBUG == TRUE)
     APPL_TRACE_EVENT("AV Sevent(0x%x)=0x%x(%s) state=%d(%s)\r\n",
-                p_scb->hndl, event, bta_av_evt_code(event), p_scb->state, bta_av_sst_code(p_scb->state));
-    #else
+                     p_scb->hndl, event, bta_av_evt_code(event), p_scb->state, bta_av_sst_code(p_scb->state));
+#else
     APPL_TRACE_VERBOSE("AV Sevent=0x%x state=%d", event, p_scb->state);
-    #endif
+#endif
     /* look up the state table for the current state */
     state_table = bta_av_sst_tbl[p_scb->state];
     event -= BTA_AV_FIRST_SSM_EVT;
@@ -465,14 +451,10 @@ void bta_av_ssm_execute(tBTA_AV_SCB *p_scb, uint16_t event, tBTA_AV_DATA *p_data
     p_scb->state = state_table[event][BTA_AV_SNEXT_STATE];
 
     /* execute action functions */
-    for(i = 0; i < BTA_AV_SACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != BTA_AV_SIGNORE)
-        {
+    for(i = 0; i < BTA_AV_SACTIONS; i++) {
+        if((action = state_table[event][i]) != BTA_AV_SIGNORE) {
             (*p_scb->p_act_tbl[action])(p_scb, p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
@@ -492,10 +474,8 @@ uint8_t bta_av_is_scb_opening(tBTA_AV_SCB *p_scb)
 {
     uint8_t is_opening = FALSE;
 
-    if(p_scb)
-    {
-        if(p_scb->state == BTA_AV_OPENING_SST)
-        {
+    if(p_scb) {
+        if(p_scb->state == BTA_AV_OPENING_SST) {
             is_opening = TRUE;
         }
     }
@@ -517,10 +497,8 @@ uint8_t bta_av_is_scb_incoming(tBTA_AV_SCB *p_scb)
 {
     uint8_t is_incoming = FALSE;
 
-    if(p_scb)
-    {
-        if(p_scb->state == BTA_AV_INCOMING_SST)
-        {
+    if(p_scb) {
+        if(p_scb->state == BTA_AV_INCOMING_SST) {
             is_incoming = TRUE;
         }
     }
@@ -540,8 +518,7 @@ uint8_t bta_av_is_scb_incoming(tBTA_AV_SCB *p_scb)
 *******************************************************************************/
 void bta_av_set_scb_sst_init(tBTA_AV_SCB *p_scb)
 {
-    if(p_scb)
-    {
+    if(p_scb) {
         p_scb->state = BTA_AV_INIT_SST;
     }
 }
@@ -560,10 +537,8 @@ uint8_t bta_av_is_scb_init(tBTA_AV_SCB *p_scb)
 {
     uint8_t is_init = FALSE;
 
-    if(p_scb)
-    {
-        if(p_scb->state == BTA_AV_INIT_SST)
-        {
+    if(p_scb) {
+        if(p_scb->state == BTA_AV_INIT_SST) {
             is_init = TRUE;
         }
     }
@@ -583,8 +558,7 @@ uint8_t bta_av_is_scb_init(tBTA_AV_SCB *p_scb)
 *******************************************************************************/
 void bta_av_set_scb_sst_incoming(tBTA_AV_SCB *p_scb)
 {
-    if(p_scb)
-    {
+    if(p_scb) {
         p_scb->state = BTA_AV_INCOMING_SST;
     }
 }
@@ -593,6 +567,7 @@ void bta_av_set_scb_sst_incoming(tBTA_AV_SCB *p_scb)
 **  Debug Functions
 *****************************************************************************/
 #if (defined(BTA_AV_DEBUG) && BTA_AV_DEBUG == TRUE)
+#if (BT_USE_TRACES == TRUE && BT_TRACE_APPL == TRUE)
 /*******************************************************************************
 **
 ** Function         bta_av_sst_code
@@ -604,8 +579,7 @@ void bta_av_set_scb_sst_incoming(tBTA_AV_SCB *p_scb)
 *******************************************************************************/
 static char *bta_av_sst_code(uint8_t state)
 {
-    switch(state)
-    {
+    switch(state) {
         case BTA_AV_INIT_SST:
             return "INIT";
 
@@ -628,6 +602,6 @@ static char *bta_av_sst_code(uint8_t state)
             return "unknown";
     }
 }
-
+#endif
 #endif
 #endif /* BTA_AV_INCLUDED */

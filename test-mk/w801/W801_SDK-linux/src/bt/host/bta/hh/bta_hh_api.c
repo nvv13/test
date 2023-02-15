@@ -43,8 +43,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_hh_reg =
-{
+static const tBTA_SYS_REG bta_hh_reg = {
     bta_hh_hdl_event,
     BTA_HhDisable
 };
@@ -272,15 +271,14 @@ void BTA_HhSendCtrl(uint8_t dev_handle, tBTA_HH_TRANS_CTRL_TYPE c_type)
 void BTA_HhSendData(uint8_t dev_handle, BD_ADDR dev_bda, BT_HDR  *p_data)
 {
     UNUSED(dev_bda);
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
 
-    if(p_data->layer_specific != BTA_HH_RPTT_OUTPUT)
-    {
+    if(p_data->layer_specific != BTA_HH_RPTT_OUTPUT) {
         APPL_TRACE_ERROR("ERROR! Wrong report type! Write Command only valid for output report!");
         return;
     }
 
-    #endif
+#endif
     bta_hh_snd_write_dev(dev_handle, HID_TRANS_DATA, (uint8_t)p_data->layer_specific, 0, 0, p_data);
 }
 
@@ -327,16 +325,13 @@ void BTA_HhAddDev(BD_ADDR bda, tBTA_HH_ATTR_MASK attr_mask, uint8_t sub_class,
     bdcpy(p_buf->bda, bda);
     wm_memcpy(&p_buf->dscp_info, &dscp_info, sizeof(tBTA_HH_DEV_DSCP_INFO));
 
-    if(dscp_info.descriptor.dl_len != 0 && dscp_info.descriptor.dsc_list)
-    {
+    if(dscp_info.descriptor.dl_len != 0 && dscp_info.descriptor.dsc_list) {
         p_buf->dscp_info.descriptor.dl_len =  dscp_info.descriptor.dl_len;
         p_buf->dscp_info.descriptor.dsc_list = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->dscp_info.descriptor.dsc_list,
                   dscp_info.descriptor.dsc_list,
                   dscp_info.descriptor.dl_len);
-    }
-    else
-    {
+    } else {
         p_buf->dscp_info.descriptor.dsc_list = NULL;
         p_buf->dscp_info.descriptor.dl_len = 0;
     }
@@ -409,11 +404,9 @@ void BTA_HhParseBootRpt(tBTA_HH_BOOT_RPT *p_data, uint8_t *p_report,
 {
     p_data->dev_type = BTA_HH_DEVT_UNKNOWN;
 
-    if(p_report)
-    {
+    if(p_report) {
         /* first byte is report ID */
-        switch(p_report[0])
-        {
+        switch(p_report[0]) {
             case BTA_HH_KEYBD_RPT_ID: /* key board report ID */
                 p_data->dev_type = p_report[0];
                 bta_hh_parse_keybd_rpt(p_data, p_report + 1, (uint16_t)(report_len - 1));

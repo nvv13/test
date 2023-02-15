@@ -24,8 +24,7 @@
 #include "osi/include/list.h"
 #include "osi/include/osi.h"
 
-typedef struct fixed_queue_t
-{
+typedef struct fixed_queue_t {
     list_t *list;
     size_t capacity;
 
@@ -39,8 +38,7 @@ fixed_queue_t *fixed_queue_new(size_t capacity)
     ret->capacity = capacity;
     ret->list = list_new(NULL);
 
-    if(!ret->list)
-    {
+    if(!ret->list) {
         goto error;
     }
 
@@ -52,14 +50,13 @@ error:
 
 void fixed_queue_free(fixed_queue_t *queue, fixed_queue_free_cb free_cb)
 {
-    if(!queue)
-    {
+    if(!queue) {
         return;
     }
 
     if(free_cb)
-        for(const list_node_t *node = list_begin(queue->list); node != list_end(queue->list); node = list_next(node))
-        {
+        for(const list_node_t *node = list_begin(queue->list); node != list_end(queue->list);
+                node = list_next(node)) {
             free_cb(list_node(node));
         }
 
@@ -69,8 +66,7 @@ void fixed_queue_free(fixed_queue_t *queue, fixed_queue_free_cb free_cb)
 
 uint8_t fixed_queue_is_empty(fixed_queue_t *queue)
 {
-    if(queue == NULL)
-    {
+    if(queue == NULL) {
         return true;
     }
 
@@ -80,8 +76,7 @@ uint8_t fixed_queue_is_empty(fixed_queue_t *queue)
 
 size_t fixed_queue_length(fixed_queue_t *queue)
 {
-    if(queue == NULL)
-    {
+    if(queue == NULL) {
         return 0;
     }
 
@@ -120,13 +115,11 @@ uint8_t fixed_queue_try_enqueue(fixed_queue_t *queue, void *data)
 
 void *fixed_queue_try_dequeue(fixed_queue_t *queue)
 {
-    if(queue == NULL)
-    {
+    if(queue == NULL) {
         return NULL;
     }
 
-    if(list_is_empty(queue->list))
-    {
+    if(list_is_empty(queue->list)) {
         return NULL;
     }
 
@@ -137,8 +130,7 @@ void *fixed_queue_try_dequeue(fixed_queue_t *queue)
 
 void *fixed_queue_try_peek_first(fixed_queue_t *queue)
 {
-    if(queue == NULL)
-    {
+    if(queue == NULL) {
         return NULL;
     }
 
@@ -148,8 +140,7 @@ void *fixed_queue_try_peek_first(fixed_queue_t *queue)
 
 void *fixed_queue_try_peek_last(fixed_queue_t *queue)
 {
-    if(queue == NULL)
-    {
+    if(queue == NULL) {
         return NULL;
     }
 
@@ -159,21 +150,18 @@ void *fixed_queue_try_peek_last(fixed_queue_t *queue)
 
 void *fixed_queue_try_remove_from_queue(fixed_queue_t *queue, void *data)
 {
-    if(queue == NULL)
-    {
+    if(queue == NULL) {
         return NULL;
     }
 
     uint8_t removed = false;
 
-    if(list_contains(queue->list, data))
-    {
+    if(list_contains(queue->list, data)) {
         removed = list_remove(queue->list, data);
         assert(removed);
     }
 
-    if(removed)
-    {
+    if(removed) {
         return data;
     }
 

@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "lwip/opt.h"
 #include "lwip/arch.h"
 #include "wm_osal.h"
 //#include <ctype.h>

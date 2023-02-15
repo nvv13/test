@@ -34,23 +34,22 @@
 #include "bta_av_int.h"
 
 #ifndef BTA_AV_RC_PASS_RSP_CODE
-    #define BTA_AV_RC_PASS_RSP_CODE     BTA_AV_RSP_NOT_IMPL
+#define BTA_AV_RC_PASS_RSP_CODE     BTA_AV_RSP_NOT_IMPL
 #endif
 
-const uint32_t  bta_av_meta_caps_co_ids[] =
-{
+const uint32_t  bta_av_meta_caps_co_ids[] = {
     AVRC_CO_METADATA,
     AVRC_CO_BROADCOM
 };
 
 /* AVRCP cupported categories */
 #if (AVRC_CTLR_INCLUDED == TRUE)
-    #define BTA_AV_RC_SUPF_CT       (AVRC_SUPF_CT_CAT2)
+#define BTA_AV_RC_SUPF_CT       (AVRC_SUPF_CT_CAT2)
 #endif
 
 #if (AVRC_CTLR_INCLUDED == TRUE)
-    #define BTA_AVK_RC_SUPF_CT       (AVRC_SUPF_CT_CAT1)
-    #define BTA_AVK_RC_SUPF_TG       (AVRC_SUPF_TG_CAT2)
+#define BTA_AVK_RC_SUPF_CT       (AVRC_SUPF_CT_CAT1)
+#define BTA_AVK_RC_SUPF_TG       (AVRC_SUPF_TG_CAT2)
 #endif
 
 /* Added to modify
@@ -61,8 +60,7 @@ const uint32_t  bta_av_meta_caps_co_ids[] =
 */
 /* Flushing partial avdtp packets can cause some headsets to disconnect the link
    if receiving partial a2dp frames */
-const uint16_t  bta_av_audio_flush_to[] =
-{
+const uint16_t  bta_av_audio_flush_to[] = {
     0, /* 1 stream */
     0, /* 2 streams */
     0, /* 3 streams */
@@ -73,16 +71,15 @@ const uint16_t  bta_av_audio_flush_to[] =
 /* Note: Android doesnt support AVRC_SUPF_TG_GROUP_NAVI  */
 /* Note: if AVRC_SUPF_TG_GROUP_NAVI is set, bta_av_cfg.avrc_group should be TRUE */
 #if AVRC_METADATA_INCLUDED == TRUE
-    #define BTA_AV_RC_SUPF_TG       (AVRC_SUPF_TG_CAT1) /* TODO: | AVRC_SUPF_TG_APP_SETTINGS) */
+#define BTA_AV_RC_SUPF_TG       (AVRC_SUPF_TG_CAT1) /* TODO: | AVRC_SUPF_TG_APP_SETTINGS) */
 #else
-    #define BTA_AV_RC_SUPF_TG       (AVRC_SUPF_TG_CAT1)
+#define BTA_AV_RC_SUPF_TG       (AVRC_SUPF_TG_CAT1)
 #endif
 
 /*
  * If the number of event IDs is changed in this array, BTA_AV_ NUM_RC_EVT_IDS   also needs to be changed.
  */
-const uint8_t  bta_av_meta_caps_evt_ids[] =
-{
+const uint8_t  bta_av_meta_caps_evt_ids[] = {
     AVRC_EVT_PLAY_STATUS_CHANGE,
     AVRC_EVT_TRACK_CHANGE,
     AVRC_EVT_PLAY_POS_CHANGED,
@@ -91,34 +88,32 @@ const uint8_t  bta_av_meta_caps_evt_ids[] =
     */
 };
 #ifndef BTA_AV_NUM_RC_EVT_IDS
-    #define BTA_AV_NUM_RC_EVT_IDS   (sizeof(bta_av_meta_caps_evt_ids) / sizeof(bta_av_meta_caps_evt_ids[0]))
+#define BTA_AV_NUM_RC_EVT_IDS   (sizeof(bta_av_meta_caps_evt_ids) / sizeof(bta_av_meta_caps_evt_ids[0]))
 #endif /* BTA_AV_NUM_RC_EVT_IDS */
 
-const uint8_t  bta_avk_meta_caps_evt_ids[] =
-{
-    #if AVRC_ADV_CTRL_INCLUDED == TRUE
+const uint8_t  bta_avk_meta_caps_evt_ids[] = {
+#if AVRC_ADV_CTRL_INCLUDED == TRUE
     AVRC_EVT_VOLUME_CHANGE,
-    #endif
+#endif
 };
 #ifndef BTA_AVK_NUM_RC_EVT_IDS
-    #define BTA_AVK_NUM_RC_EVT_IDS   (sizeof(bta_avk_meta_caps_evt_ids) / sizeof(bta_avk_meta_caps_evt_ids[0]))
+#define BTA_AVK_NUM_RC_EVT_IDS   (sizeof(bta_avk_meta_caps_evt_ids) / sizeof(bta_avk_meta_caps_evt_ids[0]))
 #endif /* BTA_AVK_NUM_RC_EVT_IDS */
 
 
 /* the MTU for the AVRCP browsing channel */
 #ifndef BTA_AV_MAX_RC_BR_MTU
-    #define BTA_AV_MAX_RC_BR_MTU      1008
+#define BTA_AV_MAX_RC_BR_MTU      1008
 #endif
 
 /* This configuration to be used when we are Src + TG + CT( only for abs vol) */
-const tBTA_AV_CFG bta_av_cfg =
-{
+const tBTA_AV_CFG bta_av_cfg = {
     AVRC_CO_BROADCOM,       /* AVRCP Company ID */
-    #if AVRC_METADATA_INCLUDED == TRUE
+#if AVRC_METADATA_INCLUDED == TRUE
     512,                    /* AVRCP MTU at L2CAP for control channel */
-    #else
+#else
     48,                     /* AVRCP MTU at L2CAP for control channel */
-    #endif
+#endif
     BTA_AV_MAX_RC_BR_MTU,   /* AVRCP MTU at L2CAP for browsing channel */
     BTA_AV_RC_SUPF_CT,      /* AVRCP controller categories */
     BTA_AV_RC_SUPF_TG,      /* AVRCP target categories */
@@ -141,14 +136,13 @@ const tBTA_AV_CFG bta_av_cfg =
 };
 
 /* This configuration to be used when we are Sink + CT + TG( only for abs vol) */
-const tBTA_AV_CFG bta_avk_cfg =
-{
+const tBTA_AV_CFG bta_avk_cfg = {
     AVRC_CO_METADATA,       /* AVRCP Company ID */
-    #if AVRC_METADATA_INCLUDED == TRUE
+#if AVRC_METADATA_INCLUDED == TRUE
     512,                    /* AVRCP MTU at L2CAP for control channel */
-    #else
+#else
     48,                     /* AVRCP MTU at L2CAP for control channel */
-    #endif
+#endif
     BTA_AV_MAX_RC_BR_MTU,   /* AVRCP MTU at L2CAP for browsing channel */
     BTA_AVK_RC_SUPF_CT,      /* AVRCP controller categories */
     BTA_AVK_RC_SUPF_TG,      /* AVRCP target categories */
@@ -172,8 +166,7 @@ const tBTA_AV_CFG bta_avk_cfg =
 
 tBTA_AV_CFG *p_bta_av_cfg = NULL;
 
-const uint16_t bta_av_rc_id[] =
-{
+const uint16_t bta_av_rc_id[] = {
     0x0000, /* bit mask: 0=SELECT, 1=UP, 2=DOWN, 3=LEFT,
                          4=RIGHT, 5=RIGHT_UP, 6=RIGHT_DOWN, 7=LEFT_UP,
                          8=LEFT_DOWN, 9=ROOT_MENU, 10=SETUP_MENU, 11=CONT_MENU,
@@ -190,7 +183,7 @@ const uint16_t bta_av_rc_id[] =
                          4=INPUT_SEL, 5=DISP_INFO, 6=HELP, 7=PAGE_UP,
                          8=PAGE_DOWN */
 
-    #if (BTA_AV_RC_PASS_RSP_CODE == BTA_AV_RSP_INTERIM)
+#if (BTA_AV_RC_PASS_RSP_CODE == BTA_AV_RSP_INTERIM)
     /* btui_app provides an example of how to leave the decision of rejecting a command or not
      * based on which media player is currently addressed (this is only applicable for AVRCP 1.4 or later)
      * If the decision is per player for a particular rc_id, the related bit is clear (not set) */
@@ -198,19 +191,19 @@ const uint16_t bta_av_rc_id[] =
                          4=PLAY, 5=STOP, 6=PAUSE, 7=RECORD,
                          8=REWIND, 9=FAST_FOR, 10=EJECT, 11=FORWARD,
                          12=BACKWARD */
-    #else
-    #if (defined BTA_AVRCP_FF_RW_SUPPORT) && (BTA_AVRCP_FF_RW_SUPPORT == TRUE)
+#else
+#if (defined BTA_AVRCP_FF_RW_SUPPORT) && (BTA_AVRCP_FF_RW_SUPPORT == TRUE)
     0x1b70, /* bit mask: 0=POWER, 1=VOL_UP, 2=VOL_DOWN, 3=MUTE,
                          4=PLAY, 5=STOP, 6=PAUSE, 7=RECORD,
                          8=REWIND, 9=FAST_FOR, 10=EJECT, 11=FORWARD,
                          12=BACKWARD */
-    #else
+#else
     0x1870, /* bit mask: 0=POWER, 1=VOL_UP, 2=VOL_DOWN, 3=MUTE,
                          4=PLAY, 5=STOP, 6=PAUSE, 7=RECORD,
                          8=REWIND, 9=FAST_FOR, 10=EJECT, 11=FORWARD,
                          12=BACKWARD */
-    #endif
-    #endif
+#endif
+#endif
 
     0x0000, /* bit mask: 0=ANGLE, 1=SUBPICT */
 
@@ -221,8 +214,7 @@ const uint16_t bta_av_rc_id[] =
 };
 
 #if (BTA_AV_RC_PASS_RSP_CODE == BTA_AV_RSP_INTERIM)
-const uint16_t bta_av_rc_id_ac[] =
-{
+const uint16_t bta_av_rc_id_ac[] = {
     0x0000, /* bit mask: 0=SELECT, 1=UP, 2=DOWN, 3=LEFT,
                          4=RIGHT, 5=RIGHT_UP, 6=RIGHT_DOWN, 7=LEFT_UP,
                          8=LEFT_DOWN, 9=ROOT_MENU, 10=SETUP_MENU, 11=CONT_MENU,

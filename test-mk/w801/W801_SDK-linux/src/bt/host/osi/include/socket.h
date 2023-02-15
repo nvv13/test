@@ -97,7 +97,8 @@ ssize_t socket_bytes_available(const socket_t *socket);
 // will be called. When the socket becomes writeable, |write_cb| will be called. The
 // |context| parameter is passed, untouched, to each of the callback routines. Neither
 // |socket| nor |reactor| may be NULL. |read_cb|, |write_cb|, and |context| may be NULL.
-void socket_register(socket_t *socket, reactor_t *reactor, void *context, socket_cb read_cb, socket_cb write_cb);
+void socket_register(socket_t *socket, reactor_t *reactor, void *context, socket_cb read_cb,
+                     socket_cb write_cb);
 
 // Unregisters |socket| from whichever reactor it is registered with, if any. This
 // function is idempotent.

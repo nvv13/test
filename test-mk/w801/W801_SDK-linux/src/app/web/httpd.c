@@ -84,10 +84,12 @@
 #include "lwip/tcp.h"
 #include "lwip/memp.h"
 #include "httpd.h"
+#include "wm_wifi.h"
 #include "wm_fwup.h"
 #include "wm_watchdog.h"
 #include "wm_params.h"
 #include "wm_wifi_oneshot.h"
+#include "wm_ram_config.h"
 
 //#include "lwip/tcp.h"
 
@@ -179,7 +181,7 @@ struct http_state {
 
   int recv_state;
   int recv_content_len;
-  char recv_boundry[64];
+  char recv_boundry[128];
  struct http_recive http_recive_request;
   struct pbuf *RecvPbuf;
   int RecvOffset;
@@ -204,7 +206,7 @@ const char * const g_pcTagLeadOut = "-->";
 const tCGI *g_pCGIs = NULL;
 int g_iNumCGIs = 0;
 #endif /* INCLUDE_HTTPD_CGI */
-static u32 session_id;
+//static u32 session_id;
 
  const  char GpucHttpHead_Authen[] = {\
     "HTTP/1.1 401 Unauthorized\r\n"
@@ -254,7 +256,7 @@ conn_err(void *arg, err_t err)
 static void
 close_conn(struct tcp_pcb *pcb, struct http_state *hs)
 {
-  DEBUG_PRINT("Closing connection 0x%08x\n\r", pcb);
+  DEBUG_PRINT("Closing connection 0x%08x\n\r", (u32)pcb);
   if (pcb){
 	  tcp_arg(pcb, NULL);
 	  tcp_sent(pcb, NULL);
@@ -274,10 +276,10 @@ close_conn(struct tcp_pcb *pcb, struct http_state *hs)
   if (pcb)
   	tcp_close(pcb);
 #if TLS_CONFIG_WEB_SERVER_MODE
-    if (gwebcfgmode)
+    if (gwebcfgmode == 1)
     {
         tls_oneshot_send_web_connect_msg();
-        gwebcfgmode = 0;
+        gwebcfgmode = 2;
     }
 #endif  
 }
@@ -480,7 +482,7 @@ send_data(struct tcp_pcb *pcb, struct http_state *hs)
 #endif
 if (hs->file_flag & FILEFLAG_FILTER)
 {
-	int memlen=len+10;
+	int memlen=len+256;
 	Temp=mem_malloc(memlen);
 	if(Temp==NULL)
 	{
@@ -891,7 +893,7 @@ http_poll(void *arg, struct tcp_pcb *pcb)
 
   hs = arg;
 
- DEBUG_PRINT("http_poll 0x%08x\n\r", pcb);
+ DEBUG_PRINT("http_poll 0x%08x\n\r", (u32)pcb);
 
     if (hs == NULL) {
     /*    printf("Null, close\n");*/
@@ -1041,6 +1043,7 @@ void send_jump_html(struct http_state *hs,struct tcp_pcb *pcb)
 static tls_os_timer_t *restart_tmr = NULL;
 static void restart_tmr_handler(void *ptmr, void *parg)
 {
+	tls_sys_set_reboot_reason(REBOOT_REASON_ACTIVE);
 	tls_sys_reset();
 }
 static void resethandler()
@@ -1222,11 +1225,18 @@ static void resethandler()
 	  DEBUG_PRINT("Opening %s\n\r", Url);
 
          	 file = fs_open(Url);
-		  if (strstr(Url, "hed")){
+		  //if (strstr(Url, "hed"))
+		  {
 			hs->file_flag |= FILEFLAG_FILTER;
 		  }	 			 
           if(file == NULL) {
-            file = fs_open("/404.html");
+            if (tls_wifi_get_oneshot_flag()) {
+                file = fs_open("/index.html");
+                if (NULL == file)
+                    file = fs_open("/404.html");
+            } else {
+                file = fs_open("/404.html");
+            }
           }
 #ifdef INCLUDE_HTTPD_SSI
           else {
@@ -1305,8 +1315,8 @@ static void resethandler()
 #endif
 	 			hs->recv_state = 2;
 	 			//tls_fwup_reg_complete_callback(http_fwup_done_callback);
-				session_id = tls_fwup_enter(TLS_FWUP_IMAGE_SRC_WEB);
-	        		DEBUG_PRINT("begin to recv octet-stream %d\r\n", session_id); 
+				//session_id = tls_fwup_enter(TLS_FWUP_IMAGE_SRC_WEB);
+	        		//DEBUG_PRINT("begin to recv octet-stream %d\r\n", session_id); 
 			}
 		}
 	}
@@ -1365,7 +1375,7 @@ void send_data_to_sys(struct http_state *hs)
 		}
 		else
 		{
-			tls_fwup_request_sync(session_id, (u8 *)(cur_p->payload) + offset, (u32)(cur_p->len - offset));
+			//tls_fwup_request_sync(session_id, (u8 *)(cur_p->payload) + offset, (u32)(cur_p->len - offset));
 			offset = 0;
 		}
 		cur_p = cur_p->next;
@@ -1660,6 +1670,7 @@ void httpd_init(unsigned short port)
 #endif
 
   web_pcb = tcp_new();
+  ip_set_option(web_pcb, SOF_REUSEADDR);
   tcp_bind(web_pcb, IP_ADDR_ANY, port);
   web_pcb = tcp_listen(web_pcb);
   tcp_arg(web_pcb, web_pcb);
@@ -1671,22 +1682,41 @@ void httpd_init(unsigned short port)
 void httpd_deinit(void)
 {
     err_t err;
-    if (web_pcb)
-    {
-	    gwebcfgmode = 0;
-	    g_pCGIs = NULL;
-	    g_iNumCGIs = 0;
-	    
-	    tcp_arg(web_pcb, NULL);
-	    tcp_accept(web_pcb, NULL);
-	    err = tcp_close(web_pcb);
-	    if (err){
-	        err = tcp_shutdown(web_pcb, 1, 1);
+	if (web_pcb)
+	{
+		tcp_arg(web_pcb, NULL);
+	    if (web_pcb->state == LISTEN)
+	    {
+		    g_pCGIs = NULL;
+		    g_iNumCGIs = 0;
+	    	tcp_accept(web_pcb, NULL);
 	    }
-	    if (err == 0)
-		    web_pcb = NULL;
-	    //printf("err:%d\n", err);
-    }
+		else
+	    {
+		    g_pCGIs = NULL;
+		    g_iNumCGIs = 0;
+
+		    tcp_recv(web_pcb, NULL);
+
+		    tcp_accept(web_pcb, NULL);
+
+	        tcp_sent(web_pcb, NULL);
+
+	        tcp_poll(web_pcb, NULL, 4);
+
+	        tcp_err(web_pcb, NULL);
+
+	    }
+		err = tcp_close(web_pcb);
+
+		if (err){
+			err = tcp_shutdown(web_pcb, 1, 1);
+		}
+		if (err == 0)
+			web_pcb = NULL;
+		//printf("httpd_deinit err:%d\n", err);
+	}
+
 
 }
 

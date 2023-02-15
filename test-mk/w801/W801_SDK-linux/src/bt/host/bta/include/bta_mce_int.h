@@ -33,8 +33,7 @@
 **  Constants
 *****************************************************************************/
 
-enum
-{
+enum {
     /* these events are handled by the state machine */
     BTA_MCE_API_ENABLE_EVT = BTA_SYS_EVT_START(BTA_ID_MCE),
     BTA_MCE_API_GET_REMOTE_MAS_INSTANCES_EVT,
@@ -42,22 +41,19 @@ enum
 };
 
 /* data type for BTA_MCE_API_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR             hdr;
     tBTA_MCE_DM_CBACK  *p_cback;
 } tBTA_MCE_API_ENABLE;
 
 /* data type for BTA_MCE_API_GET_REMOTE_MAS_INSTANCES_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR   hdr;
     BD_ADDR  bd_addr;
 } tBTA_MCE_API_GET_REMOTE_MAS_INSTANCES;
 
 /* union of all data types */
-typedef union
-{
+typedef union {
     /* GKI event buffer header */
     BT_HDR                                 hdr;
     tBTA_MCE_API_ENABLE                    enable;
@@ -65,25 +61,23 @@ typedef union
 } tBTA_MCE_MSG;
 
 /* MCE control block */
-typedef struct
-{
+typedef struct {
     uint8_t              sdp_active;  /* see BTA_MCE_SDP_ACT_* */
     BD_ADDR            remote_addr;
     tBTA_MCE_DM_CBACK  *p_dm_cback;
 } tBTA_MCE_CB;
 
-enum
-{
+enum {
     BTA_MCE_SDP_ACT_NONE = 0,
     BTA_MCE_SDP_ACT_YES       /* waiting for SDP result */
 };
 
 /* MCE control block */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    extern tBTA_MCE_CB bta_mce_cb;
+extern tBTA_MCE_CB bta_mce_cb;
 #else
-    extern tBTA_MCE_CB *bta_mce_cb_ptr;
-    #define bta_mce_cb (*bta_mce_cb_ptr)
+extern tBTA_MCE_CB *bta_mce_cb_ptr;
+#define bta_mce_cb (*bta_mce_cb_ptr)
 #endif
 
 /* config struct */

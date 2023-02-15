@@ -59,13 +59,14 @@ tls_bt_status_t tls_dm_stop_timer(uint8_t timer_id);
  ** Parameters       timer_id;
  **                  tls_ble_dm_timer_callback_t; timer expired callback function
  **
- ** Returns 		 TLS_BT_STATUS_SUCCESS;
- **				  TLS_BT_STATUS_NOMEM
+ ** Returns          TLS_BT_STATUS_SUCCESS;
+ **               TLS_BT_STATUS_NOMEM
 
  **
  *******************************************************************************/
 
-tls_bt_status_t tls_dm_start_timer(uint8_t timer_id, uint32_t timeout_ms,tls_ble_dm_timer_callback_t callback);
+tls_bt_status_t tls_dm_start_timer(uint8_t timer_id, uint32_t timeout_ms,
+                                   tls_ble_dm_timer_callback_t callback);
 
 #ifdef __cplusplus
 }

@@ -23,8 +23,7 @@ typedef int SOCKET;
 #define SOCKET_ERROR            (-1)
 
 /* tcp/ip socket configuration */
-typedef struct
-{
+typedef struct {
     char            *p_address;
     unsigned int    port;
 } tUIPC_LINUX_CFG_TCP ;

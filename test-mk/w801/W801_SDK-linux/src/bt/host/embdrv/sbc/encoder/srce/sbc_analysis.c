@@ -28,139 +28,139 @@
 /*#include <math.h>*/
 
 #if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
-    #define WIND_4_SUBBANDS_0_1 (SINT32)0x01659F45  /* gas32CoeffFor4SBs[8] = -gas32CoeffFor4SBs[32] = 0x01659F45 */
-    #define WIND_4_SUBBANDS_0_2 (SINT32)0x115B1ED2  /* gas32CoeffFor4SBs[16] = -gas32CoeffFor4SBs[24] = 0x115B1ED2 */
-    #define WIND_4_SUBBANDS_1_0 (SINT32)0x001194E6  /* gas32CoeffFor4SBs[1 et 39] = 0x001194E6 */
-    #define WIND_4_SUBBANDS_1_1 (SINT32)0x029DBAA3  /* gas32CoeffFor4SBs[9 et 31] = 0x029DBAA3 */
-    #define WIND_4_SUBBANDS_1_2 (SINT32)0x18F55C90  /* gas32CoeffFor4SBs[17 et 23] = 0x18F55C90 */
-    #define WIND_4_SUBBANDS_1_3 (SINT32)0xF60FAF37  /* gas32CoeffFor4SBs[15 et 25] = 0xF60FAF37 */
-    #define WIND_4_SUBBANDS_1_4 (SINT32)0xFF9BB9D5  /* gas32CoeffFor4SBs[7 et 33] = 0xFF9BB9D5 */
-    #define WIND_4_SUBBANDS_2_0 (SINT32)0x0030E2D3  /* gas32CoeffFor4SBs[2 et 38] = 0x0030E2D3 */
-    #define WIND_4_SUBBANDS_2_1 (SINT32)0x03B23341  /* gas32CoeffFor4SBs[10 et 30] = 0x03B23341 */
-    #define WIND_4_SUBBANDS_2_2 (SINT32)0x1F91CA46  /* gas32CoeffFor4SBs[18 et 22] = 0x1F91CA46 */
-    #define WIND_4_SUBBANDS_2_3 (SINT32)0xFC4F91D4  /* gas32CoeffFor4SBs[14 et 26] = 0xFC4F91D4 */
-    #define WIND_4_SUBBANDS_2_4 (SINT32)0x003D239B  /* gas32CoeffFor4SBs[6 et 34] = 0x003D239B */
-    #define WIND_4_SUBBANDS_3_0 (SINT32)0x00599403  /* gas32CoeffFor4SBs[3 et 37] = 0x00599403 */
-    #define WIND_4_SUBBANDS_3_1 (SINT32)0x041EEE40  /* gas32CoeffFor4SBs[11 et 29] = 0x041EEE40 */
-    #define WIND_4_SUBBANDS_3_2 (SINT32)0x2412F251  /* gas32CoeffFor4SBs[19 et 21] = 0x2412F251 */
-    #define WIND_4_SUBBANDS_3_3 (SINT32)0x00C8F2BC  /* gas32CoeffFor4SBs[13 et 27] = 0x00C8F2BC */
-    #define WIND_4_SUBBANDS_3_4 (SINT32)0x007F88E4  /* gas32CoeffFor4SBs[5 et 35] = 0x007F88E4 */
-    #define WIND_4_SUBBANDS_4_0 (SINT32)0x007DBCC8  /* gas32CoeffFor4SBs[4 et 36] = 0x007DBCC8 */
-    #define WIND_4_SUBBANDS_4_1 (SINT32)0x034FEE2C  /* gas32CoeffFor4SBs[12 et 28] = 0x034FEE2C */
-    #define WIND_4_SUBBANDS_4_2 (SINT32)0x25AC1FF2  /* gas32CoeffFor4SBs[20] = 0x25AC1FF2 */
+#define WIND_4_SUBBANDS_0_1 (SINT32)0x01659F45  /* gas32CoeffFor4SBs[8] = -gas32CoeffFor4SBs[32] = 0x01659F45 */
+#define WIND_4_SUBBANDS_0_2 (SINT32)0x115B1ED2  /* gas32CoeffFor4SBs[16] = -gas32CoeffFor4SBs[24] = 0x115B1ED2 */
+#define WIND_4_SUBBANDS_1_0 (SINT32)0x001194E6  /* gas32CoeffFor4SBs[1 et 39] = 0x001194E6 */
+#define WIND_4_SUBBANDS_1_1 (SINT32)0x029DBAA3  /* gas32CoeffFor4SBs[9 et 31] = 0x029DBAA3 */
+#define WIND_4_SUBBANDS_1_2 (SINT32)0x18F55C90  /* gas32CoeffFor4SBs[17 et 23] = 0x18F55C90 */
+#define WIND_4_SUBBANDS_1_3 (SINT32)0xF60FAF37  /* gas32CoeffFor4SBs[15 et 25] = 0xF60FAF37 */
+#define WIND_4_SUBBANDS_1_4 (SINT32)0xFF9BB9D5  /* gas32CoeffFor4SBs[7 et 33] = 0xFF9BB9D5 */
+#define WIND_4_SUBBANDS_2_0 (SINT32)0x0030E2D3  /* gas32CoeffFor4SBs[2 et 38] = 0x0030E2D3 */
+#define WIND_4_SUBBANDS_2_1 (SINT32)0x03B23341  /* gas32CoeffFor4SBs[10 et 30] = 0x03B23341 */
+#define WIND_4_SUBBANDS_2_2 (SINT32)0x1F91CA46  /* gas32CoeffFor4SBs[18 et 22] = 0x1F91CA46 */
+#define WIND_4_SUBBANDS_2_3 (SINT32)0xFC4F91D4  /* gas32CoeffFor4SBs[14 et 26] = 0xFC4F91D4 */
+#define WIND_4_SUBBANDS_2_4 (SINT32)0x003D239B  /* gas32CoeffFor4SBs[6 et 34] = 0x003D239B */
+#define WIND_4_SUBBANDS_3_0 (SINT32)0x00599403  /* gas32CoeffFor4SBs[3 et 37] = 0x00599403 */
+#define WIND_4_SUBBANDS_3_1 (SINT32)0x041EEE40  /* gas32CoeffFor4SBs[11 et 29] = 0x041EEE40 */
+#define WIND_4_SUBBANDS_3_2 (SINT32)0x2412F251  /* gas32CoeffFor4SBs[19 et 21] = 0x2412F251 */
+#define WIND_4_SUBBANDS_3_3 (SINT32)0x00C8F2BC  /* gas32CoeffFor4SBs[13 et 27] = 0x00C8F2BC */
+#define WIND_4_SUBBANDS_3_4 (SINT32)0x007F88E4  /* gas32CoeffFor4SBs[5 et 35] = 0x007F88E4 */
+#define WIND_4_SUBBANDS_4_0 (SINT32)0x007DBCC8  /* gas32CoeffFor4SBs[4 et 36] = 0x007DBCC8 */
+#define WIND_4_SUBBANDS_4_1 (SINT32)0x034FEE2C  /* gas32CoeffFor4SBs[12 et 28] = 0x034FEE2C */
+#define WIND_4_SUBBANDS_4_2 (SINT32)0x25AC1FF2  /* gas32CoeffFor4SBs[20] = 0x25AC1FF2 */
 
-    #define WIND_8_SUBBANDS_0_1 (SINT32)0x00B97348  /* 16 0x00B97348 */
-    #define WIND_8_SUBBANDS_0_2 (SINT32)0x08B4307A  /* 32 0x08B4307A */
-    #define WIND_8_SUBBANDS_1_0 (SINT32)0x00052173  /* 1 et 79 = 0x00052173 */
-    #define WIND_8_SUBBANDS_1_1 (SINT32)0x01071B96  /* 17 et 63 = 0x01071B96 */
-    #define WIND_8_SUBBANDS_1_2 (SINT32)0x0A9F3E9A  /* 33 et 47 = 0x0A9F3E9A*/
-    #define WIND_8_SUBBANDS_1_3 (SINT32)0xF9312891  /* 31 et 49 = 0xF9312891 */
-    #define WIND_8_SUBBANDS_1_4 (SINT32)0xFF8D6793  /* 15 et 65 = 0xFF8D6793 */
-    #define WIND_8_SUBBANDS_2_0 (SINT32)0x000B3F71  /* 2 et 78 = 0x000B3F71 */
-    #define WIND_8_SUBBANDS_2_1 (SINT32)0x0156B3CA  /* 18 et 62 = 0x0156B3CA */
-    #define WIND_8_SUBBANDS_2_2 (SINT32)0x0C7D59B6  /* 34 et 46 = 0x0C7D59B6 */
-    #define WIND_8_SUBBANDS_2_3 (SINT32)0xFAFF95FC  /* 30 et 50 = 0xFAFF95FC */
-    #define WIND_8_SUBBANDS_2_4 (SINT32)0xFFC9F10E  /* 14 et 66 = 0xFFC9F10E */
-    #define WIND_8_SUBBANDS_3_0 (SINT32)0x00122C7D  /* 3 et 77 = 0x00122C7D*/
-    #define WIND_8_SUBBANDS_3_1 (SINT32)0x01A1B38B  /* 19 et 61 = 0x01A1B38B */
-    #define WIND_8_SUBBANDS_3_2 (SINT32)0x0E3BB16F  /* 35 et 45 = 0x0E3BB16F */
-    #define WIND_8_SUBBANDS_3_3 (SINT32)0xFCA86E7E  /* 29 et 51 = 0xFCA86E7E */
-    #define WIND_8_SUBBANDS_3_4 (SINT32)0xFFFA2413  /* 13 et 67 = 0xFFFA2413 */
-    #define WIND_8_SUBBANDS_4_0 (SINT32)0x001AFF89  /* 4 et 66 = 0x001AFF89 */
-    #define WIND_8_SUBBANDS_4_1 (SINT32)0x01E0224C  /* 20 et 60 = 0x01E0224C */
-    #define WIND_8_SUBBANDS_4_2 (SINT32)0x0FC721F9  /* 36 et 44 = 0x0FC721F9 */
-    #define WIND_8_SUBBANDS_4_3 (SINT32)0xFE20435D  /* 28 et 52 = 0xFE20435D */
-    #define WIND_8_SUBBANDS_4_4 (SINT32)0x001D8FD2  /* 12 et 68 = 0x001D8FD2 */
-    #define WIND_8_SUBBANDS_5_0 (SINT32)0x00255A62  /* 5 et 75 = 0x00255A62 */
-    #define WIND_8_SUBBANDS_5_1 (SINT32)0x0209291F  /* 21 et 59 = 0x0209291F */
-    #define WIND_8_SUBBANDS_5_2 (SINT32)0x110ECEF0  /* 37 et 43 = 0x110ECEF0 */
-    #define WIND_8_SUBBANDS_5_3 (SINT32)0xFF5EEB73  /* 27 et  53 = 0xFF5EEB73 */
-    #define WIND_8_SUBBANDS_5_4 (SINT32)0x0034F8B6  /* 11 et 69 = 0x0034F8B6 */
-    #define WIND_8_SUBBANDS_6_0 (SINT32)0x003060F4  /* 6 et 74 = 0x003060F4 */
-    #define WIND_8_SUBBANDS_6_1 (SINT32)0x02138653  /* 22 et 58 = 0x02138653 */
-    #define WIND_8_SUBBANDS_6_2 (SINT32)0x120435FA  /* 38 et 42 = 0x120435FA */
-    #define WIND_8_SUBBANDS_6_3 (SINT32)0x005FD0FF  /* 26 et 54 = 0x005FD0FF */
-    #define WIND_8_SUBBANDS_6_4 (SINT32)0x00415B75  /* 10 et 70 = 0x00415B75 */
-    #define WIND_8_SUBBANDS_7_0 (SINT32)0x003A72E7  /* 7 et 73 = 0x003A72E7 */
-    #define WIND_8_SUBBANDS_7_1 (SINT32)0x01F5F424  /* 23 et 57 = 0x01F5F424 */
-    #define WIND_8_SUBBANDS_7_2 (SINT32)0x129C226F  /* 39 et 41 = 0x129C226F */
-    #define WIND_8_SUBBANDS_7_3 (SINT32)0x01223EBA  /* 25 et 55 = 0x01223EBA */
-    #define WIND_8_SUBBANDS_7_4 (SINT32)0x0044EF48  /* 9 et 71 = 0x0044EF48 */
-    #define WIND_8_SUBBANDS_8_0 (SINT32)0x0041EC6A  /* 8 et 72 = 0x0041EC6A */
-    #define WIND_8_SUBBANDS_8_1 (SINT32)0x01A7ECEF  /* 24 et 56 = 0x01A7ECEF */
-    #define WIND_8_SUBBANDS_8_2 (SINT32)0x12CF6C75  /* 40 = 0x12CF6C75 */
+#define WIND_8_SUBBANDS_0_1 (SINT32)0x00B97348  /* 16 0x00B97348 */
+#define WIND_8_SUBBANDS_0_2 (SINT32)0x08B4307A  /* 32 0x08B4307A */
+#define WIND_8_SUBBANDS_1_0 (SINT32)0x00052173  /* 1 et 79 = 0x00052173 */
+#define WIND_8_SUBBANDS_1_1 (SINT32)0x01071B96  /* 17 et 63 = 0x01071B96 */
+#define WIND_8_SUBBANDS_1_2 (SINT32)0x0A9F3E9A  /* 33 et 47 = 0x0A9F3E9A*/
+#define WIND_8_SUBBANDS_1_3 (SINT32)0xF9312891  /* 31 et 49 = 0xF9312891 */
+#define WIND_8_SUBBANDS_1_4 (SINT32)0xFF8D6793  /* 15 et 65 = 0xFF8D6793 */
+#define WIND_8_SUBBANDS_2_0 (SINT32)0x000B3F71  /* 2 et 78 = 0x000B3F71 */
+#define WIND_8_SUBBANDS_2_1 (SINT32)0x0156B3CA  /* 18 et 62 = 0x0156B3CA */
+#define WIND_8_SUBBANDS_2_2 (SINT32)0x0C7D59B6  /* 34 et 46 = 0x0C7D59B6 */
+#define WIND_8_SUBBANDS_2_3 (SINT32)0xFAFF95FC  /* 30 et 50 = 0xFAFF95FC */
+#define WIND_8_SUBBANDS_2_4 (SINT32)0xFFC9F10E  /* 14 et 66 = 0xFFC9F10E */
+#define WIND_8_SUBBANDS_3_0 (SINT32)0x00122C7D  /* 3 et 77 = 0x00122C7D*/
+#define WIND_8_SUBBANDS_3_1 (SINT32)0x01A1B38B  /* 19 et 61 = 0x01A1B38B */
+#define WIND_8_SUBBANDS_3_2 (SINT32)0x0E3BB16F  /* 35 et 45 = 0x0E3BB16F */
+#define WIND_8_SUBBANDS_3_3 (SINT32)0xFCA86E7E  /* 29 et 51 = 0xFCA86E7E */
+#define WIND_8_SUBBANDS_3_4 (SINT32)0xFFFA2413  /* 13 et 67 = 0xFFFA2413 */
+#define WIND_8_SUBBANDS_4_0 (SINT32)0x001AFF89  /* 4 et 66 = 0x001AFF89 */
+#define WIND_8_SUBBANDS_4_1 (SINT32)0x01E0224C  /* 20 et 60 = 0x01E0224C */
+#define WIND_8_SUBBANDS_4_2 (SINT32)0x0FC721F9  /* 36 et 44 = 0x0FC721F9 */
+#define WIND_8_SUBBANDS_4_3 (SINT32)0xFE20435D  /* 28 et 52 = 0xFE20435D */
+#define WIND_8_SUBBANDS_4_4 (SINT32)0x001D8FD2  /* 12 et 68 = 0x001D8FD2 */
+#define WIND_8_SUBBANDS_5_0 (SINT32)0x00255A62  /* 5 et 75 = 0x00255A62 */
+#define WIND_8_SUBBANDS_5_1 (SINT32)0x0209291F  /* 21 et 59 = 0x0209291F */
+#define WIND_8_SUBBANDS_5_2 (SINT32)0x110ECEF0  /* 37 et 43 = 0x110ECEF0 */
+#define WIND_8_SUBBANDS_5_3 (SINT32)0xFF5EEB73  /* 27 et  53 = 0xFF5EEB73 */
+#define WIND_8_SUBBANDS_5_4 (SINT32)0x0034F8B6  /* 11 et 69 = 0x0034F8B6 */
+#define WIND_8_SUBBANDS_6_0 (SINT32)0x003060F4  /* 6 et 74 = 0x003060F4 */
+#define WIND_8_SUBBANDS_6_1 (SINT32)0x02138653  /* 22 et 58 = 0x02138653 */
+#define WIND_8_SUBBANDS_6_2 (SINT32)0x120435FA  /* 38 et 42 = 0x120435FA */
+#define WIND_8_SUBBANDS_6_3 (SINT32)0x005FD0FF  /* 26 et 54 = 0x005FD0FF */
+#define WIND_8_SUBBANDS_6_4 (SINT32)0x00415B75  /* 10 et 70 = 0x00415B75 */
+#define WIND_8_SUBBANDS_7_0 (SINT32)0x003A72E7  /* 7 et 73 = 0x003A72E7 */
+#define WIND_8_SUBBANDS_7_1 (SINT32)0x01F5F424  /* 23 et 57 = 0x01F5F424 */
+#define WIND_8_SUBBANDS_7_2 (SINT32)0x129C226F  /* 39 et 41 = 0x129C226F */
+#define WIND_8_SUBBANDS_7_3 (SINT32)0x01223EBA  /* 25 et 55 = 0x01223EBA */
+#define WIND_8_SUBBANDS_7_4 (SINT32)0x0044EF48  /* 9 et 71 = 0x0044EF48 */
+#define WIND_8_SUBBANDS_8_0 (SINT32)0x0041EC6A  /* 8 et 72 = 0x0041EC6A */
+#define WIND_8_SUBBANDS_8_1 (SINT32)0x01A7ECEF  /* 24 et 56 = 0x01A7ECEF */
+#define WIND_8_SUBBANDS_8_2 (SINT32)0x12CF6C75  /* 40 = 0x12CF6C75 */
 #else
-    #define WIND_4_SUBBANDS_0_1 (SINT16)0x0166  /* gas32CoeffFor4SBs[8] = -gas32CoeffFor4SBs[32] = 0x01659F45 */
-    #define WIND_4_SUBBANDS_0_2 (SINT16)0x115B  /* gas32CoeffFor4SBs[16] = -gas32CoeffFor4SBs[24] = 0x115B1ED2 */
-    #define WIND_4_SUBBANDS_1_0 (SINT16)0x0012  /* gas32CoeffFor4SBs[1 et 39] = 0x001194E6 */
-    #define WIND_4_SUBBANDS_1_1 (SINT16)0x029E  /* gas32CoeffFor4SBs[9 et 31] = 0x029DBAA3 */
-    #define WIND_4_SUBBANDS_1_2 (SINT16)0x18F5  /* gas32CoeffFor4SBs[17 et 23] = 0x18F55C90 */
-    #define WIND_4_SUBBANDS_1_3 (SINT16)0xF610  /* gas32CoeffFor4SBs[15 et 25] = 0xF60FAF37 */
-    #define WIND_4_SUBBANDS_1_4 (SINT16)0xFF9C  /* gas32CoeffFor4SBs[7 et 33] = 0xFF9BB9D5 */
-    #define WIND_4_SUBBANDS_2_0 (SINT16)0x0031  /* gas32CoeffFor4SBs[2 et 38] = 0x0030E2D3 */
-    #define WIND_4_SUBBANDS_2_1 (SINT16)0x03B2  /* gas32CoeffFor4SBs[10 et 30] = 0x03B23341 */
-    #define WIND_4_SUBBANDS_2_2 (SINT16)0x1F91  /* gas32CoeffFor4SBs[18 et 22] = 0x1F91CA46 */
-    #define WIND_4_SUBBANDS_2_3 (SINT16)0xFC50  /* gas32CoeffFor4SBs[14 et 26] = 0xFC4F91D4 */
-    #define WIND_4_SUBBANDS_2_4 (SINT16)0x003D  /* gas32CoeffFor4SBs[6 et 34] = 0x003D239B */
-    #define WIND_4_SUBBANDS_3_0 (SINT16)0x005A  /* gas32CoeffFor4SBs[3 et 37] = 0x00599403 */
-    #define WIND_4_SUBBANDS_3_1 (SINT16)0x041F  /* gas32CoeffFor4SBs[11 et 29] = 0x041EEE40 */
-    #define WIND_4_SUBBANDS_3_2 (SINT16)0x2413  /* gas32CoeffFor4SBs[19 et 21] = 0x2412F251 */
-    #define WIND_4_SUBBANDS_3_3 (SINT16)0x00C9  /* gas32CoeffFor4SBs[13 et 27] = 0x00C8F2BC */
-    #define WIND_4_SUBBANDS_3_4 (SINT16)0x0080  /* gas32CoeffFor4SBs[5 et 35] = 0x007F88E4 */
-    #define WIND_4_SUBBANDS_4_0 (SINT16)0x007E  /* gas32CoeffFor4SBs[4 et 36] = 0x007DBCC8 */
-    #define WIND_4_SUBBANDS_4_1 (SINT16)0x0350  /* gas32CoeffFor4SBs[12 et 28] = 0x034FEE2C */
-    #define WIND_4_SUBBANDS_4_2 (SINT16)0x25AC  /* gas32CoeffFor4SBs[20] = 25AC1FF2 */
+#define WIND_4_SUBBANDS_0_1 (SINT16)0x0166  /* gas32CoeffFor4SBs[8] = -gas32CoeffFor4SBs[32] = 0x01659F45 */
+#define WIND_4_SUBBANDS_0_2 (SINT16)0x115B  /* gas32CoeffFor4SBs[16] = -gas32CoeffFor4SBs[24] = 0x115B1ED2 */
+#define WIND_4_SUBBANDS_1_0 (SINT16)0x0012  /* gas32CoeffFor4SBs[1 et 39] = 0x001194E6 */
+#define WIND_4_SUBBANDS_1_1 (SINT16)0x029E  /* gas32CoeffFor4SBs[9 et 31] = 0x029DBAA3 */
+#define WIND_4_SUBBANDS_1_2 (SINT16)0x18F5  /* gas32CoeffFor4SBs[17 et 23] = 0x18F55C90 */
+#define WIND_4_SUBBANDS_1_3 (SINT16)0xF610  /* gas32CoeffFor4SBs[15 et 25] = 0xF60FAF37 */
+#define WIND_4_SUBBANDS_1_4 (SINT16)0xFF9C  /* gas32CoeffFor4SBs[7 et 33] = 0xFF9BB9D5 */
+#define WIND_4_SUBBANDS_2_0 (SINT16)0x0031  /* gas32CoeffFor4SBs[2 et 38] = 0x0030E2D3 */
+#define WIND_4_SUBBANDS_2_1 (SINT16)0x03B2  /* gas32CoeffFor4SBs[10 et 30] = 0x03B23341 */
+#define WIND_4_SUBBANDS_2_2 (SINT16)0x1F91  /* gas32CoeffFor4SBs[18 et 22] = 0x1F91CA46 */
+#define WIND_4_SUBBANDS_2_3 (SINT16)0xFC50  /* gas32CoeffFor4SBs[14 et 26] = 0xFC4F91D4 */
+#define WIND_4_SUBBANDS_2_4 (SINT16)0x003D  /* gas32CoeffFor4SBs[6 et 34] = 0x003D239B */
+#define WIND_4_SUBBANDS_3_0 (SINT16)0x005A  /* gas32CoeffFor4SBs[3 et 37] = 0x00599403 */
+#define WIND_4_SUBBANDS_3_1 (SINT16)0x041F  /* gas32CoeffFor4SBs[11 et 29] = 0x041EEE40 */
+#define WIND_4_SUBBANDS_3_2 (SINT16)0x2413  /* gas32CoeffFor4SBs[19 et 21] = 0x2412F251 */
+#define WIND_4_SUBBANDS_3_3 (SINT16)0x00C9  /* gas32CoeffFor4SBs[13 et 27] = 0x00C8F2BC */
+#define WIND_4_SUBBANDS_3_4 (SINT16)0x0080  /* gas32CoeffFor4SBs[5 et 35] = 0x007F88E4 */
+#define WIND_4_SUBBANDS_4_0 (SINT16)0x007E  /* gas32CoeffFor4SBs[4 et 36] = 0x007DBCC8 */
+#define WIND_4_SUBBANDS_4_1 (SINT16)0x0350  /* gas32CoeffFor4SBs[12 et 28] = 0x034FEE2C */
+#define WIND_4_SUBBANDS_4_2 (SINT16)0x25AC  /* gas32CoeffFor4SBs[20] = 25AC1FF2 */
 
-    #define WIND_8_SUBBANDS_0_1 (SINT16)0x00B9  /* 16 0x12CF6C75 */
-    #define WIND_8_SUBBANDS_0_2 (SINT16)0x08B4  /* 32 0x08B4307A */
-    #define WIND_8_SUBBANDS_1_0 (SINT16)0x0005  /* 1 et 79 = 0x00052173 */
-    #define WIND_8_SUBBANDS_1_1 (SINT16)0x0107  /* 17 et 63 = 0x01071B96 */
-    #define WIND_8_SUBBANDS_1_2 (SINT16)0x0A9F  /* 33 et 47 = 0x0A9F3E9A*/
-    #define WIND_8_SUBBANDS_1_3 (SINT16)0xF931  /* 31 et 49 = 0xF9312891 */
-    #define WIND_8_SUBBANDS_1_4 (SINT16)0xFF8D  /* 15 et 65 = 0xFF8D6793 */
-    #define WIND_8_SUBBANDS_2_0 (SINT16)0x000B  /* 2 et 78 = 0x000B3F71 */
-    #define WIND_8_SUBBANDS_2_1 (SINT16)0x0157  /* 18 et 62 = 0x0156B3CA */
-    #define WIND_8_SUBBANDS_2_2 (SINT16)0x0C7D  /* 34 et 46 = 0x0C7D59B6 */
-    #define WIND_8_SUBBANDS_2_3 (SINT16)0xFB00  /* 30 et 50 = 0xFAFF95FC */
-    #define WIND_8_SUBBANDS_2_4 (SINT16)0xFFCA  /* 14 et 66 = 0xFFC9F10E */
-    #define WIND_8_SUBBANDS_3_0 (SINT16)0x0012  /* 3 et 77 = 0x00122C7D*/
-    #define WIND_8_SUBBANDS_3_1 (SINT16)0x01A2  /* 19 et 61 = 0x01A1B38B */
-    #define WIND_8_SUBBANDS_3_2 (SINT16)0x0E3C  /* 35 et 45 = 0x0E3BB16F */
-    #define WIND_8_SUBBANDS_3_3 (SINT16)0xFCA8  /* 29 et 51 = 0xFCA86E7E */
-    #define WIND_8_SUBBANDS_3_4 (SINT16)0xFFFA  /* 13 et 67 = 0xFFFA2413 */
-    #define WIND_8_SUBBANDS_4_0 (SINT16)0x001B  /* 4 et 66 = 0x001AFF89 */
-    #define WIND_8_SUBBANDS_4_1 (SINT16)0x01E0  /* 20 et 60 = 0x01E0224C */
-    #define WIND_8_SUBBANDS_4_2 (SINT16)0x0FC7  /* 36 et 44 = 0x0FC721F9 */
-    #define WIND_8_SUBBANDS_4_3 (SINT16)0xFE20  /* 28 et 52 = 0xFE20435D */
-    #define WIND_8_SUBBANDS_4_4 (SINT16)0x001E  /* 12 et 68 = 0x001D8FD2 */
-    #define WIND_8_SUBBANDS_5_0 (SINT16)0x0025  /* 5 et 75 = 0x00255A62 */
-    #define WIND_8_SUBBANDS_5_1 (SINT16)0x0209  /* 21 et 59 = 0x0209291F */
-    #define WIND_8_SUBBANDS_5_2 (SINT16)0x110F  /* 37 et 43 = 0x110ECEF0 */
-    #define WIND_8_SUBBANDS_5_3 (SINT16)0xFF5F  /* 27 et  53 = 0xFF5EEB73 */
-    #define WIND_8_SUBBANDS_5_4 (SINT16)0x0035  /* 11 et 69 = 0x0034F8B6 */
-    #define WIND_8_SUBBANDS_6_0 (SINT16)0x0030  /* 6 et 74 = 0x003060F4 */
-    #define WIND_8_SUBBANDS_6_1 (SINT16)0x0214  /* 22 et 58 = 0x02138653 */
-    #define WIND_8_SUBBANDS_6_2 (SINT16)0x1204  /* 38 et 42 = 0x120435FA */
-    #define WIND_8_SUBBANDS_6_3 (SINT16)0x0060  /* 26 et 54 = 0x005FD0FF */
-    #define WIND_8_SUBBANDS_6_4 (SINT16)0x0041  /* 10 et 70 = 0x00415B75 */
-    #define WIND_8_SUBBANDS_7_0 (SINT16)0x003A  /* 7 et 73 = 0x003A72E7 */
-    #define WIND_8_SUBBANDS_7_1 (SINT16)0x01F6  /* 23 et 57 = 0x01F5F424 */
-    #define WIND_8_SUBBANDS_7_2 (SINT16)0x129C  /* 39 et 41 = 0x129C226F */
-    #define WIND_8_SUBBANDS_7_3 (SINT16)0x0122  /* 25 et 55 = 0x01223EBA */
-    #define WIND_8_SUBBANDS_7_4 (SINT16)0x0045  /* 9 et 71 = 0x0044EF48 */
-    #define WIND_8_SUBBANDS_8_0 (SINT16)0x0042  /* 8 et 72 = 0x0041EC6A */
-    #define WIND_8_SUBBANDS_8_1 (SINT16)0x01A8  /* 24 et 56 = 0x01A7ECEF */
-    #define WIND_8_SUBBANDS_8_2 (SINT16)0x12CF  /* 40 = 0x12CF6C75 */
+#define WIND_8_SUBBANDS_0_1 (SINT16)0x00B9  /* 16 0x12CF6C75 */
+#define WIND_8_SUBBANDS_0_2 (SINT16)0x08B4  /* 32 0x08B4307A */
+#define WIND_8_SUBBANDS_1_0 (SINT16)0x0005  /* 1 et 79 = 0x00052173 */
+#define WIND_8_SUBBANDS_1_1 (SINT16)0x0107  /* 17 et 63 = 0x01071B96 */
+#define WIND_8_SUBBANDS_1_2 (SINT16)0x0A9F  /* 33 et 47 = 0x0A9F3E9A*/
+#define WIND_8_SUBBANDS_1_3 (SINT16)0xF931  /* 31 et 49 = 0xF9312891 */
+#define WIND_8_SUBBANDS_1_4 (SINT16)0xFF8D  /* 15 et 65 = 0xFF8D6793 */
+#define WIND_8_SUBBANDS_2_0 (SINT16)0x000B  /* 2 et 78 = 0x000B3F71 */
+#define WIND_8_SUBBANDS_2_1 (SINT16)0x0157  /* 18 et 62 = 0x0156B3CA */
+#define WIND_8_SUBBANDS_2_2 (SINT16)0x0C7D  /* 34 et 46 = 0x0C7D59B6 */
+#define WIND_8_SUBBANDS_2_3 (SINT16)0xFB00  /* 30 et 50 = 0xFAFF95FC */
+#define WIND_8_SUBBANDS_2_4 (SINT16)0xFFCA  /* 14 et 66 = 0xFFC9F10E */
+#define WIND_8_SUBBANDS_3_0 (SINT16)0x0012  /* 3 et 77 = 0x00122C7D*/
+#define WIND_8_SUBBANDS_3_1 (SINT16)0x01A2  /* 19 et 61 = 0x01A1B38B */
+#define WIND_8_SUBBANDS_3_2 (SINT16)0x0E3C  /* 35 et 45 = 0x0E3BB16F */
+#define WIND_8_SUBBANDS_3_3 (SINT16)0xFCA8  /* 29 et 51 = 0xFCA86E7E */
+#define WIND_8_SUBBANDS_3_4 (SINT16)0xFFFA  /* 13 et 67 = 0xFFFA2413 */
+#define WIND_8_SUBBANDS_4_0 (SINT16)0x001B  /* 4 et 66 = 0x001AFF89 */
+#define WIND_8_SUBBANDS_4_1 (SINT16)0x01E0  /* 20 et 60 = 0x01E0224C */
+#define WIND_8_SUBBANDS_4_2 (SINT16)0x0FC7  /* 36 et 44 = 0x0FC721F9 */
+#define WIND_8_SUBBANDS_4_3 (SINT16)0xFE20  /* 28 et 52 = 0xFE20435D */
+#define WIND_8_SUBBANDS_4_4 (SINT16)0x001E  /* 12 et 68 = 0x001D8FD2 */
+#define WIND_8_SUBBANDS_5_0 (SINT16)0x0025  /* 5 et 75 = 0x00255A62 */
+#define WIND_8_SUBBANDS_5_1 (SINT16)0x0209  /* 21 et 59 = 0x0209291F */
+#define WIND_8_SUBBANDS_5_2 (SINT16)0x110F  /* 37 et 43 = 0x110ECEF0 */
+#define WIND_8_SUBBANDS_5_3 (SINT16)0xFF5F  /* 27 et  53 = 0xFF5EEB73 */
+#define WIND_8_SUBBANDS_5_4 (SINT16)0x0035  /* 11 et 69 = 0x0034F8B6 */
+#define WIND_8_SUBBANDS_6_0 (SINT16)0x0030  /* 6 et 74 = 0x003060F4 */
+#define WIND_8_SUBBANDS_6_1 (SINT16)0x0214  /* 22 et 58 = 0x02138653 */
+#define WIND_8_SUBBANDS_6_2 (SINT16)0x1204  /* 38 et 42 = 0x120435FA */
+#define WIND_8_SUBBANDS_6_3 (SINT16)0x0060  /* 26 et 54 = 0x005FD0FF */
+#define WIND_8_SUBBANDS_6_4 (SINT16)0x0041  /* 10 et 70 = 0x00415B75 */
+#define WIND_8_SUBBANDS_7_0 (SINT16)0x003A  /* 7 et 73 = 0x003A72E7 */
+#define WIND_8_SUBBANDS_7_1 (SINT16)0x01F6  /* 23 et 57 = 0x01F5F424 */
+#define WIND_8_SUBBANDS_7_2 (SINT16)0x129C  /* 39 et 41 = 0x129C226F */
+#define WIND_8_SUBBANDS_7_3 (SINT16)0x0122  /* 25 et 55 = 0x01223EBA */
+#define WIND_8_SUBBANDS_7_4 (SINT16)0x0045  /* 9 et 71 = 0x0044EF48 */
+#define WIND_8_SUBBANDS_8_0 (SINT16)0x0042  /* 8 et 72 = 0x0041EC6A */
+#define WIND_8_SUBBANDS_8_1 (SINT16)0x01A8  /* 24 et 56 = 0x01A7ECEF */
+#define WIND_8_SUBBANDS_8_2 (SINT16)0x12CF  /* 40 = 0x12CF6C75 */
 #endif
 
 #if (SBC_USE_ARM_PRAGMA==TRUE)
-    #pragma arm section zidata = "sbc_s32_analysis_section"
+#pragma arm section zidata = "sbc_s32_analysis_section"
 #endif
 static SINT32   s32DCTY[16]  = {0};
 static SINT32   s32X[ENC_VX_BUFFER_SIZE / 2];
 static SINT16   *s16X = (SINT16 *) s32X;   /* s16X must be 32 bits aligned cf  SHIFTUP_X8_2*/
 #if (SBC_USE_ARM_PRAGMA==TRUE)
-    #pragma arm section zidata
+#pragma arm section zidata
 #endif
 
 /* This macro is for 4 subbands */
@@ -912,34 +912,32 @@ void SbcAnalysisFilter4(SBC_ENC_PARAMS *pstrEncParams)
     SINT32  s32NumOfChannels, s32NumOfBlocks;
     SINT32 i, *ps32X, *ps32X2;
     SINT32 Offset, Offset2, ChOffset;
-    #if (SBC_ARM_ASM_OPT==TRUE)
+#if (SBC_ARM_ASM_OPT==TRUE)
     register SINT32 s32Hi, s32Hi2;
-    #else
-    #if (SBC_IPAQ_OPT==TRUE)
-    #if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
+#else
+#if (SBC_IPAQ_OPT==TRUE)
+#if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
     register SINT64 s64Temp, s64Temp2;
-    #else
+#else
     register SINT32 s32Temp, s32Temp2;
-    #endif
-    #else
-    #if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
+#endif
+#else
+#if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
     SINT64 s64Temp;
-    #endif
-    #endif
-    #endif
+#endif
+#endif
+#endif
     s32NumOfChannels = pstrEncParams->s16NumOfChannels;
     s32NumOfBlocks   = pstrEncParams->s16NumOfBlocks;
     ps16PcmBuf = pstrEncParams->ps16NextPcmBuffer;
     ps32SbBuf  = pstrEncParams->s32SbBuffer;
     Offset2 = (SINT32)(EncMaxShiftCounter + 40);
 
-    for(s32Blk = 0; s32Blk < s32NumOfBlocks; s32Blk++)
-    {
+    for(s32Blk = 0; s32Blk < s32NumOfBlocks; s32Blk++) {
         Offset = (SINT32)(EncMaxShiftCounter - ShiftCounter);
 
         /* Store new samples */
-        if(s32NumOfChannels == 1)
-        {
+        if(s32NumOfChannels == 1) {
             s16X[3 + Offset] = *ps16PcmBuf;
             ps16PcmBuf++;
             s16X[2 + Offset] = *ps16PcmBuf;
@@ -948,9 +946,7 @@ void SbcAnalysisFilter4(SBC_ENC_PARAMS *pstrEncParams)
             ps16PcmBuf++;
             s16X[0 + Offset] = *ps16PcmBuf;
             ps16PcmBuf++;
-        }
-        else
-        {
+        } else {
             s16X[3 + Offset] = *ps16PcmBuf;
             ps16PcmBuf++;
             s16X[Offset2 + 3 + Offset] = *ps16PcmBuf;
@@ -969,35 +965,25 @@ void SbcAnalysisFilter4(SBC_ENC_PARAMS *pstrEncParams)
             ps16PcmBuf++;
         }
 
-        for(s32Ch = 0; s32Ch < s32NumOfChannels; s32Ch++)
-        {
+        for(s32Ch = 0; s32Ch < s32NumOfChannels; s32Ch++) {
             ChOffset = s32Ch * Offset2 + Offset;
             WINDOW_PARTIAL_4
             SBC_FastIDCT4(s32DCTY, ps32SbBuf);
             ps32SbBuf += SUB_BANDS_4;
         }
 
-        if(s32NumOfChannels == 1)
-        {
-            if(ShiftCounter >= EncMaxShiftCounter)
-            {
+        if(s32NumOfChannels == 1) {
+            if(ShiftCounter >= EncMaxShiftCounter) {
                 SHIFTUP_X4;
                 ShiftCounter = 0;
-            }
-            else
-            {
+            } else {
                 ShiftCounter += SUB_BANDS_4;
             }
-        }
-        else
-        {
-            if(ShiftCounter >= EncMaxShiftCounter)
-            {
+        } else {
+            if(ShiftCounter >= EncMaxShiftCounter) {
                 SHIFTUP_X4_2;
                 ShiftCounter = 0;
-            }
-            else
-            {
+            } else {
                 ShiftCounter += SUB_BANDS_4;
             }
         }
@@ -1014,34 +1000,32 @@ void SbcAnalysisFilter8(SBC_ENC_PARAMS *pstrEncParams)
     SINT32  s32NumOfChannels, s32NumOfBlocks;
     SINT32 i, *ps32X, *ps32X2;
     SINT32 ChOffset;
-    #if (SBC_ARM_ASM_OPT==TRUE)
+#if (SBC_ARM_ASM_OPT==TRUE)
     register SINT32 s32Hi, s32Hi2;
-    #else
-    #if (SBC_IPAQ_OPT==TRUE)
-    #if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
+#else
+#if (SBC_IPAQ_OPT==TRUE)
+#if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
     register SINT64 s64Temp, s64Temp2;
-    #else
+#else
     register SINT32 s32Temp, s32Temp2;
-    #endif
-    #else
-    #if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
+#endif
+#else
+#if (SBC_IS_64_MULT_IN_WINDOW_ACCU == TRUE)
     SINT64 s64Temp;
-    #endif
-    #endif
-    #endif
+#endif
+#endif
+#endif
     s32NumOfChannels = pstrEncParams->s16NumOfChannels;
     s32NumOfBlocks   = pstrEncParams->s16NumOfBlocks;
     ps16PcmBuf = pstrEncParams->ps16NextPcmBuffer;
     ps32SbBuf  = pstrEncParams->s32SbBuffer;
     Offset2 = (SINT32)(EncMaxShiftCounter + 80);
 
-    for(s32Blk = 0; s32Blk < s32NumOfBlocks; s32Blk++)
-    {
+    for(s32Blk = 0; s32Blk < s32NumOfBlocks; s32Blk++) {
         Offset = (SINT32)(EncMaxShiftCounter - ShiftCounter);
 
         /* Store new samples */
-        if(s32NumOfChannels == 1)
-        {
+        if(s32NumOfChannels == 1) {
             s16X[7 + Offset] = *ps16PcmBuf;
             ps16PcmBuf++;
             s16X[6 + Offset] = *ps16PcmBuf;
@@ -1058,9 +1042,7 @@ void SbcAnalysisFilter8(SBC_ENC_PARAMS *pstrEncParams)
             ps16PcmBuf++;
             s16X[0 + Offset] = *ps16PcmBuf;
             ps16PcmBuf++;
-        }
-        else
-        {
+        } else {
             s16X[7 + Offset] = *ps16PcmBuf;
             ps16PcmBuf++;
             s16X[Offset2 + 7 + Offset] = *ps16PcmBuf;
@@ -1095,35 +1077,25 @@ void SbcAnalysisFilter8(SBC_ENC_PARAMS *pstrEncParams)
             ps16PcmBuf++;
         }
 
-        for(s32Ch = 0; s32Ch < s32NumOfChannels; s32Ch++)
-        {
+        for(s32Ch = 0; s32Ch < s32NumOfChannels; s32Ch++) {
             ChOffset = s32Ch * Offset2 + Offset;
             WINDOW_PARTIAL_8
             SBC_FastIDCT8(s32DCTY, ps32SbBuf);
             ps32SbBuf += SUB_BANDS_8;
         }
 
-        if(s32NumOfChannels == 1)
-        {
-            if(ShiftCounter >= EncMaxShiftCounter)
-            {
+        if(s32NumOfChannels == 1) {
+            if(ShiftCounter >= EncMaxShiftCounter) {
                 SHIFTUP_X8;
                 ShiftCounter = 0;
-            }
-            else
-            {
+            } else {
                 ShiftCounter += SUB_BANDS_8;
             }
-        }
-        else
-        {
-            if(ShiftCounter >= EncMaxShiftCounter)
-            {
+        } else {
+            if(ShiftCounter >= EncMaxShiftCounter) {
                 SHIFTUP_X8_2;
                 ShiftCounter = 0;
-            }
-            else
-            {
+            } else {
                 ShiftCounter += SUB_BANDS_8;
             }
         }
@@ -1132,6 +1104,6 @@ void SbcAnalysisFilter8(SBC_ENC_PARAMS *pstrEncParams)
 
 void SbcAnalysisInit(void)
 {
-    wm_memset(s16X, 0, ENC_VX_BUFFER_SIZE * sizeof(SINT16));
+    memset(s16X, 0, ENC_VX_BUFFER_SIZE * sizeof(SINT16));
     ShiftCounter = 0;
 }

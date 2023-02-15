@@ -1,5 +1,4 @@
  
-#include "lwip/arch.h"
 #include "HTTPClientWrapper.h"
 #include "random.h"
 #include "wm_osal.h"
@@ -760,7 +759,7 @@ int HTTPWrapperSSLClose(tls_ssl_t *ssl, int s)
 }
 #elif TLS_CONFIG_USE_MBEDTLS
 
-static bool mbedtls_demo_inited = FALSE;
+//static bool mbedtls_demo_inited = FALSE;
 
 #if MBEDTLS_DEMO_USE_CERT
 static const char mbedtls_demos_pem[] =                                 \
@@ -908,6 +907,7 @@ int HTTPWrapperSSLConnect(tls_ssl_t **ssl_p,int fd,const struct sockaddr *name,i
 	/* OPTIONAL is not optimal for security,
 	 * but makes interop easier in this simplified example */
 	mbedtls_ssl_conf_authmode( &ssl->conf, MBEDTLS_SSL_VERIFY_NONE );
+	//mbedtls_ssl_conf_authmode( &ssl->conf, MBEDTLS_SSL_VERIFY_REQUIRED);
 #if MBEDTLS_DEMO_USE_CERT
 	mbedtls_ssl_conf_ca_chain( &ssl->conf, &ssl->cacert, NULL );
 #endif
@@ -916,6 +916,8 @@ int HTTPWrapperSSLConnect(tls_ssl_t **ssl_p,int fd,const struct sockaddr *name,i
 #if defined(MBEDTLS_DEBUG_C)
 	mbedtls_ssl_conf_dbg( &ssl->conf, ssl_client_debug, stdout );
 #endif
+
+	mbedtls_ssl_conf_read_timeout( &ssl->conf, 5000 );
 
 	if( ( ret = mbedtls_ssl_setup( &ssl->ssl, &ssl->conf ) ) != 0 )
 	{
@@ -929,7 +931,8 @@ int HTTPWrapperSSLConnect(tls_ssl_t **ssl_p,int fd,const struct sockaddr *name,i
 		goto exit;
 	}
 
-	mbedtls_ssl_set_bio( &ssl->ssl, &ssl->server_fd, mbedtls_net_send, mbedtls_net_recv, NULL );
+	//mbedtls_ssl_set_bio( &ssl->ssl, &ssl->server_fd, mbedtls_net_send, mbedtls_net_recv, NULL );
+	mbedtls_ssl_set_bio( &ssl->ssl, &ssl->server_fd, mbedtls_net_send, mbedtls_net_recv, mbedtls_net_recv_timeout);
 
 	/*
 	 * 4. Handshake

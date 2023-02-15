@@ -26,8 +26,7 @@ typedef void (*transmit_finished_cb)(BT_HDR *packet, uint8_t all_fragments_sent)
 typedef void (*packet_reassembled_cb)(BT_HDR *packet);
 typedef void (*packet_fragmented_cb)(BT_HDR *packet, uint8_t send_transmit_finished);
 
-typedef struct
-{
+typedef struct {
     // Called for every packet fragment.
     packet_fragmented_cb fragmented;
 
@@ -39,8 +38,7 @@ typedef struct
     transmit_finished_cb transmit_finished;
 } packet_fragmenter_callbacks_t;
 
-typedef struct packet_fragmenter_t
-{
+typedef struct packet_fragmenter_t {
     // Initialize the fragmenter, specifying the |result_callbacks|.
     void (*init)(const packet_fragmenter_callbacks_t *result_callbacks);
 

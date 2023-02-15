@@ -26,8 +26,7 @@ void bta_hf_client_send_at_cmd(tBTA_HF_CLIENT_DATA *p_data)
     tBTA_HF_CLIENT_DATA_VAL *p_val = (tBTA_HF_CLIENT_DATA_VAL *)p_data;
     char buf[BTA_HF_CLIENT_AT_MAX_LEN];
 
-    switch(p_val->uint8_val)
-    {
+    switch(p_val->uint8_val) {
         case BTA_HF_CLIENT_AT_CMD_VTS:
             bta_hf_client_send_at_vts((char)p_val->uint32_val1);
             break;

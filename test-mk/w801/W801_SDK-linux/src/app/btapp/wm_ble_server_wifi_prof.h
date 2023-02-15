@@ -11,8 +11,7 @@ typedef tls_bt_status_t (*op_service_enabled_callback)(int status);
 typedef tls_bt_status_t (*op_mtu_changed_callback)(int mtu);
 
 
-typedef struct
-{
+typedef struct {
     size_t size;
 
     op_service_enabled_callback enabled_cb;

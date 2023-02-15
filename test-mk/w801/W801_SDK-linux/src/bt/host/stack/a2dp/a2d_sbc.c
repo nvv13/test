@@ -63,13 +63,10 @@ tA2D_STATUS A2D_BldSbcInfo(uint8_t media_type, tA2D_SBC_CIE *p_ie, uint8_t *p_re
             (p_ie->max_bitpool < A2D_SBC_IE_MIN_BITPOOL) ||
             (p_ie->max_bitpool > A2D_SBC_IE_MAX_BITPOOL) ||
             (p_ie->min_bitpool < A2D_SBC_IE_MIN_BITPOOL) ||
-            (p_ie->min_bitpool > A2D_SBC_IE_MAX_BITPOOL))
-    {
+            (p_ie->min_bitpool > A2D_SBC_IE_MAX_BITPOOL)) {
         /* if any unused bit is set */
         status = A2D_INVALID_PARAMS;
-    }
-    else
-    {
+    } else {
         status = A2D_SUCCESS;
         *p_result++ = A2D_SBC_INFO_LEN;
         *p_result++ = media_type;
@@ -108,8 +105,7 @@ tA2D_STATUS A2D_ParsSbcInfo(tA2D_SBC_CIE *p_ie, const uint8_t *p_info,
     tA2D_STATUS status = A2D_SUCCESS;
     uint8_t losc;
 
-    if(p_ie == NULL || p_info == NULL)
-    {
+    if(p_ie == NULL || p_info == NULL) {
         return A2D_INVALID_PARAMS;
     }
 
@@ -117,8 +113,7 @@ tA2D_STATUS A2D_ParsSbcInfo(tA2D_SBC_CIE *p_ie, const uint8_t *p_info,
     p_info += 2;
 
     /* If the function is called for the wrong Media Type or Media Codec Type */
-    if(losc != A2D_SBC_INFO_LEN || *p_info != A2D_MEDIA_CT_SBC)
-    {
+    if(losc != A2D_SBC_INFO_LEN || *p_info != A2D_MEDIA_CT_SBC) {
         return A2D_WRONG_CODEC;
     }
 
@@ -133,44 +128,36 @@ tA2D_STATUS A2D_ParsSbcInfo(tA2D_SBC_CIE *p_ie, const uint8_t *p_info,
     p_ie->min_bitpool = *p_info++;
     p_ie->max_bitpool = *p_info;
 
-    if(p_ie->min_bitpool < A2D_SBC_IE_MIN_BITPOOL || p_ie->min_bitpool > A2D_SBC_IE_MAX_BITPOOL)
-    {
+    if(p_ie->min_bitpool < A2D_SBC_IE_MIN_BITPOOL || p_ie->min_bitpool > A2D_SBC_IE_MAX_BITPOOL) {
         status = A2D_BAD_MIN_BITPOOL;
     }
 
     if(p_ie->max_bitpool < A2D_SBC_IE_MIN_BITPOOL || p_ie->max_bitpool > A2D_SBC_IE_MAX_BITPOOL ||
-            p_ie->max_bitpool < p_ie->min_bitpool)
-    {
+            p_ie->max_bitpool < p_ie->min_bitpool) {
         status = A2D_BAD_MAX_BITPOOL;
     }
 
-    if(for_caps != FALSE)
-    {
+    if(for_caps != FALSE) {
         return status;
     }
 
-    if(A2D_BitsSet(p_ie->samp_freq) != A2D_SET_ONE_BIT)
-    {
+    if(A2D_BitsSet(p_ie->samp_freq) != A2D_SET_ONE_BIT) {
         status = A2D_BAD_SAMP_FREQ;
     }
 
-    if(A2D_BitsSet(p_ie->ch_mode) != A2D_SET_ONE_BIT)
-    {
+    if(A2D_BitsSet(p_ie->ch_mode) != A2D_SET_ONE_BIT) {
         status = A2D_BAD_CH_MODE;
     }
 
-    if(A2D_BitsSet(p_ie->block_len) != A2D_SET_ONE_BIT)
-    {
+    if(A2D_BitsSet(p_ie->block_len) != A2D_SET_ONE_BIT) {
         status = A2D_BAD_BLOCK_LEN;
     }
 
-    if(A2D_BitsSet(p_ie->num_subbands) != A2D_SET_ONE_BIT)
-    {
+    if(A2D_BitsSet(p_ie->num_subbands) != A2D_SET_ONE_BIT) {
         status = A2D_BAD_SUBBANDS;
     }
 
-    if(A2D_BitsSet(p_ie->alloc_mthd) != A2D_SET_ONE_BIT)
-    {
+    if(A2D_BitsSet(p_ie->alloc_mthd) != A2D_SET_ONE_BIT) {
         status = A2D_BAD_ALLOC_MTHD;
     }
 
@@ -201,22 +188,18 @@ tA2D_STATUS A2D_ParsSbcInfo(tA2D_SBC_CIE *p_ie, const uint8_t *p_info,
 ******************************************************************************/
 void A2D_BldSbcMplHdr(uint8_t *p_dst, uint8_t frag, uint8_t start, uint8_t last, uint8_t num)
 {
-    if(p_dst)
-    {
+    if(p_dst) {
         *p_dst  = 0;
 
-        if(frag)
-        {
+        if(frag) {
             *p_dst  |= A2D_SBC_HDR_F_MSK;
         }
 
-        if(start)
-        {
+        if(start) {
             *p_dst  |= A2D_SBC_HDR_S_MSK;
         }
 
-        if(last)
-        {
+        if(last) {
             *p_dst  |= A2D_SBC_HDR_L_MSK;
         }
 
@@ -246,10 +229,10 @@ void A2D_BldSbcMplHdr(uint8_t *p_dst, uint8_t frag, uint8_t start, uint8_t last,
 **
 ** Returns          void.
 ******************************************************************************/
-void A2D_ParsSbcMplHdr(uint8_t *p_src, uint8_t *p_frag, uint8_t *p_start, uint8_t *p_last, uint8_t *p_num)
+void A2D_ParsSbcMplHdr(uint8_t *p_src, uint8_t *p_frag, uint8_t *p_start, uint8_t *p_last,
+                       uint8_t *p_num)
 {
-    if(p_src && p_frag && p_start && p_last && p_num)
-    {
+    if(p_src && p_frag && p_start && p_last && p_num) {
         *p_frag = (*p_src & A2D_SBC_HDR_F_MSK) ? TRUE : FALSE;
         *p_start = (*p_src & A2D_SBC_HDR_S_MSK) ? TRUE : FALSE;
         *p_last = (*p_src & A2D_SBC_HDR_L_MSK) ? TRUE : FALSE;

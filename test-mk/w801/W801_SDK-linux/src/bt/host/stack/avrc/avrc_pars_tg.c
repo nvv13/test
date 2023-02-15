@@ -46,8 +46,7 @@ static tAVRC_STS avrc_ctrl_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAN
     p_result->pdu = *p++;
     AVRC_TRACE_DEBUG("%s pdu:0x%x", __func__, p_result->pdu);
 
-    if(!AVRC_IsValidAvcType(p_result->pdu, p_msg->hdr.ctype))
-    {
+    if(!AVRC_IsValidAvcType(p_result->pdu, p_msg->hdr.ctype)) {
         AVRC_TRACE_DEBUG("%s detects wrong AV/C type!", __func__);
         status = AVRC_STS_BAD_CMD;
     }
@@ -56,26 +55,19 @@ static tAVRC_STS avrc_ctrl_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAN
     uint16_t  len;
     BE_STREAM_TO_UINT16(len, p);
 
-    if((len + 4) != (p_msg->vendor_len))
-    {
+    if((len + 4) != (p_msg->vendor_len)) {
         status = AVRC_STS_INTERNAL_ERR;
     }
 
-    if(status != AVRC_STS_NO_ERROR)
-    {
+    if(status != AVRC_STS_NO_ERROR) {
         return status;
     }
 
-    switch(p_result->pdu)
-    {
-        case AVRC_PDU_SET_ABSOLUTE_VOLUME:
-        {
-            if(len != 1)
-            {
+    switch(p_result->pdu) {
+        case AVRC_PDU_SET_ABSOLUTE_VOLUME: {
+            if(len != 1) {
                 status = AVRC_STS_INTERNAL_ERR;
-            }
-            else
-            {
+            } else {
                 BE_STREAM_TO_UINT8(p_result->volume.volume, p);
                 p_result->volume.volume = AVRC_MAX_VOLUME & p_result->volume.volume;
             }
@@ -122,13 +114,11 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
     uint16_t  size_needed;
 
     /* Check the vendor data */
-    if(p_msg->vendor_len == 0)
-    {
+    if(p_msg->vendor_len == 0) {
         return AVRC_STS_NO_ERROR;
     }
 
-    if(p_msg->p_vendor_data == NULL)
-    {
+    if(p_msg->p_vendor_data == NULL) {
         return AVRC_STS_INTERNAL_ERR;
     }
 
@@ -136,8 +126,7 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
     p_result->pdu = *p++;
     AVRC_TRACE_DEBUG("%s pdu:0x%x", __func__, p_result->pdu);
 
-    if(!AVRC_IsValidAvcType(p_result->pdu, p_msg->hdr.ctype))
-    {
+    if(!AVRC_IsValidAvcType(p_result->pdu, p_msg->hdr.ctype)) {
         AVRC_TRACE_DEBUG("%s detects wrong AV/C type!", __func__);
         status = AVRC_STS_BAD_CMD;
     }
@@ -145,38 +134,30 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
     p++; /* skip the reserved byte */
     BE_STREAM_TO_UINT16(len, p);
 
-    if((len + 4) != (p_msg->vendor_len))
-    {
+    if((len + 4) != (p_msg->vendor_len)) {
         status = AVRC_STS_INTERNAL_ERR;
     }
 
-    if(status != AVRC_STS_NO_ERROR)
-    {
+    if(status != AVRC_STS_NO_ERROR) {
         return status;
     }
 
-    switch(p_result->pdu)
-    {
+    switch(p_result->pdu) {
         case AVRC_PDU_GET_CAPABILITIES:         /* 0x10 */
             p_result->get_caps.capability_id = *p++;
 
-            if(!AVRC_IS_VALID_CAP_ID(p_result->get_caps.capability_id))
-            {
+            if(!AVRC_IS_VALID_CAP_ID(p_result->get_caps.capability_id)) {
                 status = AVRC_STS_BAD_PARAM;
+            } else if(len != 1) {
+                status = AVRC_STS_INTERNAL_ERR;
             }
-            else
-                if(len != 1)
-                {
-                    status = AVRC_STS_INTERNAL_ERR;
-                }
 
             break;
 
         case AVRC_PDU_LIST_PLAYER_APP_ATTR:     /* 0x11 */
 
             /* no additional parameters */
-            if(len != 0)
-            {
+            if(len != 0) {
                 status = AVRC_STS_INTERNAL_ERR;
             }
 
@@ -185,15 +166,11 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
         case AVRC_PDU_LIST_PLAYER_APP_VALUES:   /* 0x12 */
             p_result->list_app_values.attr_id = *p++;
 
-            if(!AVRC_IS_VALID_ATTRIBUTE(p_result->list_app_values.attr_id))
-            {
+            if(!AVRC_IS_VALID_ATTRIBUTE(p_result->list_app_values.attr_id)) {
                 status = AVRC_STS_BAD_PARAM;
+            } else if(len != 1) {
+                status = AVRC_STS_INTERNAL_ERR;
             }
-            else
-                if(len != 1)
-                {
-                    status = AVRC_STS_INTERNAL_ERR;
-                }
 
             break;
 
@@ -201,19 +178,16 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
         case AVRC_PDU_GET_PLAYER_APP_ATTR_TEXT: /* 0x15 */
             BE_STREAM_TO_UINT8(p_result->get_cur_app_val.num_attr, p);
 
-            if(len != (p_result->get_cur_app_val.num_attr + 1))
-            {
+            if(len != (p_result->get_cur_app_val.num_attr + 1)) {
                 status = AVRC_STS_INTERNAL_ERR;
                 break;
             }
 
             p_u8 = p_result->get_cur_app_val.attrs;
 
-            for(xx = 0, yy = 0; xx < p_result->get_cur_app_val.num_attr; xx++)
-            {
+            for(xx = 0, yy = 0; xx < p_result->get_cur_app_val.num_attr; xx++) {
                 /* only report the valid player app attributes */
-                if(AVRC_IsValidPlayerAttr(*p))
-                {
+                if(AVRC_IsValidPlayerAttr(*p)) {
                     p_u8[yy++] = *p;
                 }
 
@@ -222,8 +196,7 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
 
             p_result->get_cur_app_val.num_attr = yy;
 
-            if(yy == 0)
-            {
+            if(yy == 0) {
                 status = AVRC_STS_BAD_PARAM;
             }
 
@@ -233,32 +206,26 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
             BE_STREAM_TO_UINT8(p_result->set_app_val.num_val, p);
             size_needed = sizeof(tAVRC_APP_SETTING);
 
-            if(p_buf && (len == ((p_result->set_app_val.num_val << 1) + 1)))
-            {
+            if(p_buf && (len == ((p_result->set_app_val.num_val << 1) + 1))) {
                 p_result->set_app_val.p_vals = (tAVRC_APP_SETTING *)p_buf;
                 p_app_set = p_result->set_app_val.p_vals;
 
-                for(xx = 0; ((xx < p_result->set_app_val.num_val) && (buf_len > size_needed)); xx++)
-                {
+                for(xx = 0; ((xx < p_result->set_app_val.num_val) && (buf_len > size_needed)); xx++) {
                     p_app_set[xx].attr_id = *p++;
                     p_app_set[xx].attr_val = *p++;
 
-                    if(!avrc_is_valid_player_attrib_value(p_app_set[xx].attr_id, p_app_set[xx].attr_val))
-                    {
+                    if(!avrc_is_valid_player_attrib_value(p_app_set[xx].attr_id, p_app_set[xx].attr_val)) {
                         status = AVRC_STS_BAD_PARAM;
                     }
                 }
 
-                if(xx != p_result->set_app_val.num_val)
-                {
+                if(xx != p_result->set_app_val.num_val) {
                     AVRC_TRACE_ERROR(
                                     "%s AVRC_PDU_SET_PLAYER_APP_VALUE not enough room:%d orig num_val:%d",
                                     __func__, xx, p_result->set_app_val.num_val);
                     p_result->set_app_val.num_val = xx;
                 }
-            }
-            else
-            {
+            } else {
                 AVRC_TRACE_ERROR("%s AVRC_PDU_SET_PLAYER_APP_VALUE NULL decode buffer or bad len",
                                  __func__);
                 status = AVRC_STS_INTERNAL_ERR;
@@ -267,37 +234,26 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
             break;
 
         case AVRC_PDU_GET_PLAYER_APP_VALUE_TEXT:/* 0x16 */
-            if(len < 3)
-            {
+            if(len < 3) {
                 status = AVRC_STS_INTERNAL_ERR;
-            }
-            else
-            {
+            } else {
                 BE_STREAM_TO_UINT8(p_result->get_app_val_txt.attr_id, p);
 
-                if(!AVRC_IS_VALID_ATTRIBUTE(p_result->get_app_val_txt.attr_id))
-                {
+                if(!AVRC_IS_VALID_ATTRIBUTE(p_result->get_app_val_txt.attr_id)) {
                     status = AVRC_STS_BAD_PARAM;
-                }
-                else
-                {
+                } else {
                     BE_STREAM_TO_UINT8(p_result->get_app_val_txt.num_val, p);
 
-                    if((len - 2/* attr_id & num_val */) != p_result->get_app_val_txt.num_val)
-                    {
+                    if((len - 2/* attr_id & num_val */) != p_result->get_app_val_txt.num_val) {
                         status = AVRC_STS_INTERNAL_ERR;
-                    }
-                    else
-                    {
+                    } else {
                         p_u8 = p_result->get_app_val_txt.vals;
 
-                        for(xx = 0; xx < p_result->get_app_val_txt.num_val; xx++)
-                        {
+                        for(xx = 0; xx < p_result->get_app_val_txt.num_val; xx++) {
                             p_u8[xx] = *p++;
 
                             if(!avrc_is_valid_player_attrib_value(p_result->get_app_val_txt.attr_id,
-                                                                  p_u8[xx]))
-                            {
+                                                                  p_u8[xx])) {
                                 status = AVRC_STS_BAD_PARAM;
                                 break;
                             }
@@ -309,29 +265,21 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
             break;
 
         case AVRC_PDU_INFORM_DISPLAY_CHARSET:  /* 0x17 */
-            if(len < 3)
-            {
+            if(len < 3) {
                 status = AVRC_STS_INTERNAL_ERR;
-            }
-            else
-            {
+            } else {
                 BE_STREAM_TO_UINT8(p_result->inform_charset.num_id, p);
 
-                if((len - 1/* num_id */) != p_result->inform_charset.num_id * 2)
-                {
+                if((len - 1/* num_id */) != p_result->inform_charset.num_id * 2) {
                     status = AVRC_STS_INTERNAL_ERR;
-                }
-                else
-                {
+                } else {
                     p_u16 = p_result->inform_charset.charsets;
 
-                    if(p_result->inform_charset.num_id > AVRC_MAX_CHARSET_SIZE)
-                    {
+                    if(p_result->inform_charset.num_id > AVRC_MAX_CHARSET_SIZE) {
                         p_result->inform_charset.num_id = AVRC_MAX_CHARSET_SIZE;
                     }
 
-                    for(xx = 0; xx < p_result->inform_charset.num_id; xx++)
-                    {
+                    for(xx = 0; xx < p_result->inform_charset.num_id; xx++) {
                         BE_STREAM_TO_UINT16(p_u16[xx], p);
                     }
                 }
@@ -340,16 +288,12 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
             break;
 
         case AVRC_PDU_INFORM_BATTERY_STAT_OF_CT:/* 0x18 */
-            if(len != 1)
-            {
+            if(len != 1) {
                 status = AVRC_STS_INTERNAL_ERR;
-            }
-            else
-            {
+            } else {
                 p_result->inform_battery_status.battery_status = *p++;
 
-                if(!AVRC_IS_VALID_BATTERY_STATUS(p_result->inform_battery_status.battery_status))
-                {
+                if(!AVRC_IS_VALID_BATTERY_STATUS(p_result->inform_battery_status.battery_status)) {
                     status = AVRC_STS_BAD_PARAM;
                 }
             }
@@ -357,40 +301,29 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
             break;
 
         case AVRC_PDU_GET_ELEMENT_ATTR:         /* 0x20 */
-            if(len < 9)   /* UID/8 and num_attr/1 */
-            {
+            if(len < 9) { /* UID/8 and num_attr/1 */
                 status = AVRC_STS_INTERNAL_ERR;
-            }
-            else
-            {
+            } else {
                 BE_STREAM_TO_UINT32(u32, p);
                 BE_STREAM_TO_UINT32(u32_2, p);
 
-                if(u32 == 0 && u32_2 == 0)
-                {
+                if(u32 == 0 && u32_2 == 0) {
                     BE_STREAM_TO_UINT8(p_result->get_elem_attrs.num_attr, p);
 
-                    if((len - 9/* UID/8 and num_attr/1 */) != (p_result->get_elem_attrs.num_attr * 4))
-                    {
+                    if((len - 9/* UID/8 and num_attr/1 */) != (p_result->get_elem_attrs.num_attr * 4)) {
                         status = AVRC_STS_INTERNAL_ERR;
-                    }
-                    else
-                    {
+                    } else {
                         p_u32 = p_result->get_elem_attrs.attrs;
 
-                        if(p_result->get_elem_attrs.num_attr > AVRC_MAX_ELEM_ATTR_SIZE)
-                        {
+                        if(p_result->get_elem_attrs.num_attr > AVRC_MAX_ELEM_ATTR_SIZE) {
                             p_result->get_elem_attrs.num_attr = AVRC_MAX_ELEM_ATTR_SIZE;
                         }
 
-                        for(xx = 0; xx < p_result->get_elem_attrs.num_attr; xx++)
-                        {
+                        for(xx = 0; xx < p_result->get_elem_attrs.num_attr; xx++) {
                             BE_STREAM_TO_UINT32(p_u32[xx], p);
                         }
                     }
-                }
-                else
-                {
+                } else {
                     status = AVRC_STS_NOT_FOUND;
                 }
             }
@@ -400,30 +333,24 @@ static tAVRC_STS avrc_pars_vendor_cmd(tAVRC_MSG_VENDOR *p_msg, tAVRC_COMMAND *p_
         case AVRC_PDU_GET_PLAY_STATUS:          /* 0x30 */
 
             /* no additional parameters */
-            if(len != 0)
-            {
+            if(len != 0) {
                 status = AVRC_STS_INTERNAL_ERR;
             }
 
             break;
 
         case AVRC_PDU_REGISTER_NOTIFICATION:    /* 0x31 */
-            if(len != 5)
-            {
+            if(len != 5) {
                 status = AVRC_STS_INTERNAL_ERR;
-            }
-            else
-            {
+            } else {
                 BE_STREAM_TO_UINT8(p_result->reg_notif.event_id, p);
                 BE_STREAM_TO_UINT32(p_result->reg_notif.param, p);
             }
 
             break;
 
-        case AVRC_PDU_SET_ABSOLUTE_VOLUME:
-        {
-            if(len != 1)
-            {
+        case AVRC_PDU_SET_ABSOLUTE_VOLUME: {
+            if(len != 1) {
                 status = AVRC_STS_INTERNAL_ERR;
             }
 
@@ -457,10 +384,8 @@ tAVRC_STS AVRC_Ctrl_ParsCommand(tAVRC_MSG *p_msg, tAVRC_COMMAND *p_result)
 {
     tAVRC_STS  status = AVRC_STS_INTERNAL_ERR;
 
-    if(p_msg && p_result)
-    {
-        switch(p_msg->hdr.opcode)
-        {
+    if(p_msg && p_result) {
+        switch(p_msg->hdr.opcode) {
             case AVRC_OP_VENDOR:     /*  0x00    Vendor-dependent commands */
                 status = avrc_ctrl_pars_vendor_cmd(&p_msg->vendor, p_result);
                 break;
@@ -489,15 +414,14 @@ tAVRC_STS AVRC_Ctrl_ParsCommand(tAVRC_MSG *p_msg, tAVRC_COMMAND *p_result)
 **                  Otherwise, the error code defined by AVRCP 1.4
 **
 *******************************************************************************/
-tAVRC_STS AVRC_ParsCommand(tAVRC_MSG *p_msg, tAVRC_COMMAND *p_result, uint8_t *p_buf, uint16_t buf_len)
+tAVRC_STS AVRC_ParsCommand(tAVRC_MSG *p_msg, tAVRC_COMMAND *p_result, uint8_t *p_buf,
+                           uint16_t buf_len)
 {
     tAVRC_STS  status = AVRC_STS_INTERNAL_ERR;
     uint16_t  id;
 
-    if(p_msg && p_result)
-    {
-        switch(p_msg->hdr.opcode)
-        {
+    if(p_msg && p_result) {
+        switch(p_msg->hdr.opcode) {
             case AVRC_OP_VENDOR:     /*  0x00    Vendor-dependent commands */
                 status = avrc_pars_vendor_cmd(&p_msg->vendor, p_result, p_buf, buf_len);
                 break;
@@ -505,8 +429,7 @@ tAVRC_STS AVRC_ParsCommand(tAVRC_MSG *p_msg, tAVRC_COMMAND *p_result, uint8_t *p
             case AVRC_OP_PASS_THRU:  /*  0x7C    panel subunit opcode */
                 status = avrc_pars_pass_thru(&p_msg->pass, &id);
 
-                if(status == AVRC_STS_NO_ERROR)
-                {
+                if(status == AVRC_STS_NO_ERROR) {
                     p_result->pdu = (uint8_t)id;
                 }
 

@@ -50,7 +50,8 @@ void eager_reader_free(eager_reader_t *reader);
 // Registers |reader| with the |reactor|. When the reader has data
 // |read_cb| will be called. The |context| parameter is passed, untouched, to |read_cb|.
 // Neither |reader|, nor |reactor|, nor |read_cb| may be NULL. |context| may be NULL.
-void eager_reader_register(eager_reader_t *reader, reactor_t *reactor, eager_reader_cb read_cb, void *context);
+void eager_reader_register(eager_reader_t *reader, reactor_t *reactor, eager_reader_cb read_cb,
+                           void *context);
 
 // Unregisters |reader| from whichever reactor it is registered with, if any. This
 // function is idempotent.

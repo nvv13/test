@@ -40,7 +40,7 @@
 #include "utl.h"
 
 #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-    #include "bta_hh_int.h"
+#include "bta_hh_int.h"
 #endif
 
 
@@ -62,8 +62,7 @@ static void bta_gattc_deregister_cmpl(tBTA_GATTC_RCB *p_clreg);
 static void bta_gattc_enc_cmpl_cback(tGATT_IF gattc_if, BD_ADDR bda);
 static void bta_gattc_cong_cback(uint16_t conn_id, uint8_t congested);
 
-static tGATT_CBACK bta_gattc_cl_cback =
-{
+static tGATT_CBACK bta_gattc_cl_cback = {
     bta_gattc_conn_cback,
     bta_gattc_cmpl_cback,
     bta_gattc_disc_res_cback,
@@ -74,8 +73,7 @@ static tGATT_CBACK bta_gattc_cl_cback =
 };
 
 /* opcode(tGATTC_OPTYPE) order has to be comply with internal event order */
-static uint16_t bta_gattc_opcode_to_int_evt[] =
-{
+static uint16_t bta_gattc_opcode_to_int_evt[] = {
     BTA_GATTC_API_READ_EVT,
     BTA_GATTC_API_WRITE_EVT,
     BTA_GATTC_API_EXEC_EVT,
@@ -83,8 +81,7 @@ static uint16_t bta_gattc_opcode_to_int_evt[] =
 };
 
 #if (BT_TRACE_VERBOSE == TRUE)
-static const char *bta_gattc_op_code_name[] =
-{
+static const char *bta_gattc_op_code_name[] = {
     "Unknown",
     "Discovery",
     "Read",
@@ -116,14 +113,11 @@ static void bta_gattc_enable(tBTA_GATTC_CB *p_cb)
 {
     APPL_TRACE_DEBUG("bta_gattc_enable");
 
-    if(p_cb->state == BTA_GATTC_STATE_DISABLED)
-    {
+    if(p_cb->state == BTA_GATTC_STATE_DISABLED) {
         /* initialize control block */
         wm_memset(&bta_gattc_cb, 0, sizeof(tBTA_GATTC_CB));
         p_cb->state = BTA_GATTC_STATE_ENABLED;
-    }
-    else
-    {
+    } else {
         APPL_TRACE_DEBUG("GATTC is arelady enabled");
     }
 }
@@ -143,33 +137,30 @@ void bta_gattc_disable(tBTA_GATTC_CB *p_cb)
     uint8_t           i;
     APPL_TRACE_DEBUG("bta_gattc_disable");
 
-    if(p_cb->state != BTA_GATTC_STATE_ENABLED)
-    {
+    if(p_cb->state != BTA_GATTC_STATE_ENABLED) {
         APPL_TRACE_ERROR("not enabled or disable in pogress");
         return;
     }
 
-    for(i = 0; i < BTA_GATTC_CL_MAX; i ++)
-    {
-        if(p_cb->cl_rcb[i].in_use)
-        {
+    for(i = 0; i < BTA_GATTC_CL_MAX; i ++) {
+        if(p_cb->cl_rcb[i].in_use) {
             p_cb->state = BTA_GATTC_STATE_DISABLING;
             /* don't deregister HH GATT IF */
             /* HH GATT IF will be deregistered by bta_hh_le_deregister when disable HH */
-            #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-            if(!bta_hh_le_is_hh_gatt_if(p_cb->cl_rcb[i].client_if))
-            {
-            #endif
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+
+            if(!bta_hh_le_is_hh_gatt_if(p_cb->cl_rcb[i].client_if)) {
+#endif
                 bta_gattc_deregister(p_cb, &p_cb->cl_rcb[i]);
-            #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
             }
-            #endif
+
+#endif
         }
     }
 
     /* no registered apps, indicate disable completed */
-    if(p_cb->state != BTA_GATTC_STATE_DISABLING)
-    {
+    if(p_cb->state != BTA_GATTC_STATE_DISABLING) {
         p_cb->state = BTA_GATTC_STATE_DISABLED;
         wm_memset(p_cb, 0, sizeof(tBTA_GATTC_CB));
     }
@@ -195,23 +186,18 @@ void bta_gattc_register(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_data)
     cb_data.reg_oper.status = BTA_GATT_NO_RESOURCES;
 
     /* check if  GATTC module is already enabled . Else enable */
-    if(p_cb->state == BTA_GATTC_STATE_DISABLED)
-    {
+    if(p_cb->state == BTA_GATTC_STATE_DISABLED) {
         bta_gattc_enable(p_cb);
     }
 
     /* todo need to check duplicate uuid */
-    for(i = 0; i < BTA_GATTC_CL_MAX; i ++)
-    {
-        if(!p_cb->cl_rcb[i].in_use)
-        {
-            if((p_app_uuid == NULL) || (p_cb->cl_rcb[i].client_if = GATT_Register(p_app_uuid, &bta_gattc_cl_cback)) == 0)
-            {
+    for(i = 0; i < BTA_GATTC_CL_MAX; i ++) {
+        if(!p_cb->cl_rcb[i].in_use) {
+            if((p_app_uuid == NULL)
+                    || (p_cb->cl_rcb[i].client_if = GATT_Register(p_app_uuid, &bta_gattc_cl_cback)) == 0) {
                 APPL_TRACE_ERROR("Register with GATT stack failed.");
                 status = BTA_GATT_ERROR;
-            }
-            else
-            {
+            } else {
                 p_cb->cl_rcb[i].in_use = TRUE;
                 p_cb->cl_rcb[i].p_cback = p_data->api_reg.p_cback;
                 wm_memcpy(&p_cb->cl_rcb[i].app_uuid, p_app_uuid, sizeof(tBT_UUID));
@@ -229,10 +215,8 @@ void bta_gattc_register(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_data)
     }
 
     /* callback with register event */
-    if(p_data->api_reg.p_cback)
-    {
-        if(p_app_uuid != NULL)
-        {
+    if(p_data->api_reg.p_cback) {
+        if(p_app_uuid != NULL) {
             wm_memcpy(&(cb_data.reg_oper.app_uuid), p_app_uuid, sizeof(tBT_UUID));
         }
 
@@ -253,12 +237,9 @@ void bta_gattc_start_if(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
 {
     UNUSED(p_cb);
 
-    if(bta_gattc_cl_get_regcb(p_msg->int_start_if.client_if) != NULL)
-    {
+    if(bta_gattc_cl_get_regcb(p_msg->int_start_if.client_if) != NULL) {
         GATT_StartIf(p_msg->int_start_if.client_if);
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("Unable to start app.: Unknown interface =%d", p_msg->int_start_if.client_if);
     }
 }
@@ -276,47 +257,35 @@ void bta_gattc_deregister(tBTA_GATTC_CB *p_cb, tBTA_GATTC_RCB  *p_clreg)
     uint8_t               i;
     BT_HDR              buf;
 
-    if(p_clreg != NULL)
-    {
+    if(p_clreg != NULL) {
         /* remove bg connection associated with this rcb */
-        for(i = 0; i < BTA_GATTC_KNOWN_SR_MAX; i ++)
-        {
-            if(p_cb->bg_track[i].in_use)
-            {
-                if(p_cb->bg_track[i].cif_mask & (1 << (p_clreg->client_if - 1)))
-                {
+        for(i = 0; i < BTA_GATTC_KNOWN_SR_MAX; i ++) {
+            if(p_cb->bg_track[i].in_use) {
+                if(p_cb->bg_track[i].cif_mask & (1 << (p_clreg->client_if - 1))) {
                     bta_gattc_mark_bg_conn(p_clreg->client_if, p_cb->bg_track[i].remote_bda, FALSE, FALSE);
                     GATT_CancelConnect(p_clreg->client_if, p_cb->bg_track[i].remote_bda, FALSE);
                 }
 
-                if(p_cb->bg_track[i].cif_adv_mask & (1 << (p_clreg->client_if - 1)))
-                {
+                if(p_cb->bg_track[i].cif_adv_mask & (1 << (p_clreg->client_if - 1))) {
                     bta_gattc_mark_bg_conn(p_clreg->client_if, p_cb->bg_track[i].remote_bda, FALSE, TRUE);
                 }
             }
         }
 
-        if(p_clreg->num_clcb > 0)
-        {
+        if(p_clreg->num_clcb > 0) {
             /* close all CLCB related to this app */
-            for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++)
-            {
-                if(p_cb->clcb[i].in_use && (p_cb->clcb[i].p_rcb == p_clreg))
-                {
+            for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++) {
+                if(p_cb->clcb[i].in_use && (p_cb->clcb[i].p_rcb == p_clreg)) {
                     p_clreg->dereg_pending = TRUE;
                     buf.event = BTA_GATTC_API_CLOSE_EVT;
                     buf.layer_specific = p_cb->clcb[i].bta_conn_id;
                     bta_gattc_close(&p_cb->clcb[i], (tBTA_GATTC_DATA *)&buf)  ;
                 }
             }
-        }
-        else
-        {
+        } else {
             bta_gattc_deregister_cmpl(p_clreg);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("bta_gattc_deregister Deregister Failedm unknown client cif");
     }
 }
@@ -336,18 +305,13 @@ void bta_gattc_process_api_open(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
     tBTA_GATTC_RCB *p_clreg = bta_gattc_cl_get_regcb(p_msg->api_conn.client_if);
     UNUSED(p_cb);
 
-    if(p_clreg != NULL)
-    {
-        if(p_msg->api_conn.is_direct)
-        {
+    if(p_clreg != NULL) {
+        if(p_msg->api_conn.is_direct) {
             if((p_clcb = bta_gattc_find_alloc_clcb(p_msg->api_conn.client_if,
                                                    p_msg->api_conn.remote_bda,
-                                                   p_msg->api_conn.transport)) != NULL)
-            {
+                                                   p_msg->api_conn.transport)) != NULL) {
                 bta_gattc_sm_execute(p_clcb, event, p_msg);
-            }
-            else
-            {
+            } else {
                 APPL_TRACE_ERROR("No resources to open a new connection.");
                 bta_gattc_send_open_cback(p_clreg,
                                           BTA_GATT_NO_RESOURCES,
@@ -355,14 +319,10 @@ void bta_gattc_process_api_open(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
                                           BTA_GATT_INVALID_CONN_ID,
                                           p_msg->api_conn.transport, 0);
             }
-        }
-        else
-        {
+        } else {
             bta_gattc_init_bk_conn(&p_msg->api_conn, p_clreg);
         }
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("bta_gattc_process_api_open Failed, unknown client_if: %d",
                          p_msg->api_conn.client_if);
     }
@@ -384,28 +344,21 @@ void bta_gattc_process_api_open_cancel(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_m
     tBTA_GATTC cb_data;
     UNUSED(p_cb);
 
-    if(p_msg->api_cancel_conn.is_direct)
-    {
+    if(p_msg->api_cancel_conn.is_direct) {
         if((p_clcb = bta_gattc_find_clcb_by_cif(p_msg->api_cancel_conn.client_if,
                                                 p_msg->api_cancel_conn.remote_bda,
-                                                BTA_GATT_TRANSPORT_LE)) != NULL)
-        {
+                                                BTA_GATT_TRANSPORT_LE)) != NULL) {
             bta_gattc_sm_execute(p_clcb, event, p_msg);
-        }
-        else
-        {
+        } else {
             APPL_TRACE_ERROR("No such connection need to be cancelled");
             p_clreg = bta_gattc_cl_get_regcb(p_msg->api_cancel_conn.client_if);
 
-            if(p_clreg && p_clreg->p_cback)
-            {
+            if(p_clreg && p_clreg->p_cback) {
                 cb_data.status = BTA_GATT_ERROR;
                 (*p_clreg->p_cback)(BTA_GATTC_CANCEL_OPEN_EVT, &cb_data);
             }
         }
-    }
-    else
-    {
+    } else {
         bta_gattc_cancel_bk_conn(&p_msg->api_cancel_conn);
     }
 }
@@ -426,8 +379,7 @@ void bta_gattc_process_enc_cmpl(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
     UNUSED(p_cb);
     p_clreg = bta_gattc_cl_get_regcb(p_msg->enc_cmpl.client_if);
 
-    if(p_clreg && p_clreg->p_cback)
-    {
+    if(p_clreg && p_clreg->p_cback) {
         wm_memset(&cb_data, 0, sizeof(tBTA_GATTC));
         cb_data.enc_cmpl.client_if = p_msg->enc_cmpl.client_if;
         bdcpy(cb_data.enc_cmpl.remote_bda, p_msg->enc_cmpl.remote_bda);
@@ -450,8 +402,7 @@ void bta_gattc_cancel_open_error(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_dat
     UNUSED(p_data);
     cb_data.status = BTA_GATT_ERROR;
 
-    if(p_clcb && p_clcb->p_rcb && p_clcb->p_rcb->p_cback)
-    {
+    if(p_clcb && p_clcb->p_rcb && p_clcb->p_rcb->p_cback) {
         (*p_clcb->p_rcb->p_cback)(BTA_GATTC_CANCEL_OPEN_EVT, &cb_data);
     }
 }
@@ -513,19 +464,15 @@ void bta_gattc_open(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 
     /* open/hold a connection */
     if(!GATT_Connect(p_clcb->p_rcb->client_if, p_data->api_conn.remote_bda,
-                     TRUE, p_data->api_conn.transport))
-    {
+                     TRUE, p_data->api_conn.transport)) {
         APPL_TRACE_ERROR("Connection open failure");
         bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_OPEN_FAIL_EVT, p_data);
-    }
-    else
-    {
+    } else {
         /* a connected remote device */
         if(GATT_GetConnIdIfConnected(p_clcb->p_rcb->client_if,
                                      p_data->api_conn.remote_bda,
                                      &p_clcb->bta_conn_id,
-                                     p_data->api_conn.transport))
-        {
+                                     p_data->api_conn.transport)) {
             gattc_data.int_conn.hdr.layer_specific = p_clcb->bta_conn_id;
             bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_CONN_EVT, &gattc_data);
         }
@@ -549,29 +496,23 @@ void bta_gattc_init_bk_conn(tBTA_GATTC_API_OPEN *p_data, tBTA_GATTC_RCB *p_clreg
     tBTA_GATTC_CLCB         *p_clcb;
     tBTA_GATTC_DATA         gattc_data;
 
-    if(bta_gattc_mark_bg_conn(p_data->client_if, p_data->remote_bda, TRUE, FALSE))
-    {
+    if(bta_gattc_mark_bg_conn(p_data->client_if, p_data->remote_bda, TRUE, FALSE)) {
         /* always call open to hold a connection */
-        if(!GATT_Connect(p_data->client_if, p_data->remote_bda, FALSE, p_data->transport))
-        {
+        if(!GATT_Connect(p_data->client_if, p_data->remote_bda, FALSE, p_data->transport)) {
             uint8_t *bda = (uint8_t *)p_data->remote_bda;
             status = BTA_GATT_ERROR;
             APPL_TRACE_ERROR("%s unable to connect to remote bd_addr:%02x:%02x:%02x:%02x:%02x:%02x",
                              __func__, bda[0], bda[1], bda[2], bda[3], bda[4], bda[5]);
-        }
-        else
-        {
+        } else {
             status = BTA_GATT_OK;
 
             /* if is a connected remote device */
             if(GATT_GetConnIdIfConnected(p_data->client_if,
                                          p_data->remote_bda,
                                          &conn_id,
-                                         p_data->transport))
-            {
+                                         p_data->transport)) {
                 if((p_clcb = bta_gattc_find_alloc_clcb(p_data->client_if, p_data->remote_bda,
-                                                       BTA_GATT_TRANSPORT_LE)) != NULL)
-                {
+                                                       BTA_GATT_TRANSPORT_LE)) != NULL) {
                     gattc_data.hdr.layer_specific = p_clcb->bta_conn_id = conn_id;
                     /* open connection */
                     bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_CONN_EVT, &gattc_data);
@@ -582,8 +523,7 @@ void bta_gattc_init_bk_conn(tBTA_GATTC_API_OPEN *p_data, tBTA_GATTC_RCB *p_clreg
     }
 
     /* open failure, report OPEN_EVT */
-    if(status != BTA_GATT_OK)
-    {
+    if(status != BTA_GATT_OK) {
         bta_gattc_send_open_cback(p_clreg, status, p_data->remote_bda,
                                   BTA_GATT_INVALID_CONN_ID, BTA_GATT_TRANSPORT_LE, 0);
     }
@@ -604,22 +544,17 @@ void bta_gattc_cancel_bk_conn(tBTA_GATTC_API_CANCEL_OPEN *p_data)
     cb_data.status = BTA_GATT_ERROR;
 
     /* remove the device from the bg connection mask */
-    if(bta_gattc_mark_bg_conn(p_data->client_if, p_data->remote_bda, FALSE, FALSE))
-    {
-        if(GATT_CancelConnect(p_data->client_if, p_data->remote_bda, FALSE))
-        {
+    if(bta_gattc_mark_bg_conn(p_data->client_if, p_data->remote_bda, FALSE, FALSE)) {
+        if(GATT_CancelConnect(p_data->client_if, p_data->remote_bda, FALSE)) {
             cb_data.status = BTA_GATT_OK;
-        }
-        else
-        {
+        } else {
             APPL_TRACE_ERROR("bta_gattc_cancel_bk_conn failed");
         }
     }
 
     p_clreg = bta_gattc_cl_get_regcb(p_data->client_if);
 
-    if(p_clreg && p_clreg->p_cback)
-    {
+    if(p_clreg && p_clreg->p_cback) {
         (*p_clreg->p_cback)(BTA_GATTC_CANCEL_OPEN_EVT, &cb_data);
     }
 }
@@ -637,8 +572,7 @@ void bta_gattc_cancel_open_ok(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     tBTA_GATTC          cb_data;
     UNUSED(p_data);
 
-    if(p_clcb->p_rcb->p_cback)
-    {
+    if(p_clcb->p_rcb->p_cback) {
         cb_data.status = BTA_GATT_OK;
         (*p_clcb->p_rcb->p_cback)(BTA_GATTC_CANCEL_OPEN_EVT, &cb_data);
     }
@@ -658,14 +592,10 @@ void bta_gattc_cancel_open(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
     tBTA_GATTC          cb_data;
 
-    if(GATT_CancelConnect(p_clcb->p_rcb->client_if, p_data->api_cancel_conn.remote_bda, TRUE))
-    {
+    if(GATT_CancelConnect(p_clcb->p_rcb->client_if, p_data->api_cancel_conn.remote_bda, TRUE)) {
         bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_CANCEL_OPEN_OK_EVT, p_data);
-    }
-    else
-    {
-        if(p_clcb->p_rcb->p_cback)
-        {
+    } else {
+        if(p_clcb->p_rcb->p_cback) {
             cb_data.status = BTA_GATT_ERROR;
             (*p_clcb->p_rcb->p_cback)(BTA_GATTC_CANCEL_OPEN_EVT, &cb_data);
         }
@@ -685,8 +615,7 @@ void bta_gattc_conn(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     tBTA_GATTC_IF   gatt_if;
     APPL_TRACE_DEBUG("bta_gattc_conn server cache state=%d", p_clcb->p_srcb->state);
 
-    if(p_data != NULL)
-    {
+    if(p_data != NULL) {
         APPL_TRACE_DEBUG("bta_gattc_conn conn_id=%d", p_data->hdr.layer_specific);
         p_clcb->bta_conn_id  = p_data->int_conn.hdr.layer_specific;
         GATT_GetConnectionInfor(p_data->hdr.layer_specific,
@@ -695,51 +624,38 @@ void bta_gattc_conn(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 
     p_clcb->p_srcb->connected = TRUE;
 
-    if(p_clcb->p_srcb->mtu == 0)
-    {
+    if(p_clcb->p_srcb->mtu == 0) {
         p_clcb->p_srcb->mtu = GATT_DEF_BLE_MTU_SIZE;
     }
 
     /* start database cache if needed */
     if(p_clcb->p_srcb->p_srvc_cache == NULL ||
-            p_clcb->p_srcb->state != BTA_GATTC_SERV_IDLE)
-    {
-        if(p_clcb->p_srcb->state == BTA_GATTC_SERV_IDLE)
-        {
+            p_clcb->p_srcb->state != BTA_GATTC_SERV_IDLE) {
+        if(p_clcb->p_srcb->state == BTA_GATTC_SERV_IDLE) {
             p_clcb->p_srcb->state = BTA_GATTC_SERV_LOAD;
 
-            if(bta_gattc_cache_load(p_clcb))
-            {
+            if(bta_gattc_cache_load(p_clcb)) {
                 bta_gattc_reset_discover_st(p_clcb->p_srcb, BTA_GATT_OK);
-            }
-            else
-            {
+            } else {
                 p_clcb->p_srcb->state = BTA_GATTC_SERV_DISC;
                 /* cache load failure, start discovery */
                 bta_gattc_start_discover(p_clcb, NULL);
             }
-        }
-        else /* cache is building */
-        {
+        } else { /* cache is building */
             p_clcb->state = BTA_GATTC_DISCOVER_ST;
         }
-    }
-    else
-    {
+    } else {
         /* a pending service handle change indication */
-        if(p_clcb->p_srcb->srvc_hdl_chg)
-        {
+        if(p_clcb->p_srcb->srvc_hdl_chg) {
             p_clcb->p_srcb->srvc_hdl_chg = FALSE;
             /* start discovery */
             bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_DISCOVER_EVT, NULL);
         }
     }
 
-    if(p_clcb->p_rcb)
-    {
+    if(p_clcb->p_rcb) {
         /* there is no RM for GATT */
-        if(p_clcb->transport == BTA_TRANSPORT_BR_EDR)
-        {
+        if(p_clcb->transport == BTA_TRANSPORT_BR_EDR) {
             bta_sys_conn_open(BTA_ID_GATTC, BTA_ALL_APP_ID, p_clcb->bda);
         }
 
@@ -764,8 +680,7 @@ void bta_gattc_close_fail(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
     tBTA_GATTC           cb_data;
 
-    if(p_clcb->p_rcb->p_cback)
-    {
+    if(p_clcb->p_rcb->p_cback) {
         wm_memset(&cb_data, 0, sizeof(tBTA_GATTC));
         cb_data.close.client_if = p_clcb->p_rcb->client_if;
         cb_data.close.conn_id   = p_data->hdr.layer_specific;
@@ -796,31 +711,24 @@ void bta_gattc_close(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     cb_data.close.status    = p_clcb->status;
     bdcpy(cb_data.close.remote_bda, p_clcb->bda);
 
-    if(p_clcb->transport == BTA_TRANSPORT_BR_EDR)
-    {
+    if(p_clcb->transport == BTA_TRANSPORT_BR_EDR) {
         bta_sys_conn_close(BTA_ID_GATTC, BTA_ALL_APP_ID, p_clcb->bda);
     }
 
     bta_gattc_clcb_dealloc(p_clcb);
 
-    if(p_data->hdr.event == BTA_GATTC_API_CLOSE_EVT)
-    {
+    if(p_data->hdr.event == BTA_GATTC_API_CLOSE_EVT) {
         cb_data.close.status = GATT_Disconnect(p_data->hdr.layer_specific);
+    } else if(p_data->hdr.event == BTA_GATTC_INT_DISCONN_EVT) {
+        cb_data.close.status = p_data->int_conn.reason;
+        cb_data.close.reason = p_data->int_conn.reason;
     }
-    else
-        if(p_data->hdr.event == BTA_GATTC_INT_DISCONN_EVT)
-        {
-            cb_data.close.status = p_data->int_conn.reason;
-            cb_data.close.reason = p_data->int_conn.reason;
-        }
 
-    if(p_cback)
-    {
+    if(p_cback) {
         (* p_cback)(BTA_GATTC_CLOSE_EVT, (tBTA_GATTC *)&cb_data);
     }
 
-    if(p_clreg->num_clcb == 0 && p_clreg->dereg_pending)
-    {
+    if(p_clreg->num_clcb == 0 && p_clreg->dereg_pending) {
         bta_gattc_deregister_cmpl(p_clreg);
     }
 }
@@ -838,10 +746,8 @@ void bta_gattc_reset_discover_st(tBTA_GATTC_SERV *p_srcb, tBTA_GATT_STATUS statu
     tBTA_GATTC_CB   *p_cb = &bta_gattc_cb;
     uint8_t i;
 
-    for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++)
-    {
-        if(p_cb->clcb[i].p_srcb == p_srcb)
-        {
+    for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++) {
+        if(p_cb->clcb[i].p_srcb == p_srcb) {
             p_cb->clcb[i].status = status;
             bta_gattc_sm_execute(&p_cb->clcb[i], BTA_GATTC_DISCOVER_CMPL_EVT, NULL);
         }
@@ -861,20 +767,16 @@ void bta_gattc_disc_close(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     APPL_TRACE_DEBUG("%s: Discovery cancel conn_id=%d", __func__,
                      p_clcb->bta_conn_id);
 
-    if(p_clcb->disc_active)
-    {
+    if(p_clcb->disc_active) {
         bta_gattc_reset_discover_st(p_clcb->p_srcb, BTA_GATT_ERROR);
-    }
-    else
-    {
+    } else {
         p_clcb->state = BTA_GATTC_CONN_ST;
     }
 
     // This function only gets called as the result of a BTA_GATTC_API_CLOSE_EVT
     // while in the BTA_GATTC_DISCOVER_ST state. Once the state changes, the
     // connection itself still needs to be closed to resolve the original event.
-    if(p_clcb->state == BTA_GATTC_CONN_ST)
-    {
+    if(p_clcb->state == BTA_GATTC_CONN_ST) {
         APPL_TRACE_DEBUG("State is back to BTA_GATTC_CONN_ST. "
                          "Trigger connection close");
         bta_gattc_close(p_clcb, p_data);
@@ -894,14 +796,12 @@ void bta_gattc_set_discover_st(tBTA_GATTC_SERV *p_srcb)
 {
     tBTA_GATTC_CB   *p_cb = &bta_gattc_cb;
     uint8_t   i;
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     L2CA_EnableUpdateBleConnParams(p_srcb->server_bda, FALSE);
-    #endif
+#endif
 
-    for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++)
-    {
-        if(p_cb->clcb[i].p_srcb == p_srcb)
-        {
+    for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++) {
+        if(p_cb->clcb[i].p_srcb == p_srcb) {
             p_cb->clcb[i].status = BTA_GATT_OK;
             p_cb->clcb[i].state = BTA_GATTC_DISCOVER_ST;
         }
@@ -938,16 +838,13 @@ void bta_gattc_cfg_mtu(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
     tBTA_GATT_STATUS    status;
 
-    if(bta_gattc_enqueue(p_clcb, p_data))
-    {
+    if(bta_gattc_enqueue(p_clcb, p_data)) {
         status = GATTC_ConfigureMTU(p_clcb->bta_conn_id, p_data->api_mtu.mtu);
 
         /* if failed, return callback here */
-        if(status != GATT_SUCCESS && status != GATT_CMD_STARTED)
-        {
+        if(status != GATT_SUCCESS && status != GATT_CMD_STARTED) {
             /* Dequeue the data, if it was enqueued */
-            if(p_clcb->p_q_cmd == p_data)
-            {
+            if(p_clcb->p_q_cmd == p_data) {
                 p_clcb->p_q_cmd = NULL;
             }
 
@@ -977,49 +874,39 @@ void bta_gattc_start_discover(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     {
         p_clcb->auto_update = BTA_GATTC_NO_SCHEDULE;
 
-        if(p_clcb->p_srcb != NULL)
-        {
+        if(p_clcb->p_srcb != NULL) {
             /* clear the service change mask */
             p_clcb->p_srcb->srvc_hdl_chg = FALSE;
             p_clcb->p_srcb->update_count = 0;
             p_clcb->p_srcb->state = BTA_GATTC_SERV_DISC_ACT;
 
-            if(p_clcb->transport == BTA_TRANSPORT_LE)
-            {
+            if(p_clcb->transport == BTA_TRANSPORT_LE) {
                 L2CA_EnableUpdateBleConnParams(p_clcb->p_srcb->server_bda, FALSE);
             }
 
             /* set all srcb related clcb into discovery ST */
             bta_gattc_set_discover_st(p_clcb->p_srcb);
 
-            if((p_clcb->status = bta_gattc_init_cache(p_clcb->p_srcb)) == BTA_GATT_OK)
-            {
+            if((p_clcb->status = bta_gattc_init_cache(p_clcb->p_srcb)) == BTA_GATT_OK) {
                 p_clcb->status = bta_gattc_discover_pri_service(p_clcb->bta_conn_id,
                                  p_clcb->p_srcb, GATT_DISC_SRVC_ALL);
             }
 
-            if(p_clcb->status != BTA_GATT_OK)
-            {
+            if(p_clcb->status != BTA_GATT_OK) {
                 APPL_TRACE_ERROR("discovery on server failed");
                 bta_gattc_reset_discover_st(p_clcb->p_srcb, p_clcb->status);
-            }
-            else
-            {
+            } else {
                 p_clcb->disc_active = TRUE;
             }
-        }
-        else
-        {
+        } else {
             APPL_TRACE_ERROR("unknown device, can not start discovery");
         }
     }
     /* pending operation, wait until it finishes */
-    else
-    {
+    else {
         p_clcb->auto_update = BTA_GATTC_DISC_WAITING;
 
-        if(p_clcb->p_srcb->state == BTA_GATTC_SERV_IDLE)
-        {
+        if(p_clcb->p_srcb->state == BTA_GATTC_SERV_IDLE) {
             p_clcb->state = BTA_GATTC_CONN_ST;    /* set clcb state */
         }
     }
@@ -1038,22 +925,19 @@ void bta_gattc_disc_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     tBTA_GATTC_DATA *p_q_cmd = p_clcb->p_q_cmd;
     UNUSED(p_data);
     APPL_TRACE_DEBUG("bta_gattc_disc_cmpl conn_id=%d", p_clcb->bta_conn_id);
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
 
-    if(p_clcb->transport == BTA_TRANSPORT_LE)
-    {
+    if(p_clcb->transport == BTA_TRANSPORT_LE) {
         L2CA_EnableUpdateBleConnParams(p_clcb->p_srcb->server_bda, TRUE);
     }
 
-    #endif
+#endif
     p_clcb->p_srcb->state = BTA_GATTC_SERV_IDLE;
     p_clcb->disc_active = FALSE;
 
-    if(p_clcb->status != GATT_SUCCESS)
-    {
+    if(p_clcb->status != GATT_SUCCESS) {
         /* clean up cache */
-        if(p_clcb->p_srcb && p_clcb->p_srcb->p_srvc_cache)
-        {
+        if(p_clcb->p_srcb && p_clcb->p_srcb->p_srvc_cache) {
             list_free(p_clcb->p_srcb->p_srvc_cache);
             p_clcb->p_srcb->p_srvc_cache = NULL;
         }
@@ -1062,38 +946,32 @@ void bta_gattc_disc_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
         bta_gattc_cache_reset(p_clcb->p_srcb->server_bda);
     }
 
-    if(p_clcb->p_srcb && p_clcb->p_srcb->p_srvc_list)
-    {
+    if(p_clcb->p_srcb && p_clcb->p_srcb->p_srvc_list) {
         /* release pending attribute list buffer */
         GKI_free_and_reset_buf((void **)&p_clcb->p_srcb->p_srvc_list);
     }
 
-    if(p_clcb->auto_update == BTA_GATTC_DISC_WAITING)
-    {
+    if(p_clcb->auto_update == BTA_GATTC_DISC_WAITING) {
         /* start discovery again */
         bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_DISCOVER_EVT, NULL);
     }
     /* get any queued command to proceed */
-    else
-        if(p_q_cmd != NULL)
-        {
-            p_clcb->p_q_cmd = NULL;
+    else if(p_q_cmd != NULL) {
+        p_clcb->p_q_cmd = NULL;
 
-            /* execute pending operation of link block still present */
-            if(l2cu_find_lcb_by_bd_addr(p_clcb->p_srcb->server_bda, BT_TRANSPORT_LE) != NULL)
-            {
-                bta_gattc_sm_execute(p_clcb, p_q_cmd->hdr.event, p_q_cmd);
-            }
-
-            /* if the command executed requeued the cmd, we don't
-             * want to free the underlying buffer that's being
-             * referenced by p_clcb->p_q_cmd
-             */
-            if(p_q_cmd != p_clcb->p_q_cmd)
-            {
-                GKI_free_and_reset_buf((void **)&p_q_cmd);
-            }
+        /* execute pending operation of link block still present */
+        if(l2cu_find_lcb_by_bd_addr(p_clcb->p_srcb->server_bda, BT_TRANSPORT_LE) != NULL) {
+            bta_gattc_sm_execute(p_clcb, p_q_cmd->hdr.event, p_q_cmd);
         }
+
+        /* if the command executed requeued the cmd, we don't
+         * want to free the underlying buffer that's being
+         * referenced by p_clcb->p_q_cmd
+         */
+        if(p_q_cmd != p_clcb->p_q_cmd) {
+            GKI_free_and_reset_buf((void **)&p_q_cmd);
+        }
+    }
 }
 /*******************************************************************************
 **
@@ -1106,8 +984,7 @@ void bta_gattc_disc_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 *******************************************************************************/
 void bta_gattc_read(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
-    if(!bta_gattc_enqueue(p_clcb, p_data))
-    {
+    if(!bta_gattc_enqueue(p_clcb, p_data)) {
         return;
     }
 
@@ -1118,11 +995,9 @@ void bta_gattc_read(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     tBTA_GATT_STATUS status = GATTC_Read(p_clcb->bta_conn_id, GATT_READ_BY_HANDLE, &read_param);
 
     /* read fail */
-    if(status != BTA_GATT_OK)
-    {
+    if(status != BTA_GATT_OK) {
         /* Dequeue the data, if it was enqueued */
-        if(p_clcb->p_q_cmd == p_data)
-        {
+        if(p_clcb->p_q_cmd == p_data) {
             p_clcb->p_q_cmd = NULL;
         }
 
@@ -1142,12 +1017,10 @@ void bta_gattc_read_multi(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     tBTA_GATT_STATUS    status = BTA_GATT_OK;
     tGATT_READ_PARAM    read_param;
 
-    if(bta_gattc_enqueue(p_clcb, p_data))
-    {
+    if(bta_gattc_enqueue(p_clcb, p_data)) {
         wm_memset(&read_param, 0, sizeof(tGATT_READ_PARAM));
 
-        if(status == BTA_GATT_OK)
-        {
+        if(status == BTA_GATT_OK) {
             read_param.read_multiple.num_handles = p_data->api_read_multi.num_attr;
             read_param.read_multiple.auth_req = p_data->api_read_multi.auth_req;
             wm_memcpy(&read_param.read_multiple.handles, p_data->api_read_multi.handles,
@@ -1156,11 +1029,9 @@ void bta_gattc_read_multi(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
         }
 
         /* read fail */
-        if(status != BTA_GATT_OK)
-        {
+        if(status != BTA_GATT_OK) {
             /* Dequeue the data, if it was enqueued */
-            if(p_clcb->p_q_cmd == p_data)
-            {
+            if(p_clcb->p_q_cmd == p_data) {
                 p_clcb->p_q_cmd = NULL;
             }
 
@@ -1179,8 +1050,7 @@ void bta_gattc_read_multi(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 *******************************************************************************/
 void bta_gattc_write(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
-    if(!bta_gattc_enqueue(p_clcb, p_data))
-    {
+    if(!bta_gattc_enqueue(p_clcb, p_data)) {
         return;
     }
 
@@ -1192,19 +1062,16 @@ void bta_gattc_write(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     attr.len    = p_data->api_write.len;
     attr.auth_req = p_data->api_write.auth_req;
 
-    if(p_data->api_write.p_value)
-    {
+    if(p_data->api_write.p_value) {
         wm_memcpy(attr.value, p_data->api_write.p_value, p_data->api_write.len);
     }
 
     status = GATTC_Write(p_clcb->bta_conn_id, p_data->api_write.write_type, &attr);
 
     /* write fail */
-    if(status != BTA_GATT_OK)
-    {
+    if(status != BTA_GATT_OK) {
         /* Dequeue the data, if it was enqueued */
-        if(p_clcb->p_q_cmd == p_data)
-        {
+        if(p_clcb->p_q_cmd == p_data) {
             p_clcb->p_q_cmd = NULL;
         }
 
@@ -1223,15 +1090,12 @@ void bta_gattc_execute(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
     tBTA_GATT_STATUS    status;
 
-    if(bta_gattc_enqueue(p_clcb, p_data))
-    {
+    if(bta_gattc_enqueue(p_clcb, p_data)) {
         status = GATTC_ExecuteWrite(p_clcb->bta_conn_id, p_data->api_exec.is_execute);
 
-        if(status != BTA_GATT_OK)
-        {
+        if(status != BTA_GATT_OK) {
             /* Dequeue the data, if it was enqueued */
-            if(p_clcb->p_q_cmd == p_data)
-            {
+            if(p_clcb->p_q_cmd == p_data) {
                 p_clcb->p_q_cmd = NULL;
             }
 
@@ -1253,15 +1117,11 @@ void bta_gattc_confirm(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     uint16_t handle = p_data->api_confirm.handle;
 
     if(GATTC_SendHandleValueConfirm(p_data->api_confirm.hdr.layer_specific, handle)
-            != GATT_SUCCESS)
-    {
+            != GATT_SUCCESS) {
         APPL_TRACE_ERROR("bta_gattc_confirm to handle [0x%04x] failed", handle);
-    }
-    else
-    {
+    } else {
         /* if over BR_EDR, inform PM for mode change */
-        if(p_clcb->transport == BTA_TRANSPORT_BR_EDR)
-        {
+        if(p_clcb->transport == BTA_TRANSPORT_BR_EDR) {
             bta_sys_busy(BTA_ID_GATTC, BTA_ALL_APP_ID, p_clcb->bda);
             bta_sys_idle(BTA_ID_GATTC, BTA_ALL_APP_ID, p_clcb->bda);
         }
@@ -1285,15 +1145,12 @@ void bta_gattc_read_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_OP_CMPL *p_data)
     wm_memset(&read_value, 0, sizeof(tBTA_GATT_UNFMT));
     cb_data.read.status     = p_data->status;
 
-    if(p_data->p_cmpl != NULL && p_data->status == BTA_GATT_OK)
-    {
+    if(p_data->p_cmpl != NULL && p_data->status == BTA_GATT_OK) {
         cb_data.read.handle = p_data->p_cmpl->att_value.handle;
         read_value.len = p_data->p_cmpl->att_value.len;
         read_value.p_value = p_data->p_cmpl->att_value.value;
         cb_data.read.p_value = &read_value;
-    }
-    else
-    {
+    } else {
         cb_data.read.handle = p_clcb->p_q_cmd->api_read.handle;
     }
 
@@ -1321,12 +1178,9 @@ void bta_gattc_write_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_OP_CMPL *p_data)
     cb_data.write.handle = p_data->p_cmpl->att_value.handle;
 
     if(p_clcb->p_q_cmd->api_write.hdr.event == BTA_GATTC_API_WRITE_EVT &&
-            p_clcb->p_q_cmd->api_write.write_type == BTA_GATTC_WRITE_PREPARE)
-    {
+            p_clcb->p_q_cmd->api_write.write_type == BTA_GATTC_WRITE_PREPARE) {
         event = BTA_GATTC_PREP_WRITE_EVT;
-    }
-    else
-    {
+    } else {
         event = p_clcb->p_q_cmd->api_write.cmpl_evt;
     }
 
@@ -1369,8 +1223,7 @@ void bta_gattc_cfg_mtu_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_OP_CMPL *p_data)
     tBTA_GATTC          cb_data;
     GKI_free_and_reset_buf((void **)&p_clcb->p_q_cmd);
 
-    if(p_data->p_cmpl  &&  p_data->status == BTA_GATT_OK)
-    {
+    if(p_data->p_cmpl  &&  p_data->status == BTA_GATT_OK) {
         p_clcb->p_srcb->mtu  = p_data->p_cmpl->mtu;
     }
 
@@ -1396,73 +1249,54 @@ void  bta_gattc_op_cmpl(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     uint8_t           mapped_op = 0;
     APPL_TRACE_DEBUG("bta_gattc_op_cmpl op = %d", op);
 
-    if(op == GATTC_OPTYPE_INDICATION || op == GATTC_OPTYPE_NOTIFICATION)
-    {
+    if(op == GATTC_OPTYPE_INDICATION || op == GATTC_OPTYPE_NOTIFICATION) {
         APPL_TRACE_ERROR("unexpected operation, ignored");
-    }
-    else
-        if(op >= GATTC_OPTYPE_READ)
-        {
-            if(p_clcb->p_q_cmd == NULL)
-            {
-                APPL_TRACE_ERROR("No pending command");
-                return;
-            }
-
-            if(p_clcb->p_q_cmd->hdr.event != bta_gattc_opcode_to_int_evt[op - GATTC_OPTYPE_READ])
-            {
-                mapped_op = p_clcb->p_q_cmd->hdr.event - BTA_GATTC_API_READ_EVT + GATTC_OPTYPE_READ;
-
-                if(mapped_op > GATTC_OPTYPE_INDICATION)
-                {
-                    mapped_op = 0;
-                }
-
-                #if (BT_TRACE_VERBOSE == TRUE)
-                APPL_TRACE_ERROR("expect op:(%s :0x%04x), receive unexpected operation (%s).",
-                                 bta_gattc_op_code_name[mapped_op], p_clcb->p_q_cmd->hdr.event,
-                                 bta_gattc_op_code_name[op]);
-                #else
-                APPL_TRACE_ERROR("expect op:(%u :0x%04x), receive unexpected operation (%u).",
-                                 mapped_op, p_clcb->p_q_cmd->hdr.event, op);
-                #endif
-                return;
-            }
-
-            /* discard responses if service change indication is received before operation completed */
-            if(p_clcb->auto_update == BTA_GATTC_DISC_WAITING && p_clcb->p_srcb->srvc_hdl_chg)
-            {
-                APPL_TRACE_DEBUG("Discard all responses when service change indication is received.");
-                p_data->op_cmpl.status = GATT_ERROR;
-            }
-
-            /* service handle change void the response, discard it */
-            if(op == GATTC_OPTYPE_READ)
-            {
-                bta_gattc_read_cmpl(p_clcb, &p_data->op_cmpl);
-            }
-            else
-                if(op == GATTC_OPTYPE_WRITE)
-                {
-                    bta_gattc_write_cmpl(p_clcb, &p_data->op_cmpl);
-                }
-                else
-                    if(op == GATTC_OPTYPE_EXE_WRITE)
-                    {
-                        bta_gattc_exec_cmpl(p_clcb, &p_data->op_cmpl);
-                    }
-                    else
-                        if(op == GATTC_OPTYPE_CONFIG)
-                        {
-                            bta_gattc_cfg_mtu_cmpl(p_clcb, &p_data->op_cmpl);
-                        }
-
-            if(p_clcb->auto_update == BTA_GATTC_DISC_WAITING)
-            {
-                p_clcb->auto_update = BTA_GATTC_REQ_WAITING;
-                bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_DISCOVER_EVT, NULL);
-            }
+    } else if(op >= GATTC_OPTYPE_READ) {
+        if(p_clcb->p_q_cmd == NULL) {
+            APPL_TRACE_ERROR("No pending command");
+            return;
         }
+
+        if(p_clcb->p_q_cmd->hdr.event != bta_gattc_opcode_to_int_evt[op - GATTC_OPTYPE_READ]) {
+            mapped_op = p_clcb->p_q_cmd->hdr.event - BTA_GATTC_API_READ_EVT + GATTC_OPTYPE_READ;
+
+            if(mapped_op > GATTC_OPTYPE_INDICATION) {
+                mapped_op = 0;
+            }
+
+#if (BT_TRACE_VERBOSE == TRUE)
+            APPL_TRACE_ERROR("expect op:(%s :0x%04x), receive unexpected operation (%s).",
+                             bta_gattc_op_code_name[mapped_op], p_clcb->p_q_cmd->hdr.event,
+                             bta_gattc_op_code_name[op]);
+#else
+            APPL_TRACE_ERROR("expect op:(%u :0x%04x), receive unexpected operation (%u).",
+                             mapped_op, p_clcb->p_q_cmd->hdr.event, op);
+#endif
+            return;
+        }
+
+        /* discard responses if service change indication is received before operation completed */
+        if(p_clcb->auto_update == BTA_GATTC_DISC_WAITING && p_clcb->p_srcb->srvc_hdl_chg) {
+            APPL_TRACE_DEBUG("Discard all responses when service change indication is received.");
+            p_data->op_cmpl.status = GATT_ERROR;
+        }
+
+        /* service handle change void the response, discard it */
+        if(op == GATTC_OPTYPE_READ) {
+            bta_gattc_read_cmpl(p_clcb, &p_data->op_cmpl);
+        } else if(op == GATTC_OPTYPE_WRITE) {
+            bta_gattc_write_cmpl(p_clcb, &p_data->op_cmpl);
+        } else if(op == GATTC_OPTYPE_EXE_WRITE) {
+            bta_gattc_exec_cmpl(p_clcb, &p_data->op_cmpl);
+        } else if(op == GATTC_OPTYPE_CONFIG) {
+            bta_gattc_cfg_mtu_cmpl(p_clcb, &p_data->op_cmpl);
+        }
+
+        if(p_clcb->auto_update == BTA_GATTC_DISC_WAITING) {
+            p_clcb->auto_update = BTA_GATTC_REQ_WAITING;
+            bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_DISCOVER_EVT, NULL);
+        }
+    }
 }
 /*******************************************************************************
 **
@@ -1495,8 +1329,7 @@ void bta_gattc_search(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
     tBTA_GATTC cb_data;
     APPL_TRACE_DEBUG("bta_gattc_search conn_id=%d", p_clcb->bta_conn_id);
 
-    if(p_clcb->p_srcb && p_clcb->p_srcb->p_srvc_cache)
-    {
+    if(p_clcb->p_srcb && p_clcb->p_srcb->p_srvc_cache) {
         status = BTA_GATT_OK;
         /* search the local cache of a server device */
         bta_gattc_search_service(p_clcb, p_data->api_search.p_srvc_uuid);
@@ -1535,8 +1368,7 @@ void bta_gattc_fail(tBTA_GATTC_CLCB *p_clcb, tBTA_GATTC_DATA *p_data)
 {
     UNUSED(p_data);
 
-    if(p_clcb->status == BTA_GATT_OK)
-    {
+    if(p_clcb->status == BTA_GATT_OK) {
         APPL_TRACE_ERROR("operation not supported at current state [%d]", p_clcb->state);
     }
 }
@@ -1568,8 +1400,7 @@ static void bta_gattc_deregister_cmpl(tBTA_GATTC_RCB *p_clreg)
         (*p_cback)(BTA_GATTC_DEREG_EVT, (tBTA_GATTC *)&cb_data);
     }
 
-    if(bta_gattc_num_reg_app() == 0 && p_cb->state == BTA_GATTC_STATE_DISABLING)
-    {
+    if(bta_gattc_num_reg_app() == 0 && p_cb->state == BTA_GATTC_STATE_DISABLING) {
         p_cb->state = BTA_GATTC_STATE_DISABLED;
     }
 }
@@ -1586,26 +1417,22 @@ static void bta_gattc_conn_cback(tGATT_IF gattc_if, BD_ADDR bda, uint16_t conn_i
                                  uint8_t connected, tGATT_DISCONN_REASON reason,
                                  tBT_TRANSPORT transport)
 {
-    if(reason != 0)
-    {
+    if(reason != 0) {
         APPL_TRACE_WARNING("%s() - cif=%d connected=%d conn_id=%d reason=0x%04x",
                            __func__, gattc_if, connected, conn_id, reason);
     }
 
     tls_bt_addr_t bdaddr;
     bdcpy(bdaddr.address, bda);
-    #ifdef DEBUG_CONNECT_STATE
+#ifdef DEBUG_CONNECT_STATE
 
-    if(connected)
-    {
+    if(connected) {
         btif_debug_conn_state(bdaddr, BTIF_DEBUG_CONNECTED, GATT_CONN_UNKNOWN);
-    }
-    else
-    {
+    } else {
         btif_debug_conn_state(bdaddr, BTIF_DEBUG_DISCONNECTED, reason);
     }
 
-    #endif
+#endif
     tBTA_GATTC_DATA *p_buf =
                     (tBTA_GATTC_DATA *)GKI_getbuf(sizeof(tBTA_GATTC_DATA));
     p_buf->int_conn.hdr.event = connected ? BTA_GATTC_INT_CONN_EVT :
@@ -1633,22 +1460,20 @@ static void bta_gattc_enc_cmpl_cback(tGATT_IF gattc_if, BD_ADDR bda)
     tBTA_GATTC_CLCB *p_clcb =
                     bta_gattc_find_clcb_by_cif(gattc_if, bda, BTA_GATT_TRANSPORT_LE);
 
-    if(p_clcb == NULL)
-    {
+    if(p_clcb == NULL) {
         return;
     }
 
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
 
     /* filter this event just for BTA HH LE GATT client,
        In the future, if we want to enable encryption complete event
        for all GATT clients, we can remove this code */
-    if(!bta_hh_le_is_hh_gatt_if(gattc_if))
-    {
+    if(!bta_hh_le_is_hh_gatt_if(gattc_if)) {
         return;
     }
 
-    #endif
+#endif
     APPL_TRACE_DEBUG("%s: cif = %d", __func__, gattc_if);
     tBTA_GATTC_DATA *p_buf =
                     (tBTA_GATTC_DATA *)GKI_getbuf(sizeof(tBTA_GATTC_DATA));
@@ -1677,30 +1502,24 @@ void bta_gattc_process_api_refresh(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
     uint8_t           i;
     UNUSED(p_cb);
 
-    if(p_srvc_cb != NULL)
-    {
+    if(p_srvc_cb != NULL) {
         /* try to find a CLCB */
-        if(p_srvc_cb->connected && p_srvc_cb->num_clcb != 0)
-        {
-            for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++, p_clcb ++)
-            {
-                if(p_clcb->in_use && p_clcb->p_srcb == p_srvc_cb)
-                {
+        if(p_srvc_cb->connected && p_srvc_cb->num_clcb != 0) {
+            for(i = 0; i < BTA_GATTC_CLCB_MAX; i ++, p_clcb ++) {
+                if(p_clcb->in_use && p_clcb->p_srcb == p_srvc_cb) {
                     found = TRUE;
                     break;
                 }
             }
 
-            if(found)
-            {
+            if(found) {
                 bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_DISCOVER_EVT, NULL);
                 return;
             }
         }
 
         /* in all other cases, mark it and delete the cache */
-        if(p_srvc_cb->p_srvc_cache != NULL)
-        {
+        if(p_srvc_cb->p_srvc_cache != NULL) {
             list_free(p_srvc_cb->p_srvc_cache);
             p_srvc_cb->p_srvc_cache = NULL;
         }
@@ -1732,13 +1551,12 @@ uint8_t bta_gattc_process_srvc_chg_ind(uint16_t conn_id,
     gattp_uuid.uu.uuid16 = UUID_SERVCLASS_GATT_SERVER;
     srvc_chg_uuid.len = 2;
     srvc_chg_uuid.uu.uuid16 = GATT_UUID_GATT_SRV_CHGD;
-    const tBTA_GATTC_CHARACTERISTIC *p_char = bta_gattc_get_characteristic_srcb(p_srcb, p_notify->handle);
+    const tBTA_GATTC_CHARACTERISTIC *p_char = bta_gattc_get_characteristic_srcb(p_srcb,
+            p_notify->handle);
 
     if(p_char && bta_gattc_uuid_compare(&p_char->service->uuid, &gattp_uuid, TRUE) &&
-            bta_gattc_uuid_compare(&p_char->uuid, &srvc_chg_uuid, TRUE))
-    {
-        if(att_value->len != BTA_GATTC_SERVICE_CHANGED_LEN)
-        {
+            bta_gattc_uuid_compare(&p_char->uuid, &srvc_chg_uuid, TRUE)) {
+        if(att_value->len != BTA_GATTC_SERVICE_CHANGED_LEN) {
             APPL_TRACE_ERROR("%s: received malformed service changed indication, skipping", __func__);
             return FALSE;
         }
@@ -1755,18 +1573,14 @@ uint8_t bta_gattc_process_srvc_chg_ind(uint16_t conn_id,
         bta_gattc_clear_notif_registration(p_srcb, conn_id, s_handle, e_handle);
 
         /* service change indication all received, do discovery update */
-        if(++ p_srcb->update_count == bta_gattc_num_reg_app())
-        {
+        if(++ p_srcb->update_count == bta_gattc_num_reg_app()) {
             /* not an opened connection; or connection busy */
             /* search for first available clcb and start discovery */
-            if(p_clcb == NULL || (p_clcb && p_clcb->p_q_cmd != NULL))
-            {
-                for(i = 0 ; i < BTA_GATTC_CLCB_MAX; i ++)
-                {
+            if(p_clcb == NULL || (p_clcb && p_clcb->p_q_cmd != NULL)) {
+                for(i = 0 ; i < BTA_GATTC_CLCB_MAX; i ++) {
                     if(bta_gattc_cb.clcb[i].in_use &&
                             bta_gattc_cb.clcb[i].p_srcb == p_srcb &&
-                            bta_gattc_cb.clcb[i].p_q_cmd == NULL)
-                    {
+                            bta_gattc_cb.clcb[i].p_q_cmd == NULL) {
                         p_clcb = &bta_gattc_cb.clcb[i];
                         break;
                     }
@@ -1777,15 +1591,13 @@ uint8_t bta_gattc_process_srvc_chg_ind(uint16_t conn_id,
             GATTC_SendHandleValueConfirm(conn_id, att_value->handle);
 
             /* if connection available, refresh cache by doing discovery now */
-            if(p_clcb != NULL)
-            {
+            if(p_clcb != NULL) {
                 bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_DISCOVER_EVT, NULL);
             }
         }
 
         /* notify applicationf or service change */
-        if(p_clrcb->p_cback != NULL)
-        {
+        if(p_clrcb->p_cback != NULL) {
             (* p_clrcb->p_cback)(BTA_GATTC_SRVC_CHG_EVT, (tBTA_GATTC *)p_srcb->server_bda);
         }
     }
@@ -1815,8 +1627,7 @@ void bta_gattc_proc_other_indication(tBTA_GATTC_CLCB *p_clcb, uint8_t op,
     wm_memcpy(p_notify->value, p_data->att_value.value, p_data->att_value.len);
     p_notify->conn_id = p_clcb->bta_conn_id;
 
-    if(p_clcb->p_rcb->p_cback)
-    {
+    if(p_clcb->p_rcb->p_cback) {
         (*p_clcb->p_rcb->p_cback)(BTA_GATTC_NOTIF_EVT, (tBTA_GATTC *)p_notify);
     }
 }
@@ -1840,36 +1651,30 @@ void bta_gattc_process_indicate(uint16_t conn_id, tGATTC_OPTYPE op, tGATT_CL_COM
     tBTA_GATTC_IF       gatt_if;
     tBTA_TRANSPORT transport;
 
-    if(!GATT_GetConnectionInfor(conn_id, &gatt_if, remote_bda, &transport))
-    {
+    if(!GATT_GetConnectionInfor(conn_id, &gatt_if, remote_bda, &transport)) {
         APPL_TRACE_ERROR("%s indication/notif for unknown app", __func__);
 
-        if(op == GATTC_OPTYPE_INDICATION)
-        {
+        if(op == GATTC_OPTYPE_INDICATION) {
             GATTC_SendHandleValueConfirm(conn_id, handle);
         }
 
         return;
     }
 
-    if((p_clrcb = bta_gattc_cl_get_regcb(gatt_if)) == NULL)
-    {
+    if((p_clrcb = bta_gattc_cl_get_regcb(gatt_if)) == NULL) {
         APPL_TRACE_ERROR("%s indication/notif for unregistered app", __func__);
 
-        if(op == GATTC_OPTYPE_INDICATION)
-        {
+        if(op == GATTC_OPTYPE_INDICATION) {
             GATTC_SendHandleValueConfirm(conn_id, handle);
         }
 
         return;
     }
 
-    if((p_srcb = bta_gattc_find_srcb(remote_bda)) == NULL)
-    {
+    if((p_srcb = bta_gattc_find_srcb(remote_bda)) == NULL) {
         APPL_TRACE_ERROR("%s indication/notif for unknown device, ignore", __func__);
 
-        if(op == GATTC_OPTYPE_INDICATION)
-        {
+        if(op == GATTC_OPTYPE_INDICATION) {
             GATTC_SendHandleValueConfirm(conn_id, handle);
         }
 
@@ -1880,18 +1685,14 @@ void bta_gattc_process_indicate(uint16_t conn_id, tGATTC_OPTYPE op, tGATT_CL_COM
     notify.handle = handle;
 
     /* if non-service change indication/notification, forward to application */
-    if(!bta_gattc_process_srvc_chg_ind(conn_id, p_clrcb, p_srcb, p_clcb, &notify, &p_data->att_value))
-    {
+    if(!bta_gattc_process_srvc_chg_ind(conn_id, p_clrcb, p_srcb, p_clcb, &notify, &p_data->att_value)) {
         /* if app registered for the notification */
-        if(bta_gattc_check_notif_registry(p_clrcb, p_srcb, &notify))
-        {
+        if(bta_gattc_check_notif_registry(p_clrcb, p_srcb, &notify)) {
             /* connection not open yet */
-            if(p_clcb == NULL)
-            {
+            if(p_clcb == NULL) {
                 p_clcb = bta_gattc_clcb_alloc(gatt_if, remote_bda, transport);
 
-                if(p_clcb == NULL)
-                {
+                if(p_clcb == NULL) {
                     APPL_TRACE_ERROR("No resources");
                     return;
                 }
@@ -1901,18 +1702,15 @@ void bta_gattc_process_indicate(uint16_t conn_id, tGATTC_OPTYPE op, tGATT_CL_COM
                 bta_gattc_sm_execute(p_clcb, BTA_GATTC_INT_CONN_EVT, NULL);
             }
 
-            if(p_clcb != NULL)
-            {
+            if(p_clcb != NULL) {
                 bta_gattc_proc_other_indication(p_clcb, op, p_data, &notify);
             }
         }
         /* no one intersted and need ack? */
-        else
-            if(op == GATTC_OPTYPE_INDICATION)
-            {
-                APPL_TRACE_DEBUG("%s no one interested, ack now", __func__);
-                GATTC_SendHandleValueConfirm(conn_id, handle);
-            }
+        else if(op == GATTC_OPTYPE_INDICATION) {
+            APPL_TRACE_DEBUG("%s no one interested, ack now", __func__);
+            GATTC_SendHandleValueConfirm(conn_id, handle);
+        }
     }
 }
 /*******************************************************************************
@@ -1932,22 +1730,18 @@ static void  bta_gattc_cmpl_cback(uint16_t conn_id, tGATTC_OPTYPE op, tGATT_STAT
                      conn_id, op, status);
 
     /* notification and indication processed right away */
-    if(op == GATTC_OPTYPE_NOTIFICATION || op == GATTC_OPTYPE_INDICATION)
-    {
+    if(op == GATTC_OPTYPE_NOTIFICATION || op == GATTC_OPTYPE_INDICATION) {
         bta_gattc_process_indicate(conn_id, op, p_data);
         return;
     }
     /* for all other operation, not expected if w/o connection */
-    else
-        if((p_clcb = bta_gattc_find_clcb_by_conn_id(conn_id)) == NULL)
-        {
-            APPL_TRACE_ERROR("bta_gattc_cmpl_cback unknown conn_id =  %d, ignore data", conn_id);
-            return;
-        }
+    else if((p_clcb = bta_gattc_find_clcb_by_conn_id(conn_id)) == NULL) {
+        APPL_TRACE_ERROR("bta_gattc_cmpl_cback unknown conn_id =  %d, ignore data", conn_id);
+        return;
+    }
 
     /* if over BR_EDR, inform PM for mode change */
-    if(p_clcb->transport == BTA_TRANSPORT_BR_EDR)
-    {
+    if(p_clcb->transport == BTA_TRANSPORT_BR_EDR) {
         bta_sys_busy(BTA_ID_GATTC, BTA_ALL_APP_ID, p_clcb->bda);
         bta_sys_idle(BTA_ID_GATTC, BTA_ALL_APP_ID, p_clcb->bda);
     }
@@ -1975,8 +1769,7 @@ static void bta_gattc_cmpl_sendmsg(uint16_t conn_id, tGATTC_OPTYPE op,
     p_buf->status = status;
     p_buf->op_code = op;
 
-    if(p_data != NULL)
-    {
+    if(p_data != NULL) {
         p_buf->p_cmpl = (tGATT_CL_COMPLETE *)(p_buf + 1);
         wm_memcpy(p_buf->p_cmpl, p_data, sizeof(tGATT_CL_COMPLETE));
     }
@@ -1998,10 +1791,8 @@ static void bta_gattc_cong_cback(uint16_t conn_id, uint8_t congested)
     tBTA_GATTC_CLCB *p_clcb;
     tBTA_GATTC cb_data;
 
-    if((p_clcb = bta_gattc_find_clcb_by_conn_id(conn_id)) != NULL)
-    {
-        if(p_clcb->p_rcb->p_cback)
-        {
+    if((p_clcb = bta_gattc_find_clcb_by_conn_id(conn_id)) != NULL) {
+        if(p_clcb->p_rcb->p_cback) {
             cb_data.congest.conn_id = conn_id;
             cb_data.congest.congested = congested;
             (*p_clcb->p_rcb->p_cback)(BTA_GATTC_CONGEST_EVT, &cb_data);
@@ -2026,23 +1817,19 @@ void bta_gattc_init_clcb_conn(uint8_t cif, BD_ADDR remote_bda)
     uint16_t              conn_id;
 
     /* should always get the connection ID */
-    if(GATT_GetConnIdIfConnected(cif, remote_bda, &conn_id, BTA_GATT_TRANSPORT_LE) == FALSE)
-    {
+    if(GATT_GetConnIdIfConnected(cif, remote_bda, &conn_id, BTA_GATT_TRANSPORT_LE) == FALSE) {
         APPL_TRACE_ERROR("bta_gattc_init_clcb_conn ERROR: not a connected device");
         return;
     }
 
     /* initaite a new connection here */
-    if((p_clcb = bta_gattc_clcb_alloc(cif, remote_bda, BTA_GATT_TRANSPORT_LE)) != NULL)
-    {
+    if((p_clcb = bta_gattc_clcb_alloc(cif, remote_bda, BTA_GATT_TRANSPORT_LE)) != NULL) {
         gattc_data.hdr.layer_specific = p_clcb->bta_conn_id = conn_id;
         gattc_data.api_conn.client_if = cif;
         wm_memcpy(gattc_data.api_conn.remote_bda, remote_bda, BD_ADDR_LEN);
         gattc_data.api_conn.is_direct = TRUE;
         bta_gattc_sm_execute(p_clcb, BTA_GATTC_API_OPEN_EVT, &gattc_data);
-    }
-    else
-    {
+    } else {
         APPL_TRACE_ERROR("No resources");
     }
 }
@@ -2061,12 +1848,9 @@ void bta_gattc_process_listen_all(uint8_t cif)
     uint8_t               i_conn = 0;
     tBTA_GATTC_CONN     *p_conn = &bta_gattc_cb.conn_track[0];
 
-    for(i_conn = 0; i_conn < BTA_GATTC_CONN_MAX; i_conn++, p_conn ++)
-    {
-        if(p_conn->in_use)
-        {
-            if(bta_gattc_find_clcb_by_cif(cif, p_conn->remote_bda, BTA_GATT_TRANSPORT_LE) == NULL)
-            {
+    for(i_conn = 0; i_conn < BTA_GATTC_CONN_MAX; i_conn++, p_conn ++) {
+        if(p_conn->in_use) {
+            if(bta_gattc_find_clcb_by_cif(cif, p_conn->remote_bda, BTA_GATT_TRANSPORT_LE) == NULL) {
                 bta_gattc_init_clcb_conn(cif, p_conn->remote_bda);
             }
 
@@ -2091,8 +1875,7 @@ void bta_gattc_listen(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
     cb_data.reg_oper.status = BTA_GATT_ERROR;
     cb_data.reg_oper.client_if = p_msg->api_listen.client_if;
 
-    if(p_clreg == NULL)
-    {
+    if(p_clreg == NULL) {
         APPL_TRACE_ERROR("bta_gattc_listen failed, unknown client_if: %d",
                          p_msg->api_listen.client_if);
         return;
@@ -2102,38 +1885,30 @@ void bta_gattc_listen(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
     if(bta_gattc_mark_bg_conn(p_msg->api_listen.client_if,
                               (BD_ADDR_PTR) p_msg->api_listen.remote_bda,
                               p_msg->api_listen.start,
-                              TRUE))
-    {
+                              TRUE)) {
         if(!GATT_Listen(p_msg->api_listen.client_if,
                         p_msg->api_listen.start,
-                        p_msg->api_listen.remote_bda))
-        {
+                        p_msg->api_listen.remote_bda)) {
             APPL_TRACE_ERROR("Listen failure");
             (*p_clreg->p_cback)(BTA_GATTC_LISTEN_EVT, &cb_data);
-        }
-        else
-        {
+        } else {
             cb_data.status = BTA_GATT_OK;
             (*p_clreg->p_cback)(BTA_GATTC_LISTEN_EVT, &cb_data);
 
-            if(p_msg->api_listen.start)
-            {
+            if(p_msg->api_listen.start) {
                 /* if listen to a specific target */
-                if(p_msg->api_listen.remote_bda != NULL)
-                {
+                if(p_msg->api_listen.remote_bda != NULL) {
                     /* if is a connected remote device */
                     if(L2CA_GetBleConnRole(p_msg->api_listen.remote_bda) == HCI_ROLE_SLAVE &&
                             bta_gattc_find_clcb_by_cif(p_msg->api_listen.client_if,
                                                        p_msg->api_listen.remote_bda,
-                                                       BTA_GATT_TRANSPORT_LE) == NULL)
-                    {
+                                                       BTA_GATT_TRANSPORT_LE) == NULL) {
                         bta_gattc_init_clcb_conn(p_msg->api_listen.client_if,
                                                  p_msg->api_listen.remote_bda);
                     }
                 }
                 /* if listen to all */
-                else
-                {
+                else {
                     LOG_DEBUG(LOG_TAG, "Listen For All now");
                     /* go through all connected device and send
                     callback for all connected slave connection */
@@ -2161,8 +1936,7 @@ void bta_gattc_broadcast(tBTA_GATTC_CB *p_cb, tBTA_GATTC_DATA *p_msg)
     cb_data.reg_oper.client_if = p_msg->api_listen.client_if;
     cb_data.reg_oper.status = BTM_BleBroadcast(p_msg->api_listen.start, 0);
 
-    if(p_clreg && p_clreg->p_cback)
-    {
+    if(p_clreg && p_clreg->p_cback) {
         (*p_clreg->p_cback)(BTA_GATTC_LISTEN_EVT, &cb_data);
     }
 }

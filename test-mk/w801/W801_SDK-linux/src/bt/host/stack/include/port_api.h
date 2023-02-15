@@ -34,8 +34,7 @@
 ** Define port settings structure send from the application in the
 ** set settings request, or to the application in the set settings indication.
 */
-typedef struct
-{
+typedef struct {
 
 #define PORT_BAUD_RATE_2400       0x00
 #define PORT_BAUD_RATE_4800       0x01
@@ -463,8 +462,7 @@ extern int PORT_GetModemStatus(uint16_t handle, uint8_t *p_control_signal);
 #define PORT_ERR_RXOVER     0x08    /* Input queue overflow occured */
 #define PORT_ERR_TXFULL     0x10    /* Output queue overflow occured */
 
-typedef struct
-{
+typedef struct {
 #define PORT_FLAG_CTS_HOLD  0x01    /* Tx is waiting for CTS signal */
 #define PORT_FLAG_DSR_HOLD  0x02    /* Tx is waiting for DSR signal */
 #define PORT_FLAG_RLSD_HOLD 0x04    /* Tx is waiting for RLSD signal */
@@ -601,7 +599,7 @@ extern int PORT_WriteData(uint16_t handle, char *p_data, uint16_t max_len,
 **
 *******************************************************************************/
 //extern int PORT_WriteDataCO(uint16_t handle, int *p_len);
-extern int PORT_WriteDataCO (uint16_t handle, int *p_len, int len, uint8_t *p_data);
+extern int PORT_WriteDataCO(uint16_t handle, int *p_len, int len, uint8_t *p_data);
 
 /*******************************************************************************
 **

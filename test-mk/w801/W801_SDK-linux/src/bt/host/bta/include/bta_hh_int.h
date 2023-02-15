@@ -30,20 +30,19 @@
 #include "bta_hh_api.h"
 
 #if BTA_HH_LE_INCLUDED == TRUE
-    #include "bta_gatt_api.h"
+#include "bta_gatt_api.h"
 #endif
 
 /* can be moved to bta_api.h */
 #define BTA_HH_MAX_RPT_CHARS    8
 
 #if (BTA_GATT_INCLUDED == FALSE || BLE_INCLUDED == FALSE)
-    #undef BTA_HH_LE_INCLUDED
-    #define BTA_HH_LE_INCLUDED      FALSE
+#undef BTA_HH_LE_INCLUDED
+#define BTA_HH_LE_INCLUDED      FALSE
 #endif
 
 /* state machine events, these events are handled by the state machine */
-enum
-{
+enum {
     BTA_HH_API_OPEN_EVT     = BTA_SYS_EVT_START(BTA_ID_HH),
     BTA_HH_API_CLOSE_EVT,
     BTA_HH_INT_OPEN_EVT,
@@ -56,7 +55,7 @@ enum
     BTA_HH_API_GET_DSCP_EVT,
     BTA_HH_API_MAINT_DEV_EVT,
     BTA_HH_OPEN_CMPL_EVT,
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     BTA_HH_GATT_CLOSE_EVT,
     BTA_HH_GATT_OPEN_EVT,
     BTA_HH_START_ENC_EVT,
@@ -67,7 +66,7 @@ enum
     BTA_HH_GATT_WRITE_DESCR_CMPL_EVT,
     BTA_HH_API_SCPP_UPDATE_EVT,
     BTA_HH_GATT_ENC_CMPL_EVT,
-    #endif
+#endif
 
     /* not handled by execute state machine */
     BTA_HH_API_ENABLE_EVT,
@@ -87,45 +86,41 @@ typedef uint16_t tBTA_HH_INT_EVT;         /* HID host internal events */
 #define BTA_HH_REMOVE_DEV       1
 
 /* state machine states */
-enum
-{
+enum {
     BTA_HH_NULL_ST,
     BTA_HH_IDLE_ST,
     BTA_HH_W4_CONN_ST,
     BTA_HH_CONN_ST
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     , BTA_HH_W4_SEC
-    #endif
+#endif
     , BTA_HH_INVALID_ST   /* Used to check invalid states before executing SM function */
 
 };
 typedef uint8_t tBTA_HH_STATE;
 
 /* data structure used to send a command/data to HID device */
-typedef struct
-{
+typedef struct {
     BT_HDR           hdr;
     uint8_t            t_type;
     uint8_t            param;
     uint8_t            rpt_id;
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     uint8_t            srvc_id;
-    #endif
+#endif
     uint16_t           data;
     BT_HDR           *p_data;
 } tBTA_HH_CMD_DATA;
 
 /* data type for BTA_HH_API_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     uint8_t               sec_mask;
     uint8_t               service_name[BTA_SERVICE_NAME_LEN + 1];
     tBTA_HH_CBACK   *p_cback;
 } tBTA_HH_API_ENABLE;
 
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     BD_ADDR         bd_addr;
     uint8_t           sec_mask;
@@ -133,16 +128,14 @@ typedef struct
 } tBTA_HH_API_CONN;
 
 /* internal event data from BTE HID callback */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     BD_ADDR         addr;
     uint32_t          data;
     BT_HDR          *p_data;
 } tBTA_HH_CBACK_DATA;
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     BD_ADDR             bda;
     uint16_t              attr_mask;
@@ -153,24 +146,22 @@ typedef struct
 } tBTA_HH_MAINT_DEV;
 
 #if BTA_HH_LE_INCLUDED == TRUE
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     uint16_t              conn_id;
-    tBTA_GATT_REASON    reason;         /* disconnect reason code, not useful when connect event is reported */
+    tBTA_GATT_REASON
+    reason;         /* disconnect reason code, not useful when connect event is reported */
 
 } tBTA_HH_LE_CLOSE;
 
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     uint16_t              scan_int;
     uint16_t              scan_win;
 } tBTA_HH_SCPP_UPDATE;
 #endif
 /* union of all event data types */
-typedef union
-{
+typedef union {
     BT_HDR                   hdr;
     tBTA_HH_API_ENABLE       api_enable;
     tBTA_HH_API_CONN         api_conn;
@@ -178,17 +169,16 @@ typedef union
     tBTA_HH_CBACK_DATA       hid_cback;
     tBTA_HH_STATUS           status;
     tBTA_HH_MAINT_DEV        api_maintdev;
-    #if BTA_HH_LE_INCLUDED == TRUE
+#if BTA_HH_LE_INCLUDED == TRUE
     tBTA_HH_LE_CLOSE         le_close;
     tBTA_GATTC_OPEN          le_open;
     tBTA_HH_SCPP_UPDATE      le_scpp_update;
     tBTA_GATTC_ENC_CMPL_CB   le_enc_cmpl;
-    #endif
+#endif
 } tBTA_HH_DATA;
 
 #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-typedef struct
-{
+typedef struct {
     uint8_t                   index;
     uint8_t                 in_use;
     uint8_t                   srvc_inst_id;
@@ -201,11 +191,10 @@ typedef struct
 } tBTA_HH_LE_RPT;
 
 #ifndef BTA_HH_LE_RPT_MAX
-    #define BTA_HH_LE_RPT_MAX       20
+#define BTA_HH_LE_RPT_MAX       20
 #endif
 
-typedef struct
-{
+typedef struct {
     uint8_t                 in_use;
     uint8_t                   srvc_inst_id;
     tBTA_HH_LE_RPT          report[BTA_HH_LE_RPT_MAX];
@@ -232,8 +221,7 @@ typedef struct
 #endif
 
 /* device control block */
-typedef struct
-{
+typedef struct {
     tBTA_HH_DEV_DSCP_INFO  dscp_info;      /* report descriptor and DI information */
     BD_ADDR             addr;           /* BD-Addr of the HID device */
     uint16_t              attr_mask;      /* attribute mask */
@@ -242,7 +230,8 @@ typedef struct
     uint8_t               sub_class;      /* Cod sub class */
     uint8_t               sec_mask;       /* security mask */
     uint8_t               app_id;         /* application ID for this connection */
-    uint8_t               hid_handle;     /* device handle : low 4 bits for regular HID: HID_HOST_MAX_DEVICES can not exceed 15;
+    uint8_t
+    hid_handle;     /* device handle : low 4 bits for regular HID: HID_HOST_MAX_DEVICES can not exceed 15;
                                                             high 4 bits for LE HID: GATT_MAX_PHY_CHANNEL can not exceed 15 */
     uint8_t             vp;             /* virtually unplug flag */
     uint8_t             in_use;         /* control block currently in use */
@@ -252,7 +241,7 @@ typedef struct
     tBTA_HH_PROTO_MODE  mode;           /* protocol mode */
     tBTA_HH_STATE       state;          /* CB state */
 
-    #if (BTA_HH_LE_INCLUDED == TRUE)
+#if (BTA_HH_LE_INCLUDED == TRUE)
 #define BTA_HH_LE_DISC_NONE     0x00
 #define BTA_HH_LE_DISC_HIDS     0x01
 #define BTA_HH_LE_DISC_DIS      0x02
@@ -273,14 +262,13 @@ typedef struct
 #define BTA_HH_LE_SCPS_NOTIFY_SPT  0x01
 #define BTA_HH_LE_SCPS_NOTIFY_ENB  0x02
     uint8_t               scps_notify;   /* scan refresh supported/notification enabled */
-    #endif
+#endif
 
     uint8_t             security_pending;
 } tBTA_HH_DEV_CB;
 
 /* key board parsing control block */
-typedef struct
-{
+typedef struct {
     uint8_t             mod_key[4]; /* ctrl, shift(upper), Alt, GUI */
     uint8_t             num_lock;
     uint8_t             caps_lock;
@@ -290,8 +278,7 @@ typedef struct
 /******************************************************************************
 ** Main Control Block
 *******************************************************************************/
-typedef struct
-{
+typedef struct {
     tBTA_HH_KB_CB           kb_cb;                  /* key board control block,
                                                        suppose BTA will connect
                                                        to only one keyboard at
@@ -301,10 +288,11 @@ typedef struct
                                                        block idx, used in sdp */
     uint8_t                   cb_index[BTA_HH_MAX_KNOWN]; /* maintain a CB index
                                                         map to dev handle */
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-    uint8_t                   le_cb_index[BTA_HH_MAX_DEVICE]; /* maintain a CB index map to LE dev handle */
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+    uint8_t
+    le_cb_index[BTA_HH_MAX_DEVICE]; /* maintain a CB index map to LE dev handle */
     tBTA_GATTC_IF           gatt_if;
-    #endif
+#endif
     tBTA_HH_CBACK       *p_cback;               /* Application callbacks */
     tSDP_DISCOVERY_DB      *p_disc_db;
     uint8_t                   trace_level;            /* tracing level */
@@ -314,10 +302,10 @@ typedef struct
 tBTA_HH_CB;
 
 #if BTA_DYNAMIC_MEMORY == FALSE
-    extern tBTA_HH_CB  bta_hh_cb;
+extern tBTA_HH_CB  bta_hh_cb;
 #else
-    extern tBTA_HH_CB *bta_hh_cb_ptr;
-    #define bta_hh_cb (*bta_hh_cb_ptr)
+extern tBTA_HH_CB *bta_hh_cb_ptr;
+#define bta_hh_cb (*bta_hh_cb_ptr)
 #endif
 
 /* from bta_hh_cfg.c */
@@ -369,7 +357,8 @@ extern void bta_hh_api_enable(tBTA_HH_DATA *p_data);
 extern void bta_hh_api_disable(void);
 extern void bta_hh_disc_cmpl(void);
 
-extern tBTA_HH_STATUS bta_hh_read_ssr_param(BD_ADDR bd_addr, uint16_t *p_max_ssr_lat, uint16_t *p_min_ssr_tout);
+extern tBTA_HH_STATUS bta_hh_read_ssr_param(BD_ADDR bd_addr, uint16_t *p_max_ssr_lat,
+        uint16_t *p_min_ssr_tout);
 
 /* functions for LE HID */
 extern void bta_hh_le_enable(void);
@@ -401,7 +390,7 @@ extern void bta_hh_le_notify_enc_cmpl(tBTA_HH_DEV_CB *p_cb, tBTA_HH_DATA *p_data
 extern void bta_hh_ci_load_rpt(tBTA_HH_DEV_CB *p_cb, tBTA_HH_DATA *p_buf);
 
 #if BTA_HH_DEBUG
-    extern void bta_hh_trace_dev_db(void);
+extern void bta_hh_trace_dev_db(void);
 #endif
 
 #endif

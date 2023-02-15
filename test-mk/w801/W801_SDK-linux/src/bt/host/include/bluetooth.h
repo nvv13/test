@@ -25,44 +25,38 @@
 
 
 /** Bluetooth Adapter Visibility Modes*/
-typedef enum
-{
+typedef enum {
     BT_SCAN_MODE_NONE,
     BT_SCAN_MODE_CONNECTABLE,
     BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE
 } bt_scan_mode_t;
 
 /** Bluetooth PinKey Code */
-typedef struct
-{
+typedef struct {
     uint8_t pin[16];
 } __attribute__((packed))bt_pin_code_t;
 
-typedef struct
-{
+typedef struct {
     int32_t app_uid;
     uint64_t tx_bytes;
     uint64_t rx_bytes;
 } __attribute__((packed))bt_uid_traffic_t;
 
 /** Bluetooth SDP service record */
-typedef struct
-{
+typedef struct {
     tls_bt_uuid_t uuid;
     uint16_t channel;
     char name[256]; // what's the maximum length
 } bt_service_record_t;
 
 /** Bluetooth Remote Version info */
-typedef struct
-{
+typedef struct {
     int version;
     int sub_ver;
     int manufacturer;
 } bt_remote_version_t;
 
-typedef struct
-{
+typedef struct {
     uint16_t version_supported;
     uint8_t local_privacy_enabled;
     uint8_t max_adv_instance;
@@ -77,8 +71,7 @@ typedef struct
 } bt_local_le_features_t;
 
 /** Bluetooth Out Of Band data for bonding */
-typedef struct
-{
+typedef struct {
     uint8_t c192[16]; /* Simple Pairing Hash C-192 */
     uint8_t r192[16]; /* Simple Pairing Randomizer R-192 */
     uint8_t c256[16]; /* Simple Pairing Hash C-256 */
@@ -92,8 +85,7 @@ typedef struct
 
 
 /** Bluetooth Device Type */
-typedef enum
-{
+typedef enum {
     BT_DEVICE_DEVTYPE_BREDR = 0x1,
     BT_DEVICE_DEVTYPE_BLE,
     BT_DEVICE_DEVTYPE_DUAL

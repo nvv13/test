@@ -962,6 +962,7 @@ RESENDBUF:
     }
 }
 #endif
+#if !TLS_CONFIG_CMD_NET_USE_LIST_FTR	
 static int cache_tcp_recv(struct tls_hostif_tx_msg *tx_msg)
 {
     struct tls_uart_circ_buf *precvmit =
@@ -1018,7 +1019,7 @@ static int cache_tcp_recv(struct tls_hostif_tx_msg *tx_msg)
 
     return copylen;
 }
-
+#endif
 #if 0
 static int uart_tcp_recv(struct tls_uart_port *port,
                          struct tls_hostif_tx_msg *tx_msg)

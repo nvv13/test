@@ -544,13 +544,15 @@ q15_t ref_rfft_result[RFFT_TEST_SIZE + 2] = {
     0x0000, 0x0000,
 };
 
+static q15_t rfft_srcdata[RFFT_TEST_SIZE + 2]; /*use local variable to store rfft_src,because rfft process will change the srcdata*/
 int dsp_rfft_demo(void)
 {
     int i;
     int err;
     q15_t result[RFFT_TEST_SIZE + 2];
 
-    csky_rfft_q15(&csky_rfft_sR_q15_len1024, rfft_src, result);
+	memcpy(rfft_srcdata, rfft_src, (RFFT_TEST_SIZE + 2)*sizeof(q15_t));
+    csky_rfft_q15(&csky_rfft_sR_q15_len1024, rfft_srcdata, result);
 
     for (i = 0; i < RFFT_TEST_SIZE + 2; i++) {
         err = abs(result[i] - ref_rfft_result[i]);

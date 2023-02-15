@@ -53,4 +53,8 @@ typedef struct tls_uart{
 
 struct tls_uart *tls_uart_open(u32 uart_no, TLS_UART_MODE_T uart_mode);
 
+void tls_uart_set_at_cmd_port(int at_cmd_port);
+int tls_uart_get_at_cmd_port(void);
+
+
 #endif /* WM_UART_TASK_H */

@@ -20,12 +20,12 @@
 
 
 #if (GKI_NUM_TOTAL_BUF_POOLS > 16)
-    #error Number of pools out of range (16 Max)!
+#error Number of pools out of range (16 Max)!
 #endif
-
+#if 0
 static void gki_add_to_pool_list(uint8_t pool_id);
 static void gki_remove_from_pool_list(uint8_t pool_id);
-
+#endif
 /*******************************************************************************
 **
 ** Function         gki_init_free_queue
@@ -51,8 +51,7 @@ static void gki_init_free_queue(uint8_t id, uint16_t size, uint16_t total, void 
 
     /* Remember pool start and end addresses */
     // btla-specific ++
-    if(p_mem)
-    {
+    if(p_mem) {
         p_cb->pool_start[id] = (uint8_t *)p_mem;
         p_cb->pool_end[id]   = (uint8_t *)p_mem + (act_size * total);
     }
@@ -66,14 +65,12 @@ static void gki_init_free_queue(uint8_t id, uint16_t size, uint16_t total, void 
 
     /* Initialize  index table */
     // btla-specific ++
-    if(p_mem)
-    {
+    if(p_mem) {
         hdr = (BUFFER_HDR_T *)p_mem;
         p_cb->freeq[id].p_first = hdr;
         hdr1 = hdr;
 
-        for(i = 0; i < total; i++)
-        {
+        for(i = 0; i < total; i++) {
             hdr->task_id = GKI_INVALID_TASK;
             hdr->q_id    = id;
             hdr->status  = BUF_STATUS_FREE;
@@ -101,14 +98,13 @@ static uint8_t gki_alloc_free_queue(uint8_t id)
     GKI_TRACE("gki_alloc_free_queue in, id:%d ", (int)id);
     Q = &p_cb->freeq[p_cb->pool_list[id]];
 
-    if(Q->p_first == 0)
-    {
+    if(Q->p_first == 0) {
         void *p_mem = GKI_os_malloc((Q->size + BUFFER_PADDING_SIZE) * Q->total);
 
-        if(p_mem)
-        {
+        if(p_mem) {
             //re-initialize the queue with allocated memory
-            GKI_TRACE("gki_alloc_free_queue calling  gki_init_free_queue, id:%d  size:%d, totol:%d", id, Q->size, Q->total);
+            GKI_TRACE("gki_alloc_free_queue calling  gki_init_free_queue, id:%d  size:%d, totol:%d", id,
+                      Q->size, Q->total);
             gki_init_free_queue(id, Q->size, Q->total, p_mem);
             GKI_TRACE("\ngki_alloc_free_queue ret OK, id:%d  size:%d, totol:%d\n", id, Q->size, Q->total);
             return TRUE;
@@ -121,15 +117,13 @@ static uint8_t gki_alloc_free_queue(uint8_t id)
     return FALSE;
 }
 
-void gki_dealloc_free_queue(void)
+void GKI_dealloc_free_queue(void)
 {
     uint8_t   i;
     tGKI_COM_CB *p_cb = &gki_cb.com;
 
-    for(i = 0; i < p_cb->curr_total_no_of_pools; i++)
-    {
-        if(0 < p_cb->freeq[i].max_cnt)
-        {
+    for(i = 0; i < p_cb->curr_total_no_of_pools; i++) {
+        if(0 < p_cb->freeq[i].max_cnt) {
             GKI_os_free(p_cb->pool_start[i]);
             p_cb->freeq[i].cur_cnt   = 0;
             p_cb->freeq[i].max_cnt   = 0;
@@ -161,17 +155,14 @@ void gki_buffer_init(void)
     tGKI_COM_CB *p_cb = &gki_cb.com;
 
     /* Initialize mailboxes */
-    for(tt = 0; tt < GKI_MAX_TASKS; tt++)
-    {
-        for(mb = 0; mb < NUM_TASK_MBOX; mb++)
-        {
+    for(tt = 0; tt < GKI_MAX_TASKS; tt++) {
+        for(mb = 0; mb < NUM_TASK_MBOX; mb++) {
             p_cb->OSTaskQFirst[tt][mb] = NULL;
             p_cb->OSTaskQLast [tt][mb] = NULL;
         }
     }
 
-    for(tt = 0; tt < GKI_NUM_TOTAL_BUF_POOLS; tt++)
-    {
+    for(tt = 0; tt < GKI_NUM_TOTAL_BUF_POOLS; tt++) {
         p_cb->pool_start[tt] = NULL;
         p_cb->pool_end[tt]   = NULL;
         p_cb->pool_size[tt]  = 0;
@@ -186,111 +177,110 @@ void gki_buffer_init(void)
     /* Use default from target.h */
     p_cb->pool_access_mask = GKI_DEF_BUFPOOL_PERM_MASK;
     // btla-specific ++
-    #if (!defined GKI_USE_DEFERED_ALLOC_BUF_POOLS && (GKI_USE_DYNAMIC_BUFFERS == TRUE))
+#if (!defined GKI_USE_DEFERED_ALLOC_BUF_POOLS && (GKI_USE_DYNAMIC_BUFFERS == TRUE))
     // btla-specific --
     c c;
-    #if (GKI_NUM_FIXED_BUF_POOLS > 0)
+#if (GKI_NUM_FIXED_BUF_POOLS > 0)
     a
     p_cb->bufpool0 = (uint8_t *)GKI_os_malloc((GKI_BUF0_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF0_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 1)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 1)
     p_cb->bufpool1 = (uint8_t *)GKI_os_malloc((GKI_BUF1_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF1_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 2)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 2)
     p_cb->bufpool2 = (uint8_t *)GKI_os_malloc((GKI_BUF2_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF2_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 3)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 3)
     p_cb->bufpool3 = (uint8_t *)GKI_os_malloc((GKI_BUF3_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF3_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 4)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 4)
     p_cb->bufpool4 = (uint8_t *)GKI_os_malloc((GKI_BUF4_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF4_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 5)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 5)
     p_cb->bufpool5 = (uint8_t *)GKI_os_malloc((GKI_BUF5_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF5_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 6)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 6)
     p_cb->bufpool6 = (uint8_t *)GKI_os_malloc((GKI_BUF6_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF6_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 7)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 7)
     p_cb->bufpool7 = (uint8_t *)GKI_os_malloc((GKI_BUF7_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF7_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 8)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 8)
     p_cb->bufpool8 = (uint8_t *)GKI_os_malloc((GKI_BUF8_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF8_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 9)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 9)
     p_cb->bufpool9 = (uint8_t *)GKI_os_malloc((GKI_BUF9_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF9_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 10)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 10)
     p_cb->bufpool10 = (uint8_t *)GKI_os_malloc((GKI_BUF10_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF10_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 11)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 11)
     p_cb->bufpool11 = (uint8_t *)GKI_os_malloc((GKI_BUF11_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF11_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 12)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 12)
     p_cb->bufpool12 = (uint8_t *)GKI_os_malloc((GKI_BUF12_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF12_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 13)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 13)
     p_cb->bufpool13 = (uint8_t *)GKI_os_malloc((GKI_BUF13_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF13_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 14)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 14)
     p_cb->bufpool14 = (uint8_t *)GKI_os_malloc((GKI_BUF14_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF14_MAX);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 15)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 15)
     p_cb->bufpool15 = (uint8_t *)GKI_os_malloc((GKI_BUF15_SIZE + BUFFER_PADDING_SIZE) * GKI_BUF15_MAX);
-    #endif
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 0)
+#endif
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 0)
     gki_init_free_queue(0, GKI_BUF0_SIZE, GKI_BUF0_MAX, p_cb->bufpool0);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 1)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 1)
     gki_init_free_queue(1, GKI_BUF1_SIZE, GKI_BUF1_MAX, p_cb->bufpool1);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 2)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 2)
     gki_init_free_queue(2, GKI_BUF2_SIZE, GKI_BUF2_MAX, p_cb->bufpool2);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 3)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 3)
     gki_init_free_queue(3, GKI_BUF3_SIZE, GKI_BUF3_MAX, p_cb->bufpool3);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 4)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 4)
     gki_init_free_queue(4, GKI_BUF4_SIZE, GKI_BUF4_MAX, p_cb->bufpool4);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 5)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 5)
     gki_init_free_queue(5, GKI_BUF5_SIZE, GKI_BUF5_MAX, p_cb->bufpool5);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 6)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 6)
     gki_init_free_queue(6, GKI_BUF6_SIZE, GKI_BUF6_MAX, p_cb->bufpool6);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 7)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 7)
     gki_init_free_queue(7, GKI_BUF7_SIZE, GKI_BUF7_MAX, p_cb->bufpool7);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 8)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 8)
     gki_init_free_queue(8, GKI_BUF8_SIZE, GKI_BUF8_MAX, p_cb->bufpool8);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 9)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 9)
     gki_init_free_queue(9, GKI_BUF9_SIZE, GKI_BUF9_MAX, p_cb->bufpool9);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 10)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 10)
     gki_init_free_queue(10, GKI_BUF10_SIZE, GKI_BUF10_MAX, p_cb->bufpool10);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 11)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 11)
     gki_init_free_queue(11, GKI_BUF11_SIZE, GKI_BUF11_MAX, p_cb->bufpool11);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 12)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 12)
     gki_init_free_queue(12, GKI_BUF12_SIZE, GKI_BUF12_MAX, p_cb->bufpool12);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 13)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 13)
     gki_init_free_queue(13, GKI_BUF13_SIZE, GKI_BUF13_MAX, p_cb->bufpool13);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 14)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 14)
     gki_init_free_queue(14, GKI_BUF14_SIZE, GKI_BUF14_MAX, p_cb->bufpool14);
-    #endif
-    #if (GKI_NUM_FIXED_BUF_POOLS > 15)
+#endif
+#if (GKI_NUM_FIXED_BUF_POOLS > 15)
     gki_init_free_queue(15, GKI_BUF15_SIZE, GKI_BUF15_MAX, p_cb->bufpool15);
-    #endif
+#endif
 
     /* add pools to the pool_list which is arranged in the order of size */
-    for(i = 0; i < GKI_NUM_FIXED_BUF_POOLS ; i++)
-    {
+    for(i = 0; i < GKI_NUM_FIXED_BUF_POOLS ; i++) {
         p_cb->pool_list[i] = i;
     }
 
@@ -340,24 +330,20 @@ void *GKI_getbuf(uint16_t size)
     void *p_dest = NULL;
     tGKI_COM_CB *p_cb = &gki_cb.com;
 
-    if(size == 0)
-    {
+    if(size == 0) {
         GKI_exception(GKI_ERROR_BUF_SIZE_ZERO, "getbuf: Size is zero");
         return (NULL);
     }
 
     //GKI_TRACE("GKI_getbuf, size=%d\r\n", size);
     /* Find the first buffer pool that is public that can hold the desired size */
-    for(i = 0; i < p_cb->curr_total_no_of_pools; i++)
-    {
-        if(size <= p_cb->freeq[p_cb->pool_list[i]].size)
-        {
+    for(i = 0; i < p_cb->curr_total_no_of_pools; i++) {
+        if(size <= p_cb->freeq[p_cb->pool_list[i]].size) {
             break;
         }
     }
 
-	if(i == p_cb->curr_total_no_of_pools)
-    {
+    if(i == p_cb->curr_total_no_of_pools) {
         //GKI_exception(GKI_ERROR_BUF_SIZE_TOOBIG, "getbuf: Size is too big");
         goto check_error;
     }
@@ -367,45 +353,36 @@ void *GKI_getbuf(uint16_t size)
 
     /* search the public buffer pools that are big enough to hold the size
      * until a free buffer is found */
-    for(; i < p_cb->curr_total_no_of_pools; i++)
-    {
+    for(; i < p_cb->curr_total_no_of_pools; i++) {
         /* Only look at PUBLIC buffer pools (bypass RESTRICTED pools) */
-        if(((uint16_t)1 << p_cb->pool_list[i]) & p_cb->pool_access_mask)
-        {
+        if(((uint16_t)1 << p_cb->pool_list[i]) & p_cb->pool_access_mask) {
             continue;
         }
 
-        if(size <= p_cb->freeq[p_cb->pool_list[i]].size)
-        {
+        if(size <= p_cb->freeq[p_cb->pool_list[i]].size) {
             Q = &p_cb->freeq[p_cb->pool_list[i]];
-        }
-        else
-        {
+        } else {
             continue;
         }
 
-        if(Q->cur_cnt < Q->total)
-        {
+        if(Q->cur_cnt < Q->total) {
             // btla-specific ++
-            #ifdef GKI_USE_DEFERED_ALLOC_BUF_POOLS
-            if(Q->p_first == 0 && gki_alloc_free_queue(i) != TRUE)
-            {
+#ifdef GKI_USE_DEFERED_ALLOC_BUF_POOLS
+            if(Q->p_first == 0 && gki_alloc_free_queue(i) != TRUE) {
                 GKI_enable();
                 return NULL;
             }
 
-            #endif
+#endif
             // btla-specific --
             p_hdr = Q->p_first;
             Q->p_first = p_hdr->p_next;
 
-            if(!Q->p_first)
-            {
+            if(!Q->p_first) {
                 Q->p_last = NULL;
             }
 
-            if(++Q->cur_cnt > Q->max_cnt)
-            {
+            if(++Q->cur_cnt > Q->max_cnt) {
                 Q->max_cnt = Q->cur_cnt;
             }
 
@@ -449,8 +426,7 @@ void *GKI_getpoolbuf(uint8_t pool_id)
     BUFFER_HDR_T  *p_hdr;
     tGKI_COM_CB *p_cb = &gki_cb.com;
 
-    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS) {
         GKI_exception(GKI_ERROR_GETPOOLBUF_BAD_QID, "getpoolbuf bad pool");
         return (NULL);
     }
@@ -459,28 +435,24 @@ void *GKI_getpoolbuf(uint8_t pool_id)
     GKI_disable();
     Q = &p_cb->freeq[pool_id];
 
-    if(Q->cur_cnt < Q->total)
-    {
+    if(Q->cur_cnt < Q->total) {
         // btla-specific ++
-        #ifdef GKI_USE_DEFERED_ALLOC_BUF_POOLS
-        if(Q->p_first == 0 && gki_alloc_free_queue(pool_id) != TRUE)
-        {
+#ifdef GKI_USE_DEFERED_ALLOC_BUF_POOLS
+        if(Q->p_first == 0 && gki_alloc_free_queue(pool_id) != TRUE) {
             GKI_enable();
             return NULL;
         }
 
-        #endif
+#endif
         // btla-specific --
         p_hdr = Q->p_first;
         Q->p_first = p_hdr->p_next;
 
-        if(!Q->p_first)
-        {
+        if(!Q->p_first) {
             Q->p_last = NULL;
         }
 
-        if(++Q->cur_cnt > Q->max_cnt)
-        {
+        if(++Q->cur_cnt > Q->max_cnt) {
             Q->max_cnt = Q->cur_cnt;
         }
 
@@ -514,30 +486,26 @@ void GKI_freebuf(void *p_buf)
     FREE_QUEUE_T    *Q;
     BUFFER_HDR_T    *p_hdr;
 
-    if(!p_buf)
-    {
+    if(!p_buf) {
         return;
     }
 
-    #if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
+#if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
 
-    if(gki_chk_buf_damage(p_buf))
-    {
+    if(gki_chk_buf_damage(p_buf)) {
         GKI_exception(GKI_ERROR_BUF_CORRUPTED, "Free - Buf Corrupted");
         return;
     }
 
-    #endif
+#endif
     p_hdr = (BUFFER_HDR_T *)((uint8_t *)p_buf - BUFFER_HDR_SIZE);
 
-    if(p_hdr->status != BUF_STATUS_UNLINKED)
-    {
+    if(p_hdr->status != BUF_STATUS_UNLINKED) {
         GKI_exception(GKI_ERROR_FREEBUF_BUF_LINKED, "Freeing Linked Buf");
         return;
     }
 
-    if(p_hdr->q_id >= GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(p_hdr->q_id >= GKI_NUM_TOTAL_BUF_POOLS) {
         GKI_exception(GKI_ERROR_FREEBUF_BAD_QID, "Bad Buf QId");
         return;
     }
@@ -548,12 +516,9 @@ void GKI_freebuf(void *p_buf)
     */
     Q  = &gki_cb.com.freeq[p_hdr->q_id];
 
-    if(Q->p_last)
-    {
+    if(Q->p_last) {
         Q->p_last->p_next = p_hdr;
-    }
-    else
-    {
+    } else {
         Q->p_first = p_hdr;
     }
 
@@ -562,8 +527,7 @@ void GKI_freebuf(void *p_buf)
     p_hdr->status  = BUF_STATUS_FREE;
     p_hdr->task_id = GKI_INVALID_TASK;
 
-    if(Q->cur_cnt > 0)
-    {
+    if(Q->cur_cnt > 0) {
         Q->cur_cnt--;
     }
 
@@ -573,13 +537,11 @@ void GKI_freebuf(void *p_buf)
 
 void GKI_free_and_reset_buf(void **p_ptr)
 {
-    if(p_ptr == NULL)
-    {
+    if(p_ptr == NULL) {
         return;
     }
 
-    if(NULL == (*p_ptr))
-    {
+    if(NULL == (*p_ptr)) {
         return;
     }
 
@@ -602,13 +564,11 @@ uint16_t GKI_get_buf_size(void *p_buf)
     BUFFER_HDR_T    *p_hdr;
     p_hdr = (BUFFER_HDR_T *)((uint8_t *) p_buf - BUFFER_HDR_SIZE);
 
-    if((uint32_t)p_hdr & 1)
-    {
+    if((uint32_t)p_hdr & 1) {
         return (0);
     }
 
-    if(p_hdr->q_id < GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(p_hdr->q_id < GKI_NUM_TOTAL_BUF_POOLS) {
         return (gki_cb.com.freeq[p_hdr->q_id].size);
     }
 
@@ -626,24 +586,22 @@ uint16_t GKI_get_buf_size(void *p_buf)
 *******************************************************************************/
 uint8_t gki_chk_buf_damage(void *p_buf)
 {
-    #if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
+#if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
     uint32_t *magic;
     magic  = (uint32_t *)((uint8_t *) p_buf + GKI_get_buf_size(p_buf));
 
-    if((uint32_t)magic & 1)
-    {
+    if((uint32_t)magic & 1) {
         return (TRUE);
     }
 
-    if(*magic == MAGIC_NO)
-    {
+    if(*magic == MAGIC_NO) {
         return (FALSE);
     }
 
     return (TRUE);
-    #else
+#else
     return (FALSE);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -661,39 +619,34 @@ void GKI_send_msg(uint8_t task_id, uint8_t mbox, void *msg)
     tGKI_COM_CB *p_cb = &gki_cb.com;
 
     /* If task non-existant or not started, drop buffer */
-    if((task_id >= GKI_MAX_TASKS) || (mbox >= NUM_TASK_MBOX) || (p_cb->OSRdyTbl[task_id] == TASK_DEAD))
-    {
+    if((task_id >= GKI_MAX_TASKS) || (mbox >= NUM_TASK_MBOX)
+            || (p_cb->OSRdyTbl[task_id] == TASK_DEAD)) {
         GKI_exception(GKI_ERROR_SEND_MSG_BAD_DEST, "Sending to unknown dest");
         printf("!!!Task_id=%d, mbox=%d, task_state=%d\n", task_id, mbox, p_cb->OSRdyTbl[task_id]);
         GKI_freebuf(msg);
         return;
     }
 
-    #if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
+#if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
 
-    if(gki_chk_buf_damage(msg))
-    {
+    if(gki_chk_buf_damage(msg)) {
         GKI_exception(GKI_ERROR_BUF_CORRUPTED, "Send - Buffer corrupted");
         return;
     }
 
-    #endif
+#endif
     p_hdr = (BUFFER_HDR_T *)((uint8_t *) msg - BUFFER_HDR_SIZE);
 
-    if(p_hdr->status != BUF_STATUS_UNLINKED)
-    {
+    if(p_hdr->status != BUF_STATUS_UNLINKED) {
         GKI_exception(GKI_ERROR_SEND_MSG_BUF_LINKED, "Send - buffer linked");
         return;
     }
 
     GKI_disable();
 
-    if(p_cb->OSTaskQFirst[task_id][mbox])
-    {
+    if(p_cb->OSTaskQFirst[task_id][mbox]) {
         p_cb->OSTaskQLast[task_id][mbox]->p_next = p_hdr;
-    }
-    else
-    {
+    } else {
         p_cb->OSTaskQFirst[task_id][mbox] = p_hdr;
     }
 
@@ -724,15 +677,13 @@ void *GKI_read_mbox(uint8_t mbox)
     void            *p_buf = NULL;
     BUFFER_HDR_T    *p_hdr;
 
-    if((task_id >= GKI_MAX_TASKS) || (mbox >= NUM_TASK_MBOX))
-    {
+    if((task_id >= GKI_MAX_TASKS) || (mbox >= NUM_TASK_MBOX)) {
         return (NULL);
     }
 
     GKI_disable();
 
-    if(gki_cb.com.OSTaskQFirst[task_id][mbox])
-    {
+    if(gki_cb.com.OSTaskQFirst[task_id][mbox]) {
         p_hdr = gki_cb.com.OSTaskQFirst[task_id][mbox];
         gki_cb.com.OSTaskQFirst[task_id][mbox] = p_hdr->p_next;
         p_hdr->p_next = NULL;
@@ -761,19 +712,17 @@ void *GKI_read_mbox(uint8_t mbox)
 void GKI_enqueue(BUFFER_Q *p_q, void *p_buf)
 {
     BUFFER_HDR_T    *p_hdr;
-    #if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
+#if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
 
-    if(gki_chk_buf_damage(p_buf))
-    {
+    if(gki_chk_buf_damage(p_buf)) {
         GKI_exception(GKI_ERROR_BUF_CORRUPTED, "Enqueue - Buffer corrupted");
         return;
     }
 
-    #endif
+#endif
     p_hdr = (BUFFER_HDR_T *)((uint8_t *) p_buf - BUFFER_HDR_SIZE);
 
-    if(p_hdr->status != BUF_STATUS_UNLINKED)
-    {
+    if(p_hdr->status != BUF_STATUS_UNLINKED) {
         GKI_exception(GKI_ERROR_ENQUEUE_BUF_LINKED, "Eneueue - buf already linked");
         return;
     }
@@ -781,13 +730,10 @@ void GKI_enqueue(BUFFER_Q *p_q, void *p_buf)
     GKI_disable();
 
     /* Since the queue is exposed (C vs C++), keep the pointers in exposed format */
-    if(p_q->p_last)
-    {
+    if(p_q->p_last) {
         BUFFER_HDR_T *p_last_hdr = (BUFFER_HDR_T *)((uint8_t *)p_q->p_last - BUFFER_HDR_SIZE);
         p_last_hdr->p_next = p_hdr;
-    }
-    else
-    {
+    } else {
         p_q->p_first = p_buf;
     }
 
@@ -815,32 +761,27 @@ void GKI_enqueue(BUFFER_Q *p_q, void *p_buf)
 void GKI_enqueue_head(BUFFER_Q *p_q, void *p_buf)
 {
     BUFFER_HDR_T    *p_hdr;
-    #if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
+#if (GKI_ENABLE_BUF_CORRUPTION_CHECK == TRUE)
 
-    if(gki_chk_buf_damage(p_buf))
-    {
+    if(gki_chk_buf_damage(p_buf)) {
         GKI_exception(GKI_ERROR_BUF_CORRUPTED, "Enqueue - Buffer corrupted");
         return;
     }
 
-    #endif
+#endif
     p_hdr = (BUFFER_HDR_T *)((uint8_t *) p_buf - BUFFER_HDR_SIZE);
 
-    if(p_hdr->status != BUF_STATUS_UNLINKED)
-    {
+    if(p_hdr->status != BUF_STATUS_UNLINKED) {
         GKI_exception(GKI_ERROR_ENQUEUE_BUF_LINKED, "Eneueue head - buf already linked");
         return;
     }
 
     GKI_disable();
 
-    if(p_q->p_first)
-    {
+    if(p_q->p_first) {
         p_hdr->p_next = (BUFFER_HDR_T *)((uint8_t *)p_q->p_first - BUFFER_HDR_SIZE);
         p_q->p_first = p_buf;
-    }
-    else
-    {
+    } else {
         p_q->p_first = p_buf;
         p_q->p_last  = p_buf;
         p_hdr->p_next = NULL;
@@ -869,8 +810,7 @@ void *GKI_dequeue(BUFFER_Q *p_q)
     BUFFER_HDR_T    *p_hdr;
     GKI_disable();
 
-    if(!p_q || !p_q->count)
-    {
+    if(!p_q || !p_q->count) {
         GKI_enable();
         return (NULL);
     }
@@ -879,12 +819,9 @@ void *GKI_dequeue(BUFFER_Q *p_q)
 
     /* Keep buffers such that GKI header is invisible
     */
-    if(p_hdr->p_next)
-    {
+    if(p_hdr->p_next) {
         p_q->p_first = ((uint8_t *)p_hdr->p_next + BUFFER_HDR_SIZE);
-    }
-    else
-    {
+    } else {
         p_q->p_first = NULL;
         p_q->p_last  = NULL;
     }
@@ -915,8 +852,7 @@ void *GKI_remove_from_queue(BUFFER_Q *p_q, void *p_buf)
     BUFFER_HDR_T    *p_buf_hdr;
     GKI_disable();
 
-    if(p_buf == p_q->p_first)
-    {
+    if(p_buf == p_q->p_first) {
         GKI_enable();
         return (GKI_dequeue(p_q));
     }
@@ -924,16 +860,13 @@ void *GKI_remove_from_queue(BUFFER_Q *p_q, void *p_buf)
     p_buf_hdr = (BUFFER_HDR_T *)((uint8_t *)p_buf - BUFFER_HDR_SIZE);
     p_prev    = (BUFFER_HDR_T *)((uint8_t *)p_q->p_first - BUFFER_HDR_SIZE);
 
-    for(; p_prev; p_prev = p_prev->p_next)
-    {
+    for(; p_prev; p_prev = p_prev->p_next) {
         /* If the previous points to this one, move the pointers around */
-        if(p_prev->p_next == p_buf_hdr)
-        {
+        if(p_prev->p_next == p_buf_hdr) {
             p_prev->p_next = p_buf_hdr->p_next;
 
             /* If we are removing the last guy in the queue, update p_last */
-            if(p_buf == p_q->p_last)
-            {
+            if(p_buf == p_q->p_last) {
                 p_q->p_last = p_prev + 1;
             }
 
@@ -1000,12 +933,9 @@ void *GKI_getnext(void *p_buf)
     BUFFER_HDR_T    *p_hdr;
     p_hdr = (BUFFER_HDR_T *)((uint8_t *) p_buf - BUFFER_HDR_SIZE);
 
-    if(p_hdr->p_next)
-    {
+    if(p_hdr->p_next) {
         return ((uint8_t *)p_hdr->p_next + BUFFER_HDR_SIZE);
-    }
-    else
-    {
+    } else {
         return (NULL);
     }
 }
@@ -1038,23 +968,21 @@ uint8_t GKI_queue_is_empty(BUFFER_Q *p_q)
 ** Returns          void
 **
 *******************************************************************************/
+#if 0
 static void gki_add_to_pool_list(uint8_t pool_id)
 {
     int32_t i, j;
     tGKI_COM_CB *p_cb = &gki_cb.com;
 
     /* Find the position where the specified pool should be inserted into the list */
-    for(i = 0; i < p_cb->curr_total_no_of_pools; i++)
-    {
-        if(p_cb->freeq[pool_id].size <= p_cb->freeq[ p_cb->pool_list[i] ].size)
-        {
+    for(i = 0; i < p_cb->curr_total_no_of_pools; i++) {
+        if(p_cb->freeq[pool_id].size <= p_cb->freeq[ p_cb->pool_list[i] ].size) {
             break;
         }
     }
 
     /* Insert the new buffer pool ID into the list of pools */
-    for(j = p_cb->curr_total_no_of_pools; j > i; j--)
-    {
+    for(j = p_cb->curr_total_no_of_pools; j > i; j--) {
         p_cb->pool_list[j] = p_cb->pool_list[j - 1];
     }
 
@@ -1076,23 +1004,20 @@ static void gki_remove_from_pool_list(uint8_t pool_id)
     tGKI_COM_CB *p_cb = &gki_cb.com;
     uint8_t i;
 
-    for(i = 0; i < p_cb->curr_total_no_of_pools; i++)
-    {
-        if(pool_id == p_cb->pool_list[i])
-        {
+    for(i = 0; i < p_cb->curr_total_no_of_pools; i++) {
+        if(pool_id == p_cb->pool_list[i]) {
             break;
         }
     }
 
-    while(i < (p_cb->curr_total_no_of_pools - 1))
-    {
+    while(i < (p_cb->curr_total_no_of_pools - 1)) {
         p_cb->pool_list[i] = p_cb->pool_list[i + 1];
         i++;
     }
 
     return;
 }
-
+#endif
 /*******************************************************************************
 **
 ** Function         GKI_igetpoolbuf
@@ -1110,25 +1035,21 @@ void *GKI_igetpoolbuf(uint8_t pool_id)
     FREE_QUEUE_T  *Q;
     BUFFER_HDR_T  *p_hdr;
 
-    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS) {
         return (NULL);
     }
 
     Q = &gki_cb.com.freeq[pool_id];
 
-    if(Q->cur_cnt < Q->total)
-    {
+    if(Q->cur_cnt < Q->total) {
         p_hdr = Q->p_first;
         Q->p_first = p_hdr->p_next;
 
-        if(!Q->p_first)
-        {
+        if(!Q->p_first) {
             Q->p_last = NULL;
         }
 
-        if(++Q->cur_cnt > Q->max_cnt)
-        {
+        if(++Q->cur_cnt > Q->max_cnt) {
             Q->max_cnt = Q->cur_cnt;
         }
 
@@ -1156,8 +1077,7 @@ void *GKI_igetpoolbuf(uint8_t pool_id)
 *******************************************************************************/
 uint16_t GKI_poolcount(uint8_t pool_id)
 {
-    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS) {
         return (0);
     }
 
@@ -1180,8 +1100,7 @@ uint16_t GKI_poolfreecount(uint8_t pool_id)
 {
     FREE_QUEUE_T  *Q;
 
-    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS) {
         return (0);
     }
 
@@ -1202,8 +1121,7 @@ uint16_t GKI_poolfreecount(uint8_t pool_id)
 *******************************************************************************/
 uint16_t GKI_get_pool_bufsize(uint8_t pool_id)
 {
-    if(pool_id < GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(pool_id < GKI_NUM_TOTAL_BUF_POOLS) {
         return (gki_cb.com.freeq[pool_id].size);
     }
 
@@ -1226,15 +1144,13 @@ uint16_t GKI_poolutilization(uint8_t pool_id)
 {
     FREE_QUEUE_T  *Q;
 
-    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS)
-    {
+    if(pool_id >= GKI_NUM_TOTAL_BUF_POOLS) {
         return (100);
     }
 
     Q  = &gki_cb.com.freeq[pool_id];
 
-    if(Q->total == 0)
-    {
+    if(Q->total == 0) {
         return (100);
     }
 

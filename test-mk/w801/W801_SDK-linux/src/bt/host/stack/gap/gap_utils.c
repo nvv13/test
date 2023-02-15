@@ -35,10 +35,8 @@ tGAP_INFO *gap_allocate_cb(void)
     tGAP_INFO     *p_cb = &gap_cb.blk[0];
     uint8_t        x;
 
-    for(x = 0; x < GAP_MAX_BLOCKS; x++, p_cb++)
-    {
-        if(!p_cb->in_use)
-        {
+    for(x = 0; x < GAP_MAX_BLOCKS; x++, p_cb++) {
+        if(!p_cb->in_use) {
             wm_memset(p_cb, 0, sizeof(tGAP_INFO));
             p_cb->in_use = TRUE;
             p_cb->index = x;
@@ -63,8 +61,7 @@ tGAP_INFO *gap_allocate_cb(void)
 *******************************************************************************/
 void gap_free_cb(tGAP_INFO *p_cb)
 {
-    if(p_cb)
-    {
+    if(p_cb) {
         p_cb->gap_cback = NULL;
         p_cb->in_use = FALSE;
     }
@@ -88,10 +85,8 @@ uint8_t gap_is_service_busy(uint16_t request)
     tGAP_INFO   *p_cb = &gap_cb.blk[0];
     uint8_t        x;
 
-    for(x = 0; x < GAP_MAX_BLOCKS; x++, p_cb++)
-    {
-        if(p_cb->in_use && p_cb->event == request)
-        {
+    for(x = 0; x < GAP_MAX_BLOCKS; x++, p_cb++) {
+        if(p_cb->in_use && p_cb->event == request) {
             return (TRUE);
         }
     }
@@ -113,8 +108,7 @@ uint8_t gap_is_service_busy(uint16_t request)
 *******************************************************************************/
 uint16_t gap_convert_btm_status(tBTM_STATUS btm_status)
 {
-    switch(btm_status)
-    {
+    switch(btm_status) {
         case BTM_SUCCESS:
             return (BT_PASS);
 

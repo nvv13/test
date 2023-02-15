@@ -32,7 +32,7 @@
 **  Constants
 *****************************************************************************/
 #ifndef AVDT_VERSION
-    #define AVDT_VERSION                0x0102
+#define AVDT_VERSION                0x0102
 #endif
 #define AVDT_VERSION_SYNC           0x0103
 
@@ -90,7 +90,7 @@ typedef uint8_t AVDT_REPORT_TYPE;
 
 #define AVDT_RTCP_SDES_CNAME    1       /* SDES item CNAME */
 #ifndef AVDT_MAX_CNAME_SIZE
-    #define AVDT_MAX_CNAME_SIZE     28
+#define AVDT_MAX_CNAME_SIZE     28
 #endif
 
 /* Protocol service capabilities.  This indicates the protocol service
@@ -202,8 +202,7 @@ typedef uint8_t AVDT_REPORT_TYPE;
 **  Type Definitions
 *****************************************************************************/
 
-typedef struct
-{
+typedef struct {
     uint32_t  ntp_sec;        /* NTP time: seconds relative to 0h UTC on 1 January 1900 */
     uint32_t  ntp_frac;       /* NTP time: the fractional part */
     uint32_t  rtp_time;       /* timestamp in RTP header */
@@ -212,8 +211,7 @@ typedef struct
     uint32_t  octet_count;    /* sender's octet count: same comment */
 } tAVDT_SENDER_INFO;
 
-typedef struct
-{
+typedef struct {
     uint8_t   frag_lost;      /* fraction lost since last RR */
     uint32_t  packet_lost;    /* cumulative number of packets lost since the beginning */
     uint32_t  seq_num_rcvd;   /* extended highest sequence number received */
@@ -222,16 +220,14 @@ typedef struct
     uint32_t  dlsr;           /* delay since last SR */
 } tAVDT_REPORT_BLK;
 
-typedef union
-{
+typedef union {
     tAVDT_SENDER_INFO   sr;
     tAVDT_REPORT_BLK    rr;
     uint8_t               cname[AVDT_MAX_CNAME_SIZE + 1];
 } tAVDT_REPORT_DATA;
 
 /* This structure contains parameters which are set at registration. */
-typedef struct
-{
+typedef struct {
     uint16_t      ctrl_mtu;   /* L2CAP MTU of the AVDTP signaling channel */
     uint8_t       ret_tout;   /* AVDTP signaling retransmission timeout */
     uint8_t       sig_tout;   /* AVDTP signaling message timeout */
@@ -242,8 +238,7 @@ typedef struct
 /* This structure contains the SEP information.  This information is
 ** transferred during the discovery procedure.
 */
-typedef struct
-{
+typedef struct {
     uint8_t     in_use;         /* TRUE if stream is currently in use */
     uint8_t       seid;           /* Stream endpoint identifier */
     uint8_t       media_type;     /* Media type */
@@ -251,8 +246,7 @@ typedef struct
 } tAVDT_SEP_INFO;
 
 /* This structure contains the SEP configuration. */
-typedef struct
-{
+typedef struct {
     uint8_t   codec_info[AVDT_CODEC_SIZE];        /* Codec capabilities array */
     uint8_t   protect_info[AVDT_PROTECT_SIZE];    /* Content protection capabilities */
     uint8_t   num_codec;                          /* Number of media codec information elements */
@@ -262,7 +256,7 @@ typedef struct
     uint8_t   recov_mrws;                         /* Maximum recovery window size */
     uint8_t   recov_mnmp;                         /* Recovery maximum number of media packets */
     uint8_t   hdrcmp_mask;                        /* Header compression capabilities */
-    #if AVDT_MULTIPLEXING == TRUE
+#if AVDT_MULTIPLEXING == TRUE
     uint8_t   mux_mask;                           /* Multiplexing capabilities. AVDT_MUX_XXX bits can be combined with a bitwise OR */
     uint8_t   mux_tsid_media;                     /* TSID for media transport session */
     uint8_t   mux_tcid_media;                     /* TCID for media transport session */
@@ -270,12 +264,11 @@ typedef struct
     uint8_t   mux_tcid_report;                    /* TCID for reporting transport session */
     uint8_t   mux_tsid_recov;                     /* TSID for recovery transport session */
     uint8_t   mux_tcid_recov;                     /* TCID for recovery transport session */
-    #endif
+#endif
 } tAVDT_CFG;
 
 /* Header structure for callback event parameters. */
-typedef struct
-{
+typedef struct {
     uint8_t           err_code;           /* Zero if operation succeeded; nonzero if operation failed */
     uint8_t           err_param;          /* Error parameter included for some events */
     uint8_t           label;              /* Transaction label */
@@ -287,23 +280,20 @@ typedef struct
 /* This data structure is associated with the AVDT_GETCAP_CFM_EVT,
 ** AVDT_RECONFIG_IND_EVT, and AVDT_RECONFIG_CFM_EVT.
 */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                /* Event header */
     tAVDT_CFG       *p_cfg;             /* Pointer to configuration for this SEP */
 } tAVDT_CONFIG;
 
 /* This data structure is associated with the AVDT_CONFIG_IND_EVT. */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                /* Event header */
     tAVDT_CFG       *p_cfg;             /* Pointer to configuration for this SEP */
     uint8_t           int_seid;           /* Stream endpoint ID of stream initiating the operation */
 } tAVDT_SETCONFIG;
 
 /* This data structure is associated with the AVDT_OPEN_IND_EVT and AVDT_OPEN_CFM_EVT. */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                /* Event header */
     uint16_t          peer_mtu;           /* Transport channel L2CAP MTU of the peer */
     uint16_t          lcid;               /* L2CAP LCID for media channel */
@@ -312,31 +302,27 @@ typedef struct
 /* This data structure is associated with the AVDT_SECURITY_IND_EVT
 ** and AVDT_SECURITY_CFM_EVT.
 */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                /* Event header */
     uint8_t           *p_data;            /* Pointer to security data */
     uint16_t          len;                /* Length in bytes of the security data */
 } tAVDT_SECURITY;
 
 /* This data structure is associated with the AVDT_DISCOVER_CFM_EVT. */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                /* Event header */
     tAVDT_SEP_INFO  *p_sep_info;        /* Pointer to SEP information */
     uint8_t           num_seps;           /* Number of stream endpoints */
 } tAVDT_DISCOVER;
 
 /* This data structure is associated with the AVDT_DELAY_REPORT_EVT. */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                /* Event header */
     uint16_t          delay;              /* Delay value */
 } tAVDT_DELAY_RPT;
 
 /* Union of all control callback event data structures */
-typedef union
-{
+typedef union {
     tAVDT_EVT_HDR       hdr;
     tAVDT_DISCOVER      discover_cfm;
     tAVDT_CONFIG        getcap_cfm;
@@ -391,22 +377,23 @@ typedef void (tAVDT_REPORT_CBACK)(uint8_t handle, AVDT_REPORT_TYPE type,
                                   tAVDT_REPORT_DATA *p_data);
 #endif
 
-typedef uint16_t (tAVDT_GETCAP_REQ)(BD_ADDR bd_addr, uint8_t seid, tAVDT_CFG *p_cfg, tAVDT_CTRL_CBACK *p_cback);
+typedef uint16_t (tAVDT_GETCAP_REQ)(BD_ADDR bd_addr, uint8_t seid, tAVDT_CFG *p_cfg,
+                                    tAVDT_CTRL_CBACK *p_cback);
 
 /* This structure contains information required when a stream is created.
 ** It is passed to the AVDT_CreateStream() function.
 */
-typedef struct
-{
+typedef struct {
     tAVDT_CFG           cfg;            /* SEP configuration */
     tAVDT_CTRL_CBACK    *p_ctrl_cback;  /* Control callback function */
     tAVDT_DATA_CBACK    *p_data_cback;  /* Data callback function */
-    #if AVDT_MULTIPLEXING == TRUE
-    tAVDT_MEDIA_CBACK   *p_media_cback; /* Media callback function. It will be called only if p_data_cback is NULL */
-    #endif
-    #if AVDT_REPORTING == TRUE
+#if AVDT_MULTIPLEXING == TRUE
+    tAVDT_MEDIA_CBACK
+    *p_media_cback; /* Media callback function. It will be called only if p_data_cback is NULL */
+#endif
+#if AVDT_REPORTING == TRUE
     tAVDT_REPORT_CBACK  *p_report_cback;/* Report callback function. */
-    #endif
+#endif
     uint16_t              mtu;            /* The L2CAP MTU of the transport channel */
     uint16_t              flush_to;       /* The L2CAP flush timeout of the transport channel */
     uint8_t               tsep;           /* SEP type */

@@ -34,12 +34,13 @@
 #include <oi_codec_sbc_private.h>
 
 #ifndef CLIP_INT16
-    #define CLIP_INT16(x) do { if (x > OI_INT16_MAX) { x = OI_INT16_MAX; } else if (x < OI_INT16_MIN) { x = OI_INT16_MIN; } } while (0)
+#define CLIP_INT16(x) do { if (x > OI_INT16_MAX) { x = OI_INT16_MAX; } else if (x < OI_INT16_MIN) { x = OI_INT16_MIN; } } while (0)
 #endif
 
 #define MUL_16S_16S(_x, _y) ((_x) * (_y))
 
-PRIVATE void SynthWindow80_generated(OI_INT16 *pcm, SBC_BUFFER_T const *RESTRICT buffer, OI_UINT strideShift)
+PRIVATE void SynthWindow80_generated(OI_INT16 *pcm, SBC_BUFFER_T const *RESTRICT buffer,
+                                     OI_UINT strideShift)
 {
     OI_INT32 pcm_a, pcm_b;
     /* 1 - stage 0 */ pcm_b = 0;

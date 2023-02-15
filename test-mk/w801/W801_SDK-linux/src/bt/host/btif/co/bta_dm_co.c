@@ -27,13 +27,12 @@
 #if (defined BLE_INCLUDED && BLE_INCLUDED == TRUE)
 #include "bte_appl.h"
 
-tBTE_APPL_CFG bte_appl_cfg =
-{
-    #if SMP_INCLUDED == TRUE
+tBTE_APPL_CFG bte_appl_cfg = {
+#if SMP_INCLUDED == TRUE
     BTA_LE_AUTH_REQ_SC_BOND, //BTA_LE_AUTH_REQ_SC_MITM_BOND, // Authentication requirements
-    #else
+#else
     BTM_AUTH_SPGB_YES,            // Authentication requirements
-    #endif
+#endif
     BTM_IO_CAP_NONE,  //default value //BTM_LOCAL_IO_CAPS_BLE,
     BTM_BLE_INITIATOR_KEY_SIZE,
     BTM_BLE_RESPONDER_KEY_SIZE,
@@ -146,9 +145,9 @@ void  bta_dm_co_lk_upgrade(BD_ADDR bd_addr, uint8_t *p_upgrade)
 void bta_dm_co_loc_oob(uint8_t valid, BT_OCTET16 c, BT_OCTET16 r)
 {
     BTIF_TRACE_DEBUG("bta_dm_co_loc_oob, valid = %d", valid);
-    #if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
+#if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
     btif_dm_proc_loc_oob(valid, c, r);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -169,9 +168,9 @@ void bta_dm_co_rmt_oob(BD_ADDR bd_addr)
     BT_OCTET16 p_c;
     BT_OCTET16 p_r;
     uint8_t result = FALSE;
-    #if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
+#if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
     result = btif_dm_proc_rmt_oob(bd_addr, p_c, p_r);
-    #endif
+#endif
     BTIF_TRACE_DEBUG("bta_dm_co_rmt_oob: result=%d", result);
     bta_dm_ci_rmt_oob(result, bd_addr, p_c, p_r);
 }
@@ -191,10 +190,10 @@ void bta_dm_co_rmt_oob(BD_ADDR bd_addr)
 ** Returns          void
 **
 *******************************************************************************/
-static void btui_sco_codec_callback(uint16_t event, uint16_t sco_handle)
-{
-    bta_dm_sco_ci_data_ready(event, sco_handle);
-}
+//static void btui_sco_codec_callback(uint16_t event, uint16_t sco_handle)
+//{
+//    bta_dm_sco_ci_data_ready(event, sco_handle);
+//}
 /*******************************************************************************
 **
 ** Function         bta_dm_sco_co_init
@@ -217,22 +216,19 @@ tBTA_DM_SCO_ROUTE_TYPE bta_dm_sco_co_init(uint32_t rx_bw, uint32_t tx_bw,
         configuration is set to SCO over HCI */
     /* HS invoke this call-out */
     if(
-                #if (BTA_HS_INCLUDED == TRUE ) && (BTA_HS_INCLUDED == TRUE)
+#if (BTA_HS_INCLUDED == TRUE ) && (BTA_HS_INCLUDED == TRUE)
                     (app_id == BTUI_DM_SCO_4_HS_APP_ID && btui_cfg.hs_sco_over_hci) ||
-                #endif
+#endif
                     /* AG invoke this call-out */
-                    /*(app_id != BTUI_DM_SCO_4_HS_APP_ID && btui_cfg.ag_sco_over_hci)*/1)
-    {
+                    /*(app_id != BTUI_DM_SCO_4_HS_APP_ID && btui_cfg.ag_sco_over_hci)*/1) {
         ///route = btui_cb.sco_hci = BTA_DM_SCO_ROUTE_HCI;
         route = BTA_DM_SCO_ROUTE_HCI;
     }
 
     /* no codec is is used for the SCO data */
-    if(p_codec_type->codec_type == BTA_SCO_CODEC_PCM && route == BTA_DM_SCO_ROUTE_HCI)
-    {
+    if(p_codec_type->codec_type == BTA_SCO_CODEC_PCM && route == BTA_DM_SCO_ROUTE_HCI) {
         /* initialize SCO codec */
-        if(/*!btui_sco_codec_init(rx_bw, tx_bw)*/1)
-        {
+        if(/*!btui_sco_codec_init(rx_bw, tx_bw)*/1) {
             BTIF_TRACE_DEBUG("sco codec initialization! \r\n");
         }
     }
@@ -257,8 +253,7 @@ void bta_dm_sco_co_open(uint16_t handle, uint8_t pkt_size, uint16_t event)
     //tBTUI_SCO_CODEC_CFG cfg;
 
     //if(btui_cb.sco_hci)
-    if(1)
-    {
+    if(1) {
         BTIF_TRACE_DEBUG("bta_dm_sco_co_open handle:%d pkt_size:%d\r\n", handle, pkt_size);
         //cfg.p_cback = btui_sco_codec_callback;
         //cfg.pkt_size = pkt_size;
@@ -282,8 +277,7 @@ void bta_dm_sco_co_open(uint16_t handle, uint8_t pkt_size, uint16_t event)
 void bta_dm_sco_co_close(void)
 {
     //if(btui_cb.sco_hci)
-    if(1)
-    {
+    if(1) {
         BTIF_TRACE_DEBUG("bta_dm_sco_co_close close codec\r\n");
         /* close sco codec */
         //btui_sco_codec_close();
@@ -302,14 +296,11 @@ void bta_dm_sco_co_close(void)
 *******************************************************************************/
 void bta_dm_sco_co_in_data(BT_HDR  *p_buf, tBTM_SCO_DATA_FLAG status)
 {
-    if(/*btui_cfg.sco_use_mic*/1)
-    {
+    if(/*btui_cfg.sco_use_mic*/1) {
         BTIF_TRACE_DEBUG("btui_sco_codec_inqdata\r\n");
         GKI_freebuf(p_buf);
         //btui_sco_codec_inqdata(p_buf);
-    }
-    else
-    {
+    } else {
         GKI_freebuf(p_buf);
     }
 }
@@ -358,7 +349,8 @@ void bta_dm_co_le_io_key_req(BD_ADDR bd_addr, uint8_t *p_max_key_size,
     BTIF_TRACE_ERROR("##################################");
     *p_max_key_size = 16;
     *p_init_key = *p_resp_key =
-                                  (BTA_LE_KEY_PENC | BTA_LE_KEY_PID | BTA_LE_KEY_PCSRK | BTA_LE_KEY_LENC | BTA_LE_KEY_LID | BTA_LE_KEY_LCSRK);
+                                  (BTA_LE_KEY_PENC | BTA_LE_KEY_PID | BTA_LE_KEY_PCSRK | BTA_LE_KEY_LENC | BTA_LE_KEY_LID |
+                                   BTA_LE_KEY_LCSRK);
 }
 
 
@@ -413,9 +405,9 @@ void bta_dm_co_ble_io_req(BD_ADDR bd_addr,  tBTA_IO_CAP *p_io_cap,
 
     /* *p_auth_req by default is FALSE for devices with NoInputNoOutput; TRUE for other devices. */
 
-    if(bte_appl_cfg.ble_auth_req)
-    {
-        *p_auth_req = bte_appl_cfg.ble_auth_req | (bte_appl_cfg.ble_auth_req & 0x04) | ((*p_auth_req) & 0x04);
+    if(bte_appl_cfg.ble_auth_req) {
+        *p_auth_req = bte_appl_cfg.ble_auth_req | (bte_appl_cfg.ble_auth_req & 0x04) | ((
+                                      *p_auth_req) & 0x04);
     }
 
     /* if OOB is not supported, this call-out function does not need to do anything
@@ -425,23 +417,19 @@ void bta_dm_co_ble_io_req(BD_ADDR bd_addr,  tBTA_IO_CAP *p_io_cap,
      */
     btif_dm_set_oob_for_le_io_req(bd_addr, p_oob_data, p_auth_req);
 
-    if(bte_appl_cfg.ble_io_cap <= 4)
-    {
+    if(bte_appl_cfg.ble_io_cap <= 4) {
         *p_io_cap = bte_appl_cfg.ble_io_cap;
     }
 
-    if(bte_appl_cfg.ble_init_key <= BTM_BLE_INITIATOR_KEY_SIZE)
-    {
+    if(bte_appl_cfg.ble_init_key <= BTM_BLE_INITIATOR_KEY_SIZE) {
         *p_init_key = bte_appl_cfg.ble_init_key;
     }
 
-    if(bte_appl_cfg.ble_resp_key <= BTM_BLE_RESPONDER_KEY_SIZE)
-    {
+    if(bte_appl_cfg.ble_resp_key <= BTM_BLE_RESPONDER_KEY_SIZE) {
         *p_resp_key = bte_appl_cfg.ble_resp_key;
     }
 
-    if(bte_appl_cfg.ble_max_key_size > 7 && bte_appl_cfg.ble_max_key_size <= 16)
-    {
+    if(bte_appl_cfg.ble_max_key_size > 7 && bte_appl_cfg.ble_max_key_size <= 16) {
         *p_max_key_size = bte_appl_cfg.ble_max_key_size;
     }
 }

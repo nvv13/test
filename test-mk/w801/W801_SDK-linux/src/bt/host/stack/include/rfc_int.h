@@ -66,7 +66,8 @@ extern void RFCOMM_TestReq(uint8_t *p_data, uint16_t len);
 extern void RFCOMM_FlowReq(tRFC_MCB *p_mcb, uint8_t dlci, uint8_t state);
 
 extern void RFCOMM_PortNegReq(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_STATE *p_pars);
-extern void RFCOMM_PortNegRsp(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_STATE *p_pars, uint16_t param_mask);
+extern void RFCOMM_PortNegRsp(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_STATE *p_pars,
+                              uint16_t param_mask);
 
 extern void RFCOMM_ControlReq(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_CTRL *p_pars);
 extern void RFCOMM_ControlRsp(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_CTRL *p_pars);
@@ -75,8 +76,7 @@ extern void RFCOMM_LineStatusReq(tRFC_MCB *p_mcb, uint8_t dlci, uint8_t line_sta
 /*
 ** Define logical struct used for sending and decoding MX frames
 */
-typedef struct
-{
+typedef struct {
     uint8_t   dlci;
     uint8_t   type;
     uint8_t   cr;
@@ -84,10 +84,8 @@ typedef struct
     uint8_t   pf;
     uint8_t   credit;
 
-    union
-    {
-        struct
-        {
+    union {
+        struct {
             uint8_t dlci;
             uint8_t frame_type;
             uint8_t conv_layer;
@@ -97,26 +95,22 @@ typedef struct
             uint8_t n2;
             uint8_t k;
         } pn;
-        struct
-        {
+        struct {
             uint8_t   *p_data;
             uint16_t  data_len;
         } test;
-        struct
-        {
+        struct {
             uint8_t dlci;
             uint8_t signals;
             uint8_t break_present;
             uint8_t break_duration;
         } msc;
-        struct
-        {
+        struct {
             uint8_t ea;
             uint8_t cr;
             uint8_t type;
         } nsc;
-        struct
-        {
+        struct {
             uint8_t dlci;
             uint8_t is_request;
             uint8_t baud_rate;
@@ -129,8 +123,7 @@ typedef struct
             uint8_t xoff_char;
             uint16_t param_mask;
         } rpn;
-        struct
-        {
+        struct {
             uint8_t dlci;
             uint8_t line_status;
         } rls;
@@ -213,8 +206,7 @@ typedef struct
 
 /* Define RFComm control block
 */
-typedef struct
-{
+typedef struct {
     MX_FRAME  rx_frame;
     tL2CAP_APPL_INFO  reg_info;              /* L2CAP Registration info */
     tRFC_MCB *p_rfc_lcid_mcb[MAX_L2CAP_CHANNELS];     /* MCB based on the L2CAP's lcid */
@@ -224,8 +216,7 @@ typedef struct
 } tRFCOMM_CB;
 
 /* Main Control Block for the RFCOMM Layer (PORT and RFC) */
-typedef struct
-{
+typedef struct {
     tRFCOMM_CB  rfc;
     tPORT_CB    port;
     uint8_t       trace_level;
@@ -233,10 +224,10 @@ typedef struct
 
 
 #if RFC_DYNAMIC_MEMORY == FALSE
-    extern tRFC_CB  rfc_cb;
+extern tRFC_CB  rfc_cb;
 #else
-    extern tRFC_CB *rfc_cb_ptr;
-    #define rfc_cb (*rfc_cb_ptr)
+extern tRFC_CB *rfc_cb_ptr;
+#define rfc_cb (*rfc_cb_ptr)
 #endif
 
 /* Timer running on the multiplexor channel while no DLCI connection is opened */
@@ -256,21 +247,21 @@ typedef struct
 
 #ifdef RFCOMM_PRECALC_FCS
 
-    #define RFCOMM_SABME_FCS(p_data, cr, dlci) rfc_sabme_fcs[cr][dlci]
-    #define RFCOMM_UA_FCS(p_data, cr, dlci)    rfc_ua_fcs[cr][dlci]
-    #define RFCOMM_DM_FCS(p_data, cr, dlci)    rfc_dm_fcs[cr][dlci]
-    #define RFCOMM_DISC_FCS(p_data, cr, dlci)  rfc_disc_fcs[cr][dlci]
-    #define RFCOMM_UIH_FCS(p_data, dlci)       rfc_uih_fcs[dlci]
+#define RFCOMM_SABME_FCS(p_data, cr, dlci) rfc_sabme_fcs[cr][dlci]
+#define RFCOMM_UA_FCS(p_data, cr, dlci)    rfc_ua_fcs[cr][dlci]
+#define RFCOMM_DM_FCS(p_data, cr, dlci)    rfc_dm_fcs[cr][dlci]
+#define RFCOMM_DISC_FCS(p_data, cr, dlci)  rfc_disc_fcs[cr][dlci]
+#define RFCOMM_UIH_FCS(p_data, dlci)       rfc_uih_fcs[dlci]
 
 #else
 
-    extern  uint8_t rfc_calc_fcs(uint16_t len, uint8_t *p);
+extern  uint8_t rfc_calc_fcs(uint16_t len, uint8_t *p);
 
-    #define RFCOMM_SABME_FCS(p_data, cr, dlci) rfc_calc_fcs(3, p_data)
-    #define RFCOMM_UA_FCS(p_data, cr, dlci)    rfc_calc_fcs(3, p_data)
-    #define RFCOMM_DM_FCS(p_data, cr, dlci)    rfc_calc_fcs(3, p_data)
-    #define RFCOMM_DISC_FCS(p_data, cr, dlci)  rfc_calc_fcs(3, p_data)
-    #define RFCOMM_UIH_FCS(p_data, dlci)       rfc_calc_fcs(2, p_data)
+#define RFCOMM_SABME_FCS(p_data, cr, dlci) rfc_calc_fcs(3, p_data)
+#define RFCOMM_UA_FCS(p_data, cr, dlci)    rfc_calc_fcs(3, p_data)
+#define RFCOMM_DM_FCS(p_data, cr, dlci)    rfc_calc_fcs(3, p_data)
+#define RFCOMM_DISC_FCS(p_data, cr, dlci)  rfc_calc_fcs(3, p_data)
+#define RFCOMM_UIH_FCS(p_data, dlci)       rfc_calc_fcs(2, p_data)
 
 #endif
 
@@ -289,7 +280,8 @@ extern void rfc_port_sm_execute(tPORT *p_port, uint16_t event, void *p_data);
 
 extern void rfc_process_pn(tRFC_MCB *p_rfc_mcb, uint8_t is_command, MX_FRAME *p_frame);
 extern void rfc_process_msc(tRFC_MCB *p_rfc_mcb, uint8_t is_command, MX_FRAME *p_frame);
-extern void rfc_process_rpn(tRFC_MCB *p_rfc_mcb, uint8_t is_command, uint8_t is_request, MX_FRAME *p_frame);
+extern void rfc_process_rpn(tRFC_MCB *p_rfc_mcb, uint8_t is_command, uint8_t is_request,
+                            MX_FRAME *p_frame);
 extern void rfc_process_rls(tRFC_MCB *p_rfc_mcb, uint8_t is_command, MX_FRAME *p_frame);
 extern void rfc_process_nsc(tRFC_MCB *p_rfc_mcb, MX_FRAME *p_frame);
 extern void rfc_process_test_rsp(tRFC_MCB *p_rfc_mcb, BT_HDR *p_buf);
@@ -313,7 +305,8 @@ tRFC_MCB  *rfc_find_lcid_mcb(uint16_t lcid);
 extern void      rfc_save_lcid_mcb(tRFC_MCB *p_rfc_mcb, uint16_t lcid);
 extern void      rfc_check_mcb_active(tRFC_MCB *p_mcb);
 extern void      rfc_port_closed(tPORT *p_port);
-extern void      rfc_sec_check_complete(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_ref_data, uint8_t res);
+extern void      rfc_sec_check_complete(BD_ADDR bd_addr, tBT_TRANSPORT transport, void *p_ref_data,
+                                        uint8_t res);
 extern void      rfc_inc_credit(tPORT *p_port, uint8_t credit);
 extern void      rfc_dec_credit(tPORT *p_port);
 extern void      rfc_check_send_cmd(tRFC_MCB *p_mcb, BT_HDR *p_buf);
@@ -369,7 +362,8 @@ extern void PORT_TestCnf(tRFC_MCB *p_mcb, uint8_t *p_data, uint16_t len);
 
 extern void PORT_FlowInd(tRFC_MCB *p_mcb, uint8_t dlci, uint8_t fc);
 
-extern void PORT_PortNegInd(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_STATE *p_pars, uint16_t param_mask);
+extern void PORT_PortNegInd(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_STATE *p_pars,
+                            uint16_t param_mask);
 extern void PORT_PortNegCnf(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_STATE *p_pars, uint16_t result);
 
 extern void PORT_ControlInd(tRFC_MCB *p_mcb, uint8_t dlci, tPORT_CTRL *p_pars);

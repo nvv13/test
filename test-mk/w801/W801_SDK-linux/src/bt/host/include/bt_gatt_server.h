@@ -25,8 +25,7 @@
 
 
 /** GATT value type used in response to remote read requests */
-typedef struct
-{
+typedef struct {
     uint8_t           value[BTGATT_MAX_ATTR_LEN];
     uint16_t          handle;
     uint16_t          offset;
@@ -35,8 +34,7 @@ typedef struct
 } btgatt_value_t;
 
 /** GATT remote read request response type */
-typedef union
-{
+typedef union {
     btgatt_value_t attr_value;
     uint16_t            handle;
 } btgatt_response_t;
@@ -120,8 +118,7 @@ typedef void (*congestion_callback)(int conn_id, uint8_t congested);
 /** Callback invoked when the MTU for a given connection changes */
 typedef void (*mtu_changed_callback)(int conn_id, int mtu);
 
-typedef struct
-{
+typedef struct {
     register_server_callback        register_server_cb;
     connection_callback             connection_cb;
     service_added_callback          service_added_cb;
@@ -141,8 +138,7 @@ typedef struct
 } btgatt_server_callbacks_t;
 
 /** Represents the standard BT-GATT server interface. */
-typedef struct
-{
+typedef struct {
     /** Registers a GATT server application with the stack */
     tls_bt_status_t (*register_server)(tls_bt_uuid_t *uuid);
 
@@ -151,11 +147,11 @@ typedef struct
 
     /** Create a connection to a remote peripheral */
     tls_bt_status_t (*connect)(int server_if, const tls_bt_addr_t *bd_addr,
-                           uint8_t is_direct, int transport);
+                               uint8_t is_direct, int transport);
 
     /** Disconnect an established connection or cancel a pending one */
     tls_bt_status_t (*disconnect)(int server_if, const tls_bt_addr_t *bd_addr,
-                              int conn_id);
+                                  int conn_id);
 
     /** Create a new service */
     tls_bt_status_t (*add_service)(int server_if, btgatt_srvc_id_t *srvc_id, int num_handles);
@@ -165,16 +161,16 @@ typedef struct
 
     /** Add a characteristic to a service */
     tls_bt_status_t (*add_characteristic)(int server_if,
-                                      int service_handle, tls_bt_uuid_t *uuid,
-                                      int properties, int permissions);
+                                          int service_handle, tls_bt_uuid_t *uuid,
+                                          int properties, int permissions);
 
     /** Add a descriptor to a given service */
     tls_bt_status_t (*add_descriptor)(int server_if, int service_handle,
-                                  tls_bt_uuid_t *uuid, int permissions);
+                                      tls_bt_uuid_t *uuid, int permissions);
 
     /** Starts a local service */
     tls_bt_status_t (*start_service)(int server_if, int service_handle,
-                                 int transport);
+                                     int transport);
 
     /** Stops a local service */
     tls_bt_status_t (*stop_service)(int server_if, int service_handle);
@@ -184,12 +180,12 @@ typedef struct
 
     /** Send value indication to a remote device */
     tls_bt_status_t (*send_indication)(int server_if, int attribute_handle,
-                                   int conn_id, int len, int confirm,
-                                   char *p_value);
+                                       int conn_id, int len, int confirm,
+                                       char *p_value);
 
     /** Send a response to a read/write operation */
     tls_bt_status_t (*send_response)(int conn_id, int trans_id,
-                                 int status, btgatt_response_t *response);
+                                     int status, btgatt_response_t *response);
 
 } btgatt_server_interface_t;
 

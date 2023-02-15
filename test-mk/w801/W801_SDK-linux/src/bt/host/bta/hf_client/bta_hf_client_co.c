@@ -49,14 +49,13 @@
 *******************************************************************************/
 void bta_hf_client_co_audio_state(uint16_t handle, uint8_t state, tBTA_HFP_PEER_CODEC codec)
 {
-    switch (state)
-    {
-    case SCO_STATE_ON:
-    case SCO_STATE_OFF:
-    case SCO_STATE_OFF_TRANSFER:
-    case SCO_STATE_SETUP:
-    default:
-        break;
+    switch(state) {
+        case SCO_STATE_ON:
+        case SCO_STATE_OFF:
+        case SCO_STATE_OFF_TRANSFER:
+        case SCO_STATE_SETUP:
+        default:
+            break;
     }
 }
 
@@ -112,7 +111,7 @@ void bta_hf_client_sco_co_close(void)
 }
 
 /*SCO data to application*/
-__attribute__((weak)) int btif_co_sco_data_incoming(uint8_t type, uint8_t *p_data,uint16_t length)
+__attribute__((weak)) int btif_co_sco_data_incoming(uint8_t type, uint8_t *p_data, uint16_t length)
 {
     UNUSED(type);
     UNUSED(p_data);
@@ -121,7 +120,7 @@ __attribute__((weak)) int btif_co_sco_data_incoming(uint8_t type, uint8_t *p_dat
 }
 
 /*SCO data sent over HCI*/
-__attribute__((weak)) int btif_co_sco_data_outgoing(uint8_t type, uint8_t *p_data,uint16_t length)
+__attribute__((weak)) int btif_co_sco_data_outgoing(uint8_t type, uint8_t *p_data, uint16_t length)
 {
     UNUSED(type);
     UNUSED(p_data);
@@ -156,9 +155,8 @@ void bta_hf_client_sco_co_in_data(BT_HDR  *p_buf, tBTM_SCO_DATA_FLAG status)
 {
     uint8_t       *p = (uint8_t *)(p_buf + 1) + p_buf->offset;
     uint8_t       pkt_size = 0;
-
     STREAM_SKIP_UINT16(p);
-    STREAM_TO_UINT8 (pkt_size, p);
+    STREAM_TO_UINT8(pkt_size, p);
     btif_co_sco_data_incoming(0, p, pkt_size);
     //BTA_HfClientCiData();
 }

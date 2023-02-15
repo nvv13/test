@@ -30,24 +30,24 @@
 #define SMP_PIN_CODE_LEN_MIN    6
 
 #if BLE_INCLUDED == TRUE && SMP_INCLUDED == TRUE
-    /* SMP command code */
-    #define SMP_OPCODE_PAIRING_REQ            0x01
-    #define SMP_OPCODE_PAIRING_RSP            0x02
-    #define SMP_OPCODE_CONFIRM                0x03
-    #define SMP_OPCODE_RAND                   0x04
-    #define SMP_OPCODE_PAIRING_FAILED         0x05
-    #define SMP_OPCODE_ENCRYPT_INFO           0x06
-    #define SMP_OPCODE_MASTER_ID              0x07
-    #define SMP_OPCODE_IDENTITY_INFO          0x08
-    #define SMP_OPCODE_ID_ADDR                0x09
-    #define SMP_OPCODE_SIGN_INFO              0x0A
-    #define SMP_OPCODE_SEC_REQ                0x0B
-    #define SMP_OPCODE_PAIR_PUBLIC_KEY        0x0C
-    #define SMP_OPCODE_PAIR_DHKEY_CHECK       0x0D
-    #define SMP_OPCODE_PAIR_KEYPR_NOTIF       0x0E
-    #define SMP_OPCODE_MAX                    SMP_OPCODE_PAIR_KEYPR_NOTIF
-    #define SMP_OPCODE_MIN                    SMP_OPCODE_PAIRING_REQ
-    #define SMP_OPCODE_PAIR_COMMITM           0x0F
+/* SMP command code */
+#define SMP_OPCODE_PAIRING_REQ            0x01
+#define SMP_OPCODE_PAIRING_RSP            0x02
+#define SMP_OPCODE_CONFIRM                0x03
+#define SMP_OPCODE_RAND                   0x04
+#define SMP_OPCODE_PAIRING_FAILED         0x05
+#define SMP_OPCODE_ENCRYPT_INFO           0x06
+#define SMP_OPCODE_MASTER_ID              0x07
+#define SMP_OPCODE_IDENTITY_INFO          0x08
+#define SMP_OPCODE_ID_ADDR                0x09
+#define SMP_OPCODE_SIGN_INFO              0x0A
+#define SMP_OPCODE_SEC_REQ                0x0B
+#define SMP_OPCODE_PAIR_PUBLIC_KEY        0x0C
+#define SMP_OPCODE_PAIR_DHKEY_CHECK       0x0D
+#define SMP_OPCODE_PAIR_KEYPR_NOTIF       0x0E
+#define SMP_OPCODE_MAX                    SMP_OPCODE_PAIR_KEYPR_NOTIF
+#define SMP_OPCODE_MIN                    SMP_OPCODE_PAIRING_REQ
+#define SMP_OPCODE_PAIR_COMMITM           0x0F
 #endif
 
 /* SMP event type */
@@ -117,12 +117,11 @@ typedef uint8_t tSMP_STATUS;
 typedef uint8_t  tSMP_IO_CAP;
 
 #ifndef SMP_DEFAULT_IO_CAPS
-    #define SMP_DEFAULT_IO_CAPS     SMP_IO_CAP_KBDISP
+#define SMP_DEFAULT_IO_CAPS     SMP_IO_CAP_KBDISP
 #endif
 
 /* OOB data present or not */
-enum
-{
+enum {
     SMP_OOB_NONE,
     SMP_OOB_PRESENT,
     SMP_OOB_UNKNOWN
@@ -130,8 +129,7 @@ enum
 typedef uint8_t  tSMP_OOB_FLAG;
 
 /* type of OOB data required from application */
-enum
-{
+enum {
     SMP_OOB_INVALID_TYPE,
     SMP_OOB_PEER,
     SMP_OOB_LOCAL,
@@ -212,8 +210,7 @@ typedef uint8_t tSMP_KEYS;
 typedef uint8_t tSMP_SC_KEY_TYPE;
 
 /* data type for BTM_SP_IO_REQ_EVT */
-typedef struct
-{
+typedef struct {
     tSMP_IO_CAP     io_cap;         /* local IO capabilities */
     tSMP_OOB_FLAG   oob_data;       /* OOB data present (locally) for the peer device */
     tSMP_AUTH_REQ   auth_req;       /* Authentication required (for local device) */
@@ -222,23 +219,20 @@ typedef struct
     tSMP_KEYS       resp_keys;      /* responder keys */
 } tSMP_IO_REQ;
 
-typedef struct
-{
+typedef struct {
     tSMP_STATUS reason;
     tSMP_SEC_LEVEL sec_level;
     uint8_t is_pair_cancel;
     uint8_t smp_over_br;
 } tSMP_CMPL;
 
-typedef struct
-{
+typedef struct {
     BT_OCTET32  x;
     BT_OCTET32  y;
 } tSMP_PUBLIC_KEY;
 
 /* the data associated with the info sent to the peer via OOB interface */
-typedef struct
-{
+typedef struct {
     uint8_t         present;
     BT_OCTET16      randomizer;
     BT_OCTET16      commitment;
@@ -252,23 +246,20 @@ typedef struct
 } tSMP_LOC_OOB_DATA;
 
 /* the data associated with the info received from the peer via OOB interface */
-typedef struct
-{
+typedef struct {
     uint8_t         present;
     BT_OCTET16      randomizer;
     BT_OCTET16      commitment;
     tBLE_BD_ADDR    addr_rcvd_from;
 } tSMP_PEER_OOB_DATA;
 
-typedef struct
-{
+typedef struct {
     tSMP_LOC_OOB_DATA   loc_oob_data;
     tSMP_PEER_OOB_DATA  peer_oob_data;
 } tSMP_SC_OOB_DATA;
 
 
-typedef union
-{
+typedef union {
     uint32_t          passkey;
     tSMP_IO_REQ     io_req;     /* IO request */
     tSMP_CMPL       cmplt;
@@ -278,8 +269,7 @@ typedef union
 
 
 /* AES Encryption output */
-typedef struct
-{
+typedef struct {
     uint8_t   status;
     uint8_t   param_len;
     uint16_t  opcode;

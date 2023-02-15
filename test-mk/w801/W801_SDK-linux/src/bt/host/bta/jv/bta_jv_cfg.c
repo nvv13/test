@@ -30,11 +30,11 @@
 #include "bta_jv_api.h"
 
 #ifndef BTA_JV_SDP_DB_SIZE
-    #define BTA_JV_SDP_DB_SIZE          1200
+#define BTA_JV_SDP_DB_SIZE          1200
 #endif
 
 #ifndef BTA_JV_SDP_RAW_DATA_SIZE
-    #define BTA_JV_SDP_RAW_DATA_SIZE    800
+#define BTA_JV_SDP_RAW_DATA_SIZE    800
 #endif
 
 /* The platform may choose to use dynamic memory for these data buffers.
@@ -46,8 +46,7 @@ static uint8_t bta_jv_sdp_raw_data[BTA_JV_SDP_RAW_DATA_SIZE];
 static uint8_t __attribute__((aligned(4))) bta_jv_sdp_db_data[BTA_JV_SDP_DB_SIZE];
 
 /* JV configuration structure */
-const tBTA_JV_CFG bta_jv_cfg =
-{
+const tBTA_JV_CFG bta_jv_cfg = {
     BTA_JV_SDP_RAW_DATA_SIZE,   /* The size of p_sdp_raw_data */
     BTA_JV_SDP_DB_SIZE,         /* The size of p_sdp_db_data */
     bta_jv_sdp_raw_data,        /* The data buffer to keep raw data */

@@ -38,8 +38,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_ag_reg =
-{
+static const tBTA_SYS_REG bta_ag_reg = {
     bta_ag_hdl_event,
     BTA_AgDisable
 };
@@ -60,10 +59,8 @@ static const tBTA_SYS_REG bta_ag_reg =
 tBTA_STATUS BTA_AgEnable(tBTA_AG_PARSE_MODE parse_mode, tBTA_AG_CBACK *p_cback)
 {
     /* Error if AG is already enabled, or AG is in the middle of disabling. */
-    for(int idx = 0; idx < BTA_AG_NUM_SCB; idx++)
-    {
-        if(bta_ag_cb.scb[idx].in_use)
-        {
+    for(int idx = 0; idx < BTA_AG_NUM_SCB; idx++) {
+        if(bta_ag_cb.scb[idx].in_use) {
             APPL_TRACE_ERROR("BTA_AgEnable: FAILED, AG already enabled.");
             return BTA_FAILURE;
         }
@@ -118,14 +115,10 @@ void BTA_AgRegister(tBTA_SERVICE_MASK services, tBTA_SEC sec_mask, tBTA_AG_FEAT 
     p_buf->services = services;
     p_buf->app_id = app_id;
 
-    for(int i = 0; i < BTA_AG_NUM_IDX; i++)
-    {
-        if(p_service_names[i])
-        {
+    for(int i = 0; i < BTA_AG_NUM_IDX; i++) {
+        if(p_service_names[i]) {
             strlcpy(p_buf->p_name[i], p_service_names[i], BTA_SERVICE_NAME_LEN);
-        }
-        else
-        {
+        } else {
             p_buf->p_name[i][0] = 0;
         }
     }
@@ -253,8 +246,7 @@ void BTA_AgResult(uint16_t handle, tBTA_AG_RES result, tBTA_AG_RES_DATA *p_data)
     p_buf->hdr.layer_specific = handle;
     p_buf->result = result;
 
-    if(p_data)
-    {
+    if(p_data) {
         wm_memcpy(&p_buf->data, p_data, sizeof(p_buf->data));
     }
 

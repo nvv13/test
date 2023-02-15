@@ -159,9 +159,17 @@ int http_fwup(HTTPParameters ClientParams)
                     if(recvLen == 0)
                         *(Buffer+0) = SOCKET_FWUP_START;
                     else if(nRetCode == HTTP_CLIENT_EOS && recvLen == (totalLen-nSize))
+                    {
+                        recvLen += nSize;
+                        partLen += nSize;           
+						if (totalLen && (recvLen == totalLen))
+                        printf("download %d / %d\n", recvLen, totalLen);
                         *(Buffer+0) = SOCKET_FWUP_END;
+                    }
                     else
+                    {
                         *(Buffer+0) = SOCKET_FWUP_DATA;
+                    }
 
                     *(Buffer+1) = (nSize>>8) & 0xFF;
                     *(Buffer+2) = nSize & 0xFF;	
@@ -170,7 +178,14 @@ int http_fwup(HTTPParameters ClientParams)
                     // Send received data to fwup thread and deal with socket issues.
                     s8 ret = socket_fwup_recv(0, p, ERR_OK);
                     if(ret != ERR_OK){
-                        now_state = SHUTDOWN_LINK;
+						if (ret == ERR_VAL)
+						{
+                        	now_state = QUIT_OTA;
+						}
+						else
+						{
+							now_state = SHUTDOWN_LINK;
+						}
                         break;
                     }
                     else{
@@ -224,12 +239,13 @@ int t_http_fwup(char *url)
 	memset(&httpParams, 0, sizeof(HTTPParameters));
 	if (url == NULL)
 	{
-		httpParams.Uri = "http://192.168.1.100:8080/WM_W600_SEC.img";
+		httpParams.Uri = "http://192.168.1.100:8080/w800_ota.img";
 	}
 	else
 	{
 		httpParams.Uri = url;
 	}
+
 	printf("Location: %s\n",httpParams.Uri);
 	httpParams.Verbose = TRUE;
 	return http_fwup(httpParams);

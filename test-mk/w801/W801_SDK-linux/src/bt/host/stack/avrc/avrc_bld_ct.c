@@ -194,8 +194,7 @@ static tAVRC_STS avrc_bld_get_current_player_app_values_cmd(
     UINT16_TO_BE_STREAM(p_data, param_len);
     UINT8_TO_BE_STREAM(p_data, num_attrib_id);
 
-    for(int count = 0; count < num_attrib_id; count ++)
-    {
+    for(int count = 0; count < num_attrib_id; count ++) {
         UINT8_TO_BE_STREAM(p_data, attrib_ids[count]);
     }
 
@@ -213,7 +212,8 @@ static tAVRC_STS avrc_bld_get_current_player_app_values_cmd(
 **                  Otherwise, the error code.
 **
 *******************************************************************************/
-static tAVRC_STS avrc_bld_set_current_player_app_values_cmd(BT_HDR *p_pkt, uint8_t num_attrib_id, tAVRC_APP_SETTING *p_val)
+static tAVRC_STS avrc_bld_set_current_player_app_values_cmd(BT_HDR *p_pkt, uint8_t num_attrib_id,
+        tAVRC_APP_SETTING *p_val)
 {
     AVRC_TRACE_API("avrc_bld_set_current_player_app_values_cmd");
     uint8_t *p_start = (uint8_t *)(p_pkt + 1) + p_pkt->offset;
@@ -226,8 +226,7 @@ static tAVRC_STS avrc_bld_set_current_player_app_values_cmd(BT_HDR *p_pkt, uint8
     UINT16_TO_BE_STREAM(p_data, param_len);
     UINT8_TO_BE_STREAM(p_data, num_attrib_id);
 
-    for(int count = 0; count < num_attrib_id; count ++)
-    {
+    for(int count = 0; count < num_attrib_id; count ++) {
         UINT8_TO_BE_STREAM(p_data, p_val[count].attr_id);
         UINT8_TO_BE_STREAM(p_data, p_val[count].attr_val);
     }
@@ -246,7 +245,8 @@ static tAVRC_STS avrc_bld_set_current_player_app_values_cmd(BT_HDR *p_pkt, uint8
 **                  Otherwise, the error code.
 **
 *******************************************************************************/
-static tAVRC_STS avrc_bld_get_player_app_setting_attr_text_cmd(BT_HDR *p_pkt, tAVRC_GET_APP_ATTR_TXT_CMD *p_cmd)
+static tAVRC_STS avrc_bld_get_player_app_setting_attr_text_cmd(BT_HDR *p_pkt,
+        tAVRC_GET_APP_ATTR_TXT_CMD *p_cmd)
 {
     AVRC_TRACE_API("%s", __FUNCTION__);
     uint8_t *p_start = (uint8_t *)(p_pkt + 1) + p_pkt->offset;
@@ -256,8 +256,7 @@ static tAVRC_STS avrc_bld_get_player_app_setting_attr_text_cmd(BT_HDR *p_pkt, tA
     UINT16_TO_BE_STREAM(p_data, param_len);
     UINT8_TO_BE_STREAM(p_data, p_cmd->num_attr);
 
-    for(int count = 0; count < p_cmd->num_attr; count++)
-    {
+    for(int count = 0; count < p_cmd->num_attr; count++) {
         UINT8_TO_BE_STREAM(p_data, p_cmd->attrs[count]);
     }
 
@@ -275,7 +274,8 @@ static tAVRC_STS avrc_bld_get_player_app_setting_attr_text_cmd(BT_HDR *p_pkt, tA
 **                  Otherwise, the error code.
 **
 *******************************************************************************/
-static tAVRC_STS avrc_bld_get_player_app_setting_value_text_cmd(BT_HDR *p_pkt, tAVRC_GET_APP_VAL_TXT_CMD *p_cmd)
+static tAVRC_STS avrc_bld_get_player_app_setting_value_text_cmd(BT_HDR *p_pkt,
+        tAVRC_GET_APP_VAL_TXT_CMD *p_cmd)
 {
     AVRC_TRACE_API("%s", __FUNCTION__);
     uint8_t *p_start = (uint8_t *)(p_pkt + 1) + p_pkt->offset;
@@ -285,8 +285,7 @@ static tAVRC_STS avrc_bld_get_player_app_setting_value_text_cmd(BT_HDR *p_pkt, t
     UINT16_TO_BE_STREAM(p_data, param_len);
     UINT8_TO_BE_STREAM(p_data, p_cmd->num_val);
 
-    for(int count = 0; count < p_cmd->num_val; count++)
-    {
+    for(int count = 0; count < p_cmd->num_val; count++) {
         UINT8_TO_BE_STREAM(p_data, p_cmd->vals[count]);
     }
 
@@ -304,7 +303,8 @@ static tAVRC_STS avrc_bld_get_player_app_setting_value_text_cmd(BT_HDR *p_pkt, t
 **                  Otherwise, the error code.
 **
 *******************************************************************************/
-static tAVRC_STS avrc_bld_get_element_attr_cmd(BT_HDR *p_pkt, uint8_t num_attrib, uint32_t *attrib_ids)
+static tAVRC_STS avrc_bld_get_element_attr_cmd(BT_HDR *p_pkt, uint8_t num_attrib,
+        uint32_t *attrib_ids)
 {
     AVRC_TRACE_API("avrc_bld_get_element_attr_cmd");
     uint8_t *p_start = (uint8_t *)(p_pkt + 1) + p_pkt->offset;
@@ -320,8 +320,7 @@ static tAVRC_STS avrc_bld_get_element_attr_cmd(BT_HDR *p_pkt, uint8_t num_attrib
     UINT32_TO_BE_STREAM(p_data, 0);
     UINT8_TO_BE_STREAM(p_data, num_attrib);
 
-    for(int count = 0; count < num_attrib; count ++)
-    {
+    for(int count = 0; count < num_attrib; count ++) {
         UINT32_TO_BE_STREAM(p_data, attrib_ids[count]);
     }
 
@@ -367,8 +366,7 @@ static BT_HDR *avrc_bld_init_cmd_buffer(tAVRC_COMMAND *p_cmd)
     AVRC_TRACE_API("avrc_bld_init_cmd_buffer: pdu=%x, opcode=%x", p_cmd->pdu, opcode);
     uint16_t offset = 0;
 
-    switch(opcode)
-    {
+    switch(opcode) {
         case AVRC_OP_PASS_THRU:
             offset  = AVRC_MSG_PASS_THRU_OFFSET;
             break;
@@ -388,13 +386,11 @@ static BT_HDR *avrc_bld_init_cmd_buffer(tAVRC_COMMAND *p_cmd)
     p_start = p_data;
 
     /* pass thru - group navigation - has a two byte op_id, so dont do it here */
-    if(opcode != AVRC_OP_PASS_THRU)
-    {
+    if(opcode != AVRC_OP_PASS_THRU) {
         *p_data++ = p_cmd->pdu;
     }
 
-    switch(opcode)
-    {
+    switch(opcode) {
         case AVRC_OP_VENDOR:
             /* reserved 0, packet_type 0 */
             UINT8_TO_BE_STREAM(p_data, 0);
@@ -426,17 +422,14 @@ tAVRC_STS AVRC_BldCommand(tAVRC_COMMAND *p_cmd, BT_HDR **pp_pkt)
     uint8_t alloc = FALSE;
     AVRC_TRACE_API("AVRC_BldCommand: pdu=%x status=%x", p_cmd->cmd.pdu, p_cmd->cmd.status);
 
-    if(!p_cmd || !pp_pkt)
-    {
+    if(!p_cmd || !pp_pkt) {
         AVRC_TRACE_API("AVRC_BldCommand. Invalid parameters passed. p_cmd=%p, pp_pkt=%p",
                        p_cmd, pp_pkt);
         return AVRC_STS_BAD_PARAM;
     }
 
-    if(*pp_pkt == NULL)
-    {
-        if((*pp_pkt = avrc_bld_init_cmd_buffer(p_cmd)) == NULL)
-        {
+    if(*pp_pkt == NULL) {
+        if((*pp_pkt = avrc_bld_init_cmd_buffer(p_cmd)) == NULL) {
             AVRC_TRACE_API("AVRC_BldCommand: Failed to initialize command buffer");
             return AVRC_STS_INTERNAL_ERR;
         }
@@ -447,8 +440,7 @@ tAVRC_STS AVRC_BldCommand(tAVRC_COMMAND *p_cmd, BT_HDR **pp_pkt)
     status = AVRC_STS_NO_ERROR;
     BT_HDR *p_pkt = *pp_pkt;
 
-    switch(p_cmd->pdu)
-    {
+    switch(p_cmd->pdu) {
         case AVRC_PDU_REQUEST_CONTINUATION_RSP:     /*        0x40 */
             status = avrc_bld_next_cmd(&p_cmd->continu, p_pkt);
             break;
@@ -456,19 +448,19 @@ tAVRC_STS AVRC_BldCommand(tAVRC_COMMAND *p_cmd, BT_HDR **pp_pkt)
         case AVRC_PDU_ABORT_CONTINUATION_RSP:       /*          0x41 */
             status = avrc_bld_next_cmd(&p_cmd->abort, p_pkt);
             break;
-            #if (AVRC_ADV_CTRL_INCLUDED == TRUE)
+#if (AVRC_ADV_CTRL_INCLUDED == TRUE)
 
         case AVRC_PDU_SET_ABSOLUTE_VOLUME:         /* 0x50 */
             status = avrc_bld_set_abs_volume_cmd(&p_cmd->volume, p_pkt);
             break;
-            #endif
+#endif
 
         case AVRC_PDU_REGISTER_NOTIFICATION:      /* 0x31 */
-            #if (AVRC_ADV_CTRL_INCLUDED == TRUE)
+#if (AVRC_ADV_CTRL_INCLUDED == TRUE)
             status = avrc_bld_register_notifn(p_pkt, p_cmd->reg_notif.event_id, p_cmd->reg_notif.param);
-            #endif
+#endif
             break;
-            #if (AVRC_CTLR_INCLUDED == TRUE)
+#if (AVRC_CTLR_INCLUDED == TRUE)
 
         case AVRC_PDU_GET_CAPABILITIES:
             status = avrc_bld_get_capability_cmd(p_pkt, p_cmd->get_caps.capability_id);
@@ -508,11 +500,10 @@ tAVRC_STS AVRC_BldCommand(tAVRC_COMMAND *p_cmd, BT_HDR **pp_pkt)
         case AVRC_PDU_GET_PLAY_STATUS:
             status = avrc_bld_get_play_status_cmd(p_pkt);
             break;
-            #endif
+#endif
     }
 
-    if(alloc && (status != AVRC_STS_NO_ERROR))
-    {
+    if(alloc && (status != AVRC_STS_NO_ERROR)) {
         GKI_freebuf(p_pkt);
         *pp_pkt = NULL;
     }

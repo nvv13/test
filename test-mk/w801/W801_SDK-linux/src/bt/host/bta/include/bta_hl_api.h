@@ -35,58 +35,58 @@
 *****************************************************************************/
 /* Extra Debug Code */
 #ifndef BTA_HL_DEBUG
-    #define BTA_HL_DEBUG           TRUE
+#define BTA_HL_DEBUG           TRUE
 #endif
 
 #ifndef BTA_HL_NUM_APPS
-    #define BTA_HL_NUM_APPS                 12
+#define BTA_HL_NUM_APPS                 12
 #endif
 
 #ifndef BTA_HL_NUM_MDEPS
-    #define BTA_HL_NUM_MDEPS                13
+#define BTA_HL_NUM_MDEPS                13
 #endif
 
 #ifndef BTA_HL_NUM_MCLS
-    #define BTA_HL_NUM_MCLS                 7
+#define BTA_HL_NUM_MCLS                 7
 #endif
 
 #ifndef BTA_HL_NUM_MDLS_PER_MDEP
-    #define BTA_HL_NUM_MDLS_PER_MDEP        4
+#define BTA_HL_NUM_MDLS_PER_MDEP        4
 #endif
 
 #ifndef BTA_HL_NUM_MDLS_PER_MCL
-    #define BTA_HL_NUM_MDLS_PER_MCL         10
+#define BTA_HL_NUM_MDLS_PER_MCL         10
 #endif
 
 #ifndef BTA_HL_NUM_DATA_TYPES
-    #define BTA_HL_NUM_DATA_TYPES            5   /* maximum number of data types can be supported
+#define BTA_HL_NUM_DATA_TYPES            5   /* maximum number of data types can be supported
     per MDEP ID */
 #endif
 
 #define BTA_HL_MCAP_RSP_TOUT            2    /* 2 seconds */
 
 #ifndef BTA_HL_CCH_NUM_FILTER_ELEMS
-    #define BTA_HL_CCH_NUM_FILTER_ELEMS     3
+#define BTA_HL_CCH_NUM_FILTER_ELEMS     3
 #endif
 
 #ifndef BTA_HL_NUM_SDP_CBACKS
-    #define BTA_HL_NUM_SDP_CBACKS           7
+#define BTA_HL_NUM_SDP_CBACKS           7
 #endif
 
 #ifndef BTA_HL_NUM_SDP_RECS
-    #define BTA_HL_NUM_SDP_RECS             5
+#define BTA_HL_NUM_SDP_RECS             5
 #endif
 
 #ifndef BTA_HL_NUM_SDP_MDEPS
-    #define BTA_HL_NUM_SDP_MDEPS            12
+#define BTA_HL_NUM_SDP_MDEPS            12
 #endif
 
 #ifndef BTA_HL_NUM_SVC_ELEMS
-    #define BTA_HL_NUM_SVC_ELEMS            2
+#define BTA_HL_NUM_SVC_ELEMS            2
 #endif
 
 #ifndef BTA_HL_NUM_PROTO_ELEMS
-    #define BTA_HL_NUM_PROTO_ELEMS          2
+#define BTA_HL_NUM_PROTO_ELEMS          2
 #endif
 
 #define BTA_HL_VERSION_01_00            0x0100
@@ -96,7 +96,7 @@
 #define BTA_HL_VAL_ARRY_SIZE            320
 
 #ifndef BTA_HL_NUM_MDL_CFGS
-    #define BTA_HL_NUM_MDL_CFGS             16    /* numer of MDL cfg saved in the persistent memory*/
+#define BTA_HL_NUM_MDL_CFGS             16    /* numer of MDL cfg saved in the persistent memory*/
 #endif
 
 #define BTA_HL_NUM_TIMERS               7
@@ -142,8 +142,7 @@ typedef uint8_t tBTA_HL_STATUS;
 typedef tMCA_HANDLE tBTA_HL_APP_HANDLE;
 typedef tMCA_CL     tBTA_HL_MCL_HANDLE;
 typedef tMCA_DL     tBTA_HL_MDL_HANDLE;
-enum
-{
+enum {
     BTA_HL_DEVICE_TYPE_SINK,
     BTA_HL_DEVICE_TYPE_SOURCE,
     BTA_HL_DEVICE_TYPE_DUAL
@@ -219,15 +218,13 @@ typedef uint8_t tBTA_HL_DCH_CREATE_RSP;
 
 typedef uint8_t tBTA_HL_SUP_PROC_MASK;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  max_rx_apdu_size;  /* local rcv MTU */
     uint16_t                  max_tx_apdu_size;  /* maximum TX APDU size*/
 } tBTA_HL_ECHO_CFG;
 
 
-typedef struct
-{
+typedef struct {
     uint16_t                  data_type;
     uint16_t                  max_rx_apdu_size;  /* local rcv MTU */
     uint16_t                  max_tx_apdu_size;  /* maximum TX APDU size*/
@@ -235,22 +232,19 @@ typedef struct
 } tBTA_HL_MDEP_DATA_TYPE_CFG;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDEP_ROLE           mdep_role;
     uint8_t                       num_of_mdep_data_types;
     tBTA_HL_MDEP_DATA_TYPE_CFG  data_cfg[BTA_HL_NUM_DATA_TYPES];
 } tBTA_HL_MDEP_CFG;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDEP_ID         mdep_id;  /* MDEP ID 0x01-0x7F */
     tBTA_HL_MDEP_CFG        mdep_cfg;
     uint8_t                   ori_app_id;
 } tBTA_HL_MDEP;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDEP            mdep[BTA_HL_NUM_MDEPS];
     tBTA_HL_ECHO_CFG        echo_cfg;
     tBTA_HL_MDEP_ROLE_MASK  app_role_mask;
@@ -258,15 +252,13 @@ typedef struct
     uint8_t                   num_of_mdeps;
 } tBTA_HL_SUP_FEATURE;
 
-typedef struct
-{
+typedef struct {
     uint8_t                 delete_req_pending;
     tBTA_HL_MDL_ID          mdl_id;
     tBTA_HL_MCL_HANDLE      mcl_handle;
 } tBTA_HL_DELETE_MDL;
 
-typedef struct
-{
+typedef struct {
     uint8_t                   time;
     uint16_t                  mtu;
     tBTA_HL_MDL_ID          mdl_id;
@@ -283,40 +275,37 @@ typedef struct
 #define BTA_HL_NUM_SUP_FEATURE_ELEMS     13
 #define BTA_HL_SUP_FEATURE_SDP_BUF_SIZE  512
 /* This structure is used to add supported feature lists and find supported feature elements */
-typedef struct
-{
+typedef struct {
     uint8_t       mdep_id;
     uint16_t      data_type;
     tBTA_HL_MDEP_ROLE       mdep_role;
     char        *p_mdep_desp;
 } tBTA_HL_SUP_FEATURE_ELEM;
 
-typedef struct
-{
+typedef struct {
     uint16_t                      num_elems;
     tBTA_HL_SUP_FEATURE_ELEM   list_elem[BTA_HL_NUM_SUP_FEATURE_ELEMS];
 } tBTA_HL_SUP_FEATURE_LIST_ELEM;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_DEVICE_TYPE     dev_type;           /* sink, source or dual roles */
     tBTA_SEC                sec_mask;           /* security mask for accepting conenction*/
     const char              *p_srv_name;        /* service name to be used in the SDP; null terminated*/
-    const char              *p_srv_desp;        /* service description to be used in the SDP; null terminated */
-    const char              *p_provider_name;   /* provide name to be used in the SDP; null terminated */
+    const char
+    *p_srv_desp;        /* service description to be used in the SDP; null terminated */
+    const char
+    *p_provider_name;   /* provide name to be used in the SDP; null terminated */
 } tBTA_HL_REG_PARAM;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  ctrl_psm;
     BD_ADDR                 bd_addr;           /* Address of peer device */
     tBTA_SEC                sec_mask;          /* security mask for initiating connection*/
 } tBTA_HL_CCH_OPEN_PARAM;
 
 
-typedef struct
-{
+typedef struct {
     uint16_t                  ctrl_psm;
     tBTA_HL_MDEP_ID         local_mdep_id;     /* local MDEP ID */
     tBTA_HL_MDEP_ID         peer_mdep_id;      /* peer mdep id */
@@ -325,44 +314,38 @@ typedef struct
 } tBTA_HL_DCH_OPEN_PARAM;
 
 
-typedef struct
-{
+typedef struct {
     uint16_t                  ctrl_psm;
     tBTA_HL_MDL_ID          mdl_id;
 } tBTA_HL_DCH_RECONNECT_PARAM;
 
 
-typedef struct
-{
+typedef struct {
     uint16_t                  ctrl_psm;
     uint16_t                  pkt_size;
     tBTA_HL_DCH_CFG         local_cfg;
 } tBTA_HL_DCH_ECHO_TEST_PARAM;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  buf_size;
     uint8_t                   p_buf;        /* buffer pointer */
 } tBTA_HL_DCH_BUF_INFO;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDEP_ID         local_mdep_id;  /* local MDEP ID */
     tBTA_HL_MDL_ID          mdl_id;
     tBTA_HL_DCH_CREATE_RSP  rsp_code;
     tBTA_HL_DCH_CFG         cfg_rsp;
 } tBTA_HL_DCH_CREATE_RSP_PARAM;
 
-typedef struct
-{
+typedef struct {
     uint16_t              data_type;
     uint8_t               mdep_id;
     tBTA_HL_MDEP_ROLE   mdep_role;
     char                mdep_desp[BTA_HL_MDEP_DESP_LEN + 1];
 } tBTA_HL_SDP_MDEP_CFG;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  ctrl_psm;
     uint16_t                  data_psm;
     uint8_t                   mcap_sup_proc;
@@ -373,15 +356,13 @@ typedef struct
     tBTA_HL_SDP_MDEP_CFG    mdep_cfg[BTA_HL_NUM_SDP_MDEPS];
 } tBTA_HL_SDP_REC;
 
-typedef struct
-{
+typedef struct {
     uint8_t                num_recs;
     tBTA_HL_SDP_REC      sdp_rec[BTA_HL_NUM_SDP_RECS];
 } tBTA_HL_SDP;
 
 /* HL control callback function events */
-enum
-{
+enum {
     BTA_HL_CTRL_ENABLE_CFM_EVT            = 0,
     BTA_HL_CTRL_DISABLE_CFM_EVT
 };
@@ -389,20 +370,17 @@ typedef uint8_t tBTA_HL_CTRL_EVT;
 /* Structure associated with BTA_HL_ENABLE_EVT
    BTA_HL_DISABLE_EVT */
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS  status;
 } tBTA_HL_CTRL_ENABLE_DISABLE;
 
-typedef union
-{
+typedef union {
     tBTA_HL_CTRL_ENABLE_DISABLE  enable_cfm;
     tBTA_HL_CTRL_ENABLE_DISABLE  disable_cfm;
 } tBTA_HL_CTRL;
 
 /* HL instance callback function events */
-enum
-{
+enum {
     BTA_HL_REGISTER_CFM_EVT           = 0,
     BTA_HL_DEREGISTER_CFM_EVT,
     BTA_HL_CCH_OPEN_IND_EVT,
@@ -431,52 +409,45 @@ enum
 typedef uint8_t tBTA_HL_EVT;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;        /* start status */
     uint8_t                   app_id;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_REGISTER_CFM;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;        /* start status */
     uint8_t                   app_id;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_DEREGISTER_CFM;
 
 
-typedef struct
-{
+typedef struct {
     uint8_t                 intentional;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_CCH_CLOSE_IND;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_MCL_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;             /* connection status */
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_MCL_CFM;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
     BD_ADDR                 bd_addr; /* address of peer device */
 } tBTA_HL_CCH_OPEN_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;             /* connection status */
     uint8_t                   app_id;
     tBTA_HL_MCL_HANDLE      mcl_handle;
@@ -484,8 +455,7 @@ typedef struct
     BD_ADDR                 bd_addr;            /* address of peer device */
 } tBTA_HL_CCH_OPEN_CFM;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
     tBTA_HL_MDEP_ID         local_mdep_id;
@@ -496,8 +466,7 @@ typedef struct
 
 } tBTA_HL_DCH_CREATE_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
@@ -510,8 +479,7 @@ typedef struct
     uint16_t                  mtu;
 } tBTA_HL_DCH_OPEN_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;             /* connection status */
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_MCL_HANDLE      mcl_handle;
@@ -525,8 +493,7 @@ typedef struct
 } tBTA_HL_DCH_OPEN_CFM;
 
 
-typedef struct
-{
+typedef struct {
     uint8_t                 intentional;
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_MCL_HANDLE      mcl_handle;
@@ -534,46 +501,40 @@ typedef struct
 } tBTA_HL_DCH_CLOSE_IND;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_MDL_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
 } tBTA_HL_MDL_CFM;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
     tBTA_HL_MDL_ID          mdl_id;
 } tBTA_HL_DELETE_MDL_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
     tBTA_HL_MDL_ID          mdl_id;
 } tBTA_HL_DELETE_MDL_CFM;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDL_HANDLE      mdl_handle;
     tBTA_HL_MCL_HANDLE      mcl_handle;
     tBTA_HL_APP_HANDLE      app_handle;
     uint8_t                 cong;
 } tBTA_HL_DCH_CONG_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_APP_HANDLE      app_handle;
     uint16_t                  ctrl_psm;
     uint16_t                  data_psm;
@@ -581,8 +542,7 @@ typedef struct
     uint8_t                   mcap_sup_procs;
 } tBTA_HL_SDP_INFO_IND;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_STATUS          status;
     uint8_t                   app_id;
     tBTA_HL_APP_HANDLE      app_handle;
@@ -590,8 +550,7 @@ typedef struct
     tBTA_HL_SDP             *p_sdp;
 } tBTA_HL_SDP_QUERY_CFM;
 
-typedef union
-{
+typedef union {
     tBTA_HL_REGISTER_CFM        reg_cfm;
     tBTA_HL_DEREGISTER_CFM      dereg_cfm;
     tBTA_HL_CCH_OPEN_IND        cch_open_ind;

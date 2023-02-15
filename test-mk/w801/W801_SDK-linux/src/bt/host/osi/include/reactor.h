@@ -30,8 +30,7 @@ typedef struct reactor_t reactor_t;
 typedef struct reactor_object_t reactor_object_t;
 
 // Enumerates the reasons a reactor has stopped.
-typedef enum
-{
+typedef enum {
     REACTOR_STATUS_STOP,     // |reactor_stop| was called.
     REACTOR_STATUS_ERROR,    // there was an error during the operation.
     REACTOR_STATUS_DONE,     // the reactor completed its work (for the _run_once* variants).

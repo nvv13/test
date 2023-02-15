@@ -9,6 +9,7 @@
 #define HTTP_CLIENT_STK_SIZE 1024
 static sys_mbox_t http_client_mbox = SYS_MBOX_NULL;
 static u32 *httpClientStk = NULL;
+static tls_os_task_t httpClientTaskHandle = NULL;
 #define    HTTP_CLIENT_BUFFER_SIZE   1024
 extern u8 pSession_flag;
 static UINT32  http_snd_req_local(
@@ -157,6 +158,11 @@ static void http_client_rx(void *sdata)
 int http_client_task_init(void)
 {
 	tls_os_status_t err = TLS_OS_SUCCESS;
+	if (http_client_mbox)
+	{
+		return WM_SUCCESS;
+	}
+
 	if(sys_mbox_new(&http_client_mbox, 32) != ERR_OK) 
 	{
           return WM_FAILED;
@@ -165,7 +171,7 @@ int http_client_task_init(void)
 	httpClientStk = (u32 *)tls_mem_alloc(HTTP_CLIENT_STK_SIZE * sizeof(u32));
 	if (httpClientStk)
 	{
-		err = tls_os_task_create(NULL, "httpc",
+		err = tls_os_task_create(&httpClientTaskHandle, "httpc",
 				http_client_rx,
 	                    NULL,
 	                    (void *)httpClientStk,              /* task's stack start address */
@@ -185,6 +191,30 @@ int http_client_task_init(void)
 	}
 	return WM_SUCCESS;
 }
+
+void http_client_task_free(void)
+{
+	if (httpClientStk)
+	{
+		tls_mem_free(httpClientStk);
+		httpClientStk = NULL;
+		if (http_client_mbox)
+		{
+			sys_mbox_free(&http_client_mbox);
+			http_client_mbox = SYS_MBOX_NULL;
+		}
+	}
+}
+
+int http_client_task_deinit(void)
+{
+	if (httpClientTaskHandle)
+	{
+		tls_os_task_del_by_task_handle(httpClientTaskHandle,http_client_task_free);
+	}
+	return 0;
+}
+
 
 int http_client_post(http_client_msg * msg)
 {
@@ -234,7 +264,14 @@ int http_client_post(http_client_msg * msg)
 		return HTTP_CLIENT_ERROR_INVALID_HANDLE;
     }
 	msg1->pSession = msg->pSession;
-	err = sys_mbox_trypost(&http_client_mbox, msg1);
+	if (WM_SUCCESS == http_client_task_init())
+	{
+		err = sys_mbox_trypost(&http_client_mbox, msg1);
+	}
+	else
+	{
+		err = ERR_MEM;
+	}
     //printf("post err=%d\n", err);
 	if(err != ERR_OK)
 	{

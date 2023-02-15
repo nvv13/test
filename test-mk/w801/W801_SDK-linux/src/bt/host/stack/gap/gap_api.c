@@ -36,8 +36,7 @@ tGAP_CB  gap_cb;
 *******************************************************************************/
 uint8_t GAP_SetTraceLevel(uint8_t new_level)
 {
-    if(new_level != 0xFF)
-    {
+    if(new_level != 0xFF) {
         gap_cb.trace_level = new_level;
     }
 
@@ -59,16 +58,16 @@ uint8_t GAP_SetTraceLevel(uint8_t new_level)
 void GAP_Init(void)
 {
     wm_memset(&gap_cb, 0, sizeof(tGAP_CB));
-    #if defined(GAP_INITIAL_TRACE_LEVEL)
+#if defined(GAP_INITIAL_TRACE_LEVEL)
     gap_cb.trace_level = GAP_INITIAL_TRACE_LEVEL;
-    #else
+#else
     gap_cb.trace_level = BT_TRACE_LEVEL_NONE;    /* No traces */
-    #endif
-    #if GAP_CONN_INCLUDED == TRUE
+#endif
+#if GAP_CONN_INCLUDED == TRUE
     gap_conn_init();
-    #endif
-    #if BLE_INCLUDED == TRUE
+#endif
+#if BLE_INCLUDED == TRUE
     gap_attr_db_init();
-    #endif
+#endif
 }
 

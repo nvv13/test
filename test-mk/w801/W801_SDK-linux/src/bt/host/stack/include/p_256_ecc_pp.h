@@ -28,15 +28,13 @@
 
 typedef unsigned long  DWORD;
 
-typedef struct
-{
+typedef struct {
     DWORD x[KEY_LENGTH_DWORDS_P256];
     DWORD y[KEY_LENGTH_DWORDS_P256];
     DWORD z[KEY_LENGTH_DWORDS_P256];
 } Point;
 
-typedef struct
-{
+typedef struct {
     // curve's coefficients
     DWORD a[KEY_LENGTH_DWORDS_P256];
     DWORD b[KEY_LENGTH_DWORDS_P256];
@@ -56,7 +54,9 @@ typedef struct
 } elliptic_curve_t;
 
 #ifndef OS_MEMCPY
+#ifndef wm_memcpy
 #define wm_memcpy(dst, src, len)    memcpy(dst,src,len)
+#endif
 #endif
 
 #ifndef OS_MEMSET

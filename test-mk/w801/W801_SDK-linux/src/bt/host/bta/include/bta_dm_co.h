@@ -28,7 +28,7 @@
 
 
 #ifndef BTA_SCO_OUT_PKT_SIZE
-    #define BTA_SCO_OUT_PKT_SIZE    BTM_SCO_DATA_SIZE_MAX
+#define BTA_SCO_OUT_PKT_SIZE    BTM_SCO_DATA_SIZE_MAX
 #endif
 
 #define BTA_SCO_CODEC_PCM       0       /* used for regular SCO */
@@ -39,8 +39,7 @@ typedef uint8_t   tBTA_SCO_CODEC_TYPE;
 #define BTA_DM_SCO_SAMP_RATE_16K    16000
 
 /* SCO codec information */
-typedef struct
-{
+typedef struct {
     tBTA_SCO_CODEC_TYPE   codec_type;
 } tBTA_CODEC_INFO;
 

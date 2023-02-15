@@ -33,8 +33,7 @@
 
 #define BTIF_GATTS_MAX_SRV_CHG_CLT_SIZE 50
 
-typedef struct
-{
+typedef struct {
     uint8_t             enable;
     uint8_t               num_clients;
     tBTA_GATTS_SRV_CHG  srv_chg[BTIF_GATTS_MAX_SRV_CHG_CLT_SIZE];
@@ -54,8 +53,7 @@ static void btif_gatts_check_init(void)
 {
     btif_gatts_srv_chg_cb_t *p_cb = &btif_gatts_srv_chg_cb;
 
-    if(!p_cb->enable)
-    {
+    if(!p_cb->enable) {
         wm_memset(p_cb, 0, sizeof(btif_gatts_srv_chg_cb_t));
         p_cb->enable = TRUE;
     }
@@ -72,19 +70,15 @@ void btif_gatts_add_bonded_dev_from_nv(BD_ADDR bda)
     uint8_t                   i;
     btif_gatts_check_init();
 
-    for(i = 0; i != p_cb->num_clients; ++i)
-    {
-        if(!memcmp(p_cb->srv_chg[i].bda,  bda, sizeof(BD_ADDR)))
-        {
+    for(i = 0; i != p_cb->num_clients; ++i) {
+        if(!memcmp(p_cb->srv_chg[i].bda,  bda, sizeof(BD_ADDR))) {
             found = TRUE;
             break;
         }
     }
 
-    if(!found)
-    {
-        if(p_cb->num_clients < BTIF_GATTS_MAX_SRV_CHG_CLT_SIZE)
-        {
+    if(!found) {
+        if(p_cb->num_clients < BTIF_GATTS_MAX_SRV_CHG_CLT_SIZE) {
             bdcpy(p_cb->srv_chg[p_cb->num_clients].bda, bda);
             p_cb->srv_chg[p_cb->num_clients].srv_changed = FALSE;
             p_cb->num_clients++;

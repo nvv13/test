@@ -4,14 +4,12 @@
 #include "osi/include/osi.h"
 #include "gki.h"
 
-struct list_node_t
-{
+struct list_node_t {
     struct list_node_t *next;
     void *data;
 };
 
-typedef struct list_t
-{
+typedef struct list_t {
     list_node_t *head;
     list_node_t *tail;
     size_t length;
@@ -26,8 +24,7 @@ list_t *list_new_internal(list_free_cb callback)
 {
     list_t *list = (list_t *)GKI_getbuf(sizeof(list_t));
 
-    if(!list)
-    {
+    if(!list) {
         assert(0);
         return NULL;
     }
@@ -44,8 +41,7 @@ list_t *list_new(list_free_cb callback)
 
 void list_free(list_t *list)
 {
-    if(!list)
-    {
+    if(!list) {
         return;
     }
 
@@ -64,10 +60,8 @@ uint8_t list_contains(const list_t *list, const void *data)
     assert(list != NULL);
     assert(data != NULL);
 
-    for(const list_node_t *node = list_begin(list); node != list_end(list); node = list_next(node))
-    {
-        if(list_node(node) == data)
-        {
+    for(const list_node_t *node = list_begin(list); node != list_end(list); node = list_next(node)) {
+        if(list_node(node) == data) {
             return true;
         }
     }
@@ -109,8 +103,7 @@ uint8_t list_insert_after(list_t *list, list_node_t *prev_node, void *data)
     assert(data != NULL);
     list_node_t *node = (list_node_t *)GKI_getbuf(sizeof(list_node_t));
 
-    if(!node)
-    {
+    if(!node) {
         assert(0);
         return false;
     }
@@ -119,8 +112,7 @@ uint8_t list_insert_after(list_t *list, list_node_t *prev_node, void *data)
     node->data = data;
     prev_node->next = node;
 
-    if(list->tail == prev_node)
-    {
+    if(list->tail == prev_node) {
         list->tail = node;
     }
 
@@ -134,8 +126,7 @@ uint8_t list_prepend(list_t *list, void *data)
     assert(data != NULL);
     list_node_t *node = (list_node_t *)GKI_getbuf(sizeof(list_node_t));
 
-    if(!node)
-    {
+    if(!node) {
         assert(0);
         return false;
     }
@@ -144,8 +135,7 @@ uint8_t list_prepend(list_t *list, void *data)
     node->data = data;
     list->head = node;
 
-    if(list->tail == NULL)
-    {
+    if(list->tail == NULL) {
         list->tail = list->head;
     }
 
@@ -159,8 +149,7 @@ uint8_t list_append(list_t *list, void *data)
     assert(data != NULL);
     list_node_t *node = (list_node_t *)GKI_getbuf(sizeof(list_node_t));
 
-    if(!node)
-    {
+    if(!node) {
         assert(0);
         return false;
     }
@@ -168,13 +157,10 @@ uint8_t list_append(list_t *list, void *data)
     node->next = NULL;
     node->data = data;
 
-    if(list->tail == NULL)
-    {
+    if(list->tail == NULL) {
         list->head = node;
         list->tail = node;
-    }
-    else
-    {
+    } else {
         list->tail->next = node;
         list->tail = node;
     }
@@ -189,22 +175,18 @@ uint8_t list_remove(list_t *list, void *data)
     assert(data != NULL);
     list_node_t *prev, *node;
 
-    if(list_is_empty(list))
-    {
+    if(list_is_empty(list)) {
         return false;
     }
 
-    if(list->head->data == data)
-    {
-        if(list->head == NULL)
-        {
+    if(list->head->data == data) {
+        if(list->head == NULL) {
             assert(0);
         }
 
         list_node_t *next = list_free_node_(list, list->head);
 
-        if(list->tail == list->head)
-        {
+        if(list->tail == list->head) {
             list->tail = next;
         }
 
@@ -215,24 +197,19 @@ uint8_t list_remove(list_t *list, void *data)
     prev = list->head;
     node = list->head->next;
 
-    for(; node; prev = node, node = node->next)
-    {
-        if(node == NULL)
-        {
+    for(; node; prev = node, node = node->next) {
+        if(node == NULL) {
             assert(0);
         }
 
-        if(node->data == data)
-        {
-            if(node == NULL)
-            {
+        if(node->data == data) {
+            if(node == NULL) {
                 assert(0);
             }
 
             prev->next = list_free_node_(list, node);
 
-            if(list->tail == node)
-            {
+            if(list->tail == node) {
                 list->tail = prev;
             }
 
@@ -247,10 +224,8 @@ void list_clear(list_t *list)
 {
     assert(list != NULL);
 
-    for(list_node_t *node = list->head; node;)
-    {
-        if(node == NULL)
-        {
+    for(list_node_t *node = list->head; node;) {
+        if(node == NULL) {
             assert(0);
         }
 
@@ -267,12 +242,10 @@ list_node_t *list_foreach(const list_t *list, list_iter_cb callback, void *conte
     assert(list != NULL);
     assert(callback != NULL);
 
-    for(list_node_t *node = list->head; node;)
-    {
+    for(list_node_t *node = list->head; node;) {
         list_node_t *next = node->next;
 
-        if(!callback(node->data, context))
-        {
+        if(!callback(node->data, context)) {
             return node;
         }
 
@@ -312,8 +285,7 @@ static list_node_t *list_free_node_(list_t *list, list_node_t *node)
     assert(node != NULL);
     list_node_t *next = node->next;
 
-    if(list->free_cb)
-    {
+    if(list->free_cb) {
         list->free_cb(node->data);
     }
 

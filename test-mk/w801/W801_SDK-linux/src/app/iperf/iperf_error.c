@@ -15,15 +15,19 @@
 #include "iperf_error.h"
 
 int i_errno;
-
+#define ERR_STRING_MAX_LEN (256)
+char *errstr = NULL;
 char *
 iperf_strerror(int i_errno)
 {
-    static char errstr[256];
+//    static char errstr[ERR_STRING_MAX_LEN];
     int len, perr, herr;
     perr = herr = 0;
-
-    len = sizeof(errstr);
+	if (NULL == errstr)
+	{
+		return NULL;
+	}
+    len = ERR_STRING_MAX_LEN;
     memset(errstr, 0, len);
 
     switch (i_errno) {
@@ -238,7 +242,13 @@ iperf_strerror(int i_errno)
 void
 iperf_error(char *estr)
 {
-    printf("%s: %s\n", estr, iperf_strerror(i_errno));
+	errstr = malloc(ERR_STRING_MAX_LEN);
+	if (errstr)
+	{
+	    printf("%s: %s\n", estr, iperf_strerror(i_errno));
+		free(errstr);
+		errstr = NULL;
+	}
 }
 
 /*

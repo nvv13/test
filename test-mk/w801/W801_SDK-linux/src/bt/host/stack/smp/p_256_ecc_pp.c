@@ -53,8 +53,7 @@ static void ECC_Double(Point *q, Point *p, uint32_t keyLength)
     DWORD *z1;
     DWORD *z3;
 
-    if(multiprecision_iszero(p->z, keyLength))
-    {
+    if(multiprecision_iszero(p->z, keyLength)) {
         multiprecision_init(q->z, keyLength);
         return;                                     // return infinity
     }
@@ -112,15 +111,13 @@ static void ECC_Add(Point *r, Point *p, Point *q, uint32_t keyLength)
     z3 = r->z;
 
     // if Q=infinity, return p
-    if(multiprecision_iszero(z2, keyLength))
-    {
+    if(multiprecision_iszero(z2, keyLength)) {
         p_256_copy_point(r, p);
         return;
     }
 
     // if P=infinity, return q
-    if(multiprecision_iszero(z1, keyLength))
-    {
+    if(multiprecision_iszero(z1, keyLength)) {
         p_256_copy_point(r, q);
         return;
     }
@@ -132,15 +129,11 @@ static void ECC_Add(Point *r, Point *p, Point *q, uint32_t keyLength)
     multiprecision_sub_mod(t1, t1, x1, keyLength);   // t1=t1-x1
     multiprecision_sub_mod(t2, t2, y1, keyLength);   // t2=t2-y1
 
-    if(multiprecision_iszero(t1, keyLength))
-    {
-        if(multiprecision_iszero(t2, keyLength))
-        {
+    if(multiprecision_iszero(t1, keyLength)) {
+        if(multiprecision_iszero(t2, keyLength)) {
             ECC_Double(r, q, keyLength) ;
             return;
-        }
-        else
-        {
+        } else {
             multiprecision_init(z3, keyLength);
             return;                             // return infinity
         }
@@ -168,34 +161,25 @@ static void ECC_NAF(uint8_t *naf, uint32_t *NumNAF, DWORD *k, uint32_t keyLength
     int j;
     uint32_t var;
 
-    while((var = multiprecision_most_signbits(k, keyLength)) >= 1)
-    {
-        if(k[0] & 0x01)   // k is odd
-        {
+    while((var = multiprecision_most_signbits(k, keyLength)) >= 1) {
+        if(k[0] & 0x01) { // k is odd
             sign = (k[0] & 0x03);   // 1 or 3
 
             // k = k-naf[i]
-            if(sign == 1)
-            {
+            if(sign == 1) {
                 k[0] = k[0] & 0xFFFFFFFE;
-            }
-            else
-            {
+            } else {
                 k[0] = k[0] + 1;
 
-                if(k[0] == 0)   //overflow
-                {
+                if(k[0] == 0) { //overflow
                     j = 1;
 
-                    do
-                    {
+                    do {
                         k[j]++;
                     } while(k[j++] == 0);   //overflow
                 }
             }
-        }
-        else
-        {
+        } else {
             sign = 0;
         }
 
@@ -217,12 +201,9 @@ void ECC_PointMult_Bin_NAF(Point *q, Point *p, DWORD *n, uint32_t keyLength)
     Point r;
     DWORD *modp;
 
-    if(keyLength == KEY_LENGTH_DWORDS_P256)
-    {
+    if(keyLength == KEY_LENGTH_DWORDS_P256) {
         modp = curve_p256.p;
-    }
-    else
-    {
+    } else {
         modp = curve.p;
     }
 
@@ -240,23 +221,18 @@ void ECC_PointMult_Bin_NAF(Point *q, Point *p, DWORD *n, uint32_t keyLength)
     wm_memset(naf, 0, sizeof(naf));
     ECC_NAF(naf, &NumNaf, n, keyLength);
 
-    for(int i = NumNaf - 1; i >= 0; i--)
-    {
+    for(int i = NumNaf - 1; i >= 0; i--) {
         p_256_copy_point(&r, q);
         ECC_Double(q, &r, keyLength);
         sign = (naf[i / 4] >> ((i % 4) * 2)) & 0x03;
 
-        if(sign == 1)
-        {
+        if(sign == 1) {
             p_256_copy_point(&r, q);
             ECC_Add(q, &r, p, keyLength);
+        } else if(sign == 3) {
+            p_256_copy_point(&r, q);
+            ECC_Add(q, &r, &minus_p, keyLength);
         }
-        else
-            if(sign == 3)
-            {
-                p_256_copy_point(&r, q);
-                ECC_Add(q, &r, &minus_p, keyLength);
-            }
     }
 
     multiprecision_inv_mod(minus_p.x, q->z, keyLength);

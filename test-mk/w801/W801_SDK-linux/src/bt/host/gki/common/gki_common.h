@@ -56,8 +56,7 @@
 **  Buffer Management Data Structures
 *********************************************************************/
 
-typedef struct _buffer_hdr
-{
+typedef struct _buffer_hdr {
     struct _buffer_hdr *p_next;   /* next buffer in the queue */
     uint8_t   q_id;                 /* id of the queue */
     uint8_t   task_id;              /* task which allocated the buffer*/
@@ -65,8 +64,7 @@ typedef struct _buffer_hdr
     uint8_t   Type;
 } BUFFER_HDR_T;
 
-typedef struct _free_queue
-{
+typedef struct _free_queue {
     BUFFER_HDR_T *p_first;      /* first buffer in the queue */
     BUFFER_HDR_T *p_last;       /* last buffer in the queue */
     uint16_t         size;          /* size of the buffers in the pool */
@@ -95,8 +93,7 @@ typedef struct _free_queue
 /* Exception related structures (Used in debug mode only)
 */
 #if (GKI_DEBUG == TRUE)
-typedef struct
-{
+typedef struct {
     uint16_t  type;
     uint8_t   taskid;
     uint8_t   msg[GKI_MAX_EXCEPTION_MSGLEN];
@@ -106,146 +103,145 @@ typedef struct
 
 /* Put all GKI variables into one control block
 */
-typedef struct
-{
+typedef struct {
     /* Task management variables
     */
     /* The stack and stack size are not used on Windows
     */
     // btla-specific ++
-    #if (!defined GKI_USE_DEFERED_ALLOC_BUF_POOLS && (GKI_USE_DYNAMIC_BUFFERS == FALSE))
+#if (!defined GKI_USE_DEFERED_ALLOC_BUF_POOLS && (GKI_USE_DYNAMIC_BUFFERS == FALSE))
     // btla-specific --
-    #if (GKI_NUM_FIXED_BUF_POOLS > 0)
+#if (GKI_NUM_FIXED_BUF_POOLS > 0)
     uint8_t bufpool0[(ALIGN_POOL(GKI_BUF0_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF0_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 1)
+#if (GKI_NUM_FIXED_BUF_POOLS > 1)
     uint8_t bufpool1[(ALIGN_POOL(GKI_BUF1_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF1_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 2)
+#if (GKI_NUM_FIXED_BUF_POOLS > 2)
     uint8_t bufpool2[(ALIGN_POOL(GKI_BUF2_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF2_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 3)
+#if (GKI_NUM_FIXED_BUF_POOLS > 3)
     uint8_t bufpool3[(ALIGN_POOL(GKI_BUF3_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF3_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 4)
+#if (GKI_NUM_FIXED_BUF_POOLS > 4)
     uint8_t bufpool4[(ALIGN_POOL(GKI_BUF4_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF4_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 5)
+#if (GKI_NUM_FIXED_BUF_POOLS > 5)
     uint8_t bufpool5[(ALIGN_POOL(GKI_BUF5_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF5_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 6)
+#if (GKI_NUM_FIXED_BUF_POOLS > 6)
     uint8_t bufpool6[(ALIGN_POOL(GKI_BUF6_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF6_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 7)
+#if (GKI_NUM_FIXED_BUF_POOLS > 7)
     uint8_t bufpool7[(ALIGN_POOL(GKI_BUF7_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF7_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 8)
+#if (GKI_NUM_FIXED_BUF_POOLS > 8)
     uint8_t bufpool8[(ALIGN_POOL(GKI_BUF8_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF8_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 9)
+#if (GKI_NUM_FIXED_BUF_POOLS > 9)
     uint8_t bufpool9[(ALIGN_POOL(GKI_BUF9_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF9_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 10)
+#if (GKI_NUM_FIXED_BUF_POOLS > 10)
     uint8_t bufpool10[(ALIGN_POOL(GKI_BUF10_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF10_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 11)
+#if (GKI_NUM_FIXED_BUF_POOLS > 11)
     uint8_t bufpool11[(ALIGN_POOL(GKI_BUF11_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF11_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 12)
+#if (GKI_NUM_FIXED_BUF_POOLS > 12)
     uint8_t bufpool12[(ALIGN_POOL(GKI_BUF12_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF12_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 13)
+#if (GKI_NUM_FIXED_BUF_POOLS > 13)
     uint8_t bufpool13[(ALIGN_POOL(GKI_BUF13_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF13_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 14)
+#if (GKI_NUM_FIXED_BUF_POOLS > 14)
     uint8_t bufpool14[(ALIGN_POOL(GKI_BUF14_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF14_MAX];
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 15)
+#if (GKI_NUM_FIXED_BUF_POOLS > 15)
     uint8_t bufpool15[(ALIGN_POOL(GKI_BUF15_SIZE) + BUFFER_PADDING_SIZE) * GKI_BUF15_MAX];
-    #endif
+#endif
 
-    #else
+#else
     /* Definitions for dynamic buffer use */
-    #if (GKI_NUM_FIXED_BUF_POOLS > 0)
+#if (GKI_NUM_FIXED_BUF_POOLS > 0)
     uint8_t *bufpool0;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 1)
+#if (GKI_NUM_FIXED_BUF_POOLS > 1)
     uint8_t *bufpool1;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 2)
+#if (GKI_NUM_FIXED_BUF_POOLS > 2)
     uint8_t *bufpool2;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 3)
+#if (GKI_NUM_FIXED_BUF_POOLS > 3)
     uint8_t *bufpool3;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 4)
+#if (GKI_NUM_FIXED_BUF_POOLS > 4)
     uint8_t *bufpool4;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 5)
+#if (GKI_NUM_FIXED_BUF_POOLS > 5)
     uint8_t *bufpool5;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 6)
+#if (GKI_NUM_FIXED_BUF_POOLS > 6)
     uint8_t *bufpool6;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 7)
+#if (GKI_NUM_FIXED_BUF_POOLS > 7)
     uint8_t *bufpool7;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 8)
+#if (GKI_NUM_FIXED_BUF_POOLS > 8)
     uint8_t *bufpool8;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 9)
+#if (GKI_NUM_FIXED_BUF_POOLS > 9)
     uint8_t *bufpool9;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 10)
+#if (GKI_NUM_FIXED_BUF_POOLS > 10)
     uint8_t *bufpool10;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 11)
+#if (GKI_NUM_FIXED_BUF_POOLS > 11)
     uint8_t *bufpool11;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 12)
+#if (GKI_NUM_FIXED_BUF_POOLS > 12)
     uint8_t *bufpool12;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 13)
+#if (GKI_NUM_FIXED_BUF_POOLS > 13)
     uint8_t *bufpool13;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 14)
+#if (GKI_NUM_FIXED_BUF_POOLS > 14)
     uint8_t *bufpool14;
-    #endif
+#endif
 
-    #if (GKI_NUM_FIXED_BUF_POOLS > 15)
+#if (GKI_NUM_FIXED_BUF_POOLS > 15)
     uint8_t *bufpool15;
-    #endif
+#endif
 
-    #endif
+#endif
 
     uint8_t  *OSStack[GKI_MAX_TASKS];         /* pointer to beginning of stack */
     uint16_t  OSStackSize[GKI_MAX_TASKS];     /* stack size available to each task */
@@ -271,32 +267,34 @@ typedef struct
     int32_t   OSWaitTmr   [GKI_MAX_TASKS];  /* ticks the task has to wait, for specific events */
 
     /* Only take up space timers used in the system (GKI_NUM_TIMERS defined in target.h) */
-    #if (GKI_NUM_TIMERS > 0)
+#if (GKI_NUM_TIMERS > 0)
     int32_t   OSTaskTmr0  [GKI_MAX_TASKS];
     int32_t   OSTaskTmr0R [GKI_MAX_TASKS];
-    #endif
+#endif
 
-    #if (GKI_NUM_TIMERS > 1)
+#if (GKI_NUM_TIMERS > 1)
     int32_t   OSTaskTmr1  [GKI_MAX_TASKS];
     int32_t   OSTaskTmr1R [GKI_MAX_TASKS];
-    #endif
+#endif
 
-    #if (GKI_NUM_TIMERS > 2)
+#if (GKI_NUM_TIMERS > 2)
     int32_t   OSTaskTmr2  [GKI_MAX_TASKS];
     int32_t   OSTaskTmr2R [GKI_MAX_TASKS];
-    #endif
+#endif
 
-    #if (GKI_NUM_TIMERS > 3)
+#if (GKI_NUM_TIMERS > 3)
     int32_t   OSTaskTmr3  [GKI_MAX_TASKS];
     int32_t   OSTaskTmr3R [GKI_MAX_TASKS];
-    #endif
+#endif
 
 
 
     /* Buffer related variables
     */
-    BUFFER_HDR_T    *OSTaskQFirst[GKI_MAX_TASKS][NUM_TASK_MBOX]; /* array of pointers to the first event in the task mailbox */
-    BUFFER_HDR_T    *OSTaskQLast [GKI_MAX_TASKS][NUM_TASK_MBOX]; /* array of pointers to the last event in the task mailbox */
+    BUFFER_HDR_T
+    *OSTaskQFirst[GKI_MAX_TASKS][NUM_TASK_MBOX]; /* array of pointers to the first event in the task mailbox */
+    BUFFER_HDR_T
+    *OSTaskQLast [GKI_MAX_TASKS][NUM_TASK_MBOX]; /* array of pointers to the last event in the task mailbox */
 
     /* Define the buffer pool management variables
     */
@@ -314,16 +312,18 @@ typedef struct
 
     /* Define the buffer pool access control variables */
     void        *p_user_mempool;                    /* User O/S memory pool */
-    uint16_t      pool_access_mask;                   /* Bits are set if the corresponding buffer pool is a restricted pool */
+    uint16_t
+    pool_access_mask;                   /* Bits are set if the corresponding buffer pool is a restricted pool */
     uint8_t       pool_list[GKI_NUM_TOTAL_BUF_POOLS]; /* buffer pools arranged in the order of size */
-    uint8_t       curr_total_no_of_pools;             /* number of fixed buf pools + current number of dynamic pools */
+    uint8_t
+    curr_total_no_of_pools;             /* number of fixed buf pools + current number of dynamic pools */
 
     uint8_t     timer_nesting;                      /* flag to prevent timer interrupt nesting */
 
-    #if (GKI_DEBUG == TRUE)
+#if (GKI_DEBUG == TRUE)
     uint16_t      ExceptionCnt;                       /* number of GKI exceptions that have happened */
     EXCEPTION_T Exception[GKI_MAX_EXCEPTION];
-    #endif
+#endif
 
 } tGKI_COM_CB;
 

@@ -277,8 +277,8 @@
 #define UUID_SERVCLASS_TEST_SERVER              0x9000      /* Test Group UUID */
 
 #if (BTM_WBS_INCLUDED == TRUE )
-    #define UUID_CODEC_CVSD                         0x0001   /* CVSD */
-    #define UUID_CODEC_MSBC                         0x0002   /* mSBC */
+#define UUID_CODEC_CVSD                         0x0001   /* CVSD */
+#define UUID_CODEC_MSBC                         0x0002   /* mSBC */
 #endif
 
 /* Define all the 'Descriptor Type' values.

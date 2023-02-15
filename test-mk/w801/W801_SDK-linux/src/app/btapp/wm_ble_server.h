@@ -83,10 +83,9 @@ typedef void (*wm_ble_server_congestion_callback)(int conn_id, uint8_t congested
 typedef void (*wm_ble_server_mtu_changed_callback)(int conn_id, int mtu);
 
 
-typedef struct
-{
+typedef struct {
     wm_ble_server_register_server_callback        register_server_cb;
-	wm_ble_server_deregister_server_callback      deregister_server_cb;
+    wm_ble_server_deregister_server_callback      deregister_server_cb;
     wm_ble_server_connection_callback             connection_cb;
     wm_ble_server_service_added_callback          service_added_cb;
     wm_ble_server_included_service_added_callback included_service_added_cb;

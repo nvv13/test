@@ -51,8 +51,7 @@ typedef uint8_t tBTA_SDP_STATUS;
 typedef uint16_t tBTA_SDP_EVT;
 
 /* data associated with BTA_SDP_DISCOVERY_COMP_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_SDP_STATUS      status;
     BD_ADDR              remote_addr;
     tBT_UUID             uuid;
@@ -60,8 +59,7 @@ typedef struct
     bluetooth_sdp_record records[BTA_SDP_MAX_RECORDS];
 } tBTA_SDP_SEARCH_COMP;
 
-typedef union
-{
+typedef union {
     tBTA_SDP_STATUS              status;            /* BTA_SDP_SEARCH_EVT */
     tBTA_SDP_SEARCH_COMP         sdp_search_comp;   /* BTA_SDP_SEARCH_COMP_EVT */
 } tBTA_SDP;
@@ -70,8 +68,7 @@ typedef union
 typedef void (tBTA_SDP_DM_CBACK)(tBTA_SDP_EVT event, tBTA_SDP *p_data, void *user_data);
 
 /* MCE configuration structure */
-typedef struct
-{
+typedef struct {
     uint16_t  sdp_db_size;            /* The size of p_sdp_db */
     tSDP_DISCOVERY_DB   *p_sdp_db;  /* The data buffer to keep SDP database */
 } tBTA_SDP_CFG;

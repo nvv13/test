@@ -67,8 +67,7 @@ void mca_ccb_rsp_tout(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
 *******************************************************************************/
 void mca_ccb_report_event(tMCA_CCB *p_ccb, uint8_t event, tMCA_CTRL *p_data)
 {
-    if(p_ccb && p_ccb->p_rcb && p_ccb->p_rcb->p_cback)
-    {
+    if(p_ccb && p_ccb->p_rcb && p_ccb->p_rcb->p_cback) {
         (*p_ccb->p_rcb->p_cback)(mca_rcb_to_handle(p_ccb->p_rcb), mca_ccb_to_hdl(p_ccb), event, p_data);
     }
 }
@@ -106,8 +105,7 @@ void mca_ccb_snd_req(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     MCA_TRACE_DEBUG("mca_ccb_snd_req cong=%d req=%d", p_ccb->cong, p_msg->op_code);
 
     /* check for abort request */
-    if((p_ccb->status == MCA_CCB_STAT_PENDING) && (p_msg->op_code == MCA_OP_MDL_ABORT_REQ))
-    {
+    if((p_ccb->status == MCA_CCB_STAT_PENDING) && (p_msg->op_code == MCA_OP_MDL_ABORT_REQ)) {
         p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx);
         /* the Abort API does not have the associated mdl_id.
          * Get the mdl_id in dcb to compose the request */
@@ -119,20 +117,17 @@ void mca_ccb_snd_req(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     }
 
     /* no pending outgoing messages or it's an abort request for a pending data channel */
-    if((!p_ccb->p_tx_req) || is_abort)
-    {
+    if((!p_ccb->p_tx_req) || is_abort) {
         p_ccb->p_tx_req = p_msg;
 
-        if(!p_ccb->cong)
-        {
+        if(!p_ccb->cong) {
             BT_HDR *p_pkt = (BT_HDR *)GKI_getbuf(MCA_CTRL_MTU);
             p_pkt->offset = L2CAP_MIN_OFFSET;
             p = p_start = (uint8_t *)(p_pkt + 1) + L2CAP_MIN_OFFSET;
             *p++ = p_msg->op_code;
             UINT16_TO_BE_STREAM(p, p_msg->mdl_id);
 
-            if(p_msg->op_code == MCA_OP_MDL_CREATE_REQ)
-            {
+            if(p_msg->op_code == MCA_OP_MDL_CREATE_REQ) {
                 *p++ = p_msg->mdep_id;
                 *p++ = p_msg->param;
             }
@@ -147,9 +142,7 @@ void mca_ccb_snd_req(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
         }
 
         /* else the L2CAP channel is congested. keep the message to be sent later */
-    }
-    else
-    {
+    } else {
         MCA_TRACE_WARNING("dropping api req");
         GKI_freebuf(p_data);
     }
@@ -179,19 +172,14 @@ void mca_ccb_snd_rsp(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     *p++ = p_msg->rsp_code;
     UINT16_TO_BE_STREAM(p, p_msg->mdl_id);
 
-    if(p_msg->op_code == MCA_OP_MDL_CREATE_RSP)
-    {
+    if(p_msg->op_code == MCA_OP_MDL_CREATE_RSP) {
         *p++ = p_msg->param;
         chk_mdl = TRUE;
+    } else if(p_msg->op_code == MCA_OP_MDL_RECONNECT_RSP) {
+        chk_mdl = TRUE;
     }
-    else
-        if(p_msg->op_code == MCA_OP_MDL_RECONNECT_RSP)
-        {
-            chk_mdl = TRUE;
-        }
 
-    if(chk_mdl && p_msg->rsp_code == MCA_RSP_SUCCESS)
-    {
+    if(chk_mdl && p_msg->rsp_code == MCA_RSP_SUCCESS) {
         mca_dcb_by_hdl(p_msg->dcb_idx);
         BTM_SetSecurityLevel(FALSE, "", BTM_SEC_SERVICE_MCAP_DATA,
                              p_ccb->sec_mask,
@@ -240,11 +228,9 @@ void mca_ccb_cong(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     MCA_TRACE_DEBUG("mca_ccb_cong cong=%d/%d", p_ccb->cong, p_data->llcong);
     p_ccb->cong = p_data->llcong;
 
-    if(!p_ccb->cong)
-    {
+    if(!p_ccb->cong) {
         /* if there's a held packet, send it now */
-        if(p_ccb->p_tx_req && !p_ccb->p_tx_req->hdr.layer_specific)
-        {
+        if(p_ccb->p_tx_req && !p_ccb->p_tx_req->hdr.layer_specific) {
             p_data = (tMCA_CCB_EVT *)p_ccb->p_tx_req;
             p_ccb->p_tx_req = NULL;
             mca_ccb_snd_req(p_ccb, p_data);
@@ -282,130 +268,97 @@ void mca_ccb_hdl_req(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     reject_opcode = evt_data.hdr.op_code + 1;
     MCA_TRACE_DEBUG("received mdl id: %d ", evt_data.hdr.mdl_id);
 
-    if(p_ccb->status == MCA_CCB_STAT_PENDING)
-    {
+    if(p_ccb->status == MCA_CCB_STAT_PENDING) {
         MCA_TRACE_DEBUG("received req inpending state");
 
         /* allow abort in pending state */
-        if((p_ccb->status == MCA_CCB_STAT_PENDING) && (evt_data.hdr.op_code == MCA_OP_MDL_ABORT_REQ))
-        {
+        if((p_ccb->status == MCA_CCB_STAT_PENDING) && (evt_data.hdr.op_code == MCA_OP_MDL_ABORT_REQ)) {
             reject_code = MCA_RSP_SUCCESS;
             send_rsp = TRUE;
             /* clear the pending status */
             p_ccb->status = MCA_CCB_STAT_NORM;
 
-            if(p_ccb->p_tx_req && ((p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx)) != NULL))
-            {
+            if(p_ccb->p_tx_req && ((p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx)) != NULL)) {
                 mca_dcb_dealloc(p_dcb, NULL);
                 GKI_free_and_reset_buf((void **)&p_ccb->p_tx_req);
             }
-        }
-        else
-        {
+        } else {
             reject_code = MCA_RSP_BAD_OP;
         }
-    }
-    else
-        if(p_ccb->p_rx_msg)
-        {
-            MCA_TRACE_DEBUG("still handling prev req");
-            /* still holding previous message, reject this new one ?? */
-        }
-        else
-            if(p_ccb->p_tx_req)
-            {
-                MCA_TRACE_DEBUG("still waiting for a response ctrl_vpsm:0x%x", p_ccb->ctrl_vpsm);
+    } else if(p_ccb->p_rx_msg) {
+        MCA_TRACE_DEBUG("still handling prev req");
+        /* still holding previous message, reject this new one ?? */
+    } else if(p_ccb->p_tx_req) {
+        MCA_TRACE_DEBUG("still waiting for a response ctrl_vpsm:0x%x", p_ccb->ctrl_vpsm);
 
-                /* sent a request; waiting for response */
-                if(p_ccb->ctrl_vpsm == 0)
-                {
-                    MCA_TRACE_DEBUG("local is ACP. accept the cmd from INT");
-                    /* local is acceptor, need to handle the request */
-                    check_req = TRUE;
-                    reject_code = MCA_RSP_SUCCESS;
+        /* sent a request; waiting for response */
+        if(p_ccb->ctrl_vpsm == 0) {
+            MCA_TRACE_DEBUG("local is ACP. accept the cmd from INT");
+            /* local is acceptor, need to handle the request */
+            check_req = TRUE;
+            reject_code = MCA_RSP_SUCCESS;
 
-                    /* drop the previous request */
-                    if((p_ccb->p_tx_req->op_code == MCA_OP_MDL_CREATE_REQ) &&
-                            ((p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx)) != NULL))
-                    {
-                        mca_dcb_dealloc(p_dcb, NULL);
-                    }
-
-                    GKI_free_and_reset_buf((void **)&p_ccb->p_tx_req);
-                    mca_stop_timer(p_ccb);
-                }
-                else
-                {
-                    /*  local is initiator, ignore the req */
-                    GKI_freebuf(p_pkt);
-                    return;
-                }
+            /* drop the previous request */
+            if((p_ccb->p_tx_req->op_code == MCA_OP_MDL_CREATE_REQ) &&
+                    ((p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx)) != NULL)) {
+                mca_dcb_dealloc(p_dcb, NULL);
             }
-            else
-                if(p_pkt->layer_specific != MCA_RSP_SUCCESS)
-                {
-                    reject_code = (uint8_t)p_pkt->layer_specific;
 
-                    if(((evt_data.hdr.op_code >= MCA_NUM_STANDARD_OPCODE) &&
-                            (evt_data.hdr.op_code < MCA_FIRST_SYNC_OP)) ||
-                            (evt_data.hdr.op_code > MCA_LAST_SYNC_OP))
-                    {
-                        /* invalid op code */
-                        reject_opcode = MCA_OP_ERROR_RSP;
-                        evt_data.hdr.mdl_id = 0;
-                    }
-                }
-                else
-                {
-                    check_req = TRUE;
-                    reject_code = MCA_RSP_SUCCESS;
-                }
+            GKI_free_and_reset_buf((void **)&p_ccb->p_tx_req);
+            mca_stop_timer(p_ccb);
+        } else {
+            /*  local is initiator, ignore the req */
+            GKI_freebuf(p_pkt);
+            return;
+        }
+    } else if(p_pkt->layer_specific != MCA_RSP_SUCCESS) {
+        reject_code = (uint8_t)p_pkt->layer_specific;
 
-    if(check_req)
-    {
-        if(reject_code == MCA_RSP_SUCCESS)
-        {
+        if(((evt_data.hdr.op_code >= MCA_NUM_STANDARD_OPCODE) &&
+                (evt_data.hdr.op_code < MCA_FIRST_SYNC_OP)) ||
+                (evt_data.hdr.op_code > MCA_LAST_SYNC_OP)) {
+            /* invalid op code */
+            reject_opcode = MCA_OP_ERROR_RSP;
+            evt_data.hdr.mdl_id = 0;
+        }
+    } else {
+        check_req = TRUE;
+        reject_code = MCA_RSP_SUCCESS;
+    }
+
+    if(check_req) {
+        if(reject_code == MCA_RSP_SUCCESS) {
             reject_code = MCA_RSP_BAD_MDL;
 
             if(MCA_IS_VALID_MDL_ID(evt_data.hdr.mdl_id) ||
-                    ((evt_data.hdr.mdl_id == MCA_ALL_MDL_ID) && (evt_data.hdr.op_code == MCA_OP_MDL_DELETE_REQ)))
-            {
+                    ((evt_data.hdr.mdl_id == MCA_ALL_MDL_ID) && (evt_data.hdr.op_code == MCA_OP_MDL_DELETE_REQ))) {
                 reject_code = MCA_RSP_SUCCESS;
 
                 /* mdl_id is valid according to the spec */
-                switch(evt_data.hdr.op_code)
-                {
+                switch(evt_data.hdr.op_code) {
                     case MCA_OP_MDL_CREATE_REQ:
                         evt_data.create_ind.dep_id = *p++;
                         evt_data.create_ind.cfg = *p++;
                         p_rx_msg->mdep_id = evt_data.create_ind.dep_id;
 
-                        if(!mca_is_valid_dep_id(p_ccb->p_rcb, p_rx_msg->mdep_id))
-                        {
+                        if(!mca_is_valid_dep_id(p_ccb->p_rcb, p_rx_msg->mdep_id)) {
                             MCA_TRACE_ERROR("not a valid local mdep id");
                             reject_code = MCA_RSP_BAD_MDEP;
+                        } else if(mca_ccb_uses_mdl_id(p_ccb, evt_data.hdr.mdl_id)) {
+                            MCA_TRACE_DEBUG("the mdl_id is currently used in the CL(create)");
+                            mca_dcb_close_by_mdl_id(p_ccb, evt_data.hdr.mdl_id);
+                        } else {
+                            /* check if this dep still have MDL available */
+                            if(mca_dep_free_mdl(p_ccb, evt_data.create_ind.dep_id) == 0) {
+                                MCA_TRACE_ERROR("the mdep is currently using max_mdl");
+                                reject_code = MCA_RSP_MDEP_BUSY;
+                            }
                         }
-                        else
-                            if(mca_ccb_uses_mdl_id(p_ccb, evt_data.hdr.mdl_id))
-                            {
-                                MCA_TRACE_DEBUG("the mdl_id is currently used in the CL(create)");
-                                mca_dcb_close_by_mdl_id(p_ccb, evt_data.hdr.mdl_id);
-                            }
-                            else
-                            {
-                                /* check if this dep still have MDL available */
-                                if(mca_dep_free_mdl(p_ccb, evt_data.create_ind.dep_id) == 0)
-                                {
-                                    MCA_TRACE_ERROR("the mdep is currently using max_mdl");
-                                    reject_code = MCA_RSP_MDEP_BUSY;
-                                }
-                            }
 
                         break;
 
                     case MCA_OP_MDL_RECONNECT_REQ:
-                        if(mca_ccb_uses_mdl_id(p_ccb, evt_data.hdr.mdl_id))
-                        {
+                        if(mca_ccb_uses_mdl_id(p_ccb, evt_data.hdr.mdl_id)) {
                             MCA_TRACE_ERROR("the mdl_id is currently used in the CL(reconn)");
                             reject_code = MCA_RSP_MDL_BUSY;
                         }
@@ -427,8 +380,7 @@ void mca_ccb_hdl_req(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     }
 
     if(((reject_code != MCA_RSP_SUCCESS) && (evt_data.hdr.op_code != MCA_OP_SYNC_INFO_IND))
-            || send_rsp)
-    {
+            || send_rsp) {
         BT_HDR *p_buf = (BT_HDR *)GKI_getbuf(MCA_CTRL_MTU);
         p_buf->offset = L2CAP_MIN_OFFSET;
         p = p_start = (uint8_t *)(p_buf + 1) + L2CAP_MIN_OFFSET;
@@ -445,23 +397,19 @@ void mca_ccb_hdl_req(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
         L2CA_DataWrite(p_ccb->lcid, p_buf);
     }
 
-    if(reject_code == MCA_RSP_SUCCESS)
-    {
+    if(reject_code == MCA_RSP_SUCCESS) {
         /* use the received GKI buffer to store information to double check response API */
         p_rx_msg->op_code = evt_data.hdr.op_code;
         p_rx_msg->mdl_id = evt_data.hdr.mdl_id;
         p_ccb->p_rx_msg = p_rx_msg;
 
-        if(send_rsp)
-        {
+        if(send_rsp) {
             GKI_freebuf(p_pkt);
             p_ccb->p_rx_msg = NULL;
         }
 
         mca_ccb_report_event(p_ccb, evt_data.hdr.op_code, &evt_data);
-    }
-    else
-    {
+    } else {
         GKI_freebuf(p_pkt);
     }
 }
@@ -487,85 +435,66 @@ void mca_ccb_hdl_rsp(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     tMCA_RESULT result = MCA_BAD_HANDLE;
     tMCA_TC_TBL *p_tbl;
 
-    if(p_ccb->p_tx_req)
-    {
+    if(p_ccb->p_tx_req) {
         /* verify that the received response matches the sent request */
         p = (uint8_t *)(p_pkt + 1) + p_pkt->offset;
         evt_data.hdr.op_code = *p++;
 
         if((evt_data.hdr.op_code == 0) ||
-                ((p_ccb->p_tx_req->op_code + 1) == evt_data.hdr.op_code))
-        {
+                ((p_ccb->p_tx_req->op_code + 1) == evt_data.hdr.op_code)) {
             evt_data.rsp.rsp_code = *p++;
             mca_stop_timer(p_ccb);
             BE_STREAM_TO_UINT16(evt_data.hdr.mdl_id, p);
 
-            if(evt_data.hdr.op_code == MCA_OP_MDL_CREATE_RSP)
-            {
+            if(evt_data.hdr.op_code == MCA_OP_MDL_CREATE_RSP) {
                 evt_data.create_cfm.cfg = *p++;
                 chk_mdl = TRUE;
+            } else if(evt_data.hdr.op_code == MCA_OP_MDL_RECONNECT_RSP) {
+                chk_mdl = TRUE;
             }
-            else
-                if(evt_data.hdr.op_code == MCA_OP_MDL_RECONNECT_RSP)
-                {
-                    chk_mdl = TRUE;
-                }
 
-            if(chk_mdl)
-            {
+            if(chk_mdl) {
                 p_dcb = mca_dcb_by_hdl(p_ccb->p_tx_req->dcb_idx);
 
-                if(evt_data.rsp.rsp_code == MCA_RSP_SUCCESS)
-                {
-                    if(evt_data.hdr.mdl_id != p_dcb->mdl_id)
-                    {
+                if(evt_data.rsp.rsp_code == MCA_RSP_SUCCESS) {
+                    if(evt_data.hdr.mdl_id != p_dcb->mdl_id) {
                         MCA_TRACE_ERROR("peer's mdl_id=%d != our mdl_id=%d", evt_data.hdr.mdl_id, p_dcb->mdl_id);
 
                         /* change the response code to be an error */
-                        if(evt_data.rsp.rsp_code == MCA_RSP_SUCCESS)
-                        {
+                        if(evt_data.rsp.rsp_code == MCA_RSP_SUCCESS) {
                             evt_data.rsp.rsp_code = MCA_RSP_BAD_MDL;
                             /* send Abort */
                             p_ccb->status = MCA_CCB_STAT_PENDING;
                             MCA_Abort(mca_ccb_to_hdl(p_ccb));
                         }
-                    }
-                    else
-                        if(p_dcb->p_chnl_cfg)
-                        {
-                            /* the data channel configuration is known. Proceed with data channel initiation */
-                            BTM_SetSecurityLevel(TRUE, "", BTM_SEC_SERVICE_MCAP_DATA, p_ccb->sec_mask,
-                                                 p_ccb->data_vpsm, BTM_SEC_PROTO_MCA, p_ccb->p_tx_req->dcb_idx);
-                            p_dcb->lcid = mca_l2c_open_req(p_ccb->peer_addr, p_ccb->data_vpsm, p_dcb->p_chnl_cfg);
+                    } else if(p_dcb->p_chnl_cfg) {
+                        /* the data channel configuration is known. Proceed with data channel initiation */
+                        BTM_SetSecurityLevel(TRUE, "", BTM_SEC_SERVICE_MCAP_DATA, p_ccb->sec_mask,
+                                             p_ccb->data_vpsm, BTM_SEC_PROTO_MCA, p_ccb->p_tx_req->dcb_idx);
+                        p_dcb->lcid = mca_l2c_open_req(p_ccb->peer_addr, p_ccb->data_vpsm, p_dcb->p_chnl_cfg);
 
-                            if(p_dcb->lcid)
-                            {
-                                p_tbl = mca_tc_tbl_dalloc(p_dcb);
+                        if(p_dcb->lcid) {
+                            p_tbl = mca_tc_tbl_dalloc(p_dcb);
 
-                                if(p_tbl)
-                                {
-                                    p_tbl->state = MCA_TC_ST_CONN;
-                                    p_ccb->status = MCA_CCB_STAT_PENDING;
-                                    result = MCA_SUCCESS;
-                                }
+                            if(p_tbl) {
+                                p_tbl->state = MCA_TC_ST_CONN;
+                                p_ccb->status = MCA_CCB_STAT_PENDING;
+                                result = MCA_SUCCESS;
                             }
                         }
-                        else
-                        {
-                            /* mark this MCL as pending and wait for MCA_DataChnlCfg */
-                            p_ccb->status = MCA_CCB_STAT_PENDING;
-                            result = MCA_SUCCESS;
-                        }
+                    } else {
+                        /* mark this MCL as pending and wait for MCA_DataChnlCfg */
+                        p_ccb->status = MCA_CCB_STAT_PENDING;
+                        result = MCA_SUCCESS;
+                    }
                 }
 
-                if(result != MCA_SUCCESS && p_dcb)
-                {
+                if(result != MCA_SUCCESS && p_dcb) {
                     mca_dcb_dealloc(p_dcb, NULL);
                 }
             } /* end of chk_mdl */
 
-            if(p_ccb->status != MCA_CCB_STAT_PENDING)
-            {
+            if(p_ccb->status != MCA_CCB_STAT_PENDING) {
                 GKI_free_and_reset_buf((void **)&p_ccb->p_tx_req);
             }
 
@@ -573,9 +502,7 @@ void mca_ccb_hdl_rsp(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
         }
 
         /* else a bad response is received */
-    }
-    else
-    {
+    } else {
         /* not expecting any response. drop it */
         MCA_TRACE_WARNING("dropping received rsp (not expecting a response)");
     }

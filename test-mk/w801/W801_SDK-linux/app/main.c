@@ -13,21 +13,13 @@
 *****************************************************************************/ 
 #include "wm_include.h"
 
-
 void UserMain(void)
 {
-	printf("user task\n");
-	
-	tls_gpio_cfg(WM_IO_PB_05, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	tls_gpio_cfg(WM_IO_PB_11, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-	
-	tls_gpio_write(WM_IO_PB_05, 0);	
-	tls_gpio_write(WM_IO_PB_11, 0);
+	printf("\n user task \n");
 	
 #if DEMO_CONSOLE
 	CreateDemoTask();
-#else 
-	while(1);
 #endif
+//用户自己的task
 }
 

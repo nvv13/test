@@ -4,7 +4,7 @@
 #include "wm_bt.h"
 
 int tls_ble_uart_init(tls_ble_uart_mode_t mode, uint8_t uart_id, tls_uart_options_t *p_hci_if);
-int tls_ble_uart_deinit(tls_ble_uart_mode_t mode,uint8_t uart_id);
+int tls_ble_uart_deinit(tls_ble_uart_mode_t mode, uint8_t uart_id);
 
 uint32_t tls_ble_uart_buffer_size();
 uint32_t tls_ble_uart_buffer_available();

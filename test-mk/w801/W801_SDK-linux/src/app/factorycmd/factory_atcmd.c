@@ -10,6 +10,9 @@
 #include "wm_watchdog.h"
 #include "wm_internal_flash.h"
 #include "litepoint.h"
+#include "wm_ram_config.h"
+#include "wm_adc.h"
+#include "wm_gpio_afsel.h"
 
 #define FACTORY_ATCMD_MAX_ARG      10
 #define FACTORY_ATCMD_NAME_MAX_LEN 10
@@ -160,6 +163,7 @@ static int factory_atcmd_reset_proc(
     struct factory_atcmd_token_t *tok,
     char *res_resp, u32 *res_len)
 {
+	tls_sys_set_reboot_reason(REBOOT_REASON_ACTIVE);
 	tls_sys_reset();
 	return 0;
 }
@@ -479,43 +483,68 @@ static int factory_atcmd_txg_proc( struct factory_atcmd_token_t *tok, char *res_
 
 static int factory_atcmd_txgi_proc( struct factory_atcmd_token_t *tok, char *res_resp, u32 *res_len)
 {
-    u8* tx_gain = ieee80211_get_tx_gain();
+    u8 tx_gain[TX_GAIN_LEN];
+	u8* param_tx_gain = ieee80211_get_tx_gain();
 	int i = 0;
 	int len = 0;
 	u8 tx_gain_index[TX_GAIN_LEN/3];
 	int ret = 0;
-	unsigned int val = 0;
-    if(tok->arg_found)
+
+	if(tok->arg_found)
 	{
 	    if (strtohexarray(tx_gain_index, TX_GAIN_LEN/3, tok->arg[0]) < 0)
-    	{
-			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+	    {
+    		*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
     		return 0;
-    	}	
-        tls_tx_gainindex_map2_gainvalue(tx_gain, tx_gain_index);
-		ret = tls_set_tx_gain(tx_gain);
+	    }
+
+	    tls_tx_gainindex_map2_gainvalue(tx_gain, tx_gain_index);
+		for (i = 0; i < TX_GAIN_LEN/3; i++)
+		{
+			if (tx_gain_index[i] == 0xFF)
+			{
+				tx_gain[i] = 0xFF;
+				tx_gain[i+TX_GAIN_LEN/3] = 0xFF;
+				tx_gain[i+TX_GAIN_LEN*2/3] = 0xFF;
+			}
+			else
+			{
+				param_tx_gain[i] = tx_gain[i];
+				param_tx_gain[i+TX_GAIN_LEN/3] = tx_gain[i];
+				param_tx_gain[i+TX_GAIN_LEN*2/3] = tx_gain[i];
+			}
+		}
+	    ret = tls_set_tx_gain(tx_gain);
+	    if (ret == 0)
+	    {
+    		*res_len = factory_atcmd_ok_resp(res_resp);	
+	    }
+	    else
+	    {
+    		*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+	    }
+    }
+	else{
+		/*如实反映flash参数区的实际存储情况*/
+		ret = tls_get_tx_gain(tx_gain);
 		if (ret == 0)
 		{
-			val = 1;
-			tls_rf_cal_finish_op((u8 *)&val, 1);	
-			*res_len = factory_atcmd_ok_resp(res_resp);	
+			memset(tx_gain_index, 0xFF, TX_GAIN_LEN/3);
+			tls_tx_gainvalue_map2_gainindex(tx_gain_index, tx_gain);
+			*res_len = 0;
+			len = 0;
+			len = sprintf(res_resp, "+OK=");
+			for (i = 0; i < TX_GAIN_LEN/3; i++)
+			{
+				len += sprintf(res_resp + len, "%02x", tx_gain_index[i]);
+			}
+			len += sprintf(res_resp + len, "\r\n");
+			*res_len = len;
 		}
 		else
 		{
-			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_FLASH);
 		}
-    }
-	else{
-		tls_tx_gainvalue_map2_gainindex(tx_gain_index, tx_gain);
-		*res_len = 0;
-		len = 0;
-		len = sprintf(res_resp, "+OK=");
-		for (i = 0; i < TX_GAIN_LEN/3; i++)
-		{
-			len += sprintf(res_resp + len, "%02x", tx_gain_index[i]);
-		}
-		len += sprintf(res_resp + len, "\r\n");
-		*res_len = len;
     }
     return 0;
 }
@@ -648,6 +677,7 @@ static int factory_atcmd_lptstp_proc( struct factory_atcmd_token_t *tok, char *r
 {
 	factory_atcmd_lpinit();
 	tls_txrx_litepoint_test_stop();
+	tls_lp_notify_lp_tx_data();
 	*res_len = factory_atcmd_ok_resp(res_resp);
 	return 0;
 }
@@ -716,9 +746,28 @@ static int factory_atcmd_lprstt_proc( struct factory_atcmd_token_t *tok, char *r
 static int factory_atcmd_calfinish_proc( struct factory_atcmd_token_t *tok, char *res_resp, u32 *res_len)
 {
 	int ret = 0;
-	unsigned int val = 0;
+	int val = 0;
 
-	if (tok->arg_found == 0 && (tok->op == FACTORY_ATCMD_OP_NULL || tok->op == FACTORY_ATCMD_OP_QU))
+	if (tok->arg_found)
+	{
+		ret = strtodec((int *)&val, tok->arg[0]);
+		if (ret < 0 || ((val != 1) && (val != 0)))
+		{
+			*res_len = factory_atcmd_err_resp(res_resp,FACTORY_ATCMD_ERR_INV_PARAMS);
+			return 0;
+		}
+
+		ret = tls_rf_cal_finish_op((u8 *)&val, 1);
+		if (ret == 0 )
+		{
+			*res_len = factory_atcmd_ok_resp(res_resp);
+		}
+		else
+		{
+			*res_len = factory_atcmd_err_resp(res_resp,FACTORY_ATCMD_ERR_FLASH);
+		}
+	}
+	else
 	{
 		ret = tls_rf_cal_finish_op((u8 *)&val, 0);
 		if (ret == 0)
@@ -733,13 +782,8 @@ static int factory_atcmd_calfinish_proc( struct factory_atcmd_token_t *tok, char
 		{
 			*res_len = factory_atcmd_err_resp(res_resp,FACTORY_ATCMD_ERR_FLASH);
 		}
+	}
 
-		return 0;
-	}
-	else
-	{
-		*res_len = factory_atcmd_err_resp(res_resp,FACTORY_ATCMD_ERR_OPS);
-	}
 	return 0;
 }
 
@@ -800,6 +844,102 @@ static int factory_atcmd_qver_proc( struct factory_atcmd_token_t *tok, char *res
                 __DATE__, __TIME__);
 	return 0;
 }
+static int factory_atcmd_test_mode_proc( struct factory_atcmd_token_t *tok, char *res_resp, u32 *res_len)
+{
+	wm_adc_config(0);
+	wm_adc_config(1);
+	wm_adc_config(2);
+	wm_adc_config(3);
+	*res_len = factory_atcmd_ok_resp(res_resp);
+	return 0;
+}
+static int factory_atcmd_adc_cal_proc( struct factory_atcmd_token_t *tok, char *res_resp, u32 *res_len)
+{
+	int ret = 0;
+	int val = 0;
+	int i = 0; 
+	int refvoltage[4] = {0};
+	FT_ADC_CAL_ST adc_cal;
+
+	if (tok->arg_found)
+	{
+		if (tok->arg_found < 5)
+		{
+			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+			return 0;
+		}
+		ret = strtodec(&val, tok->arg[0]);
+		if (ret < 0 || val > 15 || val < 1)
+		{
+			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+			return 0;
+		}
+		for(i = 0; i < 4; i++)
+		{
+			ret = strtodec(&refvoltage[i], tok->arg[i + 1]);
+			if (ret < 0 )
+			{
+				*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+				return 0;
+			}
+		}
+		
+		ret = adc_multipoint_calibration(val, refvoltage);
+		if (ret == 0)
+		{
+			*res_len = factory_atcmd_ok_resp(res_resp);
+		}
+		else
+		{
+			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_FLASH);
+		}		
+		return 0;
+	}
+	else
+	{
+		ret = tls_get_adc_cal_param(&adc_cal);
+		//dumpBuffer("&adc_cal", &adc_cal, sizeof(adc_cal));
+		if (ret == 0)
+		{
+			*res_len = sprintf(res_resp, "+OK=%lf,%lf\r\n", adc_cal.a, adc_cal.b);
+		}
+		else
+		{
+			*res_len = factory_atcmd_err_resp(res_resp,FACTORY_ATCMD_ERR_FLASH);
+		}		
+
+		return 0;
+	}
+}
+
+static int factory_atcmd_adc_vol_proc( struct factory_atcmd_token_t *tok, char *res_resp, u32 *res_len)
+{
+	int ret = 0;
+	int val = 0xF;
+	int i = 0; 
+	int voltage[4] = {0};
+
+	if (tok->arg_found)
+	{
+		ret = strtodec(&val, tok->arg[0]);
+		if (ret < 0 || val > 15 || val < 1)
+		{
+			*res_len = factory_atcmd_err_resp(res_resp, FACTORY_ATCMD_ERR_INV_PARAMS);
+			return 0;
+		}
+	}
+	
+	for(i = 0; i < 4; i++)
+	{
+		if (val & (1 << i))
+		{
+			wm_adc_config(i);
+			voltage[i] = adc_get_inputVolt(i);
+		}
+	}
+	*res_len = sprintf(res_resp, "+OK=%d,%d,%d,%d\r\n", voltage[0], voltage[1], voltage[2], voltage[3]);
+	return 0;
+}
 
 
 static struct factory_atcmd_t  factory_atcmd_tbl[] =
@@ -827,6 +967,9 @@ static struct factory_atcmd_t  factory_atcmd_tbl[] =
 	{ "&LPRSTT", factory_atcmd_lprstt_proc},
     { "&CALFIN", factory_atcmd_calfinish_proc},
     { "FREQ",    factory_atcmd_freq_err_proc},
+    { "&TESTM",  factory_atcmd_test_mode_proc},
+    { "&ADCCAL", factory_atcmd_adc_cal_proc},
+    { "&ADCVOL", factory_atcmd_adc_vol_proc},
     { NULL,      NULL },
 };
 

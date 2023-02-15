@@ -36,51 +36,49 @@ Function prototypes and macro definitions used internally by the codec.
 */
 
 #ifdef USE_RESTRICT_KEYWORD
-    #define RESTRICT restrict
+#define RESTRICT restrict
 #else
-    #define RESTRICT
+#define RESTRICT
 #endif
 
 #ifdef CODEC_DEBUG
-    #include <stdio.h>
-    #define ERROR(x) do { printf x; printf("\n"); } while (0)
+#include <stdio.h>
+#define ERROR(x) do { printf x; printf("\n"); } while (0)
 #else
-    #define ERROR(x)
+#define ERROR(x)
 #endif
 
 #ifdef TRACE_EXECUTION
-    #define TRACE(x) do { printf x; printf("\n"); } while (0)
+#define TRACE(x) do { printf x; printf("\n"); } while (0)
 #else
-    #define TRACE(x)
+#define TRACE(x)
 #endif
 
 #ifndef PRIVATE
-    #define PRIVATE
+#define PRIVATE
 #endif
 
 #ifndef INLINE
-    #define INLINE
+#define INLINE
 #endif
 
 #include "oi_assert.h"
 #include "oi_codec_sbc.h"
 
 #ifndef OI_SBC_SYNCWORD
-    #define OI_SBC_SYNCWORD 0x9c
+#define OI_SBC_SYNCWORD 0x9c
 #endif
 
 #ifndef DIVIDE
-    #define DIVIDE(a, b) ((a) / (b))
+#define DIVIDE(a, b) ((a) / (b))
 #endif
 
-typedef union
-{
+typedef union {
     OI_UINT8 uint8[SBC_MAX_BANDS];
     OI_UINT32 uint32[SBC_MAX_BANDS / 4];
 } BITNEED_UNION1;
 
-typedef union
-{
+typedef union {
     OI_UINT8 uint8[2 * SBC_MAX_BANDS];
     OI_UINT32 uint32[2 * SBC_MAX_BANDS / 4];
 } BITNEED_UNION2;
@@ -95,10 +93,8 @@ static const OI_UINT8 band_values[] =     { 4, 8 };
 #define TEST_MODE_SENTINEL_LENGTH 4
 
 /** Used internally. */
-typedef struct
-{
-    union
-    {
+typedef struct {
+    union {
         const OI_UINT8 *r;
         OI_UINT8 *w;
     } ptr;
@@ -176,7 +172,8 @@ INLINE OI_STATUS internal_DecoderReset(OI_CODEC_SBC_DECODER_CONTEXT *context,
                                        OI_BYTE pcmStride,
                                        OI_BOOL enhanced);
 
-INLINE OI_UINT16 OI_SBC_CalculateFrameAndHeaderlen(OI_CODEC_SBC_FRAME_INFO *frame, OI_UINT *headerLen_);
+INLINE OI_UINT16 OI_SBC_CalculateFrameAndHeaderlen(OI_CODEC_SBC_FRAME_INFO *frame,
+        OI_UINT *headerLen_);
 
 PRIVATE OI_UINT32 OI_SBC_MaxBitpool(OI_CODEC_SBC_FRAME_INFO *frame);
 
@@ -186,7 +183,8 @@ PRIVATE OI_UINT8 OI_SBC_CalculateChecksum(OI_CODEC_SBC_FRAME_INFO *frame, OI_BYT
 /* Transform functions */
 PRIVATE void shift_buffer(SBC_BUFFER_T *dest, SBC_BUFFER_T *src, OI_UINT wordCount);
 PRIVATE void cosineModulateSynth4(SBC_BUFFER_T *RESTRICT out, OI_INT32 const *RESTRICT in);
-PRIVATE void SynthWindow40_int32_int32_symmetry_with_sum(OI_INT16 *pcm, SBC_BUFFER_T buffer[80], OI_UINT strideShift);
+PRIVATE void SynthWindow40_int32_int32_symmetry_with_sum(OI_INT16 *pcm, SBC_BUFFER_T buffer[80],
+        OI_UINT strideShift);
 
 INLINE void dct3_4(OI_INT32 *RESTRICT out, OI_INT32 const *RESTRICT in);
 PRIVATE void analyze4_generated(SBC_BUFFER_T analysisBuffer[RESTRICT 40],
@@ -211,12 +209,15 @@ PRIVATE void analyze8_enhanced_generated(SBC_BUFFER_T analysisBuffer[RESTRICT 11
 /* Decoder functions */
 
 INLINE  void OI_SBC_ReadHeader(OI_CODEC_SBC_COMMON_CONTEXT *common, const OI_BYTE *data);
-PRIVATE void OI_SBC_ReadScalefactors(OI_CODEC_SBC_COMMON_CONTEXT *common, const OI_BYTE *b, OI_BITSTREAM *bs);
+PRIVATE void OI_SBC_ReadScalefactors(OI_CODEC_SBC_COMMON_CONTEXT *common, const OI_BYTE *b,
+                                     OI_BITSTREAM *bs);
 PRIVATE void OI_SBC_ReadSamples(OI_CODEC_SBC_DECODER_CONTEXT *common, OI_BITSTREAM *ob);
 PRIVATE void OI_SBC_ReadSamplesJoint(OI_CODEC_SBC_DECODER_CONTEXT *common, OI_BITSTREAM *global_bs);
-PRIVATE void OI_SBC_SynthFrame(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_INT16 *pcm, OI_UINT start_block, OI_UINT nrof_blocks);
+PRIVATE void OI_SBC_SynthFrame(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_INT16 *pcm,
+                               OI_UINT start_block, OI_UINT nrof_blocks);
 INLINE OI_INT32 OI_SBC_Dequant(OI_UINT32 raw, OI_UINT scale_factor, OI_UINT bits);
-PRIVATE OI_BOOL OI_SBC_ExamineCommandPacket(OI_CODEC_SBC_DECODER_CONTEXT *context, const OI_BYTE *data, OI_UINT32 len);
+PRIVATE OI_BOOL OI_SBC_ExamineCommandPacket(OI_CODEC_SBC_DECODER_CONTEXT *context,
+        const OI_BYTE *data, OI_UINT32 len);
 PRIVATE void OI_SBC_GenerateTestSignal(OI_INT16 pcmData[][2], OI_UINT32 sampleCount);
 
 PRIVATE void OI_SBC_ExpandFrameFields(OI_CODEC_SBC_FRAME_INFO *frame);

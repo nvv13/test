@@ -33,21 +33,20 @@
 /* #define BTA_HF_CLIENT_DEBUG TRUE */
 
 #ifndef BTA_HF_CLIENT_DEBUG
-    #define BTA_HF_CLIENT_DEBUG FALSE
+#define BTA_HF_CLIENT_DEBUG FALSE
 #endif
 
 #ifdef USE_ALARM
-    extern fixed_queue_t *btu_bta_alarm_queue;
+extern fixed_queue_t *btu_bta_alarm_queue;
 #endif
 
 #if BTA_HF_CLIENT_DEBUG == TRUE
-    static char *bta_hf_client_evt_str(uint16_t event);
-    static char *bta_hf_client_state_str(uint8_t state);
+static char *bta_hf_client_evt_str(uint16_t event);
+static char *bta_hf_client_state_str(uint8_t state);
 #endif
 
 /* state machine states */
-enum
-{
+enum {
     BTA_HF_CLIENT_INIT_ST,
     BTA_HF_CLIENT_OPENING_ST,
     BTA_HF_CLIENT_OPEN_ST,
@@ -55,8 +54,7 @@ enum
 };
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     BTA_HF_CLIENT_REGISTER,
     BTA_HF_CLIENT_DEREGISTER,
     BTA_HF_CLIENT_START_DEREG,
@@ -94,8 +92,7 @@ enum
 typedef void (*tBTA_HF_CLIENT_ACTION)(tBTA_HF_CLIENT_DATA *p_data);
 
 /* action functions table, indexed with action enum */
-const tBTA_HF_CLIENT_ACTION bta_hf_client_action[] =
-{
+const tBTA_HF_CLIENT_ACTION bta_hf_client_action[] = {
     /* BTA_HF_CLIENT_REGISTER */      bta_hf_client_register,
     /* BTA_HF_CLIENT_DEREGISTER */    bta_hf_client_deregister,
     /* BTA_HF_CLIENT_START_DEREG */   bta_hf_client_start_dereg,
@@ -133,8 +130,7 @@ const tBTA_HF_CLIENT_ACTION bta_hf_client_action[] =
 #define BTA_HF_CLIENT_NUM_COLS             3       /* number of columns in state tables */
 
 /* state table for init state */
-const uint8_t bta_hf_client_st_init[][BTA_HF_CLIENT_NUM_COLS] =
-{
+const uint8_t bta_hf_client_st_init[][BTA_HF_CLIENT_NUM_COLS] = {
     /* Event                    Action 1                       Action 2                       Next state */
     /* API_REGISTER_EVT */      {BTA_HF_CLIENT_REGISTER,       BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_INIT_ST},
     /* API_DEREGISTER_EVT */    {BTA_HF_CLIENT_DEREGISTER,     BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_INIT_ST},
@@ -155,12 +151,11 @@ const uint8_t bta_hf_client_st_init[][BTA_HF_CLIENT_NUM_COLS] =
     /* SEND_AT_CMD_EVT */       {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_INIT_ST},
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
     /* CI_SCO_DATA_EVT */       {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_INIT_ST},
-#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */    
+#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */
 };
 
 /* state table for opening state */
-const uint8_t bta_hf_client_st_opening[][BTA_HF_CLIENT_NUM_COLS] =
-{
+const uint8_t bta_hf_client_st_opening[][BTA_HF_CLIENT_NUM_COLS] = {
     /* Event                    Action 1                       Action 2                       Next state */
     /* API_REGISTER_EVT */      {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_OPENING_ST},
     /* API_DEREGISTER_EVT */    {BTA_HF_CLIENT_RFC_DO_CLOSE,   BTA_HF_CLIENT_START_DEREG,     BTA_HF_CLIENT_CLOSING_ST},
@@ -181,12 +176,11 @@ const uint8_t bta_hf_client_st_opening[][BTA_HF_CLIENT_NUM_COLS] =
     /* SEND_AT_CMD_EVT */       {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_OPENING_ST},
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
     /* CI_SCO_DATA_EVT */       {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_OPENING_ST},
-#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */    
+#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */
 };
 
 /* state table for open state */
-const uint8_t bta_hf_client_st_open[][BTA_HF_CLIENT_NUM_COLS] =
-{
+const uint8_t bta_hf_client_st_open[][BTA_HF_CLIENT_NUM_COLS] = {
     /* Event                    Action 1                       Action 2                       Next state */
     /* API_REGISTER_EVT */      {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_OPEN_ST},
     /* API_DEREGISTER_EVT */    {BTA_HF_CLIENT_START_CLOSE,    BTA_HF_CLIENT_START_DEREG,     BTA_HF_CLIENT_CLOSING_ST},
@@ -207,12 +201,11 @@ const uint8_t bta_hf_client_st_open[][BTA_HF_CLIENT_NUM_COLS] =
     /* SEND_AT_CMD_EVT */       {BTA_HF_CLIENT_SEND_AT_CMD,    BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_OPEN_ST},
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
     /* CI_SCO_DATA_EVT */       {BTA_HF_CLIENT_CI_SCO_DATA,    BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_OPEN_ST},
-#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */    
+#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */
 };
 
 /* state table for closing state */
-const uint8_t bta_hf_client_st_closing[][BTA_HF_CLIENT_NUM_COLS] =
-{
+const uint8_t bta_hf_client_st_closing[][BTA_HF_CLIENT_NUM_COLS] = {
     /* Event                    Action 1                       Action 2                       Next state */
     /* API_REGISTER_EVT */      {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_CLOSING_ST},
     /* API_DEREGISTER_EVT */    {BTA_HF_CLIENT_START_DEREG,    BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_CLOSING_ST},
@@ -233,15 +226,14 @@ const uint8_t bta_hf_client_st_closing[][BTA_HF_CLIENT_NUM_COLS] =
     /* SEND_AT_CMD_EVT */       {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_CLOSING_ST},
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
     /* CI_SCO_DATA_EVT */       {BTA_HF_CLIENT_IGNORE,         BTA_HF_CLIENT_IGNORE,          BTA_HF_CLIENT_CLOSING_ST},
-#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */    
+#endif /* (BTM_SCO_HCI_INCLUDED == TRUE ) */
 };
 
 /* type for state table */
 typedef const uint8_t (*tBTA_HF_CLIENT_ST_TBL)[BTA_HF_CLIENT_NUM_COLS];
 
 /* state table */
-const tBTA_HF_CLIENT_ST_TBL bta_hf_client_st_tbl[] =
-{
+const tBTA_HF_CLIENT_ST_TBL bta_hf_client_st_tbl[] = {
     bta_hf_client_st_init,
     bta_hf_client_st_opening,
     bta_hf_client_st_open,
@@ -264,16 +256,16 @@ tBTA_HF_CLIENT_CB  bta_hf_client_cb;
 void bta_hf_client_scb_init(void)
 {
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_free(bta_hf_client_cb.scb.collision_timer);
     alarm_free(bta_hf_client_cb.scb.at_cb.resp_timer);
     alarm_free(bta_hf_client_cb.scb.at_cb.hold_timer);
-    #endif
+#endif
     wm_memset(&bta_hf_client_cb.scb, 0, sizeof(tBTA_HF_CLIENT_SCB));
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     bta_hf_client_cb.scb.collision_timer =
                     alarm_new("bta_hf_client.scb_collision_timer");
-    #endif
+#endif
     bta_hf_client_cb.scb.sco_idx = BTM_INVALID_SCO_INDEX;
     bta_hf_client_cb.scb.negotiated_codec = BTM_SCO_CODEC_CVSD;
 }
@@ -310,8 +302,7 @@ void bta_hf_client_resume_open(void)
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
 
     /* resume opening process.  */
-    if(bta_hf_client_cb.scb.state == BTA_HF_CLIENT_INIT_ST)
-    {
+    if(bta_hf_client_cb.scb.state == BTA_HF_CLIENT_INIT_ST) {
         bta_hf_client_cb.scb.state = BTA_HF_CLIENT_OPENING_ST;
         bta_hf_client_start_open(NULL);
     }
@@ -352,27 +343,19 @@ void bta_hf_client_collision_cback(tBTA_SYS_CONN_STATUS status, uint8_t id,
     UNUSED(app_id);
     UNUSED(peer_addr);
 
-    if(bta_hf_client_cb.scb.state == BTA_HF_CLIENT_OPENING_ST)
-    {
-        if(id == BTA_ID_SYS)    /* ACL collision */
-        {
+    if(bta_hf_client_cb.scb.state == BTA_HF_CLIENT_OPENING_ST) {
+        if(id == BTA_ID_SYS) {  /* ACL collision */
             APPL_TRACE_WARNING("HF Client found collision (ACL) ...");
+        } else if(id == BTA_ID_HS) { /* RFCOMM collision */
+            APPL_TRACE_WARNING("HF Client found collision (RFCOMM) ...");
+        } else {
+            APPL_TRACE_WARNING("HF Client found collision (\?\?\?) ...");
         }
-        else
-            if(id == BTA_ID_HS)    /* RFCOMM collision */
-            {
-                APPL_TRACE_WARNING("HF Client found collision (RFCOMM) ...");
-            }
-            else
-            {
-                APPL_TRACE_WARNING("HF Client found collision (\?\?\?) ...");
-            }
 
         bta_hf_client_cb.scb.state = BTA_HF_CLIENT_INIT_ST;
 
         /* Cancel SDP if it had been started. */
-        if(bta_hf_client_cb.scb.p_disc_db)
-        {
+        if(bta_hf_client_cb.scb.p_disc_db) {
             (void)SDP_CancelServiceSearch(bta_hf_client_cb.scb.p_disc_db);
             bta_hf_client_free_db(NULL);
         }
@@ -381,18 +364,18 @@ void bta_hf_client_collision_cback(tBTA_SYS_CONN_STATUS status, uint8_t id,
         /* Collision may be detected before or after we close servers. */
         bta_hf_client_start_server();
         /* Start timer to handle connection opening restart */
-        #ifdef USE_ALARM
+#ifdef USE_ALARM
         alarm_set_on_queue(bta_hf_client_cb.scb.collision_timer,
                            BTA_HF_CLIENT_COLLISION_TIMER_MS,
                            bta_hf_client_collision_timer_cback,
                            NULL,
                            btu_bta_alarm_queue);
-        #else
+#else
         bta_hf_client_cb.scb.collision_timer.p_cback = (TIMER_CBACK *)&bta_hf_client_collision_timer_cback;
         bta_hf_client_cb.scb.collision_timer.param = (TIMER_PARAM_TYPE)NULL;
         bta_sys_start_timer(&bta_hf_client_cb.scb.collision_timer, BTA_HF_CLIENT_COLLISION_TIMER_MS, 0, 0);
         bta_hf_client_cb.scb.collision_timer_on = 1;
-        #endif
+#endif
     }
 }
 
@@ -440,8 +423,7 @@ static void bta_hf_client_api_enable(tBTA_HF_CLIENT_DATA *p_data)
 *******************************************************************************/
 static void bta_hf_client_api_disable(tBTA_HF_CLIENT_DATA *p_data)
 {
-    if(!bta_sys_is_register(BTA_ID_HS))
-    {
+    if(!bta_sys_is_register(BTA_ID_HS)) {
         APPL_TRACE_ERROR("BTA HF Client is already disabled, ignoring ...");
         return;
     }
@@ -464,12 +446,12 @@ static void bta_hf_client_api_disable(tBTA_HF_CLIENT_DATA *p_data)
 *******************************************************************************/
 uint8_t bta_hf_client_hdl_event(BT_HDR *p_msg)
 {
-    #if BTA_HF_CLIENT_DEBUG == TRUE
-    APPL_TRACE_DEBUG("bta_hf_client_hdl_event %s (0x%x)", bta_hf_client_evt_str(p_msg->event), p_msg->event);
-    #endif
+#if BTA_HF_CLIENT_DEBUG == TRUE
+    APPL_TRACE_DEBUG("bta_hf_client_hdl_event %s (0x%x)", bta_hf_client_evt_str(p_msg->event),
+                     p_msg->event);
+#endif
 
-    switch(p_msg->event)
-    {
+    switch(p_msg->event) {
         /* handle enable event */
         case BTA_HF_CLIENT_API_ENABLE_EVT:
             bta_hf_client_api_enable((tBTA_HF_CLIENT_DATA *) p_msg);
@@ -503,24 +485,22 @@ void bta_hf_client_sm_execute(uint16_t event, tBTA_HF_CLIENT_DATA *p_data)
     tBTA_HF_CLIENT_ST_TBL      state_table;
     uint8_t               action;
     int                 i;
-    #if BTA_HF_CLIENT_DEBUG == TRUE
+#if BTA_HF_CLIENT_DEBUG == TRUE
     uint16_t  in_event = event;
     uint8_t in_state =  bta_hf_client_cb.scb.state;
 
     /* Ignore displaying of AT results when not connected (Ignored in state machine) */
-    if(bta_hf_client_cb.scb.state == BTA_HF_CLIENT_OPEN_ST)
-    {
+    if(bta_hf_client_cb.scb.state == BTA_HF_CLIENT_OPEN_ST) {
         APPL_TRACE_EVENT("HF Client evt : State %d (%s), Event 0x%04x (%s)",
                          bta_hf_client_cb.scb.state,
                          bta_hf_client_state_str(bta_hf_client_cb.scb.state),
                          event, bta_hf_client_evt_str(event));
     }
 
-    #endif
+#endif
     event &= 0x00FF;
 
-    if(event >= (BTA_HF_CLIENT_MAX_EVT & 0x00FF))
-    {
+    if(event >= (BTA_HF_CLIENT_MAX_EVT & 0x00FF)) {
         APPL_TRACE_ERROR("HF Client evt out of range, ignoring...");
         return;
     }
@@ -531,29 +511,24 @@ void bta_hf_client_sm_execute(uint16_t event, tBTA_HF_CLIENT_DATA *p_data)
     bta_hf_client_cb.scb.state = state_table[event][BTA_HF_CLIENT_NEXT_STATE];
 
     /* execute action functions */
-    for(i = 0; i < BTA_HF_CLIENT_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != BTA_HF_CLIENT_IGNORE)
-        {
+    for(i = 0; i < BTA_HF_CLIENT_ACTIONS; i++) {
+        if((action = state_table[event][i]) != BTA_HF_CLIENT_IGNORE) {
             (*bta_hf_client_action[action])(p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
 
-    #if BTA_HF_CLIENT_DEBUG == TRUE
+#if BTA_HF_CLIENT_DEBUG == TRUE
 
-    if(bta_hf_client_cb.scb.state != in_state)
-    {
+    if(bta_hf_client_cb.scb.state != in_state) {
         APPL_TRACE_EVENT("BTA HF Client State Change: [%s] -> [%s] after Event [%s]",
                          bta_hf_client_state_str(in_state),
                          bta_hf_client_state_str(bta_hf_client_cb.scb.state),
                          bta_hf_client_evt_str(in_event));
     }
 
-    #endif
+#endif
 }
 
 static void send_post_slc_cmd(void)
@@ -581,8 +556,7 @@ void bta_hf_client_slc_seq(uint8_t error)
 {
     APPL_TRACE_DEBUG("bta_hf_client_slc_seq cmd: %u", bta_hf_client_cb.scb.at_cb.current_cmd);
 
-    if(error)
-    {
+    if(error) {
         /* SLC establishment error, sent close rfcomm event */
         APPL_TRACE_ERROR("HFPClient: Failed to create SLC due to AT error, disconnecting (%u)",
                          bta_hf_client_cb.scb.at_cb.current_cmd);
@@ -590,21 +564,18 @@ void bta_hf_client_slc_seq(uint8_t error)
         return;
     }
 
-    if(bta_hf_client_cb.scb.svc_conn)
-    {
+    if(bta_hf_client_cb.scb.svc_conn) {
         return;
     }
 
-    switch(bta_hf_client_cb.scb.at_cb.current_cmd)
-    {
+    switch(bta_hf_client_cb.scb.at_cb.current_cmd) {
         case BTA_HF_CLIENT_AT_NONE:
             bta_hf_client_send_at_brsf();
             break;
 
         case BTA_HF_CLIENT_AT_BRSF:
             if((bta_hf_client_cb.scb.features & BTA_HF_CLIENT_FEAT_CODEC)
-                    && (bta_hf_client_cb.scb.peer_features & BTA_HF_CLIENT_PEER_CODEC))
-            {
+                    && (bta_hf_client_cb.scb.peer_features & BTA_HF_CLIENT_PEER_CODEC)) {
                 bta_hf_client_send_at_bac();
                 break;
             }
@@ -626,12 +597,9 @@ void bta_hf_client_slc_seq(uint8_t error)
 
         case BTA_HF_CLIENT_AT_CMER:
             if(bta_hf_client_cb.scb.peer_features & BTA_HF_CLIENT_PEER_FEAT_3WAY
-                    && bta_hf_client_cb.scb.features & BTA_HF_CLIENT_FEAT_3WAY)
-            {
+                    && bta_hf_client_cb.scb.features & BTA_HF_CLIENT_FEAT_3WAY) {
                 bta_hf_client_send_at_chld('?', 0);
-            }
-            else
-            {
+            } else {
                 bta_hf_client_svc_conn_open(NULL);
                 send_post_slc_cmd();
             }
@@ -655,13 +623,12 @@ void bta_hf_client_slc_seq(uint8_t error)
 #if BTA_HF_CLIENT_DEBUG == TRUE
 
 #ifndef CASE_RETURN_STR
-    #define CASE_RETURN_STR(const) case const: return #const;
+#define CASE_RETURN_STR(const) case const: return #const;
 #endif
 
 static char *bta_hf_client_evt_str(uint16_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(BTA_HF_CLIENT_API_REGISTER_EVT)
             CASE_RETURN_STR(BTA_HF_CLIENT_API_DEREGISTER_EVT)
             CASE_RETURN_STR(BTA_HF_CLIENT_API_OPEN_EVT)
@@ -689,8 +656,7 @@ static char *bta_hf_client_evt_str(uint16_t event)
 
 static char *bta_hf_client_state_str(uint8_t state)
 {
-    switch(state)
-    {
+    switch(state) {
             CASE_RETURN_STR(BTA_HF_CLIENT_INIT_ST)
             CASE_RETURN_STR(BTA_HF_CLIENT_OPENING_ST)
             CASE_RETURN_STR(BTA_HF_CLIENT_OPEN_ST)

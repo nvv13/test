@@ -48,7 +48,7 @@ typedef uint8_t   tSMP_ASSO_MODEL;
 
 
 #ifndef SMP_MAX_CONN
-    #define SMP_MAX_CONN    2
+#define SMP_MAX_CONN    2
 #endif
 
 #define SMP_WAIT_FOR_RSP_TIMEOUT_MS      (30 * 1000)
@@ -134,8 +134,7 @@ typedef uint8_t tSMP_EVENT;
 #define SMP_SEC_KEY_MASK                    0x00ff
 
 /* SMP pairing state */
-enum
-{
+enum {
     SMP_STATE_IDLE,
     SMP_STATE_WAIT_APP_RSP,
     SMP_STATE_SEC_REQ_PENDING,
@@ -188,8 +187,7 @@ typedef uint8_t tSMP_STATE;
 typedef uint8_t tSMP_BR_EVENT;
 
 /* SMP over BR/EDR pairing states */
-enum
-{
+enum {
     SMP_BR_STATE_IDLE = SMP_STATE_IDLE,
     SMP_BR_STATE_WAIT_APP_RSP,
     SMP_BR_STATE_PAIR_REQ_RSP,
@@ -199,8 +197,7 @@ enum
 typedef uint8_t tSMP_BR_STATE;
 
 /* random and encrption activity state */
-enum
-{
+enum {
     SMP_GEN_COMPARE = 1,
     SMP_GEN_CONFIRM,
 
@@ -218,8 +215,7 @@ enum
     SMP_GEN_NONCE_8_15
 };
 
-enum
-{
+enum {
     SMP_KEY_TYPE_TK,
     SMP_KEY_TYPE_CFM,
     SMP_KEY_TYPE_CMP,
@@ -227,14 +223,12 @@ enum
     SMP_KEY_TYPE_STK,
     SMP_KEY_TYPE_LTK
 };
-typedef struct
-{
+typedef struct {
     uint8_t   key_type;
     uint8_t  *p_data;
 } tSMP_KEY;
 
-typedef union
-{
+typedef union {
     uint8_t       *p_data;    /* uint8_t type data pointer */
     tSMP_KEY    key;
     uint16_t      reason;
@@ -259,15 +253,13 @@ typedef union
 #define SMP_ENCRYT_DATA_SIZE               16
 #define SMP_ECNCRPYT_STATUS                HCI_SUCCESS
 
-typedef struct
-{
+typedef struct {
     BD_ADDR bd_addr;
     BT_HDR *p_copy;
 } tSMP_REQ_Q_ENTRY;
 
 /* SMP control block */
-typedef struct
-{
+typedef struct {
     tSMP_CALLBACK   *p_callback;
     TIMER_LIST_ENT smp_rsp_timer_ent;
     uint8_t           trace_level;
@@ -308,7 +300,8 @@ typedef struct
     tSMP_OOB_FLAG   loc_oob_flag;
     tSMP_AUTH_REQ   peer_auth_req;
     tSMP_AUTH_REQ   loc_auth_req;
-    uint8_t         secure_connections_only_mode_required;/* TRUE if locally SM is required to operate */
+    uint8_t
+    secure_connections_only_mode_required;/* TRUE if locally SM is required to operate */
     /* either in Secure Connections mode or not at all */
     tSMP_ASSO_MODEL selected_association_model;
     uint8_t         le_secure_connections_mode_is_used;

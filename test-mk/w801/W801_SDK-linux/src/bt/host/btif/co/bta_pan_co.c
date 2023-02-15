@@ -80,13 +80,11 @@ void bta_pan_co_open(uint16_t handle, uint8_t app_id, tBTA_PAN_ROLE local_role,
                    "handle:%d", app_id, local_role, peer_role, handle);
     btpan_conn_t *conn = btpan_find_conn_addr(peer_addr);
 
-    if(conn == NULL)
-    {
+    if(conn == NULL) {
         conn = btpan_new_conn(handle, peer_addr, local_role, peer_role);
     }
 
-    if(conn)
-    {
+    if(conn) {
         BTIF_TRACE_DEBUG("bta_pan_co_open:tap_fd:%d, open_count:%d, "
                          "conn->handle:%d should = handle:%d, local_role:%d, remote_role:%d",
                          btpan_cb.tap_fd, btpan_cb.open_count, conn->handle, handle,
@@ -96,18 +94,15 @@ void bta_pan_co_open(uint16_t handle, uint8_t app_id, tBTA_PAN_ROLE local_role,
         conn->handle = handle;
 
         //bdcpy(conn->peer, peer_addr);
-        if(btpan_cb.tap_fd < 0)
-        {
+        if(btpan_cb.tap_fd < 0) {
             btpan_cb.tap_fd = btpan_tap_open();
 
-            if(btpan_cb.tap_fd >= 0)
-            {
+            if(btpan_cb.tap_fd >= 0) {
                 create_tap_read_thread(btpan_cb.tap_fd);
             }
         }
 
-        if(btpan_cb.tap_fd >= 0)
-        {
+        if(btpan_cb.tap_fd >= 0) {
             btpan_cb.flow = 1;
             conn->state = PAN_STATE_OPEN;
             bta_pan_ci_rx_ready(handle);
@@ -131,8 +126,7 @@ void bta_pan_co_close(uint16_t handle, uint8_t app_id)
     BTIF_TRACE_API("bta_pan_co_close:app_id:%d, handle:%d", app_id, handle);
     btpan_conn_t *conn = btpan_find_conn_handle(handle);
 
-    if(conn && conn->state == PAN_STATE_OPEN)
-    {
+    if(conn && conn->state == PAN_STATE_OPEN) {
         BTIF_TRACE_DEBUG("bta_pan_co_close");
         // let bta close event reset this handle as it needs
         // the handle to find the connection upon CLOSE
@@ -140,8 +134,7 @@ void bta_pan_co_close(uint16_t handle, uint8_t app_id)
         conn->state = PAN_STATE_CLOSE;
         btpan_cb.open_count--;
 
-        if(btpan_cb.open_count == 0 && btpan_cb.tap_fd != -1)
-        {
+        if(btpan_cb.open_count == 0 && btpan_cb.tap_fd != -1) {
             btpan_tap_close(btpan_cb.tap_fd);
             btpan_cb.tap_fd = -1;
         }
@@ -176,31 +169,24 @@ void bta_pan_co_tx_path(uint16_t handle, uint8_t app_id)
     BTIF_TRACE_API("%s, handle:%d, app_id:%d", __func__, handle, app_id);
     btpan_conn_t *conn = btpan_find_conn_handle(handle);
 
-    if(!conn)
-    {
+    if(!conn) {
         BTIF_TRACE_ERROR("%s: cannot find pan connection", __func__);
         return;
+    } else if(conn->state != PAN_STATE_OPEN) {
+        BTIF_TRACE_ERROR("%s: conn is not opened, conn:%p, conn->state:%d",
+                         __func__, conn, conn->state);
+        return;
     }
-    else
-        if(conn->state != PAN_STATE_OPEN)
-        {
-            BTIF_TRACE_ERROR("%s: conn is not opened, conn:%p, conn->state:%d",
-                             __func__, conn, conn->state);
-            return;
-        }
 
-    do
-    {
+    do {
         /* read next data buffer from pan */
         if((p_buf = bta_pan_ci_readbuf(handle, src, dst, &protocol,
-                                       &ext, &forward)))
-        {
+                                       &ext, &forward))) {
             bdstr_t bdstr;
             BTIF_TRACE_DEBUG("%s, calling btapp_tap_send, "
                              "p_buf->len:%d, offset:%d", __func__, p_buf->len, p_buf->offset);
 
-            if(is_empty_eth_addr(conn->eth_addr) && is_valid_bt_eth_addr(src))
-            {
+            if(is_empty_eth_addr(conn->eth_addr) && is_valid_bt_eth_addr(src)) {
                 BTIF_TRACE_DEBUG("%s pan bt peer addr: %s", __func__,
                                  bdaddr_to_string((tls_bt_addr_t *)conn->peer, bdstr, sizeof(bdstr)));
                 bdaddr_to_string((tls_bt_addr_t *)src, bdstr, sizeof(bdstr));
@@ -314,8 +300,7 @@ void bta_pan_co_rx_flow(uint16_t handle, uint8_t app_id, uint8_t enable)
     BTIF_TRACE_API("bta_pan_co_rx_flow, enabled:%d, not used", enable);
     btpan_conn_t *conn = btpan_find_conn_handle(handle);
 
-    if(!conn || conn->state != PAN_STATE_OPEN)
-    {
+    if(!conn || conn->state != PAN_STATE_OPEN) {
         return;
     }
 

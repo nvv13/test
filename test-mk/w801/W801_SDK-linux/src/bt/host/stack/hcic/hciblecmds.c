@@ -40,8 +40,7 @@ uint8_t btsnd_hcic_ble_set_evt_mask(BT_EVENT_MASK event_mask)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_EVENT_MASK)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_EVENT_MASK)) == NULL) {
         return (FALSE);
     }
 
@@ -61,8 +60,7 @@ uint8_t btsnd_hcic_ble_read_buffer_size(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -80,8 +78,7 @@ uint8_t btsnd_hcic_ble_read_local_spt_feat(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -99,8 +96,7 @@ uint8_t btsnd_hcic_ble_set_local_used_feat(uint8_t feat_set[8])
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_USED_FEAT_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_USED_FEAT_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -118,8 +114,7 @@ uint8_t btsnd_hcic_ble_set_random_addr(BD_ADDR random_bda)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_RANDOM_ADDR_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_RANDOM_ADDR_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -141,8 +136,7 @@ uint8_t btsnd_hcic_ble_write_adv_params(uint16_t adv_int_min, uint16_t adv_int_m
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_ADV_PARAMS)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_ADV_PARAMS)) == NULL) {
         return (FALSE);
     }
 
@@ -167,8 +161,7 @@ uint8_t btsnd_hcic_ble_read_adv_chnl_tx_power(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -186,8 +179,7 @@ uint8_t btsnd_hcic_ble_set_adv_data(uint8_t data_len, uint8_t *p_data)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA + 1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA + 1)) == NULL) {
         return (FALSE);
     }
 
@@ -198,10 +190,8 @@ uint8_t btsnd_hcic_ble_set_adv_data(uint8_t data_len, uint8_t *p_data)
     UINT8_TO_STREAM(pp, HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA + 1);
     wm_memset(pp, 0, HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA);
 
-    if(p_data != NULL && data_len > 0)
-    {
-        if(data_len > HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA)
-        {
+    if(p_data != NULL && data_len > 0) {
+        if(data_len > HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA) {
             data_len = HCIC_PARAM_SIZE_BLE_WRITE_ADV_DATA;
         }
 
@@ -217,8 +207,7 @@ uint8_t btsnd_hcic_ble_set_scan_rsp_data(uint8_t data_len, uint8_t *p_scan_rsp)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP + 1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP + 1)) == NULL) {
         return (FALSE);
     }
 
@@ -229,10 +218,8 @@ uint8_t btsnd_hcic_ble_set_scan_rsp_data(uint8_t data_len, uint8_t *p_scan_rsp)
     UINT8_TO_STREAM(pp, HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP + 1);
     wm_memset(pp, 0, HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP);
 
-    if(p_scan_rsp != NULL && data_len > 0)
-    {
-        if(data_len > HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP)
-        {
+    if(p_scan_rsp != NULL && data_len > 0) {
+        if(data_len > HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP) {
             data_len = HCIC_PARAM_SIZE_BLE_WRITE_SCAN_RSP;
         }
 
@@ -249,8 +236,7 @@ uint8_t btsnd_hcic_ble_set_adv_enable(uint8_t adv_enable)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_ADV_ENABLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_ADV_ENABLE)) == NULL) {
         return (FALSE);
     }
 
@@ -270,8 +256,7 @@ uint8_t btsnd_hcic_ble_set_scan_params(uint8_t scan_type,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_SCAN_PARAM)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_SCAN_PARAM)) == NULL) {
         return (FALSE);
     }
 
@@ -294,8 +279,7 @@ uint8_t btsnd_hcic_ble_set_scan_enable(uint8_t scan_enable, uint8_t duplicate)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_SCAN_ENABLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_WRITE_SCAN_ENABLE)) == NULL) {
         return (FALSE);
     }
 
@@ -322,8 +306,7 @@ uint8_t btsnd_hcic_ble_create_ll_conn(uint16_t scan_int, uint16_t scan_win,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_CREATE_LL_CONN)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_CREATE_LL_CONN)) == NULL) {
         return (FALSE);
     }
 
@@ -353,8 +336,7 @@ uint8_t btsnd_hcic_ble_create_conn_cancel(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_CREATE_CONN_CANCEL)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_CREATE_CONN_CANCEL)) == NULL) {
         return (FALSE);
     }
 
@@ -372,8 +354,7 @@ uint8_t btsnd_hcic_ble_read_white_list_size(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -391,8 +372,7 @@ uint8_t btsnd_hcic_ble_clear_white_list(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CLEAR_WHITE_LIST)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_CLEAR_WHITE_LIST)) == NULL) {
         return (FALSE);
     }
 
@@ -410,8 +390,7 @@ uint8_t btsnd_hcic_ble_add_white_list(uint8_t addr_type, BD_ADDR bda)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ADD_WHITE_LIST)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_ADD_WHITE_LIST)) == NULL) {
         return (FALSE);
     }
 
@@ -431,8 +410,7 @@ uint8_t btsnd_hcic_ble_remove_from_white_list(uint8_t addr_type, BD_ADDR bda)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REMOVE_WHITE_LIST)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_REMOVE_WHITE_LIST)) == NULL) {
         return (FALSE);
     }
 
@@ -455,8 +433,7 @@ uint8_t btsnd_hcic_ble_upd_ll_conn_params(uint16_t handle,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_UPD_LL_CONN_PARAMS)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_UPD_LL_CONN_PARAMS)) == NULL) {
         return (FALSE);
     }
 
@@ -481,8 +458,7 @@ uint8_t btsnd_hcic_ble_set_host_chnl_class(uint8_t  chnl_map[HCIC_BLE_CHNL_MAP_S
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_HOST_CHNL_CLASS)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_SET_HOST_CHNL_CLASS)) == NULL) {
         return (FALSE);
     }
 
@@ -501,8 +477,7 @@ uint8_t btsnd_hcic_ble_read_chnl_map(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CHNL_MAP)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CHNL_MAP)) == NULL) {
         return (FALSE);
     }
 
@@ -521,8 +496,7 @@ uint8_t btsnd_hcic_ble_read_remote_feat(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_READ_REMOTE_FEAT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_READ_REMOTE_FEAT)) == NULL) {
         return (FALSE);
     }
 
@@ -545,8 +519,7 @@ uint8_t btsnd_hcic_ble_encrypt(uint8_t *key, uint8_t key_len,
     uint8_t *pp;
 
     if((p = HCI_GET_CMD_BUF(sizeof(BT_HDR) + sizeof(void *) +
-                            HCIC_PARAM_SIZE_BLE_ENCRYPT)) == NULL)
-    {
+                            HCIC_PARAM_SIZE_BLE_ENCRYPT)) == NULL) {
         return (FALSE);
     }
 
@@ -559,13 +532,11 @@ uint8_t btsnd_hcic_ble_encrypt(uint8_t *key, uint8_t key_len,
     UINT8_TO_STREAM(pp, HCIC_PARAM_SIZE_BLE_ENCRYPT);
     wm_memset(pp, 0, HCIC_PARAM_SIZE_BLE_ENCRYPT);
 
-    if(key_len > HCIC_BLE_ENCRYT_KEY_SIZE)
-    {
+    if(key_len > HCIC_BLE_ENCRYT_KEY_SIZE) {
         key_len = HCIC_BLE_ENCRYT_KEY_SIZE;
     }
 
-    if(pt_len > HCIC_BLE_ENCRYT_KEY_SIZE)
-    {
+    if(pt_len > HCIC_BLE_ENCRYT_KEY_SIZE) {
         pt_len = HCIC_BLE_ENCRYT_KEY_SIZE;
     }
 
@@ -582,8 +553,7 @@ uint8_t btsnd_hcic_ble_rand(void *p_cmd_cplt_cback)
     uint8_t *pp;
 
     if((p = HCI_GET_CMD_BUF(sizeof(BT_HDR) + sizeof(void *) +
-                            HCIC_PARAM_SIZE_BLE_RAND)) == NULL)
-    {
+                            HCIC_PARAM_SIZE_BLE_RAND)) == NULL) {
         return (FALSE);
     }
 
@@ -604,8 +574,7 @@ uint8_t btsnd_hcic_ble_start_enc(uint16_t handle, uint8_t rand[HCIC_BLE_RAND_DI_
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_START_ENC)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_START_ENC)) == NULL) {
         return (FALSE);
     }
 
@@ -627,8 +596,7 @@ uint8_t btsnd_hcic_ble_ltk_req_reply(uint16_t handle, uint8_t ltk[HCIC_BLE_ENCRY
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LTK_REQ_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LTK_REQ_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -648,8 +616,7 @@ uint8_t btsnd_hcic_ble_ltk_req_neg_reply(uint16_t handle)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LTK_REQ_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_LTK_REQ_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -668,8 +635,7 @@ uint8_t btsnd_hcic_ble_read_supported_states(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -686,8 +652,7 @@ uint8_t btsnd_hcic_ble_read_resolving_list_size(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -704,8 +669,7 @@ uint8_t btsnd_hcic_ble_read_suggested_default_data_length(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -724,8 +688,7 @@ uint8_t btsnd_hcic_ble_receiver_test(uint8_t rx_freq)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM1)) == NULL) {
         return (FALSE);
     }
 
@@ -744,8 +707,7 @@ uint8_t btsnd_hcic_ble_transmitter_test(uint8_t tx_freq, uint8_t test_data_len, 
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM3)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_PARAM3)) == NULL) {
         return (FALSE);
     }
 
@@ -766,8 +728,7 @@ uint8_t btsnd_hcic_ble_test_end(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -785,8 +746,7 @@ uint8_t btsnd_hcic_ble_read_host_supported(void)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_READ_CMD)) == NULL) {
         return (FALSE);
     }
 
@@ -804,8 +764,7 @@ uint8_t btsnd_hcic_ble_write_host_supported(uint8_t le_host_spt, uint8_t simul_l
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_LE_HOST_SUPPORTED)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_WRITE_LE_HOST_SUPPORTED)) == NULL) {
         return (FALSE);
     }
 
@@ -830,8 +789,7 @@ uint8_t btsnd_hcic_ble_rc_param_req_reply(uint16_t handle,
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_RC_PARAM_REQ_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_RC_PARAM_REQ_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -856,8 +814,7 @@ uint8_t btsnd_hcic_ble_rc_param_req_neg_reply(uint16_t handle, uint8_t reason)
     BT_HDR *p;
     uint8_t *pp;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_RC_PARAM_REQ_NEG_REPLY)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_RC_PARAM_REQ_NEG_REPLY)) == NULL) {
         return (FALSE);
     }
 
@@ -879,8 +836,7 @@ uint8_t btsnd_hcic_ble_add_device_resolving_list(uint8_t addr_type_peer, BD_ADDR
 {
     BT_HDR *p = NULL; //(BT_HDR *)GKI_getbuf(HCI_CMD_BUF_SIZE);
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_ADD_DEV_RESOLVING_LIST)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_ADD_DEV_RESOLVING_LIST)) == NULL) {
         return (FALSE);
     }
 
@@ -901,8 +857,7 @@ uint8_t btsnd_hcic_ble_rm_device_resolving_list(uint8_t addr_type_peer, BD_ADDR 
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_RM_DEV_RESOLVING_LIST)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_RM_DEV_RESOLVING_LIST)) == NULL) {
         return (FALSE);
     }
 
@@ -921,8 +876,7 @@ uint8_t btsnd_hcic_ble_clear_resolving_list(void)
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_CLEAR_RESOLVING_LIST)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_CLEAR_RESOLVING_LIST)) == NULL) {
         return (FALSE);
     }
 
@@ -939,8 +893,7 @@ uint8_t btsnd_hcic_ble_read_resolvable_addr_peer(uint8_t addr_type_peer, BD_ADDR
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_READ_RESOLVABLE_ADDR_PEER)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_READ_RESOLVABLE_ADDR_PEER)) == NULL) {
         return (FALSE);
     }
 
@@ -959,8 +912,7 @@ uint8_t btsnd_hcic_ble_read_resolvable_addr_local(uint8_t addr_type_peer, BD_ADD
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_READ_RESOLVABLE_ADDR_LOCAL)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_READ_RESOLVABLE_ADDR_LOCAL)) == NULL) {
         return (FALSE);
     }
 
@@ -979,8 +931,7 @@ uint8_t btsnd_hcic_ble_set_addr_resolution_enable(uint8_t addr_resolution_enable
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_SET_ADDR_RESOLUTION_ENABLE)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_SET_ADDR_RESOLUTION_ENABLE)) == NULL) {
         return (FALSE);
     }
 
@@ -998,8 +949,7 @@ uint8_t btsnd_hcic_ble_set_rand_priv_addr_timeout(uint16_t rpa_timout)
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_SET_RAND_PRIV_ADDR_TIMOUT)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_SET_RAND_PRIV_ADDR_TIMOUT)) == NULL) {
         return (FALSE);
     }
 
@@ -1017,8 +967,7 @@ uint8_t btsnd_hcic_ble_set_data_length(uint16_t conn_handle, uint16_t tx_octets,
 {
     BT_HDR *p = NULL;
 
-    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_SET_DATA_LENGTH)) == NULL)
-    {
+    if((p = HCI_GET_CMD_BUF(HCIC_PARAM_SIZE_BLE_SET_DATA_LENGTH)) == NULL) {
         return (FALSE);
     }
 

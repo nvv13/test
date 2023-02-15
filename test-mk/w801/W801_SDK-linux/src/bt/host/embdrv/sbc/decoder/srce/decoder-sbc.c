@@ -42,77 +42,64 @@ PRIVATE OI_STATUS FindSyncword(OI_CODEC_SBC_DECODER_CONTEXT *context,
                                const OI_BYTE **frameData,
                                OI_UINT32 *frameBytes)
 {
-    #ifdef SBC_ENHANCED
+#ifdef SBC_ENHANCED
     OI_BYTE search1 = OI_SBC_SYNCWORD;
     OI_BYTE search2 = OI_SBC_ENHANCED_SYNCWORD;
-    #endif // SBC_ENHANCED
+#endif // SBC_ENHANCED
 
-    if(*frameBytes == 0)
-    {
+    if(*frameBytes == 0) {
         return OI_CODEC_SBC_NOT_ENOUGH_HEADER_DATA;
     }
 
-    #ifdef SBC_ENHANCED
+#ifdef SBC_ENHANCED
 
-    if(context->limitFrameFormat && context->enhancedEnabled)
-    {
+    if(context->limitFrameFormat && context->enhancedEnabled) {
         /* If the context is restricted, only search for specified SYNCWORD */
         search1 = search2;
+    } else if(context->enhancedEnabled == FALSE) {
+        /* If enhanced is not enabled, only search for classic SBC SYNCWORD*/
+        search2 = search1;
     }
-    else
-        if(context->enhancedEnabled == FALSE)
-        {
-            /* If enhanced is not enabled, only search for classic SBC SYNCWORD*/
-            search2 = search1;
-        }
 
-    while(*frameBytes && (**frameData != search1) && (**frameData != search2))
-    {
+    while(*frameBytes && (**frameData != search1) && (**frameData != search2)) {
         (*frameBytes)--;
         (*frameData)++;
     }
 
-    if(*frameBytes)
-    {
+    if(*frameBytes) {
         /* Syncword found, *frameData points to it, and *frameBytes correctly
          * reflects the number of bytes available to read, including the
          * syncword. */
         context->common.frameInfo.enhanced = (**frameData == OI_SBC_ENHANCED_SYNCWORD);
         return OI_OK;
-    }
-    else
-    {
+    } else {
         /* No syncword was found anywhere in the provided input data.
          * *frameData points past the end of the original input, and
          * *frameBytes is 0. */
         return OI_CODEC_SBC_NO_SYNCWORD;
     }
 
-    #else  // SBC_ENHANCED
+#else  // SBC_ENHANCED
 
-    while(*frameBytes && (**frameData != OI_SBC_SYNCWORD))
-    {
+    while(*frameBytes && (**frameData != OI_SBC_SYNCWORD)) {
         (*frameBytes)--;
         (*frameData)++;
     }
 
-    if(*frameBytes)
-    {
+    if(*frameBytes) {
         /* Syncword found, *frameData points to it, and *frameBytes correctly
          * reflects the number of bytes available to read, including the
          * syncword. */
         context->common.frameInfo.enhanced = FALSE;
         return OI_OK;
-    }
-    else
-    {
+    } else {
         /* No syncword was found anywhere in the provided input data.
          * *frameData points past the end of the original input, and
          * *frameBytes is 0. */
         return OI_CODEC_SBC_NO_SYNCWORD;
     }
 
-    #endif // SBC_ENHANCED
+#endif // SBC_ENHANCED
 }
 
 static OI_STATUS DecodeBody(OI_CODEC_SBC_DECODER_CONTEXT *context,
@@ -122,58 +109,49 @@ static OI_STATUS DecodeBody(OI_CODEC_SBC_DECODER_CONTEXT *context,
                             OI_BOOL allowPartial)
 {
     OI_BITSTREAM bs;
-    OI_UINT frameSamples = context->common.frameInfo.nrof_blocks * context->common.frameInfo.nrof_subbands;
+    OI_UINT frameSamples = context->common.frameInfo.nrof_blocks *
+                           context->common.frameInfo.nrof_subbands;
     OI_UINT decode_block_count;
 
     /*
      * Based on the header data, make sure that there is enough room to write the output samples.
      */
-    if(*pcmBytes < (sizeof(OI_INT16) * frameSamples * context->common.pcmStride) && !allowPartial)
-    {
+    if(*pcmBytes < (sizeof(OI_INT16) * frameSamples * context->common.pcmStride) && !allowPartial) {
         /* If we're not allowing partial decodes, we need room for the entire
          * codec frame */
         TRACE(("-OI_CODEC_SBC_Decode: OI_CODEC_SBC_NOT_ENOUGH_AUDIO_DATA"));
         return OI_CODEC_SBC_NOT_ENOUGH_AUDIO_DATA;
+    } else if(*pcmBytes < sizeof(OI_INT16) * context->common.frameInfo.nrof_subbands *
+              context->common.pcmStride) {
+        /* Even if we're allowing partials, we can still only decode on a frame
+         * boundary */
+        return OI_CODEC_SBC_NOT_ENOUGH_AUDIO_DATA;
     }
-    else
-        if(*pcmBytes < sizeof(OI_INT16) * context->common.frameInfo.nrof_subbands * context->common.pcmStride)
-        {
-            /* Even if we're allowing partials, we can still only decode on a frame
-             * boundary */
-            return OI_CODEC_SBC_NOT_ENOUGH_AUDIO_DATA;
-        }
 
-    if(context->bufferedBlocks == 0)
-    {
+    if(context->bufferedBlocks == 0) {
         TRACE(("Reading scalefactors"));
         OI_SBC_ReadScalefactors(&context->common, bodyData, &bs);
         TRACE(("Computing bit allocation"));
         OI_SBC_ComputeBitAllocation(&context->common);
         TRACE(("Reading samples"));
 
-        if(context->common.frameInfo.mode == SBC_JOINT_STEREO)
-        {
+        if(context->common.frameInfo.mode == SBC_JOINT_STEREO) {
             OI_SBC_ReadSamplesJoint(context, &bs);
-        }
-        else
-        {
+        } else {
             OI_SBC_ReadSamples(context, &bs);
         }
 
         context->bufferedBlocks = context->common.frameInfo.nrof_blocks;
     }
 
-    if(allowPartial)
-    {
-        decode_block_count = *pcmBytes / sizeof(OI_INT16) / context->common.pcmStride / context->common.frameInfo.nrof_subbands;
+    if(allowPartial) {
+        decode_block_count = *pcmBytes / sizeof(OI_INT16) / context->common.pcmStride /
+                             context->common.frameInfo.nrof_subbands;
 
-        if(decode_block_count > context->bufferedBlocks)
-        {
+        if(decode_block_count > context->bufferedBlocks) {
             decode_block_count = context->bufferedBlocks;
         }
-    }
-    else
-    {
+    } else {
         decode_block_count = context->common.frameInfo.nrof_blocks;
     }
 
@@ -189,12 +167,10 @@ static OI_STATUS DecodeBody(OI_CODEC_SBC_DECODER_CONTEXT *context,
     /*
      * When decoding mono into a stride-2 array, copy pcm data to second channel
      */
-    if(context->common.frameInfo.nrof_channels == 1 && context->common.pcmStride == 2)
-    {
+    if(context->common.frameInfo.nrof_channels == 1 && context->common.pcmStride == 2) {
         OI_UINT i;
 
-        for(i = 0; i < frameSamples; ++i)
-        {
+        for(i = 0; i < frameSamples; ++i) {
             pcmData[2 * i + 1] = pcmData[2 * i];
         }
     }
@@ -204,12 +180,9 @@ static OI_STATUS DecodeBody(OI_CODEC_SBC_DECODER_CONTEXT *context,
      */
     *pcmBytes = frameSamples * sizeof(OI_INT16) * context->common.pcmStride;
 
-    if(context->bufferedBlocks > 0)
-    {
+    if(context->bufferedBlocks > 0) {
         return OI_CODEC_SBC_PARTIAL_DECODE;
-    }
-    else
-    {
+    } else {
         return OI_OK;
     }
 }
@@ -225,8 +198,7 @@ PRIVATE OI_STATUS internal_DecodeRaw(OI_CODEC_SBC_DECODER_CONTEXT *context,
     OI_UINT bodyLen;
     TRACE(("+OI_CODEC_SBC_DecodeRaw"));
 
-    if(context->bufferedBlocks == 0)
-    {
+    if(context->bufferedBlocks == 0) {
         /*
          * The bitallocator needs to know the bitpool value.
          */
@@ -236,14 +208,11 @@ PRIVATE OI_STATUS internal_DecodeRaw(OI_CODEC_SBC_DECODER_CONTEXT *context,
          */
         bodyLen = OI_CODEC_SBC_CalculateFramelen(&context->common.frameInfo) - SBC_HEADER_LEN;
 
-        if(*frameBytes < bodyLen)
-        {
+        if(*frameBytes < bodyLen) {
             TRACE(("-OI_CODEC_SBC_Decode: OI_CODEC_SBC_NOT_ENOUGH_BODY_DATA"));
             return OI_CODEC_SBC_NOT_ENOUGH_BODY_DATA;
         }
-    }
-    else
-    {
+    } else {
         bodyLen = 0;
     }
 
@@ -253,8 +222,7 @@ PRIVATE OI_STATUS internal_DecodeRaw(OI_CODEC_SBC_DECODER_CONTEXT *context,
      */
     status = DecodeBody(context, *frameData, pcmData, pcmBytes, TRUE);
 
-    if(OI_SUCCESS(status) || status == OI_CODEC_SBC_PARTIAL_DECODE)
-    {
+    if(OI_SUCCESS(status) || status == OI_CODEC_SBC_PARTIAL_DECODE) {
         *frameData += bodyLen;
         *frameBytes -= bodyLen;
     }
@@ -270,7 +238,8 @@ OI_STATUS OI_CODEC_SBC_DecoderReset(OI_CODEC_SBC_DECODER_CONTEXT *context,
                                     OI_UINT8 pcmStride,
                                     OI_BOOL enhanced)
 {
-    return internal_DecoderReset(context, decoderData, decoderDataBytes, maxChannels, pcmStride, enhanced);
+    return internal_DecoderReset(context, decoderData, decoderDataBytes, maxChannels, pcmStride,
+                                 enhanced);
 }
 
 OI_STATUS OI_CODEC_SBC_DecodeFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
@@ -286,14 +255,12 @@ OI_STATUS OI_CODEC_SBC_DecodeFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
     TRACE(("Finding syncword"));
     status = FindSyncword(context, frameData, frameBytes);
 
-    if(!OI_SUCCESS(status))
-    {
+    if(!OI_SUCCESS(status)) {
         return status;
     }
 
     /* Make sure enough data remains to read the header. */
-    if(*frameBytes < SBC_HEADER_LEN)
-    {
+    if(*frameBytes < SBC_HEADER_LEN) {
         TRACE(("-OI_CODEC_SBC_DecodeFrame: OI_CODEC_SBC_NOT_ENOUGH_HEADER_DATA"));
         return OI_CODEC_SBC_NOT_ENOUGH_HEADER_DATA;
     }
@@ -306,20 +273,17 @@ OI_STATUS OI_CODEC_SBC_DecodeFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
      * to ensure that the SBC parameters for this frame are compatible with the restrictions imposed
      * by the loaded overlays.
      */
-    if(context->limitFrameFormat && (context->common.frameInfo.subbands != context->restrictSubbands))
-    {
+    if(context->limitFrameFormat && (context->common.frameInfo.subbands != context->restrictSubbands)) {
         ERROR(("SBC parameters incompatible with loaded overlay"));
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    if(context->common.frameInfo.nrof_channels > context->common.maxChannels)
-    {
+    if(context->common.frameInfo.nrof_channels > context->common.maxChannels) {
         ERROR(("SBC parameters incompatible with number of channels specified during reset"));
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    if(context->common.pcmStride < 1 || context->common.pcmStride > 2)
-    {
+    if(context->common.pcmStride < 1 || context->common.pcmStride > 2) {
         ERROR(("PCM stride not set correctly during reset"));
         return OI_STATUS_INVALID_PARAMETERS;
     }
@@ -333,8 +297,7 @@ OI_STATUS OI_CODEC_SBC_DecodeFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
      */
     framelen = OI_CODEC_SBC_CalculateFramelen(&context->common.frameInfo);
 
-    if(*frameBytes < framelen)
-    {
+    if(*frameBytes < framelen) {
         TRACE(("-OI_CODEC_SBC_DecodeFrame: OI_CODEC_SBC_NOT_ENOUGH_BODY_DATA"));
         return OI_CODEC_SBC_NOT_ENOUGH_BODY_DATA;
     }
@@ -342,31 +305,29 @@ OI_STATUS OI_CODEC_SBC_DecodeFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
     TRACE(("Calculating checksum"));
     crc = OI_SBC_CalculateChecksum(&context->common.frameInfo, *frameData);
 
-    if(crc != context->common.frameInfo.crc)
-    {
+    if(crc != context->common.frameInfo.crc) {
         TRACE(("CRC Mismatch:  calc=%02x read=%02x\n", crc, context->common.frameInfo.crc));
         TRACE(("-OI_CODEC_SBC_DecodeFrame: OI_CODEC_SBC_CHECKSUM_MISMATCH"));
         return OI_CODEC_SBC_CHECKSUM_MISMATCH;
     }
 
-    #ifdef OI_DEBUG
+#ifdef OI_DEBUG
 
     /*
      * Make sure the bitpool values are sane.
      */
-    if((context->common.frameInfo.bitpool < SBC_MIN_BITPOOL) && !context->common.frameInfo.enhanced)
-    {
+    if((context->common.frameInfo.bitpool < SBC_MIN_BITPOOL) && !context->common.frameInfo.enhanced) {
         ERROR(("Bitpool too small: %d (must be >= 2)", context->common.frameInfo.bitpool));
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    if(context->common.frameInfo.bitpool > OI_SBC_MaxBitpool(&context->common.frameInfo))
-    {
-        ERROR(("Bitpool too large: %d (must be <= %ld)", context->common.frameInfo.bitpool, OI_SBC_MaxBitpool(&context->common.frameInfo)));
+    if(context->common.frameInfo.bitpool > OI_SBC_MaxBitpool(&context->common.frameInfo)) {
+        ERROR(("Bitpool too large: %d (must be <= %ld)", context->common.frameInfo.bitpool,
+               OI_SBC_MaxBitpool(&context->common.frameInfo)));
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    #endif
+#endif
     /*
      * Now decode the SBC data. Partial decode is not yet implemented for an SBC
      * stream, so pass FALSE to decode body to have it enforce the old rule that
@@ -374,8 +335,7 @@ OI_STATUS OI_CODEC_SBC_DecodeFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
      */
     status = DecodeBody(context, *frameData + SBC_HEADER_LEN, pcmData, pcmBytes, FALSE);
 
-    if(OI_SUCCESS(status))
-    {
+    if(OI_SUCCESS(status)) {
         *frameData += framelen;
         *frameBytes -= framelen;
     }
@@ -394,33 +354,28 @@ OI_STATUS OI_CODEC_SBC_SkipFrame(OI_CODEC_SBC_DECODER_CONTEXT *context,
     OI_UINT8 crc;
     status = FindSyncword(context, frameData, frameBytes);
 
-    if(!OI_SUCCESS(status))
-    {
+    if(!OI_SUCCESS(status)) {
         return status;
     }
 
-    if(*frameBytes < SBC_HEADER_LEN)
-    {
+    if(*frameBytes < SBC_HEADER_LEN) {
         return OI_CODEC_SBC_NOT_ENOUGH_HEADER_DATA;
     }
 
     OI_SBC_ReadHeader(&context->common, *frameData);
     framelen = OI_SBC_CalculateFrameAndHeaderlen(&context->common.frameInfo, &headerlen);
 
-    if(*frameBytes < headerlen)
-    {
+    if(*frameBytes < headerlen) {
         return OI_CODEC_SBC_NOT_ENOUGH_HEADER_DATA;
     }
 
     crc = OI_SBC_CalculateChecksum(&context->common.frameInfo, *frameData);
 
-    if(crc != context->common.frameInfo.crc)
-    {
+    if(crc != context->common.frameInfo.crc) {
         return OI_CODEC_SBC_CHECKSUM_MISMATCH;
     }
 
-    if(*frameBytes < framelen)
-    {
+    if(*frameBytes < framelen) {
         return OI_CODEC_SBC_NOT_ENOUGH_BODY_DATA;
     }
 
@@ -439,16 +394,13 @@ OI_UINT8 OI_CODEC_SBC_FrameCount(OI_BYTE  *frameData,
     OI_UINT8 frameCount = 0;
     OI_UINT  frameLen;
 
-    while(frameBytes)
-    {
-        while(frameBytes && ((frameData[0] & 0xFE) != 0x9C))
-        {
+    while(frameBytes) {
+        while(frameBytes && ((frameData[0] & 0xFE) != 0x9C)) {
             frameData++;
             frameBytes--;
         }
 
-        if(frameBytes < SBC_HEADER_LEN)
-        {
+        if(frameBytes < SBC_HEADER_LEN) {
             return frameCount;
         }
 
@@ -460,8 +412,7 @@ OI_UINT8 OI_CODEC_SBC_FrameCount(OI_BYTE  *frameData,
         /* Inline logic to avoid corrupting context */
         frameLen = blocks * frameData[2];
 
-        switch(mode)
-        {
+        switch(mode) {
             case SBC_JOINT_STEREO:
                 frameLen += subbands + (8 * subbands);
                 break;
@@ -472,12 +423,9 @@ OI_UINT8 OI_CODEC_SBC_FrameCount(OI_BYTE  *frameData,
             /* fall through */
 
             default:
-                if(mode == SBC_MONO)
-                {
+                if(mode == SBC_MONO) {
                     frameLen += 4 * subbands;
-                }
-                else
-                {
+                } else {
                     frameLen += 8 * subbands;
                 }
         }
@@ -485,13 +433,10 @@ OI_UINT8 OI_CODEC_SBC_FrameCount(OI_BYTE  *frameData,
         frameCount++;
         frameLen = SBC_HEADER_LEN + (frameLen + 7) / 8;
 
-        if(frameBytes > frameLen)
-        {
+        if(frameBytes > frameLen) {
             frameBytes -= frameLen;
             frameData += frameLen;
-        }
-        else
-        {
+        } else {
             frameBytes = 0;
         }
     }
@@ -503,14 +448,16 @@ OI_UINT8 OI_CODEC_SBC_FrameCount(OI_BYTE  *frameData,
 
 #ifdef SPECIALIZE_READ_SAMPLES_JOINT
 
-PRIVATE void OI_SBC_ReadSamplesJoint4(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_BITSTREAM *global_bs)
+PRIVATE void OI_SBC_ReadSamplesJoint4(OI_CODEC_SBC_DECODER_CONTEXT *context,
+                                      OI_BITSTREAM *global_bs)
 {
 #define NROF_SUBBANDS 4
 #include "readsamplesjoint.inc"
 #undef NROF_SUBBANDS
 }
 
-PRIVATE void OI_SBC_ReadSamplesJoint8(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_BITSTREAM *global_bs)
+PRIVATE void OI_SBC_ReadSamplesJoint8(OI_CODEC_SBC_DECODER_CONTEXT *context,
+                                      OI_BITSTREAM *global_bs)
 {
 #define NROF_SUBBANDS 8
 #include "readsamplesjoint.inc"
@@ -519,8 +466,7 @@ PRIVATE void OI_SBC_ReadSamplesJoint8(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_
 
 typedef void (*READ_SAMPLES)(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_BITSTREAM *global_bs);
 
-static const READ_SAMPLES SpecializedReadSamples[] =
-{
+static const READ_SAMPLES SpecializedReadSamples[] = {
     OI_SBC_ReadSamplesJoint4,
     OI_SBC_ReadSamplesJoint8
 };
@@ -532,14 +478,14 @@ PRIVATE void OI_SBC_ReadSamplesJoint(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_B
 {
     OI_CODEC_SBC_COMMON_CONTEXT *common = &context->common;
     OI_UINT nrof_subbands = common->frameInfo.nrof_subbands;
-    #ifdef SPECIALIZE_READ_SAMPLES_JOINT
+#ifdef SPECIALIZE_READ_SAMPLES_JOINT
     OI_ASSERT((nrof_subbands >> 3u) <= 1u);
     SpecializedReadSamples[nrof_subbands >> 3](context, global_bs);
-    #else
+#else
 #define NROF_SUBBANDS nrof_subbands
 #include "readsamplesjoint.inc"
 #undef NROF_SUBBANDS
-    #endif /* SPECIALIZE_READ_SAMPLES_JOINT */
+#endif /* SPECIALIZE_READ_SAMPLES_JOINT */
 }
 
 /**@}*/

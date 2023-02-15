@@ -39,8 +39,7 @@ extern "C" {
  * OI_STATUS must fit in 16 bits, so status codes can range from 0 to 66535, inclusive.
  */
 
-typedef enum
-{
+typedef enum {
     OI_STATUS_SUCCESS                      = 0,   /**< function call succeeded alias for #OI_OK */
     OI_OK                                  = 0,   /**< function call succeeded alias for #OI_STATUS_SUCCESS */
     OI_STATUS_INVALID_PARAMETERS           = 101, /**< invalid function input parameters */

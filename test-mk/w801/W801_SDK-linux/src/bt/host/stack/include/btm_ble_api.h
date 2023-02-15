@@ -73,7 +73,7 @@ typedef uint8_t tBTM_BLE_ADV_CHNL_MAP;
 
 /*d efault advertising channel map */
 #ifndef BTM_BLE_DEFAULT_ADV_CHNL_MAP
-    #define BTM_BLE_DEFAULT_ADV_CHNL_MAP   (BTM_BLE_ADV_CHNL_37| BTM_BLE_ADV_CHNL_38| BTM_BLE_ADV_CHNL_39)
+#define BTM_BLE_DEFAULT_ADV_CHNL_MAP   (BTM_BLE_ADV_CHNL_37| BTM_BLE_ADV_CHNL_38| BTM_BLE_ADV_CHNL_39)
 #endif
 
 /* advertising filter policy */
@@ -86,7 +86,7 @@ typedef uint8_t   tBTM_BLE_AFP;
 
 /* default advertising filter policy */
 #ifndef BTM_BLE_DEFAULT_AFP
-    #define BTM_BLE_DEFAULT_AFP   AP_SCAN_CONN_ALL
+#define BTM_BLE_DEFAULT_AFP   AP_SCAN_CONN_ALL
 #endif
 
 /* scanning filter policy */
@@ -102,7 +102,7 @@ typedef uint8_t   tBTM_BLE_AFP;
 typedef uint8_t   tBTM_BLE_SFP;
 
 #ifndef BTM_BLE_DEFAULT_SFP
-    #define BTM_BLE_DEFAULT_SFP   SP_ADV_ALL
+#define BTM_BLE_DEFAULT_SFP   SP_ADV_ALL
 #endif
 
 /* adv parameter boundary values */
@@ -141,64 +141,64 @@ typedef uint8_t   tBTM_BLE_SFP;
 /* default connection parameters if not configured, use GAP recommend value for auto/selective connection */
 /* default scan interval */
 #ifndef BTM_BLE_SCAN_FAST_INT
-    #define BTM_BLE_SCAN_FAST_INT    96    /* 30 ~ 60 ms (use 60)  = 96 *0.625 */
+#define BTM_BLE_SCAN_FAST_INT    96    /* 30 ~ 60 ms (use 60)  = 96 *0.625 */
 #endif
 /* default scan window for background connection, applicable for auto connection or selective conenction */
 #ifndef BTM_BLE_SCAN_FAST_WIN
-    #define BTM_BLE_SCAN_FAST_WIN   48      /* 30 ms = 48 *0.625 */
+#define BTM_BLE_SCAN_FAST_WIN   48      /* 30 ms = 48 *0.625 */
 #endif
 
 /* default scan paramter used in reduced power cycle (background scanning) */
 #ifndef BTM_BLE_SCAN_SLOW_INT_1
-    #define BTM_BLE_SCAN_SLOW_INT_1    2048    /* 1.28 s   = 2048 *0.625 */
+#define BTM_BLE_SCAN_SLOW_INT_1    2048    /* 1.28 s   = 2048 *0.625 */
 #endif
 #ifndef BTM_BLE_SCAN_SLOW_WIN_1
-    #define BTM_BLE_SCAN_SLOW_WIN_1   48      /* 30 ms = 48 *0.625 */
+#define BTM_BLE_SCAN_SLOW_WIN_1   48      /* 30 ms = 48 *0.625 */
 #endif
 
 /* default scan paramter used in reduced power cycle (background scanning) */
 #ifndef BTM_BLE_SCAN_SLOW_INT_2
-    #define BTM_BLE_SCAN_SLOW_INT_2    4096    /* 2.56 s   = 4096 *0.625 */
+#define BTM_BLE_SCAN_SLOW_INT_2    4096    /* 2.56 s   = 4096 *0.625 */
 #endif
 #ifndef BTM_BLE_SCAN_SLOW_WIN_2
-    #define BTM_BLE_SCAN_SLOW_WIN_2   36      /* 22.5 ms = 36 *0.625 */
+#define BTM_BLE_SCAN_SLOW_WIN_2   36      /* 22.5 ms = 36 *0.625 */
 #endif
 
 /* default connection interval min */
 #ifndef BTM_BLE_CONN_INT_MIN_DEF
-    #define BTM_BLE_CONN_INT_MIN_DEF     24      /* recommended min: 30ms  = 24 * 1.25 */
+#define BTM_BLE_CONN_INT_MIN_DEF     24      /* recommended min: 30ms  = 24 * 1.25 */
 #endif
 
 /* default connectino interval max */
 #ifndef BTM_BLE_CONN_INT_MAX_DEF
-    #define BTM_BLE_CONN_INT_MAX_DEF     40      /* recommended max: 50 ms = 56 * 1.25 */
+#define BTM_BLE_CONN_INT_MAX_DEF     40      /* recommended max: 50 ms = 56 * 1.25 */
 #endif
 
 /* default slave latency */
 #ifndef BTM_BLE_CONN_SLAVE_LATENCY_DEF
-    #define BTM_BLE_CONN_SLAVE_LATENCY_DEF  0      /* 0 */
+#define BTM_BLE_CONN_SLAVE_LATENCY_DEF  0      /* 0 */
 #endif
 
 /* default supervision timeout */
 #ifndef BTM_BLE_CONN_TIMEOUT_DEF
-    #define BTM_BLE_CONN_TIMEOUT_DEF    2000
+#define BTM_BLE_CONN_TIMEOUT_DEF    2000
 #endif
 
 /* minimum supervision timeout */
 #ifndef BTM_BLE_CONN_TIMEOUT_MIN_DEF
-    #define BTM_BLE_CONN_TIMEOUT_MIN_DEF    100
+#define BTM_BLE_CONN_TIMEOUT_MIN_DEF    100
 #endif
 
 /* minimum acceptable connection interval */
 #ifndef BTM_BLE_CONN_INT_MIN_LIMIT
-    #define BTM_BLE_CONN_INT_MIN_LIMIT     0x0009
+#define BTM_BLE_CONN_INT_MIN_LIMIT     0x0009
 #endif
 
 #define BTM_BLE_DIR_CONN_FALLBACK_UNDIR         1
 #define BTM_BLE_DIR_CONN_FALLBACK_NO_ADV        2
 
 #ifndef BTM_BLE_DIR_CONN_FALLBACK
-    #define BTM_BLE_DIR_CONN_FALLBACK   BTM_BLE_DIR_CONN_FALLBACK_UNDIR
+#define BTM_BLE_DIR_CONN_FALLBACK   BTM_BLE_DIR_CONN_FALLBACK_UNDIR
 #endif
 
 #define BTM_CMAC_TLEN_SIZE          8                   /* 64 bits */
@@ -206,11 +206,11 @@ typedef uint8_t   tBTM_BLE_SFP;
 typedef uint8_t BLE_SIGNATURE[BTM_BLE_AUTH_SIGN_LEN];         /* Device address */
 
 #ifndef BTM_BLE_HOST_SUPPORT
-    #define BTM_BLE_HOST_SUPPORT        0x01
+#define BTM_BLE_HOST_SUPPORT        0x01
 #endif
 
 #ifndef BTM_BLE_SIMULTANEOUS_HOST
-    #define BTM_BLE_SIMULTANEOUS_HOST   0x01
+#define BTM_BLE_SIMULTANEOUS_HOST   0x01
 #endif
 
 /* Appearance Values Reported with BTM_BLE_AD_TYPE_APPEARANCE */
@@ -266,8 +266,7 @@ typedef uint8_t BLE_SIGNATURE[BTM_BLE_AUTH_SIGN_LEN];         /* Device address 
 
 
 /* Structure returned with Rand/Encrypt complete callback */
-typedef struct
-{
+typedef struct {
     uint8_t   status;
     uint8_t   param_len;
     uint16_t  opcode;
@@ -371,8 +370,7 @@ typedef uint8_t   tBTM_BLE_AD_TYPE;
 typedef uint8_t tBTM_BLE_ADV_TX_POWER;
 
 /* adv tx power in dBm */
-typedef struct
-{
+typedef struct {
     uint8_t adv_inst_max;         /* max adv instance supported in controller */
     uint8_t rpa_offloading;
     uint16_t tot_scan_results_strg;
@@ -388,8 +386,7 @@ typedef struct
 } tBTM_BLE_VSC_CB;
 
 /* slave preferred connection interval range */
-typedef struct
-{
+typedef struct {
     uint16_t  low;
     uint16_t  hi;
 
@@ -397,8 +394,7 @@ typedef struct
 
 /* Service tag supported in the device */
 #define MAX_16BIT_SERVICES 16
-typedef struct
-{
+typedef struct {
     uint8_t       num_service;
     uint8_t     list_cmpl;
     uint16_t      uuid[MAX_16BIT_SERVICES];
@@ -406,53 +402,46 @@ typedef struct
 
 /* 32 bits Service supported in the device */
 #define MAX_32BIT_SERVICES 4
-typedef struct
-{
+typedef struct {
     uint8_t       num_service;
     uint8_t     list_cmpl;
     uint32_t      uuid[MAX_32BIT_SERVICES];
 } tBTM_BLE_32SERVICE;
 
 /* 128 bits Service supported in the device */
-typedef struct
-{
+typedef struct {
     uint8_t       num_service;
     uint8_t     list_cmpl;
     uint8_t       uuid128[MAX_UUID_SIZE];
 } tBTM_BLE_128SERVICE;
 
 #define MAX_SIZE_MANUFACTURER_DATA 32
-typedef struct
-{
+typedef struct {
     uint8_t len;
     uint8_t val[MAX_SIZE_MANUFACTURER_DATA];
 } tBTM_BLE_MANU;
 
 #define MAX_SIZE_SERVICE_DATA 32
-typedef struct
-{
+typedef struct {
     tBT_UUID    service_uuid;
     uint8_t       len;
     uint8_t       val[MAX_SIZE_SERVICE_DATA];
 } tBTM_BLE_SERVICE_DATA;
 
 #define MAX_SIZE_PROPRIETARY_ELEMENT 32
-typedef struct
-{
+typedef struct {
     uint8_t       adv_type;
     uint8_t       len;
     uint8_t       val[MAX_SIZE_PROPRIETARY_ELEMENT];     /* number of len byte */
 } tBTM_BLE_PROP_ELEM;
 
 #define MAX_PROPRIETARY_ELEMENTS 4
-typedef struct
-{
+typedef struct {
     uint8_t                   num_elem;
     tBTM_BLE_PROP_ELEM      elem[MAX_PROPRIETARY_ELEMENTS];
 } tBTM_BLE_PROPRIETARY;
 
-typedef struct
-{
+typedef struct {
     tBTM_BLE_INT_RANGE      int_range;      /* slave prefered conn interval range */
     tBTM_BLE_MANU           manu;           /* manufactuer data */
     tBTM_BLE_SERVICE        services;       /* services */
@@ -469,7 +458,7 @@ typedef struct
 } tBTM_BLE_ADV_DATA;
 
 #ifndef BTM_BLE_MULTI_ADV_MAX
-    #define BTM_BLE_MULTI_ADV_MAX   16 /* controller returned adv_inst_max should be less
+#define BTM_BLE_MULTI_ADV_MAX   16 /* controller returned adv_inst_max should be less
     than this number */
 #endif
 
@@ -483,8 +472,7 @@ typedef uint8_t tBTM_BLE_MULTI_ADV_EVT;
 
 #define BTM_BLE_MULTI_ADV_DEFAULT_STD 0
 
-typedef struct
-{
+typedef struct {
     uint16_t          adv_int_min;
     uint16_t          adv_int_max;
     uint8_t           adv_type;
@@ -493,8 +481,7 @@ typedef struct
     tBTM_BLE_ADV_TX_POWER tx_power;
 } tBTM_BLE_ADV_PARAMS;
 
-typedef struct
-{
+typedef struct {
     uint8_t   *p_sub_code; /* dynamic array to store sub code */
     uint8_t   *p_inst_id;  /* dynamic array to store instance id */
     uint8_t   pending_idx;
@@ -504,8 +491,7 @@ typedef struct
 typedef void (tBTM_BLE_MULTI_ADV_CBACK)(tBTM_BLE_MULTI_ADV_EVT evt, uint8_t inst_id,
                                         void *p_ref, tBTM_STATUS status);
 
-typedef struct
-{
+typedef struct {
     uint8_t                       inst_id;
     uint8_t                     in_use;
     uint8_t                       adv_evt;
@@ -516,15 +502,13 @@ typedef struct
     uint8_t                       index;
 } tBTM_BLE_MULTI_ADV_INST;
 
-typedef struct
-{
+typedef struct {
     uint8_t inst_index_queue[BTM_BLE_MULTI_ADV_MAX];
     int front;
     int rear;
 } tBTM_BLE_MULTI_ADV_INST_IDX_Q;
 
-typedef struct
-{
+typedef struct {
     tBTM_BLE_MULTI_ADV_INST *p_adv_inst; /* dynamic array to store adv instance */
     tBTM_BLE_MULTI_ADV_OPQ  op_q;
 } tBTM_BLE_MULTI_ADV_CB;
@@ -538,15 +522,14 @@ typedef void (tBTM_BLE_SCAN_REP_CBACK)(tBTM_BLE_REF_VALUE ref_value, uint8_t rep
 typedef void (tBTM_BLE_SCAN_SETUP_CBACK)(uint8_t evt, tBTM_BLE_REF_VALUE ref_value, uint8_t status);
 
 #ifndef BTM_BLE_BATCH_SCAN_MAX
-    #define BTM_BLE_BATCH_SCAN_MAX   5
+#define BTM_BLE_BATCH_SCAN_MAX   5
 #endif
 
 #ifndef BTM_BLE_BATCH_REP_MAIN_Q_SIZE
-    #define BTM_BLE_BATCH_REP_MAIN_Q_SIZE  2
+#define BTM_BLE_BATCH_REP_MAIN_Q_SIZE  2
 #endif
 
-typedef enum
-{
+typedef enum {
     BTM_BLE_SCAN_INVALID_STATE = 0,
     BTM_BLE_SCAN_ENABLE_CALLED = 1,
     BTM_BLE_SCAN_ENABLED_STATE = 2,
@@ -554,15 +537,13 @@ typedef enum
     BTM_BLE_SCAN_DISABLED_STATE = 4
 } tBTM_BLE_BATCH_SCAN_STATE;
 
-enum
-{
+enum {
     BTM_BLE_DISCARD_OLD_ITEMS,
     BTM_BLE_DISCARD_LOWER_RSSI_ITEMS
 };
 typedef uint8_t tBTM_BLE_DISCARD_RULE;
 
-typedef struct
-{
+typedef struct {
     uint8_t   sub_code[BTM_BLE_BATCH_SCAN_MAX];
     tBTM_BLE_BATCH_SCAN_STATE cur_state[BTM_BLE_BATCH_SCAN_MAX];
     tBTM_BLE_REF_VALUE        ref_value[BTM_BLE_BATCH_SCAN_MAX];
@@ -570,8 +551,7 @@ typedef struct
     uint8_t   next_idx;
 } tBTM_BLE_BATCH_SCAN_OPQ;
 
-typedef struct
-{
+typedef struct {
     uint8_t   rep_mode[BTM_BLE_BATCH_REP_MAIN_Q_SIZE];
     tBTM_BLE_REF_VALUE  ref_value[BTM_BLE_BATCH_REP_MAIN_Q_SIZE];
     uint8_t   num_records[BTM_BLE_BATCH_REP_MAIN_Q_SIZE];
@@ -581,8 +561,7 @@ typedef struct
     uint8_t   next_idx;
 } tBTM_BLE_BATCH_SCAN_REP_Q;
 
-typedef struct
-{
+typedef struct {
     tBTM_BLE_BATCH_SCAN_STATE      cur_state;
     tBTM_BLE_BATCH_SCAN_MODE scan_mode;
     uint32_t                  scan_interval;
@@ -610,16 +589,16 @@ typedef struct
 
 /* max number of filter spot for different filter type */
 #ifndef BTM_BLE_MAX_UUID_FILTER
-    #define BTM_BLE_MAX_UUID_FILTER     8
+#define BTM_BLE_MAX_UUID_FILTER     8
 #endif
 #ifndef BTM_BLE_MAX_ADDR_FILTER
-    #define BTM_BLE_MAX_ADDR_FILTER     8
+#define BTM_BLE_MAX_ADDR_FILTER     8
 #endif
 #ifndef BTM_BLE_PF_STR_COND_MAX
-    #define BTM_BLE_PF_STR_COND_MAX     4   /* apply to manu data , or local name */
+#define BTM_BLE_PF_STR_COND_MAX     4   /* apply to manu data , or local name */
 #endif
 #ifndef BTM_BLE_PF_STR_LEN_MAX
-    #define BTM_BLE_PF_STR_LEN_MAX      29  /* match for first 29 bytes */
+#define BTM_BLE_PF_STR_LEN_MAX      29  /* match for first 29 bytes */
 #endif
 
 typedef uint8_t   tBTM_BLE_PF_COND_TYPE;
@@ -659,8 +638,7 @@ typedef uint16_t tBTM_BLE_PF_TIMEOUT;
 typedef uint8_t  tBTM_BLE_PF_TIMEOUT_CNT;
 typedef uint16_t tBTM_BLE_PF_ADV_TRACK_ENTRIES;
 
-typedef struct
-{
+typedef struct {
     tBTM_BLE_PF_FEAT_SEL feat_seln;
     tBTM_BLE_PF_LIST_LOGIC_TYPE logic_type;
     tBTM_BLE_PF_FILT_LOGIC_TYPE filt_logic_type;
@@ -673,16 +651,14 @@ typedef struct
     tBTM_BLE_PF_ADV_TRACK_ENTRIES num_of_tracking_entries;
 } tBTM_BLE_PF_FILT_PARAMS;
 
-enum
-{
+enum {
     BTM_BLE_SCAN_COND_ADD,
     BTM_BLE_SCAN_COND_DELETE,
     BTM_BLE_SCAN_COND_CLEAR = 2
 };
 typedef uint8_t tBTM_BLE_SCAN_COND_OP;
 
-enum
-{
+enum {
     BTM_BLE_FILT_ENABLE_DISABLE = 1,
     BTM_BLE_FILT_CFG            = 2,
     BTM_BLE_FILT_ADV_PARAM      = 3
@@ -706,29 +682,25 @@ typedef void (tBTM_BLE_PF_PARAM_CBACK)(tBTM_BLE_PF_ACTION action_type,
                                        tBTM_BLE_PF_AVBL_SPACE avbl_space,
                                        tBTM_BLE_REF_VALUE ref_value, tBTM_STATUS status);
 
-typedef union
-{
+typedef union {
     uint16_t              uuid16_mask;
     uint32_t              uuid32_mask;
     uint8_t               uuid128_mask[LEN_UUID_128];
 } tBTM_BLE_PF_COND_MASK;
 
-typedef struct
-{
+typedef struct {
     tBLE_BD_ADDR            *p_target_addr;     /* target address, if NULL, generic UUID filter */
     tBT_UUID                uuid;           /* UUID condition */
     tBTM_BLE_PF_LOGIC_TYPE  cond_logic;    /* AND/OR */
     tBTM_BLE_PF_COND_MASK   *p_uuid_mask;           /* UUID mask */
 } tBTM_BLE_PF_UUID_COND;
 
-typedef struct
-{
+typedef struct {
     uint8_t                   data_len;       /* <= 20 bytes */
     uint8_t                   *p_data;
 } tBTM_BLE_PF_LOCAL_NAME_COND;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  company_id;     /* company ID */
     uint8_t                   data_len;       /* <= 20 bytes */
     uint8_t                   *p_pattern;
@@ -738,18 +710,17 @@ typedef struct
                                                 set to all 0xff, match exact data */
 } tBTM_BLE_PF_MANU_COND;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  uuid;     /* service ID */
     uint8_t                   data_len;       /* <= 20 bytes */
     uint8_t                   *p_pattern;
-    uint8_t                   *p_pattern_mask; /* Service data matching mask, same length as data pattern,
+    uint8_t
+    *p_pattern_mask; /* Service data matching mask, same length as data pattern,
                                                 set to all 0xff, match exact data */
 } tBTM_BLE_PF_SRVC_PATTERN_COND;
 
 
-typedef union
-{
+typedef union {
     tBLE_BD_ADDR                            target_addr;
     tBTM_BLE_PF_LOCAL_NAME_COND             local_name; /* lcoal name filtering */
     tBTM_BLE_PF_MANU_COND                   manu_data;  /* manufactuer data filtering */
@@ -758,8 +729,7 @@ typedef union
     tBTM_BLE_PF_SRVC_PATTERN_COND           srvc_data;      /* service data pattern */
 } tBTM_BLE_PF_COND_PARAM;
 
-typedef struct
-{
+typedef struct {
     uint8_t   action_ocf[BTM_BLE_PF_TYPE_MAX];
     tBTM_BLE_REF_VALUE  ref_value[BTM_BLE_PF_TYPE_MAX];
     tBTM_BLE_PF_PARAM_CBACK  *p_filt_param_cback[BTM_BLE_PF_TYPE_MAX];
@@ -772,18 +742,17 @@ typedef struct
 #define BTM_BLE_MAX_FILTER_COUNTER  (BTM_BLE_MAX_ADDR_FILTER + 1) /* per device filter + one generic filter indexed by 0 */
 
 #ifndef BTM_CS_IRK_LIST_MAX
-    #define BTM_CS_IRK_LIST_MAX 0x20
+#define BTM_CS_IRK_LIST_MAX 0x20
 #endif
 
-typedef struct
-{
+typedef struct {
     uint8_t    in_use;
     BD_ADDR    bd_addr;
-    uint8_t      pf_counter[BTM_BLE_PF_TYPE_MAX]; /* number of filter indexed by tBTM_BLE_PF_COND_TYPE */
+    uint8_t
+    pf_counter[BTM_BLE_PF_TYPE_MAX]; /* number of filter indexed by tBTM_BLE_PF_COND_TYPE */
 } tBTM_BLE_PF_COUNT;
 
-typedef struct
-{
+typedef struct {
     uint8_t             enable;
     uint8_t               op_type;
     tBTM_BLE_PF_COUNT   *p_addr_filter_count; /* per BDA filter array */
@@ -811,8 +780,7 @@ typedef uint16_t BTM_BLE_ADV_INFO_TIMESTAMP;
 /* These are the fields returned in each device adv packet.  It
 ** is returned in the results callback if registered.
 */
-typedef struct
-{
+typedef struct {
     uint8_t               conn_mode;
     tBTM_BLE_AD_MASK    ad_mask;        /* mask of the valid adv data field */
     uint8_t               flag;
@@ -822,8 +790,7 @@ typedef struct
     tBTM_BLE_SERVICE    service;
 } tBTM_BLE_INQ_DATA;
 
-enum
-{
+enum {
     BTM_BLE_CONN_NONE,
     BTM_BLE_CONN_AUTO,
     BTM_BLE_CONN_SELECTIVE
@@ -839,14 +806,12 @@ typedef void (tBTM_BLE_TRACK_ADV_CBACK)(tBTM_BLE_TRACK_ADV_DATA *p_track_adv_dat
 
 typedef uint8_t tBTM_BLE_TRACK_ADV_EVT;
 
-typedef struct
-{
+typedef struct {
     tBTM_BLE_REF_VALUE             ref_value;
     tBTM_BLE_TRACK_ADV_CBACK *p_track_cback;
 } tBTM_BLE_ADV_TRACK_CB;
 
-enum
-{
+enum {
     BTM_BLE_TRACK_ADV_ADD,
     BTM_BLE_TRACK_ADV_REMOVE
 };
@@ -874,8 +839,7 @@ typedef void (tBTM_BLE_ENERGY_INFO_CBACK)(tBTM_BLE_TX_TIME_MS tx_time, tBTM_BLE_
         tBTM_BLE_ENERGY_USED  energy_used,
         tBTM_STATUS status);
 
-typedef struct
-{
+typedef struct {
     tBTM_BLE_ENERGY_INFO_CBACK *p_ener_cback;
 } tBTM_BLE_ENERGY_INFO_CB;
 
@@ -888,7 +852,8 @@ typedef void (tBTM_BLE_VERIFY_CBACK)(void *p_ref_data, uint8_t match);
 /* random address set complete callback */
 typedef void (tBTM_BLE_RANDOM_SET_CBACK)(BD_ADDR random_bda);
 
-typedef void (tBTM_BLE_SCAN_REQ_CBACK)(BD_ADDR remote_bda, tBLE_ADDR_TYPE addr_type, uint8_t adv_evt);
+typedef void (tBTM_BLE_SCAN_REQ_CBACK)(BD_ADDR remote_bda, tBLE_ADDR_TYPE addr_type,
+                                       uint8_t adv_evt);
 typedef void (*tBLE_SCAN_PARAM_SETUP_CBACK)(tGATT_IF client_if, tBTM_STATUS status);
 
 tBTM_BLE_SCAN_SETUP_CBACK bta_ble_scan_setup_cb;
@@ -947,8 +912,9 @@ extern uint8_t BTM_SecAddBleKey(BD_ADDR bd_addr, tBTM_LE_KEY_VALUE *p_le_key,
 ** Returns          void
 **
 *******************************************************************************/
-extern tBTM_STATUS BTM_BleSetAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max,uint8_t adv_type, uint8_t own_addr_type,
-										tBTM_BLE_ADV_CHNL_MAP chnl_map, uint8_t afp, uint8_t peer_addr_type, tBLE_BD_ADDR *p_dir_bda);
+extern tBTM_STATUS BTM_BleSetAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max,
+        uint8_t adv_type, uint8_t own_addr_type,
+        tBTM_BLE_ADV_CHNL_MAP chnl_map, uint8_t afp, uint8_t peer_addr_type, tBLE_BD_ADDR *p_dir_bda);
 
 /*******************************************************************************
 **
@@ -1516,7 +1482,7 @@ extern uint8_t BTM_ReadConnectedTransportAddress(BD_ADDR remote_bda,
 **
 ** Parameters       start: start or stop broadcasting.
 **                         duration: 0 for infinite. other, duration seconds for broadcast
-**       
+**
 ** Returns          status.
 **
 *******************************************************************************/

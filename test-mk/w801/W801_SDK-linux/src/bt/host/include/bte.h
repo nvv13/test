@@ -31,12 +31,11 @@
  * that kill BTE driver and remove/reset BT chip
  */
 #ifndef BTE_RESET_BAUD_ON_BT_DISABLE
-    #define BTE_RESET_BAUD_ON_BT_DISABLE TRUE
+#define BTE_RESET_BAUD_ON_BT_DISABLE TRUE
 #endif
 
 /* Target Modes (based on jumper settings on hardware [see user manual]) */
-enum
-{
+enum {
     /* BTE                  BBY                     */
     /* J3   J4              SW3-3   SW3-2   SW3-1   */
     /* -------------------------------------------- */
@@ -52,8 +51,10 @@ enum
 extern volatile uint8_t    bte_target_mode;    /* indicates the mode that the board is running in */
 
 /* Startup options */
-extern uint32_t bte_startup_options;                      /* Switch and jumper settings at startup */
-void bte_get_startup_options(uint32_t *p_options);        /* Platform specific function for getting startup options */
+extern uint32_t
+bte_startup_options;                      /* Switch and jumper settings at startup */
+void bte_get_startup_options(uint32_t
+                             *p_options);        /* Platform specific function for getting startup options */
 
 #define BTE_OPTIONS_TARGET_MODE_MASK    0x00000007      /* bits 2-0 indicate target mode (QuickConnect: jp3 & jp4, BBY: SW3-1 & SW3-2)*/
 
@@ -81,8 +82,7 @@ void bte_get_startup_options(uint32_t *p_options);        /* Platform specific f
 #define BTE_HCISU_USERIAL_FAIL      0
 #define BTE_HCISU_USERIAL_OK        1
 typedef void (tUSERIAL_MSG_CBACK)(int status);
-typedef struct tHCISU_USERIAL_MSG_tag
-{
+typedef struct tHCISU_USERIAL_MSG_tag {
     BT_HDR      hdr;
     tUSERIAL_MSG_CBACK *p_cback;
     uint8_t       port;   /* port number */
@@ -90,7 +90,8 @@ typedef struct tHCISU_USERIAL_MSG_tag
     uint8_t       option; /* option for operation. depends on operation */
 } tHCISU_USERIAL_MSG;
 
-extern void bte_hcisu_userial_oper(tUSERIAL_MSG_CBACK *p_cback, uint8_t port, uint8_t op, uint8_t option);
+extern void bte_hcisu_userial_oper(tUSERIAL_MSG_CBACK *p_cback, uint8_t port, uint8_t op,
+                                   uint8_t option);
 
 /* Pointer to function for sending HCI commands and data to the HCI tranport */
 extern int (*p_bte_hci_send)(uint16_t port, BT_HDR *p_msg);
@@ -99,8 +100,7 @@ extern int (*p_bte_hci_send)(uint16_t port, BT_HDR *p_msg);
 /* Protocol trace mask */
 extern uint32_t bte_proto_trace_mask;
 
-typedef struct tBAUD_REG_tag
-{
+typedef struct tBAUD_REG_tag {
     uint8_t DHBR;
     uint8_t DLBR;
     uint8_t ExplicitBaudRate0;

@@ -134,12 +134,9 @@ void bta_hf_client_start_close(tBTA_HF_CLIENT_DATA *p_data)
     L2CA_SetIdleTimeoutByBdAddr(bta_hf_client_cb.scb.peer_addr, 0, BT_TRANSPORT_BR_EDR);
 
     /* if SCO is open close SCO and wait on RFCOMM close */
-    if(bta_hf_client_cb.scb.sco_state == BTA_HF_CLIENT_SCO_OPEN_ST)
-    {
+    if(bta_hf_client_cb.scb.sco_state == BTA_HF_CLIENT_SCO_OPEN_ST) {
         bta_hf_client_cb.scb.sco_close_rfc = TRUE;
-    }
-    else
-    {
+    } else {
         bta_hf_client_rfc_do_close(p_data);
     }
 
@@ -162,15 +159,13 @@ void bta_hf_client_start_open(tBTA_HF_CLIENT_DATA *p_data)
     BD_ADDR pending_bd_addr;
 
     /* store parameters */
-    if(p_data)
-    {
+    if(p_data) {
         bdcpy(bta_hf_client_cb.scb.peer_addr, p_data->api_open.bd_addr);
         bta_hf_client_cb.scb.cli_sec_mask = p_data->api_open.sec_mask;
     }
 
     /* Check if RFCOMM has any incoming connection to avoid collision. */
-    if(PORT_IsOpening(pending_bd_addr))
-    {
+    if(PORT_IsOpening(pending_bd_addr)) {
         /* Let the incoming connection goes through.                        */
         /* Issue collision for now.                                         */
         /* We will decide what to do when we find incoming connection later.*/
@@ -203,13 +198,10 @@ static void bta_hf_client_cback_open(tBTA_HF_CLIENT_DATA *p_data, tBTA_HF_CLIENT
     /* call app callback with open event */
     evt.open.status = status;
 
-    if(p_data)
-    {
+    if(p_data) {
         /* if p_data is provided then we need to pick the bd address from the open api structure */
         bdcpy(evt.open.bd_addr, p_data->api_open.bd_addr);
-    }
-    else
-    {
+    } else {
         bdcpy(evt.open.bd_addr, bta_hf_client_cb.scb.peer_addr);
     }
 
@@ -256,33 +248,30 @@ void bta_hf_client_rfc_acp_open(tBTA_HF_CLIENT_DATA *p_data)
                      bta_hf_client_cb.scb.serv_handle, p_data->rfc.port_handle);
 
     /* get bd addr of peer */
-    if(PORT_SUCCESS != (status = PORT_CheckConnection(p_data->rfc.port_handle, dev_addr, &lcid)))
-    {
-        APPL_TRACE_DEBUG("bta_hf_client_rfc_acp_open error PORT_CheckConnection returned status %d", status);
+    if(PORT_SUCCESS != (status = PORT_CheckConnection(p_data->rfc.port_handle, dev_addr, &lcid))) {
+        APPL_TRACE_DEBUG("bta_hf_client_rfc_acp_open error PORT_CheckConnection returned status %d",
+                         status);
     }
 
     /* Collision Handling */
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
 
     if(alarm_is_scheduled(bta_hf_client_cb.scb.collision_timer))
-    #else
+#else
     if(bta_hf_client_cb.scb.collision_timer_on)
-    #endif
+#endif
     {
-        #ifdef USE_ALARM
+#ifdef USE_ALARM
         alarm_cancel(bta_hf_client_cb.scb.collision_timer);
-        #else
+#else
         bta_hf_client_cb.scb.collision_timer_on = 0;
         bta_sys_stop_timer(&bta_hf_client_cb.scb.collision_timer);
-        #endif
+#endif
 
-        if(bdcmp(dev_addr, bta_hf_client_cb.scb.peer_addr) == 0)
-        {
+        if(bdcmp(dev_addr, bta_hf_client_cb.scb.peer_addr) == 0) {
             /* If incoming and outgoing device are same, nothing more to do.            */
             /* Outgoing conn will be aborted because we have successful incoming conn.  */
-        }
-        else
-        {
+        } else {
             /* Resume outgoing connection. */
             bta_hf_client_resume_open();
         }
@@ -386,8 +375,7 @@ void bta_hf_client_rfc_close(tBTA_HF_CLIENT_DATA *p_data)
     (*bta_hf_client_cb.p_cback)(BTA_HF_CLIENT_CLOSE_EVT, NULL);
 
     /* if not deregistering reopen server */
-    if(bta_hf_client_cb.scb.deregister == FALSE)
-    {
+    if(bta_hf_client_cb.scb.deregister == FALSE) {
         /* Clear peer bd_addr so instance can be reused */
         bdcpy(bta_hf_client_cb.scb.peer_addr, bd_addr_null);
         /* start server as it might got closed on open*/
@@ -398,8 +386,7 @@ void bta_hf_client_rfc_close(tBTA_HF_CLIENT_DATA *p_data)
         bta_sys_sco_unuse(BTA_ID_HS, 1, bta_hf_client_cb.scb.peer_addr);
     }
     /* else close port and deallocate scb */
-    else
-    {
+    else {
         bta_hf_client_close_server();
         bta_hf_client_scb_disable();
     }
@@ -422,11 +409,9 @@ void bta_hf_client_disc_int_res(tBTA_HF_CLIENT_DATA *p_data)
 
     /* if found service */
     if(p_data->disc_result.status == SDP_SUCCESS ||
-            p_data->disc_result.status == SDP_DB_FULL)
-    {
+            p_data->disc_result.status == SDP_DB_FULL) {
         /* get attributes */
-        if(bta_hf_client_sdp_find_attr())
-        {
+        if(bta_hf_client_sdp_find_attr()) {
             event = BTA_HF_CLIENT_DISC_OK_EVT;
         }
     }
@@ -451,8 +436,7 @@ void bta_hf_client_disc_acp_res(tBTA_HF_CLIENT_DATA *p_data)
 {
     /* if found service */
     if(p_data->disc_result.status == SDP_SUCCESS ||
-            p_data->disc_result.status == SDP_DB_FULL)
-    {
+            p_data->disc_result.status == SDP_DB_FULL) {
         /* get attributes */
         bta_hf_client_sdp_find_attr();
     }
@@ -479,19 +463,17 @@ void bta_hf_client_rfc_data(tBTA_HF_CLIENT_DATA *p_data)
     wm_memset(buf, 0, sizeof(buf));
 
     /* read data from rfcomm; if bad status, we're done */
-    while(PORT_ReadData(bta_hf_client_cb.scb.conn_handle, buf, BTA_HF_CLIENT_RFC_READ_MAX, &len) == PORT_SUCCESS)
-    {
+    while(PORT_ReadData(bta_hf_client_cb.scb.conn_handle, buf, BTA_HF_CLIENT_RFC_READ_MAX,
+                        &len) == PORT_SUCCESS) {
         /* if no data, we're done */
-        if(len == 0)
-        {
+        if(len == 0) {
             break;
         }
 
         bta_hf_client_at_parse(buf, len);
 
         /* no more data to read, we're done */
-        if(len < BTA_HF_CLIENT_RFC_READ_MAX)
-        {
+        if(len < BTA_HF_CLIENT_RFC_READ_MAX) {
             break;
         }
     }
@@ -513,8 +495,7 @@ void bta_hf_client_svc_conn_open(tBTA_HF_CLIENT_DATA *p_data)
     UNUSED(p_data);
     wm_memset(&evt, 0, sizeof(evt));
 
-    if(!bta_hf_client_cb.scb.svc_conn)
-    {
+    if(!bta_hf_client_cb.scb.svc_conn) {
         /* set state variable */
         bta_hf_client_cb.scb.svc_conn = TRUE;
         /* call callback */
@@ -657,8 +638,7 @@ void bta_hf_client_clcc(uint32_t idx, uint8_t incoming, uint8_t status, uint8_t 
     evt.clcc.status = status;
     evt.clcc.mpty = mpty;
 
-    if(number)
-    {
+    if(number) {
         evt.clcc.number_present = TRUE;
         strlcpy(evt.clcc.number, number, BTA_HF_CLIENT_NUMBER_LEN + 1);
         evt.clcc.number[BTA_HF_CLIENT_NUMBER_LEN] = '\0';

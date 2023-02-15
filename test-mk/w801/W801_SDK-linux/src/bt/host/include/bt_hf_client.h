@@ -19,8 +19,7 @@
 
 
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CONNECTION_STATE_DISCONNECTED = 0,
     BTHF_CLIENT_CONNECTION_STATE_CONNECTING,
     BTHF_CLIENT_CONNECTION_STATE_CONNECTED,
@@ -28,40 +27,34 @@ typedef enum
     BTHF_CLIENT_CONNECTION_STATE_DISCONNECTING
 } bthf_client_connection_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_AUDIO_STATE_DISCONNECTED = 0,
     BTHF_CLIENT_AUDIO_STATE_CONNECTING,
     BTHF_CLIENT_AUDIO_STATE_CONNECTED,
     BTHF_CLIENT_AUDIO_STATE_CONNECTED_MSBC,
 } bthf_client_audio_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_VR_STATE_STOPPED = 0,
     BTHF_CLIENT_VR_STATE_STARTED
 } bthf_client_vr_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_VOLUME_TYPE_SPK = 0,
     BTHF_CLIENT_VOLUME_TYPE_MIC
 } bthf_client_volume_type_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_NETWORK_STATE_NOT_AVAILABLE = 0,
     BTHF_CLIENT_NETWORK_STATE_AVAILABLE
 } bthf_client_network_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_SERVICE_TYPE_HOME = 0,
     BTHF_CLIENT_SERVICE_TYPE_ROAMING
 } bthf_client_service_type_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALL_STATE_ACTIVE = 0,
     BTHF_CLIENT_CALL_STATE_HELD,
     BTHF_CLIENT_CALL_STATE_DIALING,
@@ -71,14 +64,12 @@ typedef enum
     BTHF_CLIENT_CALL_STATE_HELD_BY_RESP_HOLD,
 } bthf_client_call_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALL_NO_CALLS_IN_PROGRESS = 0,
     BTHF_CLIENT_CALL_CALLS_IN_PROGRESS
 } bthf_client_call_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALLSETUP_NONE = 0,
     BTHF_CLIENT_CALLSETUP_INCOMING,
     BTHF_CLIENT_CALLSETUP_OUTGOING,
@@ -86,34 +77,29 @@ typedef enum
 
 } bthf_client_callsetup_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALLHELD_NONE = 0,
     BTHF_CLIENT_CALLHELD_HOLD_AND_ACTIVE,
     BTHF_CLIENT_CALLHELD_HOLD,
 } bthf_client_callheld_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_RESP_AND_HOLD_HELD = 0,
     BTRH_CLIENT_RESP_AND_HOLD_ACCEPT,
     BTRH_CLIENT_RESP_AND_HOLD_REJECT,
 } bthf_client_resp_and_hold_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALL_DIRECTION_OUTGOING = 0,
     BTHF_CLIENT_CALL_DIRECTION_INCOMING
 } bthf_client_call_direction_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALL_MPTY_TYPE_SINGLE = 0,
     BTHF_CLIENT_CALL_MPTY_TYPE_MULTI
 } bthf_client_call_mpty_type_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CMD_COMPLETE_OK = 0,
     BTHF_CLIENT_CMD_COMPLETE_ERROR,
     BTHF_CLIENT_CMD_COMPLETE_ERROR_NO_CARRIER,
@@ -124,8 +110,7 @@ typedef enum
     BTHF_CLIENT_CMD_COMPLETE_ERROR_CME
 } bthf_client_cmd_complete_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_CALL_ACTION_CHLD_0 = 0,
     BTHF_CLIENT_CALL_ACTION_CHLD_1,
     BTHF_CLIENT_CALL_ACTION_CHLD_2,
@@ -140,15 +125,13 @@ typedef enum
     BTHF_CLIENT_CALL_ACTION_BTRH_2,
 } bthf_client_call_action_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_SERVICE_UNKNOWN = 0,
     BTHF_CLIENT_SERVICE_VOICE,
     BTHF_CLIENT_SERVICE_FAX
 } bthf_client_subscriber_service_type_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CLIENT_IN_BAND_RINGTONE_NOT_PROVIDED = 0,
     BTHF_CLIENT_IN_BAND_RINGTONE_PROVIDED,
 } bthf_client_in_band_ring_state_t;
@@ -282,8 +265,7 @@ typedef void (* bthf_client_last_voice_tag_number_callback)(const char *number);
 typedef void (* bthf_client_ring_indication_callback)(void);
 
 /** BT-HF callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(BtHfClientCallbacks) */
     size_t      size;
     bthf_client_connection_state_callback  connection_state_cb;
@@ -310,8 +292,7 @@ typedef struct
 } bthf_client_callbacks_t;
 
 /** Represents the standard BT-HF interface. */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(BtHfClientInterface) */
     size_t size;

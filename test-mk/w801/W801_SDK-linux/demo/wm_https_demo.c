@@ -20,7 +20,7 @@
 #include "wm_sockets.h"
 #include "lwip/inet.h"
 
-#include "wm_sockets2.0.3.h"
+#include "wm_sockets.h"
 #include "HTTPClientWrapper.h"
 
 #if DEMO_HTTPS

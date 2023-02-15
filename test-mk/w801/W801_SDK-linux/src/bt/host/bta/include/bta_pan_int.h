@@ -36,8 +36,7 @@
 
 
 /* PAN events */
-enum
-{
+enum {
     /* these events are handled by the state machine */
     BTA_PAN_API_CLOSE_EVT = BTA_SYS_EVT_START(BTA_ID_PAN),
     BTA_PAN_CI_TX_READY_EVT,
@@ -58,8 +57,7 @@ enum
 };
 
 /* state machine states */
-enum
-{
+enum {
     BTA_PAN_IDLE_ST,
     BTA_PAN_OPEN_ST,
     BTA_PAN_CLOSING_ST
@@ -73,15 +71,13 @@ enum
 *****************************************************************************/
 
 /* data type for BTA_PAN_API_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;                        /* Event header */
     tBTA_PAN_CBACK     *p_cback;                    /* PAN callback function */
 } tBTA_PAN_API_ENABLE;
 
 /* data type for BTA_PAN_API_REG_ROLE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;                             /* Event header */
     char                user_name[BTA_SERVICE_NAME_LEN + 1]; /* Service name */
     char                gn_name[BTA_SERVICE_NAME_LEN + 1];   /* Service name */
@@ -98,8 +94,7 @@ typedef struct
 } tBTA_PAN_API_SET_ROLE;
 
 /* data type for BTA_PAN_API_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;                        /* Event header */
     tBTA_PAN_ROLE        local_role;                 /* local role */
     tBTA_PAN_ROLE        peer_role;                  /* peer role */
@@ -107,15 +102,13 @@ typedef struct
 } tBTA_PAN_API_OPEN;
 
 /* data type for BTA_PAN_CI_TX_FLOW_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;                    /* Event header */
     uint8_t         enable;                 /* Flow control setting */
 } tBTA_PAN_CI_TX_FLOW;
 
 /* data type for BTA_PAN_CONN_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;        /* Event header */
     tPAN_RESULT     result;
 
@@ -125,8 +118,7 @@ typedef struct
 
 
 /* union of all data types */
-typedef union
-{
+typedef union {
     BT_HDR                   hdr;
     tBTA_PAN_API_ENABLE      api_enable;
     tBTA_PAN_API_SET_ROLE    api_set_role;
@@ -136,8 +128,7 @@ typedef union
 } tBTA_PAN_DATA;
 
 /* state machine control block */
-typedef struct
-{
+typedef struct {
     BD_ADDR                 bd_addr;        /* peer bdaddr */
     fixed_queue_t           *data_queue;    /* Queue of buffers waiting to be passed to application */
     uint16_t                  handle;         /* BTA PAN/BNEP handle */
@@ -155,8 +146,7 @@ typedef struct
 
 
 /* main control block */
-typedef struct
-{
+typedef struct {
     tBTA_PAN_SCB    scb[BTA_PAN_NUM_CONN];          /* state machine control blocks */
     tBTA_PAN_CBACK *p_cback;                        /* PAN callback function */
     uint8_t            app_id[3];                      /* application id for PAN roles */
@@ -167,8 +157,7 @@ typedef struct
 
 
 /* pan data param */
-typedef struct
-{
+typedef struct {
     BT_HDR  hdr;
     BD_ADDR src;
     BD_ADDR dst;
@@ -186,10 +175,10 @@ typedef struct
 /* PAN control block */
 
 #if BTA_DYNAMIC_MEMORY == FALSE
-    extern tBTA_PAN_CB  bta_pan_cb;
+extern tBTA_PAN_CB  bta_pan_cb;
 #else
-    extern tBTA_PAN_CB *bta_pan_cb_ptr;
-    #define bta_pan_cb (*bta_pan_cb_ptr)
+extern tBTA_PAN_CB *bta_pan_cb_ptr;
+#define bta_pan_cb (*bta_pan_cb_ptr)
 #endif
 
 /*****************************************************************************

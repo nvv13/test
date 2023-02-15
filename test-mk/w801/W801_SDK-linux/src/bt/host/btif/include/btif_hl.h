@@ -49,8 +49,7 @@
 **  Type definitions and return values
 ********************************************************************************/
 
-typedef enum
-{
+typedef enum {
     BTIF_HL_SOC_STATE_IDLE,
     BTIF_HL_SOC_STATE_W4_ADD,
     BTIF_HL_SOC_STATE_W4_CONN,
@@ -58,16 +57,14 @@ typedef enum
     BTIF_HL_SOC_STATE_W4_REL
 } btif_hl_soc_state_t;
 
-typedef enum
-{
+typedef enum {
     BTIF_HL_STATE_DISABLED,
     BTIF_HL_STATE_DISABLING,
     BTIF_HL_STATE_ENABLED,
     BTIF_HL_STATE_ENABLING,
 } btif_hl_state_t;
 
-typedef enum
-{
+typedef enum {
     BTIF_HL_CCH_OP_NONE,
     BTIF_HL_CCH_OP_MDEP_FILTERING,
     BTIF_HL_CCH_OP_MATCHED_CTRL_PSM,
@@ -76,22 +73,19 @@ typedef enum
     BTIF_HL_CCH_OP_DCH_ECHO_TEST
 } btif_hl_cch_op_t;
 
-typedef enum
-{
+typedef enum {
     BTIF_HL_PEND_DCH_OP_NONE,
     BTIF_HL_PEND_DCH_OP_DELETE_MDL,
     BTIF_HL_PEND_DCH_OP_OPEN,
     BTIF_HL_PEND_DCH_OP_RECONNECT
 } btif_hl_pend_dch_op_t;
 
-typedef enum
-{
+typedef enum {
     BTIF_HL_DCH_OP_NONE,
     BTIF_HL_DCH_OP_DISC
 } btif_hl_dch_op_t;
 
-typedef enum
-{
+typedef enum {
     BTIF_HL_CHAN_CB_STATE_NONE,
     BTIF_HL_CHAN_CB_STATE_CONNECTING_PENDING,
     BTIF_HL_CHAN_CB_STATE_CONNECTED_PENDING,
@@ -101,8 +95,7 @@ typedef enum
     BTIF_HL_CHAN_CB_STATE_DESTROYED_PENDING,
 } btif_hl_chan_cb_state_t;
 
-enum
-{
+enum {
     BTIF_HL_SEND_CONNECTED_CB,
     BTIF_HL_SEND_DISCONNECTED_CB,
     BTIF_HL_REG_APP,
@@ -110,27 +103,23 @@ enum
     BTIF_HL_UPDATE_MDL,
 };
 
-typedef struct
-{
+typedef struct {
     uint8_t mdep_cfg_idx;
     int data_type;
     tBTA_HL_MDEP_ID peer_mdep_id;
 } btif_hl_extra_mdl_cfg_t;
 
-typedef struct
-{
+typedef struct {
     tBTA_HL_MDL_CFG         base;
     btif_hl_extra_mdl_cfg_t extra;
 } btif_hl_mdl_cfg_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t active;
     uint8_t app_idx;
 } btif_hl_app_data_t;
 
-typedef struct
-{
+typedef struct {
     int                     channel_id;
     BD_ADDR                 bd_addr;
     uint8_t                   mdep_cfg_idx;
@@ -142,27 +131,23 @@ typedef struct
     btif_hl_soc_state_t     state;
 } btif_hl_soc_cb_t;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  data_type;
     uint16_t                  max_tx_apdu_size;
     uint16_t                  max_rx_apdu_size;
 } btif_hl_data_type_cfg_t;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  data_type;
     tBTA_HL_MDEP_ROLE       peer_mdep_role;
 } btif_hl_filter_elem_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t                   num_elems;
     btif_hl_filter_elem_t   elem[BTIF_HL_CCH_NUM_FILTER_ELEMS];
 } btif_hl_cch_filter_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t                 in_use;
     uint16_t                  mdl_id;
     tBTA_HL_MDL_HANDLE      mdl_handle;
@@ -187,8 +172,7 @@ typedef struct
     int                     channel_id;
 } btif_hl_mdl_cb_t;
 
-typedef struct
-{
+typedef struct {
     int                     channel_id;
     int                     mdep_cfg_idx;
     uint8_t                 in_use;
@@ -198,8 +182,7 @@ typedef struct
     uint8_t                 abort_pending;
 } btif_hl_pending_chan_cb_t;
 
-typedef struct
-{
+typedef struct {
     btif_hl_mdl_cb_t        mdl[BTA_HL_NUM_MDLS_PER_MCL];
     uint8_t                 in_use;
     uint8_t                 is_connected;
@@ -218,8 +201,7 @@ typedef struct
     TIMER_LIST_ENT  cch_timer;
 } btif_hl_mcl_cb_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t                 active;
     uint16_t                  mdl_id;
     uint8_t                   mdep_cfg_idx;
@@ -227,8 +209,7 @@ typedef struct
     int                     channel_id;
 } btif_hl_delete_mdl_t;
 
-typedef struct
-{
+typedef struct {
     btif_hl_mcl_cb_t        mcb[BTA_HL_NUM_MCLS]; /* application Control Blocks */
     uint8_t                 in_use;              /* this CB is in use*/
     uint8_t                 reg_pending;
@@ -246,21 +227,22 @@ typedef struct
     tBTA_HL_DEVICE_TYPE     dev_type;
     tBTA_HL_APP_HANDLE      app_handle;
     uint16_t                  sec_mask;   /* Security mask for BTM_SetSecurityLevel() */
-    char                    srv_name[BTA_SERVICE_NAME_LEN + 1];       /* service name to be used in the SDP; null terminated*/
-    char                    srv_desp[BTA_SERVICE_DESP_LEN + 1];       /* service description to be used in the SDP; null terminated */
-    char                    provider_name[BTA_PROVIDER_NAME_LEN + 1];  /* provide name to be used in the SDP; null terminated */
+    char                    srv_name[BTA_SERVICE_NAME_LEN +
+                                                          1];       /* service name to be used in the SDP; null terminated*/
+    char                    srv_desp[BTA_SERVICE_DESP_LEN +
+                                                          1];       /* service description to be used in the SDP; null terminated */
+    char                    provider_name[BTA_PROVIDER_NAME_LEN +
+                                                                1];  /* provide name to be used in the SDP; null terminated */
     char                    application_name[BTIF_HL_APPLICATION_NAME_LEN + 1];  /* applicaiton name */
 } btif_hl_app_cb_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t                 in_use;
     uint8_t                   app_idx;
 } btif_hl_pending_reg_cb_t;
 
 /* BTIF-HL control block  */
-typedef struct
-{
+typedef struct {
     btif_hl_app_cb_t        acb[BTA_HL_NUM_APPS];      /* HL Control Blocks */
     tBTA_HL_CTRL_CBACK      *p_ctrl_cback;             /* pointer to control callback function */
     uint8_t                   next_app_id;
@@ -270,8 +252,7 @@ typedef struct
 
 typedef uint8_t btif_hl_evt_t;
 
-typedef struct
-{
+typedef struct {
     int                     app_id;
     BD_ADDR                 bd_addr;
     int                     mdep_cfg_index;
@@ -280,16 +261,14 @@ typedef struct
     int                     fd;
 } btif_hl_send_chan_state_cb_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t app_idx;
 } btif_hl_reg_t;
 
 typedef btif_hl_reg_t btif_hl_unreg_t;
 typedef btif_hl_reg_t btif_hl_update_mdl_t;
 
-typedef union
-{
+typedef union {
     btif_hl_send_chan_state_cb_t    chan_cb;
     btif_hl_reg_t           reg;
     btif_hl_unreg_t         unreg;

@@ -29,8 +29,7 @@
 /** Typedefs and defines */
 
 /** Vendor specific operations OPCODE */
-typedef enum
-{
+typedef enum {
     /*  [operation]
      *      Power on or off the BT Controller.
      *  [input param]
@@ -200,8 +199,7 @@ typedef enum
 } bt_vendor_opcode_t;
 
 /** Power on/off control states */
-typedef enum
-{
+typedef enum {
     BT_VND_PWR_OFF,
     BT_VND_PWR_ON,
 }  bt_vendor_power_state_t;
@@ -209,8 +207,7 @@ typedef enum
 /** Define HCI channel identifier in the file descriptors array
     used in BT_VND_OP_USERIAL_OPEN operation.
  */
-typedef enum
-{
+typedef enum {
     CH_CMD,     // HCI Command channel
     CH_EVT,     // HCI Event channel
     CH_ACL_OUT, // HCI ACL downstream channel
@@ -220,29 +217,25 @@ typedef enum
 }  bt_vendor_hci_channels_t;
 
 /** LPM disable/enable request */
-typedef enum
-{
+typedef enum {
     BT_VND_LPM_DISABLE,
     BT_VND_LPM_ENABLE,
 } bt_vendor_lpm_mode_t;
 
 /** LPM WAKE set state request */
-typedef enum
-{
+typedef enum {
     BT_VND_LPM_WAKE_ASSERT,
     BT_VND_LPM_WAKE_DEASSERT,
 } bt_vendor_lpm_wake_state_t;
 
 /** Callback result values */
-typedef enum
-{
+typedef enum {
     BT_VND_OP_RESULT_SUCCESS,
     BT_VND_OP_RESULT_FAIL,
 } bt_vendor_op_result_t;
 
 /** audio (SCO) state changes triggering VS commands for configuration */
-typedef struct
-{
+typedef struct {
     uint16_t    handle;
     uint16_t    peer_codec;
     uint16_t    state;
@@ -323,10 +316,10 @@ typedef void (*tINT_CMD_CBACK)(void *p_mem);
  */
 typedef uint8_t (*cmd_xmit_cb)(uint16_t opcode, void *p_buf, tINT_CMD_CBACK p_cback);
 
-typedef void (*cfg_a2dp_cb)(bt_vendor_op_result_t result, bt_vendor_opcode_t op, uint8_t bta_av_handle);
+typedef void (*cfg_a2dp_cb)(bt_vendor_op_result_t result, bt_vendor_opcode_t op,
+                            uint8_t bta_av_handle);
 
-typedef struct
-{
+typedef struct {
     /** set to sizeof(bt_vendor_callbacks_t) */
     uint32_t         size;
 
@@ -364,8 +357,7 @@ typedef struct
 } bt_vendor_callbacks_t;
 
 /** A2DP offload request */
-typedef struct
-{
+typedef struct {
     uint8_t   bta_av_handle;                 /* BTA_AV Handle for callbacks */
     uint16_t  xmit_quota;                    /* Total ACL quota for light stack */
     uint16_t  acl_data_size;                 /* Max ACL data size across HCI transport */
@@ -381,8 +373,7 @@ typedef struct
 /*
  * Bluetooth Host/Controller VENDOR Interface
  */
-typedef struct
-{
+typedef struct {
     /** Set to sizeof(bt_vndor_interface_t) */
     unsigned int          size;
 

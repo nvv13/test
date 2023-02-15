@@ -30,12 +30,11 @@ tls_bt_property_t *property_copy_array(const tls_bt_property_t *properties, size
 {
     assert(properties != NULL);
     tls_bt_property_t *clone = GKI_getbuf(sizeof(tls_bt_property_t) * count);
-    wm_memcpy(&clone[0], &properties[0], sizeof(tls_bt_property_t) * count);
+    memcpy(&clone[0], &properties[0], sizeof(tls_bt_property_t) * count);
 
-    for(size_t i = 0; i < count; ++i)
-    {
+    for(size_t i = 0; i < count; ++i) {
         clone[i].val = GKI_getbuf(clone[i].len);
-        wm_memcpy(clone[i].val, properties[i].val, clone[i].len);
+        memcpy(clone[i].val, properties[i].val, clone[i].len);
     }
 
     return clone;
@@ -45,15 +44,14 @@ tls_bt_property_t *property_copy(tls_bt_property_t *dest, const tls_bt_property_
 {
     assert(dest != NULL);
     assert(src != NULL);
-    return (tls_bt_property_t *)wm_memcpy(dest, src, sizeof(tls_bt_property_t));
+    return (tls_bt_property_t *)memcpy(dest, src, sizeof(tls_bt_property_t));
 }
 
 uint8_t property_equals(const tls_bt_property_t *p1, const tls_bt_property_t *p2)
 {
     // Two null properties are not the same. May need to revisit that
     // decision when we have a test case that exercises that condition.
-    if(!p1 || !p2 || p1->type != p2->type)
-    {
+    if(!p1 || !p2 || p1->type != p2->type) {
         return false;
     }
 
@@ -65,17 +63,16 @@ uint8_t property_equals(const tls_bt_property_t *p1, const tls_bt_property_t *p2
     //
     // Note: it may be the case that both strings are zero-padded but that
     // hasn't come up yet so this implementation doesn't handle it.
-    if(p1->type == WM_BT_PROPERTY_BDNAME && p1->len != p2->len)
-    {
+    if(p1->type == WM_BT_PROPERTY_BDNAME && p1->len != p2->len) {
         const tls_bt_property_t *shorter = p1, *longer = p2;
 
-        if(p1->len > p2->len)
-        {
+        if(p1->len > p2->len) {
             shorter = p2;
             longer = p1;
         }
 
-        return strlen((const char *)longer->val) == (size_t)shorter->len && !memcmp(longer->val, shorter->val, shorter->len);
+        return strlen((const char *)longer->val) == (size_t)shorter->len
+               && !memcmp(longer->val, shorter->val, shorter->len);
     }
 
     return p1->len == p2->len && !memcmp(p1->val, p2->val, p1->len);
@@ -132,13 +129,11 @@ void property_free(tls_bt_property_t *property)
 
 void property_free_array(tls_bt_property_t *properties, size_t count)
 {
-    if(properties == NULL)
-    {
+    if(properties == NULL) {
         return;
     }
 
-    for(size_t i = 0; i < count; ++i)
-    {
+    for(size_t i = 0; i < count; ++i) {
         GKI_freebuf(properties[i].val);
     }
 
@@ -247,7 +242,7 @@ static tls_bt_property_t *property_new_(void *val, size_t len, tls_bt_property_t
 {
     tls_bt_property_t *property = GKI_getbuf(sizeof(tls_bt_property_t));
     property->val = GKI_getbuf(len);
-    wm_memcpy(property->val, val, len);
+    memcpy(property->val, val, len);
     property->type = type;
     property->len = len;
     return property;

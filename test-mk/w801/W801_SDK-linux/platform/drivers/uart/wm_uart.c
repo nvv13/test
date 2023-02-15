@@ -60,7 +60,7 @@ static void tls_uart_tx_chars(struct tls_uart_port *port)
 		tx_msg = dl_list_first(pending_list, tls_uart_tx_msg_t, list);
 		while (tx_count-- > 0 && tx_msg->offset < tx_msg->buflen)
 		{
-		/* ¼ì²étx fifoÊÇ·ñÒÑÂú */
+		/* æ£€æŸ¥tx fifoæ˜¯å¦å·²æ»¡ */
 			if ((port->regs->UR_FIFOS & UFS_TX_FIFO_CNT_MASK) == port->tx_fifofull)
 			{
 				break;
@@ -264,7 +264,7 @@ static TLS_UART_STATUS_T tls_uart_set_flow_ctrl(struct tls_uart_port * port, TLS
         return TLS_UART_STATUS_ERROR;
 
 // port->opts.flow_ctrl = flow_ctrl;
-// //²»ÄÜÔÚÕâÀïÐÞ¸Ä£¬ÎªÁËÅäºÏÍ¸´«ºÍATÖ¸Áî£¬Èí¼þ»á×Ô¼ºÐÞ¸ÄflowctrlÅäÖÃ£¬µ«ÊÇ²ÎÊý»¹ÊÇ¹Ì¶¨²»±äµÄ
+// //ä¸èƒ½åœ¨è¿™é‡Œä¿®æ”¹ï¼Œä¸ºäº†é…åˆé€ä¼ å’ŒATæŒ‡ä»¤ï¼Œè½¯ä»¶ä¼šè‡ªå·±ä¿®æ”¹flowctrlé…ç½®ï¼Œä½†æ˜¯å‚æ•°è¿˜æ˜¯å›ºå®šä¸å˜çš„
 //printf("\nport %d flow ctrl==%d\n",port->uart_no,flow_ctrl);
     switch (flow_ctrl)
     {
@@ -291,7 +291,7 @@ void tls_uart_set_fc_status(int uart_no, TLS_UART_FLOW_CTRL_MODE_T status)
 	port = &uart_port[uart_no];
     port->fcStatus = status;
     tls_uart_set_flow_ctrl(port, status);
-    if (TLS_UART_FLOW_CTRL_HARDWARE == port->opts.flow_ctrl && 0 == status && port->hw_stopped) // ×¼±¸¹Ø±ÕÁ÷¿ØÊ±£¬·¢ÏÖtxÒÑ¾­Í£Ö¹£¬ÐèÒªÔÙ´ò¿ªtx
+    if (TLS_UART_FLOW_CTRL_HARDWARE == port->opts.flow_ctrl && 0 == status && port->hw_stopped) // å‡†å¤‡å…³é—­æµæŽ§æ—¶ï¼Œå‘çŽ°txå·²ç»åœæ­¢ï¼Œéœ€è¦å†æ‰“å¼€tx
     {
         tls_uart_tx_enable(port);
         tls_uart_tx_chars(port);
@@ -489,7 +489,7 @@ void tls_uart_tx_chars_start(struct tls_uart_port *port)
         tx_msg = dl_list_first(pending_list, tls_uart_tx_msg_t, list);
         while (tx_count-- > 0 && tx_msg->offset < tx_msg->buflen)
         {
-        /* ¼ì²étx fifoÊÇ·ñÒÑÂú */
+        /* æ£€æŸ¥tx fifoæ˜¯å¦å·²æ»¡ */
             if ((port->regs->UR_FIFOS & UFS_TX_FIFO_CNT_MASK) ==
                 port->tx_fifofull)
             {
@@ -540,7 +540,7 @@ void tls_set_uart_rx_status(int uart_no, int status)
                 && (TLS_UART_FLOW_CTRL_HARDWARE == port->fcStatus))
             {
                 cpu_sr = tls_os_set_critical();
-                // ¹Ørxfifo trigger level interruptºÍoverrun error
+                // å…³rxfifo trigger level interruptå’Œoverrun error
                 port->regs->UR_INTM |= ((0x1 << 2) | (0x01 << 8));
                 port->rxstatus = TLS_UART_RX_DISABLE;
                 tls_os_release_critical(cpu_sr);
@@ -591,7 +591,7 @@ ATTRIBUTE_ISR void UART0_IRQHandler(void)
                 if (TLS_UART_FLOW_CTRL_HARDWARE == port->fcStatus)
                 {
                     tls_set_uart_rx_status(port->uart_no, TLS_UART_RX_DISABLE);
-                    rx_fifocnt = 0; // Èç¹ûÓÐÓ²¼þÁ÷¿Ø£¬¹Ø±Õ½ÓÊÕ£¬°Ñ×îºóÒ»¸ö×Ö·û·Å½ø»·ÐÎbufferÖÐ
+                    rx_fifocnt = 0; // å¦‚æžœæœ‰ç¡¬ä»¶æµæŽ§ï¼Œå…³é—­æŽ¥æ”¶ï¼ŒæŠŠæœ€åŽä¸€ä¸ªå­—ç¬¦æ”¾è¿›çŽ¯å½¢bufferä¸­
                 }
                 else
                     break;
@@ -606,7 +606,7 @@ ATTRIBUTE_ISR void UART0_IRQHandler(void)
                 port->rx_callback(1, port->priv_data);
             }
         }
-        if (port->rx_callback != NULL && !rx_byte_cb_flag)
+        if (rxlen && port->rx_callback != NULL && !rx_byte_cb_flag)
         {
             port->rx_callback(rxlen, port->priv_data);
         }
@@ -669,25 +669,36 @@ ATTRIBUTE_ISR void UART1_IRQHandler(void)
         rx_fifocnt = (port->regs->UR_FIFOS >> 6) & 0x3F;
         escapefifocnt = rx_fifocnt;
         port->plus_char_cnt = 0;
-        rxlen = rx_fifocnt;
         
         if (CIRC_SPACE(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) <= RX_CACHE_LIMIT)
         {
             recv->tail = (recv->tail + RX_CACHE_LIMIT) & (TLS_UART_RX_BUF_SIZE - 1);
         }
-        
-        while (rx_fifocnt-- > 0)
+
+        if (intr_src & UART_RX_ERR_INT_FLAG)
         {
-            ch = (u8) port->regs->UR_RXW;
-            if (intr_src & UART_RX_ERR_INT_FLAG)
-            {
-                port->regs->UR_INTS |= UART_RX_ERR_INT_FLAG;
-                TLS_DBGPRT_INFO("\nrx err=%x,c=%d,ch=%x\n", intr_src, rx_fifocnt, ch);
-                continue;
-            }
-            recv->buf[recv->head] = ch;
-            recv->head = (recv->head + 1) & (TLS_UART_RX_BUF_SIZE - 1);
+	        while (rx_fifocnt-- > 0)
+	        {
+	            ch = (u8) port->regs->UR_RXW;
+	        }
+            rxlen = 0;
+            port->regs->UR_INTS |= UART_RX_ERR_INT_FLAG;
+            TLS_DBGPRT_INFO("\nrx err=%x,c=%d,ch=%x\n", intr_src, rx_fifocnt, ch);
         }
+		else
+		{
+			rxlen = rx_fifocnt;
+	        while (rx_fifocnt-- > 0)
+	        {
+	            ch = (u8) port->regs->UR_RXW;
+	            recv->buf[recv->head] = ch;
+	            recv->head = (recv->head + 1) & (TLS_UART_RX_BUF_SIZE - 1);
+				if(port->rx_callback != NULL && rx_byte_cb_flag)
+				{
+					port->rx_callback(1, port->priv_data);
+				}
+	        }
+		}
 
         if( escapefifocnt==3 && ch=='+')
         {
@@ -706,12 +717,8 @@ ATTRIBUTE_ISR void UART1_IRQHandler(void)
                         port->plus_char_cnt = 3;
                     break;
             }
-            if(port->rx_callback != NULL && rx_byte_cb_flag)
-            {
-                port->rx_callback(1, port->priv_data);
-            }
         }
-        if (port->rx_callback!=NULL && !rx_byte_cb_flag)
+        if (rxlen && port->rx_callback!=NULL && !rx_byte_cb_flag)
         {
             port->rx_callback(rxlen, port->priv_data);
         }
@@ -754,7 +761,7 @@ ATTRIBUTE_ISR void UART2_4_IRQHandler(void)
     u32 fifos;
     u8 escapefifocnt = 0;	
     u32 rxlen = 0;
-    u8 ch;
+    u8 ch = 0;
     csi_kernel_intrpt_enter();
 
     intr_src = port->regs->UR_INTS;
@@ -791,6 +798,10 @@ ATTRIBUTE_ISR void UART2_4_IRQHandler(void)
             }
             recv->buf[recv->head] = ch;
             recv->head = (recv->head + 1) & (TLS_UART_RX_BUF_SIZE - 1);
+            if(port->rx_callback != NULL && rx_byte_cb_flag)
+            {
+                port->rx_callback(1, port->priv_data);
+            }
         }
 
         if( escapefifocnt==3 && ch=='+')
@@ -810,12 +821,8 @@ ATTRIBUTE_ISR void UART2_4_IRQHandler(void)
                         port->plus_char_cnt = 3;
                     break;
             }
-            if(port->rx_callback != NULL && rx_byte_cb_flag)
-            {
-                port->rx_callback(1, port->priv_data);
-            }
         }
-        if (port->rx_callback!=NULL && !rx_byte_cb_flag)
+        if (rxlen && port->rx_callback!=NULL && !rx_byte_cb_flag)
         {
             port->rx_callback(rxlen, port->priv_data);
         }
@@ -1044,6 +1051,22 @@ int tls_uart_read(u16 uart_no, u8 * buf, u16 readsize)
  *
  * @note           Only uart1 support DMA transfer.
  */
+static void tls_uart_dma_write_complte_callback(void *parg)
+{
+    u32 dma_uart_ch = (u32)parg;    
+    u16 uart_no = (dma_uart_ch&0x00FFFF00)>>8;
+    u8 dma_ch = dma_uart_ch&0xFF;	
+    struct tls_uart_port *port = &uart_port[uart_no];
+
+    tls_dma_free(dma_ch);
+    port->tx_dma_on = FALSE;
+
+    if(port->tx_sent_callback)
+    {
+        port->tx_sent_callback((void*)(u32)uart_no);
+    }
+    
+} 
 int tls_uart_dma_write(char *buf, u16 writesize, void (*cmpl_callback) (void *p), u16 uart_no)
 {
     unsigned char dmaCh = 0;
@@ -1060,30 +1083,29 @@ int tls_uart_dma_write(char *buf, u16 writesize, void (*cmpl_callback) (void *p)
         TLS_DBGPRT_ERR("transmiting,wait\n");
         return WM_FAILED;
     }
-	tls_reg_write32(HR_DMA_CHNL_SEL, uart_no);
 
     /* Request DMA Channel */
-    dmaCh = tls_dma_request(2, TLS_DMA_FLAGS_CHANNEL_SEL(TLS_DMA_SEL_UART_TX) | TLS_DMA_FLAGS_HARD_MODE);
+    dmaCh = tls_dma_request(0xFF, TLS_DMA_FLAGS_CHANNEL_SEL(TLS_DMA_SEL_UART_TX) | TLS_DMA_FLAGS_HARD_MODE);
     if (dmaCh == 0xFF)
     {
         TLS_DBGPRT_ERR("dma request err\n");
         return WM_FAILED;
     }
+	tls_reg_write32(HR_DMA_CHNL_SEL, uart_no);    
 	tls_reg_write32((int)&port->regs->UR_DMAC, (tls_reg_read32((int)&port->regs->UR_DMAC) & ~0x01));
-    tls_dma_irq_register(dmaCh, cmpl_callback, (void *)(u32)uart_no, TLS_DMA_IRQ_TRANSFER_DONE);
+    
+    port->tx_sent_callback = (s16(*) (struct tls_uart_port *))cmpl_callback;
+    tls_dma_irq_register(dmaCh, tls_uart_dma_write_complte_callback, (void *)(u32)(dmaCh|uart_no<<8), TLS_DMA_IRQ_TRANSFER_DONE);
+
+    /* Enable uart TX DMA */
+    port->tx_dma_on = TRUE;
+    tls_reg_write32((int)&port->regs->UR_DMAC, (tls_reg_read32((int)&port->regs->UR_DMAC) | 0x01));   
     DmaDesc.src_addr = (int) buf;
     DmaDesc.dest_addr = (int)&port->regs->UR_TXW;
 	DmaDesc.dma_ctrl = TLS_DMA_DESC_CTRL_SRC_ADD_INC | TLS_DMA_DESC_CTRL_DATA_SIZE_BYTE | (writesize << 7);
     DmaDesc.valid = TLS_DMA_DESC_VALID;
     DmaDesc.next = NULL;
     tls_dma_start(dmaCh, &DmaDesc, 0);
-    /* Enable uart TX DMA */
-    port->tx_dma_on = TRUE;
-    tls_reg_write32((int)&port->regs->UR_DMAC, (tls_reg_read32((int)&port->regs->UR_DMAC) | 0x01));   
-    tls_reg_write32(HR_DMA_INT_MASK, (tls_reg_read32(HR_DMA_INT_MASK) & ~(0x01 << 5)));
-
-    /* enable dma interrupt */
-    tls_irq_enable(DMA_Channel2_IRQn);
 
     return WM_SUCCESS;
 }

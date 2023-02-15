@@ -40,8 +40,7 @@
 #if AVDT_DEBUG == TRUE
 
 /* verbose state strings for trace */
-const char *const avdt_scb_st_str[] =
-{
+const char *const avdt_scb_st_str[] = {
     "SCB_IDLE_ST",
     "SCB_CONF_ST",
     "SCB_OPENING_ST",
@@ -51,8 +50,7 @@ const char *const avdt_scb_st_str[] =
 };
 
 /* verbose event strings for trace */
-const char *const avdt_scb_evt_str[] =
-{
+const char *const avdt_scb_evt_str[] = {
     "API_REMOVE_EVT",
     "API_WRITE_REQ_EVT",
     "API_GETCONFIG_REQ_EVT",
@@ -107,8 +105,7 @@ const char *const avdt_scb_evt_str[] =
 
 
 /* action function list */
-const tAVDT_SCB_ACTION avdt_scb_action[] =
-{
+const tAVDT_SCB_ACTION avdt_scb_action[] = {
     avdt_scb_hdl_abort_cmd,
     avdt_scb_hdl_abort_rsp,
     avdt_scb_hdl_close_cmd,
@@ -132,13 +129,13 @@ const tAVDT_SCB_ACTION avdt_scb_action[] =
     avdt_scb_hdl_suspend_cmd,
     avdt_scb_hdl_suspend_rsp,
     avdt_scb_hdl_tc_close,
-    #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
     avdt_scb_hdl_tc_close_sto,
-    #endif
+#endif
     avdt_scb_hdl_tc_open,
-    #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
     avdt_scb_hdl_tc_open_sto,
-    #endif
+#endif
     avdt_scb_snd_delay_rpt_req,
     avdt_scb_hdl_delay_rpt_cmd,
     avdt_scb_hdl_delay_rpt_rsp,
@@ -180,8 +177,7 @@ const tAVDT_SCB_ACTION avdt_scb_action[] =
 #define AVDT_SCB_NUM_COLS           3       /* number of columns in state tables */
 
 /* state table for idle state */
-const uint8_t avdt_scb_st_idle[][AVDT_SCB_NUM_COLS] =
-{
+const uint8_t avdt_scb_st_idle[][AVDT_SCB_NUM_COLS] = {
     /* Event                     Action 1                       Action 2                    Next state */
     /* API_REMOVE_EVT */        {AVDT_SCB_DEALLOC,              AVDT_SCB_IGNORE,            AVDT_SCB_IDLE_ST},
     /* API_WRITE_REQ_EVT */     {AVDT_SCB_FREE_PKT,             AVDT_SCB_IGNORE,            AVDT_SCB_IDLE_ST},
@@ -234,8 +230,7 @@ const uint8_t avdt_scb_st_idle[][AVDT_SCB_NUM_COLS] =
 };
 
 /* state table for configured state */
-const uint8_t avdt_scb_st_conf[][AVDT_SCB_NUM_COLS] =
-{
+const uint8_t avdt_scb_st_conf[][AVDT_SCB_NUM_COLS] = {
     /* Event                     Action 1                       Action 2                    Next state */
     /* API_REMOVE_EVT */        {AVDT_SCB_SND_ABORT_REQ,        AVDT_SCB_SET_REMOVE,        AVDT_SCB_CONF_ST},
     /* API_WRITE_REQ_EVT */     {AVDT_SCB_FREE_PKT,             AVDT_SCB_IGNORE,            AVDT_SCB_CONF_ST},
@@ -288,8 +283,7 @@ const uint8_t avdt_scb_st_conf[][AVDT_SCB_NUM_COLS] =
 };
 
 /* state table for opening state */
-const uint8_t avdt_scb_st_opening[][AVDT_SCB_NUM_COLS] =
-{
+const uint8_t avdt_scb_st_opening[][AVDT_SCB_NUM_COLS] = {
     /* Event                     Action 1                       Action 2                    Next state */
     /* API_REMOVE_EVT */        {AVDT_SCB_SND_CLOSE_REQ,        AVDT_SCB_SET_REMOVE,        AVDT_SCB_CLOSING_ST},
     /* API_WRITE_REQ_EVT */     {AVDT_SCB_FREE_PKT,             AVDT_SCB_IGNORE,            AVDT_SCB_OPENING_ST},
@@ -342,8 +336,7 @@ const uint8_t avdt_scb_st_opening[][AVDT_SCB_NUM_COLS] =
 };
 
 /* state table for open state */
-const uint8_t avdt_scb_st_open[][AVDT_SCB_NUM_COLS] =
-{
+const uint8_t avdt_scb_st_open[][AVDT_SCB_NUM_COLS] = {
     /* Event                     Action 1                       Action 2                    Next state */
     /* API_REMOVE_EVT */        {AVDT_SCB_SND_CLOSE_REQ,        AVDT_SCB_SET_REMOVE,        AVDT_SCB_CLOSING_ST},
     /* API_WRITE_REQ_EVT */     {AVDT_SCB_FREE_PKT,             AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
@@ -388,21 +381,20 @@ const uint8_t avdt_scb_st_open[][AVDT_SCB_NUM_COLS] =
     /* MSG_START_REJ_EVT */     {AVDT_SCB_HDL_START_RSP,        AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
     /* MSG_SUSPEND_REJ_EVT */   {AVDT_SCB_HDL_SUSPEND_RSP,      AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
     /* TC_TOUT_EVT */           {AVDT_SCB_IGNORE,               AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
-    #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
     /* TC_OPEN_EVT */           {AVDT_SCB_HDL_TC_OPEN_STO,      AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
     /* TC_CLOSE_EVT */          {AVDT_SCB_HDL_TC_CLOSE_STO,     AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
-    #else
+#else
     /* TC_OPEN_EVT */           {AVDT_SCB_IGNORE,               AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
     /* TC_CLOSE_EVT */          {AVDT_SCB_HDL_TC_CLOSE,         AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
-    #endif
+#endif
     /* TC_CONG_EVT */           {AVDT_SCB_CONG_STATE,           AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
     /* TC_DATA_EVT */           {AVDT_SCB_DROP_PKT,             AVDT_SCB_IGNORE,            AVDT_SCB_OPEN_ST},
     /* CC_CLOSE_EVT */          {AVDT_SCB_SND_TC_CLOSE,         AVDT_SCB_IGNORE,            AVDT_SCB_CLOSING_ST}
 };
 
 /* state table for streaming state */
-const uint8_t avdt_scb_st_stream[][AVDT_SCB_NUM_COLS] =
-{
+const uint8_t avdt_scb_st_stream[][AVDT_SCB_NUM_COLS] = {
     /* Event                     Action 1                       Action 2                    Next state */
     /* API_REMOVE_EVT */        {AVDT_SCB_SND_STREAM_CLOSE,     AVDT_SCB_SET_REMOVE,        AVDT_SCB_CLOSING_ST},
     /* API_WRITE_REQ_EVT */     {AVDT_SCB_HDL_WRITE_REQ,        AVDT_SCB_CHK_SND_PKT,       AVDT_SCB_STREAM_ST},
@@ -455,8 +447,7 @@ const uint8_t avdt_scb_st_stream[][AVDT_SCB_NUM_COLS] =
 };
 
 /* state table for closing state */
-const uint8_t avdt_scb_st_closing[][AVDT_SCB_NUM_COLS] =
-{
+const uint8_t avdt_scb_st_closing[][AVDT_SCB_NUM_COLS] = {
     /* Event                     Action 1                       Action 2                    Next state */
     /* API_REMOVE_EVT */        {AVDT_SCB_SET_REMOVE,           AVDT_SCB_IGNORE,            AVDT_SCB_CLOSING_ST},
     /* API_WRITE_REQ_EVT */     {AVDT_SCB_FREE_PKT,             AVDT_SCB_IGNORE,            AVDT_SCB_CLOSING_ST},
@@ -512,8 +503,7 @@ const uint8_t avdt_scb_st_closing[][AVDT_SCB_NUM_COLS] =
 typedef const uint8_t (*tAVDT_SCB_ST_TBL)[AVDT_SCB_NUM_COLS];
 
 /* state table */
-const tAVDT_SCB_ST_TBL avdt_scb_st_tbl[] =
-{
+const tAVDT_SCB_ST_TBL avdt_scb_st_tbl[] = {
     avdt_scb_st_idle,
     avdt_scb_st_conf,
     avdt_scb_st_opening,
@@ -538,29 +528,25 @@ void avdt_scb_event(tAVDT_SCB *p_scb, uint8_t event, tAVDT_SCB_EVT *p_data)
     tAVDT_SCB_ST_TBL    state_table;
     uint8_t               action;
     int                 i;
-    #if AVDT_DEBUG == TRUE
-    AVDT_TRACE_EVENT("SCB hdl=%d event=%d/%s state=%s", avdt_scb_to_hdl(p_scb), event, avdt_scb_evt_str[event], avdt_scb_st_str[p_scb->state]);
-    #endif
+#if AVDT_DEBUG == TRUE
+    AVDT_TRACE_EVENT("SCB hdl=%d event=%d/%s state=%s", avdt_scb_to_hdl(p_scb), event,
+                     avdt_scb_evt_str[event], avdt_scb_st_str[p_scb->state]);
+#endif
     /* set current event */
     p_scb->curr_evt = event;
     /* look up the state table for the current state */
     state_table = avdt_scb_st_tbl[p_scb->state];
 
     /* set next state */
-    if(p_scb->state != state_table[event][AVDT_SCB_NEXT_STATE])
-    {
+    if(p_scb->state != state_table[event][AVDT_SCB_NEXT_STATE]) {
         p_scb->state = state_table[event][AVDT_SCB_NEXT_STATE];
     }
 
     /* execute action functions */
-    for(i = 0; i < AVDT_SCB_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != AVDT_SCB_IGNORE)
-        {
+    for(i = 0; i < AVDT_SCB_ACTIONS; i++) {
+        if((action = state_table[event][i]) != AVDT_SCB_IGNORE) {
             (*avdt_cb.p_scb_act[action])(p_scb, p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
@@ -600,43 +586,38 @@ tAVDT_SCB *avdt_scb_alloc(tAVDT_CS *p_cs)
     int         i;
 
     /* find available scb */
-    for(i = 0; i < AVDT_NUM_SEPS; i++, p_scb++)
-    {
-        if(!p_scb->allocated)
-        {
+    for(i = 0; i < AVDT_NUM_SEPS; i++, p_scb++) {
+        if(!p_scb->allocated) {
             wm_memset(p_scb, 0, sizeof(tAVDT_SCB));
             p_scb->allocated = TRUE;
             p_scb->p_ccb = NULL;
             wm_memcpy(&p_scb->cs, p_cs, sizeof(tAVDT_CS));
-            #if AVDT_MULTIPLEXING == TRUE
+#if AVDT_MULTIPLEXING == TRUE
             /* initialize fragments gueue */
             p_scb->frag_q = fixed_queue_new(SIZE_MAX);
 
-            if(p_cs->cfg.psc_mask & AVDT_PSC_MUX)
-            {
+            if(p_cs->cfg.psc_mask & AVDT_PSC_MUX) {
                 p_scb->cs.cfg.mux_tcid_media = avdt_ad_type_to_tcid(AVDT_CHAN_MEDIA, p_scb);
-                #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
 
-                if(p_cs->cfg.psc_mask & AVDT_PSC_REPORT)
-                {
+                if(p_cs->cfg.psc_mask & AVDT_PSC_REPORT) {
                     p_scb->cs.cfg.mux_tcid_report = avdt_ad_type_to_tcid(AVDT_CHAN_REPORT, p_scb);
                 }
 
-                #endif
+#endif
             }
 
-            #endif
-            #ifdef USE_ALARM
+#endif
+#ifdef USE_ALARM
             p_scb->transport_channel_timer =
                             alarm_new("avdt_scb.transport_channel_timer");
-            #endif
+#endif
             AVDT_TRACE_DEBUG("avdt_scb_alloc hdl=%d, psc_mask:0x%x", i + 1, p_cs->cfg.psc_mask);
             break;
         }
     }
 
-    if(i == AVDT_NUM_SEPS)
-    {
+    if(i == AVDT_NUM_SEPS) {
         /* out of ccbs */
         p_scb = NULL;
         AVDT_TRACE_WARNING("Out of scbs");
@@ -659,15 +640,15 @@ void avdt_scb_dealloc(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data)
 {
     UNUSED(p_data);
     AVDT_TRACE_DEBUG("avdt_scb_dealloc hdl=%d", avdt_scb_to_hdl(p_scb));
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_free(p_scb->transport_channel_timer);
-    #else
+#else
     btu_stop_timer(&p_scb->transport_channel_timer);
-    #endif
-    #if AVDT_MULTIPLEXING == TRUE
+#endif
+#if AVDT_MULTIPLEXING == TRUE
     /* free fragments we're holding, if any; it shouldn't happen */
     fixed_queue_free(p_scb->frag_q, GKI_freebuf);
-    #endif
+#endif
     wm_memset(p_scb, 0, sizeof(tAVDT_SCB));
 }
 
@@ -702,19 +683,15 @@ tAVDT_SCB *avdt_scb_by_hdl(uint8_t hdl)
     tAVDT_SCB   *p_scb;
 
     /* verify index */
-    if((hdl > 0) && (hdl <= AVDT_NUM_SEPS))
-    {
+    if((hdl > 0) && (hdl <= AVDT_NUM_SEPS)) {
         p_scb = &avdt_cb.scb[hdl - 1];
 
         /* verify scb is allocated */
-        if(!p_scb->allocated)
-        {
+        if(!p_scb->allocated) {
             p_scb = NULL;
             AVDT_TRACE_WARNING("scb hdl %d not allocated", hdl);
         }
-    }
-    else
-    {
+    } else {
         p_scb = NULL;
         AVDT_TRACE_WARNING("scb hdl %d out of range", hdl);
     }
@@ -732,7 +709,8 @@ tAVDT_SCB *avdt_scb_by_hdl(uint8_t hdl)
 ** Returns          SEID that failed, or 0 if success.
 **
 *******************************************************************************/
-uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16_t num_seid, uint8_t *p_err_code)
+uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16_t num_seid,
+                        uint8_t *p_err_code)
 {
     int         i;
     tAVDT_SCB   *p_scb;
@@ -743,35 +721,24 @@ uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16
     /* translate public state into private state */
     nsc_mask = 0;
 
-    if(state == AVDT_VERIFY_SUSPEND)
-    {
+    if(state == AVDT_VERIFY_SUSPEND) {
         nsc_mask = AVDT_NSC_SUSPEND;
     }
 
     /* verify every scb */
-    for(i = 0, *p_err_code = 0; (i < num_seid) && (*p_err_code == 0) && (i < AVDT_NUM_SEPS); i++)
-    {
-        if((p_scb = avdt_scb_by_hdl(p_seid[i])) == NULL)
-        {
+    for(i = 0, *p_err_code = 0; (i < num_seid) && (*p_err_code == 0) && (i < AVDT_NUM_SEPS); i++) {
+        if((p_scb = avdt_scb_by_hdl(p_seid[i])) == NULL) {
             *p_err_code = AVDT_ERR_BAD_STATE;
+        } else if(p_scb->p_ccb != p_ccb) {
+            *p_err_code = AVDT_ERR_BAD_STATE;
+        } else if(p_scb->cs.nsc_mask & nsc_mask) {
+            *p_err_code = AVDT_ERR_NSC;
         }
-        else
-            if(p_scb->p_ccb != p_ccb)
-            {
-                *p_err_code = AVDT_ERR_BAD_STATE;
-            }
-            else
-                if(p_scb->cs.nsc_mask & nsc_mask)
-                {
-                    *p_err_code = AVDT_ERR_NSC;
-                }
 
-        switch(state)
-        {
+        switch(state) {
             case AVDT_VERIFY_OPEN:
             case AVDT_VERIFY_START:
-                if(p_scb->state != AVDT_SCB_OPEN_ST && p_scb->state != AVDT_SCB_STREAM_ST)
-                {
+                if(p_scb->state != AVDT_SCB_OPEN_ST && p_scb->state != AVDT_SCB_STREAM_ST) {
                     *p_err_code = AVDT_ERR_BAD_STATE;
                 }
 
@@ -779,8 +746,7 @@ uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16
 
             case AVDT_VERIFY_SUSPEND:
             case AVDT_VERIFY_STREAMING:
-                if(p_scb->state != AVDT_SCB_STREAM_ST)
-                {
+                if(p_scb->state != AVDT_SCB_STREAM_ST) {
                     *p_err_code = AVDT_ERR_BAD_STATE;
                 }
 
@@ -788,8 +754,7 @@ uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16
         }
     }
 
-    if((i != num_seid) && (i < AVDT_NUM_SEPS))
-    {
+    if((i != num_seid) && (i < AVDT_NUM_SEPS)) {
         ret = p_seid[i];
     }
 
@@ -812,10 +777,8 @@ void avdt_scb_peer_seid_list(tAVDT_MULTI *p_multi)
     int         i;
     tAVDT_SCB   *p_scb;
 
-    for(i = 0; i < p_multi->num_seps; i++)
-    {
-        if((p_scb = avdt_scb_by_hdl(p_multi->seid_list[i])) != NULL)
-        {
+    for(i = 0; i < p_multi->num_seps; i++) {
+        if((p_scb = avdt_scb_by_hdl(p_multi->seid_list[i])) != NULL) {
             p_multi->seid_list[i] = p_scb->peer_seid;
         }
     }

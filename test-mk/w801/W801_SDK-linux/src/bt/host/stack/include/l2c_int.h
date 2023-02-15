@@ -74,8 +74,7 @@
 ** the states may seem a bit strange, but they are taken from
 ** the Bluetooth specification.
 */
-typedef enum
-{
+typedef enum {
     CST_CLOSED,                           /* Channel is in closed state           */
     CST_ORIG_W4_SEC_COMP,                 /* Originator waits security clearence  */
     CST_TERM_W4_SEC_COMP,                 /* Acceptor waits security clearence    */
@@ -89,8 +88,7 @@ typedef enum
 
 /* Define the possible L2CAP link states
 */
-typedef enum
-{
+typedef enum {
     LST_DISCONNECTED,
     LST_CONNECT_HOLDING,
     LST_CONNECTING_WAIT_SWITCH,
@@ -167,8 +165,7 @@ typedef enum
 
 typedef uint8_t tL2C_BLE_FIXED_CHNLS_MASK;
 
-typedef struct
-{
+typedef struct {
     uint8_t       next_tx_seq;                /* Next sequence number to be Tx'ed         */
     uint8_t       last_rx_ack;                /* Last sequence number ack'ed by the peer  */
     uint8_t       next_seq_expected;          /* Next peer sequence number expected       */
@@ -195,7 +192,7 @@ typedef struct
     TIMER_LIST_ENT ack_timer;                /* Timer delaying RR                        */
     TIMER_LIST_ENT mon_retrans_timer;       /* Timer Monitor or Retransmission          */
 
-    #if (L2CAP_ERTM_STATS == TRUE)
+#if (L2CAP_ERTM_STATS == TRUE)
     uint32_t      connect_tick_count;         /* Time channel was established             */
     uint32_t      ertm_pkt_counts[2];         /* Packets sent and received                */
     uint32_t      ertm_byte_counts[2];        /* Bytes   sent and received                */
@@ -220,7 +217,7 @@ typedef struct
     uint32_t      ack_q_count_avg[L2CAP_ERTM_STATS_NUM_AVG];
     uint32_t      ack_q_count_min[L2CAP_ERTM_STATS_NUM_AVG];
     uint32_t      ack_q_count_max[L2CAP_ERTM_STATS_NUM_AVG];
-    #endif
+#endif
 } tL2C_FCRB;
 
 
@@ -234,36 +231,34 @@ typedef struct
 #define L2C_UCD_STATE_W4_RECEPTION  0x02
 #define L2C_UCD_STATE_W4_MTU        0x04
 
-typedef struct
-{
+typedef struct {
     uint8_t               state;
     tL2CAP_UCD_CB_INFO  cb_info;
 } tL2C_UCD_REG;
 #endif
 
-typedef struct
-{
+typedef struct {
     uint8_t                 in_use;
     uint16_t                  psm;
-    uint16_t                  real_psm;               /* This may be a dummy RCB for an o/b connection but */
+    uint16_t
+    real_psm;               /* This may be a dummy RCB for an o/b connection but */
     /* this is the real PSM that we need to connect to   */
-    #if (L2CAP_UCD_INCLUDED == TRUE)
+#if (L2CAP_UCD_INCLUDED == TRUE)
     tL2C_UCD_REG            ucd;
-    #endif
+#endif
 
     tL2CAP_APPL_INFO        api;
 } tL2C_RCB;
 
 
 #ifndef L2CAP_CBB_DEFAULT_DATA_RATE_BUFF_QUOTA
-    #define L2CAP_CBB_DEFAULT_DATA_RATE_BUFF_QUOTA 100
+#define L2CAP_CBB_DEFAULT_DATA_RATE_BUFF_QUOTA 100
 #endif
 
 typedef void (tL2CAP_SEC_CBACK)(BD_ADDR bd_addr, tBT_TRANSPORT trasnport,
                                 void *p_ref_data, tBTM_STATUS result);
 
-typedef struct
-{
+typedef struct {
     uint16_t                  psm;
     tBT_TRANSPORT           transport;
     uint8_t                 is_originator;
@@ -276,13 +271,13 @@ typedef struct
 ** Each CCB has unique local and remote CIDs. All channel control blocks on
 ** the same physical link and are chained together.
 */
-typedef struct t_l2c_ccb
-{
+typedef struct t_l2c_ccb {
     uint8_t             in_use;                 /* TRUE when in use, FALSE when not */
     tL2C_CHNL_STATE     chnl_state;             /* Channel state                    */
     tL2CAP_LE_CFG_INFO  local_conn_cfg;         /* Our config for ble conn oriented channel */
     tL2CAP_LE_CFG_INFO  peer_conn_cfg;          /* Peer device config ble conn oriented channel */
-    uint8_t             is_first_seg;           /* Dtermine whether the received packet is the first segment or not */
+    uint8_t
+    is_first_seg;           /* Dtermine whether the received packet is the first segment or not */
     BT_HDR             *ble_sdu;                /* Buffer for storing unassembled sdu*/
     uint16_t              ble_sdu_length;         /* Length of unassembled sdu length*/
     struct t_l2c_ccb    *p_next_ccb;            /* Next CCB in the chain            */
@@ -336,21 +331,20 @@ typedef struct t_l2c_ccb
 #define L2CAP_BYPASS_FCS    (L2CAP_CFG_FCS_OUR | L2CAP_CFG_FCS_PEER)
     uint8_t               bypass_fcs;
 
-    #if (L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE)
+#if (L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE)
     uint8_t             is_flushable;                   /* TRUE if channel is flushable     */
-    #endif
+#endif
 
-    #if (L2CAP_NUM_FIXED_CHNLS > 0) || (L2CAP_UCD_INCLUDED == TRUE)
+#if (L2CAP_NUM_FIXED_CHNLS > 0) || (L2CAP_UCD_INCLUDED == TRUE)
     uint16_t              fixed_chnl_idle_tout;   /* Idle timeout to use for the fixed channel       */
-    #endif
+#endif
     uint16_t              tx_data_len;
 } tL2C_CCB;
 
 /***********************************************************************
 ** Define a queue of linked CCBs.
 */
-typedef struct
-{
+typedef struct {
     tL2C_CCB        *p_first_ccb;               /* The first channel in this queue */
     tL2C_CCB        *p_last_ccb;                /* The last  channel in this queue */
 } tL2C_CCB_Q;
@@ -367,8 +361,7 @@ typedef struct
 /* can be sent to headset even if higher priority channel (for example, AV media channel) */
 /* is congested.                                                                          */
 
-typedef struct
-{
+typedef struct {
     tL2C_CCB        *p_serve_ccb;               /* current serving ccb within priority group */
     tL2C_CCB        *p_first_ccb;               /* first ccb of priority group */
     uint8_t           num_ccb;                    /* number of channels in priority group */
@@ -380,8 +373,7 @@ typedef struct
 /* Define a link control block. There is one link control block between
 ** this device and any other device (i.e. BD ADDR).
 */
-typedef struct t_l2c_linkcb
-{
+typedef struct t_l2c_linkcb {
     uint8_t             in_use;                     /* TRUE when in use, FALSE when not */
     tL2C_LINK_STATE     link_state;
 
@@ -414,27 +406,28 @@ typedef struct t_l2c_linkcb
     list_t              *link_xmit_data_q;          /* Link transmit data buffer queue  */
 
     uint8_t               peer_chnl_mask[L2CAP_FIXED_CHNL_ARRAY_SIZE];
-    #if (L2CAP_UCD_INCLUDED == TRUE)
+#if (L2CAP_UCD_INCLUDED == TRUE)
     uint16_t              ucd_mtu;                    /* peer MTU on UCD */
     fixed_queue_t       *ucd_out_sec_pending_q;     /* Security pending outgoing UCD packet  */
     fixed_queue_t       *ucd_in_sec_pending_q;       /* Security pending incoming UCD packet  */
-    #endif
+#endif
 
     BT_HDR              *p_hcit_rcv_acl;            /* Current HCIT ACL buf being rcvd  */
     uint16_t              idle_timeout_sv;            /* Save current Idle timeout        */
     uint8_t               acl_priority;               /* L2C_PRIORITY_NORMAL or L2C_PRIORITY_HIGH */
     tL2CA_NOCP_CB       *p_nocp_cb;                 /* Num Cmpl pkts callback           */
 
-    #if (L2CAP_NUM_FIXED_CHNLS > 0)
+#if (L2CAP_NUM_FIXED_CHNLS > 0)
     tL2C_CCB            *p_fixed_ccbs[L2CAP_NUM_FIXED_CHNLS];
     uint16_t              disc_reason;
-    #endif
+#endif
 
     tBT_TRANSPORT       transport;
-    #if (BLE_INCLUDED == TRUE)
+#if (BLE_INCLUDED == TRUE)
     tBLE_ADDR_TYPE      ble_addr_type;
     uint16_t              tx_data_len;            /* tx data length used in data length extension */
-    fixed_queue_t       *le_sec_pending_q;      /* LE coc channels waiting for security check completion */
+    fixed_queue_t
+    *le_sec_pending_q;      /* LE coc channels waiting for security check completion */
     uint8_t               sec_act;
 #define L2C_BLE_CONN_UPDATE_DISABLE 0x1  /* disable update connection parameters */
 #define L2C_BLE_NEW_CONN_PARAM      0x2  /* new connection parameter to be set */
@@ -447,21 +440,20 @@ typedef struct t_l2c_linkcb
     uint16_t              latency;
     uint16_t              timeout;
 
-    #endif
+#endif
 
-    #if (L2CAP_ROUND_ROBIN_CHANNEL_SERVICE == TRUE)
+#if (L2CAP_ROUND_ROBIN_CHANNEL_SERVICE == TRUE)
     /* each priority group is limited burst transmission  */
     /* round robin service for the same priority channels */
     tL2C_RR_SERV        rr_serv[L2CAP_NUM_CHNL_PRIORITY];
     uint8_t               rr_pri;                             /* current serving priority group */
-    #endif
+#endif
 
 } tL2C_LCB;
 
 /* Define the L2CAP control structure
 */
-typedef struct
-{
+typedef struct {
     uint8_t           l2cap_trace_level;
     uint16_t          controller_xmit_window;         /* Total ACL window for all links   */
 
@@ -478,7 +470,8 @@ typedef struct
     tL2C_CCB        *p_free_ccb_first;              /* Pointer to first free CCB        */
     tL2C_CCB        *p_free_ccb_last;               /* Pointer to last  free CCB        */
 
-    uint8_t           desire_role;                    /* desire to be master/slave when accepting a connection */
+    uint8_t
+    desire_role;                    /* desire to be master/slave when accepting a connection */
     uint8_t         disallow_switch;                /* FALSE, to allow switch at create conn */
     uint16_t          num_lm_acl_bufs;                /* # of ACL buffers on controller   */
     uint16_t          idle_timeout;                   /* Idle timeout                     */
@@ -489,38 +482,43 @@ typedef struct
     tL2C_LCB        *p_cur_hcit_lcb;                /* Current HCI Transport buffer     */
     uint16_t          num_links_active;               /* Number of links active           */
 
-    #if (L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE)
-    uint16_t          non_flushable_pbf;              /* L2CAP_PKT_START_NON_FLUSHABLE if controller supports */
+#if (L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE)
+    uint16_t
+    non_flushable_pbf;              /* L2CAP_PKT_START_NON_FLUSHABLE if controller supports */
     /* Otherwise, L2CAP_PKT_START */
     uint8_t         is_flush_active;                /* TRUE if an HCI_Enhanced_Flush has been sent */
-    #endif
+#endif
 
-    #if L2CAP_CONFORMANCE_TESTING == TRUE
+#if L2CAP_CONFORMANCE_TESTING == TRUE
     uint32_t          test_info_resp;                 /* Conformance testing needs a dynamic response */
-    #endif
+#endif
 
-    #if (L2CAP_NUM_FIXED_CHNLS > 0)
+#if (L2CAP_NUM_FIXED_CHNLS > 0)
     tL2CAP_FIXED_CHNL_REG   fixed_reg[L2CAP_NUM_FIXED_CHNLS];   /* Reg info for fixed channels */
-    #endif
+#endif
 
-    #if (BLE_INCLUDED == TRUE)
-    uint16_t                   num_ble_links_active;               /* Number of LE links active           */
+#if (BLE_INCLUDED == TRUE)
+    uint16_t
+    num_ble_links_active;               /* Number of LE links active           */
     uint8_t                  is_ble_connecting;
     BD_ADDR                  ble_connecting_bda;
     uint16_t                   controller_le_xmit_window;         /* Total ACL window for all links   */
     tL2C_BLE_FIXED_CHNLS_MASK l2c_ble_fixed_chnls_mask;         // LE fixed channels mask
     uint16_t                   num_lm_ble_bufs;                   /* # of ACL buffers on controller   */
-    uint16_t                   ble_round_robin_quota;              /* Round-robin link quota           */
-    uint16_t                   ble_round_robin_unacked;            /* Round-robin unacked              */
+    uint16_t
+    ble_round_robin_quota;              /* Round-robin link quota           */
+    uint16_t
+    ble_round_robin_unacked;            /* Round-robin unacked              */
     uint8_t                  ble_check_round_robin;              /* Do a round robin check           */
     tL2C_RCB                 ble_rcb_pool[BLE_MAX_L2CAP_CLIENTS]; /* Registration info pool           */
-    #endif
+#endif
 
     tL2CA_ECHO_DATA_CB      *p_echo_data_cb;                /* Echo data callback */
 
-    #if (defined(L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE) && (L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE == TRUE))
-    uint16_t              high_pri_min_xmit_quota;    /* Minimum number of ACL credit for high priority link */
-    #endif /* (L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE == TRUE) */
+#if (defined(L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE) && (L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE == TRUE))
+    uint16_t
+    high_pri_min_xmit_quota;    /* Minimum number of ACL credit for high priority link */
+#endif /* (L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE == TRUE) */
 
     uint16_t          dyn_psm;
 } tL2C_CB;
@@ -531,8 +529,7 @@ typedef struct
 ** This structure is used to pass between functions, and not all the
 ** fields will always be filled in.
 */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;                        /* Remote BD address        */
     uint8_t           status;                         /* Connection status        */
     uint16_t          psm;                            /* PSM of the connection    */
@@ -552,9 +549,9 @@ typedef void (tL2C_FCR_MGMT_EVT_HDLR)(uint8_t, tL2C_CCB *);
 /* Number of ACL buffers to use for high priority channel
 */
 #if (!defined(L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE) || (L2CAP_HIGH_PRI_CHAN_QUOTA_IS_CONFIGURABLE == FALSE))
-    #define L2CAP_HIGH_PRI_MIN_XMIT_QUOTA_A     (L2CAP_HIGH_PRI_MIN_XMIT_QUOTA)
+#define L2CAP_HIGH_PRI_MIN_XMIT_QUOTA_A     (L2CAP_HIGH_PRI_MIN_XMIT_QUOTA)
 #else
-    #define L2CAP_HIGH_PRI_MIN_XMIT_QUOTA_A     (l2cb.high_pri_min_xmit_quota)
+#define L2CAP_HIGH_PRI_MIN_XMIT_QUOTA_A     (l2cb.high_pri_min_xmit_quota)
 #endif
 
 #ifdef __cplusplus
@@ -617,13 +614,17 @@ extern void     l2cu_send_peer_connect_req(tL2C_CCB *p_ccb);
 extern void     l2cu_send_peer_connect_rsp(tL2C_CCB *p_ccb, uint16_t result, uint16_t status);
 extern void     l2cu_send_peer_config_req(tL2C_CCB *p_ccb, tL2CAP_CFG_INFO *p_cfg);
 extern void     l2cu_send_peer_config_rsp(tL2C_CCB *p_ccb, tL2CAP_CFG_INFO *p_cfg);
-extern void     l2cu_send_peer_config_rej(tL2C_CCB *p_ccb, uint8_t *p_data, uint16_t data_len, uint16_t rej_len);
+extern void     l2cu_send_peer_config_rej(tL2C_CCB *p_ccb, uint8_t *p_data, uint16_t data_len,
+        uint16_t rej_len);
 extern void     l2cu_send_peer_disc_req(tL2C_CCB *p_ccb);
-extern void     l2cu_send_peer_disc_rsp(tL2C_LCB *p_lcb, uint8_t remote_id, uint16_t local_cid, uint16_t remote_cid);
+extern void     l2cu_send_peer_disc_rsp(tL2C_LCB *p_lcb, uint8_t remote_id, uint16_t local_cid,
+                                        uint16_t remote_cid);
 extern void     l2cu_send_peer_echo_req(tL2C_LCB *p_lcb, uint8_t *p_data, uint16_t data_len);
-extern void     l2cu_send_peer_echo_rsp(tL2C_LCB *p_lcb, uint8_t id, uint8_t *p_data, uint16_t data_len);
+extern void     l2cu_send_peer_echo_rsp(tL2C_LCB *p_lcb, uint8_t id, uint8_t *p_data,
+                                        uint16_t data_len);
 extern void     l2cu_send_peer_info_rsp(tL2C_LCB *p_lcb, uint8_t id, uint16_t info_type);
-extern void     l2cu_reject_connection(tL2C_LCB *p_lcb, uint16_t remote_cid, uint8_t rem_id, uint16_t result);
+extern void     l2cu_reject_connection(tL2C_LCB *p_lcb, uint16_t remote_cid, uint8_t rem_id,
+                                       uint16_t result);
 extern void     l2cu_send_peer_info_req(tL2C_LCB *p_lcb, uint16_t info_type);
 extern void     l2cu_set_acl_hci_header(BT_HDR *p_buf, tL2C_CCB *p_ccb);
 extern void     l2cu_check_channel_congestion(tL2C_CCB *p_ccb);
@@ -634,7 +635,8 @@ extern void     l2cu_set_non_flushable_pbf(uint8_t);
 #endif
 
 #if (BLE_INCLUDED == TRUE)
-extern void l2cu_send_peer_ble_par_req(tL2C_LCB *p_lcb, uint16_t min_int, uint16_t max_int, uint16_t latency, uint16_t timeout);
+extern void l2cu_send_peer_ble_par_req(tL2C_LCB *p_lcb, uint16_t min_int, uint16_t max_int,
+                                       uint16_t latency, uint16_t timeout);
 extern void l2cu_send_peer_ble_par_rsp(tL2C_LCB *p_lcb, uint16_t reason, uint8_t rem_id);
 extern void l2cu_reject_ble_connection(tL2C_LCB *p_lcb, uint8_t rem_id, uint16_t result);
 extern void l2cu_send_peer_ble_credit_based_conn_res(tL2C_CCB *p_ccb, uint16_t result);
@@ -643,7 +645,8 @@ extern void l2cu_send_peer_ble_flow_control_credit(tL2C_CCB *p_ccb, uint16_t cre
 extern void l2cu_send_peer_ble_credit_based_disconn_req(tL2C_CCB *p_ccb);
 #endif
 
-extern uint8_t l2cu_initialize_fixed_ccb(tL2C_LCB *p_lcb, uint16_t fixed_cid, tL2CAP_FCR_OPTS *p_fcr);
+extern uint8_t l2cu_initialize_fixed_ccb(tL2C_LCB *p_lcb, uint16_t fixed_cid,
+        tL2CAP_FCR_OPTS *p_fcr);
 extern void    l2cu_no_dynamic_ccbs(tL2C_LCB *p_lcb);
 extern void    l2cu_process_fixed_chnl_resp(tL2C_LCB *p_lcb);
 
@@ -667,8 +670,10 @@ uint8_t l2c_ucd_process_event(tL2C_CCB *p_ccb, uint16_t event, void *p_data);
 /* Functions provided for Broadcom Aware
 ****************************************
 */
-extern uint8_t  l2cu_check_feature_req(tL2C_LCB *p_lcb, uint8_t id, uint8_t *p_data, uint16_t data_len);
-extern void     l2cu_check_feature_rsp(tL2C_LCB *p_lcb, uint8_t id, uint8_t *p_data, uint16_t data_len);
+extern uint8_t  l2cu_check_feature_req(tL2C_LCB *p_lcb, uint8_t id, uint8_t *p_data,
+                                       uint16_t data_len);
+extern void     l2cu_check_feature_rsp(tL2C_LCB *p_lcb, uint8_t id, uint8_t *p_data,
+                                       uint16_t data_len);
 extern void     l2cu_send_feature_req(tL2C_CCB *p_ccb);
 
 extern tL2C_RCB *l2cu_allocate_rcb(uint16_t psm);
@@ -705,11 +710,13 @@ extern void     l2c_info_resp_timer_timeout(void *data);
 extern void     l2c_link_check_send_pkts(tL2C_LCB *p_lcb, tL2C_CCB *p_ccb, BT_HDR *p_buf);
 extern void     l2c_link_adjust_allocation(void);
 extern void     l2c_link_process_num_completed_pkts(uint8_t *p);
-extern void     l2c_link_process_num_completed_blocks(uint8_t controller_id, uint8_t *p, uint16_t evt_len);
+extern void     l2c_link_process_num_completed_blocks(uint8_t controller_id, uint8_t *p,
+        uint16_t evt_len);
 extern void     l2c_link_processs_num_bufs(uint16_t num_lm_acl_bufs);
 extern uint8_t    l2c_link_pkts_rcvd(uint16_t *num_pkts, uint16_t *handles);
 extern void     l2c_link_role_changed(BD_ADDR bd_addr, uint8_t new_role, uint8_t hci_status);
-extern void     l2c_link_sec_comp(BD_ADDR p_bda, tBT_TRANSPORT trasnport, void *p_ref_data, uint8_t status);
+extern void     l2c_link_sec_comp(BD_ADDR p_bda, tBT_TRANSPORT trasnport, void *p_ref_data,
+                                  uint8_t status);
 extern void     l2c_link_segments_xmitted(BT_HDR *p_msg);
 extern void     l2c_pin_code_request(BD_ADDR bd_addr);
 extern void     l2c_link_adjust_chnl_allocation(void);
@@ -779,7 +786,8 @@ extern void l2cble_credit_based_conn_req(tL2C_CCB *p_ccb);
 extern void l2cble_credit_based_conn_res(tL2C_CCB *p_ccb, uint16_t result);
 extern void l2cble_send_peer_disc_req(tL2C_CCB *p_ccb);
 extern void l2cble_send_flow_control_credit(tL2C_CCB *p_ccb, uint16_t credit_value);
-extern uint8_t l2ble_sec_access_req(BD_ADDR bd_addr, uint16_t psm, uint8_t is_originator, tL2CAP_SEC_CBACK *p_callback, void *p_ref_data);
+extern uint8_t l2ble_sec_access_req(BD_ADDR bd_addr, uint16_t psm, uint8_t is_originator,
+                                    tL2CAP_SEC_CBACK *p_callback, void *p_ref_data);
 
 #if (defined BLE_LLT_INCLUDED) && (BLE_LLT_INCLUDED == TRUE)
 extern void l2cble_process_rc_param_request_evt(uint16_t handle, uint16_t int_min, uint16_t int_max,

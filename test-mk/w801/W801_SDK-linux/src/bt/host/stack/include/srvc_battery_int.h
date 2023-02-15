@@ -24,14 +24,13 @@
 #include "gatt_api.h"
 
 #ifndef BA_MAX_INT_NUM
-    #define BA_MAX_INT_NUM     4
+#define BA_MAX_INT_NUM     4
 #endif
 
 #define BATTERY_LEVEL_SIZE      1
 
 
-typedef struct
-{
+typedef struct {
     uint8_t           app_id;
     uint16_t          ba_level_hdl;
     uint16_t          clt_cfg_hdl;
@@ -46,8 +45,7 @@ typedef struct
 
 } tBA_INST;
 
-typedef struct
-{
+typedef struct {
     tBA_INST                battery_inst[BA_MAX_INT_NUM];
     uint8_t                   inst_id;
     uint8_t                 enabled;
@@ -71,7 +69,8 @@ extern uint8_t battery_valid_handle_range(uint16_t handle);
 
 extern uint8_t battery_s_write_attr_value(uint8_t clcb_idx, tGATT_WRITE_REQ *p_value,
         tGATT_STATUS *p_status);
-extern uint8_t battery_s_read_attr_value(uint8_t clcb_idx, uint16_t handle, tGATT_VALUE *p_value, uint8_t is_long, tGATT_STATUS *p_status);
+extern uint8_t battery_s_read_attr_value(uint8_t clcb_idx, uint16_t handle, tGATT_VALUE *p_value,
+        uint8_t is_long, tGATT_STATUS *p_status);
 
 
 

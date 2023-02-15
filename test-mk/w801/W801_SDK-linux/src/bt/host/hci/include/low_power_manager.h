@@ -23,8 +23,7 @@
 typedef struct thread_t thread_t;
 typedef struct vendor_t vendor_t;
 
-typedef struct low_power_manager_t
-{
+typedef struct low_power_manager_t {
     // Initialize the low power manager, and use |post_thread| to synchronize actions.
     void (*init)(thread_t *post_thread);
 

@@ -32,9 +32,9 @@
 tls_bt_status_t btsock_rfc_init(int handle, uid_set_t *set);
 tls_bt_status_t btsock_rfc_cleanup();
 tls_bt_status_t btsock_rfc_listen(const char *name, const uint8_t *uuid, int channel,
-                              int *sock_fd, int flags, int app_uid);
+                                  int *sock_fd, int flags, int app_uid);
 tls_bt_status_t btsock_rfc_connect(const tls_bt_addr_t *bd_addr, const uint8_t *uuid,
-                               int channel, int *sock_fd, int flags, int app_uid);
+                                   int channel, int *sock_fd, int flags, int app_uid);
 void btsock_rfc_signaled(int fd, int flags, uint32_t user_id);
 
 #endif

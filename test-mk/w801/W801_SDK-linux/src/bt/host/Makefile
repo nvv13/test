@@ -2,8 +2,8 @@ TOP_DIR = ../../..
 sinclude $(TOP_DIR)/tools/w800/conf.mk
 
 ifndef PDIR
-GEN_LIBS = libbthost$(LIB_EXT)
-COMPONENTS_libbthost = bta/libbta$(LIB_EXT) 	    \
+GEN_LIBS = libbthost_br_edr$(LIB_EXT)
+COMPONENTS_libbthost_br_edr = bta/libbta$(LIB_EXT) 	    \
                        btcore/libbtcore$(LIB_EXT)	\
                        btif/libbtif$(LIB_EXT)     \
                        embdrv/libembdrv$(LIB_EXT) \

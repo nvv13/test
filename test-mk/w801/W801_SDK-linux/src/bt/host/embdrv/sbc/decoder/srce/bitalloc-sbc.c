@@ -58,15 +58,15 @@ static void stereoBitAllocation(OI_CODEC_SBC_COMMON_CONTEXT *common)
     bitcount += computeBitneed(common, &bitneeds.uint8[nrof_subbands], 1, &bitpoolPreference);
     {
         OI_UINT ex;
-        bitadjust = adjustToFitBitpool(common->frameInfo.bitpool, bitneeds.uint32, 2 * nrof_subbands, bitcount, &ex);
+        bitadjust = adjustToFitBitpool(common->frameInfo.bitpool, bitneeds.uint32, 2 * nrof_subbands,
+                                       bitcount, &ex);
         /* We want the compiler to put excess into a register */
         excess = ex;
     }
     sbL = 0;
     sbR = nrof_subbands;
 
-    while(sbL < nrof_subbands)
-    {
+    while(sbL < nrof_subbands) {
         excess = allocAdjustedBits(&common->bits.uint8[sbL], bitneeds.uint8[sbL] + bitadjust, excess);
         ++sbL;
         excess = allocAdjustedBits(&common->bits.uint8[sbR], bitneeds.uint8[sbR] + bitadjust, excess);
@@ -76,13 +76,11 @@ static void stereoBitAllocation(OI_CODEC_SBC_COMMON_CONTEXT *common)
     sbL = 0;
     sbR = nrof_subbands;
 
-    while(excess)
-    {
+    while(excess) {
         excess = allocExcessBits(&common->bits.uint8[sbL], excess);
         ++sbL;
 
-        if(!excess)
-        {
+        if(!excess) {
             break;
         }
 
@@ -91,8 +89,7 @@ static void stereoBitAllocation(OI_CODEC_SBC_COMMON_CONTEXT *common)
     }
 }
 
-static const BIT_ALLOC balloc[] =
-{
+static const BIT_ALLOC balloc[] = {
     monoBitAllocation,    /* SBC_MONO */
     dualBitAllocation,    /* SBC_DUAL_CHANNEL */
     stereoBitAllocation,  /* SBC_STEREO */
@@ -137,23 +134,16 @@ OI_UINT16 OI_CODEC_SBC_CalculateBitpool(OI_CODEC_SBC_FRAME_INFO *frame,
     OI_UINT16 hdr;
     OI_UINT16 bits;
 
-    if(frame->mode == SBC_JOINT_STEREO)
-    {
+    if(frame->mode == SBC_JOINT_STEREO) {
         hdr = 9 * nrof_subbands;
-    }
-    else
-    {
-        if(frame->mode == SBC_MONO)
-        {
+    } else {
+        if(frame->mode == SBC_MONO) {
             hdr = 4 * nrof_subbands;
-        }
-        else
-        {
+        } else {
             hdr = 8 * nrof_subbands;
         }
 
-        if(frame->mode == SBC_DUAL_CHANNEL)
-        {
+        if(frame->mode == SBC_DUAL_CHANNEL) {
             nrof_blocks *= 2;
         }
     }
@@ -164,7 +154,8 @@ OI_UINT16 OI_CODEC_SBC_CalculateBitpool(OI_CODEC_SBC_FRAME_INFO *frame,
 
 OI_UINT16 OI_CODEC_SBC_CalculatePcmBytes(OI_CODEC_SBC_COMMON_CONTEXT *common)
 {
-    return sizeof(OI_INT16) * common->pcmStride * common->frameInfo.nrof_subbands * common->frameInfo.nrof_blocks;
+    return sizeof(OI_INT16) * common->pcmStride * common->frameInfo.nrof_subbands *
+           common->frameInfo.nrof_blocks;
 }
 
 

@@ -29,8 +29,7 @@ extern "C" {
 
 static const char STACK_CONFIG_MODULE[] = "stack_config_module";
 
-typedef struct
-{
+typedef struct {
     const char *(*get_btsnoop_log_path)(void);
     uint8_t (*get_btsnoop_turned_on)(void);
     uint8_t (*get_btsnoop_should_save_last)(void);

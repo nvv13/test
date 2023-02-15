@@ -1859,7 +1859,10 @@ static UINT32 HTTPIntrnConnectionOpen (P_HTTP_SESSION pHTTPSession)
                 (HTTP_SOCKADDR*)&ServerAddress,			                // Server address    
                 sizeof(HTTP_SOCKADDR));		                    // Length of server address structure
 	        // The socket was set to be asyn so we should check the error being returned from connect()
-	        nRetCode = SocketGetErr(pHTTPSession->HttpConnection.HttpSocket);
+	        if(nRetCode)
+	        {
+	        	nRetCode = SocketGetErr(pHTTPSession->HttpConnection.HttpSocket);
+	        }
         }
         
         if(nRetCode == 0 || nRetCode == HTTP_EWOULDBLOCK || nRetCode == HTTP_EINPROGRESS)
@@ -1876,6 +1879,7 @@ static UINT32 HTTPIntrnConnectionOpen (P_HTTP_SESSION pHTTPSession)
         }
         else
         {
+        	//printf("%s: nRetCode %d\n", __func__, nRetCode);
             // Socket connection problem
             nRetCode = HTTP_CLIENT_ERROR_SOCKET_CONNECT;
             break;
@@ -2172,16 +2176,22 @@ static UINT32 HTTPIntrnRecv (P_HTTP_SESSION pHTTPSession,
                     }
                     
                 }
-		  if(nRetCode != SOCKET_SSL_MORE_DATA)
+				if(nRetCode != SOCKET_SSL_MORE_DATA)
                     *(nLength) = nRetCode;
-                // Break on no data or server connection reset
-                // MSDN: If the connection has been gracefully closed, the return value is zero.
-                if ( nRetCode == 0 || HTTPWrapperGetSocketError(pConnection->HttpSocket)== HTTP_ECONNRESET) 
+                // Break on server connection reset
+                if (/* nRetCode == 0 || */HTTPWrapperGetSocketError(pConnection->HttpSocket)== HTTP_ECONNRESET) 
                 {        
-                    // Connection closed, simply break - this is not an error
                     nRetCode =  HTTP_CLIENT_EOS;  // Signal end of stream
                     break;
                 }
+				// Break on no data
+                // MSDN: If the connection has been gracefully closed, the return value is zero.
+				if (nRetCode == 0)
+				{
+					nRetCode =  HTTP_CLIENT_ERROR_CONNECTION_CLOSE;
+					break;
+				}
+					
                 // We have successfully got the data from the server
                 nRetCode = HTTP_CLIENT_SUCCESS;
                 break;

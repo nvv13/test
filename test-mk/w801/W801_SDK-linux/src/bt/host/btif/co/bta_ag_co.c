@@ -62,24 +62,23 @@ void bta_ag_co_init(void)
 **
 *******************************************************************************/
 #if (BTM_WBS_INCLUDED == TRUE )
-    void bta_ag_co_audio_state(uint16_t handle, uint8_t app_id, uint8_t state, tBTA_AG_PEER_CODEC codec)
+void bta_ag_co_audio_state(uint16_t handle, uint8_t app_id, uint8_t state, tBTA_AG_PEER_CODEC codec)
 #else
-    void bta_ag_co_audio_state(uint16_t handle, uint8_t app_id, uint8_t state)
+void bta_ag_co_audio_state(uint16_t handle, uint8_t app_id, uint8_t state)
 #endif
 {
     BTIF_TRACE_DEBUG("bta_ag_co_audio_state: handle %d, state %d", handle, state);
 
-    switch(state)
-    {
+    switch(state) {
         case SCO_STATE_OFF:
-            #if (BTM_WBS_INCLUDED == TRUE )
+#if (BTM_WBS_INCLUDED == TRUE )
             BTIF_TRACE_DEBUG("bta_ag_co_audio_state(handle %d)::Closed (OFF), codec: 0x%x",
                              handle, codec);
             set_audio_state(handle, codec, state);
-            #else
+#else
             BTIF_TRACE_DEBUG("bta_ag_co_audio_state(handle %d)::Closed (OFF)",
                              handle);
-            #endif
+#endif
             break;
 
         case SCO_STATE_OFF_TRANSFER:
@@ -87,24 +86,24 @@ void bta_ag_co_init(void)
             break;
 
         case SCO_STATE_SETUP:
-            #if (BTM_WBS_INCLUDED == TRUE )
+#if (BTM_WBS_INCLUDED == TRUE )
             set_audio_state(handle, codec, state);
-            #else
+#else
             set_audio_state(handle, BTA_AG_CODEC_CVSD, state);
-            #endif
+#endif
             break;
 
         default:
             break;
     }
 
-    #if (BTM_WBS_INCLUDED == TRUE )
+#if (BTM_WBS_INCLUDED == TRUE )
     APPL_TRACE_DEBUG("bta_ag_co_audio_state(handle %d, app_id: %d, state %d, codec: 0x%x)",
                      handle, app_id, state, codec);
-    #else
+#else
     APPL_TRACE_DEBUG("bta_ag_co_audio_state(handle %d, app_id: %d, state %d)", \
                      handle, app_id, state);
-    #endif
+#endif
 }
 
 

@@ -57,12 +57,9 @@ static void bta_hf_client_sdp_cback(uint16_t status)
     APPL_TRACE_DEBUG("bta_hf_client_sdp_cback status:0x%x", status);
 
     /* set event according to int/acp */
-    if(bta_hf_client_cb.scb.role == BTA_HF_CLIENT_ACP)
-    {
+    if(bta_hf_client_cb.scb.role == BTA_HF_CLIENT_ACP) {
         event = BTA_HF_CLIENT_DISC_ACP_RES_EVT;
-    }
-    else
-    {
+    } else {
         event = BTA_HF_CLIENT_DISC_INT_RES_EVT;
     }
 
@@ -114,41 +111,34 @@ uint8_t bta_hf_client_add_record(char *p_service_name, uint8_t scn,
     result &= SDP_AddProfileDescriptorList(sdp_handle, profile_uuid, version);
 
     /* add service name */
-    if(p_service_name != NULL && p_service_name[0] != 0)
-    {
+    if(p_service_name != NULL && p_service_name[0] != 0) {
         result &= SDP_AddAttribute(sdp_handle, ATTR_ID_SERVICE_NAME, TEXT_STR_DESC_TYPE,
                                    (uint32_t)(strlen(p_service_name) + 1), (uint8_t *) p_service_name);
     }
 
     /* add features */
-    if(features & BTA_HF_CLIENT_FEAT_ECNR)
-    {
+    if(features & BTA_HF_CLIENT_FEAT_ECNR) {
         sdp_features |= BTA_HF_CLIENT_FEAT_ECNR;
     }
 
-    if(features & BTA_HF_CLIENT_FEAT_3WAY)
-    {
+    if(features & BTA_HF_CLIENT_FEAT_3WAY) {
         sdp_features |= BTA_HF_CLIENT_FEAT_3WAY;
     }
 
-    if(features & BTA_HF_CLIENT_FEAT_CLI)
-    {
+    if(features & BTA_HF_CLIENT_FEAT_CLI) {
         sdp_features |= BTA_HF_CLIENT_FEAT_CLI;
     }
 
-    if(features & BTA_HF_CLIENT_FEAT_VREC)
-    {
+    if(features & BTA_HF_CLIENT_FEAT_VREC) {
         sdp_features |= BTA_HF_CLIENT_FEAT_VREC;
     }
 
-    if(features & BTA_HF_CLIENT_FEAT_VOL)
-    {
+    if(features & BTA_HF_CLIENT_FEAT_VOL) {
         sdp_features |= BTA_HF_CLIENT_FEAT_VOL;
     }
 
     /* Codec bit position is different in SDP (bit 5) and in BRSF (bit 7) */
-    if(features & BTA_HF_CLIENT_FEAT_CODEC)
-    {
+    if(features & BTA_HF_CLIENT_FEAT_CODEC) {
         sdp_features |= 0x0020;
     }
 
@@ -172,8 +162,7 @@ uint8_t bta_hf_client_add_record(char *p_service_name, uint8_t scn,
 void bta_hf_client_create_record(tBTA_HF_CLIENT_DATA *p_data)
 {
     /* add sdp record if not already registered */
-    if(bta_hf_client_cb.sdp_handle == 0)
-    {
+    if(bta_hf_client_cb.sdp_handle == 0) {
         bta_hf_client_cb.sdp_handle = SDP_CreateRecord();
         bta_hf_client_cb.scn = BTM_AllocateSCN();
         bta_hf_client_add_record(p_data->api_register.name,
@@ -199,8 +188,7 @@ void bta_hf_client_del_record(tBTA_HF_CLIENT_DATA *p_data)
     UNUSED(p_data);
     APPL_TRACE_DEBUG("bta_hf_client_del_record");
 
-    if(bta_hf_client_cb.sdp_handle != 0)
-    {
+    if(bta_hf_client_cb.sdp_handle != 0) {
         SDP_DeleteRecord(bta_hf_client_cb.sdp_handle);
         bta_hf_client_cb.sdp_handle = 0;
         BTM_FreeSCN(bta_hf_client_cb.scn);
@@ -228,23 +216,18 @@ uint8_t bta_hf_client_sdp_find_attr(void)
     bta_hf_client_cb.scb.peer_version = HFP_VERSION_1_1;   /* Default version */
 
     /* loop through all records we found */
-    while(TRUE)
-    {
+    while(TRUE) {
         /* get next record; if none found, we're done */
-        if((p_rec = SDP_FindServiceInDb(bta_hf_client_cb.scb.p_disc_db, UUID_SERVCLASS_AG_HANDSFREE, p_rec)) == NULL)
-        {
+        if((p_rec = SDP_FindServiceInDb(bta_hf_client_cb.scb.p_disc_db, UUID_SERVCLASS_AG_HANDSFREE,
+                                        p_rec)) == NULL) {
             break;
         }
 
         /* get scn from proto desc list if initiator */
-        if(bta_hf_client_cb.scb.role == BTA_HF_CLIENT_INT)
-        {
-            if(SDP_FindProtocolListElemInRec(p_rec, UUID_PROTOCOL_RFCOMM, &pe))
-            {
+        if(bta_hf_client_cb.scb.role == BTA_HF_CLIENT_INT) {
+            if(SDP_FindProtocolListElemInRec(p_rec, UUID_PROTOCOL_RFCOMM, &pe)) {
                 bta_hf_client_cb.scb.peer_scn = (uint8_t) pe.params[0];
-            }
-            else
-            {
+            } else {
                 continue;
             }
         }
@@ -253,27 +236,22 @@ uint8_t bta_hf_client_sdp_find_attr(void)
         SDP_FindProfileVersionInRec(p_rec, UUID_SERVCLASS_HF_HANDSFREE, &bta_hf_client_cb.scb.peer_version);
 
         /* get features */
-        if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_SUPPORTED_FEATURES)) != NULL)
-        {
+        if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_SUPPORTED_FEATURES)) != NULL) {
             /* Found attribute. Get value. */
             /* There might be race condition between SDP and BRSF.  */
             /* Do not update if we already received BRSF.           */
-            if(bta_hf_client_cb.scb.peer_features == 0)
-            {
+            if(bta_hf_client_cb.scb.peer_features == 0) {
                 bta_hf_client_cb.scb.peer_features = p_attr->attr_value.v.u16;
 
                 /* SDP and BRSF WBS bit are different, correct it if set */
-                if(bta_hf_client_cb.scb.peer_features & 0x0020)
-                {
+                if(bta_hf_client_cb.scb.peer_features & 0x0020) {
                     bta_hf_client_cb.scb.peer_features &= ~0x0020;
                     bta_hf_client_cb.scb.peer_features |= BTA_HF_CLIENT_PEER_CODEC;
                 }
 
                 /* get network for ability to reject calls */
-                if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_NETWORK)) != NULL)
-                {
-                    if(p_attr->attr_value.v.u16 == 0x01)
-                    {
+                if((p_attr = SDP_FindAttributeInRec(p_rec, ATTR_ID_NETWORK)) != NULL) {
+                    if(p_attr->attr_value.v.u16 == 0x01) {
                         bta_hf_client_cb.scb.peer_features |= BTA_HF_CLIENT_PEER_REJECT;
                     }
                 }
@@ -310,8 +288,7 @@ void bta_hf_client_do_disc(void)
     uint8_t         db_inited = FALSE;
 
     /* initiator; get proto list and features */
-    if(bta_hf_client_cb.scb.role == BTA_HF_CLIENT_INT)
-    {
+    if(bta_hf_client_cb.scb.role == BTA_HF_CLIENT_INT) {
         attr_list[0] = ATTR_ID_SERVICE_CLASS_ID_LIST;
         attr_list[1] = ATTR_ID_PROTOCOL_DESC_LIST;
         attr_list[2] = ATTR_ID_BT_PROFILE_DESC_LIST;
@@ -320,8 +297,7 @@ void bta_hf_client_do_disc(void)
         uuid_list[0].uu.uuid16 = UUID_SERVCLASS_AG_HANDSFREE;
     }
     /* acceptor; get features */
-    else
-    {
+    else {
         attr_list[0] = ATTR_ID_SERVICE_CLASS_ID_LIST;
         attr_list[1] = ATTR_ID_BT_PROFILE_DESC_LIST;
         attr_list[2] = ATTR_ID_SUPPORTED_FEATURES;
@@ -338,15 +314,13 @@ void bta_hf_client_do_disc(void)
                                     BT_DEFAULT_BUFFER_SIZE, num_uuid,
                                     uuid_list, num_attr, attr_list);
 
-    if(db_inited)
-    {
+    if(db_inited) {
         /*Service discovery not initiated */
         db_inited = SDP_ServiceSearchAttributeRequest(bta_hf_client_cb.scb.peer_addr,
                     bta_hf_client_cb.scb.p_disc_db, bta_hf_client_sdp_cback);
     }
 
-    if(!db_inited)
-    {
+    if(!db_inited) {
         /*free discover db */
         bta_hf_client_free_db(NULL);
         /* sent failed event */

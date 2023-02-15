@@ -2,10 +2,10 @@
 #define __WM_DEMO_H__
 
 #define DEMO_ON		1
-#define DEMO_OFF	1
+#define DEMO_OFF	0
 
 //demo console
-#define DEMO_CONSOLE				DEMO_OFF
+#define DEMO_CONSOLE				DEMO_ON
 
 //socket demo
 #define DEMO_STD_SOCKET_CLIENT	    (DEMO_OFF && DEMO_CONSOLE)
@@ -14,7 +14,7 @@
 #define DEMO_UDP                    (DEMO_OFF && DEMO_CONSOLE)
 
 //connect demo
-#define DEMO_CONNECT_NET			(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_CONNECT_NET			(DEMO_ON && DEMO_CONSOLE)
 
 #define DEMO_SOCKET_CLIENT_SERVER   (DEMO_OFF && DEMO_CONSOLE)
 
@@ -61,13 +61,13 @@
 #define DEMO_PMU					(DEMO_OFF && DEMO_CONSOLE)
 
 //ntp demo
-#define DEMO_NTP					(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_NTP					(DEMO_ON && DEMO_CONSOLE)
 
 //i2s demo
 #define DEMO_I2S					(DEMO_OFF && DEMO_CONSOLE)
 
 //adc demo
-#define DEMO_ADC					(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_ADC					(DEMO_ON && DEMO_CONSOLE)
 
 //slave spi demo
 #define DEMO_SLAVE_SPI				(DEMO_OFF && DEMO_CONSOLE)
@@ -78,6 +78,10 @@
 //touch sensor
 #define DEMO_TOUCHSENSOR           (DEMO_OFF && DEMO_CONSOLE)
 
+//LCD
+#define DEMO_LCD                    (DEMO_OFF && DEMO_CONSOLE)
+
+
 //ssl server demo
 #define DEMO_SSL_SERVER				(DEMO_OFF && DEMO_CONSOLE)
 
@@ -87,17 +91,18 @@
 //http demo
 #define DEMO_HTTP					(DEMO_OFF && DEMO_CONSOLE)
 
-#define DEMO_SCAN					(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_SCAN					(DEMO_ON && DEMO_CONSOLE)
 #define DEMO_HTTPS                  (DEMO_OFF && DEMO_CONSOLE)
 #define DEMO_MQTT                   (DEMO_OFF && DEMO_CONSOLE)
 #define DEMO_SDIO_HOST              (DEMO_OFF && DEMO_CONSOLE)
 #define DEMO_FATFS                  (DEMO_OFF && DEMO_CONSOLE)
 #define DEMO_MBEDTLS                (DEMO_OFF && DEMO_CONSOLE)
 
+#define DEMO_DSP					(DEMO_ON && DEMO_CONSOLE)
 
-#define DEMO_DSP					(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_BT                     (DEMO_ON && DEMO_CONSOLE)
 
-#define DEMO_BT                     (DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_AVOID_COPY             (DEMO_OFF && DEMO_CONSOLE)
 
 ////////////////////////////////////////////////////////////////
 

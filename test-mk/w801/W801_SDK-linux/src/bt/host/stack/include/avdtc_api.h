@@ -44,16 +44,14 @@
 #define AVDTC_ABORT_IND_EVT         (9 + AVDTC_EVT_BEGIN)   /* Abort indication */
 #define AVDTC_ABORT_CFM_EVT         (10 + AVDTC_EVT_BEGIN)  /* Abort confirm */
 
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR   hdr;                        /* Event header */
     uint8_t           seid_list[AVDT_NUM_SEPS];   /* Array of SEID values */
     uint8_t           num_seps;                   /* Number of values in array */
 } tAVDT_MULTI;
 
 /* Union of all control callback event data structures */
-typedef union
-{
+typedef union {
     tAVDT_EVT_HDR       hdr;
     tAVDT_CONFIG        getconfig_cfm;
     tAVDT_MULTI         start_ind;

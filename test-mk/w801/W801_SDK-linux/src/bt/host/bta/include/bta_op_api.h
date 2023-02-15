@@ -33,11 +33,11 @@
 *****************************************************************************/
 /* Extra Debug Code */
 #ifndef BTA_OPS_DEBUG
-    #define BTA_OPS_DEBUG           FALSE
+#define BTA_OPS_DEBUG           FALSE
 #endif
 
 #ifndef BTA_OPC_DEBUG
-    #define BTA_OPC_DEBUG           FALSE
+#define BTA_OPC_DEBUG           FALSE
 #endif
 
 

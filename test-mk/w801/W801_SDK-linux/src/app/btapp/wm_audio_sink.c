@@ -12,7 +12,7 @@
 #include <assert.h>
 
 #include "wm_bt_config.h"
-
+#include "btif_util.h"
 #if (WM_BTA_AV_SINK_INCLUDED == CFG_ON)
 
 #include "wm_bt_av.h"
@@ -22,11 +22,6 @@
 #if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
 #include "audio.h"
 #endif
-
-static uint16_t g_sample_rate = 44100;
-static uint8_t  g_bit_width   = 16;
-static uint8_t  g_chan_count = 2;
-static uint8_t  g_playing_state = 0;
 
 /**This function is the pcm output function, type is 0(PCM)*/
 #if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
@@ -47,34 +42,18 @@ static uint32_t Stereo2Mono(void *audio_buf, uint32_t len, int LR)
 }
 
 int btif_co_avk_data_incoming(uint8_t type, uint8_t *p_data,uint16_t length)
-{
-    uint16_t fif0_len = 0;
-    
+{  
     Stereo2Mono(p_data, length, 1);
 
-    fif0_len = FifoSpaceLen();
-
-    if(fif0_len < length/2)
-    {
-        printf("overwritten, fifo_space(%d), write to len(%d)\r\n", fif0_len, length/2);
-    }
-
-    FifoWrite(p_data, length/2);
-
-    if(g_playing_state)
-    {
-        if(FifoDataLen()>4*1024)
-        {
-            PlayStart(g_sample_rate, g_bit_width, g_chan_count);
-            g_playing_state = 0;
-        }
-    }
-    
+    tls_player_output(p_data, length>>1);
 }
 #else
 int btif_co_avk_data_incoming(uint8_t type, uint8_t *p_data,uint16_t length)
 {
-	
+	UNUSED(type);
+	UNUSED(p_data);
+	UNUSED(length);
+	return 0;
 }
 #endif
 static void bta2dp_connection_state_callback(tls_btav_connection_state_t state, tls_bt_addr_t *bd_addr)
@@ -111,22 +90,24 @@ static void bta2dp_audio_state_callback(tls_btav_audio_state_t state, tls_bt_add
         case WM_BTAV_AUDIO_STATE_STARTED:
             TLS_BT_APPL_TRACE_DEBUG("BTAV_AUDIO_STATE_STARTED\r\n");
             //sbc_ABV_buffer_reset();
-            //VolumeControl(16);
-            //PlayStart(g_sample_rate, g_bit_width);
-            g_playing_state = 1;
+
+            #if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
+            tls_player_play();
+			#endif
+
             break;
 
         case WM_BTAV_AUDIO_STATE_STOPPED:
             TLS_BT_APPL_TRACE_DEBUG("BTAV_AUDIO_STATE_STOPPED\r\n");
 			#if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
-            PlayStop();
+            tls_player_stop();
 			#endif
             break;
 
         case WM_BTAV_AUDIO_STATE_REMOTE_SUSPEND:
             TLS_BT_APPL_TRACE_DEBUG("BTAV_AUDIO_STATE_REMOTE_SUSPEND\r\n");
 			#if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
-            PlayStop();
+            tls_player_pause();
 			#endif
             break;
 
@@ -138,7 +119,11 @@ static void bta2dp_audio_config_callback(tls_bt_addr_t *bd_addr, uint32_t sample
 {
     TLS_BT_APPL_TRACE_DEBUG("CBACK:%02x:%02x:%02x:%02x:%02x:%02x::sample_rate=%d, channel_count=%d\r\n",
                 bd_addr->address[0], bd_addr->address[1], bd_addr->address[2], bd_addr->address[3], bd_addr->address[4], bd_addr->address[5], sample_rate, channel_count);
-    g_sample_rate = sample_rate;    
+    
+#if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
+    tls_player_config(sample_rate, 16, channel_count);
+#endif
+	
 }
 static void bta2dp_audio_payload_callback(tls_bt_addr_t *bd_addr, uint8_t format, uint8_t *p_data, uint16_t length)
 {
@@ -177,11 +162,13 @@ static void btavrcp_passthrough_response_callback(int id, int pressed)
 {
 }
 
+#if 0
 static void btavrcp_connection_state_callback(bool state, tls_bt_addr_t *bd_addr)
 {
     TLS_BT_APPL_TRACE_DEBUG("CBACK:%02x:%02x:%02x:%02x:%02x:%02x::state:%d\r\n",
                 bd_addr->address[0], bd_addr->address[1], bd_addr->address[2], bd_addr->address[3], bd_addr->address[4], bd_addr->address[5], state);
 }
+#endif
 
 static void wm_a2dp_sink_callback(tls_bt_av_evt_t evt, tls_bt_av_msg_t *msg)
 {
@@ -272,7 +259,7 @@ tls_bt_status_t tls_bt_enable_a2dp_sink()
 		return status;
 	}	
 	#if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
-    AudioInit(12*1024);
+    tls_player_init();
 	#endif
 
 	return status;
@@ -283,6 +270,9 @@ tls_bt_status_t tls_bt_disable_a2dp_sink()
 	tls_bt_av_sink_deinit();
 	tls_btrc_deinit();
 	tls_btrc_ctrl_deinit();
+#if (WM_AUDIO_BOARD_INCLUDED == CFG_ON)
+    tls_player_deinit();
+#endif
 
 	return TLS_BT_STATUS_SUCCESS;
 }

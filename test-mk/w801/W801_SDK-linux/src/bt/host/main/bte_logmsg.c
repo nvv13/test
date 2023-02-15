@@ -21,21 +21,19 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+extern void hci_dbg_msg(const char *format, ...);
 
 void LogMsg(uint32_t level, const char *fmt_str, ...)
 {
     char buffer[512] = {0};
 
-    if(1)
-    {
+    if(1) {
         va_list ap;
         va_start(ap, fmt_str);
         vsprintf(&buffer[0], fmt_str, ap);
         va_end(ap);
         hci_dbg_msg("[WM]:%s\r\n", buffer);
-    }
-    else
-    {
+    } else {
         return;
     }
 }

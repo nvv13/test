@@ -28,16 +28,16 @@
 #define ENCODER_VERSION "0025"
 
 #ifdef BUILDCFG
-    #include "bt_target.h"
+#include "bt_target.h"
 #endif
 
 /*DEFINES*/
 #ifndef FALSE
-    #define FALSE 0
+#define FALSE 0
 #endif
 
 #ifndef TRUE
-    #define TRUE (!FALSE)
+#define TRUE (!FALSE)
 #endif
 
 #define SBC_MAX_NUM_OF_SUBBANDS 8
@@ -68,82 +68,82 @@
 #define SBC_NULL    0
 
 #ifndef SBC_MAX_NUM_FRAME
-    #define SBC_MAX_NUM_FRAME 1
+#define SBC_MAX_NUM_FRAME 1
 #endif
 
 #ifndef SBC_DSP_OPT
-    #define SBC_DSP_OPT FALSE
+#define SBC_DSP_OPT FALSE
 #endif
 
 /* Set SBC_USE_ARM_PRAGMA to TRUE to use "#pragma arm section zidata" */
 #ifndef SBC_USE_ARM_PRAGMA
-    #define SBC_USE_ARM_PRAGMA FALSE
+#define SBC_USE_ARM_PRAGMA FALSE
 #endif
 
 /* Set SBC_ARM_ASM_OPT to TRUE in case the target is an ARM */
 /* this will replace all the 32 and 64 bit mult by in line assembly code */
 #ifndef SBC_ARM_ASM_OPT
-    #define SBC_ARM_ASM_OPT FALSE
+#define SBC_ARM_ASM_OPT FALSE
 #endif
 
 /* green hill compiler option -> Used to distinguish the syntax for inline assembly code*/
 #ifndef SBC_GHS_COMPILER
-    #define SBC_GHS_COMPILER FALSE
+#define SBC_GHS_COMPILER FALSE
 #endif
 
 /* ARM compiler option -> Used to distinguish the syntax for inline assembly code */
 #ifndef SBC_ARM_COMPILER
-    #define SBC_ARM_COMPILER TRUE
+#define SBC_ARM_COMPILER TRUE
 #endif
 
 /* Set SBC_IPAQ_OPT to TRUE in case the target is an ARM */
 /* 32 and 64 bit mult will be performed using SINT64 ( usualy __int64 ) cast that usualy give optimal performance if supported */
 #ifndef SBC_IPAQ_OPT
-    #define SBC_IPAQ_OPT TRUE
+#define SBC_IPAQ_OPT TRUE
 #endif
 
 /* Debug only: set SBC_IS_64_MULT_IN_WINDOW_ACCU to TRUE to use 64 bit multiplication in the windowing */
 /* -> not recomended, more MIPS for the same restitution.  */
 #ifndef SBC_IS_64_MULT_IN_WINDOW_ACCU
-    #define SBC_IS_64_MULT_IN_WINDOW_ACCU  FALSE
+#define SBC_IS_64_MULT_IN_WINDOW_ACCU  FALSE
 #endif /*SBC_IS_64_MULT_IN_WINDOW_ACCU */
 
 /* Set SBC_IS_64_MULT_IN_IDCT to TRUE to use 64 bits multiplication in the DCT of Matrixing */
 /* -> more MIPS required for a better audio quality. comparasion with the SIG utilities shows a division by 10 of the RMS */
 /* CAUTION: It only apply in the if SBC_FAST_DCT is set to TRUE */
 #ifndef SBC_IS_64_MULT_IN_IDCT
-    #define SBC_IS_64_MULT_IN_IDCT  FALSE
+#define SBC_IS_64_MULT_IN_IDCT  FALSE
 #endif /*SBC_IS_64_MULT_IN_IDCT */
 
 /* set SBC_IS_64_MULT_IN_QUANTIZER to TRUE to use 64 bits multiplication in the quantizer */
 /* setting this flag to FALSE add whistling noise at 5.5 and 11 KHz usualy not perceptible by human's hears. */
 #ifndef SBC_IS_64_MULT_IN_QUANTIZER
-    #define SBC_IS_64_MULT_IN_QUANTIZER  TRUE
+#define SBC_IS_64_MULT_IN_QUANTIZER  TRUE
 #endif /*SBC_IS_64_MULT_IN_IDCT */
 
 /* Debug only: set this flag to FALSE to disable fast DCT algorithm */
 #ifndef SBC_FAST_DCT
-    #define SBC_FAST_DCT  TRUE
+#define SBC_FAST_DCT  TRUE
 #endif /*SBC_FAST_DCT */
 
 /* In case we do not use joint stereo mode the flag save some RAM and ROM in case it is set to FALSE */
 #ifndef SBC_JOINT_STE_INCLUDED
-    #define SBC_JOINT_STE_INCLUDED TRUE
+#define SBC_JOINT_STE_INCLUDED TRUE
 #endif
 
 /* TRUE -> application should provide PCM buffer, FALSE PCM buffer reside in SBC_ENC_PARAMS */
 #ifndef SBC_NO_PCM_CPY_OPTION
-    #define SBC_NO_PCM_CPY_OPTION FALSE
+#define SBC_NO_PCM_CPY_OPTION FALSE
 #endif
 
 #define MINIMUM_ENC_VX_BUFFER_SIZE (8*10*2)
 #ifndef ENC_VX_BUFFER_SIZE
-    #define ENC_VX_BUFFER_SIZE (MINIMUM_ENC_VX_BUFFER_SIZE + 64)
-    /*#define ENC_VX_BUFFER_SIZE MINIMUM_ENC_VX_BUFFER_SIZE + 1024*/
+#define ENC_VX_BUFFER_SIZE (MINIMUM_ENC_VX_BUFFER_SIZE + 64)
+/*#define ENC_VX_BUFFER_SIZE MINIMUM_ENC_VX_BUFFER_SIZE + 1024*/
 #endif
 
 #ifndef SBC_FOR_EMBEDDED_LINUX
-    #define SBC_FOR_EMBEDDED_LINUX FALSE
+#define SBC_FOR_EMBEDDED_LINUX FALSE
 #endif
 
 /*constants used for index calculation*/
@@ -151,8 +151,7 @@
 
 #include "sbc_types.h"
 
-typedef struct SBC_ENC_PARAMS_TAG
-{
+typedef struct SBC_ENC_PARAMS_TAG {
     SINT16 s16SamplingFreq;                         /* 16k, 32k, 44.1k or 48k*/
     SINT16 s16ChannelMode;                          /* mono, dual, streo or joint streo*/
     SINT16 s16NumOfSubBands;                        /* 4 or 8 */
@@ -163,19 +162,20 @@ typedef struct SBC_ENC_PARAMS_TAG
                                                        32*numOfSb for stereo & joint stereo */
     uint16_t u16BitRate;
     uint8_t   u8NumPacketToEncode;                    /* number of sbc frame to encode. Default is 1 */
-    #if (SBC_JOINT_STE_INCLUDED == TRUE)
+#if (SBC_JOINT_STE_INCLUDED == TRUE)
     SINT16 as16Join[SBC_MAX_NUM_OF_SUBBANDS];       /*1 if JS, 0 otherwise*/
-    #endif
+#endif
 
     SINT16 s16MaxBitNeed;
     SINT16 as16ScaleFactor[SBC_MAX_NUM_OF_CHANNELS * SBC_MAX_NUM_OF_SUBBANDS];
 
     SINT16 *ps16NextPcmBuffer;
-    #if (SBC_NO_PCM_CPY_OPTION == TRUE)
+#if (SBC_NO_PCM_CPY_OPTION == TRUE)
     SINT16 *ps16PcmBuffer;
-    #else
-    SINT16 as16PcmBuffer[SBC_MAX_NUM_FRAME * SBC_MAX_NUM_OF_BLOCKS * SBC_MAX_NUM_OF_CHANNELS * SBC_MAX_NUM_OF_SUBBANDS];
-    #endif
+#else
+    SINT16 as16PcmBuffer[SBC_MAX_NUM_FRAME * SBC_MAX_NUM_OF_BLOCKS * SBC_MAX_NUM_OF_CHANNELS *
+                                           SBC_MAX_NUM_OF_SUBBANDS];
+#endif
 
     SINT16  s16ScartchMemForBitAlloc[16];
 

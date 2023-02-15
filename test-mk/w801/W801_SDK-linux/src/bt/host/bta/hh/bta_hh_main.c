@@ -37,8 +37,7 @@
 *****************************************************************************/
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     BTA_HH_API_DISC_ACT,        /* HID host process API close action    */
     BTA_HH_OPEN_ACT,            /* HID host process BTA_HH_EVT_OPEN     */
     BTA_HH_CLOSE_ACT,           /* HID host process BTA_HH_EVT_CLOSE    */
@@ -52,7 +51,7 @@ enum
     BTA_HH_MAINT_DEV_ACT,
     BTA_HH_OPEN_CMPL_ACT,
     BTA_HH_OPEN_FAILURE,
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     BTA_HH_GATT_CLOSE,
     BTA_HH_LE_OPEN_FAIL,
     BTA_HH_GATT_OPEN,
@@ -67,7 +66,7 @@ enum
     BTA_HH_SEC_CMPL,
     BTA_HH_LE_UPDATE_SCPP,
     BTA_HH_GATT_ENC_CMPL,
-    #endif
+#endif
     BTA_HH_NUM_ACTIONS
 };
 
@@ -77,8 +76,7 @@ enum
 typedef void (*tBTA_HH_ACTION)(tBTA_HH_DEV_CB *p_cb, tBTA_HH_DATA *p_data);
 
 /* action functions */
-const tBTA_HH_ACTION bta_hh_action[] =
-{
+const tBTA_HH_ACTION bta_hh_action[] = {
     bta_hh_api_disc_act,
     bta_hh_open_act,
     bta_hh_close_act,
@@ -92,7 +90,7 @@ const tBTA_HH_ACTION bta_hh_action[] =
     bta_hh_maint_dev_act,
     bta_hh_open_cmpl_act,
     bta_hh_open_failure
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     , bta_hh_gatt_close
     , bta_hh_le_open_fail
     , bta_hh_gatt_open
@@ -107,7 +105,7 @@ const tBTA_HH_ACTION bta_hh_action[] =
     , bta_hh_security_cmpl
     , bta_hh_le_update_scpp
     , bta_hh_le_notify_enc_cmpl
-    #endif
+#endif
 };
 
 /* state table information */
@@ -116,8 +114,7 @@ const tBTA_HH_ACTION bta_hh_action[] =
 #define BTA_HH_NUM_COLS                 2       /* number of columns */
 
 /* state table for idle state */
-const uint8_t bta_hh_st_idle[][BTA_HH_NUM_COLS] =
-{
+const uint8_t bta_hh_st_idle[][BTA_HH_NUM_COLS] = {
     /* Event                          Action                    Next state */
     /* BTA_HH_API_OPEN_EVT      */    {BTA_HH_START_SDP,     BTA_HH_W4_CONN_ST },
     /* BTA_HH_API_CLOSE_EVT     */    {BTA_HH_IGNORE,        BTA_HH_IDLE_ST    },
@@ -131,7 +128,7 @@ const uint8_t bta_hh_st_idle[][BTA_HH_NUM_COLS] =
     /* BTA_HH_API_GET_DSCP_EVT  */    {BTA_HH_IGNORE,        BTA_HH_IDLE_ST    },
     /* BTA_HH_API_MAINT_DEV_EVT */    {BTA_HH_MAINT_DEV_ACT, BTA_HH_IDLE_ST    },
     /* BTA_HH_OPEN_CMPL_EVT        */  {BTA_HH_OPEN_CMPL_ACT, BTA_HH_CONN_ST    }
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     /* BTA_HH_GATT_CLOSE_EVT    */, {BTA_HH_IGNORE,         BTA_HH_IDLE_ST    }
     /* BTA_HH_GATT_OPEN_EVT    */, {BTA_HH_GATT_OPEN,      BTA_HH_W4_CONN_ST }
     /* BTA_HH_START_ENC_EVT    */, {BTA_HH_IGNORE,         BTA_HH_IDLE_ST    }
@@ -142,13 +139,12 @@ const uint8_t bta_hh_st_idle[][BTA_HH_NUM_COLS] =
     /* WRITE_DESCR_CMPL_EVT */, {BTA_HH_IGNORE,           BTA_HH_IDLE_ST   }
     /* SCPP_UPDATE_EVT */, {BTA_HH_IGNORE,           BTA_HH_IDLE_ST   }
     /* BTA_HH_GATT_ENC_CMPL_EVT */, {BTA_HH_IGNORE,           BTA_HH_IDLE_ST   }
-    #endif
+#endif
 
 };
 
 
-const uint8_t bta_hh_st_w4_conn[][BTA_HH_NUM_COLS] =
-{
+const uint8_t bta_hh_st_w4_conn[][BTA_HH_NUM_COLS] = {
     /* Event                          Action                 Next state */
     /* BTA_HH_API_OPEN_EVT      */    {BTA_HH_IGNORE,        BTA_HH_W4_CONN_ST },
     /* BTA_HH_API_CLOSE_EVT     */    {BTA_HH_IGNORE,        BTA_HH_IDLE_ST    },
@@ -162,7 +158,7 @@ const uint8_t bta_hh_st_w4_conn[][BTA_HH_NUM_COLS] =
     /* BTA_HH_API_GET_DSCP_EVT  */    {BTA_HH_IGNORE,        BTA_HH_W4_CONN_ST },
     /* BTA_HH_API_MAINT_DEV_EVT */    {BTA_HH_MAINT_DEV_ACT, BTA_HH_IDLE_ST    },
     /* BTA_HH_OPEN_CMPL_EVT     */    {BTA_HH_OPEN_CMPL_ACT, BTA_HH_CONN_ST    }
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     /* BTA_HH_GATT_CLOSE_EVT    */, {BTA_HH_LE_OPEN_FAIL,  BTA_HH_IDLE_ST    }
     /* BTA_HH_GATT_OPEN_EVT    */, {BTA_HH_GATT_OPEN,     BTA_HH_W4_CONN_ST }
     /* BTA_HH_START_ENC_EVT    */, {BTA_HH_START_SEC,     BTA_HH_W4_SEC     }
@@ -173,12 +169,11 @@ const uint8_t bta_hh_st_w4_conn[][BTA_HH_NUM_COLS] =
     /* WRITE_DESCR_CMPL_EVT */, {BTA_HH_WRITE_DESCR,   BTA_HH_W4_CONN_ST   }
     /* SCPP_UPDATE_EVT */, {BTA_HH_IGNORE,           BTA_HH_W4_CONN_ST   }
     /* BTA_HH_GATT_ENC_CMPL_EVT */, {BTA_HH_IGNORE,        BTA_HH_W4_CONN_ST }
-    #endif
+#endif
 };
 
 
-const uint8_t bta_hh_st_connected[][BTA_HH_NUM_COLS] =
-{
+const uint8_t bta_hh_st_connected[][BTA_HH_NUM_COLS] = {
     /* Event                          Action                 Next state */
     /* BTA_HH_API_OPEN_EVT      */    {BTA_HH_IGNORE,        BTA_HH_CONN_ST    },
     /* BTA_HH_API_CLOSE_EVT     */    {BTA_HH_API_DISC_ACT,  BTA_HH_CONN_ST    },
@@ -192,7 +187,7 @@ const uint8_t bta_hh_st_connected[][BTA_HH_NUM_COLS] =
     /* BTA_HH_API_GET_DSCP_EVT  */    {BTA_HH_GET_DSCP_ACT,  BTA_HH_CONN_ST    },
     /* BTA_HH_API_MAINT_DEV_EVT */    {BTA_HH_MAINT_DEV_ACT, BTA_HH_CONN_ST    },
     /* BTA_HH_OPEN_CMPL_EVT        */    {BTA_HH_IGNORE,         BTA_HH_CONN_ST    }
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     /* BTA_HH_GATT_CLOSE_EVT    */, {BTA_HH_GATT_CLOSE,    BTA_HH_IDLE_ST    }
     /* BTA_HH_GATT_OPEN_EVT    */, {BTA_HH_IGNORE,        BTA_HH_CONN_ST    }
     /* BTA_HH_START_ENC_EVT    */, {BTA_HH_IGNORE,        BTA_HH_CONN_ST     }
@@ -203,11 +198,10 @@ const uint8_t bta_hh_st_connected[][BTA_HH_NUM_COLS] =
     /* WRITE_DESCR_CMPL_EVT */, {BTA_HH_WRITE_DESCR,   BTA_HH_CONN_ST     }         /* do not currently write any descr when connection up */
     /* SCPP_UPDATE_EVT */, {BTA_HH_LE_UPDATE_SCPP,  BTA_HH_CONN_ST   }
     /* BTA_HH_GATT_ENC_CMPL_EVT */, {BTA_HH_IGNORE,        BTA_HH_CONN_ST     }
-    #endif
+#endif
 };
 #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
-const uint8_t bta_hh_st_w4_sec[][BTA_HH_NUM_COLS] =
-{
+const uint8_t bta_hh_st_w4_sec[][BTA_HH_NUM_COLS] = {
     /* Event                          Action                 Next state */
     /* BTA_HH_API_OPEN_EVT      */    {BTA_HH_IGNORE,        BTA_HH_W4_SEC  },
     /* BTA_HH_API_CLOSE_EVT     */    {BTA_HH_API_DISC_ACT,  BTA_HH_W4_SEC  },
@@ -238,28 +232,27 @@ const uint8_t bta_hh_st_w4_sec[][BTA_HH_NUM_COLS] =
 typedef const uint8_t (*tBTA_HH_ST_TBL)[BTA_HH_NUM_COLS];
 
 /* state table */
-const tBTA_HH_ST_TBL bta_hh_st_tbl[] =
-{
+const tBTA_HH_ST_TBL bta_hh_st_tbl[] = {
     bta_hh_st_idle,
     bta_hh_st_w4_conn,
     bta_hh_st_connected
-    #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
     , bta_hh_st_w4_sec
-    #endif
+#endif
 };
 
 /*****************************************************************************
 ** Global data
 *****************************************************************************/
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_HH_CB  bta_hh_cb;
+tBTA_HH_CB  bta_hh_cb;
 #endif
 /*****************************************************************************
 ** Static functions
 *****************************************************************************/
 #if BTA_HH_DEBUG == TRUE
-    static char *bta_hh_evt_code(tBTA_HH_INT_EVT evt_code);
-    static char *bta_hh_state_code(tBTA_HH_STATE state_code);
+static char *bta_hh_evt_code(tBTA_HH_INT_EVT evt_code);
+static char *bta_hh_state_code(tBTA_HH_STATE state_code);
 #endif
 
 /*******************************************************************************
@@ -278,20 +271,17 @@ void bta_hh_sm_execute(tBTA_HH_DEV_CB *p_cb, uint16_t event, tBTA_HH_DATA *p_dat
     uint8_t           action;
     tBTA_HH         cback_data;
     tBTA_HH_EVT     cback_event = 0;
-    #if BTA_HH_DEBUG == TRUE
+#if BTA_HH_DEBUG == TRUE
     tBTA_HH_STATE   in_state ;
     uint16_t          debug_event = event;
-    #endif
+#endif
     wm_memset(&cback_data, 0, sizeof(tBTA_HH));
 
     /* handle exception, no valid control block was found */
-    if(!p_cb)
-    {
+    if(!p_cb) {
         /* BTA HH enabled already? otherwise ignore the event although it's bad*/
-        if(bta_hh_cb.p_cback != NULL)
-        {
-            switch(event)
-            {
+        if(bta_hh_cb.p_cback != NULL) {
+            switch(event) {
                 /* no control block available for new connection */
                 case BTA_HH_API_OPEN_EVT:
                     cback_event = BTA_HH_OPEN_EVT;
@@ -305,14 +295,11 @@ void bta_hh_sm_execute(tBTA_HH_DEV_CB *p_cb, uint16_t event, tBTA_HH_DATA *p_dat
                 case BTA_HH_API_MAINT_DEV_EVT:
                     cback_event = p_data->api_maintdev.sub_event;
 
-                    if(p_data->api_maintdev.sub_event == BTA_HH_ADD_DEV_EVT)
-                    {
+                    if(p_data->api_maintdev.sub_event == BTA_HH_ADD_DEV_EVT) {
                         bdcpy(cback_data.dev_info.bda, p_data->api_maintdev.bda);
                         cback_data.dev_info.status    = BTA_HH_ERR_DB_FULL;
                         cback_data.dev_info.handle    = BTA_HH_INVALID_HANDLE;
-                    }
-                    else
-                    {
+                    } else {
                         cback_data.dev_info.status    = BTA_HH_ERR_HDL;
                         cback_data.dev_info.handle    = (uint8_t)p_data->api_maintdev.hdr.layer_specific;
                     }
@@ -326,30 +313,21 @@ void bta_hh_sm_execute(tBTA_HH_DEV_CB *p_cb, uint16_t event, tBTA_HH_DATA *p_dat
 
                     if(p_data->api_sndcmd.t_type == HID_TRANS_SET_PROTOCOL ||
                             p_data->api_sndcmd.t_type == HID_TRANS_SET_REPORT ||
-                            p_data->api_sndcmd.t_type == HID_TRANS_SET_IDLE)
-                    {
+                            p_data->api_sndcmd.t_type == HID_TRANS_SET_IDLE) {
                         cback_data.dev_status.status = BTA_HH_ERR_HDL;
                         cback_data.dev_status.handle = (uint8_t)p_data->api_sndcmd.hdr.layer_specific;
+                    } else if(p_data->api_sndcmd.t_type != HID_TRANS_DATA &&
+                              p_data->api_sndcmd.t_type != HID_TRANS_CONTROL) {
+                        cback_data.hs_data.handle = (uint8_t)p_data->api_sndcmd.hdr.layer_specific;
+                        cback_data.hs_data.status = BTA_HH_ERR_HDL;
+                        /* hs_data.rsp_data will be all zero, which is not valid value */
+                    } else if(p_data->api_sndcmd.t_type == HID_TRANS_CONTROL &&
+                              p_data->api_sndcmd.param == BTA_HH_CTRL_VIRTUAL_CABLE_UNPLUG) {
+                        cback_data.status = BTA_HH_ERR_HDL;
+                        cback_event = BTA_HH_VC_UNPLUG_EVT;
+                    } else {
+                        cback_event = 0;
                     }
-                    else
-                        if(p_data->api_sndcmd.t_type != HID_TRANS_DATA &&
-                                p_data->api_sndcmd.t_type != HID_TRANS_CONTROL)
-                        {
-                            cback_data.hs_data.handle = (uint8_t)p_data->api_sndcmd.hdr.layer_specific;
-                            cback_data.hs_data.status = BTA_HH_ERR_HDL;
-                            /* hs_data.rsp_data will be all zero, which is not valid value */
-                        }
-                        else
-                            if(p_data->api_sndcmd.t_type == HID_TRANS_CONTROL &&
-                                    p_data->api_sndcmd.param == BTA_HH_CTRL_VIRTUAL_CABLE_UNPLUG)
-                            {
-                                cback_data.status = BTA_HH_ERR_HDL;
-                                cback_event = BTA_HH_VC_UNPLUG_EVT;
-                            }
-                            else
-                            {
-                                cback_event = 0;
-                            }
 
                     break;
 
@@ -364,32 +342,28 @@ void bta_hh_sm_execute(tBTA_HH_DEV_CB *p_cb, uint16_t event, tBTA_HH_DATA *p_dat
                     APPL_TRACE_ERROR("wrong device handle: [%d]", p_data->hdr.layer_specific);
 
                     /* Free the callback buffer now */
-                    if(p_data != NULL)
-                    {
+                    if(p_data != NULL) {
                         GKI_free_and_reset_buf((void **)&p_data->hid_cback.p_data);
                     }
 
                     break;
             }
 
-            if(cback_event)
-            {
+            if(cback_event) {
                 (* bta_hh_cb.p_cback)(cback_event, &cback_data);
             }
         }
     }
     /* corresponding CB is found, go to state machine */
-    else
-    {
-        #if BTA_HH_DEBUG == TRUE
+    else {
+#if BTA_HH_DEBUG == TRUE
         in_state = p_cb->state;
         APPL_TRACE_EVENT("bta_hh_sm_execute: State 0x%02x [%s], Event [%s]",
                          in_state, bta_hh_state_code(in_state),
                          bta_hh_evt_code(debug_event));
-        #endif
+#endif
 
-        if((p_cb->state == BTA_HH_NULL_ST) || (p_cb->state >= BTA_HH_INVALID_ST))
-        {
+        if((p_cb->state == BTA_HH_NULL_ST) || (p_cb->state >= BTA_HH_INVALID_ST)) {
             APPL_TRACE_ERROR("bta_hh_sm_execute: Invalid state State = 0x%x, Event = %d",
                              p_cb->state, event);
             return;
@@ -399,22 +373,20 @@ void bta_hh_sm_execute(tBTA_HH_DEV_CB *p_cb, uint16_t event, tBTA_HH_DATA *p_dat
         event &= 0xff;
         p_cb->state = state_table[event][BTA_HH_NEXT_STATE] ;
 
-        if((action = state_table[event][BTA_HH_ACTION]) != BTA_HH_IGNORE)
-        {
+        if((action = state_table[event][BTA_HH_ACTION]) != BTA_HH_IGNORE) {
             (*bta_hh_action[action])(p_cb, p_data);
         }
 
-        #if BTA_HH_DEBUG == TRUE
+#if BTA_HH_DEBUG == TRUE
 
-        if(in_state != p_cb->state)
-        {
+        if(in_state != p_cb->state) {
             APPL_TRACE_DEBUG("HH State Change: [%s] -> [%s] after Event [%s]",
                              bta_hh_state_code(in_state),
                              bta_hh_state_code(p_cb->state),
                              bta_hh_evt_code(debug_event));
         }
 
-        #endif
+#endif
     }
 
     return;
@@ -434,8 +406,7 @@ uint8_t bta_hh_hdl_event(BT_HDR *p_msg)
     uint8_t           index = BTA_HH_IDX_INVALID;
     tBTA_HH_DEV_CB *p_cb = NULL;
 
-    switch(p_msg->event)
-    {
+    switch(p_msg->event) {
         case BTA_HH_API_ENABLE_EVT:
             bta_hh_api_enable((tBTA_HH_DATA *) p_msg);
             break;
@@ -452,53 +423,39 @@ uint8_t bta_hh_hdl_event(BT_HDR *p_msg)
 
             /* all events processed in state machine need to find corresponding
                 CB before proceed */
-            if(p_msg->event == BTA_HH_API_OPEN_EVT)
-            {
+            if(p_msg->event == BTA_HH_API_OPEN_EVT) {
                 index = bta_hh_find_cb(((tBTA_HH_API_CONN *)p_msg)->bd_addr);
-            }
-            else
-                if(p_msg->event == BTA_HH_API_MAINT_DEV_EVT)
-                {
-                    /* if add device */
-                    if(((tBTA_HH_MAINT_DEV *)p_msg)->sub_event == BTA_HH_ADD_DEV_EVT)
-                    {
-                        index = bta_hh_find_cb(((tBTA_HH_MAINT_DEV *)p_msg)->bda);
-                    }
-                    else /* else remove device by handle */
-                    {
-                        index = bta_hh_dev_handle_to_cb_idx((uint8_t)p_msg->layer_specific);
+            } else if(p_msg->event == BTA_HH_API_MAINT_DEV_EVT) {
+                /* if add device */
+                if(((tBTA_HH_MAINT_DEV *)p_msg)->sub_event == BTA_HH_ADD_DEV_EVT) {
+                    index = bta_hh_find_cb(((tBTA_HH_MAINT_DEV *)p_msg)->bda);
+                } else { /* else remove device by handle */
+                    index = bta_hh_dev_handle_to_cb_idx((uint8_t)p_msg->layer_specific);
 
-                        /* If BT disable is done while the HID device is connected and Link_Key uses unauthenticated combination
-                          * then we can get into a situation where remove_bonding is called with the index set to 0 (without getting
-                          * cleaned up). Only when VIRTUAL_UNPLUG is called do we cleanup the index and make it MAX_KNOWN.
-                          * So if REMOVE_DEVICE is called and in_use is FALSE then we should treat this as a NULL p_cb. Hence we
-                          * force the index to be IDX_INVALID
-                          */
-                        if((index != BTA_HH_IDX_INVALID) &&
-                                (bta_hh_cb.kdev[index].in_use == FALSE))
-                        {
-                            index = BTA_HH_IDX_INVALID;
-                        }
+                    /* If BT disable is done while the HID device is connected and Link_Key uses unauthenticated combination
+                      * then we can get into a situation where remove_bonding is called with the index set to 0 (without getting
+                      * cleaned up). Only when VIRTUAL_UNPLUG is called do we cleanup the index and make it MAX_KNOWN.
+                      * So if REMOVE_DEVICE is called and in_use is FALSE then we should treat this as a NULL p_cb. Hence we
+                      * force the index to be IDX_INVALID
+                      */
+                    if((index != BTA_HH_IDX_INVALID) &&
+                            (bta_hh_cb.kdev[index].in_use == FALSE)) {
+                        index = BTA_HH_IDX_INVALID;
                     }
                 }
-                else
-                    if(p_msg->event == BTA_HH_INT_OPEN_EVT)
-                    {
-                        index = bta_hh_find_cb(((tBTA_HH_CBACK_DATA *)p_msg)->addr);
-                    }
-                    else
-                    {
-                        index = bta_hh_dev_handle_to_cb_idx((uint8_t)p_msg->layer_specific);
-                    }
+            } else if(p_msg->event == BTA_HH_INT_OPEN_EVT) {
+                index = bta_hh_find_cb(((tBTA_HH_CBACK_DATA *)p_msg)->addr);
+            } else {
+                index = bta_hh_dev_handle_to_cb_idx((uint8_t)p_msg->layer_specific);
+            }
 
-            if(index != BTA_HH_IDX_INVALID)
-            {
+            if(index != BTA_HH_IDX_INVALID) {
                 p_cb = &bta_hh_cb.kdev[index];
             }
 
-            #if BTA_HH_DEBUG
+#if BTA_HH_DEBUG
             APPL_TRACE_DEBUG("bta_hh_hdl_event:: handle = %d dev_cb[%d] ", p_msg->layer_specific, index);
-            #endif
+#endif
             bta_hh_sm_execute(p_cb, p_msg->event, (tBTA_HH_DATA *) p_msg);
     }
 
@@ -520,8 +477,7 @@ uint8_t bta_hh_hdl_event(BT_HDR *p_msg)
 *******************************************************************************/
 static char *bta_hh_evt_code(tBTA_HH_INT_EVT evt_code)
 {
-    switch(evt_code)
-    {
+    switch(evt_code) {
         case BTA_HH_API_DISABLE_EVT:
             return "BTA_HH_API_DISABLE_EVT";
 
@@ -566,7 +522,7 @@ static char *bta_hh_evt_code(tBTA_HH_INT_EVT evt_code)
 
         case BTA_HH_OPEN_CMPL_EVT:
             return "BTA_HH_OPEN_CMPL_EVT";
-            #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
 
         case BTA_HH_GATT_CLOSE_EVT:
             return "BTA_HH_GATT_CLOSE_EVT";
@@ -591,7 +547,7 @@ static char *bta_hh_evt_code(tBTA_HH_INT_EVT evt_code)
 
         case BTA_HH_GATT_WRITE_DESCR_CMPL_EVT:
             return "BTA_HH_GATT_WRITE_DESCR_CMPL_EVT";
-            #endif
+#endif
 
         default:
             return "unknown HID Host event code";
@@ -609,8 +565,7 @@ static char *bta_hh_evt_code(tBTA_HH_INT_EVT evt_code)
 *******************************************************************************/
 static char *bta_hh_state_code(tBTA_HH_STATE state_code)
 {
-    switch(state_code)
-    {
+    switch(state_code) {
         case BTA_HH_NULL_ST:
             return"BTA_HH_NULL_ST";
 
@@ -622,11 +577,11 @@ static char *bta_hh_state_code(tBTA_HH_STATE state_code)
 
         case BTA_HH_CONN_ST:
             return "BTA_HH_CONN_ST";
-            #if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
+#if (defined BTA_HH_LE_INCLUDED && BTA_HH_LE_INCLUDED == TRUE)
 
         case BTA_HH_W4_SEC:
             return "BTA_HH_W4_SEC";
-            #endif
+#endif
 
         default:
             return "unknown HID Host state";

@@ -35,8 +35,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_gatts_reg =
-{
+static const tBTA_SYS_REG bta_gatts_reg = {
     bta_gatts_hdl_event,
     BTA_GATTS_Disable
 };
@@ -54,8 +53,7 @@ static const tBTA_SYS_REG bta_gatts_reg =
 *******************************************************************************/
 void BTA_GATTS_Disable(void)
 {
-    if(bta_sys_is_register(BTA_ID_GATTS) == FALSE)
-    {
+    if(bta_sys_is_register(BTA_ID_GATTS) == FALSE) {
         APPL_TRACE_WARNING("GATTS Module not enabled/already disabled");
         return;
     }
@@ -85,15 +83,13 @@ void BTA_GATTS_AppRegister(tBT_UUID *p_app_uuid, tBTA_GATTS_CBACK *p_cback)
                     (tBTA_GATTS_API_REG *)GKI_getbuf(sizeof(tBTA_GATTS_API_REG));
 
     /* register with BTA system manager */
-    if(bta_sys_is_register(BTA_ID_GATTS) == FALSE)
-    {
+    if(bta_sys_is_register(BTA_ID_GATTS) == FALSE) {
         bta_sys_register(BTA_ID_GATTS, &bta_gatts_reg);
     }
 
     p_buf->hdr.event = BTA_GATTS_API_REG_EVT;
 
-    if(p_app_uuid != NULL)
-    {
+    if(p_app_uuid != NULL) {
         wm_memcpy(&p_buf->app_uuid, p_app_uuid, sizeof(tBT_UUID));
     }
 
@@ -205,8 +201,7 @@ void BTA_GATTS_AddCharacteristic(uint16_t service_id,  tBT_UUID  *p_char_uuid,
     p_buf->perm = perm;
     p_buf->property = property;
 
-    if(p_char_uuid)
-    {
+    if(p_char_uuid) {
         wm_memcpy(&p_buf->char_uuid, p_char_uuid, sizeof(tBT_UUID));
     }
 
@@ -239,8 +234,7 @@ void BTA_GATTS_AddCharDescriptor(uint16_t service_id,
     p_buf->hdr.layer_specific = service_id;
     p_buf->perm = perm;
 
-    if(p_descr_uuid)
-    {
+    if(p_descr_uuid) {
         wm_memcpy(&p_buf->descr_uuid, p_descr_uuid, sizeof(tBT_UUID));
     }
 
@@ -324,28 +318,26 @@ void BTA_GATTS_StopService(uint16_t service_id)
 **
 *******************************************************************************/
 uint8_t BTA_GATTS_HandleValueIndication(uint16_t conn_id, uint16_t attr_id, uint16_t data_len,
-                                     uint8_t *p_data, uint8_t need_confirm)
+                                        uint8_t *p_data, uint8_t need_confirm)
 {
     tBTA_GATTS_API_INDICATION *p_buf =
                     (tBTA_GATTS_API_INDICATION *)GKI_getbuf(sizeof(tBTA_GATTS_API_INDICATION));
 
-    if(p_buf == NULL)
-    {
+    if(p_buf == NULL) {
         return BTA_NO_RESOURCES;
     }
+
     p_buf->hdr.event = BTA_GATTS_API_INDICATION_EVT;
     p_buf->hdr.layer_specific = conn_id;
     p_buf->attr_id = attr_id;
     p_buf->need_confirm = need_confirm;
 
-    if(data_len > 0 && p_data != NULL)
-    {
+    if(data_len > 0 && p_data != NULL) {
         p_buf->len = data_len;
         wm_memcpy(p_buf->value, p_data, data_len);
     }
 
     bta_sys_sendmsg(p_buf);
-
     return BTA_SUCCESS;
 }
 
@@ -373,8 +365,7 @@ void BTA_GATTS_SendRsp(uint16_t conn_id, uint32_t trans_id,
     p_buf->trans_id = trans_id;
     p_buf->status = status;
 
-    if(p_msg != NULL)
-    {
+    if(p_msg != NULL) {
         p_buf->p_rsp = (tBTA_GATTS_RSP *)(p_buf + 1);
         wm_memcpy(p_buf->p_rsp, p_msg, sizeof(tBTA_GATTS_RSP));
     }
@@ -477,13 +468,10 @@ void BTA_GATTS_Listen(tBTA_GATTS_IF server_if, uint8_t start, BD_ADDR_PTR target
     p_buf->server_if = server_if;
     p_buf->start = start;
 
-    if(target_bda)
-    {
+    if(target_bda) {
         p_buf->remote_bda = (uint8_t *)(p_buf + 1);
         wm_memcpy(p_buf->remote_bda, target_bda, BD_ADDR_LEN);
-    }
-    else
-    {
+    } else {
         p_buf->remote_bda = NULL;
     }
 

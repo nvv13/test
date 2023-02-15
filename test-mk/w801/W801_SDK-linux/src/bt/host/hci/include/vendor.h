@@ -26,8 +26,7 @@
 #include "hci_internals.h"
 #include "hci_layer.h"
 
-typedef enum
-{
+typedef enum {
     VENDOR_CHIP_POWER_CONTROL   = BT_VND_OP_POWER_CTRL,
     VENDOR_OPEN_USERIAL         = BT_VND_OP_USERIAL_OPEN,
     VENDOR_CLOSE_USERIAL        = BT_VND_OP_USERIAL_CLOSE,
@@ -36,8 +35,7 @@ typedef enum
     VENDOR_SET_AUDIO_STATE      = BT_VND_OP_SET_AUDIO_STATE
 } vendor_opcode_t;
 
-typedef enum
-{
+typedef enum {
     VENDOR_CONFIGURE_FIRMWARE   = BT_VND_OP_FW_CFG,
     VENDOR_CONFIGURE_SCO        = BT_VND_OP_SCO_CFG,
     VENDOR_SET_LPM_MODE         = BT_VND_OP_LPM_SET_MODE,
@@ -49,8 +47,7 @@ typedef enum
 
 typedef void (*vendor_cb)(uint8_t success);
 
-typedef struct vendor_t
-{
+typedef struct vendor_t {
     // Opens the vendor-specific library and sets the Bluetooth
     // address of the adapter to |local_bdaddr|. |hci_interface| is
     // used to send commands on behalf of the vendor library.

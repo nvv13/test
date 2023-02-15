@@ -29,8 +29,7 @@ void p_256_init_curve(uint32_t keyLength)
 {
     elliptic_curve_t *ec;
 
-    if(keyLength == KEY_LENGTH_DWORDS_P256)
-    {
+    if(keyLength == KEY_LENGTH_DWORDS_P256) {
         ec = &curve_p256;
         ec->p[7] = 0xFFFFFFFF;
         ec->p[6] = 0x00000001;

@@ -20,7 +20,7 @@
 
 #include "n_delay.h" //нужна для UTFT 
 
-#include "UTFT.h"
+#include "mod1/UTFT.h"
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];

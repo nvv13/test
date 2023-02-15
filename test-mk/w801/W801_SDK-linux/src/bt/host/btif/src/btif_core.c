@@ -37,6 +37,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <assert.h>
+#include <stdio.h>
 
 #include "bdaddr.h"
 #include "bt_utils.h"
@@ -56,11 +57,11 @@
 #include "osi/include/fixed_queue.h"
 
 #if defined(BTA_PAN_INCLUDED) && (BTA_PAN_INCLUDED == TRUE)
-    #include "btif_pan.h"
+#include "btif_pan.h"
 #endif
 
 #if defined(BTA_SOCK_INCLUDED) && BTA_SOCK_INCLUDED == TRUE
-    #include "btif_sock.h"
+#include "btif_sock.h"
 #endif
 
 /************************************************************************************
@@ -76,26 +77,22 @@
 /* These type definitions are used when passing data from the HAL to BTIF context
 *  in the downstream path for the adapter and remote_device property APIs */
 
-typedef struct
-{
+typedef struct {
     tls_bt_addr_t bd_addr;
     tls_bt_property_type_t type;
 } btif_storage_read_t;
 
-typedef struct
-{
+typedef struct {
     tls_bt_addr_t bd_addr;
     tls_bt_property_t prop;
 } btif_storage_write_t;
 
-typedef union
-{
+typedef union {
     btif_storage_read_t read_req;
     btif_storage_write_t write_req;
 } btif_storage_req_t;
 
-typedef enum
-{
+typedef enum {
     BTIF_CORE_STATE_DISABLED = 0,
     BTIF_CORE_STATE_ENABLING,
     BTIF_CORE_STATE_ENABLED,
@@ -125,7 +122,7 @@ static uint8_t btif_dut_mode = 0;
 /************************************************************************************
 **  Static functions
 ************************************************************************************/
-static uint8_t btif_fetch_property(const char *key, tls_bt_addr_t *addr);
+//static uint8_t btif_fetch_property(const char *key, tls_bt_addr_t *addr);
 
 /* sends message to btif task */
 static void btif_sendmsg(void *p_msg);
@@ -140,12 +137,12 @@ void bte_main_enable();
 void bte_main_disable(void);
 void bte_main_cleanup(void);
 #if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
-    void bte_main_enable_lpm(uint8_t enable);
+void bte_main_enable_lpm(uint8_t enable);
 #endif
 void bte_main_postload_cfg(void);
 void btif_dm_execute_service_request(uint16_t event, char *p_param);
 #if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
-    void btif_dm_load_local_oob(void);
+void btif_dm_load_local_oob(void);
 #endif
 void bte_main_config_hci_logging(uint8_t enable, uint8_t bt_disabled);
 
@@ -167,8 +164,7 @@ static void btif_context_switched(void *p_msg)
     tBTIF_CONTEXT_SWITCH_CBACK *p = (tBTIF_CONTEXT_SWITCH_CBACK *) p_msg;
 
     /* each callback knows how to parse the data */
-    if(p->p_cb)
-    {
+    if(p->p_cb) {
         p->p_cb(p->event, p->p_param);
     }
 }
@@ -190,14 +186,14 @@ static void btif_context_switched(void *p_msg)
 **
 *******************************************************************************/
 
-tls_bt_status_t btif_transfer_context(tBTIF_CBACK *p_cback, uint16_t event, char *p_params, int param_len, tBTIF_COPY_CBACK *p_copy_cback)
+tls_bt_status_t btif_transfer_context(tBTIF_CBACK *p_cback, uint16_t event, char *p_params,
+                                      int param_len, tBTIF_COPY_CBACK *p_copy_cback)
 {
     tBTIF_CONTEXT_SWITCH_CBACK *p_msg =
                     (tBTIF_CONTEXT_SWITCH_CBACK *)GKI_getbuf(sizeof(tBTIF_CONTEXT_SWITCH_CBACK) + param_len);
 
-    if(p_msg == NULL)
-    {
-        printf("Warning GKI_getbuf null...event=%d(0x%04x)\r\n", event,event);
+    if(p_msg == NULL) {
+        printf("Warning GKI_getbuf null...event=%d(0x%04x)\r\n", event, event);
         return TLS_BT_STATUS_NOMEM;
     }
 
@@ -207,15 +203,11 @@ tls_bt_status_t btif_transfer_context(tBTIF_CBACK *p_cback, uint16_t event, char
     p_msg->event = event;                         /* callback event */
 
     /* check if caller has provided a copy callback to do the deep copy */
-    if(p_copy_cback)
-    {
+    if(p_copy_cback) {
         p_copy_cback(event, p_msg->p_param, p_params);
+    } else if(p_params) {
+        wm_memcpy(p_msg->p_param, p_params, param_len);   /* callback parameter data */
     }
-    else
-        if(p_params)
-        {
-            wm_memcpy(p_msg->p_param, p_params, param_len);   /* callback parameter data */
-        }
 
     btif_sendmsg(p_msg);
     return TLS_BT_STATUS_SUCCESS;
@@ -254,9 +246,9 @@ int btif_is_enabled(void)
 void btif_init_ok(uint16_t event, char *p_param)
 {
     BTIF_TRACE_DEBUG("btif_task: received trigger stack init event");
-    #if (BLE_INCLUDED == TRUE)
+#if (BLE_INCLUDED == TRUE)
     btif_dm_load_ble_local_keys();
-    #endif
+#endif
     BTA_EnableBluetooth(bte_dm_evt);
 }
 
@@ -293,19 +285,17 @@ static void btif_task_prev(uint32_t params)
 static void btif_task(uint32_t event)
 {
     BT_HDR   *p_msg;
-	tls_bt_host_msg_t msg;
+    tls_bt_host_msg_t msg;
 
-    do
-    {
+    do {
         /*
          * Wait for the trigger to init chip and stack. This trigger will
          * be received by btu_task once the UART is opened and ready
          */
-        if(event == BT_EVT_TRIGGER_STACK_INIT)
-        {
-            #if (BLE_INCLUDED == TRUE)
+        if(event == BT_EVT_TRIGGER_STACK_INIT) {
+#if (BLE_INCLUDED == TRUE)
             btif_dm_load_ble_local_keys();
-            #endif
+#endif
             BTA_EnableBluetooth(bte_dm_evt);
         }
 
@@ -313,8 +303,7 @@ static void btif_task(uint32_t event)
          * Failed to initialize controller hardware, reset state and bring
          * down all threads
          */
-        if(event == BT_EVT_HARDWARE_INIT_FAIL)
-        {
+        if(event == BT_EVT_HARDWARE_INIT_FAIL) {
             BTIF_TRACE_EVENT("btif_task: hardware init failed\n");
             bte_main_disable();
             btif_queue_release();
@@ -322,24 +311,22 @@ static void btif_task(uint32_t event)
             bte_main_cleanup();
             btif_dut_mode = 0;
             btif_core_state = BTIF_CORE_STATE_DISABLED;
-			msg.adapter_state_change.status = WM_BT_STATE_OFF;
-			if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg);
+            msg.adapter_state_change.status = WM_BT_STATE_OFF;
+
+            if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg); }
+
             break;
         }
 
-        if(event & EVENT_MASK(GKI_SHUTDOWN_EVT))
-        {
+        if(event & EVENT_MASK(GKI_SHUTDOWN_EVT)) {
             break;
         }
 
-        if(event & TASK_MBOX_1_EVT_MASK)
-        {
-            while((p_msg = GKI_read_mbox(BTU_BTIF_MBOX)) != NULL)
-            {
+        if(event & TASK_MBOX_1_EVT_MASK) {
+            while((p_msg = GKI_read_mbox(BTU_BTIF_MBOX)) != NULL) {
                 BTIF_TRACE_EVENT("btif task fetched event 0x%x\n", p_msg->event);
 
-                switch(p_msg->event)
-                {
+                switch(p_msg->event) {
                     case BT_EVT_CONTEXT_SWITCH_EVT:
                         btif_context_switched(p_msg);
                         break;
@@ -375,12 +362,8 @@ void btif_sendmsg(void *p_msg)
 
 static void btif_fetch_local_bdaddr(tls_bt_addr_t *local_addr)
 {
-    char val[256] = {0};
-    uint8_t valid_bda = FALSE;
-    int val_size = 0;
-    const uint8_t null_bdaddr[BD_ADDR_LEN] = {0, 0, 0, 0, 0, 0};
     BTIF_TRACE_EVENT("Call BT device driver to get bdaddr...\n");
-
+    extern int tls_get_bt_mac_addr(uint8_t *mac);
     tls_get_bt_mac_addr(local_addr->address);
 }
 
@@ -404,8 +387,7 @@ tls_bt_status_t btif_init_bluetooth()
     /* start btif task */
     status = GKI_create_task(btif_task_prev, btif_task, BTIF_TASK, BTIF_TASK_STR);
 
-    if(status != GKI_SUCCESS)
-    {
+    if(status != GKI_SUCCESS) {
         return TLS_BT_STATUS_FAIL;
     }
 
@@ -427,8 +409,7 @@ tls_bt_status_t btif_enable_bluetooth(void)
 {
     BTIF_TRACE_DEBUG("BTIF ENABLE BLUETOOTH");
 
-    if(btif_core_state != BTIF_CORE_STATE_DISABLED)
-    {
+    if(btif_core_state != BTIF_CORE_STATE_DISABLED) {
         BTIF_TRACE_WARNING("btif_core_state...not disabled\n");
         return TLS_BT_STATUS_DONE;
     }
@@ -453,10 +434,9 @@ tls_bt_status_t btif_enable_bluetooth(void)
 
 void btif_enable_bluetooth_evt(tBTA_STATUS status, BD_ADDR local_bd)
 {
-    bdstr_t bdstr;
     tls_bt_host_msg_t msg;
-    if(bdcmp(btif_local_bd_addr.address, local_bd))
-    {
+
+    if(bdcmp(btif_local_bd_addr.address, local_bd)) {
         bdstr_t buf;
         tls_bt_property_t prop;
         /**
@@ -465,17 +445,6 @@ void btif_enable_bluetooth_evt(tBTA_STATUS status, BD_ADDR local_bd)
          * the Controller's non-volatile memory rather than in device's file
          * system.
          **/
-        #if 0
-        BTIF_TRACE_WARNING("***********************************************");
-        BTIF_TRACE_WARNING("BTIF init BDA was %02X:%02X:%02X:%02X:%02X:%02X",
-                           btif_local_bd_addr.address[0], btif_local_bd_addr.address[1],
-                           btif_local_bd_addr.address[2], btif_local_bd_addr.address[3],
-                           btif_local_bd_addr.address[4], btif_local_bd_addr.address[5]);
-        BTIF_TRACE_WARNING("Controller BDA is %02X:%02X:%02X:%02X:%02X:%02X",
-                           local_bd[0], local_bd[1], local_bd[2],
-                           local_bd[3], local_bd[4], local_bd[5]);
-        BTIF_TRACE_WARNING("***********************************************");
-        #endif
         bdcpy(btif_local_bd_addr.address, local_bd);
         //save the bd address to config file
         bdaddr_to_string(&btif_local_bd_addr, buf, sizeof(bdstr_t));
@@ -486,71 +455,63 @@ void btif_enable_bluetooth_evt(tBTA_STATUS status, BD_ADDR local_bd)
         prop.type = WM_BT_PROPERTY_BDADDR;
         prop.val = (void *)buf;
         prop.len = sizeof(tls_bt_addr_t);
-		
-		msg.adapter_prop.status = TLS_BT_STATUS_SUCCESS;
-		msg.adapter_prop.num_properties = 1;
-		msg.adapter_prop.properties = &prop;
-		if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg);
+        msg.adapter_prop.status = TLS_BT_STATUS_SUCCESS;
+        msg.adapter_prop.num_properties = 1;
+        msg.adapter_prop.properties = &prop;
+
+        if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg); }
     }
 
     bte_main_postload_cfg();
-    #if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
+#if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
     bte_main_enable_lpm(TRUE);
-    #endif
+#endif
     /* add passing up bd address as well ? */
     BTIF_TRACE_DEBUG("btif_enable_bluetooth_evt,status=%d\r\n", status);
 
     /* callback to HAL */
-    if(status == BTA_SUCCESS)
-    {
+    if(status == BTA_SUCCESS) {
         /* now fully enabled, update state */
         btif_core_state = BTIF_CORE_STATE_ENABLED;
-        
-        #if defined(BTA_AV_SINK_INCLUDED) && BTA_AV_SINK_INCLUDED ==TRUE
+#if defined(BTA_AV_SINK_INCLUDED) && BTA_AV_SINK_INCLUDED ==TRUE
         btif_av_init(BTA_A2DP_SINK_SERVICE_ID);
-        #endif
-        
-        #if defined(BTA_HFP_HSP_INCLUDED) && BTA_HFP_HSP_INCLUDED ==TRUE
+#endif
+#if defined(BTA_HFP_HSP_INCLUDED) && BTA_HFP_HSP_INCLUDED ==TRUE
         btif_enable_service(BTA_HFP_HS_SERVICE_ID);
-        #endif
-        
-        #if defined(BTA_SOCK_INCLUDED) && BTA_SOCK_INCLUDED == TRUE
+#endif
+#if defined(BTA_SOCK_INCLUDED) && BTA_SOCK_INCLUDED == TRUE
         /* init rfcomm & l2cap api */
         btif_sock_init(uid_set);
-        #endif
-        #if defined(BTA_PAN_INCLUDED) && (BTA_PAN_INCLUDED == TRUE)
+#endif
+#if defined(BTA_PAN_INCLUDED) && (BTA_PAN_INCLUDED == TRUE)
         /* init pan */
         btif_pan_init();
-        #endif
+#endif
         /* load did configuration */
-        #if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
+#if defined(BTIF_DM_OOB_TEST) && (BTIF_DM_OOB_TEST == TRUE)
         btif_dm_load_local_oob();
-        #endif
-
+#endif
         msg.adapter_state_change.status = WM_BT_STATE_ON;
-		if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg);
-		
-    }
-    else
-    {
-        #if defined(BTA_AV_SINK_INCLUDED) && BTA_AV_SINK_INCLUDED ==TRUE
-        btif_av_cleanup(BTA_A2DP_SINK_SERVICE_ID);
-        #endif
 
-        #if defined(BTA_HFP_HSP_INCLUDED) && BTA_HFP_HSP_INCLUDED ==TRUE
+        if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg); }
+    } else {
+#if defined(BTA_AV_SINK_INCLUDED) && BTA_AV_SINK_INCLUDED ==TRUE
+        btif_av_cleanup(BTA_A2DP_SINK_SERVICE_ID);
+#endif
+#if defined(BTA_HFP_HSP_INCLUDED) && BTA_HFP_HSP_INCLUDED ==TRUE
         btif_disable_service(BTA_HFP_HS_SERVICE_ID);
-        #endif
-        
+#endif
         /* cleanup rfcomm & l2cap api */
-        #if defined(BTA_SOCK_INCLUDED) && (BTA_SOCK_INCLUDED == TRUE)
+#if defined(BTA_SOCK_INCLUDED) && (BTA_SOCK_INCLUDED == TRUE)
         btif_sock_cleanup();
-        #endif
-        #if defined(BTA_PAN_INCLUDED) && (BTA_PAN_INCLUDED == TRUE)
+#endif
+#if defined(BTA_PAN_INCLUDED) && (BTA_PAN_INCLUDED == TRUE)
         btif_pan_cleanup();
-        #endif
+#endif
         btif_core_state = BTIF_CORE_STATE_DISABLED;
-		msg.adapter_state_change.status = WM_BT_STATE_OFF;
-		if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg);
+        msg.adapter_state_change.status = WM_BT_STATE_OFF;
+
+        if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg); }
     }
 }
 
@@ -569,8 +530,7 @@ tls_bt_status_t btif_disable_bluetooth(void)
 {
     tBTA_STATUS status;
 
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         BTIF_TRACE_ERROR("btif_disable_bluetooth : not yet enabled");
         return TLS_BT_STATUS_NOT_READY;
     }
@@ -578,31 +538,27 @@ tls_bt_status_t btif_disable_bluetooth(void)
     BTIF_TRACE_DEBUG("BTIF DISABLE BLUETOOTH");
     btif_dm_on_disable();
     btif_core_state = BTIF_CORE_STATE_DISABLING;
-    
-    #if defined(BTA_AV_SINK_INCLUDED) && BTA_AV_SINK_INCLUDED ==TRUE
+#if defined(BTA_AV_SINK_INCLUDED) && BTA_AV_SINK_INCLUDED ==TRUE
     btif_av_cleanup(BTA_A2DP_SINK_SERVICE_ID);
-    #endif
-    
-    #if defined(BTA_HFP_HSP_INCLUDED) && BTA_HFP_HSP_INCLUDED ==TRUE
+#endif
+#if defined(BTA_HFP_HSP_INCLUDED) && BTA_HFP_HSP_INCLUDED ==TRUE
     btif_disable_service(BTA_HFP_HS_SERVICE_ID);
-    #endif
-    
-    #if defined(BTA_SOCK_INCLUDED) && BTA_SOCK_INCLUDED == TRUE
+#endif
+#if defined(BTA_SOCK_INCLUDED) && BTA_SOCK_INCLUDED == TRUE
     /* cleanup rfcomm & l2cap api */
     btif_sock_cleanup();
-    #endif
-    #if defined(BTA_PAN_INCLUDED) && BTA_PAN_INCLUDED == TRUE
+#endif
+#if defined(BTA_PAN_INCLUDED) && BTA_PAN_INCLUDED == TRUE
     btif_pan_cleanup();
-    #endif
-	#if (defined(BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
-	BTA_GATTC_Disable();
-	BTA_GATTS_Disable();
-	#endif
+#endif
+#if (defined(BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
+    BTA_GATTC_Disable();
+    BTA_GATTS_Disable();
+#endif
     status = BTA_DisableBluetooth();
     //btif_config_flush();  //do we need to flush to flash???
 
-    if(status != BTA_SUCCESS)
-    {
+    if(status != BTA_SUCCESS) {
         BTIF_TRACE_ERROR("disable bt failed (%d)", status);
         /* reset the original state to allow attempting disable again */
         btif_core_state = BTIF_CORE_STATE_ENABLED;
@@ -626,23 +582,23 @@ tls_bt_status_t btif_disable_bluetooth(void)
 
 void btif_disable_bluetooth_evt(void)
 {
-	tls_bt_host_msg_t msg;
-	
+    tls_bt_host_msg_t msg;
     BTIF_TRACE_DEBUG("%s", __FUNCTION__);
-    #if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
+#if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
     bte_main_enable_lpm(FALSE);
-    #endif
-    #if (BLE_INCLUDED == TRUE)
+#endif
+#if (BLE_INCLUDED == TRUE)
     BTA_VendorCleanup();
-    #endif
+#endif
     bte_main_disable();
     /* update local state */
     btif_core_state = BTIF_CORE_STATE_DISABLED;
     /* callback to HAL */
-	msg.adapter_state_change.status = WM_BT_STATE_OFF;
-	if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg);
-    if(btif_shutdown_pending)
-    {
+    msg.adapter_state_change.status = WM_BT_STATE_OFF;
+
+    if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg); }
+
+    if(btif_shutdown_pending) {
         BTIF_TRACE_DEBUG("%s: calling btif_shutdown_bluetooth", __FUNCTION__);
         btif_cleanup_bluetooth();
     }
@@ -660,19 +616,17 @@ void btif_disable_bluetooth_evt(void)
 
 tls_bt_status_t btif_cleanup_bluetooth(void)
 {
-	tls_bt_host_msg_t msg;
+    tls_bt_host_msg_t msg;
     BTIF_TRACE_DEBUG("%s", __FUNCTION__);
 
-    if(btif_core_state == BTIF_CORE_STATE_DISABLING)
-    {
+    if(btif_core_state == BTIF_CORE_STATE_DISABLING) {
         BTIF_TRACE_WARNING("shutdown during disabling");
         /* shutdown called before disabling is done */
         btif_shutdown_pending = 1;
         return TLS_BT_STATUS_NOT_READY;
     }
 
-    if(btif_is_enabled())
-    {
+    if(btif_is_enabled()) {
         BTIF_TRACE_WARNING("shutdown while still enabled, initiate disable");
         /* shutdown called prior to disabling, initiate disable */
         btif_disable_bluetooth();
@@ -682,15 +636,15 @@ tls_bt_status_t btif_cleanup_bluetooth(void)
 
     btif_shutdown_pending = 0;
 
-    if(btif_core_state == BTIF_CORE_STATE_ENABLING)
-    {
+    if(btif_core_state == BTIF_CORE_STATE_ENABLING) {
         // Java layer abort BT ENABLING, could be due to ENABLE TIMEOUT
         // Direct call from cleanup()@bluetooth.c
         // bring down HCI/Vendor lib
         bte_main_disable();
         btif_core_state = BTIF_CORE_STATE_DISABLED;
         msg.adapter_state_change.status = WM_BT_STATE_OFF;
-		if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg);
+
+        if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_STATE_CHG_EVT, &msg); }
     }
 
     GKI_destroy_task(BTIF_TASK);
@@ -698,7 +652,7 @@ tls_bt_status_t btif_cleanup_bluetooth(void)
     bte_main_cleanup();
     btif_dut_mode = 0;
     //bt_utils_cleanup();
-    gki_dealloc_free_queue();
+    GKI_dealloc_free_queue();
     BTIF_TRACE_DEBUG("%s done", __FUNCTION__);
     return TLS_BT_STATUS_SUCCESS;
 }
@@ -732,20 +686,16 @@ tls_bt_status_t btif_dut_mode_configure(uint8_t enable)
 {
     BTIF_TRACE_DEBUG("%s", __FUNCTION__);
 
-    if(btif_core_state != BTIF_CORE_STATE_ENABLED)
-    {
+    if(btif_core_state != BTIF_CORE_STATE_ENABLED) {
         BTIF_TRACE_ERROR("btif_dut_mode_configure : Bluetooth not enabled");
         return TLS_BT_STATUS_NOT_READY;
     }
 
     btif_dut_mode = enable;
 
-    if(enable == 1)
-    {
+    if(enable == 1) {
         BTA_EnableTestMode();
-    }
-    else
-    {
+    } else {
         BTA_DisableTestMode();
     }
 
@@ -766,8 +716,7 @@ tls_bt_status_t btif_dut_mode_send(uint16_t opcode, uint8_t *buf, uint8_t len)
     /* TODO: Check that opcode is a vendor command group */
     BTIF_TRACE_DEBUG("%s", __FUNCTION__);
 
-    if(!btif_is_dut_mode())
-    {
+    if(!btif_is_dut_mode()) {
         BTIF_TRACE_ERROR("Bluedroid HAL needs to be init with test_mode set to 1.");
         return TLS_BT_STATUS_FAIL;
     }
@@ -784,7 +733,7 @@ tls_bt_status_t btif_dut_mode_send(uint16_t opcode, uint8_t *buf, uint8_t len)
 
 static tls_bt_status_t btif_in_get_adapter_properties(void)
 {
-	tls_bt_host_msg_t msg;
+    tls_bt_host_msg_t msg;
     tls_bt_property_t properties[6];
     uint32_t num_props;
     tls_bt_addr_t addr;
@@ -824,19 +773,18 @@ static tls_bt_status_t btif_in_get_adapter_properties(void)
                                sizeof(local_uuids), local_uuids);
     btif_storage_get_adapter_property(&properties[num_props]);
     num_props++;
+    msg.adapter_prop.status = TLS_BT_STATUS_SUCCESS;
+    msg.adapter_prop.num_properties = num_props;
+    msg.adapter_prop.properties = properties;
 
-	msg.adapter_prop.status = TLS_BT_STATUS_SUCCESS;
-	msg.adapter_prop.num_properties = num_props;
-	msg.adapter_prop.properties = properties;
-	if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg);
-		
+    if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg); }
+
     return TLS_BT_STATUS_SUCCESS;
 }
 
 static tls_bt_status_t btif_in_get_remote_device_properties(tls_bt_addr_t *bd_addr)
 {
-	tls_bt_host_msg_t msg;
-
+    tls_bt_host_msg_t msg;
     tls_bt_property_t remote_properties[8];
     uint32_t num_props = 0;
     tls_bt_bdname_t name, alias;
@@ -868,13 +816,13 @@ static tls_bt_status_t btif_in_get_remote_device_properties(tls_bt_addr_t *bd_ad
     btif_storage_get_remote_device_property(bd_addr,
                                             &remote_properties[num_props]);
     num_props++;
+    msg.remote_device_prop.status = TLS_BT_STATUS_SUCCESS;
+    msg.remote_device_prop.num_properties = num_props;
+    msg.remote_device_prop.properties = remote_properties;
+    msg.remote_device_prop.address = bd_addr;
 
-	msg.remote_device_prop.status = TLS_BT_STATUS_SUCCESS;
-	msg.remote_device_prop.num_properties = num_props;
-	msg.remote_device_prop.properties = remote_properties;
-	msg.remote_device_prop.address = bd_addr;
-	if(bt_host_cb)bt_host_cb(WM_BT_RMT_DEVICE_PROP_EVT, &msg);
-	
+    if(bt_host_cb) { bt_host_cb(WM_BT_RMT_DEVICE_PROP_EVT, &msg); }
+
     return TLS_BT_STATUS_SUCCESS;
 }
 
@@ -891,28 +839,26 @@ static tls_bt_status_t btif_in_get_remote_device_properties(tls_bt_addr_t *bd_ad
 
 static void execute_storage_request(uint16_t event, char *p_param)
 {
-	tls_bt_host_msg_t msg;
+    tls_bt_host_msg_t msg;
     tls_bt_status_t status = TLS_BT_STATUS_SUCCESS;
     BTIF_TRACE_EVENT("execute storage request event : %d", event);
 
-    switch(event)
-    {
-        case BTIF_CORE_STORAGE_ADAPTER_WRITE:
-        {
+    switch(event) {
+        case BTIF_CORE_STORAGE_ADAPTER_WRITE: {
             btif_storage_req_t *p_req = (btif_storage_req_t *)p_param;
             tls_bt_property_t *p_prop = &(p_req->write_req.prop);
             BTIF_TRACE_EVENT("type: %d, len %d, 0x%x", p_prop->type,
                              p_prop->len, p_prop->val);
             status = btif_storage_set_adapter_property(p_prop);
-			msg.adapter_prop.status = status;
-			msg.adapter_prop.properties = p_prop;
-			msg.adapter_prop.num_properties = 1;
-			if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg);
+            msg.adapter_prop.status = status;
+            msg.adapter_prop.properties = p_prop;
+            msg.adapter_prop.num_properties = 1;
+
+            if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg); }
         }
         break;
 
-        case BTIF_CORE_STORAGE_ADAPTER_READ:
-        {
+        case BTIF_CORE_STORAGE_ADAPTER_READ: {
             btif_storage_req_t *p_req = (btif_storage_req_t *)p_param;
             char buf[512];
             tls_bt_property_t prop;
@@ -920,9 +866,8 @@ static void execute_storage_request(uint16_t event, char *p_param)
             prop.val = (void *)buf;
             prop.len = sizeof(buf);
 
-            if(prop.type == WM_BT_PROPERTY_LOCAL_LE_FEATURES)
-            {
-                #if (BLE_INCLUDED == TRUE)
+            if(prop.type == WM_BT_PROPERTY_LOCAL_LE_FEATURES) {
+#if (BLE_INCLUDED == TRUE)
                 tBTM_BLE_VSC_CB cmn_vsc_cb;
                 bt_local_le_features_t local_le_features;
                 /* LE features are not stored in storage. Should be retrived from stack */
@@ -930,12 +875,9 @@ static void execute_storage_request(uint16_t event, char *p_param)
                 local_le_features.local_privacy_enabled = BTM_BleLocalPrivacyEnabled();
                 prop.len = sizeof(bt_local_le_features_t);
 
-                if(cmn_vsc_cb.filter_support == 1)
-                {
+                if(cmn_vsc_cb.filter_support == 1) {
                     local_le_features.max_adv_filter_supported = cmn_vsc_cb.max_filter;
-                }
-                else
-                {
+                } else {
                     local_le_features.max_adv_filter_supported = 0;
                 }
 
@@ -950,31 +892,30 @@ static void execute_storage_request(uint16_t event, char *p_param)
                 local_le_features.extended_scan_support = cmn_vsc_cb.extended_scan_support > 0;
                 local_le_features.debug_logging_supported = cmn_vsc_cb.debug_logging_supported > 0;
                 wm_memcpy(prop.val, &local_le_features, prop.len);
-                #endif
-            }
-            else
-            {
+#endif
+            } else {
                 status = btif_storage_get_adapter_property(&prop);
             }
+
             msg.adapter_prop.status = status;
-			msg.adapter_prop.num_properties = 1;
-			msg.adapter_prop.properties = &prop;
-			if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg);
+            msg.adapter_prop.num_properties = 1;
+            msg.adapter_prop.properties = &prop;
+
+            if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg); }
         }
         break;
 
-        case BTIF_CORE_STORAGE_ADAPTER_READ_ALL:
-        {
+        case BTIF_CORE_STORAGE_ADAPTER_READ_ALL: {
             status = btif_in_get_adapter_properties();
         }
         break;
 
-        case BTIF_CORE_STORAGE_NOTIFY_STATUS:
-        {
+        case BTIF_CORE_STORAGE_NOTIFY_STATUS: {
             msg.adapter_prop.status = status;
-			msg.adapter_prop.num_properties = 0;
-			msg.adapter_prop.properties = NULL;
-			if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg);		
+            msg.adapter_prop.num_properties = 0;
+            msg.adapter_prop.properties = NULL;
+
+            if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg); }
         }
         break;
 
@@ -986,15 +927,13 @@ static void execute_storage_request(uint16_t event, char *p_param)
 
 static void execute_storage_remote_request(uint16_t event, char *p_param)
 {
-	tls_bt_host_msg_t msg;
+    tls_bt_host_msg_t msg;
     tls_bt_status_t status = TLS_BT_STATUS_FAIL;
     tls_bt_property_t prop;
     BTIF_TRACE_EVENT("execute storage remote request event : %d", event);
 
-    switch(event)
-    {
-        case BTIF_CORE_STORAGE_REMOTE_READ:
-        {
+    switch(event) {
+        case BTIF_CORE_STORAGE_REMOTE_READ: {
             char buf[1024];
             btif_storage_req_t *p_req = (btif_storage_req_t *)p_param;
             prop.type = p_req->read_req.type;
@@ -1002,25 +941,23 @@ static void execute_storage_remote_request(uint16_t event, char *p_param)
             prop.len = sizeof(buf);
             status = btif_storage_get_remote_device_property(&(p_req->read_req.bd_addr),
                      &prop);
-			msg.remote_device_prop.num_properties = 1;
-			msg.remote_device_prop.properties = &prop;
-			msg.remote_device_prop.status = status;
-			msg.remote_device_prop.address = &(p_req->read_req.bd_addr);
-			
-			if(bt_host_cb)bt_host_cb(WM_BT_RMT_DEVICE_PROP_EVT, &msg);
+            msg.remote_device_prop.num_properties = 1;
+            msg.remote_device_prop.properties = &prop;
+            msg.remote_device_prop.status = status;
+            msg.remote_device_prop.address = &(p_req->read_req.bd_addr);
+
+            if(bt_host_cb) { bt_host_cb(WM_BT_RMT_DEVICE_PROP_EVT, &msg); }
         }
         break;
 
-        case BTIF_CORE_STORAGE_REMOTE_WRITE:
-        {
+        case BTIF_CORE_STORAGE_REMOTE_WRITE: {
             btif_storage_req_t *p_req = (btif_storage_req_t *)p_param;
             status = btif_storage_set_remote_device_property(&(p_req->write_req.bd_addr),
                      &(p_req->write_req.prop));
         }
         break;
 
-        case BTIF_CORE_STORAGE_REMOTE_READ_ALL:
-        {
+        case BTIF_CORE_STORAGE_REMOTE_READ_ALL: {
             btif_storage_req_t *p_req = (btif_storage_req_t *)p_param;
             btif_in_get_remote_device_properties(&p_req->read_req.bd_addr);
         }
@@ -1031,21 +968,23 @@ static void execute_storage_remote_request(uint16_t event, char *p_param)
 void btif_adapter_properties_evt(tls_bt_status_t status, uint32_t num_props,
                                  tls_bt_property_t *p_props)
 {
-	tls_bt_host_msg_t msg;
-	msg.adapter_prop.status = status;
-	msg.adapter_prop.num_properties = num_props;
-	msg.adapter_prop.properties = p_props;
-	if(bt_host_cb)bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg);
+    tls_bt_host_msg_t msg;
+    msg.adapter_prop.status = status;
+    msg.adapter_prop.num_properties = num_props;
+    msg.adapter_prop.properties = p_props;
+
+    if(bt_host_cb) { bt_host_cb(WM_BT_ADAPTER_PROP_CHG_EVT, &msg); }
 }
 void btif_remote_properties_evt(tls_bt_status_t status, tls_bt_addr_t *remote_addr,
                                 uint32_t num_props, tls_bt_property_t *p_props)
 {
-	tls_bt_host_msg_t msg;
-	msg.remote_device_prop.address = remote_addr;
-	msg.remote_device_prop.num_properties = num_props;
-	msg.remote_device_prop.properties = p_props;
-	msg.remote_device_prop.status = status;
-	if(bt_host_cb)bt_host_cb(WM_BT_RMT_DEVICE_PROP_EVT, &msg);
+    tls_bt_host_msg_t msg;
+    msg.remote_device_prop.address = remote_addr;
+    msg.remote_device_prop.num_properties = num_props;
+    msg.remote_device_prop.properties = p_props;
+    msg.remote_device_prop.status = status;
+
+    if(bt_host_cb) { bt_host_cb(WM_BT_RMT_DEVICE_PROP_EVT, &msg); }
 }
 
 /*******************************************************************************
@@ -1065,11 +1004,9 @@ static void btif_in_storage_request_copy_cb(uint16_t event,
     btif_storage_req_t *old_req = (btif_storage_req_t *)p_old_buf;
     BTIF_TRACE_EVENT("%s", __FUNCTION__);
 
-    switch(event)
-    {
+    switch(event) {
         case BTIF_CORE_STORAGE_REMOTE_WRITE:
-        case BTIF_CORE_STORAGE_ADAPTER_WRITE:
-        {
+        case BTIF_CORE_STORAGE_ADAPTER_WRITE: {
             bdcpy(new_req->write_req.bd_addr.address, old_req->write_req.bd_addr.address);
             /* Copy the member variables one at a time */
             new_req->write_req.prop.type = old_req->write_req.prop.type;
@@ -1096,8 +1033,7 @@ tls_bt_status_t btif_get_adapter_properties(void)
 {
     BTIF_TRACE_EVENT("%s", __FUNCTION__);
 
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
@@ -1122,8 +1058,7 @@ tls_bt_status_t btif_get_adapter_property(tls_bt_property_type_t type)
     BTIF_TRACE_EVENT("%s %d", __FUNCTION__, type);
 
     /* Allow get_adapter_property only for BDADDR and BDNAME if BT is disabled */
-    if(!btif_is_enabled() && (type != WM_BT_PROPERTY_BDADDR) && (type != WM_BT_PROPERTY_BDNAME))
-    {
+    if(!btif_is_enabled() && (type != WM_BT_PROPERTY_BDADDR) && (type != WM_BT_PROPERTY_BDNAME)) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
@@ -1145,7 +1080,8 @@ tls_bt_status_t btif_get_adapter_property(tls_bt_property_type_t type)
 **
 *******************************************************************************/
 
-tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property, uint8_t update_to_flash)
+tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property,
+        uint8_t update_to_flash)
 {
     btif_storage_req_t req;
     tls_bt_status_t status = TLS_BT_STATUS_SUCCESS;
@@ -1155,51 +1091,42 @@ tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property, uin
     BTIF_TRACE_EVENT("btif_set_adapter_property type: %d, len %d, 0x%x",
                      property->type, property->len, property->val);
 
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
-    switch(property->type)
-    {
-        case WM_BT_PROPERTY_BDNAME:
-        {
+    switch(property->type) {
+        case WM_BT_PROPERTY_BDNAME: {
             name_len = property->len > BTM_MAX_LOC_BD_NAME_LEN ? BTM_MAX_LOC_BD_NAME_LEN :
                        property->len;
             wm_memcpy(bd_name, property->val, name_len);
             bd_name[name_len] = '\0';
             BTIF_TRACE_EVENT("set property name : %s", (char *)bd_name);
             BTA_DmSetDeviceName((char *)bd_name);
-            if(update_to_flash)
-			{
-				storage_req_id = BTIF_CORE_STORAGE_ADAPTER_WRITE;
+
+            if(update_to_flash) {
+                storage_req_id = BTIF_CORE_STORAGE_ADAPTER_WRITE;
             }
         }
         break;
 
-        case WM_BT_PROPERTY_ADAPTER_SCAN_MODE:
-        {
-            bt_scan_mode_t mode = BT_SCAN_MODE_NONE; 
+        case WM_BT_PROPERTY_ADAPTER_SCAN_MODE: {
+            bt_scan_mode_t mode = BT_SCAN_MODE_NONE;
             tBTA_DM_DISC disc_mode;
             tBTA_DM_CONN conn_mode;
             uint8_t *ptr_mode = (uint8_t *)property->val;
-            
-            if(property->len == 1)
-            {
-                if(ptr_mode[0] == '2')
-                {
+
+            if(property->len == 1) {
+                if(ptr_mode[0] == '2') {
                     mode = BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE;
-                }else if(ptr_mode[0] == '1')
-                {
+                } else if(ptr_mode[0] == '1') {
                     mode = BT_SCAN_MODE_CONNECTABLE;
-                }else
-                {
+                } else {
                     mode = BT_SCAN_MODE_NONE;
                 }
             }
 
-            switch(mode)
-            {
+            switch(mode) {
                 case BT_SCAN_MODE_NONE:
                     disc_mode = BTA_DM_NON_DISC;
                     conn_mode = BTA_DM_NON_CONN;
@@ -1220,18 +1147,17 @@ tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property, uin
                     return TLS_BT_STATUS_PARM_INVALID;
             }
 
-            #if (BLE_INCLUDED == TRUE)
-            BTA_DmSetVisibility(disc_mode|BTA_DM_LE_IGNORE, conn_mode|BTA_DM_LE_IGNORE, BTA_DM_IGNORE, BTA_DM_IGNORE);
-            #else
+#if (BLE_INCLUDED == TRUE)
+            BTA_DmSetVisibility(disc_mode | BTA_DM_LE_IGNORE, conn_mode | BTA_DM_LE_IGNORE, BTA_DM_IGNORE,
+                                BTA_DM_IGNORE);
+#else
             BTA_DmSetVisibility(disc_mode, conn_mode, BTA_DM_IGNORE, BTA_DM_IGNORE);
-            #endif
-            
+#endif
             storage_req_id = BTIF_CORE_STORAGE_ADAPTER_WRITE;
         }
         break;
 
-        case WM_BT_PROPERTY_ADAPTER_DISCOVERY_TIMEOUT:
-        {
+        case WM_BT_PROPERTY_ADAPTER_DISCOVERY_TIMEOUT: {
             /* Nothing to do beside store the value in NV.  Java
                 will change the SCAN_MODE property after setting timeout,
                if required */
@@ -1254,8 +1180,7 @@ tls_bt_status_t btif_set_adapter_property(const tls_bt_property_t *property, uin
             break;
     }
 
-    if(storage_req_id != BTIF_CORE_STORAGE_NO_ACTION)
-    {
+    if(storage_req_id != BTIF_CORE_STORAGE_NO_ACTION) {
         /* pass on to storage for updating local database */
         wm_memset(&(req.write_req.bd_addr), 0, sizeof(tls_bt_addr_t));
         wm_memcpy(&(req.write_req.prop), property, sizeof(tls_bt_property_t));
@@ -1283,8 +1208,7 @@ tls_bt_status_t btif_get_remote_device_property(tls_bt_addr_t *remote_addr,
 {
     btif_storage_req_t req;
 
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
@@ -1309,8 +1233,7 @@ tls_bt_status_t btif_get_remote_device_properties(tls_bt_addr_t *remote_addr)
 {
     btif_storage_req_t req;
 
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
@@ -1337,8 +1260,7 @@ tls_bt_status_t btif_set_remote_device_property(tls_bt_addr_t *remote_addr,
 {
     btif_storage_req_t req;
 
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
@@ -1365,8 +1287,7 @@ tls_bt_status_t btif_set_remote_device_property(tls_bt_addr_t *remote_addr,
 tls_bt_status_t btif_get_remote_service_record(tls_bt_addr_t *remote_addr,
         tls_bt_uuid_t *uuid)
 {
-    if(!btif_is_enabled())
-    {
+    if(!btif_is_enabled()) {
         return TLS_BT_STATUS_NOT_READY;
     }
 
@@ -1408,15 +1329,14 @@ tls_bt_status_t btif_enable_service(tBTA_SERVICE_ID service_id)
      *
      * Otherwise, we just set the flag. On BT_Enable, the DM will trigger
      * enable for the profiles that have been enabled */
-   
+
     if(btif_enabled_services & (1 << service_id))
-       return TLS_BT_STATUS_SUCCESS; 
-    
+    { return TLS_BT_STATUS_SUCCESS; }
+
     btif_enabled_services |= (1 << service_id);
     BTIF_TRACE_DEBUG("%s: current services:0x%x", __FUNCTION__, btif_enabled_services);
 
-    if(btif_is_enabled())
-    {
+    if(btif_is_enabled()) {
         btif_transfer_context(btif_dm_execute_service_request,
                               BTIF_DM_ENABLE_SERVICE,
                               (char *)p_id, sizeof(tBTA_SERVICE_ID), NULL);
@@ -1445,8 +1365,7 @@ tls_bt_status_t btif_disable_service(tBTA_SERVICE_ID service_id)
     btif_enabled_services &= (tBTA_SERVICE_MASK)(~(1 << service_id));
     BTIF_TRACE_DEBUG("%s: Current Services:0x%x", __FUNCTION__, btif_enabled_services);
 
-    if(btif_is_enabled())
-    {
+    if(btif_is_enabled()) {
         btif_transfer_context(btif_dm_execute_service_request,
                               BTIF_DM_DISABLE_SERVICE,
                               (char *)p_id, sizeof(tBTA_SERVICE_ID), NULL);

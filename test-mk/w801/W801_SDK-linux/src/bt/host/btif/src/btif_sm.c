@@ -36,8 +36,7 @@
 /*****************************************************************************
 **  Local type definitions
 ******************************************************************************/
-typedef struct
-{
+typedef struct {
     btif_sm_state_t         state;
     btif_sm_handler_t       *p_handlers;
 } btif_sm_cb_t;
@@ -61,16 +60,14 @@ typedef struct
 
 btif_sm_handle_t btif_sm_init(const btif_sm_handler_t *p_handlers, btif_sm_state_t initial_state)
 {
-    if(p_handlers == NULL)
-    {
+    if(p_handlers == NULL) {
         BTIF_TRACE_ERROR("%s : p_handlers is NULL", __FUNCTION__);
         return NULL;
     }
 
     btif_sm_cb_t *p_cb = (btif_sm_cb_t *)GKI_getbuf(sizeof(btif_sm_cb_t));
 
-    if(p_cb == NULL)
-    {
+    if(p_cb == NULL) {
         assert(0);
     }
 
@@ -94,8 +91,7 @@ void btif_sm_shutdown(btif_sm_handle_t handle)
 {
     btif_sm_cb_t *p_cb = (btif_sm_cb_t *)handle;
 
-    if(p_cb == NULL)
-    {
+    if(p_cb == NULL) {
         BTIF_TRACE_ERROR("%s : Invalid handle", __FUNCTION__);
         return;
     }
@@ -116,8 +112,7 @@ btif_sm_state_t btif_sm_get_state(btif_sm_handle_t handle)
 {
     btif_sm_cb_t *p_cb = (btif_sm_cb_t *)handle;
 
-    if(p_cb == NULL)
-    {
+    if(p_cb == NULL) {
         BTIF_TRACE_ERROR("%s : Invalid handle", __FUNCTION__);
         return 0;
     }
@@ -137,19 +132,17 @@ btif_sm_state_t btif_sm_get_state(btif_sm_handle_t handle)
 **
 ******************************************************************************/
 tls_bt_status_t btif_sm_dispatch(btif_sm_handle_t handle, btif_sm_event_t event,
-                             void *data)
+                                 void *data)
 {
     tls_bt_status_t status = TLS_BT_STATUS_SUCCESS;
     btif_sm_cb_t *p_cb = (btif_sm_cb_t *)handle;
 
-    if(p_cb == NULL)
-    {
+    if(p_cb == NULL) {
         BTIF_TRACE_ERROR("%s : Invalid handle", __FUNCTION__);
         return TLS_BT_STATUS_FAIL;
     }
 
-    if(p_cb->p_handlers[p_cb->state](event, data) == FALSE)
-    {
+    if(p_cb->p_handlers[p_cb->state](event, data) == FALSE) {
         return TLS_BT_STATUS_UNHANDLED;
     }
 
@@ -174,15 +167,13 @@ tls_bt_status_t btif_sm_change_state(btif_sm_handle_t handle, btif_sm_state_t st
     tls_bt_status_t status = TLS_BT_STATUS_SUCCESS;
     btif_sm_cb_t *p_cb = (btif_sm_cb_t *)handle;
 
-    if(p_cb == NULL)
-    {
+    if(p_cb == NULL) {
         BTIF_TRACE_ERROR("%s : Invalid handle", __FUNCTION__);
         return TLS_BT_STATUS_FAIL;
     }
 
     /* Send exit event to the current state */
-    if(p_cb->p_handlers[p_cb->state](BTIF_SM_EXIT_EVT, NULL) == FALSE)
-    {
+    if(p_cb->p_handlers[p_cb->state](BTIF_SM_EXIT_EVT, NULL) == FALSE) {
         status = TLS_BT_STATUS_UNHANDLED;
     }
 
@@ -190,8 +181,7 @@ tls_bt_status_t btif_sm_change_state(btif_sm_handle_t handle, btif_sm_state_t st
     p_cb->state = state;
 
     /* Send enter event to the new state */
-    if(p_cb->p_handlers[p_cb->state](BTIF_SM_ENTER_EVT, NULL) == FALSE)
-    {
+    if(p_cb->p_handlers[p_cb->state](BTIF_SM_ENTER_EVT, NULL) == FALSE) {
         status = TLS_BT_STATUS_UNHANDLED;
     }
 

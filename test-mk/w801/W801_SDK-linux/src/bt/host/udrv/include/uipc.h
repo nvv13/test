@@ -29,8 +29,7 @@
 typedef uint8_t tUIPC_CH_ID;
 
 /* Events generated */
-typedef enum
-{
+typedef enum {
     UIPC_OPEN_EVT           = 0x0001,
     UIPC_CLOSE_EVT          = 0x0002,
     UIPC_RX_DATA_EVT        = 0x0004,
@@ -47,7 +46,8 @@ typedef enum
 #define UIPC_REG_REMOVE_ACTIVE_READSET  3
 #define UIPC_SET_READ_POLL_TMO          4
 
-typedef void (tUIPC_RCV_CBACK)(tUIPC_CH_ID ch_id, tUIPC_EVENT event);     /* points to BT_HDR which describes event type and length of data; len contains the number of bytes of entire message (sizeof(BT_HDR) + offset + size of data) */
+typedef void (tUIPC_RCV_CBACK)(tUIPC_CH_ID ch_id,
+                               tUIPC_EVENT event);     /* points to BT_HDR which describes event type and length of data; len contains the number of bytes of entire message (sizeof(BT_HDR) + offset + size of data) */
 
 const char *dump_uipc_event(tUIPC_EVENT event);
 

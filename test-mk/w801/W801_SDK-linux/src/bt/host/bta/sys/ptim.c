@@ -68,12 +68,9 @@ void ptim_timer_update(tPTIM_CB *p_cb)
     new_ticks_count = GKI_get_tick_count();
 
     /* Check for wrapped condition */
-    if(new_ticks_count >= p_cb->last_gki_ticks)
-    {
+    if(new_ticks_count >= p_cb->last_gki_ticks) {
         period_in_ticks = (int32_t)(new_ticks_count - p_cb->last_gki_ticks);
-    }
-    else
-    {
+    } else {
         period_in_ticks = (int32_t)(((uint32_t)0xffffffff - p_cb->last_gki_ticks)
                                     + new_ticks_count + 1);
     }
@@ -83,32 +80,25 @@ void ptim_timer_update(tPTIM_CB *p_cb)
     p_cb->last_gki_ticks = new_ticks_count;
 
     /* while there are expired timers */
-    while((p_cb->timer_queue.p_first) && (p_cb->timer_queue.p_first->ticks <= 0))
-    {
+    while((p_cb->timer_queue.p_first) && (p_cb->timer_queue.p_first->ticks <= 0)) {
         /* removed expired timer from list */
         p_tle = p_cb->timer_queue.p_first;
         GKI_remove_from_timer_list(&p_cb->timer_queue, p_tle);
 
         /* call timer callback */
-        if(p_tle->p_cback)
-        {
+        if(p_tle->p_cback) {
             (*p_tle->p_cback)(p_tle);
-        }
-        else
-            if(p_tle->event)
-            {
-                if((p_msg = (BT_HDR *) GKI_getbuf(sizeof(BT_HDR))) != NULL)
-                {
-                    p_msg->event = p_tle->event;
-                    p_msg->layer_specific = (uint16_t)p_tle->data;
-                    bta_sys_sendmsg(p_msg);
-                }
+        } else if(p_tle->event) {
+            if((p_msg = (BT_HDR *) GKI_getbuf(sizeof(BT_HDR))) != NULL) {
+                p_msg->event = p_tle->event;
+                p_msg->layer_specific = (uint16_t)p_tle->data;
+                bta_sys_sendmsg(p_msg);
             }
+        }
     }
 
     /* if timer list is empty stop periodic GKI timer */
-    if(p_cb->timer_queue.p_first == NULL)
-    {
+    if(p_cb->timer_queue.p_first == NULL) {
         GKI_stop_timer(p_cb->timer_id);
     }
 }
@@ -126,8 +116,7 @@ void ptim_timer_update(tPTIM_CB *p_cb)
 void ptim_start_timer(tPTIM_CB *p_cb, TIMER_LIST_ENT *p_tle, uint16_t type, int32_t timeout)
 {
     /* if timer list is currently empty, start periodic GKI timer */
-    if(p_cb->timer_queue.p_first == NULL)
-    {
+    if(p_cb->timer_queue.p_first == NULL) {
         p_cb->last_gki_ticks = GKI_get_tick_count();
         GKI_start_timer(p_cb->timer_id, GKI_MS_TO_TICKS(p_cb->period), TRUE);
     }
@@ -153,8 +142,7 @@ void ptim_stop_timer(tPTIM_CB *p_cb, TIMER_LIST_ENT *p_tle)
     GKI_remove_from_timer_list(&p_cb->timer_queue, p_tle);
 
     /* if timer list is empty stop periodic GKI timer */
-    if(p_cb->timer_queue.p_first == NULL)
-    {
+    if(p_cb->timer_queue.p_first == NULL) {
         GKI_stop_timer(p_cb->timer_id);
     }
 }

@@ -30,15 +30,13 @@
 typedef void *TRANSAC;
 
 /** Bluetooth Power Control States */
-typedef enum
-{
+typedef enum {
     BT_HC_CHIP_PWR_OFF,
     BT_HC_CHIP_PWR_ON,
 }  bt_hc_chip_power_state_t;
 
 /** Bluetooth Low Power Mode */
-typedef enum
-{
+typedef enum {
     BT_HC_LPM_DISABLE,
     BT_HC_LPM_ENABLE,
     BT_HC_LPM_WAKE_ASSERT,
@@ -46,57 +44,49 @@ typedef enum
 } bt_hc_low_power_event_t;
 
 /** Receive flow control */
-typedef enum
-{
+typedef enum {
     BT_RXFLOW_OFF, /* add transport device fd to select set */
     BT_RXFLOW_ON,  /* remove transport device to from select set */
 } bt_rx_flow_state_t;
 
 /** HCI logging control */
-typedef enum
-{
+typedef enum {
     BT_HC_LOGGING_OFF,
     BT_HC_LOGGING_ON,
 } bt_hc_logging_state_t;
 
 /* commands to be used in LSB with MSG_CTRL_TO_HC_CMD */
-typedef enum
-{
+typedef enum {
     BT_HC_AUDIO_STATE = 0,
     BT_HC_CMD_MAX
 } bt_hc_tx_cmd_t;
 /** Result of write request */
-typedef enum
-{
+typedef enum {
     BT_HC_TX_SUCCESS,  /* a buffer is fully processed and can be released */
     BT_HC_TX_FAIL,     /* transmit fail */
     BT_HC_TX_FRAGMENT, /* send split ACL pkt back to stack to reprocess */
 } bt_hc_transmit_result_t;
 
 /** Result of preload initialization */
-typedef enum
-{
+typedef enum {
     BT_HC_PRELOAD_SUCCESS,
     BT_HC_PRELOAD_FAIL,
 } bt_hc_preload_result_t;
 
 /** Result of postload initialization */
-typedef enum
-{
+typedef enum {
     BT_HC_POSTLOAD_SUCCESS,
     BT_HC_POSTLOAD_FAIL,
 } bt_hc_postload_result_t;
 
 /** Result of low power enable/disable request */
-typedef enum
-{
+typedef enum {
     BT_HC_LPM_DISABLED,
     BT_HC_LPM_ENABLED,
 } bt_hc_lpm_request_result_t;
 
 /** Host/Controller Library Return Status */
-typedef enum
-{
+typedef enum {
     BT_HC_STATUS_SUCCESS,
     BT_HC_STATUS_FAIL,
     BT_HC_STATUS_NOT_READY,
@@ -139,8 +129,7 @@ typedef int (*tx_result_cb)(TRANSAC transac, char *p_buf, bt_hc_transmit_result_
    buffer is deallocated in stack when processed */
 typedef int (*data_ind_cb)(TRANSAC transac, char *p_buf, int len);
 
-typedef struct
-{
+typedef struct {
     /** set to sizeof(bt_hc_callbacks_t) */
     unsigned int         size;
 
@@ -159,8 +148,8 @@ typedef struct
     /* buffer allocation request */
     alloc_mem_cb   alloc;
 
-	/*buffer allocation from pool request*/
-	alloc_mem_pool_cb pool_alloc;
+    /*buffer allocation from pool request*/
+    alloc_mem_pool_cb pool_alloc;
 
     /* buffer deallocation request */
     dealloc_mem_cb dealloc;
@@ -175,8 +164,7 @@ typedef struct
 /*
  * Bluetooth Host/Controller Interface
  */
-typedef struct
-{
+typedef struct {
     /** Set to sizeof(bt_hc_interface_t) */
     unsigned int          size;
 

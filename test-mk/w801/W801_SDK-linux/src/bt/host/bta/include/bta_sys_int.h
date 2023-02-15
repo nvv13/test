@@ -35,8 +35,7 @@
 *****************************************************************************/
 
 /* SYS HW state */
-enum
-{
+enum {
     BTA_SYS_HW_OFF,
     BTA_SYS_HW_STARTING,
     BTA_SYS_HW_ON,
@@ -47,37 +46,38 @@ typedef uint8_t tBTA_SYS_HW_STATE;
 /* Collision callback */
 #define MAX_COLLISION_REG   5
 
-typedef struct
-{
+typedef struct {
     uint8_t                   id[MAX_COLLISION_REG];
     tBTA_SYS_CONN_CBACK     *p_coll_cback[MAX_COLLISION_REG];
 } tBTA_SYS_COLLISION;
 
 /* system manager control block */
-typedef struct
-{
+typedef struct {
     tBTA_SYS_REG            *reg[BTA_ID_MAX];       /* registration structures */
     uint8_t                 is_reg[BTA_ID_MAX];     /* registration structures */
     tPTIM_CB                ptim_cb;                /* protocol timer list */
     uint8_t                 timers_disabled;        /* TRUE if sys timers disabled */
     uint8_t                   task_id;                /* GKI task id */
     tBTA_SYS_HW_STATE state;
-    tBTA_SYS_HW_CBACK *sys_hw_cback[BTA_SYS_MAX_HW_MODULES];    /* enable callback for each HW modules */
+    tBTA_SYS_HW_CBACK
+    *sys_hw_cback[BTA_SYS_MAX_HW_MODULES];    /* enable callback for each HW modules */
     uint32_t                  sys_hw_module_active;   /* bitmask of all active modules */
     uint16_t                  sys_features;           /* Bitmask of sys features */
 
     tBTA_SYS_CONN_CBACK     *prm_cb;                 /* role management callback registered by DM */
-    tBTA_SYS_CONN_CBACK     *ppm_cb;                 /* low power management callback registered by DM */
+    tBTA_SYS_CONN_CBACK
+    *ppm_cb;                 /* low power management callback registered by DM */
     tBTA_SYS_CONN_CBACK     *p_policy_cb;            /* link policy change callback registered by DM */
-    tBTA_SYS_CONN_CBACK     *p_sco_cb;               /* SCO connection change callback registered by AV */
+    tBTA_SYS_CONN_CBACK
+    *p_sco_cb;               /* SCO connection change callback registered by AV */
     tBTA_SYS_CONN_CBACK     *p_role_cb;              /* role change callback registered by AV */
     tBTA_SYS_COLLISION      colli_reg;               /* collision handling module */
-    #if (BTA_EIR_CANNED_UUID_LIST != TRUE)
+#if (BTA_EIR_CANNED_UUID_LIST != TRUE)
     tBTA_SYS_EIR_CBACK      *eir_cb;                /* add/remove UUID into EIR */
-    #endif
-    #if (BTM_SSR_INCLUDED == TRUE)
+#endif
+#if (BTM_SSR_INCLUDED == TRUE)
     tBTA_SYS_SSR_CFG_CBACK      *p_ssr_cb;
-    #endif
+#endif
     /* VS event handler */
     tBTA_SYS_VS_EVT_HDLR   *p_vs_evt_hdlr;
 
@@ -89,10 +89,10 @@ typedef struct
 
 /* system manager control block */
 #if BTA_DYNAMIC_MEMORY == TRUE
-    extern tBTA_SYS_CB *bta_sys_cb_ptr;
-	#define bta_sys_cb (*bta_sys_cb_ptr) 
+extern tBTA_SYS_CB *bta_sys_cb_ptr;
+#define bta_sys_cb (*bta_sys_cb_ptr)
 #else
-	extern tBTA_SYS_CB bta_sys_cb;
+extern tBTA_SYS_CB bta_sys_cb;
 #endif
 
 

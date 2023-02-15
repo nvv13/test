@@ -30,8 +30,7 @@
 **  Constants and data types
 *****************************************************************************/
 
-typedef struct
-{
+typedef struct {
     TIMER_LIST_Q        timer_queue;        /* GKI timer queue */
     int32_t               period;             /* Timer period in milliseconds */
     uint32_t              last_gki_ticks;     /* GKI ticks since last time update called */

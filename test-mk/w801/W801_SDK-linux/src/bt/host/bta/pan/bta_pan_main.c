@@ -40,8 +40,7 @@
 
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     BTA_PAN_API_CLOSE,
     BTA_PAN_TX_PATH,
     BTA_PAN_RX_PATH,
@@ -62,8 +61,7 @@ typedef void (*tBTA_PAN_ACTION)(tBTA_PAN_SCB *p_scb, tBTA_PAN_DATA *p_data);
 
 
 /* action function list */
-const tBTA_PAN_ACTION bta_pan_action[] =
-{
+const tBTA_PAN_ACTION bta_pan_action[] = {
     bta_pan_api_close,
     bta_pan_tx_path,
     bta_pan_rx_path,
@@ -83,8 +81,7 @@ const tBTA_PAN_ACTION bta_pan_action[] =
 
 
 /* state table for listen state */
-const uint8_t bta_pan_st_idle[][BTA_PAN_NUM_COLS] =
-{
+const uint8_t bta_pan_st_idle[][BTA_PAN_NUM_COLS] = {
     /* API_CLOSE */          {BTA_PAN_API_CLOSE,              BTA_PAN_IDLE_ST},
     /* CI_TX_READY */        {BTA_PAN_IGNORE,                 BTA_PAN_IDLE_ST},
     /* CI_RX_READY */        {BTA_PAN_IGNORE,                 BTA_PAN_IDLE_ST},
@@ -101,8 +98,7 @@ const uint8_t bta_pan_st_idle[][BTA_PAN_NUM_COLS] =
 
 
 /* state table for open state */
-const uint8_t bta_pan_st_open[][BTA_PAN_NUM_COLS] =
-{
+const uint8_t bta_pan_st_open[][BTA_PAN_NUM_COLS] = {
     /* API_CLOSE */          {BTA_PAN_API_CLOSE,               BTA_PAN_OPEN_ST},
     /* CI_TX_READY */        {BTA_PAN_TX_PATH,                 BTA_PAN_OPEN_ST},
     /* CI_RX_READY */        {BTA_PAN_RX_PATH,                 BTA_PAN_OPEN_ST},
@@ -116,8 +112,7 @@ const uint8_t bta_pan_st_open[][BTA_PAN_NUM_COLS] =
 };
 
 /* state table for closing state */
-const uint8_t bta_pan_st_closing[][BTA_PAN_NUM_COLS] =
-{
+const uint8_t bta_pan_st_closing[][BTA_PAN_NUM_COLS] = {
     /* API_CLOSE */          {BTA_PAN_IGNORE,                   BTA_PAN_CLOSING_ST},
     /* CI_TX_READY */        {BTA_PAN_TX_PATH,                  BTA_PAN_CLOSING_ST},
     /* CI_RX_READY */        {BTA_PAN_RX_PATH,                  BTA_PAN_CLOSING_ST},
@@ -134,8 +129,7 @@ const uint8_t bta_pan_st_closing[][BTA_PAN_NUM_COLS] =
 typedef const uint8_t (*tBTA_PAN_ST_TBL)[BTA_PAN_NUM_COLS];
 
 /* state table */
-const tBTA_PAN_ST_TBL bta_pan_st_tbl[] =
-{
+const tBTA_PAN_ST_TBL bta_pan_st_tbl[] = {
     bta_pan_st_idle,
     bta_pan_st_open,
     bta_pan_st_closing
@@ -147,7 +141,7 @@ const tBTA_PAN_ST_TBL bta_pan_st_tbl[] =
 
 /* PAN control block */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_PAN_CB  bta_pan_cb;
+tBTA_PAN_CB  bta_pan_cb;
 #endif
 
 /*******************************************************************************
@@ -165,18 +159,15 @@ tBTA_PAN_SCB *bta_pan_scb_alloc(void)
     tBTA_PAN_SCB     *p_scb = &bta_pan_cb.scb[0];
     int             i;
 
-    for(i = 0; i < BTA_PAN_NUM_CONN; i++, p_scb++)
-    {
-        if(!p_scb->in_use)
-        {
+    for(i = 0; i < BTA_PAN_NUM_CONN; i++, p_scb++) {
+        if(!p_scb->in_use) {
             p_scb->in_use = TRUE;
             APPL_TRACE_DEBUG("bta_pan_scb_alloc %d", i);
             break;
         }
     }
 
-    if(i == BTA_PAN_NUM_CONN)
-    {
+    if(i == BTA_PAN_NUM_CONN) {
         /* out of scbs */
         p_scb = NULL;
         APPL_TRACE_WARNING("Out of scbs");
@@ -208,14 +199,10 @@ static void bta_pan_sm_execute(tBTA_PAN_SCB *p_scb, uint16_t event, tBTA_PAN_DAT
     p_scb->state = state_table[event][BTA_PAN_NEXT_STATE];
 
     /* execute action functions */
-    for(i = 0; i < BTA_PAN_ACTIONS; i++)
-    {
-        if((action = state_table[event][i]) != BTA_PAN_IGNORE)
-        {
+    for(i = 0; i < BTA_PAN_ACTIONS; i++) {
+        if((action = state_table[event][i]) != BTA_PAN_IGNORE) {
             (*bta_pan_action[action])(p_scb, p_data);
-        }
-        else
-        {
+        } else {
             break;
         }
     }
@@ -273,12 +260,9 @@ static void bta_pan_api_open(tBTA_PAN_DATA *p_data)
     tBTA_PAN_OPEN data;
 
     /* allocate an scb */
-    if((p_scb = bta_pan_scb_alloc()) != NULL)
-    {
+    if((p_scb = bta_pan_scb_alloc()) != NULL) {
         bta_pan_open(p_scb, p_data);
-    }
-    else
-    {
+    } else {
         bdcpy(data.bd_addr, p_data->api_open.bd_addr);
         data.status = BTA_PAN_FAIL;
         bta_pan_cb.p_cback(BTA_PAN_OPEN_EVT, (tBTA_PAN *)&data);
@@ -333,10 +317,8 @@ tBTA_PAN_SCB *bta_pan_scb_by_handle(uint16_t handle)
     tBTA_PAN_SCB     *p_scb = &bta_pan_cb.scb[0];
     uint8_t i;
 
-    for(i = 0; i < BTA_PAN_NUM_CONN; i++, p_scb++)
-    {
-        if(p_scb->handle == handle)
-        {
+    for(i = 0; i < BTA_PAN_NUM_CONN; i++, p_scb++) {
+        if(p_scb->handle == handle) {
             return p_scb;;
         }
     }
@@ -360,8 +342,7 @@ uint8_t bta_pan_hdl_event(BT_HDR *p_msg)
     tBTA_PAN_SCB *p_scb;
     uint8_t     freebuf = TRUE;
 
-    switch(p_msg->event)
-    {
+    switch(p_msg->event) {
         /* handle enable event */
         case BTA_PAN_API_ENABLE_EVT:
             bta_pan_api_enable((tBTA_PAN_DATA *) p_msg);
@@ -386,8 +367,7 @@ uint8_t bta_pan_hdl_event(BT_HDR *p_msg)
         case BTA_PAN_CI_RX_WRITEBUF_EVT:
             freebuf = FALSE;
 
-            if((p_scb = bta_pan_scb_by_handle(p_msg->layer_specific)) != NULL)
-            {
+            if((p_scb = bta_pan_scb_by_handle(p_msg->layer_specific)) != NULL) {
                 bta_pan_sm_execute(p_scb, p_msg->event, (tBTA_PAN_DATA *) p_msg);
             }
 
@@ -395,8 +375,7 @@ uint8_t bta_pan_hdl_event(BT_HDR *p_msg)
 
         /* all other events */
         default:
-            if((p_scb = bta_pan_scb_by_handle(p_msg->layer_specific)) != NULL)
-            {
+            if((p_scb = bta_pan_scb_by_handle(p_msg->layer_specific)) != NULL) {
                 bta_pan_sm_execute(p_scb, p_msg->event, (tBTA_PAN_DATA *) p_msg);
             }
 

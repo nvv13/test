@@ -36,8 +36,7 @@
 *****************************************************************************/
 
 /* lcb state machine events */
-enum
-{
+enum {
     AVCT_LCB_UL_BIND_EVT,
     AVCT_LCB_UL_UNBIND_EVT,
     AVCT_LCB_UL_MSG_EVT,
@@ -62,8 +61,7 @@ enum
 ** data types
 *****************************************************************************/
 /* sub control block type - common data members for tAVCT_LCB and tAVCT_BCB */
-typedef struct
-{
+typedef struct {
     uint16_t              peer_mtu;     /* peer l2c mtu */
     uint16_t              ch_result;      /* L2CAP connection result value */
     uint16_t              ch_lcid;        /* L2CAP channel LCID */
@@ -74,8 +72,7 @@ typedef struct
 } tAVCT_SCB;
 
 /* link control block type */
-typedef struct
-{
+typedef struct {
     uint16_t              peer_mtu;     /* peer l2c mtu */
     uint16_t              ch_result;      /* L2CAP connection result value */
     uint16_t              ch_lcid;        /* L2CAP channel LCID */
@@ -91,8 +88,7 @@ typedef struct
 } tAVCT_LCB;
 
 /* browse control block type */
-typedef struct
-{
+typedef struct {
     uint16_t              peer_mtu;     /* peer l2c mtu */
     uint16_t              ch_result;      /* L2CAP connection result value */
     uint16_t              ch_lcid;        /* L2CAP channel LCID */
@@ -100,15 +96,15 @@ typedef struct
     uint8_t               state;          /* The state machine state */
     uint8_t               ch_state;       /* L2CAP channel state */
     uint8_t               ch_flags;       /* L2CAP configuration flags */
-    BT_HDR              *p_tx_msg;      /* Message to be sent - in case the browsing channel is not open when MsgReg is called */
+    BT_HDR
+    *p_tx_msg;      /* Message to be sent - in case the browsing channel is not open when MsgReg is called */
     uint8_t               ch_close;       /* CCB index+1, if CCB initiated channel close */
 } tAVCT_BCB;
 
 #define AVCT_ALOC_LCB       0x01
 #define AVCT_ALOC_BCB       0x02
 /* connection control block */
-typedef struct
-{
+typedef struct {
     tAVCT_CC            cc;                 /* parameters from connection creation */
     tAVCT_LCB           *p_lcb;             /* Associated LCB */
     tAVCT_BCB           *p_bcb;             /* associated BCB */
@@ -117,8 +113,7 @@ typedef struct
 } tAVCT_CCB;
 
 /* data type associated with UL_MSG_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR                  *p_buf;
     tAVCT_CCB               *p_ccb;
     uint8_t                   label;
@@ -126,8 +121,7 @@ typedef struct
 } tAVCT_UL_MSG;
 
 /* union associated with lcb state machine events */
-typedef union
-{
+typedef union {
     tAVCT_UL_MSG            ul_msg;
     BT_HDR                  *p_buf;
     tAVCT_CCB               *p_ccb;
@@ -137,8 +131,7 @@ typedef union
 } tAVCT_LCB_EVT;
 
 /* Control block for AVCT */
-typedef struct
-{
+typedef struct {
     tAVCT_LCB       lcb[AVCT_NUM_LINKS];    /* link control blocks */
     tAVCT_BCB       bcb[AVCT_NUM_LINKS];    /* browse control blocks */
     tAVCT_CCB       ccb[AVCT_NUM_CONN];     /* connection control blocks */
@@ -154,12 +147,12 @@ typedef struct
 /* LCB function declarations */
 extern void avct_lcb_event(tAVCT_LCB *p_lcb, uint8_t event, tAVCT_LCB_EVT *p_data);
 #if (AVCT_BROWSE_INCLUDED == TRUE)
-    extern void avct_bcb_event(tAVCT_BCB *p_bcb, uint8_t event, tAVCT_LCB_EVT *p_data);
-    extern void avct_close_bcb(tAVCT_LCB *p_lcb, tAVCT_LCB_EVT *p_data);
-    extern tAVCT_LCB *avct_lcb_by_bcb(tAVCT_BCB *p_bcb);
-    extern tAVCT_BCB *avct_bcb_by_lcb(tAVCT_LCB *p_lcb);
-    extern uint8_t avct_bcb_last_ccb(tAVCT_BCB *p_bcb, tAVCT_CCB *p_ccb_last);
-    extern tAVCT_BCB *avct_bcb_by_lcid(uint16_t lcid);
+extern void avct_bcb_event(tAVCT_BCB *p_bcb, uint8_t event, tAVCT_LCB_EVT *p_data);
+extern void avct_close_bcb(tAVCT_LCB *p_lcb, tAVCT_LCB_EVT *p_data);
+extern tAVCT_LCB *avct_lcb_by_bcb(tAVCT_BCB *p_bcb);
+extern tAVCT_BCB *avct_bcb_by_lcb(tAVCT_LCB *p_lcb);
+extern uint8_t avct_bcb_last_ccb(tAVCT_BCB *p_bcb, tAVCT_CCB *p_ccb_last);
+extern tAVCT_BCB *avct_bcb_by_lcid(uint16_t lcid);
 #endif
 extern tAVCT_LCB *avct_lcb_by_bd(BD_ADDR bd_addr);
 extern tAVCT_LCB *avct_lcb_alloc(BD_ADDR bd_addr);
@@ -187,28 +180,28 @@ extern void avct_lcb_free_msg_ind(tAVCT_LCB *p_lcb, tAVCT_LCB_EVT *p_data);
 
 /* BCB action functions */
 #if (AVCT_BROWSE_INCLUDED == TRUE)
-    typedef void (*tAVCT_BCB_ACTION)(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_chnl_open(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_unbind_disc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_open_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_open_fail(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_close_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_close_cfm(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_bind_conn(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_chk_disc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_chnl_disc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_bind_fail(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_cong_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_discard_msg(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_send_msg(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_msg_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
-    extern void avct_bcb_free_msg_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+typedef void (*tAVCT_BCB_ACTION)(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_chnl_open(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_unbind_disc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_open_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_open_fail(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_close_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_close_cfm(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_bind_conn(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_chk_disc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_chnl_disc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_bind_fail(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_cong_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_discard_msg(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_send_msg(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_msg_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_free_msg_ind(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
 
-    extern void avct_bcb_dealloc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
+extern void avct_bcb_dealloc(tAVCT_BCB *p_bcb, tAVCT_LCB_EVT *p_data);
 
-    extern const tAVCT_BCB_ACTION avct_bcb_action[];
-    extern const uint8_t avct_lcb_pkt_type_len[];
-    extern const tL2CAP_FCR_OPTS avct_l2c_br_fcr_opts_def;
+extern const tAVCT_BCB_ACTION avct_bcb_action[];
+extern const uint8_t avct_lcb_pkt_type_len[];
+extern const tL2CAP_FCR_OPTS avct_l2c_br_fcr_opts_def;
 #endif
 
 /* CCB function declarations */

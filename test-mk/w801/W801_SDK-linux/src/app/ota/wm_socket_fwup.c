@@ -74,7 +74,11 @@ s8  socket_fwup_recv(u8 skt_num, struct pbuf *p, s8 err)
 				if(ret != TLS_FWUP_STATUS_OK)
 				{
 					TLS_DBGPRT_ERR("up data error.\n");
-					goto err;//return ERR_ABRT;
+				    if (p)
+				    {
+				        pbuf_free(p);					
+				    }
+					return  ERR_VAL;
 				}
 				
 				if(current_pack.operation == SOCKET_FWUP_END)

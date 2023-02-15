@@ -26,8 +26,7 @@
 
 // Device class may be defined in other structures.
 // Only use defined methods to manipulate internals.
-typedef struct bt_device_class_t
-{
+typedef struct bt_device_class_t {
     uint8_t _[3];  // Do not access directly; use methods below.
 } bt_device_class_t;
 

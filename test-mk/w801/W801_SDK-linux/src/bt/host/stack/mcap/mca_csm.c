@@ -34,8 +34,7 @@
 /*****************************************************************************
 ** data channel state machine constants and types
 *****************************************************************************/
-enum
-{
+enum {
     MCA_CCB_FREE_MSG,
     MCA_CCB_SND_REQ,
     MCA_CCB_SND_RSP,
@@ -52,8 +51,7 @@ enum
 #define MCA_CCB_IGNORE     MCA_CCB_NUM_ACTIONS
 
 /* action function list */
-const tMCA_CCB_ACTION mca_ccb_action[] =
-{
+const tMCA_CCB_ACTION mca_ccb_action[] = {
     mca_ccb_free_msg,
     mca_ccb_snd_req,
     mca_ccb_snd_rsp,
@@ -74,8 +72,7 @@ const tMCA_CCB_ACTION mca_ccb_action[] =
 #define MCA_CCB_NUM_COLS           2       /* number of columns in state tables */
 
 /* state table for opening state */
-const uint8_t mca_ccb_st_opening[][MCA_CCB_NUM_COLS] =
-{
+const uint8_t mca_ccb_st_opening[][MCA_CCB_NUM_COLS] = {
     /* Event                            Action              Next State */
     /* MCA_CCB_API_CONNECT_EVT    */   {MCA_CCB_IGNORE,     MCA_CCB_OPENING_ST},
     /* MCA_CCB_API_DISCONNECT_EVT */   {MCA_CCB_DO_DISCONN, MCA_CCB_CLOSING_ST},
@@ -91,8 +88,7 @@ const uint8_t mca_ccb_st_opening[][MCA_CCB_NUM_COLS] =
 };
 
 /* state table for open state */
-const uint8_t mca_ccb_st_open[][MCA_CCB_NUM_COLS] =
-{
+const uint8_t mca_ccb_st_open[][MCA_CCB_NUM_COLS] = {
     /* Event                            Action              Next State */
     /* MCA_CCB_API_CONNECT_EVT    */   {MCA_CCB_IGNORE,     MCA_CCB_OPEN_ST},
     /* MCA_CCB_API_DISCONNECT_EVT */   {MCA_CCB_DO_DISCONN, MCA_CCB_CLOSING_ST},
@@ -108,8 +104,7 @@ const uint8_t mca_ccb_st_open[][MCA_CCB_NUM_COLS] =
 };
 
 /* state table for closing state */
-const uint8_t mca_ccb_st_closing[][MCA_CCB_NUM_COLS] =
-{
+const uint8_t mca_ccb_st_closing[][MCA_CCB_NUM_COLS] = {
     /* Event                            Action              Next State */
     /* MCA_CCB_API_CONNECT_EVT    */   {MCA_CCB_IGNORE,     MCA_CCB_CLOSING_ST},
     /* MCA_CCB_API_DISCONNECT_EVT */   {MCA_CCB_IGNORE,     MCA_CCB_CLOSING_ST},
@@ -128,8 +123,7 @@ const uint8_t mca_ccb_st_closing[][MCA_CCB_NUM_COLS] =
 typedef const uint8_t (*tMCA_CCB_ST_TBL)[MCA_CCB_NUM_COLS];
 
 /* state table */
-const tMCA_CCB_ST_TBL mca_ccb_st_tbl[] =
-{
+const tMCA_CCB_ST_TBL mca_ccb_st_tbl[] = {
     mca_ccb_st_opening,
     mca_ccb_st_open,
     mca_ccb_st_closing
@@ -137,8 +131,7 @@ const tMCA_CCB_ST_TBL mca_ccb_st_tbl[] =
 
 #if (BT_TRACE_VERBOSE == TRUE)
 /* verbose event strings for trace */
-static const char *const mca_ccb_evt_str[] =
-{
+static const char *const mca_ccb_evt_str[] = {
     "API_CONNECT_EVT",
     "API_DISCONNECT_EVT",
     "API_REQ_EVT",
@@ -152,8 +145,7 @@ static const char *const mca_ccb_evt_str[] =
     "RSP_TOUT_EVT"
 };
 /* verbose state strings for trace */
-static const char *const mca_ccb_st_str[] =
-{
+static const char *const mca_ccb_st_str[] = {
     "NULL_ST",
     "OPENING_ST",
     "OPEN_ST",
@@ -192,19 +184,19 @@ void mca_ccb_event(tMCA_CCB *p_ccb, uint8_t event, tMCA_CCB_EVT *p_data)
 {
     tMCA_CCB_ST_TBL    state_table;
     uint8_t              action;
-    #if (BT_TRACE_VERBOSE == TRUE)
-    MCA_TRACE_EVENT("CCB ccb=%d event=%s state=%s", mca_ccb_to_hdl(p_ccb), mca_ccb_evt_str[event], mca_ccb_st_str[p_ccb->state]);
-    #else
+#if (BT_TRACE_VERBOSE == TRUE)
+    MCA_TRACE_EVENT("CCB ccb=%d event=%s state=%s", mca_ccb_to_hdl(p_ccb), mca_ccb_evt_str[event],
+                    mca_ccb_st_str[p_ccb->state]);
+#else
     MCA_TRACE_EVENT("CCB ccb=%d event=%d state=%d", mca_ccb_to_hdl(p_ccb), event, p_ccb->state);
-    #endif
+#endif
     /* look up the state table for the current state */
     state_table = mca_ccb_st_tbl[p_ccb->state - 1];
     /* set next state */
     p_ccb->state = state_table[event][MCA_CCB_NEXT_STATE];
 
     /* execute action functions */
-    if((action = state_table[event][MCA_CCB_ACT_COL]) != MCA_CCB_IGNORE)
-    {
+    if((action = state_table[event][MCA_CCB_ACT_COL]) != MCA_CCB_IGNORE) {
         (*mca_ccb_action[action])(p_ccb, p_data);
     }
 }
@@ -227,15 +219,12 @@ tMCA_CCB *mca_ccb_by_bd(tMCA_HANDLE handle, BD_ADDR bd_addr)
     tMCA_CCB *p_ccb_tmp;
     int       i;
 
-    if(p_rcb)
-    {
+    if(p_rcb) {
         i = handle - 1;
         p_ccb_tmp = &mca_cb.ccb[i * MCA_NUM_LINKS];
 
-        for(i = 0; i < MCA_NUM_LINKS; i++, p_ccb_tmp++)
-        {
-            if(p_ccb_tmp->state != MCA_CCB_NULL_ST && memcmp(p_ccb_tmp->peer_addr, bd_addr, BD_ADDR_LEN) == 0)
-            {
+        for(i = 0; i < MCA_NUM_LINKS; i++, p_ccb_tmp++) {
+            if(p_ccb_tmp->state != MCA_CCB_NULL_ST && memcmp(p_ccb_tmp->peer_addr, bd_addr, BD_ADDR_LEN) == 0) {
                 p_ccb = p_ccb_tmp;
                 break;
             }
@@ -264,15 +253,12 @@ tMCA_CCB *mca_ccb_alloc(tMCA_HANDLE handle, BD_ADDR bd_addr)
     int       i;
     MCA_TRACE_DEBUG("mca_ccb_alloc handle:0x%x", handle);
 
-    if(p_rcb)
-    {
+    if(p_rcb) {
         i = handle - 1;
         p_ccb_tmp = &mca_cb.ccb[i * MCA_NUM_LINKS];
 
-        for(i = 0; i < MCA_NUM_LINKS; i++, p_ccb_tmp++)
-        {
-            if(p_ccb_tmp->state == MCA_CCB_NULL_ST)
-            {
+        for(i = 0; i < MCA_NUM_LINKS; i++, p_ccb_tmp++) {
+            if(p_ccb_tmp->state == MCA_CCB_NULL_ST) {
                 p_ccb_tmp->p_rcb = p_rcb;
                 p_ccb_tmp->mca_ccb_timer = alarm_new("mca.mca_ccb_timer");
                 p_ccb_tmp->state = MCA_CCB_OPENING_ST;
@@ -303,13 +289,11 @@ void mca_ccb_dealloc(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     MCA_TRACE_DEBUG("mca_ccb_dealloc ctrl_vpsm:0x%x", p_ccb->ctrl_vpsm);
     mca_dcb_close_by_mdl_id(p_ccb, MCA_ALL_MDL_ID);
 
-    if(p_ccb->ctrl_vpsm)
-    {
+    if(p_ccb->ctrl_vpsm) {
         L2CA_Deregister(p_ccb->ctrl_vpsm);
     }
 
-    if(p_ccb->data_vpsm)
-    {
+    if(p_ccb->data_vpsm) {
         L2CA_Deregister(p_ccb->data_vpsm);
     }
 
@@ -317,8 +301,7 @@ void mca_ccb_dealloc(tMCA_CCB *p_ccb, tMCA_CCB_EVT *p_data)
     GKI_free_and_reset_buf((void **)&p_ccb->p_tx_req);
     mca_stop_timer(p_ccb);
 
-    if(p_data)
-    {
+    if(p_data) {
         /* non-NULL -> an action function -> report disconnect event */
         wm_memcpy(evt_data.disconnect_ind.bd_addr, p_ccb->peer_addr, BD_ADDR_LEN);
         evt_data.disconnect_ind.reason = p_data->close.reason;
@@ -360,8 +343,7 @@ tMCA_CCB *mca_ccb_by_hdl(tMCA_CL mcl)
 {
     tMCA_CCB *p_ccb = NULL;
 
-    if(mcl && mcl <= MCA_NUM_CCBS && mca_cb.ccb[mcl - 1].state)
-    {
+    if(mcl && mcl <= MCA_NUM_CCBS && mca_cb.ccb[mcl - 1].state) {
         p_ccb = &mca_cb.ccb[mcl - 1];
     }
 
@@ -386,10 +368,8 @@ uint8_t mca_ccb_uses_mdl_id(tMCA_CCB *p_ccb, uint16_t mdl_id)
     i = mca_ccb_to_hdl(p_ccb) - 1;
     p_dcb = &mca_cb.dcb[i * MCA_NUM_MDLS];
 
-    for(i = 0; i < MCA_NUM_MDLS; i++, p_dcb++)
-    {
-        if(p_dcb->state != MCA_DCB_NULL_ST && p_dcb->mdl_id == mdl_id)
-        {
+    for(i = 0; i < MCA_NUM_MDLS; i++, p_dcb++) {
+        if(p_dcb->state != MCA_DCB_NULL_ST && p_dcb->mdl_id == mdl_id) {
             uses = TRUE;
             break;
         }

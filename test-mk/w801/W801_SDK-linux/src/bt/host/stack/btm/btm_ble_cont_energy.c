@@ -48,8 +48,7 @@ void btm_ble_cont_energy_cmpl_cback(tBTM_VSC_CMPL *p_params)
     uint8_t  status = 0;
     uint32_t total_tx_time = 0, total_rx_time = 0, total_idle_time = 0, total_energy_used = 0;
 
-    if(len < 17)
-    {
+    if(len < 17) {
         BTM_TRACE_ERROR("wrong length for btm_ble_cont_energy_cmpl_cback");
         return;
     }
@@ -87,8 +86,7 @@ tBTM_STATUS BTM_BleGetEnergyInfo(tBTM_BLE_ENERGY_INFO_CBACK *p_ener_cback)
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
     BTM_TRACE_EVENT("BTM_BleGetEnergyInfo");
 
-    if(0 == cmn_ble_vsc_cb.energy_support)
-    {
+    if(0 == cmn_ble_vsc_cb.energy_support) {
         BTM_TRACE_ERROR("Controller does not support get energy info");
         return BTM_ERR_PROCESSING;
     }
@@ -96,8 +94,7 @@ tBTM_STATUS BTM_BleGetEnergyInfo(tBTM_BLE_ENERGY_INFO_CBACK *p_ener_cback)
     ble_energy_info_cb.p_ener_cback = p_ener_cback;
 
     if((status = BTM_VendorSpecificCommand(HCI_BLE_ENERGY_INFO_OCF, 0, NULL,
-                                           btm_ble_cont_energy_cmpl_cback)) != BTM_CMD_STARTED)
-    {
+                                           btm_ble_cont_energy_cmpl_cback)) != BTM_CMD_STARTED) {
         BTM_TRACE_ERROR("BTM_BleGetEnergyInfo status: %d", status);
         return BTM_ILLEGAL_VALUE;
     }

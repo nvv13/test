@@ -57,8 +57,7 @@ typedef uint8_t tBTA_PAN_EVT;
 typedef uint8_t   tBTA_PAN_ROLE;
 
 /*  information regarding PAN roles */
-typedef struct
-{
+typedef struct {
     char *p_srv_name;  /* service name for the PAN role */
     uint8_t app_id;      /* application id */
     tBTA_SEC sec_mask; /* security setting for the role */
@@ -67,15 +66,13 @@ typedef struct
 
 
 /* Event associated with BTA_PAN_SET_ROLE_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_PAN_STATUS status;     /* status of set role event */
     tBTA_PAN_ROLE   role;       /* PAN roles successfully registered */
 } tBTA_PAN_SET_ROLE;
 
 /* Event associated with BTA_PAN_OPENING_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;    /* BD address of peer device. */
     uint16_t          handle;     /* Handle associated with this connection. */
 
@@ -83,8 +80,7 @@ typedef struct
 
 
 /* Event associated with BTA_PAN_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;    /* BD address of peer device. */
     uint16_t          handle;     /* Handle associated with this connection. */
     tBTA_PAN_STATUS status;     /* status of open event */
@@ -94,14 +90,12 @@ typedef struct
 } tBTA_PAN_OPEN;
 
 /* Event associated with BTA_PAN_CLOSE_EVT */
-typedef struct
-{
+typedef struct {
     uint16_t          handle;     /* Handle associated with the connection. */
 } tBTA_PAN_CLOSE;
 
 /* Union of all PAN callback structures */
-typedef union
-{
+typedef union {
     tBTA_PAN_SET_ROLE   set_role;   /* set_role event */
     tBTA_PAN_OPEN       open;       /* Connection has been opened. */
     tBTA_PAN_OPENING    opening;    /* Connection being opened */
@@ -110,7 +104,7 @@ typedef union
 
 /* Number of PAN connections */
 #ifndef BTA_PAN_NUM_CONN
-    #define BTA_PAN_NUM_CONN         4
+#define BTA_PAN_NUM_CONN         4
 #endif
 
 /* PAN callback */
@@ -160,7 +154,8 @@ extern void BTA_PanDisable(void);
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info, tBTA_PAN_ROLE_INFO *p_gn_info,
+void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info,
+                    tBTA_PAN_ROLE_INFO *p_gn_info,
                     tBTA_PAN_ROLE_INFO *p_nap_info);
 
 

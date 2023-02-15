@@ -67,16 +67,13 @@ void btm_ble_batchscan_filter_track_adv_vse_cback(uint8_t len, uint8_t *p)
     BTM_TRACE_EVENT("btm_ble_batchscan_filter_track_adv_vse_cback called with event:%x", sub_event);
 
     if(HCI_VSE_SUBCODE_BLE_THRESHOLD_SUB_EVT == sub_event &&
-            NULL != ble_batchscan_cb.p_thres_cback)
-    {
+            NULL != ble_batchscan_cb.p_thres_cback) {
         ble_batchscan_cb.p_thres_cback(ble_batchscan_cb.ref_value);
         return;
     }
 
-    if(HCI_VSE_SUBCODE_BLE_TRACKING_SUB_EVT == sub_event && NULL != ble_advtrack_cb.p_track_cback)
-    {
-        if(len < 10)
-        {
+    if(HCI_VSE_SUBCODE_BLE_TRACKING_SUB_EVT == sub_event && NULL != ble_advtrack_cb.p_track_cback) {
+        if(len < 10) {
             return;
         }
 
@@ -84,8 +81,7 @@ void btm_ble_batchscan_filter_track_adv_vse_cback(uint8_t len, uint8_t *p)
         BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
         adv_data.client_if = (uint8_t)ble_advtrack_cb.ref_value;
 
-        if(cmn_ble_vsc_cb.version_supported > BTM_VSC_CHIP_CAPABILITY_L_VERSION)
-        {
+        if(cmn_ble_vsc_cb.version_supported > BTM_VSC_CHIP_CAPABILITY_L_VERSION) {
             STREAM_TO_UINT8(adv_data.filt_index, p);
             STREAM_TO_UINT8(adv_data.advertiser_state, p);
             STREAM_TO_UINT8(adv_data.advertiser_info_present, p);
@@ -93,30 +89,25 @@ void btm_ble_batchscan_filter_track_adv_vse_cback(uint8_t len, uint8_t *p)
             STREAM_TO_UINT8(adv_data.addr_type, p);
 
             /* Extract the adv info details */
-            if(ADV_INFO_PRESENT == adv_data.advertiser_info_present)
-            {
+            if(ADV_INFO_PRESENT == adv_data.advertiser_info_present) {
                 STREAM_TO_UINT8(adv_data.tx_power, p);
                 STREAM_TO_UINT8(adv_data.rssi_value, p);
                 STREAM_TO_UINT16(adv_data.time_stamp, p);
                 STREAM_TO_UINT8(adv_data.adv_pkt_len, p);
 
-                if(adv_data.adv_pkt_len > 0)
-                {
+                if(adv_data.adv_pkt_len > 0) {
                     adv_data.p_adv_pkt_data = GKI_getbuf(adv_data.adv_pkt_len);
                     wm_memcpy(adv_data.p_adv_pkt_data, p, adv_data.adv_pkt_len);
                 }
 
                 STREAM_TO_UINT8(adv_data.scan_rsp_len, p);
 
-                if(adv_data.scan_rsp_len > 0)
-                {
+                if(adv_data.scan_rsp_len > 0) {
                     adv_data.p_scan_rsp_data = GKI_getbuf(adv_data.scan_rsp_len);
                     wm_memcpy(adv_data.p_scan_rsp_data, p, adv_data.scan_rsp_len);
                 }
             }
-        }
-        else
-        {
+        } else {
             /* Based on L-release version */
             STREAM_TO_UINT8(adv_data.filt_index, p);
             STREAM_TO_UINT8(adv_data.addr_type, p);
@@ -169,10 +160,8 @@ tBTM_STATUS btm_ble_batchscan_enq_rep_q(uint8_t report_format, tBTM_BLE_REF_VALU
 {
     int i = 0;
 
-    for(i = 0; i < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; i++)
-    {
-        if(report_format == ble_batchscan_cb.main_rep_q.rep_mode[i])
-        {
+    for(i = 0; i < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; i++) {
+        if(report_format == ble_batchscan_cb.main_rep_q.rep_mode[i]) {
             return BTM_ILLEGAL_VALUE;
         }
     }
@@ -203,10 +192,8 @@ void btm_ble_batchscan_enq_rep_data(uint8_t report_format, uint8_t num_records, 
 {
     int index = 0;
 
-    for(index = 0; index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; index++)
-    {
-        if(report_format == ble_batchscan_cb.main_rep_q.rep_mode[index])
-        {
+    for(index = 0; index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; index++) {
+        if(report_format == ble_batchscan_cb.main_rep_q.rep_mode[index]) {
             break;
         }
     }
@@ -214,14 +201,12 @@ void btm_ble_batchscan_enq_rep_data(uint8_t report_format, uint8_t num_records, 
     BTM_TRACE_DEBUG("btm_ble_batchscan_enq_rep_data: index:%d, rep %d, num %d len : %d",
                     index, report_format, num_records, data_len);
 
-    if(index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE && data_len > 0 && num_records > 0)
-    {
+    if(index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE && data_len > 0 && num_records > 0) {
         int len = ble_batchscan_cb.main_rep_q.data_len[index];
         uint8_t *p_orig_data = ble_batchscan_cb.main_rep_q.p_data[index];
         uint8_t *p_app_data;
 
-        if(NULL != p_orig_data)
-        {
+        if(NULL != p_orig_data) {
             p_app_data = GKI_getbuf(len + data_len);
             wm_memcpy(p_app_data, p_orig_data, len);
             wm_memcpy(p_app_data + len, p_data, data_len);
@@ -229,9 +214,7 @@ void btm_ble_batchscan_enq_rep_data(uint8_t report_format, uint8_t num_records, 
             ble_batchscan_cb.main_rep_q.p_data[index] = p_app_data;
             ble_batchscan_cb.main_rep_q.num_records[index] += num_records;
             ble_batchscan_cb.main_rep_q.data_len[index] += data_len;
-        }
-        else
-        {
+        } else {
             p_app_data = GKI_getbuf(data_len);
             wm_memcpy(p_app_data, p_data, data_len);
             ble_batchscan_cb.main_rep_q.p_data[index] = p_app_data;
@@ -256,16 +239,13 @@ void btm_ble_batchscan_deq_rep_data(uint8_t report_format, tBTM_BLE_REF_VALUE *p
 {
     int index = 0;
 
-    for(index = 0; index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; index++)
-    {
-        if(report_format == ble_batchscan_cb.main_rep_q.rep_mode[index])
-        {
+    for(index = 0; index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; index++) {
+        if(report_format == ble_batchscan_cb.main_rep_q.rep_mode[index]) {
             break;
         }
     }
 
-    if(BTM_BLE_BATCH_REP_MAIN_Q_SIZE == index)
-    {
+    if(BTM_BLE_BATCH_REP_MAIN_Q_SIZE == index) {
         BTM_TRACE_ERROR("btm_ble_batchscan_deq_rep_data: rep_format:%d not found", report_format);
         return;
     }
@@ -331,14 +311,12 @@ tBTM_STATUS btm_ble_read_batchscan_reports(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
 
     if((status = BTM_VendorSpecificCommand(HCI_BLE_BATCH_SCAN_OCF,
                                            BTM_BLE_BATCH_SCAN_READ_RESULTS_LEN, param, btm_ble_batchscan_vsc_cmpl_cback))
-            != BTM_CMD_STARTED)
-    {
+            != BTM_CMD_STARTED) {
         BTM_TRACE_ERROR("btm_ble_read_batchscan_reports %d", status);
         return BTM_ILLEGAL_VALUE;
     }
 
-    if(BTM_CMD_STARTED == status)
-    {
+    if(BTM_CMD_STARTED == status) {
         /* The user needs to be provided scan read reports event */
         btm_ble_batchscan_enq_op_q(BTM_BLE_BATCH_SCAN_READ_RESULTS, ble_batchscan_cb.cur_state,
                                    BTM_BLE_BATCH_SCAN_READ_REPTS_EVT, ref_value);
@@ -370,8 +348,7 @@ void btm_ble_batchscan_vsc_cmpl_cback(tBTM_VSC_CMPL *p_params)
     tBTM_STATUS btm_status = 0;
     uint8_t *p_data = NULL;
 
-    if(len < 2)
-    {
+    if(len < 2) {
         BTM_TRACE_ERROR("wrong length for btm_ble_batch_scan_vsc_cmpl_cback");
         btm_ble_batchscan_deq_op_q(&opcode, &cur_state, &cb_evt, &ref_value);
         return;
@@ -383,105 +360,82 @@ void btm_ble_batchscan_vsc_cmpl_cback(tBTM_VSC_CMPL *p_params)
     BTM_TRACE_DEBUG("btm_ble_batchscan op_code = %02x state = %02x cb_evt = %02x,ref_value=%d",
                     opcode, cur_state, cb_evt, ref_value);
 
-    if(opcode != subcode)
-    {
+    if(opcode != subcode) {
         BTM_TRACE_ERROR("Got unexpected VSC cmpl, expected: %d got: %d", subcode, opcode);
         return;
     }
 
-    switch(subcode)
-    {
-        case BTM_BLE_BATCH_SCAN_ENB_DISAB_CUST_FEATURE:
-        {
-            if(BTM_SUCCESS == status && BTM_BLE_SCAN_ENABLE_CALLED == cur_state)
-            {
+    switch(subcode) {
+        case BTM_BLE_BATCH_SCAN_ENB_DISAB_CUST_FEATURE: {
+            if(BTM_SUCCESS == status && BTM_BLE_SCAN_ENABLE_CALLED == cur_state) {
                 ble_batchscan_cb.cur_state = BTM_BLE_SCAN_ENABLED_STATE;
+            } else if(BTM_BLE_SCAN_ENABLE_CALLED == cur_state) {
+                BTM_TRACE_ERROR("SCAN_ENB_DISAB_CUST_FEATURE - Invalid state after enb");
+                ble_batchscan_cb.cur_state = BTM_BLE_SCAN_INVALID_STATE;
             }
-            else
-                if(BTM_BLE_SCAN_ENABLE_CALLED == cur_state)
-                {
-                    BTM_TRACE_ERROR("SCAN_ENB_DISAB_CUST_FEATURE - Invalid state after enb");
-                    ble_batchscan_cb.cur_state = BTM_BLE_SCAN_INVALID_STATE;
-                }
 
             BTM_TRACE_DEBUG("BTM_BLE_BATCH_SCAN_ENB_DISAB_CUST_FEAT status = %d, state: %d,evt=%d",
                             status, ble_batchscan_cb.cur_state, cb_evt);
 
-            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_setup_cback)
-            {
+            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_setup_cback) {
                 ble_batchscan_cb.p_setup_cback(cb_evt, ref_value, status);
             }
 
             break;
         }
 
-        case BTM_BLE_BATCH_SCAN_SET_STORAGE_PARAM:
-        {
+        case BTM_BLE_BATCH_SCAN_SET_STORAGE_PARAM: {
             BTM_TRACE_DEBUG("BTM_BLE_BATCH_SCAN_SET_STORAGE_PARAM status = %d, evt=%d",
                             status, cb_evt);
 
-            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_setup_cback)
-            {
+            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_setup_cback) {
                 ble_batchscan_cb.p_setup_cback(cb_evt, ref_value, status);
             }
 
             break;
         }
 
-        case BTM_BLE_BATCH_SCAN_SET_PARAMS:
-        {
+        case BTM_BLE_BATCH_SCAN_SET_PARAMS: {
             BTM_TRACE_DEBUG("BTM_BLE_BATCH_SCAN_SET_PARAMS status = %d,evt=%d", status, cb_evt);
 
-            if(BTM_BLE_SCAN_DISABLE_CALLED == cur_state)
-            {
-                if(BTM_SUCCESS == status)
-                {
+            if(BTM_BLE_SCAN_DISABLE_CALLED == cur_state) {
+                if(BTM_SUCCESS == status) {
                     ble_batchscan_cb.cur_state = BTM_BLE_SCAN_DISABLED_STATE;
-                }
-                else
-                {
+                } else {
                     BTM_TRACE_ERROR("BTM_BLE_BATCH_SCAN_SET_PARAMS - Invalid state after disabled");
                     ble_batchscan_cb.cur_state = BTM_BLE_SCAN_INVALID_STATE;
                 }
             }
 
-            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_setup_cback)
-            {
+            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_setup_cback) {
                 ble_batchscan_cb.p_setup_cback(cb_evt, ref_value, status);
             }
 
             break;
         }
 
-        case BTM_BLE_BATCH_SCAN_READ_RESULTS:
-        {
-            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_scan_rep_cback)
-            {
+        case BTM_BLE_BATCH_SCAN_READ_RESULTS: {
+            if(cb_evt != 0 && NULL != ble_batchscan_cb.p_scan_rep_cback) {
                 STREAM_TO_UINT8(report_format, p);
                 STREAM_TO_UINT8(num_records, p);
                 p = (uint8_t *)(p_params->p_param_buf + 4);
                 BTM_TRACE_DEBUG("BTM_BLE_BATCH_SCAN_READ_RESULTS status=%d,len=%d,rec=%d",
                                 status, len - 4, num_records);
 
-                if(0 == num_records)
-                {
+                if(0 == num_records) {
                     btm_ble_batchscan_deq_rep_data(report_format, &ref_value, &num_records,
                                                    &p_data, &data_len);
 
                     if(NULL != ble_batchscan_cb.p_scan_rep_cback)
                         ble_batchscan_cb.p_scan_rep_cback(ref_value, report_format, num_records,
                                                           data_len, p_data, status);
-                }
-                else
-                {
-                    if((len - 4) > 0)
-                    {
+                } else {
+                    if((len - 4) > 0) {
                         btm_ble_batchscan_enq_rep_data(report_format, num_records, p, len - 4);
                         /* More records could be in the buffer and needs to be pulled out */
                         btm_status = btm_ble_read_batchscan_reports(report_format, ref_value);
 
-                        if(BTM_CMD_STARTED != btm_status)
-                        {
+                        if(BTM_CMD_STARTED != btm_status) {
                             btm_ble_batchscan_deq_rep_data(report_format, &ref_value, &num_records,
                                                            &p_data, &data_len);
 
@@ -531,8 +485,7 @@ tBTM_STATUS btm_ble_set_storage_config(uint8_t batch_scan_full_max, uint8_t batc
 
     if((status = BTM_VendorSpecificCommand(HCI_BLE_BATCH_SCAN_OCF,
                                            BTM_BLE_BATCH_SCAN_STORAGE_CFG_LEN, param,
-                                           btm_ble_batchscan_vsc_cmpl_cback)) != BTM_CMD_STARTED)
-    {
+                                           btm_ble_batchscan_vsc_cmpl_cback)) != BTM_CMD_STARTED) {
         BTM_TRACE_ERROR("btm_ble_set_storage_config %d", status);
         return BTM_ILLEGAL_VALUE;
     }
@@ -575,8 +528,7 @@ tBTM_STATUS btm_ble_set_batchscan_param(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
 
     if((status = BTM_VendorSpecificCommand(HCI_BLE_BATCH_SCAN_OCF,
                                            BTM_BLE_BATCH_SCAN_PARAM_CONFIG_LEN,
-                                           scan_param, btm_ble_batchscan_vsc_cmpl_cback)) != BTM_CMD_STARTED)
-    {
+                                           scan_param, btm_ble_batchscan_vsc_cmpl_cback)) != BTM_CMD_STARTED) {
         BTM_TRACE_ERROR("btm_ble_set_batchscan_param %d", status);
         return BTM_ILLEGAL_VALUE;
     }
@@ -601,13 +553,11 @@ tBTM_STATUS btm_ble_enable_disable_batchscan(uint8_t should_enable)
     uint8_t shld_enable = 0x01;
     uint8_t enable_param[BTM_BLE_BATCH_SCAN_ENB_DISB_LEN], *pp_enable;
 
-    if(!should_enable)
-    {
+    if(!should_enable) {
         shld_enable = 0x00;
     }
 
-    if(should_enable)
-    {
+    if(should_enable) {
         pp_enable = enable_param;
         wm_memset(enable_param, 0, BTM_BLE_BATCH_SCAN_ENB_DISB_LEN);
         UINT8_TO_STREAM(pp_enable, BTM_BLE_BATCH_SCAN_ENB_DISAB_CUST_FEATURE);
@@ -615,29 +565,22 @@ tBTM_STATUS btm_ble_enable_disable_batchscan(uint8_t should_enable)
 
         if((status = BTM_VendorSpecificCommand(HCI_BLE_BATCH_SCAN_OCF,
                                                BTM_BLE_BATCH_SCAN_ENB_DISB_LEN, enable_param,
-                                               btm_ble_batchscan_vsc_cmpl_cback)) != BTM_CMD_STARTED)
-        {
+                                               btm_ble_batchscan_vsc_cmpl_cback)) != BTM_CMD_STARTED) {
             status = BTM_MODE_UNSUPPORTED;
             BTM_TRACE_ERROR("btm_ble_enable_disable_batchscan %d", status);
             return BTM_ILLEGAL_VALUE;
         }
+    } else if((status = btm_ble_set_batchscan_param(BTM_BLE_BATCH_SCAN_MODE_DISABLE,
+                        ble_batchscan_cb.scan_interval, ble_batchscan_cb.scan_window,
+                        ble_batchscan_cb.addr_type, ble_batchscan_cb.discard_rule)) != BTM_CMD_STARTED) {
+        status = BTM_MODE_UNSUPPORTED;
+        BTM_TRACE_ERROR("btm_ble_enable_disable_batchscan %d", status);
+        return BTM_ILLEGAL_VALUE;
     }
-    else
-        if((status = btm_ble_set_batchscan_param(BTM_BLE_BATCH_SCAN_MODE_DISABLE,
-                     ble_batchscan_cb.scan_interval, ble_batchscan_cb.scan_window,
-                     ble_batchscan_cb.addr_type, ble_batchscan_cb.discard_rule)) != BTM_CMD_STARTED)
-        {
-            status = BTM_MODE_UNSUPPORTED;
-            BTM_TRACE_ERROR("btm_ble_enable_disable_batchscan %d", status);
-            return BTM_ILLEGAL_VALUE;
-        }
 
-    if(should_enable)
-    {
+    if(should_enable) {
         ble_batchscan_cb.cur_state = BTM_BLE_SCAN_ENABLE_CALLED;
-    }
-    else
-    {
+    } else {
         ble_batchscan_cb.cur_state = BTM_BLE_SCAN_DISABLE_CALLED;
     }
 
@@ -674,15 +617,13 @@ tBTM_STATUS BTM_BleSetStorageConfig(uint8_t batch_scan_full_max, uint8_t batch_s
                     ble_batchscan_cb.cur_state, ref_value, batch_scan_full_max, batch_scan_trunc_max,
                     batch_scan_notify_threshold);
 
-    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1]))
-    {
+    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1])) {
         return BTM_ILLEGAL_VALUE;
     }
 
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
 
-    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg)
-    {
+    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg) {
         BTM_TRACE_ERROR("Controller does not support batch scan");
         return BTM_ERR_PROCESSING;
     }
@@ -694,20 +635,17 @@ tBTM_STATUS BTM_BleSetStorageConfig(uint8_t batch_scan_full_max, uint8_t batch_s
 
     if(batch_scan_full_max > BTM_BLE_ADV_SCAN_FULL_MAX ||
             batch_scan_trunc_max > BTM_BLE_ADV_SCAN_TRUNC_MAX ||
-            batch_scan_notify_threshold > BTM_BLE_ADV_SCAN_THR_MAX)
-    {
+            batch_scan_notify_threshold > BTM_BLE_ADV_SCAN_THR_MAX) {
         BTM_TRACE_ERROR("Illegal set storage config params");
         return BTM_ILLEGAL_VALUE;
     }
 
     if(BTM_BLE_SCAN_INVALID_STATE == ble_batchscan_cb.cur_state ||
             BTM_BLE_SCAN_DISABLED_STATE == ble_batchscan_cb.cur_state ||
-            BTM_BLE_SCAN_DISABLE_CALLED == ble_batchscan_cb.cur_state)
-    {
+            BTM_BLE_SCAN_DISABLE_CALLED == ble_batchscan_cb.cur_state) {
         status = btm_ble_enable_disable_batchscan(TRUE);
 
-        if(BTM_CMD_STARTED != status)
-        {
+        if(BTM_CMD_STARTED != status) {
             return status;
         }
 
@@ -719,8 +657,7 @@ tBTM_STATUS BTM_BleSetStorageConfig(uint8_t batch_scan_full_max, uint8_t batch_s
     status = btm_ble_set_storage_config(batch_scan_full_max, batch_scan_trunc_max,
                                         batch_scan_notify_threshold);
 
-    if(BTM_CMD_STARTED != status)
-    {
+    if(BTM_CMD_STARTED != status) {
         return status;
     }
 
@@ -755,15 +692,13 @@ tBTM_STATUS BTM_BleEnableBatchScan(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
     BTM_TRACE_EVENT(" BTM_BleEnableBatchScan: %d, %d, %d, %d, %d, %d",
                     scan_mode, scan_interval, scan_window, addr_type, discard_rule, ref_value);
 
-    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1]))
-    {
+    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1])) {
         return BTM_ILLEGAL_VALUE;
     }
 
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
 
-    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg)
-    {
+    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg) {
         BTM_TRACE_ERROR("Controller does not support batch scan");
         return BTM_ERR_PROCESSING;
     }
@@ -778,16 +713,13 @@ tBTM_STATUS BTM_BleEnableBatchScan(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
             && (BTM_BLE_BATCH_SCAN_MODE_PASS == scan_mode || BTM_BLE_BATCH_SCAN_MODE_ACTI == scan_mode
                 || BTM_BLE_BATCH_SCAN_MODE_PASS_ACTI == scan_mode)
             && (BTM_BLE_DISCARD_OLD_ITEMS == discard_rule ||
-                BTM_BLE_DISCARD_LOWER_RSSI_ITEMS == discard_rule))
-    {
+                BTM_BLE_DISCARD_LOWER_RSSI_ITEMS == discard_rule)) {
         if(BTM_BLE_SCAN_INVALID_STATE == ble_batchscan_cb.cur_state ||
                 BTM_BLE_SCAN_DISABLED_STATE == ble_batchscan_cb.cur_state ||
-                BTM_BLE_SCAN_DISABLE_CALLED == ble_batchscan_cb.cur_state)
-        {
+                BTM_BLE_SCAN_DISABLE_CALLED == ble_batchscan_cb.cur_state) {
             status = btm_ble_enable_disable_batchscan(TRUE);
 
-            if(BTM_CMD_STARTED != status)
-            {
+            if(BTM_CMD_STARTED != status) {
                 return status;
             }
 
@@ -804,17 +736,14 @@ tBTM_STATUS BTM_BleEnableBatchScan(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
         status = btm_ble_set_batchscan_param(scan_mode, scan_interval, scan_window, addr_type,
                                              discard_rule);
 
-        if(BTM_CMD_STARTED != status)
-        {
+        if(BTM_CMD_STARTED != status) {
             return status;
         }
 
         /* The user needs to be provided scan enable event */
         btm_ble_batchscan_enq_op_q(BTM_BLE_BATCH_SCAN_SET_PARAMS, ble_batchscan_cb.cur_state,
                                    BTM_BLE_BATCH_SCAN_ENABLE_EVT, ref_value);
-    }
-    else
-    {
+    } else {
         BTM_TRACE_ERROR("Illegal enable scan params");
         return BTM_ILLEGAL_VALUE;
     }
@@ -839,23 +768,20 @@ tBTM_STATUS BTM_BleDisableBatchScan(tBTM_BLE_REF_VALUE ref_value)
     tBTM_BLE_VSC_CB cmn_ble_vsc_cb;
     BTM_TRACE_EVENT(" BTM_BleDisableBatchScan");
 
-    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1]))
-    {
+    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1])) {
         return BTM_ILLEGAL_VALUE;
     }
 
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
 
-    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg)
-    {
+    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg) {
         BTM_TRACE_ERROR("Controller does not support batch scan");
         return BTM_ERR_PROCESSING;
     }
 
     status = btm_ble_enable_disable_batchscan(FALSE);
 
-    if(BTM_CMD_STARTED == status)
-    {
+    if(BTM_CMD_STARTED == status) {
         /* The user needs to be provided scan disable event */
         btm_ble_batchscan_enq_op_q(BTM_BLE_BATCH_SCAN_SET_PARAMS,
                                    BTM_BLE_SCAN_DISABLE_CALLED, BTM_BLE_BATCH_SCAN_DISABLE_EVT,
@@ -887,15 +813,13 @@ tBTM_STATUS BTM_BleReadScanReports(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
     uint16_t data_len = 0;
     BTM_TRACE_EVENT(" BTM_BleReadScanReports; %d, %d", scan_mode, ref_value);
 
-    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1]))
-    {
+    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1])) {
         return BTM_ILLEGAL_VALUE;
     }
 
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
 
-    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg)
-    {
+    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg) {
         BTM_TRACE_ERROR("Controller does not support batch scan");
         return BTM_ERR_PROCESSING;
     }
@@ -903,30 +827,24 @@ tBTM_STATUS BTM_BleReadScanReports(tBTM_BLE_BATCH_SCAN_MODE scan_mode,
     /*  Check if the requested scan mode has already been setup by the user */
     read_scan_mode = ble_batchscan_cb.scan_mode & BTM_BLE_BATCH_SCAN_MODE_ACTI;
 
-    if(0 == read_scan_mode)
-    {
+    if(0 == read_scan_mode) {
         read_scan_mode = ble_batchscan_cb.scan_mode & BTM_BLE_BATCH_SCAN_MODE_PASS;
     }
 
     /* Check only for modes, as scan reports can be called after disabling batch scan */
     if(read_scan_mode > 0 && (BTM_BLE_BATCH_SCAN_MODE_PASS == scan_mode ||
-                              BTM_BLE_BATCH_SCAN_MODE_ACTI == scan_mode))
-    {
+                              BTM_BLE_BATCH_SCAN_MODE_ACTI == scan_mode)) {
         status = btm_ble_batchscan_enq_rep_q(scan_mode, ref_value);
 
-        if(BTM_SUCCESS == status)
-        {
+        if(BTM_SUCCESS == status) {
             status = btm_ble_read_batchscan_reports(scan_mode, ref_value);
 
-            if(BTM_CMD_STARTED != status)
-            {
+            if(BTM_CMD_STARTED != status) {
                 btm_ble_batchscan_deq_rep_data(scan_mode, &ref_value,
                                                &num_records, &p_data, &data_len);
             }
         }
-    }
-    else
-    {
+    } else {
         BTM_TRACE_ERROR("Illegal read scan params: %d, %d, %d", read_scan_mode, scan_mode,
                         ble_batchscan_cb.cur_state);
         return BTM_ILLEGAL_VALUE;
@@ -954,15 +872,13 @@ tBTM_STATUS BTM_BleTrackAdvertiser(tBTM_BLE_TRACK_ADV_CBACK *p_track_cback,
     tBTM_BLE_VSC_CB cmn_ble_vsc_cb;
     BTM_TRACE_EVENT(" BTM_BleTrackAdvertiser");
 
-    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1]))
-    {
+    if(!HCI_LE_HOST_SUPPORTED(btm_cb.devcb.local_lmp_features[HCI_EXT_FEATURES_PAGE_1])) {
         return BTM_ILLEGAL_VALUE;
     }
 
     BTM_BleGetVendorCapabilities(&cmn_ble_vsc_cb);
 
-    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg)
-    {
+    if(0 == cmn_ble_vsc_cb.tot_scan_results_strg) {
         BTM_TRACE_ERROR("Controller does not support scan storage");
         return BTM_ERR_PROCESSING;
     }
@@ -1007,8 +923,7 @@ void btm_ble_batchscan_cleanup(void)
     int index = 0;
     BTM_TRACE_EVENT(" btm_ble_batchscan_cleanup");
 
-    for(index = 0; index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; index++)
-    {
+    for(index = 0; index < BTM_BLE_BATCH_REP_MAIN_Q_SIZE; index++) {
         GKI_free_and_reset_buf((void **)&ble_batchscan_cb.main_rep_q.p_data[index]);
     }
 

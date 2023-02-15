@@ -44,16 +44,14 @@ static inline int osi_android_get_control_socket(const char *name)
     snprintf(key, sizeof(key), ANDROID_SOCKET_ENV_PREFIX "%s", name);
     const char *val = getenv(key);
 
-    if(!val)
-    {
+    if(!val) {
         return -1;
     }
 
     errno = 0;
     int fd = strtol(val, NULL, 10);
 
-    if(errno)
-    {
+    if(errno) {
         return -1;
     }
 

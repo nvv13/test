@@ -24,8 +24,7 @@
 #define BTHH_MAX_DSC_LEN   884
 
 /* HH connection states */
-typedef enum
-{
+typedef enum {
     BTHH_CONN_STATE_CONNECTED              = 0,
     BTHH_CONN_STATE_CONNECTING,
     BTHH_CONN_STATE_DISCONNECTED,
@@ -38,8 +37,7 @@ typedef enum
     BTHH_CONN_STATE_UNKNOWN
 } bthh_connection_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHH_OK                = 0,
     BTHH_HS_HID_NOT_READY,        /* handshake error : device not ready */
     BTHH_HS_INVALID_RPT_ID,       /* handshake error : invalid report ID */
@@ -58,23 +56,20 @@ typedef enum
 } bthh_status_t;
 
 /* Protocol modes */
-typedef enum
-{
+typedef enum {
     BTHH_REPORT_MODE       = 0x00,
     BTHH_BOOT_MODE         = 0x01,
     BTHH_UNSUPPORTED_MODE  = 0xff
 } bthh_protocol_mode_t;
 
 /* Report types */
-typedef enum
-{
+typedef enum {
     BTHH_INPUT_REPORT      = 1,
     BTHH_OUTPUT_REPORT,
     BTHH_FEATURE_REPORT
 } bthh_report_type_t;
 
-typedef struct
-{
+typedef struct {
     int         attr_mask;
     uint8_t     sub_class;
     uint8_t     app_id;
@@ -89,7 +84,8 @@ typedef struct
 /** Callback for connection state change.
  *  state will have one of the values from bthh_connection_state_t
  */
-typedef void (* bthh_connection_state_callback)(tls_bt_addr_t *bd_addr, bthh_connection_state_t state);
+typedef void (* bthh_connection_state_callback)(tls_bt_addr_t *bd_addr,
+        bthh_connection_state_t state);
 
 /** Callback for vitual unplug api.
  *  the status of the vitual unplug
@@ -104,17 +100,20 @@ typedef void (* bthh_hid_info_callback)(tls_bt_addr_t *bd_addr, bthh_hid_info_t 
 /** Callback for get protocol api.
  *  the protocol mode is one of the value from bthh_protocol_mode_t
  */
-typedef void (* bthh_protocol_mode_callback)(tls_bt_addr_t *bd_addr, bthh_status_t hh_status, bthh_protocol_mode_t mode);
+typedef void (* bthh_protocol_mode_callback)(tls_bt_addr_t *bd_addr, bthh_status_t hh_status,
+        bthh_protocol_mode_t mode);
 
 /** Callback for get/set_idle_time api.
  */
-typedef void (* bthh_idle_time_callback)(tls_bt_addr_t *bd_addr, bthh_status_t hh_status, int idle_rate);
+typedef void (* bthh_idle_time_callback)(tls_bt_addr_t *bd_addr, bthh_status_t hh_status,
+        int idle_rate);
 
 
 /** Callback for get report api.
  *  if staus is ok rpt_data contains the report data
  */
-typedef void (* bthh_get_report_callback)(tls_bt_addr_t *bd_addr, bthh_status_t hh_status, uint8_t *rpt_data, int rpt_size);
+typedef void (* bthh_get_report_callback)(tls_bt_addr_t *bd_addr, bthh_status_t hh_status,
+        uint8_t *rpt_data, int rpt_size);
 
 /** Callback for set_report/set_protocol api and if error
  *  occurs for get_report/get_protocol api.
@@ -123,8 +122,7 @@ typedef void (* bthh_handshake_callback)(tls_bt_addr_t *bd_addr, bthh_status_t h
 
 
 /** BT-HH callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(BtHfCallbacks) */
     size_t      size;
     bthh_connection_state_callback  connection_state_cb;
@@ -140,8 +138,7 @@ typedef struct
 
 
 /** Represents the standard BT-HH interface. */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(BtHhInterface) */
     size_t          size;
@@ -170,7 +167,8 @@ typedef struct
     tls_bt_status_t (*set_protocol)(tls_bt_addr_t *bd_addr, bthh_protocol_mode_t protocolMode);
 
     /** Send a GET_REPORT to HID device. */
-    tls_bt_status_t (*get_report)(tls_bt_addr_t *bd_addr, bthh_report_type_t reportType, uint8_t reportId, int bufferSize);
+    tls_bt_status_t (*get_report)(tls_bt_addr_t *bd_addr, bthh_report_type_t reportType,
+                                  uint8_t reportId, int bufferSize);
 
     /** Send a SET_REPORT to HID device. */
     tls_bt_status_t (*set_report)(tls_bt_addr_t *bd_addr, bthh_report_type_t reportType, char *report);

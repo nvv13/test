@@ -25,8 +25,7 @@ static const char BT_UTILS_MODULE[] = "bt_utils_module";
 **  Type definitions
 ********************************************************************************/
 
-typedef enum
-{
+typedef enum {
     TASK_HIGH_MEDIA = 0,
     TASK_HIGH_GKI_TIMER,
     TASK_HIGH_BTU,

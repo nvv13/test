@@ -50,13 +50,13 @@ static BT_HDR   *avrc_vendor_msg(tAVRC_MSG_VENDOR *p_msg)
     BT_HDR  *p_cmd;
     uint8_t   *p_data;
     assert(p_msg != NULL);
-    #if AVRC_METADATA_INCLUDED == TRUE
+#if AVRC_METADATA_INCLUDED == TRUE
     assert(AVRC_META_CMD_BUF_SIZE > (AVRC_MIN_CMD_LEN + p_msg->vendor_len));
     p_cmd = (BT_HDR *)GKI_getbuf(AVRC_META_CMD_BUF_SIZE);
-    #else
+#else
     assert(AVRC_CMD_BUF_SIZE > (AVRC_MIN_CMD_LEN + p_msg->vendor_len));
     p_cmd = (BT_HDR *)GKI_getbuf(AVRC_CMD_BUF_SIZE);
-    #endif
+#endif
     p_cmd->offset = AVCT_MSG_OFFSET;
     p_data = (uint8_t *)(p_cmd + 1) + p_cmd->offset;
     *p_data++ = (p_msg->hdr.ctype & AVRC_CTYPE_MASK);
@@ -64,8 +64,7 @@ static BT_HDR   *avrc_vendor_msg(tAVRC_MSG_VENDOR *p_msg)
     *p_data++ = AVRC_OP_VENDOR;
     AVRC_CO_ID_TO_BE_STREAM(p_data, p_msg->company_id);
 
-    if(p_msg->vendor_len && p_msg->p_vendor_data)
-    {
+    if(p_msg->vendor_len && p_msg->p_vendor_data) {
         wm_memcpy(p_data, p_msg->p_vendor_data, p_msg->vendor_len);
     }
 
@@ -180,12 +179,9 @@ uint16_t AVRC_VendorCmd(uint8_t  handle, uint8_t  label, tAVRC_MSG_VENDOR *p_msg
 {
     BT_HDR *p_buf = avrc_vendor_msg(p_msg);
 
-    if(p_buf)
-    {
+    if(p_buf) {
         return AVCT_MsgReq(handle, label, AVCT_CMD, p_buf);
-    }
-    else
-    {
+    } else {
         return AVCT_NO_RESOURCES;
     }
 }
@@ -220,12 +216,9 @@ uint16_t AVRC_VendorRsp(uint8_t  handle, uint8_t  label, tAVRC_MSG_VENDOR *p_msg
 {
     BT_HDR *p_buf = avrc_vendor_msg(p_msg);
 
-    if(p_buf)
-    {
+    if(p_buf) {
         return AVCT_MsgReq(handle, label, AVCT_RSP, p_buf);
-    }
-    else
-    {
+    } else {
         return AVCT_NO_RESOURCES;
     }
 }

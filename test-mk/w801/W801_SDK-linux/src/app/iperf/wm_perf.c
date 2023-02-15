@@ -7,11 +7,12 @@
 
 #if TLS_CONFIG_WIFI_PERF_TEST
 extern int tls_perf(void* data);
+extern u64 unit_atof(const char *s);
 
 #define THT_QUEUE_SIZE	32
 #define THT_TASK_PRIO	32
 #define THT_TASK_STACK_SIZE 1024
-struct tht_param gThtSys;
+struct tht_param *gThtSys;
 tls_os_queue_t *tht_q = NULL;
 u32 *ThtTaskStk = NULL;
 int testing = 0;
@@ -50,77 +51,88 @@ void CreateThroughputTask(void)
         ThtTaskStk = (u32 *)tls_mem_alloc(THT_TASK_STACK_SIZE * sizeof(u32));
         if (ThtTaskStk)
         {
-            memset(&gThtSys, 0 ,sizeof(struct tht_param));
-            iperf_cpu_freq = tls_reg_read32(HR_CLK_DIV_CTL)&0xFF;
+        	gThtSys = tls_mem_alloc(sizeof(struct tht_param));
+        	if (gThtSys)
+        	{
+	            memset(gThtSys, 0 ,sizeof(struct tht_param));
+	            iperf_cpu_freq = tls_reg_read32(HR_CLK_DIV_CTL)&0xFF;
 
-            tls_os_queue_create(&tht_q, THT_QUEUE_SIZE);
+	            tls_os_queue_create(&tht_q, THT_QUEUE_SIZE);
 
-            tls_os_task_create(NULL, NULL,
-                               tht_task,
-                               (void *)&gThtSys,
-                               (void *)ThtTaskStk,
-                               THT_TASK_STACK_SIZE * sizeof(u32),
-                               THT_TASK_PRIO,
-                               0);
+	            tls_os_task_create(NULL, NULL,
+	                               tht_task,
+	                               (void *)gThtSys,
+	                               (void *)ThtTaskStk,
+	                               THT_TASK_STACK_SIZE * sizeof(u32),
+	                               THT_TASK_PRIO,
+	                               0);
 
-            testing = 1;
-            printf("CreateThroughputTask\n");
+	            testing = 1;
+	            printf("CreateThroughputTask\n");
+        	}				
         }
     }
 }
 
 void tht_print_param(struct tht_param* tht)
 {
-	IPF_DBG("THT Parameters: \n");
-	IPF_DBG("role: %c\n", tht->role);
-	IPF_DBG("server_hostname: %s\n", tht->server_hostname);
-	IPF_DBG("protocol: %d\n", tht->protocol);	
-	IPF_DBG("report_interval: %d\n", tht->report_interval);	
-	IPF_DBG("duration: %d\n", tht->duration);	
-	IPF_DBG("rate: %llu\n", tht->rate);	
-	IPF_DBG("block_size: %d\n", tht->block_size);	
+	if (tht)
+	{
+		IPF_DBG("THT Parameters: \n");
+		IPF_DBG("role: %c\n", tht->role);
+		IPF_DBG("server_hostname: %s\n", tht->server_hostname);
+		IPF_DBG("protocol: %d\n", tht->protocol);	
+		IPF_DBG("report_interval: %d\n", tht->report_interval);	
+		IPF_DBG("duration: %d\n", tht->duration);	
+		IPF_DBG("rate: %llu\n", tht->rate);	
+		IPF_DBG("block_size: %d\n", tht->block_size);	
+	}
 
 }
 int tht_parse_parameter(char *arg[])
 {
 	char* tmp;
 	int len;
-	struct tht_param* tht = (struct tht_param*)(&gThtSys);
 
-	memset(tht, 0, sizeof(struct tht_param));
+	if (gThtSys == NULL)
+	{
+		return -1;
+	}
+
+	memset(gThtSys, 0, sizeof(struct tht_param));
 
 	switch (*arg[0]){
 		case 'S':
 		case 's':
-			tht->role = 's';
+			gThtSys->role = 's';
 			if((tmp = strchr(arg[1], '=')) != NULL) {
-				tht->report_interval = atoi(tmp+1);
+				gThtSys->report_interval = atoi(tmp+1);
 			}
 
-			tht_print_param(tht);
+			tht_print_param(gThtSys);
 		break;
 
 		case 'C':
 		case 'c':
-			tht->role = 'c';
+			gThtSys->role = 'c';
 
 			len = arg[2] - arg[1] - 1	;
-			MEMCPY(tht->server_hostname, arg[1], len);
-			tht->server_hostname[len] = '\0';
+			MEMCPY(gThtSys->server_hostname, arg[1], len);
+			gThtSys->server_hostname[len] = '\0';
 
 			if(strcmp(arg[2], "TCP") == 0){
-				tht->protocol = Ptcp;
+				gThtSys->protocol = Ptcp;
 				
 				if((tmp = strchr(arg[3], '=')) != NULL) {
-					tht->block_size = atoi(tmp+1);
+					gThtSys->block_size = atoi(tmp+1);
 				}
 			}
 			else if(strcmp(arg[2], "UDP") == 0){
-				tht->protocol = Pudp;
+				gThtSys->protocol = Pudp;
 
 				if((tmp = strchr(arg[3], '=')) != NULL) {
 					tmp += 1;
-					tht->rate = unit_atof(tmp);
+					gThtSys->rate = unit_atof(tmp);
 				}
 			}
 			else{
@@ -129,14 +141,14 @@ int tht_parse_parameter(char *arg[])
 			}
 
 			if((tmp = strchr(arg[4], '=')) != NULL) {
-				tht->duration = atoi(tmp+1);
+				gThtSys->duration = atoi(tmp+1);
 			}
 
 			if((tmp = strchr(arg[5], '=')) != NULL) {
-				tht->report_interval = atoi(tmp+1);
+				gThtSys->report_interval = atoi(tmp+1);
 			}
 
-			tht_print_param(tht);
+			tht_print_param(gThtSys);
 		break;
 
 		default:

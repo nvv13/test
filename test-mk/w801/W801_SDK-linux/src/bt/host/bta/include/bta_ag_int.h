@@ -32,12 +32,12 @@
 
 /* Send RING & CLIP in one AT cmd */
 #ifndef BTA_AG_MULTI_RESULT_INCLUDED
-    #define BTA_AG_MULTI_RESULT_INCLUDED      FALSE
+#define BTA_AG_MULTI_RESULT_INCLUDED      FALSE
 #endif
 
 /* Replace : in VGS and VGM for HSP */
 #ifndef BTA_HSP_RESULT_REPLACE_COLON
-    #define BTA_HSP_RESULT_REPLACE_COLON      TRUE
+#define BTA_HSP_RESULT_REPLACE_COLON      TRUE
 #endif
 
 /*****************************************************************************
@@ -52,12 +52,12 @@
 
 /* Number of SCBs (AG service instances that can be registered) */
 #ifndef BTA_AG_NUM_SCB
-    #define BTA_AG_NUM_SCB          2
+#define BTA_AG_NUM_SCB          2
 #endif
 
 /* Time to wait for retry in case of collision */
 #ifndef BTA_AG_COLLISION_TIMEOUT_MS
-    #define BTA_AG_COLLISION_TIMEOUT_MS (2 * 1000)          /* 2 seconds */
+#define BTA_AG_COLLISION_TIMEOUT_MS (2 * 1000)          /* 2 seconds */
 #endif
 
 /* RFCOMM MTU SIZE */
@@ -84,8 +84,7 @@
                                       BTA_AG_FEAT_VREC | BTA_AG_FEAT_INBAND  | \
                                       BTA_AG_FEAT_VTAG)
 
-enum
-{
+enum {
     /* these events are handled by the state machine */
     BTA_AG_API_REGISTER_EVT = BTA_SYS_EVT_START(BTA_ID_AG),
     BTA_AG_API_DEREGISTER_EVT,
@@ -118,8 +117,7 @@ enum
 };
 
 /* Actions to perform after a SCO event */
-enum
-{
+enum {
     BTA_AG_POST_SCO_NONE,       /* no action */
     BTA_AG_POST_SCO_CLOSE_RFC,  /* close RFCOMM channel after SCO closes */
     BTA_AG_POST_SCO_RING,       /* send RING result code after SCO opens */
@@ -130,13 +128,12 @@ enum
 };
 
 /* sco states */
-enum
-{
+enum {
     BTA_AG_SCO_SHUTDOWN_ST,     /* no sco listening, all sco connections closed */
     BTA_AG_SCO_LISTEN_ST,       /* sco listening */
-    #if (BTM_WBS_INCLUDED == TRUE )
+#if (BTM_WBS_INCLUDED == TRUE )
     BTA_AG_SCO_CODEC_ST,        /* sco codec negotiation */
-    #endif
+#endif
     BTA_AG_SCO_OPENING_ST,      /* sco connection opening */
     BTA_AG_SCO_OPEN_CL_ST,      /* opening sco connection being closed */
     BTA_AG_SCO_OPEN_XFER_ST,    /* opening sco connection being transferred */
@@ -152,16 +149,14 @@ enum
 *****************************************************************************/
 
 /* data type for BTA_AG_API_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_AG_PARSE_MODE  parse_mode;
     tBTA_AG_CBACK      *p_cback;
 } tBTA_AG_API_ENABLE;
 
 /* data type for BTA_AG_API_REGISTER_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     char                p_name[2][BTA_SERVICE_NAME_LEN + 1];
     tBTA_SERVICE_MASK   services;
@@ -171,8 +166,7 @@ typedef struct
 } tBTA_AG_API_REGISTER;
 
 /* data type for BTA_AG_API_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     BD_ADDR             bd_addr;
     tBTA_SERVICE_MASK   services;
@@ -180,75 +174,66 @@ typedef struct
 } tBTA_AG_API_OPEN;
 
 /* data type for BTA_AG_API_RESULT_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR            hdr;
     tBTA_AG_RES       result;
     tBTA_AG_RES_DATA  data;
 } tBTA_AG_API_RESULT;
 
 /* data type for BTA_AG_API_SETCODEC_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR              hdr;
     tBTA_AG_PEER_CODEC  codec;
 } tBTA_AG_API_SETCODEC;
 
 /* data type for BTA_AG_DISC_RESULT_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     uint16_t          status;
 } tBTA_AG_DISC_RESULT;
 
 /* data type for RFCOMM events */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     uint16_t          port_handle;
 } tBTA_AG_RFC;
 
 /* data type for BTA_AG_CI_RX_WRITE_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR          hdr;
     //    char            p_data[BTA_AG_MTU+1];
 } tBTA_AG_CI_RX_WRITE;
 
 /* union of all event datatypes */
-typedef union
-{
+typedef union {
     BT_HDR                  hdr;
     tBTA_AG_API_ENABLE      api_enable;
     tBTA_AG_API_REGISTER    api_register;
     tBTA_AG_API_OPEN        api_open;
     tBTA_AG_API_RESULT      api_result;
-    #if (BTM_WBS_INCLUDED == TRUE )
+#if (BTM_WBS_INCLUDED == TRUE )
     tBTA_AG_API_SETCODEC    api_setcodec;
-    #endif
+#endif
     tBTA_AG_DISC_RESULT     disc_result;
     tBTA_AG_RFC             rfc;
     tBTA_AG_CI_RX_WRITE     ci_rx_write;
 } tBTA_AG_DATA;
 
 /* type for each profile */
-typedef struct
-{
+typedef struct {
     uint32_t          sdp_handle;
     uint8_t           scn;
 } tBTA_AG_PROFILE;
 
 #if (BTM_WBS_INCLUDED == TRUE)
-typedef enum
-{
+typedef enum {
     BTA_AG_SCO_MSBC_SETTINGS_T2 = 0, /* preferred/default when codec is mSBC */
     BTA_AG_SCO_MSBC_SETTINGS_T1,
 } tBTA_AG_SCO_MSBC_SETTINGS;
 #endif
 
 /* type for each service control block */
-typedef struct
-{
+typedef struct {
     char                clip[BTA_AG_AT_MAX_LEN + 1]; /* number string used for CLIP */
     uint16_t              serv_handle[BTA_AG_NUM_IDX]; /* RFCOMM server handles */
     tBTA_AG_AT_CB       at_cb;          /* AT command interpreter */
@@ -291,7 +276,7 @@ typedef struct
     TIMER_LIST_ENT       ring_timer;
     uint8_t collision_timer_on;
     uint8_t ring_timer_on;
-    #if (BTM_WBS_INCLUDED == TRUE)
+#if (BTM_WBS_INCLUDED == TRUE)
     TIMER_LIST_ENT       codec_negotiation_timer;
     uint8_t codec_negotiation_timer_on;
     tBTA_AG_PEER_CODEC  peer_codecs;    /* codecs for eSCO supported by the peer */
@@ -300,13 +285,12 @@ typedef struct
     uint8_t             codec_updated;  /* set to TRUE whenever the app updates codec type */
     uint8_t             codec_fallback; /* If sco nego fails for mSBC, fallback to CVSD */
     tBTA_AG_SCO_MSBC_SETTINGS codec_msbc_settings; /* settings to be used for the impending eSCO */
-    #endif
+#endif
 
 } tBTA_AG_SCB;
 
 /* type for sco data */
-typedef struct
-{
+typedef struct {
     tBTM_ESCO_CONN_REQ_EVT_DATA  conn_data;     /* SCO data for pending conn request */
     tBTA_AG_SCB                 *p_curr_scb;    /* SCB associated with SCO connection */
     tBTA_AG_SCB                 *p_xfer_scb;    /* SCB associated with SCO transfer */
@@ -318,8 +302,7 @@ typedef struct
 
 
 /* type for AG control block */
-typedef struct
-{
+typedef struct {
     tBTA_AG_SCB         scb[BTA_AG_NUM_SCB];        /* service control blocks */
     tBTA_AG_PROFILE     profile[BTA_AG_NUM_IDX];    /* profile-specific data */
     tBTA_AG_SCO_CB      sco;                        /* SCO data */
@@ -338,10 +321,10 @@ extern const tBTA_AG_AT_CMD *bta_ag_at_tbl[BTA_AG_NUM_IDX];
 
 /* control block declaration */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    extern tBTA_AG_CB bta_ag_cb;
+extern tBTA_AG_CB bta_ag_cb;
 #else
-    extern tBTA_AG_CB *bta_ag_cb_ptr;
-    #define bta_ag_cb (*bta_ag_cb_ptr)
+extern tBTA_AG_CB *bta_ag_cb_ptr;
+#define bta_ag_cb (*bta_ag_cb_ptr)
 #endif
 
 /* config struct */
@@ -415,8 +398,8 @@ extern void bta_ag_sco_listen(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 extern void bta_ag_sco_open(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 extern void bta_ag_sco_close(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 #if (BTM_WBS_INCLUDED == TRUE )
-    extern void bta_ag_sco_codec_nego(tBTA_AG_SCB *p_scb, uint8_t result);
-    extern void bta_ag_codec_negotiate(tBTA_AG_SCB *p_scb);
+extern void bta_ag_sco_codec_nego(tBTA_AG_SCB *p_scb, uint8_t result);
+extern void bta_ag_codec_negotiate(tBTA_AG_SCB *p_scb);
 #endif
 extern void bta_ag_sco_shutdown(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 extern void bta_ag_sco_conn_open(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
@@ -427,7 +410,7 @@ extern void bta_ag_svc_conn_open(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 extern void bta_ag_result(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 extern void bta_ag_setcodec(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 #if (BTM_WBS_INCLUDED == TRUE )
-    extern void bta_ag_send_bcs(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
+extern void bta_ag_send_bcs(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 #endif
 extern void bta_ag_send_ring(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);
 extern void bta_ag_ci_sco_data(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data);

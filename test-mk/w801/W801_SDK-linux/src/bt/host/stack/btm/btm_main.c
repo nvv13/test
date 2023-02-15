@@ -31,9 +31,9 @@
 /* Global BTM control block structure
 */
 #if BTM_DYNAMIC_MEMORY == FALSE
-    tBTM_CB  btm_cb;
+tBTM_CB  btm_cb;
 #else
-	tBTM_CB *btm_cb_ptr = NULL;
+tBTM_CB *btm_cb_ptr = NULL;
 #endif
 
 /*******************************************************************************
@@ -52,39 +52,36 @@ void btm_init(void)
 {
     /* All fields are cleared; nonzero fields are reinitialized in appropriate function */
 #if BTM_DYNAMIC_MEMORY == TRUE
-	btm_cb_ptr = (tBTM_CB *)GKI_os_malloc(sizeof(tBTM_CB));
+    btm_cb_ptr = (tBTM_CB *)GKI_os_malloc(sizeof(tBTM_CB));
     assert(btm_cb_ptr != NULL);
 #endif
     wm_memset(&btm_cb, 0, sizeof(tBTM_CB));
     btm_cb.page_queue = fixed_queue_new(SIZE_MAX);
     btm_cb.sec_pending_q = fixed_queue_new(SIZE_MAX);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     btm_cb.sec_collision_timer = alarm_new("btm.sec_collision_timer");
     btm_cb.pairing_timer = alarm_new("btm.pairing_timer");
-    #endif
-    #if defined(BTM_INITIAL_TRACE_LEVEL)
+#endif
+#if defined(BTM_INITIAL_TRACE_LEVEL)
     btm_cb.trace_level = BTM_INITIAL_TRACE_LEVEL;
-    #else
+#else
     btm_cb.trace_level = BT_TRACE_LEVEL_NONE;    /* No traces */
-    #endif
+#endif
     /* Initialize BTM component structures */
     btm_inq_db_init();                  /* Inquiry Database and Structures */
     btm_acl_init();                     /* ACL Database and Structures */
     /* Security Manager Database and Structures */
     //hci_dbg_msg("Skip pts secure only mode\r\n");
 
-    if(/*stack_config_get_interface()->get_pts_secure_only_mode()*/0)
-    {
+    if(/*stack_config_get_interface()->get_pts_secure_only_mode()*/0) {
         btm_sec_init(BTM_SEC_MODE_SC);
-    }
-    else
-    {
+    } else {
         btm_sec_init(BTM_SEC_MODE_SP);
     }
 
-    #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
     btm_sco_init();                     /* SCO Database and Structures (If included) */
-    #endif
+#endif
     btm_cb.sec_dev_rec = list_new(GKI_freebuf);
     btm_dev_init();                     /* Device Manager Structures & HCI_Reset */
 }
@@ -102,13 +99,14 @@ void btm_free(void)
     fixed_queue_free(btm_cb.page_queue, GKI_freebuf);
     fixed_queue_free(btm_cb.sec_pending_q, GKI_freebuf);
     list_free(btm_cb.sec_dev_rec);
-	#if BTM_DYNAMIC_MEMORY == TRUE
-    if(btm_cb_ptr)
-	{
-		GKI_os_free(btm_cb_ptr);
-		btm_cb_ptr = NULL;
+#if BTM_DYNAMIC_MEMORY == TRUE
+
+    if(btm_cb_ptr) {
+        GKI_os_free(btm_cb_ptr);
+        btm_cb_ptr = NULL;
     }
-    #endif
+
+#endif
 }
 
 

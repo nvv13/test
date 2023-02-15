@@ -25,14 +25,13 @@
 #include "bta_sdp_api.h"
 
 #ifndef BTA_SDP_DB_SIZE
-    #define BTA_SDP_DB_SIZE  4500
+#define BTA_SDP_DB_SIZE  4500
 #endif
 
 static uint8_t __attribute__((aligned(4))) bta_sdp_db_data[BTA_SDP_DB_SIZE];
 
 /* SDP configuration structure */
-const tBTA_SDP_CFG bta_sdp_cfg =
-{
+const tBTA_SDP_CFG bta_sdp_cfg = {
     BTA_SDP_DB_SIZE,
     (tSDP_DISCOVERY_DB *)bta_sdp_db_data   /* The data buffer to keep SDP database */
 };

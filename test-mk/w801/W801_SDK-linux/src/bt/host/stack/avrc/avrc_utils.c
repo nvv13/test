@@ -38,10 +38,8 @@ uint8_t AVRC_IsValidAvcType(uint8_t pdu_id, uint8_t avc_type)
 {
     uint8_t result = FALSE;
 
-    if(avc_type < AVRC_RSP_NOT_IMPL)   /* command msg */
-    {
-        switch(pdu_id)
-        {
+    if(avc_type < AVRC_RSP_NOT_IMPL) { /* command msg */
+        switch(pdu_id) {
             case AVRC_PDU_GET_CAPABILITIES:            /* 0x10 */
             case AVRC_PDU_LIST_PLAYER_APP_ATTR:        /* 0x11 */
             case AVRC_PDU_LIST_PLAYER_APP_VALUES:      /* 0x12 */
@@ -50,8 +48,7 @@ uint8_t AVRC_IsValidAvcType(uint8_t pdu_id, uint8_t avc_type)
             case AVRC_PDU_GET_PLAYER_APP_VALUE_TEXT:   /* 0x16 */
             case AVRC_PDU_GET_ELEMENT_ATTR:            /* 0x20 */
             case AVRC_PDU_GET_PLAY_STATUS:             /* 0x30 */
-                if(avc_type == AVRC_CMD_STATUS)
-                {
+                if(avc_type == AVRC_CMD_STATUS) {
                     result = TRUE;
                 }
 
@@ -65,27 +62,22 @@ uint8_t AVRC_IsValidAvcType(uint8_t pdu_id, uint8_t avc_type)
             case AVRC_PDU_SET_ADDRESSED_PLAYER:
             case AVRC_PDU_PLAY_ITEM:
             case AVRC_PDU_SET_ABSOLUTE_VOLUME:
-                if(avc_type == AVRC_CMD_CTRL)
-                {
+                if(avc_type == AVRC_CMD_CTRL) {
                     result = TRUE;
                 }
 
                 break;
 
             case AVRC_PDU_REGISTER_NOTIFICATION:       /* 0x31 */
-                if(avc_type == AVRC_CMD_NOTIF)
-                {
+                if(avc_type == AVRC_CMD_NOTIF) {
                     result = TRUE;
                 }
 
                 break;
         }
-    }
-    else  /* response msg */
-    {
+    } else { /* response msg */
         if(avc_type >= AVRC_RSP_NOT_IMPL  &&
-                avc_type <= AVRC_RSP_INTERIM)
-        {
+                avc_type <= AVRC_RSP_INTERIM) {
             result = TRUE;
         }
     }
@@ -106,12 +98,10 @@ uint8_t avrc_is_valid_player_attrib_value(uint8_t attrib, uint8_t value)
 {
     uint8_t result = FALSE;
 
-    switch(attrib)
-    {
+    switch(attrib) {
         case AVRC_PLAYER_SETTING_EQUALIZER:
             if((value > 0)  &&
-                    (value <= AVRC_PLAYER_VAL_ON))
-            {
+                    (value <= AVRC_PLAYER_VAL_ON)) {
                 result = TRUE;
             }
 
@@ -119,8 +109,7 @@ uint8_t avrc_is_valid_player_attrib_value(uint8_t attrib, uint8_t value)
 
         case AVRC_PLAYER_SETTING_REPEAT:
             if((value > 0)  &&
-                    (value <= AVRC_PLAYER_VAL_GROUP_REPEAT))
-            {
+                    (value <= AVRC_PLAYER_VAL_GROUP_REPEAT)) {
                 result = TRUE;
             }
 
@@ -129,16 +118,14 @@ uint8_t avrc_is_valid_player_attrib_value(uint8_t attrib, uint8_t value)
         case AVRC_PLAYER_SETTING_SHUFFLE:
         case AVRC_PLAYER_SETTING_SCAN:
             if((value > 0)  &&
-                    (value <= AVRC_PLAYER_VAL_GROUP_SHUFFLE))
-            {
+                    (value <= AVRC_PLAYER_VAL_GROUP_SHUFFLE)) {
                 result = TRUE;
             }
 
             break;
     }
 
-    if(attrib >= AVRC_PLAYER_SETTING_LOW_MENU_EXT)
-    {
+    if(attrib >= AVRC_PLAYER_SETTING_LOW_MENU_EXT) {
         result = TRUE;
     }
 
@@ -164,8 +151,7 @@ uint8_t AVRC_IsValidPlayerAttr(uint8_t attr)
     uint8_t result = FALSE;
 
     if((attr >= AVRC_PLAYER_SETTING_EQUALIZER && attr <= AVRC_PLAYER_SETTING_SCAN) ||
-            (attr >= AVRC_PLAYER_SETTING_LOW_MENU_EXT))
-    {
+            (attr >= AVRC_PLAYER_SETTING_LOW_MENU_EXT)) {
         result = TRUE;
     }
 
@@ -192,17 +178,14 @@ tAVRC_STS avrc_pars_pass_thru(tAVRC_MSG_PASS *p_msg, uint16_t *p_vendor_unique_i
     uint16_t      id;
     tAVRC_STS  status = AVRC_STS_BAD_CMD;
 
-    if(p_msg->op_id == AVRC_ID_VENDOR && p_msg->pass_len == AVRC_PASS_THRU_GROUP_LEN)
-    {
+    if(p_msg->op_id == AVRC_ID_VENDOR && p_msg->pass_len == AVRC_PASS_THRU_GROUP_LEN) {
         p_data = p_msg->p_pass_data;
         AVRC_BE_STREAM_TO_CO_ID(co_id, p_data);
 
-        if(co_id == AVRC_CO_METADATA)
-        {
+        if(co_id == AVRC_CO_METADATA) {
             BE_STREAM_TO_UINT16(id, p_data);
 
-            if(AVRC_IS_VALID_GROUP(id))
-            {
+            if(AVRC_IS_VALID_GROUP(id)) {
                 *p_vendor_unique_id = id;
                 status = AVRC_STS_NO_ERROR;
             }
@@ -225,8 +208,7 @@ uint8_t avrc_opcode_from_pdu(uint8_t pdu)
 {
     uint8_t opcode = 0;
 
-    switch(pdu)
-    {
+    switch(pdu) {
         case AVRC_PDU_NEXT_GROUP:
         case AVRC_PDU_PREV_GROUP: /* pass thru */
             opcode  = AVRC_OP_PASS_THRU;
@@ -253,8 +235,7 @@ uint8_t avrc_is_valid_opcode(uint8_t opcode)
 {
     uint8_t is_valid = FALSE;
 
-    switch(opcode)
-    {
+    switch(opcode) {
         case AVRC_OP_BROWSE:
         case AVRC_OP_PASS_THRU:
         case AVRC_OP_VENDOR:

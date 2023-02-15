@@ -30,18 +30,18 @@
 #include "osi/include/list.h"
 
 #ifndef     BTA_GATT_INCLUDED
-    #warning BTA_GATT_INCLUDED not defined
-    #define     BTA_GATT_INCLUDED     FALSE
+#warning BTA_GATT_INCLUDED not defined
+#define     BTA_GATT_INCLUDED     FALSE
 #endif
 
 #if ((BLE_INCLUDED == FALSE) && (BTA_GATT_INCLUDED == TRUE))
-    #undef BTA_GATT_INCLUDED
-    #define BTA_GATT_INCLUDED        FALSE
+#undef BTA_GATT_INCLUDED
+#define BTA_GATT_INCLUDED        FALSE
 #endif
 
 
 #ifndef     BTA_GATT_DEBUG
-    #define     BTA_GATT_DEBUG       FALSE
+#define     BTA_GATT_DEBUG       FALSE
 #endif
 
 /*****************************************************************************
@@ -51,8 +51,7 @@
 **  Common Definitions
 ***************************/
 /* GATT ID */
-typedef struct
-{
+typedef struct {
     tBT_UUID    uuid;           /* uuid of the attribute */
     uint8_t       inst_id;        /* instance ID */
 } __attribute__((packed)) tBTA_GATT_ID;
@@ -151,8 +150,7 @@ typedef uint8_t tBTA_GATTC_EVT;
 
 typedef tGATT_IF tBTA_GATTC_IF;
 
-typedef struct
-{
+typedef struct {
     uint16_t              unit;       /* as UUIUD defined by SIG */
     uint16_t              descr;       /* as UUID as defined by SIG */
     tGATT_FORMAT        format;
@@ -174,15 +172,13 @@ typedef uint16_t  tBTA_GATT_SVR_CHAR_CONFIG;
 /* Characteristic Aggregate Format attribute value
 */
 #define BTA_GATT_AGGR_HANDLE_NUM_MAX        10
-typedef struct
-{
+typedef struct {
     uint8_t                   num_handle;
     uint16_t                  handle_list[BTA_GATT_AGGR_HANDLE_NUM_MAX];
 } tBTA_GATT_CHAR_AGGRE;
 typedef tGATT_VALID_RANGE           tBTA_GATT_VALID_RANGE;
 
-typedef struct
-{
+typedef struct {
     uint16_t  len;
     uint8_t   *p_value;
 } tBTA_GATT_UNFMT;
@@ -206,8 +202,7 @@ typedef uint16_t tBTA_GATT_REASON;
 
 #define BTA_GATTC_MULTI_MAX    GATT_MAX_READ_MULTI_HANDLES
 
-typedef struct
-{
+typedef struct {
     uint8_t                       num_attr;
     uint16_t                      handles[BTA_GATTC_MULTI_MAX];
 } tBTA_GATTC_MULTI;
@@ -220,8 +215,7 @@ typedef struct
 
 typedef tGATT_AUTH_REQ tBTA_GATT_AUTH_REQ;
 
-enum
-{
+enum {
     BTA_GATTC_ATTR_TYPE_INCL_SRVC,
     BTA_GATTC_ATTR_TYPE_CHAR,
     BTA_GATTC_ATTR_TYPE_CHAR_DESCR,
@@ -230,8 +224,7 @@ enum
 typedef uint8_t tBTA_GATTC_ATTR_TYPE;
 
 
-typedef struct
-{
+typedef struct {
     tBT_UUID    uuid;
     uint16_t      s_handle;
     uint16_t      e_handle;   /* used for service only */
@@ -243,55 +236,47 @@ typedef struct
 } tBTA_GATTC_NV_ATTR;
 
 /* callback data structure */
-typedef struct
-{
+typedef struct {
     tBTA_GATT_STATUS    status;
     tBTA_GATTC_IF       client_if;
     tBT_UUID            app_uuid;
 } tBTA_GATTC_REG;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     tBTA_GATT_STATUS    status;
     uint16_t              handle;
     tBTA_GATT_UNFMT  *p_value;
 } tBTA_GATTC_READ;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     tBTA_GATT_STATUS    status;
     uint16_t              handle;
 } tBTA_GATTC_WRITE;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     tBTA_GATT_STATUS    status;
 } tBTA_GATTC_EXEC_CMPL;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     tBTA_GATT_STATUS    status;
 } tBTA_GATTC_SEARCH_CMPL;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     tBTA_GATT_ID   service_uuid;
 } tBTA_GATTC_SRVC_RES;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     tBTA_GATT_STATUS    status;
     uint16_t              mtu;
 } tBTA_GATTC_CFG_MTU;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATT_STATUS    status;
     uint16_t              conn_id;
     tBTA_GATTC_IF       client_if;
@@ -300,17 +285,16 @@ typedef struct
     uint16_t              mtu;
 } tBTA_GATTC_OPEN;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATT_STATUS    status;
     uint16_t              conn_id;
     tBTA_GATTC_IF       client_if;
     BD_ADDR             remote_bda;
-    tBTA_GATT_REASON    reason;         /* disconnect reason code, not useful when connect event is reported */
+    tBTA_GATT_REASON
+    reason;         /* disconnect reason code, not useful when connect event is reported */
 } tBTA_GATTC_CLOSE;
 
-typedef struct
-{
+typedef struct {
     uint16_t              conn_id;
     BD_ADDR             bda;
     uint16_t              handle;
@@ -319,28 +303,24 @@ typedef struct
     uint8_t             is_notify;
 } tBTA_GATTC_NOTIFY;
 
-typedef struct
-{
+typedef struct {
     uint16_t conn_id;
     uint8_t congested; /* congestion indicator */
 } tBTA_GATTC_CONGEST;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATT_STATUS        status;
     tBTA_GATTC_IF           client_if;
     uint16_t                  conn_id;
     BD_ADDR                 remote_bda;
 } tBTA_GATTC_OPEN_CLOSE;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATTC_IF       client_if;
     BD_ADDR             remote_bda;
 } tBTA_GATTC_ENC_CMPL_CB;
 
-typedef union
-{
+typedef union {
     tBTA_GATT_STATUS        status;
 
     tBTA_GATTC_SEARCH_CMPL  search_cmpl;          /* discovery complete */
@@ -420,13 +400,12 @@ typedef uint16_t tBTA_GATT_PERM;
 typedef uint8_t tBTA_GATT_CHAR_PROP;
 
 #ifndef BTA_GATTC_CHAR_DESCR_MAX
-    #define BTA_GATTC_CHAR_DESCR_MAX        7
+#define BTA_GATTC_CHAR_DESCR_MAX        7
 #endif
 
 /***********************  NV callback Data Definitions   **********************
 */
-typedef struct
-{
+typedef struct {
     tBT_UUID app_uuid128;
     tBT_UUID svc_uuid;
     uint16_t   svc_inst;
@@ -471,8 +450,7 @@ typedef tGATT_WRITE_REQ tBTA_GATT_WRITE_REQ;
 /* callback data for server access request from client */
 typedef tGATTS_DATA tBTA_GATTS_REQ_DATA;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATT_STATUS    status;
     BD_ADDR             remote_bda;
     uint32_t              trans_id;
@@ -480,16 +458,14 @@ typedef struct
     tBTA_GATTS_REQ_DATA *p_data;
 } tBTA_GATTS_REQ;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATTS_IF       server_if;
     tBTA_GATT_STATUS    status;
     tBT_UUID            uuid;
 } tBTA_GATTS_REG_OPER;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_GATTS_IF       server_if;
     uint16_t              service_id;
     uint16_t              svc_instance;
@@ -498,8 +474,7 @@ typedef struct
     tBT_UUID            uuid;
 } tBTA_GATTS_CREATE;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATTS_IF       server_if;
     uint16_t              service_id;
     uint16_t              attr_id;
@@ -507,16 +482,14 @@ typedef struct
     tBT_UUID            char_uuid;
 } tBTA_GATTS_ADD_RESULT;
 
-typedef struct
-{
+typedef struct {
     tBTA_GATTS_IF       server_if;
     uint16_t              service_id;
     tBTA_GATT_STATUS    status;
 } tBTA_GATTS_SRVC_OPER;
 
 
-typedef struct
-{
+typedef struct {
     tBTA_GATTS_IF       server_if;
     BD_ADDR             remote_bda;
     uint16_t              conn_id;
@@ -524,21 +497,18 @@ typedef struct
     tBTA_GATT_TRANSPORT transport;
 } tBTA_GATTS_CONN;
 
-typedef struct
-{
+typedef struct {
     uint16_t conn_id;
     uint8_t congested; /* report channel congestion indicator */
 } tBTA_GATTS_CONGEST;
 
-typedef struct
-{
+typedef struct {
     uint16_t conn_id; /* connection ID */
     tBTA_GATT_STATUS status; /* notification/indication status */
 } tBTA_GATTS_CONF;
 
 /* GATTS callback data */
-typedef union
-{
+typedef union {
     tBTA_GATTS_REG_OPER     reg_oper;
     tBTA_GATTS_CREATE       create;
     tBTA_GATTS_SRVC_OPER    srvc_oper;
@@ -558,8 +528,7 @@ typedef void (tBTA_GATTS_ENB_CBACK)(tBTA_GATT_STATUS status);
 /* Server callback function */
 typedef void (tBTA_GATTS_CBACK)(tBTA_GATTS_EVT event,  tBTA_GATTS *p_data);
 
-typedef struct
-{
+typedef struct {
     tBT_UUID                uuid;
     uint8_t                 is_primary;
     uint16_t                  handle;
@@ -569,8 +538,7 @@ typedef struct
     list_t                 *included_svc; /* list of tBTA_GATTC_INCLUDED_SVC */
 } __attribute__((packed)) tBTA_GATTC_SERVICE;
 
-typedef struct
-{
+typedef struct {
     tBT_UUID                uuid;
     uint16_t                  handle;
     tBTA_GATT_CHAR_PROP     properties;
@@ -578,15 +546,13 @@ typedef struct
     list_t                 *descriptors; /* list of tBTA_GATTC_DESCRIPTOR */
 } __attribute__((packed)) tBTA_GATTC_CHARACTERISTIC;
 
-typedef struct
-{
+typedef struct {
     tBT_UUID                    uuid;
     uint16_t                      handle;
     tBTA_GATTC_CHARACTERISTIC  *characteristic; /* owning characteristic */
 } __attribute__((packed)) tBTA_GATTC_DESCRIPTOR;
 
-typedef struct
-{
+typedef struct {
     tBT_UUID                uuid;
     uint16_t                  handle;
     tBTA_GATTC_SERVICE     *owning_service; /* owning service*/
@@ -737,7 +703,8 @@ extern const list_t *BTA_GATTC_GetServices(uint16_t conn_id);
 ** Returns          returns pointer to tBTA_GATTC_CHARACTERISTIC or NULL.
 **
 *******************************************************************************/
-extern const tBTA_GATTC_CHARACTERISTIC *BTA_GATTC_GetCharacteristic(uint16_t conn_id, uint16_t handle);
+extern const tBTA_GATTC_CHARACTERISTIC *BTA_GATTC_GetCharacteristic(uint16_t conn_id,
+        uint16_t handle);
 
 /*******************************************************************************
 **

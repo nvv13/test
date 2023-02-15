@@ -24,8 +24,7 @@
 
 static const char BTSNOOP_MODULE[] = "btsnoop_module";
 
-typedef struct btsnoop_t
-{
+typedef struct btsnoop_t {
     // Inform btsnoop whether the API desires to log. If |value| is true.
     // logging will be enabled. Otherwise it defers to the value from the
     // config file.

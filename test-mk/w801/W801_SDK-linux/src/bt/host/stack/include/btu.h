@@ -33,20 +33,17 @@
 
 // HACK(zachoverflow): temporary dark magic
 #define BTU_POST_TO_TASK_NO_GOOD_HORRIBLE_HACK 0x1700 // didn't look used in bt_types...here goes nothing
-typedef struct
-{
+typedef struct {
     void (*callback)(BT_HDR *);
 } post_to_task_hack_t;
 
-typedef struct
-{
+typedef struct {
     void (*callback)(BT_HDR *);
     BT_HDR *response;
     void *context;
 } command_complete_hack_t;
 
-typedef struct
-{
+typedef struct {
     void (*callback)(BT_HDR *);
     uint8_t status;
     BT_HDR *command;
@@ -181,20 +178,19 @@ typedef void (*tBTU_EVENT_CALLBACK)(BT_HDR *p_hdr);
 
 
 #define BTU_TTYPE_UCD_TO                            108
-#define BTU_TTYPE_BLE_GAP_BROADCAST                 109  
+#define BTU_TTYPE_BLE_GAP_BROADCAST                 109
 
 
 /* Define the BTU_TASK APPL events
 */
 #if (defined(NFC_SHARED_TRANSPORT_ENABLED) && (NFC_SHARED_TRANSPORT_ENABLED==TRUE))
-    #define BTU_NFC_AVAILABLE_EVT   EVENT_MASK(APPL_EVT_0)  /* Notifies BTU task that NFC is available (used for shared NFC+BT transport) */
+#define BTU_NFC_AVAILABLE_EVT   EVENT_MASK(APPL_EVT_0)  /* Notifies BTU task that NFC is available (used for shared NFC+BT transport) */
 #endif
 
 /* This is the inquiry response information held by BTU, and available
 ** to applications.
 */
-typedef struct
-{
+typedef struct {
     BD_ADDR     remote_bd_addr;
     uint8_t       page_scan_rep_mode;
     uint8_t       page_scan_per_mode;
@@ -210,19 +206,17 @@ typedef struct
 #define BTU_DEFAULT_DATA_SIZE (0x2a0)
 
 #if (BLE_INCLUDED == TRUE)
-    #define BTU_DEFAULT_BLE_DATA_SIZE   (27)
+#define BTU_DEFAULT_BLE_DATA_SIZE   (27)
 #endif
 
 /* structure to hold registered timers */
-typedef struct
-{
+typedef struct {
     TIMER_LIST_ENT          *p_tle;      /* timer entry */
     tBTU_TIMER_CALLBACK     timer_cb;    /* callback triggered when timer expires */
 } tBTU_TIMER_REG;
 
 /* structure to hold registered event callbacks */
-typedef struct
-{
+typedef struct {
     uint16_t                  event_range;  /* start of event range */
     tBTU_EVENT_CALLBACK     event_cb;     /* callback triggered when event is in range */
 } tBTU_EVENT_REG;
@@ -234,21 +228,19 @@ typedef struct
 #define BTU_MAX_LOCAL_CTRLS     (1 + NFC_MAX_LOCAL_CTRLS) /* only BR/EDR */
 
 /* AMP HCI control block */
-typedef struct
-{
+typedef struct {
     BUFFER_Q         cmd_xmit_q;
     BUFFER_Q         cmd_cmpl_q;
     uint16_t           cmd_window;
     TIMER_LIST_ENT   cmd_cmpl_timer;        /* Command complete timer */
-    #if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
+#if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
     uint8_t          checked_hcisu;
-    #endif
+#endif
 } tHCI_CMD_CB;
 
 /* Define structure holding BTU variables
 */
-typedef struct
-{
+typedef struct {
     tBTU_TIMER_REG   timer_reg[BTU_MAX_REG_TIMER];
     tBTU_EVENT_REG   event_reg[BTU_MAX_REG_EVENT];
 
@@ -262,11 +254,11 @@ typedef struct
     uint16_t    hcit_acl_pkt_size;            /* Max ACL packet size across HCI transport  */
     /* (this is data size plus 4 bytes overhead) */
 
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     uint16_t    hcit_ble_acl_data_size;           /* Max BLE ACL data size across HCI transport    */
     uint16_t    hcit_ble_acl_pkt_size;            /* Max BLE ACL packet size across HCI transport  */
     /* (this is data size plus 4 bytes overhead) */
-    #endif
+#endif
 
     uint8_t     reset_complete;             /* TRUE after first ack from device received */
     uint8_t       trace_level;                /* Trace level for HCI layer */

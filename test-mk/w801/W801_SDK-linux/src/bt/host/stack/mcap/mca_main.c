@@ -35,7 +35,7 @@
 
 /* Main Control block for MCA */
 #if MCA_DYNAMIC_MEMORY == FALSE
-    tMCA_CB mca_cb;
+tMCA_CB mca_cb;
 #endif
 
 /*****************************************************************************
@@ -43,8 +43,7 @@
 *****************************************************************************/
 
 /* table of standard opcode message size */
-const uint8_t mca_std_msg_len[MCA_NUM_STANDARD_OPCODE] =
-{
+const uint8_t mca_std_msg_len[MCA_NUM_STANDARD_OPCODE] = {
     4,          /* MCA_OP_ERROR_RSP         */
     5,          /* MCA_OP_MDL_CREATE_REQ    */
     5,          /* MCA_OP_MDL_CREATE_RSP    */
@@ -73,10 +72,8 @@ tMCA_HANDLE mca_handle_by_cpsm(uint16_t psm)
     tMCA_HANDLE handle = 0;
     tMCA_RCB *p_rcb = &mca_cb.rcb[0];
 
-    for(i = 0; i < MCA_NUM_REGS; i++, p_rcb++)
-    {
-        if(p_rcb->p_cback && p_rcb->reg.ctrl_psm == psm)
-        {
+    for(i = 0; i < MCA_NUM_REGS; i++, p_rcb++) {
+        if(p_rcb->p_cback && p_rcb->reg.ctrl_psm == psm) {
             handle = i + 1;
             break;
         }
@@ -101,10 +98,8 @@ tMCA_HANDLE mca_handle_by_dpsm(uint16_t psm)
     tMCA_HANDLE handle = 0;
     tMCA_RCB *p_rcb = &mca_cb.rcb[0];
 
-    for(i = 0; i < MCA_NUM_REGS; i++, p_rcb++)
-    {
-        if(p_rcb->p_cback && p_rcb->reg.data_psm == psm)
-        {
+    for(i = 0; i < MCA_NUM_REGS; i++, p_rcb++) {
+        if(p_rcb->p_cback && p_rcb->reg.data_psm == psm) {
             handle = i + 1;
             break;
         }
@@ -129,10 +124,8 @@ tMCA_TC_TBL *mca_tc_tbl_calloc(tMCA_CCB *p_ccb)
     int             i;
 
     /* find next free entry in tc table */
-    for(i = 0; i < MCA_NUM_TC_TBL; i++, p_tbl++)
-    {
-        if(p_tbl->state == MCA_TC_ST_UNUSED)
-        {
+    for(i = 0; i < MCA_NUM_TC_TBL; i++, p_tbl++) {
+        if(p_tbl->state == MCA_TC_ST_UNUSED) {
             break;
         }
     }
@@ -168,10 +161,8 @@ tMCA_TC_TBL *mca_tc_tbl_dalloc(tMCA_DCB *p_dcb)
     int             i;
 
     /* find next free entry in tc table */
-    for(i = 0; i < MCA_NUM_TC_TBL; i++, p_tbl++)
-    {
-        if(p_tbl->state == MCA_TC_ST_UNUSED)
-        {
+    for(i = 0; i < MCA_NUM_TC_TBL; i++, p_tbl++) {
+        if(p_tbl->state == MCA_TC_ST_UNUSED) {
             break;
         }
     }
@@ -205,12 +196,10 @@ tMCA_TC_TBL *mca_tc_tbl_by_lcid(uint16_t lcid)
 {
     uint8_t idx;
 
-    if(lcid)
-    {
+    if(lcid) {
         idx = mca_cb.tc.lcid_tbl[lcid - L2CAP_BASE_APPL_CID];
 
-        if(idx < MCA_NUM_TC_TBL)
-        {
+        if(idx < MCA_NUM_TC_TBL) {
             return &mca_cb.tc.tc_tbl[idx];
         }
     }
@@ -232,12 +221,10 @@ void mca_free_tc_tbl_by_lcid(uint16_t lcid)
 {
     uint8_t idx;
 
-    if(lcid)
-    {
+    if(lcid) {
         idx = mca_cb.tc.lcid_tbl[lcid - L2CAP_BASE_APPL_CID];
 
-        if(idx < MCA_NUM_TC_TBL)
-        {
+        if(idx < MCA_NUM_TC_TBL) {
             mca_cb.tc.tc_tbl[idx].state = MCA_TC_ST_UNUSED;
         }
     }
@@ -259,16 +246,12 @@ void mca_set_cfg_by_tbl(tL2CAP_CFG_INFO *p_cfg, tMCA_TC_TBL *p_tbl)
     const tL2CAP_FCR_OPTS *p_opt;
     tMCA_FCS_OPT    fcs = MCA_FCS_NONE;
 
-    if(p_tbl->tcid == MCA_CTRL_TCID)
-    {
+    if(p_tbl->tcid == MCA_CTRL_TCID) {
         p_opt = &mca_l2c_fcr_opts_def;
-    }
-    else
-    {
+    } else {
         p_dcb = mca_dcb_by_hdl(p_tbl->cb_idx);
 
-        if(p_dcb)
-        {
+        if(p_dcb) {
             p_opt = &p_dcb->p_chnl_cfg->fcr_opt;
             fcs   = p_dcb->p_chnl_cfg->fcs;
         }
@@ -280,8 +263,7 @@ void mca_set_cfg_by_tbl(tL2CAP_CFG_INFO *p_cfg, tMCA_TC_TBL *p_tbl)
     p_cfg->fcr_present = TRUE;
     wm_memcpy(&p_cfg->fcr, p_opt, sizeof(tL2CAP_FCR_OPTS));
 
-    if(fcs & MCA_FCS_PRESNT_MASK)
-    {
+    if(fcs & MCA_FCS_PRESNT_MASK) {
         p_cfg->fcs_present = TRUE;
         p_cfg->fcs = (fcs & MCA_FCS_USE_MASK);
     }
@@ -312,14 +294,12 @@ void mca_tc_close_ind(tMCA_TC_TBL *p_tbl, uint16_t reason)
                     p_tbl->tcid, p_tbl->cb_idx, p_tbl->state);
 
     /* Check if the transport channel is in use */
-    if(p_tbl->state == MCA_TC_ST_UNUSED)
-    {
+    if(p_tbl->state == MCA_TC_ST_UNUSED) {
         return;
     }
 
     /* clear mca_tc_tbl entry */
-    if(p_tbl->cfg_flags & MCA_L2C_CFG_DISCN_INT)
-    {
+    if(p_tbl->cfg_flags & MCA_L2C_CFG_DISCN_INT) {
         close.param = MCA_INT;
     }
 
@@ -327,19 +307,16 @@ void mca_tc_close_ind(tMCA_TC_TBL *p_tbl, uint16_t reason)
     p_tbl->peer_mtu = L2CAP_DEFAULT_MTU;
 
     /* if control channel, notify ccb that channel close */
-    if(p_tbl->tcid == MCA_CTRL_TCID)
-    {
+    if(p_tbl->tcid == MCA_CTRL_TCID) {
         p_ccb = mca_ccb_by_hdl((tMCA_CL)p_tbl->cb_idx);
         mca_ccb_event(p_ccb, MCA_CCB_LL_CLOSE_EVT, (tMCA_CCB_EVT *)&close);
     }
     /* notify dcb that channel close */
-    else
-    {
+    else {
         /* look up dcb  */
         p_dcb = mca_dcb_by_hdl(p_tbl->cb_idx);
 
-        if(p_dcb != NULL)
-        {
+        if(p_dcb != NULL) {
             mca_dcb_event(p_dcb, MCA_DCB_TC_CLOSE_EVT, (tMCA_DCB_EVT *) &close);
         }
     }
@@ -371,26 +348,22 @@ void mca_tc_open_ind(tMCA_TC_TBL *p_tbl)
      * MCA_ACP, if ACP */
     open.param = MCA_INT;
 
-    if(p_tbl->cfg_flags & MCA_L2C_CFG_CONN_ACP)
-    {
+    if(p_tbl->cfg_flags & MCA_L2C_CFG_CONN_ACP) {
         open.param = MCA_ACP;
     }
 
     /* if control channel, notify ccb that channel open */
-    if(p_tbl->tcid == MCA_CTRL_TCID)
-    {
+    if(p_tbl->tcid == MCA_CTRL_TCID) {
         p_ccb = mca_ccb_by_hdl((tMCA_CL)p_tbl->cb_idx);
         mca_ccb_event(p_ccb, MCA_CCB_LL_OPEN_EVT, (tMCA_CCB_EVT *)&open);
     }
     /* must be data channel, notify dcb that channel open */
-    else
-    {
+    else {
         /* look up dcb */
         p_dcb = mca_dcb_by_hdl(p_tbl->cb_idx);
 
         /* put lcid in event data */
-        if(p_dcb != NULL)
-        {
+        if(p_dcb != NULL) {
             mca_dcb_event(p_dcb, MCA_DCB_TC_OPEN_EVT, (tMCA_DCB_EVT *) &open);
         }
     }
@@ -418,19 +391,16 @@ void mca_tc_cong_ind(tMCA_TC_TBL *p_tbl, uint8_t is_congested)
     MCA_TRACE_DEBUG("%s() - tcid: %d, cb_idx: %d", __func__, p_tbl->tcid, p_tbl->cb_idx);
 
     /* if control channel, notify ccb of congestion */
-    if(p_tbl->tcid == MCA_CTRL_TCID)
-    {
+    if(p_tbl->tcid == MCA_CTRL_TCID) {
         p_ccb = mca_ccb_by_hdl((tMCA_CL)p_tbl->cb_idx);
         mca_ccb_event(p_ccb, MCA_CCB_LL_CONG_EVT, (tMCA_CCB_EVT *) &is_congested);
     }
     /* notify dcb that channel open */
-    else
-    {
+    else {
         /* look up dcb by cb_idx */
         p_dcb = mca_dcb_by_hdl(p_tbl->cb_idx);
 
-        if(p_dcb != NULL)
-        {
+        if(p_dcb != NULL) {
             mca_dcb_event(p_dcb, MCA_DCB_TC_CONG_EVT, (tMCA_DCB_EVT *) &is_congested);
         }
     }
@@ -458,64 +428,49 @@ void mca_tc_data_ind(tMCA_TC_TBL *p_tbl, BT_HDR *p_buf)
     MCA_TRACE_DEBUG("%s() - tcid: %d, cb_idx: %d", __func__, p_tbl->tcid, p_tbl->cb_idx);
 
     /* if control channel, handle control message */
-    if(p_tbl->tcid == MCA_CTRL_TCID)
-    {
+    if(p_tbl->tcid == MCA_CTRL_TCID) {
         p_ccb = mca_ccb_by_hdl((tMCA_CL)p_tbl->cb_idx);
 
-        if(p_ccb)
-        {
+        if(p_ccb) {
             p = (uint8_t *)(p_buf + 1) + p_buf->offset;
 
             /* all the request opcode has bit 0 set. response code has bit 0 clear */
-            if((*p) & 0x01)
-            {
+            if((*p) & 0x01) {
                 event = MCA_CCB_MSG_REQ_EVT;
             }
 
-            if(*p < MCA_NUM_STANDARD_OPCODE)
-            {
-                if(p_buf->len != mca_std_msg_len[*p])
-                {
+            if(*p < MCA_NUM_STANDARD_OPCODE) {
+                if(p_buf->len != mca_std_msg_len[*p]) {
                     MCA_TRACE_ERROR("$s() - opcode: %d required len: %d, got len: %d"
                                     , __func__, *p, mca_std_msg_len[*p], p_buf->len);
                     rej_rsp_code = MCA_RSP_BAD_PARAM;
                 }
+            } else if((*p >= MCA_FIRST_SYNC_OP) && (*p <= MCA_LAST_SYNC_OP)) {
+                MCA_TRACE_ERROR("%s() - unsupported SYNC opcode: %d len:%d"
+                                , __func__, *p, p_buf->len);
+                /* reject unsupported request */
+                rej_rsp_code = MCA_RSP_NO_SUPPORT;
+            } else {
+                MCA_TRACE_ERROR("%s() - bad opcode: %d len:%d", __func__, *p, p_buf->len);
+                /* reject unsupported request */
+                rej_rsp_code = MCA_RSP_BAD_OPCODE;
             }
-            else
-                if((*p >= MCA_FIRST_SYNC_OP) && (*p <= MCA_LAST_SYNC_OP))
-                {
-                    MCA_TRACE_ERROR("%s() - unsupported SYNC opcode: %d len:%d"
-                                    , __func__, *p, p_buf->len);
-                    /* reject unsupported request */
-                    rej_rsp_code = MCA_RSP_NO_SUPPORT;
-                }
-                else
-                {
-                    MCA_TRACE_ERROR("%s() - bad opcode: %d len:%d", __func__, *p, p_buf->len);
-                    /* reject unsupported request */
-                    rej_rsp_code = MCA_RSP_BAD_OPCODE;
-                }
 
             p_buf->layer_specific = rej_rsp_code;
             /* forward the request/response to state machine */
             mca_ccb_event(p_ccb, event, (tMCA_CCB_EVT *) p_buf);
         } /* got a valid ccb */
-        else
-        {
+        else {
             GKI_freebuf(p_buf);
         }
     }
     /* else send event to dcb */
-    else
-    {
+    else {
         p_dcb = mca_dcb_by_hdl(p_tbl->cb_idx);
 
-        if(p_dcb != NULL)
-        {
+        if(p_dcb != NULL) {
             mca_dcb_event(p_dcb, MCA_DCB_TC_DATA_EVT, (tMCA_DCB_EVT *) p_buf);
-        }
-        else
-        {
+        } else {
             GKI_freebuf(p_buf);
         }
     }
@@ -536,10 +491,8 @@ tMCA_RCB *mca_rcb_alloc(tMCA_REG *p_reg)
     int     i;
     tMCA_RCB *p_rcb = NULL;
 
-    for(i = 0; i < MCA_NUM_REGS; i++)
-    {
-        if(mca_cb.rcb[i].p_cback == NULL)
-        {
+    for(i = 0; i < MCA_NUM_REGS; i++) {
+        if(mca_cb.rcb[i].p_cback == NULL) {
             p_rcb = &mca_cb.rcb[i];
             wm_memcpy(&p_rcb->reg, p_reg, sizeof(tMCA_REG));
             break;
@@ -565,27 +518,22 @@ void mca_rcb_dealloc(tMCA_HANDLE handle)
     tMCA_RCB *p_rcb;
     tMCA_CCB *p_ccb;
 
-    if(handle && (handle <= MCA_NUM_REGS))
-    {
+    if(handle && (handle <= MCA_NUM_REGS)) {
         handle--;
         p_rcb = &mca_cb.rcb[handle];
 
-        if(p_rcb->p_cback)
-        {
+        if(p_rcb->p_cback) {
             p_ccb = &mca_cb.ccb[handle * MCA_NUM_LINKS];
 
             /* check if all associated CCB are disconnected */
-            for(i = 0; i < MCA_NUM_LINKS; i++, p_ccb++)
-            {
-                if(p_ccb->p_rcb)
-                {
+            for(i = 0; i < MCA_NUM_LINKS; i++, p_ccb++) {
+                if(p_ccb->p_rcb) {
                     done = FALSE;
                     mca_ccb_event(p_ccb, MCA_CCB_API_DISCONNECT_EVT, NULL);
                 }
             }
 
-            if(done)
-            {
+            if(done) {
                 wm_memset(p_rcb, 0, sizeof(tMCA_RCB));
                 MCA_TRACE_DEBUG("%s() - reset MCA_RCB index=%d", __func__, handle);
             }
@@ -623,8 +571,7 @@ tMCA_RCB *mca_rcb_by_handle(tMCA_HANDLE handle)
 {
     tMCA_RCB *p_rcb = NULL;
 
-    if(handle && (handle <= MCA_NUM_REGS) && mca_cb.rcb[handle - 1].p_cback)
-    {
+    if(handle && (handle <= MCA_NUM_REGS) && mca_cb.rcb[handle - 1].p_cback) {
         p_rcb = &mca_cb.rcb[handle - 1];
     }
 
@@ -644,8 +591,7 @@ uint8_t mca_is_valid_dep_id(tMCA_RCB *p_rcb, tMCA_DEP dep)
 {
     uint8_t valid = FALSE;
 
-    if(dep < MCA_NUM_DEPS && p_rcb->dep[dep].p_data_cback)
-    {
+    if(dep < MCA_NUM_DEPS && p_rcb->dep[dep].p_data_cback) {
         valid = TRUE;
     }
 

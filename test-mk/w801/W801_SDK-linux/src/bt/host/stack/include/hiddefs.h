@@ -29,8 +29,7 @@
 /*
 ** tHID_STATUS: HID result codes, returned by HID and device and host functions.
 */
-enum
-{
+enum {
     HID_SUCCESS,
     HID_ERR_NOT_REGISTERED,
     HID_ERR_ALREADY_REGISTERED,
@@ -129,16 +128,14 @@ typedef uint8_t tHID_STATUS;
 #define HID_SDP_DESCRIPTOR_REPORT                   (0x22)
 #define HID_SDP_DESCRIPTOR_PHYSICAL                 (0x23)
 
-typedef struct desc_info
-{
+typedef struct desc_info {
     uint16_t dl_len;
     uint8_t *dsc_list;
 } tHID_DEV_DSCP_INFO;
 
 #define HID_SSR_PARAM_INVALID    0xffff
 
-typedef struct sdp_info
-{
+typedef struct sdp_info {
     char svc_name[HID_MAX_SVC_NAME_LEN];   /*Service Name */
     char svc_descr[HID_MAX_SVC_DESCR_LEN]; /*Service Description*/
     char prov_name[HID_MAX_PROV_NAME_LEN]; /*Provider Name.*/

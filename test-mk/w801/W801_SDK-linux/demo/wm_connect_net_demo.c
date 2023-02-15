@@ -2,6 +2,7 @@
 #include "wm_include.h"
 #include "wm_demo.h"
 #include "wm_wifi_oneshot.h"
+#include "wm_param.h"
 
 #if DEMO_CONNECT_NET
 static void con_net_status_changed_event(u8 status )
@@ -58,6 +59,20 @@ int demo_webserver_config(void)
     return 0;
 }
 
+int demo_ble_config(void)
+{
+    printf("BLE config mode \n");
+#if TLS_CONFIG_BT
+	extern int demo_bt_enable();
+    tls_netif_add_status_event(con_net_status_changed_event);
+	demo_bt_enable();
+	tls_os_time_delay(HZ/2);
+	tls_wifi_set_oneshot_flag(4);	
+#endif
+    return 0;
+}
+
+
 
 //acitve connect to specified AP, use command as: t-connet("ssid","pwd");
 int demo_connect_net(char *ssid, char *pwd)
@@ -99,5 +114,63 @@ int demo_connect_net(char *ssid, char *pwd)
 
     return WM_SUCCESS;
 }
+
+//acitve connect to specified AP, use command as: t-connet_ss("ssid","pwd", 10, 0, 0);
+int demo_connect_net_with_specific_info(char *ssid, char *pwd, u32 timeout, u32 pci_en, u32 scan_mode)
+{
+    struct tls_param_ip *ip_param = NULL;
+    u8 wireless_protocol = 0;
+
+
+    if (!ssid)
+    {
+        return WM_FAILED;
+    }
+
+    printf("\nssid:%s\n", ssid);
+    printf("password=%s\n", pwd);
+    tls_wifi_disconnect();
+
+	/*clear quick connect information because of scan_mode */
+	{
+		struct tls_param_quick_connect quick_connect;
+		quick_connect.quick_connect_en = FALSE;
+		quick_connect.chanId = 255;
+
+		tls_param_set(TLS_PARAM_ID_QUICK_CONNECT, &quick_connect, TRUE);
+	}
+
+    tls_param_get(TLS_PARAM_ID_WPROTOCOL, (void *) &wireless_protocol, TRUE);
+    if (TLS_PARAM_IEEE80211_INFRA != wireless_protocol)
+    {
+        tls_wifi_softap_destroy();
+        wireless_protocol = TLS_PARAM_IEEE80211_INFRA;
+        tls_param_set(TLS_PARAM_ID_WPROTOCOL, (void *) &wireless_protocol, FALSE);
+    }
+
+    tls_wifi_set_oneshot_flag(0);
+
+    ip_param = tls_mem_alloc(sizeof(struct tls_param_ip));
+    if (ip_param)
+    {
+        tls_param_get(TLS_PARAM_ID_IP, ip_param, FALSE);
+        ip_param->dhcp_enable = TRUE;
+        tls_param_set(TLS_PARAM_ID_IP, ip_param, FALSE);
+        tls_mem_free(ip_param);
+    }
+
+    tls_netif_add_status_event(con_net_status_changed_event);
+	/*configure if sta can connect open/wep AP*/
+	tls_wifi_cfg_connect_pci(pci_en);
+	/*configure the timeout that module connect AP during scanning*/
+	tls_wifi_cfg_connect_timeout(timeout);
+	/*configure if the module immediately connect AP after scan specific AP*/
+	tls_wifi_cfg_connect_scan_mode(scan_mode);
+    tls_wifi_connect((u8 *)ssid, strlen(ssid), (u8 *)pwd, strlen(pwd));
+    printf("\nplease wait connect net......\n");
+
+    return WM_SUCCESS;
+}
+
 #endif
 

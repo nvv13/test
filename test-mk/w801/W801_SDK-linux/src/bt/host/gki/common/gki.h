@@ -80,12 +80,11 @@
 */
 typedef void (TIMER_CBACK)(void *p_tle);
 #ifndef TIMER_PARAM_TYPE
-    #define TIMER_PARAM_TYPE    uint32_t
+#define TIMER_PARAM_TYPE    uint32_t
 #endif
 /* Define a timer list entry
 */
-typedef struct _tle
-{
+typedef struct _tle {
     struct _tle  *p_next;
     struct _tle  *p_prev;
     TIMER_CBACK  *p_cback;
@@ -99,8 +98,7 @@ typedef struct _tle
 
 /* Define a timer list queue
 */
-typedef struct
-{
+typedef struct {
     TIMER_LIST_ENT   *p_first;
     TIMER_LIST_ENT   *p_last;
 } TIMER_LIST_Q;
@@ -109,8 +107,7 @@ typedef struct
 /***********************************************************************
 ** This queue is a general purpose buffer queue, for application use.
 */
-typedef struct
-{
+typedef struct {
     void    *p_first;
     void    *p_last;
     uint16_t   count;
@@ -121,7 +118,7 @@ typedef struct
 /* Task constants
 */
 #ifndef TASKPTR
-    typedef void (*TASKPTR)(uint32_t);
+typedef void (*TASKPTR)(uint32_t);
 #endif
 
 
@@ -148,6 +145,7 @@ extern void    GKI_shutdown(void);
 extern int8_t   *GKI_map_taskname(uint8_t);
 extern void    GKI_run(void *);
 extern void    GKI_stop(void);
+extern void    GKI_event_process(uint32_t task_event);
 
 /* To send buffers and events between tasks
 */
@@ -166,6 +164,8 @@ extern void GKI_free_and_reset_buf(void **p_ptr);
 extern uint16_t  GKI_poolcount(uint8_t);
 extern uint16_t  GKI_poolfreecount(uint8_t);
 extern uint16_t  GKI_poolutilization(uint8_t);
+extern void GKI_dealloc_free_queue(void);
+
 
 
 /* User buffer queue management
@@ -208,7 +208,7 @@ extern void    GKI_disable(void);
 /* Allocate (Free) memory from an OS
 */
 #if 0
-extern void *GKI_os_malloc_debug(uint32_t size, const char*file , int line);
+extern void *GKI_os_malloc_debug(uint32_t size, const char *file, int line);
 #define GKI_os_malloc(size)   GKI_os_malloc_debug(size, __FILE__, __LINE__)
 #else
 extern void *GKI_os_malloc(uint32_t size);

@@ -32,7 +32,7 @@
 #include "oi_stddefs.h"
 
 #if defined(USE_NATIVE_MEMCPY) || defined(USE_NATIVE_MALLOC)
-    #include <string.h>
+#include <string.h>
 #endif
 
 /** \addtogroup Misc Miscellaneous APIs */

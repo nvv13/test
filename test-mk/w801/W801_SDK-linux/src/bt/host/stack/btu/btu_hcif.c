@@ -49,7 +49,7 @@
 // TODO(zachoverflow): remove this horrible hack
 #include "btu.h"
 #ifdef BLUEDROID70
-    extern fixed_queue_t *btu_hci_msg_queue;
+extern fixed_queue_t *btu_hci_msg_queue;
 #endif
 //Counter to track number of HCI command timeout
 static int num_hci_cmds_timed_out;
@@ -111,31 +111,32 @@ static void btu_hcif_rem_oob_request_evt(uint8_t *p);
 
 static void btu_hcif_simple_pair_complete_evt(uint8_t *p);
 #if L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE
-    static void btu_hcif_enhanced_flush_complete_evt(void);
+static void btu_hcif_enhanced_flush_complete_evt(void);
 #endif
 
 #if (BTM_SSR_INCLUDED == TRUE)
-    static void btu_hcif_ssr_evt(uint8_t *p, uint16_t evt_len);
+static void btu_hcif_ssr_evt(uint8_t *p, uint16_t evt_len);
 #endif /* BTM_SSR_INCLUDED == TRUE */
 
 #if BLE_INCLUDED == TRUE
-    static void btu_ble_ll_conn_complete_evt(uint8_t *p, uint16_t evt_len);
-    static void btu_ble_process_adv_pkt(uint8_t *p);
-    static void btu_ble_read_remote_feat_evt(uint8_t *p);
-    static void btu_ble_ll_conn_param_upd_evt(uint8_t *p, uint16_t evt_len);
-    static void btu_ble_proc_ltk_req(uint8_t *p);
-    static void btu_hcif_encryption_key_refresh_cmpl_evt(uint8_t *p);
-    static void btu_ble_data_length_change_evt(uint8_t *p, uint16_t evt_len);
-    #if (BLE_LLT_INCLUDED == TRUE)
-        static void btu_ble_rc_param_req_evt(uint8_t *p);
-    #endif
-    #if (defined BLE_PRIVACY_SPT && BLE_PRIVACY_SPT == TRUE)
-        static void btu_ble_proc_enhanced_conn_cmpl(uint8_t *p, uint16_t evt_len);
-    #endif
+static void btu_ble_ll_conn_complete_evt(uint8_t *p, uint16_t evt_len);
+static void btu_ble_process_adv_pkt(uint8_t *p);
+static void btu_ble_read_remote_feat_evt(uint8_t *p);
+static void btu_ble_ll_conn_param_upd_evt(uint8_t *p, uint16_t evt_len);
+static void btu_ble_proc_ltk_req(uint8_t *p);
+static void btu_hcif_encryption_key_refresh_cmpl_evt(uint8_t *p);
+static void btu_ble_data_length_change_evt(uint8_t *p, uint16_t evt_len);
+#if (BLE_LLT_INCLUDED == TRUE)
+static void btu_ble_rc_param_req_evt(uint8_t *p);
+#endif
+#if (defined BLE_PRIVACY_SPT && BLE_PRIVACY_SPT == TRUE)
+static void btu_ble_proc_enhanced_conn_cmpl(uint8_t *p, uint16_t evt_len);
+#endif
 
 #endif
 
 void btu_hcif_cmd_timeout(void *p_data);
+extern void btm_sco_process_num_completed_pkts(uint8_t *p);
 
 /*******************************************************************************
 **
@@ -156,8 +157,7 @@ static void btu_hcif_store_cmd(uint8_t controller_id, BT_HDR *p_buf)
     uint8_t   *p;
 
     /* Validate controller ID */
-    if(controller_id >= BTU_MAX_LOCAL_CTRLS)
-    {
+    if(controller_id >= BTU_MAX_LOCAL_CTRLS) {
         return;
     }
 
@@ -167,14 +167,12 @@ static void btu_hcif_store_cmd(uint8_t controller_id, BT_HDR *p_buf)
     STREAM_TO_UINT16(opcode, p);
 
     /* don't do anything for certain commands */
-    if((opcode == HCI_RESET) || (opcode == HCI_HOST_NUM_PACKETS_DONE))
-    {
+    if((opcode == HCI_RESET) || (opcode == HCI_HOST_NUM_PACKETS_DONE)) {
         return;
     }
 
     /* allocate buffer (HCI_GET_CMD_BUF will either get a buffer from HCI_CMD_POOL or from 'best-fit' pool) */
-    if((p_cmd = HCI_GET_CMD_BUF(p_buf->len + p_buf->offset - HCIC_PREAMBLE_SIZE)) == NULL)
-    {
+    if((p_cmd = HCI_GET_CMD_BUF(p_buf->len + p_buf->offset - HCIC_PREAMBLE_SIZE)) == NULL) {
         return;
     }
 
@@ -183,12 +181,11 @@ static void btu_hcif_store_cmd(uint8_t controller_id, BT_HDR *p_buf)
 
     /* If vendor specific save the callback function */
     if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC
-        #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
             || (opcode == HCI_BLE_RAND)
             || (opcode == HCI_BLE_ENCRYPT)
-        #endif
-      )
-    {
+#endif
+      ) {
         wm_memcpy((uint8_t *)(p_cmd + 1), (uint8_t *)(p_buf + 1), sizeof(void *));
     }
 
@@ -198,11 +195,10 @@ static void btu_hcif_store_cmd(uint8_t controller_id, BT_HDR *p_buf)
     GKI_enqueue(&(p_hci_cmd_cb->cmd_cmpl_q), p_cmd);
 
     /* start timer */
-    if(BTU_CMD_CMPL_TIMEOUT > 0)
-    {
-        #if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
+    if(BTU_CMD_CMPL_TIMEOUT > 0) {
+#if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
         p_hci_cmd_cb->checked_hcisu = FALSE;
-        #endif
+#endif
         p_hci_cmd_cb->cmd_cmpl_timer.p_cback = (TIMER_CBACK *)&btu_hcif_cmd_timeout;
         p_hci_cmd_cb->cmd_cmpl_timer.param = (TIMER_PARAM_TYPE)controller_id;
         btu_start_timer(&(p_hci_cmd_cb->cmd_cmpl_timer),
@@ -224,15 +220,14 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
 {
     uint8_t   *p = (uint8_t *)(p_msg + 1) + p_msg->offset;
     uint8_t   hci_evt_code, hci_evt_len;
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     uint8_t   ble_sub_code;
-    #endif
+#endif
     STREAM_TO_UINT8(hci_evt_code, p);
     STREAM_TO_UINT8(hci_evt_len, p);
-
     HCI_TRACE_EVENT("HCI(event=0x%02x) len = %d)\r\n", hci_evt_code,  hci_evt_len);
-    switch(hci_evt_code)
-    {
+
+    switch(hci_evt_code) {
         case HCI_INQUIRY_COMP_EVT:
             btu_hcif_inquiry_comp_evt(p);
             break;
@@ -272,12 +267,12 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
         case HCI_ENCRYPTION_CHANGE_EVT:
             btu_hcif_encryption_change_evt(p);
             break;
-            #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
 
         case HCI_ENCRYPTION_KEY_REFRESH_COMP_EVT:
             btu_hcif_encryption_key_refresh_cmpl_evt(p);
             break;
-            #endif
+#endif
 
         case HCI_CHANGE_CONN_LINK_KEY_EVT:
             btu_hcif_change_conn_link_key_evt(p);
@@ -386,12 +381,12 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
         case HCI_ESCO_CONNECTION_CHANGED_EVT:
             btu_hcif_esco_connection_chg_evt(p);
             break;
-            #if (BTM_SSR_INCLUDED == TRUE)
+#if (BTM_SSR_INCLUDED == TRUE)
 
         case HCI_SNIFF_SUB_RATE_EVT:
             btu_hcif_ssr_evt(p, hci_evt_len);
             break;
-            #endif  /* BTM_SSR_INCLUDED == TRUE */
+#endif  /* BTM_SSR_INCLUDED == TRUE */
 
         case HCI_RMT_HOST_SUP_FEAT_NOTIFY_EVT:
             btu_hcif_host_support_evt(p);
@@ -432,20 +427,19 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
         case HCI_LINK_SUPER_TOUT_CHANGED_EVT:
             btu_hcif_link_super_tout_evt(p);
             break;
-            #if L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE
+#if L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE
 
         case HCI_ENHANCED_FLUSH_COMPLETE_EVT:
             btu_hcif_enhanced_flush_complete_evt();
             break;
-            #endif
-            #if (BLE_INCLUDED == TRUE)
+#endif
+#if (BLE_INCLUDED == TRUE)
 
         case HCI_BLE_EVENT:
             STREAM_TO_UINT8(ble_sub_code, p);
             HCI_TRACE_EVENT("BLE HCI(id=%d) event = 0x%02x)", hci_evt_code,  ble_sub_code);
 
-            switch(ble_sub_code)
-            {
+            switch(ble_sub_code) {
                 case HCI_BLE_ADV_PKT_RPT_EVT: /* result of inquiry */
                     btu_ble_process_adv_pkt(p);
                     break;
@@ -465,18 +459,18 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
                 case HCI_BLE_LTK_REQ_EVT: /* received only at slave device */
                     btu_ble_proc_ltk_req(p);
                     break;
-                    #if (defined BLE_PRIVACY_SPT && BLE_PRIVACY_SPT == TRUE)
+#if (defined BLE_PRIVACY_SPT && BLE_PRIVACY_SPT == TRUE)
 
                 case HCI_BLE_ENHANCED_CONN_COMPLETE_EVT:
                     btu_ble_proc_enhanced_conn_cmpl(p, hci_evt_len);
                     break;
-                    #endif
-                    #if (BLE_LLT_INCLUDED == TRUE)
+#endif
+#if (BLE_LLT_INCLUDED == TRUE)
 
                 case HCI_BLE_RC_PARAM_REQ_EVT:
                     btu_ble_rc_param_req_evt(p);
                     break;
-                    #endif
+#endif
 
                 case HCI_BLE_DATA_LENGTH_CHANGE_EVT:
                     btu_ble_data_length_change_evt(p, hci_evt_len);
@@ -484,7 +478,7 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
             }
 
             break;
-            #endif /* BLE_INCLUDED */
+#endif /* BLE_INCLUDED */
 
         case HCI_VENDOR_SPECIFIC_EVT:
             btm_vendor_specific_evt(p, hci_evt_len);
@@ -506,10 +500,9 @@ void btu_hcif_process_event(uint8_t controller_id, BT_HDR *p_msg)
 *******************************************************************************/
 void btu_hcif_send_cmd(uint8_t controller_id, BT_HDR *p_buf)
 {
-    #ifdef BLUEDROID70
+#ifdef BLUEDROID70
 
-    if(!p_buf)
-    {
+    if(!p_buf) {
         return;
     }
 
@@ -521,12 +514,11 @@ void btu_hcif_send_cmd(uint8_t controller_id, BT_HDR *p_buf)
     // Eww...horrible hackery here
     /* If command was a VSC, then extract command_complete callback */
     if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC
-        #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
             || (opcode == HCI_BLE_RAND)
             || (opcode == HCI_BLE_ENCRYPT)
-        #endif
-      )
-    {
+#endif
+      ) {
         vsc_callback = *((void **)(p_buf + 1));
     }
 
@@ -535,21 +527,21 @@ void btu_hcif_send_cmd(uint8_t controller_id, BT_HDR *p_buf)
                     btu_hcif_command_complete_evt,
                     btu_hcif_command_status_evt,
                     vsc_callback);
-    #if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
+#if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
     btu_check_bt_sleep();
-    #endif
-    #else
+#endif
+#else
     tHCI_CMD_CB *p_hci_cmd_cb = &(btu_cb.hci_cmd_cb[controller_id]);
-    uint8_t *q;
-    #if ((L2CAP_HOST_FLOW_CTRL == TRUE)||defined(HCI_TESTER))
+//    uint8_t *q;
+#if ((L2CAP_HOST_FLOW_CTRL == TRUE)||defined(HCI_TESTER))
     uint8_t *pp;
     uint16_t code;
-    #endif
-    HCI_TRACE_DEBUG(">>>1,btu_hcif_send_cmd(%d)(id=%d)(q=%d)(ptr=%08x)\r\n", p_hci_cmd_cb->cmd_window, controller_id, p_hci_cmd_cb->cmd_xmit_q.count, p_buf);
+#endif
+    HCI_TRACE_DEBUG(">>>1,btu_hcif_send_cmd(%d)(id=%d)(q=%d)(ptr=%08x)\r\n", p_hci_cmd_cb->cmd_window,
+                    controller_id, p_hci_cmd_cb->cmd_xmit_q.count, p_buf);
 
     /* If there are already commands in the queue, then enqueue this command */
-    if((p_buf) && (p_hci_cmd_cb->cmd_xmit_q.count))
-    {
+    if((p_buf) && (p_hci_cmd_cb->cmd_xmit_q.count)) {
         //HCI_TRACE_DEBUG("enqueue p_buf...\n");
         GKI_enqueue(&(p_hci_cmd_cb->cmd_xmit_q), p_buf);
         p_buf = NULL;
@@ -558,23 +550,19 @@ void btu_hcif_send_cmd(uint8_t controller_id, BT_HDR *p_buf)
     /* Allow for startup case, where no acks may be received */
     if(((controller_id == LOCAL_BR_EDR_CONTROLLER_ID)
             && (p_hci_cmd_cb->cmd_window == 0)
-            && (btm_cb.devcb.state == BTM_DEV_STATE_WAIT_RESET_CMPLT)))
-    {
+            && (btm_cb.devcb.state == BTM_DEV_STATE_WAIT_RESET_CMPLT))) {
         p_hci_cmd_cb->cmd_window = p_hci_cmd_cb->cmd_xmit_q.count + 1;
     }
 
     /* See if we can send anything */
-    while(p_hci_cmd_cb->cmd_window != 0)
-    {
-        if(!p_buf)
-        {
+    while(p_hci_cmd_cb->cmd_window != 0) {
+        if(!p_buf) {
             p_buf = (BT_HDR *)GKI_dequeue(&(p_hci_cmd_cb->cmd_xmit_q));
         }
 
-        if(p_buf)
-        {
+        if(p_buf) {
             btu_hcif_store_cmd(controller_id, p_buf);
-            #if ((L2CAP_HOST_FLOW_CTRL == TRUE)||defined(HCI_TESTER))
+#if ((L2CAP_HOST_FLOW_CTRL == TRUE)||defined(HCI_TESTER))
             pp = (uint8_t *)(p_buf + 1) + p_buf->offset;
             STREAM_TO_UINT16(code, pp);
 
@@ -583,46 +571,39 @@ void btu_hcif_send_cmd(uint8_t controller_id, BT_HDR *p_buf)
              * host flow control does not receive an event back from controller
              */
             if(code != HCI_HOST_NUM_PACKETS_DONE)
-            #endif
+#endif
                 p_hci_cmd_cb->cmd_window--;
 
-            if(controller_id == LOCAL_BR_EDR_CONTROLLER_ID)
-            {
+            if(controller_id == LOCAL_BR_EDR_CONTROLLER_ID) {
                 HCI_CMD_TO_LOWER(p_buf);
-            }
-            else
-            {
+            } else {
                 /* Unknown controller */
                 HCI_TRACE_DEBUG("BTU HCI(ctrl id=%d) controller ID not recognized\r\n", controller_id);
                 GKI_freebuf(p_buf);;
             }
 
             p_buf = NULL;
-        }
-        else
-        {
+        } else {
             HCI_TRACE_DEBUG(">>>3.No data\r\n");
             break;
         }
     }
 
-    if(p_buf)
-    {
+    if(p_buf) {
         HCI_TRACE_DEBUG(">>>%s [%s] line:%d, sending out...\r\n", __FILE__, __FUNCTION__, __LINE__);
         GKI_enqueue(&(p_hci_cmd_cb->cmd_xmit_q), p_buf);
     }
 
-    #if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
+#if (defined(HCILP_INCLUDED) && HCILP_INCLUDED == TRUE)
 
-    if(controller_id == LOCAL_BR_EDR_CONTROLLER_ID)
-    {
+    if(controller_id == LOCAL_BR_EDR_CONTROLLER_ID) {
         /* check if controller can go to sleep */
         //HCI_TRACE_DEBUG("run into btu_check_bt_sleep, %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
         btu_check_bt_sleep();
     }
 
-    #endif
-    #endif
+#endif
+#endif
 }
 
 /*******************************************************************************
@@ -647,8 +628,7 @@ void btu_hcif_send_host_rdy_for_data(void)
     /* Get the SCO numbers */
     /* No SCO for now ?? */
 
-    if(num_ents)
-    {
+    if(num_ents) {
         btsnd_hcic_host_num_xmitted_pkts(num_ents, handles, num_pkts);
     }
 }
@@ -730,9 +710,9 @@ static void btu_hcif_connection_comp_evt(uint8_t *p)
     BD_ADDR     bda;
     uint8_t       link_type;
     uint8_t       enc_mode;
-    #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
     tBTM_ESCO_DATA  esco_data;
-    #endif
+#endif
     STREAM_TO_UINT8(status, p);
     STREAM_TO_UINT16(handle, p);
     STREAM_TO_BDADDR(bda, p);
@@ -740,22 +720,20 @@ static void btu_hcif_connection_comp_evt(uint8_t *p)
     STREAM_TO_UINT8(enc_mode, p);
     handle = HCID_GET_HANDLE(handle);
 
-    if(link_type == HCI_LINK_TYPE_ACL)
-    {
+    if(link_type == HCI_LINK_TYPE_ACL) {
         btm_sec_connected(bda, handle, status, enc_mode);
         l2c_link_hci_conn_comp(status, handle, bda);
     }
 
-    #if BTM_SCO_INCLUDED == TRUE
-    else
-    {
+#if BTM_SCO_INCLUDED == TRUE
+    else {
         wm_memset(&esco_data, 0, sizeof(tBTM_ESCO_DATA));
         /* esco_data.link_type = HCI_LINK_TYPE_SCO; already zero */
         wm_memcpy(esco_data.bd_addr, bda, BD_ADDR_LEN);
         btm_sco_connected(status, bda, handle, &esco_data);
     }
 
-    #endif /* BTM_SCO_INCLUDED */
+#endif /* BTM_SCO_INCLUDED */
 }
 
 /*******************************************************************************
@@ -778,18 +756,16 @@ static void btu_hcif_connection_request_evt(uint8_t *p)
 
     /* Pass request to security manager to check connect filters before */
     /* passing request to l2cap */
-    if(link_type == HCI_LINK_TYPE_ACL)
-    {
+    if(link_type == HCI_LINK_TYPE_ACL) {
         btm_sec_conn_req(bda, dc);
     }
 
-    #if BTM_SCO_INCLUDED == TRUE
-    else
-    {
+#if BTM_SCO_INCLUDED == TRUE
+    else {
         btm_sco_conn_req(bda, dc, link_type);
     }
 
-    #endif /* BTM_SCO_INCLUDED */
+#endif /* BTM_SCO_INCLUDED */
 }
 
 /*******************************************************************************
@@ -809,17 +785,16 @@ static void btu_hcif_disconnection_comp_evt(uint8_t *p)
     STREAM_TO_UINT16(handle, p);
     STREAM_TO_UINT8(reason, p);
     handle = HCID_GET_HANDLE(handle);
-    #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
 
     /* If L2CAP doesn't know about it, send it to SCO */
-    if(!l2c_link_hci_disc_comp(handle, reason))
-    {
+    if(!l2c_link_hci_disc_comp(handle, reason)) {
         btm_sco_removed(handle, reason);
     }
 
-    #else
+#else
     l2c_link_hci_disc_comp(handle, reason);
-    #endif /* BTM_SCO_INCLUDED */
+#endif /* BTM_SCO_INCLUDED */
     /* Notify security manager */
     btm_sec_disconnected(handle, reason);
 }
@@ -899,6 +874,8 @@ static void btu_hcif_change_conn_link_key_evt(uint8_t *p)
     uint16_t  handle;
     STREAM_TO_UINT8(status, p);
     STREAM_TO_UINT16(handle, p);
+	UNUSED(status);
+	UNUSED(handle);
     HCI_TRACE_ERROR("!!!Impossible to run here(%s)...\r\n", __FUNCTION__);
     assert(0);
     //btm_acl_link_key_change (handle, status);
@@ -922,6 +899,9 @@ static void btu_hcif_master_link_key_comp_evt(uint8_t *p)
     STREAM_TO_UINT8(status, p);
     STREAM_TO_UINT16(handle, p);
     STREAM_TO_UINT8(key_flg, p);
+	UNUSED(status);
+	UNUSED(handle);
+	UNUSED(key_flg);
     HCI_TRACE_ERROR("!!!Impossible to run here(%s)...\r\n", __FUNCTION__);
     assert(0);
     //btm_sec_mkey_comp_event (handle, status, key_flg);
@@ -958,12 +938,9 @@ static void btu_hcif_read_rmt_ext_features_comp_evt(uint8_t *p)
     uint16_t handle;
     STREAM_TO_UINT8(status, p_cur);
 
-    if(status == HCI_SUCCESS)
-    {
+    if(status == HCI_SUCCESS) {
         btm_read_remote_ext_features_complete(p);
-    }
-    else
-    {
+    } else {
         STREAM_TO_UINT16(handle, p_cur);
         btm_read_remote_ext_features_failed(status, handle);
     }
@@ -1019,7 +996,7 @@ static void btu_hcif_qos_setup_comp_evt(uint8_t *p)
 *******************************************************************************/
 static void btu_hcif_esco_connection_comp_evt(uint8_t *p)
 {
-    #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
     tBTM_ESCO_DATA  data;
     uint16_t          handle;
     BD_ADDR         bda;
@@ -1035,7 +1012,7 @@ static void btu_hcif_esco_connection_comp_evt(uint8_t *p)
     STREAM_TO_UINT8(data.air_mode, p);
     wm_memcpy(data.bd_addr, bda, BD_ADDR_LEN);
     btm_sco_connected(status, bda, handle, &data);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1049,7 +1026,7 @@ static void btu_hcif_esco_connection_comp_evt(uint8_t *p)
 *******************************************************************************/
 static void btu_hcif_esco_connection_chg_evt(uint8_t *p)
 {
-    #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
     uint16_t  handle;
     uint16_t  tx_pkt_len;
     uint16_t  rx_pkt_len;
@@ -1064,7 +1041,7 @@ static void btu_hcif_esco_connection_chg_evt(uint8_t *p)
     STREAM_TO_UINT16(tx_pkt_len, p);
     btm_esco_proc_conn_chg(status, handle, tx_interval, retrans_window,
                            rx_pkt_len, tx_pkt_len);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1079,8 +1056,7 @@ static void btu_hcif_esco_connection_chg_evt(uint8_t *p)
 static void btu_hcif_hdl_command_complete(uint16_t opcode, uint8_t *p, uint16_t evt_len,
         void *p_cplt_cback)
 {
-    switch(opcode)
-    {
+    switch(opcode) {
         case HCI_RESET:
             btm_reset_complete();   /* BR/EDR */
             break;
@@ -1223,8 +1199,10 @@ static void btu_hcif_hdl_command_complete(uint16_t opcode, uint8_t *p, uint16_t 
         case HCI_BLE_TEST_END:
             btm_ble_test_command_complete(p);
             break;
+
         case HCI_BLE_SET_DATA_LENGTH:
             break;
+
         case HCI_BLE_READ_DEFAULT_DATA_LENGTH:
             btm_read_ble_suggested_default_data_length_complete(p, evt_len);
             break;
@@ -1259,8 +1237,7 @@ static void btu_hcif_hdl_command_complete(uint16_t opcode, uint8_t *p, uint16_t 
 #endif /* (BLE_INCLUDED == TRUE) */
 
         default:
-            if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC)
-            {
+            if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC) {
                 btm_vsc_complete(p, opcode, evt_len, (tBTM_CMPL_CB *)p_cplt_cback);
             }
 
@@ -1281,7 +1258,8 @@ static void btu_hcif_command_complete_evt_on_task(BT_HDR *event)
 {
     command_complete_hack_t *hack = (command_complete_hack_t *)&event->data[0];
     command_opcode_t opcode;
-    uint8_t *stream = hack->response->data + hack->response->offset + 3; // 2 to skip the event headers, 1 to skip the command credits
+    uint8_t *stream = hack->response->data + hack->response->offset +
+                      3; // 2 to skip the event headers, 1 to skip the command credits
     STREAM_TO_UINT16(opcode, stream);
     btu_hcif_hdl_command_complete(
                     opcode,
@@ -1311,36 +1289,32 @@ static void btu_hcif_command_complete_evt(uint8_t controller_id, uint8_t *p, uin
     BT_HDR      *p_cmd;
     void        *p_cplt_cback = NULL;
     STREAM_TO_UINT8(p_hci_cmd_cb->cmd_window, p);
-    #if (defined(HCI_MAX_SIMUL_CMDS) && (HCI_MAX_SIMUL_CMDS > 0))
+#if (defined(HCI_MAX_SIMUL_CMDS) && (HCI_MAX_SIMUL_CMDS > 0))
 
-    if(p_hci_cmd_cb->cmd_window > HCI_MAX_SIMUL_CMDS)
-    {
+    if(p_hci_cmd_cb->cmd_window > HCI_MAX_SIMUL_CMDS) {
         p_hci_cmd_cb->cmd_window = HCI_MAX_SIMUL_CMDS;
     }
 
-    #endif
+#endif
     STREAM_TO_UINT16(cc_opcode, p);
     evt_len -= 3;
 
     /* only do this for certain commands */
     if((cc_opcode != HCI_RESET) && (cc_opcode != HCI_HOST_NUM_PACKETS_DONE) &&
-            (cc_opcode != HCI_COMMAND_NONE))
-    {
+            (cc_opcode != HCI_COMMAND_NONE)) {
         /* dequeue and free stored command */
         /* always use cmd code check, when one cmd timeout waiting for cmd_cmpl,
            it'll cause the rest of the command goes in wrong order                  */
         p_cmd = (BT_HDR *) GKI_getfirst(&p_hci_cmd_cb->cmd_cmpl_q);
 
-        while(p_cmd)
-        {
+        while(p_cmd) {
             uint16_t opcode_dequeued;
             uint8_t  *p_dequeued;
             /* Make sure dequeued command is for the command_cplt received */
             p_dequeued = (uint8_t *)(p_cmd + 1) + p_cmd->offset;
             STREAM_TO_UINT16(opcode_dequeued, p_dequeued);
 
-            if(opcode_dequeued != cc_opcode)
-            {
+            if(opcode_dequeued != cc_opcode) {
                 /* opcode does not match, check next command in the queue */
                 p_cmd = (BT_HDR *) GKI_getnext(p_cmd);
                 continue;
@@ -1350,12 +1324,11 @@ static void btu_hcif_command_complete_evt(uint8_t controller_id, uint8_t *p, uin
 
             /* If command was a VSC, then extract command_complete callback */
             if((cc_opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC
-                #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
                     || (cc_opcode == HCI_BLE_RAND)
                     || (cc_opcode == HCI_BLE_ENCRYPT)
-                #endif
-              )
-            {
+#endif
+              ) {
                 p_cplt_cback = *((void **)(p_cmd + 1));
             }
 
@@ -1364,21 +1337,17 @@ static void btu_hcif_command_complete_evt(uint8_t controller_id, uint8_t *p, uin
         }
 
         /* if more commands in queue restart timer */
-        if(BTU_CMD_CMPL_TIMEOUT > 0)
-        {
-            if(!GKI_queue_is_empty(&(p_hci_cmd_cb->cmd_cmpl_q)))
-            {
-                #if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
+        if(BTU_CMD_CMPL_TIMEOUT > 0) {
+            if(!GKI_queue_is_empty(&(p_hci_cmd_cb->cmd_cmpl_q))) {
+#if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
                 p_hci_cmd_cb->checked_hcisu = FALSE;
-                #endif
+#endif
                 p_hci_cmd_cb->cmd_cmpl_timer.p_cback = (TIMER_CBACK *)&btu_hcif_cmd_timeout;
                 p_hci_cmd_cb->cmd_cmpl_timer.param = (TIMER_PARAM_TYPE)controller_id;
                 btu_start_timer(&(p_hci_cmd_cb->cmd_cmpl_timer),
                                 (uint16_t)(BTU_TTYPE_BTU_CMD_CMPL + controller_id),
                                 BTU_CMD_CMPL_TIMEOUT);
-            }
-            else
-            {
+            } else {
                 btu_stop_timer(&(p_hci_cmd_cb->cmd_cmpl_timer));
             }
         }
@@ -1405,27 +1374,24 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
 {
     BD_ADDR         bd_addr;
     uint16_t          handle;
-    #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
     tBTM_ESCO_DATA  esco_data;
-    #endif
+#endif
 
-    switch(opcode)
-    {
+    switch(opcode) {
         case HCI_EXIT_SNIFF_MODE:
         case HCI_EXIT_PARK_MODE:
-            #if BTM_SCO_WAKE_PARKED_LINK == TRUE
-            if(status != HCI_SUCCESS)
-            {
+#if BTM_SCO_WAKE_PARKED_LINK == TRUE
+            if(status != HCI_SUCCESS) {
                 /* Allow SCO initiation to continue if waiting for change mode event */
-                if(p_cmd != NULL)
-                {
+                if(p_cmd != NULL) {
                     p_cmd++;    /* bypass length field */
                     STREAM_TO_UINT16(handle, p_cmd);
                     btm_sco_chk_pend_unpark(status, handle);
                 }
             }
 
-            #endif
+#endif
 
         /* Case Falls Through */
 
@@ -1438,10 +1404,8 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
         default:
 
             /* If command failed to start, we may need to tell BTM */
-            if(status != HCI_SUCCESS)
-            {
-                switch(opcode)
-                {
+            if(status != HCI_SUCCESS) {
+                switch(opcode) {
                     case HCI_INQUIRY:
                         /* Tell inquiry processing that we are done */
                         btm_process_inq_complete(status, BTM_BR_INQUIRY_MASK);
@@ -1457,8 +1421,7 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
 
                         /* Let host know we're done with error */
                         /* read handle out of stored command */
-                        if(p_cmd != NULL)
-                        {
+                        if(p_cmd != NULL) {
                             p_cmd++;
                             STREAM_TO_UINT16(handle, p_cmd);
                             HCI_TRACE_ERROR("!!!btm_acl_link_key_change removed already\r\n");
@@ -1476,14 +1439,11 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
 
                         /* Tell BTM that the command failed */
                         /* read bd addr out of stored command */
-                        if(p_cmd != NULL)
-                        {
+                        if(p_cmd != NULL) {
                             p_cmd++;
                             STREAM_TO_BDADDR(bd_addr, p_cmd);
                             btm_acl_role_changed(status, bd_addr, BTM_ROLE_UNDEFINED);
-                        }
-                        else
-                        {
+                        } else {
                             btm_acl_role_changed(status, NULL, BTM_ROLE_UNDEFINED);
                         }
 
@@ -1493,8 +1453,7 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
                     case HCI_CREATE_CONNECTION:
 
                         /* read bd addr out of stored command */
-                        if(p_cmd != NULL)
-                        {
+                        if(p_cmd != NULL) {
                             p_cmd++;
                             STREAM_TO_BDADDR(bd_addr, p_cmd);
                             btm_sec_connected(bd_addr, HCI_INVALID_HANDLE, status, 0);
@@ -1504,13 +1463,10 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
                         break;
 
                     case HCI_READ_RMT_EXT_FEATURES:
-                        if(p_cmd != NULL)
-                        {
+                        if(p_cmd != NULL) {
                             p_cmd++; /* skip command length */
                             STREAM_TO_UINT16(handle, p_cmd);
-                        }
-                        else
-                        {
+                        } else {
                             handle = HCI_INVALID_HANDLE;
                         }
 
@@ -1526,35 +1482,31 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
                         /* Device refused to start encryption.  That should be treated as encryption failure. */
                         btm_sec_encrypt_change(BTM_INVALID_HCI_HANDLE, status, FALSE);
                         break;
-                        #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
 
                     case HCI_BLE_CREATE_LL_CONN:
                         btm_ble_create_ll_conn_complete(status);
                         break;
-                        #endif
-                        #if BTM_SCO_INCLUDED == TRUE
+#endif
+#if BTM_SCO_INCLUDED == TRUE
 
                     case HCI_SETUP_ESCO_CONNECTION:
 
                         /* read handle out of stored command */
-                        if(p_cmd != NULL)
-                        {
+                        if(p_cmd != NULL) {
                             p_cmd++;
                             STREAM_TO_UINT16(handle, p_cmd);
 
                             /* Determine if initial connection failed or is a change of setup */
-                            if(btm_is_sco_active(handle))
-                            {
+                            if(btm_is_sco_active(handle)) {
                                 btm_esco_proc_conn_chg(status, handle, 0, 0, 0, 0);
-                            }
-                            else
-                            {
+                            } else {
                                 btm_sco_connected(status, NULL, handle, &esco_data);
                             }
                         }
 
                         break;
-                        #endif
+#endif
 
                     /* This is commented out until an upper layer cares about returning event
                     #if L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE
@@ -1563,18 +1515,14 @@ static void btu_hcif_hdl_command_status(uint16_t opcode, uint8_t status, uint8_t
                     #endif
                     */
                     default:
-                        if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC)
-                        {
+                        if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC) {
                             btm_vsc_complete(&status, opcode, 1, (tBTM_CMPL_CB *)p_vsc_status_cback);
                         }
 
                         break;
                 }
-            }
-            else
-            {
-                if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC)
-                {
+            } else {
+                if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC) {
                     btm_vsc_complete(&status, opcode, 1, (tBTM_CMPL_CB *)p_vsc_status_cback);
                 }
             }
@@ -1638,42 +1586,35 @@ static void btu_hcif_command_status_evt(uint8_t controller_id, uint8_t *p)
     void        *p_vsc_status_cback = NULL;
     STREAM_TO_UINT8(status, p);
     STREAM_TO_UINT8(p_hci_cmd_cb->cmd_window, p);
-    #if (defined(HCI_MAX_SIMUL_CMDS) && (HCI_MAX_SIMUL_CMDS > 0))
+#if (defined(HCI_MAX_SIMUL_CMDS) && (HCI_MAX_SIMUL_CMDS > 0))
 
-    if(p_hci_cmd_cb->cmd_window > HCI_MAX_SIMUL_CMDS)
-    {
+    if(p_hci_cmd_cb->cmd_window > HCI_MAX_SIMUL_CMDS) {
         p_hci_cmd_cb->cmd_window = HCI_MAX_SIMUL_CMDS;
     }
 
-    #endif
+#endif
     STREAM_TO_UINT16(opcode, p);
 
     /* only do this for certain commands */
     if((opcode != HCI_RESET) && (opcode != HCI_HOST_NUM_PACKETS_DONE) &&
-            (opcode != HCI_COMMAND_NONE))
-    {
+            (opcode != HCI_COMMAND_NONE)) {
         /*look for corresponding command in cmd_queue*/
         p_cmd = (BT_HDR *) GKI_getfirst(&(p_hci_cmd_cb->cmd_cmpl_q));
 
-        while(p_cmd)
-        {
+        while(p_cmd) {
             p_data = (uint8_t *)(p_cmd + 1) + p_cmd->offset;
             STREAM_TO_UINT16(cmd_opcode, p_data);
 
             /* Make sure this  command is for the command_status received */
-            if(cmd_opcode != opcode)
-            {
+            if(cmd_opcode != opcode) {
                 /* opcode does not match, check next command in the queue */
                 p_cmd = (BT_HDR *) GKI_getnext(p_cmd);
                 continue;
-            }
-            else
-            {
+            } else {
                 GKI_remove_from_queue(&p_hci_cmd_cb->cmd_cmpl_q, p_cmd);
 
                 /* If command was a VSC, then extract command_status callback */
-                if((cmd_opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC)
-                {
+                if((cmd_opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC) {
                     p_vsc_status_cback = *((void **)(p_cmd + 1));
                 }
 
@@ -1682,21 +1623,17 @@ static void btu_hcif_command_status_evt(uint8_t controller_id, uint8_t *p)
         }
 
         /* if more commands in queue restart timer */
-        if(BTU_CMD_CMPL_TIMEOUT > 0)
-        {
-            if(!GKI_queue_is_empty(&(p_hci_cmd_cb->cmd_cmpl_q)))
-            {
-                #if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
+        if(BTU_CMD_CMPL_TIMEOUT > 0) {
+            if(!GKI_queue_is_empty(&(p_hci_cmd_cb->cmd_cmpl_q))) {
+#if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
                 p_hci_cmd_cb->checked_hcisu = FALSE;
-                #endif
+#endif
                 p_hci_cmd_cb->cmd_cmpl_timer.p_cback = (TIMER_CBACK *)&btu_hcif_cmd_timeout;
                 p_hci_cmd_cb->cmd_cmpl_timer.param = (TIMER_PARAM_TYPE)controller_id;
                 btu_start_timer(&(p_hci_cmd_cb->cmd_cmpl_timer),
                                 (uint16_t)(BTU_TTYPE_BTU_CMD_CMPL + controller_id),
                                 BTU_CMD_CMPL_TIMEOUT);
-            }
-            else
-            {
+            } else {
                 btu_stop_timer(&(p_hci_cmd_cb->cmd_cmpl_timer));
             }
         }
@@ -1706,12 +1643,9 @@ static void btu_hcif_command_status_evt(uint8_t controller_id, uint8_t *p)
     btu_hcif_hdl_command_status(opcode, status, p_data, p_vsc_status_cback);
 
     /* free stored command */
-    if(p_cmd != NULL)
-    {
+    if(p_cmd != NULL) {
         GKI_freebuf(p_cmd);
-    }
-    else
-    {
+    } else {
         HCI_TRACE_WARNING("No command in queue matching opcode %d", opcode);
     }
 
@@ -1730,17 +1664,16 @@ static void btu_hcif_command_status_evt(uint8_t controller_id, uint8_t *p)
 *******************************************************************************/
 void btu_hcif_cmd_timeout(void *p_data)
 {
-    uint8_t controller_id = (uint8_t)p_data;
+    uint32_t controller_id = (uint32_t)p_data;
     tHCI_CMD_CB *p_hci_cmd_cb = &(btu_cb.hci_cmd_cb[controller_id]);
     BT_HDR  *p_cmd;
     uint8_t   *p;
     void    *p_cplt_cback = NULL;
     uint16_t  opcode;
     uint16_t  event;
-    #if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
+#if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
 
-    if(!(p_hci_cmd_cb->checked_hcisu))
-    {
+    if(!(p_hci_cmd_cb->checked_hcisu)) {
         HCI_TRACE_WARNING("BTU HCI(id=%d) command timeout - double check HCISU", controller_id);
         /* trigger HCISU to read any pending data in transport buffer */
         GKI_send_event(HCISU_TASK, HCISU_EVT_MASK);
@@ -1753,26 +1686,23 @@ void btu_hcif_cmd_timeout(void *p_data)
         return;
     }
 
-    #endif
+#endif
     /* set the controller cmd window to 1, as if we received a response, so
     ** the flow of commands from the stack doesn't hang */
     p_hci_cmd_cb->cmd_window = 1;
 
     /* get queued command */
-    if((p_cmd = (BT_HDR *) GKI_dequeue(&(p_hci_cmd_cb->cmd_cmpl_q))) == NULL)
-    {
+    if((p_cmd = (BT_HDR *) GKI_dequeue(&(p_hci_cmd_cb->cmd_cmpl_q))) == NULL) {
         HCI_TRACE_WARNING("Cmd timeout; no cmd in queue");
         return;
     }
 
     /* if more commands in queue restart timer */
-    if(BTU_CMD_CMPL_TIMEOUT > 0)
-    {
-        if(!GKI_queue_is_empty(&(p_hci_cmd_cb->cmd_cmpl_q)))
-        {
-            #if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
+    if(BTU_CMD_CMPL_TIMEOUT > 0) {
+        if(!GKI_queue_is_empty(&(p_hci_cmd_cb->cmd_cmpl_q))) {
+#if (defined(BTU_CMD_CMPL_TOUT_DOUBLE_CHECK) && BTU_CMD_CMPL_TOUT_DOUBLE_CHECK == TRUE)
             p_hci_cmd_cb->checked_hcisu = FALSE;
-            #endif
+#endif
             p_hci_cmd_cb->cmd_cmpl_timer.p_cback = (TIMER_CBACK *)&btu_hcif_cmd_timeout;
             p_hci_cmd_cb->cmd_cmpl_timer.param = (TIMER_PARAM_TYPE)controller_id;
             btu_start_timer(&(p_hci_cmd_cb->cmd_cmpl_timer),
@@ -1782,35 +1712,33 @@ void btu_hcif_cmd_timeout(void *p_data)
     }
 
     p = (uint8_t *)(p_cmd + 1) + p_cmd->offset;
-    #if (NFC_INCLUDED == TRUE)
+#if (NFC_INCLUDED == TRUE)
 
-    if(controller_id == NFC_CONTROLLER_ID)
-    {
+    if(controller_id == NFC_CONTROLLER_ID) {
         //TODO call nfc_ncif_cmd_timeout
         HCI_TRACE_WARNING("BTU NCI command timeout - header 0x%02x%02x", p[0], p[1]);
         return;
     }
 
-    #endif
+#endif
     /* get opcode from stored command */
     STREAM_TO_UINT16(opcode, p);
     // btla-specific ++
-    #if (defined(ANDROID_APP_INCLUDED) && (ANDROID_APP_INCLUDED == TRUE))
+#if (defined(ANDROID_APP_INCLUDED) && (ANDROID_APP_INCLUDED == TRUE))
     ALOGE("######################################################################");
     ALOGE("#");
     ALOGE("# WARNING : BTU HCI(id=%d) command timeout. opcode=0x%x", controller_id, opcode);
     ALOGE("#");
     ALOGE("######################################################################");
-    #else
+#else
     HCI_TRACE_WARNING("BTU HCI(id=%d) command timeout. opcode=0x%x", controller_id, opcode);
-    #endif
+#endif
     // btla-specific ++
 
     /* send stack a fake command complete or command status, but first determine
     ** which to send
     */
-    switch(opcode)
-    {
+    switch(opcode) {
         case HCI_HOLD_MODE:
         case HCI_SNIFF_MODE:
         case HCI_EXIT_SNIFF_MODE:
@@ -1825,9 +1753,9 @@ void btu_hcif_cmd_timeout(void *p_data)
         case HCI_READ_RMT_EXT_FEATURES:
         case HCI_AUTHENTICATION_REQUESTED:
         case HCI_SET_CONN_ENCRYPTION:
-            #if BTM_SCO_INCLUDED == TRUE
+#if BTM_SCO_INCLUDED == TRUE
         case HCI_SETUP_ESCO_CONNECTION:
-            #endif
+#endif
             /* fake a command status */
             btu_hcif_hdl_command_status(opcode, HCI_ERR_UNSPECIFIED, p, NULL);
             break;
@@ -1836,12 +1764,11 @@ void btu_hcif_cmd_timeout(void *p_data)
 
             /* If vendor specific restore the callback function */
             if((opcode & HCI_GRP_VENDOR_SPECIFIC) == HCI_GRP_VENDOR_SPECIFIC
-                #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
                     || (opcode == HCI_BLE_RAND) ||
                     (opcode == HCI_BLE_ENCRYPT)
-                #endif
-              )
-            {
+#endif
+              ) {
                 p_cplt_cback = *((void **)(p_cmd + 1));
             }
 
@@ -1857,18 +1784,15 @@ void btu_hcif_cmd_timeout(void *p_data)
 
     /* When we receive consecutive HCI cmd timeouts for >=BTM_MAX_HCI_CMD_TOUT_BEFORE_RESTART
      times, Bluetooth process will be killed and restarted */
-    if(num_hci_cmds_timed_out >= BTM_MAX_HCI_CMD_TOUT_BEFORE_RESTART)
-    {
+    if(num_hci_cmds_timed_out >= BTM_MAX_HCI_CMD_TOUT_BEFORE_RESTART) {
         HCI_TRACE_ERROR("Num consecutive HCI Cmd tout =%d Restarting BT process", num_hci_cmds_timed_out);
         printf("%s  opcode=0x%08x, please check controller status\n", __FUNCTION__, opcode);
-        #if 0
+#if 0
         usleep(10000);   /* 10 milliseconds */
         /* Killing the process to force a restart as part of fault tolerance */
         kill(getpid(), SIGKILL);
-        #endif
-    }
-    else
-    {
+#endif
+    } else {
         HCI_TRACE_WARNING("HCI Cmd timeout counter %d", num_hci_cmds_timed_out);
         /* If anyone wants device status notifications, give him one */
         btm_report_device_status(BTM_DEV_STATUS_CMD_TOUT);
@@ -1896,8 +1820,7 @@ static void btu_hcif_hardware_error_evt(uint8_t *p)
     btm_report_device_status(BTM_DEV_STATUS_DOWN);
 
     /* Reset the controller */
-    if(BTM_IsDeviceUp())
-    {
+    if(BTM_IsDeviceUp()) {
         BTM_DeviceReset(NULL);
     }
 }
@@ -1951,9 +1874,8 @@ static void btu_hcif_num_compl_data_pkts_evt(uint8_t *p)
     l2c_link_process_num_completed_pkts(p);
     /* Send on to SCO */
 #if (BTM_SCO_HCI_INCLUDED == TRUE) && (BTM_SCO_INCLUDED == TRUE)
-        btm_sco_process_num_completed_pkts (p);
+    btm_sco_process_num_completed_pkts(p);
 #endif
-
 }
 
 /*******************************************************************************
@@ -1975,13 +1897,13 @@ static void btu_hcif_mode_change_evt(uint8_t *p)
     STREAM_TO_UINT16(handle, p);
     STREAM_TO_UINT8(current_mode, p);
     STREAM_TO_UINT16(interval, p);
-    #if BTM_SCO_WAKE_PARKED_LINK == TRUE
+#if BTM_SCO_WAKE_PARKED_LINK == TRUE
     btm_sco_chk_pend_unpark(status, handle);
-    #endif
+#endif
     btm_pm_proc_mode_change(status, handle, current_mode, interval);
-    #if (HID_DEV_INCLUDED == TRUE) && (HID_DEV_PM_INCLUDED == TRUE)
+#if (HID_DEV_INCLUDED == TRUE) && (HID_DEV_PM_INCLUDED == TRUE)
     hidd_pm_proc_mode_change(status, current_mode, interval) ;
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -2019,8 +1941,7 @@ static void btu_hcif_return_link_keys_evt(uint8_t *p)
     num_keys = *p;
 
     /* If there are no link keys don't call the call back */
-    if(!num_keys)
-    {
+    if(!num_keys) {
         return;
     }
 
@@ -2143,8 +2064,7 @@ static void btu_hcif_read_clock_off_comp_evt(uint8_t *p)
     STREAM_TO_UINT8(status, p);
 
     /* If failed to get clock offset just drop the result */
-    if(status != HCI_SUCCESS)
-    {
+    if(status != HCI_SUCCESS) {
         return;
     }
 
@@ -2372,14 +2292,12 @@ void btu_hcif_flush_cmd_queue(void)
     BT_HDR *p_cmd;
     btu_cb.hci_cmd_cb[0].cmd_window = 0;
 
-    while((p_cmd = (BT_HDR *) GKI_dequeue(&btu_cb.hci_cmd_cb[0].cmd_cmpl_q)) != NULL)
-    {
+    while((p_cmd = (BT_HDR *) GKI_dequeue(&btu_cb.hci_cmd_cb[0].cmd_cmpl_q)) != NULL) {
         HCI_TRACE_ERROR("cmd_cmpl_q not null\r\n");
         GKI_freebuf(p_cmd);
     }
 
-    while((p_cmd = (BT_HDR *) GKI_dequeue(&btu_cb.hci_cmd_cb[0].cmd_xmit_q)) != NULL)
-    {
+    while((p_cmd = (BT_HDR *) GKI_dequeue(&btu_cb.hci_cmd_cb[0].cmd_xmit_q)) != NULL) {
         HCI_TRACE_ERROR("cmd_xmit_q not null\r\n");
         GKI_freebuf(p_cmd);
     }
@@ -2416,8 +2334,7 @@ static void btu_hcif_encryption_key_refresh_cmpl_evt(uint8_t *p)
     STREAM_TO_UINT8(status, p);
     STREAM_TO_UINT16(handle, p);
 
-    if(status == HCI_SUCCESS)
-    {
+    if(status == HCI_SUCCESS) {
         enc_enable = 1;
     }
 
@@ -2464,9 +2381,9 @@ static void btu_ble_proc_ltk_req(uint8_t *p)
     STREAM_TO_UINT16(handle, p);
     pp = p + 8;
     STREAM_TO_UINT16(ediv, pp);
-    #if BLE_INCLUDED == TRUE && SMP_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE && SMP_INCLUDED == TRUE
     btm_ble_ltk_request(handle, p, ediv);
-    #endif
+#endif
     /* This is empty until an upper layer cares about returning event */
 }
 
@@ -2476,8 +2393,7 @@ static void btu_ble_data_length_change_evt(uint8_t *p, uint16_t evt_len)
     uint16_t tx_data_len;
     uint16_t rx_data_len;
 
-    if(!HCI_LE_DATA_LEN_EXT_SUPPORTED(btm_cb.devcb.local_le_features))
-    {
+    if(!HCI_LE_DATA_LEN_EXT_SUPPORTED(btm_cb.devcb.local_le_features)) {
         HCI_TRACE_WARNING("%s, request not supported", __FUNCTION__);
         return;
     }

@@ -338,7 +338,7 @@ tls_bt_status_t btif_storage_set_remote_addr_type(tls_bt_addr_t *remote_bd_addr,
         uint8_t addr_type, uint8_t wr_flash);
 
 tls_bt_status_t btif_storage_set_remote_device_type(tls_bt_addr_t *remote_bd_addr,
-        uint8_t dev_type,uint8_t wr_flash);
+        uint8_t dev_type, uint8_t wr_flash);
 tls_bt_status_t btif_storage_get_remote_device_type(tls_bt_addr_t *remote_bd_addr,
         int *dev_type);
 

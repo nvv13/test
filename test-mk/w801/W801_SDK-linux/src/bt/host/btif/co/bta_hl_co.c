@@ -71,8 +71,7 @@ uint8_t bta_hl_co_get_num_of_mdep(uint8_t app_id, uint8_t *p_num_of_mdep)
     uint8_t app_idx;
     uint8_t success = FALSE;
 
-    if(btif_hl_find_app_idx(app_id, &app_idx))
-    {
+    if(btif_hl_find_app_idx(app_id, &app_idx)) {
         *p_num_of_mdep = p_btif_hl_cb->acb[app_idx].sup_feature.num_of_mdeps;
         success = TRUE;
     }
@@ -100,8 +99,7 @@ uint8_t bta_hl_co_advrtise_source_sdp(uint8_t app_id)
     uint8_t     advertize_source_sdp = FALSE;
     uint8_t       app_idx;
 
-    if(btif_hl_find_app_idx(app_id, &app_idx))
-    {
+    if(btif_hl_find_app_idx(app_id, &app_idx)) {
         advertize_source_sdp = p_btif_hl_cb->acb[app_idx].sup_feature.advertize_source_sdp;
     }
 
@@ -137,8 +135,7 @@ uint8_t bta_hl_co_get_mdep_config(uint8_t  app_id,
     BTIF_TRACE_DEBUG("%s app_id=%d mdep_idx=%d mdep_id=%d mdep_counter=%d",
                      __FUNCTION__, app_id, mdep_idx, mdep_id, mdep_counter);
 
-    if(btif_hl_find_app_idx(app_id, &app_idx))
-    {
+    if(btif_hl_find_app_idx(app_id, &app_idx)) {
         idx = mdep_idx - mdep_counter - 1;
         p_btif_hl_cb->acb[app_idx].sup_feature.mdep[idx].mdep_id = mdep_id;
         wm_memcpy(p_mdep_cfg,
@@ -175,8 +172,7 @@ uint8_t bta_hl_co_get_echo_config(uint8_t  app_id,
     tBTA_HL_SUP_FEATURE *p_sup;
     BTIF_TRACE_DEBUG("%s app_id=%d", __FUNCTION__, app_id);
 
-    if(btif_hl_find_app_idx(app_id, &app_idx))
-    {
+    if(btif_hl_find_app_idx(app_id, &app_idx)) {
         p_acb = BTIF_HL_GET_APP_CB_PTR(app_idx);
         p_sup = &p_acb->sup_feature;
         p_echo_cfg->max_rx_apdu_size = p_sup->echo_cfg.max_rx_apdu_size;
@@ -259,20 +255,16 @@ uint8_t bta_hl_co_load_mdl_config(uint8_t app_id, uint8_t buffer_size,
     BTIF_TRACE_DEBUG("%s app_id=%d, num_items=%d",
                      __FUNCTION__, app_id, buffer_size);
 
-    if(buffer_size > BTA_HL_NUM_MDL_CFGS)
-    {
+    if(buffer_size > BTA_HL_NUM_MDL_CFGS) {
         result = FALSE;
         return result;
     }
 
     result = btif_hl_load_mdl_config(app_id, buffer_size, p_mdl_buf);
 
-    if(result)
-    {
-        for(i = 0, p = p_mdl_buf; i < buffer_size; i++, p++)
-        {
-            if(p->active)
-            {
+    if(result) {
+        for(i = 0, p = p_mdl_buf; i < buffer_size; i++, p++) {
+            if(p->active) {
                 BTIF_TRACE_DEBUG("i=%d mdl_id=0x%x dch_mode=%d local mdep_role=%d mdep_id=%d mtu=%d",
                                  i, p->mdl_id, p->dch_mode, p->local_mdep_role, p->local_mdep_role, p->mtu);
             }
@@ -308,12 +300,10 @@ void bta_hl_co_get_tx_data(uint8_t app_id, tBTA_HL_MDL_HANDLE mdl_handle,
     BTIF_TRACE_DEBUG("%s app_id=%d mdl_handle=0x%x buf_size=%d",
                      __FUNCTION__, app_id, mdl_handle, buf_size);
 
-    if(btif_hl_find_mdl_idx_using_handle(mdl_handle, &app_idx, &mcl_idx, &mdl_idx))
-    {
+    if(btif_hl_find_mdl_idx_using_handle(mdl_handle, &app_idx, &mcl_idx, &mdl_idx)) {
         p_dcb = BTIF_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
 
-        if(p_dcb->tx_size <= buf_size)
-        {
+        if(p_dcb->tx_size <= buf_size) {
             wm_memcpy(p_buf, p_dcb->p_tx_pkt, p_dcb->tx_size);
             GKI_free_and_reset_buf((void **)&p_dcb->p_tx_pkt);
             p_dcb->tx_size = 0;
@@ -350,27 +340,22 @@ void bta_hl_co_put_rx_data(uint8_t app_id, tBTA_HL_MDL_HANDLE mdl_handle,
     BTIF_TRACE_DEBUG("%s app_id=%d mdl_handle=0x%x data_size=%d",
                      __FUNCTION__, app_id, mdl_handle, data_size);
 
-    if(btif_hl_find_mdl_idx_using_handle(mdl_handle, &app_idx, &mcl_idx, &mdl_idx))
-    {
+    if(btif_hl_find_mdl_idx_using_handle(mdl_handle, &app_idx, &mcl_idx, &mdl_idx)) {
         p_dcb = BTIF_HL_GET_MDL_CB_PTR(app_idx, mcl_idx, mdl_idx);
         p_dcb->p_rx_pkt = (uint8_t *)GKI_getbuf(data_size);
         wm_memcpy(p_dcb->p_rx_pkt, p_data, data_size);
 
-        if(p_dcb->p_scb)
-        {
+        if(p_dcb->p_scb) {
             BTIF_TRACE_DEBUG("app_idx=%d mcl_idx=0x%x mdl_idx=0x%x data_size=%d",
                              app_idx, mcl_idx, mdl_idx, data_size);
             ssize_t r;
             OSI_NO_INTR(r = send(p_dcb->p_scb->socket_id[1], p_dcb->p_rx_pkt,
                                  data_size, 0));
 
-            if(r == data_size)
-            {
+            if(r == data_size) {
                 BTIF_TRACE_DEBUG("socket send success data_size=%d", data_size);
                 status = BTA_HL_STATUS_OK;
-            }
-            else
-            {
+            } else {
                 BTIF_TRACE_ERROR("socket send failed r=%d data_size=%d", r,
                                  data_size);
             }

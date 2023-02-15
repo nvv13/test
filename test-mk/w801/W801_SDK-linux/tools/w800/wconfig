@@ -50,11 +50,11 @@ menu "Firmware Configuration"
         help
             w800 image encrypt.
 
-    config W800_SIGN_PUBKEY_SRC
-        int "image decrypt"
+    config W800_SECBOOT_IMAGE_TYPE
+	int "boot image type"
         default 0
         help
-            w800 image decrypt.
+            w800 secboot image type.
 endmenu
 
 menu "Download Configuration"

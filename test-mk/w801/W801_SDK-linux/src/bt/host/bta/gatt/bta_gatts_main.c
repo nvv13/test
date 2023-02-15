@@ -34,8 +34,7 @@
 typedef void (*tBTA_GATTS_SRVC_ACT)(tBTA_GATTS_SRVC_CB *p_rcb, tBTA_GATTS_DATA *p_data);
 
 /* service building action function list */
-const tBTA_GATTS_SRVC_ACT bta_gatts_srvc_build_act[] =
-{
+const tBTA_GATTS_SRVC_ACT bta_gatts_srvc_build_act[] = {
     bta_gatts_add_include_srvc,
     bta_gatts_add_char,
     bta_gatts_add_char_descr,
@@ -46,9 +45,9 @@ const tBTA_GATTS_SRVC_ACT bta_gatts_srvc_build_act[] =
 
 /* GATTS control block */
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_GATTS_CB  bta_gatts_cb;
+tBTA_GATTS_CB  bta_gatts_cb;
 #else
-	tBTA_GATTS_CB  *bta_gatts_cb_ptr;
+tBTA_GATTS_CB  *bta_gatts_cb_ptr;
 #endif
 
 /*******************************************************************************
@@ -66,8 +65,7 @@ uint8_t bta_gatts_hdl_event(BT_HDR *p_msg)
     tBTA_GATTS_CB *p_cb = &bta_gatts_cb;
     tBTA_GATTS_SRVC_CB *p_srvc_cb = NULL;
 
-    switch(p_msg->event)
-    {
+    switch(p_msg->event) {
         case BTA_GATTS_API_DISABLE_EVT:
             bta_gatts_api_disable(p_cb);
             break;
@@ -121,12 +119,10 @@ uint8_t bta_gatts_hdl_event(BT_HDR *p_msg)
             p_srvc_cb = bta_gatts_find_srvc_cb_by_srvc_id(p_cb,
                         ((tBTA_GATTS_DATA *)p_msg)->api_add_incl_srvc.hdr.layer_specific);
 
-            if(p_srvc_cb != NULL)
-            {
-                bta_gatts_srvc_build_act[p_msg->event - BTA_GATTS_API_ADD_INCL_SRVC_EVT](p_srvc_cb, (tBTA_GATTS_DATA *) p_msg);
-            }
-            else
-            {
+            if(p_srvc_cb != NULL) {
+                bta_gatts_srvc_build_act[p_msg->event - BTA_GATTS_API_ADD_INCL_SRVC_EVT](p_srvc_cb,
+                        (tBTA_GATTS_DATA *) p_msg);
+            } else {
                 APPL_TRACE_ERROR("service not created");
             }
 

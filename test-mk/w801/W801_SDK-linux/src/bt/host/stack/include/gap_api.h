@@ -70,19 +70,19 @@
 
 
 #ifndef  GAP_PREFER_CONN_INT_MAX
-    #define  GAP_PREFER_CONN_INT_MAX         BTM_BLE_CONN_INT_MIN
+#define  GAP_PREFER_CONN_INT_MAX         BTM_BLE_CONN_INT_MIN
 #endif
 
 #ifndef  GAP_PREFER_CONN_INT_MIN
-    #define  GAP_PREFER_CONN_INT_MIN         BTM_BLE_CONN_INT_MIN
+#define  GAP_PREFER_CONN_INT_MIN         BTM_BLE_CONN_INT_MIN
 #endif
 
 #ifndef  GAP_PREFER_CONN_LATENCY
-    #define  GAP_PREFER_CONN_LATENCY         0
+#define  GAP_PREFER_CONN_LATENCY         0
 #endif
 
 #ifndef  GAP_PREFER_CONN_SP_TOUT
-    #define  GAP_PREFER_CONN_SP_TOUT         2000
+#define  GAP_PREFER_CONN_SP_TOUT         2000
 #endif
 
 /*****************************************************************************
@@ -101,23 +101,20 @@ typedef void (tGAP_CALLBACK)(uint16_t event, void *p_data);
 
 
 /* Definition of the GAP_FindAddrByName results structure */
-typedef struct
-{
+typedef struct {
     uint16_t       status;
     BD_ADDR      bd_addr;
     tBTM_BD_NAME devname;
 } tGAP_FINDADDR_RESULTS;
 
-typedef struct
-{
+typedef struct {
     uint16_t      int_min;
     uint16_t      int_max;
     uint16_t      latency;
     uint16_t      sp_tout;
 } tGAP_BLE_PREF_PARAM;
 
-typedef union
-{
+typedef union {
     tGAP_BLE_PREF_PARAM     conn_param;
     BD_ADDR                 reconn_bda;
     uint16_t                  icon;

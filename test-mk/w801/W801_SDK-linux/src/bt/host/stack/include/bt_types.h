@@ -23,11 +23,11 @@
 #include <stdbool.h>
 
 #ifndef FALSE
-    #define FALSE  false
+#define FALSE  false
 #endif
 
 #ifndef TRUE
-    #define TRUE   true
+#define TRUE   true
 #endif
 
 typedef uint8_t uint8_t;
@@ -41,11 +41,11 @@ typedef int32_t int32_t;
 typedef uint8_t uint8_t;
 
 #ifdef __arm
-    #define PACKED  __packed
-    #define INLINE  __inline
+#define PACKED  __packed
+#define INLINE  __inline
 #else
-    #define PACKED
-    #define INLINE
+#define PACKED
+#define INLINE
 #endif
 
 /* READ WELL !!
@@ -222,8 +222,7 @@ typedef uint8_t uint8_t;
 
 /* Define the header of each buffer used in the Bluetooth stack.
 */
-typedef struct
-{
+typedef struct {
     uint16_t          event;
     uint16_t          len;
     uint16_t          offset;
@@ -394,8 +393,7 @@ typedef uint8_t ACO[ACO_LEN];                 /* Authenticated ciphering offset 
 #define COF_LEN         12
 typedef uint8_t COF[COF_LEN];                 /* ciphering offset number */
 
-typedef struct
-{
+typedef struct {
     uint8_t               qos_flags;          /* TBD */
     uint8_t               service_type;       /* see below */
     uint32_t              token_rate;         /* bytes/second */
@@ -451,16 +449,14 @@ typedef uint8_t ACCESS_CODE[ACCESS_CODE_BYTE_LEN];
 #define BT_MICROSECS_TO_CLK(x)  (((x) * 8 + 2499) / 5000)
 /* Maximum UUID size - 16 bytes, and structure to hold any type of UUID. */
 #define MAX_UUID_SIZE              16
-typedef struct
-{
+typedef struct {
 #define LEN_UUID_16     2
 #define LEN_UUID_32     4
 #define LEN_UUID_128    16
 
     uint16_t          len;
 
-    union
-    {
+    union {
         uint16_t      uuid16;
         uint32_t      uuid32;
         uint8_t       uuid128[MAX_UUID_SIZE];
@@ -519,8 +515,7 @@ typedef struct
 #define BT_CONNECTED_USING_BREDR   1
 #define BT_CONNECTED_USING_AMP     2
 
-typedef struct
-{
+typedef struct {
     uint32_t   is_connected;
     int32_t    rssi;
     uint32_t   bytes_sent;
@@ -550,8 +545,7 @@ typedef uint8_t tBT_TRANSPORT;
 
 #define BLE_ADDR_IS_STATIC(x)   ((x[0] & 0xC0) == 0xC0)
 
-typedef struct
-{
+typedef struct {
     tBLE_ADDR_TYPE      type;
     BD_ADDR             bda;
 } tBLE_BD_ADDR;
@@ -742,8 +736,8 @@ typedef void (BT_LOG_FUNC)(int trace_type, const char *fmt_str, ...);
 
 /* bd addr length and type */
 #ifndef BD_ADDR_LEN
-    #define BD_ADDR_LEN     6
-    typedef uint8_t BD_ADDR[BD_ADDR_LEN];
+#define BD_ADDR_LEN     6
+typedef uint8_t BD_ADDR[BD_ADDR_LEN];
 #endif
 
 // From bd.c
@@ -774,8 +768,7 @@ static inline void bdcpy(BD_ADDR a, const BD_ADDR b)
 {
     int i;
 
-    for(i = BD_ADDR_LEN; i != 0; i--)
-    {
+    for(i = BD_ADDR_LEN; i != 0; i--) {
         *a++ = *b++;
     }
 }
@@ -794,10 +787,8 @@ static inline int bdcmp(const BD_ADDR a, const BD_ADDR b)
 {
     int i;
 
-    for(i = BD_ADDR_LEN; i != 0; i--)
-    {
-        if(*a++ != *b++)
-        {
+    for(i = BD_ADDR_LEN; i != 0; i--) {
+        if(*a++ != *b++) {
             return -1;
         }
     }

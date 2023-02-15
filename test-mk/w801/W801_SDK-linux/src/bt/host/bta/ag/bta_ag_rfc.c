@@ -56,23 +56,20 @@ int bta_ag_data_cback_3(uint16_t port_handle, void *p_data, uint16_t len);
 
 /* rfcomm callback function tables */
 typedef tPORT_CALLBACK *tBTA_AG_PORT_CBACK;
-const tBTA_AG_PORT_CBACK bta_ag_port_cback_tbl[] =
-{
+const tBTA_AG_PORT_CBACK bta_ag_port_cback_tbl[] = {
     bta_ag_port_cback_1,
     bta_ag_port_cback_2,
     bta_ag_port_cback_3
 };
 
-const tBTA_AG_PORT_CBACK bta_ag_mgmt_cback_tbl[] =
-{
+const tBTA_AG_PORT_CBACK bta_ag_mgmt_cback_tbl[] = {
     bta_ag_mgmt_cback_1,
     bta_ag_mgmt_cback_2,
     bta_ag_mgmt_cback_3
 };
 
 typedef tPORT_DATA_CALLBACK *tBTA_AG_DATA_CBACK;
-const tBTA_AG_DATA_CBACK bta_ag_data_cback_tbl[] =
-{
+const tBTA_AG_DATA_CBACK bta_ag_data_cback_tbl[] = {
     bta_ag_data_cback_1,
     bta_ag_data_cback_2,
     bta_ag_data_cback_3
@@ -93,11 +90,9 @@ static void bta_ag_port_cback(uint32_t code, uint16_t port_handle, uint16_t hand
     tBTA_AG_SCB *p_scb;
     UNUSED(code);
 
-    if((p_scb = bta_ag_scb_by_idx(handle)) != NULL)
-    {
+    if((p_scb = bta_ag_scb_by_idx(handle)) != NULL) {
         /* ignore port events for port handles other than connected handle */
-        if(port_handle != p_scb->conn_handle)
-        {
+        if(port_handle != p_scb->conn_handle) {
             APPL_TRACE_DEBUG("ag_port_cback ignoring handle:%d conn_handle = %d other handle = %d",
                              port_handle, p_scb->conn_handle, handle);
             return;
@@ -129,37 +124,27 @@ static void bta_ag_mgmt_cback(uint32_t code, uint16_t port_handle, uint16_t hand
     APPL_TRACE_DEBUG("ag_mgmt_cback : code = %d, port_handle = %d, handle = %d",
                      code, port_handle, handle);
 
-    if((p_scb = bta_ag_scb_by_idx(handle)) != NULL)
-    {
+    if((p_scb = bta_ag_scb_by_idx(handle)) != NULL) {
         /* ignore close event for port handles other than connected handle */
-        if((code != PORT_SUCCESS) && (port_handle != p_scb->conn_handle))
-        {
+        if((code != PORT_SUCCESS) && (port_handle != p_scb->conn_handle)) {
             APPL_TRACE_DEBUG("ag_mgmt_cback ignoring handle:%d", port_handle);
             return;
         }
 
-        if(code == PORT_SUCCESS)
-        {
-            if(p_scb->conn_handle)      /* Outgoing connection */
-            {
-                if(port_handle == p_scb->conn_handle)
-                {
+        if(code == PORT_SUCCESS) {
+            if(p_scb->conn_handle) {    /* Outgoing connection */
+                if(port_handle == p_scb->conn_handle) {
                     found_handle = TRUE;
                 }
-            }
-            else                        /* Incoming connection */
-            {
-                for(i = 0; i < BTA_AG_NUM_IDX; i++)
-                {
-                    if(port_handle == p_scb->serv_handle[i])
-                    {
+            } else {                    /* Incoming connection */
+                for(i = 0; i < BTA_AG_NUM_IDX; i++) {
+                    if(port_handle == p_scb->serv_handle[i]) {
                         found_handle = TRUE;
                     }
                 }
             }
 
-            if(!found_handle)
-            {
+            if(!found_handle) {
                 APPL_TRACE_ERROR("bta_ag_mgmt_cback: PORT_SUCCESS, ignoring handle = %d", port_handle);
                 return;
             }
@@ -167,15 +152,11 @@ static void bta_ag_mgmt_cback(uint32_t code, uint16_t port_handle, uint16_t hand
             event = BTA_AG_RFC_OPEN_EVT;
         }
         /* distinguish server close events */
-        else
-            if(port_handle == p_scb->conn_handle)
-            {
-                event = BTA_AG_RFC_CLOSE_EVT;
-            }
-            else
-            {
-                event = BTA_AG_RFC_SRV_CLOSE_EVT;
-            }
+        else if(port_handle == p_scb->conn_handle) {
+            event = BTA_AG_RFC_CLOSE_EVT;
+        } else {
+            event = BTA_AG_RFC_SRV_CLOSE_EVT;
+        }
 
         tBTA_AG_RFC *p_buf = (tBTA_AG_RFC *)GKI_getbuf(sizeof(tBTA_AG_RFC));
         p_buf->hdr.event = event;
@@ -279,8 +260,7 @@ void bta_ag_setup_port(tBTA_AG_SCB *p_scb, uint16_t handle)
     uint16_t i = bta_ag_scb_to_idx(p_scb) - 1;
 
     /* set up data callback if using pass through mode */
-    if(bta_ag_cb.parse_mode == BTA_AG_PASS_THROUGH)
-    {
+    if(bta_ag_cb.parse_mode == BTA_AG_PASS_THROUGH) {
         PORT_SetDataCallback(handle, bta_ag_data_cback_tbl[i]);
     }
 
@@ -304,25 +284,21 @@ void bta_ag_start_servers(tBTA_AG_SCB *p_scb, tBTA_SERVICE_MASK services)
     int bta_ag_port_status;
     services >>= BTA_HSP_SERVICE_ID;
 
-    for(i = 0; i < BTA_AG_NUM_IDX && services != 0; i++, services >>= 1)
-    {
+    for(i = 0; i < BTA_AG_NUM_IDX && services != 0; i++, services >>= 1) {
         /* if service is set in mask */
-        if(services & 1)
-        {
+        if(services & 1) {
             BTM_SetSecurityLevel(FALSE, "", bta_ag_sec_id[i], p_scb->serv_sec_mask,
                                  BT_PSM_RFCOMM, BTM_SEC_PROTO_RFCOMM, bta_ag_cb.profile[i].scn);
             bta_ag_port_status =  RFCOMM_CreateConnection(bta_ag_uuid[i], bta_ag_cb.profile[i].scn,
                                   TRUE, BTA_AG_MTU, (uint8_t *) bd_addr_any, &(p_scb->serv_handle[i]),
                                   bta_ag_mgmt_cback_tbl[bta_ag_scb_to_idx(p_scb) - 1]);
 
-            if(bta_ag_port_status  == PORT_SUCCESS)
-            {
+            if(bta_ag_port_status  == PORT_SUCCESS) {
                 bta_ag_setup_port(p_scb, p_scb->serv_handle[i]);
-            }
-            else
-            {
+            } else {
                 /* TODO: CR#137125 to handle to error properly */
-                APPL_TRACE_DEBUG("bta_ag_start_servers: RFCOMM_CreateConnection returned error:%d", bta_ag_port_status);
+                APPL_TRACE_DEBUG("bta_ag_start_servers: RFCOMM_CreateConnection returned error:%d",
+                                 bta_ag_port_status);
             }
         }
     }
@@ -343,11 +319,9 @@ void bta_ag_close_servers(tBTA_AG_SCB *p_scb, tBTA_SERVICE_MASK services)
     int i;
     services >>= BTA_HSP_SERVICE_ID;
 
-    for(i = 0; i < BTA_AG_NUM_IDX && services != 0; i++, services >>= 1)
-    {
+    for(i = 0; i < BTA_AG_NUM_IDX && services != 0; i++, services >>= 1) {
         /* if service is set in mask */
-        if(services & 1)
-        {
+        if(services & 1) {
             RFCOMM_RemoveServer(p_scb->serv_handle[i]);
             p_scb->serv_handle[i] = 0;
         }
@@ -369,10 +343,8 @@ uint8_t bta_ag_is_server_closed(tBTA_AG_SCB *p_scb)
     uint8_t xx;
     uint8_t is_closed = TRUE;
 
-    for(xx = 0; xx < BTA_AG_NUM_IDX; xx++)
-    {
-        if(p_scb->serv_handle[xx] != 0)
-        {
+    for(xx = 0; xx < BTA_AG_NUM_IDX; xx++) {
+        if(p_scb->serv_handle[xx] != 0) {
             is_closed = FALSE;
         }
     }
@@ -397,14 +369,12 @@ void bta_ag_rfc_do_open(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data)
 
     if(RFCOMM_CreateConnection(bta_ag_uuid[p_scb->conn_service], p_scb->peer_scn,
                                FALSE, BTA_AG_MTU, p_scb->peer_addr, &(p_scb->conn_handle),
-                               bta_ag_mgmt_cback_tbl[bta_ag_scb_to_idx(p_scb) - 1]) == PORT_SUCCESS)
-    {
+                               bta_ag_mgmt_cback_tbl[bta_ag_scb_to_idx(p_scb) - 1]) == PORT_SUCCESS) {
         bta_ag_setup_port(p_scb, p_scb->conn_handle);
         APPL_TRACE_DEBUG("bta_ag_rfc_do_open : conn_handle = %d", p_scb->conn_handle);
     }
     /* RFCOMM create connection failed; send ourselves RFCOMM close event */
-    else
-    {
+    else {
         bta_ag_sm_execute(p_scb, BTA_AG_RFC_CLOSE_EVT, p_data);
     }
 }
@@ -423,12 +393,9 @@ void bta_ag_rfc_do_close(tBTA_AG_SCB *p_scb, tBTA_AG_DATA *p_data)
 {
     UNUSED(p_data);
 
-    if(p_scb->conn_handle)
-    {
+    if(p_scb->conn_handle) {
         RFCOMM_RemoveConnection(p_scb->conn_handle);
-    }
-    else
-    {
+    } else {
         /* Close API was called while AG is in Opening state.               */
         /* Need to trigger the state machine to send callback to the app    */
         /* and move back to INIT state.                                     */

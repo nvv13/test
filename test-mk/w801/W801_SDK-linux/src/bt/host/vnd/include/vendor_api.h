@@ -18,8 +18,7 @@
 **  Resolvable private address offload VSC specific definitions
 ******************************************************************************/
 
-enum
-{
+enum {
     BTM_BLE_PRIVACY_ENABLE,
     BTM_BLE_PRIVACY_DISABLE
 };

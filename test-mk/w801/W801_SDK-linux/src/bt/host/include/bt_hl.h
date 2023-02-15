@@ -21,22 +21,19 @@
 
 /* HL connection states */
 
-typedef enum
-{
+typedef enum {
     BTHL_MDEP_ROLE_SOURCE,
     BTHL_MDEP_ROLE_SINK
 } bthl_mdep_role_t;
 
-typedef enum
-{
+typedef enum {
     BTHL_APP_REG_STATE_REG_SUCCESS,
     BTHL_APP_REG_STATE_REG_FAILED,
     BTHL_APP_REG_STATE_DEREG_SUCCESS,
     BTHL_APP_REG_STATE_DEREG_FAILED
 } bthl_app_reg_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHL_CHANNEL_TYPE_RELIABLE,
     BTHL_CHANNEL_TYPE_STREAMING,
     BTHL_CHANNEL_TYPE_ANY
@@ -44,8 +41,7 @@ typedef enum
 
 
 /* HL connection states */
-typedef enum
-{
+typedef enum {
     BTHL_CONN_STATE_CONNECTING,
     BTHL_CONN_STATE_CONNECTED,
     BTHL_CONN_STATE_DISCONNECTING,
@@ -53,20 +49,22 @@ typedef enum
     BTHL_CONN_STATE_DESTROYED
 } bthl_channel_state_t;
 
-typedef struct
-{
+typedef struct {
     bthl_mdep_role_t        mdep_role;
     int                     data_type;
     bthl_channel_type_t     channel_type;
-    const char                   *mdep_description; /* MDEP description to be used in the SDP (optional); null terminated */
+    const char
+    *mdep_description; /* MDEP description to be used in the SDP (optional); null terminated */
 } bthl_mdep_cfg_t;
 
-typedef struct
-{
+typedef struct {
     const char      *application_name;
-    const char      *provider_name;   /* provider name to be used in the SDP (optional); null terminated */
-    const char      *srv_name;        /* service name to be used in the SDP (optional); null terminated*/
-    const char      *srv_desp;        /* service description to be used in the SDP (optional); null terminated */
+    const char
+    *provider_name;   /* provider name to be used in the SDP (optional); null terminated */
+    const char
+    *srv_name;        /* service name to be used in the SDP (optional); null terminated*/
+    const char
+    *srv_desp;        /* service description to be used in the SDP (optional); null terminated */
     int             number_of_mdeps;
     bthl_mdep_cfg_t *mdep_cfg;  /* Dynamic array */
 } bthl_reg_param_t;
@@ -80,11 +78,11 @@ typedef void (* bthl_app_reg_state_callback)(int app_id, bthl_app_reg_state_t st
  *  state will have one of the values from
  *  bthl_connection_state_t and fd (file descriptor)
  */
-typedef void (* bthl_channel_state_callback)(int app_id, tls_bt_addr_t *bd_addr, int mdep_cfg_index, int channel_id, bthl_channel_state_t state, int fd);
+typedef void (* bthl_channel_state_callback)(int app_id, tls_bt_addr_t *bd_addr, int mdep_cfg_index,
+        int channel_id, bthl_channel_state_t state, int fd);
 
 /** BT-HL callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(bthl_callbacks_t) */
     size_t      size;
     bthl_app_reg_state_callback     app_reg_state_cb;
@@ -93,8 +91,7 @@ typedef struct
 
 
 /** Represents the standard BT-HL interface. */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(bthl_interface_t)  */
     size_t          size;
@@ -111,7 +108,8 @@ typedef struct
     tls_bt_status_t (*unregister_application)(int app_id);
 
     /** connect channel */
-    tls_bt_status_t (*connect_channel)(int app_id, tls_bt_addr_t *bd_addr, int mdep_cfg_index, int *channel_id);
+    tls_bt_status_t (*connect_channel)(int app_id, tls_bt_addr_t *bd_addr, int mdep_cfg_index,
+                                       int *channel_id);
 
     /** destroy channel */
     tls_bt_status_t (*destroy_channel)(int channel_id);

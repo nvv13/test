@@ -130,8 +130,7 @@ typedef uint8_t tL2CAP_CHNL_DATA_RATE;
 **  Type Definitions
 *****************************************************************************/
 
-typedef struct
-{
+typedef struct {
 #define L2CAP_FCR_BASIC_MODE    0x00
 #define L2CAP_FCR_ERTM_MODE     0x03
 #define L2CAP_FCR_STREAM_MODE   0x04
@@ -150,8 +149,7 @@ typedef struct
 ** parameters are optional, for each parameter there is a boolean to
 ** use to signify its presence or absence.
 */
-typedef struct
-{
+typedef struct {
     uint16_t      result;                 /* Only used in confirm messages */
     uint8_t     mtu_present;
     uint16_t      mtu;
@@ -171,8 +169,7 @@ typedef struct
 /* Define a structure to hold the configuration parameter for LE L2CAP connection
 ** oriented channels.
 */
-typedef struct
-{
+typedef struct {
     uint16_t  mtu;
     uint16_t  mps;
     uint16_t  credits;
@@ -299,8 +296,7 @@ typedef void (tL2CA_TX_COMPLETE_CB)(uint16_t, uint16_t);
 ** MUST be provided, with the exception of the "connect pending"
 ** callback and "congestion status" callback.
 */
-typedef struct
-{
+typedef struct {
     tL2CA_CONNECT_IND_CB        *pL2CA_ConnectInd_Cb;
     tL2CA_CONNECT_CFM_CB        *pL2CA_ConnectCfm_Cb;
     tL2CA_CONNECT_PND_CB        *pL2CA_ConnectPnd_Cb;
@@ -318,8 +314,7 @@ typedef struct
 /* Define the structure that applications use to create or accept
 ** connections with enhanced retransmission mode.
 */
-typedef struct
-{
+typedef struct {
     uint8_t       preferred_mode;
     uint8_t       allowed_modes;
     uint16_t      user_rx_buf_size;
@@ -785,7 +780,8 @@ extern uint8_t L2CA_RegForNoCPEvt(tL2CA_NOCP_CB *p_cb, BD_ADDR p_bda);
 ** Returns          TRUE if a valid channel, else FALSE
 **
 *******************************************************************************/
-extern uint8_t L2CA_SetChnlDataRate(uint16_t cid, tL2CAP_CHNL_DATA_RATE tx, tL2CAP_CHNL_DATA_RATE rx);
+extern uint8_t L2CA_SetChnlDataRate(uint16_t cid, tL2CAP_CHNL_DATA_RATE tx,
+                                    tL2CAP_CHNL_DATA_RATE rx);
 
 typedef void (tL2CA_RESERVE_CMPL_CBACK)(void);
 
@@ -915,8 +911,7 @@ typedef void (tL2CA_UCD_CONGESTION_STATUS_CB)(BD_ADDR, uint8_t);
 
 /* UCD registration info (the callback addresses and PSM)
 */
-typedef struct
-{
+typedef struct {
     tL2CA_UCD_DISCOVER_CB           *pL2CA_UCD_Discover_Cb;
     tL2CA_UCD_DATA_CB               *pL2CA_UCD_Data_Cb;
     tL2CA_UCD_CONGESTION_STATUS_CB  *pL2CA_UCD_Congestion_Status_Cb;
@@ -1042,8 +1037,7 @@ typedef void (tL2CA_FIXED_CONGESTION_STATUS_CB)(BD_ADDR, uint8_t);
 
 /* Fixed channel registration info (the callback addresses and channel config)
 */
-typedef struct
-{
+typedef struct {
     tL2CA_FIXED_CHNL_CB    *pL2CA_FixedConn_Cb;
     tL2CA_FIXED_DATA_CB    *pL2CA_FixedData_Cb;
     tL2CA_FIXED_CONGESTION_STATUS_CB *pL2CA_FixedCong_Cb;
@@ -1162,7 +1156,8 @@ extern uint8_t L2CA_GetCurrentConfig(uint16_t lcid,
 ** Returns      TRUE if successful
 **
 *******************************************************************************/
-extern uint8_t L2CA_GetConnectionConfig(uint16_t lcid, uint16_t *mtu, uint16_t *rcid, uint16_t *handle);
+extern uint8_t L2CA_GetConnectionConfig(uint16_t lcid, uint16_t *mtu, uint16_t *rcid,
+                                        uint16_t *handle);
 
 #if (BLE_INCLUDED == TRUE)
 /*******************************************************************************

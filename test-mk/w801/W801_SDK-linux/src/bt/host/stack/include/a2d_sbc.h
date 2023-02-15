@@ -74,8 +74,7 @@
 *****************************************************************************/
 
 /* data type for the SBC Codec Information Element*/
-typedef struct
-{
+typedef struct {
     uint8_t   samp_freq;      /* Sampling frequency */
     uint8_t   ch_mode;        /* Channel mode */
     uint8_t   block_len;      /* Block length */

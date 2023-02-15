@@ -63,10 +63,8 @@ uint8_t bta_gatts_alloc_srvc_cb(tBTA_GATTS_CB *p_cb, uint8_t rcb_idx)
 {
     uint8_t i;
 
-    for(i = 0; i < BTA_GATTS_MAX_SRVC_NUM; i ++)
-    {
-        if(!p_cb->srvc_cb[i].in_use)
-        {
+    for(i = 0; i < BTA_GATTS_MAX_SRVC_NUM; i ++) {
+        if(!p_cb->srvc_cb[i].in_use) {
             p_cb->srvc_cb[i].in_use = TRUE;
             p_cb->srvc_cb[i].rcb_idx = rcb_idx;
             return i;
@@ -79,10 +77,8 @@ void bta_gatts_free_srvc_cb(tBTA_GATTS_CB *p_cb, uint8_t rcb_idx)
 {
     uint8_t i;
 
-    for(i = 0; i < BTA_GATTS_MAX_SRVC_NUM; i ++)
-    {
-        if((p_cb->srvc_cb[i].in_use) && (p_cb->srvc_cb[i].rcb_idx == rcb_idx))
-        {
+    for(i = 0; i < BTA_GATTS_MAX_SRVC_NUM; i ++) {
+        if((p_cb->srvc_cb[i].in_use) && (p_cb->srvc_cb[i].rcb_idx == rcb_idx)) {
             wm_memset(&p_cb->srvc_cb[i], 0, sizeof(tBTA_GATTS_SRVC_CB));
         }
     }
@@ -104,10 +100,8 @@ tBTA_GATTS_RCB *bta_gatts_find_app_rcb_by_app_if(tBTA_GATTS_IF server_if)
     uint8_t i;
     tBTA_GATTS_RCB *p_reg;
 
-    for(i = 0, p_reg = bta_gatts_cb.rcb; i < BTA_GATTS_MAX_APP_NUM; i ++, p_reg++)
-    {
-        if(p_reg->in_use && p_reg->gatt_if == server_if)
-        {
+    for(i = 0, p_reg = bta_gatts_cb.rcb; i < BTA_GATTS_MAX_APP_NUM; i ++, p_reg++) {
+        if(p_reg->in_use && p_reg->gatt_if == server_if) {
             return p_reg;
         }
     }
@@ -129,10 +123,8 @@ uint8_t bta_gatts_find_app_rcb_idx_by_app_if(tBTA_GATTS_CB *p_cb, tBTA_GATTS_IF 
 {
     uint8_t i;
 
-    for(i = 0; i < BTA_GATTS_MAX_APP_NUM; i ++)
-    {
-        if(p_cb->rcb[i].in_use && p_cb->rcb[i].gatt_if == server_if)
-        {
+    for(i = 0; i < BTA_GATTS_MAX_APP_NUM; i ++) {
+        if(p_cb->rcb[i].in_use && p_cb->rcb[i].gatt_if == server_if) {
             return i;
         }
     }
@@ -153,11 +145,9 @@ tBTA_GATTS_SRVC_CB *bta_gatts_find_srvc_cb_by_srvc_id(tBTA_GATTS_CB *p_cb, uint1
     uint8_t i;
     APPL_TRACE_DEBUG("bta_gatts_find_srvc_cb_by_srvc_id  service_id=%d", service_id);
 
-    for(i = 0; i < BTA_GATTS_MAX_SRVC_NUM; i ++)
-    {
+    for(i = 0; i < BTA_GATTS_MAX_SRVC_NUM; i ++) {
         if(p_cb->srvc_cb[i].in_use &&
-                p_cb->srvc_cb[i].service_id == service_id)
-        {
+                p_cb->srvc_cb[i].service_id == service_id) {
             APPL_TRACE_DEBUG("bta_gatts_find_srvc_cb_by_srvc_id  found service cb index =%d", i);
             return &p_cb->srvc_cb[i];
         }
@@ -178,8 +168,7 @@ tBTA_GATTS_SRVC_CB *bta_gatts_find_srvc_cb_by_attr_id(tBTA_GATTS_CB *p_cb, uint1
 {
     uint8_t i;
 
-    for(i = 0; i < (BTA_GATTS_MAX_SRVC_NUM); i ++)
-    {
+    for(i = 0; i < (BTA_GATTS_MAX_SRVC_NUM); i ++) {
         if( /* middle service */
                         (i < (BTA_GATTS_MAX_SRVC_NUM - 1) &&
                          p_cb->srvc_cb[i].in_use &&
@@ -194,8 +183,7 @@ tBTA_GATTS_SRVC_CB *bta_gatts_find_srvc_cb_by_attr_id(tBTA_GATTS_CB *p_cb, uint1
                         /* last service incb */
                         (i == (BTA_GATTS_MAX_SRVC_NUM - 1) &&
                          attr_id >= p_cb->srvc_cb[i].service_id)
-        )
-        {
+        ) {
             return &p_cb->srvc_cb[i];
         }
     }
@@ -217,37 +205,29 @@ uint8_t bta_gatts_uuid_compare(tBT_UUID tar, tBT_UUID src)
     uint8_t  *ps, *pt;
 
     /* any of the UUID is unspecified */
-    if(src.len == 0 || tar.len == 0)
-    {
+    if(src.len == 0 || tar.len == 0) {
         return TRUE;
     }
 
     /* If both are 16-bit, we can do a simple compare */
-    if(src.len == 2 && tar.len == 2)
-    {
+    if(src.len == 2 && tar.len == 2) {
         return src.uu.uuid16 == tar.uu.uuid16;
     }
 
     /* One or both of the UUIDs is 128-bit */
-    if(src.len == LEN_UUID_16)
-    {
+    if(src.len == LEN_UUID_16) {
         /* convert a 16 bits UUID to 128 bits value */
         bta_gatt_convert_uuid16_to_uuid128(su, src.uu.uuid16);
         ps = su;
-    }
-    else
-    {
+    } else {
         ps = src.uu.uuid128;
     }
 
-    if(tar.len == LEN_UUID_16)
-    {
+    if(tar.len == LEN_UUID_16) {
         /* convert a 16 bits UUID to 128 bits value */
         bta_gatt_convert_uuid16_to_uuid128(tu, tar.uu.uuid16);
         pt = tu;
-    }
-    else
-    {
+    } else {
         pt = tar.uu.uuid128;
     }
 

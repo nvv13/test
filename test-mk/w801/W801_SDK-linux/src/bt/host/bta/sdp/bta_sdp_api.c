@@ -36,8 +36,7 @@
 **  Constants
 *****************************************************************************/
 
-static const tBTA_SYS_REG bta_sdp_reg =
-{
+static const tBTA_SYS_REG bta_sdp_reg = {
     bta_sdp_sm_execute,
     NULL
 };
@@ -61,14 +60,12 @@ tBTA_SDP_STATUS BTA_SdpEnable(tBTA_SDP_DM_CBACK *p_cback)
     tBTA_SDP_STATUS status = BTA_SDP_FAILURE;
     APPL_TRACE_API(__FUNCTION__);
 
-    if(p_cback && FALSE == bta_sys_is_register(BTA_ID_SDP))
-    {
+    if(p_cback && FALSE == bta_sys_is_register(BTA_ID_SDP)) {
         wm_memset(&bta_sdp_cb, 0, sizeof(tBTA_SDP_CB));
         /* register with BTA system manager */
         bta_sys_register(BTA_ID_SDP, &bta_sdp_reg);
 
-        if(p_cback)
-        {
+        if(p_cback) {
             tBTA_SDP_API_ENABLE *p_buf =
                             (tBTA_SDP_API_ENABLE *)GKI_getbuf(sizeof(tBTA_SDP_API_ENABLE));
             p_buf->hdr.event = BTA_SDP_API_ENABLE_EVT;

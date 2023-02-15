@@ -25,8 +25,7 @@
 #define BTA_HF_CLIENT_AT_MAX_LEN        512
 
 /* AT command table element */
-typedef struct
-{
+typedef struct {
     const char  *p_cmd;         /* AT command string */
     uint8_t       arg_type;       /* allowable argument type syntax */
     uint8_t       fmt;            /* whether arg is int or string */
@@ -41,8 +40,7 @@ typedef void (tBTA_AG_AT_CMD_CBACK)(void *p_user, uint16_t cmd, uint8_t arg_type
 /* callback function executed to send "ERROR" result code */
 typedef void (tBTA_AG_AT_ERR_CBACK)(void *p_user, uint8_t unknown, char *p_arg);
 
-enum
-{
+enum {
     BTA_HF_CLIENT_AT_NONE,
     BTA_HF_CLIENT_AT_BRSF,
     BTA_HF_CLIENT_AT_BAC,
@@ -78,8 +76,7 @@ typedef uint8_t tBTA_HF_CLIENT_AT_CMD;
 #define BTA_HF_CLIENT_AT_PARSER_MAX_LEN        374
 
 /* This structure holds prepared AT command queued for sending */
-struct queued_at_cmd
-{
+struct queued_at_cmd {
     tBTA_HF_CLIENT_AT_CMD cmd;
     char buf[BTA_HF_CLIENT_AT_MAX_LEN];
     uint16_t buf_len;
@@ -91,9 +88,9 @@ typedef struct queued_at_cmd tBTA_HF_CLIENT_AT_QCMD;
 #define BTA_HF_CLIENT_AT_INDICATOR_COUNT 20
 
 /* AT command parsing control block */
-typedef struct
-{
-    char                    buf[BTA_HF_CLIENT_AT_PARSER_MAX_LEN + 1]; /* extra byte to always have \0 at the end */
+typedef struct {
+    char                    buf[BTA_HF_CLIENT_AT_PARSER_MAX_LEN +
+                                                                1]; /* extra byte to always have \0 at the end */
     unsigned int            offset;
     tBTA_HF_CLIENT_AT_CMD   current_cmd;
     tBTA_HF_CLIENT_AT_QCMD  *queued_cmd;

@@ -132,8 +132,8 @@ extern uint8_t btsnd_hcic_disconnect(uint16_t handle, uint8_t reason);
 /* Disconnect */
 
 #if BTM_SCO_INCLUDED == TRUE
-    /* Add SCO Connection */
-    extern uint8_t btsnd_hcic_add_SCO_conn(uint16_t handle, uint16_t packet_types);
+/* Add SCO Connection */
+extern uint8_t btsnd_hcic_add_SCO_conn(uint16_t handle, uint16_t packet_types);
 #endif /* BTM_SCO_INCLUDED */
 
 #define HCIC_PARAM_SIZE_ADD_SCO_CONN    4
@@ -583,9 +583,9 @@ extern uint8_t btsnd_hcic_write_default_erroneous_data_rpt(uint8_t level);
 
 
 #if L2CAP_NON_FLUSHABLE_PB_INCLUDED == TRUE
-    extern uint8_t btsnd_hcic_enhanced_flush(uint16_t handle, uint8_t packet_type);
+extern uint8_t btsnd_hcic_enhanced_flush(uint16_t handle, uint8_t packet_type);
 
-    #define HCIC_PARAM_SIZE_ENHANCED_FLUSH  3
+#define HCIC_PARAM_SIZE_ENHANCED_FLUSH  3
 #endif
 
 
@@ -597,7 +597,8 @@ extern uint8_t btsnd_hcic_send_keypress_notif(BD_ADDR bd_addr, uint8_t notif);
 #define HCI_SEND_KEYPRESS_NOTIF_NOTIF_OFF      6
 
 
-extern uint8_t btsnd_hcic_refresh_encryption_key(uint16_t handle);       /* Refresh Encryption Key */
+extern uint8_t btsnd_hcic_refresh_encryption_key(uint16_t
+        handle);       /* Refresh Encryption Key */
 
 /**** end of Simple Pairing Commands ****/
 
@@ -637,7 +638,8 @@ extern uint8_t btsnd_hcic_set_event_filter(uint8_t filt_type,
 #define HCI_FILT_COND_FILT_OFF          2
 /* Set Event Filter */
 
-extern uint8_t btsnd_hcic_flush(uint8_t local_controller_id, uint16_t handle);                 /* Flush */
+extern uint8_t btsnd_hcic_flush(uint8_t local_controller_id,
+                                uint16_t handle);                 /* Flush */
 
 /* Create New Unit Type */
 extern uint8_t btsnd_hcic_new_unit_key(void);
@@ -708,13 +710,16 @@ extern uint8_t btsnd_hcic_write_pin_type(uint8_t type);                   /* Wri
 extern uint8_t btsnd_hcic_read_auto_accept(void);                       /* Read Auto Accept */
 extern uint8_t btsnd_hcic_write_auto_accept(uint8_t flag);                /* Write Auto Accept */
 extern uint8_t btsnd_hcic_read_name(void);                              /* Read Local Name */
-extern uint8_t btsnd_hcic_read_conn_acc_tout(uint8_t local_controller_id);       /* Read Connection Accept Timout */
-extern uint8_t btsnd_hcic_write_conn_acc_tout(uint8_t local_controller_id, uint16_t tout);   /* Write Connection Accept Timout */
+extern uint8_t btsnd_hcic_read_conn_acc_tout(uint8_t
+        local_controller_id);       /* Read Connection Accept Timout */
+extern uint8_t btsnd_hcic_write_conn_acc_tout(uint8_t local_controller_id,
+        uint16_t tout);   /* Write Connection Accept Timout */
 extern uint8_t btsnd_hcic_read_page_tout(void);                         /* Read Page Timout */
 extern uint8_t btsnd_hcic_write_page_tout(uint16_t timeout);              /* Write Page Timout */
 extern uint8_t btsnd_hcic_read_scan_enable(void);                       /* Read Scan Enable */
 extern uint8_t btsnd_hcic_write_scan_enable(uint8_t flag);                /* Write Scan Enable */
-extern uint8_t btsnd_hcic_read_pagescan_cfg(void);                      /* Read Page Scan Activity */
+extern uint8_t btsnd_hcic_read_pagescan_cfg(
+                void);                      /* Read Page Scan Activity */
 
 extern uint8_t btsnd_hcic_write_pagescan_cfg(uint16_t interval,
         uint16_t window);            /* Write Page Scan Activity */
@@ -736,14 +741,18 @@ extern uint8_t btsnd_hcic_write_inqscan_cfg(uint16_t interval, uint16_t window);
 #define HCI_SCAN_CFG_WINDOW_OFF         2
 /* Write Inquiry Scan Activity */
 
-extern uint8_t btsnd_hcic_read_auth_enable(void);                        /* Read Authentication Enable */
-extern uint8_t btsnd_hcic_write_auth_enable(uint8_t flag);                 /* Write Authentication Enable */
+extern uint8_t btsnd_hcic_read_auth_enable(
+                void);                        /* Read Authentication Enable */
+extern uint8_t btsnd_hcic_write_auth_enable(uint8_t
+        flag);                 /* Write Authentication Enable */
 extern uint8_t btsnd_hcic_read_encr_mode(void);                          /* Read encryption mode */
-extern uint8_t btsnd_hcic_write_encr_mode(uint8_t mode);                   /* Write encryption mode */
+extern uint8_t btsnd_hcic_write_encr_mode(uint8_t
+        mode);                   /* Write encryption mode */
 extern uint8_t btsnd_hcic_read_dev_class(void);                          /* Read Class of Device */
 extern uint8_t btsnd_hcic_write_dev_class(DEV_CLASS dev);                /* Write Class of Device */
 extern uint8_t btsnd_hcic_read_voice_settings(void);                     /* Read Voice Settings */
-extern uint8_t btsnd_hcic_write_voice_settings(uint16_t flags);            /* Write Voice Settings */
+extern uint8_t btsnd_hcic_write_voice_settings(uint16_t
+        flags);            /* Write Voice Settings */
 
 /* Host Controller to Host flow control */
 #define HCI_HOST_FLOW_CTRL_OFF          0
@@ -751,7 +760,8 @@ extern uint8_t btsnd_hcic_write_voice_settings(uint16_t flags);            /* Wr
 #define HCI_HOST_FLOW_CTRL_SCO_ON       2
 #define HCI_HOST_FLOW_CTRL_BOTH_ON      3
 
-extern uint8_t btsnd_hcic_set_host_flow_ctrl(uint8_t value);          /* Enable/disable flow control toward host */
+extern uint8_t btsnd_hcic_set_host_flow_ctrl(uint8_t
+        value);          /* Enable/disable flow control toward host */
 
 
 extern uint8_t btsnd_hcic_read_auto_flush_tout(uint16_t handle);      /* Read Retransmit Timout */
@@ -764,10 +774,14 @@ extern uint8_t btsnd_hcic_write_auto_flush_tout(uint16_t handle,
 #define HCI_FLUSH_TOUT_HANDLE_OFF       0
 #define HCI_FLUSH_TOUT_TOUT_OFF         2
 
-extern uint8_t btsnd_hcic_read_num_bcast_xmit(void);                    /* Read Num Broadcast Retransmits */
-extern uint8_t btsnd_hcic_write_num_bcast_xmit(uint8_t num);              /* Write Num Broadcast Retransmits */
-extern uint8_t btsnd_hcic_read_hold_mode_act(void);                     /* Read Hold Mode Activity */
-extern uint8_t btsnd_hcic_write_hold_mode_act(uint8_t flags);             /* Write Hold Mode Activity */
+extern uint8_t btsnd_hcic_read_num_bcast_xmit(
+                void);                    /* Read Num Broadcast Retransmits */
+extern uint8_t btsnd_hcic_write_num_bcast_xmit(uint8_t
+        num);              /* Write Num Broadcast Retransmits */
+extern uint8_t btsnd_hcic_read_hold_mode_act(
+                void);                     /* Read Hold Mode Activity */
+extern uint8_t btsnd_hcic_write_hold_mode_act(uint8_t
+        flags);             /* Write Hold Mode Activity */
 
 extern uint8_t btsnd_hcic_read_tx_power(uint16_t handle, uint8_t type);     /* Read Tx Power */
 
@@ -780,8 +794,10 @@ extern uint8_t btsnd_hcic_read_tx_power(uint16_t handle, uint8_t type);     /* R
 #define HCI_READ_CURRENT                0x00
 #define HCI_READ_MAXIMUM                0x01
 
-extern uint8_t btsnd_hcic_read_sco_flow_enable(void);                       /* Read Authentication Enable */
-extern uint8_t btsnd_hcic_write_sco_flow_enable(uint8_t flag);                /* Write Authentication Enable */
+extern uint8_t btsnd_hcic_read_sco_flow_enable(
+                void);                       /* Read Authentication Enable */
+extern uint8_t btsnd_hcic_write_sco_flow_enable(uint8_t
+        flag);                /* Write Authentication Enable */
 
 /* Set Host Buffer Size */
 extern uint8_t btsnd_hcic_set_host_buf_size(uint16_t acl_len,
@@ -809,10 +825,12 @@ extern uint8_t btsnd_hcic_host_num_xmitted_pkts(uint8_t num_handles,
 #define HCI_PKTS_DONE_HANDLE_OFF        1
 #define HCI_PKTS_DONE_NUM_PKTS_OFF      3
 
-extern uint8_t btsnd_hcic_read_link_super_tout(uint8_t local_controller_id, uint16_t handle);   /* Read Link Supervision Timeout */
+extern uint8_t btsnd_hcic_read_link_super_tout(uint8_t local_controller_id,
+        uint16_t handle);   /* Read Link Supervision Timeout */
 
 /* Write Link Supervision Timeout */
-extern uint8_t btsnd_hcic_write_link_super_tout(uint8_t local_controller_id, uint16_t handle, uint16_t timeout);
+extern uint8_t btsnd_hcic_write_link_super_tout(uint8_t local_controller_id, uint16_t handle,
+        uint16_t timeout);
 
 #define HCIC_PARAM_SIZE_WRITE_LINK_SUPER_TOUT        4
 
@@ -843,43 +861,52 @@ extern uint8_t btsnd_hcic_read_clock(uint16_t handle, uint8_t which_clock);
 
 #ifdef TESTER_ENABLE
 
-    #define HCIC_PARAM_SIZE_ENTER_TEST_MODE  2
+#define HCIC_PARAM_SIZE_ENTER_TEST_MODE  2
 
-    #define HCI_ENTER_TEST_HANDLE_OFF        0
+#define HCI_ENTER_TEST_HANDLE_OFF        0
 
-    #define HCIC_PARAM_SIZE_TEST_CNTRL          10
-    #define HCI_TEST_CNTRL_HANDLE_OFF           0
-    #define HCI_TEST_CNTRL_SCENARIO_OFF         2
-    #define HCI_TEST_CNTRL_HOPPINGMODE_OFF      3
-    #define HCI_TEST_CNTRL_TX_FREQ_OFF          4
-    #define HCI_TEST_CNTRL_RX_FREQ_OFF          5
-    #define HCI_TEST_CNTRL_PWR_CNTRL_MODE_OFF   6
-    #define HCI_TEST_CNTRL_POLL_PERIOD_OFF      7
-    #define HCI_TEST_CNTRL_PKT_TYPE_OFF         8
-    #define HCI_TEST_CNTRL_LENGTH_OFF           9
+#define HCIC_PARAM_SIZE_TEST_CNTRL          10
+#define HCI_TEST_CNTRL_HANDLE_OFF           0
+#define HCI_TEST_CNTRL_SCENARIO_OFF         2
+#define HCI_TEST_CNTRL_HOPPINGMODE_OFF      3
+#define HCI_TEST_CNTRL_TX_FREQ_OFF          4
+#define HCI_TEST_CNTRL_RX_FREQ_OFF          5
+#define HCI_TEST_CNTRL_PWR_CNTRL_MODE_OFF   6
+#define HCI_TEST_CNTRL_POLL_PERIOD_OFF      7
+#define HCI_TEST_CNTRL_PKT_TYPE_OFF         8
+#define HCI_TEST_CNTRL_LENGTH_OFF           9
 
 #endif
 
-extern uint8_t btsnd_hcic_read_page_scan_per(void);                    /* Read Page Scan Period Mode */
-extern uint8_t btsnd_hcic_write_page_scan_per(uint8_t mode);             /* Write Page Scan Period Mode */
+extern uint8_t btsnd_hcic_read_page_scan_per(
+                void);                    /* Read Page Scan Period Mode */
+extern uint8_t btsnd_hcic_write_page_scan_per(uint8_t
+        mode);             /* Write Page Scan Period Mode */
 extern uint8_t btsnd_hcic_read_page_scan_mode(void);                   /* Read Page Scan Mode */
 extern uint8_t btsnd_hcic_write_page_scan_mode(uint8_t mode);            /* Write Page Scan Mode */
-extern uint8_t btsnd_hcic_read_local_ver(uint8_t local_controller_id);          /* Read Local Version Info */
-extern uint8_t btsnd_hcic_read_local_supported_cmds(uint8_t local_controller_id);   /* Read Local Supported Commands */
-extern uint8_t btsnd_hcic_read_local_features(void);                   /* Read Local Supported Features */
+extern uint8_t btsnd_hcic_read_local_ver(uint8_t
+        local_controller_id);          /* Read Local Version Info */
+extern uint8_t btsnd_hcic_read_local_supported_cmds(uint8_t
+        local_controller_id);   /* Read Local Supported Commands */
+extern uint8_t btsnd_hcic_read_local_features(
+                void);                   /* Read Local Supported Features */
 extern uint8_t btsnd_hcic_read_buffer_size(void);                      /* Read Local buffer sizes */
 extern uint8_t btsnd_hcic_read_country_code(void);                     /* Read Country Code */
 extern uint8_t btsnd_hcic_read_bd_addr(void);                          /* Read Local BD_ADDR */
-extern uint8_t btsnd_hcic_read_fail_contact_count(uint8_t local_controller_id, uint16_t handle);   /* Read Failed Contact Counter */
-extern uint8_t btsnd_hcic_reset_fail_contact_count(uint8_t local_controller_id, uint16_t handle);   /* Reset Failed Contact Counter */
+extern uint8_t btsnd_hcic_read_fail_contact_count(uint8_t local_controller_id,
+        uint16_t handle);   /* Read Failed Contact Counter */
+extern uint8_t btsnd_hcic_reset_fail_contact_count(uint8_t local_controller_id,
+        uint16_t handle);   /* Reset Failed Contact Counter */
 extern uint8_t btsnd_hcic_get_link_quality(uint16_t handle);             /* Get Link Quality */
 extern uint8_t btsnd_hcic_read_rssi(uint16_t handle);                    /* Read RSSI */
 extern uint8_t btsnd_hcic_read_loopback_mode(void);                    /* Read Loopback Mode */
 extern uint8_t btsnd_hcic_write_loopback_mode(uint8_t mode);             /* Write Loopback Mode */
-extern uint8_t btsnd_hcic_enable_test_mode(void);                      /* Enable Device Under Test Mode */
+extern uint8_t btsnd_hcic_enable_test_mode(
+                void);                      /* Enable Device Under Test Mode */
 extern uint8_t btsnd_hcic_write_pagescan_type(uint8_t type);             /* Write Page Scan Type */
 extern uint8_t btsnd_hcic_read_pagescan_type(void);                    /* Read Page Scan Type */
-extern uint8_t btsnd_hcic_write_inqscan_type(uint8_t type);              /* Write Inquiry Scan Type */
+extern uint8_t btsnd_hcic_write_inqscan_type(uint8_t
+        type);              /* Write Inquiry Scan Type */
 extern uint8_t btsnd_hcic_read_inqscan_type(void);                     /* Read Inquiry Scan Type */
 extern uint8_t btsnd_hcic_write_inquiry_mode(uint8_t type);              /* Write Inquiry Mode */
 extern uint8_t btsnd_hcic_read_inquiry_mode(void);                     /* Read Inquiry Mode */
@@ -891,7 +918,8 @@ extern uint8_t btsnd_hcic_read_afh_channel_map(uint16_t handle);
 extern uint8_t btsnd_hcic_nop(void);                               /* NOP */
 
 /* Send HCI Data */
-extern void btsnd_hcic_data(BT_HDR *p_buf, uint16_t len, uint16_t handle, uint8_t boundary, uint8_t broadcast);
+extern void btsnd_hcic_data(BT_HDR *p_buf, uint16_t len, uint16_t handle, uint8_t boundary,
+                            uint8_t broadcast);
 
 #define HCI_DATA_HANDLE_MASK 0x0FFF
 
@@ -953,7 +981,8 @@ extern void btsnd_hcie_connection_comp(void *buffer, uint8_t status, uint16_t ha
 
 
 /* Connection Request Event */
-extern void btsnd_hcie_connection_req(void *buffer, BD_ADDR bd_addr, DEV_CLASS dev_class, uint8_t link_type);
+extern void btsnd_hcie_connection_req(void *buffer, BD_ADDR bd_addr, DEV_CLASS dev_class,
+                                      uint8_t link_type);
 
 #define HCIE_PARAM_SIZE_CONNECTION_REQ  10
 
@@ -974,13 +1003,15 @@ extern void btsnd_hcie_auth_comp(void *buffer, uint8_t status, uint16_t handle);
 
 
 /* Remote Name Request Complete Event */
-extern void btsnd_hcie_rmt_name_req_comp(void *buffer, uint8_t status, BD_ADDR bd_addr, BD_NAME name);
+extern void btsnd_hcie_rmt_name_req_comp(void *buffer, uint8_t status, BD_ADDR bd_addr,
+        BD_NAME name);
 
 #define HCIE_PARAM_SIZE_RMT_NAME_REQ_COMP  (1 + BD_ADDR_LEN + BD_NAME_LEN)
 
 
 /* Encryption Change Event */
-extern void btsnd_hcie_encryption_change(void *buffer, uint8_t status, uint16_t handle, uint8_t enable);
+extern void btsnd_hcie_encryption_change(void *buffer, uint8_t status, uint16_t handle,
+        uint8_t enable);
 
 #define HCIE_PARAM_SIZE_ENCR_CHANGE  4
 
@@ -1004,14 +1035,16 @@ extern void btsnd_hcie_master_link_key(void *buffer, uint8_t status, uint16_t ha
 
 
 /* Read Remote Supported Features Complete Event */
-extern void btsnd_hcie_read_rmt_features(void *buffer, uint8_t status, uint16_t handle, uint8_t *features);
+extern void btsnd_hcie_read_rmt_features(void *buffer, uint8_t status, uint16_t handle,
+        uint8_t *features);
 
 #define LMP_FEATURES_SIZE   8
 #define HCIE_PARAM_SIZE_READ_RMT_FEATURES  11
 
 
 /* Read Remote Extended Features Complete Event */
-extern void btsnd_hcie_read_rmt_ext_features(void *buffer, uint8_t status, uint16_t handle, uint8_t page_num,
+extern void btsnd_hcie_read_rmt_ext_features(void *buffer, uint8_t status, uint16_t handle,
+        uint8_t page_num,
         uint8_t max_page_num, uint8_t *features);
 
 #define EXT_LMP_FEATURES_SIZE   8
@@ -1019,7 +1052,8 @@ extern void btsnd_hcie_read_rmt_ext_features(void *buffer, uint8_t status, uint1
 
 
 /* Read Remote Version Complete Event */
-extern void btsnd_hcie_read_rmt_version(void *buffer, uint8_t status, uint16_t handle, uint8_t version,
+extern void btsnd_hcie_read_rmt_version(void *buffer, uint8_t status, uint16_t handle,
+                                        uint8_t version,
                                         uint16_t comp_name, uint16_t sub_version);
 
 #define HCIE_PARAM_SIZE_READ_RMT_VERSION  8
@@ -1042,13 +1076,15 @@ extern void btsnd_hcie_flow_spec_compl(void *buffer, uint8_t status, uint16_t ha
 
 
 /*  Command Complete Event */
-extern void btsnd_hcie_cmd_comp(void *buffer, uint8_t max_host_cmds, uint16_t opcode, uint8_t status);
+extern void btsnd_hcie_cmd_comp(void *buffer, uint8_t max_host_cmds, uint16_t opcode,
+                                uint8_t status);
 
 #define HCIE_PARAM_SIZE_CMD_COMP  4
 
 
 /*  Command Complete with pre-filled in parameters */
-extern void btsnd_hcie_cmd_comp_params(void *buffer, uint8_t max_host_cmds, uint16_t cmd_opcode, uint8_t status);
+extern void btsnd_hcie_cmd_comp_params(void *buffer, uint8_t max_host_cmds, uint16_t cmd_opcode,
+                                       uint8_t status);
 
 #define HCI_CMD_COMPL_PARAM_OFFSET 4
 
@@ -1074,7 +1110,8 @@ extern void btsnd_hcie_cmd_comp_bd_addr(void *buffer, uint8_t max_host_cmds, uin
 
 
 /*  Command Pending Event */
-extern void btsnd_hcie_cmd_status(void *buffer, uint8_t status, uint8_t max_host_cmds, uint16_t opcode);
+extern void btsnd_hcie_cmd_status(void *buffer, uint8_t status, uint8_t max_host_cmds,
+                                  uint16_t opcode);
 
 #define HCIE_PARAM_SIZE_CMD_STATUS  4
 
@@ -1098,7 +1135,8 @@ extern void btsnd_hcie_role_change(void *buffer, uint8_t status, BD_ADDR bd_addr
 
 
 /* Ready for Data Packets Event */
-extern void btsnd_hcie_num_compl_pkts(void *buffer, uint8_t num_handles, uint16_t *p_handle, uint16_t *num_pkts);
+extern void btsnd_hcie_num_compl_pkts(void *buffer, uint8_t num_handles, uint16_t *p_handle,
+                                      uint16_t *num_pkts);
 
 #define MAX_DATA_HANDLES        10
 
@@ -1113,7 +1151,8 @@ extern void btsnd_hcie_mode_change(void *buffer, uint8_t status, uint16_t handle
 
 
 /* Return Link Keys Event */
-extern void btsnd_hcie_return_link_keys(void *buffer, uint8_t num_keys, BD_ADDR *bd_addr, LINK_KEY *link_key);
+extern void btsnd_hcie_return_link_keys(void *buffer, uint8_t num_keys, BD_ADDR *bd_addr,
+                                        LINK_KEY *link_key);
 
 /* This should not be more than 0x0b */
 #define MAX_LINK_KEYS 10
@@ -1135,7 +1174,8 @@ extern void btsnd_hcie_link_key_req(void *buffer, BD_ADDR bd_addr);
 
 
 /* Link Key Notification Event */
-extern void btsnd_hcie_link_key_notify(void *buffer, BD_ADDR bd_addr, LINK_KEY link_key, uint8_t key_type);
+extern void btsnd_hcie_link_key_notify(void *buffer, BD_ADDR bd_addr, LINK_KEY link_key,
+                                       uint8_t key_type);
 
 #define HCIE_PARAM_SIZE_LINK_KEY_NOTIFY  23
 
@@ -1170,7 +1210,8 @@ extern void btsnd_hcie_read_clock_off_comp(void *buffer, uint8_t status, uint16_
 
 
 /* Connection Packet Type Change Event */
-extern void btsnd_hcie_pkt_type_change(void *buffer, uint8_t status, uint16_t handle, uint16_t pkt_type);
+extern void btsnd_hcie_pkt_type_change(void *buffer, uint8_t status, uint16_t handle,
+                                       uint16_t pkt_type);
 
 #define HCIE_PARAM_SIZE_PKT_TYPE_CHANGE  5
 
@@ -1196,7 +1237,8 @@ extern void btsnd_hcie_pagescan_rep_mode_chng(void *buffer, BD_ADDR bd_addr, uin
 
 
 /* Sniff Sub Rate Event */
-extern void btsnd_hcie_sniff_sub_rate(void *buffer, uint8_t status, uint16_t handle, uint16_t max_tx_lat, uint16_t max_rx_lat,
+extern void btsnd_hcie_sniff_sub_rate(void *buffer, uint8_t status, uint16_t handle,
+                                      uint16_t max_tx_lat, uint16_t max_rx_lat,
                                       uint16_t min_remote_timeout, uint16_t min_local_timeout);
 
 #define HCIE_PARAM_SIZE_SNIFF_SUB_RATE  11
@@ -1302,7 +1344,8 @@ extern uint8_t btsnd_hcic_ble_add_white_list(uint8_t addr_type, BD_ADDR bda);
 
 extern uint8_t btsnd_hcic_ble_remove_from_white_list(uint8_t addr_type, BD_ADDR bda);
 
-extern uint8_t btsnd_hcic_ble_upd_ll_conn_params(uint16_t handle, uint16_t conn_int_min, uint16_t conn_int_max,
+extern uint8_t btsnd_hcic_ble_upd_ll_conn_params(uint16_t handle, uint16_t conn_int_min,
+        uint16_t conn_int_max,
         uint16_t conn_latency, uint16_t conn_timeout, uint16_t min_len, uint16_t max_len);
 
 extern uint8_t btsnd_hcic_ble_set_host_chnl_class(uint8_t chnl_map[HCIC_BLE_CHNL_MAP_SIZE]);
@@ -1311,7 +1354,8 @@ extern uint8_t btsnd_hcic_ble_read_chnl_map(uint16_t handle);
 
 extern uint8_t btsnd_hcic_ble_read_remote_feat(uint16_t handle);
 
-extern uint8_t btsnd_hcic_ble_encrypt(uint8_t *key, uint8_t key_len, uint8_t *plain_text, uint8_t pt_len, void *p_cmd_cplt_cback);
+extern uint8_t btsnd_hcic_ble_encrypt(uint8_t *key, uint8_t key_len, uint8_t *plain_text,
+                                      uint8_t pt_len, void *p_cmd_cplt_cback);
 
 extern uint8_t btsnd_hcic_ble_rand(void *p_cmd_cplt_cback);
 

@@ -40,14 +40,12 @@
 **  Local type definitions
 *******************************************************************************/
 
-typedef enum
-{
+typedef enum {
     BTIF_QUEUE_CONNECT_EVT,
     BTIF_QUEUE_ADVANCE_EVT,
 } btif_queue_event_t;
 
-typedef struct
-{
+typedef struct {
     tls_bt_addr_t bda;
     uint16_t uuid;
     uint8_t busy;
@@ -68,8 +66,7 @@ static const size_t MAX_REASONABLE_REQUESTS = 10;
 
 static void queue_int_add(connect_node_t *p_param)
 {
-    if(!connect_queue)
-    {
+    if(!connect_queue) {
         connect_queue = list_new(GKI_freebuf);
         assert(connect_queue != NULL);
     }
@@ -77,10 +74,9 @@ static void queue_int_add(connect_node_t *p_param)
     // Sanity check to make sure we're not leaking connection requests
     assert(list_length(connect_queue) < MAX_REASONABLE_REQUESTS);
 
-    for(const list_node_t *node = list_begin(connect_queue); node != list_end(connect_queue); node = list_next(node))
-    {
-        if(((connect_node_t *)list_node(node))->uuid == p_param->uuid)
-        {
+    for(const list_node_t *node = list_begin(connect_queue); node != list_end(connect_queue);
+            node = list_next(node)) {
+        if(((connect_node_t *)list_node(node))->uuid == p_param->uuid) {
             LOG_INFO(LOG_TAG, "%s dropping duplicate connect request for uuid: %04x", __func__, p_param->uuid);
             return;
         }
@@ -93,16 +89,14 @@ static void queue_int_add(connect_node_t *p_param)
 
 static void queue_int_advance()
 {
-    if(connect_queue && !list_is_empty(connect_queue))
-    {
+    if(connect_queue && !list_is_empty(connect_queue)) {
         list_remove(connect_queue, list_front(connect_queue));
     }
 }
 
 static void queue_int_handle_evt(uint16_t event, char *p_param)
 {
-    switch(event)
-    {
+    switch(event) {
         case BTIF_QUEUE_CONNECT_EVT:
             queue_int_add((connect_node_t *)p_param);
             break;
@@ -125,7 +119,8 @@ static void queue_int_handle_evt(uint16_t event, char *p_param)
 ** Returns          BT_STATUS_SUCCESS if successful
 **
 *******************************************************************************/
-tls_bt_status_t btif_queue_connect(uint16_t uuid, const tls_bt_addr_t *bda, btif_connect_cb_t connect_cb)
+tls_bt_status_t btif_queue_connect(uint16_t uuid, const tls_bt_addr_t *bda,
+                                   btif_connect_cb_t connect_cb)
 {
     connect_node_t node;
     wm_memset(&node, 0, sizeof(connect_node_t));
@@ -156,8 +151,7 @@ void btif_queue_advance()
 // stack_manager when the stack comes up.
 tls_bt_status_t btif_queue_connect_next(void)
 {
-    if(!connect_queue || list_is_empty(connect_queue))
-    {
+    if(!connect_queue || list_is_empty(connect_queue)) {
         return TLS_BT_STATUS_FAIL;
     }
 
@@ -165,8 +159,7 @@ tls_bt_status_t btif_queue_connect_next(void)
 
     // If the queue is currently busy, we return success anyway,
     // since the connection has been queued...
-    if(p_head->busy)
-    {
+    if(p_head->busy) {
         return TLS_BT_STATUS_SUCCESS;
     }
 

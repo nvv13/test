@@ -57,13 +57,11 @@ static void btif_mce_mas_discovery_comp_evt(uint16_t event, char *p_param)
     int i;
     BTIF_TRACE_EVENT("%s:  event = %d", __FUNCTION__, event);
 
-    if(event != BTA_MCE_MAS_DISCOVERY_COMP_EVT)
-    {
+    if(event != BTA_MCE_MAS_DISCOVERY_COMP_EVT) {
         return;
     }
 
-    for(i = 0; i < evt_data->num_mas; i++)
-    {
+    for(i = 0; i < evt_data->num_mas; i++) {
         insts[i].id = evt_data->mas[i].instance_id;
         insts[i].scn = evt_data->mas[i].scn;
         insts[i].msg_types = evt_data->mas[i].msg_type;
@@ -71,7 +69,8 @@ static void btif_mce_mas_discovery_comp_evt(uint16_t event, char *p_param)
     }
 
     bdcpy(addr.address, evt_data->remote_addr);
-    HAL_CBACK(bt_mce_callbacks, remote_mas_instances_cb, evt_data->status, &addr, evt_data->num_mas, insts);
+    HAL_CBACK(bt_mce_callbacks, remote_mas_instances_cb, evt_data->status, &addr, evt_data->num_mas,
+              insts);
 }
 
 static void mas_discovery_comp_copy_cb(uint16_t event, char *p_dest, char *p_src)
@@ -81,21 +80,18 @@ static void mas_discovery_comp_copy_cb(uint16_t event, char *p_dest, char *p_src
     char *p_dest_str;
     int i;
 
-    if(!p_src)
-    {
+    if(!p_src) {
         return;
     }
 
-    if(event != BTA_MCE_MAS_DISCOVERY_COMP_EVT)
-    {
+    if(event != BTA_MCE_MAS_DISCOVERY_COMP_EVT) {
         return;
     }
 
     maybe_non_aligned_memcpy(p_dest_data, p_src_data, sizeof(*p_src_data));
     p_dest_str = p_dest + sizeof(tBTA_MCE_MAS_DISCOVERY_COMP);
 
-    for(i = 0; i < p_src_data->num_mas; i++)
-    {
+    for(i = 0; i < p_src_data->num_mas; i++) {
         p_dest_data->mas[i].p_srv_name = p_dest_str;
         wm_memcpy(p_dest_str, p_src_data->mas[i].p_srv_name, p_src_data->mas[i].srv_name_len);
         p_dest_str += p_src_data->mas[i].srv_name_len;
@@ -105,16 +101,13 @@ static void mas_discovery_comp_copy_cb(uint16_t event, char *p_dest, char *p_src
 
 static void mce_dm_cback(tBTA_MCE_EVT event, tBTA_MCE *p_data, void *user_data)
 {
-    switch(event)
-    {
-        case BTA_MCE_MAS_DISCOVERY_COMP_EVT:
-        {
+    switch(event) {
+        case BTA_MCE_MAS_DISCOVERY_COMP_EVT: {
             int i;
             uint16_t param_len = sizeof(tBTA_MCE);
 
             /* include space for all p_srv_name copies including null-termination */
-            for(i = 0; i < p_data->mas_disc_comp.num_mas; i++)
-            {
+            for(i = 0; i < p_data->mas_disc_comp.num_mas; i++) {
                 param_len += (p_data->mas_disc_comp.mas[i].srv_name_len + 1);
             }
 
@@ -137,13 +130,13 @@ static tls_bt_status_t init(btmce_callbacks_t *callbacks)
 static tls_bt_status_t get_remote_mas_instances(tls_bt_addr_t *bd_addr)
 {
     bdstr_t bdstr;
-    BTIF_TRACE_EVENT("%s: remote_addr=%s", __FUNCTION__, bdaddr_to_string(bd_addr, bdstr, sizeof(bdstr)));
+    BTIF_TRACE_EVENT("%s: remote_addr=%s", __FUNCTION__, bdaddr_to_string(bd_addr, bdstr,
+                     sizeof(bdstr)));
     BTA_MceGetRemoteMasInstances(bd_addr->address);
     return TLS_BT_STATUS_SUCCESS;
 }
 
-static const btmce_interface_t mce_if =
-{
+static const btmce_interface_t mce_if = {
     sizeof(btmce_interface_t),
     init,
     get_remote_mas_instances,
@@ -168,12 +161,9 @@ tls_bt_status_t btif_mce_execute_service(uint8_t b_enable)
 {
     BTIF_TRACE_EVENT("%s enable:%d", __FUNCTION__, b_enable);
 
-    if(b_enable)
-    {
+    if(b_enable) {
         BTA_MceEnable(mce_dm_cback);
-    }
-    else
-    {
+    } else {
         /* This is called on BT disable so no need to extra cleanup */
     }
 

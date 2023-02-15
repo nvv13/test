@@ -37,7 +37,8 @@ This file drives SBC decoding.
 #include "oi_bitstream.h"
 #include <stdio.h>
 
-OI_CHAR *const OI_Codec_Copyright = "Copyright 2002-2007 Open Interface North America, Inc. All rights reserved";
+OI_CHAR *const OI_Codec_Copyright =
+                "Copyright 2002-2007 Open Interface North America, Inc. All rights reserved";
 
 INLINE OI_STATUS internal_DecoderReset(OI_CODEC_SBC_DECODER_CONTEXT *context,
                                        OI_UINT32 *decoderData,
@@ -49,26 +50,24 @@ INLINE OI_STATUS internal_DecoderReset(OI_CODEC_SBC_DECODER_CONTEXT *context,
     OI_UINT i;
     OI_STATUS status;
 
-    for(i = 0; i < sizeof(*context); i++)
-    {
+    for(i = 0; i < sizeof(*context); i++) {
         ((char *)context)[i] = 0;
     }
 
-    #ifdef SBC_ENHANCED
+#ifdef SBC_ENHANCED
     context->enhancedEnabled = enhanced ? TRUE : FALSE;
-    #else
+#else
     context->enhancedEnabled = FALSE;
 
-    if(enhanced)
-    {
+    if(enhanced) {
         return OI_STATUS_INVALID_PARAMETERS;
     }
 
-    #endif
-    status = OI_CODEC_SBC_Alloc(&context->common, decoderData, decoderDataBytes, maxChannels, pcmStride);
+#endif
+    status = OI_CODEC_SBC_Alloc(&context->common, decoderData, decoderDataBytes, maxChannels,
+                                pcmStride);
 
-    if(!OI_SUCCESS(status))
-    {
+    if(!OI_SUCCESS(status)) {
         return status;
     }
 
@@ -99,8 +98,7 @@ INLINE void OI_SBC_ReadHeader(OI_CODEC_SBC_COMMON_CONTEXT *common, const OI_BYTE
      */
     d1 = data[1];
 
-    if(d1 != frame->cachedInfo)
-    {
+    if(d1 != frame->cachedInfo) {
         frame->freqIndex = (d1 & (BIT7 | BIT6)) >> 6;
         frame->frequency = freq_values[frame->freqIndex];
         frame->blocks = (d1 & (BIT5 | BIT4)) >> 4;
@@ -135,21 +133,16 @@ PRIVATE void OI_SBC_ReadScalefactors(OI_CODEC_SBC_COMMON_CONTEXT *common,
     OI_INT8 *scale_factor = common->scale_factor;
     OI_UINT f;
 
-    if(common->frameInfo.nrof_subbands == 8 || common->frameInfo.mode != SBC_JOINT_STEREO)
-    {
-        if(common->frameInfo.mode == SBC_JOINT_STEREO)
-        {
+    if(common->frameInfo.nrof_subbands == 8 || common->frameInfo.mode != SBC_JOINT_STEREO) {
+        if(common->frameInfo.mode == SBC_JOINT_STEREO) {
             common->frameInfo.join = *b++;
-        }
-        else
-        {
+        } else {
             common->frameInfo.join = 0;
         }
 
         i /= 2;
 
-        do
-        {
+        do {
             *scale_factor++ = HIGH(f = *b++);
             *scale_factor++ = LOW(f);
         } while(--i);
@@ -159,15 +152,12 @@ PRIVATE void OI_SBC_ReadScalefactors(OI_CODEC_SBC_COMMON_CONTEXT *common,
          * is initialize the bitstream.
          */
         OI_BITSTREAM_ReadInit(bs, b);
-    }
-    else
-    {
+    } else {
         OI_ASSERT(common->frameInfo.nrof_subbands == 4 && common->frameInfo.mode == SBC_JOINT_STEREO);
         common->frameInfo.join = HIGH(f = *b++);
         i = (i - 1) / 2;
 
-        do
-        {
+        do {
             *scale_factor++ = LOW(f);
             *scale_factor++ = HIGH(f = *b++);
         } while(--i);
@@ -194,45 +184,36 @@ PRIVATE void OI_SBC_ReadSamples(OI_CODEC_SBC_DECODER_CONTEXT *context, OI_BITSTR
     OI_UINT bitPtr = global_bs->bitPtr;
     const OI_UINT iter_count = common->frameInfo.nrof_channels * common->frameInfo.nrof_subbands / 4;
 
-    do
-    {
+    do {
         OI_UINT i;
 
-        for(i = 0; i < iter_count; ++i)
-        {
+        for(i = 0; i < iter_count; ++i) {
             OI_UINT32 sf_by4 = ((OI_UINT32 *)common->scale_factor)[i];
             OI_UINT32 bits_by4 = common->bits.uint32[i];
             OI_UINT n;
 
-            for(n = 0; n < 4; ++n)
-            {
+            for(n = 0; n < 4; ++n) {
                 OI_INT32 dequant;
                 OI_UINT bits;
                 OI_INT sf;
 
-                if(OI_CPU_BYTE_ORDER == OI_LITTLE_ENDIAN_BYTE_ORDER)
-                {
+                if(OI_CPU_BYTE_ORDER == OI_LITTLE_ENDIAN_BYTE_ORDER) {
                     bits = bits_by4 & 0xFF;
                     bits_by4 >>= 8;
                     sf = sf_by4 & 0xFF;
                     sf_by4 >>= 8;
-                }
-                else
-                {
+                } else {
                     bits = (bits_by4 >> 24) & 0xFF;
                     bits_by4 <<= 8;
                     sf = (sf_by4 >> 24) & 0xFF;
                     sf_by4 <<= 8;
                 }
 
-                if(bits)
-                {
+                if(bits) {
                     OI_UINT32 raw;
                     OI_BITSTREAM_READUINT(raw, bits, ptr, value, bitPtr);
                     dequant = OI_SBC_Dequant(raw, sf, bits);
-                }
-                else
-                {
+                } else {
                     dequant = 0;
                 }
 

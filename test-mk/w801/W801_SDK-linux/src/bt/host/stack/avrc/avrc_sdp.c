@@ -28,18 +28,18 @@
 #include "avrc_int.h"
 
 #ifndef SDP_AVRCP_1_4
-    #define SDP_AVRCP_1_4      TRUE
+#define SDP_AVRCP_1_4      TRUE
 #endif
 
 #ifndef SDP_AVCTP_1_4
-    #define SDP_AVCTP_1_4      TRUE
+#define SDP_AVCTP_1_4      TRUE
 #endif
 
 /*****************************************************************************
 **  Global data
 *****************************************************************************/
 #if AVRC_DYNAMIC_MEMORY == FALSE
-    tAVRC_CB avrc_cb;
+tAVRC_CB avrc_cb;
 #endif
 
 /******************************************************************************
@@ -118,16 +118,15 @@ uint16_t AVRC_FindService(uint16_t service_uuid, BD_ADDR bd_addr,
                                     };
     AVRC_TRACE_API("AVRC_FindService uuid: %x", service_uuid);
 
-    if((service_uuid != UUID_SERVCLASS_AV_REM_CTRL_TARGET && service_uuid != UUID_SERVCLASS_AV_REMOTE_CONTROL) ||
-            p_db == NULL || p_db->p_db == NULL || p_cback == NULL)
-    {
+    if((service_uuid != UUID_SERVCLASS_AV_REM_CTRL_TARGET
+            && service_uuid != UUID_SERVCLASS_AV_REMOTE_CONTROL) ||
+            p_db == NULL || p_db->p_db == NULL || p_cback == NULL) {
         return AVRC_BAD_PARAM;
     }
 
     /* check if it is busy */
     if(avrc_cb.service_uuid == UUID_SERVCLASS_AV_REM_CTRL_TARGET ||
-            avrc_cb.service_uuid == UUID_SERVCLASS_AV_REMOTE_CONTROL)
-    {
+            avrc_cb.service_uuid == UUID_SERVCLASS_AV_REMOTE_CONTROL) {
         return AVRC_NO_RESOURCES;
     }
 
@@ -135,8 +134,7 @@ uint16_t AVRC_FindService(uint16_t service_uuid, BD_ADDR bd_addr,
     uuid_list.len = LEN_UUID_16;
     uuid_list.uu.uuid16 = service_uuid;
 
-    if(p_db->p_attrs == NULL || p_db->num_attr == 0)
-    {
+    if(p_db->p_attrs == NULL || p_db->num_attr == 0) {
         p_db->p_attrs  = a2d_attr_list;
         p_db->num_attr = AVRC_NUM_ATTR;
     }
@@ -144,8 +142,7 @@ uint16_t AVRC_FindService(uint16_t service_uuid, BD_ADDR bd_addr,
     result = SDP_InitDiscoveryDb(p_db->p_db, p_db->db_len, 1, &uuid_list, p_db->num_attr,
                                  p_db->p_attrs);
 
-    if(result == TRUE)
-    {
+    if(result == TRUE) {
         /* store service_uuid and discovery db pointer */
         avrc_cb.p_db = p_db->p_db;
         avrc_cb.service_uuid = service_uuid;
@@ -205,16 +202,15 @@ uint16_t AVRC_AddRecord(uint16_t service_uuid, char *p_service_name,
     uint16_t      class_list[2];
     AVRC_TRACE_API("AVRC_AddRecord uuid: %x", service_uuid);
 
-    if(service_uuid != UUID_SERVCLASS_AV_REM_CTRL_TARGET && service_uuid != UUID_SERVCLASS_AV_REMOTE_CONTROL)
-    {
+    if(service_uuid != UUID_SERVCLASS_AV_REM_CTRL_TARGET
+            && service_uuid != UUID_SERVCLASS_AV_REMOTE_CONTROL) {
         return AVRC_BAD_PARAM;
     }
 
     /* add service class id list */
     class_list[0] = service_uuid;
 
-    if((service_uuid == UUID_SERVCLASS_AV_REMOTE_CONTROL) && (profile_version > AVRC_REV_1_3))
-    {
+    if((service_uuid == UUID_SERVCLASS_AV_REMOTE_CONTROL) && (profile_version > AVRC_REV_1_3)) {
         class_list[1] = UUID_SERVCLASS_AV_REM_CTRL_CONTROL;
         count = 2;
     }
@@ -227,8 +223,7 @@ uint16_t AVRC_AddRecord(uint16_t service_uuid, char *p_service_name,
     avrc_proto_desc_list[0].params[0] = AVCT_PSM;
     avrc_proto_desc_list[0].params[1] = 0;
 
-    for(index = 1; index < AVRC_NUM_PROTO_ELEMS; index++)
-    {
+    for(index = 1; index < AVRC_NUM_PROTO_ELEMS; index++) {
         avrc_proto_desc_list[index].num_params = 1;
         avrc_proto_desc_list[index].protocol_uuid = UUID_PROTOCOL_AVCTP;
         avrc_proto_desc_list[index].params[0] = AVCT_REV_1_4;
@@ -239,8 +234,7 @@ uint16_t AVRC_AddRecord(uint16_t service_uuid, char *p_service_name,
                                   (tSDP_PROTOCOL_ELEM *)avrc_proto_desc_list);
 
     /* additional protocal descriptor, required only for version > 1.3    */
-    if((profile_version > AVRC_REV_1_3) && (browse_supported))
-    {
+    if((profile_version > AVRC_REV_1_3) && (browse_supported)) {
         tSDP_PROTO_LIST_ELEM  avrc_add_proto_desc_list;
         avrc_add_proto_desc_list.num_elems = 2;
         avrc_add_proto_desc_list.list_elem[0].num_params = 1;
@@ -251,11 +245,13 @@ uint16_t AVRC_AddRecord(uint16_t service_uuid, char *p_service_name,
         avrc_add_proto_desc_list.list_elem[1].protocol_uuid = UUID_PROTOCOL_AVCTP;
         avrc_add_proto_desc_list.list_elem[1].params[0] = AVCT_REV_1_4;
         avrc_add_proto_desc_list.list_elem[1].params[1] = 0;
-        result &= SDP_AddAdditionProtoLists(sdp_handle, 1, (tSDP_PROTO_LIST_ELEM *)&avrc_add_proto_desc_list);
+        result &= SDP_AddAdditionProtoLists(sdp_handle, 1,
+                                            (tSDP_PROTO_LIST_ELEM *)&avrc_add_proto_desc_list);
     }
 
     /* add profile descriptor list   */
-    result &= SDP_AddProfileDescriptorList(sdp_handle, UUID_SERVCLASS_AV_REMOTE_CONTROL, profile_version);
+    result &= SDP_AddProfileDescriptorList(sdp_handle, UUID_SERVCLASS_AV_REMOTE_CONTROL,
+                                           profile_version);
     /* add supported categories */
     p = temp;
     UINT16_TO_BE_STREAM(p, categories);
@@ -263,15 +259,13 @@ uint16_t AVRC_AddRecord(uint16_t service_uuid, char *p_service_name,
                                (uint32_t)2, (uint8_t *)temp);
 
     /* add provider name */
-    if(p_provider_name != NULL)
-    {
+    if(p_provider_name != NULL) {
         result &= SDP_AddAttribute(sdp_handle, ATTR_ID_PROVIDER_NAME, TEXT_STR_DESC_TYPE,
                                    (uint32_t)(strlen(p_provider_name) + 1), (uint8_t *) p_provider_name);
     }
 
     /* add service name */
-    if(p_service_name != NULL)
-    {
+    if(p_service_name != NULL) {
         result &= SDP_AddAttribute(sdp_handle, ATTR_ID_SERVICE_NAME, TEXT_STR_DESC_TYPE,
                                    (uint32_t)(strlen(p_service_name) + 1), (uint8_t *) p_service_name);
     }
@@ -307,8 +301,7 @@ uint16_t AVRC_AddRecord(uint16_t service_uuid, char *p_service_name,
 ******************************************************************************/
 uint8_t AVRC_SetTraceLevel(uint8_t new_level)
 {
-    if(new_level != 0xFF)
-    {
+    if(new_level != 0xFF) {
         avrc_cb.trace_level = new_level;
     }
 
@@ -329,10 +322,10 @@ uint8_t AVRC_SetTraceLevel(uint8_t new_level)
 void AVRC_Init(void)
 {
     wm_memset(&avrc_cb, 0, sizeof(tAVRC_CB));
-    #if defined(AVRC_INITIAL_TRACE_LEVEL)
+#if defined(AVRC_INITIAL_TRACE_LEVEL)
     avrc_cb.trace_level  = AVRC_INITIAL_TRACE_LEVEL;
-    #else
+#else
     avrc_cb.trace_level  = BT_TRACE_LEVEL_NONE;
-    #endif
+#endif
 }
 

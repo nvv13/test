@@ -57,8 +57,7 @@ extern fixed_queue_t *btu_general_alarm_queue;
 #define SMP_PAIR_KEYPR_NOTIF_SIZE       (1 /* opcode */ + 1 /*Notif Type*/)
 
 /* SMP command sizes per spec */
-static const uint8_t smp_cmd_size_per_spec[] =
-{
+static const uint8_t smp_cmd_size_per_spec[] = {
     0,
     SMP_PAIRING_REQ_SIZE,       /* 0x01: pairing request */
     SMP_PAIRING_REQ_SIZE,       /* 0x02: pairing response */
@@ -85,8 +84,7 @@ typedef uint8_t (*tSMP_CMD_LEN_VALID)(tSMP_CB *p_cb);
 
 static uint8_t smp_command_has_valid_fixed_length(tSMP_CB *p_cb);
 
-static const tSMP_CMD_LEN_VALID smp_cmd_len_is_valid[] =
-{
+static const tSMP_CMD_LEN_VALID smp_cmd_len_is_valid[] = {
     smp_parameter_unconditionally_invalid,
     smp_command_has_valid_fixed_length, /* 0x01: pairing request */
     smp_command_has_valid_fixed_length, /* 0x02: pairing response */
@@ -111,8 +109,7 @@ typedef uint8_t (*tSMP_CMD_PARAM_RANGES_VALID)(tSMP_CB *p_cb);
 static uint8_t smp_pairing_request_response_parameters_are_valid(tSMP_CB *p_cb);
 static uint8_t smp_pairing_keypress_notification_is_valid(tSMP_CB *p_cb);
 
-static const tSMP_CMD_PARAM_RANGES_VALID smp_cmd_param_ranges_are_valid[] =
-{
+static const tSMP_CMD_PARAM_RANGES_VALID smp_cmd_param_ranges_are_valid[] = {
     smp_parameter_unconditionally_invalid,
     smp_pairing_request_response_parameters_are_valid, /* 0x01: pairing request */
     smp_pairing_request_response_parameters_are_valid, /* 0x02: pairing response */
@@ -149,8 +146,7 @@ static BT_HDR *smp_build_pairing_commitment_cmd(uint8_t cmd_code, tSMP_CB *p_cb)
 static BT_HDR *smp_build_pair_dhkey_check_cmd(uint8_t cmd_code, tSMP_CB *p_cb);
 static BT_HDR *smp_build_pairing_keypress_notification_cmd(uint8_t cmd_code, tSMP_CB *p_cb);
 
-static const tSMP_CMD_ACT smp_cmd_build_act[] =
-{
+static const tSMP_CMD_ACT smp_cmd_build_act[] = {
     NULL,
     smp_build_pairing_cmd,          /* 0x01: pairing request */
     smp_build_pairing_cmd,          /* 0x02: pairing response */
@@ -169,8 +165,7 @@ static const tSMP_CMD_ACT smp_cmd_build_act[] =
     smp_build_pairing_commitment_cmd /* 0x0F: pairing commitment */
 };
 
-static const uint8_t smp_association_table[2][SMP_IO_CAP_MAX][SMP_IO_CAP_MAX] =
-{
+static const uint8_t smp_association_table[2][SMP_IO_CAP_MAX][SMP_IO_CAP_MAX] = {
     /* display only */    /* Display Yes/No */   /* keyboard only */
     /* No Input/Output */ /* keyboard display */
 
@@ -241,8 +236,7 @@ static const uint8_t smp_association_table[2][SMP_IO_CAP_MAX][SMP_IO_CAP_MAX] =
     }
 };
 
-static const uint8_t smp_association_table_sc[2][SMP_IO_CAP_MAX][SMP_IO_CAP_MAX] =
-{
+static const uint8_t smp_association_table_sc[2][SMP_IO_CAP_MAX][SMP_IO_CAP_MAX] = {
     /* display only */    /* Display Yes/No */   /* keyboard only */
     /* No InputOutput */  /* keyboard display */
 
@@ -330,30 +324,26 @@ uint8_t  smp_send_msg_to_L2CAP(BD_ADDR rem_bda, BT_HDR *p_toL2CAP)
     uint16_t l2cap_ret;
     uint16_t fixed_cid = L2CAP_SMP_CID;
 
-    if(smp_cb.smp_over_br)
-    {
+    if(smp_cb.smp_over_br) {
         fixed_cid = L2CAP_SMP_BR_CID;
     }
 
     SMP_TRACE_EVENT("%s", __FUNCTION__);
     smp_cb.total_tx_unacked += 1;
 
-    if((l2cap_ret = L2CA_SendFixedChnlData(fixed_cid, rem_bda, p_toL2CAP)) == L2CAP_DW_FAILED)
-    {
+    if((l2cap_ret = L2CA_SendFixedChnlData(fixed_cid, rem_bda, p_toL2CAP)) == L2CAP_DW_FAILED) {
         smp_cb.total_tx_unacked -= 1;
         SMP_TRACE_ERROR("SMP   failed to pass msg:0x%0x to L2CAP",
                         *((uint8_t *)(p_toL2CAP + 1) + p_toL2CAP->offset));
         return FALSE;
-    }
-    else
-    {
+    } else {
         return TRUE;
     }
 }
 
 
 #ifndef CASE_RETURN_STR
-    #define CASE_RETURN_STR(const) case const: return #const;
+#define CASE_RETURN_STR(const) case const: return #const;
 #endif
 
 
@@ -361,8 +351,7 @@ uint8_t  smp_send_msg_to_L2CAP(BD_ADDR rem_bda, BT_HDR *p_toL2CAP)
 
 static char *smp_code_2_str(uint8_t event)
 {
-    switch(event)
-    {
+    switch(event) {
             CASE_RETURN_STR(SMP_OPCODE_PAIRING_REQ)
             CASE_RETURN_STR(SMP_OPCODE_PAIRING_RSP)
             CASE_RETURN_STR(SMP_OPCODE_CONFIRM)
@@ -399,40 +388,36 @@ uint8_t smp_send_cmd(uint8_t cmd_code, tSMP_CB *p_cb)
     BT_HDR *p_buf;
     uint8_t sent = FALSE;
     uint8_t failure = SMP_PAIR_INTERNAL_ERR;
-    #if SMP_OPCODE_DEBUG == 1
-    SMP_TRACE_EVENT("<===smp_send_cmd on l2cap cmd_code=[%s][%d]\r\n", smp_code_2_str(cmd_code), cmd_code);
-    #endif
+#if SMP_OPCODE_DEBUG == 1
+    SMP_TRACE_EVENT("<===smp_send_cmd on l2cap cmd_code=[%s][%d]\r\n", smp_code_2_str(cmd_code),
+                    cmd_code);
+#endif
 
     if(cmd_code <= (SMP_OPCODE_MAX + 1 /* for SMP_OPCODE_PAIR_COMMITM */) &&
-            smp_cmd_build_act[cmd_code] != NULL)
-    {
+            smp_cmd_build_act[cmd_code] != NULL) {
         p_buf = (*smp_cmd_build_act[cmd_code])(cmd_code, p_cb);
 
         if(p_buf != NULL &&
-                smp_send_msg_to_L2CAP(p_cb->pairing_bda, p_buf))
-        {
+                smp_send_msg_to_L2CAP(p_cb->pairing_bda, p_buf)) {
             sent = TRUE;
-            #ifdef USE_ALARM
+#ifdef USE_ALARM
             alarm_set_on_queue(p_cb->smp_rsp_timer_ent,
                                SMP_WAIT_FOR_RSP_TIMEOUT_MS, smp_rsp_timeout,
                                NULL, btu_general_alarm_queue);
-            #else
+#else
             btu_stop_timer(&p_cb->smp_rsp_timer_ent);
             p_cb->smp_rsp_timer_ent.p_cback = (TIMER_CBACK *)&smp_rsp_timeout;
             p_cb->smp_rsp_timer_ent.param = (TIMER_PARAM_TYPE)NULL;
-            btu_start_timer(&p_cb->smp_rsp_timer_ent, BTU_TTYPE_SMP_PAIRING_CMD, SMP_WAIT_FOR_RSP_TIMEOUT_MS / 1000);
-            #endif
+            btu_start_timer(&p_cb->smp_rsp_timer_ent, BTU_TTYPE_SMP_PAIRING_CMD,
+                            SMP_WAIT_FOR_RSP_TIMEOUT_MS / 1000);
+#endif
         }
     }
 
-    if(!sent)
-    {
-        if(p_cb->smp_over_br)
-        {
+    if(!sent) {
+        if(p_cb->smp_over_br) {
             smp_br_state_machine_event(p_cb, SMP_BR_AUTH_CMPL_EVT, &failure);
-        }
-        else
-        {
+        } else {
             smp_sm_event(p_cb, SMP_AUTH_CMPL_EVT, &failure);
         }
     }
@@ -455,12 +440,9 @@ void smp_rsp_timeout(UNUSED_ATTR void *data)
     uint8_t failure = SMP_RSP_TIMEOUT;
     SMP_TRACE_EVENT("%s state:%d br_state:%d", __FUNCTION__, p_cb->state, p_cb->br_state);
 
-    if(p_cb->smp_over_br)
-    {
+    if(p_cb->smp_over_br) {
         smp_br_state_machine_event(p_cb, SMP_BR_AUTH_CMPL_EVT, &failure);
-    }
-    else
-    {
+    } else {
         smp_sm_event(p_cb, SMP_AUTH_CMPL_EVT, &failure);
     }
 }
@@ -828,10 +810,8 @@ void smp_mask_enc_key(uint8_t loc_enc_size, uint8_t *p_data)
 {
     SMP_TRACE_EVENT("smp_mask_enc_key");
 
-    if(loc_enc_size < BT_OCTET16_LEN)
-    {
-        for(; loc_enc_size < BT_OCTET16_LEN; loc_enc_size ++)
-        {
+    if(loc_enc_size < BT_OCTET16_LEN) {
+        for(; loc_enc_size < BT_OCTET16_LEN; loc_enc_size ++) {
             * (p_data + loc_enc_size) = 0;
         }
     }
@@ -854,8 +834,7 @@ void smp_xor_128(BT_OCTET16 a, BT_OCTET16 b)
     uint8_t i, *aa = a, *bb = b;
     SMP_TRACE_EVENT("smp_xor_128");
 
-    for(i = 0; i < BT_OCTET16_LEN; i++)
-    {
+    for(i = 0; i < BT_OCTET16_LEN; i++) {
         aa[i] = aa[i] ^ bb[i];
     }
 }
@@ -874,15 +853,15 @@ void smp_cb_cleanup(tSMP_CB   *p_cb)
     tSMP_CALLBACK   *p_callback = p_cb->p_callback;
     uint8_t           trace_level = p_cb->trace_level;
     SMP_TRACE_EVENT("smp_cb_cleanup");
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_free(p_cb->smp_rsp_timer_ent);
-    #endif
+#endif
     wm_memset(p_cb, 0, sizeof(tSMP_CB));
     p_cb->p_callback = p_callback;
     p_cb->trace_level = trace_level;
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     p_cb->smp_rsp_timer_ent = alarm_new("smp.smp_rsp_timer_ent");
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -898,12 +877,9 @@ void smp_remove_fixed_channel(tSMP_CB *p_cb)
 {
     SMP_TRACE_DEBUG("%s", __func__);
 
-    if(p_cb->smp_over_br)
-    {
+    if(p_cb->smp_over_br) {
         L2CA_RemoveFixedChnl(L2CAP_SMP_BR_CID, p_cb->pairing_bda);
-    }
-    else
-    {
+    } else {
         L2CA_RemoveFixedChnl(L2CAP_SMP_CID, p_cb->pairing_bda);
     }
 }
@@ -922,11 +898,11 @@ void smp_remove_fixed_channel(tSMP_CB *p_cb)
 void smp_reset_control_value(tSMP_CB *p_cb)
 {
     SMP_TRACE_EVENT("%s", __func__);
-    #ifdef USE_ALARM
+#ifdef USE_ALARM
     alarm_cancel(p_cb->smp_rsp_timer_ent);
-    #else
+#else
     btu_stop_timer(&p_cb->smp_rsp_timer_ent);
-    #endif
+#endif
     p_cb->flags = 0;
     /* set the link idle timer to drop the link when pairing is done
        usually service discovery will follow authentication complete, to avoid
@@ -957,15 +933,13 @@ void smp_proc_pairing_cmpl(tSMP_CB *p_cb)
     evt_data.cmplt.reason = p_cb->status;
     evt_data.cmplt.smp_over_br = p_cb->smp_over_br;
 
-    if(p_cb->status == SMP_SUCCESS)
-    {
+    if(p_cb->status == SMP_SUCCESS) {
         evt_data.cmplt.sec_level = p_cb->sec_level;
     }
 
     evt_data.cmplt.is_pair_cancel  = FALSE;
 
-    if(p_cb->is_pair_cancel)
-    {
+    if(p_cb->is_pair_cancel) {
         evt_data.cmplt.is_pair_cancel = TRUE;
     }
 
@@ -975,8 +949,7 @@ void smp_proc_pairing_cmpl(tSMP_CB *p_cb)
     wm_memcpy(pairing_bda, p_cb->pairing_bda, BD_ADDR_LEN);
     smp_reset_control_value(p_cb);
 
-    if(p_callback)
-    {
+    if(p_callback) {
         (*p_callback)(SMP_COMPLT_EVT, pairing_bda, &evt_data);
     }
 }
@@ -999,19 +972,16 @@ uint8_t smp_command_has_invalid_parameters(tSMP_CB *p_cb)
     SMP_TRACE_DEBUG("%s for cmd code 0x%02x", __func__, cmd_code);
 
     if((cmd_code > (SMP_OPCODE_MAX + 1 /* for SMP_OPCODE_PAIR_COMMITM */)) ||
-            (cmd_code < SMP_OPCODE_MIN))
-    {
+            (cmd_code < SMP_OPCODE_MIN)) {
         SMP_TRACE_WARNING("Somehow received command with the RESERVED code 0x%02x", cmd_code);
         return TRUE;
     }
 
-    if(!(*smp_cmd_len_is_valid[cmd_code])(p_cb))
-    {
+    if(!(*smp_cmd_len_is_valid[cmd_code])(p_cb)) {
         return TRUE;
     }
 
-    if(!(*smp_cmd_param_ranges_are_valid[cmd_code])(p_cb))
-    {
+    if(!(*smp_cmd_param_ranges_are_valid[cmd_code])(p_cb)) {
         return TRUE;
     }
 
@@ -1034,8 +1004,7 @@ uint8_t smp_command_has_valid_fixed_length(tSMP_CB *p_cb)
     uint8_t   cmd_code = p_cb->rcvd_cmd_code;
     SMP_TRACE_DEBUG("%s for cmd code 0x%02x", __func__, cmd_code);
 
-    if(p_cb->rcvd_cmd_len != smp_cmd_size_per_spec[cmd_code])
-    {
+    if(p_cb->rcvd_cmd_len != smp_cmd_size_per_spec[cmd_code]) {
         SMP_TRACE_WARNING("Rcvd from the peer cmd 0x%02x with invalid length\
             0x%02x (per spec the length is 0x%02x).",
                           cmd_code, p_cb->rcvd_cmd_len, smp_cmd_size_per_spec[cmd_code]);
@@ -1067,32 +1036,28 @@ uint8_t smp_pairing_request_response_parameters_are_valid(tSMP_CB *p_cb)
     uint8_t   enc_size = p_cb->peer_enc_size;
     SMP_TRACE_DEBUG("%s for cmd code 0x%02x", __func__, p_cb->rcvd_cmd_code);
 
-    if(io_caps >= BTM_IO_CAP_MAX)
-    {
+    if(io_caps >= BTM_IO_CAP_MAX) {
         SMP_TRACE_WARNING("Rcvd from the peer cmd 0x%02x with IO Capabilty \
             value (0x%02x) out of range).",
                           p_cb->rcvd_cmd_code, io_caps);
         return FALSE;
     }
 
-    if(!((oob_flag == SMP_OOB_NONE) || (oob_flag == SMP_OOB_PRESENT)))
-    {
+    if(!((oob_flag == SMP_OOB_NONE) || (oob_flag == SMP_OOB_PRESENT))) {
         SMP_TRACE_WARNING("Rcvd from the peer cmd 0x%02x with OOB data flag value \
             (0x%02x) out of range).",
                           p_cb->rcvd_cmd_code, oob_flag);
         return FALSE;
     }
 
-    if(!((bond_flag == SMP_AUTH_NO_BOND) || (bond_flag == SMP_AUTH_BOND)))
-    {
+    if(!((bond_flag == SMP_AUTH_NO_BOND) || (bond_flag == SMP_AUTH_BOND))) {
         SMP_TRACE_WARNING("Rcvd from the peer cmd 0x%02x with Bonding_Flags value (0x%02x)\
                            out of range).",
                           p_cb->rcvd_cmd_code, bond_flag);
         return FALSE;
     }
 
-    if((enc_size < SMP_ENCR_KEY_SIZE_MIN) || (enc_size > SMP_ENCR_KEY_SIZE_MAX))
-    {
+    if((enc_size < SMP_ENCR_KEY_SIZE_MIN) || (enc_size > SMP_ENCR_KEY_SIZE_MAX)) {
         SMP_TRACE_WARNING("Rcvd from the peer cmd 0x%02x with Maximum Encryption \
             Key value (0x%02x) out of range).",
                           p_cb->rcvd_cmd_code, enc_size);
@@ -1116,8 +1081,7 @@ uint8_t smp_pairing_keypress_notification_is_valid(tSMP_CB *p_cb)
     tBTM_SP_KEY_TYPE keypress_notification = p_cb->peer_keypress_notification;
     SMP_TRACE_DEBUG("%s for cmd code 0x%02x", __func__, p_cb->rcvd_cmd_code);
 
-    if(keypress_notification >= BTM_SP_KEY_OUT_OF_RANGE)
-    {
+    if(keypress_notification >= BTM_SP_KEY_OUT_OF_RANGE) {
         SMP_TRACE_WARNING("Rcvd from the peer cmd 0x%02x with Pairing Keypress \
             Notification value (0x%02x) out of range).",
                           p_cb->rcvd_cmd_code, keypress_notification);
@@ -1206,19 +1170,15 @@ tSMP_ASSO_MODEL smp_select_association_model(tSMP_CB *p_cb)
                     __FUNCTION__, p_cb->secure_connections_only_mode_required ?
                     "TRUE" : "FALSE");
 
-    if((p_cb->peer_auth_req & SMP_SC_SUPPORT_BIT) && (p_cb->loc_auth_req & SMP_SC_SUPPORT_BIT))
-    {
+    if((p_cb->peer_auth_req & SMP_SC_SUPPORT_BIT) && (p_cb->loc_auth_req & SMP_SC_SUPPORT_BIT)) {
         p_cb->le_secure_connections_mode_is_used = TRUE;
     }
 
     SMP_TRACE_DEBUG("use_sc_process = %d", p_cb->le_secure_connections_mode_is_used);
 
-    if(p_cb->le_secure_connections_mode_is_used)
-    {
+    if(p_cb->le_secure_connections_mode_is_used) {
         model = smp_select_association_model_secure_connections(p_cb);
-    }
-    else
-    {
+    } else {
         model = smp_select_legacy_association_model(p_cb);
     }
 
@@ -1238,27 +1198,21 @@ tSMP_ASSO_MODEL smp_select_legacy_association_model(tSMP_CB *p_cb)
     SMP_TRACE_DEBUG("%s", __func__);
 
     /* if OOB data is present on both devices, then use OOB association model */
-    if(p_cb->peer_oob_flag == SMP_OOB_PRESENT && p_cb->loc_oob_flag == SMP_OOB_PRESENT)
-    {
+    if(p_cb->peer_oob_flag == SMP_OOB_PRESENT && p_cb->loc_oob_flag == SMP_OOB_PRESENT) {
         return SMP_MODEL_OOB;
     }
 
     /* else if neither device requires MITM, then use Just Works association model */
-    if(SMP_NO_MITM_REQUIRED(p_cb->peer_auth_req) && SMP_NO_MITM_REQUIRED(p_cb->loc_auth_req))
-    {
+    if(SMP_NO_MITM_REQUIRED(p_cb->peer_auth_req) && SMP_NO_MITM_REQUIRED(p_cb->loc_auth_req)) {
         return SMP_MODEL_ENCRYPTION_ONLY;
     }
 
     /* otherwise use IO capability to select association model */
-    if(p_cb->peer_io_caps < SMP_IO_CAP_MAX && p_cb->local_io_capability < SMP_IO_CAP_MAX)
-    {
-        if(p_cb->role == HCI_ROLE_MASTER)
-        {
+    if(p_cb->peer_io_caps < SMP_IO_CAP_MAX && p_cb->local_io_capability < SMP_IO_CAP_MAX) {
+        if(p_cb->role == HCI_ROLE_MASTER) {
             model = smp_association_table[p_cb->role][p_cb->peer_io_caps]
                     [p_cb->local_io_capability];
-        }
-        else
-        {
+        } else {
             model = smp_association_table[p_cb->role][p_cb->local_io_capability]
                     [p_cb->peer_io_caps];
         }
@@ -1280,27 +1234,21 @@ tSMP_ASSO_MODEL smp_select_association_model_secure_connections(tSMP_CB *p_cb)
     SMP_TRACE_DEBUG("%s", __func__);
 
     /* if OOB data is present on at least one device, then use OOB association model */
-    if(p_cb->peer_oob_flag == SMP_OOB_PRESENT || p_cb->loc_oob_flag == SMP_OOB_PRESENT)
-    {
+    if(p_cb->peer_oob_flag == SMP_OOB_PRESENT || p_cb->loc_oob_flag == SMP_OOB_PRESENT) {
         return SMP_MODEL_SEC_CONN_OOB;
     }
 
     /* else if neither device requires MITM, then use Just Works association model */
-    if(SMP_NO_MITM_REQUIRED(p_cb->peer_auth_req) && SMP_NO_MITM_REQUIRED(p_cb->loc_auth_req))
-    {
+    if(SMP_NO_MITM_REQUIRED(p_cb->peer_auth_req) && SMP_NO_MITM_REQUIRED(p_cb->loc_auth_req)) {
         return SMP_MODEL_SEC_CONN_JUSTWORKS;
     }
 
     /* otherwise use IO capability to select association model */
-    if(p_cb->peer_io_caps < SMP_IO_CAP_MAX && p_cb->local_io_capability < SMP_IO_CAP_MAX)
-    {
-        if(p_cb->role == HCI_ROLE_MASTER)
-        {
+    if(p_cb->peer_io_caps < SMP_IO_CAP_MAX && p_cb->local_io_capability < SMP_IO_CAP_MAX) {
+        if(p_cb->role == HCI_ROLE_MASTER) {
             model = smp_association_table_sc[p_cb->role][p_cb->peer_io_caps]
                     [p_cb->local_io_capability];
-        }
-        else
-        {
+        } else {
             model = smp_association_table_sc[p_cb->role][p_cb->local_io_capability]
                     [p_cb->peer_io_caps];
         }
@@ -1320,8 +1268,7 @@ void smp_reverse_array(uint8_t *arr, uint8_t len)
     uint8_t i = 0, tmp;
     SMP_TRACE_DEBUG("smp_reverse_array");
 
-    for(i = 0; i < len / 2; i ++)
-    {
+    for(i = 0; i < len / 2; i ++) {
         tmp = arr[i];
         arr[i] = arr[len - 1 - i];
         arr[len - 1 - i] = tmp;
@@ -1422,8 +1369,7 @@ void smp_collect_peer_ble_address(uint8_t *le_addr, tSMP_CB *p_cb)
     uint8_t           *p = le_addr;
     SMP_TRACE_DEBUG("%s", __func__);
 
-    if(!BTM_ReadRemoteConnectionAddr(p_cb->pairing_bda, bda, &addr_type))
-    {
+    if(!BTM_ReadRemoteConnectionAddr(p_cb->pairing_bda, bda, &addr_type)) {
         SMP_TRACE_ERROR("can not collect peer le addr information for unknown device");
         return;
     }
@@ -1451,8 +1397,7 @@ uint8_t smp_check_commitment(tSMP_CB *p_cb)
     print128(expected, (const uint8_t *)"calculated peer commitment");
     print128(p_cb->remote_commitment, (const uint8_t *)"received peer commitment");
 
-    if(memcmp(p_cb->remote_commitment, expected, BT_OCTET16_LEN))
-    {
+    if(memcmp(p_cb->remote_commitment, expected, BT_OCTET16_LEN)) {
         SMP_TRACE_WARNING("Commitment check fails");
         return FALSE;
     }
@@ -1510,23 +1455,19 @@ uint8_t smp_calculate_f5_mackey_and_long_term_key(tSMP_CB *p_cb)
     uint8_t *p_nb;
     SMP_TRACE_DEBUG("%s", __func__);
 
-    if(p_cb->role == HCI_ROLE_MASTER)
-    {
+    if(p_cb->role == HCI_ROLE_MASTER) {
         smp_collect_local_ble_address(a, p_cb);
         smp_collect_peer_ble_address(b, p_cb);
         p_na = p_cb->rand;
         p_nb = p_cb->rrand;
-    }
-    else
-    {
+    } else {
         smp_collect_local_ble_address(b, p_cb);
         smp_collect_peer_ble_address(a, p_cb);
         p_na = p_cb->rrand;
         p_nb = p_cb->rand;
     }
 
-    if(!smp_calculate_f5(p_cb->dhkey, p_na, p_nb, a, b, p_cb->mac_key, p_cb->ltk))
-    {
+    if(!smp_calculate_f5(p_cb->dhkey, p_na, p_nb, a, b, p_cb->mac_key, p_cb->ltk)) {
         SMP_TRACE_ERROR("%s failed", __func__);
         return FALSE;
     }
@@ -1550,27 +1491,19 @@ uint8_t smp_request_oob_data(tSMP_CB *p_cb)
     tSMP_OOB_DATA_TYPE req_oob_type = SMP_OOB_INVALID_TYPE;
     SMP_TRACE_DEBUG("%s", __func__);
 
-    if(p_cb->peer_oob_flag == SMP_OOB_PRESENT && p_cb->loc_oob_flag == SMP_OOB_PRESENT)
-    {
+    if(p_cb->peer_oob_flag == SMP_OOB_PRESENT && p_cb->loc_oob_flag == SMP_OOB_PRESENT) {
         /* both local and peer rcvd data OOB */
         req_oob_type = SMP_OOB_BOTH;
+    } else if(p_cb->peer_oob_flag == SMP_OOB_PRESENT) {
+        /* peer rcvd OOB local data, local didn't receive OOB peer data */
+        req_oob_type = SMP_OOB_LOCAL;
+    } else if(p_cb->loc_oob_flag == SMP_OOB_PRESENT) {
+        req_oob_type = SMP_OOB_PEER;
     }
-    else
-        if(p_cb->peer_oob_flag == SMP_OOB_PRESENT)
-        {
-            /* peer rcvd OOB local data, local didn't receive OOB peer data */
-            req_oob_type = SMP_OOB_LOCAL;
-        }
-        else
-            if(p_cb->loc_oob_flag == SMP_OOB_PRESENT)
-            {
-                req_oob_type = SMP_OOB_PEER;
-            }
 
     SMP_TRACE_DEBUG("req_oob_type = %d", req_oob_type);
 
-    if(req_oob_type == SMP_OOB_INVALID_TYPE)
-    {
+    if(req_oob_type == SMP_OOB_INVALID_TYPE) {
         return FALSE;
     }
 

@@ -127,12 +127,12 @@
 
 /* This data type is used in AVRC_FindService() to initialize the SDP database
  * to hold the result service search. */
-typedef struct
-{
+typedef struct {
     uint32_t              db_len;  /* Length, in bytes, of the discovery database */
     tSDP_DISCOVERY_DB  *p_db;    /* Pointer to the discovery database */
     uint16_t              num_attr;/* The number of attributes in p_attrs */
-    uint16_t             *p_attrs; /* The attributes filter. If NULL, AVRCP API sets the attribute filter
+    uint16_t
+    *p_attrs; /* The attributes filter. If NULL, AVRCP API sets the attribute filter
                                   * to be ATTR_ID_SERVICE_CLASS_ID_LIST, ATTR_ID_BT_PROFILE_DESC_LIST,
                                   * ATTR_ID_SUPPORTED_FEATURES, ATTR_ID_SERVICE_NAME and ATTR_ID_PROVIDER_NAME.
                                   * If not NULL, the input is taken as the filter. */
@@ -159,8 +159,7 @@ typedef void (tAVRC_CTRL_CBACK)(uint8_t handle, uint8_t event, uint16_t result,
 typedef void (tAVRC_MSG_CBACK)(uint8_t handle, uint8_t label, uint8_t opcode,
                                tAVRC_MSG *p_msg);
 
-typedef struct
-{
+typedef struct {
     tAVRC_CTRL_CBACK    *p_ctrl_cback;  /* pointer to application control callback */
     tAVRC_MSG_CBACK     *p_msg_cback;   /* pointer to application message callback */
     uint32_t              company_id;     /* the company ID  */

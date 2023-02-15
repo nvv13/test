@@ -34,7 +34,7 @@
 *****************************************************************************/
 
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_SDP_CB bta_sdp_cb;
+tBTA_SDP_CB bta_sdp_cb;
 #endif
 
 /* state machine action enumeration list */
@@ -44,8 +44,7 @@
 typedef void (*tBTA_SDP_ACTION)(tBTA_SDP_MSG *p_data);
 
 /* action function list */
-const tBTA_SDP_ACTION bta_sdp_action[] =
-{
+const tBTA_SDP_ACTION bta_sdp_action[] = {
     bta_sdp_enable,  /* BTA_SDP_API_ENABLE_EVT */
     bta_sdp_search,  /* BTA_SDP_API_SEARCH_EVT */
     bta_sdp_create_record,  /* BTA_SDP_API_CREATE_RECORD_USER_EVT */
@@ -61,8 +60,7 @@ const tBTA_SDP_ACTION bta_sdp_action[] =
 *******************************************************************************/
 uint8_t bta_sdp_sm_execute(BT_HDR *p_msg)
 {
-    if(p_msg == NULL)
-    {
+    if(p_msg == NULL) {
         return FALSE;
     }
 
@@ -70,8 +68,7 @@ uint8_t bta_sdp_sm_execute(BT_HDR *p_msg)
     uint16_t action = (p_msg->event & 0x00ff);
 
     /* execute action functions */
-    if(action < BTA_SDP_NUM_ACTIONS)
-    {
+    if(action < BTA_SDP_NUM_ACTIONS) {
         (*bta_sdp_action[action])((tBTA_SDP_MSG *)p_msg);
         ret = TRUE;
     }

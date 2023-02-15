@@ -44,9 +44,10 @@
 #include "wm_pmu.h"
 #include "wm_ram_config.h"
 #include "wm_uart.h"
-
+#include "wm_watchdog.h"
+#include "wm_wifi.h"
 #if TLS_CONFIG_ONLY_FACTORY_ATCMD
-#include "factory_atcmd.h"
+#include "../../src/app/factorycmd/factory_atcmd.h"
 #endif
 
 /* c librayr mutex */
@@ -87,16 +88,16 @@ void _mutex_release (u32 *mutex)
 
 #endif
 
-#define     TASK_START_STK_SIZE         640     /* Size of each task's stacks (# of WORDs)  */
+#define     TASK_START_STK_SIZE         768     /* Size of each task's stacks (# of WORDs)  */
 /*If you want to delete main task after it works, you can open this MACRO below*/
-#define MAIN_TASK_DELETE_AFTER_START_FTR  0
+#define MAIN_TASK_DELETE_AFTER_START_FTR  1
 
 u8 *TaskStartStk = NULL;
 tls_os_task_t tststarthdl = NULL;
 
 #define FW_MAJOR_VER           0x1
 #define FW_MINOR_VER           0x0
-#define FW_PATCH_VER           0x4
+#define FW_PATCH_VER           0x10
 
 const char FirmWareVer[4] =
 {
@@ -121,7 +122,11 @@ extern int wpa_supplicant_init(u8 *mac_addr);
 extern void tls_sys_auto_mode_run(void);
 extern void UserMain(void);
 extern void tls_bt_entry();
-
+#if (TLS_CONFIG_HOSTIF&&TLS_CONFIG_UART)
+extern int tls_uart_get_at_cmd_port(void);
+extern void tls_uart_set_at_cmd_port(int at_cmd_port);
+#endif
+void tls_mem_get_init_available_size(void);
 void task_start (void *data);
 
 /****************/
@@ -198,6 +203,13 @@ void task_start_free()
 int main(void)
 {
     u32 value = 0;
+
+	/*standby reason setting in here,because pmu irq will clear it.*/
+	if ((tls_reg_read32(HR_PMU_INTERRUPT_SRC)>>7)&0x1)
+	{
+		tls_sys_set_reboot_reason(REBOOT_REASON_STANDBY);
+	}
+	
     /*32K switch to use RC circuit & calibration*/
     tls_pmu_clk_select(0);
 #if (TLS_CONFIG_HOSTIF&&TLS_CONFIG_UART)
@@ -212,10 +224,10 @@ int main(void)
     value &= ~(BIT(5));
     tls_reg_write32(HR_PMU_PS_CR, value);
 	
-    /*Close those not initialized clk except uart0,sdadc,gpio,rfcfg*/
+    /*Close those not initialized clk except touchsensor/trng, uart0,sdadc,gpio,rfcfg*/
     value = tls_reg_read32(HR_CLK_BASE_ADDR);
     value &= ~0x3fffff;
-    value |= 0x1a02;
+    value |= 0x201a02;
     tls_reg_write32(HR_CLK_BASE_ADDR, value);
 
 
@@ -255,6 +267,9 @@ int main(void)
     csi_vic_set_wakeup_irq(PMU_IRQn);
     csi_vic_set_wakeup_irq(TIMER_IRQn);
     csi_vic_set_wakeup_irq(WDG_IRQn);
+	/*should be here because main stack will be allocated and deallocated after task delete*/
+	tls_mem_get_init_available_size();
+	
     /*configure wake up source end*/
 	TaskStartStk = tls_mem_alloc(sizeof(u32)*TASK_START_STK_SIZE);
 	if (TaskStartStk)
@@ -343,7 +358,6 @@ void task_start (void *data)
     tls_wl_hw_using_24m_crystal();
 #endif
 
-	tls_mem_get_init_available_size();
     /* must call first to configure gpio Alternate functions according the hardware design */
     wm_gpio_config();
 
@@ -369,7 +383,7 @@ void task_start (void *data)
     tls_get_tx_gain(&tx_gain_group[0]);
     TLS_DBGPRT_INFO("tx gain ");
     TLS_DBGPRT_DUMP((char *)(&tx_gain_group[0]), 27);
-    if (tls_wifi_mem_cfg(WIFI_MEM_START_ADDR, 7, 7)) /*wifi tx&rx mem customized interface*/
+    if (tls_wifi_mem_cfg(WIFI_MEM_START_ADDR, 7, 3)) /*wifi tx&rx mem customized interface*/
     {
         TLS_DBGPRT_INFO("wl mem initial failured\n");
     }
@@ -388,7 +402,7 @@ void task_start (void *data)
 	/*wifi-temperature compensation,default:open*/
 	tls_wifi_set_tempcomp_flag(0);
 	tls_wifi_set_psm_chipsleep_flag(0);
-	tls_wifi_psm_chipsleep_cb_register(tls_pmu_chipsleep_callback, NULL, NULL);
+	tls_wifi_psm_chipsleep_cb_register((tls_wifi_psm_chipsleep_callback)tls_pmu_chipsleep_callback, NULL, NULL);
     tls_ethernet_init();
 
 #if TLS_CONFIG_BT
@@ -410,11 +424,6 @@ void task_start (void *data)
 #if TLS_CONFIG_UART
     tls_uart_init();
 #endif
-
-#if TLS_CONFIG_HTTP_CLIENT_TASK
-    http_client_task_init();
-#endif
-
 #endif
 
 	tls_param_get(TLS_PARAM_ID_PSM, &enable, TRUE);	
@@ -438,14 +447,10 @@ void task_start (void *data)
 		}
         tls_os_time_delay(0x10000000);
 #else
-#if 1
-		tls_os_time_delay(0x10000000);
-#else
         //printf("start up\n");
         extern void tls_os_disp_task_stat_info(void);
         tls_os_disp_task_stat_info();
         tls_os_time_delay(1000);
-#endif		
 #endif
     }
 }

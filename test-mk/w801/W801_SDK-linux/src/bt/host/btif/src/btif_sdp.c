@@ -68,8 +68,7 @@ static void btif_sdp_search_comp_evt(uint16_t event, char *p_param)
     tls_bt_addr_t addr;
     BTIF_TRACE_DEBUG("%s:  event = %d", __FUNCTION__, event);
 
-    if(event != BTA_SDP_SEARCH_COMP_EVT)
-    {
+    if(event != BTA_SDP_SEARCH_COMP_EVT) {
         return;
     }
 
@@ -84,13 +83,11 @@ static void sdp_search_comp_copy_cb(uint16_t event, char *p_dest, char *p_src)
     tBTA_SDP_SEARCH_COMP *p_dest_data = (tBTA_SDP_SEARCH_COMP *) p_dest;
     tBTA_SDP_SEARCH_COMP *p_src_data = (tBTA_SDP_SEARCH_COMP *) p_src;
 
-    if(!p_src)
-    {
+    if(!p_src) {
         return;
     }
 
-    if(event != BTA_SDP_SEARCH_COMP_EVT)
-    {
+    if(event != BTA_SDP_SEARCH_COMP_EVT) {
         return;
     }
 
@@ -100,10 +97,8 @@ static void sdp_search_comp_copy_cb(uint16_t event, char *p_dest, char *p_src)
 
 static void sdp_dm_cback(tBTA_SDP_EVT event, tBTA_SDP *p_data, void *user_data)
 {
-    switch(event)
-    {
-        case BTA_SDP_SEARCH_COMP_EVT:
-        {
+    switch(event) {
+        case BTA_SDP_SEARCH_COMP_EVT: {
             int size = sizeof(tBTA_SDP);
             size += get_sdp_records_size(p_data->sdp_search_comp.records,
                                          p_data->sdp_search_comp.record_count);
@@ -113,14 +108,12 @@ static void sdp_dm_cback(tBTA_SDP_EVT event, tBTA_SDP *p_data, void *user_data)
             break;
         }
 
-        case BTA_SDP_CREATE_RECORD_USER_EVT:
-        {
+        case BTA_SDP_CREATE_RECORD_USER_EVT: {
             on_create_record_event(PTR_TO_INT(user_data));
             break;
         }
 
-        case BTA_SDP_REMOVE_RECORD_USER_EVT:
-        {
+        case BTA_SDP_REMOVE_RECORD_USER_EVT: {
             on_remove_record_event(PTR_TO_INT(user_data));
             break;
         }
@@ -157,8 +150,7 @@ static tls_bt_status_t search(tls_bt_addr_t *bd_addr, const uint8_t *uuid)
     return TLS_BT_STATUS_SUCCESS;
 }
 
-static const btsdp_interface_t sdp_if =
-{
+static const btsdp_interface_t sdp_if = {
     sizeof(btsdp_interface_t),
     init,
     deinit,
@@ -186,12 +178,9 @@ tls_bt_status_t btif_sdp_execute_service(uint8_t b_enable)
 {
     BTIF_TRACE_DEBUG("%s enable:%d", __FUNCTION__, b_enable);
 
-    if(b_enable)
-    {
+    if(b_enable) {
         BTA_SdpEnable(sdp_dm_cback);
-    }
-    else
-    {
+    } else {
         /* This is called on BT disable so no need to extra cleanup */
     }
 

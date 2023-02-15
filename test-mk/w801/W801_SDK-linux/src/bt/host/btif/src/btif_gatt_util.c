@@ -46,8 +46,7 @@
 #define GATTC_READ_VALUE_TYPE_VALUE          0x0000  /* Attribute value itself */
 #define GATTC_READ_VALUE_TYPE_AGG_FORMAT     0x2905  /* Characteristic Aggregate Format*/
 
-static unsigned char BASE_UUID[16] =
-{
+static unsigned char BASE_UUID[16] = {
     0xfb, 0x34, 0x9b, 0x5f, 0x80, 0x00, 0x00, 0x80,
     0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
@@ -58,36 +57,29 @@ int uuidType(unsigned char *p_uuid)
     int match = 0;
     int all_zero = 1;
 
-    for(i = 0; i != 16; ++i)
-    {
-        if(i == 12 || i == 13)
-        {
+    for(i = 0; i != 16; ++i) {
+        if(i == 12 || i == 13) {
             continue;
         }
 
-        if(p_uuid[i] == BASE_UUID[i])
-        {
+        if(p_uuid[i] == BASE_UUID[i]) {
             ++match;
         }
 
-        if(p_uuid[i] != 0)
-        {
+        if(p_uuid[i] != 0) {
             all_zero = 0;
         }
     }
 
-    if(all_zero)
-    {
+    if(all_zero) {
         return 0;
     }
 
-    if(match == 12)
-    {
+    if(match == 12) {
         return LEN_UUID_32;
     }
 
-    if(match == 14)
-    {
+    if(match == 14) {
         return LEN_UUID_16;
     }
 
@@ -104,8 +96,7 @@ void btif_to_bta_uuid(tBT_UUID *p_dest, tls_bt_uuid_t *p_src)
     int i = 0;
     p_dest->len = uuidType(p_src->uu);
 
-    switch(p_dest->len)
-    {
+    switch(p_dest->len) {
         case LEN_UUID_16:
             p_dest->uu.uuid16 = (p_src->uu[13] << 8) + p_src->uu[12];
             break;
@@ -116,8 +107,7 @@ void btif_to_bta_uuid(tBT_UUID *p_dest, tls_bt_uuid_t *p_src)
             break;
 
         case LEN_UUID_128:
-            for(i = 0; i != 16; ++i)
-            {
+            for(i = 0; i != 16; ++i) {
                 p_dest->uu.uuid128[i] = p_byte[i];
             }
 
@@ -143,8 +133,7 @@ void btif_to_bta_uuid_mask(tBTA_DM_BLE_PF_COND_MASK *p_mask, tls_bt_uuid_t *p_sr
     char *p_byte = (char *)p_src;
     int i = 0;
 
-    switch(uuidType(p_src->uu))
-    {
+    switch(uuidType(p_src->uu)) {
         case LEN_UUID_16:
             p_mask->uuid16_mask = (p_src->uu[13] << 8) + p_src->uu[12];
             break;
@@ -155,8 +144,7 @@ void btif_to_bta_uuid_mask(tBTA_DM_BLE_PF_COND_MASK *p_mask, tls_bt_uuid_t *p_sr
             break;
 
         case LEN_UUID_128:
-            for(i = 0; i != 16; ++i)
-            {
+            for(i = 0; i != 16; ++i) {
                 p_mask->uuid128_mask[i] = p_byte[i];
             }
 
@@ -175,16 +163,13 @@ void bta_to_btif_uuid(tls_bt_uuid_t *p_dest, tBT_UUID *p_src)
 {
     int i = 0;
 
-    if(p_src->len == LEN_UUID_16 || p_src->len == LEN_UUID_32)
-    {
-        for(i = 0; i != 16; ++i)
-        {
+    if(p_src->len == LEN_UUID_16 || p_src->len == LEN_UUID_32) {
+        for(i = 0; i != 16; ++i) {
             p_dest->uu[i] = BASE_UUID[i];
         }
     }
 
-    switch(p_src->len)
-    {
+    switch(p_src->len) {
         case 0:
             break;
 
@@ -201,8 +186,7 @@ void bta_to_btif_uuid(tls_bt_uuid_t *p_dest, tBT_UUID *p_src)
             break;
 
         case LEN_UUID_128:
-            for(i = 0; i != 16; ++i)
-            {
+            for(i = 0; i != 16; ++i) {
                 p_dest->uu[i] = p_src->uu.uuid128[i];
             }
 
@@ -220,22 +204,16 @@ void bta_to_btif_uuid(tls_bt_uuid_t *p_dest, tBT_UUID *p_src)
 
 uint16_t get_uuid16(tBT_UUID *p_uuid)
 {
-    if(p_uuid->len == LEN_UUID_16)
-    {
+    if(p_uuid->len == LEN_UUID_16) {
         return p_uuid->uu.uuid16;
+    } else if(p_uuid->len == LEN_UUID_128) {
+        uint16_t u16;
+        uint8_t *p = &p_uuid->uu.uuid128[LEN_UUID_128 - 4];
+        STREAM_TO_UINT16(u16, p);
+        return u16;
+    } else { /* p_uuid->len == LEN_UUID_32 */
+        return(uint16_t) p_uuid->uu.uuid32;
     }
-    else
-        if(p_uuid->len == LEN_UUID_128)
-        {
-            uint16_t u16;
-            uint8_t *p = &p_uuid->uu.uuid128[LEN_UUID_128 - 4];
-            STREAM_TO_UINT16(u16, p);
-            return u16;
-        }
-        else  /* p_uuid->len == LEN_UUID_32 */
-        {
-            return(uint16_t) p_uuid->uu.uuid32;
-        }
 }
 
 uint16_t set_read_value(btgatt_read_params_t *p_dest, tBTA_GATTC_READ *p_src)
@@ -244,8 +222,7 @@ uint16_t set_read_value(btgatt_read_params_t *p_dest, tBTA_GATTC_READ *p_src)
     p_dest->status = p_src->status;
     p_dest->handle = p_src->handle;
 
-    if((p_src->status == BTA_GATT_OK) && (p_src->p_value != NULL))
-    {
+    if((p_src->status == BTA_GATT_OK) && (p_src->p_value != NULL)) {
         LOG_INFO(LOG_TAG, "%s len = %d ", __FUNCTION__, p_src->p_value->len);
         p_dest->value.len = p_src->p_value->len;
 
@@ -254,9 +231,7 @@ uint16_t set_read_value(btgatt_read_params_t *p_dest, tBTA_GATTC_READ *p_src)
                       p_src->p_value->len);
 
         len += p_src->p_value->len;
-    }
-    else
-    {
+    } else {
         p_dest->value.len = 0;
     }
 
@@ -271,11 +246,9 @@ static bool BTA_JvIsEncrypted_T(BD_ADDR bd_addr)
     uint8_t sec_flags, le_flags;
 
     if(BTM_GetSecurityFlags(bd_addr, &sec_flags) &&
-            BTM_GetSecurityFlagsByTransport(bd_addr, &le_flags, BT_TRANSPORT_LE))
-    {
+            BTM_GetSecurityFlagsByTransport(bd_addr, &le_flags, BT_TRANSPORT_LE)) {
         if(sec_flags & BTM_SEC_FLAG_ENCRYPTED ||
-                le_flags & BTM_SEC_FLAG_ENCRYPTED)
-        {
+                le_flags & BTM_SEC_FLAG_ENCRYPTED) {
             is_encrypted = TRUE;
         }
     }
@@ -289,21 +262,20 @@ static bool BTA_JvIsEncrypted_T(BD_ADDR bd_addr)
 #if (!defined(BLE_DELAY_REQUEST_ENC) || (BLE_DELAY_REQUEST_ENC == FALSE))
 static uint8_t btif_gatt_is_link_encrypted(BD_ADDR bd_addr)
 {
-    if(bd_addr == NULL)
-    {
+    if(bd_addr == NULL) {
         return FALSE;
     }
 
     return BTA_JvIsEncrypted_T(bd_addr);
 }
 
-static void btif_gatt_set_encryption_cb(BD_ADDR bd_addr, tBTA_TRANSPORT transport, tBTA_STATUS result)
+static void btif_gatt_set_encryption_cb(BD_ADDR bd_addr, tBTA_TRANSPORT transport,
+                                        tBTA_STATUS result)
 {
     UNUSED(bd_addr);
     UNUSED(transport);
 
-    if(result != BTA_SUCCESS && result != BTA_BUSY)
-    {
+    if(result != BTA_SUCCESS && result != BTA_BUSY) {
         BTIF_TRACE_WARNING("%s() - Encryption failed (%d)", __FUNCTION__, result);
     }
 }
@@ -311,24 +283,23 @@ static void btif_gatt_set_encryption_cb(BD_ADDR bd_addr, tBTA_TRANSPORT transpor
 
 void btif_gatt_check_encrypted_link(BD_ADDR bd_addr, tBTA_GATT_TRANSPORT transport_link)
 {
-    #if (!defined(BLE_DELAY_REQUEST_ENC) || (BLE_DELAY_REQUEST_ENC == FALSE))
+#if (!defined(BLE_DELAY_REQUEST_ENC) || (BLE_DELAY_REQUEST_ENC == FALSE))
     char buf[100];
     tls_bt_addr_t bda;
     bdcpy(bda.address, bd_addr);
 
     if((btif_storage_get_ble_bonding_key(&bda, BTIF_DM_LE_KEY_PENC,
                                          buf, sizeof(tBTM_LE_PENC_KEYS)) == TLS_BT_STATUS_SUCCESS)
-            && !btif_gatt_is_link_encrypted(bd_addr))
-    {
+            && !btif_gatt_is_link_encrypted(bd_addr)) {
         BTIF_TRACE_DEBUG("%s: transport = %d", __func__, transport_link);
         BTA_DmSetEncryption(bd_addr, transport_link,
                             &btif_gatt_set_encryption_cb, BTM_BLE_SEC_ENCRYPT);
     }
 
-    #else
+#else
     UNUSED(bd_addr);
     UNUSED(transport_link);
-    #endif
+#endif
 }
 
 #endif
@@ -339,16 +310,14 @@ void btif_gatt_move_track_adv_data(btgatt_track_adv_info_t *p_dest,
     wm_memset(p_dest, 0, sizeof(btgatt_track_adv_info_t));
     wm_memcpy(p_dest, p_src, sizeof(btgatt_track_adv_info_t));
 
-    if(p_src->adv_pkt_len > 0)
-    {
+    if(p_src->adv_pkt_len > 0) {
         p_dest->p_adv_pkt_data = GKI_getbuf(p_src->adv_pkt_len);
         wm_memcpy(p_dest->p_adv_pkt_data, p_src->p_adv_pkt_data,
                   p_src->adv_pkt_len);
         GKI_free_and_reset_buf((void **)&p_src->p_adv_pkt_data);
     }
 
-    if(p_src->scan_rsp_len > 0)
-    {
+    if(p_src->scan_rsp_len > 0) {
         p_dest->p_scan_rsp_data = GKI_getbuf(p_src->scan_rsp_len);
         wm_memcpy(p_dest->p_scan_rsp_data, p_src->p_scan_rsp_data,
                   p_src->scan_rsp_len);

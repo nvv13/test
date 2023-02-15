@@ -34,9 +34,9 @@
 **  Global data
 *****************************************************************************/
 #if A2D_DYNAMIC_MEMORY == FALSE
-    tA2D_CB a2d_cb;
+tA2D_CB a2d_cb;
 #else
-	tA2D_CB *a2d_cb_ptr;
+tA2D_CB *a2d_cb_ptr;
 #endif
 
 
@@ -64,15 +64,12 @@ static void a2d_sdp_cback(uint16_t status)
     tSDP_PROTOCOL_ELEM  elem;
     A2D_TRACE_API("a2d_sdp_cback status: %d", status);
 
-    if(status == SDP_SUCCESS)
-    {
+    if(status == SDP_SUCCESS) {
         /* loop through all records we found */
-        do
-        {
+        do {
             /* get next record; if none found, we're done */
             if((p_rec = SDP_FindServiceInDb(a2d_cb.find.p_db,
-                                            a2d_cb.find.service_uuid, p_rec)) == NULL)
-            {
+                                            a2d_cb.find.service_uuid, p_rec)) == NULL) {
                 break;
             }
 
@@ -80,30 +77,26 @@ static void a2d_sdp_cback(uint16_t status)
 
             /* get service name */
             if((p_attr = SDP_FindAttributeInRec(p_rec,
-                                                ATTR_ID_SERVICE_NAME)) != NULL)
-            {
+                                                ATTR_ID_SERVICE_NAME)) != NULL) {
                 a2d_svc.p_service_name = (char *) p_attr->attr_value.v.array;
                 a2d_svc.service_len    = SDP_DISC_ATTR_LEN(p_attr->attr_len_type);
             }
 
             /* get provider name */
             if((p_attr = SDP_FindAttributeInRec(p_rec,
-                                                ATTR_ID_PROVIDER_NAME)) != NULL)
-            {
+                                                ATTR_ID_PROVIDER_NAME)) != NULL) {
                 a2d_svc.p_provider_name = (char *) p_attr->attr_value.v.array;
                 a2d_svc.provider_len    = SDP_DISC_ATTR_LEN(p_attr->attr_len_type);
             }
 
             /* get supported features */
             if((p_attr = SDP_FindAttributeInRec(p_rec,
-                                                ATTR_ID_SUPPORTED_FEATURES)) != NULL)
-            {
+                                                ATTR_ID_SUPPORTED_FEATURES)) != NULL) {
                 a2d_svc.features = p_attr->attr_value.v.u16;
             }
 
             /* get AVDTP version */
-            if(SDP_FindProtocolListElemInRec(p_rec, UUID_PROTOCOL_AVDTP, &elem))
-            {
+            if(SDP_FindProtocolListElemInRec(p_rec, UUID_PROTOCOL_AVDTP, &elem)) {
                 a2d_svc.avdt_version = elem.params[0];
                 A2D_TRACE_DEBUG("avdt_version: 0x%x", a2d_svc.avdt_version);
             }
@@ -118,8 +111,7 @@ static void a2d_sdp_cback(uint16_t status)
     GKI_free_and_reset_buf((void **)&a2d_cb.find.p_db);
 
     /* return info from sdp record in app callback function */
-    if(a2d_cb.find.p_cback != NULL)
-    {
+    if(a2d_cb.find.p_cback != NULL) {
         (*a2d_cb.find.p_cback)(found, &a2d_svc);
     }
 
@@ -182,8 +174,7 @@ tA2D_STATUS A2D_AddRecord(uint16_t service_uuid, char *p_service_name, char *p_p
     A2D_TRACE_API("A2D_AddRecord uuid: %x", service_uuid);
 
     if((sdp_handle == 0) ||
-            (service_uuid != UUID_SERVCLASS_AUDIO_SOURCE && service_uuid != UUID_SERVCLASS_AUDIO_SINK))
-    {
+            (service_uuid != UUID_SERVCLASS_AUDIO_SOURCE && service_uuid != UUID_SERVCLASS_AUDIO_SINK)) {
         return A2D_INVALID_PARAMS;
     }
 
@@ -199,11 +190,11 @@ tA2D_STATUS A2D_AddRecord(uint16_t service_uuid, char *p_service_name, char *p_p
     proto_list[1].params[0] = a2d_cb.avdt_sdp_ver;
     result &= SDP_AddProtocolList(sdp_handle, A2D_NUM_PROTO_ELEMS, proto_list);
     /* add profile descriptor list   */
-    result &= SDP_AddProfileDescriptorList(sdp_handle, UUID_SERVCLASS_ADV_AUDIO_DISTRIBUTION, A2D_VERSION);
+    result &= SDP_AddProfileDescriptorList(sdp_handle, UUID_SERVCLASS_ADV_AUDIO_DISTRIBUTION,
+                                           A2D_VERSION);
 
     /* add supported feature */
-    if(features != 0)
-    {
+    if(features != 0) {
         p = temp;
         UINT16_TO_BE_STREAM(p, features);
         result &= SDP_AddAttribute(sdp_handle, ATTR_ID_SUPPORTED_FEATURES, UINT_DESC_TYPE,
@@ -211,15 +202,13 @@ tA2D_STATUS A2D_AddRecord(uint16_t service_uuid, char *p_service_name, char *p_p
     }
 
     /* add provider name */
-    if(p_provider_name != NULL)
-    {
+    if(p_provider_name != NULL) {
         result &= SDP_AddAttribute(sdp_handle, ATTR_ID_PROVIDER_NAME, TEXT_STR_DESC_TYPE,
                                    (uint32_t)(strlen(p_provider_name) + 1), (uint8_t *) p_provider_name);
     }
 
     /* add service name */
-    if(p_service_name != NULL)
-    {
+    if(p_service_name != NULL) {
         result &= SDP_AddAttribute(sdp_handle, ATTR_ID_SERVICE_NAME, TEXT_STR_DESC_TYPE,
                                    (uint32_t)(strlen(p_service_name) + 1), (uint8_t *) p_service_name);
     }
@@ -280,14 +269,12 @@ tA2D_STATUS A2D_FindService(uint16_t service_uuid, BD_ADDR bd_addr,
     A2D_TRACE_API("A2D_FindService uuid: %x", service_uuid);
 
     if((service_uuid != UUID_SERVCLASS_AUDIO_SOURCE && service_uuid != UUID_SERVCLASS_AUDIO_SINK) ||
-            p_db == NULL || p_cback == NULL)
-    {
+            p_db == NULL || p_cback == NULL) {
         return A2D_INVALID_PARAMS;
     }
 
     if(a2d_cb.find.service_uuid == UUID_SERVCLASS_AUDIO_SOURCE ||
-            a2d_cb.find.service_uuid == UUID_SERVCLASS_AUDIO_SINK)
-    {
+            a2d_cb.find.service_uuid == UUID_SERVCLASS_AUDIO_SINK) {
         return A2D_BUSY;
     }
 
@@ -295,30 +282,26 @@ tA2D_STATUS A2D_FindService(uint16_t service_uuid, BD_ADDR bd_addr,
     uuid_list.len = LEN_UUID_16;
     uuid_list.uu.uuid16 = service_uuid;
 
-    if(p_db->p_attrs == NULL || p_db->num_attr == 0)
-    {
+    if(p_db->p_attrs == NULL || p_db->num_attr == 0) {
         p_db->p_attrs  = a2d_attr_list;
         p_db->num_attr = A2D_NUM_ATTR;
     }
 
-    if(a2d_cb.find.p_db == NULL)
-    {
+    if(a2d_cb.find.p_db == NULL) {
         a2d_cb.find.p_db = (tSDP_DISCOVERY_DB *)GKI_getbuf(p_db->db_len);
     }
 
     result = SDP_InitDiscoveryDb(a2d_cb.find.p_db, p_db->db_len, 1, &uuid_list, p_db->num_attr,
                                  p_db->p_attrs);
 
-    if(result == TRUE)
-    {
+    if(result == TRUE) {
         /* store service_uuid */
         a2d_cb.find.service_uuid = service_uuid;
         a2d_cb.find.p_cback = p_cback;
         /* perform service search */
         result = SDP_ServiceSearchAttributeRequest(bd_addr, a2d_cb.find.p_db, a2d_sdp_cback);
 
-        if(FALSE == result)
-        {
+        if(FALSE == result) {
             a2d_cb.find.service_uuid = 0;
         }
     }
@@ -349,8 +332,7 @@ tA2D_STATUS A2D_FindService(uint16_t service_uuid, BD_ADDR bd_addr,
 ******************************************************************************/
 uint8_t A2D_SetTraceLevel(uint8_t new_level)
 {
-    if(new_level != 0xFF)
-    {
+    if(new_level != 0xFF) {
         a2d_cb.trace_level = new_level;
     }
 
@@ -370,12 +352,9 @@ uint8_t A2D_BitsSet(uint8_t num)
     uint8_t   count;
     uint8_t res;
 
-    if(num == 0)
-    {
+    if(num == 0) {
         res = A2D_SET_ZERO_BIT;
-    }
-    else
-    {
+    } else {
         count = (num & (num - 1));
         res = ((count == 0) ? A2D_SET_ONE_BIT : A2D_SET_MULTL_BIT);
     }
@@ -398,16 +377,15 @@ uint8_t A2D_BitsSet(uint8_t num)
 void A2D_Init(void)
 {
 #if (A2D_DYNAMIC_MEMORY == TRUE)
-	a2d_cb_ptr = (tA2D_CB *)GKI_os_malloc(sizeof(tA2D_CB));
+    a2d_cb_ptr = (tA2D_CB *)GKI_os_malloc(sizeof(tA2D_CB));
 #endif /* #if (A2D_DYNAMIC_MEMORY) */
-
     wm_memset(&a2d_cb, 0, sizeof(tA2D_CB));
     a2d_cb.avdt_sdp_ver = AVDT_VERSION;
-    #if defined(A2D_INITIAL_TRACE_LEVEL)
+#if defined(A2D_INITIAL_TRACE_LEVEL)
     a2d_cb.trace_level  = A2D_INITIAL_TRACE_LEVEL;
-    #else
+#else
     a2d_cb.trace_level  = BT_TRACE_LEVEL_NONE;
-    #endif
+#endif
 }
 
 /*******************************************************************************

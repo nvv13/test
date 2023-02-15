@@ -98,15 +98,15 @@
 #include <oi_codec_sbc_private.h>
 
 #ifndef SBC_DEQUANT_LONG_SCALED_OFFSET
-    #define SBC_DEQUANT_LONG_SCALED_OFFSET 1555931970
+#define SBC_DEQUANT_LONG_SCALED_OFFSET 1555931970
 #endif
 
 #ifndef SBC_DEQUANT_LONG_UNSCALED_OFFSET
-    #define SBC_DEQUANT_LONG_UNSCALED_OFFSET 2147483648
+#define SBC_DEQUANT_LONG_UNSCALED_OFFSET 2147483648
 #endif
 
 #ifndef SBC_DEQUANT_SCALING_FACTOR
-    #define SBC_DEQUANT_SCALING_FACTOR 1.38019122262781f
+#define SBC_DEQUANT_SCALING_FACTOR 1.38019122262781f
 #endif
 
 const OI_UINT32 dequant_long_scaled[17];
@@ -115,7 +115,7 @@ const OI_UINT32 dequant_long_unscaled[17];
 /** Scales x by y bits to the right, adding a rounding factor.
  */
 #ifndef SCALE
-    #define SCALE(x, y) (((x) + (1 <<((y)-1))) >> (y))
+#define SCALE(x, y) (((x) + (1 <<((y)-1))) >> (y))
 #endif
 
 #ifdef DEBUG_DEQUANTIZATION
@@ -145,15 +145,14 @@ INLINE OI_INT32 OI_SBC_Dequant(OI_UINT32 raw, OI_UINT scale_factor, OI_UINT bits
     OI_ASSERT(scale_factor <= 15);
     OI_ASSERT(bits <= 16);
 
-    if(bits <= 1)
-    {
+    if(bits <= 1) {
         return 0;
     }
 
     d = (raw * 2) + 1;
     d *= dequant_long_scaled[bits];
     result = d - SBC_DEQUANT_LONG_SCALED_OFFSET;
-    #ifdef DEBUG_DEQUANTIZATION
+#ifdef DEBUG_DEQUANTIZATION
     {
         OI_INT32 integerized_float_result;
         float float_result;
@@ -163,7 +162,7 @@ INLINE OI_INT32 OI_SBC_Dequant(OI_UINT32 raw, OI_UINT scale_factor, OI_UINT bits
         OI_ASSERT(((result >= 0) && (integerized_float_result >= 0)) ||
                   ((result <= 0) && (integerized_float_result <= 0)));
     }
-    #endif
+#endif
     return result >> (15 - scale_factor);
 }
 
@@ -181,13 +180,11 @@ INLINE OI_INT32 OI_SBC_Dequant_Unscaled(OI_UINT32 raw, OI_UINT scale_factor, OI_
     OI_ASSERT(scale_factor <= 15);
     OI_ASSERT(bits <= 16);
 
-    if(bits <= 1)
-    {
+    if(bits <= 1) {
         return 0;
     }
 
-    if(bits == 16)
-    {
+    if(bits == 16) {
         result = (raw << 16) + raw - 0x7fff7fff;
         return SCALE(result, 24 - scale_factor);
     }

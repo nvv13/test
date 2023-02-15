@@ -37,8 +37,7 @@
 **  Type definitions for callback functions
 ********************************************************************************/
 
-typedef enum
-{
+typedef enum {
     /* Reuse BTA_AV_XXX_EVT - No need to redefine them here */
     BTIF_AV_CONNECT_REQ_EVT = BTA_AV_MAX_EVT,
     BTIF_AV_DISCONNECT_REQ_EVT,
@@ -170,28 +169,28 @@ uint8_t btif_av_is_connected(void);
 uint8_t btif_av_is_peer_edr(void);
 
 #ifdef USE_AUDIO_TRACK
-    /*******************************************************************************
-    **
-    ** Function         audio_focus_status
-    **
-    ** Description      Update Audio Focus State
-    **
-    ** Returns          None
-    **
-    *******************************************************************************/
-    void audio_focus_status(int state);
+/*******************************************************************************
+**
+** Function         audio_focus_status
+**
+** Description      Update Audio Focus State
+**
+** Returns          None
+**
+*******************************************************************************/
+void audio_focus_status(int state);
 
-    /*******************************************************************************
-    **
-    ** Function         btif_queue_focus_request
-    **
-    ** Description      This is used to move context to btif and
-    **                  queue audio_focus_request
-    **
-    ** Returns          none
-    **
-    *******************************************************************************/
-    void btif_queue_focus_request(void);
+/*******************************************************************************
+**
+** Function         btif_queue_focus_request
+**
+** Description      This is used to move context to btif and
+**                  queue audio_focus_request
+**
+** Returns          none
+**
+*******************************************************************************/
+void btif_queue_focus_request(void);
 #endif
 
 /******************************************************************************

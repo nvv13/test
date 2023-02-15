@@ -117,13 +117,13 @@ typedef uint16_t tGATT_DISCONN_REASON;
 /* MAX GATT MTU size
 */
 #ifndef GATT_MAX_MTU_SIZE
-    #define GATT_MAX_MTU_SIZE     517
+#define GATT_MAX_MTU_SIZE     517
 #endif
 
 /* max legth of an attribute value
 */
 #ifndef GATT_MAX_ATTR_LEN
-    #define GATT_MAX_ATTR_LEN     600
+#define GATT_MAX_ATTR_LEN     600
 #endif
 
 /* default GATT MTU size over LE link
@@ -135,18 +135,18 @@ typedef uint16_t tGATT_DISCONN_REASON;
 #define GATT_INVALID_CONN_ID        0xFFFF
 
 #ifndef GATT_CL_MAX_LCB
-    #define GATT_CL_MAX_LCB     22
+#define GATT_CL_MAX_LCB     22
 #endif
 
 #ifndef GATT_MAX_SCCB
-    #define GATT_MAX_SCCB       10
+#define GATT_MAX_SCCB       10
 #endif
 
 
 /* GATT notification caching timer, default to be three seconds
 */
 #ifndef GATTC_NOTIF_TIMEOUT
-    #define GATTC_NOTIF_TIMEOUT   3
+#define GATTC_NOTIF_TIMEOUT   3
 #endif
 
 /*****************************************************************************
@@ -200,8 +200,7 @@ typedef uint8_t tGATT_CHAR_PROP;
 
 /* Format of the value of a characteristic. enumeration type
 */
-enum
-{
+enum {
     GATT_FORMAT_RES,            /* rfu */
     GATT_FORMAT_BOOL,           /* 0x01 boolean */
     GATT_FORMAT_2BITS,           /* 0x02 2 bit */
@@ -236,8 +235,7 @@ typedef uint8_t tGATT_FORMAT;
 
 /* Characteristic Presentation Format Descriptor value
 */
-typedef struct
-{
+typedef struct {
     uint16_t              unit;       /* as UUIUD defined by SIG */
     uint16_t              descr;       /* as UUID as defined by SIG */
     tGATT_FORMAT        format;
@@ -247,16 +245,14 @@ typedef struct
 
 /* Characteristic Report reference Descriptor format
 */
-typedef struct
-{
+typedef struct {
     uint8_t              rpt_id;       /* report ID */
     uint8_t              rpt_type;       /* report type */
 } tGATT_CHAR_RPT_REF;
 
 
 #define GATT_VALID_RANGE_MAX_SIZE       16
-typedef struct
-{
+typedef struct {
     uint8_t                   format;
     uint16_t                  len;
     uint8_t                   lower_range[GATT_VALID_RANGE_MAX_SIZE]; /* in little endian format */
@@ -266,8 +262,7 @@ typedef struct
 /* Characteristic Aggregate Format attribute value
 */
 #define GATT_AGGR_HANDLE_NUM_MAX        10
-typedef struct
-{
+typedef struct {
     uint8_t                   num_handle;
     uint16_t                  handle_list[GATT_AGGR_HANDLE_NUM_MAX];
 } tGATT_CHAR_AGGRE;
@@ -308,11 +303,11 @@ typedef uint8_t tGATT_AUTH_REQ;
 
 /* Attribute Value structure
 */
-typedef struct
-{
+typedef struct {
     uint16_t          conn_id;
     uint16_t          handle;     /* attribute handle */
-    uint16_t          offset;     /* attribute value offset, if no offfset is needed for the command, ignore it */
+    uint16_t
+    offset;     /* attribute value offset, if no offfset is needed for the command, ignore it */
     uint16_t          len;        /* length of attribute value */
     tGATT_AUTH_REQ  auth_req;   /*  authentication request */
     uint8_t           value[GATT_MAX_ATTR_LEN];  /* the actual attribute value */
@@ -320,8 +315,7 @@ typedef struct
 
 /* Union of the event data which is used in the server respond API to carry the server response information
 */
-typedef union
-{
+typedef union {
     /* data type            member          event   */
     tGATT_VALUE             attr_value;     /* READ, HANDLE_VALUE_IND, PREPARE_WRITE */
     /* READ_BLOB, READ_BY_TYPE */
@@ -340,18 +334,17 @@ typedef uint8_t tGATT_TRANSPORT;
 typedef uint8_t   tGATT_EXEC_FLAG;
 
 /* read request always based on UUID */
-typedef struct
-{
+typedef struct {
     uint16_t        handle;
     uint16_t        offset;
     uint8_t       is_long;
 } tGATT_READ_REQ;
 
 /* write request data */
-typedef struct
-{
+typedef struct {
     uint16_t          handle;     /* attribute handle */
-    uint16_t          offset;     /* attribute value offset, if no offfset is needed for the command, ignore it */
+    uint16_t
+    offset;     /* attribute value offset, if no offfset is needed for the command, ignore it */
     uint16_t          len;        /* length of attribute value */
     uint8_t           value[GATT_MAX_ATTR_LEN];  /* the actual attribute value */
     uint8_t         need_rsp;   /* need write response */
@@ -359,8 +352,7 @@ typedef struct
 } tGATT_WRITE_REQ;
 
 /* callback data for server access request from client */
-typedef union
-{
+typedef union {
     tGATT_READ_REQ         read_req;       /* read request, read by Type, read blob */
 
     tGATT_WRITE_REQ        write_req;    /* write */
@@ -373,8 +365,7 @@ typedef union
 
 typedef uint8_t tGATT_SERV_IF;               /* GATT Service Interface */
 
-enum
-{
+enum {
     GATTS_REQ_TYPE_READ = 1,        /* Attribute read request */
     GATTS_REQ_TYPE_WRITE,           /* Attribute write request */
     GATTS_REQ_TYPE_WRITE_EXEC,      /* Execute write */
@@ -388,8 +379,7 @@ typedef uint8_t   tGATTS_REQ_TYPE;
 /* Client Used Data Structure
 */
 /* definition of different discovery types */
-enum
-{
+enum {
     GATT_DISC_SRVC_ALL = 1,     /* discover all services */
     GATT_DISC_SRVC_BY_UUID,     /* discover service of a special type */
     GATT_DISC_INC_SRVC,         /* discover the included service within a service */
@@ -401,8 +391,7 @@ typedef uint8_t   tGATT_DISC_TYPE;
 
 /* Discover parameters of different discovery types
 */
-typedef struct
-{
+typedef struct {
     tBT_UUID    service;
     uint16_t      s_handle;
     uint16_t      e_handle;
@@ -410,8 +399,7 @@ typedef struct
 
 /* GATT read type enumeration
 */
-enum
-{
+enum {
     GATT_READ_BY_TYPE =        1,
     GATT_READ_BY_HANDLE,
     GATT_READ_MULTIPLE,
@@ -423,8 +411,7 @@ typedef uint8_t tGATT_READ_TYPE;
 
 /* Read By Type Request (GATT_READ_BY_TYPE) Data
 */
-typedef struct
-{
+typedef struct {
     tGATT_AUTH_REQ      auth_req;
     uint16_t              s_handle;
     uint16_t              e_handle;
@@ -434,23 +421,20 @@ typedef struct
 /*   GATT_READ_MULTIPLE request data
 */
 #define GATT_MAX_READ_MULTI_HANDLES      10           /* Max attributes to read in one request */
-typedef struct
-{
+typedef struct {
     tGATT_AUTH_REQ          auth_req;
     uint16_t                  num_handles;                            /* number of handles to read */
     uint16_t                  handles[GATT_MAX_READ_MULTI_HANDLES];   /* handles list to be read */
 } tGATT_READ_MULTI;
 
 /*   Read By Handle Request (GATT_READ_BY_HANDLE) data */
-typedef struct
-{
+typedef struct {
     tGATT_AUTH_REQ         auth_req;
     uint16_t                 handle;
 } tGATT_READ_BY_HANDLE;
 
 /*   READ_BT_HANDLE_Request data */
-typedef struct
-{
+typedef struct {
     tGATT_AUTH_REQ         auth_req;
     uint16_t                 handle;
     uint16_t                 offset;
@@ -458,8 +442,7 @@ typedef struct
 
 /* Read Request Data
 */
-typedef union
-{
+typedef union {
     tGATT_READ_BY_TYPE   service;
     tGATT_READ_BY_TYPE   char_type;        /* characterisitc type */
     tGATT_READ_MULTI     read_multiple;
@@ -468,8 +451,7 @@ typedef union
 } tGATT_READ_PARAM;
 
 /* GATT write type enumeration */
-enum
-{
+enum {
     GATT_WRITE_NO_RSP = 1,
     GATT_WRITE,
     GATT_WRITE_PREPARE
@@ -478,8 +460,7 @@ typedef uint8_t tGATT_WRITE_TYPE;
 
 /* Client Operation Complete Callback Data
 */
-typedef union
-{
+typedef union {
     tGATT_VALUE          att_value;
     uint16_t               mtu;
     uint16_t               handle;
@@ -499,8 +480,7 @@ typedef uint8_t tGATTC_OPTYPE;
 
 /* characteristic declaration
 */
-typedef struct
-{
+typedef struct {
     tGATT_CHAR_PROP       char_prop;   /* characterisitc properties */
     uint16_t                val_handle;  /* characteristic value attribute handle */
     tBT_UUID              char_uuid;   /* characteristic UUID type */
@@ -508,8 +488,7 @@ typedef struct
 
 /* primary service group data
 */
-typedef struct
-{
+typedef struct {
     uint16_t          e_handle;       /* ending handle of the group */
     tBT_UUID        service_type;   /* group type */
 } tGATT_GROUP_VALUE;
@@ -517,15 +496,13 @@ typedef struct
 
 /* included service attribute value
 */
-typedef struct
-{
+typedef struct {
     tBT_UUID    service_type;       /* included service UUID */
     uint16_t      s_handle;           /* starting handle */
     uint16_t      e_handle;           /* ending handle */
 } tGATT_INCL_SRVC;
 
-typedef union
-{
+typedef union {
     tGATT_INCL_SRVC     incl_service;  /* include service value */
     tGATT_GROUP_VALUE   group_value;   /* Service UUID type.
                                           This field is used with GATT_DISC_SRVC_ALL
@@ -541,8 +518,7 @@ typedef union
 
 /* discover result record
 */
-typedef struct
-{
+typedef struct {
     tBT_UUID            type;
     uint16_t              handle;
     tGATT_DISC_VALUE    value;
@@ -585,8 +561,7 @@ typedef void (tGATT_ENC_CMPL_CB)(tGATT_IF gatt_if, BD_ADDR bda);
 ** GATT. This structure includes callback functions. All functions
 ** MUST be provided.
 */
-typedef struct
-{
+typedef struct {
     tGATT_CONN_CBACK                *p_conn_cb;
     tGATT_CMPL_CBACK                *p_cmpl_cb;
     tGATT_DISC_RES_CB               *p_disc_res_cb;
@@ -600,8 +575,7 @@ typedef struct
 */
 
 
-typedef struct
-{
+typedef struct {
     tBT_UUID app_uuid128;
     tBT_UUID svc_uuid;
     uint16_t   svc_inst;
@@ -619,29 +593,25 @@ typedef struct
 #define GATTS_SRV_CHG_CMD_READ_CLENT       5
 typedef uint8_t tGATTS_SRV_CHG_CMD;
 
-typedef struct
-{
+typedef struct {
     BD_ADDR         bda;
     uint8_t         srv_changed;
 } tGATTS_SRV_CHG;
 
 
-typedef union
-{
+typedef union {
     tGATTS_SRV_CHG  srv_chg;
     uint8_t           client_read_index; /* only used for sequential reading client srv chg info */
 } tGATTS_SRV_CHG_REQ;
 
-typedef union
-{
+typedef union {
     tGATTS_SRV_CHG srv_chg;
     uint8_t num_clients;
 } tGATTS_SRV_CHG_RSP;
 
 
 
-typedef struct
-{
+typedef struct {
     tGATTS_HNDL_RANGE   *p_new_srv_start;
 } tGATTS_PENDING_NEW_SRV_START;
 
@@ -651,8 +621,7 @@ typedef void (tGATTS_NV_SAVE_CBACK)(uint8_t is_saved, tGATTS_HNDL_RANGE *p_hndl_
 typedef uint8_t (tGATTS_NV_SRV_CHG_CBACK)(tGATTS_SRV_CHG_CMD cmd, tGATTS_SRV_CHG_REQ *p_req,
         tGATTS_SRV_CHG_RSP *p_rsp);
 
-typedef struct
-{
+typedef struct {
     tGATTS_NV_SAVE_CBACK       *p_nv_save_callback;
     tGATTS_NV_SRV_CHG_CBACK    *p_srv_chg_callback;
 } tGATT_APPL_INFO;

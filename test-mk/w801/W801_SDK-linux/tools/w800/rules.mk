@@ -13,16 +13,21 @@ endif
 endif
 
 CSRCS ?= $(wildcard *.c)
+CPPSRCS ?= $(wildcard *.cpp)
 ASRCS ?= $(wildcard *.S)
 
 subdir_path := $(subst $(abspath $(TOP_DIR))/,,$(shell pwd))
 
+CURRENT_DIR := $(notdir $(shell pwd))
+
 SUBDIRS ?= $(patsubst %/,%,$(dir $(wildcard */Makefile)))
 
-OBJS := $(CSRCS:%.c=$(OBJODIR)/$(subdir_path)/%.o) \
-        $(ASRCS:%.S=$(OBJODIR)/$(subdir_path)/%.o)
+OBJS := $(CSRCS:%.c=$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o) \
+        $(ASRCS:%.S=$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o) \
+	$(CPPSRCS:%.cpp=$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o)
 
-OBJS-DEPS := $(patsubst %.c, $(OBJODIR)/$(subdir_path)/%.o.d, $(CSRCS))
+OBJS-DEPS := $(patsubst %.c, $(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o.d, $(CSRCS))
+OBJS-CPPDEPS := $(patsubst %.cpp, $(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o.d, $(CPPSRCS))
 
 OLIBS := $(GEN_LIBS:%=$(LIBODIR)/%)
 
@@ -61,11 +66,20 @@ $(BINODIR)/%.bin: $(IMAGEODIR)/%.elf
 	$(OBJCOPY) -O binary $(IMAGEODIR)/$(TARGET).elf $(FIRMWAREDIR)/$(TARGET)/$(TARGET).bin
 
 ifeq ($(UNAME_S),Linux)
-	@gcc $(SDK_TOOLS)/wm_tool.c -lpthread -o $(WM_TOOL)
+	@$(RM) -rf $(SDK_TOOLS)/wm_tool
+	@make -C $(SDK_TOOLS)/zlib-1.2.11
+	@gcc $(SDK_TOOLS)/wm_tool.c -lpthread -o $(WM_TOOL) -L. $(SDK_TOOLS)/zlib-1.2.11/libz.a
 else
 ifeq ($(UNAME_O),Darwin)
-	@gcc $(SDK_TOOLS)/wm_tool.c -lpthread -o $(WM_TOOL)
+	@$(RM) -rf $(SDK_TOOLS)/wm_tool
+	@make -C $(SDK_TOOLS)/zlib-1.2.11
+	@gcc $(SDK_TOOLS)/wm_tool.c -lpthread -o $(WM_TOOL) -L. $(SDK_TOOLS)/zlib-1.2.11/libz.a
 else
+#if you want to make wm_tool.c to produce your wm_tool.exe,you should unmask script below by #
+#ifeq ($(UNAME_O),Msys)
+#	@$(RM) -rf $(SDK_TOOLS)/wm_tool
+#	@gcc $(SDK_TOOLS)/wm_tool.c -o $(WM_TOOL)
+#endif
 # windows, cygwin-gcc exist bug for uart rts/cts
 endif
 endif
@@ -81,14 +95,17 @@ else
 endif
 	@cp $(IMAGEODIR)/$(TARGET).map $(FIRMWAREDIR)/$(TARGET)/$(TARGET).map
 
-	@$(WM_TOOL) -b  $(SEC_BOOT_BIN) -fc 0 -it 0 -ih $(SECBOOT_HEADER_POS) -ra $(SECBOOT_ADDRESS_POS) -ua $(UPD_ADDRESS) -nh $(IMG_HEADER) -un 0 -o $(SEC_BOOT_IMG)
+	@$(WM_TOOL) -b  $(SEC_BOOT_BIN) -fc 0 -it $(SECBOOT_IMG_TYPE) -ih $(SECBOOT_HEADER_POS) -ra $(SECBOOT_ADDRESS_POS) -ua $(UPD_ADDRESS) -nh $(IMG_HEADER) -un 0 -o $(SEC_BOOT_IMG)
 
 ifeq ($(SIGNATURE),1)
 	@openssl dgst -sign $(CA_PATH)/cakey.pem -sha1 -out $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign.dat $(FIRMWAREDIR)/$(TARGET)/$(TARGET).img
 	@cat $(FIRMWAREDIR)/$(TARGET)/$(TARGET).img $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign.dat > $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign.img
-	@cat $(SEC_BOOT) $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign.img > $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
+	@openssl dgst -sign $(CA_PATH)/cakey.pem -sha1 -out $(SEC_BOOT_IMG)_sign.dat $(SEC_BOOT)
+	@cat $(SEC_BOOT) $(SEC_BOOT_IMG)_sign.dat > $(SEC_BOOT_IMG)_sign.img
+	@cat $(SEC_BOOT_IMG)_sign.img $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign.img > $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
 	@$(WM_TOOL) -b $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign.img -fc 1 -it $(IMG_TYPE) -ih $(IMG_HEADER) -ra $(RUN_ADDRESS) -ua $(UPD_ADDRESS) -nh 0 -un 0 -vs $(shell $(VER_TOOL) $(TOP_DIR)/platform/sys/wm_main.c) -o $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign
-	@mv $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_gz.img $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_ota.img
+	@openssl dgst -sign $(CA_PATH)/cakey.pem -sha1 -out $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_gz.dat $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_gz.img
+	@cat $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_gz.img $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_gz.dat > $(FIRMWAREDIR)/$(TARGET)/$(TARGET)_sign_ota.img
 else
 	@cat $(SEC_BOOT) $(FIRMWAREDIR)/$(TARGET)/$(TARGET).img > $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
 	@$(WM_TOOL) -b $(FIRMWAREDIR)/$(TARGET)/$(TARGET).img -fc 1 -it $(IMG_TYPE) -ih $(IMG_HEADER) -ra $(RUN_ADDRESS) -ua $(UPD_ADDRESS) -nh 0 -un 0 -vs $(shell $(VER_TOOL) $(TOP_DIR)/platform/sys/wm_main.c) -o $(FIRMWAREDIR)/$(TARGET)/$(TARGET)
@@ -122,7 +139,13 @@ help:
 	@echo  '               and capture the log output by the device'
 
 lib: .subdirs $(OBJS) $(OLIBS)
+ifeq ($(USE_NIMBLE), 1)
 	@cp $(LIBODIR)/libapp$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
+	@cp $(LIBODIR)/libblehost$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
+else
+	@cp $(LIBODIR)/libapp_br_edr$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
+	@cp $(LIBODIR)/libbthost_br_edr$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
+endif	
 	@cp $(LIBODIR)/libwmarch$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
 	@cp $(LIBODIR)/libwmcommon$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
 	@cp $(LIBODIR)/libdrivers$(LIB_EXT) $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)
@@ -142,11 +165,17 @@ distclean:clean
 	$(RM) -r $(FIRMWAREDIR)/$(CONFIG_ARCH_TYPE)
 	$(RM) -r $(SDK_TOOLS)/.config.old
 
+run:all
+	@$(WM_TOOL) -c $(DL_PORT) -rs at -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls -sl str -ws 115200
+
 list:
 	@$(WM_TOOL) -l
 
 down:
 	@$(WM_TOOL) -c $(DL_PORT) -rs rts -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
+
+image:all
+	@$(WM_TOOL) -c $(DL_PORT) -rs rts -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).img
 
 flash:all
 	@$(WM_TOOL) -c $(DL_PORT) -rs rts -ds $(DL_BAUD) -dl $(FIRMWAREDIR)/$(TARGET)/$(TARGET).fls
@@ -158,6 +187,7 @@ erase:
 	@set -e; $(foreach d, $(SUBDIRS), $(MAKE) -C $(d);)
 
 sinclude $(OBJS-DEPS)
+sinclude $(OBJS-CPPDEPS)
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),clobber)
@@ -167,11 +197,14 @@ endif
 endif
 endif
 
-$(OBJODIR)/$(subdir_path)/%.o: %.c
+$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o: %.c
 	@mkdir -p $(OBJODIR)/$(subdir_path)
-	$(CC) $(if $(findstring $<,$(DSRCS)),$(DFLAGS),$(CFLAGS)) $(COPTS_$(*F)) $(INCLUDES) $(CMACRO) -c "$<" -o "$@" -MMD -MD -MF "$(@:$(OBJODIR)/$(subdir_path)/%.o=$(OBJODIR)/$(subdir_path)/%.o.d)" -MT "$(@)"
+	$(CC) $(if $(findstring $<,$(DSRCS)),$(DFLAGS),$(CFLAGS)) $(COPTS_$(*F)) $(INCLUDES) $(CMACRO) -c "$<" -o "$@" -MMD -MD -MF "$(@:$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o=$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o.d)" -MT "$(@)"
 
-$(OBJODIR)/$(subdir_path)/%.o: %.S
+$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o: %.cpp
+	@mkdir -p $(OBJODIR)/$(subdir_path)
+	$(CPP) $(if $(findstring $<,$(DSRCS)),$(DFLAGS),$(CXXFLAGS)) $(COPTS_$(*F)) $(INCLUDES) $(CMACRO) -c "$<" -o "$@" -MMD -MD -MF "$(@:$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o=$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o.d)" -MT "$(@)"
+$(OBJODIR)/$(subdir_path)/$(CURRENT_DIR)_%.o: %.S
 	@mkdir -p $(OBJODIR)/$(subdir_path)
 	$(ASM) $(ASMFLAGS) $(INCLUDES) $(CMACRO) -c "$<" -o "$@"
 

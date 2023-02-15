@@ -20,14 +20,12 @@
 
 
 /* AT response code - OK/Error */
-typedef enum
-{
+typedef enum {
     BTHF_AT_RESPONSE_ERROR = 0,
     BTHF_AT_RESPONSE_OK
 } bthf_at_response_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CONNECTION_STATE_DISCONNECTED = 0,
     BTHF_CONNECTION_STATE_CONNECTING,
     BTHF_CONNECTION_STATE_CONNECTED,
@@ -35,44 +33,38 @@ typedef enum
     BTHF_CONNECTION_STATE_DISCONNECTING
 } bthf_connection_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_AUDIO_STATE_DISCONNECTED = 0,
     BTHF_AUDIO_STATE_CONNECTING,
     BTHF_AUDIO_STATE_CONNECTED,
     BTHF_AUDIO_STATE_DISCONNECTING
 } bthf_audio_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_VR_STATE_STOPPED = 0,
     BTHF_VR_STATE_STARTED
 } bthf_vr_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_VOLUME_TYPE_SPK = 0,
     BTHF_VOLUME_TYPE_MIC
 } bthf_volume_type_t;
 
 /* Noise Reduction and Echo Cancellation */
-typedef enum
-{
+typedef enum {
     BTHF_NREC_STOP,
     BTHF_NREC_START
 } bthf_nrec_t;
 
 /* WBS codec setting */
-typedef enum
-{
+typedef enum {
     BTHF_WBS_NONE,
     BTHF_WBS_NO,
     BTHF_WBS_YES
 } bthf_wbs_config_t;
 
 /* CHLD - Call held handling */
-typedef enum
-{
+typedef enum {
     BTHF_CHLD_TYPE_RELEASEHELD,              // Terminate all held or set UDUB("busy") to a waiting call
     BTHF_CHLD_TYPE_RELEASEACTIVE_ACCEPTHELD, // Terminate all active calls and accepts a waiting/held call
     BTHF_CHLD_TYPE_HOLDACTIVE_ACCEPTHELD,    // Hold all active calls and accepts a waiting/held call
@@ -82,7 +74,8 @@ typedef enum
 /** Callback for connection state change.
  *  state will have one of the values from BtHfConnectionState
  */
-typedef void (* bthf_connection_state_callback)(bthf_connection_state_t state, tls_bt_addr_t *bd_addr);
+typedef void (* bthf_connection_state_callback)(bthf_connection_state_t state,
+        tls_bt_addr_t *bd_addr);
 
 /** Callback for audio connection state change.
  *  state will have one of the values from BtHfAudioState
@@ -105,7 +98,8 @@ typedef void (* bthf_hangup_call_cmd_callback)(tls_bt_addr_t *bd_addr);
 /** Callback for disconnect call (AT+CHUP)
  *  type will denote Speaker/Mic gain (BtHfVolumeControl).
  */
-typedef void (* bthf_volume_cmd_callback)(bthf_volume_type_t type, int volume, tls_bt_addr_t *bd_addr);
+typedef void (* bthf_volume_cmd_callback)(bthf_volume_type_t type, int volume,
+        tls_bt_addr_t *bd_addr);
 
 /** Callback for dialing an outgoing call
  *  If number is NULL, redial
@@ -158,8 +152,7 @@ typedef void (* bthf_unknown_at_cmd_callback)(char *at_string, tls_bt_addr_t *bd
 typedef void (* bthf_key_pressed_cmd_callback)(tls_bt_addr_t *bd_addr);
 
 /** BT-HF callback structure. */
-typedef struct
-{
+typedef struct {
     /** set to sizeof(BtHfCallbacks) */
     size_t      size;
     bthf_connection_state_callback  connection_state_cb;
@@ -182,21 +175,18 @@ typedef struct
 } bthf_callbacks_t;
 
 /** Network Status */
-typedef enum
-{
+typedef enum {
     BTHF_NETWORK_STATE_NOT_AVAILABLE = 0,
     BTHF_NETWORK_STATE_AVAILABLE
 } bthf_network_state_t;
 
 /** Service type */
-typedef enum
-{
+typedef enum {
     BTHF_SERVICE_TYPE_HOME = 0,
     BTHF_SERVICE_TYPE_ROAMING
 } bthf_service_type_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CALL_STATE_ACTIVE = 0,
     BTHF_CALL_STATE_HELD,
     BTHF_CALL_STATE_DIALING,
@@ -206,33 +196,28 @@ typedef enum
     BTHF_CALL_STATE_IDLE
 } bthf_call_state_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CALL_DIRECTION_OUTGOING = 0,
     BTHF_CALL_DIRECTION_INCOMING
 } bthf_call_direction_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CALL_TYPE_VOICE = 0,
     BTHF_CALL_TYPE_DATA,
     BTHF_CALL_TYPE_FAX
 } bthf_call_mode_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CALL_MPTY_TYPE_SINGLE = 0,
     BTHF_CALL_MPTY_TYPE_MULTI
 } bthf_call_mpty_type_t;
 
-typedef enum
-{
+typedef enum {
     BTHF_CALL_ADDRTYPE_UNKNOWN = 0x81,
     BTHF_CALL_ADDRTYPE_INTERNATIONAL = 0x91
 } bthf_call_addrtype_t;
 /** Represents the standard BT-HF interface. */
-typedef struct
-{
+typedef struct {
 
     /** set to sizeof(BtHfInterface) */
     size_t          size;
@@ -263,15 +248,17 @@ typedef struct
     tls_bt_status_t (*volume_control)(bthf_volume_type_t type, int volume, tls_bt_addr_t *bd_addr);
 
     /** Combined device status change notification */
-    tls_bt_status_t (*device_status_notification)(bthf_network_state_t ntk_state, bthf_service_type_t svc_type, int signal,
+    tls_bt_status_t (*device_status_notification)(bthf_network_state_t ntk_state,
+            bthf_service_type_t svc_type, int signal,
             int batt_chg);
 
     /** Response for COPS command */
     tls_bt_status_t (*cops_response)(const char *cops, tls_bt_addr_t *bd_addr);
 
     /** Response for CIND command */
-    tls_bt_status_t (*cind_response)(int svc, int num_active, int num_held, bthf_call_state_t call_setup_state,
-                                 int signal, int roam, int batt_chg, tls_bt_addr_t *bd_addr);
+    tls_bt_status_t (*cind_response)(int svc, int num_active, int num_held,
+                                     bthf_call_state_t call_setup_state,
+                                     int signal, int roam, int batt_chg, tls_bt_addr_t *bd_addr);
 
     /** Pre-formatted AT response, typically in response to unknown AT cmd */
     tls_bt_status_t (*formatted_at_response)(const char *rsp, tls_bt_addr_t *bd_addr);
@@ -280,16 +267,17 @@ typedef struct
      *  ERROR (0)
      *  OK    (1)
      */
-    tls_bt_status_t (*at_response)(bthf_at_response_t response_code, int error_code, tls_bt_addr_t *bd_addr);
+    tls_bt_status_t (*at_response)(bthf_at_response_t response_code, int error_code,
+                                   tls_bt_addr_t *bd_addr);
 
     /** response for CLCC command
      *  Can be iteratively called for each call index
      *  Call index of 0 will be treated as NULL termination (Completes response)
      */
     tls_bt_status_t (*clcc_response)(int index, bthf_call_direction_t dir,
-                                 bthf_call_state_t state, bthf_call_mode_t mode,
-                                 bthf_call_mpty_type_t mpty, const char *number,
-                                 bthf_call_addrtype_t type, tls_bt_addr_t *bd_addr);
+                                     bthf_call_state_t state, bthf_call_mode_t mode,
+                                     bthf_call_mpty_type_t mpty, const char *number,
+                                     bthf_call_addrtype_t type, tls_bt_addr_t *bd_addr);
 
     /** notify of a call state change
      *  Each update notifies
@@ -298,8 +286,9 @@ typedef struct
      *                   This will take one of the values from BtHfCallState
      *    3. number & type: valid only for incoming & waiting call
     */
-    tls_bt_status_t (*phone_state_change)(int num_active, int num_held, bthf_call_state_t call_setup_state,
-                                      const char *number, bthf_call_addrtype_t type);
+    tls_bt_status_t (*phone_state_change)(int num_active, int num_held,
+                                          bthf_call_state_t call_setup_state,
+                                          const char *number, bthf_call_addrtype_t type);
 
     /** Closes the interface. */
     void (*cleanup)(void);

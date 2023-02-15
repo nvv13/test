@@ -40,7 +40,7 @@
 // C++ code that includes base and osi/include/osi.h can thus easily default to
 // the definition from libbase but we should check here to avoid compile errors.
 #ifndef COMPILE_ASSERT
-    #define COMPILE_ASSERT(COND) typedef int failed_compile_assert[(COND) ? 1 : -1] __attribute__ ((unused))
+#define COMPILE_ASSERT(COND) typedef int failed_compile_assert[(COND) ? 1 : -1] __attribute__ ((unused))
 #endif  // COMPILE_ASSERT
 
 // Macros for safe integer to pointer conversion. In the C language, data is

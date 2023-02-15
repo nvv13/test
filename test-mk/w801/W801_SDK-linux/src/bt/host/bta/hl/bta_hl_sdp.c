@@ -43,23 +43,20 @@ uint8_t bta_hl_fill_sup_feature_list(const tSDP_DISC_ATTR  *p_attr,
     uint8_t           list_cnt = 0;
     uint8_t         status = TRUE;
 
-    for(p_attr = p_attr->attr_value.v.p_sub_attr; p_attr; p_attr = p_attr->p_next_attr)
-    {
+    for(p_attr = p_attr->attr_value.v.p_sub_attr; p_attr; p_attr = p_attr->p_next_attr) {
         /* mdep sequence */
-        if(SDP_DISC_ATTR_TYPE(p_attr->attr_len_type) != DATA_ELE_SEQ_DESC_TYPE)
-        {
+        if(SDP_DISC_ATTR_TYPE(p_attr->attr_len_type) != DATA_ELE_SEQ_DESC_TYPE) {
             return(FALSE);
         }
 
         item_cnt = 0;
 
-        for(p_sattr = p_attr->attr_value.v.p_sub_attr; p_sattr && (item_cnt < 4) ; p_sattr = p_sattr->p_next_attr)
-        {
+        for(p_sattr = p_attr->attr_value.v.p_sub_attr; p_sattr
+                && (item_cnt < 4) ; p_sattr = p_sattr->p_next_attr) {
             /* for each mdep list */
             p_list->list_elem[list_cnt].p_mdep_desp = NULL;
 
-            switch(item_cnt)
-            {
+            switch(item_cnt) {
                 case 0:
                     p_list->list_elem[list_cnt].mdep_id = p_sattr->attr_value.v.u8;
                     break;
@@ -103,14 +100,12 @@ int bta_hl_compose_supported_feature_list(uint8_t *p, uint16_t num_elem,
     uint16_t          xx, str_len, seq_len;
     uint8_t           *p_head = p;
 
-    for(xx = 0; xx < num_elem; xx++, p_elem_list++)
-    {
+    for(xx = 0; xx < num_elem; xx++, p_elem_list++) {
         UINT8_TO_BE_STREAM(p, (DATA_ELE_SEQ_DESC_TYPE << 3) | SIZE_IN_NEXT_BYTE);
         seq_len = 7;
         str_len = 0;
 
-        if(p_elem_list->p_mdep_desp)
-        {
+        if(p_elem_list->p_mdep_desp) {
             str_len = strlen(p_elem_list->p_mdep_desp) + 1;
             seq_len += str_len + 2; /* todo add a # symbol for 2 */
         }
@@ -123,8 +118,7 @@ int bta_hl_compose_supported_feature_list(uint8_t *p, uint16_t num_elem,
         UINT8_TO_BE_STREAM(p, (UINT_DESC_TYPE << 3) | SIZE_ONE_BYTE);
         UINT8_TO_BE_STREAM(p, p_elem_list->mdep_role);
 
-        if(str_len)
-        {
+        if(str_len) {
             UINT8_TO_BE_STREAM(p, (TEXT_STR_DESC_TYPE << 3) | SIZE_IN_NEXT_BYTE);
             UINT8_TO_BE_STREAM(p, str_len);
             ARRAY_TO_BE_STREAM(p, p_elem_list->p_mdep_desp, str_len);
@@ -190,22 +184,17 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
     UNUSED(app_id);
 
     if((p_cb->sup_feature.app_role_mask == BTA_HL_MDEP_ROLE_MASK_SOURCE) &&
-            (!p_cb->sup_feature.advertize_source_sdp))
-    {
+            (!p_cb->sup_feature.advertize_source_sdp)) {
         return BTA_HL_STATUS_OK;
     }
 
     num_services = 1;
     svc_class_id_list[0] = UUID_SERVCLASS_HDP_SOURCE;
 
-    if(p_cb->sup_feature.app_role_mask == BTA_HL_MDEP_ROLE_MASK_SINK)
-    {
+    if(p_cb->sup_feature.app_role_mask == BTA_HL_MDEP_ROLE_MASK_SINK) {
         svc_class_id_list[0] = UUID_SERVCLASS_HDP_SINK;
-    }
-    else
-    {
-        if(p_cb->sup_feature.app_role_mask != BTA_HL_MDEP_ROLE_MASK_SOURCE)
-        {
+    } else {
+        if(p_cb->sup_feature.app_role_mask != BTA_HL_MDEP_ROLE_MASK_SOURCE) {
             /* dual role */
             num_services = 2;
             svc_class_id_list[1] = UUID_SERVCLASS_HDP_SINK;
@@ -214,8 +203,7 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
 
     result &= SDP_AddServiceClassIdList(p_cb->sdp_handle, num_services, svc_class_id_list);
 
-    if(result)
-    {
+    if(result) {
         /* add the protocol element sequence */
         proto_elem_list[0].protocol_uuid = UUID_PROTOCOL_L2CAP;
         proto_elem_list[0].num_params = 1;
@@ -227,8 +215,7 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
         result &= SDP_AddProfileDescriptorList(p_cb->sdp_handle, profile_uuid, version);
     }
 
-    if(result)
-    {
+    if(result) {
         add_proto_list.num_elems = BTA_HL_NUM_ADD_PROTO_ELEMS;
         add_proto_list.list_elem[0].protocol_uuid = UUID_PROTOCOL_L2CAP;
         add_proto_list.list_elem[0].num_params = 1;
@@ -239,10 +226,8 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
                                             (tSDP_PROTO_LIST_ELEM *)&add_proto_list);
     }
 
-    if(result)
-    {
-        if(p_cb->srv_name[0])
-        {
+    if(result) {
+        if(p_cb->srv_name[0]) {
             result &= SDP_AddAttribute(p_cb->sdp_handle,
                                        (uint16_t)ATTR_ID_SERVICE_NAME,
                                        (uint8_t)TEXT_STR_DESC_TYPE,
@@ -251,10 +236,8 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
         } /* end of setting optional service name */
     }
 
-    if(result)
-    {
-        if(p_cb->srv_desp[0])
-        {
+    if(result) {
+        if(p_cb->srv_desp[0]) {
             result &= SDP_AddAttribute(p_cb->sdp_handle,
                                        (uint16_t)ATTR_ID_SERVICE_DESCRIPTION,
                                        (uint8_t)TEXT_STR_DESC_TYPE,
@@ -263,10 +246,8 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
         } /* end of setting optional service description */
     }
 
-    if(result)
-    {
-        if(p_cb->provider_name[0])
-        {
+    if(result) {
+        if(p_cb->provider_name[0]) {
             result &= SDP_AddAttribute(p_cb->sdp_handle,
                                        (uint16_t)ATTR_ID_PROVIDER_NAME,
                                        (uint8_t)TEXT_STR_DESC_TYPE,
@@ -277,37 +258,31 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
 
     /* add supported feture list */
 
-    if(result)
-    {
+    if(result) {
         cnt = 0;
 
-        for(i = 1; i < BTA_HL_NUM_MDEPS; i++)
-        {
-            if(p_cb->sup_feature.mdep[i].mdep_id)
-            {
+        for(i = 1; i < BTA_HL_NUM_MDEPS; i++) {
+            if(p_cb->sup_feature.mdep[i].mdep_id) {
                 mdep_id = (uint8_t)p_cb->sup_feature.mdep[i].mdep_id;
                 mdep_role = (uint8_t)p_cb->sup_feature.mdep[i].mdep_cfg.mdep_role;
-                APPL_TRACE_DEBUG("num_of_mdep_data_types %d ", p_cb->sup_feature.mdep[i].mdep_cfg.num_of_mdep_data_types);
+                APPL_TRACE_DEBUG("num_of_mdep_data_types %d ",
+                                 p_cb->sup_feature.mdep[i].mdep_cfg.num_of_mdep_data_types);
 
-                for(j = 0; j < p_cb->sup_feature.mdep[i].mdep_cfg.num_of_mdep_data_types; j++)
-                {
+                for(j = 0; j < p_cb->sup_feature.mdep[i].mdep_cfg.num_of_mdep_data_types; j++) {
                     sup_feature_list.list_elem[cnt].mdep_id = mdep_id;
                     sup_feature_list.list_elem[cnt].mdep_role = mdep_role;
-                    sup_feature_list.list_elem[cnt].data_type = p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].data_type;
+                    sup_feature_list.list_elem[cnt].data_type =
+                                    p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].data_type;
 
-                    if(p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].desp[0] != '\0')
-                    {
+                    if(p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].desp[0] != '\0') {
                         sup_feature_list.list_elem[cnt].p_mdep_desp = p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].desp;
-                    }
-                    else
-                    {
+                    } else {
                         sup_feature_list.list_elem[cnt].p_mdep_desp = NULL;
                     }
 
                     cnt++;
 
-                    if(cnt == BTA_HL_NUM_SUP_FEATURE_ELEMS)
-                    {
+                    if(cnt == BTA_HL_NUM_SUP_FEATURE_ELEMS) {
                         result = FALSE;
                         break;
                     }
@@ -321,35 +296,27 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
                                                 sup_feature_list.list_elem);
     }
 
-    if(result)
-    {
+    if(result) {
         result &= SDP_AddAttribute(p_cb->sdp_handle, ATTR_ID_HDP_DATA_EXCH_SPEC, UINT_DESC_TYPE,
                                    (uint32_t)1, (uint8_t *)&data_exchange_spec);
     }
 
-    if(result)
-    {
+    if(result) {
         result &= SDP_AddAttribute(p_cb->sdp_handle, ATTR_ID_HDP_MCAP_SUP_PROC, UINT_DESC_TYPE,
                                    (uint32_t)1, (uint8_t *)&mcap_sup_proc);
     }
 
-    if(result)
-    {
+    if(result) {
         result &= SDP_AddUuidSequence(p_cb->sdp_handle, ATTR_ID_BROWSE_GROUP_LIST, 1, browse_list);
     }
 
-    if(result)
-    {
-        for(i = 0; i < num_services; i++)
-        {
+    if(result) {
+        for(i = 0; i < num_services; i++) {
             bta_sys_add_uuid(svc_class_id_list[i]);
             APPL_TRACE_DEBUG("dbg bta_sys_add_uuid i=%d uuid=0x%x", i, svc_class_id_list[i]);   //todo
         }
-    }
-    else
-    {
-        if(p_cb->sdp_handle)
-        {
+    } else {
+        if(p_cb->sdp_handle) {
             SDP_DeleteRecord(p_cb->sdp_handle);
             p_cb->sdp_handle = 0;
         }
@@ -357,9 +324,9 @@ tBTA_HL_STATUS bta_hl_sdp_update(uint8_t app_id)
         status = BTA_HL_STATUS_SDP_FAIL;
     }
 
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_sdp_update status=%s", bta_hl_status_code(status));
-    #endif
+#endif
     return status;
 }
 
@@ -395,32 +362,26 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
     tBTA_HL_APP_CB                  *p_cb = BTA_HL_GET_APP_CB_PTR(app_idx);
     uint8_t                         result = TRUE;
     tBTA_HL_STATUS                  status = BTA_HL_STATUS_OK;
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_sdp_register app_idx=%d", app_idx);
-    #endif
+#endif
 
     if((p_cb->sup_feature.app_role_mask == BTA_HL_MDEP_ROLE_MASK_SOURCE) &&
-            (!p_cb->sup_feature.advertize_source_sdp))
-    {
+            (!p_cb->sup_feature.advertize_source_sdp)) {
         return BTA_HL_STATUS_OK;
     }
 
-    if((p_cb->sdp_handle  = SDP_CreateRecord()) == 0)
-    {
+    if((p_cb->sdp_handle  = SDP_CreateRecord()) == 0) {
         return BTA_HL_STATUS_SDP_NO_RESOURCE;
     }
 
     num_services = 1;
     svc_class_id_list[0] = UUID_SERVCLASS_HDP_SOURCE;
 
-    if(p_cb->sup_feature.app_role_mask == BTA_HL_MDEP_ROLE_MASK_SINK)
-    {
+    if(p_cb->sup_feature.app_role_mask == BTA_HL_MDEP_ROLE_MASK_SINK) {
         svc_class_id_list[0] = UUID_SERVCLASS_HDP_SINK;
-    }
-    else
-    {
-        if(p_cb->sup_feature.app_role_mask != BTA_HL_MDEP_ROLE_MASK_SOURCE)
-        {
+    } else {
+        if(p_cb->sup_feature.app_role_mask != BTA_HL_MDEP_ROLE_MASK_SOURCE) {
             /* dual role */
             num_services = 2;
             svc_class_id_list[1] = UUID_SERVCLASS_HDP_SINK;
@@ -429,8 +390,7 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
 
     result &= SDP_AddServiceClassIdList(p_cb->sdp_handle, num_services, svc_class_id_list);
 
-    if(result)
-    {
+    if(result) {
         /* add the protocol element sequence */
         proto_elem_list[0].protocol_uuid = UUID_PROTOCOL_L2CAP;
         proto_elem_list[0].num_params = 1;
@@ -442,8 +402,7 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
         result &= SDP_AddProfileDescriptorList(p_cb->sdp_handle, profile_uuid, version);
     }
 
-    if(result)
-    {
+    if(result) {
         add_proto_list.num_elems = BTA_HL_NUM_ADD_PROTO_ELEMS;
         add_proto_list.list_elem[0].protocol_uuid = UUID_PROTOCOL_L2CAP;
         add_proto_list.list_elem[0].num_params = 1;
@@ -454,10 +413,8 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
                                             (tSDP_PROTO_LIST_ELEM *)&add_proto_list);
     }
 
-    if(result)
-    {
-        if(p_cb->srv_name[0])
-        {
+    if(result) {
+        if(p_cb->srv_name[0]) {
             result &= SDP_AddAttribute(p_cb->sdp_handle,
                                        (uint16_t)ATTR_ID_SERVICE_NAME,
                                        (uint8_t)TEXT_STR_DESC_TYPE,
@@ -466,10 +423,8 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
         } /* end of setting optional service name */
     }
 
-    if(result)
-    {
-        if(p_cb->srv_desp[0])
-        {
+    if(result) {
+        if(p_cb->srv_desp[0]) {
             result &= SDP_AddAttribute(p_cb->sdp_handle,
                                        (uint16_t)ATTR_ID_SERVICE_DESCRIPTION,
                                        (uint8_t)TEXT_STR_DESC_TYPE,
@@ -478,10 +433,8 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
         } /* end of setting optional service description */
     }
 
-    if(result)
-    {
-        if(p_cb->provider_name[0])
-        {
+    if(result) {
+        if(p_cb->provider_name[0]) {
             result &= SDP_AddAttribute(p_cb->sdp_handle,
                                        (uint16_t)ATTR_ID_PROVIDER_NAME,
                                        (uint8_t)TEXT_STR_DESC_TYPE,
@@ -492,34 +445,28 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
 
     /* add supported feture list */
 
-    if(result)
-    {
+    if(result) {
         cnt = 0;
 
-        for(i = 1; i <= p_cb->sup_feature.num_of_mdeps; i++)
-        {
+        for(i = 1; i <= p_cb->sup_feature.num_of_mdeps; i++) {
             mdep_id = (uint8_t)p_cb->sup_feature.mdep[i].mdep_id;
             mdep_role = (uint8_t)p_cb->sup_feature.mdep[i].mdep_cfg.mdep_role;
 
-            for(j = 0; j < p_cb->sup_feature.mdep[i].mdep_cfg.num_of_mdep_data_types; j++)
-            {
+            for(j = 0; j < p_cb->sup_feature.mdep[i].mdep_cfg.num_of_mdep_data_types; j++) {
                 sup_feature_list.list_elem[cnt].mdep_id = mdep_id;
                 sup_feature_list.list_elem[cnt].mdep_role = mdep_role;
-                sup_feature_list.list_elem[cnt].data_type = p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].data_type;
+                sup_feature_list.list_elem[cnt].data_type =
+                                p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].data_type;
 
-                if(p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].desp[0] != '\0')
-                {
+                if(p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].desp[0] != '\0') {
                     sup_feature_list.list_elem[cnt].p_mdep_desp = p_cb->sup_feature.mdep[i].mdep_cfg.data_cfg[j].desp;
-                }
-                else
-                {
+                } else {
                     sup_feature_list.list_elem[cnt].p_mdep_desp = NULL;
                 }
 
                 cnt++;
 
-                if(cnt == BTA_HL_NUM_SUP_FEATURE_ELEMS)
-                {
+                if(cnt == BTA_HL_NUM_SUP_FEATURE_ELEMS) {
                     result = FALSE;
                     break;
                 }
@@ -532,35 +479,27 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
                                                 sup_feature_list.list_elem);
     }
 
-    if(result)
-    {
+    if(result) {
         result &= SDP_AddAttribute(p_cb->sdp_handle, ATTR_ID_HDP_DATA_EXCH_SPEC, UINT_DESC_TYPE,
                                    (uint32_t)1, (uint8_t *)&data_exchange_spec);
     }
 
-    if(result)
-    {
+    if(result) {
         result &= SDP_AddAttribute(p_cb->sdp_handle, ATTR_ID_HDP_MCAP_SUP_PROC, UINT_DESC_TYPE,
                                    (uint32_t)1, (uint8_t *)&mcap_sup_proc);
     }
 
-    if(result)
-    {
+    if(result) {
         result &= SDP_AddUuidSequence(p_cb->sdp_handle, ATTR_ID_BROWSE_GROUP_LIST, 1, browse_list);
     }
 
-    if(result)
-    {
-        for(i = 0; i < num_services; i++)
-        {
+    if(result) {
+        for(i = 0; i < num_services; i++) {
             bta_sys_add_uuid(svc_class_id_list[i]);
             APPL_TRACE_DEBUG("dbg bta_sys_add_uuid i=%d uuid=0x%x", i, svc_class_id_list[i]);   //todo
         }
-    }
-    else
-    {
-        if(p_cb->sdp_handle)
-        {
+    } else {
+        if(p_cb->sdp_handle) {
             SDP_DeleteRecord(p_cb->sdp_handle);
             p_cb->sdp_handle = 0;
         }
@@ -568,9 +507,9 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
         status = BTA_HL_STATUS_SDP_FAIL;
     }
 
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_sdp_register status=%s", bta_hl_status_code(status));
-    #endif
+#endif
     return status;
 }
 
@@ -590,41 +529,32 @@ tBTA_HL_STATUS bta_hl_sdp_register(uint8_t app_idx)
 tSDP_DISC_REC *bta_hl_find_sink_or_src_srv_class_in_db(const tSDP_DISCOVERY_DB *p_db,
         const tSDP_DISC_REC *p_start_rec)
 {
-    #if SDP_CLIENT_ENABLED == TRUE
+#if SDP_CLIENT_ENABLED == TRUE
     tSDP_DISC_REC   *p_rec;
     tSDP_DISC_ATTR  *p_attr, *p_sattr;
 
     /* Must have a valid database */
-    if(p_db == NULL)
-    {
+    if(p_db == NULL) {
         return(NULL);
     }
 
-    if(!p_start_rec)
-    {
+    if(!p_start_rec) {
         p_rec = p_db->p_first_rec;
-    }
-    else
-    {
+    } else {
         p_rec = p_start_rec->p_next_rec;
     }
 
-    while(p_rec)
-    {
+    while(p_rec) {
         p_attr = p_rec->p_first_attr;
 
-        while(p_attr)
-        {
+        while(p_attr) {
             if((p_attr->attr_id == ATTR_ID_SERVICE_CLASS_ID_LIST)
-                    && (SDP_DISC_ATTR_TYPE(p_attr->attr_len_type) == DATA_ELE_SEQ_DESC_TYPE))
-            {
-                for(p_sattr = p_attr->attr_value.v.p_sub_attr; p_sattr; p_sattr = p_sattr->p_next_attr)
-                {
+                    && (SDP_DISC_ATTR_TYPE(p_attr->attr_len_type) == DATA_ELE_SEQ_DESC_TYPE)) {
+                for(p_sattr = p_attr->attr_value.v.p_sub_attr; p_sattr; p_sattr = p_sattr->p_next_attr) {
                     if((SDP_DISC_ATTR_TYPE(p_sattr->attr_len_type) == UUID_DESC_TYPE)
                             && (SDP_DISC_ATTR_LEN(p_sattr->attr_len_type) == 2)
                             && ((p_sattr->attr_value.v.u16 == UUID_SERVCLASS_HDP_SINK) ||
-                                (p_sattr->attr_value.v.u16 == UUID_SERVCLASS_HDP_SOURCE)))
-                    {
+                                (p_sattr->attr_value.v.u16 == UUID_SERVCLASS_HDP_SOURCE))) {
                         return(p_rec);
                     }
                 }
@@ -638,11 +568,11 @@ tSDP_DISC_REC *bta_hl_find_sink_or_src_srv_class_in_db(const tSDP_DISCOVERY_DB *
         p_rec = p_rec->p_next_rec;
     }
 
-    #endif
+#endif
     /* If here, no matching UUID found */
-    #if BTA_HL_DEBUG == TRUE
+#if BTA_HL_DEBUG == TRUE
     APPL_TRACE_DEBUG("bta_hl_find_sink_or_src_srv_class_in_db failed");
-    #endif
+#endif
     return(NULL);
 }
 #endif /* HL_INCLUDED */

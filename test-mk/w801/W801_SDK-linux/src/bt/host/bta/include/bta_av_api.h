@@ -37,7 +37,7 @@
 /* Set to TRUE if seperate authorization prompt desired for AVCTP besides A2DP authorization */
 /* Typically FALSE when AVRCP is used in conjunction with A2DP */
 #ifndef BTA_AV_WITH_AVCTP_AUTHORIZATION
-    #define BTA_AV_WITH_AVCTP_AUTHORIZATION     FALSE
+#define BTA_AV_WITH_AVCTP_AUTHORIZATION     FALSE
 #endif
 
 /* AV status values */
@@ -93,20 +93,20 @@ typedef uint8_t tBTA_AV_HNDL;
 
 /* maximum number of streams created: 1 for audio, 1 for video */
 #ifndef BTA_AV_NUM_STRS
-    #define BTA_AV_NUM_STRS         2
+#define BTA_AV_NUM_STRS         2
 #endif
 
 #ifndef BTA_AV_MAX_SEPS
-    #define BTA_AV_MAX_SEPS         2
+#define BTA_AV_MAX_SEPS         2
 #endif
 
 #ifndef BTA_AV_MAX_A2DP_MTU
-    /*#define BTA_AV_MAX_A2DP_MTU     668 //224 (DM5) * 3 - 4(L2CAP header) */
-    #define BTA_AV_MAX_A2DP_MTU     1008
+/*#define BTA_AV_MAX_A2DP_MTU     668 //224 (DM5) * 3 - 4(L2CAP header) */
+#define BTA_AV_MAX_A2DP_MTU     1008
 #endif
 
 #ifndef BTA_AV_MAX_VDP_MTU
-    #define BTA_AV_MAX_VDP_MTU      1008
+#define BTA_AV_MAX_VDP_MTU      1008
 #endif
 
 
@@ -261,14 +261,12 @@ typedef uint8_t tBTA_AV_ERR;
 typedef uint8_t tBTA_AV_EVT;
 
 /* Event associated with BTA_AV_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_FEAT    features;
 } tBTA_AV_ENABLE;
 
 /* Event associated with BTA_AV_REGISTER_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;       /* audio/video */
     tBTA_AV_HNDL    hndl;       /* Handle associated with the stream. */
     uint8_t           app_id;     /* ID associated with call to BTA_AvRegister() */
@@ -280,8 +278,7 @@ typedef struct
 #define BTA_AV_EDR_3MBPS        0x02
 typedef uint8_t tBTA_AV_EDR;
 
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
     BD_ADDR         bd_addr;
@@ -292,15 +289,13 @@ typedef struct
 } tBTA_AV_OPEN;
 
 /* data associated with BTA_AV_CLOSE_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
 } tBTA_AV_CLOSE;
 
 /* data associated with BTA_AV_START_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
     tBTA_AV_STATUS  status;
@@ -309,8 +304,7 @@ typedef struct
 } tBTA_AV_START;
 
 /* data associated with BTA_AV_SUSPEND_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
     uint8_t         initiator; /* TRUE, if local device initiates the SUSPEND */
@@ -318,16 +312,14 @@ typedef struct
 } tBTA_AV_SUSPEND;
 
 /* data associated with BTA_AV_RECONFIG_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
     tBTA_AV_STATUS  status;
 } tBTA_AV_RECONFIG;
 
 /* data associated with BTA_AV_PROTECT_REQ_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
     uint8_t           *p_data;
@@ -335,8 +327,7 @@ typedef struct
 } tBTA_AV_PROTECT_REQ;
 
 /* data associated with BTA_AV_PROTECT_RSP_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_AV_CHNL    chnl;
     tBTA_AV_HNDL    hndl;
     uint8_t           *p_data;
@@ -345,8 +336,7 @@ typedef struct
 } tBTA_AV_PROTECT_RSP;
 
 /* data associated with BTA_AV_RC_OPEN_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     tBTA_AV_FEAT    peer_features;
     BD_ADDR         peer_addr;
@@ -354,23 +344,20 @@ typedef struct
 } tBTA_AV_RC_OPEN;
 
 /* data associated with BTA_AV_RC_CLOSE_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     BD_ADDR         peer_addr;
 } tBTA_AV_RC_CLOSE;
 
 /* data associated with BTA_AV_RC_FEAT_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     tBTA_AV_FEAT    peer_features;
     BD_ADDR         peer_addr;
 } tBTA_AV_RC_FEAT;
 
 /* data associated with BTA_AV_REMOTE_CMD_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     tBTA_AV_RC      rc_id;
     tBTA_AV_STATE   key_state;
@@ -381,8 +368,7 @@ typedef struct
 } tBTA_AV_REMOTE_CMD;
 
 /* data associated with BTA_AV_REMOTE_RSP_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     tBTA_AV_RC      rc_id;
     tBTA_AV_STATE   key_state;
@@ -393,8 +379,7 @@ typedef struct
 } tBTA_AV_REMOTE_RSP;
 
 /* data associated with BTA_AV_VENDOR_CMD_EVT, BTA_AV_VENDOR_RSP_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     uint16_t          len;            /* Max vendor dependent message is 512 */
     uint8_t           label;
@@ -404,8 +389,7 @@ typedef struct
 } tBTA_AV_VENDOR;
 
 /* data associated with BTA_AV_META_MSG_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           rc_handle;
     uint16_t          len;
     uint8_t           label;
@@ -416,22 +400,19 @@ typedef struct
 } tBTA_AV_META_MSG;
 
 /* data associated with BTA_AV_PENDING_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;
 } tBTA_AV_PEND;
 
 /* data associated with BTA_AV_REJECT_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;
     tBTA_AV_HNDL    hndl;       /* Handle associated with the stream that rejected the connection. */
 } tBTA_AV_REJECT;
 
 
 /* union of data associated with AV callback */
-typedef union
-{
+typedef union {
     tBTA_AV_CHNL        chnl;
     tBTA_AV_ENABLE      enable;
     tBTA_AV_REGISTER    registr;
@@ -455,15 +436,13 @@ typedef union
     tBTA_AV_STATUS      status;
 } tBTA_AV;
 
-typedef struct
-{
+typedef struct {
     uint8_t *codec_info;
     BD_ADDR bd_addr;;
 } tBTA_AVK_CONFIG;
 
 /* union of data associated with AV Media callback */
-typedef union
-{
+typedef union {
     BT_HDR     *p_data;
     tBTA_AVK_CONFIG avk_config;
 } tBTA_AV_MEDIA;
@@ -495,8 +474,7 @@ typedef void (*tBTA_AV_ACT)(void *p_cb, void *p_data);
 typedef void (tBTA_AV_REG)(tAVDT_CS *p_cs, char *p_service_name, void *p_data);
 
 /* AV configuration structure */
-typedef struct
-{
+typedef struct {
     uint32_t  company_id;         /* AVRCP Company ID */
     uint16_t  avrc_mtu;           /* AVRCP MTU at L2CAP for control channel */
     uint16_t  avrc_br_mtu;        /* AVRCP MTU at L2CAP for browsing channel */

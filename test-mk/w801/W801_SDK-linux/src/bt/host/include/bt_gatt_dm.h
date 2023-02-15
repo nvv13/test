@@ -22,8 +22,7 @@
 
 #include "bt_gatt_types.h"
 
-typedef enum
-{
+typedef enum {
     BTIF_GATT_DM_SET_ADV_DATA,
     BTIF_GATT_DM_SET_ADV_PARAM,
     BTIF_GATT_DM_SET_ADV_EXT_PARAM,
@@ -45,28 +44,24 @@ typedef enum
     BTIF_GATT_DM_SEC_ACT
 } btif_gatt_dm_event_t;
 
-typedef struct
-{
+typedef struct {
     uint16_t disc;
     uint16_t conn;
 } __attribute__((packed))  btif_dm_visibility_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t id;
     uint32_t ms;
     void *callback_ptr;
 } __attribute__((packed))  btif_dm_timer_t;
 
-typedef struct
-{
+typedef struct {
     int evt;
     void *priv_data;
 } __attribute__((packed))  btif_dm_evt_t;
 
 
-typedef struct
-{
+typedef struct {
     tls_bt_addr_t addr;
     uint16_t length;
 } __attribute__((packed))  btif_dm_set_data_length_t;
@@ -79,8 +74,7 @@ typedef void (*adv_disable_callback)(int status);
 typedef void (*dm_timeout_callback)(uint8_t id, int32_t func_ptr);
 typedef void (*dm_triger_callback)(int evt_id, int32_t func_ptr);
 
-typedef struct
-{
+typedef struct {
     adv_enable_callback        adv_enable_cb;
     adv_update_data_callback             adv_update_data_cb;
     adv_config_data_callback          adv_config_data_cb;

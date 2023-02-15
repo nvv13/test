@@ -29,8 +29,7 @@
 
 /* Define the HID Connection Block
 */
-typedef struct hid_conn
-{
+typedef struct hid_conn {
 #define HID_CONN_STATE_UNUSED           (0)
 #define HID_CONN_STATE_CONNECTING_CTRL  (1)
 #define HID_CONN_STATE_CONNECTING_INTR  (2)
@@ -56,7 +55,8 @@ typedef struct hid_conn
     uint16_t            ctrl_cid;
     uint16_t            intr_cid;
     uint16_t            rem_mtu_size;
-    uint16_t            disc_reason;                       /* Reason for disconnecting (for HID_HDEV_EVT_CLOSE) */
+    uint16_t
+    disc_reason;                       /* Reason for disconnecting (for HID_HDEV_EVT_CLOSE) */
     TIMER_LIST_ENT  process_repage_timer;
 } tHID_CONN;
 

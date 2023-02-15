@@ -123,12 +123,12 @@ static const char BTE_LOGMSG_MODULE[] = "bte_logmsg_module";
 
 /* Enables or disables verbose trace information. */
 #ifndef BT_TRACE_VERBOSE
-    #define BT_TRACE_VERBOSE    FALSE
+#define BT_TRACE_VERBOSE    FALSE
 #endif
 
 /* Enables or disables all trace messages. */
 #ifndef BT_USE_TRACES
-    #define BT_USE_TRACES       TRUE
+#define BT_USE_TRACES       TRUE
 #endif
 
 /******************************************************************************
@@ -146,75 +146,75 @@ static const char BTE_LOGMSG_MODULE[] = "bte_logmsg_module";
 
 /* Core Stack default trace levels */
 #ifndef HCI_INITIAL_TRACE_LEVEL
-    #define HCI_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define HCI_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef BTM_INITIAL_TRACE_LEVEL
-    #define BTM_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_VERBOSE
+#define BTM_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_VERBOSE
 #endif
 
 #ifndef L2CAP_INITIAL_TRACE_LEVEL
-    #define L2CAP_INITIAL_TRACE_LEVEL           BT_TRACE_LEVEL_WARNING
+#define L2CAP_INITIAL_TRACE_LEVEL           BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef RFCOMM_INITIAL_TRACE_LEVEL
-    #define RFCOMM_INITIAL_TRACE_LEVEL          BT_TRACE_LEVEL_WARNING
+#define RFCOMM_INITIAL_TRACE_LEVEL          BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef SDP_INITIAL_TRACE_LEVEL
-    #define SDP_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define SDP_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef GAP_INITIAL_TRACE_LEVEL
-    #define GAP_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define GAP_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef BNEP_INITIAL_TRACE_LEVEL
-    #define BNEP_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
+#define BNEP_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef PAN_INITIAL_TRACE_LEVEL
-    #define PAN_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define PAN_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef A2D_INITIAL_TRACE_LEVEL
-    #define A2D_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define A2D_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef AVDT_INITIAL_TRACE_LEVEL
-    #define AVDT_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
+#define AVDT_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef AVCT_INITIAL_TRACE_LEVEL
-    #define AVCT_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
+#define AVCT_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef AVRC_INITIAL_TRACE_LEVEL
-    #define AVRC_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
+#define AVRC_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef MCA_INITIAL_TRACE_LEVEL
-    #define MCA_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define MCA_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef HID_INITIAL_TRACE_LEVEL
-    #define HID_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define HID_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef APPL_INITIAL_TRACE_LEVEL
-    #define APPL_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
+#define APPL_INITIAL_TRACE_LEVEL            BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef BT_TRACE_APPL
-    #define BT_TRACE_APPL   BT_USE_TRACES
+#define BT_TRACE_APPL   BT_USE_TRACES
 #endif
 
 #ifndef GATT_INITIAL_TRACE_LEVEL
-    #define GATT_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
+#define GATT_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_WARNING
 #endif
 
 #ifndef SMP_INITIAL_TRACE_LEVEL
-    #define SMP_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_VERBOSE
+#define SMP_INITIAL_TRACE_LEVEL             BT_TRACE_LEVEL_VERBOSE
 #endif
 
 #define BT_TRACE(l,t,...)                        LogMsg((TRACE_CTRL_GENERAL | (l) | TRACE_ORG_STACK | (t)), ##__VA_ARGS__)
@@ -223,311 +223,311 @@ static const char BTE_LOGMSG_MODULE[] = "bte_logmsg_module";
 /* Define tracing for the HCI unit
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_L2CAP == TRUE)
-    #define HCI_TRACE_ERROR(...)                     {if (btu_trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define HCI_TRACE_WARNING(...)                   {if (btu_trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define HCI_TRACE_EVENT(...)                     {if (btu_trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define HCI_TRACE_DEBUG(...)                     {if (btu_trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define HCI_TRACE_ERROR(...)                     {if (btu_trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define HCI_TRACE_WARNING(...)                   {if (btu_trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define HCI_TRACE_EVENT(...)                     {if (btu_trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define HCI_TRACE_DEBUG(...)                     {if (btu_trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_HCI, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define HCI_TRACE_ERROR(...)
-    #define HCI_TRACE_WARNING(...)
-    #define HCI_TRACE_EVENT(...)
-    #define HCI_TRACE_DEBUG(...)
+#define HCI_TRACE_ERROR(...)
+#define HCI_TRACE_WARNING(...)
+#define HCI_TRACE_EVENT(...)
+#define HCI_TRACE_DEBUG(...)
 #endif
 
 /* Define tracing for BTM
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_BTM == TRUE)
-    #define BTM_TRACE_ERROR(...)                     {if (btm_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define BTM_TRACE_WARNING(...)                   {if (btm_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define BTM_TRACE_API(...)                       {if (btm_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define BTM_TRACE_EVENT(...)                     {if (btm_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define BTM_TRACE_DEBUG(...)                     {if (btm_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define BTM_TRACE_ERROR(...)                     {if (btm_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define BTM_TRACE_WARNING(...)                   {if (btm_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define BTM_TRACE_API(...)                       {if (btm_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define BTM_TRACE_EVENT(...)                     {if (btm_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define BTM_TRACE_DEBUG(...)                     {if (btm_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_BTM, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define BTM_TRACE_ERROR(...)
-    #define BTM_TRACE_WARNING(...)
-    #define BTM_TRACE_API(...)
-    #define BTM_TRACE_EVENT(...)
-    #define BTM_TRACE_DEBUG(...)
+#define BTM_TRACE_ERROR(...)
+#define BTM_TRACE_WARNING(...)
+#define BTM_TRACE_API(...)
+#define BTM_TRACE_EVENT(...)
+#define BTM_TRACE_DEBUG(...)
 #endif
 
 /* Define tracing for the L2CAP unit
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_L2CAP == TRUE)
-    #define L2CAP_TRACE_ERROR(...)                   {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define L2CAP_TRACE_WARNING(...)                 {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define L2CAP_TRACE_API(...)                     {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define L2CAP_TRACE_EVENT(...)                   {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define L2CAP_TRACE_DEBUG(...)                   {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define L2CAP_TRACE_ERROR(...)                   {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define L2CAP_TRACE_WARNING(...)                 {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define L2CAP_TRACE_API(...)                     {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define L2CAP_TRACE_EVENT(...)                   {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define L2CAP_TRACE_DEBUG(...)                   {if (l2cb.l2cap_trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_L2CAP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define L2CAP_TRACE_ERROR(...)
-    #define L2CAP_TRACE_WARNING(...)
-    #define L2CAP_TRACE_API(...)
-    #define L2CAP_TRACE_EVENT(...)
-    #define L2CAP_TRACE_DEBUG(...)
+#define L2CAP_TRACE_ERROR(...)
+#define L2CAP_TRACE_WARNING(...)
+#define L2CAP_TRACE_API(...)
+#define L2CAP_TRACE_EVENT(...)
+#define L2CAP_TRACE_DEBUG(...)
 #endif
 /* Define tracing for the SDP unit
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_SDP == TRUE)
-    #define SDP_TRACE_ERROR(...)                     {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define SDP_TRACE_WARNING(...)                   {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define SDP_TRACE_API(...)                       {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define SDP_TRACE_EVENT(...)                     {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define SDP_TRACE_DEBUG(...)                     {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define SDP_TRACE_ERROR(...)                     {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define SDP_TRACE_WARNING(...)                   {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define SDP_TRACE_API(...)                       {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define SDP_TRACE_EVENT(...)                     {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define SDP_TRACE_DEBUG(...)                     {if (sdp_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_SDP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define SDP_TRACE_ERROR(...)
-    #define SDP_TRACE_WARNING(...)
-    #define SDP_TRACE_API(...)
-    #define SDP_TRACE_EVENT(...)
-    #define SDP_TRACE_DEBUG(...)
+#define SDP_TRACE_ERROR(...)
+#define SDP_TRACE_WARNING(...)
+#define SDP_TRACE_API(...)
+#define SDP_TRACE_EVENT(...)
+#define SDP_TRACE_DEBUG(...)
 #endif
 
 /* Define tracing for the RFCOMM unit
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_RFCOMM == TRUE)
-    #define RFCOMM_TRACE_ERROR(...)                  {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define RFCOMM_TRACE_WARNING(...)                {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define RFCOMM_TRACE_API(...)                    {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define RFCOMM_TRACE_EVENT(...)                  {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define RFCOMM_TRACE_DEBUG(...)                  {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define RFCOMM_TRACE_ERROR(...)                  {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define RFCOMM_TRACE_WARNING(...)                {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define RFCOMM_TRACE_API(...)                    {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define RFCOMM_TRACE_EVENT(...)                  {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define RFCOMM_TRACE_DEBUG(...)                  {if (rfc_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_RFCOMM, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define RFCOMM_TRACE_ERROR(...)
-    #define RFCOMM_TRACE_WARNING(...)
-    #define RFCOMM_TRACE_API(...)
-    #define RFCOMM_TRACE_EVENT(...)
-    #define RFCOMM_TRACE_DEBUG(...)
+#define RFCOMM_TRACE_ERROR(...)
+#define RFCOMM_TRACE_WARNING(...)
+#define RFCOMM_TRACE_API(...)
+#define RFCOMM_TRACE_EVENT(...)
+#define RFCOMM_TRACE_DEBUG(...)
 #endif
 
 /* Generic Access Profile traces */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_HID == TRUE)
-    #define GAP_TRACE_ERROR(...)                     {if (gap_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define GAP_TRACE_EVENT(...)                     {if (gap_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define GAP_TRACE_API(...)                       {if (gap_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define GAP_TRACE_WARNING(...)                   {if (gap_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define GAP_TRACE_ERROR(...)                     {if (gap_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define GAP_TRACE_EVENT(...)                     {if (gap_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define GAP_TRACE_API(...)                       {if (gap_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define GAP_TRACE_WARNING(...)                   {if (gap_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_GAP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
 #else
-    #define GAP_TRACE_ERROR(...)
-    #define GAP_TRACE_EVENT(...)
-    #define GAP_TRACE_API(...)
-    #define GAP_TRACE_WARNING(...)
+#define GAP_TRACE_ERROR(...)
+#define GAP_TRACE_EVENT(...)
+#define GAP_TRACE_API(...)
+#define GAP_TRACE_WARNING(...)
 #endif
 
 /* define traces for HID Host */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_HID == TRUE)
-    #define HIDH_TRACE_ERROR(...)                     {if (hh_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define HIDH_TRACE_WARNING(...)                   {if (hh_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define HIDH_TRACE_API(...)                       {if (hh_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define HIDH_TRACE_EVENT(...)                     {if (hh_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define HIDH_TRACE_DEBUG(...)                     {if (hh_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define HIDH_TRACE_ERROR(...)                     {if (hh_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define HIDH_TRACE_WARNING(...)                   {if (hh_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define HIDH_TRACE_API(...)                       {if (hh_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define HIDH_TRACE_EVENT(...)                     {if (hh_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define HIDH_TRACE_DEBUG(...)                     {if (hh_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_HID, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define HIDH_TRACE_ERROR(...)
-    #define HIDH_TRACE_WARNING(...)
-    #define HIDH_TRACE_API(...)
-    #define HIDH_TRACE_EVENT(...)
-    #define HIDH_TRACE_DEBUG(...)
+#define HIDH_TRACE_ERROR(...)
+#define HIDH_TRACE_WARNING(...)
+#define HIDH_TRACE_API(...)
+#define HIDH_TRACE_EVENT(...)
+#define HIDH_TRACE_DEBUG(...)
 #endif
 
 /* define traces for BNEP */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_BNEP == TRUE)
-    #define BNEP_TRACE_ERROR(...)                     {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define BNEP_TRACE_WARNING(...)                   {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define BNEP_TRACE_API(...)                       {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define BNEP_TRACE_EVENT(...)                     {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define BNEP_TRACE_DEBUG(...)                     {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define BNEP_TRACE_ERROR(...)                     {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define BNEP_TRACE_WARNING(...)                   {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define BNEP_TRACE_API(...)                       {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define BNEP_TRACE_EVENT(...)                     {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define BNEP_TRACE_DEBUG(...)                     {if (bnep_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_BNEP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define BNEP_TRACE_ERROR(...)
-    #define BNEP_TRACE_WARNING(...)
-    #define BNEP_TRACE_API(...)
-    #define BNEP_TRACE_EVENT(...)
-    #define BNEP_TRACE_DEBUG(...)
+#define BNEP_TRACE_ERROR(...)
+#define BNEP_TRACE_WARNING(...)
+#define BNEP_TRACE_API(...)
+#define BNEP_TRACE_EVENT(...)
+#define BNEP_TRACE_DEBUG(...)
 #endif
 
 /* define traces for PAN */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_PAN == TRUE)
-    #define PAN_TRACE_ERROR(...)                     {if (pan_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define PAN_TRACE_WARNING(...)                   {if (pan_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define PAN_TRACE_API(...)                       {if (pan_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define PAN_TRACE_EVENT(...)                     {if (pan_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define PAN_TRACE_DEBUG(...)                     {if (pan_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define PAN_TRACE_ERROR(...)                     {if (pan_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define PAN_TRACE_WARNING(...)                   {if (pan_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define PAN_TRACE_API(...)                       {if (pan_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define PAN_TRACE_EVENT(...)                     {if (pan_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define PAN_TRACE_DEBUG(...)                     {if (pan_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_PAN, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define PAN_TRACE_ERROR(...)
-    #define PAN_TRACE_WARNING(...)
-    #define PAN_TRACE_API(...)
-    #define PAN_TRACE_EVENT(...)
-    #define PAN_TRACE_DEBUG(...)
+#define PAN_TRACE_ERROR(...)
+#define PAN_TRACE_WARNING(...)
+#define PAN_TRACE_API(...)
+#define PAN_TRACE_EVENT(...)
+#define PAN_TRACE_DEBUG(...)
 #endif
 /* Define tracing for the A2DP profile
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_A2D == TRUE)
-    #define A2D_TRACE_ERROR(...)                      {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_ERROR,##__VA_ARGS__);}
-    #define A2D_TRACE_WARNING(...)                    {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_WARNING,##__VA_ARGS__);}
-    #define A2D_TRACE_EVENT(...)                      {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_EVENT,##__VA_ARGS__);}
-    #define A2D_TRACE_DEBUG(...)                      {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_DEBUG,##__VA_ARGS__);}
-    #define A2D_TRACE_API(...)                        {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_API,##__VA_ARGS__);}
+#define A2D_TRACE_ERROR(...)                      {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_ERROR,##__VA_ARGS__);}
+#define A2D_TRACE_WARNING(...)                    {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_WARNING,##__VA_ARGS__);}
+#define A2D_TRACE_EVENT(...)                      {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_EVENT,##__VA_ARGS__);}
+#define A2D_TRACE_DEBUG(...)                      {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_DEBUG,##__VA_ARGS__);}
+#define A2D_TRACE_API(...)                        {if (a2d_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_A2D, TRACE_TYPE_API,##__VA_ARGS__);}
 #else
-    #define A2D_TRACE_ERROR(...)
-    #define A2D_TRACE_WARNING(...)
-    #define A2D_TRACE_EVENT(...)
-    #define A2D_TRACE_DEBUG(...)
-    #define A2D_TRACE_API(...)
+#define A2D_TRACE_ERROR(...)
+#define A2D_TRACE_WARNING(...)
+#define A2D_TRACE_EVENT(...)
+#define A2D_TRACE_DEBUG(...)
+#define A2D_TRACE_API(...)
 #endif
 
 /* AVDTP
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_AVDTP == TRUE)
-    #define AVDT_TRACE_ERROR(...)                     {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define AVDT_TRACE_WARNING(...)                   {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define AVDT_TRACE_EVENT(...)                     {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define AVDT_TRACE_DEBUG(...)                     {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define AVDT_TRACE_API(...)                       {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define AVDT_TRACE_ERROR(...)                     {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define AVDT_TRACE_WARNING(...)                   {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define AVDT_TRACE_EVENT(...)                     {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define AVDT_TRACE_DEBUG(...)                     {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define AVDT_TRACE_API(...)                       {if (avdt_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_API, ##__VA_ARGS__);}
 #else
-    #define AVDT_TRACE_ERROR(...)
-    #define AVDT_TRACE_WARNING(...)
-    #define AVDT_TRACE_EVENT(...)
-    #define AVDT_TRACE_DEBUG(...)
-    #define AVDT_TRACE_API(...)
+#define AVDT_TRACE_ERROR(...)
+#define AVDT_TRACE_WARNING(...)
+#define AVDT_TRACE_EVENT(...)
+#define AVDT_TRACE_DEBUG(...)
+#define AVDT_TRACE_API(...)
 #endif
 /* Define tracing for the AVCTP protocol
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_AVCT == TRUE)
-    #define AVCT_TRACE_ERROR(...)                     {if (avct_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define AVCT_TRACE_WARNING(...)                   {if (avct_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define AVCT_TRACE_EVENT(...)                     {if (avct_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define AVCT_TRACE_DEBUG(...)                     {if (avct_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define AVCT_TRACE_API(...)                       {if (avct_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define AVCT_TRACE_ERROR(...)                     {if (avct_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define AVCT_TRACE_WARNING(...)                   {if (avct_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define AVCT_TRACE_EVENT(...)                     {if (avct_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define AVCT_TRACE_DEBUG(...)                     {if (avct_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define AVCT_TRACE_API(...)                       {if (avct_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_API, ##__VA_ARGS__);}
 #else
-    #define AVCT_TRACE_ERROR(...)
-    #define AVCT_TRACE_WARNING(...)
-    #define AVCT_TRACE_EVENT(...)
-    #define AVCT_TRACE_DEBUG(...)
-    #define AVCT_TRACE_API(...)
+#define AVCT_TRACE_ERROR(...)
+#define AVCT_TRACE_WARNING(...)
+#define AVCT_TRACE_EVENT(...)
+#define AVCT_TRACE_DEBUG(...)
+#define AVCT_TRACE_API(...)
 #endif
 
 /* Define tracing for the AVRCP profile
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_AVRCP == TRUE)
-    #define AVRC_TRACE_ERROR(...)                      {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define AVRC_TRACE_WARNING(...)                    {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define AVRC_TRACE_EVENT(...)                      {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define AVRC_TRACE_DEBUG(...)                      {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define AVRC_TRACE_API(...)                        {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define AVRC_TRACE_ERROR(...)                      {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define AVRC_TRACE_WARNING(...)                    {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define AVRC_TRACE_EVENT(...)                      {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define AVRC_TRACE_DEBUG(...)                      {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define AVRC_TRACE_API(...)                        {if (avrc_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_AVP, TRACE_TYPE_API, ##__VA_ARGS__);}
 #else
-    #define AVRC_TRACE_ERROR(...)
-    #define AVRC_TRACE_WARNING(...)
-    #define AVRC_TRACE_EVENT(...)
-    #define AVRC_TRACE_DEBUG(...)
-    #define AVRC_TRACE_API(...)
+#define AVRC_TRACE_ERROR(...)
+#define AVRC_TRACE_WARNING(...)
+#define AVRC_TRACE_EVENT(...)
+#define AVRC_TRACE_DEBUG(...)
+#define AVRC_TRACE_API(...)
 #endif
 
 /* MCAP
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_MCA == TRUE)
-    #define MCA_TRACE_ERROR(...)                     {if (mca_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define MCA_TRACE_WARNING(...)                   {if (mca_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define MCA_TRACE_EVENT(...)                     {if (mca_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define MCA_TRACE_DEBUG(...)                     {if (mca_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define MCA_TRACE_API(...)                       {if (mca_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define MCA_TRACE_ERROR(...)                     {if (mca_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define MCA_TRACE_WARNING(...)                   {if (mca_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define MCA_TRACE_EVENT(...)                     {if (mca_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define MCA_TRACE_DEBUG(...)                     {if (mca_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define MCA_TRACE_API(...)                       {if (mca_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_MCA, TRACE_TYPE_API, ##__VA_ARGS__);}
 #else
-    #define MCA_TRACE_ERROR(...)
-    #define MCA_TRACE_WARNING(...)
-    #define MCA_TRACE_EVENT(...)
-    #define MCA_TRACE_DEBUG(...)
-    #define MCA_TRACE_API(...)
+#define MCA_TRACE_ERROR(...)
+#define MCA_TRACE_WARNING(...)
+#define MCA_TRACE_EVENT(...)
+#define MCA_TRACE_DEBUG(...)
+#define MCA_TRACE_API(...)
 #endif
 
 /* Define tracing for the ATT/GATT unit
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_GATT == TRUE)
-    #define GATT_TRACE_ERROR(...)                     {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define GATT_TRACE_WARNING(...)                   {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define GATT_TRACE_API(...)                       {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define GATT_TRACE_EVENT(...)                     {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define GATT_TRACE_DEBUG(...)                     {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define GATT_TRACE_ERROR(...)                     {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define GATT_TRACE_WARNING(...)                   {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define GATT_TRACE_API(...)                       {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define GATT_TRACE_EVENT(...)                     {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define GATT_TRACE_DEBUG(...)                     {if (gatt_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_ATT, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define GATT_TRACE_ERROR(...)
-    #define GATT_TRACE_WARNING(...)
-    #define GATT_TRACE_API(...)
-    #define GATT_TRACE_EVENT(...)
-    #define GATT_TRACE_DEBUG(...)
+#define GATT_TRACE_ERROR(...)
+#define GATT_TRACE_WARNING(...)
+#define GATT_TRACE_API(...)
+#define GATT_TRACE_EVENT(...)
+#define GATT_TRACE_DEBUG(...)
 #endif
 
 /* Define tracing for the SMP unit
 */
 #if (BT_USE_TRACES == TRUE && BT_TRACE_SMP == TRUE)
-    #define SMP_TRACE_ERROR(...)                     {if (smp_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define SMP_TRACE_WARNING(...)                   {if (smp_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define SMP_TRACE_API(...)                       {if (smp_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define SMP_TRACE_EVENT(...)                     {if (smp_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define SMP_TRACE_DEBUG(...)                     {if (smp_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define SMP_TRACE_ERROR(...)                     {if (smp_cb.trace_level >= BT_TRACE_LEVEL_ERROR) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define SMP_TRACE_WARNING(...)                   {if (smp_cb.trace_level >= BT_TRACE_LEVEL_WARNING) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define SMP_TRACE_API(...)                       {if (smp_cb.trace_level >= BT_TRACE_LEVEL_API) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_API, ##__VA_ARGS__);}
+#define SMP_TRACE_EVENT(...)                     {if (smp_cb.trace_level >= BT_TRACE_LEVEL_EVENT) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define SMP_TRACE_DEBUG(...)                     {if (smp_cb.trace_level >= BT_TRACE_LEVEL_DEBUG) BT_TRACE(TRACE_LAYER_SMP, TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    #define SMP_TRACE_ERROR(...)
-    #define SMP_TRACE_WARNING(...)
-    #define SMP_TRACE_API(...)
-    #define SMP_TRACE_EVENT(...)
-    #define SMP_TRACE_DEBUG(...)
+#define SMP_TRACE_ERROR(...)
+#define SMP_TRACE_WARNING(...)
+#define SMP_TRACE_API(...)
+#define SMP_TRACE_EVENT(...)
+#define SMP_TRACE_DEBUG(...)
 #endif
 
 #if (BT_USE_TRACES == TRUE && BT_TRACE_BTIF == TRUE)
-    extern uint8_t btif_trace_level;
+extern uint8_t btif_trace_level;
 
-    /* define traces for application */
-    #define BTIF_TRACE_ERROR(...)                    {if (btif_trace_level >= BT_TRACE_LEVEL_ERROR) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define BTIF_TRACE_WARNING(...)                  {if (btif_trace_level >= BT_TRACE_LEVEL_WARNING) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define BTIF_TRACE_API(...)                      {if (btif_trace_level >= BT_TRACE_LEVEL_API) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define BTIF_TRACE_EVENT(...)                    {if (btif_trace_level >= BT_TRACE_LEVEL_EVENT) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define BTIF_TRACE_DEBUG(...)                    {if (btif_trace_level >= BT_TRACE_LEVEL_DEBUG) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define BTIF_TRACE_VERBOSE(...)                  {if (btif_trace_level >= BT_TRACE_LEVEL_VERBOSE) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+/* define traces for application */
+#define BTIF_TRACE_ERROR(...)                    {if (btif_trace_level >= BT_TRACE_LEVEL_ERROR) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define BTIF_TRACE_WARNING(...)                  {if (btif_trace_level >= BT_TRACE_LEVEL_WARNING) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define BTIF_TRACE_API(...)                      {if (btif_trace_level >= BT_TRACE_LEVEL_API) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_API, ##__VA_ARGS__);}
+#define BTIF_TRACE_EVENT(...)                    {if (btif_trace_level >= BT_TRACE_LEVEL_EVENT) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define BTIF_TRACE_DEBUG(...)                    {if (btif_trace_level >= BT_TRACE_LEVEL_DEBUG) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define BTIF_TRACE_VERBOSE(...)                  {if (btif_trace_level >= BT_TRACE_LEVEL_VERBOSE) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    /* define traces for Application */
+/* define traces for Application */
 
-    #define BTIF_TRACE_ERROR(...)
-    #define BTIF_TRACE_WARNING(...)
-    #define BTIF_TRACE_API(...)
-    #define BTIF_TRACE_EVENT(...)
-    #define BTIF_TRACE_DEBUG(...)
-    #define BTIF_TRACE_VERBOSE(...)
+#define BTIF_TRACE_ERROR(...)
+#define BTIF_TRACE_WARNING(...)
+#define BTIF_TRACE_API(...)
+#define BTIF_TRACE_EVENT(...)
+#define BTIF_TRACE_DEBUG(...)
+#define BTIF_TRACE_VERBOSE(...)
 
 #endif
 
 
 #if (BT_USE_TRACES == TRUE && BT_TRACE_STORAGE == TRUE)
-    extern uint8_t btstorage_trace_level;
+extern uint8_t btstorage_trace_level;
 
-    /* define traces for application */
-    #define BTSTORAGE_TRACE_ERROR(...)                    {if (btstorage_trace_level >= BT_TRACE_LEVEL_ERROR) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define BTSTORAGE_TRACE_WARNING(...)                  {if (btstorage_trace_level >= BT_TRACE_LEVEL_WARNING) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define BTSTORAGE_TRACE_API(...)                      {if (btstorage_trace_level >= BT_TRACE_LEVEL_API) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define BTSTORAGE_TRACE_EVENT(...)                    {if (btstorage_trace_level >= BT_TRACE_LEVEL_EVENT) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define BTSTORAGE_TRACE_DEBUG(...)                    {if (btstorage_trace_level >= BT_TRACE_LEVEL_DEBUG) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define BTSTORAGE_TRACE_VERBOSE(...)                  {if (btstorage_trace_level >= BT_TRACE_LEVEL_VERBOSE) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+/* define traces for application */
+#define BTSTORAGE_TRACE_ERROR(...)                    {if (btstorage_trace_level >= BT_TRACE_LEVEL_ERROR) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define BTSTORAGE_TRACE_WARNING(...)                  {if (btstorage_trace_level >= BT_TRACE_LEVEL_WARNING) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define BTSTORAGE_TRACE_API(...)                      {if (btstorage_trace_level >= BT_TRACE_LEVEL_API) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_API, ##__VA_ARGS__);}
+#define BTSTORAGE_TRACE_EVENT(...)                    {if (btstorage_trace_level >= BT_TRACE_LEVEL_EVENT) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define BTSTORAGE_TRACE_DEBUG(...)                    {if (btstorage_trace_level >= BT_TRACE_LEVEL_DEBUG) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define BTSTORAGE_TRACE_VERBOSE(...)                  {if (btstorage_trace_level >= BT_TRACE_LEVEL_VERBOSE) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 #else
-    /* define traces for Application */
+/* define traces for Application */
 
-    #define BTSTORAGE_TRACE_ERROR(...)
-    #define BTSTORAGE_TRACE_WARNING(...)
-    #define BTSTORAGE_TRACE_API(...)
-    #define BTSTORAGE_TRACE_EVENT(...)
-    #define BTSTORAGE_TRACE_DEBUG(...)
-    #define BTSTORAGE_TRACE_VERBOSE(...)
+#define BTSTORAGE_TRACE_ERROR(...)
+#define BTSTORAGE_TRACE_WARNING(...)
+#define BTSTORAGE_TRACE_API(...)
+#define BTSTORAGE_TRACE_EVENT(...)
+#define BTSTORAGE_TRACE_DEBUG(...)
+#define BTSTORAGE_TRACE_VERBOSE(...)
 
 #endif
 
 #if (BT_USE_TRACES == TRUE && BT_TRACE_APPL == TRUE)
-    /* define traces for application */
-    #define APPL_TRACE_ERROR(...)                    {if (appl_trace_level >= BT_TRACE_LEVEL_ERROR) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_ERROR, ##__VA_ARGS__);}
-    #define APPL_TRACE_WARNING(...)                  {if (appl_trace_level >= BT_TRACE_LEVEL_WARNING) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_WARNING, ##__VA_ARGS__);}
-    #define APPL_TRACE_API(...)                      {if (appl_trace_level >= BT_TRACE_LEVEL_API) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_API, ##__VA_ARGS__);}
-    #define APPL_TRACE_EVENT(...)                    {if (appl_trace_level >= BT_TRACE_LEVEL_EVENT) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_EVENT, ##__VA_ARGS__);}
-    #define APPL_TRACE_DEBUG(...)                    {if (appl_trace_level >= BT_TRACE_LEVEL_DEBUG) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
-    #define APPL_TRACE_VERBOSE(...)                  {if (appl_trace_level >= BT_TRACE_LEVEL_VERBOSE) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+/* define traces for application */
+#define APPL_TRACE_ERROR(...)                    {if (appl_trace_level >= BT_TRACE_LEVEL_ERROR) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_ERROR, ##__VA_ARGS__);}
+#define APPL_TRACE_WARNING(...)                  {if (appl_trace_level >= BT_TRACE_LEVEL_WARNING) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_WARNING, ##__VA_ARGS__);}
+#define APPL_TRACE_API(...)                      {if (appl_trace_level >= BT_TRACE_LEVEL_API) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_API, ##__VA_ARGS__);}
+#define APPL_TRACE_EVENT(...)                    {if (appl_trace_level >= BT_TRACE_LEVEL_EVENT) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_EVENT, ##__VA_ARGS__);}
+#define APPL_TRACE_DEBUG(...)                    {if (appl_trace_level >= BT_TRACE_LEVEL_DEBUG) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
+#define APPL_TRACE_VERBOSE(...)                  {if (appl_trace_level >= BT_TRACE_LEVEL_VERBOSE) LogMsg(TRACE_CTRL_GENERAL | TRACE_LAYER_NONE | TRACE_ORG_APPL | TRACE_TYPE_DEBUG, ##__VA_ARGS__);}
 
 #else
-    /* define traces for Application */
+/* define traces for Application */
 
-    #define APPL_TRACE_ERROR(...)
-    #define APPL_TRACE_WARNING(...)
-    #define APPL_TRACE_API(...)
-    #define APPL_TRACE_EVENT(...)
-    #define APPL_TRACE_DEBUG(...)
-    #define APPL_TRACE_VERBOSE(...)
+#define APPL_TRACE_ERROR(...)
+#define APPL_TRACE_WARNING(...)
+#define APPL_TRACE_API(...)
+#define APPL_TRACE_EVENT(...)
+#define APPL_TRACE_DEBUG(...)
+#define APPL_TRACE_VERBOSE(...)
 
 #endif
 
@@ -579,16 +579,14 @@ typedef uint8_t tBTTRC_PARAM_TYPE;
 typedef uint8_t tBTTRC_LAYER_ID;
 typedef uint8_t tBTTRC_TYPE;
 
-typedef struct
-{
+typedef struct {
     tBTTRC_LAYER_ID layer_id;
     tBTTRC_TYPE     type;      /* TODO: use tBTTRC_TYPE instead of "classical level 0-5" */
 } tBTTRC_LEVEL;
 
 typedef uint8_t (tBTTRC_SET_TRACE_LEVEL)(uint8_t);
 
-typedef struct
-{
+typedef struct {
     const tBTTRC_LAYER_ID         layer_id_start;
     const tBTTRC_LAYER_ID         layer_id_end;
     tBTTRC_SET_TRACE_LEVEL        *p_f;

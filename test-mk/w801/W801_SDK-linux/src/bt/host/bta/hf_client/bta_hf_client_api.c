@@ -34,8 +34,7 @@
 /*****************************************************************************
 **  Constants and data types
 *****************************************************************************/
-static const tBTA_SYS_REG bta_hf_client_reg =
-{
+static const tBTA_SYS_REG bta_hf_client_reg = {
     bta_hf_client_hdl_event,
     BTA_HfClientDisable
 };
@@ -60,8 +59,7 @@ static const tBTA_SYS_REG bta_hf_client_reg =
 *******************************************************************************/
 tBTA_STATUS BTA_HfClientEnable(tBTA_HF_CLIENT_CBACK *p_cback)
 {
-    if(bta_sys_is_register(BTA_ID_HS))
-    {
+    if(bta_sys_is_register(BTA_ID_HS)) {
         APPL_TRACE_ERROR("BTA HF Client is already enabled, ignoring ...");
         return BTA_FAILURE;
     }
@@ -112,12 +110,9 @@ void BTA_HfClientRegister(tBTA_SEC sec_mask, tBTA_HF_CLIENT_FEAT features,
     p_buf->features = features;
     p_buf->sec_mask = sec_mask;
 
-    if(p_service_name)
-    {
+    if(p_service_name) {
         strlcpy(p_buf->name, p_service_name, BTA_SERVICE_NAME_LEN);
-    }
-    else
-    {
+    } else {
         p_buf->name[0] = 0;
     }
 
@@ -233,7 +228,8 @@ void BTA_HfClientAudioClose(uint16_t handle)
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_HfClientSendAT(uint16_t handle, tBTA_HF_CLIENT_AT_CMD_TYPE at, uint32_t val1, uint32_t val2, const char *str)
+void BTA_HfClientSendAT(uint16_t handle, tBTA_HF_CLIENT_AT_CMD_TYPE at, uint32_t val1,
+                        uint32_t val2, const char *str)
 {
     tBTA_HF_CLIENT_DATA_VAL *p_buf =
                     (tBTA_HF_CLIENT_DATA_VAL *)GKI_getbuf(sizeof(tBTA_HF_CLIENT_DATA_VAL));
@@ -242,13 +238,10 @@ void BTA_HfClientSendAT(uint16_t handle, tBTA_HF_CLIENT_AT_CMD_TYPE at, uint32_t
     p_buf->uint32_val1 = val1;
     p_buf->uint32_val2 = val2;
 
-    if(str)
-    {
+    if(str) {
         strlcpy(p_buf->str, str, BTA_HF_CLIENT_NUMBER_LEN + 1);
         p_buf->str[BTA_HF_CLIENT_NUMBER_LEN] = '\0';
-    }
-    else
-    {
+    } else {
         p_buf->str[0] = '\0';
     }
 
@@ -259,7 +252,8 @@ void BTA_HfClientSendAT(uint16_t handle, tBTA_HF_CLIENT_AT_CMD_TYPE at, uint32_t
 void BTA_HfClientCiData(void)
 {
     BT_HDR *p_buf;
-    if ((p_buf = (BT_HDR *) GKI_getbuf(sizeof(BT_HDR))) != NULL) {
+
+    if((p_buf = (BT_HDR *) GKI_getbuf(sizeof(BT_HDR))) != NULL) {
         p_buf->event = BTA_HF_CLIENT_CI_SCO_DATA_EVT;
         bta_sys_sendmsg(p_buf);
     }

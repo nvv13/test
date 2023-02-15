@@ -25,8 +25,7 @@
 typedef void *(*alloc_fn)(size_t size);
 typedef void (*free_fn)(void *ptr);
 
-typedef struct
-{
+typedef struct {
     alloc_fn alloc;
     free_fn  free;
 } allocator_t;

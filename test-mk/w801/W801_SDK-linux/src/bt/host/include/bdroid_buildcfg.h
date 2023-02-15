@@ -46,64 +46,64 @@
 #endif
 
 #if (WM_BT_INCLUDED == CFG_ON || WM_BLE_INCLUDED == CFG_ON)
-    #define BTA_INCLUDED            TRUE
+#define BTA_INCLUDED            TRUE
 #else
-    #define BTA_INCLUDED			FALSE
+#define BTA_INCLUDED            FALSE
 #endif
 
 #if (WM_BT_INCLUDED == CFG_ON)
-    #define SDP_INCLUDED            TRUE
+#define SDP_INCLUDED            TRUE
 #else
-    #define SDP_INCLUDED            FALSE
+#define SDP_INCLUDED            FALSE
 #endif
 
 #if (WM_BLE_INCLUDED == CFG_ON)
-    #define BLE_INCLUDED              TRUE
-    #define BTA_GATT_INCLUDED         TRUE
+#define BLE_INCLUDED              TRUE
+#define BTA_GATT_INCLUDED         TRUE
 #else
-    #define BLE_INCLUDED              FALSE
-    #define BTA_GATT_INCLUDED         FALSE
+#define BLE_INCLUDED              FALSE
+#define BTA_GATT_INCLUDED         FALSE
 #endif
 
 #if (WM_BTA_AV_SINK_INCLUDED == CFG_ON)
-    #define BTA_AV_SINK_INCLUDED        TRUE
-    #define BTA_AR_INCLUDED             TRUE
-    #define BTA_AV_INCLUDED             TRUE
-    #define AVRC_METADATA_INCLUDED      TRUE
-    #define AVRC_ADV_CTRL_INCLUDED      TRUE
-    #define AVRC_CTLR_INCLUDED          TRUE
+#define BTA_AV_SINK_INCLUDED        TRUE
+#define BTA_AR_INCLUDED             TRUE
+#define BTA_AV_INCLUDED             TRUE
+#define AVRC_METADATA_INCLUDED      TRUE
+#define AVRC_ADV_CTRL_INCLUDED      TRUE
+#define AVRC_CTLR_INCLUDED          TRUE
 #else
-    #define BTA_AV_SINK_INCLUDED        FALSE
-    #define BTA_AR_INCLUDED             FALSE
-    #define BTA_AV_INCLUDED             FALSE
-    #define AVRC_METADATA_INCLUDED		FALSE
-    #define AVRC_ADV_CTRL_INCLUDED		FALSE
-    #define AVRC_CTLR_INCLUDED			FALSE
+#define BTA_AV_SINK_INCLUDED        FALSE
+#define BTA_AR_INCLUDED             FALSE
+#define BTA_AV_INCLUDED             FALSE
+#define AVRC_METADATA_INCLUDED      FALSE
+#define AVRC_ADV_CTRL_INCLUDED      FALSE
+#define AVRC_CTLR_INCLUDED          FALSE
 #endif
 
 #if (WM_BTA_HFP_HSP_INCLUDED == CFG_ON)
-    #define BTA_HFP_HSP_INCLUDED    TRUE
-    #define BTM_SCO_INCLUDED        TRUE
-    #define BTM_SCO_HCI_INCLUDED    TRUE   /* TRUE includes SCO over HCI code */
+#define BTA_HFP_HSP_INCLUDED    TRUE
+#define BTM_SCO_INCLUDED        TRUE
+#define BTM_SCO_HCI_INCLUDED    TRUE   /* TRUE includes SCO over HCI code */
 #else
-    #define BTA_HFP_HSP_INCLUDED    FALSE
-    #define BTM_SCO_INCLUDED        FALSE
-    #define BTM_SCO_HCI_INCLUDED    FALSE   
+#define BTA_HFP_HSP_INCLUDED    FALSE
+#define BTM_SCO_INCLUDED        FALSE
+#define BTM_SCO_HCI_INCLUDED    FALSE
 #endif
 
 
 #if (WM_BTA_SPPS_INCLUDED == CFG_ON || WM_BTA_SPPC_INCLUDED == CFG_ON)
-    #define BTA_SPP_INCLUDED        TRUE
-    #define BTA_JV_INCLUDED         TRUE
+#define BTA_SPP_INCLUDED        TRUE
+#define BTA_JV_INCLUDED         TRUE
 #else
-    #define BTA_SPP_INCLUDED       FALSE
-    #define BTA_JV_INCLUDED        FALSE   
+#define BTA_SPP_INCLUDED       FALSE
+#define BTA_JV_INCLUDED        FALSE
 #endif
 
 #if (WM_BTA_SPPC_INCLUDED == CFG_ON)
-    #define SDP_CLIENT_ENABLED        TRUE
+#define SDP_CLIENT_ENABLED        TRUE
 #else
-    #define SDP_CLIENT_ENABLED        FALSE
+#define SDP_CLIENT_ENABLED        FALSE
 #endif
 
 
@@ -262,8 +262,8 @@
 #define OBX_INCLUDED                FALSE
 
 #if defined(OBX_INCLUDED) && (OBX_INCLUDED == FALSE)
-    #define OBX_NUM_SERVERS 0
-    #define OBX_NUM_CLIENTS 0
+#define OBX_NUM_SERVERS 0
+#define OBX_NUM_CLIENTS 0
 #endif
 
 

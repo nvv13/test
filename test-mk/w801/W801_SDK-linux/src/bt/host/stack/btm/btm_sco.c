@@ -55,8 +55,7 @@
 /*              L O C A L    F U N C T I O N     P R O T O T Y P E S            */
 /********************************************************************************/
 
-static const tBTM_ESCO_PARAMS btm_esco_defaults =
-{
+static const tBTM_ESCO_PARAMS btm_esco_defaults = {
     BTM_64KBITS_RATE,               /* TX Bandwidth (64 kbits/sec)              */
     BTM_64KBITS_RATE,               /* RX Bandwidth (64 kbits/sec)              */
     0x000a,                         /* 10 ms (HS/HF can use EV3, 2-EV3, 3-EV3)  */
@@ -81,25 +80,23 @@ static const tBTM_ESCO_PARAMS btm_esco_defaults =
 *******************************************************************************/
 void btm_sco_flush_sco_data(uint16_t sco_inx)
 {
-    #if BTM_SCO_HCI_INCLUDED == TRUE
-    #if (BTM_MAX_SCO_LINKS>0)
+#if BTM_SCO_HCI_INCLUDED == TRUE
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p ;
     BT_HDR      *p_buf;
 
-    if(sco_inx < BTM_MAX_SCO_LINKS)
-    {
+    if(sco_inx < BTM_MAX_SCO_LINKS) {
         p = &btm_cb.sco_cb.sco_db[sco_inx];
 
-        while((p_buf = (BT_HDR *)fixed_queue_try_dequeue(p->xmit_data_q)) != NULL)
-        {
+        while((p_buf = (BT_HDR *)fixed_queue_try_dequeue(p->xmit_data_q)) != NULL) {
             GKI_freebuf(p_buf);
         }
     }
 
-    #else
+#else
     UNUSED(sco_inx);
-    #endif
-    #endif
+#endif
+#endif
 }
 /*******************************************************************************
 **
@@ -112,17 +109,16 @@ void btm_sco_flush_sco_data(uint16_t sco_inx)
 *******************************************************************************/
 void btm_sco_init(void)
 {
-    #if 0  /* cleared in btm_init; put back in if called from anywhere else! */
+#if 0  /* cleared in btm_init; put back in if called from anywhere else! */
     wm_memset(&btm_cb.sco_cb, 0, sizeof(tSCO_CB));
-    #endif
-    #if BTM_SCO_HCI_INCLUDED == TRUE
+#endif
+#if BTM_SCO_HCI_INCLUDED == TRUE
 
-    for(int i = 0; i < BTM_MAX_SCO_LINKS; i++)
-    {
+    for(int i = 0; i < BTM_MAX_SCO_LINKS; i++) {
         btm_cb.sco_cb.sco_db[i].xmit_data_q = fixed_queue_new(SIZE_MAX);
     }
 
-    #endif
+#endif
     /* Initialize nonzero defaults */
     btm_cb.sco_cb.sco_disc_reason  = BTM_INVALID_SCO_DISC_REASON;
     btm_cb.sco_cb.def_esco_parms = btm_esco_defaults; /* Initialize with defaults */
@@ -148,52 +144,39 @@ void btm_sco_init(void)
 static void btm_esco_conn_rsp(uint16_t sco_inx, uint8_t hci_status, BD_ADDR bda,
                               tBTM_ESCO_PARAMS *p_parms)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN        *p_sco = NULL;
     tBTM_ESCO_PARAMS *p_setup;
     uint16_t            temp_pkt_types;
 
-    if(sco_inx < BTM_MAX_SCO_LINKS)
-    {
+    if(sco_inx < BTM_MAX_SCO_LINKS) {
         p_sco = &btm_cb.sco_cb.sco_db[sco_inx];
     }
 
     /* Reject the connect request if refused by caller or wrong state */
-    if(hci_status != HCI_SUCCESS || p_sco == NULL)
-    {
-        if(p_sco)
-        {
+    if(hci_status != HCI_SUCCESS || p_sco == NULL) {
+        if(p_sco) {
             p_sco->state = (p_sco->state == SCO_ST_W4_CONN_RSP) ? SCO_ST_LISTENING
                            : SCO_ST_UNUSED;
         }
 
-        if(!btm_cb.sco_cb.esco_supported)
-        {
-            if(!btsnd_hcic_reject_conn(bda, hci_status))
-            {
+        if(!btm_cb.sco_cb.esco_supported) {
+            if(!btsnd_hcic_reject_conn(bda, hci_status)) {
+                BTM_TRACE_ERROR("Could not reject (e)SCO conn: No Buffer!!!");
+            }
+        } else {
+            if(!btsnd_hcic_reject_esco_conn(bda, hci_status)) {
                 BTM_TRACE_ERROR("Could not reject (e)SCO conn: No Buffer!!!");
             }
         }
-        else
-        {
-            if(!btsnd_hcic_reject_esco_conn(bda, hci_status))
-            {
-                BTM_TRACE_ERROR("Could not reject (e)SCO conn: No Buffer!!!");
-            }
-        }
-    }
-    else    /* Connection is being accepted */
-    {
+    } else { /* Connection is being accepted */
         p_sco->state = SCO_ST_CONNECTING;
         p_setup = &p_sco->esco.setup;
 
         /* If parameters not specified use the default */
-        if(p_parms)
-        {
+        if(p_parms) {
             *p_setup = *p_parms;
-        }
-        else /* Use the last setup passed thru BTM_SetEscoMode (or defaults) */
-        {
+        } else { /* Use the last setup passed thru BTM_SetEscoMode (or defaults) */
             *p_setup = btm_cb.sco_cb.def_esco_parms;
         }
 
@@ -211,13 +194,10 @@ static void btm_esco_conn_rsp(uint16_t sco_inx, uint8_t hci_status, BD_ADDR bda,
         }
         */
         /* If SCO request, remove eSCO packet types (conformance) */
-        if(p_sco->esco.data.link_type == BTM_LINK_TYPE_SCO)
-        {
+        if(p_sco->esco.data.link_type == BTM_LINK_TYPE_SCO) {
             temp_pkt_types &= BTM_SCO_LINK_ONLY_MASK;
             temp_pkt_types |= BTM_SCO_EXCEPTION_PKTS_MASK;
-        }
-        else
-        {
+        } else {
             /* OR in any exception packet types */
             temp_pkt_types |= ((p_setup->packet_types & BTM_SCO_EXCEPTION_PKTS_MASK) |
                                (btm_cb.btm_sco_pkt_types_supported & BTM_SCO_EXCEPTION_PKTS_MASK));
@@ -225,22 +205,19 @@ static void btm_esco_conn_rsp(uint16_t sco_inx, uint8_t hci_status, BD_ADDR bda,
 
         if(btsnd_hcic_accept_esco_conn(bda, p_setup->tx_bw, p_setup->rx_bw,
                                        p_setup->max_latency, p_setup->voice_contfmt,
-                                       p_setup->retrans_effort, temp_pkt_types))
-        {
+                                       p_setup->retrans_effort, temp_pkt_types)) {
             p_setup->packet_types = temp_pkt_types;
-        }
-        else
-        {
+        } else {
             BTM_TRACE_ERROR("Could not accept SCO conn: No Buffer!!!");
         }
     }
 
-    #endif
+#endif
 }
 
 
 #if BTM_SCO_HCI_INCLUDED == TRUE
-void btm_sco_process_num_bufs (uint16_t num_lm_sco_bufs)
+void btm_sco_process_num_bufs(uint16_t num_lm_sco_bufs)
 {
     BTM_TRACE_ERROR("%s, %d", __FUNCTION__, num_lm_sco_bufs);
     btm_cb.sco_cb.num_lm_sco_bufs = btm_cb.sco_cb.xmit_window_size = num_lm_sco_bufs;
@@ -271,18 +248,19 @@ void btm_sco_process_num_bufs (uint16_t num_lm_sco_bufs)
 **
 *******************************************************************************/
 //extern
-tBTM_STATUS BTM_ConfigScoPath (tBTM_SCO_ROUTE_TYPE path,
-                               tBTM_SCO_DATA_CB *p_sco_data_cb,
-                               tBTM_SCO_PCM_PARAM *p_pcm_param,
-                               uint8_t err_data_rpt)
+tBTM_STATUS BTM_ConfigScoPath(tBTM_SCO_ROUTE_TYPE path,
+                              tBTM_SCO_DATA_CB *p_sco_data_cb,
+                              tBTM_SCO_PCM_PARAM *p_pcm_param,
+                              uint8_t err_data_rpt)
 {
     UNUSED(err_data_rpt);
     UNUSED(p_pcm_param);
     btm_cb.sco_cb.sco_path = path;
-    if (path == BTM_SCO_ROUTE_PCM) {
+
+    if(path == BTM_SCO_ROUTE_PCM) {
         return BTM_SUCCESS;
-    } else if (path == BTM_SCO_ROUTE_HCI) {
-        if (p_sco_data_cb) {
+    } else if(path == BTM_SCO_ROUTE_HCI) {
+        if(p_sco_data_cb) {
             btm_cb.sco_cb.p_data_cb = p_sco_data_cb;
         }
     }
@@ -307,44 +285,50 @@ void btm_sco_check_send_pkts(uint16_t sco_inx)
     /* If there is data to send, send it now */
     BT_HDR  *p_buf;
 
-    while((p_buf = (BT_HDR *)fixed_queue_try_dequeue(p_ccb->xmit_data_q)) != NULL)
-    {
-        #if BTM_SCO_HCI_DEBUG
+    while((p_buf = (BT_HDR *)fixed_queue_try_dequeue(p_ccb->xmit_data_q)) != NULL) {
+#if BTM_SCO_HCI_DEBUG
         BTM_TRACE_DEBUG("btm: [%d] buf in xmit_data_q",
                         fixed_queue_length(p_ccb->xmit_data_q) + 1);
-        #endif
+#endif
         HCI_SCO_DATA_TO_LOWER(p_buf);
     }
 }
-void btm_sco_process_num_completed_pkts (uint8_t *p)
+void btm_sco_process_num_completed_pkts(uint8_t *p)
 {
     uint8_t       num_handles, xx;
     uint16_t      handle;
     uint16_t      num_sent;
     uint16_t      sco_inx;
     tSCO_CB  *p_cb = &btm_cb.sco_cb;
-    tSCO_CONN * p_ccb;
-    STREAM_TO_UINT8 (num_handles, p);
-    for (xx = 0; xx < num_handles; xx++) {
-        STREAM_TO_UINT16 (handle, p);
-        STREAM_TO_UINT16 (num_sent, p);
-        if ((sco_inx = btm_find_scb_by_handle(handle)) == BTM_MAX_SCO_LINKS) {
+    tSCO_CONN *p_ccb;
+    STREAM_TO_UINT8(num_handles, p);
+
+    for(xx = 0; xx < num_handles; xx++) {
+        STREAM_TO_UINT16(handle, p);
+        STREAM_TO_UINT16(num_sent, p);
+
+        if((sco_inx = btm_find_scb_by_handle(handle)) == BTM_MAX_SCO_LINKS) {
             continue;
         }
+
         BTM_TRACE_DEBUG("%s, %d, %u", __FUNCTION__, handle, p_cb->xmit_window_size); //debug
         p_ccb = &p_cb->sco_db[sco_inx];
         p_ccb->sent_not_acked -= num_sent;
+
         // don't go negative
-        if (p_ccb->sent_not_acked < 0) {
+        if(p_ccb->sent_not_acked < 0) {
             BTM_TRACE_WARNING("SCO: un-acked underf: %u", p_ccb->sent_not_acked);
             p_ccb->sent_not_acked = 0;
         }
+
         p_cb->xmit_window_size += num_sent;
-        if (p_cb->xmit_window_size > p_cb->num_lm_sco_bufs) {
+
+        if(p_cb->xmit_window_size > p_cb->num_lm_sco_bufs) {
             BTM_TRACE_WARNING("SCO xwind: %d, max %d", p_cb->xmit_window_size, p_cb->num_lm_sco_bufs);
             p_cb->xmit_window_size = p_cb->num_lm_sco_bufs;
         }
-        btm_sco_check_send_pkts (sco_inx);
+
+        btm_sco_check_send_pkts(sco_inx);
     }
 
     return;
@@ -363,7 +347,7 @@ void btm_sco_process_num_completed_pkts (uint8_t *p)
 *******************************************************************************/
 void  btm_route_sco_data(BT_HDR *p_msg)
 {
-    #if BTM_SCO_HCI_INCLUDED == TRUE
+#if BTM_SCO_HCI_INCLUDED == TRUE
     uint16_t      sco_inx, handle;
     uint8_t       *p = (uint8_t *)(p_msg + 1) + p_msg->offset;
     uint8_t       pkt_size = 0;
@@ -373,28 +357,24 @@ void  btm_route_sco_data(BT_HDR *p_msg)
     pkt_status = HCID_GET_EVENT(handle);
     handle   = HCID_GET_HANDLE(handle);
     STREAM_TO_UINT8(pkt_size, p);
+	UNUSED(pkt_size);
 
-    if((sco_inx = btm_find_scb_by_handle(handle)) != BTM_MAX_SCO_LINKS)
-    {
+    if((sco_inx = btm_find_scb_by_handle(handle)) != BTM_MAX_SCO_LINKS) {
         /* send data callback */
         if(!btm_cb.sco_cb.p_data_cb)
             /* if no data callback registered,  just free the buffer  */
         {
             GKI_freebuf(p_msg);
-        }
-        else
-        {
+        } else {
             (*btm_cb.sco_cb.p_data_cb)(sco_inx, p_msg, (tBTM_SCO_DATA_FLAG) pkt_status);
         }
-    }
-    else /* no mapping handle SCO connection is active, free the buffer */
-    {
+    } else { /* no mapping handle SCO connection is active, free the buffer */
         GKI_freebuf(p_msg);
     }
 
-    #else
+#else
     GKI_freebuf(p_msg);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -420,23 +400,19 @@ void  btm_route_sco_data(BT_HDR *p_msg)
 *******************************************************************************/
 tBTM_STATUS BTM_WriteScoData(uint16_t sco_inx, BT_HDR *p_buf)
 {
-    #if (BTM_SCO_HCI_INCLUDED == TRUE) && (BTM_MAX_SCO_LINKS>0)
+#if (BTM_SCO_HCI_INCLUDED == TRUE) && (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p_ccb = &btm_cb.sco_cb.sco_db[sco_inx];
     uint8_t   *p;
     tBTM_STATUS     status = BTM_SUCCESS;
 
     if(sco_inx < BTM_MAX_SCO_LINKS && btm_cb.sco_cb.p_data_cb &&
-            p_ccb->state == SCO_ST_CONNECTED)
-    {
+            p_ccb->state == SCO_ST_CONNECTED) {
         /* Ensure we have enough space in the buffer for the SCO and HCI headers */
-        if(p_buf->offset < HCI_SCO_PREAMBLE_SIZE)
-        {
+        if(p_buf->offset < HCI_SCO_PREAMBLE_SIZE) {
             BTM_TRACE_ERROR("BTM SCO - cannot send buffer, offset: %d", p_buf->offset);
             GKI_freebuf(p_buf);
             status = BTM_ILLEGAL_VALUE;
-        }
-        else    /* write HCI header */
-        {
+        } else { /* write HCI header */
             /* Step back 3 bytes to add the headers */
             p_buf->offset -= HCI_SCO_PREAMBLE_SIZE;
             /* Set the pointer to the beginning of the data */
@@ -446,8 +422,7 @@ tBTM_STATUS BTM_WriteScoData(uint16_t sco_inx, BT_HDR *p_buf)
 
             /* only sent the first BTM_SCO_DATA_SIZE_MAX bytes data if more than max,
                and set warning status */
-            if(p_buf->len > BTM_SCO_DATA_SIZE_MAX)
-            {
+            if(p_buf->len > BTM_SCO_DATA_SIZE_MAX) {
                 p_buf->len = BTM_SCO_DATA_SIZE_MAX;
                 status = BTM_SCO_BAD_LENGTH;
             }
@@ -457,9 +432,7 @@ tBTM_STATUS BTM_WriteScoData(uint16_t sco_inx, BT_HDR *p_buf)
             fixed_queue_enqueue(p_ccb->xmit_data_q, p_buf);
             btm_sco_check_send_pkts(sco_inx);
         }
-    }
-    else
-    {
+    } else {
         GKI_freebuf(p_buf);
         BTM_TRACE_WARNING("BTM_WriteScoData, invalid sco index: %d at state [%d]",
                           sco_inx, btm_cb.sco_cb.sco_db[sco_inx].state);
@@ -467,11 +440,11 @@ tBTM_STATUS BTM_WriteScoData(uint16_t sco_inx, BT_HDR *p_buf)
     }
 
     return (status);
-    #else
+#else
     UNUSED(sco_inx);
     UNUSED(p_buf);
     return (BTM_NO_RESOURCES);
-    #endif
+#endif
 }
 
 #if (BTM_MAX_SCO_LINKS>0)
@@ -492,15 +465,11 @@ static tBTM_STATUS btm_send_connect_request(uint16_t acl_handle,
     tACL_CONN *p_acl;
 
     /* Send connect request depending on version of spec */
-    if(!btm_cb.sco_cb.esco_supported)
-    {
-        if(!btsnd_hcic_add_SCO_conn(acl_handle, BTM_ESCO_2_SCO(p_setup->packet_types)))
-        {
+    if(!btm_cb.sco_cb.esco_supported) {
+        if(!btsnd_hcic_add_SCO_conn(acl_handle, BTM_ESCO_2_SCO(p_setup->packet_types))) {
             return (BTM_NO_RESOURCES);
         }
-    }
-    else
-    {
+    } else {
         temp_pkt_types = (p_setup->packet_types & BTM_SCO_SUPPORTED_PKTS_MASK &
                           btm_cb.btm_sco_pkt_types_supported);
         /* OR in any exception packet types */
@@ -510,19 +479,16 @@ static tBTM_STATUS btm_send_connect_request(uint16_t acl_handle,
         /* UPF25:  Only SCO was brought up in this case */
         btm_handle_to_acl_index(acl_handle);
 
-        if((xx = btm_handle_to_acl_index(acl_handle)) < MAX_L2CAP_LINKS)
-        {
+        if((xx = btm_handle_to_acl_index(acl_handle)) < MAX_L2CAP_LINKS) {
             p_acl = &btm_cb.acl_db[xx];
 
-            if(!HCI_EDR_ESCO_2MPS_SUPPORTED(p_acl->peer_lmp_features[HCI_EXT_FEATURES_PAGE_0]))
-            {
+            if(!HCI_EDR_ESCO_2MPS_SUPPORTED(p_acl->peer_lmp_features[HCI_EXT_FEATURES_PAGE_0])) {
                 BTM_TRACE_WARNING("BTM Remote does not support 2-EDR eSCO");
                 temp_pkt_types |= (HCI_ESCO_PKT_TYPES_MASK_NO_2_EV3 |
                                    HCI_ESCO_PKT_TYPES_MASK_NO_2_EV5);
             }
 
-            if(!HCI_EDR_ESCO_3MPS_SUPPORTED(p_acl->peer_lmp_features[HCI_EXT_FEATURES_PAGE_0]))
-            {
+            if(!HCI_EDR_ESCO_3MPS_SUPPORTED(p_acl->peer_lmp_features[HCI_EXT_FEATURES_PAGE_0])) {
                 BTM_TRACE_WARNING("BTM Remote does not support 3-EDR eSCO");
                 temp_pkt_types |= (HCI_ESCO_PKT_TYPES_MASK_NO_3_EV3 |
                                    HCI_ESCO_PKT_TYPES_MASK_NO_3_EV5);
@@ -531,22 +497,18 @@ static tBTM_STATUS btm_send_connect_request(uint16_t acl_handle,
             /* Check to see if BR/EDR Secure Connections is being used
             ** If so, we cannot use SCO-only packet types (HFP 1.7)
             */
-            if(BTM_BothEndsSupportSecureConnections(p_acl->remote_addr))
-            {
+            if(BTM_BothEndsSupportSecureConnections(p_acl->remote_addr)) {
                 temp_pkt_types &= ~(BTM_SCO_PKT_TYPE_MASK);
                 BTM_TRACE_DEBUG("%s: SCO Conn: pkt_types after removing SCO (0x%04x)", __FUNCTION__,
                                 temp_pkt_types);
 
                 /* Return error if no packet types left */
-                if(temp_pkt_types == 0)
-                {
+                if(temp_pkt_types == 0) {
                     BTM_TRACE_ERROR("%s: SCO Conn (BR/EDR SC): No packet types available",
                                     __FUNCTION__);
                     return (BTM_WRONG_MODE);
                 }
-            }
-            else
-            {
+            } else {
                 BTM_TRACE_DEBUG("%s: SCO Conn(BR/EDR SC):local or peer does not support BR/EDR SC",
                                 __FUNCTION__);
             }
@@ -563,12 +525,9 @@ static tBTM_STATUS btm_send_connect_request(uint16_t acl_handle,
                                        p_setup->max_latency,
                                        p_setup->voice_contfmt,
                                        p_setup->retrans_effort,
-                                       temp_pkt_types))
-        {
+                                       temp_pkt_types)) {
             return (BTM_NO_RESOURCES);
-        }
-        else
-        {
+        } else {
             p_setup->packet_types = temp_pkt_types;
         }
     }
@@ -605,11 +564,10 @@ void btm_set_sco_ind_cback(tBTM_SCO_IND_CBACK *sco_ind_cb)
 void btm_accept_sco_link(uint16_t sco_inx, tBTM_ESCO_PARAMS *p_setup,
                          tBTM_SCO_CB *p_conn_cb, tBTM_SCO_CB *p_disc_cb)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN        *p_sco;
 
-    if(sco_inx >= BTM_MAX_SCO_LINKS)
-    {
+    if(sco_inx >= BTM_MAX_SCO_LINKS) {
         BTM_TRACE_ERROR("btm_accept_sco_link: Invalid sco_inx(%d)", sco_inx);
         return;
     }
@@ -621,9 +579,9 @@ void btm_accept_sco_link(uint16_t sco_inx, tBTM_ESCO_PARAMS *p_setup,
     p_sco->esco.data.link_type = BTM_LINK_TYPE_ESCO; /* Accept with all supported types */
     BTM_TRACE_DEBUG("TCS accept SCO: Packet Types 0x%04x", p_setup->packet_types);
     btm_esco_conn_rsp(sco_inx, HCI_SUCCESS, p_sco->esco.data.bd_addr, p_setup);
-    #else
+#else
     btm_reject_sco_link(sco_inx);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -665,71 +623,57 @@ tBTM_STATUS BTM_CreateSco(BD_ADDR remote_bda, uint8_t is_orig, uint16_t pkt_type
                           uint16_t *p_sco_inx, tBTM_SCO_CB *p_conn_cb,
                           tBTM_SCO_CB *p_disc_cb)
 {
-    #if (BTM_MAX_SCO_LINKS > 0)
+#if (BTM_MAX_SCO_LINKS > 0)
     tBTM_ESCO_PARAMS *p_setup;
     tSCO_CONN        *p = &btm_cb.sco_cb.sco_db[0];
     uint16_t            xx;
     uint16_t            acl_handle = 0;
     uint16_t            temp_pkt_types;
     tACL_CONN        *p_acl;
-    #if (BTM_SCO_WAKE_PARKED_LINK == TRUE)
+#if (BTM_SCO_WAKE_PARKED_LINK == TRUE)
     tBTM_PM_PWR_MD    pm;
     tBTM_PM_STATE     state;
-    #else
+#else
     uint8_t             mode;
-    #endif  // BTM_SCO_WAKE_PARKED_LINK
+#endif  // BTM_SCO_WAKE_PARKED_LINK
     *p_sco_inx = BTM_INVALID_SCO_INDEX;
 
     /* If originating, ensure that there is an ACL connection to the BD Address */
-    if(is_orig)
-    {
-        if((!remote_bda) || ((acl_handle = BTM_GetHCIConnHandle(remote_bda, BT_TRANSPORT_BR_EDR)) == 0xFFFF))
-        {
+    if(is_orig) {
+        if((!remote_bda)
+                || ((acl_handle = BTM_GetHCIConnHandle(remote_bda, BT_TRANSPORT_BR_EDR)) == 0xFFFF)) {
             return (BTM_UNKNOWN_ADDR);
         }
     }
 
-    if(remote_bda)
-    {
+    if(remote_bda) {
         /* If any SCO is being established to the remote BD address, refuse this */
-        for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-        {
+        for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
             if(((p->state == SCO_ST_CONNECTING) || (p->state == SCO_ST_LISTENING)
                     || (p->state == SCO_ST_PEND_UNPARK))
-                    && (!memcmp(p->esco.data.bd_addr, remote_bda, BD_ADDR_LEN)))
-            {
+                    && (!memcmp(p->esco.data.bd_addr, remote_bda, BD_ADDR_LEN))) {
                 return (BTM_BUSY);
             }
         }
-    }
-    else
-    {
+    } else {
         /* Support only 1 wildcard BD address at a time */
-        for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-        {
-            if((p->state == SCO_ST_LISTENING) && (!p->rem_bd_known))
-            {
+        for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+            if((p->state == SCO_ST_LISTENING) && (!p->rem_bd_known)) {
                 return (BTM_BUSY);
             }
         }
     }
 
     /* Now, try to find an unused control block, and kick off the SCO establishment */
-    for(xx = 0, p = &btm_cb.sco_cb.sco_db[0]; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if(p->state == SCO_ST_UNUSED)
-        {
-            if(remote_bda)
-            {
-                if(is_orig)
-                {
+    for(xx = 0, p = &btm_cb.sco_cb.sco_db[0]; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if(p->state == SCO_ST_UNUSED) {
+            if(remote_bda) {
+                if(is_orig) {
                     /* can not create SCO link if in park mode */
-                    #if BTM_SCO_WAKE_PARKED_LINK == TRUE
-                    if((btm_read_power_mode_state(p->esco.data.bd_addr, &state) == BTM_SUCCESS))
-                    {
+#if BTM_SCO_WAKE_PARKED_LINK == TRUE
+                    if((btm_read_power_mode_state(p->esco.data.bd_addr, &state) == BTM_SUCCESS)) {
                         if(state == BTM_PM_ST_SNIFF || state == BTM_PM_ST_PARK ||
-                                state == BTM_PM_ST_PENDING)
-                        {
+                                state == BTM_PM_ST_PENDING) {
                             BTM_TRACE_DEBUG("%s In sniff, park or pend mode: %d", __func__, state);
                             wm_memset((void *)&pm, 0, sizeof(pm));
                             pm.mode = BTM_PM_MD_ACTIVE;
@@ -738,27 +682,23 @@ tBTM_STATUS BTM_CreateSco(BD_ADDR remote_bda, uint8_t is_orig, uint16_t pkt_type
                         }
                     }
 
-                    #else  // BTM_SCO_WAKE_PARKED_LINK
+#else  // BTM_SCO_WAKE_PARKED_LINK
 
-                    if((BTM_ReadPowerMode(remote_bda, &mode) == BTM_SUCCESS) && (mode == BTM_PM_MD_PARK))
-                    {
+                    if((BTM_ReadPowerMode(remote_bda, &mode) == BTM_SUCCESS) && (mode == BTM_PM_MD_PARK)) {
                         return (BTM_WRONG_MODE);
                     }
 
-                    #endif  // BTM_SCO_WAKE_PARKED_LINK
+#endif  // BTM_SCO_WAKE_PARKED_LINK
                 }
 
                 wm_memcpy(p->esco.data.bd_addr, remote_bda, BD_ADDR_LEN);
                 p->rem_bd_known = TRUE;
-            }
-            else
-            {
+            } else {
                 p->rem_bd_known = FALSE;
             }
 
             /* Link role is ignored in for this message */
-            if(pkt_types == BTM_IGNORE_SCO_PKT_TYPE)
-            {
+            if(pkt_types == BTM_IGNORE_SCO_PKT_TYPE) {
                 pkt_types = btm_cb.sco_cb.def_esco_parms.packet_types;
             }
 
@@ -770,13 +710,10 @@ tBTM_STATUS BTM_CreateSco(BD_ADDR remote_bda, uint8_t is_orig, uint16_t pkt_type
                               btm_cb.btm_sco_pkt_types_supported);
 
             /* OR in any exception packet types */
-            if(btm_cb.sco_cb.desired_sco_mode == HCI_LINK_TYPE_ESCO)
-            {
+            if(btm_cb.sco_cb.desired_sco_mode == HCI_LINK_TYPE_ESCO) {
                 temp_pkt_types |= ((p_setup->packet_types & BTM_SCO_EXCEPTION_PKTS_MASK) |
                                    (btm_cb.btm_sco_pkt_types_supported & BTM_SCO_EXCEPTION_PKTS_MASK));
-            }
-            else    /* Only using SCO packet types; turn off EDR also */
-            {
+            } else { /* Only using SCO packet types; turn off EDR also */
                 temp_pkt_types |= BTM_SCO_EXCEPTION_PKTS_MASK;
             }
 
@@ -786,38 +723,30 @@ tBTM_STATUS BTM_CreateSco(BD_ADDR remote_bda, uint8_t is_orig, uint16_t pkt_type
             p->hci_handle = BTM_INVALID_HCI_HANDLE;
             p->is_orig = is_orig;
 
-            if(p->state != SCO_ST_PEND_UNPARK)
-            {
-                if(is_orig)
-                {
+            if(p->state != SCO_ST_PEND_UNPARK) {
+                if(is_orig) {
                     /* If role change is in progress, do not proceed with SCO setup
                      * Wait till role change is complete */
                     p_acl = btm_bda_to_acl(remote_bda, BT_TRANSPORT_BR_EDR);
 
-                    if(p_acl && p_acl->switch_role_state != BTM_ACL_SWKEY_STATE_IDLE)
-                    {
+                    if(p_acl && p_acl->switch_role_state != BTM_ACL_SWKEY_STATE_IDLE) {
                         BTM_TRACE_API("Role Change is in progress for ACL handle 0x%04x", acl_handle);
                         p->state = SCO_ST_PEND_ROLECHANGE;
                     }
                 }
             }
 
-            if(p->state != SCO_ST_PEND_UNPARK && p->state != SCO_ST_PEND_ROLECHANGE)
-            {
-                if(is_orig)
-                {
+            if(p->state != SCO_ST_PEND_UNPARK && p->state != SCO_ST_PEND_ROLECHANGE) {
+                if(is_orig) {
                     BTM_TRACE_API("BTM_CreateSco -> (e)SCO Link for ACL handle 0x%04x, Desired Type %d",
                                   acl_handle, btm_cb.sco_cb.desired_sco_mode);
 
-                    if((btm_send_connect_request(acl_handle, p_setup)) != BTM_CMD_STARTED)
-                    {
+                    if((btm_send_connect_request(acl_handle, p_setup)) != BTM_CMD_STARTED) {
                         return (BTM_NO_RESOURCES);
                     }
 
                     p->state = SCO_ST_CONNECTING;
-                }
-                else
-                {
+                } else {
                     p->state = SCO_ST_LISTENING;
                 }
             }
@@ -827,7 +756,7 @@ tBTM_STATUS BTM_CreateSco(BD_ADDR remote_bda, uint8_t is_orig, uint16_t pkt_type
         }
     }
 
-    #endif
+#endif
     /* If here, all SCO blocks in use */
     return (BTM_NO_RESOURCES);
 }
@@ -845,27 +774,24 @@ tBTM_STATUS BTM_CreateSco(BD_ADDR remote_bda, uint8_t is_orig, uint16_t pkt_type
 *******************************************************************************/
 void btm_sco_chk_pend_unpark(uint8_t hci_status, uint16_t hci_handle)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     uint16_t      xx;
     uint16_t      acl_handle;
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
         if((p->state == SCO_ST_PEND_UNPARK) &&
-                ((acl_handle = BTM_GetHCIConnHandle(p->esco.data.bd_addr, BT_TRANSPORT_BR_EDR)) == hci_handle))
-        {
+                ((acl_handle = BTM_GetHCIConnHandle(p->esco.data.bd_addr, BT_TRANSPORT_BR_EDR)) == hci_handle)) {
             BTM_TRACE_API("btm_sco_chk_pend_unpark -> (e)SCO Link for ACL handle 0x%04x, Desired Type %d, hci_status 0x%02x",
                           acl_handle, btm_cb.sco_cb.desired_sco_mode, hci_status);
 
-            if((btm_send_connect_request(acl_handle, &p->esco.setup)) == BTM_CMD_STARTED)
-            {
+            if((btm_send_connect_request(acl_handle, &p->esco.setup)) == BTM_CMD_STARTED) {
                 p->state = SCO_ST_CONNECTING;
             }
         }
     }
 
-    #endif  // BTM_MAX_SCO_LINKS
+#endif  // BTM_MAX_SCO_LINKS
 }
 #endif  // BTM_SCO_WAKE_PARKED_LINK
 
@@ -881,26 +807,23 @@ void btm_sco_chk_pend_unpark(uint8_t hci_status, uint16_t hci_handle)
 *******************************************************************************/
 void btm_sco_chk_pend_rolechange(uint16_t hci_handle)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     uint16_t      xx;
     uint16_t      acl_handle;
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
         if((p->state == SCO_ST_PEND_ROLECHANGE) &&
-                ((acl_handle = BTM_GetHCIConnHandle(p->esco.data.bd_addr, BT_TRANSPORT_BR_EDR)) == hci_handle))
-        {
+                ((acl_handle = BTM_GetHCIConnHandle(p->esco.data.bd_addr, BT_TRANSPORT_BR_EDR)) == hci_handle)) {
             BTM_TRACE_API("btm_sco_chk_pend_rolechange -> (e)SCO Link for ACL handle 0x%04x", acl_handle);
 
-            if((btm_send_connect_request(acl_handle, &p->esco.setup)) == BTM_CMD_STARTED)
-            {
+            if((btm_send_connect_request(acl_handle, &p->esco.setup)) == BTM_CMD_STARTED) {
                 p->state = SCO_ST_CONNECTING;
             }
         }
     }
 
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -915,22 +838,20 @@ void btm_sco_chk_pend_rolechange(uint16_t hci_handle)
 *******************************************************************************/
 void btm_sco_disc_chk_pend_for_modechange(uint16_t hci_handle)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
     BTM_TRACE_DEBUG("%s: hci_handle 0x%04x, p->state 0x%02x", __func__,
                     hci_handle, p->state);
 
-    for(uint16_t xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
+    for(uint16_t xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
         if((p->state == SCO_ST_PEND_MODECHANGE) &&
-                (BTM_GetHCIConnHandle(p->esco.data.bd_addr, BT_TRANSPORT_BR_EDR)) == hci_handle)
-        {
+                (BTM_GetHCIConnHandle(p->esco.data.bd_addr, BT_TRANSPORT_BR_EDR)) == hci_handle) {
             BTM_TRACE_DEBUG("%s: SCO Link handle 0x%04x", __func__, p->hci_handle);
             BTM_RemoveSco(xx);
         }
     }
 
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -945,14 +866,13 @@ void btm_sco_disc_chk_pend_for_modechange(uint16_t hci_handle)
 *******************************************************************************/
 void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CB     *p_sco = &btm_cb.sco_cb;
     tSCO_CONN   *p = &p_sco->sco_db[0];
     uint16_t      xx;
     tBTM_ESCO_CONN_REQ_EVT_DATA evt_data;
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
         /*
          * If the sco state is in the SCO_ST_CONNECTING state, we still need
          * to return accept sco to avoid race conditon for sco creation
@@ -961,8 +881,7 @@ void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
                              !memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN);
 
         if(((p->state == SCO_ST_CONNECTING) && rem_bd_matches) ||
-                ((p->state == SCO_ST_LISTENING) && (rem_bd_matches || !p->rem_bd_known)))
-        {
+                ((p->state == SCO_ST_LISTENING) && (rem_bd_matches || !p->rem_bd_known))) {
             /* If this guy was a wildcard, he is not one any more */
             p->rem_bd_known = TRUE;
             p->esco.data.link_type = link_type;
@@ -970,8 +889,7 @@ void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
             wm_memcpy(p->esco.data.bd_addr, bda, BD_ADDR_LEN);
 
             /* If no callback, auto-accept the connection if packet types match */
-            if(!p->esco.p_esco_cback)
-            {
+            if(!p->esco.p_esco_cback) {
                 /* If requesting eSCO reject if default parameters are SCO only */
                 if((link_type == BTM_LINK_TYPE_ESCO
                         && !(p_sco->def_esco_parms.packet_types & BTM_ESCO_LINK_ONLY_MASK)
@@ -979,17 +897,12 @@ void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
                             == BTM_SCO_EXCEPTION_PKTS_MASK))
                         /* Reject request if SCO is desired but no SCO packets delected */
                         || (link_type == BTM_LINK_TYPE_SCO
-                            && !(p_sco->def_esco_parms.packet_types & BTM_SCO_LINK_ONLY_MASK)))
-                {
+                            && !(p_sco->def_esco_parms.packet_types & BTM_SCO_LINK_ONLY_MASK))) {
                     btm_esco_conn_rsp(xx, HCI_ERR_HOST_REJECT_RESOURCES, bda, NULL);
-                }
-                else    /* Accept the request */
-                {
+                } else { /* Accept the request */
                     btm_esco_conn_rsp(xx, HCI_SUCCESS, bda, NULL);
                 }
-            }
-            else    /* Notify upper layer of connect indication */
-            {
+            } else { /* Notify upper layer of connect indication */
                 wm_memcpy(evt_data.bd_addr, bda, BD_ADDR_LEN);
                 wm_memcpy(evt_data.dev_class, dev_class, DEV_CLASS_LEN);
                 evt_data.link_type = link_type;
@@ -1002,13 +915,10 @@ void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
     }
 
     /* TCS usage */
-    if(btm_cb.sco_cb.app_sco_ind_cb)
-    {
+    if(btm_cb.sco_cb.app_sco_ind_cb) {
         /* Now, try to find an unused control block */
-        for(xx = 0, p = &btm_cb.sco_cb.sco_db[0]; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-        {
-            if(p->state == SCO_ST_UNUSED)
-            {
+        for(xx = 0, p = &btm_cb.sco_cb.sco_db[0]; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+            if(p->state == SCO_ST_UNUSED) {
                 p->is_orig = FALSE;
                 p->state = SCO_ST_LISTENING;
                 p->esco.data.link_type = link_type;
@@ -1018,14 +928,13 @@ void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
             }
         }
 
-        if(xx < BTM_MAX_SCO_LINKS)
-        {
+        if(xx < BTM_MAX_SCO_LINKS) {
             btm_cb.sco_cb.app_sco_ind_cb(xx);
             return;
         }
     }
 
-    #endif
+#endif
     /* If here, no one wants the SCO connection. Reject it */
     BTM_TRACE_WARNING("btm_sco_conn_req: No one wants this SCO connection; rejecting it");
     btm_esco_conn_rsp(BTM_MAX_SCO_LINKS, HCI_ERR_HOST_REJECT_RESOURCES, bda, NULL);
@@ -1044,52 +953,40 @@ void btm_sco_conn_req(BD_ADDR bda,  DEV_CLASS dev_class, uint8_t link_type)
 void btm_sco_connected(uint8_t hci_status, BD_ADDR bda, uint16_t hci_handle,
                        tBTM_ESCO_DATA *p_esco_data)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
     uint16_t      xx;
     uint8_t     spt = FALSE;
     tBTM_CHG_ESCO_PARAMS parms;
-    #endif
+#endif
     btm_cb.sco_cb.sco_disc_reason = hci_status;
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
         if(((p->state == SCO_ST_CONNECTING) ||
                 (p->state == SCO_ST_LISTENING)  ||
                 (p->state == SCO_ST_W4_CONN_RSP))
                 && (p->rem_bd_known)
-                && (!bda || !memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN)))
-        {
-            if(hci_status != HCI_SUCCESS)
-            {
+                && (!bda || !memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN))) {
+            if(hci_status != HCI_SUCCESS) {
                 /* Report the error if originator, otherwise remain in Listen mode */
-                if(p->is_orig)
-                {
+                if(p->is_orig) {
                     /* If role switch is pending, we need try again after role switch is complete */
-                    if(hci_status == HCI_ERR_ROLE_SWITCH_PENDING)
-                    {
+                    if(hci_status == HCI_ERR_ROLE_SWITCH_PENDING) {
                         BTM_TRACE_API("Role Change pending for HCI handle 0x%04x", hci_handle);
                         p->state = SCO_ST_PEND_ROLECHANGE;
                     }
                     /* avoid calling disconnect callback because of sco creation race */
-                    else
-                        if(hci_status != HCI_ERR_LMP_ERR_TRANS_COLLISION)
-                        {
-                            p->state = SCO_ST_UNUSED;
-                            (*p->p_disc_cb)(xx);
-                        }
-                }
-                else
-                {
-                    /* Notify the upper layer that incoming sco connection has failed. */
-                    if(p->state == SCO_ST_CONNECTING)
-                    {
+                    else if(hci_status != HCI_ERR_LMP_ERR_TRANS_COLLISION) {
                         p->state = SCO_ST_UNUSED;
                         (*p->p_disc_cb)(xx);
                     }
-                    else
-                    {
+                } else {
+                    /* Notify the upper layer that incoming sco connection has failed. */
+                    if(p->state == SCO_ST_CONNECTING) {
+                        p->state = SCO_ST_UNUSED;
+                        (*p->p_disc_cb)(xx);
+                    } else {
                         p->state = SCO_ST_LISTENING;
                     }
                 }
@@ -1097,31 +994,25 @@ void btm_sco_connected(uint8_t hci_status, BD_ADDR bda, uint16_t hci_handle,
                 return;
             }
 
-            if(p->state == SCO_ST_LISTENING)
-            {
+            if(p->state == SCO_ST_LISTENING) {
                 spt = TRUE;
             }
 
             p->state = SCO_ST_CONNECTED;
             p->hci_handle = hci_handle;
 
-            if(!btm_cb.sco_cb.esco_supported)
-            {
+            if(!btm_cb.sco_cb.esco_supported) {
                 p->esco.data.link_type = BTM_LINK_TYPE_SCO;
 
-                if(spt)
-                {
+                if(spt) {
                     parms.packet_types = p->esco.setup.packet_types;
                     /* Keep the other parameters the same for SCO */
                     parms.max_latency = p->esco.setup.max_latency;
                     parms.retrans_effort = p->esco.setup.retrans_effort;
                     BTM_ChangeEScoLinkParms(xx, &parms);
                 }
-            }
-            else
-            {
-                if(p_esco_data)
-                {
+            } else {
+                if(p_esco_data) {
                     p->esco.data = *p_esco_data;
                 }
             }
@@ -1131,7 +1022,7 @@ void btm_sco_connected(uint8_t hci_status, BD_ADDR bda, uint16_t hci_handle,
         }
     }
 
-    #endif
+#endif
 }
 
 
@@ -1151,10 +1042,8 @@ uint16_t  btm_find_scb_by_handle(uint16_t handle)
     int         xx;
     tSCO_CONN    *p = &btm_cb.sco_cb.sco_db[0];
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if((p->state == SCO_ST_CONNECTED) && (p->hci_handle == handle))
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if((p->state == SCO_ST_CONNECTED) && (p->hci_handle == handle)) {
             return (xx);
         }
     }
@@ -1174,21 +1063,19 @@ uint16_t  btm_find_scb_by_handle(uint16_t handle)
 *******************************************************************************/
 tBTM_STATUS BTM_RemoveSco(uint16_t sco_inx)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[sco_inx];
     uint16_t       tempstate;
     tBTM_PM_STATE   state = BTM_PM_ST_INVALID;
     BTM_TRACE_DEBUG("%s", __func__);
 
     /* Validity check */
-    if((sco_inx >= BTM_MAX_SCO_LINKS) || (p->state == SCO_ST_UNUSED))
-    {
+    if((sco_inx >= BTM_MAX_SCO_LINKS) || (p->state == SCO_ST_UNUSED)) {
         return (BTM_UNKNOWN_ADDR);
     }
 
     /* If no HCI handle, simply drop the connection and return */
-    if(p->hci_handle == BTM_INVALID_HCI_HANDLE || p->state == SCO_ST_PEND_UNPARK)
-    {
+    if(p->hci_handle == BTM_INVALID_HCI_HANDLE || p->state == SCO_ST_PEND_UNPARK) {
         p->hci_handle = BTM_INVALID_HCI_HANDLE;
         p->state = SCO_ST_UNUSED;
         p->esco.p_esco_cback = NULL;    /* Deregister the eSCO event callback */
@@ -1196,8 +1083,7 @@ tBTM_STATUS BTM_RemoveSco(uint16_t sco_inx)
     }
 
     if((btm_read_power_mode_state(p->esco.data.bd_addr, &state) == BTM_SUCCESS)
-            && state == BTM_PM_ST_PENDING)
-    {
+            && state == BTM_PM_ST_PENDING) {
         BTM_TRACE_DEBUG("%s: BTM_PM_ST_PENDING for ACL mapped with SCO Link 0x%04x",
                         __func__, p->hci_handle);
         p->state = SCO_ST_PEND_MODECHANGE;
@@ -1207,16 +1093,15 @@ tBTM_STATUS BTM_RemoveSco(uint16_t sco_inx)
     tempstate = p->state;
     p->state = SCO_ST_DISCONNECTING;
 
-    if(!btsnd_hcic_disconnect(p->hci_handle, HCI_ERR_PEER_USER))
-    {
+    if(!btsnd_hcic_disconnect(p->hci_handle, HCI_ERR_PEER_USER)) {
         p->state = tempstate;
         return (BTM_NO_RESOURCES);
     }
 
     return (BTM_CMD_STARTED);
-    #else
+#else
     return (BTM_NO_RESOURCES);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1230,19 +1115,17 @@ tBTM_STATUS BTM_RemoveSco(uint16_t sco_inx)
 *******************************************************************************/
 void btm_remove_sco_links(BD_ADDR bda)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
     uint16_t       xx;
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if(p->rem_bd_known && (!memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN)))
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if(p->rem_bd_known && (!memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN))) {
             BTM_RemoveSco(xx);
         }
     }
 
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1257,18 +1140,16 @@ void btm_remove_sco_links(BD_ADDR bda)
 *******************************************************************************/
 void btm_sco_removed(uint16_t hci_handle, uint8_t reason)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
     uint16_t      xx;
-    #endif
+#endif
     btm_cb.sco_cb.sco_disc_reason = reason;
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     p = &btm_cb.sco_cb.sco_db[0];
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if((p->state != SCO_ST_UNUSED) && (p->state != SCO_ST_LISTENING) && (p->hci_handle == hci_handle))
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if((p->state != SCO_ST_UNUSED) && (p->state != SCO_ST_LISTENING) && (p->hci_handle == hci_handle)) {
             btm_sco_flush_sco_data(xx);
             p->state = SCO_ST_UNUSED;
             p->hci_handle = BTM_INVALID_HCI_HANDLE;
@@ -1279,7 +1160,7 @@ void btm_sco_removed(uint16_t hci_handle, uint8_t reason)
         }
     }
 
-    #endif
+#endif
 }
 
 
@@ -1298,16 +1179,13 @@ void btm_sco_removed(uint16_t hci_handle, uint8_t reason)
 *******************************************************************************/
 void btm_sco_acl_removed(BD_ADDR bda)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[0];
     uint16_t      xx;
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if(p->state != SCO_ST_UNUSED)
-        {
-            if((!bda) || (!memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN) && p->rem_bd_known))
-            {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if(p->state != SCO_ST_UNUSED) {
+            if((!bda) || (!memcmp(p->esco.data.bd_addr, bda, BD_ADDR_LEN) && p->rem_bd_known)) {
                 btm_sco_flush_sco_data(xx);
                 p->state = SCO_ST_UNUSED;
                 p->esco.p_esco_cback = NULL;    /* Deregister eSCO callback */
@@ -1316,7 +1194,7 @@ void btm_sco_acl_removed(BD_ADDR bda)
         }
     }
 
-    #endif
+#endif
 }
 
 
@@ -1346,13 +1224,12 @@ void btm_sco_acl_removed(BD_ADDR bda)
 *******************************************************************************/
 tBTM_STATUS BTM_SetScoPacketTypes(uint16_t sco_inx, uint16_t pkt_types)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tBTM_CHG_ESCO_PARAMS parms;
     tSCO_CONN           *p;
 
     /* Validity check */
-    if(sco_inx >= BTM_MAX_SCO_LINKS)
-    {
+    if(sco_inx >= BTM_MAX_SCO_LINKS) {
         return (BTM_UNKNOWN_ADDR);
     }
 
@@ -1362,9 +1239,9 @@ tBTM_STATUS BTM_SetScoPacketTypes(uint16_t sco_inx, uint16_t pkt_types)
     parms.max_latency = p->esco.setup.max_latency;
     parms.retrans_effort = p->esco.setup.retrans_effort;
     return (BTM_ChangeEScoLinkParms(sco_inx, &parms));
-    #else
+#else
     return (BTM_UNKNOWN_ADDR);
-    #endif
+#endif
 }
 
 
@@ -1391,22 +1268,19 @@ tBTM_STATUS BTM_SetScoPacketTypes(uint16_t sco_inx, uint16_t pkt_types)
 *******************************************************************************/
 uint16_t BTM_ReadScoPacketTypes(uint16_t sco_inx)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN *p = &btm_cb.sco_cb.sco_db[sco_inx];
 
     /* Validity check */
-    if((sco_inx < BTM_MAX_SCO_LINKS) && (p->state == SCO_ST_CONNECTED))
-    {
+    if((sco_inx < BTM_MAX_SCO_LINKS) && (p->state == SCO_ST_CONNECTED)) {
         return (p->esco.setup.packet_types);
-    }
-    else
-    {
+    } else {
         return (0);
     }
 
-    #else
+#else
     return (0);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1465,22 +1339,19 @@ uint16_t BTM_ReadDeviceScoPacketTypes(void)
 *******************************************************************************/
 uint16_t BTM_ReadScoHandle(uint16_t sco_inx)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[sco_inx];
 
     /* Validity check */
-    if((sco_inx < BTM_MAX_SCO_LINKS) && (p->state == SCO_ST_CONNECTED))
-    {
+    if((sco_inx < BTM_MAX_SCO_LINKS) && (p->state == SCO_ST_CONNECTED)) {
         return (p->hci_handle);
-    }
-    else
-    {
+    } else {
         return (BTM_INVALID_HCI_HANDLE);
     }
 
-    #else
+#else
     return (BTM_INVALID_HCI_HANDLE);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1495,22 +1366,19 @@ uint16_t BTM_ReadScoHandle(uint16_t sco_inx)
 *******************************************************************************/
 uint8_t *BTM_ReadScoBdAddr(uint16_t sco_inx)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN   *p = &btm_cb.sco_cb.sco_db[sco_inx];
 
     /* Validity check */
-    if((sco_inx < BTM_MAX_SCO_LINKS) && (p->rem_bd_known))
-    {
+    if((sco_inx < BTM_MAX_SCO_LINKS) && (p->rem_bd_known)) {
         return (p->esco.data.bd_addr);
-    }
-    else
-    {
+    } else {
         return (NULL);
     }
 
-    #else
+#else
     return (NULL);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1533,16 +1401,11 @@ tBTM_STATUS BTM_SetEScoMode(tBTM_SCO_TYPE sco_mode, tBTM_ESCO_PARAMS *p_parms)
     tSCO_CB          *p_esco = &btm_cb.sco_cb;
     tBTM_ESCO_PARAMS *p_def = &p_esco->def_esco_parms;
 
-    if(p_esco->esco_supported)
-    {
-        if(p_parms)
-        {
-            if(sco_mode == BTM_LINK_TYPE_ESCO)
-            {
+    if(p_esco->esco_supported) {
+        if(p_parms) {
+            if(sco_mode == BTM_LINK_TYPE_ESCO) {
                 *p_def = *p_parms;    /* Save as the default parameters */
-            }
-            else    /* Load only the SCO packet types */
-            {
+            } else { /* Load only the SCO packet types */
                 p_def->packet_types = p_parms->packet_types;
                 p_def->tx_bw            = BTM_64KBITS_RATE;
                 p_def->rx_bw            = BTM_64KBITS_RATE;
@@ -1556,9 +1419,7 @@ tBTM_STATUS BTM_SetEScoMode(tBTM_SCO_TYPE sco_mode, tBTM_ESCO_PARAMS *p_parms)
 
         p_esco->desired_sco_mode = sco_mode;
         BTM_TRACE_API("BTM_SetEScoMode -> mode %d",  sco_mode);
-    }
-    else
-    {
+    } else {
         p_esco->desired_sco_mode = BTM_LINK_TYPE_SCO;
         p_def->packet_types &= BTM_SCO_LINK_ONLY_MASK;
         p_def->retrans_effort = 0;
@@ -1591,25 +1452,23 @@ tBTM_STATUS BTM_SetEScoMode(tBTM_SCO_TYPE sco_mode, tBTM_ESCO_PARAMS *p_parms)
 *******************************************************************************/
 tBTM_STATUS BTM_RegForEScoEvts(uint16_t sco_inx, tBTM_ESCO_CBACK *p_esco_cback)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
 
-    if(!btm_cb.sco_cb.esco_supported)
-    {
+    if(!btm_cb.sco_cb.esco_supported) {
         btm_cb.sco_cb.sco_db[sco_inx].esco.p_esco_cback = NULL;
         return (BTM_MODE_UNSUPPORTED);
     }
 
     if(sco_inx < BTM_MAX_SCO_LINKS &&
-            btm_cb.sco_cb.sco_db[sco_inx].state != SCO_ST_UNUSED)
-    {
+            btm_cb.sco_cb.sco_db[sco_inx].state != SCO_ST_UNUSED) {
         btm_cb.sco_cb.sco_db[sco_inx].esco.p_esco_cback = p_esco_cback;
         return (BTM_SUCCESS);
     }
 
     return (BTM_ILLEGAL_VALUE);
-    #else
+#else
     return (BTM_MODE_UNSUPPORTED);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1630,23 +1489,19 @@ tBTM_STATUS BTM_RegForEScoEvts(uint16_t sco_inx, tBTM_ESCO_CBACK *p_esco_cback)
 *******************************************************************************/
 tBTM_STATUS BTM_ReadEScoLinkParms(uint16_t sco_inx, tBTM_ESCO_DATA *p_parms)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     uint8_t index;
     BTM_TRACE_API("BTM_ReadEScoLinkParms -> sco_inx 0x%04x", sco_inx);
 
     if(sco_inx < BTM_MAX_SCO_LINKS &&
-            btm_cb.sco_cb.sco_db[sco_inx].state >= SCO_ST_CONNECTED)
-    {
+            btm_cb.sco_cb.sco_db[sco_inx].state >= SCO_ST_CONNECTED) {
         *p_parms = btm_cb.sco_cb.sco_db[sco_inx].esco.data;
         return (BTM_SUCCESS);
     }
 
-    if(sco_inx == BTM_FIRST_ACTIVE_SCO_INDEX)
-    {
-        for(index = 0; index < BTM_MAX_SCO_LINKS; index++)
-        {
-            if(btm_cb.sco_cb.sco_db[index].state >= SCO_ST_CONNECTED)
-            {
+    if(sco_inx == BTM_FIRST_ACTIVE_SCO_INDEX) {
+        for(index = 0; index < BTM_MAX_SCO_LINKS; index++) {
+            if(btm_cb.sco_cb.sco_db[index].state >= SCO_ST_CONNECTED) {
                 BTM_TRACE_API("BTM_ReadEScoLinkParms the first active SCO index is %d", index);
                 *p_parms = btm_cb.sco_cb.sco_db[index].esco.data;
                 return (BTM_SUCCESS);
@@ -1654,7 +1509,7 @@ tBTM_STATUS BTM_ReadEScoLinkParms(uint16_t sco_inx, tBTM_ESCO_DATA *p_parms)
         }
     }
 
-    #endif
+#endif
     BTM_TRACE_API("BTM_ReadEScoLinkParms cannot find the SCO index!");
     wm_memset(p_parms, 0, sizeof(tBTM_ESCO_DATA));
     return (BTM_WRONG_MODE);
@@ -1681,15 +1536,14 @@ tBTM_STATUS BTM_ReadEScoLinkParms(uint16_t sco_inx, tBTM_ESCO_DATA *p_parms)
 *******************************************************************************/
 tBTM_STATUS BTM_ChangeEScoLinkParms(uint16_t sco_inx, tBTM_CHG_ESCO_PARAMS *p_parms)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tBTM_ESCO_PARAMS *p_setup;
     tSCO_CONN        *p_sco;
     uint16_t            temp_pkt_types;
 
     /* Make sure sco handle is valid and on an active link */
     if(sco_inx >= BTM_MAX_SCO_LINKS ||
-            btm_cb.sco_cb.sco_db[sco_inx].state != SCO_ST_CONNECTED)
-    {
+            btm_cb.sco_cb.sco_db[sco_inx].state != SCO_ST_CONNECTED) {
         return (BTM_WRONG_MODE);
     }
 
@@ -1698,21 +1552,17 @@ tBTM_STATUS BTM_ChangeEScoLinkParms(uint16_t sco_inx, tBTM_CHG_ESCO_PARAMS *p_pa
 
     /* If SCO connection OR eSCO not supported just send change packet types */
     if(p_sco->esco.data.link_type == BTM_LINK_TYPE_SCO ||
-            !btm_cb.sco_cb.esco_supported)
-    {
+            !btm_cb.sco_cb.esco_supported) {
         p_setup->packet_types = p_parms->packet_types &
                                 (btm_cb.btm_sco_pkt_types_supported & BTM_SCO_LINK_ONLY_MASK);
         BTM_TRACE_API("BTM_ChangeEScoLinkParms -> SCO Link for handle 0x%04x, pkt 0x%04x",
                       p_sco->hci_handle, p_setup->packet_types);
 
         if(!btsnd_hcic_change_conn_type(p_sco->hci_handle,
-                                        BTM_ESCO_2_SCO(p_setup->packet_types)))
-        {
+                                        BTM_ESCO_2_SCO(p_setup->packet_types))) {
             return (BTM_NO_RESOURCES);
         }
-    }
-    else
-    {
+    } else {
         temp_pkt_types = (p_parms->packet_types & BTM_SCO_SUPPORTED_PKTS_MASK &
                           btm_cb.btm_sco_pkt_types_supported);
         /* OR in any exception packet types */
@@ -1728,20 +1578,17 @@ tBTM_STATUS BTM_ChangeEScoLinkParms(uint16_t sco_inx, tBTM_CHG_ESCO_PARAMS *p_pa
                                        p_setup->rx_bw, p_parms->max_latency,
                                        p_setup->voice_contfmt,
                                        p_parms->retrans_effort,
-                                       temp_pkt_types))
-        {
+                                       temp_pkt_types)) {
             return (BTM_NO_RESOURCES);
-        }
-        else
-        {
+        } else {
             p_parms->packet_types = temp_pkt_types;
         }
     }
 
     return (BTM_CMD_STARTED);
-    #else
+#else
     return (BTM_WRONG_MODE);
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1764,17 +1611,16 @@ tBTM_STATUS BTM_ChangeEScoLinkParms(uint16_t sco_inx, tBTM_CHG_ESCO_PARAMS *p_pa
 *******************************************************************************/
 void BTM_EScoConnRsp(uint16_t sco_inx, uint8_t hci_status, tBTM_ESCO_PARAMS *p_parms)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
 
     if(sco_inx < BTM_MAX_SCO_LINKS &&
-            btm_cb.sco_cb.sco_db[sco_inx].state == SCO_ST_W4_CONN_RSP)
-    {
+            btm_cb.sco_cb.sco_db[sco_inx].state == SCO_ST_W4_CONN_RSP) {
         btm_esco_conn_rsp(sco_inx, hci_status,
                           btm_cb.sco_cb.sco_db[sco_inx].esco.data.bd_addr,
                           p_parms);
     }
 
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1789,12 +1635,12 @@ void BTM_EScoConnRsp(uint16_t sco_inx, uint8_t hci_status, tBTM_ESCO_PARAMS *p_p
 *******************************************************************************/
 tBTM_SCO_TYPE btm_read_def_esco_mode(tBTM_ESCO_PARAMS *p_parms)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     *p_parms = btm_cb.sco_cb.def_esco_parms;
     return btm_cb.sco_cb.desired_sco_mode;
-    #else
+#else
     return BTM_LINK_TYPE_SCO;
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1811,20 +1657,17 @@ void btm_esco_proc_conn_chg(uint8_t status, uint16_t handle, uint8_t tx_interval
                             uint8_t retrans_window, uint16_t rx_pkt_len,
                             uint16_t tx_pkt_len)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN               *p = &btm_cb.sco_cb.sco_db[0];
     tBTM_CHG_ESCO_EVT_DATA   data;
     uint16_t                   xx;
     BTM_TRACE_EVENT("btm_esco_proc_conn_chg -> handle 0x%04x, status 0x%02x",
                     handle, status);
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if(p->state == SCO_ST_CONNECTED && handle == p->hci_handle)
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if(p->state == SCO_ST_CONNECTED && handle == p->hci_handle) {
             /* If upper layer wants notification */
-            if(p->esco.p_esco_cback)
-            {
+            if(p->esco.p_esco_cback) {
                 wm_memcpy(data.bd_addr, p->esco.data.bd_addr, BD_ADDR_LEN);
                 data.hci_status = status;
                 data.sco_inx = xx;
@@ -1840,7 +1683,7 @@ void btm_esco_proc_conn_chg(uint8_t status, uint16_t handle, uint8_t tx_interval
         }
     }
 
-    #endif
+#endif
 }
 
 /*******************************************************************************
@@ -1855,19 +1698,17 @@ void btm_esco_proc_conn_chg(uint8_t status, uint16_t handle, uint8_t tx_interval
 *******************************************************************************/
 uint8_t btm_is_sco_active(uint16_t handle)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     uint16_t     xx;
     tSCO_CONN *p = &btm_cb.sco_cb.sco_db[0];
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if(handle == p->hci_handle && p->state == SCO_ST_CONNECTED)
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if(handle == p->hci_handle && p->state == SCO_ST_CONNECTED) {
             return (TRUE);
         }
     }
 
-    #endif
+#endif
     return (FALSE);
 }
 
@@ -1882,15 +1723,13 @@ uint8_t btm_is_sco_active(uint16_t handle)
 *******************************************************************************/
 uint8_t BTM_GetNumScoLinks(void)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     tSCO_CONN *p = &btm_cb.sco_cb.sco_db[0];
     uint16_t     xx;
     uint8_t      num_scos = 0;
 
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        switch(p->state)
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        switch(p->state) {
             case SCO_ST_W4_CONN_RSP:
             case SCO_ST_CONNECTING:
             case SCO_ST_CONNECTED:
@@ -1901,9 +1740,9 @@ uint8_t BTM_GetNumScoLinks(void)
     }
 
     return (num_scos);
-    #else
+#else
     return (0);
-    #endif
+#endif
 }
 
 
@@ -1918,20 +1757,18 @@ uint8_t BTM_GetNumScoLinks(void)
 *******************************************************************************/
 uint8_t btm_is_sco_active_by_bdaddr(BD_ADDR remote_bda)
 {
-    #if (BTM_MAX_SCO_LINKS>0)
+#if (BTM_MAX_SCO_LINKS>0)
     uint8_t xx;
     tSCO_CONN *p = &btm_cb.sco_cb.sco_db[0];
 
     /* If any SCO is being established to the remote BD address, refuse this */
-    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++)
-    {
-        if((!memcmp(p->esco.data.bd_addr, remote_bda, BD_ADDR_LEN)) && (p->state == SCO_ST_CONNECTED))
-        {
+    for(xx = 0; xx < BTM_MAX_SCO_LINKS; xx++, p++) {
+        if((!memcmp(p->esco.data.bd_addr, remote_bda, BD_ADDR_LEN)) && (p->state == SCO_ST_CONNECTED)) {
             return (TRUE);
         }
     }
 
-    #endif
+#endif
     return (FALSE);
 }
 #else   /* SCO_EXCLUDED == TRUE (Link in stubs) */

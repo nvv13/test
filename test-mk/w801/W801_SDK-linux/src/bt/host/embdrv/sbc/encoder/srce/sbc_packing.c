@@ -77,9 +77,9 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
     uint16_t u16Levels; /*to store levels*/
     SINT32 s32Temp1;    /*used in 64-bit multiplication*/
     SINT32 s32Low;  /*used in 64-bit multiplication*/
-    #if (SBC_IS_64_MULT_IN_QUANTIZER==TRUE)
+#if (SBC_IS_64_MULT_IN_QUANTIZER==TRUE)
     SINT32 s32Hi1, s32Low1, s32Carry, s32TempVal2, s32Hi, s32Temp2;
-    #endif
+#endif
     pu8PacketPtr    = pstrEncParams->pu8NextPacket;    /*Initialize the ptr*/
     *pu8PacketPtr++ = (uint8_t)0x9C;   /*Sync word*/
     *pu8PacketPtr++ = (uint8_t)(pstrEncParams->FrameHeader);
@@ -88,48 +88,39 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
     /*here it indicate if it is byte boundary or nibble boundary*/
     s32PresentBit = 8;
     Temp = 0;
-    #if (SBC_JOINT_STE_INCLUDED == TRUE)
+#if (SBC_JOINT_STE_INCLUDED == TRUE)
 
-    if(pstrEncParams->s16ChannelMode == SBC_JOINT_STEREO)
-    {
+    if(pstrEncParams->s16ChannelMode == SBC_JOINT_STEREO) {
         /* pack join stero parameters */
-        for(s32Sb = 0; s32Sb < s32NumOfSubBands; s32Sb++)
-        {
+        for(s32Sb = 0; s32Sb < s32NumOfSubBands; s32Sb++) {
             Temp <<= 1;
             Temp |= pstrEncParams->as16Join[s32Sb];
         }
 
         /* pack RFA */
-        if(s32NumOfSubBands == SUB_BANDS_4)
-        {
+        if(s32NumOfSubBands == SUB_BANDS_4) {
             s32PresentBit = 4;
-        }
-        else
-        {
+        } else {
             *(pu8PacketPtr++) = Temp;
             Temp = 0;
         }
     }
 
-    #endif
+#endif
     /* Pack Scale factor */
     ps16GenPtr = pstrEncParams->as16ScaleFactor;
     s32Sb = s32NumOfChannels * s32NumOfSubBands;
 
     /*Temp=*pu8PacketPtr;*/
-    for(s32Ch = s32Sb; s32Ch > 0; s32Ch--)
-    {
+    for(s32Ch = s32Sb; s32Ch > 0; s32Ch--) {
         Temp <<= 4;
         Temp |= *ps16GenPtr++;
 
-        if(s32PresentBit == 4)
-        {
+        if(s32PresentBit == 4) {
             s32PresentBit = 8;
             *(pu8PacketPtr++) = Temp;
             Temp = 0;
-        }
-        else
-        {
+        } else {
             s32PresentBit = 4;
         }
     }
@@ -139,18 +130,15 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
     /*Temp=*pu8PacketPtr;*/
     s32NumOfBlocks = pstrEncParams->s16NumOfBlocks;
 
-    for(s32Blk = s32NumOfBlocks - 1; s32Blk >= 0; s32Blk--)
-    {
+    for(s32Blk = s32NumOfBlocks - 1; s32Blk >= 0; s32Blk--) {
         ps16GenPtr  = pstrEncParams->as16Bits;
         ps16ScfPtr  = pstrEncParams->as16ScaleFactor;
 
-        for(s32Ch = s32Sb - 1; s32Ch >= 0; s32Ch--)
-        {
+        for(s32Ch = s32Sb - 1; s32Ch >= 0; s32Ch--) {
             s32LoopCount = *ps16GenPtr++;
 
-            if(s32LoopCount != 0)
-            {
-                #if (SBC_IS_64_MULT_IN_QUANTIZER==TRUE)
+            if(s32LoopCount != 0) {
+#if (SBC_IS_64_MULT_IN_QUANTIZER==TRUE)
                 /* finding level from reconstruction part of decoder */
                 u32SfRaisedToPow2 = ((uint32_t)1 << ((*ps16ScfPtr) + 1));
                 u16Levels = (uint16_t)(((uint32_t)1 << s32LoopCount) - 1);
@@ -162,7 +150,7 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
                 s32Low1  &= ((uint32_t)1 << (32 - ((*ps16ScfPtr) + 2))) - 1;
                 s32Hi1    = s32Hi << (32 - ((*ps16ScfPtr) + 2));
                 u32QuantizedSbValue0 = (uint16_t)((s32Low1 | s32Hi1) >> 12);
-                #else
+#else
                 /* finding level from reconstruction part of decoder */
                 u32SfRaisedToPow2 = ((uint32_t)1 << *ps16ScfPtr);
                 u16Levels = (uint16_t)(((uint32_t)1 << s32LoopCount) - 1);
@@ -171,21 +159,17 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
                 Mult32(s32Temp1, u16Levels, s32Low);
                 s32Low >>= (*ps16ScfPtr + 1);
                 u32QuantizedSbValue0 = (uint16_t)s32Low;
-                #endif
+#endif
                 /*store the number of bits required and the quantized s32Sb
                 sample to ease the coding*/
                 u32QuantizedSbValue = u32QuantizedSbValue0;
 
-                if(s32PresentBit >= s32LoopCount)
-                {
+                if(s32PresentBit >= s32LoopCount) {
                     Temp <<= s32LoopCount;
                     Temp |= u32QuantizedSbValue;
                     s32PresentBit -= s32LoopCount;
-                }
-                else
-                {
-                    while(s32PresentBit < s32LoopCount)
-                    {
+                } else {
+                    while(s32PresentBit < s32LoopCount) {
                         s32LoopCount -= s32PresentBit;
                         u32QuantizedSbValue >>= s32LoopCount;
                         /*remove the unwanted msbs*/
@@ -228,13 +212,10 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
     */
     Temp = *pu8PacketPtr;
 
-    for(s32Ch = 1; s32Ch < (s32LoopCount + 4); s32Ch++)
-    {
+    for(s32Ch = 1; s32Ch < (s32LoopCount + 4); s32Ch++) {
         /* skip sync word and CRC bytes */
-        if(s32Ch != 3)
-        {
-            for(s32LoopCountJ = 7; s32LoopCountJ >= 0; s32LoopCountJ--)
-            {
+        if(s32Ch != 3) {
+            for(s32LoopCountJ = 7; s32LoopCountJ >= 0; s32LoopCountJ--) {
                 u8XoredVal = ((u8CRC >> 7) & 0x01) ^ ((Temp >> s32LoopCountJ) & 0x01);
                 u8CRC <<= 1;
                 u8CRC ^= (u8XoredVal * 0x1D);
@@ -245,10 +226,8 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
         Temp = *(++pu8PacketPtr);
     }
 
-    if(pstrEncParams->s16ChannelMode == SBC_JOINT_STEREO)
-    {
-        for(s32LoopCountJ = 7; s32LoopCountJ >= (8 - s32NumOfSubBands); s32LoopCountJ--)
-        {
+    if(pstrEncParams->s16ChannelMode == SBC_JOINT_STEREO) {
+        for(s32LoopCountJ = 7; s32LoopCountJ >= (8 - s32NumOfSubBands); s32LoopCountJ--) {
             u8XoredVal = ((u8CRC >> 7) & 0x01) ^ ((Temp >> s32LoopCountJ) & 0x01);
             u8CRC <<= 1;
             u8CRC ^= (u8XoredVal * 0x1D);
@@ -261,6 +240,7 @@ void EncPacking(SBC_ENC_PARAMS *pstrEncParams)
     pu8PacketPtr = pstrEncParams->pu8NextPacket;    /*Initialize the ptr*/
     pu8PacketPtr += 3;
     *pu8PacketPtr = u8CRC;
-    pstrEncParams->pu8NextPacket += pstrEncParams->u16PacketLength; /* move the pointer to the end in case there is more than one frame to encode */
+    pstrEncParams->pu8NextPacket +=
+                    pstrEncParams->u16PacketLength; /* move the pointer to the end in case there is more than one frame to encode */
 }
 

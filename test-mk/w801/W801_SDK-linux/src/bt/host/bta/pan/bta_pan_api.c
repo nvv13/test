@@ -26,16 +26,15 @@
 #include <string.h>
 #include "bdroid_buildcfg.h"
 #include "bta_pan_api.h"
+#include "bt_utils.h"
 #if defined(BTA_PAN_INCLUDED) && BTA_PAN_INCLUDED == TRUE
 #include "bta_api.h"
 #include "bta_sys.h"
 #include "pan_api.h"
 #include "bt_common.h"
 #include "bta_pan_int.h"
-#include "bt_utils.h"
 
-static const tBTA_SYS_REG bta_pan_reg =
-{
+static const tBTA_SYS_REG bta_pan_reg = {
     bta_pan_hdl_event,
     BTA_PanDisable
 };
@@ -93,7 +92,8 @@ void BTA_PanDisable(void)
 ** Returns          void
 **
 *******************************************************************************/
-void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info, tBTA_PAN_ROLE_INFO *p_gn_info,
+void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info,
+                    tBTA_PAN_ROLE_INFO *p_gn_info,
                     tBTA_PAN_ROLE_INFO *p_nap_info)
 {
     tBTA_PAN_API_SET_ROLE  *p_buf =
@@ -101,14 +101,10 @@ void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info, tBTA_PA
     p_buf->hdr.event = BTA_PAN_API_SET_ROLE_EVT;
     p_buf->role = role;
 
-    if(p_user_info && (role & BTA_PAN_ROLE_PANU))
-    {
-        if(p_user_info->p_srv_name)
-        {
+    if(p_user_info && (role & BTA_PAN_ROLE_PANU)) {
+        if(p_user_info->p_srv_name) {
             strlcpy(p_buf->user_name, p_user_info->p_srv_name, BTA_SERVICE_NAME_LEN);
-        }
-        else
-        {
+        } else {
             p_buf->user_name[0] = 0;
         }
 
@@ -116,14 +112,10 @@ void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info, tBTA_PA
         p_buf->user_sec_mask = p_user_info->sec_mask;
     }
 
-    if(p_gn_info && (role & BTA_PAN_ROLE_GN))
-    {
-        if(p_gn_info->p_srv_name)
-        {
+    if(p_gn_info && (role & BTA_PAN_ROLE_GN)) {
+        if(p_gn_info->p_srv_name) {
             strlcpy(p_buf->gn_name, p_gn_info->p_srv_name, BTA_SERVICE_NAME_LEN);
-        }
-        else
-        {
+        } else {
             p_buf->gn_name[0] = 0;
         }
 
@@ -131,14 +123,10 @@ void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info, tBTA_PA
         p_buf->gn_sec_mask = p_gn_info->sec_mask;
     }
 
-    if(p_nap_info && (role & BTA_PAN_ROLE_NAP))
-    {
-        if(p_nap_info->p_srv_name)
-        {
+    if(p_nap_info && (role & BTA_PAN_ROLE_NAP)) {
+        if(p_nap_info->p_srv_name) {
             strlcpy(p_buf->nap_name, p_nap_info->p_srv_name, BTA_SERVICE_NAME_LEN);
-        }
-        else
-        {
+        } else {
             p_buf->nap_name[0] = 0;
         }
 
@@ -200,7 +188,8 @@ void BTA_PanDisable(void)
 {
 }
 
-void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info, tBTA_PAN_ROLE_INFO *p_gn_info,
+void BTA_PanSetRole(tBTA_PAN_ROLE role, tBTA_PAN_ROLE_INFO *p_user_info,
+                    tBTA_PAN_ROLE_INFO *p_gn_info,
                     tBTA_PAN_ROLE_INFO *p_nap_info)
 {
     UNUSED(role);

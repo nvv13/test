@@ -20,6 +20,20 @@
   2)Add sta list monitor task*/
 static tls_os_timer_t *sta_monitor_tim = NULL;
 static u32 totalstanum = 0;
+/*mac that not allowed to join soft ap, you can change it.*/
+unsigned char blackmac[6] = {0x44,0xc3,0x46,0x41,0x71,0x1f};
+
+static u32 delblackstatimeout = 60;
+static u32 delcnt = 0;
+
+static u32 addrefusecnt = 0;
+static u32 addrefusecnttimeout = 60;
+
+#define ADD_BLACK_STATE  0
+#define DEL_BLACK_STATE 1
+static u32 blackstate = DEL_BLACK_STATE;
+
+
 static void demo_monitor_stalist_tim(void *ptmr, void *parg)
 {
     u8 *stabuf = NULL;
@@ -28,16 +42,55 @@ static void demo_monitor_stalist_tim(void *ptmr, void *parg)
     stabuf = tls_mem_alloc(1024);
     if (stabuf)
     {
+		stanum = 0;
+    	memset(stabuf, 0, 1024);		
         tls_wifi_get_authed_sta_info(&stanum, stabuf, 1024);
         if (totalstanum != stanum)
         {
-            wm_printf("sta mac:\n");
+            wm_printf("white sta mac:\n");
             for (i = 0; i < stanum ; i++)
             {
                 wm_printf("%M\n", &stabuf[i * 6]);
             }
         }
         totalstanum = stanum;
+		stanum = 0;
+		memset(stabuf, 0, 1024);
+		tls_wifi_softap_get_blackinfo(&stanum, stabuf, 1024);
+        wm_printf("black sta mac:\n");
+        for (i = 0; i < stanum ; i++)
+        {
+           wm_printf("%M\n", &stabuf[i * 6]);
+       	}
+
+		switch (blackstate)
+		{
+			case DEL_BLACK_STATE: /*delete sta's for black list*/
+				delcnt++;
+				if (delcnt > delblackstatimeout)
+				{
+					for (i = 0; i < stanum ; i++)
+					{
+						tls_wifi_softap_del_blacksta(&stabuf[i*6]);
+					}
+					delcnt = 0;
+					blackstate = ADD_BLACK_STATE;
+				}
+			break;
+			case ADD_BLACK_STATE:  /*add station into black list*/
+				addrefusecnt ++;
+				if (addrefusecnt > addrefusecnttimeout)
+				{
+					tls_wifi_softap_add_blacksta(blackmac);
+					tls_wifi_softap_del_station(blackmac);
+					addrefusecnt = 0;
+					blackstate = DEL_BLACK_STATE;
+				}
+			break;
+			default:
+			break;
+		}
+		
         tls_mem_free(stabuf);
         stabuf = NULL;
     }
@@ -50,6 +103,7 @@ int demo_create_softap(u8 *ssid, u8 *key, int chan, int encrypt, int format)
     u8 ret = 0;
     u8 ssid_set = 0;
     u8 wireless_protocol = 0;
+
 
     u8 ssid_len = 0;
     if (!ssid)
@@ -108,6 +162,9 @@ int demo_create_softap(u8 *ssid, u8 *key, int chan, int encrypt, int format)
     ipinfo->netmask[2] = 255;
     ipinfo->netmask[3] = 0;
     MEMCPY(ipinfo->dnsname, "local.wm", sizeof("local.wm"));
+
+	blackstate = DEL_BLACK_STATE;
+	tls_wifi_softap_add_blacksta(blackmac);
 
     ret = tls_wifi_softap_create(apinfo, ipinfo);
     wm_printf("\n ap create %s ! \n", (ret == WM_SUCCESS) ? "Successfully" : "Error");

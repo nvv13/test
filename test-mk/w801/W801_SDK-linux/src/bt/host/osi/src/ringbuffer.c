@@ -22,8 +22,7 @@
 #include "osi/include/allocator.h"
 #include "osi/include/ringbuffer.h"
 
-struct ringbuffer_t
-{
+struct ringbuffer_t {
     size_t total;
     size_t available;
     uint8_t *base;
@@ -42,8 +41,7 @@ ringbuffer_t *ringbuffer_init(const size_t size)
 
 void ringbuffer_free(ringbuffer_t *rb)
 {
-    if(rb != NULL)
-    {
+    if(rb != NULL) {
         GKI_freebuf(rb->base);
     }
 
@@ -67,17 +65,14 @@ size_t ringbuffer_insert(ringbuffer_t *rb, const uint8_t *p, size_t length)
     assert(rb);
     assert(p);
 
-    if(length > ringbuffer_available(rb))
-    {
+    if(length > ringbuffer_available(rb)) {
         length = ringbuffer_available(rb);
     }
 
-    for(size_t i = 0; i != length; ++i)
-    {
+    for(size_t i = 0; i != length; ++i) {
         *rb->tail++ = *p++;
 
-        if(rb->tail >= (rb->base + rb->total))
-        {
+        if(rb->tail >= (rb->base + rb->total)) {
             rb->tail = rb->base;
         }
     }
@@ -90,15 +85,13 @@ size_t ringbuffer_delete(ringbuffer_t *rb, size_t length)
 {
     assert(rb);
 
-    if(length > ringbuffer_size(rb))
-    {
+    if(length > ringbuffer_size(rb)) {
         length = ringbuffer_size(rb);
     }
 
     rb->head += length;
 
-    if(rb->head >= (rb->base + rb->total))
-    {
+    if(rb->head >= (rb->base + rb->total)) {
         rb->head -= rb->total;
     }
 
@@ -113,14 +106,13 @@ size_t ringbuffer_peek(const ringbuffer_t *rb, int offset, uint8_t *p, size_t le
     assert(offset >= 0);
     assert((size_t)offset <= ringbuffer_size(rb));
     uint8_t *b = ((rb->head - rb->base + offset) % rb->total) + rb->base;
-    const size_t bytes_to_copy = (offset + length > ringbuffer_size(rb)) ? ringbuffer_size(rb) - offset : length;
+    const size_t bytes_to_copy = (offset + length > ringbuffer_size(rb)) ? ringbuffer_size(
+            rb) - offset : length;
 
-    for(size_t copied = 0; copied < bytes_to_copy; ++copied)
-    {
+    for(size_t copied = 0; copied < bytes_to_copy; ++copied) {
         *p++ = *b++;
 
-        if(b >= (rb->base + rb->total))
-        {
+        if(b >= (rb->base + rb->total)) {
             b = rb->base;
         }
     }
@@ -135,8 +127,7 @@ size_t ringbuffer_pop(ringbuffer_t *rb, uint8_t *p, size_t length)
     const size_t copied = ringbuffer_peek(rb, 0, p, length);
     rb->head += copied;
 
-    if(rb->head >= (rb->base + rb->total))
-    {
+    if(rb->head >= (rb->base + rb->total)) {
         rb->head -= rb->total;
     }
 

@@ -30,7 +30,7 @@
 #include "btm_api.h"
 
 #if BLE_INCLUDED == TRUE
-    #include "btm_ble_api.h"
+#include "btm_ble_api.h"
 #endif
 
 /*****************************************************************************
@@ -86,15 +86,15 @@ typedef uint8_t tBTA_STATUS;
 #define BTA_PCE_SERVICE_ID      28          /* PhoneBook Access Client*/
 #define BTA_SDP_SERVICE_ID      29          /* SDP Search*/
 #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
-    /* BLE profile service ID */
-    #define BTA_BLE_SERVICE_ID      30          /* GATT profile */
+/* BLE profile service ID */
+#define BTA_BLE_SERVICE_ID      30          /* GATT profile */
 
-    #define BTA_USER_SERVICE_ID     31          /* User requested UUID */
+#define BTA_USER_SERVICE_ID     31          /* User requested UUID */
 
-    #define BTA_MAX_SERVICE_ID      32
+#define BTA_MAX_SERVICE_ID      32
 #else
-    #define BTA_USER_SERVICE_ID     30          /* User requested UUID */
-    #define BTA_MAX_SERVICE_ID      31
+#define BTA_USER_SERVICE_ID     30          /* User requested UUID */
+#define BTA_MAX_SERVICE_ID      31
 #endif
 /* service IDs (BTM_SEC_SERVICE_FIRST_EMPTY + 1) to (BTM_SEC_MAX_SERVICES - 1)
  * are used by BTA JV */
@@ -135,23 +135,22 @@ typedef uint8_t tBTA_SERVICE_ID;
 #define BTA_PCE_SERVICE_MASK        0x10000000  /* Phone Book Client */
 
 #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
-    #define BTA_BLE_SERVICE_MASK        0x20000000  /* GATT based service */
-    #define BTA_USER_SERVICE_MASK       0x40000000  /* Message Notification Profile */
+#define BTA_BLE_SERVICE_MASK        0x20000000  /* GATT based service */
+#define BTA_USER_SERVICE_MASK       0x40000000  /* Message Notification Profile */
 #else
-    #define BTA_USER_SERVICE_MASK       0x20000000  /* Message Notification Profile */
+#define BTA_USER_SERVICE_MASK       0x20000000  /* Message Notification Profile */
 #endif
 
 #if BLE_INCLUDED == TRUE && BTA_GATT_INCLUDED == TRUE
-    #define BTA_ALL_SERVICE_MASK        0x3FFFFFFF  /* All services supported by BTA. */
+#define BTA_ALL_SERVICE_MASK        0x3FFFFFFF  /* All services supported by BTA. */
 #else
-    #define BTA_ALL_SERVICE_MASK        0x1FFFFFFF  /* All services supported by BTA. */
+#define BTA_ALL_SERVICE_MASK        0x1FFFFFFF  /* All services supported by BTA. */
 #endif
 
 typedef uint32_t tBTA_SERVICE_MASK;
 
 /* extended service mask, including mask with one or more GATT UUID */
-typedef struct
-{
+typedef struct {
     tBTA_SERVICE_MASK   srvc_mask;
     uint8_t               num_uuid;
     tBT_UUID            *p_uuid;
@@ -182,18 +181,19 @@ typedef uint16_t tBTA_SEC;
 #define BTA_DM_GENERAL_DISC     BTM_GENERAL_DISCOVERABLE    /* General discoverable. */
 #define BTA_DM_LIMITED_DISC     BTM_LIMITED_DISCOVERABLE    /* Limited discoverable. */
 #if ((defined BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
-    #define BTA_DM_BLE_NON_DISCOVERABLE        BTM_BLE_NON_DISCOVERABLE        /* Device is not LE discoverable */
-    #define BTA_DM_BLE_GENERAL_DISCOVERABLE    BTM_BLE_GENERAL_DISCOVERABLE    /* Device is LE General discoverable */
-    #define BTA_DM_BLE_LIMITED_DISCOVERABLE    BTM_BLE_LIMITED_DISCOVERABLE    /* Device is LE Limited discoverable */
+#define BTA_DM_BLE_NON_DISCOVERABLE        BTM_BLE_NON_DISCOVERABLE        /* Device is not LE discoverable */
+#define BTA_DM_BLE_GENERAL_DISCOVERABLE    BTM_BLE_GENERAL_DISCOVERABLE    /* Device is LE General discoverable */
+#define BTA_DM_BLE_LIMITED_DISCOVERABLE    BTM_BLE_LIMITED_DISCOVERABLE    /* Device is LE Limited discoverable */
 #endif
-typedef uint16_t tBTA_DM_DISC;        /* this discoverability mode is a bit mask among BR mode and LE mode */
+typedef uint16_t
+tBTA_DM_DISC;        /* this discoverability mode is a bit mask among BR mode and LE mode */
 
 /* Connectable Modes */
 #define BTA_DM_NON_CONN         BTM_NON_CONNECTABLE         /* Device is not connectable. */
 #define BTA_DM_CONN             BTM_CONNECTABLE             /* Device is connectable. */
 #if ((defined BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
-    #define BTA_DM_BLE_NON_CONNECTABLE      BTM_BLE_NON_CONNECTABLE     /* Device is LE non-connectable. */
-    #define BTA_DM_BLE_CONNECTABLE          BTM_BLE_CONNECTABLE         /* Device is LE connectable. */
+#define BTA_DM_BLE_NON_CONNECTABLE      BTM_BLE_NON_CONNECTABLE     /* Device is LE non-connectable. */
+#define BTA_DM_BLE_CONNECTABLE          BTM_BLE_CONNECTABLE         /* Device is LE connectable. */
 #endif
 
 typedef uint16_t tBTA_DM_CONN;
@@ -217,9 +217,9 @@ typedef tBT_TRANSPORT tBTA_TRANSPORT;
 #define BTA_DM_LIMITED_INQUIRY  BTM_LIMITED_INQUIRY         /* Perform limited inquiry. */
 
 #if ((defined BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
-    #define BTA_BLE_INQUIRY_NONE    BTM_BLE_INQUIRY_NONE
-    #define BTA_BLE_GENERAL_INQUIRY BTM_BLE_GENERAL_INQUIRY      /* Perform LE general inquiry. */
-    #define BTA_BLE_LIMITED_INQUIRY BTM_BLE_LIMITED_INQUIRY      /* Perform LE limited inquiry. */
+#define BTA_BLE_INQUIRY_NONE    BTM_BLE_INQUIRY_NONE
+#define BTA_BLE_GENERAL_INQUIRY BTM_BLE_GENERAL_INQUIRY      /* Perform LE general inquiry. */
+#define BTA_BLE_LIMITED_INQUIRY BTM_BLE_LIMITED_INQUIRY      /* Perform LE limited inquiry. */
 #endif
 typedef uint8_t tBTA_DM_INQ_MODE;
 
@@ -245,8 +245,7 @@ typedef uint8_t tBTA_AUTH_RESP;
 
 typedef uint8_t tBTA_PREF_ROLES;
 
-enum
-{
+enum {
 
     BTA_DM_NO_SCATTERNET,        /* Device doesn't support scatternet, it might
                                     support "role switch during connection" for
@@ -262,43 +261,41 @@ enum
 
 
 /* Inquiry filter device class condition */
-typedef struct
-{
+typedef struct {
     DEV_CLASS       dev_class;        /* device class of interest */
     DEV_CLASS       dev_class_mask;   /* mask to determine the bits of device class of interest */
 } tBTA_DM_COD_COND;
 
 
 /* Inquiry Filter Condition */
-typedef union
-{
+typedef union {
     BD_ADDR              bd_addr;            /* BD address of  device to filter. */
     tBTA_DM_COD_COND     dev_class_cond;     /* Device class filter condition */
 } tBTA_DM_INQ_COND;
 
 /* Inquiry Parameters */
-typedef struct
-{
+typedef struct {
     tBTA_DM_INQ_MODE    mode;           /* Inquiry mode, limited or general. */
     uint8_t               duration;       /* Inquiry duration in 1.28 sec units. */
-    uint8_t               max_resps;      /* Maximum inquiry responses.  Set to zero for unlimited responses. */
+    uint8_t
+    max_resps;      /* Maximum inquiry responses.  Set to zero for unlimited responses. */
     uint8_t             report_dup;     /* report duplicated inquiry response with higher RSSI value */
     tBTA_DM_INQ_FILT    filter_type;    /* Filter condition type. */
     tBTA_DM_INQ_COND    filter_cond;    /* Filter condition data. */
-    #if (defined(BTA_HOST_INTERLEAVE_SEARCH) && BTA_HOST_INTERLEAVE_SEARCH == TRUE)
-    uint8_t               intl_duration[4];/*duration array storing the interleave scan's time portions*/
-    #endif
+#if (defined(BTA_HOST_INTERLEAVE_SEARCH) && BTA_HOST_INTERLEAVE_SEARCH == TRUE)
+    uint8_t
+    intl_duration[4];/*duration array storing the interleave scan's time portions*/
+#endif
 } tBTA_DM_INQ;
 
-typedef struct
-{
+typedef struct {
     uint8_t   bta_dm_eir_min_name_len;        /* minimum length of local name when it is shortened */
-    #if (BTA_EIR_CANNED_UUID_LIST == TRUE)
+#if (BTA_EIR_CANNED_UUID_LIST == TRUE)
     uint8_t   bta_dm_eir_uuid16_len;          /* length of 16-bit UUIDs */
     uint8_t  *bta_dm_eir_uuid16;              /* 16-bit UUIDs */
-    #else
+#else
     uint32_t  uuid_mask[BTM_EIR_SERVICE_ARRAY_SIZE]; /* mask of UUID list in EIR */
-    #endif
+#endif
     int8_t   *bta_dm_eir_inq_tx_power;        /* Inquiry TX power         */
     uint8_t   bta_dm_eir_flag_len;            /* length of flags in bytes */
     uint8_t  *bta_dm_eir_flags;               /* flags for EIR */
@@ -346,8 +343,7 @@ typedef tBTM_BLE_SERVICE_DATA tBTA_BLE_SERVICE_DATA;
 typedef tBTM_BLE_128SERVICE tBTA_BLE_128SERVICE;
 typedef tBTM_BLE_32SERVICE  tBTA_BLE_32SERVICE;
 
-typedef struct
-{
+typedef struct {
     tBTA_BLE_INT_RANGE      int_range;          /* slave prefered conn interval range */
     tBTA_BLE_MANU           manu;            /* manufacturer data */
     tBTA_BLE_SERVICE        services;        /* 16 bits services */
@@ -390,8 +386,7 @@ typedef uint8_t tBTA_BLE_ADV_EVT;
 typedef uint8_t tBTA_BLE_ADV_TX_POWER;
 
 /* advertising instance parameters */
-typedef struct
-{
+typedef struct {
     uint16_t                  adv_int_min;            /* minimum adv interval */
     uint16_t                  adv_int_max;            /* maximum adv interval */
     tBTA_BLE_ADV_EVT        adv_type;               /* adv event type */
@@ -403,8 +398,7 @@ typedef struct
 /* These are the fields returned in each device adv packet.  It
 ** is returned in the results callback if registered.
 */
-typedef struct
-{
+typedef struct {
     uint8_t               conn_mode;
     tBTA_BLE_AD_MASK    ad_mask;        /* mask of the valid adv data field */
     uint8_t               flag;
@@ -414,30 +408,26 @@ typedef struct
     tBTA_BLE_SERVICE    service;
 } tBTA_BLE_INQ_DATA;
 
-enum
-{
+enum {
     BTA_BLE_BATCH_SCAN_MODE_PASS = 1,
     BTA_BLE_BATCH_SCAN_MODE_ACTI = 2,
     BTA_BLE_BATCH_SCAN_MODE_PASS_ACTI = 3
 };
 typedef uint8_t tBTA_BLE_BATCH_SCAN_MODE;
 
-enum
-{
+enum {
     BTA_BLE_DISCARD_OLD_ITEMS = 0,
     BTA_BLE_DISCARD_LOWER_RSSI_ITEMS = 1
 };
 typedef uint8_t tBTA_BLE_DISCARD_RULE;
 
-enum
-{
+enum {
     BTA_BLE_ADV_SEEN_FIRST_TIME = 0,
     BTA_BLE_ADV_TRACKING_TIMEOUT = 1
 };
 typedef uint8_t tBTA_BLE_ADV_CHANGE_REASON;
 
-enum
-{
+enum {
     BTA_BLE_BATCH_SCAN_ENB_EVT      = 1,
     BTA_BLE_BATCH_SCAN_CFG_STRG_EVT = 2,
     BTA_BLE_BATCH_SCAN_DATA_EVT     = 3,
@@ -464,7 +454,8 @@ typedef uint8_t tBTA_DM_BLE_RSSI_ALERT_TYPE;
 typedef uint8_t     tBTA_DM_BLE_RSSI_ALERT_MASK;
 
 
-typedef void (tBTA_DM_BLE_RSSI_CBACK)(BD_ADDR bd_addr, tBTA_DM_BLE_RSSI_ALERT_TYPE alert_type, int8_t rssi);
+typedef void (tBTA_DM_BLE_RSSI_CBACK)(BD_ADDR bd_addr, tBTA_DM_BLE_RSSI_ALERT_TYPE alert_type,
+                                      int8_t rssi);
 
 /* max number of filter spot for different filter type */
 #define BTA_DM_BLE_MAX_UUID_FILTER     BTM_BLE_MAX_UUID_FILTER    /* 8 */
@@ -476,8 +467,7 @@ typedef void (tBTA_DM_BLE_RSSI_CBACK)(BD_ADDR bd_addr, tBTA_DM_BLE_RSSI_ALERT_TY
 #define BTA_DM_BLE_PF_LOGIC_AND             1
 typedef uint8_t tBTA_DM_BLE_PF_LOGIC_TYPE;
 
-enum
-{
+enum {
     BTA_DM_BLE_SCAN_COND_ADD,
     BTA_DM_BLE_SCAN_COND_DELETE,
     BTA_DM_BLE_SCAN_COND_CLEAR = 2
@@ -485,8 +475,7 @@ enum
 typedef uint8_t tBTA_DM_BLE_SCAN_COND_OP;
 
 /* ADV payload filtering vendor specific call event */
-enum
-{
+enum {
     BTA_BLE_SCAN_PF_ENABLE_EVT = 7,
     BTA_BLE_SCAN_PF_COND_EVT
 };
@@ -503,29 +492,26 @@ enum
 #define BTA_DM_BLE_PF_TYPE_MAX             BTM_BLE_PF_TYPE_MAX
 typedef uint8_t   tBTA_DM_BLE_PF_COND_TYPE;
 
-typedef union
-{
+typedef union {
     uint16_t              uuid16_mask;
     uint32_t              uuid32_mask;
     uint8_t               uuid128_mask[LEN_UUID_128];
 } tBTA_DM_BLE_PF_COND_MASK;
 
-typedef struct
-{
+typedef struct {
     tBLE_BD_ADDR                *p_target_addr;     /* target address, if NULL, generic UUID filter */
     tBT_UUID                    uuid;           /* UUID condition */
     tBTA_DM_BLE_PF_LOGIC_TYPE   cond_logic;    /* AND/OR */
-    tBTA_DM_BLE_PF_COND_MASK    *p_uuid_mask;           /* UUID condition mask, if NULL, match exact as UUID condition */
+    tBTA_DM_BLE_PF_COND_MASK
+    *p_uuid_mask;           /* UUID condition mask, if NULL, match exact as UUID condition */
 } tBTA_DM_BLE_PF_UUID_COND;
 
-typedef struct
-{
+typedef struct {
     uint8_t                   data_len;       /* <= 20 bytes */
     uint8_t                   *p_data;
 } tBTA_DM_BLE_PF_LOCAL_NAME_COND;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  company_id;     /* company ID */
     uint8_t                   data_len;       /* <= 20 bytes */
     uint8_t                   *p_pattern;
@@ -534,8 +520,7 @@ typedef struct
                                                 as data pattern, set to all 0xff, match exact data */
 } tBTA_DM_BLE_PF_MANU_COND;
 
-typedef struct
-{
+typedef struct {
     uint16_t                  uuid;     /* service ID */
     uint8_t                   data_len;       /* <= 20 bytes */
     uint8_t                   *p_pattern;
@@ -543,13 +528,13 @@ typedef struct
                                                 as data pattern, set to all 0xff, match exact data */
 } tBTA_DM_BLE_PF_SRVC_PATTERN_COND;
 
-typedef union
-{
+typedef union {
     tBLE_BD_ADDR                            target_addr;
     tBTA_DM_BLE_PF_LOCAL_NAME_COND             local_name; /* lcoal name filtering */
     tBTA_DM_BLE_PF_MANU_COND                   manu_data;  /* manufactuer data filtering */
     tBTA_DM_BLE_PF_UUID_COND                   srvc_uuid;  /* service UUID filtering */
-    tBTA_DM_BLE_PF_UUID_COND                   solicitate_uuid;   /* solicitated service UUID filtering */
+    tBTA_DM_BLE_PF_UUID_COND
+    solicitate_uuid;   /* solicitated service UUID filtering */
     tBTA_DM_BLE_PF_SRVC_PATTERN_COND           srvc_data;      /* service data pattern */
 } tBTA_DM_BLE_PF_COND_PARAM;
 
@@ -596,15 +581,13 @@ typedef uint8_t tBTA_SIG_STRENGTH_MASK;
 typedef uint8_t tBTA_DM_SEC_EVT;
 
 /* Structure associated with BTA_DM_ENABLE_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR  bd_addr;
     tBTA_STATUS    status;
 } tBTA_DM_ENABLE;
 
 /* Structure associated with BTA_DM_PIN_REQ_EVT */
-typedef struct
-{
+typedef struct {
     /* Note: First 3 data members must be, bd_addr, dev_class, and bd_name in order */
     BD_ADDR         bd_addr;            /* BD address peer device. */
     DEV_CLASS       dev_class;          /* Class of Device */
@@ -662,8 +645,7 @@ typedef tBTM_LE_LENC_KEYS  tBTA_LE_LENC_KEYS  ;
 typedef tBTM_LE_LCSRK_KEYS tBTA_LE_LCSRK_KEYS ;
 typedef tBTM_LE_PID_KEYS   tBTA_LE_PID_KEYS ;
 
-typedef union
-{
+typedef union {
     tBTA_LE_PENC_KEYS   penc_key;       /* received peer encryption key */
     tBTA_LE_PCSRK_KEYS  psrk_key;       /* received peer device SRK */
     tBTA_LE_PID_KEYS    pid_key;        /* peer device ID key */
@@ -676,8 +658,7 @@ typedef union
 #define BTA_BLE_LOCAL_KEY_TYPE_ER         2
 typedef uint8_t tBTA_DM_BLE_LOCAL_KEY_MASK;
 
-typedef struct
-{
+typedef struct {
     BT_OCTET16       ir;
     BT_OCTET16       irk;
     BT_OCTET16       dhk;
@@ -697,22 +678,19 @@ typedef uint8_t tBTA_DM_BLE_CONN_TYPE;
 typedef uint8_t (tBTA_DM_BLE_SEL_CBACK)(BD_ADDR random_bda, uint8_t *p_remote_name);
 
 /* Structure associated with BTA_DM_BLE_SEC_REQ_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;        /* peer address */
     BD_NAME         bd_name;        /* peer device name */
 } tBTA_DM_BLE_SEC_REQ;
 
-typedef struct
-{
+typedef struct {
     BD_ADDR                 bd_addr;        /* peer address */
     tBTM_LE_KEY_TYPE        key_type;
     tBTM_LE_KEY_VALUE       *p_key_value;
 } tBTA_DM_BLE_KEY;
 
 /* Structure associated with BTA_DM_AUTH_CMPL_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;            /* BD address peer device. */
     BD_NAME         bd_name;            /* Name of peer device. */
     uint8_t         key_present;        /* Valid link key value in key element */
@@ -726,8 +704,7 @@ typedef struct
 
 
 /* Structure associated with BTA_DM_AUTHORIZE_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;            /* BD address peer device. */
     BD_NAME         bd_name;            /* Name of peer device. */
     tBTA_SERVICE_ID service;            /* Service ID to authorize. */
@@ -735,35 +712,31 @@ typedef struct
 } tBTA_DM_AUTHORIZE;
 
 /* Structure associated with BTA_DM_LINK_UP_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;            /* BD address peer device. */
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_TRANSPORT  link_type;
-    #endif
+#endif
 } tBTA_DM_LINK_UP;
 
 /* Structure associated with BTA_DM_LINK_DOWN_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;            /* BD address peer device. */
     uint8_t           status;             /* connection open/closed */
     uint8_t         is_removed;         /* TRUE if device is removed when link is down */
-    #if BLE_INCLUDED == TRUE
+#if BLE_INCLUDED == TRUE
     tBTA_TRANSPORT  link_type;
-    #endif
+#endif
 } tBTA_DM_LINK_DOWN;
 
 /* Structure associated with BTA_DM_ROLE_CHG_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;            /* BD address peer device. */
     uint8_t           new_role;           /* the new connection role */
 } tBTA_DM_ROLE_CHG;
 
 /* Structure associated with BTA_DM_BUSY_LEVEL_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           level;     /* when paging or inquiring, level is 10.
                                     Otherwise, the number of ACL links */
     uint8_t           level_flags; /* indicates individual flags */
@@ -774,7 +747,7 @@ typedef struct
 #define BTA_IO_CAP_IN       BTM_IO_CAP_IN       /* 2 KeyboardOnly */
 #define BTA_IO_CAP_NONE     BTM_IO_CAP_NONE     /* 3 NoInputNoOutput */
 #if BLE_INCLUDED == TRUE && SMP_INCLUDED == TRUE
-    #define BTA_IO_CAP_KBDISP   BTM_IO_CAP_KBDISP   /* 4 Keyboard display */
+#define BTA_IO_CAP_KBDISP   BTM_IO_CAP_KBDISP   /* 4 Keyboard display */
 #endif
 typedef tBTM_IO_CAP     tBTA_IO_CAP;
 
@@ -813,13 +786,13 @@ typedef tBTM_LE_AUTH_REQ       tBTA_LE_AUTH_REQ;       /* combination of the abo
 typedef tBTM_OOB_DATA   tBTA_OOB_DATA;
 
 /* Structure associated with BTA_DM_SP_CFM_REQ_EVT */
-typedef struct
-{
+typedef struct {
     /* Note: First 3 data members must be, bd_addr, dev_class, and bd_name in order */
     BD_ADDR         bd_addr;        /* peer address */
     DEV_CLASS       dev_class;      /* peer CoD */
     BD_NAME         bd_name;        /* peer device name */
-    uint32_t          num_val;        /* the numeric value for comparison. If just_works, do not show this number to UI */
+    uint32_t
+    num_val;        /* the numeric value for comparison. If just_works, do not show this number to UI */
     uint8_t         just_works;     /* TRUE, if "Just Works" association model */
     tBTA_AUTH_REQ   loc_auth_req;   /* Authentication required for local device */
     tBTA_AUTH_REQ   rmt_auth_req;   /* Authentication required for peer device */
@@ -827,8 +800,7 @@ typedef struct
     tBTA_AUTH_REQ   rmt_io_caps;    /* IO Capabilities of remote device */
 } tBTA_DM_SP_CFM_REQ;
 
-enum
-{
+enum {
     BTA_SP_KEY_STARTED,         /* passkey entry started */
     BTA_SP_KEY_ENTERED,         /* passkey digit entered */
     BTA_SP_KEY_ERASED,          /* passkey digit erased */
@@ -838,25 +810,23 @@ enum
 typedef uint8_t   tBTA_SP_KEY_TYPE;
 
 /* Structure associated with BTA_DM_SP_KEYPRESS_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR             bd_addr;        /* peer address */
     tBTA_SP_KEY_TYPE   notif_type;
 } tBTA_DM_SP_KEY_PRESS;
 
 /* Structure associated with BTA_DM_SP_KEY_NOTIF_EVT */
-typedef struct
-{
+typedef struct {
     /* Note: First 3 data members must be, bd_addr, dev_class, and bd_name in order */
     BD_ADDR         bd_addr;        /* peer address */
     DEV_CLASS       dev_class;      /* peer CoD */
     BD_NAME         bd_name;        /* peer device name */
-    uint32_t          passkey;        /* the numeric value for comparison. If just_works, do not show this number to UI */
+    uint32_t
+    passkey;        /* the numeric value for comparison. If just_works, do not show this number to UI */
 } tBTA_DM_SP_KEY_NOTIF;
 
 /* Structure associated with BTA_DM_SP_RMT_OOB_EVT */
-typedef struct
-{
+typedef struct {
     /* Note: First 3 data members must be, bd_addr, dev_class, and bd_name in order */
     BD_ADDR         bd_addr;        /* peer address */
     DEV_CLASS       dev_class;      /* peer CoD */
@@ -864,14 +834,12 @@ typedef struct
 } tBTA_DM_SP_RMT_OOB;
 
 /* Structure associated with BTA_DM_BOND_CANCEL_CMPL_EVT */
-typedef struct
-{
+typedef struct {
     tBTA_STATUS     result;    /* TRUE of bond cancel succeeded, FALSE if failed. */
 } tBTA_DM_BOND_CANCEL_CMPL;
 
 /* Union of all security callback structures */
-typedef union
-{
+typedef union {
     tBTA_DM_ENABLE      enable;         /* BTA enabled */
     tBTA_DM_PIN_REQ     pin_req;        /* PIN request. */
     tBTA_DM_AUTH_CMPL   auth_cmpl;      /* Authentication complete indication. */
@@ -954,8 +922,7 @@ typedef uint16_t tBTA_DM_BLE_PF_TIMEOUT;
 typedef uint8_t  tBTA_DM_BLE_PF_TIMEOUT_CNT;
 typedef uint16_t tBTA_DM_BLE_PF_ADV_TRACK_ENTRIES;
 
-typedef struct
-{
+typedef struct {
     tBTA_DM_BLE_PF_FEAT_SEL feat_seln;
     tBTA_DM_BLE_PF_LIST_LOGIC_TYPE list_logic_type;
     tBTA_DM_BLE_PF_FILT_LOGIC_TYPE filt_logic_type;
@@ -982,42 +949,39 @@ typedef uint8_t tBTA_DM_SEARCH_EVT;
 #define BTA_DM_INQ_RES_IGNORE_RSSI      BTM_INQ_RES_IGNORE_RSSI /* 0x7f RSSI value not supplied (ignore it) */
 
 /* Structure associated with BTA_DM_INQ_RES_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR         bd_addr;                /* BD address peer device. */
     DEV_CLASS       dev_class;              /* Device class of peer device. */
-    uint8_t         remt_name_not_required; /* Application sets this flag if it already knows the name of the device */
+    uint8_t
+    remt_name_not_required; /* Application sets this flag if it already knows the name of the device */
     /* If the device name is known to application BTA skips the remote name request */
     uint8_t         is_limited;             /* TRUE, if the limited inquiry bit is set in the CoD */
     int8_t            rssi;                   /* The rssi value */
     uint8_t           *p_eir;                 /* received EIR */
-    #if (BLE_INCLUDED == TRUE)
+#if (BLE_INCLUDED == TRUE)
     uint8_t               inq_result_type;
     uint8_t               ble_addr_type;
     tBTM_BLE_EVT_TYPE   ble_evt_type;
     tBT_DEVICE_TYPE     device_type;
     uint8_t               flag;
-    #endif
+#endif
 
 } tBTA_DM_INQ_RES;
 
 /* Structure associated with BTA_DM_INQ_CMPL_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           num_resps;          /* Number of inquiry responses. */
 } tBTA_DM_INQ_CMPL;
 
 /* Structure associated with BTA_DM_DI_DISC_CMPL_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR             bd_addr;        /* BD address peer device. */
     uint8_t               num_record;     /* Number of DI record */
     tBTA_STATUS         result;
 } tBTA_DM_DI_DISC_CMPL;
 
 /* Structure associated with BTA_DM_DISC_RES_EVT */
-typedef struct
-{
+typedef struct {
     BD_ADDR             bd_addr;        /* BD address peer device. */
     BD_NAME             bd_name;        /* Name of peer device. */
     tBTA_SERVICE_MASK   services;       /* Services found on peer device. */
@@ -1030,8 +994,7 @@ typedef struct
 } tBTA_DM_DISC_RES;
 
 /* Structure associated with tBTA_DM_DISC_BLE_RES */
-typedef struct
-{
+typedef struct {
     BD_ADDR             bd_addr;        /* BD address peer device. */
     BD_NAME             bd_name;        /* Name of peer device. */
     tBT_UUID            service;        /* GATT based Services UUID found on peer device. */
@@ -1039,8 +1002,7 @@ typedef struct
 
 
 /* Union of all search callback structures */
-typedef union
-{
+typedef union {
     tBTA_DM_INQ_RES     inq_res;        /* Inquiry result for a peer device. */
     tBTA_DM_INQ_CMPL    inq_cmpl;       /* Inquiry complete. */
     tBTA_DM_DISC_RES    disc_res;       /* Discovery result for a peer device. */
@@ -1157,48 +1119,48 @@ typedef uint8_t tBTA_DM_PM_ACTION;
 #define BTA_DM_PM_NUM_EVTS      9
 
 #ifndef BTA_DM_PM_PARK_IDX
-    #define BTA_DM_PM_PARK_IDX      5 /* the actual index to bta_dm_pm_md[] for PARK mode */
+#define BTA_DM_PM_PARK_IDX      5 /* the actual index to bta_dm_pm_md[] for PARK mode */
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_A2DP_IDX
-    #define BTA_DM_PM_SNIFF_A2DP_IDX      BTA_DM_PM_SNIFF
+#define BTA_DM_PM_SNIFF_A2DP_IDX      BTA_DM_PM_SNIFF
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_HD_IDLE_IDX
-    #define BTA_DM_PM_SNIFF_HD_IDLE_IDX   BTA_DM_PM_SNIFF2
+#define BTA_DM_PM_SNIFF_HD_IDLE_IDX   BTA_DM_PM_SNIFF2
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_SCO_OPEN_IDX
-    #define BTA_DM_PM_SNIFF_SCO_OPEN_IDX  BTA_DM_PM_SNIFF3
+#define BTA_DM_PM_SNIFF_SCO_OPEN_IDX  BTA_DM_PM_SNIFF3
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_HD_ACTIVE_IDX
-    #define BTA_DM_PM_SNIFF_HD_ACTIVE_IDX BTA_DM_PM_SNIFF4
+#define BTA_DM_PM_SNIFF_HD_ACTIVE_IDX BTA_DM_PM_SNIFF4
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_HH_OPEN_IDX
-    #define BTA_DM_PM_SNIFF_HH_OPEN_IDX BTA_DM_PM_SNIFF2
+#define BTA_DM_PM_SNIFF_HH_OPEN_IDX BTA_DM_PM_SNIFF2
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_HH_ACTIVE_IDX
-    #define BTA_DM_PM_SNIFF_HH_ACTIVE_IDX BTA_DM_PM_SNIFF2
+#define BTA_DM_PM_SNIFF_HH_ACTIVE_IDX BTA_DM_PM_SNIFF2
 #endif
 
 #ifndef BTA_DM_PM_SNIFF_HH_IDLE_IDX
-    #define BTA_DM_PM_SNIFF_HH_IDLE_IDX BTA_DM_PM_SNIFF2
+#define BTA_DM_PM_SNIFF_HH_IDLE_IDX BTA_DM_PM_SNIFF2
 #endif
 
 
 #ifndef BTA_DM_PM_HH_OPEN_DELAY
-    #define BTA_DM_PM_HH_OPEN_DELAY 30000
+#define BTA_DM_PM_HH_OPEN_DELAY 30000
 #endif
 
 #ifndef BTA_DM_PM_HH_ACTIVE_DELAY
-    #define BTA_DM_PM_HH_ACTIVE_DELAY 30000
+#define BTA_DM_PM_HH_ACTIVE_DELAY 30000
 #endif
 
 #ifndef BTA_DM_PM_HH_IDLE_DELAY
-    #define BTA_DM_PM_HH_IDLE_DELAY 30000
+#define BTA_DM_PM_HH_IDLE_DELAY 30000
 #endif
 
 /* The Sniff Parameters defined below must be ordered from highest
@@ -1208,52 +1170,52 @@ typedef uint8_t tBTA_DM_PM_ACTION;
  * must insure that order is maintained.
  */
 #ifndef BTA_DM_PM_SNIFF_MAX
-    #define BTA_DM_PM_SNIFF_MAX      800
-    #define BTA_DM_PM_SNIFF_MIN      400
-    #define BTA_DM_PM_SNIFF_ATTEMPT  4
-    #define BTA_DM_PM_SNIFF_TIMEOUT  1
+#define BTA_DM_PM_SNIFF_MAX      800
+#define BTA_DM_PM_SNIFF_MIN      400
+#define BTA_DM_PM_SNIFF_ATTEMPT  4
+#define BTA_DM_PM_SNIFF_TIMEOUT  1
 #endif
 
 #ifndef BTA_DM_PM_SNIFF1_MAX
-    #define BTA_DM_PM_SNIFF1_MAX     400
-    #define BTA_DM_PM_SNIFF1_MIN     200
-    #define BTA_DM_PM_SNIFF1_ATTEMPT 4
-    #define BTA_DM_PM_SNIFF1_TIMEOUT 1
+#define BTA_DM_PM_SNIFF1_MAX     400
+#define BTA_DM_PM_SNIFF1_MIN     200
+#define BTA_DM_PM_SNIFF1_ATTEMPT 4
+#define BTA_DM_PM_SNIFF1_TIMEOUT 1
 #endif
 
 #ifndef BTA_DM_PM_SNIFF2_MAX
-    #define BTA_DM_PM_SNIFF2_MAX     180
-    #define BTA_DM_PM_SNIFF2_MIN     150
-    #define BTA_DM_PM_SNIFF2_ATTEMPT 4
-    #define BTA_DM_PM_SNIFF2_TIMEOUT 1
+#define BTA_DM_PM_SNIFF2_MAX     180
+#define BTA_DM_PM_SNIFF2_MIN     150
+#define BTA_DM_PM_SNIFF2_ATTEMPT 4
+#define BTA_DM_PM_SNIFF2_TIMEOUT 1
 #endif
 
 #ifndef BTA_DM_PM_SNIFF3_MAX
-    #define BTA_DM_PM_SNIFF3_MAX     150
-    #define BTA_DM_PM_SNIFF3_MIN     50
-    #define BTA_DM_PM_SNIFF3_ATTEMPT 4
-    #define BTA_DM_PM_SNIFF3_TIMEOUT 1
+#define BTA_DM_PM_SNIFF3_MAX     150
+#define BTA_DM_PM_SNIFF3_MIN     50
+#define BTA_DM_PM_SNIFF3_ATTEMPT 4
+#define BTA_DM_PM_SNIFF3_TIMEOUT 1
 #endif
 
 #ifndef BTA_DM_PM_SNIFF4_MAX
-    #define BTA_DM_PM_SNIFF4_MAX     54
-    #define BTA_DM_PM_SNIFF4_MIN     30
-    #define BTA_DM_PM_SNIFF4_ATTEMPT 4
-    #define BTA_DM_PM_SNIFF4_TIMEOUT 1
+#define BTA_DM_PM_SNIFF4_MAX     54
+#define BTA_DM_PM_SNIFF4_MIN     30
+#define BTA_DM_PM_SNIFF4_ATTEMPT 4
+#define BTA_DM_PM_SNIFF4_TIMEOUT 1
 #endif
 
 #ifndef BTA_DM_PM_SNIFF5_MAX
-    #define BTA_DM_PM_SNIFF5_MAX     36
-    #define BTA_DM_PM_SNIFF5_MIN     30
-    #define BTA_DM_PM_SNIFF5_ATTEMPT 2
-    #define BTA_DM_PM_SNIFF5_TIMEOUT 0
+#define BTA_DM_PM_SNIFF5_MAX     36
+#define BTA_DM_PM_SNIFF5_MIN     30
+#define BTA_DM_PM_SNIFF5_ATTEMPT 2
+#define BTA_DM_PM_SNIFF5_TIMEOUT 0
 #endif
 
 #ifndef BTA_DM_PM_PARK_MAX
-    #define BTA_DM_PM_PARK_MAX       800
-    #define BTA_DM_PM_PARK_MIN       400
-    #define BTA_DM_PM_PARK_ATTEMPT   0
-    #define BTA_DM_PM_PARK_TIMEOUT   0
+#define BTA_DM_PM_PARK_MAX       800
+#define BTA_DM_PM_PARK_MIN       400
+#define BTA_DM_PM_PARK_ATTEMPT   0
+#define BTA_DM_PM_PARK_TIMEOUT   0
 #endif
 
 
@@ -1287,7 +1249,7 @@ typedef tSDP_DI_GET_RECORD      tBTA_DI_GET_RECORD;
 typedef tSDP_DISCOVERY_DB       tBTA_DISCOVERY_DB;
 
 #ifndef         BTA_DI_NUM_MAX
-    #define         BTA_DI_NUM_MAX       3
+#define         BTA_DI_NUM_MAX       3
 #endif
 
 /* Device features mask definitions */
@@ -1394,7 +1356,8 @@ extern void BTA_DmSetDeviceName(char *p_name);
 ** Returns          void
 **
 *******************************************************************************/
-extern void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode, uint8_t pairable_mode, uint8_t conn_filter);
+extern void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode,
+                                uint8_t pairable_mode, uint8_t conn_filter);
 
 /*******************************************************************************
 **
@@ -1718,7 +1681,8 @@ extern void BTA_DmBleSecurityGrant(BD_ADDR bd_addr, tBTA_DM_BLE_SEC_GRANT res);
 ** Returns          void
 **
 *******************************************************************************/
-extern void BTA_DmBleSetBgConnType(tBTA_DM_BLE_CONN_TYPE bg_conn_type, tBTA_DM_BLE_SEL_CBACK *p_select_cback);
+extern void BTA_DmBleSetBgConnType(tBTA_DM_BLE_CONN_TYPE bg_conn_type,
+                                   tBTA_DM_BLE_SEL_CBACK *p_select_cback);
 
 /*******************************************************************************
 **
@@ -1862,8 +1826,9 @@ extern void BTA_DmSetBleScanParams(tGATT_IF client_if, uint32_t scan_interval,
 extern void BTA_DmSetBleAdvParams(uint16_t adv_int_min, uint16_t adv_int_max,
                                   tBLE_BD_ADDR *p_dir_bda);
 
-extern void BTA_DmSetBleAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max,uint8_t adv_type, uint8_t own_addr_type,
-										tBTM_BLE_ADV_CHNL_MAP chnl_map, uint8_t afp, uint8_t peer_addr_type, tBLE_BD_ADDR *p_dir_bda);
+extern void BTA_DmSetBleAdvExtParams(uint16_t adv_int_min, uint16_t adv_int_max, uint8_t adv_type,
+                                     uint8_t own_addr_type,
+                                     tBTM_BLE_ADV_CHNL_MAP chnl_map, uint8_t afp, uint8_t peer_addr_type, tBLE_BD_ADDR *p_dir_bda);
 
 extern uint8_t BTA_DmGetBleAdvertiseState();
 extern uint8_t BTA_DmGetBleScanState();
@@ -2046,7 +2011,7 @@ extern void BTA_DmBleSetScanRsp(tBTA_BLE_AD_MASK data_mask,
 ** Returns          None
 **
 *******************************************************************************/
-extern void BTA_DmBleBroadcast(uint8_t start, uint16_t duration,tBTA_BLE_MULTI_ADV_CBACK *p_cback);
+extern void BTA_DmBleBroadcast(uint8_t start, uint16_t duration, tBTA_BLE_MULTI_ADV_CBACK *p_cback);
 
 
 /*******************************************************************************

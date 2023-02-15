@@ -31,15 +31,13 @@
 #define BTGATT_MAX_ATTR_LEN 600
 
 /** Buffer type for unformatted reads/writes */
-typedef struct
-{
+typedef struct {
     uint8_t             value[BTGATT_MAX_ATTR_LEN];
     uint16_t            len;
 } btgatt_unformatted_value_t;
 
 /** Parameters for GATT read operations */
-typedef struct
-{
+typedef struct {
     uint16_t           handle;
     btgatt_unformatted_value_t value;
     uint16_t            value_type;
@@ -47,8 +45,7 @@ typedef struct
 } btgatt_read_params_t;
 
 /** Parameters for GATT write operations */
-typedef struct
-{
+typedef struct {
     btgatt_srvc_id_t    srvc_id;
     btgatt_gatt_id_t    char_id;
     btgatt_gatt_id_t    descr_id;
@@ -56,8 +53,7 @@ typedef struct
 } btgatt_write_params_t;
 
 /** Attribute change notification parameters */
-typedef struct
-{
+typedef struct {
     uint8_t             value[BTGATT_MAX_ATTR_LEN];
     tls_bt_addr_t         bda;
     uint16_t            handle;
@@ -65,8 +61,7 @@ typedef struct
     uint8_t             is_notify;
 } btgatt_notify_params_t;
 
-typedef struct
-{
+typedef struct {
     uint8_t  client_if;
     uint8_t  action;
     uint8_t  filt_index;
@@ -82,8 +77,7 @@ typedef struct
     uint16_t  num_of_tracking_entries;
 } btgatt_filt_param_setup_t;
 
-typedef struct
-{
+typedef struct {
     tls_bt_addr_t        *bda1;
     tls_bt_uuid_t          *uuid1;
     uint16_t            u1;
@@ -94,8 +88,7 @@ typedef struct
 } btgatt_test_params_t;
 
 /* BT GATT client error codes */
-typedef enum
-{
+typedef enum {
     BT_GATTC_COMMAND_SUCCESS = 0,    /* 0  Command succeeded                 */
     BT_GATTC_COMMAND_STARTED,        /* 1  Command started OK.               */
     BT_GATTC_COMMAND_BUSY,           /* 2  Device busy with another command  */
@@ -231,10 +224,10 @@ typedef void (*get_gatt_db_callback)(int conn_id, tls_btgatt_db_element_t *db, i
 typedef void (*services_removed_callback)(int conn_id, uint16_t start_handle, uint16_t end_handle);
 
 /** GATT services were added */
-typedef void (*services_added_callback)(int conn_id, tls_btgatt_db_element_t *added, int added_count);
+typedef void (*services_added_callback)(int conn_id, tls_btgatt_db_element_t *added,
+                                        int added_count);
 
-typedef struct
-{
+typedef struct {
     register_client_callback            register_client_cb;
     scan_result_callback                scan_result_cb;
     connect_callback                    open_cb;
@@ -272,8 +265,7 @@ typedef struct
 
 /** Represents the standard BT-GATT client interface. */
 
-typedef struct
-{
+typedef struct {
     /** Registers a GATT client application with the stack */
     tls_bt_status_t (*register_client)(tls_bt_uuid_t *uuid);
 
@@ -285,11 +277,11 @@ typedef struct
 
     /** Create a connection to a remote LE or dual-mode device */
     tls_bt_status_t (*connect)(int client_if, const tls_bt_addr_t *bd_addr,
-                           uint8_t is_direct, int transport);
+                               uint8_t is_direct, int transport);
 
     /** Disconnect a remote device or cancel a pending connection */
     tls_bt_status_t (*disconnect)(int client_if, const tls_bt_addr_t *bd_addr,
-                              int conn_id);
+                                  int conn_id);
 
     /** Start or stop advertisements to listen for incoming connections */
     tls_bt_status_t (*listen)(int client_if, uint8_t start);
@@ -305,20 +297,20 @@ typedef struct
 
     /** Read a characteristic on a remote device */
     tls_bt_status_t (*read_characteristic)(int conn_id, uint16_t handle,
-                                       int auth_req);
+                                           int auth_req);
 
     /** Write a remote characteristic */
     tls_bt_status_t (*write_characteristic)(int conn_id, uint16_t handle,
-                                        int write_type, int len, int auth_req,
-                                        char *p_value);
+                                            int write_type, int len, int auth_req,
+                                            char *p_value);
 
     /** Read the descriptor for a given characteristic */
     tls_bt_status_t (*read_descriptor)(int conn_id, uint16_t handle, int auth_req);
 
     /** Write a remote descriptor for a given characteristic */
     tls_bt_status_t (*write_descriptor)(int conn_id, uint16_t handle,
-                                    int write_type, int len,
-                                    int auth_req, char *p_value);
+                                        int write_type, int len,
+                                        int auth_req, char *p_value);
 
     /** Execute a prepared write operation */
     tls_bt_status_t (*execute_write)(int conn_id, int execute);
@@ -343,11 +335,11 @@ typedef struct
 
     /** Configure a scan filter condition  */
     tls_bt_status_t (*scan_filter_add_remove)(int client_if, int action, int filt_type,
-                                          int filt_index, int company_id,
-                                          int company_id_mask, const tls_bt_uuid_t *p_uuid,
-                                          const tls_bt_uuid_t *p_uuid_mask, const tls_bt_addr_t *bd_addr,
-                                          char addr_type, int data_len, char *p_data, int mask_len,
-                                          char *p_mask);
+            int filt_index, int company_id,
+            int company_id_mask, const tls_bt_uuid_t *p_uuid,
+            const tls_bt_uuid_t *p_uuid_mask, const tls_bt_addr_t *bd_addr,
+            char addr_type, int data_len, char *p_data, int mask_len,
+            char *p_mask);
 
     /** Clear all scan filter conditions for specific filter index*/
     tls_bt_status_t (*scan_filter_clear)(int client_if, int filt_index);
@@ -360,45 +352,46 @@ typedef struct
 
     /** Set the advertising data or scan response data */
     tls_bt_status_t (*set_adv_data)(int client_if, uint8_t set_scan_rsp, uint8_t include_name,
-                                uint8_t include_txpower, int min_interval, int max_interval, int appearance,
-                                uint16_t manufacturer_len, char *manufacturer_data,
-                                uint16_t service_data_len, char *service_data,
-                                uint16_t service_uuid_len, char *service_uuid);
+                                    uint8_t include_txpower, int min_interval, int max_interval, int appearance,
+                                    uint16_t manufacturer_len, char *manufacturer_data,
+                                    uint16_t service_data_len, char *service_data,
+                                    uint16_t service_uuid_len, char *service_uuid);
 
     /** Configure the MTU for a given connection */
     tls_bt_status_t (*configure_mtu)(int conn_id, int mtu);
 
     /** Request a connection parameter update */
     tls_bt_status_t (*conn_parameter_update)(const tls_bt_addr_t *bd_addr, int min_interval,
-                                         int max_interval, int latency, int timeout);
+            int max_interval, int latency, int timeout);
 
     /** Sets the LE scan interval and window in units of N*0.625 msec */
     tls_bt_status_t (*set_scan_parameters)(int client_if, int scan_interval, int scan_window);
 
     /* Setup the parameters as per spec, user manual specified values and enable multi ADV */
     tls_bt_status_t (*multi_adv_enable)(int client_if, int min_interval, int max_interval, int adv_type,
-                                    int chnl_map, int tx_power, int timeout_s);
+                                        int chnl_map, int tx_power, int timeout_s);
 
     /* Update the parameters as per spec, user manual specified values and restart multi ADV */
     tls_bt_status_t (*multi_adv_update)(int client_if, int min_interval, int max_interval, int adv_type,
-                                    int chnl_map, int tx_power, int timeout_s);
+                                        int chnl_map, int tx_power, int timeout_s);
 
     /* Setup the data for the specified instance */
-    tls_bt_status_t (*multi_adv_set_inst_data)(int client_if, uint8_t set_scan_rsp, uint8_t include_name,
-                                           uint8_t incl_txpower, int appearance, int manufacturer_len,
-                                           char *manufacturer_data, int service_data_len,
-                                           char *service_data, int service_uuid_len, char *service_uuid);
+    tls_bt_status_t (*multi_adv_set_inst_data)(int client_if, uint8_t set_scan_rsp,
+            uint8_t include_name,
+            uint8_t incl_txpower, int appearance, int manufacturer_len,
+            char *manufacturer_data, int service_data_len,
+            char *service_data, int service_uuid_len, char *service_uuid);
 
     /* Disable the multi adv instance */
     tls_bt_status_t (*multi_adv_disable)(int client_if);
 
     /* Configure the batchscan storage */
     tls_bt_status_t (*batchscan_cfg_storage)(int client_if, int batch_scan_full_max,
-                                         int batch_scan_trunc_max, int batch_scan_notify_threshold);
+            int batch_scan_trunc_max, int batch_scan_notify_threshold);
 
     /* Enable batchscan */
     tls_bt_status_t (*batchscan_enb_batch_scan)(int client_if, int scan_mode,
-                                            int scan_interval, int scan_window, int addr_type, int discard_rule);
+            int scan_interval, int scan_window, int addr_type, int discard_rule);
 
     /* Disable batchscan */
     tls_bt_status_t (*batchscan_dis_batch_scan)(int client_if);

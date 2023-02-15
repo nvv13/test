@@ -24,15 +24,13 @@
 
 // The preamble is stored un-encrypted as the first part
 // of the file.
-typedef struct btsnooz_preamble_t
-{
+typedef struct btsnooz_preamble_t {
     uint8_t version;
     uint64_t last_timestamp_ms;
 } __attribute__((__packed__)) btsnooz_preamble_t;
 
 // One header for each HCI packet
-typedef struct btsnooz_header_t
-{
+typedef struct btsnooz_header_t {
     uint16_t length;
     uint16_t packet_length;
     uint32_t delta_time_ms;

@@ -21,8 +21,7 @@
 #include <stdint.h>
 
 // Audio state definitions.
-typedef enum
-{
+typedef enum {
     SCO_STATE_OFF = 0,      // Audio is off.
     SCO_STATE_OFF_TRANSFER, // Closed pending final transfer of audio.
     SCO_STATE_ON,           // Audio is on.
@@ -30,8 +29,7 @@ typedef enum
 } sco_state_t;
 
 // Codec type definitions.
-typedef enum
-{
+typedef enum {
     SCO_CODEC_NONE = 0x0000,
     SCO_CODEC_CVSD = 0x0001,
     SCO_CODEC_MSBC = 0x0002,

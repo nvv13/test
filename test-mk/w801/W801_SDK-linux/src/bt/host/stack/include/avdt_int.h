@@ -34,7 +34,7 @@
 #include "btm_api.h"
 
 #ifndef AVDT_DEBUG
-    #define AVDT_DEBUG  FALSE
+#define AVDT_DEBUG  FALSE
 #endif
 
 /*****************************************************************************
@@ -42,37 +42,36 @@
 *****************************************************************************/
 
 /* channel types */
-enum
-{
+enum {
     AVDT_CHAN_SIG,                  /* signaling channel */
     AVDT_CHAN_MEDIA,                /* media channel */
-    #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
     AVDT_CHAN_REPORT,               /* reporting channel */
-    #endif
+#endif
     AVDT_CHAN_NUM_TYPES
 };
 
 /* protocol service capabilities of this AVDTP implementation */
 /* for now multiplexing will be used only for fragmentation */
 #if ((AVDT_MULTIPLEXING == TRUE) && (AVDT_REPORTING == TRUE))
-    #define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_MUX | AVDT_PSC_REPORT | AVDT_PSC_DELAY_RPT)
-    #define AVDT_LEG_PSC            (AVDT_PSC_TRANS | AVDT_PSC_MUX | AVDT_PSC_REPORT)
+#define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_MUX | AVDT_PSC_REPORT | AVDT_PSC_DELAY_RPT)
+#define AVDT_LEG_PSC            (AVDT_PSC_TRANS | AVDT_PSC_MUX | AVDT_PSC_REPORT)
 #else /* AVDT_MULTIPLEXING && AVDT_REPORTING  */
 
-    #if (AVDT_MULTIPLEXING == TRUE)
-        #define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_MUX | AVDT_PSC_DELAY_RPT)
-        #define AVDT_LEG_PSC            (AVDT_PSC_TRANS | AVDT_PSC_MUX)
-    #else /* AVDT_MULTIPLEXING */
+#if (AVDT_MULTIPLEXING == TRUE)
+#define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_MUX | AVDT_PSC_DELAY_RPT)
+#define AVDT_LEG_PSC            (AVDT_PSC_TRANS | AVDT_PSC_MUX)
+#else /* AVDT_MULTIPLEXING */
 
-        #if (AVDT_REPORTING == TRUE)
-            #define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_REPORT | AVDT_PSC_DELAY_RPT)
-            #define AVDT_LEG_PSC            (AVDT_PSC_TRANS | AVDT_PSC_REPORT)
-        #else /* AVDT_REPORTING  */
-            #define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_DELAY_RPT)
-            #define AVDT_LEG_PSC            (AVDT_PSC_TRANS)
-        #endif /* AVDT_REPORTING  */
+#if (AVDT_REPORTING == TRUE)
+#define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_REPORT | AVDT_PSC_DELAY_RPT)
+#define AVDT_LEG_PSC            (AVDT_PSC_TRANS | AVDT_PSC_REPORT)
+#else /* AVDT_REPORTING  */
+#define AVDT_PSC                (AVDT_PSC_TRANS | AVDT_PSC_DELAY_RPT)
+#define AVDT_LEG_PSC            (AVDT_PSC_TRANS)
+#endif /* AVDT_REPORTING  */
 
-    #endif /* AVDT_MULTIPLEXING */
+#endif /* AVDT_MULTIPLEXING */
 
 #endif /* AVDT_MULTIPLEXING && AVDT_REPORTING  */
 
@@ -112,13 +111,12 @@ enum
 
 /* maximum number of command retransmissions */
 #ifndef AVDT_RET_MAX
-    #define AVDT_RET_MAX            1
+#define AVDT_RET_MAX            1
 #endif
 
 
 /* ccb state machine states */
-enum
-{
+enum {
     AVDT_CCB_IDLE_ST,
     AVDT_CCB_OPENING_ST,
     AVDT_CCB_OPEN_ST,
@@ -126,8 +124,7 @@ enum
 };
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     AVDT_CCB_CHAN_OPEN,
     AVDT_CCB_CHAN_CLOSE,
     AVDT_CCB_CHK_CLOSE,
@@ -170,8 +167,7 @@ enum
 #define AVDT_CCB_IGNORE     AVDT_CCB_NUM_ACTIONS
 
 /* ccb state machine events */
-enum
-{
+enum {
     AVDT_CCB_API_DISCOVER_REQ_EVT,
     AVDT_CCB_API_GETCAP_REQ_EVT,
     AVDT_CCB_API_START_REQ_EVT,
@@ -206,8 +202,7 @@ enum
 /* scb state machine states; these state values are private to this module so
 ** the scb state cannot be read or set by actions functions
 */
-enum
-{
+enum {
     AVDT_SCB_IDLE_ST,
     AVDT_SCB_CONF_ST,
     AVDT_SCB_OPENING_ST,
@@ -217,8 +212,7 @@ enum
 };
 
 /* state machine action enumeration list */
-enum
-{
+enum {
     AVDT_SCB_HDL_ABORT_CMD,
     AVDT_SCB_HDL_ABORT_RSP,
     AVDT_SCB_HDL_CLOSE_CMD,
@@ -242,13 +236,13 @@ enum
     AVDT_SCB_HDL_SUSPEND_CMD,
     AVDT_SCB_HDL_SUSPEND_RSP,
     AVDT_SCB_HDL_TC_CLOSE,
-    #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
     AVDT_SCB_HDL_TC_CLOSE_STO,
-    #endif
+#endif
     AVDT_SCB_HDL_TC_OPEN,
-    #if AVDT_REPORTING == TRUE
+#if AVDT_REPORTING == TRUE
     AVDT_SCB_HDL_TC_OPEN_STO,
-    #endif
+#endif
     AVDT_SCB_SND_DELAY_RPT_REQ,
     AVDT_SCB_HDL_DELAY_RPT_CMD,
     AVDT_SCB_HDL_DELAY_RPT_RSP,
@@ -288,8 +282,7 @@ enum
 #define AVDT_SCB_IGNORE     AVDT_SCB_NUM_ACTIONS
 
 /* scb state machine events */
-enum
-{
+enum {
     AVDT_SCB_API_REMOVE_EVT,
     AVDT_SCB_API_WRITE_REQ_EVT,
     AVDT_SCB_API_GETCONFIG_REQ_EVT,
@@ -342,10 +335,10 @@ enum
 
 /* adaption layer number of stream routing table entries */
 #if AVDT_REPORTING == TRUE
-    /* 2 channels(1 media, 1 report) for each SEP and one for signalling */
-    #define AVDT_NUM_RT_TBL     ((AVDT_NUM_SEPS<<1) + 1)
+/* 2 channels(1 media, 1 report) for each SEP and one for signalling */
+#define AVDT_NUM_RT_TBL     ((AVDT_NUM_SEPS<<1) + 1)
 #else
-    #define AVDT_NUM_RT_TBL     (AVDT_NUM_SEPS + 1)
+#define AVDT_NUM_RT_TBL     (AVDT_NUM_SEPS + 1)
 #endif
 
 /* adaption layer number of transport channel table entries - moved to target.h
@@ -379,8 +372,7 @@ enum
 *****************************************************************************/
 
 /* msg union of all message parameter types */
-typedef union
-{
+typedef union {
     tAVDT_EVT_HDR           hdr;
     tAVDT_EVT_HDR           single;
     tAVDT_SETCONFIG         config_cmd;
@@ -394,37 +386,32 @@ typedef union
 } tAVDT_MSG;
 
 /* data type for AVDT_CCB_API_DISCOVER_REQ_EVT */
-typedef struct
-{
+typedef struct {
     tAVDT_CTRL_CBACK    *p_cback;
     tAVDT_SEP_INFO      *p_sep_info;
     uint8_t               num_seps;
 } tAVDT_CCB_API_DISCOVER;
 
 /* data type for AVDT_CCB_API_GETCAP_REQ_EVT */
-typedef struct
-{
+typedef struct {
     tAVDT_EVT_HDR       single;
     tAVDT_CTRL_CBACK    *p_cback;
     tAVDT_CFG           *p_cfg;
 } tAVDT_CCB_API_GETCAP;
 
 /* data type for AVDT_CCB_API_CONNECT_REQ_EVT */
-typedef struct
-{
+typedef struct {
     tAVDT_CTRL_CBACK    *p_cback;
     uint8_t               sec_mask;
 } tAVDT_CCB_API_CONNECT;
 
 /* data type for AVDT_CCB_API_DISCONNECT_REQ_EVT */
-typedef struct
-{
+typedef struct {
     tAVDT_CTRL_CBACK    *p_cback;
 } tAVDT_CCB_API_DISCONNECT;
 
 /* union associated with ccb state machine events */
-typedef union
-{
+typedef union {
     tAVDT_CCB_API_DISCOVER      discover;
     tAVDT_CCB_API_GETCAP        getcap;
     tAVDT_CCB_API_CONNECT       connect;
@@ -435,8 +422,7 @@ typedef union
 } tAVDT_CCB_EVT;
 
 /* channel control block type */
-typedef struct
-{
+typedef struct {
     BD_ADDR             peer_addr;      /* BD address of peer */
     /*
      * NOTE: idle_ccb_timer, ret_ccb_timer and rsp_ccb_timer are mutually
@@ -456,11 +442,14 @@ typedef struct
     uint8_t             allocated;      /* Whether ccb is allocated */
     uint8_t               state;          /* The CCB state machine state */
     uint8_t             ll_opened;      /* TRUE if LL is opened */
-    uint8_t             proc_busy;      /* TRUE when a discover or get capabilities procedure in progress */
-    uint8_t               proc_param;     /* Procedure parameter; either SEID for get capabilities or number of SEPS for discover */
+    uint8_t
+    proc_busy;      /* TRUE when a discover or get capabilities procedure in progress */
+    uint8_t
+    proc_param;     /* Procedure parameter; either SEID for get capabilities or number of SEPS for discover */
     uint8_t             cong;           /* Whether signaling channel is congested */
     uint8_t               label;          /* Message header "label" (sequence number) */
-    uint8_t             reconn;         /* If TRUE, reinitiate connection after transitioning from CLOSING to IDLE state */
+    uint8_t
+    reconn;         /* If TRUE, reinitiate connection after transitioning from CLOSING to IDLE state */
     uint8_t               ret_count;      /* Command retransmission count */
 } tAVDT_CCB;
 
@@ -468,29 +457,26 @@ typedef struct
 typedef void (*tAVDT_CCB_ACTION)(tAVDT_CCB *p_ccb, tAVDT_CCB_EVT *p_data);
 
 /* type for AVDT_SCB_API_WRITE_REQ_EVT */
-typedef struct
-{
+typedef struct {
     BT_HDR      *p_buf;
     uint32_t      time_stamp;
-    #if AVDT_MULTIPLEXING == TRUE
+#if AVDT_MULTIPLEXING == TRUE
     uint8_t       *p_data;
     uint32_t      data_len;
-    #endif
+#endif
     uint8_t       m_pt;
     tAVDT_DATA_OPT_MASK     opt;
 } tAVDT_SCB_APIWRITE;
 
 /* type for AVDT_SCB_TC_CLOSE_EVT */
-typedef struct
-{
+typedef struct {
     uint8_t           old_tc_state;       /* channel state before closed */
     uint8_t           tcid;               /* TCID  */
     uint8_t           type;               /* channel type */
 } tAVDT_SCB_TC_CLOSE;
 
 /* type for scb event data */
-typedef union
-{
+typedef union {
     tAVDT_MSG           msg;
     tAVDT_SCB_APIWRITE  apiwrite;
     tAVDT_DELAY_RPT     apidelay;
@@ -501,8 +487,7 @@ typedef union
 } tAVDT_SCB_EVT;
 
 /* stream control block type */
-typedef struct
-{
+typedef struct {
     tAVDT_CS        cs;             /* stream creation struct */
     tAVDT_CFG       curr_cfg;       /* current configuration */
     tAVDT_CFG       req_cfg;        /* requested configuration */
@@ -519,22 +504,23 @@ typedef struct
     uint8_t           curr_evt;       /* current event; set only by state machine */
     uint8_t         cong;           /* Whether media transport channel is congested */
     uint8_t           close_code;     /* Error code received in close response */
-    #if AVDT_MULTIPLEXING == TRUE
+#if AVDT_MULTIPLEXING == TRUE
     fixed_queue_t   *frag_q;        /* Queue for outgoing media fragments */
     uint32_t          frag_off;       /* length of already received media fragments */
-    uint32_t          frag_org_len;   /* original length before fragmentation of receiving media packet */
+    uint32_t
+    frag_org_len;   /* original length before fragmentation of receiving media packet */
     uint8_t           *p_next_frag;   /* next fragment to send */
     uint8_t           *p_media_buf;   /* buffer for media packet assigned by AVDT_SetMediaBuf */
-    uint32_t          media_buf_len;  /* length of buffer for media packet assigned by AVDT_SetMediaBuf */
-    #endif
+    uint32_t
+    media_buf_len;  /* length of buffer for media packet assigned by AVDT_SetMediaBuf */
+#endif
 } tAVDT_SCB;
 
 /* type for action functions */
 typedef void (*tAVDT_SCB_ACTION)(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data);
 
 /* adaption layer type for transport channel table */
-typedef struct
-{
+typedef struct {
     uint16_t  peer_mtu;       /* L2CAP mtu of the peer device */
     uint16_t  my_mtu;         /* Our MTU for this channel */
     uint16_t  my_flush_to;    /* Our flush timeout for this channel */
@@ -547,24 +533,21 @@ typedef struct
 } tAVDT_TC_TBL;
 
 /* adaption layer type for stream routing table */
-typedef struct
-{
+typedef struct {
     uint16_t  lcid;           /* L2CAP LCID of the associated transport channel */
     uint8_t   scb_hdl;        /* stream control block associated with this tc */
 } tAVDT_RT_TBL;
 
 
 /* adaption layer control block */
-typedef struct
-{
+typedef struct {
     tAVDT_RT_TBL    rt_tbl[AVDT_NUM_LINKS][AVDT_NUM_RT_TBL];
     tAVDT_TC_TBL    tc_tbl[AVDT_NUM_TC_TBL];
     uint8_t           lcid_tbl[MAX_L2CAP_CHANNELS];   /* map LCID to tc_tbl index */
 } tAVDT_AD;
 
 /* Control block for AVDT */
-typedef struct
-{
+typedef struct {
     tAVDT_REG           rcb;                    /* registration control block */
     tAVDT_CCB           ccb[AVDT_NUM_LINKS];    /* channel control blocks */
     tAVDT_SCB           scb[AVDT_NUM_SEPS];     /* stream control blocks */
@@ -634,7 +617,8 @@ extern tAVDT_SCB *avdt_scb_alloc(tAVDT_CS *p_cs);
 extern void avdt_scb_dealloc(tAVDT_SCB *p_scb, tAVDT_SCB_EVT *p_data);
 extern uint8_t avdt_scb_to_hdl(tAVDT_SCB *p_scb);
 extern tAVDT_SCB *avdt_scb_by_hdl(uint8_t hdl);
-extern uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16_t num_seid, uint8_t *p_err_code);
+extern uint8_t avdt_scb_verify(tAVDT_CCB *p_ccb, uint8_t state, uint8_t *p_seid, uint16_t num_seid,
+                               uint8_t *p_err_code);
 extern void avdt_scb_peer_seid_list(tAVDT_MULTI *p_multi);
 extern uint32_t avdt_scb_gen_ssrc(tAVDT_SCB *p_scb);
 

@@ -50,12 +50,12 @@ static bool tx_cmd_pkts_pending = false;
 //#define SEND_USE_QUEUE
 
 #ifdef SEND_USE_QUEUE
-    static BUFFER_Q tx_q;
+static BUFFER_Q tx_q;
 #endif
 
 
 #ifndef BTHC_DBG
-    #define BTHC_DBG FALSE
+#define BTHC_DBG FALSE
 #endif
 
 
@@ -81,44 +81,45 @@ static void cleanup(void)
 
 static void event_lpm_enable(void *context)
 {
-    #ifdef WM_LPM_ENABLED
+#ifdef WM_LPM_ENABLED
     lpm_enable(true);
-    #endif
+#endif
 }
 
 static void event_lpm_disable(void *context)
 {
-    #ifdef WM_LPM_ENABLED
+#ifdef WM_LPM_ENABLED
     lpm_enable(false);
-    #endif
+#endif
 }
 
 static void event_lpm_wake_device(void *context)
 {
-    #ifdef WM_LPM_ENABLED
+#ifdef WM_LPM_ENABLED
     lpm_wake_assert();
-    #endif
+#endif
 }
 
 static void event_lpm_allow_sleep(void *context)
 {
-    #ifdef WM_LPM_ENABLED
+#ifdef WM_LPM_ENABLED
     lpm_allow_bt_device_sleep();
-    #endif
+#endif
 }
 
 static void event_lpm_idle_timeout(void *context)
 {
-    #ifdef WM_LPM_ENABLED
+#ifdef WM_LPM_ENABLED
     lpm_wake_deassert();
-    #endif
+#endif
 }
-
+#if 0
 static void event_epilog(void *context)
 {
-    vendor_send_command(BT_VND_OP_EPILOG, NULL);
+    //vendor_send_command(BT_VND_OP_EPILOG, NULL);
+    (void)context;
 }
-
+#endif
 static void event_tx_cmd(void *msg)
 {
     HC_BT_HDR *p_msg = (HC_BT_HDR *)msg;
@@ -126,13 +127,10 @@ static void event_tx_cmd(void *msg)
     int event = p_msg->event & MSG_EVT_MASK;
     int sub_event = p_msg->event & MSG_SUB_EVT_MASK;
 
-    if(event == MSG_CTRL_TO_HC_CMD && sub_event == BT_HC_AUDIO_STATE)
-    {
+    if(event == MSG_CTRL_TO_HC_CMD && sub_event == BT_HC_AUDIO_STATE) {
         //vendor_send_command(BT_VND_OP_SET_AUDIO_STATE, p_msg->data);
         BTHCDBG("%s (event: 0x%x, sub_event: 0x%x) >>>>>\n", __func__, event, sub_event);
-    }
-    else
-    {
+    } else {
         BTHCDBG("%s (event: 0x%x, sub_event: 0x%x) not supported\n", __func__, event, sub_event);
     }
 
@@ -154,11 +152,10 @@ void bthc_idle_timeout(void)
 
 static int init(const bt_hc_callbacks_t *p_cb, unsigned char *local_bdaddr)
 {
-    int result;
+    //int result;
     BTHCDBG("%s %s line:%d\n", __FILE__, __FUNCTION__, __LINE__);
 
-    if(p_cb == NULL)
-    {
+    if(p_cb == NULL) {
         BTHCDBG("init failed with no user callbacks!\n");
         return BT_HC_STATUS_FAIL;
     }
@@ -170,20 +167,20 @@ static int init(const bt_hc_callbacks_t *p_cb, unsigned char *local_bdaddr)
     bt_hc_cbacks = (bt_hc_callbacks_t *) p_cb;
     //vendor_open(local_bdaddr);
     //utils_init();
-    #ifdef HCI_USE_MCT
+#ifdef HCI_USE_MCT
     extern tHCI_IF hci_mct_func_table;
     p_hci_if = &hci_mct_func_table;
-    #else
+#else
     extern tHCI_IF hci_h4_func_table;
     p_hci_if = &hci_h4_func_table;
     p_hci_if->init();
-    #endif
-    #ifdef WM_LPM_ENABLED
+#endif
+#ifdef WM_LPM_ENABLED
     lpm_init();
-    #endif
-    #ifdef SEND_USE_QUEUE
+#endif
+#ifdef SEND_USE_QUEUE
     utils_queue_init(&tx_q);
-    #endif
+#endif
     return BT_HC_STATUS_SUCCESS;
 }
 
@@ -220,11 +217,11 @@ static void postload(TRANSAC transac)
 /** Transmit frame */
 static int transmit_buf(TRANSAC transac, char *p_buf, int len)
 {
-    #ifdef SEND_USE_QUEUE
+#ifdef SEND_USE_QUEUE
     utils_enqueue(&tx_q, (HC_BT_HDR *)transac);
-    #else
+#else
     p_hci_if->send((HC_BT_HDR *)transac);
-    #endif
+#endif
     return BT_HC_STATUS_SUCCESS;
 }
 
@@ -232,11 +229,10 @@ static int transmit_buf(TRANSAC transac, char *p_buf, int len)
 /** Configure low power mode wake state */
 static int lpm(bt_hc_low_power_event_t event)
 {
-    #if 1
+#if 1
 
     //printf("lpm--->event:0x%08x\n", event);
-    switch(event)
-    {
+    switch(event) {
         case BT_HC_LPM_DISABLE:
             //thread_post(hc_cb.worker_thread, event_lpm_disable, NULL);
             event_lpm_disable(NULL);
@@ -258,7 +254,7 @@ static int lpm(bt_hc_low_power_event_t event)
             break;
     }
 
-    #endif
+#endif
     return BT_HC_STATUS_SUCCESS;
 }
 
@@ -270,6 +266,7 @@ static void set_power(bt_hc_chip_power_state_t state)
     BTHCDBG("set_power %d\n", state);
     /* Calling vendor-specific part */
     pwr_state = (state == BT_HC_CHIP_PWR_ON) ? BT_VND_PWR_ON : BT_VND_PWR_OFF;
+	UNUSED(pwr_state);
     //vendor_send_command(BT_VND_OP_POWER_CTRL, &pwr_state);
     BTHCDBG("%s (event: %s) >>>>>\n", __func__, "BT_VND_OP_POWER_CTRL");
 }
@@ -281,16 +278,15 @@ static int tx_hc_cmd(TRANSAC transac, char *p_buf, int len)
     return 1;
 }
 
-static const bt_hc_interface_t bluetoothHCLibInterface =
-{
+static const bt_hc_interface_t bluetoothHCLibInterface = {
     sizeof(bt_hc_interface_t),
     init,
     set_power,
     lpm,
     preload,
-    postload,
+    (void *)postload,
     transmit_buf,
-    logging,
+    (void *)logging,
     cleanup,
     tx_hc_cmd,
 };
@@ -311,11 +307,11 @@ const bt_hc_interface_t *bt_hc_get_interface(void)
 
 void bthc_tx(HC_BT_HDR *buf)
 {
-    #ifdef SEND_USE_QUEUE
+#ifdef SEND_USE_QUEUE
     utils_enqueue(&tx_q, buf);
-    #else
+#else
     p_hci_if->send(buf);
-    #endif
+#endif
 }
 
 
@@ -323,7 +319,7 @@ void bthc_tx(HC_BT_HDR *buf)
 int credit_counter = 0;
 void event_tx(void)
 {
-    #ifdef SEND_USE_QUEUE
+#ifdef SEND_USE_QUEUE
     /*
      *  We will go through every packets in the tx queue.
      *  Fine to clear tx_cmd_pkts_pending.
@@ -336,10 +332,8 @@ void event_tx(void)
     utils_lock();
     HC_BT_HDR *p_next_msg = tx_q.p_first;
 
-    while(p_next_msg && sending_msg_count < ARRAY_SIZE(sending_msg_que))
-    {
-        if((p_next_msg->event & MSG_EVT_MASK) == MSG_STACK_TO_HC_HCI_CMD)
-        {
+    while(p_next_msg && sending_msg_count < ARRAY_SIZE(sending_msg_que)) {
+        if((p_next_msg->event & MSG_EVT_MASK) == MSG_STACK_TO_HC_HCI_CMD) {
             /*
              *  if we have used up controller's outstanding HCI command
              *  credits (normally is 1), skip all HCI command packets in
@@ -349,9 +343,9 @@ void event_tx(void)
              *  CommandStatusEvent.
              */
             if(tx_cmd_pkts_pending ||
-                    (sending_hci_cmd_pkts_count >= num_hci_cmd_pkts))
-            {
-                BTHCDBG("tx_pending:%d, shcps:%d, hci_cmd_pkts:%d\n", tx_cmd_pkts_pending, sending_hci_cmd_pkts_count, num_hci_cmd_pkts);
+                    (sending_hci_cmd_pkts_count >= num_hci_cmd_pkts)) {
+                BTHCDBG("tx_pending:%d, shcps:%d, hci_cmd_pkts:%d\n", tx_cmd_pkts_pending,
+                        sending_hci_cmd_pkts_count, num_hci_cmd_pkts);
                 tx_cmd_pkts_pending = true;
                 p_next_msg = utils_getnext(p_next_msg);
                 continue;
@@ -368,39 +362,36 @@ void event_tx(void)
 
     utils_unlock();
 
-    for(i = 0; i < sending_msg_count; i++)
-    {
+    for(i = 0; i < sending_msg_count; i++) {
         p_hci_if->send(sending_msg_que[i]);
     }
 
-    if(tx_cmd_pkts_pending)
-    {
+    if(tx_cmd_pkts_pending) {
         credit_counter++;
         //printf("Used up Tx Cmd credits\n");
     }
 
-    #endif
+#endif
 }
 
 int eventrx = 0;
 void event_rx()
 {
     eventrx++;
-    process_intr_bulk_recv_packet();
+   // process_intr_bulk_recv_packet();
     /*change from skb queue to userial queue*/
-    userial_read_thread(NULL);
-    #ifndef HCI_USE_MCT
+   // userial_read_thread(NULL);
+#ifndef HCI_USE_MCT
     p_hci_if->rcv();
 
-    if(tx_cmd_pkts_pending && num_hci_cmd_pkts > 0)
-    {
+    if(tx_cmd_pkts_pending && num_hci_cmd_pkts > 0) {
         // Got HCI Cmd credits from controller. Send whatever data
         // we have in our tx queue. We can call |event_tx| directly
         // here since we're already on the worker thread.
         event_tx();
     }
 
-    #endif
+#endif
 }
 
 

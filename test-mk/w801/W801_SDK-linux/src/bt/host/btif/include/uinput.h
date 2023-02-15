@@ -561,16 +561,14 @@ extern "C" {
 **  Type definitions and return values
 ********************************************************************************/
 
-struct uinput_id
-{
+struct uinput_id {
     uint16_t bustype;
     uint16_t vendor;
     uint16_t product;
     uint16_t version;
 };
 
-struct uinput_dev
-{
+struct uinput_dev {
     char name[UINPUT_MAX_NAME_SIZE];
     struct uinput_id id;
     int ff_effects_max;
@@ -580,8 +578,7 @@ struct uinput_dev
     int absflat[ABS_MAX + 1];
 };
 
-struct uinput_event
-{
+struct uinput_event {
     struct timeval time;
     uint16_t type;
     uint16_t code;

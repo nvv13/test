@@ -35,7 +35,7 @@
 *****************************************************************************/
 
 #if BTA_DYNAMIC_MEMORY == FALSE
-    tBTA_MCE_CB bta_mce_cb;
+tBTA_MCE_CB bta_mce_cb;
 #endif
 
 /* state machine action enumeration list */
@@ -45,8 +45,7 @@
 typedef void (*tBTA_MCE_ACTION)(tBTA_MCE_MSG *p_data);
 
 /* action function list */
-const tBTA_MCE_ACTION bta_mce_action[] =
-{
+const tBTA_MCE_ACTION bta_mce_action[] = {
     bta_mce_enable,                    /* BTA_MCE_API_ENABLE_EVT */
     bta_mce_get_remote_mas_instances,  /* BTA_MCE_API_GET_REMOTE_MAS_INSTANCES_EVT */
 };
@@ -63,8 +62,7 @@ const tBTA_MCE_ACTION bta_mce_action[] =
 *******************************************************************************/
 uint8_t bta_mce_sm_execute(BT_HDR *p_msg)
 {
-    if(p_msg == NULL)
-    {
+    if(p_msg == NULL) {
         return FALSE;
     }
 
@@ -72,8 +70,7 @@ uint8_t bta_mce_sm_execute(BT_HDR *p_msg)
     uint16_t action = (p_msg->event & 0x00ff);
 
     /* execute action functions */
-    if(action < BTA_MCE_NUM_ACTIONS)
-    {
+    if(action < BTA_MCE_NUM_ACTIONS) {
         (*bta_mce_action[action])((tBTA_MCE_MSG *)p_msg);
         ret = TRUE;
     }

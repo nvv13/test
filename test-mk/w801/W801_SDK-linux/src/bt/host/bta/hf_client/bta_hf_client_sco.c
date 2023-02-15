@@ -33,8 +33,7 @@
                                     BTM_SCO_PKT_TYPES_MASK_NO_2_EV5 | \
                                     BTM_SCO_PKT_TYPES_MASK_NO_3_EV5)
 
-static const tBTM_ESCO_PARAMS bta_hf_client_esco_params[] =
-{
+static const tBTM_ESCO_PARAMS bta_hf_client_esco_params[] = {
     /* SCO CVSD */
     {
         .rx_bw = BTM_64KBITS_RATE,
@@ -75,8 +74,7 @@ static const tBTM_ESCO_PARAMS bta_hf_client_esco_params[] =
     }
 };
 
-enum
-{
+enum {
     BTA_HF_CLIENT_SCO_LISTEN_E,
     BTA_HF_CLIENT_SCO_OPEN_E,          /* open request */
     BTA_HF_CLIENT_SCO_CLOSE_E,         /* close request */
@@ -105,21 +103,17 @@ static uint8_t bta_hf_client_sco_remove(uint8_t only_active)
     tBTM_STATUS status;
     APPL_TRACE_DEBUG("%s %d", __FUNCTION__, only_active);
 
-    if(bta_hf_client_cb.scb.sco_idx != BTM_INVALID_SCO_INDEX)
-    {
+    if(bta_hf_client_cb.scb.sco_idx != BTM_INVALID_SCO_INDEX) {
         status = BTM_RemoveSco(bta_hf_client_cb.scb.sco_idx);
         APPL_TRACE_DEBUG("%s idx 0x%04x, status:0x%x", __FUNCTION__, bta_hf_client_cb.scb.sco_idx, status);
 
-        if(status == BTM_CMD_STARTED)
-        {
+        if(status == BTM_CMD_STARTED) {
             removed_started = TRUE;
         }
         /* If no connection reset the sco handle */
-        else
-            if((status == BTM_SUCCESS) || (status == BTM_UNKNOWN_ADDR))
-            {
-                bta_hf_client_cb.scb.sco_idx = BTM_INVALID_SCO_INDEX;
-            }
+        else if((status == BTM_SUCCESS) || (status == BTM_UNKNOWN_ADDR)) {
+            bta_hf_client_cb.scb.sco_idx = BTM_INVALID_SCO_INDEX;
+        }
     }
 
     return removed_started;
@@ -153,14 +147,14 @@ void bta_hf_client_cback_sco(uint8_t event)
 ** Returns          void
 **
 *******************************************************************************/
-static void bta_hf_client_sco_read_cback (uint16_t sco_idx, BT_HDR *p_data, tBTM_SCO_DATA_FLAG status)
+static void bta_hf_client_sco_read_cback(uint16_t sco_idx, BT_HDR *p_data,
+        tBTM_SCO_DATA_FLAG status)
 {
-    if (status != BTM_SCO_DATA_CORRECT)
-    {
+    if(status != BTM_SCO_DATA_CORRECT) {
         APPL_TRACE_DEBUG("%s: status(%d)", __FUNCTION__, status);
     }
 
-    bta_hf_client_sco_co_in_data (p_data, status);
+    bta_hf_client_sco_co_in_data(p_data, status);
     GKI_freebuf(p_data);
 }
 #endif /* BTM_SCO_HCI_INCLUDED */
@@ -183,17 +177,12 @@ static void bta_hf_client_sco_conn_rsp(tBTM_ESCO_CONN_REQ_EVT_DATA *p_data)
     tBTA_HFP_CODEC_INFO     codec_info = {BTA_HFP_SCO_CODEC_PCM};
     uint32_t              pcm_sample_rate;
 #endif
-
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
 
-    if(bta_hf_client_cb.scb.sco_state == BTA_HF_CLIENT_SCO_LISTEN_ST)
-    {
-        if(p_data->link_type == BTM_LINK_TYPE_SCO)
-        {
+    if(bta_hf_client_cb.scb.sco_state == BTA_HF_CLIENT_SCO_LISTEN_ST) {
+        if(p_data->link_type == BTM_LINK_TYPE_SCO) {
             resp = bta_hf_client_esco_params[0];
-        }
-        else
-        {
+        } else {
             resp = bta_hf_client_esco_params[bta_hf_client_cb.scb.negotiated_codec];
         }
 
@@ -202,15 +191,11 @@ static void bta_hf_client_sco_conn_rsp(tBTM_ESCO_CONN_REQ_EVT_DATA *p_data)
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
         bta_hf_client_co_audio_state(bta_hf_client_cb.scb.sco_idx, SCO_STATE_SETUP, 0);
         pcm_sample_rate = BTA_HFP_SCO_SAMP_RATE_8K;
-
         /* initialize SCO setup, no voice setting for AG, data rate <==> sample rate */
         BTM_ConfigScoPath(bta_hf_client_sco_co_init(pcm_sample_rate, pcm_sample_rate, &codec_info, 0),
-            bta_hf_client_sco_read_cback, NULL, TRUE);
+                          bta_hf_client_sco_read_cback, NULL, TRUE);
 #endif
-
-    }
-    else
-    {
+    } else {
         hci_status = HCI_ERR_HOST_REJECT_DEVICE;
     }
 
@@ -248,8 +233,7 @@ static void bta_hf_client_esco_connreq_cback(tBTM_ESCO_EVT event, tBTM_ESCO_EVT_
 {
     APPL_TRACE_DEBUG("%s %d", __FUNCTION__, event);
 
-    if(event != BTM_ESCO_CONN_REQ_EVT)
-    {
+    if(event != BTM_ESCO_CONN_REQ_EVT) {
         return;
     }
 
@@ -277,16 +261,14 @@ static void bta_hf_client_sco_conn_cback(uint16_t sco_idx)
     rem_bd = BTM_ReadScoBdAddr(sco_idx);
 
     if(rem_bd && bdcmp(bta_hf_client_cb.scb.peer_addr, rem_bd) == 0 &&
-            bta_hf_client_cb.scb.svc_conn && bta_hf_client_cb.scb.sco_idx == sco_idx)
-    {
+            bta_hf_client_cb.scb.svc_conn && bta_hf_client_cb.scb.sco_idx == sco_idx) {
         BT_HDR *p_buf = (BT_HDR *)GKI_getbuf(sizeof(BT_HDR));
         p_buf->event = BTA_HF_CLIENT_SCO_OPEN_EVT;
         p_buf->layer_specific = bta_hf_client_cb.scb.conn_handle;
         bta_sys_sendmsg(p_buf);
     }
     /* no match found; disconnect sco, init sco variables */
-    else
-    {
+    else {
         bta_hf_client_cb.scb.sco_state = BTA_HF_CLIENT_SCO_SHUTDOWN_ST;
         BTM_RemoveSco(sco_idx);
     }
@@ -306,15 +288,14 @@ static void bta_hf_client_sco_disc_cback(uint16_t sco_idx)
 {
     APPL_TRACE_DEBUG("%s %d", __func__, sco_idx);
 
-    if(bta_hf_client_cb.scb.sco_idx == sco_idx)
-    {
+    if(bta_hf_client_cb.scb.sco_idx == sco_idx) {
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
         tBTM_STATUS status = BTM_ConfigScoPath(BTM_SCO_ROUTE_PCM, NULL, NULL, TRUE);
         APPL_TRACE_DEBUG("%s close config status = %d", __FUNCTION__, status);
         UNUSED(status);
         /* SCO clean up here */
         bta_hf_client_sco_co_close();
-#endif    
+#endif
         BT_HDR *p_buf = (BT_HDR *)GKI_getbuf(sizeof(BT_HDR));
         p_buf->event = BTA_HF_CLIENT_SCO_CLOSE_EVT;
         p_buf->layer_specific = bta_hf_client_cb.scb.conn_handle;;
@@ -342,11 +323,10 @@ static void bta_hf_client_sco_create(uint8_t is_orig)
     tBTM_SCO_ROUTE_TYPE sco_route;
     tBTA_HFP_CODEC_INFO codec_info = {BTA_HFP_SCO_CODEC_PCM};
     uint32_t              pcm_sample_rate;
-#endif    
+#endif
 
     /* Make sure this sco handle is not already in use */
-    if(bta_hf_client_cb.scb.sco_idx != BTM_INVALID_SCO_INDEX)
-    {
+    if(bta_hf_client_cb.scb.sco_idx != BTM_INVALID_SCO_INDEX) {
         APPL_TRACE_WARNING("%s: Index 0x%04x already in use", __FUNCTION__,
                            bta_hf_client_cb.scb.sco_idx);
         return;
@@ -355,25 +335,21 @@ static void bta_hf_client_sco_create(uint8_t is_orig)
     params = bta_hf_client_esco_params[1];
 
     /* if initiating set current scb and peer bd addr */
-    if(is_orig)
-    {
+    if(is_orig) {
         /* Attempt to use eSCO if remote host supports HFP >= 1.5 */
-        if(bta_hf_client_cb.scb.peer_version >= HFP_VERSION_1_5 && !bta_hf_client_cb.scb.retry_with_sco_only)
-        {
+        if(bta_hf_client_cb.scb.peer_version >= HFP_VERSION_1_5
+                && !bta_hf_client_cb.scb.retry_with_sco_only) {
             BTM_SetEScoMode(BTM_LINK_TYPE_ESCO, &params);
 
             /* If ESCO or EDR ESCO, retry with SCO only in case of failure */
             if((params.packet_types & BTM_ESCO_LINK_ONLY_MASK)
-                    || !((params.packet_types & ~(BTM_ESCO_LINK_ONLY_MASK | BTM_SCO_LINK_ONLY_MASK)) ^ BTA_HF_CLIENT_NO_EDR_ESCO))
-            {
+                    || !((params.packet_types & ~(BTM_ESCO_LINK_ONLY_MASK | BTM_SCO_LINK_ONLY_MASK)) ^
+                         BTA_HF_CLIENT_NO_EDR_ESCO)) {
                 bta_hf_client_cb.scb.retry_with_sco_only = TRUE;
                 APPL_TRACE_API("Setting retry_with_sco_only to TRUE");
             }
-        }
-        else
-        {
-            if(bta_hf_client_cb.scb.retry_with_sco_only)
-            {
+        } else {
+            if(bta_hf_client_cb.scb.retry_with_sco_only) {
                 APPL_TRACE_API("retrying with SCO only");
             }
 
@@ -383,20 +359,15 @@ static void bta_hf_client_sco_create(uint8_t is_orig)
 
         /* tell sys to stop av if any */
         bta_sys_sco_use(BTA_ID_HS, 1, bta_hf_client_cb.scb.peer_addr);
-
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
         /* Allow any platform specific pre-SCO set up to take place */
         bta_hf_client_co_audio_state(bta_hf_client_cb.scb.sco_idx, SCO_STATE_SETUP, 0);
-
         pcm_sample_rate = BTA_HFP_SCO_SAMP_RATE_8K;
         sco_route = bta_hf_client_sco_co_init(pcm_sample_rate, pcm_sample_rate, &codec_info, 0);
-
         /* initialize SCO setup, no voice setting for AG, data rate <==> sample rate */
         BTM_ConfigScoPath(sco_route, bta_hf_client_sco_read_cback, NULL, TRUE);
 #endif
-    }
-    else
-    {
+    } else {
         bta_hf_client_cb.scb.retry_with_sco_only = FALSE;
     }
 
@@ -405,10 +376,8 @@ static void bta_hf_client_sco_create(uint8_t is_orig)
                            &bta_hf_client_cb.scb.sco_idx, bta_hf_client_sco_conn_cback,
                            bta_hf_client_sco_disc_cback);
 
-    if(status == BTM_CMD_STARTED && !is_orig)
-    {
-        if(!BTM_RegForEScoEvts(bta_hf_client_cb.scb.sco_idx, bta_hf_client_esco_connreq_cback))
-        {
+    if(status == BTM_CMD_STARTED && !is_orig) {
+        if(!BTM_RegForEScoEvts(bta_hf_client_cb.scb.sco_idx, bta_hf_client_esco_connreq_cback)) {
             APPL_TRACE_DEBUG("%s SCO registration success", __FUNCTION__);
         }
     }
@@ -434,51 +403,53 @@ static void bta_hf_client_sco_event(uint8_t event)
     APPL_TRACE_DEBUG("%s state: %d event: %d", __FUNCTION__,
                      bta_hf_client_cb.scb.sco_state, event);
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
-        tBTA_HF_CLIENT_SCB *p_scb = &bta_hf_client_cb.scb;
-        BT_HDR  *p_buf;
+    tBTA_HF_CLIENT_SCB *p_scb = &bta_hf_client_cb.scb;
+    BT_HDR  *p_buf;
 #endif
-
 #if (BTM_SCO_HCI_INCLUDED == TRUE )
-        if (event == BTA_HF_CLIENT_SCO_CI_DATA_E) {
-            uint16_t pkt_offset = 1 + HCI_SCO_PREAMBLE_SIZE;
-            uint16_t len_to_send = 0;
-            //while (true)
-            do
-            {
-                p_buf = GKI_getbuf(sizeof(BT_HDR) + pkt_offset + BTM_SCO_DATA_SIZE_MAX);
-                if (!p_buf) {
-                    APPL_TRACE_WARNING("%s, no mem", __FUNCTION__);
-                    break;
-                }
-    
-                p_buf->offset = pkt_offset;
-                p_buf->len = BTM_SCO_DATA_SIZE_MAX;
-                len_to_send = bta_hf_client_sco_co_out_data(p_buf->data + pkt_offset, BTM_SCO_DATA_SIZE_MAX);
-                if (len_to_send == BTM_SCO_DATA_SIZE_MAX) {
-                    // expect to get the exact size of data from upper layer
-                    if (bta_hf_client_cb.scb.sco_state == BTA_HF_CLIENT_SCO_OPEN_ST) {
-                        tBTM_STATUS write_stat = BTM_WriteScoData(p_scb->sco_idx, p_buf);
-                        if (write_stat != BTM_SUCCESS) {
-                            break;
-                        }
-                    } else {
-                        GKI_freebuf(p_buf);
+
+    if(event == BTA_HF_CLIENT_SCO_CI_DATA_E) {
+        uint16_t pkt_offset = 1 + HCI_SCO_PREAMBLE_SIZE;
+        uint16_t len_to_send = 0;
+
+        //while (true)
+        do {
+            p_buf = GKI_getbuf(sizeof(BT_HDR) + pkt_offset + BTM_SCO_DATA_SIZE_MAX);
+
+            if(!p_buf) {
+                APPL_TRACE_WARNING("%s, no mem", __FUNCTION__);
+                break;
+            }
+
+            p_buf->offset = pkt_offset;
+            p_buf->len = BTM_SCO_DATA_SIZE_MAX;
+            len_to_send = bta_hf_client_sco_co_out_data(p_buf->data + pkt_offset, BTM_SCO_DATA_SIZE_MAX);
+
+            if(len_to_send == BTM_SCO_DATA_SIZE_MAX) {
+                // expect to get the exact size of data from upper layer
+                if(bta_hf_client_cb.scb.sco_state == BTA_HF_CLIENT_SCO_OPEN_ST) {
+                    tBTM_STATUS write_stat = BTM_WriteScoData(p_scb->sco_idx, p_buf);
+
+                    if(write_stat != BTM_SUCCESS) {
+                        break;
                     }
                 } else {
                     GKI_freebuf(p_buf);
-                    break;
                 }
-            }while(0);
-    
-            return;
-        }
+            } else {
+                GKI_freebuf(p_buf);
+                break;
+            }
+        } while(0);
+
+        return;
+    }
+
 #endif
 
-    switch(bta_hf_client_cb.scb.sco_state)
-    {
+    switch(bta_hf_client_cb.scb.sco_state) {
         case BTA_HF_CLIENT_SCO_SHUTDOWN_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_LISTEN_E:
                     /* create sco listen connection */
                     bta_hf_client_sco_create(FALSE);
@@ -493,8 +464,7 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_LISTEN_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_LISTEN_E:
                     /* create sco listen connection (Additional channel) */
                     bta_hf_client_sco_create(FALSE);
@@ -534,8 +504,7 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_OPENING_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_CLOSE_E:
                     bta_hf_client_cb.scb.sco_state = BTA_HF_CLIENT_SCO_OPEN_CL_ST;
                     break;
@@ -562,8 +531,7 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_OPEN_CL_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_OPEN_E:
                     bta_hf_client_cb.scb.sco_state = BTA_HF_CLIENT_SCO_OPENING_ST;
                     break;
@@ -591,13 +559,11 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_OPEN_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_CLOSE_E:
 
                     /* close sco connection if active */
-                    if(bta_hf_client_sco_remove(TRUE))
-                    {
+                    if(bta_hf_client_sco_remove(TRUE)) {
                         bta_hf_client_cb.scb.sco_state = BTA_HF_CLIENT_SCO_CLOSING_ST;
                     }
 
@@ -623,8 +589,7 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_CLOSING_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_OPEN_E:
                     bta_hf_client_cb.scb.sco_state = BTA_HF_CLIENT_SCO_CLOSE_OP_ST;
                     break;
@@ -647,8 +612,7 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_CLOSE_OP_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_CLOSE_E:
                     bta_hf_client_cb.scb.sco_state = BTA_HF_CLIENT_SCO_CLOSING_ST;
                     break;
@@ -671,8 +635,7 @@ static void bta_hf_client_sco_event(uint8_t event)
             break;
 
         case BTA_HF_CLIENT_SCO_SHUTTING_ST:
-            switch(event)
-            {
+            switch(event) {
                 case BTA_HF_CLIENT_SCO_CONN_OPEN_E:
                     /* close sco connection; wait for conn close event */
                     bta_hf_client_sco_remove(TRUE);
@@ -748,19 +711,16 @@ void bta_hf_client_sco_conn_open(tBTA_HF_CLIENT_DATA *p_data)
     APPL_TRACE_DEBUG("%s", __FUNCTION__);
     bta_hf_client_sco_event(BTA_HF_CLIENT_SCO_CONN_OPEN_E);
     bta_sys_sco_open(BTA_ID_HS, 1, bta_hf_client_cb.scb.peer_addr);
-
 #if (BTM_SCO_HCI_INCLUDED == TRUE)
-        bta_hf_client_co_audio_state(bta_hf_client_cb.scb.sco_idx, SCO_STATE_ON, 0);
-        /* open SCO codec if SCO is routed through transport */
-        bta_hf_client_sco_co_open(bta_hf_client_cb.scb.sco_idx, BTA_HFP_SCO_OUT_PKT_SIZE, BTA_HF_CLIENT_CI_SCO_DATA_EVT);
+    bta_hf_client_co_audio_state(bta_hf_client_cb.scb.sco_idx, SCO_STATE_ON, 0);
+    /* open SCO codec if SCO is routed through transport */
+    bta_hf_client_sco_co_open(bta_hf_client_cb.scb.sco_idx, BTA_HFP_SCO_OUT_PKT_SIZE,
+                              BTA_HF_CLIENT_CI_SCO_DATA_EVT);
 #endif
 
-    if(bta_hf_client_cb.scb.negotiated_codec == BTM_SCO_CODEC_MSBC)
-    {
+    if(bta_hf_client_cb.scb.negotiated_codec == BTM_SCO_CODEC_MSBC) {
         bta_hf_client_cback_sco(BTA_HF_CLIENT_AUDIO_MSBC_OPEN_EVT);
-    }
-    else
-    {
+    } else {
         bta_hf_client_cback_sco(BTA_HF_CLIENT_AUDIO_OPEN_EVT);
     }
 
@@ -785,20 +745,16 @@ void bta_hf_client_sco_conn_close(tBTA_HF_CLIENT_DATA *p_data)
 
     /* retry_with_sco_only, will be set only when initiator
     ** and HFClient is first trying to establish an eSCO connection */
-    if(bta_hf_client_cb.scb.retry_with_sco_only && bta_hf_client_cb.scb.svc_conn)
-    {
+    if(bta_hf_client_cb.scb.retry_with_sco_only && bta_hf_client_cb.scb.svc_conn) {
         bta_hf_client_sco_create(TRUE);
-    }
-    else
-    {
+    } else {
         bta_hf_client_sco_event(BTA_HF_CLIENT_SCO_CONN_CLOSE_E);
         bta_sys_sco_close(BTA_ID_HS, 1, bta_hf_client_cb.scb.peer_addr);
         bta_sys_sco_unuse(BTA_ID_HS, 1, bta_hf_client_cb.scb.peer_addr);
         /* call app callback */
         bta_hf_client_cback_sco(BTA_HF_CLIENT_AUDIO_CLOSE_EVT);
 
-        if(bta_hf_client_cb.scb.sco_close_rfc == TRUE)
-        {
+        if(bta_hf_client_cb.scb.sco_close_rfc == TRUE) {
             bta_hf_client_cb.scb.sco_close_rfc = FALSE;
             bta_hf_client_rfc_do_close(p_data);
         }
@@ -839,8 +795,7 @@ void bta_hf_client_sco_close(tBTA_HF_CLIENT_DATA *p_data)
     UNUSED(p_data);
     APPL_TRACE_DEBUG("%s  0x%x", __FUNCTION__, bta_hf_client_cb.scb.sco_idx);
 
-    if(bta_hf_client_cb.scb.sco_idx != BTM_INVALID_SCO_INDEX)
-    {
+    if(bta_hf_client_cb.scb.sco_idx != BTM_INVALID_SCO_INDEX) {
         bta_hf_client_sco_event(BTA_HF_CLIENT_SCO_CLOSE_E);
     }
 }
