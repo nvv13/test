@@ -101,6 +101,7 @@ https://www.altlinux.org/ImageMagick_-_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%8
 ~~~
 convert *.png -resize 480x320! -define bmp:subtype=RGB565 p%03d.bmp
 convert *.jpg -resize 480x320! -define bmp:subtype=RGB565 j%03d.bmp
+convert *.JPG -resize 480x320! -rotate 180 -define bmp:subtype=RGB565 j%03d.bmp
 ~~~
 
 

@@ -59,7 +59,7 @@ This project is based on the original [UTFT library](http://www.rinkydinkelectro
 
 # convert *.png -resize 480x320! -define bmp:subtype=RGB565 p%03d.bmp
 # convert *.jpg -resize 480x320! -define bmp:subtype=RGB565 j%03d.bmp
-
+# convert *.JPG -resize 480x320! -rotate 180 -define bmp:subtype=RGB565 j%03d.bmp
 
 */
 
