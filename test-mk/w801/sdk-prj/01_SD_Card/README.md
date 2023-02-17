@@ -111,9 +111,16 @@ https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_UTFU
 ----
 
 
+в SDK используеться FatFs 
+
+ это по моему, сайт автора http://elm-chan.org/fsw/ff/00index_e.html
+ и там есть подробное описание FatFs 
+
+ тут например про её использование - настройку и примеры кода
+ http://elm-chan.org/fsw/ff/doc/appnote.html
 
 
-
+-------
 
 
 Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):

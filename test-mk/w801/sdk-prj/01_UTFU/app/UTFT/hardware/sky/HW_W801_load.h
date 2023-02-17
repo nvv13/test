@@ -1,6 +1,5 @@
 
 
-#include "wm_gpio_afsel.h"
 #include "ff.h"
 
 //#define SERIAL_DEBUG
@@ -11,36 +10,13 @@ u8 file_buffer[512] = {0};
 word UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename)
 {
 
-	FATFS fs; //FatFs file system object
+
 	FIL fnew; // file object
 	FRESULT res_sd;// file operation results
 	UINT fnum; // The number of files successfully read and written
 
 	int cx, cy, cp;
 
- 	wm_sdio_host_config(0);
-
-	//mount SD card
-	res_sd = f_mount(&fs, "0:", 1);
-	
-	//***********************formatting test****************************
-	if(res_sd == FR_NO_FILESYSTEM)
-	{
-		return FR_NO_FILESYSTEM;
-	}
-	else if(res_sd != FR_OK)
-	{
-#ifdef SERIAL_DEBUG
-               printf ("Failed to mount file system! Probably because the file initialization failed! error code:%d\r\n", res_sd);
-#endif
-		return FR_NO_FILESYSTEM;
-	}
-	else
-	{
-#ifdef SERIAL_DEBUG_ALL
-               printf ("The file system is successfully mounted, and the read and write test can be performed!\r\n");
-#endif
-	}
 
 	//Open the file
 	res_sd = f_open(&fnew, /*"0:FatFs_test_files.txt"*/ filename, FA_OPEN_EXISTING | FA_READ);
@@ -112,8 +88,6 @@ word UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename)
 		sbi(P_CS, B_CS);
 	}
 	
-	//unmount file system
-	f_mount(NULL, "0:", 1);
 	return res_sd;
 
 /*
