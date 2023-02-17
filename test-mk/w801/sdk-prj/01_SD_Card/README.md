@@ -89,7 +89,20 @@ http://www.rinkydinkelectronics.com/library.php?id=51
 
 для Linux, это можно сделать с помощью утилиты convert, входящую в состав ImageMagick.
 [Руководство пользователя ImageMagick v. 7.1.0](https://coollib.net/b/558566-ivan-georgievich-titarenko-rukovodstvo-polzovatelya-imagemagick-v-710)
-как нибуть попробую, дополню инфу.
+
+или
+https://www.altlinux.org/ImageMagick_-_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9
+
+
+
+например, конвертировать все изображения png (или jpg ниже), текущей директории,
+в bmp формат размера 480 на 320 без сохранения соотношения сторон
+для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
+~~~
+convert *.png -resize 480x320! -define bmp:subtype=RGB565 p%03d.bmp
+convert *.jpg -resize 480x320! -define bmp:subtype=RGB565 j%03d.bmp
+~~~
+
 
 ----
 

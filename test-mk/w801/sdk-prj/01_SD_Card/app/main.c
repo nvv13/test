@@ -61,24 +61,20 @@ scan_files (
           else
             { /* It is a file. */
               printf ("%s/%s\n", path, fno.fname);
-              if (strstr (fno.fname, ".raw") != NULL)
-                {
-                  char FileName[256];
-                  if (strlen (path) != 0)
-                    sprintf (FileName, "0:%s/%s", path, fno.fname);
-                  else
-                    sprintf (FileName, "0:%s", fno.fname);
+              char FileName[256];
+              if (strlen (path) != 0)
+                sprintf (FileName, "0:%s/%s", path, fno.fname);
+              else
+                sprintf (FileName, "0:%s", fno.fname);
                   UTFT_loadBitmap (
                       0, 0, 480, 320,
                       FileName); // выводим на дисплей картинку
                                  // начиная с координаты 0,0 размером
                                  // 480,320 из файла 0-x.raw
-                  //tls_os_time_delay (HZ * 1);
-                  UTFT_setFont (BigFont);
-                  UTFT_setColor2 (VGA_FUCHSIA);
-                  UTFT_print (FileName, CENTER, 300, 0);
-                  tls_os_time_delay (HZ * 3);
-                }
+               UTFT_setFont (BigFont);
+               UTFT_setColor2 (VGA_FUCHSIA);
+               UTFT_print (FileName, CENTER, 300, 0);
+               tls_os_time_delay (HZ * 3);
             }
         }
       f_closedir (&dir);
