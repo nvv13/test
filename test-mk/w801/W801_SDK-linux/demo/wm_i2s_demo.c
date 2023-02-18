@@ -321,12 +321,19 @@ int tls_i2s_demo(s8  format,
 }
 int tls_i2s_io_init(void)
 {
-	wm_i2s_ck_config(WM_IO_PB_08);
-	wm_i2s_ws_config(WM_IO_PB_09);
-	wm_i2s_di_config(WM_IO_PB_10);
-	wm_i2s_do_config(WM_IO_PB_11);
+//	wm_i2s_ck_config(WM_IO_PB_08);
+//	wm_i2s_ws_config(WM_IO_PB_09);
+//	wm_i2s_di_config(WM_IO_PB_10);
+//	wm_i2s_do_config(WM_IO_PB_11);
+
+   wm_i2s_ck_config(WM_IO_PA_08); // clock line         i2s Bclk
+   wm_i2s_ws_config(WM_IO_PA_09); // word select line   i2s LRclk
+   wm_i2s_do_config(WM_IO_PA_10); // Dout
+   wm_i2s_di_config(WM_IO_PA_11); // Din
+
     printf("\r\n");
-	printf("ck--PB08, ws--PB09, di--PB10, do--PB11;\r\n");
+//	printf("ck--PB08, ws--PB09, di--PB10, do--PB11;\r\n");
+	printf("ck--PA08, ws--PA09, di--PA11, do--PA10;\r\n");
     return WM_SUCCESS;
 }
 

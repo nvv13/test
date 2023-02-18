@@ -64,7 +64,7 @@
 #define DEMO_NTP					(DEMO_ON && DEMO_CONSOLE)
 
 //i2s demo
-#define DEMO_I2S					(DEMO_OFF && DEMO_CONSOLE)
+#define DEMO_I2S					(DEMO_ON && DEMO_CONSOLE)
 
 //adc demo
 #define DEMO_ADC					(DEMO_ON && DEMO_CONSOLE)

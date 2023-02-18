@@ -1,40 +1,35 @@
 !!!В РАБОТЕ!!!
 !!!underway!!!
 
-это сейчас не работает, так как сменилась версия SDK, и там это уже реализовано (немного по другому)
 
 
-project ble server api
-
-board HLK-W801-KIT-V1.1 
+board HLK-W801-KIT-V1.1 + модуль max98357a 
 
 
-~~~
+project i2s
 
-в makefile 
-библиотека libapp.a, 
-заменена на директорию mod1 
-/lib/w800/mod1/libapp.a
-в ней добавленны функции для работы с bleapp
-собственно в сами исходники
 
-исходники модификации от zxx
- https://github.com/xiansenzhao/W800-KIT-bt-cht8305c.git
-описание
- https://blog.csdn.net/qq_37280428/article/details/124188328?spm=1001.2014.3001.5502
 
-~~~
+
 
 
 
 надо соеденить по схеме:
 ~~~
 connect to
-W801       
+W801   модуль max98357a, вид сверху, 
+GPIO   контакты
+----   ------     ---------------------------------------------------------------------------------------------
+PA09    RLclk      word select line   i2s LRclk
+PA08    Bclk       clock line         i2s Bclk
+PA10    Din,       Data Input
+VCC     Gain_Slot, conect VDD - 6db, Unconnected - 9db, conntct GND 100kOm - 15db, connecd VDD 100kOm - 3db
+VCC     SD_MODE,   0 - off, VDD - on
+GND     GND
+VCC     VCC
+----   ------     ---------------------------------------------------------------------------------------------
+
 ~~~
-
-
-
 
 
 
