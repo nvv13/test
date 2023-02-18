@@ -99,9 +99,12 @@ https://www.altlinux.org/ImageMagick_-_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%8
 в bmp формат размера 480 на 320 без сохранения соотношения сторон
 для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
 ~~~
-convert *.png -resize 480x320! -define bmp:subtype=RGB565 p%03d.bmp
-convert *.jpg -resize 480x320! -define bmp:subtype=RGB565 j%03d.bmp
-convert *.JPG -resize 480x320! -rotate 180 -define bmp:subtype=RGB565 j%03d.bmp
+для png
+convert *.png -resize 480x320! -flip -define bmp:subtype=RGB565 j%03d.bmp
+для jpg
+convert *.jpg -resize 480x320! -flip -define bmp:subtype=RGB565 j%03d.bmp
+регистр в Linux имеет значение
+convert *.JPG -resize 480x320! -flip -define bmp:subtype=RGB565 j%03d.bmp
 ~~~
 
 
