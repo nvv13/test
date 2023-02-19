@@ -7,7 +7,7 @@
 
 #define BEF_LEN_3X 510 // 170*3
 #define BEF_LEN_2X 512 // 256*2
-u8 file_buffer[BEF_LEN_2X] = {0};
+static u8 file_buffer[BEF_LEN_2X] = {0};
 
 typedef struct tagBITMAPFILEHEADER
  {
