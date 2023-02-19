@@ -25,33 +25,34 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 //#define BEF_LEN_3X 510 // 170*3
 //#define BEF_LEN_2X 512 // 256*2
-u8 file_buffer[16384] = { 0 };
+//u8 file_buffer[65536] = { 0 };
+u8 file_buffer[32768] = { 0 };
 
 #include "wm_i2s.h"
 
 #define DEMO_DATA_SIZE        (1024)
 
-extern int wm_i2s_tranceive_dma (uint32_t i2s_mode,
-                                 wm_dma_handler_type *hdma_tx,
-                                 wm_dma_handler_type *hdma_rx,
-                                 uint16_t *data_tx, uint16_t *data_rx,
-                                 uint16_t len);
+//extern int wm_i2s_tranceive_dma (uint32_t i2s_mode,
+//                                 wm_dma_handler_type *hdma_tx,
+//                                 wm_dma_handler_type *hdma_rx,
+//                                 uint16_t *data_tx, uint16_t *data_rx,
+//                                 uint16_t len);
 
-enum
-{
-  WM_I2S_MODE_INT,
-  WM_I2S_MODE_DMA
-};
+//enum
+//{
+//  WM_I2S_MODE_INT,
+//  WM_I2S_MODE_DMA
+//};
 
-enum
-{
-  WM_I2S_TX = 1,
-  WM_I2S_RX = 2,
-  WM_I2S_TR = 3,
-  WM_I2S_TR_SLAVE = 4,
-};
+//enum
+//{
+//  WM_I2S_TX = 1,
+//  WM_I2S_RX = 2,
+//  WM_I2S_TR = 3,
+//  WM_I2S_TR_SLAVE = 4,
+//};
 
-uint32_t i2s_demo_tx[DEMO_DATA_SIZE] = { 0 };
+u16 i2s_demo_tx[DEMO_DATA_SIZE] = { 0 };
 
 static uint32_t g_tx_buff_val = 0;
 static wm_dma_handler_type hdma_tx;
@@ -61,7 +62,7 @@ i2sDmaSendCpltCallback (wm_dma_handler_type *hdma)
   	int i = DEMO_DATA_SIZE/2;
   	for(; i < DEMO_DATA_SIZE; i++)
   	{
-  		i2s_demo_tx[i] = ((u32*)file_buffer)[g_tx_buff_val++];
+  		i2s_demo_tx[i] = ((u16*)file_buffer)[g_tx_buff_val++];
   	}
 }
 static void
@@ -70,7 +71,7 @@ i2sDmaSendHalfCpltCallback (wm_dma_handler_type *hdma)
   	int i = 0;
   	for(; i < DEMO_DATA_SIZE/2; i++)
   	{
-  		i2s_demo_tx[i] = ((u32*)file_buffer)[g_tx_buff_val++];
+  		i2s_demo_tx[i] = ((u16*)file_buffer)[g_tx_buff_val++];
   	}
 }
 static void
@@ -79,7 +80,7 @@ tls_i2s_tx_dma_demo ()
   g_tx_buff_val=0;
   for (u16 len = 0; len < DEMO_DATA_SIZE; len++)
     {
-      i2s_demo_tx[len] = file_buffer[g_tx_buff_val++];
+      i2s_demo_tx[len] = ((u16*)file_buffer)[g_tx_buff_val++];
     }
 #if 0
 	wm_i2s_tx_dma((int16_t *)i2s_demo_tx, DEMO_DATA_SIZE, NULL);
@@ -88,7 +89,7 @@ tls_i2s_tx_dma_demo ()
   memset (&hdma_tx, 0, sizeof (wm_dma_handler_type));
   hdma_tx.XferCpltCallback = i2sDmaSendCpltCallback;
   hdma_tx.XferHalfCpltCallback = i2sDmaSendHalfCpltCallback;
-  wm_i2s_transmit_dma (&hdma_tx, (uint16_t *)i2s_demo_tx, DEMO_DATA_SIZE * 2);
+  wm_i2s_transmit_dma (&hdma_tx, i2s_demo_tx, DEMO_DATA_SIZE );
   printf ("dma transmit start\n");
 #endif
 }
@@ -121,9 +122,9 @@ tls_i2s_send (s32 freq, s8 datawidth, s8 stereo)
                        I2S_Standard,    I2S_DataFormat_16, 8000,
                        5000000 };
 
-  opts.I2S_Mode_MS = (tx_rx - 1);
-  opts.I2S_Mode_SS = (stereo << 22);
-  opts.I2S_Mode_LR = I2S_LEFT_CHANNEL;
+  opts.I2S_Mode_MS = (tx_rx - 1); // master or slave mode
+  opts.I2S_Mode_SS = (stereo << 22); //stereo or single channel
+  opts.I2S_Mode_LR = I2S_LEFT_CHANNEL; //left or right channel
   opts.I2S_Trans_STD = (format * 0x1000000);
   opts.I2S_DataFormat = (datawidth / 8 - 1) * 0x10;
   opts.I2S_AudioFreq = freq;
@@ -135,6 +136,8 @@ tls_i2s_send (s32 freq, s8 datawidth, s8 stereo)
   wm_i2s_port_init (&opts);
   wm_i2s_register_callback (NULL);
   tls_i2s_tx_dma_demo ();
+
+  wm_i2s_tx_rx_stop();
 
   return WM_SUCCESS;
 }
