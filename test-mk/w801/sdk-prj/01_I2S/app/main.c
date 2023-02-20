@@ -25,26 +25,26 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 //#define BEF_LEN_3X 510 // 170*3
 //#define BEF_LEN_2X 512 // 256*2
-//u8 file_buffer[65536] = { 0 };
+// u8 file_buffer[65536] = { 0 };
 u8 file_buffer[32768] = { 0 };
 
 #include "wm_i2s.h"
 
-#define DEMO_DATA_SIZE        (1024)
+#define DEMO_DATA_SIZE (1024)
 
-//extern int wm_i2s_tranceive_dma (uint32_t i2s_mode,
+// extern int wm_i2s_tranceive_dma (uint32_t i2s_mode,
 //                                 wm_dma_handler_type *hdma_tx,
 //                                 wm_dma_handler_type *hdma_rx,
 //                                 uint16_t *data_tx, uint16_t *data_rx,
 //                                 uint16_t len);
 
-//enum
+// enum
 //{
 //  WM_I2S_MODE_INT,
 //  WM_I2S_MODE_DMA
 //};
 
-//enum
+// enum
 //{
 //  WM_I2S_TX = 1,
 //  WM_I2S_RX = 2,
@@ -59,28 +59,28 @@ static wm_dma_handler_type hdma_tx;
 static void
 i2sDmaSendCpltCallback (wm_dma_handler_type *hdma)
 {
-  	int i = DEMO_DATA_SIZE/2;
-  	for(; i < DEMO_DATA_SIZE; i++)
-  	{
-  		i2s_demo_tx[i] = ((u16*)file_buffer)[g_tx_buff_val++];
-  	}
+  int i = DEMO_DATA_SIZE / 2;
+  for (; i < DEMO_DATA_SIZE; i++)
+    {
+      i2s_demo_tx[i] = ((u16 *)file_buffer)[g_tx_buff_val++];
+    }
 }
 static void
 i2sDmaSendHalfCpltCallback (wm_dma_handler_type *hdma)
 {
-  	int i = 0;
-  	for(; i < DEMO_DATA_SIZE/2; i++)
-  	{
-  		i2s_demo_tx[i] = ((u16*)file_buffer)[g_tx_buff_val++];
-  	}
+  int i = 0;
+  for (; i < DEMO_DATA_SIZE / 2; i++)
+    {
+      i2s_demo_tx[i] = ((u16 *)file_buffer)[g_tx_buff_val++];
+    }
 }
 static void
 tls_i2s_tx_dma_demo ()
 {
-  g_tx_buff_val=0;
+  g_tx_buff_val = 0;
   for (u16 len = 0; len < DEMO_DATA_SIZE; len++)
     {
-      i2s_demo_tx[len] = ((u16*)file_buffer)[g_tx_buff_val++];
+      i2s_demo_tx[len] = ((u16 *)file_buffer)[g_tx_buff_val++];
     }
 #if 0
 	wm_i2s_tx_dma((int16_t *)i2s_demo_tx, DEMO_DATA_SIZE, NULL);
@@ -89,7 +89,7 @@ tls_i2s_tx_dma_demo ()
   memset (&hdma_tx, 0, sizeof (wm_dma_handler_type));
   hdma_tx.XferCpltCallback = i2sDmaSendCpltCallback;
   hdma_tx.XferHalfCpltCallback = i2sDmaSendHalfCpltCallback;
-  wm_i2s_transmit_dma (&hdma_tx, i2s_demo_tx, DEMO_DATA_SIZE );
+  wm_i2s_transmit_dma (&hdma_tx, i2s_demo_tx, DEMO_DATA_SIZE);
   printf ("dma transmit start\n");
 #endif
 }
@@ -122,9 +122,9 @@ tls_i2s_send (s32 freq, s8 datawidth, s8 stereo)
                        I2S_Standard,    I2S_DataFormat_16, 8000,
                        5000000 };
 
-  opts.I2S_Mode_MS = (tx_rx - 1); // master or slave mode
-  opts.I2S_Mode_SS = (stereo << 22); //stereo or single channel
-  opts.I2S_Mode_LR = I2S_LEFT_CHANNEL; //left or right channel
+  opts.I2S_Mode_MS = (tx_rx - 1);      // master or slave mode
+  opts.I2S_Mode_SS = (stereo << 22);   // stereo or single channel
+  opts.I2S_Mode_LR = I2S_LEFT_CHANNEL; // left or right channel
   opts.I2S_Trans_STD = (format * 0x1000000);
   opts.I2S_DataFormat = (datawidth / 8 - 1) * 0x10;
   opts.I2S_AudioFreq = freq;
@@ -137,30 +137,12 @@ tls_i2s_send (s32 freq, s8 datawidth, s8 stereo)
   wm_i2s_register_callback (NULL);
   tls_i2s_tx_dma_demo ();
 
-  wm_i2s_tx_rx_stop();
+  tls_os_time_delay (HZ * 10);
+  wm_i2s_tx_rx_stop ();
 
   return WM_SUCCESS;
 }
 
-// Wav Header
-typedef struct tagWAVHDR
-{
-  char riff[4];  // = "RIFF" = 0x46464952
-  u32 size_8;    // = FileSize - 8
-  char wave[4];  // = "WAVE" = 0x45564157
-  char fmt[4];   // = "fmt " = 0x20746D66
-  u32 dwFmtSize; // = size of next structure: 16
-
-  u16 format_tag;        // = PCM : 1  audioFormat
-  u16 channels;          // = number of channels: 1 mono, 2 dual channels
-  u32 samples_per_sec;   // = sample rate
-  u32 avg_bytes_per_sec; // = bytes per second
-  u16 block_align;       // = bytes per sample point: wBitsPerSample / 8
-  u16 bits_per_sample;   // = Quantization bits: 8 | 16
-
-  char data[4];  // = "data" = 0x61746164
-  u32 data_size; // = file length without file header
-} WAVHDR, *PWAVHDR;
 
 void
 init_i2s (void)
@@ -169,12 +151,12 @@ init_i2s (void)
   wm_i2s_ws_config (WM_IO_PA_09); // word select line   i2s LRclk
   wm_i2s_do_config (WM_IO_PA_10); // Dout
   wm_i2s_di_config (WM_IO_PA_11); // Din
-  
+
   // no need
-  // wm_i2s_mclk_config (WM_IO_PA_00); only PA0  ,The clock is still the
+  // wm_i2s_mclk_config (WM_IO_PA_00);// only PA0  ,The clock is still the
   // internal 160MHz clock, whether the MCLK clock is turned on, and the
-  // operating frequencies of MCLK and BCLK 
-  
+  // operating frequencies of MCLK and BCLK
+
   // no need
   // wm_i2s_extclk_config (WM_IO_PA_07);
   // only PA7,The working clock configuration of the I2S module can be
@@ -188,6 +170,34 @@ init_ff (void)
   wm_sdio_host_config (0);
 }
 
+
+
+// pack(push,1) - Byte alignment ?
+#pragma pack(push, 1)
+// Wav Header
+typedef struct tagWAVHDR
+{
+  char riff[4];  // = "RIFF" = 0x46464952
+  u32 size_8;    // = FileSize - 8                 fileSize
+  char wave[4];  // = "WAVE" = 0x45564157
+  char fmt[4];   // = "fmt " = 0x20746D66
+  u32 dwFmtSize; // = size of next structure: 16   headerSizeLeft
+
+  u16 format_tag;        // = PCM : 1  audioFormat, (1 = no compression)
+  u16 channels;          // = number of channels: 1 mono, 2 dual channels
+  u32 samples_per_sec;   // = sample rate       sampleRate
+  u32 avg_bytes_per_sec; // = bytes per second  bytesPerSecond
+  u16 block_align;       // = bytes per sample point: wBitsPerSample / 8
+                         // bytesPerSample
+  u16 bits_per_sample;   // = Quantization bits: 8 | 16 bitsPerSamplePerChannel
+
+  char data[4];  // = "data" = 0x61746164
+  u32 data_size; // = file length without file header   dataSize
+} WAVHDR, *PWAVHDR;
+#pragma pack(pop)
+
+
+
 FRESULT
 WAV_loadWav (char *filename)
 {
@@ -195,6 +205,12 @@ WAV_loadWav (char *filename)
   FIL fnew;       // file object
   FRESULT res_sd; // file operation results
   UINT fnum;      // The number of files successfully read and written
+
+  if (sizeof (WAVHDR) != 44)
+    {
+      printf ("Wrong sizeof `WAVHDR` value, 44 expected\r\n");
+      return -5;
+    }
 
   // Open the file
   res_sd = f_open (&fnew, filename, FA_OPEN_EXISTING | FA_READ);
@@ -217,16 +233,54 @@ WAV_loadWav (char *filename)
 #ifdef SERIAL_DEBUG
               printf ("wav header ok\r\n");
 #endif
+
+              if (aHead->dwFmtSize != 16)
+                {
+                  printf ("Wrong `headerSizeLeft` value, 16 expected\r\n");
+                  f_close (&fnew);
+                  return -6;
+                }
+
+              if (aHead->format_tag != 1)
+                {
+                  printf ("Wrong `compression` value, 1 expected\r\n");
+                  f_close (&fnew);
+                  return -7;
+                }
+
+              if (aHead->channels != 2)
+                {
+                  printf ("Wrong `channelsNum` value, 2 expected\r\n");
+                  f_close (&fnew);
+                  return -8;
+                }
+
+              if ((aHead->samples_per_sec != 44100)
+                  || (aHead->block_align != 4)
+                  || (aHead->bits_per_sample != 16)
+                  || (aHead->avg_bytes_per_sec != 44100 * 2 * 2)
+                  || (aHead->data_size < sizeof (i2s_demo_tx)))
+                {
+                  printf ("Wrong file format, 16 bit file with sample "
+                          "rate 44100 expected\r\n");
+                  f_close (&fnew);
+                  return -9;
+                }
+
               s32 freq = aHead->samples_per_sec;
               s8 datawidth = aHead->bits_per_sample;
               s8 stereo = aHead->channels;
-              res_sd = f_read (&fnew, file_buffer, sizeof(file_buffer) , &fnum);
+
+              res_sd
+                  = f_read (&fnew, file_buffer, sizeof (file_buffer), &fnum);
 #ifdef SERIAL_DEBUG
               printf ("load fnum:%d, ", fnum);
 #endif
               tls_i2s_send (freq, datawidth, stereo);
             }
         }
+      // close file
+      f_close (&fnew);
     }
   return res_sd;
 }
@@ -275,9 +329,8 @@ scan_files (
               if (strstr (FileName, ".wav") != NULL
                   || strstr (FileName, ".WAV") != NULL)
                 {
-                WAV_loadWav (FileName);
-                tls_os_time_delay (HZ * 10);
-                } 
+                  WAV_loadWav (FileName);
+                }
             }
         }
       f_closedir (&dir);
@@ -349,6 +402,7 @@ UserMain (void)
 
   printf ("UserMain start");
   tls_sys_clk_set (CPU_CLK_240M);
+  //tls_sys_clk_set (CPU_CLK_160M);
 
   tls_os_task_create (NULL, NULL, user_app1_task, NULL,
                       (void *)UserApp1TaskStk, /* task's stack start address */

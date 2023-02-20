@@ -5,10 +5,12 @@
 //#define SERIAL_DEBUG
 //#define SERIAL_DEBUG_ALL
 
-#define BEF_LEN_3X 510 // 170*3
+//#define BEF_LEN_3X 510 // 170*3
 #define BEF_LEN_2X 512 // 256*2
 static u8 file_buffer[BEF_LEN_2X] = {0};
 
+// pack(push,1) - Byte alignment ?
+#pragma pack(push, 1)
 typedef struct tagBITMAPFILEHEADER
  {
    u16   bfType;
@@ -17,6 +19,7 @@ typedef struct tagBITMAPFILEHEADER
    u16   bfReserved2;
    u32   bfOffBits;
  } BITMAPFILEHEADER, *PBITMAPFILEHEADER;
+#pragma pack(pop)
 
 word UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename)
 {
@@ -47,13 +50,16 @@ word UTFT_loadBitmap(int x, int y, int sx, int sy, char *filename)
 		        PBITMAPFILEHEADER aHead=(PBITMAPFILEHEADER)file_buffer;
 		        if(aHead->bfType== 0x4D42) 
 				{ // BMP file start signature check
+#ifdef SERIAL_DEBUG
+	                        printf ("sizeof(BITMAPFILEHEADER)=%d, aHead->bfOffBits=%d\r\n",sizeof(BITMAPFILEHEADER),aHead->bfOffBits);
+#endif
 			        uint32_t bmpImageoffset;        // Start address of image data in file
-		           	bmpImageoffset = 137 ;//aHead->bfOffBits; // Start of image data
+		           	bmpImageoffset = aHead->bfOffBits - 1; // Start of image data
 				res_sd = f_lseek (
 					  &fnew,  /* [IN] File object */
 					  bmpImageoffset  /* [IN] Offset of file read/write pointer to be set */
 					);                                
-#ifdef SERIAL_DEBUG_ALL
+#ifdef SERIAL_DEBUG
 		                        printf ("f_lseek successfully! %d\r\n",bmpImageoffset);
 #endif
 				fnum=BEF_LEN_2X;
