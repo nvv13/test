@@ -26,11 +26,17 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 //#define BEF_LEN_3X 510 // 170*3
 //#define BEF_LEN_2X 512 // 256*2
 // u8 file_buffer[65536] = { 0 };
-u8 file_buffer[32768] = { 0 };
+#define DEMO_DATA_SIZE (8192 * 2)
+
+static FIL fnew;       // file object
+static FRESULT res_sd; // file operation results
+static UINT fnum;      // The number of files successfully read and written
+
+u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
 
 #include "wm_i2s.h"
 
-#define DEMO_DATA_SIZE (1024)
+//#define DEMO_DATA_SIZE (1024)
 
 // extern int wm_i2s_tranceive_dma (uint32_t i2s_mode,
 //                                 wm_dma_handler_type *hdma_tx,
@@ -52,36 +58,46 @@ u8 file_buffer[32768] = { 0 };
 //  WM_I2S_TR_SLAVE = 4,
 //};
 
-u16 i2s_demo_tx[DEMO_DATA_SIZE] = { 0 };
+// u16 i2s_demo_tx[DEMO_DATA_SIZE] = { 0 };
 
-static uint32_t g_tx_buff_val = 0;
+// static uint32_t g_tx_buff_val = 0;
 static wm_dma_handler_type hdma_tx;
 static void
 i2sDmaSendCpltCallback (wm_dma_handler_type *hdma)
 {
-  int i = DEMO_DATA_SIZE / 2;
-  for (; i < DEMO_DATA_SIZE; i++)
-    {
-      i2s_demo_tx[i] = ((u16 *)file_buffer)[g_tx_buff_val++];
-    }
+  /*  int i = DEMO_DATA_SIZE / 2;
+    for (; i < DEMO_DATA_SIZE; i++)
+      {
+        //i2s_demo_tx[i] = ((u16 *)file_buffer)[g_tx_buff_val++];
+        i2s_demo_tx[i] = (file_buffer[g_tx_buff_val+1]<<8 |
+    file_buffer[g_tx_buff_val])     ; g_tx_buff_val++; g_tx_buff_val++;
+      }*/
+
+  res_sd
+      = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE), DEMO_DATA_SIZE, &fnum);
 }
 static void
 i2sDmaSendHalfCpltCallback (wm_dma_handler_type *hdma)
 {
-  int i = 0;
-  for (; i < DEMO_DATA_SIZE / 2; i++)
-    {
-      i2s_demo_tx[i] = ((u16 *)file_buffer)[g_tx_buff_val++];
-    }
+  /*  int i = 0;
+    for (; i < DEMO_DATA_SIZE / 2; i++)
+      {
+        //i2s_demo_tx[i] = ((u16 *)file_buffer)[g_tx_buff_val++];
+        i2s_demo_tx[i] = (file_buffer[g_tx_buff_val+1]<<8 |
+    file_buffer[g_tx_buff_val])     ; g_tx_buff_val++; g_tx_buff_val++;
+
+      }*/
+  res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
 }
 static void
 tls_i2s_tx_dma_demo ()
 {
-  g_tx_buff_val = 0;
+/*  g_tx_buff_val = 0;
   for (u16 len = 0; len < DEMO_DATA_SIZE; len++)
     {
-      i2s_demo_tx[len] = ((u16 *)file_buffer)[g_tx_buff_val++];
-    }
+      i2s_demo_tx[len] = (file_buffer[g_tx_buff_val+1]<<8 |
+  file_buffer[g_tx_buff_val])     ; g_tx_buff_val++; g_tx_buff_val++;
+    }*/
 #if 0
 	wm_i2s_tx_dma((int16_t *)i2s_demo_tx, DEMO_DATA_SIZE, NULL);
 	printf("send %d\r\n", DEMO_DATA_SIZE);
@@ -89,44 +105,67 @@ tls_i2s_tx_dma_demo ()
   memset (&hdma_tx, 0, sizeof (wm_dma_handler_type));
   hdma_tx.XferCpltCallback = i2sDmaSendCpltCallback;
   hdma_tx.XferHalfCpltCallback = i2sDmaSendHalfCpltCallback;
-  wm_i2s_transmit_dma (&hdma_tx, i2s_demo_tx, DEMO_DATA_SIZE);
+  wm_i2s_transmit_dma (&hdma_tx, (u16 *)file_buffer, DEMO_DATA_SIZE);
   printf ("dma transmit start\n");
 #endif
 }
 
-/**
- * @brief
- *
- * @param[in]  freq
- *    sample rate
- *
- * @param[in]  datawidth
- *    - \ref 8: 8 bit
- *    - \ref 16: 16 bit
- *    - \ref 24: 24 bit
- *    - \ref 32: 32 bit
- *
- * @param[in]  stereo
- *    - \ref 0: stereo
- *	  - \ref 1: mono
- *
- */
 int
-tls_i2s_send (s32 freq, s8 datawidth, s8 stereo)
+tls_i2s_send (s32 freq /*sample rate */
+              ,
+              s8 datawidth
+              /*
+             datawidth
+              *    - \ref 8: 8 bit
+              *    - \ref 16: 16 bit
+              *    - \ref 24: 24 bit
+              *    - \ref 32: 32 bit
+              */
+              ,
+              s8 stereo
+              /* *  stereo
+               *  - \ref 0: stereo
+               *  - \ref 1: mono
+               */
+
+)
 {
-  s8 format = 0; // 0: i2s
-  s8 tx_rx = 1;  // 1: transmit
-  s8 mode = 1;   // 1: dma
+  s8 format = 0;
+  /*  format
+   *	- \ref 0: i2s
+   *	- \ref 1: msb
+   *	- \ref 2: pcma
+   *	- \ref 3: pcmb
+   */
+
+  s8 tx_rx = 1; // 1: transmit
+                /*    tx_rx
+                 *    - \ref 1: transmit
+                 *    - \ref 2: receive
+                 *    - \ref 3: duplex master
+                 *    - \ref 4: duplex slave
+                 */
+
+  s8 mode = 1; // 1: dma
+               /*   mode
+                *    - \ref 0: interrupt
+                *    - \ref 1: dma
+                */
+
+  // format:0, tx_en:1, freq:44100, datawidth:16, stereo:0, mode:1
 
   I2S_InitDef opts = { I2S_MODE_MASTER, I2S_CTRL_STEREO,   I2S_RIGHT_CHANNEL,
                        I2S_Standard,    I2S_DataFormat_16, 8000,
                        5000000 };
 
-  opts.I2S_Mode_MS = (tx_rx - 1);      // master or slave mode
-  opts.I2S_Mode_SS = (stereo << 22);   // stereo or single channel
-  opts.I2S_Mode_LR = I2S_LEFT_CHANNEL; // left or right channel
-  opts.I2S_Trans_STD = (format * 0x1000000);
-  opts.I2S_DataFormat = (datawidth / 8 - 1) * 0x10;
+  opts.I2S_Mode_MS = (tx_rx - 1);            // master or slave mode
+  opts.I2S_Mode_SS = (stereo << 22);         // stereo or single channel
+  opts.I2S_Mode_LR = I2S_LEFT_CHANNEL;       // left or right channel
+  opts.I2S_Trans_STD = (format * 0x1000000); /* 0:i2s 1:msb 2:pcma 3:pcmb */
+  opts.I2S_DataFormat
+      = (datawidth / 8 - 1)
+        * 0x10; /* I2S_DataFormat_8(8) I2S_DataFormat_16(16)
+                   I2S_DataFormat_24(24) I2S_DataFormat_32(32) */
   opts.I2S_AudioFreq = freq;
   opts.I2S_MclkFreq = 80000000;
 
@@ -137,12 +176,11 @@ tls_i2s_send (s32 freq, s8 datawidth, s8 stereo)
   wm_i2s_register_callback (NULL);
   tls_i2s_tx_dma_demo ();
 
-  tls_os_time_delay (HZ * 10);
+  tls_os_time_delay (HZ * 100);
   wm_i2s_tx_rx_stop ();
 
   return WM_SUCCESS;
 }
-
 
 void
 init_i2s (void)
@@ -170,8 +208,6 @@ init_ff (void)
   wm_sdio_host_config (0);
 }
 
-
-
 // pack(push,1) - Byte alignment ?
 #pragma pack(push, 1)
 // Wav Header
@@ -196,15 +232,9 @@ typedef struct tagWAVHDR
 } WAVHDR, *PWAVHDR;
 #pragma pack(pop)
 
-
-
 FRESULT
 WAV_loadWav (char *filename)
 {
-
-  FIL fnew;       // file object
-  FRESULT res_sd; // file operation results
-  UINT fnum;      // The number of files successfully read and written
 
   if (sizeof (WAVHDR) != 44)
     {
@@ -259,7 +289,8 @@ WAV_loadWav (char *filename)
                   || (aHead->block_align != 4)
                   || (aHead->bits_per_sample != 16)
                   || (aHead->avg_bytes_per_sec != 44100 * 2 * 2)
-                  || (aHead->data_size < sizeof (i2s_demo_tx)))
+                  //              || (aHead->data_size < sizeof (i2s_demo_tx))
+              )
                 {
                   printf ("Wrong file format, 16 bit file with sample "
                           "rate 44100 expected\r\n");
@@ -267,9 +298,31 @@ WAV_loadWav (char *filename)
                   return -9;
                 }
 
-              s32 freq = aHead->samples_per_sec;
+              s32 freq = aHead->samples_per_sec; /*    sample rate  */
               s8 datawidth = aHead->bits_per_sample;
-              s8 stereo = aHead->channels;
+              /*    datawidth
+               *    - \ref 8: 8 bit
+               *    - \ref 16: 16 bit
+               *    - \ref 24: 24 bit
+               *    - \ref 32: 32 bit
+               */
+
+              s8 stereo = (2 - aHead->channels);
+              /* 	 stereo
+               *    - \ref 0: stereo
+               *	  - \ref 1: mono
+               */
+
+              uint32_t bmpImageoffset; // Start address of image data in file
+              bmpImageoffset = 1024 * 1024 * 4; // Start of image data
+              res_sd
+                  = f_lseek (&fnew,         /* [IN] File object */
+                             bmpImageoffset /* [IN] Offset of file read/write
+                                               pointer to be set */
+                  );
+#ifdef SERIAL_DEBUG
+              printf ("f_lseek successfully! %d\r\n", bmpImageoffset);
+#endif
 
               res_sd
                   = f_read (&fnew, file_buffer, sizeof (file_buffer), &fnum);
@@ -322,13 +375,13 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              UTFT_clrScr (); // стираем всю информацию с дисплея
-              UTFT_setFont (BigFont);
-              UTFT_setColor2 (VGA_FUCHSIA);
-              UTFT_print (FileName, CENTER, 300, 0);
               if (strstr (FileName, ".wav") != NULL
                   || strstr (FileName, ".WAV") != NULL)
                 {
+                  UTFT_clrScr (); // стираем всю информацию с дисплея
+                  UTFT_setFont (BigFont);
+                  UTFT_setColor2 (VGA_FUCHSIA);
+                  UTFT_print (FileName, CENTER, 300, 0);
                   WAV_loadWav (FileName);
                 }
             }
@@ -402,7 +455,7 @@ UserMain (void)
 
   printf ("UserMain start");
   tls_sys_clk_set (CPU_CLK_240M);
-  //tls_sys_clk_set (CPU_CLK_160M);
+  // tls_sys_clk_set (CPU_CLK_160M);
 
   tls_os_task_create (NULL, NULL, user_app1_task, NULL,
                       (void *)UserApp1TaskStk, /* task's stack start address */
