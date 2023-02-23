@@ -16,6 +16,20 @@
 
 #define DEMO_DATA_SIZE (8192)
 
+static enum n_i2s_status my_sost = N_I2S_NONE;
+
+enum n_i2s_status
+n_i2s_get_status (void)
+{
+  return my_sost;
+};
+void
+n_i2s_stop (void)
+{
+  if (my_sost != N_I2S_STOP)
+    my_sost = N_I2S_QUERY_TO_STOP;
+};
+
 static FIL fnew;       // file object
 static FRESULT res_sd; // file operation results
 static UINT fnum;      // The number of files successfully read and written
@@ -28,13 +42,39 @@ static wm_dma_handler_type hdma_tx;
 static void
 i2sDmaSendCpltCallback (wm_dma_handler_type *hdma)
 {
-  res_sd
-      = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE), DEMO_DATA_SIZE, &fnum);
+  if (my_sost == N_I2S_END_FILE)
+    {
+      memset ((file_buffer + DEMO_DATA_SIZE), 0, DEMO_DATA_SIZE);
+    }
+  else
+    {
+      res_sd = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE), DEMO_DATA_SIZE,
+                       &fnum);
+      if (fnum < DEMO_DATA_SIZE)
+        {
+          my_sost = N_I2S_END_FILE;
+          memset ((file_buffer + DEMO_DATA_SIZE + fnum), 0,
+                  (DEMO_DATA_SIZE - fnum));
+        }
+    }
 }
 static void
 i2sDmaSendHalfCpltCallback (wm_dma_handler_type *hdma)
 {
-  res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
+
+  if (my_sost == N_I2S_END_FILE)
+    {
+      memset (file_buffer, 0, DEMO_DATA_SIZE);
+    }
+  else
+    {
+      res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
+      if (fnum < DEMO_DATA_SIZE)
+        {
+          my_sost = N_I2S_END_FILE;
+          memset ((file_buffer + fnum), 0, (DEMO_DATA_SIZE - fnum));
+        }
+    }
 }
 static void
 tls_i2s_tx_dma_demo ()
@@ -66,6 +106,10 @@ tls_i2s_send (s32 freq /*sample rate */
 
 )
 {
+
+  if (my_sost == N_I2S_NONE)
+    n_i2s_init_hw ();
+
   s8 format = 0;
   /*  format
    *	- \ref 0: i2s
@@ -111,20 +155,25 @@ tls_i2s_send (s32 freq /*sample rate */
   wm_i2s_port_init (&opts);
   wm_i2s_register_callback (NULL);
   tls_i2s_tx_dma_demo ();
-
-  tls_os_time_delay (HZ * 100);
+  my_sost = N_I2S_PLAY;
+  while (my_sost == N_I2S_PLAY)
+    {
+      tls_os_time_delay (HZ);
+    }
   wm_i2s_tx_rx_stop ();
 
   return WM_SUCCESS;
 }
 
 void
-init_i2s (void)
+n_i2s_init_hw (void)
 {
   wm_i2s_ck_config (WM_IO_PA_08); // clock line         i2s Bclk
   wm_i2s_ws_config (WM_IO_PA_09); // word select line   i2s LRclk
   wm_i2s_do_config (WM_IO_PA_10); // Dout
   wm_i2s_di_config (WM_IO_PA_11); // Din
+
+  my_sost = N_I2S_HW_INIT;
 
   // no need
   // wm_i2s_mclk_config (WM_IO_PA_00);// only PA0  ,The clock is still the
@@ -163,7 +212,7 @@ typedef struct tagWAVHDR
 #pragma pack(pop)
 
 FRESULT
-WAV_loadWav (char *filename)
+n_i2s_PlayWav (char *filename)
 {
 
   if (sizeof (WAVHDR) != 44)

@@ -31,7 +31,7 @@ init_ff (void)
   wm_sdio_host_config (0);
 }
 
-extern uint8_t BigFont[]; // подключаем большой шрифт
+extern uint8_t SmallFont[]; // подключаем большой шрифт
 
 FRESULT
 scan_files (
@@ -72,10 +72,10 @@ scan_files (
                   || strstr (FileName, ".WAV") != NULL)
                 {
                   UTFT_clrScr (); // стираем всю информацию с дисплея
-                  UTFT_setFont (BigFont);
+                  UTFT_setFont (SmallFont);
                   UTFT_setColor2 (VGA_FUCHSIA);
-                  UTFT_print (FileName, CENTER, 300, 0);
-                  WAV_loadWav (FileName);
+                  UTFT_print (fno.fname, CENTER, 150, 0);
+                  n_i2s_PlayWav (FileName);
                 }
             }
         }
@@ -90,7 +90,7 @@ user_app1_task (void *sdata)
 {
   printf ("user_app1_task start\n");
 
-  init_i2s ();
+  n_i2s_init_hw ();
 
   init_ff ();
 
