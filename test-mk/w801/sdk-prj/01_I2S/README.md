@@ -1,7 +1,7 @@
 
 
 
-board HLK-W801-KIT-V1.1 + модуль max98357a или модуль PCM5102A
+board HLK-W801-KIT-V1.1 + I2S модуль max98357a или модуль PCM5102A
 
 
 project i2s
