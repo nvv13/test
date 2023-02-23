@@ -6,6 +6,8 @@ board HLK-W801-KIT-V1.1 + модуль max98357a или модуль PCM5102A
 
 project i2s
 
+Видео
+https://youtu.be/4-9HiGcrC7A
 
 
 
