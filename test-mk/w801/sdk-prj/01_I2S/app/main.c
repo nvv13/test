@@ -96,39 +96,67 @@ static u8 u8_volume = 0; //
 #define KNOOB_DT WM_IO_PA_12
 #define KNOOB_CLK WM_IO_PA_13
 
-static const u16 i_pos_dreb_SW = 3; //кнопка
-volatile static u8 i_dreb_SW = 0;     // от дребезга кнопки
+volatile static u16 i_dreb_CLK = 0; // от дребезга
+// static u16 i_dreb_DT = 0;  // от дребезга
+static const u16 i_pos_dreb_CLK = 3;
+// static const u16 i_pos_dreb_DT  = 5;
+static const u16 i_pos_dreb_SW = 300; //кнопка
+static int i_rotar = 10;
+volatile static u16 i_rotar_zero = 0;
+volatile static u16 i_rotar_one = 0;
+static u8 i_rotar_value = 0;
+volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 static char buf_str_ind[100];
-
-long pos = 0;
-byte lastState = 0;
-const int8_t increment[16]
-    = { 0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0 };
+static u8 u8_enc_state = 0;
 
 static void
 demo_timer_irq (u8 *arg) //
 {
-  byte state = tls_gpio_read (KNOOB_CLK) | (tls_gpio_read (KNOOB_DT) << 1);
-  if (state != lastState)
+
+  if (i_dreb_CLK != 0)
     {
-      pos += increment[state | (lastState << 2)];
-      lastState = state;
+      if (i_dreb_CLK++ > i_pos_dreb_CLK) //можно отсчитывать временной интервал
+        {
+          i_dreb_CLK = 0; // от дребезга
 
-      if (pos < 0)
-        pos = 0;
-      if (pos > 100)
-        pos = 100;
+          u8_enc_state = ~u8_enc_state;
+          if (u8_enc_state)
+            {
 
-      u8_volume = 100 - pos;
-      n_i2s_SetVolume (u8_volume);
-      UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
-                                      // семисегментный индикатор
-      UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      sprintf (buf_str_ind, "%.3d", u8_volume);
-      UTFT_print (buf_str_ind, CENTER, 150,
+              if (i_rotar_zero > i_rotar_one)
+                i_rotar--;
+              else
+                i_rotar++;
+
+              if (i_rotar < 0)
+                i_rotar = 0;
+              if (i_rotar > 100)
+                i_rotar = 100;
+
+              u8_volume = 100 - i_rotar;
+              n_i2s_SetVolume (u8_volume);
+              UTFT_setFont (
+                  SevenSegNumFont); // устанавливаем шрифт имитирующий
+                                    // семисегментный индикатор
+              UTFT_setColor2 (
+                  VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+              sprintf (buf_str_ind, "%.3d", u8_volume);
+              UTFT_print (
+                  buf_str_ind, CENTER, 150,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
+            }
+          i_rotar_zero = 0;
+          i_rotar_one = 0;
+          i_rotar_value = 1;
+        }
     }
+
+  /*  if (i_dreb_DT != 0
+        && i_dreb_DT++ > i_pos_dreb_DT) //можно отсчитывать временной интервал
+      {
+        i_dreb_DT = 0; // от дребезга
+      }*/
 
   if (i_dreb_SW != 0
       && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
@@ -138,7 +166,7 @@ demo_timer_irq (u8 *arg) //
 }
 
 static void
-demo_gpio_isr_callback (void *context)
+KNOOB_SW_isr_callback (void *context)
 {
   u16 ret = tls_get_gpio_irq_status (KNOOB_SW);
   if (ret)
@@ -151,6 +179,40 @@ demo_gpio_isr_callback (void *context)
         }
     }
 }
+static void
+KNOOB_CLK_isr_callback (void *context)
+{
+  u16 ret = tls_get_gpio_irq_status (KNOOB_CLK);
+  if (ret)
+    {
+      tls_clr_gpio_irq_status (KNOOB_CLK);
+      if (i_dreb_CLK == 0)
+        {
+          if (tls_gpio_read (KNOOB_DT))
+            i_rotar_one++;
+          else
+            i_rotar_zero++;
+          i_dreb_CLK = 1;
+        }
+    }
+}
+/*static void
+KNOOB_DT_isr_callback (void *context)
+{
+  u16 ret = tls_get_gpio_irq_status (KNOOB_DT);
+  if (ret)
+    {
+      tls_clr_gpio_irq_status (KNOOB_DT);
+      if (i_dreb_DT == 0)
+        {
+          if (tls_gpio_read (KNOOB_DT))
+            i_rotar_one++;
+          else
+            i_rotar_zero++;
+          i_dreb_DT = 1;
+        }
+    }
+}*/
 
 //****************************************************************************************************//
 
@@ -165,8 +227,8 @@ user_app1_task (void *sdata)
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
-  timer_cfg.unit = TLS_TIMER_UNIT_MS;
-  //timer_cfg.unit = TLS_TIMER_UNIT_US;
+  // timer_cfg.unit = TLS_TIMER_UNIT_MS;
+  timer_cfg.unit = TLS_TIMER_UNIT_US;
   timer_cfg.timeout = 100;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
@@ -176,12 +238,12 @@ user_app1_task (void *sdata)
   printf ("timer start\n");
   //
   tls_gpio_cfg (KNOOB_SW, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_isr_register (KNOOB_SW, demo_gpio_isr_callback, NULL);
+  tls_gpio_isr_register (KNOOB_SW, KNOOB_SW_isr_callback, NULL);
   tls_gpio_irq_enable (KNOOB_SW, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
   tls_gpio_cfg (KNOOB_CLK, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  // tls_gpio_isr_register (KNOOB_CLK, KNOOB_CLK_isr_callback, NULL);
-  // tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
+  tls_gpio_isr_register (KNOOB_CLK, KNOOB_CLK_isr_callback, NULL);
+  tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   // tls_gpio_isr_register (KNOOB_DT, KNOOB_DT_isr_callback, NULL);
@@ -189,7 +251,7 @@ user_app1_task (void *sdata)
   //
 
   u8_volume = 50;
-  pos = 100 - u8_volume;
+  i_rotar = 100 - u8_volume;
   n_i2s_SetVolume (u8_volume);
 
   // подключаем библиотеку UTFT
