@@ -293,6 +293,10 @@ n_i2s_init_hw (void)
   // module to select the external clock source.
 }
 
+/*
+Volume Algoritm used from
+https://github.com/pschatzmann/arduino-audio-tools.git
+*/
 void
 n_i2s_SetVolume (u8 procVol)
 {
@@ -314,13 +318,12 @@ n_i2s_SetVolume (u8 procVol)
           input = input / 100;
           printf ("0 input %f\n", input);
 
-          
-                float ym=0.1;
-                float b = pow (((1 / ym) - 1), 2);
-                float a = 1.0f / (b - 1.0f);
-                float volumeFactor = pow (b, input) * a - a;
-          
-          //float volumeFactor = pow (2.0, input) - 1.0;
+          float ym = 0.1;
+          float b = pow (((1 / ym) - 1), 2);
+          float a = 1.0f / (b - 1.0f);
+          float volumeFactor = pow (b, input) * a - a;
+
+          // float volumeFactor = pow (2.0, input) - 1.0;
 
           printf ("1 volumeFactor %f\n", volumeFactor);
 

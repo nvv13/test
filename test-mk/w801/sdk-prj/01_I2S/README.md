@@ -79,6 +79,49 @@ SD Card
 
 
 
+
+Регулятор Громкости, Энкодер KY-040 
+connect to
+W801   KY-040 
+GPIO   PIN
+-----  -------------------------------------------------
+GND    GND
++3.3   +
+PA11   SW
+PA12   DT
+PA13   CLK
+-----  -------------------------------------------------
+
+
+на LCD если смотреть сверху на экран, и разьем с правой стороны
+то, соединения такие
+connect to TFT32MEGA_2 
+---- --------- ----
+W801 LCD   LCD W801
+---- --------- ----
+5v    5v   5v	
+PB17 VH0   VH1 PB18
+PB26 VH2   VH3 PB25 
+PB24 VH4   VH5 PB23 
+PB22 VH6   VH7 PB21 
+PB16 VL7   VL6 PB01
+PB02 VL5   VL4 PB15 
+PB14 VL3   VL2 PB13 
+PB12 VL1   VL0 PB00
+PA01 RS	    WR PA02	
+PA03 CS    RST PA04
+     -*-   -*-
+     -*-   RD
+     -*-   -*-
+     -*-   -*-
+ MISO SD   SD MOSI
+  SCK SD   SD CS
+gnd  GND   GND
+---- --------- ----
+W801 LCD   LCD W801
+---- --------- ----
+
+
 ~~~
 
 
