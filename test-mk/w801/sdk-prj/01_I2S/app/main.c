@@ -94,6 +94,17 @@ user_app1_task (void *sdata)
 
   init_ff ();
 
+  n_i2s_SetVolume (10);
+  n_i2s_SetVolume (20);
+  n_i2s_SetVolume (30);
+  n_i2s_SetVolume (40);
+  n_i2s_SetVolume (50);
+  n_i2s_SetVolume (60);
+  n_i2s_SetVolume (70);
+  n_i2s_SetVolume (80);
+  n_i2s_SetVolume (90);
+  n_i2s_SetVolume (99);
+
   // подключаем библиотеку UTFT
   UTFT_UTFT (TFT32MEGA_2, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
              (u8)WM_IO_PA_04, 0);

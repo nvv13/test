@@ -74,6 +74,17 @@ extern "C"
    */
   void n_i2s_stop (void);
 
+  /**
+   * @brief          This function is used to Set Volume
+   *
+   * @param[in]      Procent Of Voleme 0..100 %
+   *
+   * @return         none
+   *
+   * @note
+   */
+  void n_i2s_SetVolume (u8 procVol);
+
 #if defined(__cplusplus)
 }
 #endif

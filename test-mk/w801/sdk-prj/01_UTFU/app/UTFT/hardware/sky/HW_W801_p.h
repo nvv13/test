@@ -93,3 +93,82 @@ static void sbi(uint32_t* PORT_REG, u8 PIN)
 	tls_os_release_critical(cpu_sr); // enable Interrupt
 
 }
+
+/*
+static void pulse_high(uint32_t* PORT_REG, u8 PIN)
+{
+	u32 cpu_sr = 0;
+        u32 reg;
+	u32	reg_en;
+        u8  pin;
+        u16 offset;
+
+        if (PIN >= WM_IO_PB_00) // w801 chip, only two GPIO port, PA (GPIOA - 16 bit) and PB (GPIOB - 32 bit), max power 12ma
+        {
+          pin    = PIN - WM_IO_PB_00;
+          offset = TLS_IO_AB_OFFSET;
+        }
+        else
+        {
+          pin    = PIN;
+          offset = 0;
+        }
+
+	
+	cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+	
+	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
+	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin)); // enabled control reg from need pin
+
+	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
+
+        tls_reg_write32(HR_GPIO_DATA + offset, reg | (1 << pin));// write Hi from pin 
+
+        tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));// write low from pin 
+
+        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
+
+	tls_os_release_critical(cpu_sr); // enable Interrupt
+
+}
+*/
+
+/*
+static void pulse_low(uint32_t* PORT_REG, u8 PIN)
+{
+	u32 cpu_sr = 0;
+        u32 reg;
+	u32	reg_en;
+        u8  pin;
+        u16 offset;
+
+        if (PIN >= WM_IO_PB_00) // w801 chip, only two GPIO port, PA (GPIOA - 16 bit) and PB (GPIOB - 32 bit), max power 12ma
+        {
+          pin    = PIN - WM_IO_PB_00;
+          offset = TLS_IO_AB_OFFSET;
+        }
+        else
+        {
+          pin    = PIN;
+          offset = 0;
+        }
+
+	
+	cpu_sr = tls_os_set_critical();  // disable Interrupt !!!
+	
+	reg_en = tls_reg_read32(HR_GPIO_DATA_EN + offset);
+	tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en | (1 << pin)); // enabled control reg from need pin
+
+	reg = tls_reg_read32(HR_GPIO_DATA + offset); // load all pins from port
+
+        tls_reg_write32(HR_GPIO_DATA + offset, reg | (1 << pin));// write Hi from pin 
+
+        tls_reg_write32(HR_GPIO_DATA + offset, reg & (~(1 << pin)));// write low from pin 
+
+        tls_reg_write32(HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
+
+	tls_os_release_critical(cpu_sr); // enable Interrupt
+
+}
+
+*/

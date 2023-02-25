@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -34,9 +35,105 @@ static FIL fnew;       // file object
 static FRESULT res_sd; // file operation results
 static UINT fnum;      // The number of files successfully read and written
 
-u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
+static u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
+static u8 info_channels = 2;
+static u8 info_bits_per_sample = 16;
 
 #include "wm_i2s.h"
+
+static s32_t max_value;
+
+/// provides the biggest number for the indicated number of bits
+static s32_t
+maxValue (int value_bits_per_sample)
+{
+  switch (value_bits_per_sample)
+    {
+    case 8:
+      return 127;
+    case 16:
+      return 32767;
+    case 24:
+      return 8388607;
+    case 32:
+      return 2147483647;
+    }
+  return 32767;
+}
+
+float factor_for_channel[] = { 1.0, 1.0 };
+
+static void
+applyVolume16 (s16_t *data, size_t size)
+{
+  for (size_t j = 0; j < size; j++)
+    {
+      s16_t result = factor_for_channel[(j % info_channels ? 0 : 1)] * data[j];
+      if (true) //! info.allow_boost)
+        {
+          if (result > max_value)
+            result = max_value;
+          if (result < -max_value)
+            result = -max_value;
+        }
+      data[j] = result;
+    }
+}
+
+/*static void
+applyVolume24 (int24_t *data, size_t size)
+{
+  for (size_t j = 0; j < size; j++)
+    {
+      float result = factorForChannel (j % info.channels) * data[j];
+      if (1)//!info.allow_boost)
+        {
+          if (result > max_value)
+            result = max_value;
+          if (result < -max_value)
+            result = -max_value;
+        }
+      int32_t result1 = result;
+      data[j] = static_cast<int24_t> (result1);
+    }
+}
+*/
+
+static void
+applyVolume32 (s32_t *data, size_t size)
+{
+  for (size_t j = 0; j < size; j++)
+    {
+      s32_t result = factor_for_channel[(j % info_channels ? 0 : 1)] * data[j];
+      if (true) //! info.allow_boost)
+        {
+          if (result > max_value)
+            result = max_value;
+          if (result < -max_value)
+            result = -max_value;
+        }
+      data[j] = result;
+    }
+}
+
+static void
+applyVolume (const uint8_t *buffer, size_t size)
+{
+  switch (info_bits_per_sample)
+    {
+    case 16:
+      applyVolume16 ((int16_t *)buffer, size / 2);
+      break;
+    case 24:
+      // applyVolume24 ((int24_t *)buffer, size / 3);
+      break;
+    case 32:
+      applyVolume32 ((int32_t *)buffer, size / 4);
+      break;
+      // default:
+      // printf("Unsupported bits_per_sample: %d", info.bits_per_sample);
+    }
+}
 
 static wm_dma_handler_type hdma_tx;
 static void
@@ -50,6 +147,7 @@ i2sDmaSendCpltCallback (wm_dma_handler_type *hdma)
     {
       res_sd = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE), DEMO_DATA_SIZE,
                        &fnum);
+      applyVolume ((file_buffer + DEMO_DATA_SIZE), fnum);
       if (fnum < DEMO_DATA_SIZE)
         {
           my_sost = N_I2S_END_FILE;
@@ -69,6 +167,7 @@ i2sDmaSendHalfCpltCallback (wm_dma_handler_type *hdma)
   else
     {
       res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
+      applyVolume (file_buffer, fnum);
       if (fnum < DEMO_DATA_SIZE)
         {
           my_sost = N_I2S_END_FILE;
@@ -109,6 +208,13 @@ tls_i2s_send (s32 freq /*sample rate */
 
   if (my_sost == N_I2S_NONE)
     n_i2s_init_hw ();
+
+  max_value = maxValue (datawidth);
+  info_bits_per_sample = datawidth;
+  if (stereo)
+    info_channels = 1;
+  else
+    info_channels = 2;
 
   s8 format = 0;
   /*  format
@@ -185,6 +291,50 @@ n_i2s_init_hw (void)
   // only PA7,The working clock configuration of the I2S module can be
   // configured by setting the 0x40000718 register in the clock and reset
   // module to select the external clock source.
+}
+
+void
+n_i2s_SetVolume (u8 procVol)
+{
+  if (procVol >= 100)
+    {
+      factor_for_channel[0] = 1.0;
+      factor_for_channel[1] = 1.0;
+    }
+  else
+    {
+      if (procVol == 0)
+        {
+          factor_for_channel[0] = 0.0;
+          factor_for_channel[1] = 0.0;
+        }
+      else
+        {
+          float input = procVol;
+          input = input / 100;
+          printf ("0 input %f\n", input);
+
+          
+                float ym=0.1;
+                float b = pow (((1 / ym) - 1), 2);
+                float a = 1.0f / (b - 1.0f);
+                float volumeFactor = pow (b, input) * a - a;
+          
+          //float volumeFactor = pow (2.0, input) - 1.0;
+
+          printf ("1 volumeFactor %f\n", volumeFactor);
+
+          if (volumeFactor > 1.0)
+            volumeFactor = 1.0;
+          if (volumeFactor < 0.0)
+            volumeFactor = 0.0;
+
+          printf ("2 volumeFactor %f\n", volumeFactor);
+
+          factor_for_channel[0] = volumeFactor;
+          factor_for_channel[1] = volumeFactor;
+        }
+    }
 }
 
 // pack(push,1) - Byte alignment ?
@@ -304,6 +454,7 @@ n_i2s_PlayWav (char *filename)
 
               res_sd
                   = f_read (&fnew, file_buffer, sizeof (file_buffer), &fnum);
+              applyVolume (file_buffer, sizeof (file_buffer));
 #ifdef SERIAL_DEBUG
               printf ("load fnum:%d, ", fnum);
 #endif
