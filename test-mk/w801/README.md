@@ -59,6 +59,7 @@ W800 address mapping
 вот наиболее свежий SDK что я нашел https://github.com/ggggxiaolong/wm_sdk_w800
 есть описание, и более подробно что где скачать
 + что то подправлено
+( есть новая версия!! https://github.com/leoay/wm-sdk-w80x-2023.git )
 
 еще приложил в папку doc, документы переведенные с китайского на английский, с помощью - Machine Translated by Google.
 
