@@ -35,6 +35,8 @@ init_ff (void)
 extern uint8_t SmallFont[]; // подключаем большой шрифт
 extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
+static u8 u8_volume = 0; //
+static char buf_str_ind[10];
 
 FRESULT
 scan_files (
@@ -76,8 +78,18 @@ scan_files (
                 {
                   UTFT_clrScr (); // стираем всю информацию с дисплея
                   UTFT_setFont (SmallFont);
-                  UTFT_setColor2 (VGA_FUCHSIA);
-                  UTFT_print (fno.fname, CENTER, 300, 0);
+                  UTFT_setColor2 (VGA_SILVER);
+                  UTFT_print (fno.fname, CENTER, 220, 0);
+                  UTFT_setFont (
+                      SevenSegNumFont); // устанавливаем шрифт имитирующий
+                                        // семисегментный индикатор
+                  UTFT_setColor2 (
+                      VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+                  sprintf (buf_str_ind, "%.3d", u8_volume);
+                  UTFT_print (
+                      buf_str_ind, CENTER, 150,
+                      0); // выводим текст на дисплей (выравнивание по ширине -
+                          // центр дисплея, координата по высоте 150 точек)
                   n_i2s_PlayWav (FileName);
                 }
             }
@@ -88,8 +100,6 @@ scan_files (
   return res;
 }
 
-static u8 u8_volume = 0; //
-
 //****************************************************************************************************//
 
 #define KNOOB_SW WM_IO_PA_11
@@ -97,16 +107,13 @@ static u8 u8_volume = 0; //
 #define KNOOB_CLK WM_IO_PA_13
 
 volatile static u16 i_dreb_CLK = 0; // от дребезга
-// static u16 i_dreb_DT = 0;  // от дребезга
 static const u16 i_pos_dreb_CLK = 3;
-// static const u16 i_pos_dreb_DT  = 5;
 static const u16 i_pos_dreb_SW = 300; //кнопка
 static int i_rotar = 10;
 volatile static u16 i_rotar_zero = 0;
 volatile static u16 i_rotar_one = 0;
 static u8 i_rotar_value = 0;
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
-static char buf_str_ind[100];
 static u8 u8_enc_state = 0;
 
 static void
@@ -119,7 +126,9 @@ demo_timer_irq (u8 *arg) //
         {
           i_dreb_CLK = 0; // от дребезга
 
-          u8_enc_state = ~u8_enc_state;
+          u8_enc_state = ~u8_enc_state; // у меня "Полношаговый" энкодер, даёт
+                                        // 4 сигнала на один щелчок, поэтому
+                                        // исп. переменная u8_enc_state
           if (u8_enc_state)
             {
 
@@ -151,12 +160,6 @@ demo_timer_irq (u8 *arg) //
           i_rotar_value = 1;
         }
     }
-
-  /*  if (i_dreb_DT != 0
-        && i_dreb_DT++ > i_pos_dreb_DT) //можно отсчитывать временной интервал
-      {
-        i_dreb_DT = 0; // от дребезга
-      }*/
 
   if (i_dreb_SW != 0
       && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
@@ -196,23 +199,6 @@ KNOOB_CLK_isr_callback (void *context)
         }
     }
 }
-/*static void
-KNOOB_DT_isr_callback (void *context)
-{
-  u16 ret = tls_get_gpio_irq_status (KNOOB_DT);
-  if (ret)
-    {
-      tls_clr_gpio_irq_status (KNOOB_DT);
-      if (i_dreb_DT == 0)
-        {
-          if (tls_gpio_read (KNOOB_DT))
-            i_rotar_one++;
-          else
-            i_rotar_zero++;
-          i_dreb_DT = 1;
-        }
-    }
-}*/
 
 //****************************************************************************************************//
 
@@ -246,8 +232,6 @@ user_app1_task (void *sdata)
   tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  // tls_gpio_isr_register (KNOOB_DT, KNOOB_DT_isr_callback, NULL);
-  // tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_DOUBLE_EDGE);
   //
 
   u8_volume = 50;
