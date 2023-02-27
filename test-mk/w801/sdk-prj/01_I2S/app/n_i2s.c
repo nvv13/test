@@ -1,3 +1,10 @@
+/*
+
+Volume Algoritm used from
+https://github.com/pschatzmann/arduino-audio-tools.git
+
+*/
+
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,8 +19,8 @@
 
 #include "n_i2s.h"
 
-#define SERIAL_DEBUG
-#define SERIAL_DEBUG_ALL
+//#define SERIAL_DEBUG
+//#define SERIAL_DEBUG_ALL
 
 #define DEMO_DATA_SIZE (8192)
 
@@ -182,7 +189,9 @@ tls_i2s_tx_dma_demo ()
   hdma_tx.XferCpltCallback = i2sDmaSendCpltCallback;
   hdma_tx.XferHalfCpltCallback = i2sDmaSendHalfCpltCallback;
   wm_i2s_transmit_dma (&hdma_tx, (u16 *)file_buffer, DEMO_DATA_SIZE);
+#ifdef SERIAL_DEBUG_ALL
   printf ("dma transmit start\n");
+#endif
 }
 
 static int
@@ -232,11 +241,11 @@ tls_i2s_send (s32 freq /*sample rate */
                  *    - \ref 4: duplex slave
                  */
 
-  s8 mode = 1; // 1: dma
-               /*   mode
-                *    - \ref 0: interrupt
-                *    - \ref 1: dma
-                */
+  // s8 mode = 1; // 1: dma
+  /*   mode
+   *    - \ref 0: interrupt
+   *    - \ref 1: dma
+   */
 
   // format:0, tx_en:1, freq:44100, datawidth:16, stereo:0, mode:1
 
@@ -255,9 +264,11 @@ tls_i2s_send (s32 freq /*sample rate */
   opts.I2S_AudioFreq = freq;
   opts.I2S_MclkFreq = 80000000;
 
+#ifdef SERIAL_DEBUG
   printf ("\r\n");
   printf ("format:%d, tx_en:%d, freq:%d, ", format, tx_rx, freq);
   printf ("datawidth:%d, stereo:%d, mode:%d\r\n", datawidth, stereo, mode);
+#endif
   wm_i2s_port_init (&opts);
   wm_i2s_register_callback (NULL);
   tls_i2s_tx_dma_demo ();
@@ -316,7 +327,9 @@ n_i2s_SetVolume (u8 procVol)
         {
           float input = procVol;
           input = input / 100;
+#ifdef SERIAL_DEBUG_ALL
           printf ("0 input %f\n", input);
+#endif
 
           float ym = 0.1;
           float b = pow (((1 / ym) - 1), 2);
@@ -325,14 +338,18 @@ n_i2s_SetVolume (u8 procVol)
 
           // float volumeFactor = pow (2.0, input) - 1.0;
 
+#ifdef SERIAL_DEBUG_ALL
           printf ("1 volumeFactor %f\n", volumeFactor);
+#endif
 
           if (volumeFactor > 1.0)
             volumeFactor = 1.0;
           if (volumeFactor < 0.0)
             volumeFactor = 0.0;
 
+#ifdef SERIAL_DEBUG_ALL
           printf ("2 volumeFactor %f\n", volumeFactor);
+#endif
 
           factor_for_channel[0] = volumeFactor;
           factor_for_channel[1] = volumeFactor;
@@ -392,7 +409,7 @@ n_i2s_PlayWav (char *filename)
               && strstr (aHead->fmt, "fmt ") != NULL
               && strstr (aHead->data, "data") != NULL)
             {
-#ifdef SERIAL_DEBUG
+#ifdef SERIAL_DEBUG_ALL
               printf ("wav header ok\r\n");
 #endif
 

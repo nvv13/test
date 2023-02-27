@@ -5,6 +5,11 @@
  *
  * @author  nvv13
  *
+ * Volume Algoritm used from
+ * https://github.com/pschatzmann/arduino-audio-tools.git
+ * https://github.com/pschatzmann/arduino-audio-tools/blob/main/License.txt
+ * GNU General Public License v3.0
+ *
  */
 
 #ifndef N_I2S_H
