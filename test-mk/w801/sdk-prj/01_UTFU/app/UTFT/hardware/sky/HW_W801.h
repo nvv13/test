@@ -284,6 +284,15 @@ void UTFT__fast_fill_8(int ch, long pix)
 
 
 
-extern void n_delay_ms (uint32_t ms);
-static void delay(int ms){n_delay_ms(ms);};
+//extern void n_delay_ms (uint32_t ms);
+//static void delay(int ms){n_delay_ms(ms);};
+
+static void delay(u32 ms)
+{
+u32 tick = ms / (1000/HZ);
+if(ms> (tick * (1000/HZ)) )tick++;//в данном случае в большую сторону сделаем
+tls_os_time_delay(tick);
+};
+
+
 

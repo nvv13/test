@@ -13,7 +13,6 @@
 #include "wm_gpio_afsel.h"
 
 #include "mod1/UTFT.h"
-#include "n_delay.h" //нужна для UTFT
 
 #include "ff.h"
 

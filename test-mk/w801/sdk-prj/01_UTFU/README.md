@@ -1,5 +1,3 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
 
 
 project UTFT

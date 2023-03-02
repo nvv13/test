@@ -19,8 +19,6 @@
 #include "wm_gpio_afsel.h"
 #include "wm_osal.h"
 
-#include "n_delay.h" //нужна для UTFT
-
 #include "mod1/UTFT.h"
 
 #define USER_APP1_TASK_SIZE 2048
