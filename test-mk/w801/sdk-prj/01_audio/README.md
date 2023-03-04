@@ -14,27 +14,50 @@ project audio
 https://github.com/schreibfaul1/ESP32-audioI2S.git
 
 
+
+
+
+~~~
+
+с Линковкой cpp были проблемы, 
+поэтому в Makefile добавлено :
+
+CXXFLAGS += -fno-threadsafe-statics 
+
+и ниже,
+
+LINKLIB = -lstdc++ \
+    ...............	
+
+
+по первому пункту ( -fno-threadsafe-statics ), обьяснение :
 https://stackoverflow.com/questions/38779413/arduinojson-undefined-reference-to-cxa-guard-acquire
--fno-threadsafe-statics
-
-
-CXXFLAGS_STD += -std=gnu++11
-
-
-
 https://github.com/bblanchon/ArduinoJson/issues/356
-, you should add -fno-threadsafe-statics and keep -std=c++11.
 
 Explanation:
 
 -std=c++11 enables support for the new language features introduced in the C++11 standard, like nullptr
--fno-threadsafe-statics disables the mutex around initialization of local static variables, which is useless when you program is single threaded.
+-fno-threadsafe-statics disables the mutex around initialization of local static variables,
+  which is useless when you program is single threaded. Ну да, w801 имеет только одно ядро, подходит.
 
 
+это 
+CXXFLAGS_STD += -std=gnu++11
+не добавлял, так как и так работает
 
+
+по второму пункту ( -lstdc++ ), обьяснение :
 https://www.appsloveworld.com/cplus/100/28/undefined-reference-to-gxx-personality-sj0
 
--lstdc++ 
+Explanation:
+
+ use gcc to compile C++ programs, but if you use any features of the standard library or C++ runtime 
+ (including exception handling) then you need to link to the C++ runtime with -lstdc++ 
+ (or -lsupc++ for just the runtime).
+
+~~~
+
+
 
 --------
 
@@ -128,8 +151,7 @@ $ make flash
 
 
 
-
-
+-----------
 Прочее:
 
   подцепляемся к платке, если интересует вывод на консоль (используеться в проекте)
@@ -141,13 +163,15 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
   и пользуемся ...
           выход из picocom - CTRL + A + Q  (это выход без сброса порта (Skipping tty reset...))
 
-
+-----------
 
 Прочее (Linux):
+
  компилируем, и перенаправляем консоль ошибок(2) в файл
+
 $ make 2> a.txt 
 
-
+-----------
 
 
 

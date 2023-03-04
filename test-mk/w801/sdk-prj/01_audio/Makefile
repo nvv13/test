@@ -2,7 +2,6 @@ TOP_DIR := .
 sinclude $(TOP_DIR)/tools/w800/conf.mk
 
 CXXFLAGS += -fno-threadsafe-statics 
-#CXXFLAGS_STD += -std=gnu++11
 
 ifndef PDIR # {
 GEN_IMAGES = $(TARGET).elf

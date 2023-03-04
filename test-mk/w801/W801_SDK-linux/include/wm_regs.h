@@ -254,7 +254,7 @@ typedef volatile unsigned int TLS_REG;    /* Hardware register definition */
 #define HR_CLK_RST_STA			(HR_CLK_BASE_ADDR + 0x1C)
 
 /***************************************************************
- * 内存模块寄存器定义
+ * Memory module register definition 
  ***************************************************************/
 #define HR_MEM_BASE_ADDR        	(DEVICE_BASE_ADDR + 0xF00)
 #define HR_MEM_TXBUF_BASE_ADDR      (HR_MEM_BASE_ADDR + 0x00)

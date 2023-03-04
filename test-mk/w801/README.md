@@ -59,17 +59,17 @@ W800 address mapping
 вот наиболее свежий SDK что я нашел https://github.com/ggggxiaolong/wm_sdk_w800
 есть описание, и более подробно что где скачать
 + что то подправлено
-( есть новая версия!! https://github.com/leoay/wm-sdk-w80x-2023.git )
+( есть новая версия SDK !! https://github.com/leoay/wm-sdk-w80x-2023.git )
 
 еще приложил в папку doc, документы переведенные с китайского на английский, с помощью - Machine Translated by Google.
 
 и исходные, если смотреть в исходный и переведённый, вроде что то становиться понятно.
 
-
+-----------
 
 делал по инструкциям из этого проекта ( у меня Linux Fedora 33 x86_64 )
 https://github.com/droppingy/W801_SDK-linux
-
+-----------
 
 1) первое замечание, насчет конденсатора
  Board : HLK-W801-KIT-V1.0 (add a capacitor (4.7uF) between GND and RESET)
@@ -77,6 +77,8 @@ https://github.com/droppingy/W801_SDK-linux
    https://www.cnblogs.com/milton/p/15621540.html
    
    поскольку у меня платка HLK-W801-KIT-V1.1 , я конденсатор не припаял, и .. работает
+
+-----------
 
 2) второе, установка :
  Toolchain: csky-elfabiv2-tools-x86_64-minilibc-20210423  https://github.com/droppingy/hlk-w80x-toolchain 
@@ -86,7 +88,7 @@ https://github.com/droppingy/W801_SDK-linux
    это чтоб в menuconfig не переделывать, такой там путь по умолчанию
  (еще, в этом мануале https://github.com/IOsetting/wm-sdk-w806, есть ссылки как получить данный Toolchain на другие архитектуры, типа i386)
 
-
+-----------
 
 3) далее, из домашней директории
 
@@ -189,6 +191,7 @@ Sequence  Command             Description
 подправляем t-connect("mywifi2","94510984")
 и вставляем в терминал...
                          
+-----------
 
 4) что дальше?
   например, изучаем пиложенный файлик
@@ -211,7 +214,7 @@ sdk-prj
 ~~~
 
 
-
+-----------
 
 5) еще, 
 очистить проект
@@ -225,7 +228,7 @@ $ make erase
 
 
 
-
+-----------
 
 6) отформатировать исходный текст (ставим $ dnf install clang-tools-extra)
 
@@ -236,7 +239,7 @@ $ clang-format --style=GNU --verbose -i *.c* *.h*
 $ make fmt
 
 
-
+-----------
 
 7) еще, для 
 make menuconfig
@@ -245,6 +248,13 @@ make menuconfig
 
 $ dnf install ncurses-devel
 
+-----------
+
+8) Прочее (Linux):
+
+ компилируем, и перенаправляем консоль ошибок(2) в файл
+
+$ make 2> a.txt 
 
 
 -----------
