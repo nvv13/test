@@ -1,28 +1,16 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
-
 
 project
 
-board HLK-W801-KIT-V1.1 + u8g2 + i2c
+board HLK-W801-KIT-V1.1 + u8g2 + i2c OLED 128x64 Display
+
 
 Видео
+
 
 исходники u8g2, взяты с сайта https://github.com/olikraus/u8g2
 
 пример адаптации взят из https://github.com/RIOT-OS/RIOT, (хотя можно было взять из LuatOS, к примеру)
 
-~~~
-в Makefile директории /app
-
-добавлено
-
-CFLAGS += -DU8X8_WITH_USER_PTR
-CFLAGS += -DMODULE_PERIPH_I2C
-
-INCLUDES += -I ./u8g2
-~~~
 
 
 ~~~
@@ -31,8 +19,10 @@ INCLUDES += -I ./u8g2
 
 добавлено
 
-    $(TOP_DIR)/app/u8g2 
-    $(TOP_DIR)/app/libu8g2$(LIB_EXT) 
+в LINKLIB добавляем
+
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
+
 
 ~~~
 
@@ -41,6 +31,7 @@ INCLUDES += -I ./u8g2
 
 
 дисплей
+ OLED 128x64  1'3 дюйма, I2C, контроллер sh1106
 ~~~
 Разрешение экрана  - 128x64
 ~~~
@@ -50,8 +41,11 @@ INCLUDES += -I ./u8g2
 соеденить по схеме:
 ~~~
 connect to
-2 VCC       5v (3.3 вольт, почему-то не сработало)
+DISPLAY     w801
 1 GND       GND
+2 VCC       5v 
+3 scl       PA01
+4 sda       PA04
 ~~~
 
 

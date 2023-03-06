@@ -9,7 +9,6 @@ endif
 
 sinclude $(TOP_DIR)/tools/w800/rules.mk
 
-CFLAGS += -DU8X8_WITH_USER_PTR
 
 PDIR := ../$(PDIR)
 sinclude $(PDIR)Makefile

@@ -14,8 +14,6 @@ https://youtu.be/ZmhRPNjVMo0
 
 добавлено
 
-CFLAGS += -DU8X8_WITH_USER_PTR
-
 INCLUDES += -I ./u8g2
 ~~~
 
@@ -28,6 +26,17 @@ INCLUDES += -I ./u8g2
 
     $(TOP_DIR)/app/u8g2 
     $(TOP_DIR)/app/libu8g2$(LIB_EXT) 
+
+
+
+если готовую библиотеку, то,
+
+в LINKLIB добавляем
+
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
+
+например как в этом проекте
+ https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_u8g2_i2c
 
 ~~~
 

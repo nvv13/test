@@ -10,8 +10,6 @@ endif
 
 sinclude $(TOP_DIR)/tools/w800/rules.mk
 
-CFLAGS += -DU8X8_WITH_USER_PTR
-
 INCLUDES := $(INCLUDES) -I $(PDIR)include
 INCLUDES += -I ./u8g2
 
