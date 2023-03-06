@@ -1,3 +1,18 @@
+/*
+
+ mc - Milliseconds 10^-3
+
+ µs - Microseconds 10^-6
+ us - Microseconds 10^-6
+
+ ns - Nanoseconds  10^-9
+
+ 1000 ms = 1 µs OR 1 us
+
+*/
+
+#include "csi_core.h"
+
 #include "n_delay.h"
 #include "wm_cpu.h"
 
@@ -5,14 +20,13 @@ extern uint32_t csi_coret_get_load (void);
 extern uint32_t csi_coret_get_value (void);
 
 /**
- * @brief     interface delay ms
+ * @brief     interface delay ms (Milliseconds 10^-3)
  * @param[in] ms
  * @note      none
  */
 void
 n_delay_ms (uint32_t ms)
 {
-  // printf("*st7920_interface_delay_ms(%d)\n\r", ms);
   if (ms == 0)
     return;
   do
@@ -23,7 +37,7 @@ n_delay_ms (uint32_t ms)
 }
 
 /**
- * @brief     interface delay us
+ * @brief     interface delay us (Microseconds 10^-6)
  * @param[in] us
  * @note      none
  */
@@ -39,14 +53,24 @@ n_delay_us (uint32_t us)
   if (us == 0)
     return;
 
-  uint32_t load = csi_coret_get_load ();
-  uint32_t start = csi_coret_get_value ();
+  uint32_t load = csi_coret_get_load (); // значение, после которого сброс и
+                                         // прерывание SysTick
+  uint32_t start
+      = csi_coret_get_value (); // текущее значение System Tick Timer (CORET)
   uint32_t cur;
   uint32_t cnt;
   tls_sys_clk sysclk;
 
   tls_sys_clk_get (&sysclk);
   cnt = sysclk.cpuclk * us;
+  /*
+  при 240MHz значение sysclk.cpuclk=240
+  то есть
+  1 cpuclk = 1 микросекунда
+  или 1MHz,
+  то есть
+  System Tick Timer (CORET) - меняеться с частотой CPU
+  */
 
   while (1)
     {

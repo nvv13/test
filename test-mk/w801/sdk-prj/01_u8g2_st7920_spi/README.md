@@ -15,7 +15,6 @@ https://youtu.be/ZmhRPNjVMo0
 добавлено
 
 CFLAGS += -DU8X8_WITH_USER_PTR
-CFLAGS += -DMODULE_PERIPH_SPI
 
 INCLUDES += -I ./u8g2
 ~~~

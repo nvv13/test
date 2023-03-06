@@ -96,17 +96,22 @@ UserMain (void)
   /* initialize to SPI */
   puts ("Initializing to SPI.");
 
-  u8g2_Setup_st7920_s_128x64_1 (&u8g2, U8G2_R0, u8x8_byte_hw_spi_riotos,
-                                u8x8_gpio_and_delay_riotos);
-
   u8x8_riotos_t user_data = {
-    .device_index = 0,        // SPI_DEV(0),
+
     .pin_cs = WM_IO_PB_21,    // GPIO_PIN(PORT_A, 4),
     .pin_dc = GPIO_UNDEF,     // GPIO_UNDEF,
     .pin_reset = WM_IO_PB_22, // GPIO_PIN(PORT_A, 0),
+
+    .spi_cs = WM_IO_PB_14, /* */
+    .spi_ck = WM_IO_PB_15, /* */
+    .spi_di = WM_IO_PB_16, /* */
+    .spi_do = WM_IO_PB_17, /* */
   };
 
   u8g2_SetUserPtr (&u8g2, &user_data);
+
+  u8g2_Setup_st7920_s_128x64_1 (&u8g2, U8G2_R0, u8x8_byte_hw_spi_riotos,
+                                u8x8_gpio_and_delay_riotos);
 
   /* initialize the display */
   puts ("Initializing display.");

@@ -22,7 +22,8 @@
 #ifndef U8X8_RIOTOS_H
 #define U8X8_RIOTOS_H
 
-#include "u8x8.h"
+#include "mod1/u8x8.h"
+#include "mod1/u8g2.h"
 
 #include "wm_type_def.h"
 /* */
@@ -51,10 +52,19 @@ extern "C"
     void
         *user_ptr; /**< Pointer to optionally store any additional user-data */
 
-    unsigned int device_index;  /**< Index of the SPI/I2C device */
     enum tls_io_name pin_cs;    /**< Pin for SPI CS, GPIO_UNDEF if not used */
     enum tls_io_name pin_dc;    /**< Pin for SPI DC, GPIO_UNDEF if not used */
     enum tls_io_name pin_reset; /**< Pin for RESET, GPIO_UNDEF if not used */
+
+    enum tls_io_name spi_cs; /* */
+    enum tls_io_name spi_ck; /* */
+    enum tls_io_name spi_di; /* даже если не используеться, надо определить? */
+    enum tls_io_name spi_do; /* */
+
+    enum tls_io_name i2c_scl; /* */
+    enum tls_io_name i2c_sda; /* */
+    u32 i2c_freq;             /* частота i2c в герцах */
+
   } u8x8_riotos_t;
 
   /**

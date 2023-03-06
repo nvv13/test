@@ -9,7 +9,8 @@
  *****************************************************************************/
 
 #if defined(__cplusplus)
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stdio.h>
@@ -33,7 +34,6 @@ extern "C" {
 #if defined(__cplusplus)
 }
 #endif
-
 
 class CBlink
 {
@@ -60,6 +60,24 @@ public:
 extern "C" int
 UserMain (void)
 {
+  union
+  {
+    short s;
+    char c[sizeof (short)];
+  } un;
+  un.s = 0x0102;
+  printf (" CPU:xt804 ");
+  if (sizeof (short) == 2)
+    {
+      if (un.c[0] == 1 && un.c[1] == 2)
+        printf ("big-endiann");
+      else if (un.c[0] == 2 && un.c[1] == 1)
+        printf ("little-endiann");
+      else
+        printf ("unknownn");
+    }
+  else
+   printf("sizeof(short) = %dn", sizeof(short));
 
   CBlink ob_Blink1 = CBlink (WM_IO_PB_05);
   CBlink ob_Blink2 = CBlink (WM_IO_PB_25);

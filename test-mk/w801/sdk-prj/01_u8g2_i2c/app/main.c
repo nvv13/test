@@ -31,7 +31,7 @@
 #include "wm_watchdog.h"
 //#include "csi_core.h"
 
-#include "u8g2.h"
+#include "mod1/u8g2.h"
 #include "u8x8_riotos.h"
 
 /**
@@ -84,6 +84,7 @@ LCD	       - W801
 19 BLA         - +3.3v
 20 BLK         - GND
 */
+
 void
 UserMain (void)
 {
@@ -96,14 +97,40 @@ UserMain (void)
   /* initialize to SPI */
   puts ("Initializing to I2C.");
 
-  u8g2_Setup_ssd1306_128x64_noname_1 (&u8g2, U8G2_R0, u8x8_byte_hw_i2c_riotos,
-                                      u8x8_gpio_and_delay_riotos);
+  u8g2_Setup_sh1106_i2c_128x64_noname_f (
+      &u8g2, U8G2_R0, u8x8_byte_hw_i2c_riotos, u8x8_gpio_and_delay_riotos);
+
+  // void u8g2_Setup_sh1106_i2c_128x64_noname_1(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_vcomh0_1(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_winstar_1(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_noname_2(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_vcomh0_2(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_winstar_2(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_noname_f(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_vcomh0_f(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb); void
+  // u8g2_Setup_sh1106_i2c_128x64_winstar_f(u8g2_t *u8g2, const u8g2_cb_t
+  // *rotation, u8x8_msg_cb byte_cb, u8x8_msg_cb gpio_and_delay_cb);
+
+  if (u8g2.u8x8.i2c_address == 255)
+    u8g2.u8x8.i2c_address = 0x3C;
 
   u8x8_riotos_t user_data = {
-    .device_index = 0,       // SPI_DEV(0),
-    .pin_cs = GPIO_UNDEF, //WM_IO_PA_01,   // scl
-    .pin_dc = GPIO_UNDEF, //WM_IO_PA_04,   // sda
+    .pin_cs = GPIO_UNDEF,    //
+    .pin_dc = GPIO_UNDEF,    //
     .pin_reset = GPIO_UNDEF, //
+
+    .i2c_scl = WM_IO_PA_01, /* */
+    .i2c_sda = WM_IO_PA_04, /* */
+    .i2c_freq = 100000      /* частота i2c в герцах */
+
   };
 
   u8g2_SetUserPtr (&u8g2, &user_data);
