@@ -7,7 +7,7 @@ project
 board HLK-W801-KIT-V1.1 + wifi + OLED Display + WDT + rtos + https weather + ntp + OTA upgrade 
 
 видео:
-https://youtu.be/Hg9dpII8_EY
+https://youtu.be/-Hyt0G5vFQM
 
 ------
 
