@@ -125,9 +125,6 @@ demo_console_task (void *sdata)
   u8g2_InitDisplay (&u8g2);
   u8g2_SetPowerSave (&u8g2, 0);
 
-  u8g2_SetDrawColor (&u8g2, 1);
-  u8g2_SetFont (&u8g2, u8g2_font_helvB12_tf);
-  u8g2_FirstPage (&u8g2);
   char buff[100];
 
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
@@ -309,31 +306,45 @@ demo_console_task (void *sdata)
                 }
             }
 
-          if (iMode == MODE_CLOCK)
+          u8g2_FirstPage (&u8g2);
+          do
             {
+              u8g2_SetDrawColor (&u8g2, 1);
+              u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
               if (u8_sec_state)
-                buff[sprintf (buff, "%d%d:%d%d   ", i_5643_hour / 10,
+                buff[sprintf (buff, "%d%d:%d%d", i_5643_hour / 10,
                               i_5643_hour % 10, i_5643_min / 10,
                               i_5643_min % 10)]
                     = 0;
               else
-                buff[sprintf (buff, "%d%d %d%d   ", i_5643_hour / 10,
+                buff[sprintf (buff, "%d%d %d%d", i_5643_hour / 10,
                               i_5643_hour % 10, i_5643_min / 10,
                               i_5643_min % 10)]
                     = 0;
-            }
-          else
-            {
+              u8g2_DrawStr (&u8g2, 10, 24, buff);
+
               int i_t = i_5643_t_value;
-              if (i_5643_t_mantissa > 5)
-                i_t++;
-              if (i_5643_t_sign == 1)
-                buff[sprintf (buff, " +%d%dC   ", i_t / 10, i_t % 10)] = 0;
+              if (i_t == 88)
+                {
+                  buff[sprintf (buff, "wait WiFi")] = 0;
+                  u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+                  u8g2_DrawStr (&u8g2, 0, 58, buff);
+                }
               else
-                buff[sprintf (buff, " -%d%dC   ", i_t / 10, i_t % 10)] = 0;
+                {
+                  if (i_5643_t_mantissa > 5)
+                    i_t++;
+                  if (i_5643_t_sign == 1)
+                    buff[sprintf (buff, "+%d%d", i_t / 10, i_t % 10)] = 0;
+                  else
+                    buff[sprintf (buff, "-%d%d", i_t / 10, i_t % 10)] = 0;
+                  u8g2_DrawStr (&u8g2, 20, 58, buff);
+                  buff[sprintf (buff, "C")] = 0;
+                  u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+                  u8g2_DrawStr (&u8g2, 80, 58, buff);
+                }
             }
-          u8g2_DrawStr (&u8g2, 12, 22, buff);
-          u8g2_NextPage (&u8g2);
+          while (u8g2_NextPage (&u8g2));
         }
     }
 }
