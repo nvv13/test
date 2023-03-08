@@ -30,6 +30,32 @@ DISPLAY     w801
 
 
 
+--------
+
+в проекте используеться библиотека u8g2
+~~~
+
+ее сборка https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_u8g2_st7920_spi
+после сборки, сама библиотека libu8g2.a 
+ разместить в директорию 
+.\lib\w800\mod1\
+и заголовочные файлы u8g2.h u8x8.h
+ разместить директорию
+.\include\mod1\
+
+их еще можно взять из 
+https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/lib/w800/mod1
+https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/include/mod1
+
+
+в Makefile директории . этого проекта
+секция LINKLIB добавлено
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
+
+~~~
+
+--------
+
 
 ~~~
 При старте: подсоединяемся к сети Wifi, запрашиваем время по ntp.
