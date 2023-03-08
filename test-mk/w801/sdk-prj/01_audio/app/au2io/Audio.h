@@ -6,14 +6,13 @@
  *      Author: Wolle (schreibfaul1)
  */
 
-
 #define SDFATFS_USED // activate for SdFat
 
 #pragma once
 #pragma GCC optimize("Ofast")
 #include "Arduino.h"
-#include "esp32-hal-log.h"
 #include "cencode.h"
+#include "esp32-hal-log.h"
 #include <vector>
 
 #include "SPI.h"
@@ -21,7 +20,6 @@
 #include "WiFiClientSecure.h"
 #include "i2s.h"
 #include <vector>
-
 
 #ifdef SDFATFS_USED
 #include "SdFat.h" // https://github.com/greiman/SdFat
@@ -801,4 +799,3 @@ private:
 
 //----------------------------------------------------------------------------------------------------------------------
 #pragma GCC diagnostic pop
-

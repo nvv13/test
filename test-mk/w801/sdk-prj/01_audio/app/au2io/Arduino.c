@@ -28,8 +28,6 @@ extern "C"
 }
 #endif
 
-
-
 #ifndef UINT32_MAX
 #define UINT32_MAX (4294967295U)
 #endif
@@ -47,9 +45,9 @@ millis (void)
   return cur * (1000 / HZ);
 };
 
-//extern "C" int HTTPWrapperToUpper (int c);
-//char
-//toupper (char a)
+// extern "C" int HTTPWrapperToUpper (int c);
+// char
+// toupper (char a)
 //{
 //  return (char)HTTPWrapperToUpper (a);
 //};
@@ -102,12 +100,14 @@ log_w (const char *log)
   printf ("%s\n", log);
 }; // for debug
 
-
-void * __malloc_heap_psram(size_t len){
-return NULL;
+void *
+__malloc_heap_psram (size_t len)
+{
+  return NULL;
 };
 
-void * heap_caps_malloc_prefer(u32 size, u8 a, u8 opt, u8 opt2){return NULL;};
-
-
-
+void *
+heap_caps_malloc_prefer (u32 size, u8 a, u8 opt, u8 opt2)
+{
+  return NULL;
+};

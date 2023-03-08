@@ -22,6 +22,12 @@
 #ifndef U8X8_RIOTOS_H
 #define U8X8_RIOTOS_H
 
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include "mod1/u8x8.h"
 #include "mod1/u8g2.h"
 
@@ -31,11 +37,6 @@
 
 #define GPIO_UNDEF -1
 #define gpio_is_valid(u8g2) ((u8g2 != GPIO_UNDEF))
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
 
   /**
    * @brief   Holds RIOT-OS specific peripheral data.

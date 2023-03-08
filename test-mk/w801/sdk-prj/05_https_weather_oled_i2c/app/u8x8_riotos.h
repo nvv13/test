@@ -22,14 +22,13 @@
 #ifndef U8X8_RIOTOS_H
 #define U8X8_RIOTOS_H
 
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-#include "mod1/u8x8.h"
 #include "mod1/u8g2.h"
+#include "mod1/u8x8.h"
 
 #include "wm_type_def.h"
 /* */

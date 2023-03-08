@@ -632,8 +632,8 @@ Audio::connecttohost (const char *host, const char *user, const char *pwd)
   if (m_f_Log)
     AUDIO_INFO ("connect to %s on port %d path %s", hostwoext, port,
                 extension);
-  res = _client->connect (hostwoext, port,
-                          m_f_ssl ? m_timeout_ms_ssl : m_timeout_ms);
+  res = _client->n_connect (hostwoext, port,
+                            m_f_ssl ? m_timeout_ms_ssl : m_timeout_ms);
   if (res)
     {
       uint32_t dt = millis () - t;
@@ -791,7 +791,7 @@ Audio::httpPrint (const char *host)
   if (!_client->connected ())
     {
       AUDIO_INFO ("The host has disconnected, reconnecting");
-      if (!_client->connect (hostwoext, port))
+      if (!_client->n_connect (hostwoext, port))
         {
           log_e ("connection lost");
           stopSong ();
@@ -1060,7 +1060,7 @@ Audio::connecttospeech (const char *speech, const char *lang)
       speechBuff = NULL;
     }
   _client = static_cast<WiFiClient *> (&client);
-  if (!_client->connect (host, 80))
+  if (!_client->n_connect (host, 80))
     {
       log_e ("Connection failed");
       return false;
@@ -1164,7 +1164,7 @@ Audio::connecttomarytts (const char *speech, const char *lang,
       speechBuff = NULL;
     }
   _client = static_cast<WiFiClient *> (&client);
-  if (!_client->connect (host, port))
+  if (!_client->n_connect (host, port))
     {
       log_e ("Connection failed");
       return false;
