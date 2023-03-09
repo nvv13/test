@@ -1,0 +1,101 @@
+Audio.cpp: In member function ‘void Audio::setDefaults()’:
+Audio.cpp:420:28: error: ‘FLACDecoder_FreeBuffers’ was not declared in this scope
+   FLACDecoder_FreeBuffers ();
+                            ^
+Audio.cpp: In member function ‘int Audio::read_OGG_Header(uint8_t*, size_t)’:
+Audio.cpp:3008:41: error: ‘FLACDecoder_AllocateBuffers’ was not declared in this scope
+       if (!FLACDecoder_AllocateBuffers ())
+                                         ^
+Audio.cpp: In member function ‘void Audio::processLocalFile()’:
+Audio.cpp:4055:31: error: ‘FLACDecoderReset’ was not declared in this scope
+             FLACDecoderReset ();
+                               ^
+Audio.cpp:4083:34: error: ‘FLACDecoder_FreeBuffers’ was not declared in this scope
+         FLACDecoder_FreeBuffers ();
+                                  ^
+Audio.cpp: In member function ‘bool Audio::initializeDecoder()’:
+Audio.cpp:5121:41: error: ‘FLACDecoder_AllocateBuffers’ was not declared in this scope
+       if (!FLACDecoder_AllocateBuffers ())
+                                         ^
+Audio.cpp: In member function ‘int Audio::findNextSync(uint8_t*, size_t)’:
+Audio.cpp:5611:45: error: ‘FLACSetRawBlockParams’ was not declared in this scope
+                              m_audioDataSize);
+                                             ^
+Audio.cpp:5612:45: error: ‘FLACFindSyncWord’ was not declared in this scope
+       nextSync = FLACFindSyncWord (data, len);
+                                             ^
+Audio.cpp:5618:45: error: ‘FLACSetRawBlockParams’ was not declared in this scope
+                              m_audioDataSize);
+                                             ^
+Audio.cpp:5619:45: error: ‘FLACFindSyncWord’ was not declared in this scope
+       nextSync = FLACFindSyncWord (data, len);
+                                             ^
+Audio.cpp: In member function ‘int Audio::sendBytes(uint8_t*, size_t)’:
+Audio.cpp:5697:52: error: ‘FLACDecode’ was not declared in this scope
+       ret = FLACDecode (data, &bytesLeft, m_outBuff);
+                                                    ^
+Audio.cpp:5764:45: error: ‘FLACGetChannels’ was not declared in this scope
+               setChannels (FLACGetChannels ());
+                                             ^
+Audio.cpp:5765:47: error: ‘FLACGetSampRate’ was not declared in this scope
+               setSampleRate (FLACGetSampRate ());
+                                               ^
+Audio.cpp:5766:55: error: ‘FLACGetBitsPerSample’ was not declared in this scope
+               setBitsPerSample (FLACGetBitsPerSample ());
+                                                       ^
+Audio.cpp:5767:43: error: ‘FLACGetBitRate’ was not declared in this scope
+               setBitrate (FLACGetBitRate ());
+                                           ^
+Audio.cpp:5781:48: error: ‘FLACGetOutputSamps’ was not declared in this scope
+           m_validSamples = FLACGetOutputSamps () / getChannels ();
+                                                ^
+Audio.cpp: In member function ‘void Audio::compute_audioCurrentTime(int)’:
+Audio.cpp:5824:35: error: ‘FLACGetBitRate’ was not declared in this scope
+       setBitrate (FLACGetBitRate ());
+                                   ^
+Audio.cpp: In member function ‘void Audio::printDecodeError(int)’:
+Audio.cpp:6022:14: error: ‘ERR_FLAC_NONE’ was not declared in this scope
+         case ERR_FLAC_NONE:
+              ^~~~~~~~~~~~~
+Audio.cpp:6025:14: error: ‘ERR_FLAC_BLOCKSIZE_TOO_BIG’ was not declared in this scope
+         case ERR_FLAC_BLOCKSIZE_TOO_BIG:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6028:14: error: ‘ERR_FLAC_RESERVED_BLOCKSIZE_UNSUPPORTED’ was not declared in this scope
+         case ERR_FLAC_RESERVED_BLOCKSIZE_UNSUPPORTED:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6031:14: error: ‘ERR_FLAC_SYNC_CODE_NOT_FOUND’ was not declared in this scope
+         case ERR_FLAC_SYNC_CODE_NOT_FOUND:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6034:14: error: ‘ERR_FLAC_UNKNOWN_CHANNEL_ASSIGNMENT’ was not declared in this scope
+         case ERR_FLAC_UNKNOWN_CHANNEL_ASSIGNMENT:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6037:14: error: ‘ERR_FLAC_RESERVED_CHANNEL_ASSIGNMENT’ was not declared in this scope
+         case ERR_FLAC_RESERVED_CHANNEL_ASSIGNMENT:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6040:14: error: ‘ERR_FLAC_RESERVED_SUB_TYPE’ was not declared in this scope
+         case ERR_FLAC_RESERVED_SUB_TYPE:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6043:14: error: ‘ERR_FLAC_PREORDER_TOO_BIG’ was not declared in this scope
+         case ERR_FLAC_PREORDER_TOO_BIG:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6046:14: error: ‘ERR_FLAC_RESERVED_RESIDUAL_CODING’ was not declared in this scope
+         case ERR_FLAC_RESERVED_RESIDUAL_CODING:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6049:14: error: ‘ERR_FLAC_WRONG_RICE_PARTITION_NR’ was not declared in this scope
+         case ERR_FLAC_WRONG_RICE_PARTITION_NR:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6052:14: error: ‘ERR_FLAC_BITS_PER_SAMPLE_TOO_BIG’ was not declared in this scope
+         case ERR_FLAC_BITS_PER_SAMPLE_TOO_BIG:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6055:14: error: ‘ERR_FLAG_BITS_PER_SAMPLE_UNKNOWN’ was not declared in this scope
+         case ERR_FLAG_BITS_PER_SAMPLE_UNKNOWN:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp: In member function ‘uint32_t Audio::getAudioFileDuration()’:
+Audio.cpp:6129:53: error: ‘FLACGetAudioFileDuration’ was not declared in this scope
+     m_audioFileDuration = FLACGetAudioFileDuration ();
+                                                     ^
+Audio.cpp: In member function ‘bool Audio::setFilePos(uint32_t)’:
+Audio.cpp:6211:23: error: ‘FLACDecoderReset’ was not declared in this scope
+     FLACDecoderReset ();
+                       ^
+make: *** [../../tools/w800/rules.mk:206: ../../bin/build/w800/obj/app/au2io/au2io_Audio.o] Ошибка 1

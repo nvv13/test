@@ -1,0 +1,832 @@
+/**
+ * This is a driver library for VS1053 MP3 Codec Breakout
+ * (Ogg Vorbis / MP3 / AAC / WMA / FLAC / MIDI Audio Codec Chip).
+ * Adapted for Espressif ESP8266 and ESP32 boards.
+ *
+ * version 1.0.1
+ *
+ * Licensed under GNU GPLv3 <http://gplv3.fsf.org/>
+ * Copyright © 2018
+ *
+ * @authors baldram, edzelf, MagicCube, maniacbug
+ *
+ * Development log:
+ *  - 2011: initial VS1053 Arduino library
+ *          originally written by J. Coliz (github: @maniacbug),
+ *  - 2016: refactored and integrated into Esp-radio sketch
+ *          by Ed Smallenburg (github: @edzelf)
+ *  - 2017: refactored to use as PlatformIO library
+ *          by Marcin Szalomski (github: @baldram | twitter: @baldram)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License or later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//#include "wm_type_def.h"
+//#include "wm_uart.h"
+#include "wm_gpio.h"
+#include "wm_gpio_afsel.h"
+#include "wm_hostspi.h"
+//#include "wm_socket.h"
+//#include "wm_sockets.h"
+//#include "wm_wifi.h"
+//#include "wm_hspi.h"
+//#include "wm_pwm.h"
+//#include "wm_params.h"
+#include "wm_osal.h"
+//#include "wm_netif.h"
+//#include "wm_efuse.h"
+//#include "wm_mem.h"
+//#include "wm_cpu.h"
+//#include "wm_regs.h"
+//#include "wm_rtc.h"
+//#include "wm_timer.h"
+//#include "wm_watchdog.h"
+//#include "csi_core.h"
+
+#include "patches/vs1053b-patches.h"
+
+#include "ConsoleLogger.h"
+
+#include "VS1053.h"
+
+//-----------------------------------------------------
+#ifndef _BV
+#define _BV(x) (1UL << (x))
+#endif
+
+#ifndef MAX
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
+
+#ifndef MIN
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#endif
+//-----------------------------------------------------
+static long
+map (long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+//-----------------------------------------------------
+static void
+delay (u32 ms)
+{
+  u32 tick = ms / (1000 / HZ);
+  if (ms > (tick * (1000 / HZ)))
+    tick++; //в данном случае в большую сторону сделаем
+  tls_os_time_delay (tick);
+};
+
+  //-----------------------------------------------------
+
+#define HIGH 1
+#define LOW 0
+
+#define INPUT_PULLUP WM_GPIO_ATTR_PULLHIGH
+#define INPUT WM_GPIO_DIR_INPUT
+#define OUTPUT WM_GPIO_DIR_OUTPUT
+
+static u8
+digitalRead (enum tls_io_name pin)
+{
+  return tls_gpio_read (pin);
+};
+static void
+digitalWrite (enum tls_io_name pin, u8 val)
+{
+  tls_gpio_write (pin, val);
+};
+//-----------------------------------------------------
+static void
+yield (void)
+{
+  tls_os_time_delay (0);
+}; // Very short delay
+
+//-----------------------------------------------------
+#define SPISettings int
+// SPISettings(200000, MSBFIRST, SPI_MODE0);
+//#define MSBFIRST 0
+//#define SPI_MODE0 0
+
+static  enum tls_io_name spi_cs; /* */
+static  enum tls_io_name spi_ck; /* */
+static  enum tls_io_name spi_di; /* даже если не используеться, надо определить? */
+static  enum tls_io_name spi_do; /* */
+
+static int
+SPI_Settings (u32 fclk)
+{
+  wm_spi_cs_config (spi_cs);
+  wm_spi_ck_config (spi_ck);
+  wm_spi_di_config (spi_di);
+  wm_spi_do_config (spi_do);
+  tls_spi_trans_type (
+      SPI_BYTE_TRANSFER); // SPI_DMA_TRANSFER);SPI_WORD_TRANSFER // byte ,
+                          // word, dma , MSBFIRST, SPI_MODE0
+  return tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_HIGH, fclk);
+};
+static void SPI_beginTransaction (int VS1053_SPI){}; // Prevent other SPI users
+static void SPI_endTransaction (void){};             // Allow other SPI users
+static u8
+SPI_transfer (u8 a)
+{
+  u8 rxbuf[1] = { a };
+  tls_spi_read (rxbuf, 1);
+  // tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32 n_rx);
+  return rxbuf[0];
+};
+static u8
+SPI_write (u8 a)
+{
+  u8 buf[1] = { a };
+  return tls_spi_write (buf, 1);
+};
+static u8
+SPI_write16 (u16 a)
+{
+  union
+  {
+    u16 w;
+    u8 b[2];
+  } un;
+  un.w = a;
+  return tls_spi_write (un.b, 2);
+}; // Send 16 bits data
+static size_t
+SPI_writeBytes (u8 *data, size_t chunk_length)
+{
+  return tls_spi_write (data, chunk_length);
+};
+
+//-----------------------------------------------------
+
+const uint8_t vs1053_chunk_size = 32;
+// SCI Register
+const uint8_t SCI_MODE = 0x0;
+const uint8_t SCI_STATUS = 0x1;
+const uint8_t SCI_BASS = 0x2;
+const uint8_t SCI_CLOCKF = 0x3;
+const uint8_t SCI_DECODE_TIME = 0x4; // current decoded time in full seconds
+const uint8_t SCI_AUDATA = 0x5;
+const uint8_t SCI_WRAM = 0x6;
+const uint8_t SCI_WRAMADDR = 0x7;
+const uint8_t SCI_AIADDR = 0xA;
+const uint8_t SCI_VOL = 0xB;
+const uint8_t SCI_AICTRL0 = 0xC;
+const uint8_t SCI_AICTRL1 = 0xD;
+const uint8_t SCI_num_registers = 0xF;
+// SCI_MODE bits
+const uint8_t SM_SDINEW = 11; // Bitnumber in SCI_MODE always on
+const uint8_t SM_RESET = 2;   // Bitnumber in SCI_MODE soft reset
+const uint8_t SM_CANCEL = 3;  // Bitnumber in SCI_MODE cancel song
+const uint8_t SM_TESTS = 5;   // Bitnumber in SCI_MODE for tests
+const uint8_t SM_LINE1 = 14;  // Bitnumber in SCI_MODE for Line input
+const uint8_t SM_STREAM = 6;  // Bitnumber in SCI_MODE for Streaming Mode
+
+const uint16_t ADDR_REG_GPIO_DDR_RW = 0xc017;
+const uint16_t ADDR_REG_GPIO_VAL_R = 0xc018;
+const uint16_t ADDR_REG_GPIO_ODATA_RW = 0xc019;
+const uint16_t ADDR_REG_I2S_CONFIG_RW = 0xc040;
+
+static SPISettings VS1053_SPI; // SPI settings for this slave
+static uint8_t endFillByte;    // Byte to send when stopping song
+
+static enum tls_io_name cs_pin;      // Pin where CS line is connected
+static enum tls_io_name dcs_pin;     // Pin where DCS line is connected
+static enum tls_io_name dreq_pin;    // Pin where DREQ line is connected
+static uint8_t curvol;      // Current volume setting 0..100%
+static s8_t curbalance = 0; // Current balance setting -100..100
+
+
+
+
+static void
+VS1053_await_data_request (void)
+{
+  while (!digitalRead (dreq_pin))
+    {
+      yield (); // Very short delay
+    }
+}
+
+static void
+VS1053_control_mode_on (void)
+{
+  SPI_beginTransaction (VS1053_SPI); // Prevent other SPI users
+  digitalWrite (dcs_pin, HIGH);      // Bring slave in control mode
+  digitalWrite (cs_pin, LOW);
+}
+
+static void
+VS1053_control_mode_off (void)
+{
+  digitalWrite (cs_pin, HIGH); // End control mode
+  SPI_endTransaction ();       // Allow other SPI users
+}
+
+static void
+VS1053_data_mode_on (void)
+{
+  SPI_beginTransaction (VS1053_SPI); // Prevent other SPI users
+  digitalWrite (cs_pin, HIGH);       // Bring slave in data mode
+  digitalWrite (dcs_pin, LOW);
+}
+
+static void
+VS1053_data_mode_off (void)
+{
+  digitalWrite (dcs_pin, HIGH); // End data mode
+  SPI_endTransaction ();        // Allow other SPI users
+}
+
+static uint16_t VS1053_read_register (uint8_t _reg);
+
+static void VS1053_sdi_send_buffer (uint8_t *data, size_t len);
+
+static void VS1053_sdi_send_fillers (size_t length);
+
+static void VS1053_wram_write (uint16_t address, uint16_t data);
+
+static uint16_t VS1053_wram_read (uint16_t address);
+
+//    inline bool VS1053_data_request(void)  {
+//        return (digitalRead(dreq_pin) == HIGH);
+//    }
+// bool VS1053_data_request(void);
+// static bool VS1053_data_request(void)
+//{
+//  return (digitalRead(dreq_pin) == HIGH);
+//}
+
+void
+VS1053_VS1053 (libVS1053_t* set_pin)
+{
+  cs_pin = set_pin->cs_pin;
+  dcs_pin = set_pin->dcs_pin;
+  dreq_pin = set_pin->dreq_pin;
+
+spi_cs = set_pin->spi_cs;
+spi_ck = set_pin->spi_ck;
+spi_di = set_pin->spi_di;
+spi_do = set_pin->spi_do;
+
+}
+
+uint16_t
+VS1053_read_register (uint8_t _reg)
+{
+  uint16_t result;
+
+  VS1053_control_mode_on ();
+  SPI_write (3);    // Read operation
+  SPI_write (_reg); // Register to read (0..0xF)
+  // Note: transfer16 does not seem to work
+  result = (SPI_transfer (0xFF) << 8) | // Read 16 bits data
+           (SPI_transfer (0xFF));
+  VS1053_await_data_request (); // Wait for DREQ to be HIGH again
+  VS1053_control_mode_off ();
+  return result;
+}
+
+void
+VS1053_writeRegister (uint8_t _reg, uint16_t _value)
+{
+  VS1053_control_mode_on ();
+  SPI_write (2);        // Write operation
+  SPI_write (_reg);     // Register to write (0..0xF)
+  SPI_write16 (_value); // Send 16 bits data
+  VS1053_await_data_request ();
+  VS1053_control_mode_off ();
+}
+
+void
+VS1053_sdi_send_buffer (uint8_t *data, size_t len)
+{
+  size_t chunk_length; // Length of chunk 32 byte or shorter
+
+  VS1053_data_mode_on ();
+  while (len) // More to do?
+    {
+      VS1053_await_data_request (); // Wait for space available
+      chunk_length = len;
+      if (len > vs1053_chunk_size)
+        {
+          chunk_length = vs1053_chunk_size;
+        }
+      len -= chunk_length;
+      SPI_writeBytes (data, chunk_length);
+      data += chunk_length;
+    }
+  VS1053_data_mode_off ();
+}
+
+void
+VS1053_sdi_send_fillers (size_t len)
+{
+  size_t chunk_length; // Length of chunk 32 byte or shorter
+
+  VS1053_data_mode_on ();
+  while (len) // More to do?
+    {
+      VS1053_await_data_request (); // Wait for space available
+      chunk_length = len;
+      if (len > vs1053_chunk_size)
+        {
+          chunk_length = vs1053_chunk_size;
+        }
+      len -= chunk_length;
+      while (chunk_length--)
+        {
+          SPI_write (endFillByte);
+        }
+    }
+  VS1053_data_mode_off ();
+}
+
+void
+VS1053_wram_write (uint16_t address, uint16_t data)
+{
+  VS1053_writeRegister (SCI_WRAMADDR, address);
+  VS1053_writeRegister (SCI_WRAM, data);
+}
+
+uint16_t
+VS1053_wram_read (uint16_t address)
+{
+  VS1053_writeRegister (SCI_WRAMADDR, address); // Start reading from WRAM
+  return VS1053_read_register (SCI_WRAM);       // Read back result
+}
+
+bool
+VS1053_testComm (const char *header)
+{
+  // Test the communication with the VS1053 module.  The result wille be
+  // returned. If DREQ is low, there is problably no VS1053 connected.  Pull
+  // the line HIGH in order to prevent an endless loop waiting for this signal.
+  // The rest of the software will still work, but readbacks from VS1053 will
+  // fail.
+  int i; // Loop control
+  uint16_t r1, r2, cnt = 0;
+  uint16_t delta = 300; // 3 for fast SPI
+
+  if (!digitalRead (dreq_pin))
+    {
+      LOG ("VS1053 not properly installed!\n");
+      // Allow testing without the VS1053 module
+      tls_gpio_cfg (dreq_pin, WM_GPIO_DIR_INPUT,
+                    WM_GPIO_ATTR_PULLHIGH); // DREQ is now input with pull-up
+      return false;                         // Return bad result
+    }
+  // Further TESTING.  Check if SCI bus can write and read without errors.
+  // We will use the volume setting for this.
+  // Will give warnings on serial output if DEBUG is active.
+  // A maximum of 20 errors will be reported.
+  if (strstr (header, "Fast"))
+    {
+      delta = 3; // Fast SPI, more loops
+    }
+
+  LOG ("%s", header); // Show a header
+
+  for (i = 0; (i < 0xFFFF) && (cnt < 20); i += delta)
+    {
+      VS1053_writeRegister (SCI_VOL, i);   // Write data to SCI_VOL
+      r1 = VS1053_read_register (SCI_VOL); // Read back for the first time
+      r2 = VS1053_read_register (SCI_VOL); // Read back a second time
+      if (r1 != r2 || i != r1 || i != r2)  // Check for 2 equal reads
+        {
+          LOG ("VS1053 error retry SB:%04X R1:%04X R2:%04X\n", i, r1, r2);
+          cnt++;
+          delay (10);
+        }
+      yield (); // Allow ESP firmware to do some bookkeeping
+    }
+  return (cnt == 0); // Return the result
+}
+
+void
+VS1053_begin ()
+{
+  tls_gpio_cfg (dreq_pin, WM_GPIO_DIR_INPUT,
+                WM_GPIO_ATTR_FLOATING); // DREQ is an input
+  tls_gpio_cfg (cs_pin, WM_GPIO_DIR_OUTPUT,
+                WM_GPIO_ATTR_FLOATING); // The SCI and SDI signals
+  tls_gpio_cfg (dcs_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  digitalWrite (dcs_pin, HIGH); // Start HIGH for SCI en SDI
+  digitalWrite (cs_pin, HIGH);
+  delay (100);
+  LOG ("\n");
+  LOG ("Reset VS1053...\n");
+  digitalWrite (dcs_pin, LOW); // Low & Low will bring reset pin low
+  digitalWrite (cs_pin, LOW);
+  delay (500);
+  LOG ("End reset VS1053...\n");
+  digitalWrite (dcs_pin, HIGH); // Back to normal again
+  digitalWrite (cs_pin, HIGH);
+  delay (500);
+  // Init SPI in slow mode ( 0.2 MHz )
+  VS1053_SPI = SPI_Settings (200000);
+  // printDetails("Right after reset/startup");
+  delay (20);
+  // printDetails("20 msec after reset");
+  if (VS1053_testComm ("Slow SPI,Testing VS1053 read/write registers...\n"))
+    {
+      // softReset();
+      // Switch on the analog parts
+      VS1053_writeRegister (SCI_AUDATA, 44101); // 44.1kHz stereo
+      // The next clocksetting allows SPI clocking at 5 MHz, 4 MHz is safe
+      // then.
+      VS1053_writeRegister (
+          SCI_CLOCKF,
+          6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
+      // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
+      VS1053_SPI = SPI_Settings (4000000);
+      VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_LINE1));
+      VS1053_testComm (
+          "Fast SPI, Testing VS1053 read/write registers again...\n");
+      delay (10);
+      VS1053_await_data_request ();
+      endFillByte = VS1053_wram_read (0x1E06) & 0xFF;
+      LOG ("endFillByte is %X\n", endFillByte);
+      // printDetails("After last clocksetting") ;
+      delay (100);
+    }
+}
+
+void
+VS1053_setVolume (uint8_t vol)
+{
+  // Set volume.  Both left and right.
+  // Input value is 0..100.  100 is the loudest.
+  uint8_t valueL, valueR; // Values to send to SCI_VOL
+
+  curvol = vol; // Save for later use
+  valueL = vol;
+  valueR = vol;
+
+  if (curbalance < 0)
+    {
+      valueR = MAX (0, vol + curbalance);
+    }
+  else if (curbalance > 0)
+    {
+      valueL = MAX (0, vol - curbalance);
+    }
+
+  valueL = map (valueL, 0, 100, 0xFE, 0x00); // 0..100% to left channel
+  valueR = map (valueR, 0, 100, 0xFE, 0x00); // 0..100% to right channel
+
+  VS1053_writeRegister (SCI_VOL,
+                        (valueL << 8) | valueR); // Volume left and right
+}
+
+void
+VS1053_setBalance (s8_t balance)
+{
+  if (balance > 100)
+    {
+      curbalance = 100;
+    }
+  else if (balance < -100)
+    {
+      curbalance = -100;
+    }
+  else
+    {
+      curbalance = balance;
+    }
+}
+
+void
+VS1053_setTone (uint8_t *rtone)
+{ // Set bass/treble (4 nibbles)
+  // Set tone characteristics.  See documentation for the 4 nibbles.
+  uint16_t value = 0; // Value to send to SCI_BASS
+  int i;              // Loop control
+
+  for (i = 0; i < 4; i++)
+    {
+      value = (value << 4) | rtone[i]; // Shift next nibble in
+    }
+  VS1053_writeRegister (SCI_BASS, value); // Volume left and right
+}
+
+uint8_t
+VS1053_getVolume ()
+{ // Get the currenet volume setting.
+  return curvol;
+}
+
+s8_t
+VS1053_getBalance ()
+{ // Get the currenet balance setting.
+  return curbalance;
+}
+
+void
+VS1053_startSong ()
+{
+  VS1053_sdi_send_fillers (10);
+}
+
+void
+VS1053_playChunk (uint8_t *data, size_t len)
+{
+  VS1053_sdi_send_buffer (data, len);
+}
+
+void
+VS1053_stopSong ()
+{
+  uint16_t modereg; // Read from mode register
+  int i;            // Loop control
+
+  VS1053_sdi_send_fillers (2052);
+  delay (10);
+  VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_CANCEL));
+  for (i = 0; i < 200; i++)
+    {
+      VS1053_sdi_send_fillers (32);
+      modereg = VS1053_read_register (SCI_MODE); // Read status
+      if ((modereg & _BV (SM_CANCEL)) == 0)
+        {
+          VS1053_sdi_send_fillers (2052);
+          LOG ("Song stopped correctly after %d msec\n", i * 10);
+          return;
+        }
+      delay (10);
+    }
+  printf ("Song stopped incorrectly!");
+}
+
+void
+VS1053_softReset ()
+{
+  LOG ("Performing soft-reset\n");
+  VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_RESET));
+  delay (10);
+  VS1053_await_data_request ();
+}
+
+/**
+ * VLSI datasheet: "SM_STREAM activates VS1053b’s stream mode. In this mode,
+ * data should be sent with as even intervals as possible and preferable in
+ * blocks of less than 512 bytes, and VS1053b makes every attempt to keep its
+ * input buffer half full by changing its playback speed up to 5%. For best
+ * quality sound, the average speed error should be within 0.5%, the bitrate
+ * should not exceed 160 kbit/s and VBR should not be used. For details, see
+ * Application Notes for VS10XX. This mode only works with MP3 and WAV files."
+ */
+
+void
+VS1053_streamModeOn ()
+{
+  LOG ("Performing streamModeOn\n");
+  VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_STREAM));
+  delay (10);
+  VS1053_await_data_request ();
+}
+
+void
+VS1053_streamModeOff ()
+{
+  LOG ("Performing streamModeOff\n");
+  VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW));
+  delay (10);
+  VS1053_await_data_request ();
+}
+
+void
+VS1053_printDetails (const char *header)
+{
+  uint16_t regbuf[16];
+  uint8_t i;
+  (void)regbuf;
+
+  LOG ("%s", header);
+  LOG ("REG   Contents\n");
+  LOG ("---   -----\n");
+  for (i = 0; i <= SCI_num_registers; i++)
+    {
+      regbuf[i] = VS1053_read_register (i);
+    }
+  for (i = 0; i <= SCI_num_registers; i++)
+    {
+      delay (5);
+      LOG ("%3X - %5X\n", i, regbuf[i]);
+    }
+}
+
+/**
+ * An optional switch.
+ * Most VS1053 modules will start up in MIDI mode. The result is that there is
+ * no audio when playing MP3. You can modify the board, but there is a more
+ * elegant way without soldering. No side effects for boards which do not need
+ * this switch. It means you can call it just in case.
+ *
+ * Read more here: http://www.bajdi.com/lcsoft-vs1053-mp3-module/#comment-33773
+ */
+void
+VS1053_switchToMp3Mode ()
+{
+  VS1053_wram_write (ADDR_REG_GPIO_DDR_RW, 3);   // GPIO DDR = 3
+  VS1053_wram_write (ADDR_REG_GPIO_ODATA_RW, 0); // GPIO ODATA = 0
+  delay (100);
+  LOG ("Switched to mp3 mode\n");
+  VS1053_softReset ();
+}
+
+void
+VS1053_disableI2sOut ()
+{
+  VS1053_wram_write (ADDR_REG_I2S_CONFIG_RW, 0x0000);
+
+  // configure GPIO0 4-7 (I2S) as input (default)
+  // leave other GPIOs unchanged
+  uint16_t cur_ddr = VS1053_wram_read (ADDR_REG_GPIO_DDR_RW);
+  VS1053_wram_write (ADDR_REG_GPIO_DDR_RW, cur_ddr & ~0x00f0);
+}
+
+void
+VS1053_enableI2sOut (enum VS1053_I2S_RATE i2sRate)
+{
+  // configure GPIO0 4-7 (I2S) as output
+  // leave other GPIOs unchanged
+  uint16_t cur_ddr = VS1053_wram_read (ADDR_REG_GPIO_DDR_RW);
+  VS1053_wram_write (ADDR_REG_GPIO_DDR_RW, cur_ddr | 0x00f0);
+
+  uint16_t i2s_config = 0x000c; // Enable MCLK(3); I2S(2)
+  switch (i2sRate)
+    {
+    case VS1053_I2S_RATE_192_KHZ:
+      i2s_config |= 0x0002;
+      break;
+    case VS1053_I2S_RATE_96_KHZ:
+      i2s_config |= 0x0001;
+      break;
+    default:
+    case VS1053_I2S_RATE_48_KHZ:
+      // 0x0000
+      break;
+    }
+
+  VS1053_wram_write (ADDR_REG_I2S_CONFIG_RW, i2s_config);
+}
+
+/**
+ * A lightweight method to check if VS1053 is correctly wired up (power supply
+ * and connection to SPI interface).
+ *
+ * @return true if the chip is wired up correctly
+ */
+bool
+VS1053_isChipConnected ()
+{
+  uint16_t status = VS1053_read_register (SCI_STATUS);
+
+  return !(status == 0 || status == 0xFFFF);
+}
+
+/**
+ * get the Version Number for the VLSI chip
+ * VLSI datasheet: 0 for VS1001, 1 for VS1011, 2 for VS1002, 3 for VS1003, 4
+ * for VS1053 and VS8053, 5 for VS1033, 7 for VS1103, and 6 for VS1063.
+ */
+uint16_t
+VS1053_getChipVersion ()
+{
+  uint16_t status = VS1053_read_register (SCI_STATUS);
+
+  return ((status & 0x00F0) >> 4);
+}
+
+/**
+ * Provides current decoded time in full seconds (from SCI_DECODE_TIME register
+ * value)
+ *
+ * When decoding correct data, current decoded time is shown in SCI_DECODE_TIME
+ * register in full seconds. The user may change the value of this register.
+ * In that case the new value should be written twice to make absolutely
+ * certain that the change is not overwritten by the firmware. A write to
+ * SCI_DECODE_TIME also resets the byteRate calculation.
+ *
+ * SCI_DECODE_TIME is reset at every hardware and software reset. It is no
+ * longer cleared when decoding of a file ends to allow the decode time to
+ * proceed automatically with looped files and with seamless playback of
+ * multiple files. With fast playback (see the playSpeed extra parameter) the
+ * decode time also counts faster. Some codecs (WMA and Ogg Vorbis) can also
+ * indicate the absolute play position, see the positionMsec extra parameter in
+ * section 10.11.
+ *
+ * @see VS1053b Datasheet (1.31) / 9.6.5 SCI_DECODE_TIME (RW)
+ *
+ * @return current decoded time in full seconds
+ */
+uint16_t
+VS1053_getDecodedTime ()
+{
+  return VS1053_read_register (SCI_DECODE_TIME);
+}
+
+/**
+ * Clears decoded time (sets SCI_DECODE_TIME register to 0x00)
+ *
+ * The user may change the value of this register. In that case the new value
+ * should be written twice to make absolutely certain that the change is not
+ * overwritten by the firmware. A write to SCI_DECODE_TIME also resets the
+ * byteRate calculation.
+ */
+void
+VS1053_clearDecodedTime ()
+{
+  VS1053_writeRegister (SCI_DECODE_TIME, 0x00);
+  VS1053_writeRegister (SCI_DECODE_TIME, 0x00);
+}
+
+/**
+ * Fine tune the data rate
+ */
+void
+VS1053_adjustRate (long ppm2)
+{
+  VS1053_writeRegister (SCI_WRAMADDR, 0x1e07);
+  VS1053_writeRegister (SCI_WRAM, ppm2);
+  VS1053_writeRegister (SCI_WRAM, ppm2 >> 16);
+  // oldClock4KHz = 0 forces  adjustment calculation when rate checked.
+  VS1053_writeRegister (SCI_WRAMADDR, 0x5b1c);
+  VS1053_writeRegister (SCI_WRAM, 0);
+  // Write to AUDATA or CLOCKF checks rate and recalculates adjustment.
+  VS1053_writeRegister (SCI_AUDATA, VS1053_read_register (SCI_AUDATA));
+}
+
+/**
+ * Load a patch or plugin
+ *
+ * Patches can be found on the VLSI Website
+ * http://www.vlsi.fi/en/support/software/vs10xxpatches.html
+ *
+ * Please note that loadUserCode only works for compressed plugins (file ending
+ * .plg). To include them, rename them to file ending .h Please also note that,
+ * in order to avoid multiple definitions, if you are using more than one
+ * patch, it is necessary to rename the name of the array plugin[] and the name
+ * of PLUGIN_SIZE to names of your choice. example: after renaming plugin[] to
+ * plugin_myname[] and PLUGIN_SIZE to PLUGIN_MYNAME_SIZE the method is called
+ * by player.loadUserCode(plugin_myname, PLUGIN_MYNAME_SIZE) It is also
+ * possible to just rename the array plugin[] to a name of your choice example:
+ * after renaming plugin[] to plugin_myname[] the method is called by
+ * player.loadUserCode(plugin_myname,
+ * sizeof(plugin_myname)/sizeof(plugin_myname[0]))
+ */
+void
+VS1053_loadUserCode (const unsigned short *plugin, unsigned short plugin_size)
+{
+  int i = 0;
+  while (i < plugin_size)
+    {
+      unsigned short addr, n, val;
+      addr = plugin[i++];
+      n = plugin[i++];
+      if (n & 0x8000U)
+        { /* RLE run, replicate n samples */
+          n &= 0x7FFF;
+          val = plugin[i++];
+          while (n--)
+            {
+              VS1053_writeRegister (addr, val);
+            }
+        }
+      else
+        { /* Copy run, copy n samples */
+          while (n--)
+            {
+              val = plugin[i++];
+              VS1053_writeRegister (addr, val);
+            }
+        }
+    }
+}
+
+/**
+ * Load the latest generic firmware patch
+ */
+void
+VS1053_loadDefaultVs1053Patches ()
+{
+  VS1053_loadUserCode (PATCHES, PATCHES_SIZE);
+};

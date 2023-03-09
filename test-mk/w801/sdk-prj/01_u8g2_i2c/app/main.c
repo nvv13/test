@@ -60,7 +60,6 @@ static const uint8_t logo[] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-
 void
 UserMain (void)
 {
@@ -75,7 +74,6 @@ UserMain (void)
 
   u8g2_Setup_sh1106_i2c_128x64_noname_f (
       &u8g2, U8G2_R0, u8x8_byte_hw_i2c_riotos, u8x8_gpio_and_delay_riotos);
-
 
   if (u8g2.u8x8.i2c_address == 255) // заменяем default на настоящий адрес
     u8g2.u8x8.i2c_address = 0x3C;

@@ -1,0 +1,138 @@
+Audio.cpp: In member function ‘void Audio::setDefaults()’:
+Audio.cpp:421:27: error: ‘AACDecoder_FreeBuffers’ was not declared in this scope
+   AACDecoder_FreeBuffers ();
+                           ^
+Audio.cpp: In member function ‘void Audio::processLocalFile()’:
+Audio.cpp:4079:33: error: ‘AACDecoder_FreeBuffers’ was not declared in this scope
+         AACDecoder_FreeBuffers ();
+                                 ^
+Audio.cpp:4081:33: error: ‘AACDecoder_FreeBuffers’ was not declared in this scope
+         AACDecoder_FreeBuffers ();
+                                 ^
+Audio.cpp: In member function ‘bool Audio::initializeDecoder()’:
+Audio.cpp:5096:31: error: ‘AACDecoder_IsInit’ was not declared in this scope
+       if (!AACDecoder_IsInit ())
+                               ^
+Audio.cpp:5098:44: error: ‘AACDecoder_AllocateBuffers’ was not declared in this scope
+           if (!AACDecoder_AllocateBuffers ())
+                                            ^
+Audio.cpp:5106:31: error: ‘AACDecoder_IsInit’ was not declared in this scope
+       if (!AACDecoder_IsInit ())
+                               ^
+Audio.cpp:5108:44: error: ‘AACDecoder_AllocateBuffers’ was not declared in this scope
+           if (!AACDecoder_AllocateBuffers ())
+                                            ^
+Audio.cpp: In member function ‘void Audio::showCodecParams()’:
+Audio.cpp:5553:33: error: ‘AACGetFormat’ was not declared in this scope
+       if ((answ = AACGetFormat ()) < 4)
+                                 ^
+Audio.cpp:5562:59: error: ‘AACGetID’ was not declared in this scope
+           sprintf (m_chbuf, "AAC Codec: %s", co[AACGetID ()]);
+                                                           ^
+Audio.cpp:5564:30: error: ‘AACGetProfile’ was not declared in this scope
+           if (AACGetProfile () < 5)
+                              ^
+Audio.cpp: In member function ‘int Audio::findNextSync(uint8_t*, size_t)’:
+Audio.cpp:5599:44: error: ‘AACFindSyncWord’ was not declared in this scope
+       nextSync = AACFindSyncWord (data, len);
+                                            ^
+Audio.cpp:5603:43: error: ‘AACSetRawBlockParams’ was not declared in this scope
+       AACSetRawBlockParams (0, 2, 44100, 1);
+                                           ^
+Audio.cpp: In member function ‘int Audio::sendBytes(uint8_t*, size_t)’:
+Audio.cpp:5691:51: error: ‘AACDecode’ was not declared in this scope
+       ret = AACDecode (data, &bytesLeft, m_outBuff);
+                                                   ^
+Audio.cpp:5757:44: error: ‘AACGetChannels’ was not declared in this scope
+               setChannels (AACGetChannels ());
+                                            ^
+Audio.cpp:5758:46: error: ‘AACGetSampRate’ was not declared in this scope
+               setSampleRate (AACGetSampRate ());
+                                              ^
+Audio.cpp:5759:54: error: ‘AACGetBitsPerSample’ was not declared in this scope
+               setBitsPerSample (AACGetBitsPerSample ());
+                                                      ^
+Audio.cpp:5760:42: error: ‘AACGetBitrate’ was not declared in this scope
+               setBitrate (AACGetBitrate ());
+                                          ^
+Audio.cpp:5777:47: error: ‘AACGetOutputSamps’ was not declared in this scope
+           m_validSamples = AACGetOutputSamps () / getChannels ();
+                                               ^
+Audio.cpp: In member function ‘void Audio::compute_audioCurrentTime(int)’:
+Audio.cpp:5816:34: error: ‘AACGetBitrate’ was not declared in this scope
+       setBitrate (AACGetBitrate ());
+                                  ^
+Audio.cpp:5820:34: error: ‘AACGetBitrate’ was not declared in this scope
+       setBitrate (AACGetBitrate ());
+                                  ^
+Audio.cpp: In member function ‘void Audio::printDecodeError(int)’:
+Audio.cpp:5944:14: error: ‘ERR_AAC_NONE’ was not declared in this scope
+         case ERR_AAC_NONE:
+              ^~~~~~~~~~~~
+Audio.cpp:5947:14: error: ‘ERR_AAC_INDATA_UNDERFLOW’ was not declared in this scope
+         case ERR_AAC_INDATA_UNDERFLOW:
+              ^~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5950:14: error: ‘ERR_AAC_NULL_POINTER’ was not declared in this scope
+         case ERR_AAC_NULL_POINTER:
+              ^~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5953:14: error: ‘ERR_AAC_INVALID_ADTS_HEADER’ was not declared in this scope
+         case ERR_AAC_INVALID_ADTS_HEADER:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5956:14: error: ‘ERR_AAC_INVALID_ADIF_HEADER’ was not declared in this scope
+         case ERR_AAC_INVALID_ADIF_HEADER:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5959:14: error: ‘ERR_AAC_INVALID_FRAME’ was not declared in this scope
+         case ERR_AAC_INVALID_FRAME:
+              ^~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5962:14: error: ‘ERR_AAC_MPEG4_UNSUPPORTED’ was not declared in this scope
+         case ERR_AAC_MPEG4_UNSUPPORTED:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5965:14: error: ‘ERR_AAC_CHANNEL_MAP’ was not declared in this scope
+         case ERR_AAC_CHANNEL_MAP:
+              ^~~~~~~~~~~~~~~~~~~
+Audio.cpp:5968:14: error: ‘ERR_AAC_SYNTAX_ELEMENT’ was not declared in this scope
+         case ERR_AAC_SYNTAX_ELEMENT:
+              ^~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5971:14: error: ‘ERR_AAC_DEQUANT’ was not declared in this scope
+         case ERR_AAC_DEQUANT:
+              ^~~~~~~~~~~~~~~
+Audio.cpp:5974:14: error: ‘ERR_AAC_STEREO_PROCESS’ was not declared in this scope
+         case ERR_AAC_STEREO_PROCESS:
+              ^~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5977:14: error: ‘ERR_AAC_PNS’ was not declared in this scope
+         case ERR_AAC_PNS:
+              ^~~~~~~~~~~
+Audio.cpp:5980:14: error: ‘ERR_AAC_SHORT_BLOCK_DEINT’ was not declared in this scope
+         case ERR_AAC_SHORT_BLOCK_DEINT:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5983:14: error: ‘ERR_AAC_TNS’ was not declared in this scope
+         case ERR_AAC_TNS:
+              ^~~~~~~~~~~
+Audio.cpp:5986:14: error: ‘ERR_AAC_IMDCT’ was not declared in this scope
+         case ERR_AAC_IMDCT:
+              ^~~~~~~~~~~~~
+Audio.cpp:5989:14: error: ‘ERR_AAC_SBR_INIT’ was not declared in this scope
+         case ERR_AAC_SBR_INIT:
+              ^~~~~~~~~~~~~~~~
+Audio.cpp:5992:14: error: ‘ERR_AAC_SBR_BITSTREAM’ was not declared in this scope
+         case ERR_AAC_SBR_BITSTREAM:
+              ^~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5995:14: error: ‘ERR_AAC_SBR_DATA’ was not declared in this scope
+         case ERR_AAC_SBR_DATA:
+              ^~~~~~~~~~~~~~~~
+Audio.cpp:5998:14: error: ‘ERR_AAC_SBR_PCM_FORMAT’ was not declared in this scope
+         case ERR_AAC_SBR_PCM_FORMAT:
+              ^~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6001:14: error: ‘ERR_AAC_SBR_NCHANS_TOO_HIGH’ was not declared in this scope
+         case ERR_AAC_SBR_NCHANS_TOO_HIGH:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6004:14: error: ‘ERR_AAC_SBR_SINGLERATE_UNSUPPORTED’ was not declared in this scope
+         case ERR_AAC_SBR_SINGLERATE_UNSUPPORTED:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6007:14: error: ‘ERR_AAC_NCHANS_TOO_HIGH’ was not declared in this scope
+         case ERR_AAC_NCHANS_TOO_HIGH:
+              ^~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:6010:14: error: ‘ERR_AAC_RAWBLOCK_PARAMS’ was not declared in this scope
+         case ERR_AAC_RAWBLOCK_PARAMS:
+              ^~~~~~~~~~~~~~~~~~~~~~~
+make: *** [../../tools/w800/rules.mk:206: ../../bin/build/w800/obj/app/au2io/au2io_Audio.o] Ошибка 1

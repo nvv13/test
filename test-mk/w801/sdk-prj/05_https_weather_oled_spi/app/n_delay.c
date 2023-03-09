@@ -49,14 +49,11 @@ n_delay_us (uint32_t us)
       n_delay_ms (us / 1000);
       us = us % 1000;
     }
-  //    printf("*st7920_interface_delay_us(%d)\n\r", us);
   if (us == 0)
     return;
 
-  uint32_t load = csi_coret_get_load (); // значение, после которого сброс и
-                                         // прерывание SysTick
-  uint32_t start
-      = csi_coret_get_value (); // текущее значение System Tick Timer (CORET)
+  uint32_t load = csi_coret_get_load ();
+  uint32_t start = csi_coret_get_value ();
   uint32_t cur;
   uint32_t cnt;
   tls_sys_clk sysclk;
@@ -69,7 +66,20 @@ n_delay_us (uint32_t us)
   1 cpuclk = 1 микросекунда
   или 1MHz,
   то есть
-  System Tick Timer (CORET) - меняеться с частотой CPU
+  System Tick Timer (CORET) - меняеться с частотой CPU в сторону уменьшения
+  csi_coret_get_value() - текущее значение CORET
+
+  при достижении нуля, возникает прерываение, и загрузка текущего значения из
+  переменой csi_coret_get_load() - настраевает OS при смене частоты процессора
+
+  значение load от частоты:
+  240MHz load=479999
+  160MHz load=319999
+  80MHz  load=159999
+  40MHz  load=79999
+
+  если частоту в герцах поделить на значение load,
+  то это и будет 500 герц (т.е. период 2 милисекунды)
   */
 
   while (1)

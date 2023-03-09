@@ -1,0 +1,84 @@
+Audio.cpp: In member function ‘void Audio::setDefaults()’:
+Audio.cpp:419:27: error: ‘MP3Decoder_FreeBuffers’ was not declared in this scope
+   MP3Decoder_FreeBuffers ();
+                           ^
+Audio.cpp: In member function ‘void Audio::processLocalFile()’:
+Audio.cpp:4077:33: error: ‘MP3Decoder_FreeBuffers’ was not declared in this scope
+         MP3Decoder_FreeBuffers ();
+                                 ^
+Audio.cpp: In member function ‘bool Audio::initializeDecoder()’:
+Audio.cpp:5089:40: error: ‘MP3Decoder_AllocateBuffers’ was not declared in this scope
+       if (!MP3Decoder_AllocateBuffers ())
+                                        ^
+Audio.cpp: In member function ‘int Audio::findNextSync(uint8_t*, size_t)’:
+Audio.cpp:5595:44: error: ‘MP3FindSyncWord’ was not declared in this scope
+       nextSync = MP3FindSyncWord (data, len);
+                                            ^
+Audio.cpp: In member function ‘int Audio::sendBytes(uint8_t*, size_t)’:
+Audio.cpp:5688:54: error: ‘MP3Decode’ was not declared in this scope
+       ret = MP3Decode (data, &bytesLeft, m_outBuff, 0);
+                                                      ^
+Audio.cpp:5750:44: error: ‘MP3GetChannels’ was not declared in this scope
+               setChannels (MP3GetChannels ());
+                                            ^
+Audio.cpp:5751:46: error: ‘MP3GetSampRate’ was not declared in this scope
+               setSampleRate (MP3GetSampRate ());
+                                              ^
+Audio.cpp:5752:54: error: ‘MP3GetBitsPerSample’ was not declared in this scope
+               setBitsPerSample (MP3GetBitsPerSample ());
+                                                      ^
+Audio.cpp:5753:42: error: ‘MP3GetBitrate’ was not declared in this scope
+               setBitrate (MP3GetBitrate ());
+                                          ^
+Audio.cpp:5773:47: error: ‘MP3GetOutputSamps’ was not declared in this scope
+           m_validSamples = MP3GetOutputSamps () / getChannels ();
+                                               ^
+Audio.cpp: In member function ‘void Audio::compute_audioCurrentTime(int)’:
+Audio.cpp:5812:34: error: ‘MP3GetBitrate’ was not declared in this scope
+       setBitrate (MP3GetBitrate ());
+                                  ^
+Audio.cpp: In member function ‘void Audio::printDecodeError(int)’:
+Audio.cpp:5896:14: error: ‘ERR_MP3_NONE’ was not declared in this scope
+         case ERR_MP3_NONE:
+              ^~~~~~~~~~~~
+Audio.cpp:5899:14: error: ‘ERR_MP3_INDATA_UNDERFLOW’ was not declared in this scope
+         case ERR_MP3_INDATA_UNDERFLOW:
+              ^~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5902:14: error: ‘ERR_MP3_MAINDATA_UNDERFLOW’ was not declared in this scope
+         case ERR_MP3_MAINDATA_UNDERFLOW:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5905:14: error: ‘ERR_MP3_FREE_BITRATE_SYNC’ was not declared in this scope
+         case ERR_MP3_FREE_BITRATE_SYNC:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5908:14: error: ‘ERR_MP3_OUT_OF_MEMORY’ was not declared in this scope
+         case ERR_MP3_OUT_OF_MEMORY:
+              ^~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5911:14: error: ‘ERR_MP3_NULL_POINTER’ was not declared in this scope
+         case ERR_MP3_NULL_POINTER:
+              ^~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5914:14: error: ‘ERR_MP3_INVALID_FRAMEHEADER’ was not declared in this scope
+         case ERR_MP3_INVALID_FRAMEHEADER:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5917:14: error: ‘ERR_MP3_INVALID_SIDEINFO’ was not declared in this scope
+         case ERR_MP3_INVALID_SIDEINFO:
+              ^~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5920:14: error: ‘ERR_MP3_INVALID_SCALEFACT’ was not declared in this scope
+         case ERR_MP3_INVALID_SCALEFACT:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5923:14: error: ‘ERR_MP3_INVALID_HUFFCODES’ was not declared in this scope
+         case ERR_MP3_INVALID_HUFFCODES:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5926:14: error: ‘ERR_MP3_INVALID_DEQUANTIZE’ was not declared in this scope
+         case ERR_MP3_INVALID_DEQUANTIZE:
+              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5929:14: error: ‘ERR_MP3_INVALID_IMDCT’ was not declared in this scope
+         case ERR_MP3_INVALID_IMDCT:
+              ^~~~~~~~~~~~~~~~~~~~~
+Audio.cpp:5932:14: error: ‘ERR_MP3_INVALID_SUBBAND’ was not declared in this scope
+         case ERR_MP3_INVALID_SUBBAND:
+              ^~~~~~~~~~~~~~~~~~~~~~~
+Audio.cpp: In member function ‘bool Audio::setFilePos(uint32_t)’:
+Audio.cpp:6204:29: error: ‘MP3Decoder_ClearBuffer’ was not declared in this scope
+     MP3Decoder_ClearBuffer ();
+                             ^
+make: *** [../../tools/w800/rules.mk:206: ../../bin/build/w800/obj/app/au2io/au2io_Audio.o] Ошибка 1
