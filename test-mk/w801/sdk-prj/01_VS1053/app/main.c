@@ -89,14 +89,14 @@ user_app1_task (void *sdata)
 
   libVS1053_t user_data = {
 
-    .cs_pin   =WM_IO_PB_21,
-    .dcs_pin  =WM_IO_PB_22,
-    .dreq_pin =WM_IO_PB_18,
+    .cs_pin   =WM_IO_PB_21, /* xcs */
+    .dcs_pin  =WM_IO_PB_22, /* xdcs */
+    .dreq_pin =WM_IO_PB_18, /* dreq */
 
     .spi_cs = WM_IO_PB_23, /* */
-    .spi_ck = WM_IO_PB_24, /* */
-    .spi_di = WM_IO_PB_25, /* */
-    .spi_do = WM_IO_PB_26, /* */
+    .spi_ck = WM_IO_PB_24, /* sck */
+    .spi_di = WM_IO_PB_25, /* mosi */
+    .spi_do = WM_IO_PB_26, /* miso */
   };
 
 

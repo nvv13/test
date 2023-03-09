@@ -137,7 +137,8 @@ SPI_Settings (u32 fclk)
   wm_spi_di_config (spi_di);
   wm_spi_do_config (spi_do);
   tls_spi_trans_type (
-      SPI_BYTE_TRANSFER); // SPI_DMA_TRANSFER);SPI_WORD_TRANSFER // byte ,
+      SPI_BYTE_TRANSFER); 
+// SPI_DMA_TRANSFER);//SPI_WORD_TRANSFER // byte ,
                           // word, dma , MSBFIRST, SPI_MODE0
   return tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_HIGH, fclk);
 };
@@ -146,9 +147,10 @@ static void SPI_endTransaction (void){};             // Allow other SPI users
 static u8
 SPI_transfer (u8 a)
 {
-  u8 rxbuf[1] = { a };
+  u8 txbuf[1] = { a };
+  u8 rxbuf[1] = { 0 };
   tls_spi_read (rxbuf, 1);
-  // tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32 n_rx);
+  //tls_spi_read_with_cmd(txbuf, 1, rxbuf, 1);
   return rxbuf[0];
 };
 static u8
