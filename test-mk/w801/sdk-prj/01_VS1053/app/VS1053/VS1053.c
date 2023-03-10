@@ -124,10 +124,42 @@ yield (void)
 //#define MSBFIRST 0
 //#define SPI_MODE0 0
 
-static  enum tls_io_name spi_cs; /* */
-static  enum tls_io_name spi_ck; /* */
-static  enum tls_io_name spi_di; /* даже если не используеться, надо определить? */
-static  enum tls_io_name spi_do; /* */
+static enum tls_io_name spi_cs; /* */
+static enum tls_io_name spi_ck; /* */
+static enum tls_io_name
+    spi_di; /* даже если не используеться, надо определить? */
+static enum tls_io_name spi_do; /* */
+
+static void
+SPI_print_retval (int i_retval, char *help)
+{
+  switch (i_retval)
+    {
+    case TLS_SPI_STATUS_OK:
+      LOG (" %s = TLS_SPI_STATUS_OK success.\n", help);
+      break;
+    case TLS_SPI_STATUS_EINVAL:
+      LOG (" %s = TLS_SPI_STATUS_EINVAL argument is invalid.\n", help);
+      break;
+    case TLS_SPI_STATUS_ENOMEM:
+      LOG (" %s = TLS_SPI_STATUS_ENOMEM no enough memory.\n", help);
+      break;
+    case TLS_SPI_STATUS_ESHUTDOWN:
+      LOG (" %s = TLS_SPI_STATUS_ESHUTDOWN SPI driver has not been "
+           "installed.\n",
+           help);
+      break;
+    case TLS_SPI_STATUS_EMODENOSUPPORT:
+      LOG (" %s = TLS_SPI_STATUS_EMODENOSUPPORT mode is not support.\n", help);
+      break;
+    case TLS_SPI_STATUS_ECLKNOSUPPORT:
+      LOG (" %s = TLS_SPI_STATUS_ECLKNOSUPPORT	fclk is not support.\n", help);
+      break;
+    case TLS_SPI_STATUS_EBUSY:
+      LOG (" %s = TLS_SPI_STATUS_EBUSY	SPI is already initialized.\n", help);
+      break;
+    }
+}
 
 static int
 SPI_Settings (u32 fclk)
@@ -136,30 +168,49 @@ SPI_Settings (u32 fclk)
   wm_spi_ck_config (spi_ck);
   wm_spi_di_config (spi_di);
   wm_spi_do_config (spi_do);
-  tls_spi_trans_type (
-      SPI_BYTE_TRANSFER); 
-// SPI_DMA_TRANSFER);//SPI_WORD_TRANSFER // byte ,
-                          // word, dma , MSBFIRST, SPI_MODE0
-  return tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_HIGH, fclk);
+  tls_spi_trans_type (SPI_BYTE_TRANSFER);
+  // SPI_DMA_TRANSFER);
+  // SPI_WORD_TRANSFER=spi_set_endian(0)=SPI_LITTLE_ENDIAN;
+  // default SPI_BYTE_TRANSFER=spi_set_endian(1)=SPI_BIG_ENDIAN;
+  // byte,word, dma
+  // используемая последовательность вывода бит.
+  // MSBFIRST (Most Significant Bit First) — слева - с первого (левого) бита
+  // (старшего) или LSBFIRST (Least Significant Bit First) — справа - с
+  // последнего бита (младшего) 
+  //  надо чтобы было  MSBFIRST, SPI_MODE0
+  int retval = tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_LOW, fclk);
+  /**< SPI transfer mode: mode_0(CPHA=0, CHOL=0),
+         mode_1(CPHA=0, CHOL=1), mode_2(CPHA=1,
+             CHOL=0), mode_3(CPHA=1, CHOL=1). */
+  SPI_print_retval (retval, "tls_spi_setup");
+  return retval;
 };
 static void SPI_beginTransaction (int VS1053_SPI){}; // Prevent other SPI users
 static void SPI_endTransaction (void){};             // Allow other SPI users
+
 static u8
 SPI_transfer (u8 a)
 {
   u8 txbuf[1] = { a };
   u8 rxbuf[1] = { 0 };
-  tls_spi_read (rxbuf, 1);
-  //tls_spi_read_with_cmd(txbuf, 1, rxbuf, 1);
+  // tls_spi_read (rxbuf, 1);
+  /**
+   * @brief          This function is used to synchronously write command and
+   * then read data from SPI.
+   */
+  // int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32
+  // n_rx);
+  SPI_print_retval (tls_spi_read_with_cmd (txbuf, 1, rxbuf, 1),
+                    "SPI_transfer");
   return rxbuf[0];
 };
-static u8
+static void
 SPI_write (u8 a)
 {
   u8 buf[1] = { a };
-  return tls_spi_write (buf, 1);
+  SPI_print_retval (tls_spi_write (buf, 1), "SPI_write");
 };
-static u8
+static void
 SPI_write16 (u16 a)
 {
   union
@@ -168,12 +219,12 @@ SPI_write16 (u16 a)
     u8 b[2];
   } un;
   un.w = a;
-  return tls_spi_write (un.b, 2);
+  SPI_print_retval (tls_spi_write (un.b, 2), "SPI_write16");
 }; // Send 16 bits data
-static size_t
+static void
 SPI_writeBytes (u8 *data, size_t chunk_length)
 {
-  return tls_spi_write (data, chunk_length);
+  SPI_print_retval (tls_spi_write (data, chunk_length), "SPI_writeBytes");
 };
 
 //-----------------------------------------------------
@@ -209,14 +260,11 @@ const uint16_t ADDR_REG_I2S_CONFIG_RW = 0xc040;
 static SPISettings VS1053_SPI; // SPI settings for this slave
 static uint8_t endFillByte;    // Byte to send when stopping song
 
-static enum tls_io_name cs_pin;      // Pin where CS line is connected
-static enum tls_io_name dcs_pin;     // Pin where DCS line is connected
-static enum tls_io_name dreq_pin;    // Pin where DREQ line is connected
-static uint8_t curvol;      // Current volume setting 0..100%
-static s8_t curbalance = 0; // Current balance setting -100..100
-
-
-
+static enum tls_io_name cs_pin;   // Pin where CS line is connected
+static enum tls_io_name dcs_pin;  // Pin where DCS line is connected
+static enum tls_io_name dreq_pin; // Pin where DREQ line is connected
+static uint8_t curvol;            // Current volume setting 0..100%
+static s8_t curbalance = 0;       // Current balance setting -100..100
 
 static void
 VS1053_await_data_request (void)
@@ -277,17 +325,16 @@ static uint16_t VS1053_wram_read (uint16_t address);
 //}
 
 void
-VS1053_VS1053 (libVS1053_t* set_pin)
+VS1053_VS1053 (libVS1053_t *set_pin)
 {
   cs_pin = set_pin->cs_pin;
   dcs_pin = set_pin->dcs_pin;
   dreq_pin = set_pin->dreq_pin;
 
-spi_cs = set_pin->spi_cs;
-spi_ck = set_pin->spi_ck;
-spi_di = set_pin->spi_di;
-spi_do = set_pin->spi_do;
-
+  spi_cs = set_pin->spi_cs;
+  spi_ck = set_pin->spi_ck;
+  spi_di = set_pin->spi_di;
+  spi_do = set_pin->spi_do;
 }
 
 uint16_t

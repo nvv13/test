@@ -44,23 +44,23 @@ enum VS1053_I2S_RATE
   VS1053_I2S_RATE_48_KHZ
 };
 
-  typedef struct
-  {
+typedef struct
+{
 
-    enum tls_io_name cs_pin; 
-    enum tls_io_name dcs_pin;
-    enum tls_io_name dreq_pin;
+  enum tls_io_name cs_pin;
+  enum tls_io_name dcs_pin;
+  enum tls_io_name dreq_pin;
 
-    enum tls_io_name spi_cs; /* */
-    enum tls_io_name spi_ck; /* */
-    enum tls_io_name spi_di; /* даже если не используеться, надо определить? */
-    enum tls_io_name spi_do; /* */
+  enum tls_io_name spi_cs; /* */
+  enum tls_io_name spi_ck; /* */
+  enum tls_io_name spi_di; /* даже если не используеться, надо определить? */
+  enum tls_io_name spi_do; /* */
 
-  } libVS1053_t;
+} libVS1053_t;
 
 // Constructor.  Only sets pin values.  Doesn't touch the chip.  Be sure to
 // call begin()!
-void VS1053_VS1053 (libVS1053_t* set_pin);
+void VS1053_VS1053 (libVS1053_t *set_pin);
 
 // Begin operation.  Sets pins correctly, and prepares SPI bus.
 void VS1053_begin ();
