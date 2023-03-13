@@ -124,10 +124,10 @@ yield (void)
 //#define MSBFIRST 0
 //#define SPI_MODE0 0
 
-static enum tls_io_name spi_cs; /* */
-static enum tls_io_name spi_ck; /* */
 static enum tls_io_name
-    spi_di; /* даже если не используеться, надо определить? */
+    spi_cs; /* даже если не используеться, надо определить?  */
+static enum tls_io_name spi_ck; /* */
+static enum tls_io_name spi_di; /* */
 static enum tls_io_name spi_do; /* */
 
 static void
@@ -176,7 +176,7 @@ SPI_Settings (u32 fclk)
   // используемая последовательность вывода бит.
   // MSBFIRST (Most Significant Bit First) — слева - с первого (левого) бита
   // (старшего) или LSBFIRST (Least Significant Bit First) — справа - с
-  // последнего бита (младшего) 
+  // последнего бита (младшего)
   //  надо чтобы было  MSBFIRST, SPI_MODE0
   int retval = tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_LOW, fclk);
   /**< SPI transfer mode: mode_0(CPHA=0, CHOL=0),
@@ -188,21 +188,37 @@ SPI_Settings (u32 fclk)
 static void SPI_beginTransaction (int VS1053_SPI){}; // Prevent other SPI users
 static void SPI_endTransaction (void){};             // Allow other SPI users
 
+/*
 static u8
 SPI_transfer (u8 a)
 {
-  u8 txbuf[1] = { a };
+  // u8 txbuf[1] = { a };
   u8 rxbuf[1] = { 0 };
-  // tls_spi_read (rxbuf, 1);
+  SPI_print_retval (tls_spi_read (rxbuf, 1), "SPI_read");
+  // @brief          This function is used to synchronously write command and
+  // then read data from SPI.
+  // int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32
+  // n_rx);
+  // SPI_print_retval (tls_spi_read_with_cmd (txbuf, 1, rxbuf, 1),
+  //                  "SPI_transfer");
+  return rxbuf[0];
+};
+*/
+static u16
+SPI_read16 (u16 a)
+{
+  // u8 txbuf[2] = { a };
+  u8 rxbuf[2] = { 0, 0 };
+  SPI_print_retval (tls_spi_read (rxbuf, 2), "SPI_read16");
   /**
    * @brief          This function is used to synchronously write command and
    * then read data from SPI.
    */
   // int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32
   // n_rx);
-  SPI_print_retval (tls_spi_read_with_cmd (txbuf, 1, rxbuf, 1),
-                    "SPI_transfer");
-  return rxbuf[0];
+  // SPI_print_retval (tls_spi_read_with_cmd (txbuf, 1, rxbuf, 1),
+  //                  "SPI_transfer");
+  return rxbuf[0] << 8 | rxbuf[1];
 };
 static void
 SPI_write (u8 a)
@@ -260,6 +276,7 @@ const uint16_t ADDR_REG_I2S_CONFIG_RW = 0xc040;
 static SPISettings VS1053_SPI; // SPI settings for this slave
 static uint8_t endFillByte;    // Byte to send when stopping song
 
+static enum tls_io_name rst_pin;  // hardware Reset Pin
 static enum tls_io_name cs_pin;   // Pin where CS line is connected
 static enum tls_io_name dcs_pin;  // Pin where DCS line is connected
 static enum tls_io_name dreq_pin; // Pin where DREQ line is connected
@@ -327,6 +344,7 @@ static uint16_t VS1053_wram_read (uint16_t address);
 void
 VS1053_VS1053 (libVS1053_t *set_pin)
 {
+  rst_pin = set_pin->rst_pin;
   cs_pin = set_pin->cs_pin;
   dcs_pin = set_pin->dcs_pin;
   dreq_pin = set_pin->dreq_pin;
@@ -343,11 +361,13 @@ VS1053_read_register (uint8_t _reg)
   uint16_t result;
 
   VS1053_control_mode_on ();
-  SPI_write (3);    // Read operation
-  SPI_write (_reg); // Register to read (0..0xF)
+  //SPI_write (3);    // Read operation
+  //SPI_write (_reg); // Register to read (0..0xF)
+  SPI_write16( 0x03 << 8 | _reg );
   // Note: transfer16 does not seem to work
-  result = (SPI_transfer (0xFF) << 8) | // Read 16 bits data
-           (SPI_transfer (0xFF));
+  result = SPI_read16 (0xFFFF);
+  //  result = (SPI_transfer (0xFF) << 8) | // Read 16 bits data
+  //           (SPI_transfer (0xFF));
   VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_off ();
   return result;
@@ -357,8 +377,9 @@ void
 VS1053_writeRegister (uint8_t _reg, uint16_t _value)
 {
   VS1053_control_mode_on ();
-  SPI_write (2);        // Write operation
-  SPI_write (_reg);     // Register to write (0..0xF)
+  //SPI_write (2);        // Write operation
+  //SPI_write (_reg);     // Register to write (0..0xF)
+  SPI_write16( 0x02 << 8 | _reg );
   SPI_write16 (_value); // Send 16 bits data
   VS1053_await_data_request ();
   VS1053_control_mode_off ();
@@ -476,12 +497,22 @@ VS1053_begin ()
                 WM_GPIO_ATTR_FLOATING); // DREQ is an input
   tls_gpio_cfg (cs_pin, WM_GPIO_DIR_OUTPUT,
                 WM_GPIO_ATTR_FLOATING); // The SCI and SDI signals
+  if (gpio_is_valid (rst_pin))
+    tls_gpio_cfg (rst_pin, WM_GPIO_DIR_OUTPUT,
+                  WM_GPIO_ATTR_PULLHIGH); // HW reset
   tls_gpio_cfg (dcs_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
   digitalWrite (dcs_pin, HIGH); // Start HIGH for SCI en SDI
   digitalWrite (cs_pin, HIGH);
   delay (100);
   LOG ("\n");
   LOG ("Reset VS1053...\n");
+  if (gpio_is_valid (rst_pin))
+    {
+      digitalWrite (rst_pin, LOW);
+      delay (100);
+      digitalWrite (rst_pin, HIGH);
+      delay (100);
+    }
   digitalWrite (dcs_pin, LOW); // Low & Low will bring reset pin low
   digitalWrite (cs_pin, LOW);
   delay (500);

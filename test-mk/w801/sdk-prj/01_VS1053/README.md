@@ -3,7 +3,7 @@
 
 
 
-project SD Card, SDIO
+project SD Card, SDIO, VS1053
 
 board HLK-W801-KIT-V1.1 + SD Card, SDIO, VS1053
 
@@ -15,9 +15,6 @@ https://github.com/baldram/ESP_VS1053_Library.git
 
 
 
-Дисплей 3.2 TFT Ultra HD 320X480 HX8367C
-фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113125.jpg" alt="back side" title="back side" /></p>
 
 
 
@@ -25,33 +22,8 @@ https://github.com/baldram/ESP_VS1053_Library.git
 
 надо соеденить по схеме:
 ~~~
-на LCD если смотреть сверху на экран, и разьем с правой стороны
-то, соединения такие
-connect to TFT32MEGA_2 
----- --------- ----
-W801 LCD   LCD W801
----- --------- ----
-5v    5v   5v	
-PB17 VH0   VH1 PB18
-PB26 VH2   VH3 PB25 
-PB24 VH4   VH5 PB23 
-PB22 VH6   VH7 PB21 
-PB16 VL7   VL6 PB01
-PB02 VL5   VL4 PB15 
-PB14 VL3   VL2 PB13 
-PB12 VL1   VL0 PB00
-PA01 RS	    WR PA02	
-PA03 CS    RST PA04
-     -*-   -*-
-     -*-   RD
-     -*-   -*-
-     -*-   -*-
- MISO SD   SD MOSI
-  SCK SD   SD CS
-gnd  GND   GND
----- --------- ----
-W801 LCD   LCD W801
----- --------- ----
+
+
 
 
 
@@ -90,46 +62,10 @@ SD Card
 ~~~
 
 
-на SD Card, копируем файлы изображений из директории raw
-
-они подготовлены с помощью конверторов идущих с библиотекой UTFT
-http://www.rinkydinkelectronics.com/library.php?id=51
-
-для Linux, это можно сделать с помощью утилиты convert, входящую в состав ImageMagick.
-[Руководство пользователя ImageMagick v. 7.1.0](https://coollib.net/b/558566-ivan-georgievich-titarenko-rukovodstvo-polzovatelya-imagemagick-v-710)
-
-или
-https://www.altlinux.org/ImageMagick_-_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9
-
-
-
-например, конвертировать все изображения png (или jpg ниже), текущей директории,
-в bmp формат размера 480 на 320 без сохранения соотношения сторон
-для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
-~~~
-для png
-convert *.png -resize 480x320! -flip -define bmp:subtype=RGB565 j%03d.bmp
-для jpg
-convert *.jpg -resize 480x320! -flip -define bmp:subtype=RGB565 j%03d.bmp
-регистр в Linux имеет значение
-convert *.JPG -resize 480x320! -flip -define bmp:subtype=RGB565 j%03d.bmp
-~~~
 
 
 ----
 
-
-в makefile 
-
-библиотека libapp.a, 
-заменена на директорию mod1 (поменял кодировку на 866, для файловой системы)
-./lib/w800/mod1/libapp.a
-
-также собраная библиотека берётся из
-./lib/w800/mod1/libUTFT.a
-
-собирается так:
-https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_UTFU
 
 
 

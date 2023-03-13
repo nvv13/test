@@ -44,17 +44,26 @@ enum VS1053_I2S_RATE
   VS1053_I2S_RATE_48_KHZ
 };
 
+#define GPIO_UNDEF -1
+#define gpio_is_valid(pin) ((pin != GPIO_UNDEF))
 typedef struct
 {
 
-  enum tls_io_name cs_pin;
-  enum tls_io_name dcs_pin;
-  enum tls_io_name dreq_pin;
+  enum tls_io_name rst_pin; // -> rst Reset pin? not use GPIO_UNDEF
+  enum tls_io_name
+      cs_pin; // -> cs Serial Control Interface (SCI) Chip Select pin
+  enum tls_io_name
+      dcs_pin; // -> dcs Serial Data Interface (SDI) Chip Select pin
+  enum tls_io_name dreq_pin; // <- dreq Data Request pin DREQ is turned low
+                             // when the stream buffer is too full
 
-  enum tls_io_name spi_cs; /* */
-  enum tls_io_name spi_ck; /* */
-  enum tls_io_name spi_di; /* даже если не используеться, надо определить? */
-  enum tls_io_name spi_do; /* */
+  enum tls_io_name spi_cs; /* . cs Chip Select pin, даже если не используеться,
+                              надо определить? */
+  enum tls_io_name spi_ck; /* -> clk Clock input pin */
+  enum tls_io_name
+      spi_di; /* <- miso MISO (Master In Slave Out) pin */
+  enum tls_io_name
+      spi_do; /* -> mosi MOSI (Master Out Slave In) pin */
 
 } libVS1053_t;
 

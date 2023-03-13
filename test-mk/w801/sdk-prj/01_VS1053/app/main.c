@@ -89,14 +89,15 @@ user_app1_task (void *sdata)
 
   libVS1053_t user_data = {
 
-    .cs_pin   =WM_IO_PB_21, /* xcs */
-    .dcs_pin  =WM_IO_PB_22, /* xdcs */
-    .dreq_pin =WM_IO_PB_18, /* dreq */
+    .rst_pin  =WM_IO_PB_17, /* HW reset pin */
+    .cs_pin   =WM_IO_PB_21, /* ->xcs  SCI Chip Select pin */
+    .dcs_pin  =WM_IO_PB_22, /* ->xdcs SDI Chip Select pin */
+    .dreq_pin =WM_IO_PB_18, /* <-dreq Data Request pin */
 
     .spi_cs = WM_IO_PB_23, /* */
-    .spi_ck = WM_IO_PB_24, /* sck */
-    .spi_di = WM_IO_PB_25, /* mosi */
-    .spi_do = WM_IO_PB_26, /* miso */
+    .spi_ck = WM_IO_PB_24, /* ck->sck  Clock pin */
+    .spi_di = WM_IO_PB_25, /* di<-mosi */
+    .spi_do = WM_IO_PB_26, /* do->miso */
   };
 
 
