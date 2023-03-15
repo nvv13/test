@@ -95,9 +95,9 @@ user_app1_task (void *sdata)
     .dreq_pin =WM_IO_PB_18, /* <-dreq Data Request pin */
 
     .spi_cs = WM_IO_PB_23, /* */
-    .spi_ck = WM_IO_PB_24, /* ck->sck  Clock pin */
-    .spi_di = WM_IO_PB_25, /* di<-mosi */
-    .spi_do = WM_IO_PB_26, /* do->miso */
+    .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
+    .spi_di = WM_IO_PB_25, /* master miso di <- miso slave */
+    .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
   };
 
 

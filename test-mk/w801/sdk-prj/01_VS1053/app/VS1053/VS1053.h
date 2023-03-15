@@ -59,11 +59,9 @@ typedef struct
 
   enum tls_io_name spi_cs; /* . cs Chip Select pin, даже если не используеться,
                               надо определить? */
-  enum tls_io_name spi_ck; /* -> clk Clock input pin */
-  enum tls_io_name
-      spi_di; /* <- miso MISO (Master In Slave Out) pin */
-  enum tls_io_name
-      spi_do; /* -> mosi MOSI (Master Out Slave In) pin */
+  enum tls_io_name spi_ck; /* -> clk Clock input pin -> */
+  enum tls_io_name spi_di; /* miso MISO (Master In Slave Out) pin <- */
+  enum tls_io_name spi_do; /* mosi MOSI (Master Out Slave In) pin -> */
 
 } libVS1053_t;
 
@@ -105,6 +103,9 @@ void VS1053_printDetails (const char *header);
 
 // Do a soft reset
 void VS1053_softReset ();
+
+// Do a HW + Soft reset
+void VS1053_reset (void);
 
 // Test communication with module
 bool VS1053_testComm (const char *header);
@@ -154,5 +155,7 @@ void VS1053_loadUserCode (const unsigned short *plugin,
 
 // Loads the latest generic firmware patch.
 void VS1053_loadDefaultVs1053Patches ();
+
+void VS1053_sineTest (uint8_t n, uint16_t ms);
 
 #endif

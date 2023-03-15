@@ -136,7 +136,7 @@ SPI_print_retval (int i_retval, char *help)
   switch (i_retval)
     {
     case TLS_SPI_STATUS_OK:
-      LOG (" %s = TLS_SPI_STATUS_OK success.\n", help);
+      // LOG (" %s = TLS_SPI_STATUS_OK success.\n", help);
       break;
     case TLS_SPI_STATUS_EINVAL:
       LOG (" %s = TLS_SPI_STATUS_EINVAL argument is invalid.\n", help);
@@ -168,7 +168,8 @@ SPI_Settings (u32 fclk)
   wm_spi_ck_config (spi_ck);
   wm_spi_di_config (spi_di);
   wm_spi_do_config (spi_do);
-  tls_spi_trans_type (SPI_BYTE_TRANSFER);
+  //tls_spi_trans_type (SPI_BYTE_TRANSFER);
+  tls_spi_trans_type (SPI_DMA_TRANSFER);
   // SPI_DMA_TRANSFER);
   // SPI_WORD_TRANSFER=spi_set_endian(0)=SPI_LITTLE_ENDIAN;
   // default SPI_BYTE_TRANSFER=spi_set_endian(1)=SPI_BIG_ENDIAN;
@@ -188,55 +189,54 @@ SPI_Settings (u32 fclk)
 static void SPI_beginTransaction (int VS1053_SPI){}; // Prevent other SPI users
 static void SPI_endTransaction (void){};             // Allow other SPI users
 
-/*
-static u8
-SPI_transfer (u8 a)
+static int
+SPI_transfer (const u8 *txbuf, u32 n_tx, u8 *rxbuf, u32 n_rx)
 {
-  // u8 txbuf[1] = { a };
-  u8 rxbuf[1] = { 0 };
-  SPI_print_retval (tls_spi_read (rxbuf, 1), "SPI_read");
   // @brief          This function is used to synchronously write command and
   // then read data from SPI.
   // int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32
   // n_rx);
-  // SPI_print_retval (tls_spi_read_with_cmd (txbuf, 1, rxbuf, 1),
-  //                  "SPI_transfer");
-  return rxbuf[0];
+  int retval = tls_spi_read_with_cmd (txbuf, n_tx, rxbuf, n_rx);
+  SPI_print_retval (retval, "SPI_transfer");
+  return retval;
 };
-*/
+/*
 static u16
 SPI_read16 (u16 a)
 {
   // u8 txbuf[2] = { a };
   u8 rxbuf[2] = { 0, 0 };
   SPI_print_retval (tls_spi_read (rxbuf, 2), "SPI_read16");
-  /**
-   * @brief          This function is used to synchronously write command and
-   * then read data from SPI.
-   */
+  //  @brief          This function is used to synchronously write command and
+  //  then read data from SPI.
   // int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32
   // n_rx);
   // SPI_print_retval (tls_spi_read_with_cmd (txbuf, 1, rxbuf, 1),
   //                  "SPI_transfer");
   return rxbuf[0] << 8 | rxbuf[1];
-};
+};*/
 static void
 SPI_write (u8 a)
 {
-  u8 buf[1] = { a };
+  u8 buf[1];
+  buf[0] = a;
   SPI_print_retval (tls_spi_write (buf, 1), "SPI_write");
 };
-static void
+/*static void
 SPI_write16 (u16 a)
 {
+  u8 buf[2];
   union
   {
     u16 w;
     u8 b[2];
   } un;
   un.w = a;
-  SPI_print_retval (tls_spi_write (un.b, 2), "SPI_write16");
-}; // Send 16 bits data
+  // CPU:xt804 - little-endiann
+  buf[0] = un.b[1]; // first Send hi byte
+  buf[1] = un.b[0]; // second Send lo byte
+  SPI_print_retval (tls_spi_write (buf, 2), "SPI_write16");
+};*/ // Send 16 bits data
 static void
 SPI_writeBytes (u8 *data, size_t chunk_length)
 {
@@ -244,33 +244,57 @@ SPI_writeBytes (u8 *data, size_t chunk_length)
 };
 
 //-----------------------------------------------------
+const uint8_t VS1053_SCI_READ = 0x03;  //!< Serial read address
+const uint8_t VS1053_SCI_WRITE = 0x02; //!< Serial write address
 
 const uint8_t vs1053_chunk_size = 32;
-// SCI Register
-const uint8_t SCI_MODE = 0x0;
-const uint8_t SCI_STATUS = 0x1;
-const uint8_t SCI_BASS = 0x2;
-const uint8_t SCI_CLOCKF = 0x3;
-const uint8_t SCI_DECODE_TIME = 0x4; // current decoded time in full seconds
-const uint8_t SCI_AUDATA = 0x5;
-const uint8_t SCI_WRAM = 0x6;
-const uint8_t SCI_WRAMADDR = 0x7;
-const uint8_t SCI_AIADDR = 0xA;
-const uint8_t SCI_VOL = 0xB;
-const uint8_t SCI_AICTRL0 = 0xC;
-const uint8_t SCI_AICTRL1 = 0xD;
-const uint8_t SCI_num_registers = 0xF;
-// SCI_MODE bits
-const uint8_t SM_SDINEW = 11; // Bitnumber in SCI_MODE always on
-const uint8_t SM_RESET = 2;   // Bitnumber in SCI_MODE soft reset
-const uint8_t SM_CANCEL = 3;  // Bitnumber in SCI_MODE cancel song
-const uint8_t SM_TESTS = 5;   // Bitnumber in SCI_MODE for tests
-const uint8_t SM_LINE1 = 14;  // Bitnumber in SCI_MODE for Line input
-const uint8_t SM_STREAM = 6;  // Bitnumber in SCI_MODE for Streaming Mode
 
-const uint16_t ADDR_REG_GPIO_DDR_RW = 0xc017;
-const uint16_t ADDR_REG_GPIO_VAL_R = 0xc018;
-const uint16_t ADDR_REG_GPIO_ODATA_RW = 0xc019;
+// SCI Register
+const uint8_t SCI_MODE = 0x00;   //!< Mode control
+const uint8_t SCI_STATUS = 0x01; //!< Status of VS1053b
+const uint8_t SCI_BASS = 0x02;   //!< Built-in bass/treble control
+const uint8_t SCI_CLOCKF = 0x03; //!< Clock frequency + multiplier
+const uint8_t SCI_DECODE_TIME
+    = 0x04; //!< Decode time in seconds // current decoded time in full seconds
+const uint8_t SCI_AUDATA = 0x05;   //!< Misc. audio data
+const uint8_t SCI_WRAM = 0x06;     //!< RAM write/read
+const uint8_t SCI_WRAMADDR = 0x07; //!< Base address for RAM write/read
+const uint8_t SCI_HDAT0 = 0x08;    //!< Stream header data 0
+const uint8_t SCI_HDAT1 = 0x09;    //!< Stream header data 1
+const uint8_t SCI_AIADDR
+    = 0x0A; //!< Indicates the start address of the application code written
+            //!< earlier
+            //!<    with SCI_WRAMADDR and SCI_WRAM registers.
+const uint8_t SCI_VOL = 0x0B;     //!< Volume control
+const uint8_t SCI_AICTRL0 = 0x0C; //!< SCI_AICTRL register 0. Used to access
+                                  //!< the user's application program
+const uint8_t SCI_AICTRL1 = 0x0D; //!< SCI_AICTRL register 1. Used to access
+                                  //!< the user's application program
+const uint8_t SCI_AICTRL2 = 0x0E; //!< SCI_AICTRL register 2. Used to access
+                                  //!< the user's application program
+const uint8_t SCI_AICTRL3 = 0x0F; //!< SCI_AICTRL register 3. Used to access
+                                  //!< the user's application program
+const uint8_t SCI_num_registers = 0x0F; //
+
+// SCI_MODE bits
+const uint8_t SM_DIFF
+    = 0; //!< Differential, 0: normal in-phase audio, 1: left channel inverted
+const uint8_t SM_LAYER12 = 1;  //!< Allow MPEG layers I & II
+const uint8_t SM_SDINEW = 11;  // Bitnumber in SCI_MODE always on
+const uint8_t SM_RESET = 2;    // Bitnumber in SCI_MODE soft reset
+const uint8_t SM_CANCEL = 3;   // Bitnumber in SCI_MODE cancel song
+const uint8_t SM_TESTS = 5;    // Bitnumber in SCI_MODE for tests
+const uint8_t SM_LINE1 = 14;   // Bitnumber in SCI_MODE for Line input
+const uint8_t SM_STREAM = 6;   // Bitnumber in SCI_MODE for Streaming Mode
+const uint8_t SM_EARSPKLO = 4; // Bitnumber EarSpeaker low setting
+const uint8_t SM_ADPCM = 12;   // Bitnumber PCM/ADPCM recording active
+const uint8_t SM_CLKRANGE
+    = 15; // Bitnumber Input clock range, 0: 12..13 MHz, 1: 24..26 MHz
+
+const uint16_t ADDR_REG_GPIO_DDR_RW = 0xc017;   //!< Direction
+const uint16_t ADDR_REG_GPIO_VAL_R = 0xc018;    //!< Values read from pins
+const uint16_t ADDR_REG_GPIO_ODATA_RW = 0xc019; //!< Values set to the pin
+#define VS1053_INT_ENABLE 0xC01A                //!< Interrupt enable
 const uint16_t ADDR_REG_I2S_CONFIG_RW = 0xc040;
 
 static SPISettings VS1053_SPI; // SPI settings for this slave
@@ -359,15 +383,10 @@ uint16_t
 VS1053_read_register (uint8_t _reg)
 {
   uint16_t result;
-
   VS1053_control_mode_on ();
-  //SPI_write (3);    // Read operation
-  //SPI_write (_reg); // Register to read (0..0xF)
-  SPI_write16( 0x03 << 8 | _reg );
-  // Note: transfer16 does not seem to work
-  result = SPI_read16 (0xFFFF);
-  //  result = (SPI_transfer (0xFF) << 8) | // Read 16 bits data
-  //           (SPI_transfer (0xFF));
+  uint8_t buffer[2] = { VS1053_SCI_READ, _reg };
+  SPI_transfer (buffer, 2, buffer, 2);
+  result = ((uint16_t) (buffer[0]) << 8) | (uint16_t) (buffer[1]);
   VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_off ();
   return result;
@@ -377,10 +396,9 @@ void
 VS1053_writeRegister (uint8_t _reg, uint16_t _value)
 {
   VS1053_control_mode_on ();
-  //SPI_write (2);        // Write operation
-  //SPI_write (_reg);     // Register to write (0..0xF)
-  SPI_write16( 0x02 << 8 | _reg );
-  SPI_write16 (_value); // Send 16 bits data
+  uint8_t buffer[4] = { VS1053_SCI_WRITE, _reg, (uint8_t) (_value >> 8),
+                        (uint8_t) (_value & 0xFF) };
+  SPI_writeBytes (buffer, 4);
   VS1053_await_data_request ();
   VS1053_control_mode_off ();
 }
@@ -910,3 +928,51 @@ VS1053_loadDefaultVs1053Patches ()
 {
   VS1053_loadUserCode (PATCHES, PATCHES_SIZE);
 };
+
+// void VS1053_softReset(void) {
+//  VS1053_writeRegister(SCI_MODE , _BV (SM_SDINEW) | _BV (SM_RESET) );
+//  delay(100);
+//}
+
+void
+VS1053_reset (void)
+{
+  // TODO:
+  // http://www.vlsi.fi/player_vs1011_1002_1003/modularplayer/vs10xx_8c.html#a3
+  // hardware reset
+  if (gpio_is_valid (rst_pin))
+    {
+      digitalWrite (rst_pin, LOW);
+      delay (100);
+      digitalWrite (rst_pin, HIGH);
+    }
+
+  delay (100);
+  VS1053_softReset ();
+  delay (100);
+
+  VS1053_writeRegister (SCI_CLOCKF, 0x6000);
+
+  VS1053_setVolume (40);
+}
+
+void
+VS1053_sineTest (uint8_t n, uint16_t ms)
+{
+  VS1053_reset ();
+
+  uint16_t mode = VS1053_read_register (SCI_MODE);
+  mode |= 0x0020;
+  VS1053_writeRegister (SCI_MODE, mode);
+
+  while (!digitalRead (dreq_pin))
+    ;
+  //  delay(10);
+
+  uint8_t sine_start[8] = { 0x53, 0xEF, 0x6E, n, 0x00, 0x00, 0x00, 0x00 };
+  uint8_t sine_stop[8] = { 0x45, 0x78, 0x69, 0x74, 0x00, 0x00, 0x00, 0x00 };
+
+  SPI_writeBytes (sine_start, 8);
+  delay (ms);
+  SPI_writeBytes (sine_stop, 8);
+}
