@@ -112,6 +112,7 @@ user_app1_task (void *sdata)
     }
   VS1053_switchToMp3Mode (); // optional, some boards require this
   VS1053_setVolume (VOLUME);
+  VS1053_sineTest (0x44, 5000); // Make a tone to indicate VS1053 is working  
 
   FATFS fs;
   FRESULT res_sd;
@@ -121,8 +122,10 @@ user_app1_task (void *sdata)
 
   while (1)
     { //
+      VS1053_sineTest (0x44, 5000); // Make a tone to indicate VS1053 is working  
 
       VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
+
 /*
       // mount SD card
       res_sd = f_mount (&fs, "0:", 1);
