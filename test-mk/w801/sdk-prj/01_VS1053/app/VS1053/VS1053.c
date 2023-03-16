@@ -168,8 +168,9 @@ SPI_Settings (u32 fclk)
   wm_spi_ck_config (spi_ck);
   wm_spi_di_config (spi_di);
   wm_spi_do_config (spi_do);
-  //tls_spi_trans_type (SPI_BYTE_TRANSFER);
-  tls_spi_trans_type (SPI_DMA_TRANSFER);
+  tls_spi_trans_type (SPI_BYTE_TRANSFER);
+  // tls_spi_trans_type (SPI_DMA_TRANSFER);
+  //tls_spi_trans_type (SPI_WORD_TRANSFER);
   // SPI_DMA_TRANSFER);
   // SPI_WORD_TRANSFER=spi_set_endian(0)=SPI_LITTLE_ENDIAN;
   // default SPI_BYTE_TRANSFER=spi_set_endian(1)=SPI_BIG_ENDIAN;
@@ -179,7 +180,7 @@ SPI_Settings (u32 fclk)
   // (старшего) или LSBFIRST (Least Significant Bit First) — справа - с
   // последнего бита (младшего)
   //  надо чтобы было  MSBFIRST, SPI_MODE0
-  int retval = tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_LOW, fclk);
+  int retval = tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_HIGH, fclk);
   /**< SPI transfer mode: mode_0(CPHA=0, CHOL=0),
          mode_1(CPHA=0, CHOL=1), mode_2(CPHA=1,
              CHOL=0), mode_3(CPHA=1, CHOL=1). */
@@ -244,58 +245,70 @@ SPI_writeBytes (u8 *data, size_t chunk_length)
 };
 
 //-----------------------------------------------------
-const uint8_t VS1053_SCI_READ = 0x03;  //!< Serial read address
-const uint8_t VS1053_SCI_WRITE = 0x02; //!< Serial write address
+const uint8_t VS1053_SCI_READ = 0x03;  // Serial read address
+const uint8_t VS1053_SCI_WRITE = 0x02; // Serial write address
 
 const uint8_t vs1053_chunk_size = 32;
 
-// SCI Register
-const uint8_t SCI_MODE = 0x00;   //!< Mode control
-const uint8_t SCI_STATUS = 0x01; //!< Status of VS1053b
-const uint8_t SCI_BASS = 0x02;   //!< Built-in bass/treble control
-const uint8_t SCI_CLOCKF = 0x03; //!< Clock frequency + multiplier
+//* SCI Register
+const uint8_t SCI_MODE = 0x00;   // Mode control
+const uint8_t SCI_STATUS = 0x01; // Status of VS1053b
+const uint8_t SCI_BASS = 0x02;   // Built-in bass/treble control
+const uint8_t SCI_CLOCKF = 0x03; // Clock frequency + multiplier
 const uint8_t SCI_DECODE_TIME
     = 0x04; //!< Decode time in seconds // current decoded time in full seconds
-const uint8_t SCI_AUDATA = 0x05;   //!< Misc. audio data
-const uint8_t SCI_WRAM = 0x06;     //!< RAM write/read
-const uint8_t SCI_WRAMADDR = 0x07; //!< Base address for RAM write/read
-const uint8_t SCI_HDAT0 = 0x08;    //!< Stream header data 0
-const uint8_t SCI_HDAT1 = 0x09;    //!< Stream header data 1
+const uint8_t SCI_AUDATA = 0x05;   // Misc. audio data
+const uint8_t SCI_WRAM = 0x06;     // RAM write/read
+const uint8_t SCI_WRAMADDR = 0x07; // Base address for RAM write/read
+const uint8_t SCI_HDAT0 = 0x08;    // Stream header data 0
+const uint8_t SCI_HDAT1 = 0x09;    // Stream header data 1
 const uint8_t SCI_AIADDR
     = 0x0A; //!< Indicates the start address of the application code written
             //!< earlier
             //!<    with SCI_WRAMADDR and SCI_WRAM registers.
-const uint8_t SCI_VOL = 0x0B;     //!< Volume control
-const uint8_t SCI_AICTRL0 = 0x0C; //!< SCI_AICTRL register 0. Used to access
-                                  //!< the user's application program
-const uint8_t SCI_AICTRL1 = 0x0D; //!< SCI_AICTRL register 1. Used to access
-                                  //!< the user's application program
-const uint8_t SCI_AICTRL2 = 0x0E; //!< SCI_AICTRL register 2. Used to access
-                                  //!< the user's application program
-const uint8_t SCI_AICTRL3 = 0x0F; //!< SCI_AICTRL register 3. Used to access
-                                  //!< the user's application program
+const uint8_t SCI_VOL = 0x0B;     // Volume control
+const uint8_t SCI_AICTRL0 = 0x0C; // SCI_AICTRL register 0. Used to access
+                                  // the user's application program
+const uint8_t SCI_AICTRL1 = 0x0D; // SCI_AICTRL register 1. Used to access
+                                  // the user's application program
+const uint8_t SCI_AICTRL2 = 0x0E; // SCI_AICTRL register 2. Used to access
+                                  // the user's application program
+const uint8_t SCI_AICTRL3 = 0x0F; // SCI_AICTRL register 3. Used to access
+                                  // the user's application program
 const uint8_t SCI_num_registers = 0x0F; //
+//* end SCI Register
 
-// SCI_MODE bits
+//* SCI_MODE bits
 const uint8_t SM_DIFF
     = 0; //!< Differential, 0: normal in-phase audio, 1: left channel inverted
-const uint8_t SM_LAYER12 = 1;  //!< Allow MPEG layers I & II
-const uint8_t SM_SDINEW = 11;  // Bitnumber in SCI_MODE always on
-const uint8_t SM_RESET = 2;    // Bitnumber in SCI_MODE soft reset
-const uint8_t SM_CANCEL = 3;   // Bitnumber in SCI_MODE cancel song
-const uint8_t SM_TESTS = 5;    // Bitnumber in SCI_MODE for tests
-const uint8_t SM_LINE1 = 14;   // Bitnumber in SCI_MODE for Line input
-const uint8_t SM_STREAM = 6;   // Bitnumber in SCI_MODE for Streaming Mode
-const uint8_t SM_EARSPKLO = 4; // Bitnumber EarSpeaker low setting
-const uint8_t SM_ADPCM = 12;   // Bitnumber PCM/ADPCM recording active
+const uint8_t SM_LAYER12 = 1;  // Allow MPEG layers I & II, 0:no 1:yes
+const uint8_t SM_RESET = 2;    // Bitnumber in SCI_MODE soft reset, 1:reset
+const uint8_t SM_CANCEL = 3;   // Cancel decoding current file, 1:cancel
+const uint8_t SM_EARSPKLO = 4; // Bitnumber EarSpeaker low setting, 1:active
+const uint8_t SM_TESTS = 5;    // Allow SDI tests, 1:allowed
+const uint8_t SM_STREAM = 6;   // Stream mode, 1:yes
+const uint8_t SM_EARSPEAKER_HI = 7; // EarSpeaker high setting 0 off 1 active
+const uint8_t SM_DACT = 8;          // DCLK active edge 0 rising 1 falling
+const uint8_t SM_SDIORD = 9;        // SDI bit order 0 MSb first 1 MSb last
+const uint8_t SM_SDISHARE = 10;     // Share SPI chip select 0 no 1 yes
+const uint8_t SM_SDINEW = 11;       // Bitnumber in SCI_MODE always on
+const uint8_t SM_ADPCM = 12;        // Bitnumber PCM/ADPCM recording active
+// 13 bit alwaus 0, reserv
+const uint8_t SM_LINE1 = 14; // MIC/LINE1 selector input, 0:MICP 1:LINE1
 const uint8_t SM_CLKRANGE
-    = 15; // Bitnumber Input clock range, 0: 12..13 MHz, 1: 24..26 MHz
+    = 15; // Input clock range, 0:12..13 MHz, 1:24..26 MHz
+//* end SCI_MODE bits
 
-const uint16_t ADDR_REG_GPIO_DDR_RW = 0xc017;   //!< Direction
-const uint16_t ADDR_REG_GPIO_VAL_R = 0xc018;    //!< Values read from pins
-const uint16_t ADDR_REG_GPIO_ODATA_RW = 0xc019; //!< Values set to the pin
-#define VS1053_INT_ENABLE 0xC01A                //!< Interrupt enable
+//* -
+const uint16_t ADDR_REG_DREQ_R
+    = 0xc012; // address of DREQ register, VS1053b DREQ also goes down while an
+              // SCI operation is in progress.
+const uint16_t ADDR_REG_GPIO_DDR_RW = 0xc017;   // Direction
+const uint16_t ADDR_REG_GPIO_VAL_R = 0xc018;    // Values read from pins
+const uint16_t ADDR_REG_GPIO_ODATA_RW = 0xc019; // Values set to the pin
+const uint16_t ADDR_REG_INT_ENABLE = 0xC01A;    // Interrupt enable
 const uint16_t ADDR_REG_I2S_CONFIG_RW = 0xc040;
+//* end -
 
 static SPISettings VS1053_SPI; // SPI settings for this slave
 static uint8_t endFillByte;    // Byte to send when stopping song
@@ -346,15 +359,15 @@ VS1053_data_mode_off (void)
   SPI_endTransaction ();        // Allow other SPI users
 }
 
-static uint16_t VS1053_read_register (uint8_t _reg);
+//static uint16_t VS1053_read_register (uint8_t _reg);
 
-static void VS1053_sdi_send_buffer (uint8_t *data, size_t len);
+//static void VS1053_sdi_send_buffer (uint8_t *data, size_t len);
 
-static void VS1053_sdi_send_fillers (size_t length);
+//static void VS1053_sdi_send_fillers (size_t length);
 
-static void VS1053_wram_write (uint16_t address, uint16_t data);
+//static void VS1053_wram_write (uint16_t address, uint16_t data);
 
-static uint16_t VS1053_wram_read (uint16_t address);
+//static uint16_t VS1053_wram_read (uint16_t address);
 
 //    inline bool VS1053_data_request(void)  {
 //        return (digitalRead(dreq_pin) == HIGH);
@@ -379,7 +392,7 @@ VS1053_VS1053 (libVS1053_t *set_pin)
   spi_do = set_pin->spi_do;
 }
 
-uint16_t
+static  uint16_t
 VS1053_read_register (uint8_t _reg)
 {
   uint16_t result;
@@ -392,7 +405,7 @@ VS1053_read_register (uint8_t _reg)
   return result;
 }
 
-void
+static void
 VS1053_writeRegister (uint8_t _reg, uint16_t _value)
 {
   VS1053_control_mode_on ();
@@ -403,7 +416,7 @@ VS1053_writeRegister (uint8_t _reg, uint16_t _value)
   VS1053_control_mode_off ();
 }
 
-void
+static void
 VS1053_sdi_send_buffer (uint8_t *data, size_t len)
 {
   size_t chunk_length; // Length of chunk 32 byte or shorter
@@ -424,7 +437,7 @@ VS1053_sdi_send_buffer (uint8_t *data, size_t len)
   VS1053_data_mode_off ();
 }
 
-void
+static void
 VS1053_sdi_send_fillers (size_t len)
 {
   size_t chunk_length; // Length of chunk 32 byte or shorter
@@ -447,14 +460,14 @@ VS1053_sdi_send_fillers (size_t len)
   VS1053_data_mode_off ();
 }
 
-void
+static void
 VS1053_wram_write (uint16_t address, uint16_t data)
 {
   VS1053_writeRegister (SCI_WRAMADDR, address);
   VS1053_writeRegister (SCI_WRAM, data);
 }
 
-uint16_t
+static uint16_t
 VS1053_wram_read (uint16_t address)
 {
   VS1053_writeRegister (SCI_WRAMADDR, address); // Start reading from WRAM
@@ -530,6 +543,9 @@ VS1053_begin ()
       delay (100);
       digitalWrite (rst_pin, HIGH);
       delay (100);
+      VS1053_await_data_request ();
+      // DREQ rises when initialization is complete. You should not send any
+      // data or commands before that.
     }
   digitalWrite (dcs_pin, LOW); // Low & Low will bring reset pin low
   digitalWrite (cs_pin, LOW);
@@ -680,6 +696,8 @@ VS1053_softReset ()
   VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_RESET));
   delay (10);
   VS1053_await_data_request ();
+  // DREQ rises when initialization is complete. You should not send any data
+  // or commands before that.
 }
 
 /**
@@ -929,11 +947,6 @@ VS1053_loadDefaultVs1053Patches ()
   VS1053_loadUserCode (PATCHES, PATCHES_SIZE);
 };
 
-// void VS1053_softReset(void) {
-//  VS1053_writeRegister(SCI_MODE , _BV (SM_SDINEW) | _BV (SM_RESET) );
-//  delay(100);
-//}
-
 void
 VS1053_reset (void)
 {
@@ -945,11 +958,15 @@ VS1053_reset (void)
       digitalWrite (rst_pin, LOW);
       delay (100);
       digitalWrite (rst_pin, HIGH);
+      VS1053_await_data_request ();
+      // DREQ rises when initialization is complete. You should not send any
+      // data or commands before that.
     }
 
   delay (100);
   VS1053_softReset ();
   delay (100);
+  VS1053_await_data_request ();
 
   VS1053_writeRegister (SCI_CLOCKF, 0x6000);
 
@@ -962,12 +979,38 @@ VS1053_sineTest (uint8_t n, uint16_t ms)
   VS1053_reset ();
 
   uint16_t mode = VS1053_read_register (SCI_MODE);
-  mode |= 0x0020;
+  mode |= _BV (SM_TESTS);
   VS1053_writeRegister (SCI_MODE, mode);
+  VS1053_await_data_request ();
 
-  while (!digitalRead (dreq_pin))
-    ;
-  //  delay(10);
+  union
+  {
+    uint8_t byte_full;
+    struct bitFields
+    {
+      uint8_t S : 5;
+      uint8_t F : 3;
+    } bits;
+  } un;
+  un.byte_full = n;
+  /*
+  bits 7:5 Fs
+  0 44100 Hz
+  1 48000 Hz
+  2 32000 Hz
+  3 22050 Hz
+  4 24000 Hz
+  5 16000 Hz
+  6 11025 Hz
+  7 12000 Hz
+
+  S=bits 4:0
+
+  Hz = Fs*(S/128);
+  */
+  u16 Fs[] = { 44100, 48000, 32000, 22050, 24000, 16000, 11025, 12000 };
+  LOG (" VS1053_sineTest, n=%d F=%d S=%d Hz=%d \n", n, un.bits.F, un.bits.S,
+       (Fs[un.bits.F] * un.bits.S) / 128  );
 
   uint8_t sine_start[8] = { 0x53, 0xEF, 0x6E, n, 0x00, 0x00, 0x00, 0x00 };
   uint8_t sine_stop[8] = { 0x45, 0x78, 0x69, 0x74, 0x00, 0x00, 0x00, 0x00 };
@@ -975,4 +1018,71 @@ VS1053_sineTest (uint8_t n, uint16_t ms)
   SPI_writeBytes (sine_start, 8);
   delay (ms);
   SPI_writeBytes (sine_stop, 8);
+}
+
+#define VS1053_GPIO_DDR 0xC017 // GPIO Direction
+#define VS1053_GPIO_IDATA 0xC018 // GPIO Values read from pins
+#define VS1053_GPIO_ODATA 0xC019 // GPIO Values set to the pins
+
+void
+VS1053_GPIO_pinMode (uint8_t pin, uint8_t dir)
+{
+  if (pin > 7)
+    return;
+
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_DDR);
+  uint16_t ddr = VS1053_read_register (SCI_WRAM);
+
+  if (dir == INPUT)
+    ddr &= ~_BV (pin);
+  if (dir == OUTPUT)
+    ddr |= _BV (pin);
+
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_DDR);
+  VS1053_writeRegister (SCI_WRAM, ddr);
+}
+
+void
+VS1053_GPIO_digitalWrite_all_pin (uint8_t val)
+{
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_ODATA);
+  VS1053_writeRegister (SCI_WRAM, val);
+}
+
+void
+VS1053_GPIO_digitalWrite_pin (uint8_t pin, uint8_t val)
+{
+  if (pin > 7)
+    return;
+
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_ODATA);
+  uint16_t pins = VS1053_read_register (SCI_WRAM);
+
+  if (val == LOW)
+    pins &= ~_BV (pin);
+  if (val == HIGH)
+    pins |= _BV (pin);
+
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_ODATA);
+  VS1053_writeRegister (SCI_WRAM, pins);
+}
+
+uint16_t
+VS1053_GPIO_digitalRead_all_pin (void)
+{
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_IDATA);
+  return VS1053_read_register (SCI_WRAM) & 0xFF;
+}
+
+bool
+VS1053_GPIO_digitalRead_pin (uint8_t pin)
+{
+  if (pin > 7)
+    return 0;
+
+  VS1053_writeRegister (SCI_WRAMADDR, VS1053_GPIO_IDATA);
+  uint16_t val = VS1053_read_register (SCI_WRAM);
+  if (val & _BV (pin))
+    return true;
+  return false;
 }

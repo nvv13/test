@@ -105,6 +105,7 @@ user_app1_task (void *sdata)
   // initialize SPI
   //    SPI.begin();
   VS1053_begin ();
+  VS1053_sineTest (N_Hz_3000, 5000); // Make a tone to indicate VS1053 is working  
   if (VS1053_getChipVersion () == 4)
     { // Only perform an update if we really are using a VS1053, not. eg.
       // VS1003
@@ -112,17 +113,16 @@ user_app1_task (void *sdata)
     }
   VS1053_switchToMp3Mode (); // optional, some boards require this
   VS1053_setVolume (VOLUME);
-  VS1053_sineTest (0x44, 5000); // Make a tone to indicate VS1053 is working  
 
   FATFS fs;
   FRESULT res_sd;
   char buff[256]; // буффер для названия директории при сканировании файловой
                   // системы
-  wm_sdio_host_config (0);
+  //wm_sdio_host_config (0);
 
   while (1)
     { //
-      VS1053_sineTest (0x44, 5000); // Make a tone to indicate VS1053 is working  
+//      VS1053_sineTest (N_Hz_7750, 5000); // Make a tone to indicate VS1053 is working  
 
       VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
 
