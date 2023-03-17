@@ -180,7 +180,7 @@ SPI_Settings (u32 fclk)
   // (старшего) или LSBFIRST (Least Significant Bit First) — справа - с
   // последнего бита (младшего)
   //  надо чтобы было  MSBFIRST, SPI_MODE0
-  int retval = tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_HIGH, fclk);
+  int retval = tls_spi_setup (TLS_SPI_MODE_0, TLS_SPI_CS_LOW, fclk);
   /**< SPI transfer mode: mode_0(CPHA=0, CHOL=0),
          mode_1(CPHA=0, CHOL=1), mode_2(CPHA=1,
              CHOL=0), mode_3(CPHA=1, CHOL=1). */
@@ -201,6 +201,15 @@ SPI_transfer (const u8 *txbuf, u32 n_tx, u8 *rxbuf, u32 n_rx)
   SPI_print_retval (retval, "SPI_transfer");
   return retval;
 };
+
+static int
+SPI_read_buf (u8 *rxbuf, u32 n_rx)
+{
+  int retval = tls_spi_read (rxbuf, n_rx);
+  SPI_print_retval (retval, "SPI_read");
+  return retval;
+};
+
 /*
 static u16
 SPI_read16 (u16 a)
@@ -396,9 +405,17 @@ static  uint16_t
 VS1053_read_register (uint8_t _reg)
 {
   uint16_t result;
+  VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_on ();
-  uint8_t buffer[2] = { VS1053_SCI_READ, _reg };
-  SPI_transfer (buffer, 2, buffer, 2);
+  uint8_t buffer[3] = { VS1053_SCI_READ, _reg , 0};
+  //SPI_transfer (buffer, 2, buffer, 3);
+
+  SPI_writeBytes (buffer, 2);
+  //buffer[0]=0xFF;buffer[1]=0xFF;
+  //SPI_transfer (buffer, 2, buffer, 2);
+  //SPI_read (buffer, 2, buffer, 2);
+  SPI_read_buf(buffer, 3);//
+
   result = ((uint16_t) (buffer[0]) << 8) | (uint16_t) (buffer[1]);
   VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_off ();
@@ -408,6 +425,7 @@ VS1053_read_register (uint8_t _reg)
 static void
 VS1053_writeRegister (uint8_t _reg, uint16_t _value)
 {
+  VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_on ();
   uint8_t buffer[4] = { VS1053_SCI_WRITE, _reg, (uint8_t) (_value >> 8),
                         (uint8_t) (_value & 0xFF) };
@@ -415,6 +433,70 @@ VS1053_writeRegister (uint8_t _reg, uint16_t _value)
   VS1053_await_data_request ();
   VS1053_control_mode_off ();
 }
+
+
+void
+VS1053_softReset ()
+{
+  LOG ("Performing soft-reset\n");
+  // Init SPI in slow mode ( 0.2 MHz )
+  VS1053_SPI = SPI_Settings (200000);
+  VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_RESET));
+  /* Newmode, Reset, No L1-2 */
+
+  delay (10);
+  VS1053_await_data_request ();
+
+
+    /* A quick sanity check: write to two registers, then test if we
+     get the same results. Note that if you use a too high SPI
+     speed, the MSB is the most likely to fail when read again. */
+    VS1053_writeRegister(SCI_HDAT0, 0xABAD);
+    VS1053_writeRegister(SCI_HDAT1, 0x1DEA);
+    if (VS1053_read_register(SCI_HDAT0) != 0xABAD || VS1053_read_register(SCI_HDAT1) != 0x1DEA) {
+        printf("There is something wrong with VS10xx\n");
+    }
+
+
+  VS1053_writeRegister (SCI_CLOCKF,6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
+      // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
+
+  //VS1053_writeRegister(SPI_CLOCKF,0XC000);   //Set the clock
+  VS1053_writeRegister(SCI_AUDATA,0xbb81);   //samplerate 48k,stereo
+  VS1053_writeRegister(SCI_BASS, 0x0055);    //set accent
+  VS1053_writeRegister(SCI_VOL, 0x4040);     //Set volume level
+
+  VS1053_await_data_request ();
+
+  VS1053_SPI = SPI_Settings (4000000);
+
+}
+
+
+void
+VS1053_reset (void)
+{
+  // TODO:
+  // http://www.vlsi.fi/player_vs1011_1002_1003/modularplayer/vs10xx_8c.html#a3
+  // hardware reset
+  if (gpio_is_valid (rst_pin))
+    {
+      digitalWrite (rst_pin, LOW);
+      delay (100);
+      digitalWrite (rst_pin, HIGH);
+      VS1053_await_data_request ();
+      // DREQ rises when initialization is complete. You should not send any
+      // data or commands before that.
+    }
+
+  delay (100);
+  VS1053_softReset ();
+  delay (100);
+  VS1053_await_data_request ();
+}
+
+
+
 
 static void
 VS1053_sdi_send_buffer (uint8_t *data, size_t len)
@@ -689,17 +771,6 @@ VS1053_stopSong ()
   printf ("Song stopped incorrectly!");
 }
 
-void
-VS1053_softReset ()
-{
-  LOG ("Performing soft-reset\n");
-  VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_RESET));
-  delay (10);
-  VS1053_await_data_request ();
-  // DREQ rises when initialization is complete. You should not send any data
-  // or commands before that.
-}
-
 /**
  * VLSI datasheet: "SM_STREAM activates VS1053b’s stream mode. In this mode,
  * data should be sent with as even intervals as possible and preferable in
@@ -731,21 +802,17 @@ VS1053_streamModeOff ()
 void
 VS1053_printDetails (const char *header)
 {
-  uint16_t regbuf[16];
+//  uint16_t regbuf[16];
   uint8_t i;
-  (void)regbuf;
+  //(void)regbuf;
 
   LOG ("%s", header);
   LOG ("REG   Contents\n");
   LOG ("---   -----\n");
-  for (i = 0; i <= SCI_num_registers; i++)
+  for (i = 0; i <= SCI_num_registers;
+     i++)
     {
-      regbuf[i] = VS1053_read_register (i);
-    }
-  for (i = 0; i <= SCI_num_registers; i++)
-    {
-      delay (5);
-      LOG ("%3X - %5X\n", i, regbuf[i]);
+      LOG ("%3X - %5X\n", i, VS1053_read_register (i));
     }
 }
 
@@ -947,31 +1014,6 @@ VS1053_loadDefaultVs1053Patches ()
   VS1053_loadUserCode (PATCHES, PATCHES_SIZE);
 };
 
-void
-VS1053_reset (void)
-{
-  // TODO:
-  // http://www.vlsi.fi/player_vs1011_1002_1003/modularplayer/vs10xx_8c.html#a3
-  // hardware reset
-  if (gpio_is_valid (rst_pin))
-    {
-      digitalWrite (rst_pin, LOW);
-      delay (100);
-      digitalWrite (rst_pin, HIGH);
-      VS1053_await_data_request ();
-      // DREQ rises when initialization is complete. You should not send any
-      // data or commands before that.
-    }
-
-  delay (100);
-  VS1053_softReset ();
-  delay (100);
-  VS1053_await_data_request ();
-
-  VS1053_writeRegister (SCI_CLOCKF, 0x6000);
-
-  VS1053_setVolume (40);
-}
 
 void
 VS1053_sineTest (uint8_t n, uint16_t ms)

@@ -105,6 +105,7 @@ user_app1_task (void *sdata)
   // initialize SPI
   //    SPI.begin();
   VS1053_begin ();
+  VS1053_printDetails ("reg value read ");
   VS1053_sineTest (N_Hz_3000, 5000); // Make a tone to indicate VS1053 is working  
   if (VS1053_getChipVersion () == 4)
     { // Only perform an update if we really are using a VS1053, not. eg.
@@ -123,8 +124,10 @@ user_app1_task (void *sdata)
   while (1)
     { //
 //      VS1053_sineTest (N_Hz_7750, 5000); // Make a tone to indicate VS1053 is working  
+  VS1053_printDetails ("reg value read ");
+  tls_os_time_delay (2);
 
-      VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
+//      VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
 
 /*
       // mount SD card
@@ -160,7 +163,7 @@ user_app1_task (void *sdata)
       // unmount file system
       f_mount (NULL, "0:", 1);
 */
-      tls_os_time_delay (HZ * 1);
+//      tls_os_time_delay (HZ * 1);
 
     } //
 }
