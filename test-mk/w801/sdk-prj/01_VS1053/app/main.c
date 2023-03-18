@@ -19,6 +19,12 @@
 #include "wm_gpio_afsel.h"
 #include "wm_osal.h"
 
+#include "mod1/u8g2.h"
+#include "u8x8_riotos.h"
+
+static u8g2_t u8g2;
+
+
 #include "VS1053/VS1053.h"
 
 #define USER_APP1_TASK_SIZE 2048
@@ -66,6 +72,18 @@ scan_files (
                   || strstr (FileName, ".MP3") != NULL)
                 {
                   printf ("FileName = %s \n", FileName);
+
+                  u8g2_FirstPage (&u8g2);
+                  do
+                    {
+                      u8g2_SetDrawColor (&u8g2, 1);
+                      u8g2_SetFont (&u8g2, u8g2_font_courR08_tr);
+                      u8g2_DrawStr (&u8g2, 0, 20, fno.fname);
+                      if(strlen(fno.fname)>20)u8g2_DrawStr (&u8g2, 0, 35, fno.fname+20);
+                      if(strlen(fno.fname)>40)u8g2_DrawStr (&u8g2, 0, 50, fno.fname+40);
+                    }
+                  while (u8g2_NextPage (&u8g2));
+
                   VS1053_PlayMp3 (FileName);
                 }
             }
@@ -83,6 +101,35 @@ user_app1_task (void *sdata)
 {
   printf ("user_app1_task start\n");
 
+  /* initialize to SPI */
+  puts ("Initializing to I2C oled Display.");
+
+  u8g2_Setup_sh1106_i2c_128x64_noname_f (
+      &u8g2, U8G2_R0, u8x8_byte_hw_i2c_riotos, u8x8_gpio_and_delay_riotos);
+
+  if (u8g2.u8x8.i2c_address == 255) // заменяем default на настоящий адрес
+    u8g2.u8x8.i2c_address = 0x3C;
+
+  u8x8_riotos_t d_data = {
+    .pin_cs = GPIO_UNDEF,    //
+    .pin_dc = GPIO_UNDEF,    //
+    .pin_reset = GPIO_UNDEF, //
+
+    .i2c_scl = WM_IO_PA_01, /* */
+    .i2c_sda = WM_IO_PA_04, /* */
+    .i2c_freq = 100000      /* частота i2c в герцах */
+
+  };
+
+  u8g2_SetUserPtr (&u8g2, &d_data);
+
+  /* initialize the display */
+  puts ("Initializing display.");
+
+  u8g2_InitDisplay (&u8g2);
+  u8g2_SetPowerSave (&u8g2, 0);
+
+  /* vs1053 */
   libVS1053_t user_data = {
 
     .rst_pin = WM_IO_PB_17,  /* HW reset pin */

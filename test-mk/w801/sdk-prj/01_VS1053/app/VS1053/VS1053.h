@@ -350,4 +350,8 @@ typedef enum VS1053_status
 
 FRESULT VS1053_PlayMp3 (char *filename);
 
+enum VS1053_status VS1053_status_get_status (void);
+
+void VS1053_stop_PlayMP3 (void);
+
 #endif

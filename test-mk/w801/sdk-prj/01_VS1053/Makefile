@@ -63,6 +63,7 @@ LINKLIB = 	\
 
 ifeq ($(USE_LIB), 1)
 LINKLIB += $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libapp$(LIB_EXT)  \
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmarch$(LIB_EXT)      \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmcommon$(LIB_EXT)    \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libdrivers$(LIB_EXT)     \

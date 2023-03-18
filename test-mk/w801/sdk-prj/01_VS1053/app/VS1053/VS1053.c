@@ -1135,7 +1135,7 @@ VS1053_status_get_status (void)
   return my_sost;
 };
 void
-VS1053_stop (void)
+VS1053_stop_PlayMP3 (void)
 {
   if (my_sost != VS1053_STOP)
     my_sost = VS1053_QUERY_TO_STOP;
@@ -1160,7 +1160,8 @@ static FRESULT res_sd;     // file operation results
 static UINT fnum; // The number of files successfully read and written
 static volatile u32 fnum_play;
 
-#define DEMO_DATA_SIZE 8192
+//#define DEMO_DATA_SIZE 64*32 //2048
+#define DEMO_DATA_SIZE 128*32 //4096
 static u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
 #define SERIAL_DEBUG
 //#define SERIAL_DEBUG_ALL
@@ -1180,7 +1181,7 @@ VS1053_playMP3_task (void *sdata)
       if (start_buf_load == 1)
         {
           start_buf_load = 0;
-          tls_os_time_delay (1);
+          tls_os_time_delay (0);
           if (n_buf_cur == 1)
             {
               n_buf_cur = 2;
@@ -1189,8 +1190,6 @@ VS1053_playMP3_task (void *sdata)
                   res_sd = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE),
                                    DEMO_DATA_SIZE, &fnum);
                   fnum_play = fnum;
-                  if (fnum < DEMO_DATA_SIZE)
-                      my_sost = VS1053_END_FILE;
                 }
             }
           else
@@ -1200,8 +1199,6 @@ VS1053_playMP3_task (void *sdata)
                 {
                   res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
                   fnum_play = fnum;
-                  if (fnum < DEMO_DATA_SIZE)
-                      my_sost = VS1053_END_FILE;
                 }
             }
         }
@@ -1285,7 +1282,9 @@ VS1053_PlayMp3 (char *filename)
                       VS1053_playChunk ((file_buffer + DEMO_DATA_SIZE),
                                         fnum_play);
                     }
-                }
+                   if (fnum_play < DEMO_DATA_SIZE)
+                      my_sost = VS1053_END_FILE;
+               }
             start_buf_load = 0;
             }
         }
