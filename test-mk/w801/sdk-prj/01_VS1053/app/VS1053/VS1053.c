@@ -1160,7 +1160,7 @@ static FRESULT res_sd;     // file operation results
 static UINT fnum; // The number of files successfully read and written
 static volatile u32 fnum_play;
 
-#define DEMO_DATA_SIZE 2048
+#define DEMO_DATA_SIZE 8192
 static u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
 #define SERIAL_DEBUG
 //#define SERIAL_DEBUG_ALL
@@ -1168,7 +1168,7 @@ static u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
 static volatile u8 n_buf_cur = 0;
 static volatile u8 start_buf_load =0;
 
-#define VS1053_TASK_SIZE 4096
+#define VS1053_TASK_SIZE 1024
 static OS_STK VS1053_TaskStk[VS1053_TASK_SIZE];
 #define VS1053_TASK_SIZE_PRIO 32
 
@@ -1180,7 +1180,7 @@ VS1053_playMP3_task (void *sdata)
       if (start_buf_load == 1)
         {
           start_buf_load = 0;
-          //tls_os_time_delay (1);
+          tls_os_time_delay (1);
           if (n_buf_cur == 1)
             {
               n_buf_cur = 2;
@@ -1276,14 +1276,14 @@ VS1053_PlayMp3 (char *filename)
 #endif
                   if (n_buf_cur == 1)
                     {
-                      VS1053_playChunk (file_buffer, fnum_play);
                       start_buf_load = 1;
+                      VS1053_playChunk (file_buffer, fnum_play);
                     }
                   else
                     {
+                      start_buf_load = 1;
                       VS1053_playChunk ((file_buffer + DEMO_DATA_SIZE),
                                         fnum_play);
-                      start_buf_load = 1;
                     }
                 }
             start_buf_load = 0;
