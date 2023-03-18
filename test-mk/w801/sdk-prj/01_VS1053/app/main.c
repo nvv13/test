@@ -77,8 +77,7 @@ scan_files (
   return res;
 }
 
-
-#define VOLUME 50 // volume level 0-100
+#define VOLUME 100 // volume level 0-100
 
 #include "SampleMp3.h"
 
@@ -89,24 +88,35 @@ user_app1_task (void *sdata)
 
   libVS1053_t user_data = {
 
-    .rst_pin  =WM_IO_PB_17, /* HW reset pin */
-    .cs_pin   =WM_IO_PB_21, /* ->xcs  SCI Chip Select pin */
-    .dcs_pin  =WM_IO_PB_22, /* ->xdcs SDI Chip Select pin */
-    .dreq_pin =WM_IO_PB_18, /* <-dreq Data Request pin */
+    .rst_pin = WM_IO_PB_17,  /* HW reset pin */
+    .cs_pin = WM_IO_PB_21,   /* ->xcs  SCI Chip Select pin */
+    .dcs_pin = WM_IO_PB_22,  /* ->xdcs SDI Chip Select pin */
+    .dreq_pin = WM_IO_PB_18, /* <-dreq Data Request pin */
 
     .spi_cs = WM_IO_PB_23, /* */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
-    .spi_di = WM_IO_PB_25, /* master miso di <- miso slave */
+    .spi_di = WM_IO_PB_03, /* master miso di <- miso slave, на макетке board
+                              HLK-W801-KIT-V1.1 работает только WM_IO_PB_03  */
     .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
   };
 
+  /**
+   * config the pins used for spi di
+   * WM_IO_PB_00 - не работает,
+   * WM_IO_PB_03 - работает!
+   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный к
+   * данному контакту на макетке
+   * WM_IO_PB_25 only for 56pin - не работает, мешает светодиод подключенный к
+   * данному контакту на макетке
+   */
 
   VS1053_VS1053 (&user_data);
   // initialize SPI
   //    SPI.begin();
   VS1053_begin ();
   VS1053_printDetails ("reg value read ");
-  VS1053_sineTest (N_Hz_3000, 5000); // Make a tone to indicate VS1053 is working  
+  VS1053_sineTest (N_Hz_3000,
+                   5000); // Make a tone to indicate VS1053 is working
   if (VS1053_getChipVersion () == 4)
     { // Only perform an update if we really are using a VS1053, not. eg.
       // VS1003
@@ -119,51 +129,48 @@ user_app1_task (void *sdata)
   FRESULT res_sd;
   char buff[256]; // буффер для названия директории при сканировании файловой
                   // системы
-  //wm_sdio_host_config (0);
+  // wm_sdio_host_config (0);
 
   while (1)
     { //
-//      VS1053_sineTest (N_Hz_7750, 5000); // Make a tone to indicate VS1053 is working  
-  VS1053_printDetails ("reg value read ");
-  tls_os_time_delay (2);
+      VS1053_printDetails ("reg value read ");
+      tls_os_time_delay (2);
 
-//      VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
+      VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
 
-/*
-      // mount SD card
-      res_sd = f_mount (&fs, "0:", 1);
+      /*
+            // mount SD card
+            res_sd = f_mount (&fs, "0:", 1);
 
-      //***********************formatting test****************************
-      if (res_sd == FR_NO_FILESYSTEM)
-        {
-          printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably "
-                  "because the file "
-                  "initialization failed! error code:%d\r\n",
-                  res_sd);
-        }
-      else if (res_sd != FR_OK)
-        {
-          printf ("Failed to mount file system! Probably because the file "
-                  "initialization failed! error code:%d\r\n",
-                  res_sd);
-        }
-      else
-        {
-          printf ("The file system is successfully mounted, and the read and "
-                  "write test can be performed!\r\n");
-        }
+            //***********************formatting
+         test**************************** if (res_sd == FR_NO_FILESYSTEM)
+              {
+                printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably
+         " "because the file " "initialization failed! error code:%d\r\n",
+                        res_sd);
+              }
+            else if (res_sd != FR_OK)
+              {
+                printf ("Failed to mount file system! Probably because the file
+         " "initialization failed! error code:%d\r\n", res_sd);
+              }
+            else
+              {
+                printf ("The file system is successfully mounted, and the read
+         and " "write test can be performed!\r\n");
+              }
 
-      if (res_sd == FR_OK)
-        {
-          memset (buff, 0, sizeof (buff));
-          strcpy (buff, "/");
-          res_sd = scan_files (buff);
-        }
+            if (res_sd == FR_OK)
+              {
+                memset (buff, 0, sizeof (buff));
+                strcpy (buff, "/");
+                res_sd = scan_files (buff);
+              }
 
-      // unmount file system
-      f_mount (NULL, "0:", 1);
-*/
-//      tls_os_time_delay (HZ * 1);
+            // unmount file system
+            f_mount (NULL, "0:", 1);
+      */
+      tls_os_time_delay (HZ * 1);
 
     } //
 }

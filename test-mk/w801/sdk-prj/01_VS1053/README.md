@@ -24,6 +24,29 @@ https://github.com/baldram/ESP_VS1053_Library.git
 ~~~
 
 
+  libVS1053_t user_data = {
+
+    .rst_pin = WM_IO_PB_17,  /* HW reset pin */
+    .cs_pin = WM_IO_PB_21,   /* ->xcs  SCI Chip Select pin */
+    .dcs_pin = WM_IO_PB_22,  /* ->xdcs SDI Chip Select pin */
+    .dreq_pin = WM_IO_PB_18, /* <-dreq Data Request pin */
+
+    .spi_cs = WM_IO_PB_23, /* */
+    .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
+    .spi_di = WM_IO_PB_03, /* master miso di <- miso slave, на макетке board
+                              HLK-W801-KIT-V1.1 работает только WM_IO_PB_03  */
+    .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
+  };
+
+  /**
+   * config the pins used for spi di
+   * WM_IO_PB_00 - не работает,
+   * WM_IO_PB_03 - работает!
+   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный к
+   * данному контакту на макетке WM_IO_PB_25 only for 56pin - не работает,
+   * мешает светодиод подключенный к данному контакту на макетке
+   */
+
 
 
 

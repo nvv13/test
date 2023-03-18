@@ -170,7 +170,7 @@ SPI_Settings (u32 fclk)
   wm_spi_do_config (spi_do);
   tls_spi_trans_type (SPI_BYTE_TRANSFER);
   // tls_spi_trans_type (SPI_DMA_TRANSFER);
-  //tls_spi_trans_type (SPI_WORD_TRANSFER);
+  // tls_spi_trans_type (SPI_WORD_TRANSFER);
   // SPI_DMA_TRANSFER);
   // SPI_WORD_TRANSFER=spi_set_endian(0)=SPI_LITTLE_ENDIAN;
   // default SPI_BYTE_TRANSFER=spi_set_endian(1)=SPI_BIG_ENDIAN;
@@ -190,6 +190,7 @@ SPI_Settings (u32 fclk)
 static void SPI_beginTransaction (int VS1053_SPI){}; // Prevent other SPI users
 static void SPI_endTransaction (void){};             // Allow other SPI users
 
+/*
 static int
 SPI_transfer (const u8 *txbuf, u32 n_tx, u8 *rxbuf, u32 n_rx)
 {
@@ -201,6 +202,7 @@ SPI_transfer (const u8 *txbuf, u32 n_tx, u8 *rxbuf, u32 n_rx)
   SPI_print_retval (retval, "SPI_transfer");
   return retval;
 };
+*/
 
 static int
 SPI_read_buf (u8 *rxbuf, u32 n_rx)
@@ -368,15 +370,15 @@ VS1053_data_mode_off (void)
   SPI_endTransaction ();        // Allow other SPI users
 }
 
-//static uint16_t VS1053_read_register (uint8_t _reg);
+// static uint16_t VS1053_read_register (uint8_t _reg);
 
-//static void VS1053_sdi_send_buffer (uint8_t *data, size_t len);
+// static void VS1053_sdi_send_buffer (uint8_t *data, size_t len);
 
-//static void VS1053_sdi_send_fillers (size_t length);
+// static void VS1053_sdi_send_fillers (size_t length);
 
-//static void VS1053_wram_write (uint16_t address, uint16_t data);
+// static void VS1053_wram_write (uint16_t address, uint16_t data);
 
-//static uint16_t VS1053_wram_read (uint16_t address);
+// static uint16_t VS1053_wram_read (uint16_t address);
 
 //    inline bool VS1053_data_request(void)  {
 //        return (digitalRead(dreq_pin) == HIGH);
@@ -401,20 +403,18 @@ VS1053_VS1053 (libVS1053_t *set_pin)
   spi_do = set_pin->spi_do;
 }
 
-static  uint16_t
+static uint16_t
 VS1053_read_register (uint8_t _reg)
 {
   uint16_t result;
   VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_on ();
-  uint8_t buffer[3] = { VS1053_SCI_READ, _reg , 0};
-  //SPI_transfer (buffer, 2, buffer, 3);
+  uint8_t buffer[2] = { VS1053_SCI_READ, _reg};
+  
+  //SPI_transfer (buffer, 2, buffer, 2); то-же работает 
 
   SPI_writeBytes (buffer, 2);
-  //buffer[0]=0xFF;buffer[1]=0xFF;
-  //SPI_transfer (buffer, 2, buffer, 2);
-  //SPI_read (buffer, 2, buffer, 2);
-  SPI_read_buf(buffer, 3);//
+  SPI_read_buf (buffer, 2); //
 
   result = ((uint16_t) (buffer[0]) << 8) | (uint16_t) (buffer[1]);
   VS1053_await_data_request (); // Wait for DREQ to be HIGH again
@@ -434,7 +434,6 @@ VS1053_writeRegister (uint8_t _reg, uint16_t _value)
   VS1053_control_mode_off ();
 }
 
-
 void
 VS1053_softReset ()
 {
@@ -447,31 +446,31 @@ VS1053_softReset ()
   delay (10);
   VS1053_await_data_request ();
 
-
-    /* A quick sanity check: write to two registers, then test if we
-     get the same results. Note that if you use a too high SPI
-     speed, the MSB is the most likely to fail when read again. */
-    VS1053_writeRegister(SCI_HDAT0, 0xABAD);
-    VS1053_writeRegister(SCI_HDAT1, 0x1DEA);
-    if (VS1053_read_register(SCI_HDAT0) != 0xABAD || VS1053_read_register(SCI_HDAT1) != 0x1DEA) {
-        printf("There is something wrong with VS10xx\n");
+  /* A quick sanity check: write to two registers, then test if we
+   get the same results. Note that if you use a too high SPI
+   speed, the MSB is the most likely to fail when read again. */
+  VS1053_writeRegister (SCI_HDAT0, 0xABAD);
+  VS1053_writeRegister (SCI_HDAT1, 0x1DEA);
+  if (VS1053_read_register (SCI_HDAT0) != 0xABAD
+      || VS1053_read_register (SCI_HDAT1) != 0x1DEA)
+    {
+      printf ("There is something wrong with VS10xx\n");
     }
 
+  VS1053_writeRegister (
+      SCI_CLOCKF,
+      6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
+                // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
 
-  VS1053_writeRegister (SCI_CLOCKF,6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
-      // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
-
-  //VS1053_writeRegister(SPI_CLOCKF,0XC000);   //Set the clock
-  VS1053_writeRegister(SCI_AUDATA,0xbb81);   //samplerate 48k,stereo
-  VS1053_writeRegister(SCI_BASS, 0x0055);    //set accent
-  VS1053_writeRegister(SCI_VOL, 0x4040);     //Set volume level
+  // VS1053_writeRegister(SPI_CLOCKF,0XC000);   //Set the clock
+  VS1053_writeRegister (SCI_AUDATA, 0xbb81); // samplerate 48k,stereo
+  VS1053_writeRegister (SCI_BASS, 0x0055);   // set accent
+  VS1053_writeRegister (SCI_VOL, 0x4040);    // Set volume level
 
   VS1053_await_data_request ();
 
   VS1053_SPI = SPI_Settings (4000000);
-
 }
-
 
 void
 VS1053_reset (void)
@@ -494,9 +493,6 @@ VS1053_reset (void)
   delay (100);
   VS1053_await_data_request ();
 }
-
-
-
 
 static void
 VS1053_sdi_send_buffer (uint8_t *data, size_t len)
@@ -802,15 +798,14 @@ VS1053_streamModeOff ()
 void
 VS1053_printDetails (const char *header)
 {
-//  uint16_t regbuf[16];
+  //  uint16_t regbuf[16];
   uint8_t i;
   //(void)regbuf;
 
   LOG ("%s", header);
   LOG ("REG   Contents\n");
   LOG ("---   -----\n");
-  for (i = 0; i <= SCI_num_registers;
-     i++)
+  for (i = 0; i <= SCI_num_registers; i++)
     {
       LOG ("%3X - %5X\n", i, VS1053_read_register (i));
     }
@@ -1014,7 +1009,6 @@ VS1053_loadDefaultVs1053Patches ()
   VS1053_loadUserCode (PATCHES, PATCHES_SIZE);
 };
 
-
 void
 VS1053_sineTest (uint8_t n, uint16_t ms)
 {
@@ -1052,7 +1046,7 @@ VS1053_sineTest (uint8_t n, uint16_t ms)
   */
   u16 Fs[] = { 44100, 48000, 32000, 22050, 24000, 16000, 11025, 12000 };
   LOG (" VS1053_sineTest, n=%d F=%d S=%d Hz=%d \n", n, un.bits.F, un.bits.S,
-       (Fs[un.bits.F] * un.bits.S) / 128  );
+       (Fs[un.bits.F] * un.bits.S) / 128);
 
   uint8_t sine_start[8] = { 0x53, 0xEF, 0x6E, n, 0x00, 0x00, 0x00, 0x00 };
   uint8_t sine_stop[8] = { 0x45, 0x78, 0x69, 0x74, 0x00, 0x00, 0x00, 0x00 };
