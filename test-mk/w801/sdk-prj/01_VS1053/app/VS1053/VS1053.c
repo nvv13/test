@@ -168,8 +168,8 @@ SPI_Settings (u32 fclk)
   wm_spi_ck_config (spi_ck);
   wm_spi_di_config (spi_di);
   wm_spi_do_config (spi_do);
-  tls_spi_trans_type (SPI_BYTE_TRANSFER);
-  // tls_spi_trans_type (SPI_DMA_TRANSFER);
+  //tls_spi_trans_type (SPI_BYTE_TRANSFER);
+  tls_spi_trans_type (SPI_DMA_TRANSFER);
   // tls_spi_trans_type (SPI_WORD_TRANSFER);
   // SPI_DMA_TRANSFER);
   // SPI_WORD_TRANSFER=spi_set_endian(0)=SPI_LITTLE_ENDIAN;
@@ -409,9 +409,9 @@ VS1053_read_register (uint8_t _reg)
   uint16_t result;
   VS1053_await_data_request (); // Wait for DREQ to be HIGH again
   VS1053_control_mode_on ();
-  uint8_t buffer[2] = { VS1053_SCI_READ, _reg};
-  
-  //SPI_transfer (buffer, 2, buffer, 2); то-же работает 
+  uint8_t buffer[2] = { VS1053_SCI_READ, _reg };
+
+  // SPI_transfer (buffer, 2, buffer, 2); то-же работает
 
   SPI_writeBytes (buffer, 2);
   SPI_read_buf (buffer, 2); //
@@ -891,6 +891,8 @@ VS1053_getChipVersion ()
 {
   uint16_t status = VS1053_read_register (SCI_STATUS);
 
+  LOG ("VS1053_getChipVersion = %d \n", ((status & 0x00F0) >> 4));
+
   return ((status & 0x00F0) >> 4);
 }
 
@@ -1121,4 +1123,174 @@ VS1053_GPIO_digitalRead_pin (uint8_t pin)
   if (val & _BV (pin))
     return true;
   return false;
+}
+
+/************************/
+
+static volatile enum VS1053_status my_sost = VS1053_NONE;
+
+enum VS1053_status
+VS1053_status_get_status (void)
+{
+  return my_sost;
+};
+void
+VS1053_stop (void)
+{
+  if (my_sost != VS1053_STOP)
+    my_sost = VS1053_QUERY_TO_STOP;
+};
+
+// pack(push,1) - Byte alignment ?
+#pragma pack(push, 1)
+// MP3 Header
+typedef struct tagMP3
+{
+  char ID3[3]; // = "ID3"
+  u8 ver;
+  u8 sum_ver;
+  u8 flag;
+  u8 header_size[4];
+
+} MP3HDR, *PMP3HDR;
+#pragma pack(pop)
+
+static FIL fnew;           // file object
+static FRESULT res_sd;     // file operation results
+static UINT fnum; // The number of files successfully read and written
+static volatile u32 fnum_play;
+
+#define DEMO_DATA_SIZE 2048
+static u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
+#define SERIAL_DEBUG
+//#define SERIAL_DEBUG_ALL
+
+static volatile u8 n_buf_cur = 0;
+static volatile u8 start_buf_load =0;
+
+#define VS1053_TASK_SIZE 4096
+static OS_STK VS1053_TaskStk[VS1053_TASK_SIZE];
+#define VS1053_TASK_SIZE_PRIO 32
+
+void
+VS1053_playMP3_task (void *sdata)
+{
+  while (true)
+    {
+      if (start_buf_load == 1)
+        {
+          start_buf_load = 0;
+          //tls_os_time_delay (1);
+          if (n_buf_cur == 1)
+            {
+              n_buf_cur = 2;
+              if (my_sost != VS1053_END_FILE)
+                {
+                  res_sd = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE),
+                                   DEMO_DATA_SIZE, &fnum);
+                  fnum_play = fnum;
+                  if (fnum < DEMO_DATA_SIZE)
+                      my_sost = VS1053_END_FILE;
+                }
+            }
+          else
+            {
+              n_buf_cur = 1;
+              if (my_sost != VS1053_END_FILE)
+                {
+                  res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
+                  fnum_play = fnum;
+                  if (fnum < DEMO_DATA_SIZE)
+                      my_sost = VS1053_END_FILE;
+                }
+            }
+        }
+        else
+        tls_os_time_delay (1);
+    }
+}
+
+FRESULT
+VS1053_PlayMp3 (char *filename)
+{
+  start_buf_load = 0;
+  if (n_buf_cur == 0)
+    {
+      tls_os_task_create (
+          NULL, NULL, VS1053_playMP3_task, NULL,
+          (void *)VS1053_TaskStk,          /* task's stack start address */
+          VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
+          VS1053_TASK_SIZE_PRIO, 0);
+    }
+  n_buf_cur = 1;
+
+  uint32_t start;
+
+  // Open the file
+  res_sd = f_open (&fnew, filename, FA_OPEN_EXISTING | FA_READ);
+  // file opened successfully?
+  if (res_sd == FR_OK)
+    {
+#ifdef SERIAL_DEBUG_ALL
+      printf ("Open file successfully! Start reading data!\r\n");
+#endif
+      res_sd = f_read (&fnew, file_buffer, sizeof (MP3HDR), &fnum);
+      if (res_sd == FR_OK)
+        {
+          // Parse BMP header to get the information we need
+          PMP3HDR aHead = (PMP3HDR)file_buffer;
+          if (strstr (aHead->ID3, "ID3") != NULL)
+            {
+#ifdef SERIAL_DEBUG_ALL
+              printf ("MP3 header ok\r\n");
+#endif
+              if (!(aHead->ver > 0 && aHead->ver < 6))
+                {
+                  printf ("Wrong `version` value %d\r\n", aHead->ver);
+                  f_close (&fnew);
+                  return -7;
+                }
+
+              start = 0ul;
+              start |= (0x7F & aHead->header_size[0]);
+              start <<= 7;
+              start |= (0x7F & aHead->header_size[1]);
+              start <<= 7;
+              start |= (0x7F & aHead->header_size[2]);
+              start <<= 7;
+              start |= (0x7F & aHead->header_size[3]);
+
+              res_sd = f_lseek (&fnew, start);
+#ifdef SERIAL_DEBUG
+              printf ("f_lseek successfully! %d\r\n", start);
+#endif
+
+              res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
+              n_buf_cur = 1;
+              my_sost = VS1053_PLAY;
+              fnum_play = fnum;
+              while (my_sost == VS1053_PLAY)
+                {
+#ifdef SERIAL_DEBUG_ALL
+                  printf ("load fnum:%d, ", fnum);
+#endif
+                  if (n_buf_cur == 1)
+                    {
+                      VS1053_playChunk (file_buffer, fnum_play);
+                      start_buf_load = 1;
+                    }
+                  else
+                    {
+                      VS1053_playChunk ((file_buffer + DEMO_DATA_SIZE),
+                                        fnum_play);
+                      start_buf_load = 1;
+                    }
+                }
+            start_buf_load = 0;
+            }
+        }
+      // close file
+      f_close (&fnew);
+    }
+  return res_sd;
 }

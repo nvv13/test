@@ -27,8 +27,6 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 #include "ff.h"
 
-extern uint8_t BigFont[]; // подключаем большой шрифт
-
 FRESULT
 scan_files (
     char *path /* Start node to be scanned (***also used as work area***) */
@@ -58,7 +56,7 @@ scan_files (
             }
           else
             { /* It is a file. */
-              printf ("%s/%s\n", path, fno.fname);
+              // printf ("%s/%s\n", path, fno.fname);
               char FileName[256];
               if (strlen (path) != 0)
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
@@ -67,7 +65,8 @@ scan_files (
               if (strstr (FileName, ".mp3") != NULL
                   || strstr (FileName, ".MP3") != NULL)
                 {
-                  // n_i2s_PlayWav (FileName);
+                  printf ("FileName = %s \n", FileName);
+                  VS1053_PlayMp3 (FileName);
                 }
             }
         }
@@ -78,8 +77,6 @@ scan_files (
 }
 
 #define VOLUME 100 // volume level 0-100
-
-#include "SampleMp3.h"
 
 void
 user_app1_task (void *sdata)
@@ -114,9 +111,6 @@ user_app1_task (void *sdata)
   // initialize SPI
   //    SPI.begin();
   VS1053_begin ();
-  VS1053_printDetails ("reg value read ");
-  VS1053_sineTest (N_Hz_3000,
-                   5000); // Make a tone to indicate VS1053 is working
   if (VS1053_getChipVersion () == 4)
     { // Only perform an update if we really are using a VS1053, not. eg.
       // VS1003
@@ -129,47 +123,43 @@ user_app1_task (void *sdata)
   FRESULT res_sd;
   char buff[256]; // буффер для названия директории при сканировании файловой
                   // системы
-  // wm_sdio_host_config (0);
+  wm_sdio_host_config (0);
 
   while (1)
     { //
-      VS1053_printDetails ("reg value read ");
-      tls_os_time_delay (2);
 
-      VS1053_playChunk (sampleMp3, sizeof (sampleMp3));
+      // mount SD card
+      res_sd = f_mount (&fs, "0:", 1);
 
-      /*
-            // mount SD card
-            res_sd = f_mount (&fs, "0:", 1);
+      //***********************formatting    test****************************
+      if (res_sd == FR_NO_FILESYSTEM)
+        {
+          printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably "
+                  "because the file initialization failed! error code:%d\r\n",
+                  res_sd);
+        }
+      else if (res_sd != FR_OK)
+        {
+          printf ("Failed to mount file system! Probably because the file "
+                  "initialization failed! error code:%d\r\n",
+                  res_sd);
+        }
+      else
+        {
+          printf ("The file system is successfully mounted, and the read and "
+                  "write test can be performed!\r\n");
+        }
 
-            //***********************formatting
-         test**************************** if (res_sd == FR_NO_FILESYSTEM)
-              {
-                printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably
-         " "because the file " "initialization failed! error code:%d\r\n",
-                        res_sd);
-              }
-            else if (res_sd != FR_OK)
-              {
-                printf ("Failed to mount file system! Probably because the file
-         " "initialization failed! error code:%d\r\n", res_sd);
-              }
-            else
-              {
-                printf ("The file system is successfully mounted, and the read
-         and " "write test can be performed!\r\n");
-              }
+      if (res_sd == FR_OK)
+        {
+          memset (buff, 0, sizeof (buff));
+          strcpy (buff, "/");
+          res_sd = scan_files (buff);
+        }
 
-            if (res_sd == FR_OK)
-              {
-                memset (buff, 0, sizeof (buff));
-                strcpy (buff, "/");
-                res_sd = scan_files (buff);
-              }
+      // unmount file system
+      f_mount (NULL, "0:", 1);
 
-            // unmount file system
-            f_mount (NULL, "0:", 1);
-      */
       tls_os_time_delay (HZ * 1);
 
     } //

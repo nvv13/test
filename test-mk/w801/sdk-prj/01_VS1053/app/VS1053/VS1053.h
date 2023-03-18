@@ -35,6 +35,7 @@
 #ifndef VS1053_H
 #define VS1053_H
 
+#include "ff.h"
 #include "wm_type_def.h"
 
 enum VS1053_I2S_RATE
@@ -67,8 +68,9 @@ typedef struct
                             * WM_IO_PB_00 - не работает,
                             * WM_IO_PB_03 - работает!
                             * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный к
-                            * данному контакту на макетке                          WM_IO_PB_25 only for 56pin - не работает,
-                            * мешает светодиод подключенный к данному контакту на макетке
+                            * данному контакту на макетке                          WM_IO_PB_25 only for
+                            * 56pin - не работает,                          мешает светодиод подключенный к данному контакту на
+                            * макетке
                             */
 
   enum tls_io_name spi_do; /* mosi MOSI (Master Out Slave In) pin -> */
@@ -335,5 +337,17 @@ bool VS1053_GPIO_digitalRead_pin (uint8_t pin);
 #define N_Hz_11250 62
 #define N_Hz_11625 63
 void VS1053_sineTest (uint8_t n, uint16_t ms);
+
+typedef enum VS1053_status
+{
+  VS1053_NONE = 0,
+  VS1053_HW_INIT = 1,
+  VS1053_PLAY = 2,
+  VS1053_END_FILE = 3,
+  VS1053_STOP = 4,
+  VS1053_QUERY_TO_STOP = 5,
+} _VS1053_status;
+
+FRESULT VS1053_PlayMp3 (char *filename);
 
 #endif

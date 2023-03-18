@@ -51,6 +51,7 @@ sdio host
 Подключаем SD Card по схеме
 W801	Pin #	SD 4-bit Mode	Описание
 -----  -------------------------------------------------
+PB10	9	DAT[2]		Data Line 2 /Read Wait
  PB11	1	CD/DAT[3]	Data Line 3
  PB07	2	CMD		Command Line
  Gnd	3	VSS1		Ground
@@ -59,7 +60,6 @@ W801	Pin #	SD 4-bit Mode	Описание
  Gnd	6	Vss2		Ground
  PB08	7	DAT[0]		Data Line 0
  PB09	8	DAT[1]		Data Line 1 / Interrupt
-PB10	9	DAT[2]		Data Line 2 /Read Wait
 -----  -------------------------------------------------
 
 
