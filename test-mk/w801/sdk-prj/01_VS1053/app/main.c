@@ -40,7 +40,7 @@ demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
 if(VS1053_status_get_status()==VS1053_PLAY)
  {
- VS1053_stop_PlayMP3();
+ //VS1053_stop_PlayMP3();
  };
 }
 
@@ -91,9 +91,10 @@ scan_files (
                     {
                       u8g2_SetDrawColor (&u8g2, 1);
                       u8g2_SetFont (&u8g2, u8g2_font_courR08_tr);
-                      u8g2_DrawStr (&u8g2, 0, 20, fno.fname);
-                      if(strlen(fno.fname)>20)u8g2_DrawStr (&u8g2, 0, 35, fno.fname+20);
-                      if(strlen(fno.fname)>40)u8g2_DrawStr (&u8g2, 0, 50, fno.fname+40);
+                      u8g2_DrawStr (&u8g2, 0, 10, fno.fname);
+                      if(strlen(fno.fname)>20)u8g2_DrawStr (&u8g2, 0, 25, fno.fname+20);
+                      if(strlen(fno.fname)>40)u8g2_DrawStr (&u8g2, 0, 40, fno.fname+40);
+                      if(strlen(fno.fname)>60)u8g2_DrawStr (&u8g2, 0, 55, fno.fname+60);
                     }
                   while (u8g2_NextPage (&u8g2));
 
@@ -121,7 +122,7 @@ user_app1_task (void *sdata)
   // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
   // минимальной яркости, пришлось сделать время таймера поменьше
   // timer_cfg.timeout = 100; // 0 * 30;
-  timer_cfg.timeout = 1000 * 10;
+  timer_cfg.timeout = 1000 * 20;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
