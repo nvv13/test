@@ -25,7 +25,6 @@
 
 static u8g2_t u8g2;
 
-
 #include "VS1053/VS1053.h"
 
 #define USER_APP1_TASK_SIZE 2048
@@ -34,17 +33,14 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 #include "ff.h"
 
-
 static void
 demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-if(VS1053_status_get_status()==VS1053_PLAY)
- {
- //VS1053_stop_PlayMP3();
- };
+  if (VS1053_status_get_status () == VS1053_PLAY)
+    {
+      // VS1053_stop_PlayMP3();
+    };
 }
-
-
 
 FRESULT
 scan_files (
@@ -91,10 +87,31 @@ scan_files (
                     {
                       u8g2_SetDrawColor (&u8g2, 1);
                       u8g2_SetFont (&u8g2, u8g2_font_courR08_tr);
-                      u8g2_DrawStr (&u8g2, 0, 10, fno.fname);
-                      if(strlen(fno.fname)>20)u8g2_DrawStr (&u8g2, 0, 25, fno.fname+20);
-                      if(strlen(fno.fname)>40)u8g2_DrawStr (&u8g2, 0, 40, fno.fname+40);
-                      if(strlen(fno.fname)>60)u8g2_DrawStr (&u8g2, 0, 55, fno.fname+60);
+                      // FF_LFN_BUF		255
+                      if (strlen (fno.fname) > 80)
+                        {
+                          fno.fname[101] = 0;
+                          u8g2_DrawStr (&u8g2, 0, 8 + 12 + 12 + 12 + 12,
+                                        fno.fname + 80);
+                        };
+                      if (strlen (fno.fname) > 60)
+                        {
+                          fno.fname[81] = 0;
+                          u8g2_DrawStr (&u8g2, 0, 8 + 12 + 12 + 12,
+                                        fno.fname + 60);
+                        };
+                      if (strlen (fno.fname) > 40)
+                        {
+                          fno.fname[61] = 0;
+                          u8g2_DrawStr (&u8g2, 0, 8 + 12 + 12, fno.fname + 40);
+                        };
+                      if (strlen (fno.fname) > 20)
+                        {
+                          fno.fname[41] = 0;
+                          u8g2_DrawStr (&u8g2, 0, 8 + 12, fno.fname + 20);
+                        };
+                      fno.fname[21] = 0;
+                      u8g2_DrawStr (&u8g2, 0, 8, fno.fname);
                     }
                   while (u8g2_NextPage (&u8g2));
 
