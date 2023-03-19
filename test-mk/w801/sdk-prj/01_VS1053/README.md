@@ -31,6 +31,8 @@ PB18  DREQ
 PB24  SCK
 PB03  MISO
 PB26  MOSI
+5V    5V
+GND   DGND
 ----- -------------
 
 
