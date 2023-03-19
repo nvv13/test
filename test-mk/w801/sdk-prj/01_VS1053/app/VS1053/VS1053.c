@@ -168,7 +168,7 @@ SPI_Settings (u32 fclk)
   wm_spi_ck_config (spi_ck);
   wm_spi_di_config (spi_di);
   wm_spi_do_config (spi_do);
-  //tls_spi_trans_type (SPI_BYTE_TRANSFER);
+  // tls_spi_trans_type (SPI_BYTE_TRANSFER);
   tls_spi_trans_type (SPI_DMA_TRANSFER);
   // tls_spi_trans_type (SPI_WORD_TRANSFER);
   // SPI_DMA_TRANSFER);
@@ -658,6 +658,12 @@ VS1053_begin ()
       LOG ("endFillByte is %X\n", endFillByte);
       // printDetails("After last clocksetting") ;
       delay (100);
+    }
+
+  if (VS1053_getChipVersion () == 4)
+    { // Only perform an update if we really are using a VS1053, not. eg.
+      // VS1003
+      VS1053_loadDefaultVs1053Patches ();
     }
 }
 
@@ -1155,71 +1161,20 @@ typedef struct tagMP3
 } MP3HDR, *PMP3HDR;
 #pragma pack(pop)
 
-static FIL fnew;           // file object
-static FRESULT res_sd;     // file operation results
-static UINT fnum; // The number of files successfully read and written
-static volatile u32 fnum_play;
+static FIL fnew;       // file object
+static FRESULT res_sd; // file operation results
+static UINT fnum;      // The number of files successfully read and written
 
-//#define DEMO_DATA_SIZE 64*32 //2048
-#define DEMO_DATA_SIZE 128*32 //4096
-static u8 file_buffer[DEMO_DATA_SIZE * 2] = { 0 };
+#define DEMO_DATA_SIZE 32 // 4096
+static u8 file_buffer[DEMO_DATA_SIZE] = { 0 };
 #define SERIAL_DEBUG
 //#define SERIAL_DEBUG_ALL
-
-static volatile u8 n_buf_cur = 0;
-static volatile u8 start_buf_load =0;
-
-#define VS1053_TASK_SIZE 1024
-static OS_STK VS1053_TaskStk[VS1053_TASK_SIZE];
-#define VS1053_TASK_SIZE_PRIO 32
-
-void
-VS1053_playMP3_task (void *sdata)
-{
-  while (true)
-    {
-      if (start_buf_load == 1)
-        {
-          start_buf_load = 0;
-          tls_os_time_delay (0);
-          if (n_buf_cur == 1)
-            {
-              n_buf_cur = 2;
-              if (my_sost != VS1053_END_FILE)
-                {
-                  res_sd = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE),
-                                   DEMO_DATA_SIZE, &fnum);
-                  fnum_play = fnum;
-                }
-            }
-          else
-            {
-              n_buf_cur = 1;
-              if (my_sost != VS1053_END_FILE)
-                {
-                  res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
-                  fnum_play = fnum;
-                }
-            }
-        }
-        else
-        tls_os_time_delay (1);
-    }
-}
 
 FRESULT
 VS1053_PlayMp3 (char *filename)
 {
-  start_buf_load = 0;
-  if (n_buf_cur == 0)
-    {
-      tls_os_task_create (
-          NULL, NULL, VS1053_playMP3_task, NULL,
-          (void *)VS1053_TaskStk,          /* task's stack start address */
-          VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
-          VS1053_TASK_SIZE_PRIO, 0);
-    }
-  n_buf_cur = 1;
+
+  VS1053_switchToMp3Mode (); // optional, some boards require this
 
   uint32_t start;
 
@@ -1262,30 +1217,19 @@ VS1053_PlayMp3 (char *filename)
               printf ("f_lseek successfully! %d\r\n", start);
 #endif
 
-              res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE, &fnum);
-              n_buf_cur = 1;
+              fnum = vs1053_chunk_size;
               my_sost = VS1053_PLAY;
-              fnum_play = fnum;
-              while (my_sost == VS1053_PLAY)
+              VS1053_data_mode_on ();
+              while (fnum == vs1053_chunk_size
+                     && my_sost == VS1053_PLAY) // More to do?
                 {
-#ifdef SERIAL_DEBUG_ALL
-                  printf ("load fnum:%d, ", fnum);
-#endif
-                  if (n_buf_cur == 1)
-                    {
-                      start_buf_load = 1;
-                      VS1053_playChunk (file_buffer, fnum_play);
-                    }
-                  else
-                    {
-                      start_buf_load = 1;
-                      VS1053_playChunk ((file_buffer + DEMO_DATA_SIZE),
-                                        fnum_play);
-                    }
-                   if (fnum_play < DEMO_DATA_SIZE)
-                      my_sost = VS1053_END_FILE;
-               }
-            start_buf_load = 0;
+                  VS1053_await_data_request (); // Wait for space available
+                  res_sd
+                      = f_read (&fnew, file_buffer, vs1053_chunk_size, &fnum);
+                  SPI_writeBytes (file_buffer, fnum);
+                }
+              VS1053_data_mode_off ();
+              my_sost = VS1053_STOP;
             }
         }
       // close file

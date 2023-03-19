@@ -10,9 +10,9 @@ board HLK-W801-KIT-V1.1 + SD Card, SDIO, VS1053
 Видео
 
 
-библиотека VS1053? источник:
+библиотека VS1053 источник:
 https://github.com/baldram/ESP_VS1053_Library.git
-
+https://github.com/adafruit/Adafruit_VS1053_Library.git
 
 
 

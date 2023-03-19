@@ -14,6 +14,7 @@
 #include "wm_type_def.h"
 
 #include "wm_cpu.h"
+#include "wm_timer.h"
 
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
@@ -32,6 +33,18 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
 #include "ff.h"
+
+
+static void
+demo_timer_irq (u8 *arg) // здесь будет смена режима
+{
+if(VS1053_status_get_status()==VS1053_PLAY)
+ {
+ VS1053_stop_PlayMP3();
+ };
+}
+
+
 
 FRESULT
 scan_files (
@@ -85,6 +98,7 @@ scan_files (
                   while (u8g2_NextPage (&u8g2));
 
                   VS1053_PlayMp3 (FileName);
+                  tls_os_time_delay (HZ);
                 }
             }
         }
@@ -100,6 +114,23 @@ void
 user_app1_task (void *sdata)
 {
   printf ("user_app1_task start\n");
+
+  u8 timer_id;
+  struct tls_timer_cfg timer_cfg;
+  timer_cfg.unit = TLS_TIMER_UNIT_MS;
+  // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
+  // минимальной яркости, пришлось сделать время таймера поменьше
+  // timer_cfg.timeout = 100; // 0 * 30;
+  timer_cfg.timeout = 1000 * 10;
+  timer_cfg.is_repeat = 1;
+  timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
+  timer_cfg.arg = NULL;
+  timer_id = tls_timer_create (&timer_cfg);
+  if (true)
+    {
+      tls_timer_start (timer_id);
+      printf ("timer start\n");
+    }
 
   /* initialize to SPI */
   puts ("Initializing to I2C oled Display.");
@@ -155,15 +186,7 @@ user_app1_task (void *sdata)
    */
 
   VS1053_VS1053 (&user_data);
-  // initialize SPI
-  //    SPI.begin();
   VS1053_begin ();
-  if (VS1053_getChipVersion () == 4)
-    { // Only perform an update if we really are using a VS1053, not. eg.
-      // VS1003
-      VS1053_loadDefaultVs1053Patches ();
-    }
-  VS1053_switchToMp3Mode (); // optional, some boards require this
   VS1053_setVolume (VOLUME);
 
   FATFS fs;
