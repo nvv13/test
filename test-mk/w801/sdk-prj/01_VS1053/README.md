@@ -1,12 +1,11 @@
+project VS1053
 
 
-project SD Card, SDIO, VS1053
-
-board HLK-W801-KIT-V1.1 + VS1053
+board HLK-W801-KIT-V1.1 + VS1053 + OLED + SD Card + Button
 
 
 Видео
-
+https://youtu.be/942BgG0cVuE
 
 
 библиотека VS1053 источник:
@@ -19,7 +18,7 @@ https://github.com/adafruit/Adafruit_VS1053_Library.git
 
 соединения
 
-надо соеденить по схеме:
+надо соединить по схеме:
 ~~~
 
 
@@ -81,7 +80,7 @@ SD Card
 
 Светодиодный модуль OLED 1,3 дюйма, синий I2C, 128X64, 1,3 дюйма, контроллер sh1106
      4 pin
-надо соеденить по схеме:
+надо соединить по схеме:
 connect to
 DISPLAY     w801
 -----  -------------------------------------------------
