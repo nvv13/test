@@ -33,15 +33,6 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 #include "ff.h"
 
-static void
-demo_timer_irq (u8 *arg) // здесь будет смена режима
-{
-  if (VS1053_status_get_status () == VS1053_PLAY)
-    {
-      // VS1053_stop_PlayMP3();
-    };
-}
-
 FRESULT
 scan_files (
     char *path /* Start node to be scanned (***also used as work area***) */
@@ -128,6 +119,38 @@ scan_files (
 
 #define VOLUME 100 // volume level 0-100
 
+#define KNOOB_SW WM_IO_PA_11
+static const u16 i_pos_dreb_SW = 300; //кнопка
+volatile static u8 i_dreb_SW = 0;     // от дребезга кнопки
+
+static void
+KNOOB_SW_isr_callback (void *context)
+{
+  u16 ret = tls_get_gpio_irq_status (KNOOB_SW);
+  if (ret)
+    {
+      tls_clr_gpio_irq_status (KNOOB_SW);
+      if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
+        {
+          i_dreb_SW = 1;
+          if (VS1053_status_get_status () == VS1053_PLAY)
+            {
+              VS1053_stop_PlayMP3 ();
+            };
+        }
+    }
+}
+
+static void
+demo_timer_irq (u8 *arg) // здесь будет смена режима
+{
+  if (i_dreb_SW != 0
+      && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
+    {
+      i_dreb_SW = 0; // от дребезга
+    }
+}
+
 void
 user_app1_task (void *sdata)
 {
@@ -135,11 +158,8 @@ user_app1_task (void *sdata)
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
-  timer_cfg.unit = TLS_TIMER_UNIT_MS;
-  // timer_cfg.unit = TLS_TIMER_UNIT_US; // чтобы небыло мерцания на
-  // минимальной яркости, пришлось сделать время таймера поменьше
-  // timer_cfg.timeout = 100; // 0 * 30;
-  timer_cfg.timeout = 1000 * 20;
+  timer_cfg.unit = TLS_TIMER_UNIT_US;
+  timer_cfg.timeout = 100;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -149,6 +169,11 @@ user_app1_task (void *sdata)
       tls_timer_start (timer_id);
       printf ("timer start\n");
     }
+
+  //
+  tls_gpio_cfg (KNOOB_SW, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_PULLHIGH);
+  tls_gpio_isr_register (KNOOB_SW, KNOOB_SW_isr_callback, NULL);
+  tls_gpio_irq_enable (KNOOB_SW, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
 
   /* initialize to SPI */
   puts ("Initializing to I2C oled Display.");

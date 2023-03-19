@@ -1,13 +1,12 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
 
 
 project SD Card, SDIO, VS1053
 
-board HLK-W801-KIT-V1.1 + SD Card, SDIO, VS1053
+board HLK-W801-KIT-V1.1 + VS1053
+
 
 Видео
+
 
 
 библиотека VS1053 источник:
@@ -24,29 +23,24 @@ https://github.com/adafruit/Adafruit_VS1053_Library.git
 ~~~
 
 
-  libVS1053_t user_data = {
+W801  VS1053
+----- -------------
+PB17  XRST
+PB21  XCS
+PB22  XDCS
+PB18  DREQ
+PB24  SCK
+PB03  MISO
+PB26  MOSI
+----- -------------
 
-    .rst_pin = WM_IO_PB_17,  /* HW reset pin */
-    .cs_pin = WM_IO_PB_21,   /* ->xcs  SCI Chip Select pin */
-    .dcs_pin = WM_IO_PB_22,  /* ->xdcs SDI Chip Select pin */
-    .dreq_pin = WM_IO_PB_18, /* <-dreq Data Request pin */
 
-    .spi_cs = WM_IO_PB_23, /* */
-    .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
-    .spi_di = WM_IO_PB_03, /* master miso di <- miso slave, на макетке board
-                              HLK-W801-KIT-V1.1 работает только WM_IO_PB_03  */
-    .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
-  };
 
-  /**
-   * config the pins used for spi di
-   * WM_IO_PB_00 - не работает,
-   * WM_IO_PB_03 - работает!
-   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный к
-   * данному контакту на макетке WM_IO_PB_25 only for 56pin - не работает,
-   * мешает светодиод подключенный к данному контакту на макетке
-   */
-
+W801 Кнопка
+---- ----- 
+PA11  1
+GND   2
+---- ----- 
 
 
 
@@ -84,15 +78,18 @@ SD Card
 
 
 
+
 Светодиодный модуль OLED 1,3 дюйма, синий I2C, 128X64, 1,3 дюйма, контроллер sh1106
      4 pin
 надо соеденить по схеме:
 connect to
 DISPLAY     w801
+-----  -------------------------------------------------
 1 GND       GND
 2 VCC       5v 
 3 scl       PA01
 4 sda       PA04
+-----  -------------------------------------------------
 
 
 ~~~
@@ -103,6 +100,28 @@ DISPLAY     w801
 ----
 
 
+
+в проекте используеться библиотека u8g2
+~~~
+
+ее сборка https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_u8g2_st7920_spi
+после сборки, сама библиотека libu8g2.a 
+ разместить в директорию 
+.\lib\w800\mod1\
+и заголовочные файлы u8g2.h u8x8.h
+ разместить директорию
+.\include\mod1\
+
+их еще можно взять из 
+https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/lib/w800/mod1
+https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/include/mod1
+
+
+в Makefile директории . этого проекта
+секция LINKLIB добавлено
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
+
+~~~
 
 
 ----
