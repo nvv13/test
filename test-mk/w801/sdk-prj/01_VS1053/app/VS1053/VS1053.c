@@ -328,7 +328,7 @@ static enum tls_io_name rst_pin;  // hardware Reset Pin
 static enum tls_io_name cs_pin;   // Pin where CS line is connected
 static enum tls_io_name dcs_pin;  // Pin where DCS line is connected
 static enum tls_io_name dreq_pin; // Pin where DREQ line is connected
-static uint8_t curvol;            // Current volume setting 0..100%
+static uint8_t curvol = 0x40;     // Current volume setting 0..100%
 static s8_t curbalance = 0;       // Current balance setting -100..100
 
 static void
@@ -465,7 +465,8 @@ VS1053_softReset ()
   // VS1053_writeRegister(SPI_CLOCKF,0XC000);   //Set the clock
   VS1053_writeRegister (SCI_AUDATA, 0xbb81); // samplerate 48k,stereo
   VS1053_writeRegister (SCI_BASS, 0x0055);   // set accent
-  VS1053_writeRegister (SCI_VOL, 0x4040);    // Set volume level
+  // VS1053_writeRegister (SCI_VOL, 0x4040);    // Set volume level
+  VS1053_setVolume (curvol); // restore volume
 
   VS1053_await_data_request ();
 
@@ -1174,7 +1175,8 @@ FRESULT
 VS1053_PlayMp3 (char *filename)
 {
 
-  VS1053_switchToMp3Mode (); // optional, some boards require this
+  VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
+                             // include!)
 
   uint32_t start;
 
