@@ -112,6 +112,7 @@ This project is based on the original [UTFT library](http://www.rinkydinkelectro
 #define ILI9327_UNO		34
 #define HX8357C		    35
 #define ILI9225B		36
+#define TFT00_96SP          37
 
 #define ITDB32			0	// HX8347-A (16bit)
 #define ITDB32WC		1	// ILI9327  (16bit)

@@ -1,4 +1,5 @@
 case ST7735S:
+case TFT00_96SP:
 	UTFT_LCD_Write_COM(0x11);//Sleep exit 
 	delay(120);
  

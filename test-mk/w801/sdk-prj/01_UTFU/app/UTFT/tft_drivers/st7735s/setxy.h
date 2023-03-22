@@ -1,4 +1,5 @@
 case ST7735S:
+case TFT00_96SP:
 	UTFT_LCD_Write_COM(0x2a); 
   	UTFT_LCD_Write_DATA2(x1>>8);
   	UTFT_LCD_Write_DATA2(x1);
