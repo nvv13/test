@@ -11,40 +11,48 @@
 
 #include <types.h>
 
+#include "wm_gpio.h"
+//#include "wm_gpio_afsel.h"
 
 // Используемый SPI (SPI1, SPI2)
 #define ST77xx_SPI_periph       SPI1
 #define ST77xx_RESET_Used       1       // Используется ножка RESET дисплея
-#define ST77xx_CS_Used          0       // Используется ножка CS дисплея. Можно установить в 0 если дисплей один и на CS лог. 1
+#define ST77xx_CS_Used          1       // Используется ножка CS дисплея. Можно установить в 0 если дисплей один и на CS лог. 1
 #define ST77xx_DC_Used          1       // Используется ножка DC (Data/Command) дисплея. 0 если используется 3-проводной режим подключения по SPI
-#define ST77xx_BLK_PWM_Used     1       // Используется плавное управление яркостью подсветки используя ШИМ (иначе управление дискретное - ВКЛ/ВЫКЛ)
+#define ST77xx_BLK_PWM_Used     0       // Используется плавное управление яркостью подсветки используя ШИМ (иначе управление дискретное - ВКЛ/ВЫКЛ)
 
 //==============================================================================
 // Настройки подключения к интерфейсу дисплея
 //==============================================================================
 // Сигнал RESET
 #if (ST77xx_RESET_Used)
-  #define ST77xx_RESET_Port     GPIOA
-  #define ST77xx_RESET_Pin      GPIO_Pin_3
+  #define ST77xx_RESET_Port     GPIOB
+  #define ST77xx_RESET_Pin      WM_IO_PB_21
 #endif
 // Сигнал CS
 #if (ST77xx_CS_Used)
   #define ST77xx_CS_Port        GPIOB
-  #define ST77xx_CS_Pin         GPIO_Pin_10
+  #define ST77xx_CS_Pin         WM_IO_PB_22
 #endif
 // Сигнал DC
 #if (ST77xx_DC_Used)
-  #define ST77xx_DC_Port        GPIOA
-  #define ST77xx_DC_Pin         GPIO_Pin_2
+  #define ST77xx_DC_Port        GPIOB
+  #define ST77xx_DC_Pin         WM_IO_PB_23
 #endif
+
+//      wm_spi_cs_config (WM_IO_PB_14);
+//      wm_spi_ck_config (WM_IO_PB_15);
+//      wm_spi_di_config (WM_IO_PB_16);
+//      wm_spi_do_config (WM_IO_PB_17);
+
 
 #if (ST77xx_BLK_PWM_Used)
 // Используется 1 канал таймера 2 для управления с помощью ШИМ
   #define ST77xx_PWM_TMR2_Chan  1       // Номер канала (1-4) таймера 2, используемый для ШИМ
 #else
   // Сигнал BLK (для управления подсветкой)
-  #define ST77xx_BLK_Port       GPIOA
-  #define ST77xx_BLK_Pin        GPIO_Pin_1
+  #define ST77xx_BLK_Port       GPIOB
+  #define ST77xx_BLK_Pin        WM_IO_PB_24
 #endif
 //==============================================================================
 

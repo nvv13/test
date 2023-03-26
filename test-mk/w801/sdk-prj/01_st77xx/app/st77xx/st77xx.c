@@ -15,7 +15,7 @@
 #include <st77xx.h>
 #include <gpio.h>
 #include <spim.h>
-//#include <timers.h>
+
 
 
 #if (ST77xx_CS_Used)

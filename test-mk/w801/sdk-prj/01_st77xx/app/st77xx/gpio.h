@@ -7,11 +7,12 @@ typedef enum
 #define IS_GPIO_BIT_ACTION(ACTION) (((ACTION) == Bit_RESET) || ((ACTION) == Bit_SET))
 
 
-#define GPIOA      0
-#define GPIOB      1
 
-#define GPIO_Pin_2 2
-#define GPIO_Pin_3 3
+//#define GPIOA      0
+//#define GPIOB      1
+
+//#define GPIO_Pin_2 2
+//#define GPIO_Pin_3 3
 
 
 typedef struct
@@ -19,12 +20,19 @@ typedef struct
 /*  __IO uint32_t CRL;
   __IO uint32_t CRH;
   __IO uint32_t IDR;
+
   __IO uint32_t ODR;
   __IO uint32_t BSRR;
   __IO uint32_t BRR;
   __IO uint32_t LCKR;*/
  int a;
 } GPIO_TypeDef;
+
+
+GPIO_TypeDef* GPIOA;
+GPIO_TypeDef* GPIOB;
+
+
 
 void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal);
 

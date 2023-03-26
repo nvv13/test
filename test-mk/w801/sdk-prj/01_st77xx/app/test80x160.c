@@ -132,11 +132,12 @@ void Test80x160_Graphics(void)
 //==============================================================================
 void Test80x160_Images(void)
 {
+/*  
   FATFS fatfs;
   DIR DirInfo;
   FILINFO FileInfo;
   FRESULT res;
-  
+
   res = f_mount(&fatfs, "0", 1);
   if (res != FR_OK)
     return;
@@ -165,5 +166,6 @@ void Test80x160_Images(void)
       delay_ms(2000);
     }
   }
+*/
 }
 //==============================================================================

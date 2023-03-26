@@ -34,7 +34,7 @@
 
 
 #include "main.h"
-
+#include <button.h>
 
 #include "st77xx/dispcolor.h"
 #include "st77xx/fonts/font.h"
@@ -61,12 +61,55 @@ user_app1_task (void *sdata)
   printf ("user_app1_task start\n");
 
 
+
+
+#if (DISPLAY == DISPLAY_160x80)
+  // Инициализация дисплея
+  dispcolor_Init(160, 80);
+  // Инициализация входа для кнопки
+  button_Init();
+  // Тест вывода основных цветов
+  Test_Colors();
+  // Тест вывода приглашения с плавным затуханием
+  Test_TextFading("Электроника\r\nв объективе", 30, 23);
+  // Тест вывода текста разными шрифтами
+  Test80x160_Text();
+  // Тест вывода простой 2D-графики
+  Test80x160_Graphics();
+
   while (1)
-    { //
+  {
+    // Вывод картинок с SD-флешки
+    Test80x160_Images();
+  }
+#else
+  // Инициализация дисплея
+  dispcolor_Init(240, 240);
+  // Инициализация входа для кнопки
+  button_Init();
+  // Тест вывода основных цветов
+  Test_Colors();
+  // Тест вывода приглашения с плавным затуханием
+  Test_TextFading("Электроника\r\nв объективе", 75, 100);
+  // Тест вывода текста разными шрифтами
+  Test240x240_Text();
+  // Тест вывода простой 2D-графики
+  Test240x240_Graphics();
 
-      tls_os_time_delay (HZ * 3);
+  while (1)
+  {
+    // Вывод картинок с SD-флешки
+    Test240x240_Images();
+  }
+#endif
 
-    } //
+
+//  while (1)
+//    { //
+//
+//      tls_os_time_delay (HZ * 3);
+
+//    } //
 }
 
 void
