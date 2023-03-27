@@ -45,6 +45,11 @@ void ST7735_Init(uint8_t Width, uint8_t Height)
   // Отправляем последовательность инициализирующих команд
   ST77xx_SoftReset();
 
+//	ST77xx_SendCmd(0xfe);
+//	ST77xx_SendCmd(0xfe);
+//	ST77xx_SendCmd(0xfe);
+//	ST77xx_SendCmd(0xef);
+
   ST77xx_SleepMode(0);
 
   ST77xx_ColorModeSet(ST7735_ColorMode_16bit);

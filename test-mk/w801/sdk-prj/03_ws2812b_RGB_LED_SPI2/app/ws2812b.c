@@ -59,23 +59,23 @@ shift (const u16 offset, const u32 reg, const u8 pin, uint32_t data)
         { // 1
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg | (1 << pin)); /* write high */
-          n_delay_tic (
+          n_delay_us (
               170); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us,
                     // + - значения чуть подравлены с учетом операторов в цикле
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg & (~(1 << pin))); /* write low */
-          n_delay_tic (
+          n_delay_us (
               61); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
         }
       else
         { // 0
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg | (1 << pin)); /* write high */
-          n_delay_tic (
+          n_delay_us (
               60); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
           tls_reg_write32 (HR_GPIO_DATA + offset,
                            reg & (~(1 << pin))); /* write low */
-          n_delay_tic (
+          n_delay_us (
               163); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
         }
     }
@@ -754,30 +754,55 @@ static I2S_InitDef i2s_config
         I2S_Standard,    I2S_DataFormat_16, 8000,
         5000000 };
 
-#define UNIT_SIZE 2 * 4096 // 1024
+#define LED_CNT_BUF 128
+
+#if(LED_MODE == LED_MODE_RGBW)
+#define UNIT_SIZE   6 * LED_CNT_BUF     // 6 * 128 LED
+#else
+#define UNIT_SIZE   8 * LED_CNT_BUF     // 8 * 128 LED
+#endif
+
 #define PCM_ADDRDSS 0x100000
 #define FIRM_SIZE 940
 
-int16_t data_1[2][UNIT_SIZE];
+static int16_t data_1[2][UNIT_SIZE];
+static int cur_LED;
+static u8 ind_buf;
+
+static ws2812b_t *__dev;
+static color_rgba_t *__vals;
 
 void
 i2s_demo_callback_play (uint32_t *data, uint16_t *len)
 {
-  /*
-    static int number = 0;
+  if(ind_buf==0)
+   ind_buf++;
+   else
+   ind_buf=0;
+  int16_t *p_dma_buf = data_1[ind_buf];
+  for (int i = 0; i < __dev->led_numof && i<LED_CNT_BUF; i++)
+    {
 
-    tls_fls_read (PCM_ADDRDSS + number * UNIT_SIZE * 2, (u8 *)data,
-                  UNIT_SIZE * 2);
+      // green
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].color.g & 0x0F];
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].color.g >> 4];
 
-    number++;
-    if (number > FIRM_SIZE / UNIT_SIZE / 1024 / 2)
-      {
-        number = 0;
-        *len = 0xFFFF;
-      }
-    printf ("%d, %x\n", number, data[0]);
-  */
-  printf ("i2s_demo_callback_play data[0] =  %x\n", data[0]);
+      // red
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].color.r & 0x0F];
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].color.r >> 4];
+
+      // blue
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].color.b & 0x0F];
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].color.b >> 4];
+
+#if LED_MODE == LED_MODE_RGBW
+      // white
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].alpha & 0x0F];
+      *p_dma_buf++ = bitpatterns[__vals[cur_LED].alpha >> 4];
+#endif
+      cur_LED++;
+    }
+  //printf ("i2s_demo_callback_play data[0] =  %x\n", data[0]);
 }
 
 static void
@@ -785,34 +810,42 @@ i2s_mode_ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
 {
   assert (dev && vals);
 
+  __dev=(ws2812b_t *)dev;
+  __vals=(color_rgba_t*)vals;
+
+
   memset (data_1[0], 0, UNIT_SIZE);
   memset (data_1[1], 0, UNIT_SIZE);
 
-  int16_t *p_dma_buf = data_1[0];
 
   wm_i2s_port_init (&i2s_config);
   wm_i2s_register_callback (i2s_demo_callback_play);
 
-  for (int i = 0; i < dev->led_numof; i++)
+  ind_buf=0;
+  int16_t *p_dma_buf = data_1[ind_buf];
+  cur_LED=0;
+  for (int i = 0; i < dev->led_numof && i<LED_CNT_BUF; i++)
     {
 
       // green
-      *p_dma_buf++ = bitpatterns[vals[i].color.g & 0x0F];
-      *p_dma_buf++ = bitpatterns[vals[i].color.g >> 4];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].color.g & 0x0F];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].color.g >> 4];
 
       // red
-      *p_dma_buf++ = bitpatterns[vals[i].color.r & 0x0F];
-      *p_dma_buf++ = bitpatterns[vals[i].color.r >> 4];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].color.r & 0x0F];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].color.r >> 4];
 
       // blue
-      *p_dma_buf++ = bitpatterns[vals[i].color.b & 0x0F];
-      *p_dma_buf++ = bitpatterns[vals[i].color.b >> 4];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].color.b & 0x0F];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].color.b >> 4];
 
 #if LED_MODE == LED_MODE_RGBW
       // white
-      *p_dma_buf++ = bitpatterns[vals[i].alpha & 0x0F];
-      *p_dma_buf++ = bitpatterns[vals[i].alpha >> 4];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].alpha & 0x0F];
+      *p_dma_buf++ = bitpatterns[vals[cur_LED].alpha >> 4];
 #endif
+
+      cur_LED++;
     }
 
   wm_i2s_tx_rx_dma (&i2s_config, data_1[0], data_1[1], UNIT_SIZE);

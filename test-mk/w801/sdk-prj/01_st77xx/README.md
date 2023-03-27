@@ -165,7 +165,10 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 https://www.youtube.com/watch?v=PUV9_OdMcCA&list=PLcB-ZTUBP1r2qxoRp7rUsNmKf7pAlbUf7
 https://bitbucket.org/nadyrshin_ryu/st77xx_stm32/downloads/
 
-
+возможно это не тот чип, поэтому ещё
+https://github.com/Bodmer/TFT_eSPI/discussions/1310?sort=new#discussioncomment-1246522
+https://github.com/Jorre05/gc9106
+https://github.com/nachus001/GC9106_driver
 
 
 

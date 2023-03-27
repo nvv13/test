@@ -13,6 +13,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+#include "n_utf8_to_win1251.h"
+
 #include "fonts/font.h"
 
 #if (DISPCOLOR_type == DISPTYPE_st7789)
@@ -395,6 +397,8 @@ uint8_t dispcolor_DrawChar_Bg(int16_t X, int16_t Y, uint8_t FontID, uint8_t Char
 //==============================================================================
 
 
+
+
 //==============================================================================
 // Функция вывода текста из строки Str на дисплей
 //==============================================================================
@@ -405,6 +409,8 @@ static int16_t dispcolor_DrawString_General(int16_t X, int16_t Y, uint8_t FontID
   uint8_t done = 0;             // Флаг окончания вывода
   int16_t Xstart = X;           // Запоминаем куда будем переводить каретку при переходе на новую строку
   uint8_t StrHeight = 8;        // Высота символов в пикселях для перехода на слежующую строку
+
+  n_convert_utf8_to_windows1251((char*)Str, (char*)Str, strlen((char*)Str));
 
   // Вывод строки
   while (!done)
