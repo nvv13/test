@@ -12,6 +12,8 @@ case TFT00_96SP:
   	UTFT_LCD_Write_DATA2(y2 & 0xFF);
 	UTFT_LCD_Write_COM(0x2c); 
 	break;
+
+
 /*
 Lcd_WriteIndex(0x2A); //Set Column Address
 Lcd_WriteData(0x00);

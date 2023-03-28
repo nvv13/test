@@ -52,8 +52,6 @@ user_app1_task (void *sdata)
 {
   printf ("user_app1_task start\n");
 
-  //Цветной графический дисплей 3.2 TFT 480x320 MEGA
-  // http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html
   // подключаем библиотеку UTFT
 
   // TFT00_96SP - для ST7735S
@@ -62,22 +60,12 @@ user_app1_task (void *sdata)
  , (u8)WM_IO_PB_15  //WR  SCL
  , (u8)WM_IO_PB_22  //CS  CS
  , (u8)WM_IO_PB_21  //RST reset RES
- , (u8)WM_IO_PB_23);//SER    DC
+ , (u8)WM_IO_PB_23);//SER => DC !
 
   //UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER
-  // объявляем объект myGLCD класса библиотеки UTFT указывая тип дисплея
-  // TFT32MEGA и номера выводов Arduino к которым подключён дисплей: RS, WR,
-  // CS, RST. Выводы параллельной шины данных не указываются
 
-  //UTFT_UTFT (TFT32MEGA_2, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
-  //           (u8)WM_IO_PA_04, 0);
-  //          TFT32MEGA_2                        // если изображение на дисплее
-  //          отображается зеркально, значит для инициализации Вашего дисплея,
-  //          нужно указать не TFT32MEGA, а TFT32MEGA_2.
-  // (тип TFT32MEGA - для дисплеев на базе чипа ILI9481, а тип TFT32MEGA_2 -
-  // для дисплеев на базе чипа HX8357С).
   //
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   //UTFT_InitLCD (PORTRAIT);
