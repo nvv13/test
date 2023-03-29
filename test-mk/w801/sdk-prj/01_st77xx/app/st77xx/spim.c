@@ -9,7 +9,6 @@
 void spim_init(SPI_TypeDef* SPIx, uint8_t FastSpeed, uint8_t WordLen)
 {
       /*MASTER SPI configuratioin*/
-
       wm_spi_cs_config (WM_IO_PB_14);
       wm_spi_ck_config (WM_IO_PB_15);
       wm_spi_di_config (WM_IO_PB_16);

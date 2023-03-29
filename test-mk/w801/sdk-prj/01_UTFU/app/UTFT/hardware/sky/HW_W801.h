@@ -1,3 +1,9 @@
+
+#include "wm_gpio.h"
+#include "wm_gpio_afsel.h"
+
+#include "wm_hostspi.h"
+
 /**
  *
  *
@@ -7,6 +13,28 @@
 // *** Hardware specific functions ***
 void UTFT__hw_special_init()
 {
+if (display_serial_mode==SERIAL_5PIN)
+ {
+      /*MASTER SPI configuratioin*/
+      wm_spi_cs_config (WM_IO_PB_14);
+      wm_spi_ck_config (WM_IO_PB_15);//(enum tls_io_name)P_WR
+      wm_spi_di_config (WM_IO_PB_16);
+      wm_spi_do_config (WM_IO_PB_17);//(enum tls_io_name)P_RS
+
+      // printf (
+      //"MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16,
+      // do--PB17;\r\n");
+      tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
+      tls_spi_setup (TLS_SPI_MODE_0,
+                     TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
+                     50000000
+      );
+ }
+}
+
+void UTFT_LCD_Writ_Bus_SPI(const u8 * buf, u32 len)
+{
+        tls_spi_write (buf, len);
 }
 
 void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
@@ -14,21 +42,14 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 	switch (mode)
 	{
 	case 1:
+                /* в этом режиме VH==1 значит комменда, 0 - данные, передаем */
 		if (display_serial_mode==SERIAL_4PIN)
-		{
+		{ /* SERIAL_4PIN значит 1 передаваемый бит - означает комманда/данные */
 			if (VH==1)
 				sbi(P_SDA, B_SDA);
 			else
 				cbi(P_SDA, B_SDA);
 			pulse_low(P_SCL, B_SCL);
-		}
-		else
-		{
-			if (VH==1)
-				sbi(P_RS, B_RS);
-			else
-				cbi(P_RS, B_RS);
-		}
 
 		if (VL & 0x80)
 			sbi(P_SDA, B_SDA);
@@ -70,8 +91,21 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 		else
 			cbi(P_SDA, B_SDA);
 		pulse_low(P_SCL, B_SCL);
+
+		}
+		else
+		{ /* SERIAL_5PIN, значит есть отдельный пин, который говорит, данные это или комманда */
+			if (VH==1)
+				sbi(P_RS, B_RS);
+			else
+				cbi(P_RS, B_RS);
+//		    u8 buf[1]={VL};
+                    tls_spi_write ((u8*)&VL, 1);
+		}
+
 		break;
 	case 8:
+                /* в этом режиме VH и VL - данные */
 		tls_gpio_write (PIN0, VH & 0x80 ? 1 : 0);
 		tls_gpio_write (PIN1, VH & 0x40 ? 1 : 0);
 		tls_gpio_write (PIN2, VH & 0x20 ? 1 : 0);
@@ -93,24 +127,7 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 		break;
 	case 16:
 		{
-/*
-		tls_gpio_write (PIN0, VH & 0x80 ? 1 : 0);
-		tls_gpio_write (PIN1, VH & 0x40 ? 1 : 0);
-		tls_gpio_write (PIN2, VH & 0x20 ? 1 : 0);
-		tls_gpio_write (PIN3, VH & 0x10 ? 1 : 0);
-		tls_gpio_write (PIN4, VH & 0x08 ? 1 : 0);
-		tls_gpio_write (PIN5, VH & 0x04 ? 1 : 0);
-		tls_gpio_write (PIN6, VH & 0x02 ? 1 : 0);
-		tls_gpio_write (PIN7, VH & 0x01 ? 1 : 0);
-		tls_gpio_write (PIN8, VL & 0x80 ? 1 : 0);
-		tls_gpio_write (PIN9, VL & 0x40 ? 1 : 0);
-		tls_gpio_write (PIN10, VL & 0x20 ? 1 : 0);
-		tls_gpio_write (PIN11, VL & 0x10 ? 1 : 0);
-		tls_gpio_write (PIN12, VL & 0x08 ? 1 : 0);
-		tls_gpio_write (PIN13, VL & 0x04 ? 1 : 0);
-		tls_gpio_write (PIN14, VL & 0x02 ? 1 : 0);
-		tls_gpio_write (PIN15, VL & 0x01 ? 1 : 0);
-*/
+                /* в этом режиме VH и VL - данные, 16 разрядов порта B, биты 0-15  */
 		//!ВНИМАНИЕ! PIN0 - PIN15, использовать только PB порт GPIO !ВНИМАНИЕ!
 		u32 cpu_sr = 0;
         	u32 reg;

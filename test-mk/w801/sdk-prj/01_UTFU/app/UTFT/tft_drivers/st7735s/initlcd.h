@@ -98,6 +98,7 @@ case ST7735S:
 	UTFT_LCD_Write_COM(0x29);//Display on
 	break;
 
+/*
 case TFT00_96SP+100: // off case
 
     UTFT_LCD_Write_COM(0x11);//Sleep exit
@@ -163,7 +164,7 @@ case TFT00_96SP+100: // off case
 //Now I can use the full graphicstest.ino for this blue tab board. 
 //Look in Sitronics ST7735S V1.3 pg 142.
 
-
+*/
 /*
     lcd_write_cmd(conf,0x36);
     if(conf->direction==0)lcd_write_data(conf,0x08); Rotation?
@@ -171,6 +172,7 @@ case TFT00_96SP+100: // off case
     else if(conf->direction==2)lcd_write_data(conf,0x78);
     else lcd_write_data(conf,0xA8);
 */
+/*
         delay(10);
     //ST7735R Gamma Sequence
     UTFT_LCD_Write_COM(0xE0); //positive gamma
@@ -214,6 +216,7 @@ case TFT00_96SP+100: // off case
 //      10,                           //     10 ms delay
 //    ST77XX_DISPON,    ST_CMD_DELAY, //  4: Main screen turn on, no args w/delay
 //      100 };                        //     100 ms delay
+*/
 /*
     lcd_write_cmd(conf,0xFC);
     lcd_write_data(conf,0x80);
@@ -232,6 +235,7 @@ case TFT00_96SP+100: // off case
     UTFT_LCD_Write_DATA2(0x00);
     UTFT_LCD_Write_DATA2(0x9F);
 */
+/*
     UTFT_LCD_Write_COM(0x3A); //65k mode ST77xx_Cmd_COLMOD
 #define ST7735_ColorMode_12bit  0x03
 #define ST7735_ColorMode_16bit  0x05
@@ -329,7 +333,7 @@ case TFT00_96SP+124: // off case
 	UTFT_LCD_Write_COM(0x11);
         delay(120);
 	UTFT_LCD_Write_COM(0x29);
-
+*/
 /*
 Lcd_WriteIndex(0x2A); //Set Column Address
 Lcd_WriteData(0x00);
@@ -343,7 +347,7 @@ Lcd_WriteData(0x00);
 Lcd_WriteData(0x9f);
 Lcd_WriteIndex(0x2c);
 */
-	break;
+//	break;
 
 
 
@@ -353,8 +357,6 @@ Lcd_WriteIndex(0x2c);
 
 
 case TFT00_96SP: // on case
-
-
 
 // 7735R init, part 1 (red or green tab)
 // 15 commands in list:
@@ -369,6 +371,16 @@ case TFT00_96SP: // on case
  //  2: Out of sleep mode, 0 args, w/delay
 //     500 ms delay
     delay(500);
+
+
+// https://arduino.ru/forum/apparatnye-voprosy/st7735s-096-80x160-spi-krivo-rabotaet#comment-619145
+//    UTFT_LCD_Write_COM(0xfe); //
+//    UTFT_LCD_Write_COM(0xef); // | Переключаем разрешение
+//    UTFT_LCD_Write_COM(0xb6);UTFT_LCD_Write_DATA2(0x11); // | экрана 80x160
+//    UTFT_LCD_Write_COM(0xac);UTFT_LCD_Write_DATA2(0x0b); ///
+//https://arduino.ru/forum/apparatnye-voprosy/st7735s-096-80x160-spi-krivo-rabotaet#comment-619327
+
+
 
 #define ST7735_FRMCTR1 0xB1
 UTFT_LCD_Write_COM(ST7735_FRMCTR1);//  3: Framerate ctrl - normal mode, 3 arg:
@@ -432,16 +444,17 @@ UTFT_LCD_Write_DATA2(0x05); //     16-bit color
 //    _height = ST7735_TFTWIDTH_80;
 //    _width = ST7735_TFTHEIGHT_160;
 
+//#define TFT096_COL_SHIFT_PIXEL 24
  // 7735R init, part 2 (mini 160x80)
  //  2 commands in list:
-#define ST77XX_CASET 0x2A
-UTFT_LCD_Write_COM(ST77XX_CASET);//  1: Column addr set, 4 args, no delay:
-UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x00);//     XSTART = 0
-UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x4F);//     XEND = 79
-#define ST77XX_RASET 0x2B
-UTFT_LCD_Write_COM(ST77XX_RASET);//  2: Row addr set, 4 args, no delay:
-UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x00);//     XSTART = 0
-UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x9F);//     XEND = 159
+//#define ST77XX_CASET 0x2A
+//UTFT_LCD_Write_COM(ST77XX_CASET);//  1: Column addr set, 4 args, no delay:
+//UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x00 + TFT096_COL_SHIFT_PIXEL);//     XSTART = 0
+//UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x4F + TFT096_COL_SHIFT_PIXEL);//     XEND = 79
+//#define ST77XX_RASET 0x2B
+//UTFT_LCD_Write_COM(ST77XX_RASET);//  2: Row addr set, 4 args, no delay:
+//UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x00);//     XSTART = 0
+//UTFT_LCD_Write_DATA2(0x00);UTFT_LCD_Write_DATA2(0x9F);//     XEND = 159
 
 
 //    _colstart = 24;
@@ -481,6 +494,7 @@ UTFT_LCD_Write_DATA2(0xC0);
 #define ST77XX_MADCTL_MV 0x20
 #define ST77XX_MADCTL_ML 0x10
 #define ST77XX_MADCTL_RGB 0x00
+#define ST7735_MADCTL_BGR 0x08
     UTFT_LCD_Write_COM(ST77XX_MADCTL);
     UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST77XX_MADCTL_RGB); // rotation(0)
 //    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MY | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(1)

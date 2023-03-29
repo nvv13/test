@@ -78,26 +78,25 @@ user_app1_task (void *sdata)
 
       UTFT_clrScr (); // стираем всю информацию с дисплея
       tls_os_time_delay (HZ); // 
-/*
+
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
-      UTFT_drawRect (1, 2, 17,
-                     10); // Рисуем прямоугольник (с противоположными углами в
+      UTFT_drawRect (5, 5, 160-5,
+                     80-5); // Рисуем прямоугольник (с противоположными углами в
                            // координатах 10x20 - 170x100)
       tls_os_time_delay (HZ); // 
 
       UTFT_setColor2 (VGA_RED); // Устанавливаем красный цвет
       UTFT_drawLine (
           1, 1, 150,
-          10); // Рисуем линию (через точки с координатами 10x10 - 170x10)
+          70); // Рисуем линию (через точки с координатами 10x10 - 170x10)
       tls_os_time_delay (HZ); // 
 
       UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
       UTFT_drawRoundRect (
-          1, 5, 30,
-          15); // Рисуем прямоугольник со скруглёнными углами (с
+          5, 5, 130,
+          55); // Рисуем прямоугольник со скруглёнными углами (с
                 // противоположными углами в координатах 10x110 - 170x210)
       tls_os_time_delay (HZ); // 
-*/
                 //
       UTFT_setColor2 (VGA_LIME); // Устанавливаем лаймовый цвет
       UTFT_fillRect (
@@ -109,7 +108,6 @@ user_app1_task (void *sdata)
                 // в координатах 10x220 - 170x310)
       tls_os_time_delay (HZ*3); // 
                 //
-/*
       UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
       UTFT_drawCircle (
           80, 40,
@@ -119,7 +117,7 @@ user_app1_task (void *sdata)
                                       // центром в точке 350x240 и радиусом 70)
 
       tls_os_time_delay (HZ * 3);
-*/
+
       UTFT_fillScr2 (VGA_RED);
       tls_os_time_delay (HZ); // заливаем
       //   дисплей красным,     ждём 1 секунду
@@ -139,24 +137,25 @@ user_app1_task (void *sdata)
 
       UTFT_fillScr2 (VGA_NAVY);
       tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
-/*
+
       UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setFont (BigFont); // устанавливаем большой шрифт
       UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
-      UTFT_print ("BigFont", CENTER, 10,
+      UTFT_print ("BigFont", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 10,
+      UTFT_setColor2 (VGA_BLACK); // устанавливаем 
+      UTFT_print ("12:35", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
       tls_os_time_delay (HZ * 3);
       //
 
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
-      UTFT_print ("SmallFont", CENTER, 20,
+      UTFT_print ("SmallFontTest", CENTER, 20,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 15,
+      UTFT_print ("12345678", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
       tls_os_time_delay (HZ * 3);
@@ -164,39 +163,19 @@ user_app1_task (void *sdata)
       UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
                                       // семисегментный индикатор
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      UTFT_print ("1234567890", CENTER, 10,
+      UTFT_print ("12:34", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
       tls_os_time_delay (HZ * 3);
 
-      UTFT_setFont (BigFont);
-      UTFT_setColor2 (VGA_WHITE);
-      UTFT_setBackColor2 (VGA_TRANSPARENT);
-      UTFT_print ("BigF(c \xA3"
-                  "o"
-                  "\x99\x99"
-                  "ep"
-                  "\x9b\x9f"
-                  "o"
-                  "\x9e"
-                  " pycc"
-                  "\x9f"
-                  "o"
-                  "\x98"
-                  "o):",
-                  CENTER, 5, 5);
 
-      //      UTFT_print ("АБВГДЕЁЖЗИЙКЛМН", CENTER, 150, 0);
-      tls_os_time_delay (HZ * 3);
-*/
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
       UTFT_print ("SmallFont", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
-/*
+
       UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
       UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
-*/
       tls_os_time_delay (HZ * 3);
     } //
 }

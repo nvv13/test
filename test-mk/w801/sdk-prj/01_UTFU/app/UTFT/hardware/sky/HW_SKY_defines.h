@@ -23,6 +23,10 @@
 
 #define pgm_read_word(data) *data
 #define pgm_read_byte(data) *data
+
+#ifdef bitmapdatatype
+#undef bitmapdatatype
+#endif
 #define bitmapdatatype unsigned short*
 
 #define PROGMEM
