@@ -761,40 +761,7 @@ UTFT_fillCircle (int x, int y, int radius)
 void
 UTFT_clrScr ()
 {
-  long i;
-
-  cbi (P_CS, B_CS);
-  UTFT_clrXY ();
-  if (display_transfer_mode != 1)
-    sbi (P_RS, B_RS);
-  if (display_transfer_mode == 16)
-    UTFT__fast_fill_16 (0, 0, ((disp_x_size + 1) * (disp_y_size + 1)));
-  else if (display_transfer_mode == 8)
-    UTFT__fast_fill_8 (0, ((disp_x_size + 1) * (disp_y_size + 1)));
-  else
-    {
-      if (display_serial_mode == SERIAL_5PIN)
-        sbi (P_RS, B_RS);
-      u8 buf[2] = { 0, 0 };
-      for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
-        {
-          if (display_transfer_mode != 1)
-            UTFT_LCD_Writ_Bus (0, 0, display_transfer_mode);
-          else
-            {
-              if (display_serial_mode == SERIAL_5PIN)
-                {
-                  UTFT_LCD_Writ_Bus_SPI (buf, 2);
-                }
-              else
-                {
-                  UTFT_LCD_Writ_Bus (0x01, 0, display_transfer_mode);
-                  UTFT_LCD_Writ_Bus (0x01, 0, display_transfer_mode);
-                }
-            }
-        }
-    }
-  sbi (P_CS, B_CS);
+UTFT_fillScr2 (0);
 }
 
 void
@@ -823,6 +790,9 @@ UTFT_fillScr2 (word color)
     UTFT__fast_fill_8 (ch, ((disp_x_size + 1) * (disp_y_size + 1)));
   else
     {
+      if (display_serial_mode == SERIAL_5PIN)
+        sbi (P_RS, B_RS);
+      u8 buf[2] = { ch, cl };
       for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
         {
           if (display_transfer_mode != 1)
@@ -831,8 +801,6 @@ UTFT_fillScr2 (word color)
             {
               if (display_serial_mode == SERIAL_5PIN)
                 {
-                  sbi (P_RS, B_RS);
-                  u8 buf[2] = { ch, cl };
                   UTFT_LCD_Writ_Bus_SPI (buf, 2);
                 }
               else

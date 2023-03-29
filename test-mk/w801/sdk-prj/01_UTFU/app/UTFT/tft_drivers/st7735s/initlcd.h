@@ -428,7 +428,9 @@ UTFT_LCD_Write_COM(ST7735_VMCTR1);// 12: Power control, 1 arg, no delay:
 UTFT_LCD_Write_DATA2(0x0E);
 
 #define ST77XX_INVOFF 0x20
-UTFT_LCD_Write_COM(ST77XX_INVOFF);// 13: Don't invert display, no args
+//UTFT_LCD_Write_COM(ST77XX_INVOFF);// 13: Don't invert display, no args
+#define ST77XX_INVON 0x21
+UTFT_LCD_Write_COM(ST77XX_INVON);// 13: invert display, no args
 
 #define ST77XX_MADCTL 0x36
 UTFT_LCD_Write_COM(ST77XX_MADCTL);// 14: Mem access ctl (directions), 1 arg:
@@ -496,7 +498,7 @@ UTFT_LCD_Write_DATA2(0xC0);
 #define ST77XX_MADCTL_RGB 0x00
 #define ST7735_MADCTL_BGR 0x08
     UTFT_LCD_Write_COM(ST77XX_MADCTL);
-    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST77XX_MADCTL_RGB); // rotation(0)
+    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR); // rotation(0)
 //    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MY | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(1)
 //    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_RGB); // rotation(2)
 //    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(3)

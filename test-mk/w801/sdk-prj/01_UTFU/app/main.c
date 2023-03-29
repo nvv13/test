@@ -78,6 +78,9 @@ user_app1_task (void *sdata)
 
       UTFT_clrScr (); // стираем всю информацию с дисплея
       tls_os_time_delay (HZ); // 
+      UTFT_fillScr2 (VGA_BLACK);
+      tls_os_time_delay (HZ); // 
+
 
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
       UTFT_drawRect (5, 5, 160-5,
@@ -144,7 +147,8 @@ user_app1_task (void *sdata)
       UTFT_print ("BigFont", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_setColor2 (VGA_BLACK); // устанавливаем 
+      UTFT_setColor2 (VGA_RED); // устанавливаем 
+      UTFT_setBackColor2 (VGA_TRANSPARENT);
       UTFT_print ("12:35", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
