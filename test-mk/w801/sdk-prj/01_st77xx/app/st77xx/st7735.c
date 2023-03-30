@@ -45,23 +45,43 @@ void ST7735_Init(uint8_t Width, uint8_t Height)
   // Отправляем последовательность инициализирующих команд
   ST77xx_SoftReset();
 
-//	ST77xx_SendCmd(0xfe);
-//	ST77xx_SendCmd(0xfe);
-//	ST77xx_SendCmd(0xfe);
-//	ST77xx_SendCmd(0xef);
-
   ST77xx_SleepMode(0);
+
+//ST77xx_SendCmd(0xfe); //
+//ST77xx_SendCmd(0xef); // | Переключаем разрешение
+//ST77xx_SendCmd(0xb6);ST77xx_SendData(0x11); // | экрана 80x160
+//ST77xx_SendCmd(0xac);ST77xx_SendData(0x0b); ///
+
 
   ST77xx_ColorModeSet(ST7735_ColorMode_16bit);
   delay_ms(500);
 
-  ST77xx_MemAccessModeSet(1, 0, 0, 1);
+  ST77xx_MemAccessModeSet(0, 1, 0, 1);
   delay_ms(10);
+
 
   ST77xx_InversionMode(1);
   delay_ms(10);
 
   ST77xx_FillScreen(0);
+
+/*
+#define ST77XX_MADCTL 0x36
+  ST77xx_SendCmd(ST77XX_MADCTL);// 14: Mem access ctl (directions), 1 arg:
+  ST77xx_SendData(0xC0); //     row/col addr, bottom-top refresh
+  delay_ms(10);
+
+#define ST77XX_MADCTL 0x36
+#define ST77XX_MADCTL_MY 0x80
+#define ST77XX_MADCTL_MX 0x40
+#define ST77XX_MADCTL_MV 0x20
+#define ST77XX_MADCTL_ML 0x10
+#define ST77XX_MADCTL_RGB 0x00
+#define ST7735_MADCTL_BGR 0x08
+  ST77xx_SendCmd(ST77XX_MADCTL);
+  ST77xx_SendData(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR); // rotation(0)
+  delay_ms(10);
+*/
   
   // Включаем подсветку
   st77xx_SetBL(100);

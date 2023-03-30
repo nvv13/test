@@ -70,9 +70,10 @@ static byte __p1, __p2, __p3, __p4, __p5;
 static _current_font cfont;
 static boolean _transparent;
 static boolean LCD_Write_1byte_Flag = 0;
+static u32 _spi_freq ;
 
 static void UTFT_LCD_Writ_Bus (char VH, char VL, byte mode);
-static void UTFT_LCD_Writ_Bus_SPI(const u8 * buf, u32 len);
+static void UTFT_LCD_Writ_Bus_SPI (const u8 *buf, u32 len);
 static void UTFT_LCD_Write_COM (char VL);
 static void UTFT_LCD_Write_DATA (char VH, char VL);
 static void UTFT_LCD_Write_DATA2 (char VL);
@@ -96,98 +97,19 @@ static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 #include "hardware/sky/HW_W801.h"
 
 void
-UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER)
+UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
+           u32 spi_freq)
 {
-  //	обозначение:				--		--		CTE32
-  //-- DMTFT24104	--		--		--		CTE32W
-  // -- LPH9135		--		--		CTE50		--
-  // --
-  // ELEE32_REVA	--			--			ELEE32_REVB
-  // CTE70 CTE32HR		CTE28		CTE22		--
-  // DMTFT28105	MI0283QT9 CTE35IPS	CTE40		CTE50CPLD
-  // DMTFT18101	--		--		--
-  //--		--
-  //						--		--		--		--
-  //DMTFT28103
-  //--		--		--		--	    --			--
-  //--
-  //--		EHOUSE50	--		--		INFINIT32	--
-  //--
-  //--		EHOUSE70	--		--		DMTFT22102	--
-  //--
-  //--		--		--		CTE70CPLD	--		--		--
-  //--
-  //--		-- 						ITDB32		ITDB32WC	ITDB32S
-  //ITDB24
-  // ITDB28		--		ITDB22		ITDB22SP	ITDB32WD
-  // ITDB18SP
-  //--		ITDB25H		ITDB43		ITDB50		ITDB24E_8
-  //--
-  //--		--			--			--		--		--
-  //--
-  //--		--		--		--		--		--
-  //EHOUSE50CPLD
-  //--		--		--		--		--
-  //--
-  //						--		--		--		--
-  //ITDB24D
-  //--		--		--		--	    --			--
-  //--
-  //--		--		--		--		--		--
-  //--
-  //--		--		--		--		--		--		TFT22SHLD
-  //--
-  //--		--		--		--		--		--		--
-  //--
-  //--
-  //						--		--		--		--
-  //ITDB24DWOT
-  //--		--		--		--	    --			--
-  //--
-  //--		--		--		--		--		--
-  //--
-  //--		--		--		--		--		--
-  //TFT01_22SP
-  //--		--		--		--		--		--		--
-  //--
-  //--		--
-  //						--		TFT01_32W	TFT01_32
-  //--
-  // TFT01_24_8  	TFT01_24_16	--		--		TFT01_32WD
-  // --
-  //--		--		TFT01_43	TFT01_50	TFT01_24R2	ITDB24E_16
-  //--
-  //--			--			--		TFT01_70	TFT32MEGA
-  //TFT01_28
-  // TFT01_22	TFT01_18SP	TFT01_24SP	--		--		--
-  // --
-  //--		TFT18SHLD	TFT28UNO	TFT28MEGA	TFT395UNO
-  //TFT32MEGA_2 TFT00_96SP
-  //	контроллер:				HX8347-A	ILI9327
-  //SSD1289
-  // ILI9325C	ILI9325D	ILI9325D	HX8340-B	HX8340-B
-  // HX8352-A ST7735		PCF8833		S1D19122	SSD1963
-  // SSD1963 S6D1121		S6D1121		SSD1289		--
-  // -- SSD1289		SSD1963		ILI9481		ILI9325D	S6D0164
-  // ST7735S		ILI9341		ILI9341		R61581		ILI9486
-  // CPLD		HX8353C		ST7735		ILI9341		ILI9341
-  // ILI9327		HX8357C                 ILI9225B       ST7735S
-  /*	размер x:	 */ word dsx[]
-      = { 239, 239, 239, 239, 239, 239, 175, 175, 239, 127, 127, 239, 271,
-          479, 239, 239, 239, 0,   0,   239, 479, 319, 239, 175, 127, 239,
-          239, 319, 319, 799, 127, 127, 239, 239, 319, 319, 175, 79 };
-  /*	размер y:	 */ word dsy[]
-      = { 319, 399, 319, 319, 319, 319, 219, 219, 399, 159, 127, 319, 479,
-          799, 319, 319, 319, 0,   0,   319, 799, 479, 319, 219, 159, 319,
-          319, 479, 479, 479, 159, 159, 319, 319, 479, 479, 219, 159 };
-  /*	размер шины: */ byte dtm[]
-      = { 16,          16,          16,          8,           8,           16,
-          8,           SERIAL_4PIN, 16,          SERIAL_5PIN, SERIAL_5PIN, 16,
-          16,          16,          8,           16,          LATCHED_16,  0,
-          0,           8,           16,          16,          16,          8,
-          SERIAL_5PIN, SERIAL_5PIN, SERIAL_4PIN, 16,          16,          16,
-          SERIAL_5PIN, SERIAL_5PIN, 8,           8,           8,           16,
-          SERIAL_5PIN, SERIAL_5PIN };
+//	обозначение:				--		--		CTE32		--		DMTFT24104	--		--		--		CTE32W	    --			LPH9135		--		--		CTE50		--		--		ELEE32_REVA	--			--			ELEE32_REVB	CTE70		CTE32HR		CTE28		CTE22		--		DMTFT28105	MI0283QT9	CTE35IPS	CTE40		CTE50CPLD	DMTFT18101	--		--		--		--		--
+//						--		--		--		--		DMTFT28103	--		--		--		--	    --			--		--		--		EHOUSE50	--		--		INFINIT32	--			--			--		EHOUSE70	--		--		DMTFT22102	--		--		--		--		--		CTE70CPLD	--		--		--		--		--		--
+//						ITDB32		ITDB32WC	ITDB32S		ITDB24		ITDB28		--		ITDB22		ITDB22SP	ITDB32WD    ITDB18SP		--		ITDB25H		ITDB43		ITDB50		ITDB24E_8	--		--		--			--			--		--		--		--		--		--		--		--		--		--		EHOUSE50CPLD    --		--		--		--		--		--
+//						--		--		--		--		ITDB24D		--		--		--		--	    --			--		--		--		--		--		--		--		--			--			--		--		--		--		--		--		TFT22SHLD	--		--		--		--		--		--		--		--		--		--
+//						--		--		--		--		ITDB24DWOT	--		--		--		--	    --			--		--		--		--		--		--		--		--			--			--		--		--		--		--		--		TFT01_22SP	--		--		--		--		--		--		--		--		--		--
+//						--		TFT01_32W	TFT01_32	--		TFT01_24_8  	TFT01_24_16	--		--		TFT01_32WD  --			--		--		TFT01_43	TFT01_50	TFT01_24R2	ITDB24E_16	--		--			--			--		TFT01_70	TFT32MEGA	TFT01_28	TFT01_22	TFT01_18SP	TFT01_24SP	--		--		--		--		--		TFT18SHLD	TFT28UNO	TFT28MEGA	TFT395UNO	TFT32MEGA_2                            TFT00_96SP TFT01_3SP
+//	контроллер:				HX8347-A	ILI9327		SSD1289		ILI9325C	ILI9325D	ILI9325D	HX8340-B	HX8340-B	HX8352-A    ST7735		PCF8833		S1D19122	SSD1963		SSD1963		S6D1121		S6D1121		SSD1289		--			--			SSD1289		SSD1963		ILI9481		ILI9325D	S6D0164		ST7735S		ILI9341		ILI9341		R61581		ILI9486		CPLD		HX8353C		ST7735		ILI9341		ILI9341		ILI9327		HX8357C                 ILI9225B       ST7735S	  ST7789	
+/*	размер x:	 */	word dsx[] = {	239,		239,		239,		239,		239,		239,		175,		175,		239,        127,		127,		239,		271,		479,		239,		239,		239,		0,			0,			239,		479,		319,		239,		175,		127,		239,		239,		319,		319,		799,		127,		127,		239,		239,		319,		319			,175          ,79	  ,240	    };
+/*	размер y:	 */	word dsy[] = {	319,		399,		319,		319,		319,		319,		219,		219,		399,        159,		127,		319,		479,		799,		319,		319,		319,		0,			0,			319,		799,		479,		319,		219,		159,		319,		319,		479,		479,		479,		159,		159,		319,		319,		479,		479			,219          ,159	  ,240	    };
+/*	размер шины: */		byte dtm[] = {	16,		16,		16,		8,		8,		16,		8,		SERIAL_4PIN,	16,	    SERIAL_5PIN,	SERIAL_5PIN,	16,		16,		16,		8,		16,		LATCHED_16,	0,			0,			8,		16,		16,		16,		8,		SERIAL_5PIN,	SERIAL_5PIN,	SERIAL_4PIN,	16,		16,		16,		SERIAL_5PIN, 	SERIAL_5PIN,	8,		8,		8,		16			,SERIAL_5PIN  ,SERIAL_5PIN,SERIAL_5PIN	    };
 
   disp_x_size = dsx[model];
   disp_y_size = dsy[model];
@@ -199,6 +121,7 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER)
   __p3 = CS;
   __p4 = RST;
   __p5 = SER;
+  _spi_freq = spi_freq ;
 
   if (display_transfer_mode == SERIAL_4PIN)
     {
@@ -283,7 +206,7 @@ UTFT_LCD_Write_DATA (char VH, char VL)
     }
   else
     {
-      if (display_serial_mode == SERIAL_5PIN)
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
         {
           sbi (P_RS, B_RS);
           u8 buf[2] = { VH, VL };
@@ -442,6 +365,9 @@ UTFT_InitLCD (byte orientation)
 #ifndef DISABLE_ILI9225B
 #include "tft_drivers/ili9225b/initlcd.h"
 #endif
+#ifndef DISABLE_ST7789
+#include "tft_drivers/st7789/initlcd.h"
+#endif
     }
   sbi (P_CS, B_CS);
 
@@ -556,6 +482,9 @@ UTFT_setXY (word x1, word y1, word x2, word y2)
 #endif
 #ifndef DISABLE_ILI9225B
 #include "tft_drivers/ili9225b/setxy.h"
+#endif
+#ifndef DISABLE_ST7789
+#include "tft_drivers/st7789/setxy.h"
 #endif
     }
 }
@@ -761,7 +690,7 @@ UTFT_fillCircle (int x, int y, int radius)
 void
 UTFT_clrScr ()
 {
-UTFT_fillScr2 (0);
+  UTFT_fillScr2 (0);
 }
 
 void
@@ -799,7 +728,7 @@ UTFT_fillScr2 (word color)
             UTFT_LCD_Writ_Bus (ch, cl, display_transfer_mode);
           else
             {
-              if (display_serial_mode == SERIAL_5PIN)
+              if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
                 {
                   UTFT_LCD_Writ_Bus_SPI (buf, 2);
                 }

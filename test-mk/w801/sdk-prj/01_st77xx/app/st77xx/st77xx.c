@@ -193,6 +193,7 @@ void ST77xx_SetWindow(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
 {
   ST77xx_ColumnSet(x0, x1);
   ST77xx_RowSet(y0, y1);
+
   
   ST77xx_SendCmd(ST77xx_Cmd_RAMWR);
 }

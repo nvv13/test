@@ -6,21 +6,21 @@
 
 project st77xx
 
-board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей 77xx
+board HLK-W801-KIT-V1.1 + 0.96 TFT дисплей st7735s SPI
 
 Видео
 
-
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_st77xx/jpg/0.96tft-back.jpg" alt="back side" title="back side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft-back.jpg" alt="back side" title="back side" /></p>
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_st77xx/jpg/0.96tft.jpg" alt="top side" title="top side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft.jpg" alt="top side" title="top side" /></p>
+
 
 фото3
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_st77xx/jpg/1.3tft-back.jpg" alt="back side" title="back side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.3tft-back.jpg" alt="back side" title="back side" /></p>
 фото4
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_st77xx/jpg/1.3tft.jpg" alt="top side" title="top side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.3tft.jpg" alt="top side" title="top side" /></p>
 
 
 
@@ -29,17 +29,21 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей 77xx
 
 надо соеденить по схеме:
 ~~~
-на LCD если смотреть сверху на экран, и разьем с правой стороны
-то, соединения такие
 connect to 
----- --------- ----
-W801 LCD   LCD W801
----- --------- ----
-5v    5v   5v	
-gnd  GND   GND
----- --------- ----
-W801 LCD   LCD W801
----- --------- ----
+---- ------
+W801 LCD   
+---- ------
+gnd  GND   
+5v   VCC
+PB15 SCL
+PB17 SDA
+PB21 RES
+PB23 DC
+PB22 CS
+---  BLK
+---- ------
+W801 LCD   
+---- ------
 
 
 

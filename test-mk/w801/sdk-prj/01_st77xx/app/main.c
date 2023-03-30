@@ -66,6 +66,7 @@ user_app1_task (void *sdata)
 #if (DISPLAY == DISPLAY_160x80)
   // Инициализация дисплея
   dispcolor_Init(160, 80);
+  //dispcolor_Init(80, 160);
   // Инициализация входа для кнопки
   button_Init();
   // Тест вывода основных цветов

@@ -4,7 +4,11 @@
 #define OUTPUT	1
 
 
-static void pinMode(byte PIN,byte b_mode){tls_gpio_cfg ((enum tls_io_name)PIN, WM_GPIO_DIR_OUTPUT,WM_GPIO_ATTR_FLOATING);};
+static void pinMode(byte PIN,byte b_mode)
+ {
+ if(PIN==NO_GPIO_PIN)return;
+ tls_gpio_cfg ((enum tls_io_name)PIN, WM_GPIO_DIR_OUTPUT,WM_GPIO_ATTR_FLOATING);
+ };
 //volatile 
 static uint32_t* portOutputRegister(u8 PIN)
 {
@@ -26,6 +30,8 @@ static void digitalWrite(byte PIN,int LEVEL){tls_gpio_write ((enum tls_io_name)P
 
 static void cbi(uint32_t* PORT_REG, u8 PIN)
 {
+        if(PIN==NO_GPIO_PIN)return;
+
 	u32 cpu_sr = 0;
         u32 reg;
 	u32	reg_en;
@@ -61,6 +67,8 @@ static void cbi(uint32_t* PORT_REG, u8 PIN)
 
 static void sbi(uint32_t* PORT_REG, u8 PIN)
 {
+        if(PIN==NO_GPIO_PIN)return;
+
 	u32 cpu_sr = 0;
         u32 reg;
 	u32	reg_en;

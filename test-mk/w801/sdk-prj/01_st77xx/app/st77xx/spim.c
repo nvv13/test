@@ -19,7 +19,7 @@ void spim_init(SPI_TypeDef* SPIx, uint8_t FastSpeed, uint8_t WordLen)
       tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
       tls_spi_setup (TLS_SPI_MODE_0,
                      TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
-                     400000
+                     50000000
       );
 
 }

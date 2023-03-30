@@ -20,6 +20,8 @@
 #define ST7735_X_Start          26
 #define ST7735_Y_Start          1
 
+//#define ST7735_X_Start          1
+//#define ST7735_Y_Start          26
 
 // Процедура инициализации дисплея
 void ST7735_Init(uint8_t Width, uint8_t Height);

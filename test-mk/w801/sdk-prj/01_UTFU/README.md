@@ -1,8 +1,9 @@
-
-
 project UTFT
 
-board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей Ultra HD 320X480 HX8367C
+
+-----------------------------
+
+board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей Ultra HD 320X480 HX8367C 16bit bus
 
 Видео
 https://youtu.be/ULZDZhmtduk
@@ -14,7 +15,7 @@ https://youtu.be/ULZDZhmtduk
 фото2
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113136.jpg" alt="top side" title="top side" /></p>
 
-
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT32MEGA_2 
 
 соединения
 
@@ -47,8 +48,53 @@ gnd  GND   GND
 ---- --------- ----
 W801 LCD   LCD W801
 ---- --------- ----
+~~~
 
 
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 0.96 TFT дисплей st7735s SPI
+
+Видео
+
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft-back.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT00_96SP
+
+соединения
+
+надо соеденить по схеме:
+~~~
+connect to TFT00_96SP SPI
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB23 DC   комманда/данные
+PB22 CS   выбор чипа
+---  BLK  подсветка, можно через PWM, в данном случае не использовал
+---- ------
+W801 LCD   
+---- ------
+
+~~~
+
+
+
+
+-----------------------------
 после сборки, файл libUTFT.a 
 лежит ./bin/build/w800/lib/libUTFT.a
 
@@ -60,12 +106,14 @@ W801 LCD   LCD W801
 
 это для других проектов
 
-~~~
+-----------------------------
 
 
 
 
 
+-----------------------------
+-----------------------------
 
 
 Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):

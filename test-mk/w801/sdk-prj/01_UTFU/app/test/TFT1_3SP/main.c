@@ -54,8 +54,8 @@ user_app1_task (void *sdata)
 
   // подключаем библиотеку UTFT
 
-  // TFT00_96SP - для ST7735S
-  UTFT_UTFT (TFT00_96SP
+  // TFT01_3SP - для ST7789
+  UTFT_UTFT (TFT01_3SP
  , (u8)WM_IO_PB_17  //RS  SDA
  , (u8)WM_IO_PB_15  //WR  SCL
  , (u8)WM_IO_PB_22  //CS  CS

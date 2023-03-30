@@ -54,17 +54,32 @@ user_app1_task (void *sdata)
 
   // подключаем библиотеку UTFT
 
-  // TFT00_96SP - для ST7735S
-  UTFT_UTFT (TFT00_96SP
+  // TFT01_3SP - для ST7789
+  UTFT_UTFT (TFT01_3SP
  , (u8)WM_IO_PB_17  //RS  SDA
  , (u8)WM_IO_PB_15  //WR  SCL
- , (u8)WM_IO_PB_22  //CS  CS
+ , (u8)NO_GPIO_PIN //WM_IO_PB_22  //CS  CS
  , (u8)WM_IO_PB_21  //RST reset RES
- , (u8)WM_IO_PB_23);//SER => DC !
+ , (u8)WM_IO_PB_23 //SER => DC !
+ , 0
+  /* spi_freq(Герц) для 5 контактных SPI дисплеев
+     (где отдельно ножка комманда/данные)
+  програмируеться HW SPI на ножки (предопред)
+      wm_spi_cs_config (WM_IO_PB_14);
+      wm_spi_ck_config (WM_IO_PB_15);
+      wm_spi_di_config (WM_IO_PB_16);
+      wm_spi_do_config (WM_IO_PB_17);
+  но, можно отказаться от HW SPI в пользу Soft SPI 
+  установив spi_freq=0
+  эмуляции SPI, это удобно для разных ножек
+*/
+ );
 
-  //UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER);
+
+
+  //UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq);
   //                               byte RS,         byte WR,         byte CS,
-  //                               byte RST, byte SER
+  //                               byte RST, byte SER, u32 spi_freq
 
   //
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей

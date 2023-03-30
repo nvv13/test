@@ -13,27 +13,26 @@
 // *** Hardware specific functions ***
 void UTFT__hw_special_init()
 {
-if (display_serial_mode==SERIAL_5PIN)
+if (display_serial_mode==SERIAL_5PIN && _spi_freq!=0)
  {
       /*MASTER SPI configuratioin*/
       wm_spi_cs_config (WM_IO_PB_14);
-      wm_spi_ck_config (WM_IO_PB_15);//(enum tls_io_name)P_WR
+      wm_spi_ck_config (WM_IO_PB_15);
       wm_spi_di_config (WM_IO_PB_16);
-      wm_spi_do_config (WM_IO_PB_17);//(enum tls_io_name)P_RS
+      wm_spi_do_config (WM_IO_PB_17);
 
-      // printf (
-      //"MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16,
-      // do--PB17;\r\n");
+      LOG("MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, do--PB17; spi_freq=%d \n",_spi_freq); 
       tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
       tls_spi_setup (TLS_SPI_MODE_0,
                      TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
-                     50000000
+                     _spi_freq 
       );
  }
 }
 
 void UTFT_LCD_Writ_Bus_SPI(const u8 * buf, u32 len)
 {
+ if(_spi_freq!=0)
         tls_spi_write (buf, len);
 }
 
@@ -50,6 +49,19 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 			else
 				cbi(P_SDA, B_SDA);
 			pulse_low(P_SCL, B_SCL);
+		}
+		else
+		{ /* SERIAL_5PIN, значит есть отдельный пин, который говорит, данные это или комманда */
+			if (VH==1)
+				sbi(P_RS, B_RS);
+			else
+				cbi(P_RS, B_RS);
+		}
+
+                if (display_serial_mode==SERIAL_5PIN && _spi_freq!=0)
+                    tls_spi_write ((u8*)&VL, 1);
+                else
+                {
 
 		if (VL & 0x80)
 			sbi(P_SDA, B_SDA);
@@ -92,16 +104,7 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 			cbi(P_SDA, B_SDA);
 		pulse_low(P_SCL, B_SCL);
 
-		}
-		else
-		{ /* SERIAL_5PIN, значит есть отдельный пин, который говорит, данные это или комманда */
-			if (VH==1)
-				sbi(P_RS, B_RS);
-			else
-				cbi(P_RS, B_RS);
-//		    u8 buf[1]={VL};
-                    tls_spi_write ((u8*)&VL, 1);
-		}
+                }
 
 		break;
 	case 8:

@@ -81,7 +81,14 @@ j%03d.bmp
 #ifndef UTFT_h
 #define UTFT_h
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define UTFT_VERSION 281
+
+#define NO_GPIO_PIN 255
 
 #define LEFT 0
 #define RIGHT 9999
@@ -128,36 +135,37 @@ j%03d.bmp
 #define HX8357C 35
 #define ILI9225B 36
 #define TFT00_96SP 37
+#define TFT01_3SP  38
 
-#define ITDB32 0      // HX8347-A (16bit)
-#define ITDB32WC 1    // ILI9327  (16bit)
-#define TFT01_32W 1   // ILI9327	(16bit)
-#define ITDB32S 2     // SSD1289  (16bit)
-#define TFT01_32 2    // SSD1289  (16bit)
-#define CTE32 2       // SSD1289  (16bit)
-#define ITDB24 3      // ILI9325C (8bit)
-#define ITDB24D 4     // ILI9325D (8bit)
-#define ITDB24DWOT 4  // ILI9325D (8bit)
-#define ITDB28 4      // ILI9325D (8bit)
-#define TFT01_24_8 4  // ILI9325D (8bit)
-#define DMTFT24104 4  // ILI9325D (8bit)
-#define DMTFT28103 4  // ILI9325D (8bit)
+#define ITDB32 0 // HX8347-A (16bit)
+#define ITDB32WC 1 // ILI9327  (16bit)
+#define TFT01_32W 1 // ILI9327	(16bit)
+#define ITDB32S 2 // SSD1289  (16bit)
+#define TFT01_32 2 // SSD1289  (16bit)
+#define CTE32 2 // SSD1289  (16bit)
+#define ITDB24 3 // ILI9325C (8bit)
+#define ITDB24D 4 // ILI9325D (8bit)
+#define ITDB24DWOT 4 // ILI9325D (8bit)
+#define ITDB28 4 // ILI9325D (8bit)
+#define TFT01_24_8 4 // ILI9325D (8bit)
+#define DMTFT24104 4 // ILI9325D (8bit)
+#define DMTFT28103 4 // ILI9325D (8bit)
 #define TFT01_24_16 5 // ILI9325D (16bit)
-#define ITDB22 6      // HX8340-B (8bit)
-#define ITDB22SP 7    // HX8340-B (Serial 4Pin)
-#define ITDB32WD 8    // HX8352-A (16bit)
-#define TFT01_32WD 8  // HX8352-A	(16bit)
-#define CTE32W 8      // HX8352-A	(16bit)
-#define ITDB18SP 9    // ST7735   (Serial 5Pin)
-#define LPH9135 10    // PCF8833	(Serial 5Pin)
-#define ITDB25H 11    // S1D19122	(16bit)
-#define ITDB43 12     // SSD1963	(16bit) 480x272
-#define TFT01_43 12   // SSD1963	(16bit) 480x272
-#define ITDB50 13     // SSD1963	(16bit) 800x480
-#define TFT01_50 13   // SSD1963	(16bit) 800x480
-#define CTE50 13      // SSD1963	(16bit) 800x480
-#define EHOUSE50 13   // SSD1963	(16bit) 800x480
-#define ITDB24E_8 14  // S6D1121	(8bit)
+#define ITDB22 6 // HX8340-B (8bit)
+#define ITDB22SP 7 // HX8340-B (Serial 4Pin)
+#define ITDB32WD 8 // HX8352-A (16bit)
+#define TFT01_32WD 8 // HX8352-A	(16bit)
+#define CTE32W 8 // HX8352-A	(16bit)
+#define ITDB18SP 9 // ST7735   (Serial 5Pin)
+#define LPH9135 10 // PCF8833	(Serial 5Pin)
+#define ITDB25H 11 // S1D19122	(16bit)
+#define ITDB43 12 // SSD1963	(16bit) 480x272
+#define TFT01_43 12 // SSD1963	(16bit) 480x272
+#define ITDB50 13 // SSD1963	(16bit) 800x480
+#define TFT01_50 13 // SSD1963	(16bit) 800x480
+#define CTE50 13 // SSD1963	(16bit) 800x480
+#define EHOUSE50 13 // SSD1963	(16bit) 800x480
+#define ITDB24E_8 14 // S6D1121	(8bit)
 #define TFT01_24R2 14 // S6D1121	(8bit)
 #define ITDB24E_16 15 // S6D1121	(16bit)
 #define INFINIT32                                                             \
@@ -165,34 +173,34 @@ j%03d.bmp
 #define ELEE32_REVA 16 // SSD1289	(Latched 16bit)
 //#define NOT_IN_USE	17
 //#define NOT_IN_USE	18
-#define ELEE32_REVB 19  // SSD1289	(8bit)
-#define TFT01_70 20     // SSD1963	(16bit) 800x480 Alternative Init
-#define CTE70 20        // SSD1963	(16bit) 800x480 Alternative Init
-#define EHOUSE70 20     // SSD1963	(16bit) 800x480 Alternative Init
-#define CTE32HR 21      // ILI9481	(16bit)
-#define TFT32MEGA 21    // ILI9481	(16bit)
-#define CTE28 22        // ILI9325D (16bit) Alternative Init
-#define TFT01_28 22     // ILI9325D (16bit) Alternative Init
-#define CTE22 23        // S6D0164	(8bit)
-#define TFT01_22 23     // S6D0164	(8bit)
-#define DMTFT22102 23   // S6D0164  (8bit)
-#define TFT01_18SP 24   // ST7735S  (Serial 5Pin)
-#define TFT01_22SP 25   // ILI9341	(Serial 5Pin)
-#define TFT01_24SP 25   // ILI9341	(Serial 5Pin)
-#define TFT22SHLD 25    // ILI9341	(Serial 5Pin)
-#define DMTFT28105 25   // ILI9341  (Serial 5Pin)
-#define MI0283QT9 26    // ILI9341	(Serial 4Pin)
-#define CTE35IPS 27     // R61581	(16bit)
-#define CTE40 28        // ILI9486	(16bit)
+#define ELEE32_REVB 19 // SSD1289	(8bit)
+#define TFT01_70 20 // SSD1963	(16bit) 800x480 Alternative Init
+#define CTE70 20 // SSD1963	(16bit) 800x480 Alternative Init
+#define EHOUSE70 20 // SSD1963	(16bit) 800x480 Alternative Init
+#define CTE32HR 21 // ILI9481	(16bit)
+#define TFT32MEGA 21 // ILI9481	(16bit)
+#define CTE28 22 // ILI9325D (16bit) Alternative Init
+#define TFT01_28 22 // ILI9325D (16bit) Alternative Init
+#define CTE22 23 // S6D0164	(8bit)
+#define TFT01_22 23 // S6D0164	(8bit)
+#define DMTFT22102 23 // S6D0164  (8bit)
+#define TFT01_18SP 24 // ST7735S  (Serial 5Pin)
+#define TFT01_22SP 25 // ILI9341	(Serial 5Pin)
+#define TFT01_24SP 25 // ILI9341	(Serial 5Pin)
+#define TFT22SHLD 25 // ILI9341	(Serial 5Pin)
+#define DMTFT28105 25 // ILI9341  (Serial 5Pin)
+#define MI0283QT9 26 // ILI9341	(Serial 4Pin)
+#define CTE35IPS 27 // R61581	(16bit)
+#define CTE40 28 // ILI9486	(16bit)
 #define EHOUSE50CPLD 29 // CPLD		(16bit)
-#define CTE50CPLD 29    // CPLD		(16bit)
-#define CTE70CPLD 29    // CPLD		(16bit)
-#define DMTFT18101 30   // HX8353C  (Serial 5Pin)
-#define TFT18SHLD 31    // ST7735	(Serial 5Pin) Alternative Init
-#define TFT28UNO 32     // ILI9341	(8bit)
-#define TFT28MEGA 33    // ILI9341	(8bit)
-#define TFT395UNO 34    // ILI9327	(8bit)
-#define TFT32MEGA_2 35  // HX8357C	(16bit)
+#define CTE50CPLD 29 // CPLD		(16bit)
+#define CTE70CPLD 29 // CPLD		(16bit)
+#define DMTFT18101 30 // HX8353C  (Serial 5Pin)
+#define TFT18SHLD 31 // ST7735	(Serial 5Pin) Alternative Init
+#define TFT28UNO 32 // ILI9341	(8bit)
+#define TFT28MEGA 33 // ILI9341	(8bit)
+#define TFT395UNO 34 // ILI9327	(8bit)
+#define TFT32MEGA_2 35 // HX8357C	(16bit)
 
 #define SERIAL_4PIN 4
 #define SERIAL_5PIN 5
@@ -226,71 +234,106 @@ j%03d.bmp
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef u8 byte;
-typedef u16 word;
+#define LOG(...) printf (__VA_ARGS__)
+
+  typedef u8 byte;
+  typedef u16 word;
 
 #define bitmapdatatype unsigned short *
 
-typedef struct
-{
-  uint8_t *font;
-  uint8_t x_size;
-  uint8_t y_size;
-  uint8_t offset;
-  uint8_t numchars;
-} _current_font_t;
+  typedef struct
+  {
+    uint8_t *font;
+    uint8_t x_size;
+    uint8_t y_size;
+    uint8_t offset;
+    uint8_t numchars;
+  } _current_font_t;
 
-typedef _current_font_t _current_font;
+  typedef _current_font_t _current_font;
 
-typedef bool boolean;
+  typedef bool boolean;
+/*
+void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq);
 
-void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER);
-// UTFT(byte model, int RS, int WR, int CS, int RST, int SER=0);
-void UTFT_InitLCD (byte orientation);
-// InitLCD(byte orientation=LANDSCAPE);
-void UTFT_clrScr ();
-void UTFT_drawPixel (int x, int y);
-void UTFT_drawLine (int x1, int y1, int x2, int y2);
-void UTFT_fillScr (byte r, byte g, byte b);
-void UTFT_fillScr2 (word color);
-void UTFT_drawRect (int x1, int y1, int x2, int y2);
-void UTFT_drawRoundRect (int x1, int y1, int x2, int y2);
-void UTFT_fillRect (int x1, int y1, int x2, int y2);
-void UTFT_fillRoundRect2 (int x1, int y1, int x2, int y2);
-void UTFT_drawCircle (int x, int y, int radius);
-void UTFT_fillCircle (int x, int y, int radius);
-void UTFT_setColor (byte r, byte g, byte b);
-void UTFT_setColor2 (word color);
-word UTFT_getColor ();
-void UTFT_setBackColor (byte r, byte g, byte b);
-void UTFT_setBackColor2 (uint32_t color);
-word UTFT_getBackColor ();
-void UTFT_print (char *st, int x, int y, int deg);
-// print(char *st, int x, int y, int deg=0);
-// void	UTFT_print2(String st, int x, int y, int deg);
-void UTFT_printNumI (long num, int x, int y, int length, char filler);
-// printNumI(long num, int x, int y, int length=0, char filler=' ');
-void UTFT_printNumF (double num, byte dec, int x, int y, char divider,
-                     int length, char filler);
-// printNumF(double num, byte dec, int x, int y, char divider='.', int
-// length=0, char filler=' ');
-void UTFT_setFont (uint8_t *font);
-uint8_t *UTFT_getFont ();
-uint8_t UTFT_getFontXsize ();
-uint8_t UTFT_getFontYsize ();
-void UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data,
-                      int scale);
-// drawBitmap(int x, int y, int sx, int sy, bitmapdatatype data, int scale=1);
-void UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data,
-                       int deg, int rox, int roy);
-void UTFT_lcdOff ();
-void UTFT_lcdOn ();
-void UTFT_setContrast (char c);
-int UTFT_getDisplayXSize ();
-int UTFT_getDisplayYSize ();
-void UTFT_setBrightness (byte br);
-void UTFT_setDisplayPage (byte page);
-void UTFT_setWritePage (byte page);
-word UTFT_loadBitmap (int x, int y, int sx, int sy, char *filename);
+для паралельной шины, указываются RS, WR, CS, RST
+ Выводы параллельной шины данных не указываются
+  если, параллельная 16 бит шина = PB0 ... PB15 !
+  если было бы 8 бит шина = PB0 ... PB7 !
+
+для шины SPI
+ RS это SDA  данные
+ WR это SCL  синхросигнал
+ CS это  CS  выбор чипа
+ RST это RES сброс (reset)
+ SER это DC  комманда/данные
+ spi_freq    частота SPI(Герц) 
+ 
+ для 5 контактных SPI дисплеев
+ (где отдельно ножка комманда/данные)
+ програмируеться HW SPI на ножки (предопред)
+       wm_spi_cs_config (WM_IO_PB_14); - не исп, но занята
+  WR = wm_spi_ck_config (WM_IO_PB_15);
+       wm_spi_di_config (WM_IO_PB_16); - не исп, но занята
+  RS = wm_spi_do_config (WM_IO_PB_17);
+ но, можно отказаться от HW SPI в пользу Soft SPI 
+  установив spi_freq=0 -  эмуляция SPI
+  это удобно для разных ножек
+
+*/
+  void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
+                  u32 spi_freq);
+
+  void UTFT_InitLCD (byte orientation);
+  // InitLCD(byte orientation=LANDSCAPE);
+  void UTFT_clrScr ();
+  void UTFT_drawPixel (int x, int y);
+  void UTFT_drawLine (int x1, int y1, int x2, int y2);
+  void UTFT_fillScr (byte r, byte g, byte b);
+  void UTFT_fillScr2 (word color);
+  void UTFT_drawRect (int x1, int y1, int x2, int y2);
+  void UTFT_drawRoundRect (int x1, int y1, int x2, int y2);
+  void UTFT_fillRect (int x1, int y1, int x2, int y2);
+  void UTFT_fillRoundRect2 (int x1, int y1, int x2, int y2);
+  void UTFT_drawCircle (int x, int y, int radius);
+  void UTFT_fillCircle (int x, int y, int radius);
+  void UTFT_setColor (byte r, byte g, byte b);
+  void UTFT_setColor2 (word color);
+  word UTFT_getColor ();
+  void UTFT_setBackColor (byte r, byte g, byte b);
+  void UTFT_setBackColor2 (uint32_t color);
+  word UTFT_getBackColor ();
+  void UTFT_print (char *st, int x, int y, int deg);
+  // print(char *st, int x, int y, int deg=0);
+  // void	UTFT_print2(String st, int x, int y, int deg);
+  void UTFT_printNumI (long num, int x, int y, int length, char filler);
+  // printNumI(long num, int x, int y, int length=0, char filler=' ');
+  void UTFT_printNumF (double num, byte dec, int x, int y, char divider,
+                       int length, char filler);
+  // printNumF(double num, byte dec, int x, int y, char divider='.', int
+  // length=0, char filler=' ');
+  void UTFT_setFont (uint8_t *font);
+  uint8_t *UTFT_getFont ();
+  uint8_t UTFT_getFontXsize ();
+  uint8_t UTFT_getFontYsize ();
+  void UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data,
+                        int scale);
+  // drawBitmap(int x, int y, int sx, int sy, bitmapdatatype data, int
+  // scale=1);
+  void UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data,
+                         int deg, int rox, int roy);
+  void UTFT_lcdOff ();
+  void UTFT_lcdOn ();
+  void UTFT_setContrast (char c);
+  int UTFT_getDisplayXSize ();
+  int UTFT_getDisplayYSize ();
+  void UTFT_setBrightness (byte br);
+  void UTFT_setDisplayPage (byte page);
+  void UTFT_setWritePage (byte page);
+  word UTFT_loadBitmap (int x, int y, int sx, int sy, char *filename);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
