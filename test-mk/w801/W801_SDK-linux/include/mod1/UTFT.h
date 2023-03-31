@@ -280,6 +280,7 @@ void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 s
   установив spi_freq=0 -  эмуляция SPI
   это удобно для разных ножек
 
+  максимально, частота spi_freq = 20000000 (20MHz)
 */
   void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
                   u32 spi_freq);

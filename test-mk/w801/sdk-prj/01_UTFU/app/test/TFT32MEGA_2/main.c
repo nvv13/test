@@ -47,7 +47,7 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start\n");
+  printf ("user_app1_task start 3.2 TFT 480x320 MEGA 16bit bus\n");
 
   //Цветной графический дисплей 3.2 TFT 480x320 MEGA
   // http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html

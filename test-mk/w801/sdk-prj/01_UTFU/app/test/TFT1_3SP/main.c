@@ -50,7 +50,7 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start\n");
+  printf ("user_app1_task start TFT01_3SP 240x240 SPI st7789\n");
 
   // подключаем библиотеку UTFT
 
@@ -58,10 +58,10 @@ user_app1_task (void *sdata)
   UTFT_UTFT (TFT01_3SP
  , (u8)WM_IO_PB_17  //RS  SDA
  , (u8)WM_IO_PB_15  //WR  SCL
- , (u8)WM_IO_PB_22  //CS  CS
+ , (u8)NO_GPIO_PIN //WM_IO_PB_22  //CS  CS
  , (u8)WM_IO_PB_21  //RST reset RES
  , (u8)WM_IO_PB_23 //SER => DC !
- , 50000000
+ , 2500000
   /* spi_freq(Герц) для 5 контактных SPI дисплеев
      (где отдельно ножка комманда/данные)
   програмируеться HW SPI на ножки (предопред)
@@ -90,12 +90,17 @@ user_app1_task (void *sdata)
 
   while (1)
     { //
-
       UTFT_clrScr (); // стираем всю информацию с дисплея
       tls_os_time_delay (HZ); // 
-      UTFT_fillScr2 (VGA_BLACK);
-      tls_os_time_delay (HZ); // 
 
+      UTFT_setColor2 (VGA_WHITE); // 
+      for(int i=1;i<40;i++){
+      UTFT_drawRect (1, 1, i*4, i*2); 
+      }
+ 
+      tls_os_time_delay (HZ*3); // 
+  
+      UTFT_fillScr2 (VGA_BLACK);
 
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
       UTFT_drawRect (5, 5, 160-5,
@@ -162,6 +167,8 @@ user_app1_task (void *sdata)
       UTFT_print ("BigFont", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
+      tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
+      UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setColor2 (VGA_RED); // устанавливаем 
       UTFT_setBackColor2 (VGA_TRANSPARENT);
       UTFT_print ("12:35", CENTER, 40,
@@ -170,8 +177,9 @@ user_app1_task (void *sdata)
       tls_os_time_delay (HZ * 3);
       //
 
+      UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
-      UTFT_print ("SmallFontTest", CENTER, 20,
+      UTFT_print ("SmallFontTest", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
       UTFT_print ("12345678", CENTER, 40,
@@ -181,21 +189,23 @@ user_app1_task (void *sdata)
       //
       UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
                                       // семисегментный индикатор
+      UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      UTFT_print ("12:34", CENTER, 10,
+      UTFT_print ("12345", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
       tls_os_time_delay (HZ * 3);
 
 
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
-      UTFT_print ("SmallFont", CENTER, 40,
+      UTFT_print ("SmallFont", CENTER, 60,
                   0); // выводим текст на дисплей (выравнивание по ширине -
 
       UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
-      UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 10,
+      UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 5,
                   0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
+
     } //
 }
 

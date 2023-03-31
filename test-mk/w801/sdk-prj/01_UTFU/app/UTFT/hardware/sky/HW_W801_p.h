@@ -23,7 +23,10 @@ static uint32_t* portOutputRegister(u8 PIN)
 };
 static u8 digitalPinToPort(byte PIN){return PIN;};
 static u8 digitalPinToBitMask(byte PIN){return PIN;};
-static void digitalWrite(byte PIN,int LEVEL){tls_gpio_write ((enum tls_io_name)PIN, LEVEL ? 1 : 0 );};
+static void digitalWrite(byte PIN,int LEVEL){
+ if(PIN==NO_GPIO_PIN)return;
+ tls_gpio_write ((enum tls_io_name)PIN, LEVEL ? 1 : 0 );
+ };
 
 //		P_RS	= portOutputRegister(digitalPinToPort(RS));
 //		B_RS	= digitalPinToBitMask(RS);
@@ -105,6 +108,9 @@ static void sbi(uint32_t* PORT_REG, u8 PIN)
 /*
 static void pulse_high(uint32_t* PORT_REG, u8 PIN)
 {
+
+ if(PIN==NO_GPIO_PIN)return;
+
 	u32 cpu_sr = 0;
         u32 reg;
 	u32	reg_en;
@@ -144,6 +150,9 @@ static void pulse_high(uint32_t* PORT_REG, u8 PIN)
 /*
 static void pulse_low(uint32_t* PORT_REG, u8 PIN)
 {
+
+ if(PIN==NO_GPIO_PIN)return;
+
 	u32 cpu_sr = 0;
         u32 reg;
 	u32	reg_en;

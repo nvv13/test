@@ -4,10 +4,37 @@
 
 #include "wm_hostspi.h"
 
-/**
- *
- *
-**/
+
+static void
+SPI_print_retval (int i_retval, char *help)
+{
+  switch (i_retval)
+    {
+    case TLS_SPI_STATUS_OK:
+      // LOG (" %s = TLS_SPI_STATUS_OK success.\n", help);
+      break;
+    case TLS_SPI_STATUS_EINVAL:
+      LOG (" %s = TLS_SPI_STATUS_EINVAL argument is invalid.\n", help);
+      break;
+    case TLS_SPI_STATUS_ENOMEM:
+      LOG (" %s = TLS_SPI_STATUS_ENOMEM no enough memory.\n", help);
+      break;
+    case TLS_SPI_STATUS_ESHUTDOWN:
+      LOG (" %s = TLS_SPI_STATUS_ESHUTDOWN SPI driver has not been "
+           "installed.\n",
+           help);
+      break;
+    case TLS_SPI_STATUS_EMODENOSUPPORT:
+      LOG (" %s = TLS_SPI_STATUS_EMODENOSUPPORT mode is not support.\n", help);
+      break;
+    case TLS_SPI_STATUS_ECLKNOSUPPORT:
+      LOG (" %s = TLS_SPI_STATUS_ECLKNOSUPPORT	fclk is not support.\n", help);
+      break;
+    case TLS_SPI_STATUS_EBUSY:
+      LOG (" %s = TLS_SPI_STATUS_EBUSY	SPI is already initialized.\n", help);
+      break;
+    }
+}
 
 
 // *** Hardware specific functions ***
@@ -23,17 +50,68 @@ if (display_serial_mode==SERIAL_5PIN && _spi_freq!=0)
 
       LOG("MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, do--PB17; spi_freq=%d \n",_spi_freq); 
       tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
-      tls_spi_setup (TLS_SPI_MODE_0,
-                     TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
+      //tls_spi_trans_type (SPI_BYTE_TRANSFER); // byte , word, dma
+      SPI_print_retval (tls_spi_setup (TLS_SPI_MODE_0,
+                     TLS_SPI_CS_LOW,                   // TLS_SPI_CS_LOW,
                      _spi_freq 
-      );
+      ),"tls_spi_setup");
  }
+}
+
+//#include "wm_regs.h"
+//#include "wm_irq.h"
+//#include "wm_gpio.h"
+//#include "wm_hostspi.h"
+//#include "wm_dma.h"
+//#include "wm_dbg.h"
+//#include "wm_mem.h"
+//#include "wm_cpu.h"
+//#include "wm_spi_hal.h"
+//#include "wm_wl_task.h"
+//#include "tls_common.h"
+//#include "core_804.h"
+#include "wm_pmu.h"
+
+extern int spiWaitIdle(void);
+
+int n_spi_write(const u8 * buf, u32 len)
+{
+if (len <= 4)
+ {
+        u32 data32 = 0;
+        u16 txBitLen;
+        u32 rdval1 = 0;
+        u32 i;
+        tls_open_peripheral_clock(TLS_PERIPHERAL_TYPE_LSPI);
+            SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
+            while (SPIM_CHCFG_REG & SPI_CLEAR_FIFOS);
+            for (i = 0; i < len; i++)
+            {
+                data32 |= (((u8) (buf[i])) << (i * 8));
+            }
+            SPIM_TXDATA_REG = data32;
+            txBitLen = 8 * len;
+            rdval1 =
+                SPI_FORCE_SPI_CS_OUT | SPI_CS_LOW | SPI_TX_CHANNEL_ON |
+                SPI_RX_CHANNEL_ON | SPI_CONTINUE_MODE | SPI_START |
+                SPI_VALID_CLKS_NUM(txBitLen);
+            SPIM_CHCFG_REG = rdval1;
+            spiWaitIdle();
+            SPIM_CHCFG_REG |= SPI_CS_HIGH;
+
+            SPIM_CHCFG_REG = 0x00000000;
+            SPIM_MODECFG_REG = 0x00000000;
+        tls_close_peripheral_clock(TLS_PERIPHERAL_TYPE_LSPI);
+        return TLS_SPI_STATUS_OK;
+ }
+ else
+        return tls_spi_write (buf, len);
 }
 
 void UTFT_LCD_Writ_Bus_SPI(const u8 * buf, u32 len)
 {
  if(_spi_freq!=0)
-        tls_spi_write (buf, len);
+        n_spi_write (buf, len);
 }
 
 void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
@@ -59,7 +137,7 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 		}
 
                 if (display_serial_mode==SERIAL_5PIN && _spi_freq!=0)
-                    tls_spi_write ((u8*)&VL, 1);
+                    n_spi_write ((u8*)&VL, 1);
                 else
                 {
 

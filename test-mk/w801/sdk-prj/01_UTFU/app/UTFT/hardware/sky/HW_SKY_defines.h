@@ -21,8 +21,13 @@
 
 #define fontbyte(x) cfont.font[x]  
 
-#define pgm_read_word(data) *data
-#define pgm_read_byte(data) *data
+//#define pgm_read_word(data) *data
+//#define pgm_read_byte(data) *data
+#define PROGMEM
+#define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+#define pgm_read_word(addr) (*(const unsigned short *)(addr))
+typedef unsigned char prog_uchar;
+
 
 #ifdef bitmapdatatype
 #undef bitmapdatatype
