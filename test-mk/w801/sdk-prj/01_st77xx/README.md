@@ -1,4 +1,7 @@
 
+исходники библиотеки, взяты отсюда: 
+https://www.youtube.com/watch?v=PUV9_OdMcCA&list=PLcB-ZTUBP1r2qxoRp7rUsNmKf7pAlbUf7
+
 
 project st77xx
 
@@ -25,7 +28,7 @@ connect to
 W801 LCD   
 ---- ------
 gnd  GND   
-5v   VCC
+3.3v   VCC
 PB15 SCL
 PB17 SDA
 PB21 RES
