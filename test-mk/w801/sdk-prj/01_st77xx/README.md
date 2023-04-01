@@ -1,25 +1,16 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
-
 
 
 project st77xx
 
-board HLK-W801-KIT-V1.1 + 0.96 TFT дисплей st7735s SPI
+board HLK-W801-KIT-V1.1 + 1.3 TFT 240x240 дисплей st7789 SPI
 
 Видео
-
-Дисплей
-фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft-back.jpg" alt="back side" title="back side" /></p>
-фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft.jpg" alt="top side" title="top side" /></p>
+https://youtu.be/RTD7CE0EDUw?t=124
 
 
-фото3
+фото1
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.3tft-back.jpg" alt="back side" title="back side" /></p>
-фото4
+фото2
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.3tft.jpg" alt="top side" title="top side" /></p>
 
 
@@ -39,7 +30,6 @@ PB15 SCL
 PB17 SDA
 PB21 RES
 PB23 DC
-PB22 CS
 ---  BLK
 ---- ------
 W801 LCD   

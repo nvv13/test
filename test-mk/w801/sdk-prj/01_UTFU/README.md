@@ -100,8 +100,7 @@ W801 LCD
 board HLK-W801-KIT-V1.1 + 1.3 TFT 240x240 дисплей st7789 SPI
 
 Видео
-https://youtu.be/RTD7CE0EDUw
-
+https://youtu.be/RTD7CE0EDUw?t=93
 
 Дисплей
 фото 1 
