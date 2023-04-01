@@ -53,9 +53,9 @@ user_app1_task (void *sdata)
   // http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html
   // подключаем библиотеку UTFT
   UTFT_UTFT (TFT32MEGA_2, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
-             (u8)WM_IO_PA_04, 0, 0);
+             (u8)WM_IO_PA_04, 0, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
-  //                               byte RST, byte SER, u32 spi_freq
+  //                               byte RST, byte SER, u32 spi_freq, u8 spi_mode
   // объявляем объект myGLCD класса библиотеки UTFT указывая тип дисплея
   // TFT32MEGA и номера выводов Arduino к которым подключён дисплей: RS, WR,
   // CS, RST. Выводы параллельной шины данных не указываются

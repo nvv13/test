@@ -71,6 +71,7 @@ static _current_font cfont;
 static boolean _transparent;
 static boolean LCD_Write_1byte_Flag = 0;
 static u32 _spi_freq ;
+static u8 _spi_mode;
 
 static void UTFT_LCD_Writ_Bus (char VH, char VL, byte mode);
 static void UTFT_LCD_Writ_Bus_SPI (const u8 *buf, u32 len);
@@ -98,7 +99,7 @@ static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 
 void
 UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
-           u32 spi_freq)
+           u32 spi_freq, u8 spi_mode)
 {
 //	обозначение:				--		--		CTE32		--		DMTFT24104	--		--		--		CTE32W	    --			LPH9135		--		--		CTE50		--		--		ELEE32_REVA	--			--			ELEE32_REVB	CTE70		CTE32HR		CTE28		CTE22		--		DMTFT28105	MI0283QT9	CTE35IPS	CTE40		CTE50CPLD	DMTFT18101	--		--		--		--		--
 //						--		--		--		--		DMTFT28103	--		--		--		--	    --			--		--		--		EHOUSE50	--		--		INFINIT32	--			--			--		EHOUSE70	--		--		DMTFT22102	--		--		--		--		--		CTE70CPLD	--		--		--		--		--		--
@@ -122,6 +123,7 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
   __p4 = RST;
   __p5 = SER;
   _spi_freq = spi_freq ;
+  _spi_mode=spi_mode;
 
   if (display_transfer_mode == SERIAL_4PIN)
     {

@@ -58,10 +58,10 @@ user_app1_task (void *sdata)
   UTFT_UTFT (TFT01_3SP
  , (u8)WM_IO_PB_17  //RS  SDA
  , (u8)WM_IO_PB_15  //WR  SCL
- , (u8)NO_GPIO_PIN //WM_IO_PB_22  //CS  CS
+ , (u8)WM_IO_PB_22  //NO_GPIO_PIN //WM_IO_PB_22  //CS  CS
  , (u8)WM_IO_PB_21  //RST reset RES
  , (u8)WM_IO_PB_23 //SER => DC !
- , 2500000
+ , 20000000
   /* spi_freq(Герц) для 5 контактных SPI дисплеев
      (где отдельно ножка комманда/данные)
   програмируеться HW SPI на ножки (предопред)
@@ -73,6 +73,7 @@ user_app1_task (void *sdata)
   установив spi_freq=0
   эмуляции SPI, это удобно для разных ножек
 */
+ ,TLS_SPI_MODE_1
  );
 
 
@@ -94,8 +95,8 @@ user_app1_task (void *sdata)
       tls_os_time_delay (HZ); // 
 
       UTFT_setColor2 (VGA_WHITE); // 
-      for(int i=1;i<40;i++){
-      UTFT_drawRect (1, 1, i*4, i*2); 
+      for(int i=1;i<120;i++){
+      UTFT_drawRect (1, 1, i*2, i*2); 
       }
  
       tls_os_time_delay (HZ*3); // 

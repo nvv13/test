@@ -73,11 +73,12 @@ user_app1_task (void *sdata)
   установив spi_freq=0
   эмуляции SPI, это удобно для разных ножек
 */
+ ,TLS_SPI_MODE_0
  );
 
 
 
-  //UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq);
+  //UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq, u8 spi_mode);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
 

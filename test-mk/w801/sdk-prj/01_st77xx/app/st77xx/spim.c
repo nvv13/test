@@ -17,9 +17,9 @@ void spim_init(SPI_TypeDef* SPIx, uint8_t FastSpeed, uint8_t WordLen)
       //"MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16,
       // do--PB17;\r\n");
       tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
-      tls_spi_setup (TLS_SPI_MODE_0,
+      tls_spi_setup (TLS_SPI_MODE_1,
                      TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
-                     50000000
+                     20000000
       );
 
 }

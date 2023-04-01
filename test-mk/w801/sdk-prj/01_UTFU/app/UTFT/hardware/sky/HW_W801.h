@@ -51,7 +51,7 @@ if (display_serial_mode==SERIAL_5PIN && _spi_freq!=0)
       LOG("MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, do--PB17; spi_freq=%d \n",_spi_freq); 
       tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
       //tls_spi_trans_type (SPI_BYTE_TRANSFER); // byte , word, dma
-      SPI_print_retval (tls_spi_setup (TLS_SPI_MODE_0,
+      SPI_print_retval (tls_spi_setup (_spi_mode , //TLS_SPI_MODE_1
                      TLS_SPI_CS_LOW,                   // TLS_SPI_CS_LOW,
                      _spi_freq 
       ),"tls_spi_setup");

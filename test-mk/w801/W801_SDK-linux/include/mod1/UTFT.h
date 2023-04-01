@@ -230,6 +230,7 @@ extern "C"
 #define VGA_TRANSPARENT 0xFFFFFFFF
 
 #include "wm_type_def.h"
+#include "wm_hostspi.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -254,7 +255,7 @@ extern "C"
 
   typedef bool boolean;
 /*
-void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq);
+void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq, u8 spi_mode);
 
 для паралельной шины, указываются RS, WR, CS, RST
  Выводы параллельной шины данных не указываются
@@ -281,9 +282,11 @@ void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 s
   это удобно для разных ножек
 
   максимально, частота spi_freq = 20000000 (20MHz)
+
+  spi_mode -> TLS_SPI_MODE_0, TLS_SPI_MODE_1, TLS_SPI_MODE_2, TLS_SPI_MODE_3
 */
   void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
-                  u32 spi_freq);
+                  u32 spi_freq, u8 spi_mode);
 
   void UTFT_InitLCD (byte orientation);
   // InitLCD(byte orientation=LANDSCAPE);
