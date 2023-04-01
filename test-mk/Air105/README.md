@@ -1,5 +1,11 @@
 air105
 
+отладочная плата
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/Air105/jpg/air105-back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/Air105/jpg/air105-top.jpg" alt="top side" title="top side" /></p>
+
 о чипе
  https://wiki.luatos.com/chips/air105/hardware.html
  https://developpaper.com/aizhou-air105-uses-keil-mdk-dap-link-to-burn-and-debug/
