@@ -14,6 +14,15 @@ https://youtu.be/nirQxYLzDgw
 
 дисплей
  OLED 128x64  2'4 дюйма, SPI, контроллер ssd1309
+
+
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_u8g2_ssd1309_spi/jpg/2_4_OLED-back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_u8g2_ssd1309_spi/jpg/2_4_OLED-top.jpg" alt="top side" title="top side" /></p>
+
+
+
 ~~~
 Разрешение экрана  - 128x64
 ~~~
