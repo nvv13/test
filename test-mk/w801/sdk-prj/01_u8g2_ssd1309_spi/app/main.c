@@ -69,25 +69,25 @@ UserMain (void)
   uint32_t screen = 0;
   u8g2_t u8g2;
 
-  /* initialize to I2C */
-  puts ("Initializing to I2C.");
-
-  u8g2_Setup_sh1106_i2c_128x64_noname_f (
-      &u8g2, U8G2_R0, u8x8_byte_hw_i2c_riotos, u8x8_gpio_and_delay_riotos);
-
-  if (u8g2.u8x8.i2c_address == 255) // заменяем default на настоящий адрес
-    u8g2.u8x8.i2c_address = 0x3C;
+  /* initialize to SPI */
+  puts ("Initializing to SPI.");
 
   u8x8_riotos_t user_data = {
-    .pin_cs = GPIO_UNDEF,    //
-    .pin_dc = GPIO_UNDEF,    //
-    .pin_reset = GPIO_UNDEF, //
 
-    .i2c_scl = WM_IO_PA_01, /* */
-    .i2c_sda = WM_IO_PA_04, /* */
-    .i2c_freq = 100000      /* частота i2c в герцах */
+    .pin_cs = WM_IO_PB_22,    // GPIO_PIN(PORT_A, 4),
+    .pin_dc = WM_IO_PB_23,     // GPIO_UNDEF,
+    .pin_reset = WM_IO_PB_21, // GPIO_PIN(PORT_A, 0),
 
+    .spi_cs = WM_IO_PB_14, /* */
+    .spi_ck = WM_IO_PB_15, /* */
+    .spi_di = WM_IO_PB_16, /* */
+    .spi_do = WM_IO_PB_17, /* */
   };
+
+  u8g2_SetUserPtr (&u8g2, &user_data);
+
+  u8g2_Setup_ssd1309_128x64_noname2_1 (&u8g2, U8G2_R0, u8x8_byte_hw_spi_riotos,
+                                u8x8_gpio_and_delay_riotos);
 
   u8g2_SetUserPtr (&u8g2, &user_data);
 
