@@ -77,7 +77,7 @@ GPIO number	name	Default and extended functions
 36		PB20	UART0_RX
 ~~~
 
-о luatos для чипа Air101/Air103
+о luatos для чипа Air101/Air103 (+ еще W800/W801/W806)
  https://gitee.com/openLuat/luatos-soc-air101
 
 о компиляции luatos, если нужно, так то есть готовые образы прошивки для Air101/Air103

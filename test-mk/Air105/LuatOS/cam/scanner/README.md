@@ -1,3 +1,7 @@
+источник
+https://wiki.luatos.com/
+
+
 project 
 
 LuatOS + air105 + camera GC032A + TFT IPS 160x80 st7735s OR TFT IPS 240x240 st7789
