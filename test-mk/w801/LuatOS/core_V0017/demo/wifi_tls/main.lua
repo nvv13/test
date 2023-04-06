@@ -1,3 +1,9 @@
+--[[
+ собирал прошивку V0017 с #define LUAT_USE_TLS
+ не помогло
+ https не работает
+]]
+
 -- LuaTools The two information of PROJECT and VERSION are required
 PROJECT = "wifidemo"
 VERSION = "1.0.0"
@@ -34,15 +40,16 @@ sys.taskInit(function()
     if wlan.ready() then
         log.info("wlan", "ready !!")
         sys.wait(100)
-        -- local url = "http://time.jsontest.com"
-        local url = "http://time.jsontest.com"
         while 1 do
+            local url = "http://time.jsontest.com"
             local code, headers, body = http.request("GET", url).wait()
             log.info("http", code, json.encode(headers or {}), body and #body or 0)
+            --
+            url = "https://worldtimeapi.org/api/timezone/Europe/Moscow"
+            code, headers, body = http.request("GET", url).wait()
+            log.info("http", code, json.encode(headers or {}), body and #body or 0)
+            --
             sys.wait(5000)
-            log.info("lua", rtos.meminfo())
-            log.info("sys", rtos.meminfo("sys"))
-            sys.wait(1000)
         end
     else
         print("wlan NOT ready!!!!")
