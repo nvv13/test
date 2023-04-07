@@ -44,16 +44,25 @@ end
 
 spi_lcd = spi.deviceSetup(1,pin.PB14,1,1,8,48*1000*1000,spi.MSB,1,1) -- st7789 CPHA=1 CPOL=1 current controller
 
+
+--log.info("lcd.init",
+--lcd.init("st7789",{port = "device",pin_dc = pin.PB23 ,pin_rst = pin.PB21,pin_pwr = pin.PB24,direction = 0,w = 240,h = 240,xoffset = 0,yoffset = 0},spi_lcd))
+
+--log.info("lcd.init",
+--lcd.init("st7789",{port = "device",pin_dc = pin.PB23 ,pin_rst = pin.PB21,pin_pwr = pin.PB24,direction = 0,w = 135,h = 240,xoffset = 52,yoffset = 40},spi_lcd))
+
 log.info("lcd.init",
-lcd.init("st7789",{port = "device",pin_dc = pin.PB23 ,pin_rst = pin.PB21,pin_pwr = pin.PB24,direction = 0,w = 240,h = 240,xoffset = 0,yoffset = 0},spi_lcd))
+lcd.init("st7789",{port = "device",pin_dc = pin.PB23 ,pin_rst = pin.PB21,pin_pwr = pin.PB24,direction = 0,w = 172,h = 320,xoffset = 33,yoffset = 0},spi_lcd))
+
+
 
 
 sys.taskInit(function()
     sys.wait(1000)
      lcd.on()
     wlan.init()
-    --wlan.connect("bred1", "9115676369")
-    wlan.connect("bred8", "123123123")
+    wlan.connect("bred1", "9115676369")
+    --wlan.connect("bred8", "123123123")
     log.info("wlan", "wait for IP_READY")
     sys.waitUntil("IP_READY", 30000)
     if wlan.ready() then
@@ -77,7 +86,7 @@ sys.taskInit(function()
             end
             local s_pt_time=string.format("%.2d:%.2d:%.2d",i_hour,i_min,i_sec)
             log.info("Time",s_pt_time)            
-            lcd.drawStr(40,40,s_pt_time,0x0000)
+            lcd.drawStr(10,40,s_pt_time,0x0000)
             sys.wait(5000)
             log.info("rtos.meminfo", rtos.meminfo())
             log.info("rtos.meminfo lua", rtos.meminfo("lua"))
@@ -193,8 +202,10 @@ sys.taskInit(function()
               0x00,0x00,0xF8,0x0F,0x00,0x08,0x00,0x04,0x00,0x04,0x00,0x02,0x00,0x01,0x80,0x00
                                 ))
             sys.wait(1000)
-            lcd.showImage(0,0,"/luadb/dacha.jpg")
-            sys.wait(10000)
+            --lcd.showImage(0,0,"/luadb/dacha135x240.jpg")
+            -- lcd.showImage(0,0,"/luadb/dacha240x240.jpg")
+            lcd.showImage(0,0,"/luadb/o172x320.jpg")
+            sys.wait(20000)
         end
     else
         print("wlan NOT ready!!!!")
