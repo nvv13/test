@@ -206,6 +206,22 @@ user_app1_task (void *sdata)
                   0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
 
+      u32 current_tick = tls_os_get_time();
+      u32 count=0;
+      while( (tls_os_get_time() - current_tick) <= (HZ*10) )
+       {
+       UTFT_fillScr2 (count);
+       count++;
+       }
+      UTFT_clrScr ();
+      UTFT_setFont (BigFont);
+      UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+      char mesg[50];
+      UTFT_print ("run 10 sec", CENTER, 20, 0);       
+      sprintf (mesg, "=%d FPS=%d", count, count/10);
+      UTFT_print (mesg, CENTER, 50, 0);       
+      tls_os_time_delay (HZ * 5);
+
     } //
 }
 

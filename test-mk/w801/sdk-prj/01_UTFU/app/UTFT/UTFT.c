@@ -44,6 +44,7 @@
 
 #include "memorysaver.h"
 
+#include "wm_mem.h"
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
 #include "wm_io.h"
@@ -92,6 +93,8 @@ static void UTFT__fast_fill_16 (int ch, int cl, long pix);
 static void UTFT__fast_fill_8 (int ch, long pix);
 static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 
+static u8 *buf_x_line=NULL;
+
 // Подключение аппаратно-зависимых функций, для правильной работы
 // микроконтроллеров
 #include "hardware/sky/HW_SKY.h"
@@ -125,6 +128,7 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
   _spi_freq = spi_freq ;
   _spi_mode=spi_mode;
 
+
   if (display_transfer_mode == SERIAL_4PIN)
     {
       display_transfer_mode = 1;
@@ -135,6 +139,12 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
       display_transfer_mode = 1;
       display_serial_mode = SERIAL_5PIN;
     }
+
+  if(buf_x_line==NULL && display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+    {
+    buf_x_line = tls_mem_alloc((disp_x_size+1)*2);
+    }
+
 
   if (display_transfer_mode != 1)
     {
@@ -723,8 +733,23 @@ UTFT_fillScr2 (word color)
     {
       if (display_serial_mode == SERIAL_5PIN)
         sbi (P_RS, B_RS);
-      u8 buf[2] = { ch, cl };
-      for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0 && buf_x_line!=NULL)
+       {
+       for (i = 0; i < ((disp_x_size + 1)); i++)
+        {
+        buf_x_line[i*2]=ch;
+        buf_x_line[i*2+1]=cl;
+        }
+       for (i = 0; i < ((disp_y_size + 1)); i++)
+        {
+        UTFT_LCD_Writ_Bus_SPI (buf_x_line, ((disp_x_size + 1)*2));
+        }
+       }
+       else
+       {
+       buf_x_line[0]=ch;
+       buf_x_line[1]=cl;
+       for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
         {
           if (display_transfer_mode != 1)
             UTFT_LCD_Writ_Bus (ch, cl, display_transfer_mode);
@@ -732,7 +757,7 @@ UTFT_fillScr2 (word color)
             {
               if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
                 {
-                  UTFT_LCD_Writ_Bus_SPI (buf, 2);
+                  UTFT_LCD_Writ_Bus_SPI (buf_x_line, 2);
                 }
               else
                 {
@@ -741,6 +766,7 @@ UTFT_fillScr2 (word color)
                 }
             }
         }
+       }
     }
   sbi (P_CS, B_CS);
 }
