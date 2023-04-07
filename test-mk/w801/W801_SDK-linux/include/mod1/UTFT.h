@@ -136,6 +136,8 @@ extern "C"
 #define ILI9225B 36
 #define TFT00_96SP 37
 #define TFT01_3SP  38
+#define TFT01_47V89 39
+#define TFT01_14V89 40
 
 #define ITDB32 0 // HX8347-A (16bit)
 #define ITDB32WC 1 // ILI9327  (16bit)

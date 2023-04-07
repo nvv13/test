@@ -84,7 +84,7 @@ PB15 SCL  синхросигнал
 PB17 SDA  данные
 PB21 RES  сброс (reset)
 PB23 DC   комманда/данные
-PB22 CS   выбор чипа
+PB14 CS   выбор чипа
 ---  BLK  подсветка, можно через PWM, в данном случае не использовал
 ---- ------
 W801 LCD   
@@ -131,6 +131,95 @@ W801 LCD
 
 ~~~
 
+
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 1.14 TFT 135x240 дисплей st7789v SPI
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.14tft-back.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.14tft.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_14V89
+
+соединения
+
+надо соеденить по схеме:
+~~~
+connect to TFT01_14V89 SPI
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB23 DC   комманда/данные
+PB14 CS   выбор чипа
+---  BLK  подсветка, можно через PWM, в данном случае не использовал
+---- ------
+W801 LCD   
+---- ------
+
+~~~
+
+
+
+------------------------------------------------
+
+
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 1.47 TFT 172x320 дисплей st7789v3 SPI
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft-back.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_47V89
+
+соединения
+
+надо соеденить по схеме:
+~~~
+connect to TFT01_47V89 SPI
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB23 DC   комманда/данные
+PB14 CS   выбор чипа
+---  BLK  подсветка, можно через PWM, в данном случае не использовал
+---- ------
+W801 LCD   
+---- ------
+
+~~~
+
+
+
+------------------------------------------------
 
 
 

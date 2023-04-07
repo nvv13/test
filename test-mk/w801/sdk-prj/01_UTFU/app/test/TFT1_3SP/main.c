@@ -56,8 +56,8 @@ user_app1_task (void *sdata)
 
   // TFT01_3SP - для ST7789
   UTFT_UTFT (TFT01_3SP
- , (u8)WM_IO_PB_17  //RS  SDA
- , (u8)WM_IO_PB_15  //WR  SCL
+ , (u8)NO_GPIO_PIN  //WM_IO_PB_17  //RS  SDA
+ , (u8)NO_GPIO_PIN  //WM_IO_PB_15  //WR  SCL
  , (u8)NO_GPIO_PIN  //WM_IO_PB_22  //CS  CS
  , (u8)WM_IO_PB_21  //RST reset RES
  , (u8)WM_IO_PB_23  //SER => DC !
@@ -73,7 +73,7 @@ user_app1_task (void *sdata)
   установив spi_freq=0
   эмуляции SPI, это удобно для разных ножек
 */
- ,TLS_SPI_MODE_1  /* у некоторых дисплеев по разному */
+ ,TLS_SPI_MODE_3  /* у некоторых дисплеев по разному */
  );
 
 
