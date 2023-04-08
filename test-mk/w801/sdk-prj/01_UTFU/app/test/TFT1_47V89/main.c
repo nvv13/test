@@ -50,7 +50,7 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start TFT01_47V89 172x320 SPI st7789v3\n");
+  printf ("user_app1_task start TFT01_47V89 172x320 Soft SPI st7789v3\n");
 
   // подключаем библиотеку UTFT
 
@@ -58,7 +58,7 @@ user_app1_task (void *sdata)
   UTFT_UTFT (TFT01_47V89
  , (u8)NO_GPIO_PIN  //WM_IO_PB_17  //RS  SDA
  , (u8)NO_GPIO_PIN  //WM_IO_PB_15  //WR  SCL
- , (u8)NO_GPIO_PIN  //WM_IO_PB_22  //CS  CS
+ , (u8)NO_GPIO_PIN  //WM_IO_PB_14  //CS  CS 
  , (u8)WM_IO_PB_21  //RST reset RES
  , (u8)WM_IO_PB_23  //SER => DC !
  , 20000000

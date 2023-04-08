@@ -49,9 +49,8 @@
 #include "wm_gpio_afsel.h"
 #include "wm_io.h"
 
-#include "hardware/sky/HW_SKY_defines.h"
 
-#include "hardware/sky/HW_W801_p.h"
+#include "hardware/sky/HW_SKY_defines.h"
 
 /*
         The functions and variables below should not normally be used.
@@ -74,6 +73,8 @@ static boolean LCD_Write_1byte_Flag = 0;
 static u32 _spi_freq ;
 static u8 _spi_mode;
 
+#include "hardware/sky/HW_W801_p.h"
+
 static void UTFT_LCD_Writ_Bus (char VH, char VL, byte mode);
 static void UTFT_LCD_Writ_Bus_SPI (const u8 *buf, u32 len);
 static void UTFT_LCD_Write_COM (char VL);
@@ -93,7 +94,8 @@ static void UTFT__fast_fill_16 (int ch, int cl, long pix);
 static void UTFT__fast_fill_8 (int ch, long pix);
 static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 
-static u8 *buf_x_line=NULL;
+static u8 *buf_4x_line=NULL;
+
 
 // Подключение аппаратно-зависимых функций, для правильной работы
 // микроконтроллеров
@@ -140,10 +142,10 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
       display_serial_mode = SERIAL_5PIN;
     }
 
-  if(buf_x_line==NULL && display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
-    {
-    buf_x_line = tls_mem_alloc((disp_x_size+1)*2);
-    }
+  //if(buf_4x_line==NULL && display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+  //  {
+  buf_4x_line = tls_mem_alloc((disp_x_size+1)*4);
+  //  }
 
 
   if (display_transfer_mode != 1)
@@ -199,7 +201,7 @@ UTFT_LCD_Write_COM (char VL)
 {
   if (display_transfer_mode != 1)
     {
-      cbi (P_RS, B_RS);
+      cbi_RS();
       LCD_Write_1byte_Flag = 1;
       UTFT_LCD_Writ_Bus (0x00, VL, display_transfer_mode);
       LCD_Write_1byte_Flag = 0;
@@ -213,14 +215,14 @@ UTFT_LCD_Write_DATA (char VH, char VL)
 {
   if (display_transfer_mode != 1)
     {
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT_LCD_Writ_Bus (VH, VL, display_transfer_mode);
     }
   else
     {
       if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
         {
-          sbi (P_RS, B_RS);
+          sbi_RS();
           u8 buf[2] = { VH, VL };
           UTFT_LCD_Writ_Bus_SPI (buf, 2);
         }
@@ -237,7 +239,7 @@ UTFT_LCD_Write_DATA2 (char VL)
 {
   if (display_transfer_mode != 1)
     {
-      sbi (P_RS, B_RS);
+      sbi_RS();
       LCD_Write_1byte_Flag = 1;
       UTFT_LCD_Writ_Bus (0x00, VL, display_transfer_mode);
       LCD_Write_1byte_Flag = 0;
@@ -567,7 +569,7 @@ UTFT_fillRect (int x1, int y1, int x2, int y2)
     {
       cbi (P_CS, B_CS);
       UTFT_setXY (x1, y1, x2, y2);
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT__fast_fill_16 (fch, fcl,
                           (((long)(x2 - x1) + 1) * ((long)(y2 - y1) + 1)));
       sbi (P_CS, B_CS);
@@ -576,7 +578,7 @@ UTFT_fillRect (int x1, int y1, int x2, int y2)
     {
       cbi (P_CS, B_CS);
       UTFT_setXY (x1, y1, x2, y2);
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT__fast_fill_8 (fch, (((long)(x2 - x1) + 1) * ((long)(y2 - y1) + 1)));
       sbi (P_CS, B_CS);
     }
@@ -724,7 +726,7 @@ UTFT_fillScr2 (word color)
   cbi (P_CS, B_CS);
   UTFT_clrXY ();
   if (display_transfer_mode != 1)
-    sbi (P_RS, B_RS);
+    sbi_RS();
   if (display_transfer_mode == 16)
     UTFT__fast_fill_16 (ch, cl, ((disp_x_size + 1) * (disp_y_size + 1)));
   else if ((display_transfer_mode == 8) && (ch == cl))
@@ -732,23 +734,24 @@ UTFT_fillScr2 (word color)
   else
     {
       if (display_serial_mode == SERIAL_5PIN)
-        sbi (P_RS, B_RS);
-      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0 && buf_x_line!=NULL)
+        sbi_RS();
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0 && buf_4x_line!=NULL)
        {
-       for (i = 0; i < ((disp_x_size + 1)); i++)
+       for (i = 0; i < ((disp_x_size + 1)*2); i++)
         {
-        buf_x_line[i*2]=ch;
-        buf_x_line[i*2+1]=cl;
+        buf_4x_line[i*2]=ch;
+        buf_4x_line[i*2+1]=cl;
         }
-       for (i = 0; i < ((disp_y_size + 1)); i++)
+       for (i = 0; i < ((disp_y_size + 1)/2); i++)
         {
-        UTFT_LCD_Writ_Bus_SPI (buf_x_line, ((disp_x_size + 1)*2));
+        UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1)*4));
         }
+       if((disp_y_size + 1)%2)UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1)*2));
        }
        else
        {
-       buf_x_line[0]=ch;
-       buf_x_line[1]=cl;
+       buf_4x_line[0]=ch;
+       buf_4x_line[1]=cl;
        for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
         {
           if (display_transfer_mode != 1)
@@ -757,7 +760,7 @@ UTFT_fillScr2 (word color)
             {
               if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
                 {
-                  UTFT_LCD_Writ_Bus_SPI (buf_x_line, 2);
+                  UTFT_LCD_Writ_Bus_SPI (buf_4x_line, 2);
                 }
               else
                 {
@@ -903,12 +906,12 @@ UTFT_drawHLine (int x, int y, int l)
   UTFT_setXY (x, y, x + l, y);
   if (display_transfer_mode == 16)
     {
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT__fast_fill_16 (fch, fcl, l);
     }
   else if ((display_transfer_mode == 8) && (fch == fcl))
     {
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT__fast_fill_8 (fch, l);
     }
   else
@@ -934,12 +937,12 @@ UTFT_drawVLine (int x, int y, int l)
   UTFT_setXY (x, y, x, y + l);
   if (display_transfer_mode == 16)
     {
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT__fast_fill_16 (fch, fcl, l);
     }
   else if ((display_transfer_mode == 8) && (fch == fcl))
     {
-      sbi (P_RS, B_RS);
+      sbi_RS();
       UTFT__fast_fill_8 (fch, l);
     }
   else

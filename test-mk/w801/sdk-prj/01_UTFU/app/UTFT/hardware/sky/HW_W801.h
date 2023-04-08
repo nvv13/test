@@ -123,10 +123,10 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
 		if (display_serial_mode==SERIAL_4PIN)
 		{ /* SERIAL_4PIN значит 1 передаваемый бит - означает комманда/данные */
 			if (VH==1)
-				sbi(P_SDA, B_SDA);
+				sbi_SDA();
 			else
-				cbi(P_SDA, B_SDA);
-			pulse_low(P_SCL, B_SCL);
+				cbi_SDA();
+			pulse_low_SCL();
 		}
 		else
 		{ /* SERIAL_5PIN, значит есть отдельный пин, который говорит, данные это или комманда */
@@ -142,45 +142,45 @@ void UTFT_LCD_Writ_Bus(char VH,char VL, byte mode)
                 {
 
 		if (VL & 0x80)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x40)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x20)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x10)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x08)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x04)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x02)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 		if (VL & 0x01)
-			sbi(P_SDA, B_SDA);
+			sbi_SDA();
 		else
-			cbi(P_SDA, B_SDA);
-		pulse_low(P_SCL, B_SCL);
+			cbi_SDA();
+		pulse_low_SCL();
 
                 }
 

@@ -52,10 +52,15 @@ case TFT01_14V89:
 #define ST77XX_MADCTL_MV 0x20
 #define ST77XX_MADCTL_ML 0x10
 #define ST7789_MADCTL_RGB 0x00
-  if(display_model==TFT01_3SP)
-   UTFT_LCD_Write_DATA2(ST7789_MADCTL_RGB); // rotation(2)
-   else
-   UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR); // rotation(0)  case TFT01_14V89: TFT01_47V89
+  switch(display_model)
+   {
+   case TFT01_3SP: UTFT_LCD_Write_DATA2(ST7789_MADCTL_RGB);break; // rotation(2)
+   case TFT01_47V89: UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7789_MADCTL_RGB);break; // rotation(0)  case TFT01_47V89
+   default:
+   UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR); // rotation(0)  case TFT01_14V89:
+   }
+
+
 //    UTFT_LCD_Write_DATA2(ST7789_MADCTL_RGB); // rotation(2)
 
 //    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MY | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(1)
