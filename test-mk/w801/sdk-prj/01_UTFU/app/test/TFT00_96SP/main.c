@@ -47,6 +47,66 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 
+
+#include "wm_gpio_afsel.h"
+#include "ff.h"
+
+FRESULT
+scan_files (
+    char *path /* Start node to be scanned (***also used as work area***) */
+)
+{ /* http://elm-chan.org/fsw/ff/doc/readdir.html */
+  FRESULT res;
+  DIR dir;
+  UINT i;
+  static FILINFO fno;
+
+  res = f_opendir (&dir, path); /* Open the directory */
+  if (res == FR_OK)
+    {
+      for (;;)
+        {
+          res = f_readdir (&dir, &fno); /* Read a directory item */
+          if (res != FR_OK || fno.fname[0] == 0)
+            break; /* Break on error or end of dir */
+          if (fno.fattrib & AM_DIR)
+            { /* It is a directory */
+              i = strlen (path);
+              sprintf (&path[i], "/%s", fno.fname);
+              res = scan_files (path); /* Enter the directory */
+              if (res != FR_OK)
+                break;
+              path[i] = 0;
+            }
+          else
+            { /* It is a file. */
+              printf ("%s/%s\n", path, fno.fname);
+              char FileName[256];
+              if (strlen (path) != 0)
+                sprintf (FileName, "0:%s/%s", path, fno.fname);
+              else
+                sprintf (FileName, "0:%s", fno.fname);
+              if (strstr (FileName, "160x80") != NULL)
+               {
+               UTFT_loadBitmap (
+                      0, 0, 160, 80,
+                      FileName); // выводим на дисплей картинку
+                                 // начиная с координаты 0,0 размером
+                                 // 172,320 из файла 0-x.raw
+               UTFT_setFont (BigFont);
+               UTFT_setColor2 (VGA_FUCHSIA);
+               UTFT_print (FileName, CENTER, 300, 0);
+               tls_os_time_delay (HZ * 3);
+               }
+            }
+        }
+      f_closedir (&dir);
+    }
+
+  return res;
+}
+
+
 void
 user_app1_task (void *sdata)
 {
@@ -73,7 +133,6 @@ user_app1_task (void *sdata)
   установив spi_freq=0
   эмуляции SPI, это удобно для разных ножек
 */
- ,TLS_SPI_MODE_3
  );
 
 
@@ -223,6 +282,45 @@ user_app1_task (void *sdata)
       sprintf (mesg, "=%d FPS=%d", count, count/10);
       UTFT_print (mesg, CENTER, 50, 0);       
       tls_os_time_delay (HZ * 5);
+
+
+
+
+      // mount SD card
+      res_sd = f_mount (&fs, "0:", 1);
+      //***********************formatting test****************************
+      if (res_sd == FR_NO_FILESYSTEM)
+        {
+          printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably "
+                  "because the file "
+                  "initialization failed! error code:%d\r\n",
+                  res_sd);
+        }
+      else if (res_sd != FR_OK)
+        {
+          printf ("Failed to mount file system! Probably because the file "
+                  "initialization failed! error code:%d\r\n",
+                  res_sd);
+        }
+      else
+        {
+          printf ("The file system is successfully mounted, and the read and "
+                  "write test can be performed!\r\n");
+          memset (buff, 0, sizeof (buff));
+          strcpy (buff, "/");
+          res_sd = scan_files (buff);
+        }
+      if (res_sd == FR_OK)
+        {
+          memset (buff, 0, sizeof (buff));
+          strcpy (buff, "/");
+          res_sd = scan_files (buff);
+        }
+      // unmount file system
+      f_mount (NULL, "0:", 1);
+      tls_os_time_delay (HZ * 1);
+
+
 
     } //
 }

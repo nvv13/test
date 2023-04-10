@@ -239,7 +239,7 @@ user_app1_task (void *sdata)
 
   // подключаем библиотеку UTFT
   UTFT_UTFT (TFT32MEGA_2, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
-             (u8)WM_IO_PA_04, 0);
+             (u8)WM_IO_PA_04, 0, 0);
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   UTFT_clrScr (); // стираем всю информацию с дисплея
 

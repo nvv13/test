@@ -181,7 +181,7 @@ W801 LCD
 на SD Card должны быть файлы изображения типа .BMP, не сжатыйе,
  подготовленный в нужном разрешении с палитрой 565
 в названии (en) должно быть разрешения текущего подключенного дисплея,
-например "mkar1-172x320.bmp"
+например "mkar1-320x172.bmp"
 
 Как подготовить файлы, способы:
 1)с помощью конверторов идущих с библиотекой UTFT
@@ -197,9 +197,7 @@ ImageMagick. [Руководство пользователя ImageMagickv. 7.1.
 директории, в bmp формат размера 480 на 320 без сохранения соотношения сторон
 для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
 
-# convert *.png -resize 172x320! -define bmp:subtype=RGB565 p%03d-172x320.bmp
-# convert *.jpg -resize 172x320! -define bmp:subtype=RGB565 j%03d-172x320.bmp
-# convert *.JPG -resize 172x320! -rotate 180 -define bmp:subtype=RGB565 j%03d-172x320.bmp
+# convert *.JPG -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
 
 ~~~
 sdio host
