@@ -27,7 +27,7 @@
 #include "tjpgd.h"
 
 #define LUAT_LOG_TAG "tjpgd"
-//#include "luat_log.h"
+#include "luat_log.h"
 
 #if JD_FASTDECODE == 2
 #define HUFF_BIT	10	/* Bit length to apply fast huffman decode */

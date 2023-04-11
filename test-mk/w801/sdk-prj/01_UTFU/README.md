@@ -48,6 +48,13 @@ gnd  GND   GND
 ---- --------- ----
 W801 LCD   LCD W801
 ---- --------- ----
+
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.JPG -resize 480x320! -rotate 180 -define bmp:subtype=RGB565 j%03d-480x320.bmp
+
+
 ~~~
 
 
@@ -90,6 +97,12 @@ PB14 CS   выбор чипа
 W801 LCD   
 ---- ------
 
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.JPG -resize 160x80! -rotate 180 -define bmp:subtype=RGB565 j%03d-160x80.bmp
+
+
 ~~~
 
 
@@ -128,6 +141,11 @@ PB23 DC   комманда/данные
 ---- ------
 W801 LCD   
 ---- ------
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.JPG -resize 240x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-240x240.bmp
+
 
 ~~~
 
@@ -170,8 +188,61 @@ PB14 CS   выбор чипа
 W801 LCD   
 ---- ------
 
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.JPG -resize 240x135! -rotate 180 -define bmp:subtype=RGB565 j%03d-240x135.bmp
+
 ~~~
 
+
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 1.47 TFT 172x320 дисплей st7789v3 SPI
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft-back.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_47V89
+
+соединения
+
+надо соеденить по схеме:
+~~~
+connect to TFT01_47V89 SPI
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB23 DC   комманда/данные
+PB14 CS   выбор чипа
+---  BLK  подсветка, можно через PWM, в данном случае не использовал
+---- ------
+W801 LCD   
+---- ------
+
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.JPG -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
+
+~~~
+
+
+
+------------------------------------------------
 
 
 ------------------------------------------------
@@ -231,48 +302,8 @@ SD Card
 К контактам Gnd(3,6) и +3.3v(4) - подключам конденсаторы, керамический ~0,047мКф и электролит ~10мКф от помех...
 
 ~~~
-------------------------------------------------
 
-
-board HLK-W801-KIT-V1.1 + 1.47 TFT 172x320 дисплей st7789v3 SPI
-
-
-Видео
-
-
-Дисплей
-фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft-back.jpg" alt="back side" title="back side" /></p>
-фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft.jpg" alt="top side" title="top side" /></p>
-
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_47V89
-
-соединения
-
-надо соеденить по схеме:
-~~~
-connect to TFT01_47V89 SPI
----- ------
-W801 LCD   
----- ------
-gnd  GND  
-3.3v VCC
-PB15 SCL  синхросигнал
-PB17 SDA  данные
-PB21 RES  сброс (reset)
-PB23 DC   комманда/данные
-PB14 CS   выбор чипа
----  BLK  подсветка, можно через PWM, в данном случае не использовал
----- ------
-W801 LCD   
----- ------
-
-~~~
-
-
-
-------------------------------------------------
+---------------------------------------------
 
 
 
@@ -403,7 +434,7 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 
 
-----
+--------------------------------
 
 
 исходники библиотеки, взяты отсюда: 
@@ -420,7 +451,9 @@ https://github.com/twsdwf/UTFT-rus.git
 This project is based on the original [UTFT library](http://www.rinkydinkelectronics.com/library.php?id=51) developed and maintained by Henning Karlsen, and licensed under [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
 
+исходники для jpeg библиотеки, взяты отсюда:
+https://gitee.com/openLuat/LuatOS.git
 
-
+--------------------------------
 
 

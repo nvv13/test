@@ -1,6 +1,6 @@
 air105
 
-отладочная плата
+отладочная плата (4M bytes Flash, 640K bytes of RAM)
 фото 1 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/Air105/jpg/air105-back.jpg" alt="back side" title="back side" /></p>
 фото 2
@@ -103,3 +103,15 @@ Learn Lua in 15 Minutes
 о платке
  https://wiki.luatos.com/chips/air105/board.html
 
+
+------------------------------------------
+
+PS:
+Весьма вероятно что на данной платке 
+AIR105, 204МГц, 4Мб Flash, 640Kb RAM, 32-bit RISC Core(ARMv7-M)
+можно запустить Linux...
+так как, на очень похожей платке от STM
+https://www.st.com/en/evaluation-tools/32f769idiscovery.html 
+ STM32F769NIH6  Arm Cortex‑M7 core-based microcontroller with 2 Mbytes of flash memory and 532 Kbytes of RAM
+Linux запускали https://github.com/fdu/STM32F769I-disco_Buildroot
+------------------------------------------

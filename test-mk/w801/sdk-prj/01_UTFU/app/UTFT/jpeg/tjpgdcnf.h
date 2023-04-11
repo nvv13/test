@@ -11,7 +11,21 @@
 #define JD_SZBUF            512
 #endif
 
+
+
 #define LUAT_LCD_COLOR_DEPTH 16
+
+
+
+#if (LUAT_LCD_COLOR_DEPTH == 32)
+#define luat_color_t uint32_t
+#elif (LUAT_LCD_COLOR_DEPTH == 16)
+#define luat_color_t uint16_t
+#elif (LUAT_LCD_COLOR_DEPTH == 8)
+#define luat_color_t uint8_t
+#else
+#error "no supprt color depth"
+#endif
 
 /* Specifies size of stream input buffer */
 

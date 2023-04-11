@@ -1,3 +1,14 @@
+/*
+
+исходники для jpeg библиотеки, взяты отсюда:
+https://gitee.com/openLuat/LuatOS.git
+
+*/
+
+
+#define LUAT_LOG_TAG "ujpg"
+#include "luat_log.h"
+
 #include "tjpgd.h"
 #include "tjpgdcnf.h"
 
@@ -10,7 +21,7 @@ typedef struct {
     int y;
     // int width;
     // int height;
-    uint16_t buff[16*16]
+    uint16_t buff[16*16];
 } IODEV;
 
 static unsigned int file_in_func (JDEC* jd, uint8_t* buff, unsigned int nbyte){
@@ -24,7 +35,8 @@ static unsigned int file_in_func (JDEC* jd, uint8_t* buff, unsigned int nbyte){
     }
 }
 
-static unsigned int lcd_out_func (JDEC* jd, void* bitmap, JRECT* rect){
+//int (*outfunc)(JDEC*,void*,JRECT*)
+static int lcd_out_func (JDEC* jd, void* bitmap, JRECT* rect){
     IODEV *dev = (IODEV*)jd->device;
     uint16_t* tmp = (uint16_t*)bitmap;
 
@@ -42,6 +54,7 @@ static unsigned int lcd_out_func (JDEC* jd, void* bitmap, JRECT* rect){
                                 dev->buff);
     return 1;    /* Continue to decompress */
 }
+
 
 static int lcd_draw_jpeg(const char* path, int xpos, int ypos) {
   JRESULT res;      /* Result code of TJpgDec API */
@@ -89,3 +102,11 @@ static int lcd_draw_jpeg(const char* path, int xpos, int ypos) {
     return 0;
   }
 }
+
+
+int UTFT_ADD_lcd_draw_jpeg (const char* path, int xpos, int ypos)
+{
+return lcd_draw_jpeg(path,  xpos,  ypos);
+}
+
+

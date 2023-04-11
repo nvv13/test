@@ -9,5 +9,9 @@ endif
 
 sinclude $(TOP_DIR)/tools/w800/rules.mk
 
+INCLUDES := $(INCLUDES) -I $(PDIR)include 
+
+INCLUDES += -I ./UTFT
+
 PDIR := ../$(PDIR)
 sinclude $(PDIR)Makefile
