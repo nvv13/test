@@ -52,7 +52,7 @@ W801 LCD   LCD W801
 
 
 *подготовка изображений для SD Card (инф.ниже)
-# convert *.JPG -resize 480x320! -rotate 180 -define bmp:subtype=RGB565 j%03d-480x320.bmp
+# convert *.jpg -resize 480x320! -rotate 180 -define bmp:subtype=RGB565 j%03d-480x320.bmp
 
 
 ~~~
@@ -100,7 +100,7 @@ W801 LCD
 
 
 *подготовка изображений для SD Card (инф.ниже)
-# convert *.JPG -resize 160x80! -rotate 180 -define bmp:subtype=RGB565 j%03d-160x80.bmp
+# convert *.jpg -resize 160x80! -rotate 180 -define bmp:subtype=RGB565 j%03d-160x80.bmp
 
 
 ~~~
@@ -144,7 +144,7 @@ W801 LCD
 
 
 *подготовка изображений для SD Card (инф.ниже)
-# convert *.JPG -resize 240x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-240x240.bmp
+# convert *.jpg -resize 240x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-240x240.bmp
 
 
 ~~~
@@ -190,7 +190,7 @@ W801 LCD
 
 
 *подготовка изображений для SD Card (инф.ниже)
-# convert *.JPG -resize 240x135! -rotate 180 -define bmp:subtype=RGB565 j%03d-240x135.bmp
+# convert *.jpg -resize 240x135! -rotate 180 -define bmp:subtype=RGB565 j%03d-240x135.bmp
 
 ~~~
 
@@ -236,7 +236,7 @@ W801 LCD
 
 
 *подготовка изображений для SD Card (инф.ниже)
-# convert *.JPG -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
+# convert *.jpg -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
 
 ~~~
 
@@ -268,7 +268,7 @@ ImageMagick. [Руководство пользователя ImageMagickv. 7.1.
 директории, в bmp формат размера 480 на 320 без сохранения соотношения сторон
 для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
 
-# convert *.JPG -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
+# convert *.jpg -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
 
 ~~~
 sdio host

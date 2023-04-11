@@ -93,9 +93,9 @@ scan_files (
                       FileName); // выводим на дисплей картинку
                                  // начиная с координаты 0,0 размером
                                  // 172,320 из файла 0-x.raw
-               UTFT_setFont (BigFont);
+               UTFT_setFont (SmallFont);
                UTFT_setColor2 (VGA_FUCHSIA);
-               UTFT_print (FileName, CENTER, 300, 0);
+               UTFT_print (fno.fname, CENTER, 60, 0);
                tls_os_time_delay (HZ * 3);
                }
             }
@@ -110,7 +110,7 @@ scan_files (
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 0.96 tft st7735s \n");
+  printf ("user_app1_task start 0.96 tft 80x160 st7735s HW SPI \n");
 
   // подключаем библиотеку UTFT
 
@@ -140,6 +140,15 @@ user_app1_task (void *sdata)
   //UTFT_UTFT(byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq, u8 spi_mode);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
+
+
+  FATFS fs;
+  FRESULT res_sd;
+  char buff[256]; // буффер для названия директории при сканировании файловой
+                  // системы
+  wm_sdio_host_config (0);
+
+
 
   //
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
