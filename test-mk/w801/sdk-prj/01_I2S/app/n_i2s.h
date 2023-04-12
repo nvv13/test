@@ -58,6 +58,17 @@ extern "C"
   FRESULT n_i2s_PlayWav (char *filename);
 
   /**
+   * @brief          This function is used to Play Mp3 File
+   *
+   * @param[in]      filename
+   *
+   * @return         FRESULT
+   *
+   * @note
+   */
+  FRESULT n_i2s_PlayMp3 (char *filename);
+
+  /**
    * @brief          This function return status
    *
    * @param[in]      none

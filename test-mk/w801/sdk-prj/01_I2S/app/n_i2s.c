@@ -486,3 +486,197 @@ n_i2s_PlayWav (char *filename)
     }
   return res_sd;
 }
+
+#include "mp3_decode/minimp3.h"
+#include "wm_mem.h"
+#define MP3_FRAME_LEN 4 * 1152
+
+static void *mp3_decoder = NULL;
+
+// pack(push,1) - Byte alignment ?
+#pragma pack(push, 1)
+// MP3 Header
+typedef struct tagMP3
+{
+  char ID3[3]; // = "ID3"
+  u8 ver;
+  u8 sum_ver;
+  u8 flag;
+  u8 header_size[4];
+
+} MP3HDR, *PMP3HDR;
+#pragma pack(pop)
+
+FRESULT
+n_i2s_PlayMp3 (char *filename)
+{
+
+  if (sizeof (file_buffer) < MP3_FRAME_LEN)
+    {
+      printf ("Error %d file_buffer < MP3_FRAME_LEN %d\r\n",
+              sizeof (file_buffer), MP3_FRAME_LEN);
+      return -55;
+    }
+
+  if (mp3_decoder == NULL)
+    mp3_decoder = tls_mem_alloc (sizeof (mp3dec_t));
+
+  uint32_t start;
+
+  // Open the file
+  res_sd = f_open (&fnew, filename, FA_OPEN_EXISTING | FA_READ);
+  // file opened successfully?
+  if (res_sd == FR_OK)
+    {
+#ifdef SERIAL_DEBUG_ALL
+      printf ("Open file successfully! Start reading data!\r\n");
+#endif
+      res_sd = f_read (&fnew, file_buffer, sizeof (MP3HDR), &fnum);
+      if (res_sd == FR_OK)
+        {
+          // Parse BMP header to get the information we need
+          PMP3HDR aHead = (PMP3HDR)file_buffer;
+          if (strstr (aHead->ID3, "ID3") != NULL)
+            {
+#ifdef SERIAL_DEBUG_ALL
+              printf ("MP3 header ok\r\n");
+#endif
+              if (!(aHead->ver > 0 && aHead->ver < 6))
+                {
+                  printf ("Wrong `version` value %d\r\n", aHead->ver);
+                  f_close (&fnew);
+                  return -7;
+                }
+
+              start = 0ul;
+              start |= (0x7F & aHead->header_size[0]);
+              start <<= 7;
+              start |= (0x7F & aHead->header_size[1]);
+              start <<= 7;
+              start |= (0x7F & aHead->header_size[2]);
+              start <<= 7;
+              start |= (0x7F & aHead->header_size[3]);
+
+              res_sd = f_lseek (&fnew, start);
+#ifdef SERIAL_DEBUG
+              printf ("f_lseek successfully! %d\r\n", start);
+#endif
+
+              res_sd = f_read (&fnew, file_buffer, MP3_FRAME_LEN, &fnum);
+              
+              u8 channel;
+              s32 freq;/*    sample rate  */
+              int bitrate_kbps;
+              //    int frame_bytes, frame_offset, channels, hz, layer, bitrate_kbps;
+              mp3dec_frame_info_t info;
+              if (mp3dec_decode_frame (mp3_decoder, file_buffer, fnum, NULL,
+                                       &info)
+                  > 0)
+                {
+                  freq = info.hz;
+                  channel = info.channels;
+                  bitrate_kbps = info.bitrate_kbps;
+                }
+              else
+                {
+                  printf ("error mp3dec_decode_frame\r\n");
+                  f_close (&fnew);
+                  return -7;
+                }
+
+              memset (mp3_decoder, 0, sizeof (mp3dec_t));
+              mp3dec_init (mp3_decoder);
+
+              if (channel != 2)
+                {
+                  printf ("Wrong `channelsNum` value, 2 expected\r\n");
+                  f_close (&fnew);
+                  return -8;
+                }
+
+
+              if ((freq != 44100)
+                  || (bitrate_kbps != 44100 * 2 * 2)
+                       )
+                {
+                  printf ("Wrong file format, 16 bit file with sample "
+                          "rate 44100 expected\r\n");
+                  f_close (&fnew);
+                  return -9;
+                }
+
+              s8 datawidth = 8 * bitrate_kbps / channel / freq;
+              /*    datawidth
+               *    - \ref 8: 8 bit
+               *    - \ref 16: 16 bit
+               *    - \ref 24: 24 bit
+               *    - \ref 32: 32 bit
+               */
+
+              s8 stereo = (2 - channel);
+              /* 	 stereo
+               *    - \ref 0: stereo
+               *	  - \ref 1: mono
+               */
+
+
+              /*
+                            fnum = MP3_FRAME_LEN;
+                            my_sost = VS1053_PLAY;
+                            VS1053_data_mode_on ();
+                            while (fnum == MP3_FRAME_LEN
+                                   && my_sost == VS1053_PLAY) // More to do?
+                              {
+                                VS1053_await_data_request (); // Wait for space
+                 available res_sd = f_read (&fnew, file_buffer, MP3_FRAME_LEN,
+                 &fnum); SPI_writeBytes (file_buffer, fnum);
+                              }
+                            VS1053_data_mode_off ();
+                            my_sost = VS1053_STOP;
+
+	mp3dec_frame_info_t info;
+
+                           const uint8_t *input, uint32_t len,
+                            int16_t *pcm, uint32_t *out_len,
+                            uint32_t *hz, uint32_t *used)
+
+	int result = mp3dec_decode_frame(decoder, input, len, pcm, &info);
+	*hz = info.hz;
+	*out_len = (result * info.channels * 2);
+	*used = info.frame_bytes;
+	return result;
+
+
+
+				result = mp3_decoder_get_data(coder->mp3_decoder, coder->buff.addr + pos, coder->buff.used - pos, out_buff->addr + out_buff->used, &out_len, &hz, &used);
+				if (result > 0)
+				{
+					out_buff->used += out_len;
+				}
+
+//				if (!result) {
+//					LLOGD("jump %dbyte", info.frame_bytes);
+//				}
+				pos += used;
+				if ((out_buff->len - out_buff->used) < (MINIMP3_MAX_SAMPLES_PER_FRAME * 2))
+				{
+					break;
+				}
+
+
+              res_sd
+                  = f_read (&fnew, file_buffer, sizeof (file_buffer), &fnum);
+              applyVolume (file_buffer, sizeof (file_buffer));
+#ifdef SERIAL_DEBUG
+              printf ("load fnum:%d, ", fnum);
+#endif
+              tls_i2s_send (freq, datawidth, stereo);
+
+              */
+            }
+        }
+      // close file
+      f_close (&fnew);
+    }
+  return res_sd;
+}

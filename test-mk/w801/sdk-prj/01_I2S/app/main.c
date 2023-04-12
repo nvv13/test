@@ -90,6 +90,7 @@ scan_files (
                       0); // выводим текст на дисплей (выравнивание по ширине -
                           // центр дисплея, координата по высоте 150 точек)
                   n_i2s_PlayWav (FileName);
+                  // temporary not work n_i2s_PlayMp3 (FileName);
                 }
             }
         }

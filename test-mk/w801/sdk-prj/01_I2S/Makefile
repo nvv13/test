@@ -31,7 +31,8 @@ endif
 endif
 
 COMPONENTS_$(TARGET) =	\
-    $(TOP_DIR)/app/libuser$(LIB_EXT) #\
+    $(TOP_DIR)/app/libuser$(LIB_EXT) \
+    $(TOP_DIR)/app/libMINIMP3$(LIB_EXT) #\
 #    $(TOP_DIR)/demo/libdemo$(LIB_EXT)
 
 ifeq ($(USE_LIB), 0)

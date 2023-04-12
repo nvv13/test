@@ -35,7 +35,8 @@
 //#include "wm_regs.h"
 
 
-#include "UTFT.h"
+#include "mod1/UTFT.h"
+#include "mod1/u_jpeg.h"
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
@@ -86,13 +87,10 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "240x240") != NULL)
+              if (strstr (FileName, "240x240") != NULL && strstr (FileName, ".jpg") != NULL)
                {
-               UTFT_loadBitmap (
-                      0, 0, 240, 240,
-                      FileName); // выводим на дисплей картинку
-                                 // начиная с координаты 0,0 размером
-                                 // 172,320 из файла 0-x.raw
+               UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
+               //UTFT_loadBitmap (0, 0, 240, 240, FileName); 
                UTFT_setFont (SmallFont);
                UTFT_setColor2 (VGA_FUCHSIA);
                UTFT_print (fno.fname, CENTER, 200, 0);

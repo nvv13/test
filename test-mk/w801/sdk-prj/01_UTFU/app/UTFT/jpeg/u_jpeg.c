@@ -5,12 +5,16 @@ https://gitee.com/openLuat/LuatOS.git
 
 */
 
+#include <string.h>
+
 
 #define LUAT_LOG_TAG "ujpg"
 #include "luat_log.h"
 
 #include "tjpgd.h"
 #include "tjpgdcnf.h"
+
+#include "u_jpeg.h"
 
 #define N_BPP (3 - JD_FORMAT)
 
@@ -23,6 +27,8 @@ typedef struct {
     // int height;
     uint16_t buff[16*16];
 } IODEV;
+
+//static uint16_t buff2[2048];
 
 static unsigned int file_in_func (JDEC* jd, uint8_t* buff, unsigned int nbyte){
     IODEV *dev = (IODEV*)jd->device;   /* Device identifier for the session (5th argument of jd_prepare function) */
@@ -66,6 +72,15 @@ static int lcd_draw_jpeg(const char* path, int xpos, int ypos) {
   size_t sz_work = 3500; /* Size of work area */
 #endif
   IODEV devid;      /* User defined device identifier */
+
+  if (!(strstr (path, ".jpg") != NULL ||
+        strstr (path, ".JPG") != NULL ||
+        strstr (path, ".jpeg") != NULL ||
+        strstr (path, ".JPEG") != NULL
+      )) {
+    LLOGW("no such file jpg %s", path);
+    return -1;
+  }
 
   FILE* fd = luat_fs_fopen(path, "r");
   if (fd == NULL) {
