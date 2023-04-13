@@ -35,7 +35,8 @@
 //#include "wm_regs.h"
 
 
-#include "UTFT.h"
+#include "mod1/UTFT.h"
+#include "mod1/u_jpeg.h"
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
