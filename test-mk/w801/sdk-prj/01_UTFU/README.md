@@ -286,7 +286,7 @@ ImageMagick. [Руководство пользователя ImageMagickv. 7.1.
 # convert *.jpg -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp
 
 если используется библиотека libTJPEG.a
-# convert *.jpg -resize 320x172! -rotate 180 -define jpg:subtype=RGB565 j%03d-320x172.jpg
+# convert *.jpg -resize 320x172! j%03d-320x172.jpg
 
 ~~~
 sdio host
