@@ -398,9 +398,10 @@ UTFT_setXY (word x1, word y1, word x2, word y2)
   if (orient == LANDSCAPE)
     {
       swap_word (x1, y1);
-      swap_word (x2, y2) y1 = disp_y_size - y1;
+      swap_word (x2, y2);
+      y1 = disp_y_size - y1;
       y2 = disp_y_size - y2;
-      swap_word (y1, y2)
+      swap_word (y1, y2);
     }
 
   switch (display_model)
@@ -1543,6 +1544,44 @@ UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data, int deg,
     }
   UTFT_clrXY ();
 }
+
+
+/*
+void
+UTFT_drawBitmapLEBF(int x, int y, int sx, int sy, bitmapdatatype data)
+{
+  // LEBF -> Little Endian Byte First
+  unsigned int col;
+  int tx, ty, tc;
+
+      if (orient == PORTRAIT)
+        {
+          cbi (P_CS, B_CS);
+          UTFT_setXY (x, y, x + sx - 1, y + sy - 1);
+          for (tc = 0; tc < (sx * sy); tc++)
+            {
+              col = pgm_read_word (&data[tc]);
+              UTFT_LCD_Write_DATA (col & 0xff, col >> 8);
+            }
+          sbi (P_CS, B_CS);
+        }
+      else
+        {
+          cbi (P_CS, B_CS);
+          for (ty = 0; ty < sy; ty++)
+            {
+              UTFT_setXY (x, y + ty, x + sx - 1, y + ty);
+              for (tx = sx - 1; tx >= 0; tx--)
+                {
+                  col = pgm_read_word (&data[(ty * sx) + tx]);
+                  UTFT_LCD_Write_DATA (col & 0xff, col >> 8);
+                }
+            }
+          sbi (P_CS, B_CS);
+        }
+  UTFT_clrXY ();
+}
+*/
 
 void
 UTFT_lcdOff ()

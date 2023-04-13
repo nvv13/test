@@ -326,6 +326,8 @@ void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 s
   // scale=1);
   void UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data,
                          int deg, int rox, int roy);
+  //void UTFT_drawBitmapLEBF (int x, int y, int sx, int sy, bitmapdatatype data);
+
   void UTFT_lcdOff ();
   void UTFT_lcdOn ();
   void UTFT_setContrast (char c);

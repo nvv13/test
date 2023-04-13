@@ -576,6 +576,9 @@ n_i2s_PlayMp3 (char *filename)
                   freq = info.hz;
                   channel = info.channels;
                   bitrate_kbps = info.bitrate_kbps;
+                  printf ("mp3dec frame info frame_bytes=%d, frame_offset=%d, channels=%d, hz=%d, layer=%d, bitrate_kbps=%d\r\n",
+                           info.frame_bytes, info.frame_offset,
+                           info.channels, info.hz, info.layer, info.bitrate_kbps);
                 }
               else
                 {

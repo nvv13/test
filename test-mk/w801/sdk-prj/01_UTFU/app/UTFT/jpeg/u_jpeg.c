@@ -25,10 +25,9 @@ typedef struct {
     int y;
     // int width;
     // int height;
-    uint16_t buff[16*16];
+//    uint16_t buff[16*16];
 } IODEV;
 
-//static uint16_t buff2[2048];
 
 static unsigned int file_in_func (JDEC* jd, uint8_t* buff, unsigned int nbyte){
     IODEV *dev = (IODEV*)jd->device;   /* Device identifier for the session (5th argument of jd_prepare function) */
@@ -44,20 +43,22 @@ static unsigned int file_in_func (JDEC* jd, uint8_t* buff, unsigned int nbyte){
 //int (*outfunc)(JDEC*,void*,JRECT*)
 static int lcd_out_func (JDEC* jd, void* bitmap, JRECT* rect){
     IODEV *dev = (IODEV*)jd->device;
-    uint16_t* tmp = (uint16_t*)bitmap;
+//    uint16_t* tmp = (uint16_t*)bitmap;
 
     // rgb高低位swap
-    uint16_t count = (rect->right - rect->left + 1) * (rect->bottom - rect->top + 1);
-    for (size_t i = 0; i < count; i++)
-    {
-      dev->buff[i] = ((tmp[i] >> 8) & 0xFF)+ ((tmp[i] << 8) & 0xFF00);
-    }
+//    uint16_t count = (rect->right - rect->left + 1) * (rect->bottom - rect->top + 1);
+//    for (size_t i = 0; i < count; i++)
+//    {
+      //dev->buff[i] = ((tmp[i] >> 8) & 0xFF)+ ((tmp[i] << 8) & 0xFF00);
+//      dev->buff[i] = tmp[i]; //((tmp[i] >> 8) & 0xFF)+ ((tmp[i] << 8) & 0xFF00);
+//    }
 
     // LLOGD("jpeg seg %dx%d %dx%d", rect->left, rect->top, rect->right, rect->bottom);
     // LLOGD("jpeg seg size %d %d %d", rect->right - rect->left + 1, rect->bottom - rect->top + 1, (rect->right - rect->left + 1) * (rect->bottom - rect->top + 1));
     luat_lcd_draw(default_conf, dev->x + rect->left, dev->y + rect->top,
                                 dev->x + rect->right, dev->y + rect->bottom,
-                                dev->buff);
+                                //dev->buff
+                                bitmap);
     return 1;    /* Continue to decompress */
 }
 

@@ -55,17 +55,21 @@ size_t luat_fs_fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
 
 int luat_fs_fseek(FILE* stream, long int offset, int origin)
 { 
-  FRESULT res_sd; // file operation results
-                  res_sd = f_lseek (
-                      stream,         /* [IN] File object */
-                      offset /* [IN] Offset of file read/write pointer
-                                        to be set */
-                  );
-  if (res_sd == FR_OK)
-   return 0;
-  else 
-   return 1;
-   
+
+    int npos = f_tell(stream);
+    if (origin == SEEK_SET) {
+        npos = offset;
+    } else if (origin == SEEK_CUR) {
+        npos += offset;
+    } else if (origin == SEEK_END) {
+        npos = f_size(stream);
+    }
+    FRESULT ret = f_lseek(stream, npos);
+    if (ret == FR_OK) {
+        return 0;
+    }
+    return -1;
+
 }
 
 int luat_fs_fclose(FILE* stream)
@@ -77,8 +81,16 @@ int luat_fs_fclose(FILE* stream)
 
 int luat_lcd_draw(luat_lcd_conf_t* conf, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, luat_color_t* color)
 { 
-UTFT_drawBitmap (x1, y1, x2, y2, color,  0);
+/*
+int x  = x1;
+int y  = y1;
+int sx = x2 - x1 + 1;
+int sy = y2 - y1 + 1;
+*/
+UTFT_drawBitmap ( x1, y1, x2 - x1 + 1, y2 - y1 + 1, color, 1);
+//UTFT_drawBitmapLEBF ( x1, y1, x2 - x1 + 1, y2 - y1 + 1, color);
 return 0;
 };
+
 
  

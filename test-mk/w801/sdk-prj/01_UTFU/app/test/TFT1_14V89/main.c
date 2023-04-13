@@ -86,13 +86,10 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "240x135") != NULL)
+              if (strstr (FileName, "240x135") != NULL && strstr (FileName, ".jpg") != NULL)
                {
-               UTFT_loadBitmap (
-                      0, 0, 240, 135,
-                      FileName); // выводим на дисплей картинку
-                                 // начиная с координаты 0,0 размером
-                                 // 172,320 из файла 0-x.raw
+               UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
+               //UTFT_loadBitmap ( 0, 0, 240, 135,  FileName); // выводим на дисплей картинку
                UTFT_setFont (SmallFont);
                UTFT_setColor2 (VGA_FUCHSIA);
                UTFT_print (fno.fname, CENTER, 100, 0);
