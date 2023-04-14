@@ -260,6 +260,61 @@ W801 LCD
 ------------------------------------------------
 
 
+
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 1.69 TFT 240x280 дисплей st7789v2 SPI
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.69tft-back.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.69tft.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_69V89
+
+соединения
+
+надо соеденить по схеме:
+~~~
+connect to TFT01_69V89 SPI
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB23 DC   комманда/данные
+PB14 CS   выбор чипа
+---  BLK  подсветка, можно через PWM, в данном случае не использовал
+---- ------
+W801 LCD   
+---- ------
+
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 280x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-280x240.bmp
+
+если используется библиотека libTJPEG.a
+# convert *.jpg -resize 280x240! j%03d-280x240.jpg
+
+~~~
+
+
+
+------------------------------------------------
+
+
+
 ------------------------------------------------
 
 
