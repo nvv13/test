@@ -127,6 +127,14 @@ user_app1_task (void *sdata)
   // (тип TFT32MEGA - для дисплеев на базе чипа ILI9481, а тип TFT32MEGA_2 -
   // для дисплеев на базе чипа HX8357С).
   //
+
+  FATFS fs;
+  FRESULT res_sd;
+  char buff[256]; // буффер для названия директории при сканировании файловой
+                  // системы
+  wm_sdio_host_config (0);
+
+
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   //
 

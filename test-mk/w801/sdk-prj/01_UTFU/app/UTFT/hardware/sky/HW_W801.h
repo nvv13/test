@@ -200,7 +200,7 @@ UTFT_LCD_Writ_Bus (char VH, char VL, byte mode)
       tls_gpio_write (PIN5, VH & 0x04 ? 1 : 0);
       tls_gpio_write (PIN6, VH & 0x02 ? 1 : 0);
       tls_gpio_write (PIN7, VH & 0x01 ? 1 : 0);
-      pulse_low (P_WR, B_WR);
+      pulse_low_WR ();
       tls_gpio_write (PIN0, VL & 0x80 ? 1 : 0);
       tls_gpio_write (PIN1, VL & 0x40 ? 1 : 0);
       tls_gpio_write (PIN2, VL & 0x20 ? 1 : 0);
@@ -209,7 +209,7 @@ UTFT_LCD_Writ_Bus (char VH, char VL, byte mode)
       tls_gpio_write (PIN5, VL & 0x04 ? 1 : 0);
       tls_gpio_write (PIN6, VL & 0x02 ? 1 : 0);
       tls_gpio_write (PIN7, VL & 0x01 ? 1 : 0);
-      pulse_low (P_WR, B_WR);
+      pulse_low_WR ();
       break;
     case 16:
       {
@@ -309,7 +309,7 @@ UTFT_LCD_Writ_Bus (char VH, char VL, byte mode)
                          reg_en);         // reg_en return
         tls_os_release_critical (cpu_sr); // enable Interrupt
 
-        pulse_low (P_WR, B_WR);
+        pulse_low_WR ();
       }
       break;
     }
@@ -381,27 +381,27 @@ UTFT__fast_fill_16 (int ch, int cl, long pix)
   blocks = pix / 16;
   for (int i = 0; i < blocks; i++)
     {
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
     }
   if ((pix % 16) != 0)
     for (int i = 0; i < (pix % 16); i++)
       {
-        pulse_low (P_WR, B_WR);
+        pulse_low_WR ();
       }
 }
 
@@ -422,44 +422,44 @@ UTFT__fast_fill_8 (int ch, long pix)
   blocks = pix / 16;
   for (int i = 0; i < blocks; i++)
     {
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
-      pulse_low (P_WR, B_WR);
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
+      pulse_low_WR ();
     }
   if ((pix % 16) != 0)
     for (int i = 0; i < (pix % 16); i++)
       {
-        pulse_low (P_WR, B_WR);
-        pulse_low (P_WR, B_WR);
+        pulse_low_WR ();
+        pulse_low_WR ();
       }
 }
 

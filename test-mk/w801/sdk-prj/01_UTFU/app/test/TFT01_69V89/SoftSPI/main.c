@@ -1,3 +1,5 @@
+
+
 /*****************************************************************************
  *
  * File Name : main.c
@@ -31,7 +33,6 @@
 //#include "wm_mem.h"
 //#include "wm_regs.h"
 
-
 #include "mod1/UTFT.h"
 #include "mod1/u_jpeg.h"
 
@@ -45,9 +46,8 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 
-
-#include "wm_gpio_afsel.h"
 #include "ff.h"
+#include "wm_gpio_afsel.h"
 
 FRESULT
 scan_files (
@@ -84,13 +84,13 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "480x320") != NULL && strstr (FileName, ".jpg") != NULL)
+              if (strstr (FileName, "280x240") != NULL && strstr (FileName, ".jpg") != NULL)
                {
                UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
-               //UTFT_loadBitmap (0, 0, 480, 320, FileName); // выводим на дисплей картинку
-               UTFT_setFont (BigFont);
+               //UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим на дисплей картинку
+               UTFT_setFont (SmallFont);
                UTFT_setColor2 (VGA_FUCHSIA);
-               UTFT_print (FileName, CENTER, 300, 0);
+               UTFT_print (fno.fname, CENTER, 210, 0);
                tls_os_time_delay (HZ * 3);
                }
             }
@@ -101,32 +101,37 @@ scan_files (
   return res;
 }
 
-
-
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.2 TFT 480x320 MEGA 16bit bus\n");
+  printf ("user_app1_task start TFT01_69V89 240x280 HW SPI st7789v3\n");
 
-  //Цветной графический дисплей 3.2 TFT 480x320 MEGA
-  // http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT32MEGA_2, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
-             (u8)WM_IO_PA_04, 0, 0);
-  //                               byte RS,         byte WR,         byte CS,
-  //                               byte RST, byte SER, u32 spi_freq
-  // объявляем объект myGLCD класса библиотеки UTFT указывая тип дисплея
-  // TFT32MEGA и номера выводов Arduino к которым подключён дисплей: RS, WR,
-  // CS, RST. Выводы параллельной шины данных не указываются
-  // в данном случае, параллельная 16 бит шина = PB0 ... PB15
-  // если было бы 8 бит шина = PB0 ... PB7
 
-  //          TFT32MEGA_2                        // если изображение на дисплее
-  //          отображается зеркально, значит для инициализации Вашего дисплея,
-  //          нужно указать не TFT32MEGA, а TFT32MEGA_2.
-  // (тип TFT32MEGA - для дисплеев на базе чипа ILI9481, а тип TFT32MEGA_2 -
-  // для дисплеев на базе чипа HX8357С).
-  //
+  // TFT01_47V89 - для ST7789v
+  UTFT_UTFT (TFT01_69V89, (u8)WM_IO_PB_17  //NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
+             ,
+             (u8)WM_IO_PB_15  //NO_GPIO_PIN //WM_IO_PB_15  //WR  SCL
+             ,
+             (u8)WM_IO_PB_14  //NO_GPIO_PIN // WM_IO_PB_14  //CS  CS
+             ,
+             (u8)WM_IO_PB_21 // RST reset RES
+             ,
+             (u8)WM_IO_PB_23 // SER => DC !
+             ,
+             0//20000000
+             /* spi_freq(Герц) для 5 контактных SPI дисплеев
+                (где отдельно ножка комманда/данные)
+             програмируеться HW SPI на ножки (предопред)
+                 wm_spi_cs_config (WM_IO_PB_14);
+                 wm_spi_ck_config (WM_IO_PB_15);
+                 wm_spi_di_config (WM_IO_PB_16);
+                 wm_spi_do_config (WM_IO_PB_17);
+             но, можно отказаться от HW SPI в пользу Soft SPI
+             установив spi_freq=0
+             эмуляции SPI, это удобно для разных ножек
+           */
+  );
 
   FATFS fs;
   FRESULT res_sd;
@@ -134,44 +139,61 @@ user_app1_task (void *sdata)
                   // системы
   wm_sdio_host_config (0);
 
-
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-  //
+  // UTFT_InitLCD (PORTRAIT);
 
   while (1)
-    { //
-
+    {                 //
       UTFT_clrScr (); // стираем всю информацию с дисплея
+      tls_os_time_delay (HZ); //
+
+      UTFT_setColor2 (VGA_WHITE); // 240x280
+      for (int i = 2; i < 56; i++)
+        {
+          UTFT_drawRect (2, 2, i * 5, i * 4);
+        }
+
+      tls_os_time_delay (HZ * 3); //
+
+      UTFT_fillScr2 (VGA_BLACK);
 
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
-      UTFT_drawRect (10, 20, 170,
-                     100); // Рисуем прямоугольник (с противоположными углами в
-                           // координатах 10x20 - 170x100)
+      UTFT_drawRect (
+          5, 5, 280 - 5,
+          240 - 5); // Рисуем прямоугольник (с противоположными углами)
+      tls_os_time_delay (HZ); //
 
       UTFT_setColor2 (VGA_RED); // Устанавливаем красный цвет
-      UTFT_drawLine (
-          10, 10, 170,
-          10); // Рисуем линию (через точки с координатами 10x10 - 170x10)
+      UTFT_drawLine (1, 1, 150,
+                     70);     // Рисуем линию
+      tls_os_time_delay (HZ); //
 
       UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
       UTFT_drawRoundRect (
-          10, 110, 170,
-          210); // Рисуем прямоугольник со скруглёнными углами (с
+          10, 10, 270,
+          230); // Рисуем прямоугольник со скруглёнными углами (с
                 // противоположными углами в координатах 10x110 - 170x210)
-                //
+      tls_os_time_delay (HZ * 3); //
+                                  //
       UTFT_setColor2 (VGA_LIME); // Устанавливаем лаймовый цвет
-      UTFT_fillRect (
-          10, 220, 170,
-          310); // Рисуем закрашенный прямоугольник (с противоположными углами
-                // в координатах 10x220 - 170x310)
-                //
+      UTFT_fillRect (11          //по горизонтали?
+                     ,
+                     11 // по вертикали?
+                     ,
+                     271 //длинна?
+                     ,
+                     231 //высота?
+      ); // Рисуем закрашенный прямоугольник (с противоположными углами
+         // в координатах 10x220 - 170x310)
+      tls_os_time_delay (HZ * 3); //
+                                  //
       UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
       UTFT_drawCircle (
-          350, 90,
-          70); // Рисуем окружность (с центром в точке 350x90 и радиусом 70)
+          140, 120,
+          70); // Рисуем окружность (с центром в точке x y  и радиусом r)
 
-      UTFT_fillCircle (350, 240, 70); // Рисуем закрашенную окружность (с
-                                      // центром в точке 350x240 и радиусом 70)
+      UTFT_fillCircle (140, 120, 50); // Рисуем закрашенную окружность (с
+                                     // центром в точке x y и радиусом r)
 
       tls_os_time_delay (HZ * 3);
 
@@ -198,76 +220,63 @@ user_app1_task (void *sdata)
       UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setFont (BigFont); // устанавливаем большой шрифт
       UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
-      UTFT_print ("BigFont", CENTER, 100,
+      UTFT_print ("BigFont", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 115,
+      tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
+      UTFT_clrScr (); // стираем всю информацию с дисплея
+      UTFT_setColor2 (VGA_RED); // устанавливаем
+      UTFT_setBackColor2 (VGA_TRANSPARENT);
+      UTFT_print ("12:35", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
       tls_os_time_delay (HZ * 3);
       //
 
+      UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
-      UTFT_print ("SmallFont", CENTER, 130,
+      UTFT_print ("SmallFontTest", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 145,
+      UTFT_print ("12345678", CENTER, 50,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
       tls_os_time_delay (HZ * 3);
       //
       UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
                                       // семисегментный индикатор
+      UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      UTFT_print ("1234567890", CENTER, 150,
+      UTFT_print ("12345", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
       tls_os_time_delay (HZ * 3);
 
-      UTFT_setFont (BigFont);
-      UTFT_setColor2 (VGA_WHITE);
-      UTFT_setBackColor2 (VGA_TRANSPARENT);
-      UTFT_print ("BigF(c \xA3"
-                  "o"
-                  "\x99\x99"
-                  "ep"
-                  "\x9b\x9f"
-                  "o"
-                  "\x9e"
-                  " pycc"
-                  "\x9f"
-                  "o"
-                  "\x98"
-                  "o):",
-                  CENTER, 200, 0);
-
-      //      UTFT_print ("АБВГДЕЁЖЗИЙКЛМН", CENTER, 150, 0);
-      tls_os_time_delay (HZ * 3);
+      UTFT_setFont (SmallFont); // устанавливаем большой шрифт
+      UTFT_print ("SmallFont", CENTER, 80,
+                  0); // выводим текст на дисплей (выравнивание по ширине -
 
       UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
-      UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 130,
+      UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 100,
                   0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
 
-      u32 current_tick = tls_os_get_time();
-      u32 count=0;
-      while( (tls_os_get_time() - current_tick) <= (HZ*10) )
-       {
-       UTFT_fillScr2 (count);
-       count++;
-       }
+      u32 current_tick = tls_os_get_time ();
+      u32 count = 0;
+      u32 sec = 10;
+      while ((tls_os_get_time () - current_tick) <= (HZ * sec))
+        {
+          UTFT_fillScr2 (count);
+          count++;
+        }
       UTFT_clrScr ();
       UTFT_setFont (BigFont);
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
       char mesg[50];
-      UTFT_print ("run 10 sec", CENTER, 20, 0);       
-      sprintf (mesg, "=%d FPS=%d", count, count/10);
-      UTFT_print (mesg, CENTER, 50, 0);       
-      tls_os_time_delay (HZ * 5);
-
-
-
-
+      UTFT_print ("run 10 sec", CENTER, 20, 0);
+      sprintf (mesg, "=%d FPS=%d", count, count / sec);
+      UTFT_print (mesg, CENTER, 50, 0);
+      tls_os_time_delay (HZ * sec);
 
       // mount SD card
       res_sd = f_mount (&fs, "0:", 1);
@@ -302,9 +311,6 @@ user_app1_task (void *sdata)
       // unmount file system
       f_mount (NULL, "0:", 1);
       tls_os_time_delay (HZ * 1);
-
-
-
 
     } //
 }
