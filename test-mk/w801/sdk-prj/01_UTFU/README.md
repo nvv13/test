@@ -314,6 +314,78 @@ W801 LCD
 ------------------------------------------------
 
 
+-----------------------------
+
+board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей 320X240 16bit bus
+
+Видео
+https://youtu.be/ULZDZhmtduk
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft_back.jpg" alt="back side" title="back side" /></p>
+фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_320QDT_9341
+
+соединения
+
+надо соеденить по схеме:
+~~~
+вид с низу, разьем слева
+connect to TFT_320QDT_9341
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+       20  40
+       NC  NC
+     LEDA  NC
+       NC  SD_CS
+PA04 REST  SD_DIN
+     F_CS  SD_CLK
+PA03   CS  SD_DO
+PB21 DB15  T_IRQ
+PB22 DB14  T_DO
+PB23 DB13  NC
+PB24 DB12  T_DIN
+PB25 DB11  T_CS
+PB26 DB10  T_CLK
+PB18 DB9   DB7    PB16
+PB17 DB8   DB6    PB01
+      RD   DB5    PB02
+PA02  WR   DB4    PB15 
+PA01  RS   DB3    PB14
+      NC   DB2    PB13 
+ 
+5V   VCC   DB1    PB12
+gnd  GND   DBO    PB00
+     1     21
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 320x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x240.bmp
+
+если используется библиотека libTJPEG.a
+# convert *.jpg -resize 320x240! j%03d-320x240.jpg
+
+
+~~~
+
+
+
+------------------------------------------------
+
+
+
+
+
+
 
 ------------------------------------------------
 
@@ -335,7 +407,7 @@ ImageMagick. [Руководство пользователя ImageMagickv. 7.1.
  https://www.altlinux.org/ImageMagick_-_%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9
 
 например, конвертировать все изображения png (или jpg ниже), текущей
-директории, в bmp формат размера 480 на 320 без сохранения соотношения сторон
+директории, в bmp формат размера 172 на 320 без сохранения соотношения сторон
 для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
 
 # convert *.jpg -resize 320x172! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x172.bmp

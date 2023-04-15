@@ -12,6 +12,7 @@ sinclude $(TOP_DIR)/tools/w800/rules.mk
 
 INCLUDES := $(INCLUDES) -I $(PDIR)include
 INCLUDES += -I ./UTFT
+INCLUDES += -I ./UTFT/jpeg
 
 PDIR := ../$(PDIR)
 sinclude $(PDIR)Makefile

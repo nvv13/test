@@ -1,4 +1,5 @@
 case ILI9341_MEGA:
+case TFT_320QDT_9341:
 	UTFT_LCD_Write_COM(0x2A); //column
 	UTFT_LCD_Write_DATA2(x1>>8);
 	UTFT_LCD_Write_DATA2(x1);
