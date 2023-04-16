@@ -319,8 +319,7 @@ W801 LCD
 board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей 320X240 16bit bus
 
 Видео
-https://youtu.be/ULZDZhmtduk
-
+https://youtu.be/Jpsm4nAKuIg
 
 Дисплей
 фото 1 
@@ -337,11 +336,11 @@ https://youtu.be/ULZDZhmtduk
 вид с низу, разьем слева
 connect to TFT_320QDT_9341
 ---- ------------ ----
-W801 LCD      LCD W801
+W801 LCD   LCD    W801
 ---- ------------ ----
        20  40
        NC  NC
-     LEDA  NC
+3.3v LEDA  NC
        NC  SD_CS
 PA04 REST  SD_DIN
      F_CS  SD_CLK
@@ -352,18 +351,18 @@ PB23 DB13  NC
 PB24 DB12  T_DIN
 PB25 DB11  T_CS
 PB26 DB10  T_CLK
-PB18 DB9   DB7    PB16
-PB17 DB8   DB6    PB01
-      RD   DB5    PB02
-PA02  WR   DB4    PB15 
-PA01  RS   DB3    PB14
-      NC   DB2    PB13 
+PB18  DB9  DB7    PB16
+PB17  DB8  DB6    PB01
+3.3v   RD  DB5    PB02
+PA02   WR  DB4    PB15 
+PA01   RS  DB3    PB14
+       NC  DB2    PB13 
  
-5V   VCC   DB1    PB12
-gnd  GND   DBO    PB00
-     1     21
+5V    VCC  DB1    PB12
+gnd   GND  DBO    PB00
+        1   21
 ---- ------------ ----
-W801 LCD      LCD W801
+W801  LCD  LCD    W801
 ---- ------------ ----
 
 
