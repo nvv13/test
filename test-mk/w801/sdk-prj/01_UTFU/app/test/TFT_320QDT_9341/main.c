@@ -32,8 +32,8 @@
 //#include "wm_regs.h"
 
 
-#include "mod1/UTFT.h"
-#include "mod1/u_jpeg.h"
+#include "UTFT.h"
+#include "u_jpeg.h"
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
@@ -90,7 +90,8 @@ scan_files (
                //UTFT_loadBitmap (0, 0, 480, 320, FileName); // выводим на дисплей картинку
                UTFT_setFont (BigFont);
                UTFT_setColor2 (VGA_FUCHSIA);
-               UTFT_print (FileName, CENTER, 300, 0);
+               UTFT_setBackColor2 (VGA_TRANSPARENT);
+               UTFT_print (fno.fname, CENTER, 200, 0);
                tls_os_time_delay (HZ * 3);
                }
             }
@@ -137,36 +138,42 @@ user_app1_task (void *sdata)
 
       UTFT_clrScr (); // стираем всю информацию с дисплея
 
-      UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
-      UTFT_drawRect (10, 20, 170,
-                     100); // Рисуем прямоугольник (с противоположными углами в
-                           // координатах 10x20 - 170x100)
+      UTFT_setColor2 (VGA_WHITE); // 240x280
+      for (int i = 2; i < 59; i++)
+        {
+          UTFT_drawRect (2, 2, i * 5, i * 4);
+        }
 
-      UTFT_setColor2 (VGA_RED); // Устанавливаем красный цвет
-      UTFT_drawLine (
-          10, 10, 170,
-          10); // Рисуем линию (через точки с координатами 10x10 - 170x10)
+      tls_os_time_delay (HZ * 3); //
+
+      UTFT_fillScr2 (VGA_BLACK);
 
       UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
       UTFT_drawRoundRect (
-          10, 110, 170,
-          210); // Рисуем прямоугольник со скруглёнными углами (с
+          10, 10, 310,
+          230); // Рисуем прямоугольник со скруглёнными углами (с
                 // противоположными углами в координатах 10x110 - 170x210)
-                //
+      tls_os_time_delay (HZ * 3); //
+                                  //
       UTFT_setColor2 (VGA_LIME); // Устанавливаем лаймовый цвет
-      UTFT_fillRect (
-          10, 220, 170,
-          310); // Рисуем закрашенный прямоугольник (с противоположными углами
-                // в координатах 10x220 - 170x310)
-                //
+      UTFT_fillRect (11          //по горизонтали?
+                     ,
+                     11 // по вертикали?
+                     ,
+                     309 //длинна?
+                     ,
+                     229 //высота?
+      ); // Рисуем закрашенный прямоугольник (с противоположными углами
+         // в координатах 10x220 - 170x310)
+      tls_os_time_delay (HZ * 3); //
+                                  //
       UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
       UTFT_drawCircle (
-          350, 90,
-          70); // Рисуем окружность (с центром в точке 350x90 и радиусом 70)
+          160, 120,
+          70); // Рисуем окружность (с центром в точке x y  и радиусом r)
 
-      UTFT_fillCircle (350, 240, 70); // Рисуем закрашенную окружность (с
-                                      // центром в точке 350x240 и радиусом 70)
-
+      UTFT_fillCircle (160, 120, 50); // Рисуем закрашенную окружность (с
+                                     // центром в точке x y и радиусом r)
       tls_os_time_delay (HZ * 3);
 
       UTFT_fillScr2 (VGA_RED);
@@ -218,25 +225,6 @@ user_app1_task (void *sdata)
                       // центр дисплея, координата по высоте 150 точек)
       tls_os_time_delay (HZ * 3);
 
-      UTFT_setFont (BigFont);
-      UTFT_setColor2 (VGA_WHITE);
-      UTFT_setBackColor2 (VGA_TRANSPARENT);
-      UTFT_print ("BigF(c \xA3"
-                  "o"
-                  "\x99\x99"
-                  "ep"
-                  "\x9b\x9f"
-                  "o"
-                  "\x9e"
-                  " pycc"
-                  "\x9f"
-                  "o"
-                  "\x98"
-                  "o):",
-                  CENTER, 200, 0);
-
-      //      UTFT_print ("АБВГДЕЁЖЗИЙКЛМН", CENTER, 150, 0);
-      tls_os_time_delay (HZ * 3);
 
       UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
       UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 130,
