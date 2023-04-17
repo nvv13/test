@@ -31,9 +31,8 @@
 //#include "wm_mem.h"
 //#include "wm_regs.h"
 
-
-#include "mod1/UTFT.h"
 #include "URTouch.h"
+#include "mod1/UTFT.h"
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
@@ -45,8 +44,6 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 
-
-
 void
 user_app1_task (void *sdata)
 {
@@ -54,8 +51,8 @@ user_app1_task (void *sdata)
 
   // Цветной графический дисплей 3.2 TFT 320x240 с тачскрином
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
-             (u8)WM_IO_PA_04, 0, 0);
+  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
+             (u8)WM_IO_PA_03, (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
   // UTFT тип дисплея TFT_320QDT_9341
@@ -72,38 +69,44 @@ user_app1_task (void *sdata)
       UTFT_drawRect (2, 2, i * 5, i * 4);
     }
 
-  //URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
-  URTouch_URTouch(
-    (u8)WM_IO_PA_05 //byte tclk
-  , (u8)WM_IO_PA_06 //byte tcs
-  , (u8)WM_IO_PA_07 //byte tdin
-  , (u8)WM_IO_PA_08 //byte dout
-  , (u8)WM_IO_PA_09 //byte irq
-   );
+  // URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
+  URTouch_URTouch ((u8)WM_IO_PA_05 // byte tclk
+                   ,
+                   (u8)WM_IO_PA_06 // byte tcs
+                   ,
+                   (u8)WM_IO_PA_07 // byte tdin
+                   ,
+                   (u8)WM_IO_PA_08 // byte dout
+                   ,
+                   (u8)WM_IO_PA_09 // byte irq
+  );
 
-  URTouch_InitTouch(LANDSCAPE);
-  URTouch_setPrecision(PREC_MEDIUM);
-
+  URTouch_InitTouch (LANDSCAPE);
+  URTouch_setPrecision (PREC_MEDIUM);
 
   //
-  int x=0,y=0;
+  int x = 0, y = 0;
 
+  UTFT_clrScr ();
+  UTFT_setFont (BigFont);
+  UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
 
   while (1)
     { //
 
-    if (URTouch_dataAvailable())
-      {
-        URTouch_read();
-        x=URTouch_getX();
-        y=URTouch_getY();
-        UTFT_clrScr ();
-        UTFT_setFont (BigFont);
-        UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-        char mesg[50];
-        sprintf (mesg, "X=%d Y=%d", x, y);
-        UTFT_print (mesg, CENTER, 50, 0);       
-      }
+      if (URTouch_dataAvailable ())
+        {
+          URTouch_read ();
+          x = URTouch_getX ();
+          y = UTFT_getDisplayYSize () - URTouch_getY ();
+          if (x >= 0 && y >= 0)
+            {
+              char mesg[50];
+              sprintf (mesg, "X=%.3d Y=%.3d", x, y);
+              UTFT_print (mesg, CENTER, 10, 0);
+              UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
+            }
+        }
 
     } //
 }
