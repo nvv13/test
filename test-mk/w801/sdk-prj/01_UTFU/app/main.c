@@ -109,18 +109,16 @@ user_app1_task (void *sdata)
 {
   printf ("user_app1_task start 3.2 TFT_320QDT_9341 320x240 16bit bus\n");
 
-  //Цветной графический дисплей 3.2 TFT 480x320 MEGA
-  // http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-3-2-tft-480x320.html
+  //Цветной графический дисплей 3.2 TFT 320x240
   // подключаем библиотеку UTFT
   UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
              (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
-  // объявляем объект myGLCD класса библиотеки UTFT указывая тип дисплея
-  // TFT32MEGA и номера выводов Arduino к которым подключён дисплей: RS, WR,
+  // UTFT тип дисплея TFT_320QDT_9341
+  // и номера выводов W801 к которым подключён дисплей: RS, WR,
   // CS, RST. Выводы параллельной шины данных не указываются
   // в данном случае, параллельная 16 бит шина = PB0 ... PB15
-  // если было бы 8 бит шина = PB0 ... PB7
 
 
   FATFS fs;
