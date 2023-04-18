@@ -30,6 +30,7 @@
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
 //#include "wm_regs.h"
+#include "wm_rtc.h"
 
 
 #include "UTFT.h"
@@ -229,6 +230,15 @@ user_app1_task (void *sdata)
                   0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
 
+
+      unsigned int t=0; // used to save time relative to 1970
+      struct tm *tblock;
+      tblock = localtime ((const time_t *)&t); // switch to local time
+      tls_set_rtc (tblock);
+
+      struct tm tstart;
+      struct tm tstop;
+      tls_get_rtc (&tstart);
       u32 current_tick = tls_os_get_time();
       u32 count=0;
       while( (tls_os_get_time() - current_tick) <= (HZ*10) )
@@ -236,12 +246,15 @@ user_app1_task (void *sdata)
        UTFT_fillScr2 (count);
        count++;
        }
+      tls_get_rtc (&tstop);
+      int sec=(tstop.tm_hour*3600 + tstop.tm_min*60 + tstop.tm_sec) - (tstart.tm_hour*3600 + tstart.tm_min*60 + tstart.tm_sec);
       UTFT_clrScr ();
       UTFT_setFont (BigFont);
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
       char mesg[50];
-      UTFT_print ("run 10 sec", CENTER, 20, 0);       
-      sprintf (mesg, "=%d FPS=%d", count, count/10);
+      sprintf (mesg, "run %d sec" , sec);
+      UTFT_print (mesg, CENTER, 20, 0);       
+      sprintf (mesg, "=%d FPS=%d", count, count/sec);
       UTFT_print (mesg, CENTER, 50, 0);       
       tls_os_time_delay (HZ * 5);
 
