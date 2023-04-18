@@ -357,110 +357,19 @@ UTFT__set_direction_registers (byte mode)
     }
 }
 void
-UTFT__fast_fill_16 (int ch, int cl, long pix)
+UTFT__fast_fill_16 (byte VH, byte VL, long pix)
 {
-  long blocks;
+        if(pix>0)UTFT_LCD_Writ_Bus (VH, VL, 16);
 
-  tls_gpio_write (PIN0, ch & 0x80 ? 1 : 0);
-  tls_gpio_write (PIN1, ch & 0x40 ? 1 : 0);
-  tls_gpio_write (PIN2, ch & 0x20 ? 1 : 0);
-  tls_gpio_write (PIN3, ch & 0x10 ? 1 : 0);
-  tls_gpio_write (PIN4, ch & 0x08 ? 1 : 0);
-  tls_gpio_write (PIN5, ch & 0x04 ? 1 : 0);
-  tls_gpio_write (PIN6, ch & 0x02 ? 1 : 0);
-  tls_gpio_write (PIN7, ch & 0x01 ? 1 : 0);
-  tls_gpio_write (PIN8, cl & 0x80 ? 1 : 0);
-  tls_gpio_write (PIN9, cl & 0x40 ? 1 : 0);
-  tls_gpio_write (PIN10, cl & 0x20 ? 1 : 0);
-  tls_gpio_write (PIN11, cl & 0x10 ? 1 : 0);
-  tls_gpio_write (PIN12, cl & 0x08 ? 1 : 0);
-  tls_gpio_write (PIN13, cl & 0x04 ? 1 : 0);
-  tls_gpio_write (PIN14, cl & 0x02 ? 1 : 0);
-  tls_gpio_write (PIN15, cl & 0x01 ? 1 : 0);
-
-  blocks = pix / 16;
-  for (int i = 0; i < blocks; i++)
-    {
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-    }
-  if ((pix % 16) != 0)
-    for (int i = 0; i < (pix % 16); i++)
-      {
-        pulse_low_WR ();
-      }
+        if(pix>1)pulse_low_WR_repeat ( pix-1 );
 }
 
 void
 UTFT__fast_fill_8 (int ch, long pix)
 {
-  long blocks;
+        if(pix>0)UTFT_LCD_Writ_Bus (ch, ch, 8);
 
-  tls_gpio_write (PIN0, ch & 0x80 ? 1 : 0);
-  tls_gpio_write (PIN1, ch & 0x40 ? 1 : 0);
-  tls_gpio_write (PIN2, ch & 0x20 ? 1 : 0);
-  tls_gpio_write (PIN3, ch & 0x10 ? 1 : 0);
-  tls_gpio_write (PIN4, ch & 0x08 ? 1 : 0);
-  tls_gpio_write (PIN5, ch & 0x04 ? 1 : 0);
-  tls_gpio_write (PIN6, ch & 0x02 ? 1 : 0);
-  tls_gpio_write (PIN7, ch & 0x01 ? 1 : 0);
-
-  blocks = pix / 16;
-  for (int i = 0; i < blocks; i++)
-    {
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-      pulse_low_WR ();
-    }
-  if ((pix % 16) != 0)
-    for (int i = 0; i < (pix % 16); i++)
-      {
-        pulse_low_WR ();
-        pulse_low_WR ();
-      }
+        if(pix>1)pulse_low_WR_repeat ( (pix-1) * 2 );
 }
 
 // extern void n_delay_ms (uint32_t ms);

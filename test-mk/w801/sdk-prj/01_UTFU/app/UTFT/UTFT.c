@@ -90,7 +90,7 @@ static void UTFT_setXY (word x1, word y1, word x2, word y2);
 static void UTFT_clrXY ();
 static void UTFT_rotateChar (byte c, int x, int y, int pos, int deg);
 static void UTFT__set_direction_registers (byte mode);
-static void UTFT__fast_fill_16 (int ch, int cl, long pix);
+static void UTFT__fast_fill_16 (byte VH, byte VL, long pix);
 static void UTFT__fast_fill_8 (int ch, long pix);
 static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 

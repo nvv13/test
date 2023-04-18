@@ -216,7 +216,7 @@ pulse_low_SCL (void)
 }
 
 
-static void pulse_low_WR(void)
+static void pulse_low_WR_repeat(u32 u32_count)
 {
 
   if (B_WR == NO_GPIO_PIN)
@@ -248,15 +248,22 @@ static void pulse_low_WR(void)
 
   reg = tls_reg_read32 (HR_GPIO_DATA + offset); // load all pins from port
 
-  tls_reg_write32 (HR_GPIO_DATA + offset,
+  for(u32 i=0;i<u32_count;i++)
+    {
+    tls_reg_write32 (HR_GPIO_DATA + offset,
                    reg & (~(1 << pin))); /* write low from pin */
-
-  tls_reg_write32 (HR_GPIO_DATA + offset,
+    tls_reg_write32 (HR_GPIO_DATA + offset,
                    reg | (1 << pin)); /* write Hi from pin */
+    }
 
   tls_reg_write32 (HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
 
   tls_os_release_critical (cpu_sr); // enable Interrupt
+}
+
+static void pulse_low_WR(void)
+{
+    pulse_low_WR_repeat (1);
 }
 
 
