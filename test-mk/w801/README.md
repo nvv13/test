@@ -14,10 +14,12 @@ Connectivity
  Bluetooth/BLE 4.2
 
 Expansion – 2x 24-pin headers with
- 1x SDIO host with support for SDIO 2.0, SDHC, MMC 4.2
- 1x SDIO device up to 200 Mbps
- Up to 6x UART, 1x I2C
- 1x SPI slave up to 50 MHz, 1x master/slave SPI
+ 1x SDIO host with support for SDIO 2.0, SDHC, MMC 4.2 (Configurable interface clock rate, support host rate 0~50MHz)
+ 1x SDIO device up to 200 Mbps (for 4 data line)
+ Up to 6x UART
+ 1x I2C
+ 1x high-speed SPI interface, supporting up to 50MHz
+ 1x master/slave SPI up to 20MHz
  LCD controller with support for 4×32 interface
  1x I2S
  Up to 4x ADC (16-bit, 1KHz sampling rate)
