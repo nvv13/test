@@ -99,7 +99,8 @@ tic_delay (uint32_t cnt)
 void
 UserMain (void)
 {
-  enum tls_io_name gpio_pin = WM_IO_PB_05;
+  //enum tls_io_name gpio_pin = WM_IO_PB_05;
+  enum tls_io_name gpio_pin = WM_IO_PA_10;
 
   printf ("user task\n");
 
@@ -107,7 +108,7 @@ UserMain (void)
   // tls_sys_clk_set (CPU_CLK_40M);
   // tls_sys_clk_set(CPU_CLK_80M);
   // tls_sys_clk_set(CPU_CLK_160M);
-  // tls_sys_clk_set(CPU_CLK_240M); // freq = 5,714309 MHz
+   tls_sys_clk_set(CPU_CLK_240M); // freq = 5,714309 MHz
 
   tic_delay (0);
   n_delay_ms (0);
@@ -148,15 +149,22 @@ UserMain (void)
   reg_en = tls_reg_read32 (HR_GPIO_DATA_EN + offset);
   tls_reg_write32 (HR_GPIO_DATA_EN + offset, reg_en | (1 << pin));
 
+
   reg = tls_reg_read32 (HR_GPIO_DATA + offset);
   while (1)
     {
-      if (u8_led_state)
-        tls_reg_write32 (HR_GPIO_DATA + offset,
-                         reg & (~(1 << pin))); /* write low */
+
+
+      if (u8_led_state)   // CPU_CLK_240M = 5.71425MHz ... 5.71426MHz
+        tls_reg_write32 (HR_GPIO_DATA + offset, reg & (~(1 << pin))); 
       else
-        tls_reg_write32 (HR_GPIO_DATA + offset,
-                         reg | (1 << pin)); /* write high */
+        tls_reg_write32 (HR_GPIO_DATA + offset, reg | (1 << pin)); 
+  
+//      tls_bitband_write(HR_GPIOA_DATA, WM_IO_PA_10     , u8_led_state);// CPU_CLK_240M = 2.85712MHz
+//      tls_bitband_write(HR_GPIOB_DATA, WM_IO_PB_05 - 16, u8_led_state); // CPU_CLK_80M = 2MHz
+//      tls_bitband_write(HR_GPIOB_DATA, WM_IO_PB_05 - 16, u8_led_state); // CPU_CLK_240M = 2.85712MHz
+
+
       //	    tls_gpio_write(gpio_pin, u8_led_state);	// freq 577 KHz
       // CPU_CLK_240M tls_os_time_delay(0); // freq = 2.000 MHz
       // tls_os_time_delay(1); // freq = 377.360 KHz CPU_CLK_240M
@@ -196,9 +204,10 @@ UserMain (void)
       //n_delay_ms (10); // 40m 49.940 hz half period = 10 ms
       //n_delay_ms (10); // 40m 49.940 hz half period = 10 ms
 
-      n_delay_us (1000 * 1000);
+//      n_delay_us (1000 * 1000);
 
       u8_led_state = ~u8_led_state;
+
     }
 
   tls_reg_write32 (HR_GPIO_DATA_EN + offset, reg_en);
