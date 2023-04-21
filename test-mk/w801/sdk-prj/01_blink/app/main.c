@@ -154,11 +154,27 @@ UserMain (void)
   while (1)
     {
 
+      u8_led_state = ~u8_led_state;
 
+#ifndef UINT32_MAX
+#define UINT32_MAX (4294967295U)
+#endif
+
+  u32 u32_count = UINT32_MAX;
+  for(u32 i=0;i<u32_count;i++)
+    {
+    tls_reg_write32 (HR_GPIO_DATA + offset,
+                   reg & (~(1 << pin))); /* write low from pin */
+    tls_reg_write32 (HR_GPIO_DATA + offset,
+                   reg | (1 << pin)); /* write Hi from pin */
+    }
+
+/*
       if (u8_led_state)   // CPU_CLK_240M = 5.71425MHz ... 5.71426MHz
         tls_reg_write32 (HR_GPIO_DATA + offset, reg & (~(1 << pin))); 
       else
         tls_reg_write32 (HR_GPIO_DATA + offset, reg | (1 << pin)); 
+*/
   
 //      tls_bitband_write(HR_GPIOA_DATA, WM_IO_PA_10     , u8_led_state);// CPU_CLK_240M = 2.85712MHz
 //      tls_bitband_write(HR_GPIOB_DATA, WM_IO_PB_05 - 16, u8_led_state); // CPU_CLK_80M = 2MHz
@@ -206,7 +222,6 @@ UserMain (void)
 
 //      n_delay_us (1000 * 1000);
 
-      u8_led_state = ~u8_led_state;
 
     }
 

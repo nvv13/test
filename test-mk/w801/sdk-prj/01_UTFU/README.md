@@ -384,6 +384,52 @@ W801  LCD  LCD    W801
 ------------------------------------------------
 
 
+board HLK-W801-KIT-V1.1 + 2.4 TFT SPI 240x320 V1.3
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341.jpg" alt="top side" title="top side" /></p>
+
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT2_4SP_9341
+
+соединения
+
+надо соеденить по схеме:
+~~~
+connect to TFT2_4SP_9341
+---- ------
+W801 LCD   
+---- ------
+3.3v VCC
+gnd  GND  
+PB21 RESET сброс
+PB14 CS    выбор чипа
+PB23 DC    комманда/данные
+PB17 SDI   данные
+PB15 SCK   синхросигнал
+3.3v LED  
+---- ------
+W801 LCD   
+---- ------
+
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 320x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x240.bmp
+
+если используется библиотека libTJPEG.a
+# convert *.jpg -resize 320x240! j%03d-320x240.jpg
+
+~~~
+
+
 
 
 

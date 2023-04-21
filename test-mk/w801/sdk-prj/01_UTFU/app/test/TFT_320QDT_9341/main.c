@@ -235,7 +235,6 @@ user_app1_task (void *sdata)
       struct tm *tblock;
       tblock = localtime ((const time_t *)&t); // switch to local time
       tls_set_rtc (tblock);
-
       struct tm tstart;
       struct tm tstop;
       tls_get_rtc (&tstart);
@@ -256,7 +255,7 @@ user_app1_task (void *sdata)
       UTFT_print (mesg, CENTER, 20, 0);       
       sprintf (mesg, "=%d FPS=%d", count, count/sec);
       UTFT_print (mesg, CENTER, 50, 0);       
-      tls_os_time_delay (HZ * 5);
+      tls_os_time_delay (HZ * 10);
 
 
 

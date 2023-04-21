@@ -1,4 +1,5 @@
 case ILI9341_S5P:
+case TFT2_4SP_9341:
 
     UTFT_LCD_Write_COM(0xCB);  
     UTFT_LCD_Write_DATA2(0x39); 
@@ -44,7 +45,41 @@ case ILI9341_S5P:
     UTFT_LCD_Write_DATA2(0x86);   //--
  
     UTFT_LCD_Write_COM(0x36);    // Memory Access Control 
-    UTFT_LCD_Write_DATA2(0x48);   
+//    UTFT_LCD_Write_DATA2(0x48);   
+
+#define ST77XX_MADCTL_MY 0x80
+#define ST77XX_MADCTL_MX 0x40
+#define ST77XX_MADCTL_MV 0x20
+#define ST77XX_MADCTL_ML 0x10
+#define ST7789_MADCTL_RGB 0x00
+#define ST7735_MADCTL_BGR 0x08
+  switch(display_model)
+   {
+   case TFT2_4SP_9341: //UTFT_LCD_Write_DATA2(ST7789_MADCTL_RGB);break; // rotation(2)
+  //    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR);break; // rotation(0)
+  //  UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MY | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB);break; // rotation(1)
+   // UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB);break; // rotation(3)
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7789_MADCTL_RGB);break; // rotation(0)  case TFT01_47V89
+   UTFT_LCD_Write_DATA2(0x20);break;   
+   default:
+   UTFT_LCD_Write_DATA2(0x48);   
+   }
+
+//#define ST77XX_MADCTL_RGB 0x00
+//#define ST7735_MADCTL_BGR 0x08
+//    UTFT_LCD_Write_COM(ST77XX_MADCTL);
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR); // rotation(0)
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MY | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(1)
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_RGB); // rotation(2)
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(3)
+
+
+//    UTFT_LCD_Write_DATA2(ST7789_MADCTL_RGB); // rotation(2)
+
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MY | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(1)
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_RGB); // rotation(2)
+//    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MV | ST77XX_MADCTL_RGB); // rotation(3)
+
 
     UTFT_LCD_Write_COM(0x3A);    
     UTFT_LCD_Write_DATA2(0x55); 
