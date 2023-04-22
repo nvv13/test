@@ -141,6 +141,7 @@ extern "C"
 #define TFT01_69V89 41
 #define TFT_320QDT_9341 42
 #define TFT2_4SP_9341 43
+#define TFT02_0V89 44
 
 #define ITDB32 0 // HX8347-A (16bit)
 #define ITDB32WC 1 // ILI9327  (16bit)

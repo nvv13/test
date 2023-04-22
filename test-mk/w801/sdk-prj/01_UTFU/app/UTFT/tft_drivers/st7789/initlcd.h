@@ -2,6 +2,7 @@ case TFT01_3SP:
 case TFT01_47V89:
 case TFT01_14V89:
 case TFT01_69V89:
+case TFT02_0V89:
    LOG("TFT01_3SP init 9 commands in list\n"); 
          // Init commands for 7789 screens
          //  9 commands in list:
@@ -59,6 +60,7 @@ case TFT01_69V89:
    case TFT01_47V89: 
    case TFT01_14V89: 
    case TFT01_69V89:
+   case TFT02_0V89:
     UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7789_MADCTL_RGB);break; // rotation(0)  case TFT01_47V89
    default:
    UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7735_MADCTL_BGR); // rotation(0)  case TFT01_14V89:
