@@ -56,7 +56,7 @@ static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 struct tm t_last_start_main_task;
 
 #include "mod1/u8g2.h"
-#include "u8x8_riotos.h"
+#include "mod1/u8x8_riotos.h"
 
 u16 i_mode_global = GL_MODE_WEATHER_CLOCK; //
 

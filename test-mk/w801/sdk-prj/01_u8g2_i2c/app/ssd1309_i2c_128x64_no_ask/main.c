@@ -72,7 +72,7 @@ UserMain (void)
   /* initialize to I2C */
   puts ("Initializing to I2C.");
 
-  /* попадаються дисплеи с неправильным i2c, не дающие ask, тогда используем u8x8_byte_hw_i2c_no_ask_riotos */
+
   u8g2_Setup_ssd1309_i2c_128x64_noname0_f(
      &u8g2, U8G2_R0, u8x8_byte_hw_i2c_no_ask_riotos, u8x8_gpio_and_delay_riotos);
 

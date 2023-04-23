@@ -48,7 +48,7 @@ UserMain (void)
     {
       if (!i2c_send_addr (addr))
         {
-          sprintf (char_buff, "0x%.2X addr ACK found!\n\r", addr);
+          sprintf (char_buff, "0x%.2X addr ACK found! = 0x%.2X\n\r", addr, addr>>1);
           printf (char_buff);
           u8_tic=HZ>>2;
         }

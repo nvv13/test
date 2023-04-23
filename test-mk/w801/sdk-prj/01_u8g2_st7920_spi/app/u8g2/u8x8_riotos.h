@@ -88,6 +88,14 @@ extern "C"
   uint8_t u8x8_byte_hw_i2c_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
                                    void *arg_ptr);
 
+  /*
+  i2c,
+  ignores ACK response (which is anyway not provided by some displays)
+  also does not allow reading from the device
+  */
+  uint8_t u8x8_byte_hw_i2c_no_ask_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
+                                   void *arg_ptr);
+
 #ifdef __cplusplus
 }
 #endif

@@ -32,7 +32,7 @@
 //#include "csi_core.h"
 
 #include "mod1/u8g2.h"
-#include "u8x8_riotos.h"
+#include "mod1/u8x8_riotos.h"
 
 /**
  * @brief   RIOT-OS logo, 64x32 pixels at 8 pixels per byte.

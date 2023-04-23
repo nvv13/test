@@ -24,12 +24,120 @@
 
 #include "u8x8_riotos.h"
 
-#include "n_delay.h"
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
 
 #include "wm_hostspi.h"
 #include "wm_i2c.h"
+
+
+
+/*
+
+ mc - Milliseconds 10^-3
+
+ µs - Microseconds 10^-6
+ us - Microseconds 10^-6
+
+ ns - Nanoseconds  10^-9
+
+ 1000 ms = 1 µs OR 1 us
+
+*/
+
+#include "csi_core.h"
+
+#include "wm_cpu.h"
+
+extern uint32_t csi_coret_get_load (void);
+extern uint32_t csi_coret_get_value (void);
+
+static void _n_delay_us (uint32_t us);
+
+/**
+ * @brief     interface delay ms (Milliseconds 10^-3)
+ * @param[in] ms
+ * @note      none
+ */
+static void
+_n_delay_ms (uint32_t ms)
+{
+  if (ms == 0)
+    return;
+  do
+    {
+      _n_delay_us (1000);
+    }
+  while ((--ms) > 0);
+}
+
+/**
+ * @brief     interface delay us (Microseconds 10^-6)
+ * @param[in] us
+ * @note      none
+ */
+static void
+_n_delay_us (uint32_t us)
+{
+  if (us > 1000) //надо так, иначе зависнет, уже 2000 перебор, поэтому так
+    {
+      _n_delay_ms (us / 1000);
+      us = us % 1000;
+    }
+  if (us == 0)
+    return;
+
+  uint32_t load = csi_coret_get_load ();
+  uint32_t start = csi_coret_get_value ();
+  uint32_t cur;
+  uint32_t cnt;
+  tls_sys_clk sysclk;
+
+  tls_sys_clk_get (&sysclk);
+  cnt = sysclk.cpuclk * us;
+  /*
+  при 240MHz значение sysclk.cpuclk=240
+  то есть
+  1 cpuclk = 1 микросекунда
+  или 1MHz,
+  то есть
+  System Tick Timer (CORET) - меняеться с частотой CPU в сторону уменьшения
+  csi_coret_get_value() - текущее значение CORET
+
+  при достижении нуля, возникает прерываение, и загрузка текущего значения из
+  переменой csi_coret_get_load() - настраевает OS при смене частоты процессора
+
+  значение load от частоты:
+  240MHz load=479999
+  160MHz load=319999
+  80MHz  load=159999
+  40MHz  load=79999
+
+  если частоту в герцах поделить на значение load,
+  то это и будет 500 герц (т.е. период 2 милисекунды)
+  */
+
+  while (1)
+    {
+      cur = csi_coret_get_value ();
+
+      if (start > cur)
+        {
+          if (start - cur >= cnt)
+            {
+              return;
+            }
+        }
+      else
+        {
+          if (load - cur + start > cnt)
+            {
+              return;
+            }
+        }
+    }
+}
+
 
 static uint32_t
 u8x8_pulse_width_to_spi_speed (uint32_t pulse_width)
@@ -110,15 +218,15 @@ u8x8_gpio_and_delay_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
       break;
     case U8X8_MSG_DELAY_MILLI:
       //            xtimer_usleep(arg_int * 1000);
-      n_delay_ms (arg_int);
+      _n_delay_ms (arg_int);
       break;
     case U8X8_MSG_DELAY_10MICRO:
       //            xtimer_usleep(arg_int * 10);
-      n_delay_us (arg_int * 10);
+      _n_delay_us (arg_int * 10);
       break;
     case U8X8_MSG_DELAY_100NANO:
       //            xtimer_nanosleep(arg_int * 100);
-      n_delay_us (arg_int);
+      _n_delay_us (arg_int);
       break;
     case U8X8_MSG_GPIO_CS:
       if (u8x8_riot_ptr != NULL && gpio_is_valid (u8x8_riot_ptr->pin_cs))
@@ -184,7 +292,7 @@ u8x8_byte_hw_spi_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
       tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
       tls_spi_setup (u8x8_spi_mode_to_spi_conf (
                          u8g2->display_info->spi_mode), // TLS_SPI_MODE_3,
-                     TLS_SPI_CS_LOW,                   // TLS_SPI_CS_HIGH,
+                     TLS_SPI_CS_HIGH,                   // TLS_SPI_CS_LOW,
                      u8x8_pulse_width_to_spi_speed (
                          u8g2->display_info->sck_pulse_width_ns) // clk 400000
       );
@@ -338,6 +446,146 @@ u8x8_byte_hw_i2c_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
       wire_beginTransmission (u8x8_GetI2CAddress (u8g2));
       wire_write (buffer, index);
       wire_endTransmission ();
+
+      //      i2c_release (dev);
+
+      break;
+    default:
+      return 0;
+    }
+
+  return 1;
+}
+
+
+
+static u8
+wire_beginTransmission_no_ask (u8 AddresI2C)
+{
+  tls_reg_write32 (HR_I2C_TX_RX,
+                   (AddresI2C << 1)); // заносим в регистр данных адрес слейва
+
+  tls_reg_write32 (
+      HR_I2C_CR_SR,
+      I2C_CR_STA | I2C_CR_WR); // включаем модуль на передачу и выдаем START
+
+  while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
+    ; // ждем окончания передачи
+
+//  if (tls_reg_read32 (HR_I2C_CR_SR)
+//      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+//    {
+//      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+//      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+//        ; // ожидаем освобождения шины
+//      printf ("wire_beginTransmission error ASK AddresI2C= 0x%.2X \n",
+//              AddresI2C);
+//      return 1; // возвращаем код ошибки "1"
+//    }           // если есть ответ от слейва
+
+  return 0; // возвращаем "0" - передача успешна
+}
+static u8
+wire_write_no_ask (u8 *cmdI2C, u8 u8_Len)
+{
+  for (u8 u8_index = 0; u8_index < u8_Len; u8_index++)
+    {
+      u8 data = cmdI2C[u8_index];
+
+      tls_reg_write32 (HR_I2C_TX_RX,
+                       data); // заносим в регистр данных байт на отправку
+      if (u8_index == (u8_Len - 1))
+        {
+          tls_reg_write32 (HR_I2C_CR_SR, // I2C_CR_NAK |
+                           I2C_CR_WR
+                               | I2C_CR_STO); // передаем байт и по окончании
+                                              // передачи - STOP
+#ifdef LCD_SERIAL_DEBUG
+          printf ("i2c wire_write I2C_CR_STO data= 0x%.2X \n", data);
+#endif
+        }
+      else
+        {
+          tls_reg_write32 (
+              HR_I2C_CR_SR, // I2C_CR_NAK |
+              I2C_CR_WR); // передаем байт и по окончании передачи - STOP
+#ifdef LCD_SERIAL_DEBUG
+          printf ("i2c wire_write data= 0x%.2X \n", data);
+#endif
+        }
+
+      // while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+      //  ;       // ожидаем освобождения шины
+      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_TIP)
+        ; // ждем окончания передачи
+
+//      if (tls_reg_read32 (HR_I2C_CR_SR)
+//          & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+//        {
+//          tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+//          while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+//            ; // ожидаем освобождения шины
+//          printf ("i2c wire_write error ASK data= 0x%.2X \n", data);
+//          return 1; // возвращаем код ошибки "1"
+//        }           // если есть ответ от слейва
+    }
+  return 0; // возвращаем "0" - передача успешна
+}
+
+static u8
+wire_endTransmission_no_ask (void)
+{
+//  if (tls_reg_read32 (HR_I2C_CR_SR)
+//      & I2C_SR_NAK) // если по окончанию передачи байта слейв не ответил
+//    {
+//      tls_reg_write32 (HR_I2C_CR_SR, I2C_CR_STO); // останавливаем обмен,
+//      while (tls_reg_read32 (HR_I2C_CR_SR) & I2C_SR_BUSY)
+//        ; // ожидаем освобождения шины
+//      printf ("wire_endTransmission error ASK\n");
+//      return 1; // возвращаем код ошибки "1"
+//    }           // если есть ответ от слейва
+
+  return 0; // возвращаем "0" - передача успешна
+}
+
+
+uint8_t
+u8x8_byte_hw_i2c_no_ask_riotos (u8x8_t *u8g2, uint8_t msg, uint8_t arg_int,
+                         void *arg_ptr)
+{
+  static uint8_t buffer[32]; /* u8x8 will never send more than 32 bytes
+                                between START_TRANSFER and END_TRANSFER */
+  static size_t index;
+
+  const u8x8_riotos_t *u8x8_riot_ptr = u8x8_GetUserPtr (u8g2);
+
+  /* assert that user_ptr is correctly set */
+  assert (u8x8_riot_ptr != NULL);
+
+  switch (msg)
+    {
+    case U8X8_MSG_BYTE_SEND:
+      memcpy (&buffer[index], arg_ptr, arg_int);
+      index += arg_int;
+      assert (index <= sizeof (buffer));
+      break;
+    case U8X8_MSG_BYTE_INIT:
+      break;
+    case U8X8_MSG_BYTE_SET_DC:
+      break;
+    case U8X8_MSG_BYTE_START_TRANSFER:
+      //              i2c_acquire(dev);
+      wm_i2c_scl_config (u8x8_riot_ptr->i2c_scl);
+      wm_i2c_sda_config (u8x8_riot_ptr->i2c_sda);
+      tls_i2c_init (u8x8_riot_ptr->i2c_freq);
+      index = 0;
+      break;
+    case U8X8_MSG_BYTE_END_TRANSFER:
+      //      i2c_write_bytes (dev, u8x8_GetI2CAddress (u8g2), buffer, index,
+      //      0);
+      wire_beginTransmission_no_ask (u8x8_GetI2CAddress (u8g2));
+      wire_write_no_ask (buffer, index);
+      wire_endTransmission_no_ask ();
 
       //      i2c_release (dev);
 
