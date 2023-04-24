@@ -21,7 +21,7 @@
 #include "wm_osal.h"
 
 #include "mod1/u8g2.h"
-#include "u8x8_riotos.h"
+#include "mod1/u8x8_riotos.h"
 
 static u8g2_t u8g2;
 
