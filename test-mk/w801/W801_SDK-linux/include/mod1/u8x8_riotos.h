@@ -34,8 +34,14 @@ extern "C"
 /* */
 #include "wm_io.h"
 
+
+#ifndef GPIO_UNDEF
 #define GPIO_UNDEF -1
-#define gpio_is_valid(u8g2) ((u8g2 != GPIO_UNDEF))
+#endif
+
+#ifndef gpio_is_valid
+#define gpio_is_valid(pin) ((pin != GPIO_UNDEF))
+#endif
 
   /**
    * @brief   Holds RIOT-OS specific peripheral data.
