@@ -33,6 +33,17 @@ static u16 i_POS_country = 0;
 static u16 i_LOAD_country = 0;
 static char s_country[50];
 
+char *
+my_recognize_ret_url_resolved (void)
+{
+  return s_url_resolved;
+}
+
+char *my_recognize_ret_name (void)
+{
+  return s_name;
+}
+
 void
 my_recognize_http_reset (void)
 {
@@ -103,10 +114,7 @@ my_recognize_http (const char *recvbuf, int i_len)
 
 #define HTTP_CLIENT_BUFFER_SIZE 1024
 
-u8 RemoteIp[4]
-    = { 192, 168, 1, 100 }; // Remote server's IP when test http function
-
-u32
+static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
               u8 parseXmlJson)
 {
@@ -224,7 +232,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
   return nRetCode;
 }
 
-u32
+static u32
 http_get (HTTPParameters ClientParams)
 {
   return http_snd_req (ClientParams, VerbGet, NULL, 0);

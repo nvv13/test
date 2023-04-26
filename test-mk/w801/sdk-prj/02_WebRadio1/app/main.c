@@ -39,7 +39,6 @@
 
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
-#include "w_https.h"
 #include "w_ntp.h"
 #include "w_wifi.h"
 
@@ -105,14 +104,16 @@ demo_timer_irq (u8 *arg) //
                 i_rotar = 100;
 
               u8_volume = 100 - i_rotar;
-              // n_i2s_SetVolume (u8_volume);
+              VS1053_setVolume (u8_volume);
               u8g2_FirstPage (&u8g2);
               do
                 {
-                  u8g2_SetDrawColor (&u8g2, 1);
-                  u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
-                  sprintf (buf_str_ind, "%.3d", u8_volume);
-                  u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+                u8g2_SetDrawColor (&u8g2, 1);
+                u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
+                sprintf (buf_str_ind, "%.3d", u8_volume);
+                u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+                u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+                u8g2_DrawStr (&u8g2, 10, 50, my_recognize_ret_name());
                 }
               while (u8g2_NextPage (&u8g2));
             }
@@ -139,7 +140,7 @@ KNOOB_SW_isr_callback (void *context)
       if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
         {
           i_dreb_SW = 1;
-          // n_i2s_stop ();
+          VS1053_stop_PlayMP3 ();
         }
     }
 }
@@ -172,7 +173,7 @@ demo_console_task (void *sdata)
 
   u8_wait_start_ota_upgrade = 0;
 
-  tls_watchdog_init (60 * 1000
+  tls_watchdog_init (30 * 1000
                      * 1000); // u32 usec около 6 сек --около 1-2 минуты
   u8 u8_wifi_state = 0;
 
@@ -231,7 +232,6 @@ demo_console_task (void *sdata)
 
   VS1053_VS1053 (&user_data53);
   VS1053_begin ();
-  VS1053_setVolume (100);
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
@@ -256,10 +256,20 @@ demo_console_task (void *sdata)
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   //
 
-  u8_volume = 50;
+  u8_volume = 100;
   i_rotar = 100 - u8_volume;
+  VS1053_setVolume (u8_volume);
+  u8g2_FirstPage (&u8g2);
+  do
+    {
+      u8g2_SetDrawColor (&u8g2, 1);
+      u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
+      sprintf (buf_str_ind, "%.3d", u8_volume);
+      u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+    }
+  while (u8g2_NextPage (&u8g2));
 
-  char buff[100];
+  // char buff[100];
 
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
@@ -290,19 +300,34 @@ demo_console_task (void *sdata)
       struct tm tblock;
       tls_get_rtc (&tblock);
 
+      tls_watchdog_clr ();
+
+      //          http_get_demo
+      //          ("https://de1.api.radio-browser.info/json/stations/"
+      //                         "bycodec/mp3?limit=1&order=random");
+      //          my_recognize_http_reset ();
+
       while (u8_wifi_state == 1) // основной цикл(2)
         {
-
+          my_recognize_http_reset ();
           http_get_demo (
               "http://all.api.radio-browser.info/json/stations/bycodec/"
               "mp3?limit=1&order=random");
-          my_recognize_http_reset ();
+          u8g2_FirstPage (&u8g2);
+          do
+            {
+              u8g2_SetDrawColor (&u8g2, 1);
+              u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
+              sprintf (buf_str_ind, "%.3d", u8_volume);
+              u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+              u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+              u8g2_DrawStr (&u8g2, 10, 50, my_recognize_ret_name());
+            }
+          while (u8g2_NextPage (&u8g2));
 
-          http_get_demo ("https://de1.api.radio-browser.info/json/stations/"
-                         "bycodec/mp3?limit=1&order=random");
-          my_recognize_http_reset ();
+          VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved ());
 
-          tls_os_time_delay (HZ * 30);
+          tls_os_time_delay (HZ*5);
           tls_watchdog_clr ();
           tls_get_rtc (&tblock); // получаем текущее время
           // printf("
@@ -320,15 +345,17 @@ demo_console_task (void *sdata)
                                                     //скачалась
             }
 
-          u8g2_FirstPage (&u8g2);
-          do
-            {
-              u8g2_SetDrawColor (&u8g2, 1);
-              u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
-              buff[sprintf (buff, "%d", 1)] = 0;
-              u8g2_DrawStr (&u8g2, 10, 24, buff);
-            }
-          while (u8g2_NextPage (&u8g2));
+          /*
+                  u8g2_FirstPage (&u8g2);
+                   do
+                     {
+                       u8g2_SetDrawColor (&u8g2, 1);
+                       u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
+                       sprintf (buf_str_ind, "%.3d", u8_volume);
+                       u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+                     }
+                   while (u8g2_NextPage (&u8g2));
+         */
         }
     }
 }

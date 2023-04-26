@@ -213,6 +213,8 @@ extern "C"
 
   void VS1053_stop_PlayMP3 (void);
 
+  FRESULT VS1053_PlayHttpMp3 (const char *Uri);
+
 #ifdef __cplusplus
 }
 #endif

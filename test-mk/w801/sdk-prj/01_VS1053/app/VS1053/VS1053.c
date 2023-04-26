@@ -57,6 +57,10 @@
 //#include "wm_watchdog.h"
 //#include "csi_core.h"
 
+#include "HTTPClient.h"
+#include "wm_type_def.h"
+#include "wm_watchdog.h"
+
 #include "patches/vs1053b-patches.h"
 
 #include "ConsoleLogger.h"
@@ -1237,5 +1241,167 @@ VS1053_PlayMp3 (char *filename)
       // close file
       f_close (&fnew);
     }
+  return res_sd;
+}
+
+
+
+
+
+
+#define HTTP_CLIENT_BUFFER_SIZE vs1053_chunk_size
+
+static u32
+http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
+              u8 parseXmlJson)
+{
+  int nRetCode;
+  u32 nSize, nTotal = 0;
+  char *Buffer = NULL;
+  HTTP_SESSION_HANDLE pHTTP;
+  u32 nSndDataLen;
+
+  Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
+  if (Buffer == NULL)
+    {
+      return HTTP_CLIENT_ERROR_NO_MEMORY;
+    }
+  memset (Buffer, 0, HTTP_CLIENT_BUFFER_SIZE);
+  printf ("HTTP Client v1.0\r\n");
+  nSndDataLen = (pSndData == NULL ? 0 : strlen (pSndData));
+  // Open the HTTP request handle
+  pHTTP = HTTPClientOpenRequest (0);
+  if (!pHTTP)
+    {
+      nRetCode = HTTP_CLIENT_ERROR_INVALID_HANDLE;
+      tls_mem_free (Buffer);
+      return nRetCode;
+    }
+
+      /*
+if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
+"application/json", 1))!= HTTP_CLIENT_SUCCESS)
+      {
+  break;
+}
+      */
+    // Set the Verb
+  nRetCode = HTTPClientSetVerb (pHTTP, verb);
+  if (nRetCode != HTTP_CLIENT_SUCCESS)
+    {
+      tls_mem_free (Buffer);
+      return nRetCode;
+     }
+#if TLS_CONFIG_HTTP_CLIENT_AUTH
+        // Set authentication
+//        if(ClientParams.AuthType != AuthSchemaNone)
+//        {
+//            if((nRetCode = HTTPClientSetAuth(pHTTP, ClientParams.AuthType,
+//            NULL)) != HTTP_CLIENT_SUCCESS)
+//            {
+//                break;
+//            }
+//
+//            // Set authentication
+//            if((nRetCode = HTTPClientSetCredentials(pHTTP,
+//            ClientParams.UserName, ClientParams.Password)) !=
+//            HTTP_CLIENT_SUCCESS)
+//            {
+//                break;
+//            }
+//        }
+#endif // TLS_CONFIG_HTTP_CLIENT_AUTH
+#if TLS_CONFIG_HTTP_CLIENT_PROXY
+        // Use Proxy server
+//        if(ClientParams.UseProxy == TRUE)
+//        {
+//            if((nRetCode = HTTPClientSetProxy(pHTTP, ClientParams.ProxyHost,
+//            ClientParams.ProxyPort, NULL, NULL)) != HTTP_CLIENT_SUCCESS)
+//            {
+//                break;
+//            }
+//        }
+#endif // TLS_CONFIG_HTTP_CLIENT_PROXY
+
+  do
+    {
+      if ((nRetCode = HTTPClientSendRequest (
+               pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
+               verb == VerbPost || verb == VerbPut, 0, 0))
+          != HTTP_CLIENT_SUCCESS)
+        {
+          break;
+        }
+      // Retrieve the the headers and analyze them
+      if ((nRetCode = HTTPClientRecvResponse (pHTTP, 30))
+          != HTTP_CLIENT_SUCCESS)
+        {
+          break;
+        }
+      printf ("Start to receive data from remote server...\r\n");
+
+      my_sost = VS1053_PLAY;
+      //VS1053_data_mode_on ();
+      // Get the data until we get an error or end of stream code
+      while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS) && my_sost == VS1053_PLAY)
+        {
+          // Set the size of our buffer
+          nSize = HTTP_CLIENT_BUFFER_SIZE;
+          // Get the data
+          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 300, &nSize);
+          if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS && my_sost == VS1053_PLAY)
+            break;
+          //printf("%d\n", nTotal);
+          VS1053_data_mode_on ();
+          VS1053_await_data_request (); // Wait for space available
+          SPI_writeBytes ((u8*)Buffer, nSize);
+
+          tls_watchdog_clr ();
+          nTotal += nSize;
+        }
+        VS1053_data_mode_off ();
+    }
+  while (my_sost == VS1053_PLAY); // Run only once
+  tls_mem_free (Buffer);
+  my_sost = VS1053_STOP;
+
+  if (pHTTP)
+    HTTPClientCloseRequest (&pHTTP);
+  if (ClientParams.Verbose == TRUE)
+    {
+      printf ("\n\nHTTP Client terminated %d (got %d b)\n\n", nRetCode,
+              nTotal);
+    }
+  return nRetCode;
+}
+
+static u32
+http_get (HTTPParameters ClientParams)
+{
+  return http_snd_req (ClientParams, VerbGet, NULL, 0);
+}
+
+FRESULT
+VS1053_PlayHttpMp3 (const char *Uri)
+{
+
+  VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
+                             // include!)
+
+  HTTPParameters httpParams;
+  memset (&httpParams, 0, sizeof (HTTPParameters));
+  httpParams.Uri = (char *)tls_mem_alloc (128);
+  if (httpParams.Uri == NULL)
+    {
+      printf ("malloc error.\n");
+      return WM_FAILED;
+    }
+  memset (httpParams.Uri, 0, 128);
+  sprintf (httpParams.Uri, "%s", Uri);
+  httpParams.Verbose = TRUE;
+  printf ("Location: %s\n", httpParams.Uri);
+  res_sd = http_get (httpParams);
+  tls_mem_free (httpParams.Uri);
+
   return res_sd;
 }
