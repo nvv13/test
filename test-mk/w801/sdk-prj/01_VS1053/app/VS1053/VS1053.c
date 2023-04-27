@@ -67,6 +67,8 @@
 
 #include "VS1053.h"
 
+#define FCLK_SLOW_VS1053   200000
+#define FCLK_FAST_VS1053  5000000
 //-----------------------------------------------------
 #ifndef _BV
 #define _BV(x) (1UL << (x))
@@ -443,7 +445,7 @@ VS1053_softReset ()
 {
   LOG ("Performing soft-reset\n");
   // Init SPI in slow mode ( 0.2 MHz )
-  VS1053_SPI = SPI_Settings (200000);
+  VS1053_SPI = SPI_Settings (FCLK_SLOW_VS1053);
   VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_RESET));
   /* Newmode, Reset, No L1-2 */
 
@@ -474,7 +476,7 @@ VS1053_softReset ()
 
   VS1053_await_data_request ();
 
-  VS1053_SPI = SPI_Settings (4000000);
+  VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
 }
 
 void
@@ -638,7 +640,7 @@ VS1053_begin ()
   digitalWrite (cs_pin, HIGH);
   delay (500);
   // Init SPI in slow mode ( 0.2 MHz )
-  VS1053_SPI = SPI_Settings (200000);
+  VS1053_SPI = SPI_Settings (FCLK_SLOW_VS1053);
   // printDetails("Right after reset/startup");
   delay (20);
   // printDetails("20 msec after reset");
@@ -653,7 +655,7 @@ VS1053_begin ()
           SCI_CLOCKF,
           6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
       // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
-      VS1053_SPI = SPI_Settings (4000000);
+      VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
       VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_LINE1));
       VS1053_testComm (
           "Fast SPI, Testing VS1053 read/write registers again...\n");
@@ -1249,7 +1251,7 @@ VS1053_PlayMp3 (char *filename)
 
 
 
-#define HTTP_CLIENT_BUFFER_SIZE vs1053_chunk_size
+#define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size)
 
 static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
@@ -1348,7 +1350,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
-          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 300, &nSize);
+          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 500, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS && my_sost == VS1053_PLAY)
             break;
           //printf("%d\n", nTotal);

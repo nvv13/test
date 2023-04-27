@@ -133,7 +133,7 @@ my_recognize_http (const char *recvbuf, int i_len)
     }
 }
 
-#define HTTP_CLIENT_BUFFER_SIZE 1024
+#define HTTP_CLIENT_BUFFER_SIZE 512
 
 static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
@@ -232,7 +232,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
-          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 300, &nSize);
+          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 500, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
           // printf("%s", Buffer);

@@ -72,10 +72,11 @@ static void display_refresh(void)
               u8g2_SetDrawColor (&u8g2, 1);
               u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
               sprintf (buf_str_ind, "vol:%.3d", u8_volume);
-              u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+              u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
               u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-              u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_name());
-              u8g2_DrawStr (&u8g2, 1, 55, my_recognize_ret_tags());
+              u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name());
+              u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags());
+              u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country());
             }
           while (u8g2_NextPage (&u8g2));
 
@@ -263,7 +264,7 @@ demo_console_task (void *sdata)
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   //
 
-  u8_volume = 100;
+  u8_volume = 80;
   i_rotar = 100 - u8_volume;
   VS1053_setVolume (u8_volume);
   display_refresh();
@@ -310,9 +311,9 @@ demo_console_task (void *sdata)
 
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved ());
 
-          tls_os_time_delay (HZ*5);
+          tls_os_time_delay (HZ);
           tls_watchdog_clr ();
-          tls_get_rtc (&tblock); // получаем текущее время
+          //tls_get_rtc (&tblock); // получаем текущее время
           // printf("
           // sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
 
