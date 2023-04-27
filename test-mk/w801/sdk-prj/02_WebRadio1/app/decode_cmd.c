@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "mod1/VS1053.h"
+
 int
 fast_decode_cmd (char *sock_rx, int len)
 {
@@ -29,6 +31,7 @@ fast_decode_cmd (char *sock_rx, int len)
           = sprintf (sock_rx, "OTA upgrade start, try = " OTA_PATH_FILE " \n");
       extern u8 u8_wait_start_ota_upgrade;
       u8_wait_start_ota_upgrade = 1;
+      VS1053_stop_PlayMP3 ();
     }
 
   if (strncmp ((char *)sock_rx, "help", 4) == 0)

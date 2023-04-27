@@ -56,12 +56,32 @@ static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
 
-u8 u8_wait_start_ota_upgrade;
+u8 u8_wait_start_ota_upgrade = 0;
+
+
 
 //****************************************************************************************************//
 static u8g2_t u8g2;
 static u8 u8_volume = 0; //
 static char buf_str_ind[10];
+static void display_refresh(void)
+{
+          u8g2_FirstPage (&u8g2);
+          do
+            {
+              u8g2_SetDrawColor (&u8g2, 1);
+              u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+              sprintf (buf_str_ind, "vol:%.3d", u8_volume);
+              u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
+              u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+              u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_name());
+              u8g2_DrawStr (&u8g2, 1, 55, my_recognize_ret_tags());
+            }
+          while (u8g2_NextPage (&u8g2));
+
+}
+
+//****************************************************************************************************//
 
 #define KNOOB_SW WM_IO_PA_11
 #define KNOOB_DT WM_IO_PA_12
@@ -105,17 +125,7 @@ demo_timer_irq (u8 *arg) //
 
               u8_volume = 100 - i_rotar;
               VS1053_setVolume (u8_volume);
-              u8g2_FirstPage (&u8g2);
-              do
-                {
-                u8g2_SetDrawColor (&u8g2, 1);
-                u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
-                sprintf (buf_str_ind, "%.3d", u8_volume);
-                u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
-                u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-                u8g2_DrawStr (&u8g2, 10, 50, my_recognize_ret_name());
-                }
-              while (u8g2_NextPage (&u8g2));
+              display_refresh();
             }
           i_rotar_zero = 0;
           i_rotar_one = 0;
@@ -171,11 +181,8 @@ demo_console_task (void *sdata)
 
   printf ("wifi test app\n");
 
-  u8_wait_start_ota_upgrade = 0;
-
   tls_watchdog_init (30 * 1000
                      * 1000); // u32 usec около 6 сек --около 1-2 минуты
-  u8 u8_wifi_state = 0;
 
   puts ("Initializing to I2C oled Display.");
 
@@ -259,17 +266,9 @@ demo_console_task (void *sdata)
   u8_volume = 100;
   i_rotar = 100 - u8_volume;
   VS1053_setVolume (u8_volume);
-  u8g2_FirstPage (&u8g2);
-  do
-    {
-      u8g2_SetDrawColor (&u8g2, 1);
-      u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
-      sprintf (buf_str_ind, "%.3d", u8_volume);
-      u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
-    }
-  while (u8g2_NextPage (&u8g2));
+  display_refresh();
 
-  // char buff[100];
+  u8 u8_wifi_state = 0;
 
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
@@ -281,7 +280,7 @@ demo_console_task (void *sdata)
             u8_wifi_state = 1;
           else
             {
-              tls_os_time_delay (5000);
+              tls_os_time_delay (HZ*5);
             }
         }
 
@@ -293,7 +292,7 @@ demo_console_task (void *sdata)
             u8_ntp_state = 1;
           else
             {
-              tls_os_time_delay (5000);
+              tls_os_time_delay (HZ*5);
             }
         }
 
@@ -302,28 +301,12 @@ demo_console_task (void *sdata)
 
       tls_watchdog_clr ();
 
-      //          http_get_demo
-      //          ("https://de1.api.radio-browser.info/json/stations/"
-      //                         "bycodec/mp3?limit=1&order=random");
-      //          my_recognize_http_reset ();
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           my_recognize_http_reset ();
-          http_get_demo (
-              "http://all.api.radio-browser.info/json/stations/bycodec/"
-              "mp3?limit=1&order=random");
-          u8g2_FirstPage (&u8g2);
-          do
-            {
-              u8g2_SetDrawColor (&u8g2, 1);
-              u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
-              sprintf (buf_str_ind, "%.3d", u8_volume);
-              u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
-              u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-              u8g2_DrawStr (&u8g2, 10, 50, my_recognize_ret_name());
-            }
-          while (u8g2_NextPage (&u8g2));
+          http_get_web_station_by_random();
+          display_refresh();
 
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved ());
 
@@ -345,17 +328,6 @@ demo_console_task (void *sdata)
                                                     //скачалась
             }
 
-          /*
-                  u8g2_FirstPage (&u8g2);
-                   do
-                     {
-                       u8g2_SetDrawColor (&u8g2, 1);
-                       u8g2_SetFont (&u8g2, u8g2_font_courB24_tf);
-                       sprintf (buf_str_ind, "%.3d", u8_volume);
-                       u8g2_DrawStr (&u8g2, 10, 24, buf_str_ind);
-                     }
-                   while (u8g2_NextPage (&u8g2));
-         */
         }
     }
 }

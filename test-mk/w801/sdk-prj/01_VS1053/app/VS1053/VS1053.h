@@ -42,6 +42,7 @@ extern "C"
 
 #include "ff.h"
 #include "wm_type_def.h"
+#include "wm_io.h"
 
   enum VS1053_I2S_RATE
   {
