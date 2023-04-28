@@ -68,7 +68,7 @@
 #include "VS1053.h"
 
 #define FCLK_SLOW_VS1053   200000
-#define FCLK_FAST_VS1053  5000000
+#define FCLK_FAST_VS1053  4000000
 //-----------------------------------------------------
 #ifndef _BV
 #define _BV(x) (1UL << (x))
