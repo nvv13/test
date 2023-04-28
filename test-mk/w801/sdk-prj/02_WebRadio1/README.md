@@ -1,19 +1,14 @@
+project simple WebRadio
+
+board HLK-W801-KIT-V1.1 + VS1053 = simple WebRadio
 
 
-
-Светодиодный модуль OLED 1,3 дюйма, синий I2C, 128X64, 1,3 дюйма, контроллер sh1106
-
-или
-
-дисплей OLED 128x64 2.4 дюйма, 2.42OLED-IIC VER:1.1, I2C, контроллер ssd1309
+видео:
+https://youtu.be/WgBXT7bLOw8
 
 ------
 
-project
 
-board HLK-W801-KIT-V1.1 + wifi + OLED Display + WDT + rtos + https weather + ntp + OTA upgrade 
-
-видео:
 
 
 ------
@@ -23,16 +18,22 @@ board HLK-W801-KIT-V1.1 + wifi + OLED Display + WDT + rtos + https weather + ntp
 дисплей
 
 Светодиодный модуль OLED 1,3 дюйма, синий I2C, 128X64, 1,3 дюйма, контроллер sh1106
-     4 pin
+
+или
+
+дисплей OLED 128x64 2.4 дюйма, 2.42OLED-IIC VER:1.1, I2C, контроллер ssd1309
+
 
 надо соеденить по схеме:
 ~~~
 connect to
 DISPLAY     w801
+----- -------------
 1 GND       GND
 2 VCC       5v 
 3 scl       PA01
 4 sda       PA04
+----- -------------
 
 
 
@@ -71,46 +72,15 @@ PA13   CLK    S2
 
 --------
 
-в проекте используеться библиотека u8g2
-~~~
-ее сборка https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_u8g2_st7920_spi
+в проекте используеться библиотека u8g2 + библиотека VS1053
 
-в Makefile директории . этого проекта
-секция LINKLIB добавлено
-    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
-~~~
+
+
 
 --------
 
 
-~~~
-При старте: подсоединяемся к сети Wifi, запрашиваем время по ntp.
-В работе: 
 
-Удаленное управление: можно подцепиться к платке по сети, на порт 5555,
- пример программки для соединения chat_client.py
- команды
-      "help - справка по коммандам"
-
-~~~
-
-
-
-
-~~~
-для OTA, развернул сервер, ( подробнее типа https://habr.com/ru/company/ruvds/blog/528428/ )
-sudo apt-get install apache2 phpy libapache2-mod-php
-sudo service apache2 restart
-
-в каталог /var/www/ota/webradio1
-
-ложим файл прошивки, вида:
-w800_ota.img
-
-*немного позже, развернул сервер apache2 на устройстве keenetic-giga (KN-1011)
-навела на это статья https://kotyara12.ru/iot/keenetic-mqtt/
-
-~~~
 
 
 
@@ -222,6 +192,11 @@ PS:
 
 пример адаптации взят из https://github.com/RIOT-OS/RIOT, (хотя можно было взять из LuatOS, к примеру)
 
+библиотека VS1053 источник:
+https://github.com/baldram/ESP_VS1053_Library.git
+https://github.com/adafruit/Adafruit_VS1053_Library.git
+
+------
 
 
 
