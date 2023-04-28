@@ -308,6 +308,7 @@ demo_console_task (void *sdata)
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           my_recognize_http_reset ();
+          display_refresh();
           http_get_web_station_by_random();
           display_refresh();
 
