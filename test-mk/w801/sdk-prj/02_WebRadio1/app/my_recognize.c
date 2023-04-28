@@ -1,3 +1,50 @@
+/*
+
+$ wget 'http://all.api.radio-browser.info/json/stations/bytag/classic?codec=mp3&limit=1&order=random' -O 1.json
+
+[{
+"changeuuid":"55dd77ed-d8d3-4333-9f55-ac3a3f863922",
+"stationuuid":"962560b0-0601-11e8-ae97-52543be04c81",
+"serveruuid":null,
+"name":"WPSU 91.5 Penn State University - State College, PA",
+"url":"http://wpsu-ice.streamguys1.com/wpsu1",
+"url_resolved":"http://wpsu-ice.streamguys1.com/wpsu1",
+"homepage":"http://wpsu.org/",
+"favicon":"http://wpsu.org/apple-touch-icon-120x120.png",
+"tags":"classical,npr,penn state,pri,public radio,state college",
+"country":"The United States Of America",
+"countrycode":"US",
+"iso_3166_2":null,
+"state":"Pennsylvania",
+"language":"english",
+"languagecodes":"",
+"votes":36,
+"lastchangetime":"2022-11-28 08:09:30",
+"lastchangetime_iso8601":"2022-11-28T08:09:30Z",
+"codec":"MP3",
+"bitrate":96,
+"hls":0,
+"lastcheckok":1,
+"lastchecktime":"2023-04-28 10:42:26",
+"lastchecktime_iso8601":"2023-04-28T10:42:26Z",
+"lastcheckoktime":"2023-04-28 10:42:26",
+"lastcheckoktime_iso8601":"2023-04-28T10:42:26Z",
+"lastlocalchecktime":"",
+"lastlocalchecktime_iso8601":null,
+"clicktimestamp":"2023-04-24 23:08:58",
+"clicktimestamp_iso8601":"2023-04-24T23:08:58Z",
+"clickcount":4,
+"clicktrend":0,
+"ssl_error":0,
+"geo_lat":null,
+"geo_long":null,
+"has_extended_info":false
+}]
+
+
+
+*/
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,6 +80,17 @@ static u16 i_POS_country = 0;
 static u16 i_LOAD_country = 0;
 static char s_country[50];
 
+static const char *c_codec = "\"codec\":\"";
+static u16 i_POS_codec = 0;
+static u16 i_LOAD_codec = 0;
+static char s_codec[10];
+
+static const char *c_bitrate = "\"bitrate\":";
+static u16 i_POS_bitrate = 0;
+static u16 i_LOAD_bitrate = 0;
+static char s_bitrate[10];
+
+
 char * my_recognize_ret_stationuuid (void)
 {
   return s_stationuuid;
@@ -49,16 +107,25 @@ my_recognize_ret_url_resolved (void)
   return s_url_resolved;
 }
 
-char * my_recognize_ret_tags (void)
-{
-  return s_tags;
-}
-
 char * my_recognize_ret_country (void)
 {
   return s_country;
 }
 
+char * my_recognize_ret_tags (void)
+{
+  return s_tags;
+}
+
+char * my_recognize_ret_codec (void)
+{
+  return s_codec;
+}
+
+char * my_recognize_ret_bitrate (void)
+{
+  return s_bitrate;
+}
 
 void
 my_recognize_http_reset (void)
@@ -78,6 +145,12 @@ my_recognize_http_reset (void)
   i_POS_country = 0;
   i_LOAD_country = 0;
   s_country[0]=0;
+  i_POS_codec = 0;
+  i_LOAD_codec = 0;
+  s_codec[0]=0;
+  i_POS_bitrate = 0;
+  i_LOAD_bitrate = 0;
+  s_bitrate[0]=0;
 }
 
 void
@@ -130,6 +203,10 @@ my_recognize_http (const char *recvbuf, int i_len)
                   sizeof (s_tags));
       load_field (ch, c_country, &i_POS_country, s_country, &i_LOAD_country,
                   sizeof (s_country));
+      load_field (ch, c_codec, &i_POS_codec, s_codec, &i_LOAD_codec,
+                  sizeof (s_codec));
+      load_field (ch, c_bitrate, &i_POS_bitrate, s_bitrate, &i_LOAD_bitrate,
+                  sizeof (s_bitrate));
     }
 }
 

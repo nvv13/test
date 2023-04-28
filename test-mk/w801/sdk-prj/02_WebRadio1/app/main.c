@@ -77,6 +77,8 @@ static void display_refresh(void)
               u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name());
               u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags());
               u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country());
+              u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec());
+              u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate());
             }
           while (u8g2_NextPage (&u8g2));
 

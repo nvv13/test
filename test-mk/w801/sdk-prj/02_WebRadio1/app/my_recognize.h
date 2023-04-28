@@ -10,6 +10,8 @@ char * my_recognize_ret_name (void);
 char * my_recognize_ret_url_resolved (void);
 char * my_recognize_ret_tags (void);
 char * my_recognize_ret_country (void);
+char * my_recognize_ret_codec (void);
+char * my_recognize_ret_bitrate (void);
 
 
 int http_get_web_station_by_random (void);
