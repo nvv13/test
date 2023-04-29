@@ -27,12 +27,12 @@ https://youtu.be/WgBXT7bLOw8
 надо соеденить по схеме:
 ~~~
 connect to
-DISPLAY     w801
+DISPLAY   w801
 ----- -------------
-1 GND       GND
-2 VCC       3.3v 
-3 scl       PA01
-4 sda       PA04
+GND       GND
+VCC       3.3v 
+scl       PA01
+sda       PA04
 ----- -------------
 
 
