@@ -7,22 +7,30 @@
 #include <string.h>
 
 #include "mod1/VS1053.h"
+#include "my_recognize.h"
 
 int
 fast_decode_cmd (char *sock_rx, int len)
 {
-  int i_len_ret = len;
+  int i_len_ret = 0;
 
   if (strncmp ((char *)sock_rx, "time", 4) == 0)
     {
       struct tm tblock;
       tls_get_rtc (&tblock);
       extern u32 total_mem_size;
-      //не проверил, сколько буфер, а он 1024 байт
+      //не проверил, сколько буфер, а он 1024 байт !
+      // 57 + 50  +150 +50 +50 +10 +10 = 377
       i_len_ret = sprintf (
-          sock_rx, "date %d.%02d.%02d %02d:%02d:%02d total_mem_size=%d",
+          sock_rx, "date %d.%02d.%02d %02d:%02d:%02d total_mem_size=%d\n%s\n%s\n%s\n%s\n%s\n%s\n",
           tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
-          tblock.tm_hour, tblock.tm_min, tblock.tm_sec, total_mem_size);
+          tblock.tm_hour, tblock.tm_min, tblock.tm_sec, total_mem_size
+          ,my_recognize_ret_stationuuid () //50
+          ,my_recognize_ret_name()         //150
+          ,my_recognize_ret_tags()         //50
+          ,my_recognize_ret_country()      //50
+          ,my_recognize_ret_codec()        //10
+          ,my_recognize_ret_bitrate());    //10
     }
 
   if (strncmp ((char *)sock_rx, "upgrade", 7) == 0)

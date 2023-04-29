@@ -1,6 +1,11 @@
 #ifndef W_NTP_H
 #define W_NTP_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 //#include <string.h>
 //#include <stdio.h>
 //#include <stdlib.h>
@@ -21,14 +26,12 @@
 #include "wm_mem.h"
 //#include "wm_regs.h"
 
-//#ifdef __cplusplus
-// extern "C" {
-//#endif
 
 int ntp_demo (void);
 
-//#ifdef __cplusplus
-// extern }
-//#endif
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* W_NTP_H */
