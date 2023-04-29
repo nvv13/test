@@ -42,22 +42,14 @@
 #include "w_ntp.h"
 #include "w_wifi.h"
 
-//#include "decode_cmd.h"
 
 #define DEMO_TASK_SIZE 2048
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-//#define DEMO_SOCK_S_TASK_SIZE 1024
-//static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
-//#define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
-
 #include "mod1/VS1053.h"
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
-
-//u8 u8_wait_start_ota_upgrade = 0;
-
 
 
 //****************************************************************************************************//
@@ -320,36 +312,9 @@ demo_console_task (void *sdata)
           // printf("
           // sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
 
-/*
-          if (u8_wait_start_ota_upgrade)
-            {
-              u8_wait_start_ota_upgrade = 0;
-              printf ("OTA upgrade start, try = " OTA_PATH_FILE "\n");
-              tls_watchdog_clr ();
-              t_http_fwup (OTA_PATH_FILE);
-              printf ("OTA upgrade stop, error\n"); //если в это место попало,
-                                                    //значит какая-то ошибка
-                                                    //случилась и прошивка не
-                                                    //скачалась
-            }
-*/
         }
     }
 }
-
-/*
-void
-sock_s_task (void *sdata)
-{
-
-  while (1)
-    {
-      int i_port = 5555;
-      printf ("create_socket_server  i_port=%d\n", i_port);
-      create_socket_server (i_port);
-    }
-}
-*/
 
 void
 UserMain (void)
@@ -364,9 +329,4 @@ UserMain (void)
                           * sizeof (u32), /* task's stack size, unit:byte */
                       DEMO_TASK_PRIO, 0);
 
-//  tls_os_task_create (NULL, NULL, sock_s_task, NULL,
-//                      (void *)sock_s_task_stk, /* task's stack start address */
-//                      DEMO_SOCK_S_TASK_SIZE
-//                          * sizeof (u32), /* task's stack size, unit:byte */
-//                      DEMO_SOCK_S_PRIO, 0);
 }
