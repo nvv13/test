@@ -30,7 +30,7 @@ connect to
 DISPLAY     w801
 ----- -------------
 1 GND       GND
-2 VCC       5v 
+2 VCC       3.3v 
 3 scl       PA01
 4 sda       PA04
 ----- -------------
