@@ -7,8 +7,6 @@ extern "C"
 #endif
 
 void my_recognize_http_reset (void);
-void my_recognize_http_error (void);
-void my_recognize_http (const char *recvbuf, int i_len);
 
 char * my_recognize_ret_stationuuid (void);
 char * my_recognize_ret_name (void);

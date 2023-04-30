@@ -153,7 +153,7 @@ my_recognize_http_reset (void)
   s_bitrate[0]=0;
 }
 
-void
+static void
 my_recognize_http_error (void)
 {
   my_recognize_http_reset ();
@@ -186,7 +186,7 @@ load_field (const char ch, const char *c_find, u16 *i_pos_find, char *s_field,
     }
 }
 
-void
+static void
 my_recognize_http (const char *recvbuf, int i_len)
 {
   // printf ("%s\n",recvbuf);
