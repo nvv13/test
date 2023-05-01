@@ -116,11 +116,11 @@ create_socket_server (const int port)
              && server_fd != -1) // это сделано, чтоб в этом месте программа не
                                  // застряла, при переподключении к wifi
         {
-          //printf("start accept\n");
+          // printf("start accept\n");
           i_start_recive = server_fd;
           new_fd
               = accept (server_fd, (struct sockaddr *)&client_addr, &sin_size);
-          //printf("accept newfd = %d %d\n",new_fd,i_ret++);
+          // printf("accept newfd = %d %d\n",new_fd,i_ret++);
           i_start_recive = -1;
         }
 
@@ -172,20 +172,19 @@ create_socket_server (const int port)
               printf ("\nReceive %d bytes from %s\n", ret,
                       inet_ntoa (client_addr.sin_addr.s_addr));
               printf ("%s\n", sock_rx);
-/*
-              int i_len_ret
-                  = fast_decode_cmd (sock_rx, ret); // atoi((char *)buf + 11);
-              if (i_len_ret > 0)
-                {
-                  ret = send (new_fd, sock_rx, i_len_ret, 0);
-                  if (ret < 0)
-                    {
-                      printf ("Error occured during sending,errno:%d\n",
-                              errno);
-                      break;
-                    }
-                }
-*/
+              /*
+                            int i_len_ret
+                                = fast_decode_cmd (sock_rx, ret); // atoi((char
+                 *)buf + 11); if (i_len_ret > 0)
+                              {
+                                ret = send (new_fd, sock_rx, i_len_ret, 0);
+                                if (ret < 0)
+                                  {
+                                    printf ("Error occured during
+                 sending,errno:%d\n", errno); break;
+                                  }
+                              }
+              */
             }
         }
       if (new_fd != -1)

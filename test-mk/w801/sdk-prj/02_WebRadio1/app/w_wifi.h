@@ -2,7 +2,8 @@
 #define W_WIFI_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 //#include <string.h>
@@ -23,13 +24,11 @@ extern "C" {
 #include "wm_netif.h"
 //#include "wm_efuse.h"
 #include "wm_mem.h"
-//#include "wm_regs.h"
+  //#include "wm_regs.h"
 
+  int demo_connect_net (const char *ssid, const char *pwd);
 
-int demo_connect_net (const char *ssid, const char *pwd);
-
-int create_socket_server (const int port);
-
+  int create_socket_server (const int port);
 
 #ifdef __cplusplus
 }

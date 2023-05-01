@@ -1,6 +1,8 @@
 /*
 
-$ wget 'http://all.api.radio-browser.info/json/stations/bytag/classic?codec=mp3&limit=1&order=random' -O 1.json
+$ wget
+'http://all.api.radio-browser.info/json/stations/bytag/classic?codec=mp3&limit=1&order=random'
+-O 1.json
 
 [{
 "changeuuid":"55dd77ed-d8d3-4333-9f55-ac3a3f863922",
@@ -44,7 +46,6 @@ $ wget 'http://all.api.radio-browser.info/json/stations/bytag/classic?codec=mp3&
 
 
 */
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -90,13 +91,14 @@ static u16 i_POS_bitrate = 0;
 static u16 i_LOAD_bitrate = 0;
 static char s_bitrate[10];
 
-
-char * my_recognize_ret_stationuuid (void)
+char *
+my_recognize_ret_stationuuid (void)
 {
   return s_stationuuid;
 }
 
-char * my_recognize_ret_name (void)
+char *
+my_recognize_ret_name (void)
 {
   return s_name;
 }
@@ -107,22 +109,26 @@ my_recognize_ret_url_resolved (void)
   return s_url_resolved;
 }
 
-char * my_recognize_ret_country (void)
+char *
+my_recognize_ret_country (void)
 {
   return s_country;
 }
 
-char * my_recognize_ret_tags (void)
+char *
+my_recognize_ret_tags (void)
 {
   return s_tags;
 }
 
-char * my_recognize_ret_codec (void)
+char *
+my_recognize_ret_codec (void)
 {
   return s_codec;
 }
 
-char * my_recognize_ret_bitrate (void)
+char *
+my_recognize_ret_bitrate (void)
 {
   return s_bitrate;
 }
@@ -132,25 +138,25 @@ my_recognize_http_reset (void)
 {
   i_POS_stationuuid = 0;
   i_LOAD_stationuuid = 0;
-  s_stationuuid[0]=0;
+  s_stationuuid[0] = 0;
   i_POS_name = 0;
   i_LOAD_name = 0;
-  s_name[0]=0;
+  s_name[0] = 0;
   i_POS_url_resolved = 0;
   i_LOAD_url_resolved = 0;
-  s_url_resolved[0]=0;
+  s_url_resolved[0] = 0;
   i_POS_tags = 0;
   i_LOAD_tags = 0;
-  s_tags[0]=0;
+  s_tags[0] = 0;
   i_POS_country = 0;
   i_LOAD_country = 0;
-  s_country[0]=0;
+  s_country[0] = 0;
   i_POS_codec = 0;
   i_LOAD_codec = 0;
-  s_codec[0]=0;
+  s_codec[0] = 0;
   i_POS_bitrate = 0;
   i_LOAD_bitrate = 0;
-  s_bitrate[0]=0;
+  s_bitrate[0] = 0;
 }
 
 static void
@@ -336,8 +342,8 @@ http_get (HTTPParameters ClientParams)
   return http_snd_req (ClientParams, VerbGet, NULL, 0);
 }
 
-
-int http_get_web_station_by_stationuuid (char * in_stationuuid)
+int
+http_get_web_station_by_stationuuid (char *in_stationuuid)
 {
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));
@@ -348,7 +354,9 @@ int http_get_web_station_by_stationuuid (char * in_stationuuid)
       return WM_FAILED;
     }
   memset (httpParams.Uri, 0, 128);
-  sprintf (httpParams.Uri, "http://all.api.radio-browser.info/json/stations/byuuid/%s", in_stationuuid);
+  sprintf (httpParams.Uri,
+           "http://all.api.radio-browser.info/json/stations/byuuid/%s",
+           in_stationuuid);
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);
   http_get (httpParams);
@@ -356,23 +364,42 @@ int http_get_web_station_by_stationuuid (char * in_stationuuid)
   return WM_SUCCESS;
 }
 
-static u8 u8_ch_st_uri=0;
+static u8 u8_ch_st_uri = 0;
 
 int
 http_get_web_station_by_random (void)
 {
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));
-  switch(u8_ch_st_uri)
-  {
-  case 0 : httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bycodec/mp3?limit=1&order=random";break;
-  case 1 : httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/rock?codec=mp3&limit=1&order=random";break;
-  case 2 : httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/classic?codec=mp3&limit=1&order=random";break;
-  case 3 : httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/trance?codec=mp3&limit=1&order=random";break;
-  case 4 : httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/pop?codec=mp3&limit=1&order=random";break;
-  case 5 : httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bycountry/rus?codec=mp3&limit=1&order=random";break;
-  }
-  if(++u8_ch_st_uri>5)u8_ch_st_uri=0;
+  switch (u8_ch_st_uri)
+    {
+    case 0:
+      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/"
+                       "bycodec/mp3?limit=1&order=random";
+      break;
+    case 1:
+      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
+                       "rock?codec=mp3&limit=1&order=random";
+      break;
+    case 2:
+      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
+                       "classic?codec=mp3&limit=1&order=random";
+      break;
+    case 3:
+      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
+                       "trance?codec=mp3&limit=1&order=random";
+      break;
+    case 4:
+      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
+                       "pop?codec=mp3&limit=1&order=random";
+      break;
+    case 5:
+      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/"
+                       "bycountry/rus?codec=mp3&limit=1&order=random";
+      break;
+    }
+  if (++u8_ch_st_uri > 5)
+    u8_ch_st_uri = 0;
   //
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);

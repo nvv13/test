@@ -4,32 +4,19 @@
  *
  * Description: main
  *
- * Date : 2022-06-05
+ * Date : 2023-04-25
  *****************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "wm_type_def.h"
-//#include "wm_uart.h"
+
 #include "wm_gpio.h"
-//#include "wm_hostspi.h"
-//#include "wm_socket.h"
-//#include "wm_sockets.h"
-//#include "wm_wifi.h"
-//#include "wm_hspi.h"
-//#include "wm_pwm.h"
-//#include "wm_params.h"
 #include "wm_osal.h"
-//#include "wm_netif.h"
-//#include "wm_efuse.h"
-//#include "wm_mem.h"
 #include "wm_regs.h"
-#include "wm_rtc.h"
 #include "wm_timer.h"
 #include "wm_watchdog.h"
-//#include "wm_cpu.h"
-//#include "csi_core.h"
+#include "wm_cpu.h"
 
 //#include "../../../../../../w_wifi_pass.h"
 //#define MY_WIFI_AP "bred8"
@@ -39,9 +26,7 @@
 
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
-#include "w_ntp.h"
 #include "w_wifi.h"
-
 
 #define DEMO_TASK_SIZE 2048
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
@@ -51,29 +36,29 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
 
-
 //****************************************************************************************************//
 static u8g2_t u8g2;
 static u8 u8_volume = 0; //
 static char buf_str_ind[10];
-static void display_refresh(void)
+static void
+display_refresh (void)
 {
-          u8g2_FirstPage (&u8g2);
-          do
-            {
-              u8g2_SetDrawColor (&u8g2, 1);
-              u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-              sprintf (buf_str_ind, "vol:%.3d", u8_volume);
-              u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
-              u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-              u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name());
-              u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags());
-              u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country());
-              u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec());
-              u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate());
-            }
-          while (u8g2_NextPage (&u8g2));
-
+  u8g2_FirstPage (&u8g2);
+  do
+    {
+      u8g2_SetDrawColor (&u8g2, 1);
+      u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+      sprintf (buf_str_ind, "vol:%.3d", u8_volume);
+      u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
+      u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+      u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name ());
+      u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags ());
+      u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country ());
+      u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec ());
+      u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate ());
+      //u8g2_DrawStr (&u8g2, 40, 60, my_recognize_ret_stationuuid ());
+    }
+  while (u8g2_NextPage (&u8g2));
 }
 
 //****************************************************************************************************//
@@ -120,7 +105,7 @@ demo_timer_irq (u8 *arg) //
 
               u8_volume = 100 - i_rotar;
               VS1053_setVolume (u8_volume);
-              display_refresh();
+              display_refresh ();
             }
           i_rotar_zero = 0;
           i_rotar_one = 0;
@@ -133,6 +118,7 @@ demo_timer_irq (u8 *arg) //
     {
       i_dreb_SW = 0; // от дребезга
     }
+
 }
 
 static void
@@ -261,7 +247,7 @@ demo_console_task (void *sdata)
   u8_volume = 80;
   i_rotar = 100 - u8_volume;
   VS1053_setVolume (u8_volume);
-  display_refresh();
+  display_refresh ();
 
   u8 u8_wifi_state = 0;
 
@@ -275,43 +261,24 @@ demo_console_task (void *sdata)
             u8_wifi_state = 1;
           else
             {
-              tls_os_time_delay (HZ*5);
+              tls_os_time_delay (HZ * 5);
             }
         }
 
-      u8 u8_ntp_state = 0;
-      while (u8_ntp_state == 0)
-        {
-          printf ("trying to get ntp\n");
-          if (u8_ntp_state == 0 && ntp_demo () == WM_SUCCESS)
-            u8_ntp_state = 1;
-          else
-            {
-              tls_os_time_delay (HZ*5);
-            }
-        }
-
-      struct tm tblock;
-      tls_get_rtc (&tblock);
 
       tls_watchdog_clr ();
-
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           my_recognize_http_reset ();
-          display_refresh();
-          http_get_web_station_by_random();
-          display_refresh();
+          display_refresh ();
+          http_get_web_station_by_random ();
+          display_refresh ();
 
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved ());
 
           tls_os_time_delay (HZ);
           tls_watchdog_clr ();
-          //tls_get_rtc (&tblock); // получаем текущее время
-          // printf("
-          // sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",tblock.tm_sec,tblock.tm_min,tblock.tm_hour,tblock.tm_mon+1,tblock.tm_year+1900);
-
         }
     }
 }
@@ -321,12 +288,11 @@ UserMain (void)
 {
   printf ("user task\n");
 
-  tls_sys_clk_set(CPU_CLK_240M);
+  tls_sys_clk_set (CPU_CLK_240M);
 
   tls_os_task_create (NULL, NULL, demo_console_task, NULL,
                       (void *)DemoTaskStk, /* task's stack start address */
                       DEMO_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
                       DEMO_TASK_PRIO, 0);
-
 }
