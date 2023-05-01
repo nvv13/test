@@ -15,6 +15,7 @@ extern "C"
   char *my_recognize_ret_country (void);
   char *my_recognize_ret_codec (void);
   char *my_recognize_ret_bitrate (void);
+  bool my_recognize_ret_https (void);
 
   int http_get_web_station_by_random (void);
   int http_get_web_station_by_stationuuid (char *in_stationuuid);

@@ -133,6 +133,12 @@ my_recognize_ret_bitrate (void)
   return s_bitrate;
 }
 
+
+bool my_recognize_ret_https (void)
+{
+  return (strstr(s_url_resolved,"https:")!=NULL);
+}
+
 void
 my_recognize_http_reset (void)
 {
@@ -404,6 +410,5 @@ http_get_web_station_by_random (void)
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);
   http_get (httpParams);
-  tls_mem_free (httpParams.Uri);
   return WM_SUCCESS;
 }
