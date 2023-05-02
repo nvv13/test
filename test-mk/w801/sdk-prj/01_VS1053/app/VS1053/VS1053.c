@@ -1262,6 +1262,7 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
   char *Buffer = NULL;
   HTTP_SESSION_HANDLE pHTTP;
   u32 nSndDataLen;
+  my_sost = VS1053_HW_INIT;
 
   Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
   if (Buffer == NULL)

@@ -9,6 +9,12 @@ extern "C"
   int flash_cfg_load_u16 (u16 *u16_value, u8 u8_index);
   int flash_cfg_store_u16 (u16 u16_value, u8 u8_index);
 
+  int flash_cfg_load_stantion_name (char *name_buf_len29, u8 u8_index);
+  int flash_cfg_store_stantion_name (char *name_buf_len28, u8 u8_index);
+
+  int flash_cfg_load_stantion_uuid (char *uuid_buf_len37, u8 u8_index);
+  int flash_cfg_store_stantion_uuid (char *uuid_buf_len36, u8 u8_index);
+
 #ifdef __cplusplus
 }
 #endif

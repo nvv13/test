@@ -133,10 +133,10 @@ my_recognize_ret_bitrate (void)
   return s_bitrate;
 }
 
-
-bool my_recognize_ret_https (void)
+bool
+my_recognize_ret_https (void)
 {
-  return (strstr(s_url_resolved,"https:")!=NULL);
+  return (strstr (s_url_resolved, "https:") != NULL);
 }
 
 void

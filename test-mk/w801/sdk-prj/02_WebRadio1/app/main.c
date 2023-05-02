@@ -11,12 +11,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "wm_type_def.h"
+
+#include "wm_cpu.h"
 #include "wm_gpio.h"
 #include "wm_osal.h"
 #include "wm_regs.h"
 #include "wm_timer.h"
 #include "wm_watchdog.h"
-#include "wm_cpu.h"
 
 //#include "../../../../../../w_wifi_pass.h"
 //#define MY_WIFI_AP "bred8"
@@ -38,6 +40,7 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 
 //****************************************************************************************************//
 static u8g2_t u8g2;
+static u8 i_switch_menu = 0;
 static u8 u8_volume = 0; //
 static char buf_str_ind[10];
 static void
@@ -47,16 +50,34 @@ display_refresh (void)
   do
     {
       u8g2_SetDrawColor (&u8g2, 1);
-      u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-      sprintf (buf_str_ind, "vol:%.3d", u8_volume);
-      u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
-      u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-      u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name ());
-      u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags ());
-      u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country ());
-      u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec ());
-      u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate ());
-      u8g2_DrawStr (&u8g2, 90, 60, (my_recognize_ret_https ()?"https":"http"));
+      if (i_switch_menu == 0)
+        {
+          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+          sprintf (buf_str_ind, "vol:%.3d", u8_volume);
+          u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
+          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name ());
+          u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags ());
+          u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country ());
+          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec ());
+          u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate ());
+
+          if (VS1053_status_get_status () == VS1053_PLAY)
+            u8g2_DrawStr (&u8g2, 90, 60,
+                          (my_recognize_ret_https () ? "https" : "http"));
+          else
+            {
+              u8g2_SetDrawColor (&u8g2, 1);
+              u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+              u8g2_DrawStr (&u8g2, 30, 45, "WAIT...");
+            }
+        }
+      else
+        {
+          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+          sprintf (buf_str_ind, "Menu");
+          u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
+        }
     }
   while (u8g2_NextPage (&u8g2));
 }
@@ -76,6 +97,9 @@ volatile static u16 i_rotar_one = 0;
 static u8 i_rotar_value = 0;
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 static u8 u8_enc_state = 0;
+volatile static u16 i_delay_SW_DBL_CLICK = 0;
+static const u16 i_pos_DBL_CLICK = 10000;
+volatile static u16 i_delay_WAIT = 0;
 
 static void
 demo_timer_irq (u8 *arg) //
@@ -119,6 +143,29 @@ demo_timer_irq (u8 *arg) //
       i_dreb_SW = 0; // от дребезга
     }
 
+  if (i_delay_SW_DBL_CLICK > 0)
+    {
+      if (i_delay_SW_DBL_CLICK++ > i_pos_DBL_CLICK)
+        {
+          i_delay_SW_DBL_CLICK = 0;
+          if (i_switch_menu == 0)
+            VS1053_stop_PlayMP3 ();
+        }
+    }
+
+  if (i_delay_WAIT > 0)
+    {
+      if (i_delay_WAIT++ > i_pos_DBL_CLICK)
+        {
+          if (VS1053_status_get_status () != VS1053_PLAY)
+            i_delay_WAIT = 1;
+          else
+            {
+              i_delay_WAIT = 0;
+              display_refresh ();
+            }
+        }
+    }
 }
 
 static void
@@ -131,7 +178,14 @@ KNOOB_SW_isr_callback (void *context)
       if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
         {
           i_dreb_SW = 1;
-          VS1053_stop_PlayMP3 ();
+          if (i_delay_SW_DBL_CLICK == 0)
+            i_delay_SW_DBL_CLICK = 1;
+          else
+            {
+              i_delay_SW_DBL_CLICK = 0;
+              i_switch_menu = ~i_switch_menu;
+              display_refresh ();
+            }
         }
     }
 }
@@ -265,7 +319,6 @@ demo_console_task (void *sdata)
             }
         }
 
-
       tls_watchdog_clr ();
 
       while (u8_wifi_state == 1) // основной цикл(2)
@@ -274,6 +327,7 @@ demo_console_task (void *sdata)
           display_refresh ();
           http_get_web_station_by_random ();
           display_refresh ();
+          i_delay_WAIT = 1;
 
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved ());
 
