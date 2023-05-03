@@ -17,9 +17,11 @@ Expansion – 2x 24-pin headers with
  1x SDIO host with support for SDIO 2.0, SDHC, MMC 4.2 (Configurable interface clock rate, support host rate 0~50MHz)
  1x SDIO device up to 200 Mbps (for 4 data line)
  Up to 6x UART
- 1x I2C
+ 1x I2C working frequency support can be configured, 100K-400K.
  1x high-speed SPI interface, supporting up to 50MHz
- 1x master/slave SPI up to 20MHz
+ 1x master/slave SPI up to 20MHz (8-word-deep FIFOs for transmit and receive paths,
+    Support full duplex and half duplex, The master device supports bit transmission,
+    up to 65536 bit transmission (8192 byte) )
  LCD controller with support for 4×32 interface
  1x I2S
  Up to 4x ADC (16-bit, 1KHz sampling rate)
@@ -32,7 +34,23 @@ Misc – Reset and Boot buttons, 7x user LEDs including two connected to PWM cap
 Power Supply – 5V via USB-C port
 Power consumption – Standby: Less than 10 uA for W801 MCU, not the board itself
 Dimensions – About 70 x 26 mm
+
+
+ Timers - Microsecond and millisecond timing (the number of counts is configured according to the clock frequency),
+          and six configurable 32-bit counters are realized. When the counting configured by the corresponding
+          calculator is completed When successful, a corresponding interrupt is generated.
+
+ Watchdog Controller
+
+ PWM Controller - 5-channel PWM signal generation function
+          2-channel input signal capture function (PWM0 and PWM4 two channels)
+          Frequency range: 3Hz~160KHz
+          Maximum accuracy of duty cycle: 1/256, counter width for inserting dead zone: 8bit
+
+
 ~~~
+
+
 
 
 фото 1 

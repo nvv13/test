@@ -40,9 +40,94 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 
 //****************************************************************************************************//
 static u8g2_t u8g2;
+
 static u8 i_switch_menu = 0;
-static u8 u8_volume = 0; //
-static char buf_str_ind[10];
+static int i_menu = 0;
+
+static u16 u16_volume = 0; //
+static char buf_str_ind[50];
+static char stantion_uuid[39];
+static void display_refresh (void);
+
+#define MENU_STORE_VOLUME 0
+
+#define MENU_LOAD_ST0 1
+#define MENU_STORE_ST0 2
+#define MENU_LOAD_ST1 3
+#define MENU_STORE_ST1 4
+#define MENU_LOAD_ST2 5
+#define MENU_STORE_ST2 6
+#define MENU_LOAD_ST3 7
+#define MENU_STORE_ST3 8
+
+void
+MenuActionClick (void)
+{
+  switch (i_menu)
+    {
+    case MENU_STORE_VOLUME:
+      {
+        flash_cfg_store_u16 (u16_volume, MENU_STORE_VOLUME);
+      };
+      break;
+    case MENU_LOAD_ST0:
+      {
+        flash_cfg_load_stantion_uuid (stantion_uuid, 0);
+        VS1053_stop_PlayMP3 ();
+      };
+      break;
+    case MENU_STORE_ST0:
+      {
+        flash_cfg_store_stantion_name (my_recognize_ret_name (), 0);
+        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 0);
+        display_refresh ();
+      };
+      break;
+
+    case MENU_LOAD_ST1:
+      {
+        flash_cfg_load_stantion_uuid (stantion_uuid, 1);
+        VS1053_stop_PlayMP3 ();
+      };
+      break;
+    case MENU_STORE_ST1:
+      {
+        flash_cfg_store_stantion_name (my_recognize_ret_name (), 1);
+        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 1);
+        display_refresh ();
+      };
+      break;
+
+    case MENU_LOAD_ST2:
+      {
+        flash_cfg_load_stantion_uuid (stantion_uuid, 2);
+        VS1053_stop_PlayMP3 ();
+      };
+      break;
+    case MENU_STORE_ST2:
+      {
+        flash_cfg_store_stantion_name (my_recognize_ret_name (), 2);
+        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 2);
+        display_refresh ();
+      };
+      break;
+
+    case MENU_LOAD_ST3:
+      {
+        flash_cfg_load_stantion_uuid (stantion_uuid, 3);
+        VS1053_stop_PlayMP3 ();
+      };
+      break;
+    case MENU_STORE_ST3:
+      {
+        flash_cfg_store_stantion_name (my_recognize_ret_name (), 3);
+        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 3);
+        display_refresh ();
+      };
+      break;
+    }
+}
+
 static void
 display_refresh (void)
 {
@@ -53,7 +138,7 @@ display_refresh (void)
       if (i_switch_menu == 0)
         {
           u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-          sprintf (buf_str_ind, "vol:%.3d", u8_volume);
+          sprintf (buf_str_ind, "vol:%.3d", u16_volume);
           u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
           u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name ());
@@ -76,7 +161,74 @@ display_refresh (void)
         {
           u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
           sprintf (buf_str_ind, "Menu");
-          u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
+          u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
+          //
+
+          if (i_menu == MENU_STORE_VOLUME)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 61, 16, "Store Vol");
+
+          if (i_menu == MENU_LOAD_ST0)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 1, 30, "0.");
+          flash_cfg_load_stantion_name (buf_str_ind, 0);
+          buf_str_ind[14]=0;
+          u8g2_DrawStr (&u8g2, 10, 30, buf_str_ind);
+
+          if (i_menu == MENU_STORE_ST0)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 100, 30, "St0");
+
+          if (i_menu == MENU_LOAD_ST1)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 1, 40, "1.");
+          flash_cfg_load_stantion_name (buf_str_ind, 1);
+          buf_str_ind[14]=0;
+          u8g2_DrawStr (&u8g2, 10, 40, buf_str_ind);
+
+          if (i_menu == MENU_STORE_ST1)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 100, 40, "St1");
+
+          if (i_menu == MENU_LOAD_ST2)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 1, 50, "2.");
+          flash_cfg_load_stantion_name (buf_str_ind, 2);
+          buf_str_ind[14]=0;
+          u8g2_DrawStr (&u8g2, 10, 50, buf_str_ind);
+
+          if (i_menu == MENU_STORE_ST2)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 100, 50, "St2");
+
+          if (i_menu == MENU_LOAD_ST3)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 1, 60, "3.");
+          flash_cfg_load_stantion_name (buf_str_ind, 3);
+          buf_str_ind[14]=0;
+          u8g2_DrawStr (&u8g2, 10, 60, buf_str_ind);
+
+          if (i_menu == MENU_STORE_ST3)
+            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+          else
+            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 100, 60, "St3");
         }
     }
   while (u8g2_NextPage (&u8g2));
@@ -88,18 +240,24 @@ display_refresh (void)
 #define KNOOB_DT WM_IO_PA_12
 #define KNOOB_CLK WM_IO_PA_13
 
-volatile static u16 i_dreb_CLK = 0; // от дребезга
-static const u16 i_pos_dreb_CLK = 3;
-static const u16 i_pos_dreb_SW = 300; //кнопка
+static const u16 i_pos_dreb_CLK = 3; // 0,3 MS
+volatile static u16 i_dreb_CLK = 0;  // от дребезга
+
 static int i_rotar = 10;
 volatile static u16 i_rotar_zero = 0;
 volatile static u16 i_rotar_one = 0;
-static u8 i_rotar_value = 0;
-volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 static u8 u8_enc_state = 0;
-volatile static u16 i_delay_SW_DBL_CLICK = 0;
-static const u16 i_pos_DBL_CLICK = 10000;
-volatile static u16 i_delay_WAIT = 0;
+
+static const u16 i_pos_dreb_SW
+    = 300; //кнопка,таймер 100 Мкс, значит будет 30 миллисекунд.
+volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
+
+static const u16 i_pos_DBL_CLICK = 10000; // таймер 100 Мкс, значит будет 1 сек
+volatile static u16 i_delay_SW_DBL_CLICK
+    = 0; // двойной клик, переход в меню и обратно
+
+volatile static u16 i_delay_WAIT
+    = 0; //если не 0, значит ждем данных с сервера веб станции
 
 static void
 demo_timer_irq (u8 *arg) //
@@ -117,23 +275,37 @@ demo_timer_irq (u8 *arg) //
           if (u8_enc_state)
             {
 
-              if (i_rotar_zero > i_rotar_one)
-                i_rotar--;
+              if (i_switch_menu == 0)
+                {
+                  if (i_rotar_zero > i_rotar_one)
+                    i_rotar--;
+                  else
+                    i_rotar++;
+
+                  if (i_rotar < 0)
+                    i_rotar = 0;
+                  if (i_rotar > 100)
+                    i_rotar = 100;
+
+                  u16_volume = 100 - i_rotar;
+                  VS1053_setVolume (u16_volume);
+                }
               else
-                i_rotar++;
+                {
+                  if (i_rotar_zero > i_rotar_one)
+                    i_menu--;
+                  else
+                    i_menu++;
+                  if (i_menu < 0)
+                    i_menu = 0;
+                  if (i_menu > 8)
+                    i_menu = 8;
+                }
 
-              if (i_rotar < 0)
-                i_rotar = 0;
-              if (i_rotar > 100)
-                i_rotar = 100;
-
-              u8_volume = 100 - i_rotar;
-              VS1053_setVolume (u8_volume);
               display_refresh ();
             }
           i_rotar_zero = 0;
           i_rotar_one = 0;
-          i_rotar_value = 1;
         }
     }
 
@@ -149,7 +321,12 @@ demo_timer_irq (u8 *arg) //
         {
           i_delay_SW_DBL_CLICK = 0;
           if (i_switch_menu == 0)
-            VS1053_stop_PlayMP3 ();
+            {
+              stantion_uuid[0] = 0;
+              VS1053_stop_PlayMP3 ();
+            }
+          else
+            MenuActionClick ();
         }
     }
 
@@ -184,6 +361,7 @@ KNOOB_SW_isr_callback (void *context)
             {
               i_delay_SW_DBL_CLICK = 0;
               i_switch_menu = ~i_switch_menu;
+              i_menu = 0;
               display_refresh ();
             }
         }
@@ -216,8 +394,7 @@ demo_console_task (void *sdata)
 
   printf ("wifi test app\n");
 
-  tls_watchdog_init (30 * 1000
-                     * 1000); // u32 usec около 6 сек --около 1-2 минуты
+  tls_watchdog_init (20 * 1000 * 1000); // u32 usec microseconds, около 20 сек
 
   puts ("Initializing to I2C oled Display.");
 
@@ -239,7 +416,7 @@ demo_console_task (void *sdata)
 
     .i2c_scl = WM_IO_PA_01,
     .i2c_sda = WM_IO_PA_04,
-    .i2c_freq = 100000 // частота i2c в герцах
+    .i2c_freq = 200000 // частота i2c в герцах
 
   };
   u8g2_SetUserPtr (&u8g2, &user_data_8x8);
@@ -255,7 +432,7 @@ demo_console_task (void *sdata)
     .dcs_pin = WM_IO_PB_22,  /* ->xdcs SDI Chip Select pin */
     .dreq_pin = WM_IO_PB_18, /* <-dreq Data Request pin */
 
-    .spi_cs = WM_IO_PB_23, /* not wire */
+    .spi_cs = WM_IO_PB_23, /* not wire, но назначить надо */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
     .spi_di = WM_IO_PB_03, /* master miso di <- miso slave, на макетке board
                               HLK-W801-KIT-V1.1 работает только WM_IO_PB_03  */
@@ -277,9 +454,9 @@ demo_console_task (void *sdata)
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
-  // timer_cfg.unit = TLS_TIMER_UNIT_MS;
-  timer_cfg.unit = TLS_TIMER_UNIT_US;
-  timer_cfg.timeout = 100;
+  // timer_cfg.unit = TLS_TIMER_UNIT_MS; // MS или Миллисекунды = 10^-3
+  timer_cfg.unit = TLS_TIMER_UNIT_US; // US или Микросекунды = 10^-6
+  timer_cfg.timeout = 100; // 100 US, значит частота 10KHz
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -298,9 +475,12 @@ demo_console_task (void *sdata)
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   //
 
-  u8_volume = 80;
-  i_rotar = 100 - u8_volume;
-  VS1053_setVolume (u8_volume);
+  stantion_uuid[0] = 0;
+  flash_cfg_load_u16 (&u16_volume, MENU_STORE_VOLUME);
+  if (u16_volume > 100) //после обновления прошивки?
+    u16_volume = 80;
+  i_rotar = 100 - u16_volume;
+  VS1053_setVolume (u16_volume);
   display_refresh ();
 
   u8 u8_wifi_state = 0;
@@ -325,7 +505,12 @@ demo_console_task (void *sdata)
         {
           my_recognize_http_reset ();
           display_refresh ();
-          http_get_web_station_by_random ();
+
+          if (strlen (stantion_uuid) == 36)
+            http_get_web_station_by_stationuuid (stantion_uuid);
+          else
+            http_get_web_station_by_random ();
+
           display_refresh ();
           i_delay_WAIT = 1;
 

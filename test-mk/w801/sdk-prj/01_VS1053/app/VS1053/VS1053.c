@@ -1341,20 +1341,26 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
         {
           break;
         }
+      tls_os_time_delay (HZ);
       printf ("Start to receive data from remote server...\r\n");
 
-      my_sost = VS1053_PLAY;
-      //VS1053_data_mode_on ();
+      u16 u16_connect_timeout_sec=100;
+      if(strstr(ClientParams.Uri,"https")!=NULL)
+          u16_connect_timeout_sec=500;
+
+      if(my_sost != VS1053_QUERY_TO_STOP)my_sost = VS1053_PLAY;
+
       // Get the data until we get an error or end of stream code
       while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS) && my_sost == VS1053_PLAY)
         {
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
-          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 500, &nSize);
+          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, u16_connect_timeout_sec, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS && my_sost == VS1053_PLAY)
             break;
           //printf("%d\n", nTotal);
+          //VS1053_playChunk ((u8*)Buffer, nSize);
           VS1053_data_mode_on ();
           VS1053_await_data_request (); // Wait for space available
           SPI_writeBytes ((u8*)Buffer, nSize);

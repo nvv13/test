@@ -11,7 +11,7 @@
 #include "wm_internal_flash.h"
 
 #define USER_U16_FLASH_BUF_SIZE 256
-#define STANTION_ID_FLASH_BUF_SIZE 1024
+#define STANTION_ID_FLASH_BUF_SIZE 512 // 36+28 * 8
 
 int
 flash_cfg_load_u16 (u16 *u16_value, u8 u8_index)
@@ -79,9 +79,9 @@ flash_cfg_store_u16 (u16 u16_value, u8 u8_index)
 int
 flash_cfg_load_stantion_name (char *name_buf_len29, u8 u8_index)
 {
-  if (u8_index > 15)
+  if (u8_index > 7)
     {
-      printf ("\nflash_cfg_store_u16 error, invalid index (0...15) = %d\n",
+      printf ("\nflash_cfg_store_u16 error, invalid index (0...7) = %d\n",
               u8_index);
       return WM_FAILED;
     }
@@ -115,9 +115,9 @@ flash_cfg_load_stantion_name (char *name_buf_len29, u8 u8_index)
 int
 flash_cfg_store_stantion_name (char *name_buf_len28, u8 u8_index)
 {
-  if (u8_index > 15)
+  if (u8_index > 7)
     {
-      printf ("\nflash_cfg_store_u16 error, invalid index (0...15) = %d\n",
+      printf ("\nflash_cfg_store_u16 error, invalid index (0...7) = %d\n",
               u8_index);
       return WM_FAILED;
     }
@@ -154,9 +154,9 @@ flash_cfg_store_stantion_name (char *name_buf_len28, u8 u8_index)
 int
 flash_cfg_load_stantion_uuid (char *uuid_buf_len37, u8 u8_index)
 {
-  if (u8_index > 15)
+  if (u8_index > 7)
     {
-      printf ("\nflash_cfg_store_u16 error, invalid index (0...15) = %d\n",
+      printf ("\nflash_cfg_store_u16 error, invalid index (0...7) = %d\n",
               u8_index);
       return WM_FAILED;
     }
@@ -190,9 +190,9 @@ flash_cfg_load_stantion_uuid (char *uuid_buf_len37, u8 u8_index)
 int
 flash_cfg_store_stantion_uuid (char *uuid_buf_len36, u8 u8_index)
 {
-  if (u8_index > 15)
+  if (u8_index > 7)
     {
-      printf ("\nflash_cfg_store_u16 error, invalid index (0...15) = %d\n",
+      printf ("\nflash_cfg_store_u16 error, invalid index (0...7) = %d\n",
               u8_index);
       return WM_FAILED;
     }
