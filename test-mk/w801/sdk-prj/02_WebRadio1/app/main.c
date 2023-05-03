@@ -146,16 +146,8 @@ display_refresh (void)
           u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country ());
           u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec ());
           u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate ());
-
-          if (VS1053_status_get_status () == VS1053_PLAY)
-            u8g2_DrawStr (&u8g2, 90, 60,
-                          (my_recognize_ret_https () ? "https" : "http"));
-          else
-            {
-              u8g2_SetDrawColor (&u8g2, 1);
-              u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-              u8g2_DrawStr (&u8g2, 30, 45, "WAIT...");
-            }
+          u8g2_DrawStr (&u8g2, 90, 60,
+                        (my_recognize_ret_https () ? "https" : "http"));
         }
       else
         {
@@ -176,7 +168,7 @@ display_refresh (void)
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 1, 30, "0.");
           flash_cfg_load_stantion_name (buf_str_ind, 0);
-          buf_str_ind[14]=0;
+          buf_str_ind[14] = 0;
           u8g2_DrawStr (&u8g2, 10, 30, buf_str_ind);
 
           if (i_menu == MENU_STORE_ST0)
@@ -191,7 +183,7 @@ display_refresh (void)
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 1, 40, "1.");
           flash_cfg_load_stantion_name (buf_str_ind, 1);
-          buf_str_ind[14]=0;
+          buf_str_ind[14] = 0;
           u8g2_DrawStr (&u8g2, 10, 40, buf_str_ind);
 
           if (i_menu == MENU_STORE_ST1)
@@ -206,7 +198,7 @@ display_refresh (void)
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 1, 50, "2.");
           flash_cfg_load_stantion_name (buf_str_ind, 2);
-          buf_str_ind[14]=0;
+          buf_str_ind[14] = 0;
           u8g2_DrawStr (&u8g2, 10, 50, buf_str_ind);
 
           if (i_menu == MENU_STORE_ST2)
@@ -221,7 +213,7 @@ display_refresh (void)
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 1, 60, "3.");
           flash_cfg_load_stantion_name (buf_str_ind, 3);
-          buf_str_ind[14]=0;
+          buf_str_ind[14] = 0;
           u8g2_DrawStr (&u8g2, 10, 60, buf_str_ind);
 
           if (i_menu == MENU_STORE_ST3)
@@ -229,6 +221,13 @@ display_refresh (void)
           else
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 100, 60, "St3");
+        }
+
+      if (VS1053_status_get_status () != VS1053_PLAY)
+        {
+          u8g2_SetDrawColor (&u8g2, 1);
+          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+          u8g2_DrawStr (&u8g2, 30, 45, "WAIT...");
         }
     }
   while (u8g2_NextPage (&u8g2));
@@ -259,8 +258,9 @@ volatile static u16 i_delay_SW_DBL_CLICK
 volatile static u16 i_delay_WAIT
     = 0; //если не 0, значит ждем данных с сервера веб станции
 
-static const u16 i_pos_delay_volume = 3000; // таймер 100 Мкс, значит будет 0.3 сек
-volatile static u16 i_delay_volume=0;
+static const u16 i_pos_delay_volume
+    = 3000; // таймер 100 Мкс, значит будет 0.3 сек
+volatile static u16 i_delay_volume = 0;
 
 static void
 demo_timer_irq (u8 *arg) //
@@ -291,10 +291,10 @@ demo_timer_irq (u8 *arg) //
                     i_rotar = 100;
 
                   u16_volume = 100 - i_rotar;
-                  if(i_delay_volume==0) 
+                  if (i_delay_volume == 0)
                     {
-                    i_delay_volume = 1;
-                    VS1053_setVolume (u16_volume);
+                      i_delay_volume = 1;
+                      VS1053_setVolume (u16_volume);
                     }
                 }
               else
@@ -322,7 +322,9 @@ demo_timer_irq (u8 *arg) //
       i_dreb_SW = 0; // от дребезга
     }
 
-  if (i_delay_SW_DBL_CLICK > 0) //если время двойного нажатия просрочено (1 сек), то действие в зависимости от , в меню мы или нет
+  if (i_delay_SW_DBL_CLICK
+      > 0) //если время двойного нажатия просрочено (1 сек), то действие в
+           //зависимости от , в меню мы или нет
     {
       if (i_delay_SW_DBL_CLICK++ > i_pos_DBL_CLICK)
         {
@@ -337,17 +339,18 @@ demo_timer_irq (u8 *arg) //
         }
     }
 
-  if (i_delay_volume > 0) // регулятор громкости, защитим от зависаний, слишком быстро - нельзя
+  if (i_delay_volume > 0) // регулятор громкости, защитим от зависаний, слишком
+                          // быстро - нельзя
     {
       if (i_delay_volume++ > i_pos_delay_volume)
         {
-           i_delay_volume = 0;
-           VS1053_setVolume (u16_volume);
+          i_delay_volume = 0;
+          VS1053_setVolume (u16_volume);
         }
     }
 
-
-  if (i_delay_WAIT > 0) // ждем (1 сек) для того чтоб убрать надпись "WAIT..." на дисплее, если уже воспроизведение
+  if (i_delay_WAIT > 0) // ждем (1 сек) для того чтоб убрать надпись "WAIT..."
+                        // на дисплее, если уже воспроизведение
     {
       if (i_delay_WAIT++ > i_pos_DBL_CLICK)
         {
