@@ -259,6 +259,9 @@ volatile static u16 i_delay_SW_DBL_CLICK
 volatile static u16 i_delay_WAIT
     = 0; //если не 0, значит ждем данных с сервера веб станции
 
+static const u16 i_pos_delay_volume = 3000; // таймер 100 Мкс, значит будет 0.3 сек
+volatile static u16 i_delay_volume=0;
+
 static void
 demo_timer_irq (u8 *arg) //
 {
@@ -288,7 +291,11 @@ demo_timer_irq (u8 *arg) //
                     i_rotar = 100;
 
                   u16_volume = 100 - i_rotar;
-                  VS1053_setVolume (u16_volume);
+                  if(i_delay_volume==0) 
+                    {
+                    i_delay_volume = 1;
+                    VS1053_setVolume (u16_volume);
+                    }
                 }
               else
                 {
@@ -315,7 +322,7 @@ demo_timer_irq (u8 *arg) //
       i_dreb_SW = 0; // от дребезга
     }
 
-  if (i_delay_SW_DBL_CLICK > 0)
+  if (i_delay_SW_DBL_CLICK > 0) //если время двойного нажатия просрочено (1 сек), то действие в зависимости от , в меню мы или нет
     {
       if (i_delay_SW_DBL_CLICK++ > i_pos_DBL_CLICK)
         {
@@ -330,7 +337,17 @@ demo_timer_irq (u8 *arg) //
         }
     }
 
-  if (i_delay_WAIT > 0)
+  if (i_delay_volume > 0) // регулятор громкости, защитим от зависаний, слишком быстро - нельзя
+    {
+      if (i_delay_volume++ > i_pos_delay_volume)
+        {
+           i_delay_volume = 0;
+           VS1053_setVolume (u16_volume);
+        }
+    }
+
+
+  if (i_delay_WAIT > 0) // ждем (1 сек) для того чтоб убрать надпись "WAIT..." на дисплее, если уже воспроизведение
     {
       if (i_delay_WAIT++ > i_pos_DBL_CLICK)
         {
