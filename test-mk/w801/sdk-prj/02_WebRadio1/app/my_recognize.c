@@ -389,7 +389,6 @@ http_get_web_station_by_random (void)
 {
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));
-    u8_ch_st_uri = 5;
   switch (u8_ch_st_uri)
     {
     case 0:
