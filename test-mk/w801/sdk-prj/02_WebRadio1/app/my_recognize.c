@@ -421,7 +421,7 @@ http_get_web_station_by_random (void)
     {
     case 0:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/"
-                       "bycodec/mp3?limit=1&order=random";
+                       "bycountry/japan?limit=1&order=random";
       break;
     case 1:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
