@@ -101,7 +101,7 @@ display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
   u8g2_DrawStr (&u8g2, 1, 30 + u8_stpos * 10, buf_str_ind);
   flash_cfg_load_stantion_name (buf_str_ind, (u8_Page_Disp * 4 + u8_stpos));
   buf_str_ind[14] = 0;
-  u8g2_DrawStr (&u8g2, 16, 30 + u8_stpos * 10, buf_str_ind);
+  u8g2_DrawUTF8 (&u8g2, 16, 30 + u8_stpos * 10, buf_str_ind);
 
   if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 == 0 && i_menu !=0)
     u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
@@ -127,8 +127,8 @@ display_refresh (void)
           sprintf (buf_str_ind, "vol:%.3d", u16_volume);
           u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
           u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 1, 30, my_recognize_ret_name ());
-          u8g2_DrawStr (&u8g2, 1, 40, my_recognize_ret_tags ());
+          u8g2_DrawUTF8 (&u8g2, 1, 30, my_recognize_ret_name ());
+          u8g2_DrawUTF8 (&u8g2, 1, 40, my_recognize_ret_tags ());
           u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country ());
           u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec ());
           u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate ());
