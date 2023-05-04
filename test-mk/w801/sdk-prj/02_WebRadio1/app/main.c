@@ -47,86 +47,72 @@ static int i_menu = 0;
 static u16 u16_volume = 0; //
 static char buf_str_ind[50];
 static char stantion_uuid[39];
+static int i_find_stantion_id = -1;
+
 static void display_refresh (void);
 
 #define MENU_STORE_VOLUME 0
-
-#define MENU_LOAD_ST0 1
-#define MENU_STORE_ST0 2
-#define MENU_LOAD_ST1 3
-#define MENU_STORE_ST1 4
-#define MENU_LOAD_ST2 5
-#define MENU_STORE_ST2 6
-#define MENU_LOAD_ST3 7
-#define MENU_STORE_ST3 8
+#define MENU_MAX_POS (28 * 2)
 
 void
 MenuActionClick (void)
 {
-  switch (i_menu)
+  if (i_menu == MENU_STORE_VOLUME)
+    flash_cfg_store_u16 (u16_volume, MENU_STORE_VOLUME);
+  else
     {
-    case MENU_STORE_VOLUME:
-      {
-        flash_cfg_store_u16 (u16_volume, MENU_STORE_VOLUME);
-      };
-      break;
-    case MENU_LOAD_ST0:
-      {
-        flash_cfg_load_stantion_uuid (stantion_uuid, 0);
-        VS1053_stop_PlayMP3 ();
-      };
-      break;
-    case MENU_STORE_ST0:
-      {
-        flash_cfg_store_stantion_name (my_recognize_ret_name (), 0);
-        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 0);
-        display_refresh ();
-      };
-      break;
-
-    case MENU_LOAD_ST1:
-      {
-        flash_cfg_load_stantion_uuid (stantion_uuid, 1);
-        VS1053_stop_PlayMP3 ();
-      };
-      break;
-    case MENU_STORE_ST1:
-      {
-        flash_cfg_store_stantion_name (my_recognize_ret_name (), 1);
-        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 1);
-        display_refresh ();
-      };
-      break;
-
-    case MENU_LOAD_ST2:
-      {
-        flash_cfg_load_stantion_uuid (stantion_uuid, 2);
-        VS1053_stop_PlayMP3 ();
-      };
-      break;
-    case MENU_STORE_ST2:
-      {
-        flash_cfg_store_stantion_name (my_recognize_ret_name (), 2);
-        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 2);
-        display_refresh ();
-      };
-      break;
-
-    case MENU_LOAD_ST3:
-      {
-        flash_cfg_load_stantion_uuid (stantion_uuid, 3);
-        VS1053_stop_PlayMP3 ();
-      };
-      break;
-    case MENU_STORE_ST3:
-      {
-        flash_cfg_store_stantion_name (my_recognize_ret_name (), 3);
-        flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (), 3);
-        display_refresh ();
-      };
-      break;
+      u8 u8_stantion_id = (i_menu / 2);
+      if ((u8_stantion_id * 2) == i_menu && u8_stantion_id>0)
+        u8_stantion_id--;
+      //
+      //printf ("MenuActionClick i_menu %d,i_menu2 %d,u8_stantion_id %d\n",i_menu,i_menu % 2,u8_stantion_id);
+      if (i_menu % 2 != 0)
+        {
+          flash_cfg_load_stantion_uuid (stantion_uuid, u8_stantion_id);
+          VS1053_stop_PlayMP3 ();
+        }
+      else
+        {
+          i_find_stantion_id = flash_cfg_find_stantion_id_by_uuid (
+              my_recognize_ret_stationuuid ());
+          if (i_find_stantion_id == -1)
+            {
+              flash_cfg_store_stantion_name (my_recognize_ret_name (),
+                                             u8_stantion_id);
+              flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (),
+                                             u8_stantion_id);
+            }
+          //printf ("i_find_stantion_id %d\n",i_find_stantion_id);
+          display_refresh ();
+        }
     }
 }
+
+static void
+display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
+{
+  u8 u8_Page_Disp = u8_stantion_id / 4; //по 4 станции влезает на дисплей
+
+  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 != 0 && i_menu !=0)
+    u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+  else
+    u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+  sprintf (buf_str_ind, "%.2d.", (u8_Page_Disp * 4 + u8_stpos));
+  u8g2_DrawStr (&u8g2, 1, 30 + u8_stpos * 10, buf_str_ind);
+  flash_cfg_load_stantion_name (buf_str_ind, (u8_Page_Disp * 4 + u8_stpos));
+  buf_str_ind[14] = 0;
+  u8g2_DrawStr (&u8g2, 16, 30 + u8_stpos * 10, buf_str_ind);
+
+  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 == 0 && i_menu !=0)
+    u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+  else
+    u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+  sprintf (buf_str_ind, "St%.2d", (u8_Page_Disp * 4 + u8_stpos));
+  u8g2_DrawStr (&u8g2, 100, 30 + u8_stpos * 10, buf_str_ind);
+}
+
+volatile static u16 i_delay_WAIT
+    = 0; //если не 0, значит ждем данных с сервера веб станции
 
 static void
 display_refresh (void)
@@ -156,71 +142,33 @@ display_refresh (void)
           u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
           //
 
+          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          sprintf (buf_str_ind, "%d", i_menu);
+          u8g2_DrawStr (&u8g2, 65, 10, buf_str_ind);
+
           if (i_menu == MENU_STORE_VOLUME)
             u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
           else
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 61, 16, "Store Vol");
+          u8g2_DrawStr (&u8g2, 65, 20, "Store Vol");
 
-          if (i_menu == MENU_LOAD_ST0)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 1, 30, "0.");
-          flash_cfg_load_stantion_name (buf_str_ind, 0);
-          buf_str_ind[14] = 0;
-          u8g2_DrawStr (&u8g2, 10, 30, buf_str_ind);
+          u8 u8_stantion_id = (i_menu / 2);
+          if ((u8_stantion_id * 2) == i_menu && u8_stantion_id>0)
+            u8_stantion_id--;
+          display_menu_stantion_pos (u8_stantion_id, 0);
+          display_menu_stantion_pos (u8_stantion_id, 1);
+          display_menu_stantion_pos (u8_stantion_id, 2);
+          display_menu_stantion_pos (u8_stantion_id, 3);
 
-          if (i_menu == MENU_STORE_ST0)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 100, 30, "St0");
-
-          if (i_menu == MENU_LOAD_ST1)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 1, 40, "1.");
-          flash_cfg_load_stantion_name (buf_str_ind, 1);
-          buf_str_ind[14] = 0;
-          u8g2_DrawStr (&u8g2, 10, 40, buf_str_ind);
-
-          if (i_menu == MENU_STORE_ST1)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 100, 40, "St1");
-
-          if (i_menu == MENU_LOAD_ST2)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 1, 50, "2.");
-          flash_cfg_load_stantion_name (buf_str_ind, 2);
-          buf_str_ind[14] = 0;
-          u8g2_DrawStr (&u8g2, 10, 50, buf_str_ind);
-
-          if (i_menu == MENU_STORE_ST2)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 100, 50, "St2");
-
-          if (i_menu == MENU_LOAD_ST3)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 1, 60, "3.");
-          flash_cfg_load_stantion_name (buf_str_ind, 3);
-          buf_str_ind[14] = 0;
-          u8g2_DrawStr (&u8g2, 10, 60, buf_str_ind);
-
-          if (i_menu == MENU_STORE_ST3)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 100, 60, "St3");
+          if (i_find_stantion_id >= 0)
+            {
+              u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+              sprintf (buf_str_ind, "St%.2d.OVER(%.2d)", u8_stantion_id,
+                       i_find_stantion_id);
+              u8g2_DrawStr (&u8g2, 1, 45, buf_str_ind);
+              i_find_stantion_id = -1;
+              i_delay_WAIT = 1;
+            }
         }
 
       if (VS1053_status_get_status () != VS1053_PLAY)
@@ -239,7 +187,7 @@ display_refresh (void)
 #define KNOOB_DT WM_IO_PA_12
 #define KNOOB_CLK WM_IO_PA_13
 
-static const u16 i_pos_dreb_CLK = 3; // 0,3 MS
+static const u16 i_pos_dreb_CLK = 1; // таймер 300 Мкс, значит будет 300 MKs
 volatile static u16 i_dreb_CLK = 0;  // от дребезга
 
 static int i_rotar = 10;
@@ -248,18 +196,15 @@ volatile static u16 i_rotar_one = 0;
 static u8 u8_enc_state = 0;
 
 static const u16 i_pos_dreb_SW
-    = 300; //кнопка,таймер 100 Мкс, значит будет 30 миллисекунд.
+    = 600; //кнопка,таймер 300 Мкс, значит будет 120 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
-static const u16 i_pos_DBL_CLICK = 10000; // таймер 100 Мкс, значит будет 1 сек
+static const u16 i_pos_DBL_CLICK = 3000; // таймер 300 Мкс, значит будет 0.9 сек
 volatile static u16 i_delay_SW_DBL_CLICK
     = 0; // двойной клик, переход в меню и обратно
 
-volatile static u16 i_delay_WAIT
-    = 0; //если не 0, значит ждем данных с сервера веб станции
-
 static const u16 i_pos_delay_volume
-    = 3000; // таймер 100 Мкс, значит будет 0.3 сек
+    = 6000; // таймер 300 Мкс, значит будет 0.9 сек
 volatile static u16 i_delay_volume = 0;
 
 static void
@@ -305,8 +250,8 @@ demo_timer_irq (u8 *arg) //
                     i_menu++;
                   if (i_menu < 0)
                     i_menu = 0;
-                  if (i_menu > 8)
-                    i_menu = 8;
+                  if (i_menu > MENU_MAX_POS)
+                    i_menu = MENU_MAX_POS;
                 }
 
               display_refresh ();
@@ -436,7 +381,7 @@ demo_console_task (void *sdata)
 
     .i2c_scl = WM_IO_PA_01,
     .i2c_sda = WM_IO_PA_04,
-    .i2c_freq = 200000 // частота i2c в герцах
+    .i2c_freq = 100000 // частота i2c в герцах
 
   };
   u8g2_SetUserPtr (&u8g2, &user_data_8x8);
@@ -476,7 +421,7 @@ demo_console_task (void *sdata)
   struct tls_timer_cfg timer_cfg;
   // timer_cfg.unit = TLS_TIMER_UNIT_MS; // MS или Миллисекунды = 10^-3
   timer_cfg.unit = TLS_TIMER_UNIT_US; // US или Микросекунды = 10^-6
-  timer_cfg.timeout = 100; // 100 US, значит частота 10KHz
+  timer_cfg.timeout = 300; // 100 US, значит частота 10KHz
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -527,7 +472,10 @@ demo_console_task (void *sdata)
           display_refresh ();
 
           if (strlen (stantion_uuid) == 36)
+            {
             http_get_web_station_by_stationuuid (stantion_uuid);
+            stantion_uuid[0] = 0;
+            }
           else
             http_get_web_station_by_random ();
 

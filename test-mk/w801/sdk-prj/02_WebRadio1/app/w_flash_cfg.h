@@ -15,6 +15,8 @@ extern "C"
   int flash_cfg_load_stantion_uuid (char *uuid_buf_len37, u8 u8_index);
   int flash_cfg_store_stantion_uuid (char *uuid_buf_len36, u8 u8_index);
 
+  int flash_cfg_find_stantion_id_by_uuid (char *uuid_buf_len36);
+
 #ifdef __cplusplus
 }
 #endif

@@ -55,6 +55,7 @@ $ wget
 #include "wm_type_def.h"
 
 #include "my_recognize.h"
+#include "n_utf8_to_win1251.h"
 
 static const char *c_stationuuid = "\"stationuuid\":\"";
 static u16 i_POS_stationuuid = 0;
@@ -100,6 +101,10 @@ my_recognize_ret_stationuuid (void)
 char *
 my_recognize_ret_name (void)
 {
+  if (strlen (s_name) == 0)
+    {
+      return s_tags;
+    }
   return s_name;
 }
 
@@ -332,6 +337,13 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
   while (0); // Run only once
   tls_mem_free (Buffer);
 
+  if (strlen ((char *)s_name) > 2)
+    n_convert_utf8_to_windows1251 ((char *)s_name, (char *)s_name,
+                                   strlen ((char *)s_name));
+  if (strlen ((char *)s_tags) > 2)
+    n_convert_utf8_to_windows1251 ((char *)s_tags, (char *)s_tags,
+                                   strlen ((char *)s_tags));
+
   if (pHTTP)
     HTTPClientCloseRequest (&pHTTP);
   if (ClientParams.Verbose == TRUE)
@@ -377,6 +389,7 @@ http_get_web_station_by_random (void)
 {
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));
+    u8_ch_st_uri = 5;
   switch (u8_ch_st_uri)
     {
     case 0:
@@ -385,23 +398,23 @@ http_get_web_station_by_random (void)
       break;
     case 1:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "rock?codec=mp3&limit=1&order=random";
+                       "rock?limit=1&order=random";
       break;
     case 2:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "classic?codec=mp3&limit=1&order=random";
+                       "classic?limit=1&order=random";
       break;
     case 3:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "trance?codec=mp3&limit=1&order=random";
+                       "trance?limit=1&order=random";
       break;
     case 4:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "pop?codec=mp3&limit=1&order=random";
+                       "pop?limit=1&order=random";
       break;
     case 5:
       httpParams.Uri = "http://all.api.radio-browser.info/json/stations/"
-                       "bycountry/rus?codec=mp3&limit=1&order=random";
+                       "bycountry/rus?limit=1&order=random";
       break;
     }
   if (++u8_ch_st_uri > 5)
