@@ -376,44 +376,70 @@ http_get_web_station_by_stationuuid (char *in_stationuuid)
 }
 
 static u8 u8_ch_st_uri = 0;
+static u8 u8_ch_st_ord = 0;
 
 int
 http_get_web_station_by_random (void)
 {
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));
+
+  char *s_tag;
   switch (u8_ch_st_uri)
     {
     case 0:
-      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/"
-                       "bytag/video?limit=1&order=random";
+      s_tag="organ";
       break;
     case 1:
-      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "rock?limit=1&order=random";
+      s_tag= "piano";
       break;
     case 2:
-      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "classic?limit=1&order=random";
+      s_tag= "rock";
       break;
     case 3:
-      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "trance?limit=1&order=random";
+      s_tag= "classic";
       break;
     case 4:
-      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/bytag/"
-                       "pop?limit=1&order=random";
+      s_tag= "trance";
       break;
     case 5:
-      httpParams.Uri = "http://all.api.radio-browser.info/json/stations/"
-                       "bycountry/rus?limit=1&order=random";
+      s_tag= "pop";
       break;
+    case 6:
+      s_tag= "rus";
+      break;
+    case 7:
+      s_tag= "j-pop";
+      break;
+    case 8:
+      s_tag= "k-pop";
+      break;
+    default:s_tag= "top";
     }
-  if (++u8_ch_st_uri > 5)
+  if (++u8_ch_st_uri > 8)
+    {
     u8_ch_st_uri = 0;
+    u8_ch_st_ord=~u8_ch_st_ord;
+    }
+  char *s_order;
+  if(u8_ch_st_ord==0)
+    s_order="order=votes";
+    else
+    s_order="order=random";
   //
+  httpParams.Uri = (char *)tls_mem_alloc (128);
+  if (httpParams.Uri == NULL)
+    {
+      printf ("malloc error.\n");
+      return WM_FAILED;
+    }
+  memset (httpParams.Uri, 0, 128);
+  sprintf (httpParams.Uri,
+           "http://all.api.radio-browser.info/json/stations/bytag/%s?limit=1&%s",
+           s_tag,s_order);
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);
   http_get (httpParams);
+  tls_mem_free (httpParams.Uri);
   return WM_SUCCESS;
 }
