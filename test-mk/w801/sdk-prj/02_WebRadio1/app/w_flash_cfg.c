@@ -242,7 +242,8 @@ flash_cfg_find_stantion_id_by_uuid (char *uuid_buf_len36)
   for (int i_cnt = 0; i_cnt < 28; i_cnt++)
     {
       flash_cfg_load_stantion_uuid (uuid_buf_len37, i_cnt);
-      if (strlen(uuid_buf_len37) == 36 && strlen(uuid_buf_len36) == 36 && strstr (uuid_buf_len36, uuid_buf_len37) != NULL)
+      if (strlen (uuid_buf_len37) == 36 && strlen (uuid_buf_len36) == 36
+          && strstr (uuid_buf_len36, uuid_buf_len37) != NULL)
         {
           return i_cnt;
         }

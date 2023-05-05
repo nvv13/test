@@ -48,6 +48,8 @@ static u16 u16_volume = 0; //
 static char buf_str_ind[50];
 static char stantion_uuid[39];
 static int i_find_stantion_id = -1;
+static char stantion_name_temp[50];
+static char stantion_uuid_temp[39];
 
 static void display_refresh (void);
 
@@ -62,10 +64,11 @@ MenuActionClick (void)
   else
     {
       u8 u8_stantion_id = (i_menu / 2);
-      if ((u8_stantion_id * 2) == i_menu && u8_stantion_id>0)
+      if ((u8_stantion_id * 2) == i_menu && u8_stantion_id > 0)
         u8_stantion_id--;
       //
-      //printf ("MenuActionClick i_menu %d,i_menu2 %d,u8_stantion_id %d\n",i_menu,i_menu % 2,u8_stantion_id);
+      // printf ("MenuActionClick i_menu %d,i_menu2 %d,u8_stantion_id
+      // %d\n",i_menu,i_menu % 2,u8_stantion_id);
       if (i_menu % 2 != 0)
         {
           flash_cfg_load_stantion_uuid (stantion_uuid, u8_stantion_id);
@@ -75,14 +78,31 @@ MenuActionClick (void)
         {
           i_find_stantion_id = flash_cfg_find_stantion_id_by_uuid (
               my_recognize_ret_stationuuid ());
-          if (i_find_stantion_id == -1)
+          if (i_find_stantion_id == -1 || i_find_stantion_id == u8_stantion_id)
             {
               flash_cfg_store_stantion_name (my_recognize_ret_name (),
                                              u8_stantion_id);
               flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (),
                                              u8_stantion_id);
             }
-          //printf ("i_find_stantion_id %d\n",i_find_stantion_id);
+          else
+            { //Если нашло в другом месте, то обмен позиций
+              flash_cfg_load_stantion_uuid (stantion_uuid_temp,
+                                            u8_stantion_id);
+              flash_cfg_load_stantion_name (stantion_name_temp,
+                                            u8_stantion_id);
+
+              flash_cfg_store_stantion_name (stantion_name_temp,
+                                             i_find_stantion_id);
+              flash_cfg_store_stantion_uuid (stantion_uuid_temp,
+                                             i_find_stantion_id);
+
+              flash_cfg_store_stantion_name (my_recognize_ret_name (),
+                                             u8_stantion_id);
+              flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (),
+                                             u8_stantion_id);
+            }
+          // printf ("i_find_stantion_id %d\n",i_find_stantion_id);
           display_refresh ();
         }
     }
@@ -93,8 +113,9 @@ display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
 {
   u8 u8_Page_Disp = u8_stantion_id / 4; //по 4 станции влезает на дисплей
 
-  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 != 0 && i_menu !=0)
-    u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 != 0
+      && i_menu != 0)
+    u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
   else
     u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
   sprintf (buf_str_ind, "%.2d.", (u8_Page_Disp * 4 + u8_stpos));
@@ -103,8 +124,9 @@ display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
   buf_str_ind[14] = 0;
   u8g2_DrawUTF8 (&u8g2, 16, 30 + u8_stpos * 10, buf_str_ind);
 
-  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 == 0 && i_menu !=0)
-    u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 == 0
+      && i_menu != 0)
+    u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
   else
     u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
   sprintf (buf_str_ind, "St%.2d", (u8_Page_Disp * 4 + u8_stpos));
@@ -142,18 +164,18 @@ display_refresh (void)
           u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
           //
 
-          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_SetFont (&u8g2, u8g2_font_5x8_t_cyrillic);
           sprintf (buf_str_ind, "%d", i_menu);
           u8g2_DrawStr (&u8g2, 65, 10, buf_str_ind);
 
           if (i_menu == MENU_STORE_VOLUME)
-            u8g2_SetFont (&u8g2, u8g2_font_courB08_tf);
+            u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
           else
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
           u8g2_DrawStr (&u8g2, 65, 20, "Store Vol");
 
           u8 u8_stantion_id = (i_menu / 2);
-          if ((u8_stantion_id * 2) == i_menu && u8_stantion_id>0)
+          if ((u8_stantion_id * 2) == i_menu && u8_stantion_id > 0)
             u8_stantion_id--;
           display_menu_stantion_pos (u8_stantion_id, 0);
           display_menu_stantion_pos (u8_stantion_id, 1);
@@ -163,9 +185,9 @@ display_refresh (void)
           if (i_find_stantion_id >= 0)
             {
               u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-              sprintf (buf_str_ind, "St%.2d.OVER(%.2d)", u8_stantion_id,
+              sprintf (buf_str_ind, "St%.2d.OV(%.2d)", u8_stantion_id,
                        i_find_stantion_id);
-              u8g2_DrawStr (&u8g2, 1, 45, buf_str_ind);
+              u8g2_DrawStr (&u8g2, 0, 45, buf_str_ind);
               i_find_stantion_id = -1;
               i_delay_WAIT = 1;
             }
@@ -188,7 +210,7 @@ display_refresh (void)
 #define KNOOB_CLK WM_IO_PA_13
 
 static const u16 i_pos_dreb_CLK = 1; // таймер 300 Мкс, значит будет 300 MKs
-volatile static u16 i_dreb_CLK = 0;  // от дребезга
+volatile static u16 i_dreb_CLK = 0; // от дребезга
 
 static int i_rotar = 10;
 volatile static u16 i_rotar_zero = 0;
@@ -199,7 +221,8 @@ static const u16 i_pos_dreb_SW
     = 600; //кнопка,таймер 300 Мкс, значит будет 120 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
-static const u16 i_pos_DBL_CLICK = 3000; // таймер 300 Мкс, значит будет 0.9 сек
+static const u16 i_pos_DBL_CLICK
+    = 3000; // таймер 300 Мкс, значит будет 0.9 сек
 volatile static u16 i_delay_SW_DBL_CLICK
     = 0; // двойной клик, переход в меню и обратно
 
@@ -473,8 +496,8 @@ demo_console_task (void *sdata)
 
           if (strlen (stantion_uuid) == 36)
             {
-            http_get_web_station_by_stationuuid (stantion_uuid);
-            stantion_uuid[0] = 0;
+              http_get_web_station_by_stationuuid (stantion_uuid);
+              stantion_uuid[0] = 0;
             }
           else
             http_get_web_station_by_random ();
