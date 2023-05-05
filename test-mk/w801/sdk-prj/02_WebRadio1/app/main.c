@@ -364,7 +364,7 @@ KNOOB_SW_isr_callback (void *context)
             {
               i_delay_SW_DBL_CLICK = 0;
               i_switch_menu = ~i_switch_menu;
-              i_menu = 0;
+              //i_menu = 0;
               display_refresh ();
             }
         }
