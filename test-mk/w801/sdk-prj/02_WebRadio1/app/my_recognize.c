@@ -388,10 +388,10 @@ http_get_web_station_by_random (void)
   switch (u8_ch_st_uri)
     {
     case 0:
-      s_tag="organ";
+      s_tag= "piano";
       break;
     case 1:
-      s_tag= "piano";
+      s_tag= "trance";
       break;
     case 2:
       s_tag= "rock";
@@ -400,13 +400,13 @@ http_get_web_station_by_random (void)
       s_tag= "classic";
       break;
     case 4:
-      s_tag= "trance";
+      s_tag="organ";
       break;
     case 5:
       s_tag= "pop";
       break;
     case 6:
-      s_tag= "rus";
+      s_tag= "guitar";
       break;
     case 7:
       s_tag= "j-pop";
