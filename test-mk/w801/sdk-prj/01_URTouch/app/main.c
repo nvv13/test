@@ -105,6 +105,7 @@ user_app1_task (void *sdata)
               sprintf (mesg, "X=%.3d Y=%.3d", x, y);
               UTFT_print (mesg, CENTER, 10, 0);
               UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
+              printf ("touch X=%.3d Y=%.3d\n",x, y);
             }
         }
 

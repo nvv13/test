@@ -94,6 +94,10 @@ static void UTFT__fast_fill_16 (byte VH, byte VL, long pix);
 static void UTFT__fast_fill_8 (int ch, long pix);
 static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 
+static void LCD_WR_REG(u16 Value);
+static void LCD_WR_DATA(u8 VL);
+
+
 static u8 *buf_4x_line=NULL;
 
 
@@ -111,12 +115,12 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
 //						ITDB32		ITDB32WC	ITDB32S		ITDB24		ITDB28		--		ITDB22		ITDB22SP	ITDB32WD    ITDB18SP		--		ITDB25H		ITDB43		ITDB50		ITDB24E_8	--		--		--			--			--		--		--		--		--		--		--		--		--		--		EHOUSE50CPLD    --		--		--		--		--		--
 //						--		--		--		--		ITDB24D		--		--		--		--	    --			--		--		--		--		--		--		--		--			--			--		--		--		--		--		--		TFT22SHLD	--		--		--		--		--		--		--		--		--		--
 //						--		--		--		--		ITDB24DWOT	--		--		--		--	    --			--		--		--		--		--		--		--		--			--			--		--		--		--		--		--		TFT01_22SP	--		--		--		--		--		--		--		--		--		--
-//						--		TFT01_32W	TFT01_32	--		TFT01_24_8  	TFT01_24_16	--		--		TFT01_32WD  --			--		--		TFT01_43	TFT01_50	TFT01_24R2	ITDB24E_16	--		--			--			--		TFT01_70	TFT32MEGA	TFT01_28	TFT01_22	TFT01_18SP	TFT01_24SP	--		--		--		--		--		TFT18SHLD	TFT28UNO	TFT28MEGA	TFT395UNO	TFT32MEGA_2                            TFT00_96SP    TFT01_3SP      TFT01_47V89    TFT01_14V89    TFT01_69V89    TFT_320QDT_9341 TFT2_4SP_9341   TFT02_0V89
-//	контроллер:				HX8347-A	ILI9327		SSD1289		ILI9325C	ILI9325D	ILI9325D	HX8340-B	HX8340-B	HX8352-A    ST7735		PCF8833		S1D19122	SSD1963		SSD1963		S6D1121		S6D1121		SSD1289		--			--			SSD1289		SSD1963		ILI9481		ILI9325D	S6D0164		ST7735S		ILI9341		ILI9341		R61581		ILI9486		CPLD		HX8353C		ST7735		ILI9341		ILI9341		ILI9327		HX8357C                 ILI9225B       ST7735S	     ST7789         ST7789v	   ST7789v        ST7789v2       ILI9341         ILI9341         ST7789v
-/*	размер x:	 */	word dsx[] = {	239,		239,		239,		239,		239,		239,		175,		175,		239,        127,		127,		239,		271,		479,		239,		239,		239,		0,			0,			239,		479,		319,		239,		175,		127,		239,		239,		319,		319,		799,		127,		127,		239,		239,		319,		319			,175          ,79	     ,239	    ,171           ,134           ,239           ,239            ,239            ,239           };
-/*	размер y:	 */	word dsy[] = {	319,		399,		319,		319,		319,		319,		219,		219,		399,        159,		127,		319,		479,		799,		319,		319,		319,		0,			0,			319,		799,		479,		319,		219,		159,		319,		319,		479,		479,		479,		159,		159,		319,		319,		479,		479			,219          ,159	     ,239	    ,319           ,239           ,279           ,319            ,319            ,319           };
-/*	размер шины: */		byte dtm[] = {	16,		16,		16,		8,		8,		16,		8,		SERIAL_4PIN,	16,	    SERIAL_5PIN,	SERIAL_5PIN,	16,		16,		16,		8,		16,		LATCHED_16,	0,			0,			8,		16,		16,		16,		8,		SERIAL_5PIN,	SERIAL_5PIN,	SERIAL_4PIN,	16,		16,		16,		SERIAL_5PIN, 	SERIAL_5PIN,	8,		8,		8,		16			,SERIAL_5PIN  ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,16             ,SERIAL_5PIN    ,SERIAL_5PIN   };
-/*	режим HW SPI */	       u8 spi_md[] = {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    TLS_SPI_MODE_3,	0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,		TLS_SPI_MODE_3,		0,		0,	0,		0,		0,		0, 		TLS_SPI_MODE_3,	0,		0,		0,		0			,0	      ,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,0              ,TLS_SPI_MODE_3 ,TLS_SPI_MODE_3};
+//						--		TFT01_32W	TFT01_32	--		TFT01_24_8  	TFT01_24_16	--		--		TFT01_32WD  --			--		--		TFT01_43	TFT01_50	TFT01_24R2	ITDB24E_16	--		--			--			--		TFT01_70	TFT32MEGA	TFT01_28	TFT01_22	TFT01_18SP	TFT01_24SP	--		--		--		--		--		TFT18SHLD	TFT28UNO	TFT28MEGA	TFT395UNO	TFT32MEGA_2                            TFT00_96SP    TFT01_3SP      TFT01_47V89    TFT01_14V89    TFT01_69V89    TFT_320QDT_9341 TFT2_4SP_9341   TFT02_0V89      TFT_397T_NT35510
+//	контроллер:				HX8347-A	ILI9327		SSD1289		ILI9325C	ILI9325D	ILI9325D	HX8340-B	HX8340-B	HX8352-A    ST7735		PCF8833		S1D19122	SSD1963		SSD1963		S6D1121		S6D1121		SSD1289		--			--			SSD1289		SSD1963		ILI9481		ILI9325D	S6D0164		ST7735S		ILI9341		ILI9341		R61581		ILI9486		CPLD		HX8353C		ST7735		ILI9341		ILI9341		ILI9327		HX8357C                 ILI9225B       ST7735S	     ST7789         ST7789v	   ST7789v        ST7789v2       ILI9341         ILI9341         ST7789v         nt35510
+/*	размер x:	 */	word dsx[] = {	239,		239,		239,		239,		239,		239,		175,		175,		239,        127,		127,		239,		271,		479,		239,		239,		239,		0,			0,			239,		479,		319,		239,		175,		127,		239,		239,		319,		319,		799,		127,		127,		239,		239,		319,		319			,175          ,79	     ,239	    ,171           ,134           ,239           ,239            ,239            ,239            ,479};
+/*	размер y:	 */	word dsy[] = {	319,		399,		319,		319,		319,		319,		219,		219,		399,        159,		127,		319,		479,		799,		319,		319,		319,		0,			0,			319,		799,		479,		319,		219,		159,		319,		319,		479,		479,		479,		159,		159,		319,		319,		479,		479			,219          ,159	     ,239	    ,319           ,239           ,279           ,319            ,319            ,319            ,799};
+/*	размер шины: */		byte dtm[] = {	16,		16,		16,		8,		8,		16,		8,		SERIAL_4PIN,	16,	    SERIAL_5PIN,	SERIAL_5PIN,	16,		16,		16,		8,		16,		LATCHED_16,	0,			0,			8,		16,		16,		16,		8,		SERIAL_5PIN,	SERIAL_5PIN,	SERIAL_4PIN,	16,		16,		16,		SERIAL_5PIN, 	SERIAL_5PIN,	8,		8,		8,		16			,SERIAL_5PIN  ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,16             ,SERIAL_5PIN    ,SERIAL_5PIN    ,16 };
+/*	режим HW SPI */	       u8 spi_md[] = {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    TLS_SPI_MODE_3,	0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,		TLS_SPI_MODE_3,		0,		0,	0,		0,		0,		0, 		TLS_SPI_MODE_3,	0,		0,		0,		0			,0	      ,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,0              ,TLS_SPI_MODE_3 ,TLS_SPI_MODE_3 ,0  };
 
   disp_x_size = dsx[model];
   disp_y_size = dsy[model];
@@ -195,6 +199,18 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
           B_RS = digitalPinToBitMask (SER);
         }
     }
+}
+
+static void LCD_WR_REG(u16 Value)
+{
+cbi_RS();
+//LCD_Write_1byte_Flag = 0;
+UTFT_LCD_Writ_Bus (Value>>8, Value & 0xff , 16);
+}
+
+static void LCD_WR_DATA(byte VL)
+{
+UTFT_LCD_Write_DATA2 (VL);
 }
 
 void
@@ -383,6 +399,9 @@ UTFT_InitLCD (byte orientation)
 #ifndef DISABLE_ST7789
 #include "tft_drivers/st7789/initlcd.h"
 #endif
+#ifndef DISABLE_NT35510
+#include "tft_drivers/nt35510/initlcd.h"
+#endif
     }
   sbi (P_CS, B_CS);
 
@@ -501,6 +520,9 @@ UTFT_setXY (word x1, word y1, word x2, word y2)
 #endif
 #ifndef DISABLE_ST7789
 #include "tft_drivers/st7789/setxy.h"
+#endif
+#ifndef DISABLE_NT35510
+#include "tft_drivers/nt35510/setxy.h"
 #endif
     }
 }
