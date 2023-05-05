@@ -113,24 +113,39 @@ display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
 {
   u8 u8_Page_Disp = u8_stantion_id / 4; //по 4 станции влезает на дисплей
 
-  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 != 0
-      && i_menu != 0)
+  bool l_name_choice = ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id
+                        && i_menu % 2 != 0 && i_menu != 0);
+  bool l_store_choice = ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id
+                         && i_menu % 2 == 0 && i_menu != 0);
+
+  if (l_name_choice)
     u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
   else
-    u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+    u8g2_SetFont (&u8g2, u8g2_font_4x6_t_cyrillic);
   sprintf (buf_str_ind, "%.2d.", (u8_Page_Disp * 4 + u8_stpos));
   u8g2_DrawStr (&u8g2, 1, 30 + u8_stpos * 10, buf_str_ind);
   flash_cfg_load_stantion_name (buf_str_ind, (u8_Page_Disp * 4 + u8_stpos));
-  buf_str_ind[14] = 0;
+  if (buf_str_ind[0] == 0xd0)
+    buf_str_ind[(l_store_choice ? 24 : 28)] = 0;
+  else
+    buf_str_ind[(l_store_choice ? 12 : 14)] = 0;
   u8g2_DrawUTF8 (&u8g2, 16, 30 + u8_stpos * 10, buf_str_ind);
 
-  if ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id && i_menu % 2 == 0
-      && i_menu != 0)
-    u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
-  else
-    u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-  sprintf (buf_str_ind, "St%.2d", (u8_Page_Disp * 4 + u8_stpos));
-  u8g2_DrawStr (&u8g2, 100, 30 + u8_stpos * 10, buf_str_ind);
+  if (!l_name_choice)
+    {
+      if (l_store_choice)
+        {
+          u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
+          sprintf (buf_str_ind, "Store%.2d", (u8_Page_Disp * 4 + u8_stpos));
+          u8g2_DrawStr (&u8g2, 80, 30 + u8_stpos * 10, buf_str_ind);
+        }
+      else
+        {
+          u8g2_SetFont (&u8g2, u8g2_font_4x6_t_cyrillic);
+          sprintf (buf_str_ind, "St%.2d", (u8_Page_Disp * 4 + u8_stpos));
+          u8g2_DrawStr (&u8g2, 100, 30 + u8_stpos * 10, buf_str_ind);
+        }
+    }
 }
 
 volatile static u16 i_delay_WAIT
