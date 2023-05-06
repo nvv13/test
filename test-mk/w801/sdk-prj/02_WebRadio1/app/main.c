@@ -40,6 +40,7 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 
 //****************************************************************************************************//
 u8 u8_wifi_state = 0;
+extern u32 VS1053_WEB_RADIO_nTotal;
 
 static u8g2_t u8g2;
 
@@ -210,7 +211,7 @@ display_refresh (void)
             }
         }
 
-      if (VS1053_status_get_status () != VS1053_PLAY)
+      if (VS1053_status_get_status () != VS1053_PLAY || VS1053_WEB_RADIO_nTotal<512)
         {
           u8g2_SetDrawColor (&u8g2, 1);
           u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
@@ -339,7 +340,7 @@ demo_timer_irq (u8 *arg) //
     {
       if (i_delay_WAIT++ > i_pos_DBL_CLICK)
         {
-          if (VS1053_status_get_status () != VS1053_PLAY)
+          if (VS1053_status_get_status () != VS1053_PLAY || VS1053_WEB_RADIO_nTotal<512)
             i_delay_WAIT = 1;
           else
             {

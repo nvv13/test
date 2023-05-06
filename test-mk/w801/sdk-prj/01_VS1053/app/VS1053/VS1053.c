@@ -1249,6 +1249,7 @@ VS1053_PlayMp3 (char *filename)
 
 
 
+u32 VS1053_WEB_RADIO_nTotal = 0;
 
 
 #define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size)
@@ -1258,11 +1259,12 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
               u8 parseXmlJson)
 {
   int nRetCode;
-  u32 nSize, nTotal = 0;
+  u32 nSize = 0;
   char *Buffer = NULL;
   HTTP_SESSION_HANDLE pHTTP;
   u32 nSndDataLen;
   my_sost = VS1053_HW_INIT;
+  VS1053_WEB_RADIO_nTotal=0;
 
   Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
   if (Buffer == NULL)
@@ -1350,6 +1352,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
 
       if(my_sost != VS1053_QUERY_TO_STOP)my_sost = VS1053_PLAY;
 
+      VS1053_WEB_RADIO_nTotal=0;
       // Get the data until we get an error or end of stream code
       while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS) && my_sost == VS1053_PLAY)
         {
@@ -1365,8 +1368,8 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           VS1053_await_data_request (); // Wait for space available
           SPI_writeBytes ((u8*)Buffer, nSize);
 
-          tls_watchdog_clr ();
-          nTotal += nSize;
+          if(VS1053_WEB_RADIO_nTotal>512)tls_watchdog_clr ();
+          VS1053_WEB_RADIO_nTotal += nSize;
         }
         VS1053_data_mode_off ();
     }
@@ -1379,7 +1382,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
   if (ClientParams.Verbose == TRUE)
     {
       printf ("\n\nHTTP Client terminated %d (got %d b)\n\n", nRetCode,
-              nTotal);
+              VS1053_WEB_RADIO_nTotal);
     }
   return nRetCode;
 }
