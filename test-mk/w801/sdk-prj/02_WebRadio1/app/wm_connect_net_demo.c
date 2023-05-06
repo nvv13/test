@@ -12,6 +12,8 @@ static int new_fd = -1;
 static int server_fd = -1;
 static int i_start_recive = -1;
 
+extern u8 u8_wifi_state;
+
 static void
 con_net_status_changed_event (u8 status)
 {
@@ -22,6 +24,7 @@ con_net_status_changed_event (u8 status)
       break;
     case NETIF_WIFI_JOIN_FAILED:
       printf ("NETIF_WIFI_JOIN_FAILED\n");
+      u8_wifi_state = 0;
       break;
     case NETIF_WIFI_DISCONNECTED:
       {
@@ -32,6 +35,7 @@ con_net_status_changed_event (u8 status)
         if (server_fd != -1)
           closesocket (server_fd);
         server_fd = -1;
+      u8_wifi_state = 0;
       };
       break;
     case NETIF_IP_NET_UP:

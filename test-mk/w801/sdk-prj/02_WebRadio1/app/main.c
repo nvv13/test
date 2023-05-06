@@ -39,6 +39,8 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #include "mod1/u8x8_riotos.h"
 
 //****************************************************************************************************//
+u8 u8_wifi_state = 0;
+
 static u8g2_t u8g2;
 
 static u8 i_switch_menu = 0;
@@ -233,7 +235,7 @@ volatile static u16 i_rotar_one = 0;
 static u8 u8_enc_state = 0;
 
 static const u16 i_pos_dreb_SW
-    = 600; //кнопка,таймер 300 Мкс, значит будет 120 миллисекунд.
+    = 1000; //кнопка,таймер 300 Мкс, значит будет 300 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
 static const u16 i_pos_DBL_CLICK
@@ -486,7 +488,6 @@ demo_console_task (void *sdata)
   VS1053_setVolume (u16_volume);
   display_refresh ();
 
-  u8 u8_wifi_state = 0;
 
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
@@ -503,6 +504,11 @@ demo_console_task (void *sdata)
         }
 
       tls_watchdog_clr ();
+
+      tls_os_time_delay (HZ);
+      my_recognize_http_reset ();
+      printf ("load default stantion 0\n");
+      flash_cfg_load_stantion_uuid (stantion_uuid, 0);
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {

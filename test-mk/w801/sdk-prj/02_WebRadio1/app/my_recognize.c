@@ -423,7 +423,7 @@ http_get_web_station_by_random (void)
     }
   char *s_order;
   if(u8_ch_st_ord==0)
-    s_order="order=votes";
+    s_order="order=random&reverse=true";
     else
     s_order="order=random";
   //
