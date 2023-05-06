@@ -35,7 +35,7 @@ con_net_status_changed_event (u8 status)
         if (server_fd != -1)
           closesocket (server_fd);
         server_fd = -1;
-      u8_wifi_state = 0;
+        u8_wifi_state = 0;
       };
       break;
     case NETIF_IP_NET_UP:

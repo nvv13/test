@@ -45,7 +45,7 @@ extern u32 VS1053_WEB_RADIO_nTotal;
 static u8g2_t u8g2;
 
 static u8 i_switch_menu = 0;
-static int i_menu = 0;
+static u16 i_menu = 0;
 
 static u16 u16_volume = 0; //
 static char buf_str_ind[50];
@@ -57,6 +57,7 @@ static char stantion_uuid_temp[39];
 static void display_refresh (void);
 
 #define MENU_STORE_VOLUME 0
+#define MENU_STORE_INDEX 1
 #define MENU_MAX_POS (28 * 2)
 
 void
@@ -211,7 +212,8 @@ display_refresh (void)
             }
         }
 
-      if (VS1053_status_get_status () != VS1053_PLAY || VS1053_WEB_RADIO_nTotal<512)
+      if (VS1053_status_get_status () != VS1053_PLAY
+          || VS1053_WEB_RADIO_nTotal < 512)
         {
           u8g2_SetDrawColor (&u8g2, 1);
           u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
@@ -340,7 +342,8 @@ demo_timer_irq (u8 *arg) //
     {
       if (i_delay_WAIT++ > i_pos_DBL_CLICK)
         {
-          if (VS1053_status_get_status () != VS1053_PLAY || VS1053_WEB_RADIO_nTotal<512)
+          if (VS1053_status_get_status () != VS1053_PLAY
+              || VS1053_WEB_RADIO_nTotal < 512)
             i_delay_WAIT = 1;
           else
             {
@@ -367,7 +370,16 @@ KNOOB_SW_isr_callback (void *context)
             {
               i_delay_SW_DBL_CLICK = 0;
               i_switch_menu = ~i_switch_menu;
-              //i_menu = 0;
+              // i_menu = 0;
+              /*
+              if (i_switch_menu == 0)
+                {
+                  u16 menu_tmp;
+                  flash_cfg_load_u16 (&menu_tmp, MENU_STORE_INDEX);
+                  if (menu_tmp != i_menu)
+                    flash_cfg_store_u16 (i_menu, MENU_STORE_INDEX);
+                }
+              */
               display_refresh ();
             }
         }
@@ -483,12 +495,14 @@ demo_console_task (void *sdata)
 
   stantion_uuid[0] = 0;
   flash_cfg_load_u16 (&u16_volume, MENU_STORE_VOLUME);
+  flash_cfg_load_u16 (&i_menu, MENU_STORE_INDEX);
+  if (i_menu > MENU_MAX_POS)
+    i_menu = 0;
   if (u16_volume > 100) //после обновления прошивки?
     u16_volume = 80;
   i_rotar = 100 - u16_volume;
   VS1053_setVolume (u16_volume);
   display_refresh ();
-
 
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {

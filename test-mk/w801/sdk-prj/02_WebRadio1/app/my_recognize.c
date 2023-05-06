@@ -388,44 +388,45 @@ http_get_web_station_by_random (void)
   switch (u8_ch_st_uri)
     {
     case 0:
-      s_tag= "piano";
+      s_tag = "piano";
       break;
     case 1:
-      s_tag= "trance";
+      s_tag = "trance";
       break;
     case 2:
-      s_tag= "rock";
+      s_tag = "rock";
       break;
     case 3:
-      s_tag= "classic";
+      s_tag = "classic";
       break;
     case 4:
-      s_tag="organ";
+      s_tag = "organ";
       break;
     case 5:
-      s_tag= "pop";
+      s_tag = "pop";
       break;
     case 6:
-      s_tag= "guitar";
+      s_tag = "guitar";
       break;
     case 7:
-      s_tag= "j-pop";
+      s_tag = "j-pop";
       break;
     case 8:
-      s_tag= "k-pop";
+      s_tag = "k-pop";
       break;
-    default:s_tag= "top";
+    default:
+      s_tag = "top";
     }
   if (++u8_ch_st_uri > 8)
     {
-    u8_ch_st_uri = 0;
-    u8_ch_st_ord=~u8_ch_st_ord;
+      u8_ch_st_uri = 0;
+      u8_ch_st_ord = ~u8_ch_st_ord;
     }
   char *s_order;
-  if(u8_ch_st_ord==0)
-    s_order="order=random&reverse=true";
-    else
-    s_order="order=random";
+  if (u8_ch_st_ord == 0)
+    s_order = "order=random&reverse=true";
+  else
+    s_order = "order=random";
   //
   httpParams.Uri = (char *)tls_mem_alloc (128);
   if (httpParams.Uri == NULL)
@@ -434,9 +435,10 @@ http_get_web_station_by_random (void)
       return WM_FAILED;
     }
   memset (httpParams.Uri, 0, 128);
-  sprintf (httpParams.Uri,
-           "http://all.api.radio-browser.info/json/stations/bytag/%s?limit=1&%s",
-           s_tag,s_order);
+  sprintf (
+      httpParams.Uri,
+      "http://all.api.radio-browser.info/json/stations/bytag/%s?limit=1&%s",
+      s_tag, s_order);
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);
   http_get (httpParams);
