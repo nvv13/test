@@ -245,7 +245,7 @@ volatile static u16 i_rotar_one = 0;
 static u8 u8_enc_state = 0;
 
 static const u16 i_pos_dreb_SW
-    = 1000; //кнопка,таймер 300 Мкс, значит будет 300 миллисекунд.
+    = 2000; //кнопка,таймер 300 Мкс, значит будет 600 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
 static const u16 i_pos_DBL_CLICK
