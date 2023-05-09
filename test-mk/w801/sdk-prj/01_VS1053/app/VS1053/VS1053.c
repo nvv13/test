@@ -1402,13 +1402,13 @@ VS1053_PlayHttpMp3 (const char *Uri)
 
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));
-  httpParams.Uri = (char *)tls_mem_alloc (128);
+  httpParams.Uri = (char *)tls_mem_alloc (200);
   if (httpParams.Uri == NULL)
     {
       printf ("malloc error.\n");
       return WM_FAILED;
     }
-  memset (httpParams.Uri, 0, 128);
+  memset (httpParams.Uri, 0, 200);
   sprintf (httpParams.Uri, "%s", Uri);
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);
