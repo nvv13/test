@@ -249,7 +249,23 @@ my_recognize_http (const char *recvbuf, int i_len)
       load_field (ch, c_bitrate, &i_POS_bitrate, s_bitrate[u8_index],
                   &i_LOAD_bitrate, sizeof (s_bitrate[u8_index]));
       if (ch == '}' && u8_index < MAX_INDEX_LOAD_FIND - 1)
-        u8_index++;
+        {
+          u8_index++;
+          i_POS_stationuuid = 0;
+          i_LOAD_stationuuid = 0;
+          i_POS_name = 0;
+          i_LOAD_name = 0;
+          i_POS_url_resolved = 0;
+          i_LOAD_url_resolved = 0;
+          i_POS_tags = 0;
+          i_LOAD_tags = 0;
+          i_POS_country = 0;
+          i_LOAD_country = 0;
+          i_POS_codec = 0;
+          i_LOAD_codec = 0;
+          i_POS_bitrate = 0;
+          i_LOAD_bitrate = 0;
+        }
     }
 }
 

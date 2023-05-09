@@ -449,7 +449,6 @@ random (int min_num, int max_num)
   return result;
 }
 
-
 // console task use UART0 as communication port with PC
 void
 demo_console_task (void *sdata)
@@ -458,7 +457,7 @@ demo_console_task (void *sdata)
   printf ("wifi test app\n");
 
   tls_watchdog_init (20 * 1000 * 1000); // u32 usec microseconds, около 20 сек
-  srand (tls_os_get_time ()); // time(NULL));
+  srand (tls_os_get_time ());           // time(NULL));
 
   puts ("Initializing to I2C oled Display.");
 
@@ -584,9 +583,14 @@ demo_console_task (void *sdata)
             }
           else
             {
-            http_get_web_station_by_random ();
-            u8_ind_ch_st=random (0,MAX_INDEX_LOAD_FIND-1);
-            printf ("u8_ind_ch_st=%d\n",u8_ind_ch_st);
+              http_get_web_station_by_random ();
+              for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+                {
+                  printf ("ind=%d,%s\n", ind, my_recognize_ret_name (ind));
+                }
+
+              u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
+              printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
             }
 
           display_refresh ();
