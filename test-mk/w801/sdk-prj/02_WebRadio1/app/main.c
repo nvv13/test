@@ -46,6 +46,7 @@ static u8g2_t u8g2;
 
 static u8 i_switch_menu = 0;
 static u16 i_menu = 0;
+static u8 u8_ind_ch_st = 0;
 
 static u16 u16_volume = 0; //
 static char buf_str_ind[50];
@@ -81,13 +82,13 @@ MenuActionClick (void)
       else
         {
           i_find_stantion_id = flash_cfg_find_stantion_id_by_uuid (
-              my_recognize_ret_stationuuid ());
+              my_recognize_ret_stationuuid (u8_ind_ch_st));
           if (i_find_stantion_id == -1 || i_find_stantion_id == u8_stantion_id)
             {
-              flash_cfg_store_stantion_name (my_recognize_ret_name (),
-                                             u8_stantion_id);
-              flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (),
-                                             u8_stantion_id);
+              flash_cfg_store_stantion_name (
+                  my_recognize_ret_name (u8_ind_ch_st), u8_stantion_id);
+              flash_cfg_store_stantion_uuid (
+                  my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
             }
           else
             { //Если нашло в другом месте, то обмен позиций
@@ -101,10 +102,10 @@ MenuActionClick (void)
               flash_cfg_store_stantion_uuid (stantion_uuid_temp,
                                              i_find_stantion_id);
 
-              flash_cfg_store_stantion_name (my_recognize_ret_name (),
-                                             u8_stantion_id);
-              flash_cfg_store_stantion_uuid (my_recognize_ret_stationuuid (),
-                                             u8_stantion_id);
+              flash_cfg_store_stantion_name (
+                  my_recognize_ret_name (u8_ind_ch_st), u8_stantion_id);
+              flash_cfg_store_stantion_uuid (
+                  my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
             }
           // printf ("i_find_stantion_id %d\n",i_find_stantion_id);
           display_refresh ();
@@ -168,13 +169,15 @@ display_refresh (void)
           sprintf (buf_str_ind, "vol:%.3d", u16_volume);
           u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
           u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawUTF8 (&u8g2, 1, 30, my_recognize_ret_name ());
-          u8g2_DrawUTF8 (&u8g2, 1, 40, my_recognize_ret_tags ());
-          u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country ());
-          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec ());
-          u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate ());
-          u8g2_DrawStr (&u8g2, 90, 60,
-                        (my_recognize_ret_https () ? "https" : "http"));
+          u8g2_DrawUTF8 (&u8g2, 1, 30, my_recognize_ret_name (u8_ind_ch_st));
+          u8g2_DrawUTF8 (&u8g2, 1, 40, my_recognize_ret_tags (u8_ind_ch_st));
+          u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country (u8_ind_ch_st));
+          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec (u8_ind_ch_st));
+          u8g2_DrawStr (&u8g2, 60, 60,
+                        my_recognize_ret_bitrate (u8_ind_ch_st));
+          u8g2_DrawStr (
+              &u8g2, 90, 60,
+              (my_recognize_ret_https (u8_ind_ch_st) ? "https" : "http"));
         }
       else
         {
@@ -380,6 +383,8 @@ KNOOB_SW_isr_callback (void *context)
                     flash_cfg_store_u16 (i_menu, MENU_STORE_INDEX);
                 }
               */
+              if (i_switch_menu != 0 && i_menu > 1 && i_menu % 2 == 0)
+                i_menu--;
               display_refresh ();
             }
         }
@@ -404,6 +409,46 @@ KNOOB_CLK_isr_callback (void *context)
 }
 
 //****************************************************************************************************//
+/*
+constrain(x, a, b)
+Функция проверяет и если надо задает новое значение,
+так чтобы оно была в области допустимых значений, заданной параметрами.
+
+Параметры
+x: проверяемое значение, любой тип
+a: нижняя граница области допустимых значений, любой тип
+b: верхняя граница области допустимых значений, любой тип
+*/
+static int
+constrain (int x, int a, int b)
+{
+  if (x < a)
+    return a;
+  if (x > b)
+    return b;
+  return x;
+}
+static int
+random (int min_num, int max_num)
+{
+  int result = 0, low_num = 0, hi_num = 0;
+
+  if (min_num < max_num)
+    {
+      low_num = min_num;
+      hi_num = max_num + 1; // include max_num in output
+    }
+  else
+    {
+      low_num = max_num;
+      hi_num = min_num + 1; // include max_num in output
+    }
+
+  result = (rand () % (hi_num - low_num)) + low_num;
+  result = constrain (result, low_num, hi_num - 1);
+  return result;
+}
+
 
 // console task use UART0 as communication port with PC
 void
@@ -413,6 +458,7 @@ demo_console_task (void *sdata)
   printf ("wifi test app\n");
 
   tls_watchdog_init (20 * 1000 * 1000); // u32 usec microseconds, около 20 сек
+  srand (tls_os_get_time ()); // time(NULL));
 
   puts ("Initializing to I2C oled Display.");
 
@@ -534,14 +580,19 @@ demo_console_task (void *sdata)
             {
               http_get_web_station_by_stationuuid (stantion_uuid);
               stantion_uuid[0] = 0;
+              u8_ind_ch_st = 0;
             }
           else
+            {
             http_get_web_station_by_random ();
+            u8_ind_ch_st=random (0,MAX_INDEX_LOAD_FIND-1);
+            printf ("u8_ind_ch_st=%d\n",u8_ind_ch_st);
+            }
 
           display_refresh ();
           i_delay_WAIT = 1;
 
-          VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved ());
+          VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (u8_ind_ch_st));
 
           tls_os_time_delay (HZ);
           tls_watchdog_clr ();

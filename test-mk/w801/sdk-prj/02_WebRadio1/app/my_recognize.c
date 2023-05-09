@@ -52,122 +52,144 @@ $ wget
 #include <string.h>
 
 #include "HTTPClient.h"
-#include "wm_type_def.h"
 
 #include "my_recognize.h"
 //#include "n_utf8_to_win1251.h"
 
+static u8 u8_index = 0;
+
 static const char *c_stationuuid = "\"stationuuid\":\"";
 static u16 i_POS_stationuuid = 0;
 static u16 i_LOAD_stationuuid = 0;
-static char s_stationuuid[50];
+static char s_stationuuid[MAX_INDEX_LOAD_FIND][37];
 
 static const char *c_name = "\"name\":\"";
 static u16 i_POS_name = 0;
 static u16 i_LOAD_name = 0;
-static char s_name[150];
+static char s_name[MAX_INDEX_LOAD_FIND][32];
 
 static const char *c_url_resolved = "\"url_resolved\":\"";
 static u16 i_POS_url_resolved = 0;
 static u16 i_LOAD_url_resolved = 0;
-static char s_url_resolved[250];
+static char s_url_resolved[MAX_INDEX_LOAD_FIND][200];
 
 static const char *c_tags = "\"tags\":\"";
 static u16 i_POS_tags = 0;
 static u16 i_LOAD_tags = 0;
-static char s_tags[50];
+static char s_tags[MAX_INDEX_LOAD_FIND][32];
 
 static const char *c_country = "\"country\":\"";
 static u16 i_POS_country = 0;
 static u16 i_LOAD_country = 0;
-static char s_country[50];
+static char s_country[MAX_INDEX_LOAD_FIND][32];
 
 static const char *c_codec = "\"codec\":\"";
 static u16 i_POS_codec = 0;
 static u16 i_LOAD_codec = 0;
-static char s_codec[10];
+static char s_codec[MAX_INDEX_LOAD_FIND][10];
 
 static const char *c_bitrate = "\"bitrate\":";
 static u16 i_POS_bitrate = 0;
 static u16 i_LOAD_bitrate = 0;
-static char s_bitrate[10];
+static char s_bitrate[MAX_INDEX_LOAD_FIND][5];
 
 char *
-my_recognize_ret_stationuuid (void)
+my_recognize_ret_stationuuid (u8 index)
 {
-  return s_stationuuid;
+  if (index > u8_index)
+    index = u8_index;
+  return s_stationuuid[index];
 }
 
 char *
-my_recognize_ret_name (void)
+my_recognize_ret_name (u8 index)
 {
-  if (strlen (s_name) == 0)
+  if (index > u8_index)
+    index = u8_index;
+  if (strlen (s_name[index]) == 0)
     {
-      return s_tags;
+      return s_tags[index];
     }
-  return s_name;
+  return s_name[index];
 }
 
 char *
-my_recognize_ret_url_resolved (void)
+my_recognize_ret_url_resolved (u8 index)
 {
-  return s_url_resolved;
+  if (index > u8_index)
+    index = u8_index;
+  return s_url_resolved[index];
 }
 
 char *
-my_recognize_ret_country (void)
+my_recognize_ret_country (u8 index)
 {
-  return s_country;
+  if (index > u8_index)
+    index = u8_index;
+  return s_country[index];
 }
 
 char *
-my_recognize_ret_tags (void)
+my_recognize_ret_tags (u8 index)
 {
-  return s_tags;
+  if (index > u8_index)
+    index = u8_index;
+  return s_tags[index];
 }
 
 char *
-my_recognize_ret_codec (void)
+my_recognize_ret_codec (u8 index)
 {
-  return s_codec;
+  if (index > u8_index)
+    index = u8_index;
+  return s_codec[index];
 }
 
 char *
-my_recognize_ret_bitrate (void)
+my_recognize_ret_bitrate (u8 index)
 {
-  return s_bitrate;
+  if (index > u8_index)
+    index = u8_index;
+  return s_bitrate[index];
 }
 
 bool
-my_recognize_ret_https (void)
+my_recognize_ret_https (u8 index)
 {
-  return (strstr (s_url_resolved, "https:") != NULL);
+  if (index > u8_index)
+    index = u8_index;
+  return (strstr (s_url_resolved[index], "https:") != NULL);
 }
 
 void
 my_recognize_http_reset (void)
 {
+  u8_index = 0;
+  //
   i_POS_stationuuid = 0;
   i_LOAD_stationuuid = 0;
-  s_stationuuid[0] = 0;
   i_POS_name = 0;
   i_LOAD_name = 0;
-  s_name[0] = 0;
   i_POS_url_resolved = 0;
   i_LOAD_url_resolved = 0;
-  s_url_resolved[0] = 0;
   i_POS_tags = 0;
   i_LOAD_tags = 0;
-  s_tags[0] = 0;
   i_POS_country = 0;
   i_LOAD_country = 0;
-  s_country[0] = 0;
   i_POS_codec = 0;
   i_LOAD_codec = 0;
-  s_codec[0] = 0;
   i_POS_bitrate = 0;
   i_LOAD_bitrate = 0;
-  s_bitrate[0] = 0;
+  for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+    {
+      s_stationuuid[ind][0] = 0;
+      s_name[ind][0] = 0;
+      s_url_resolved[ind][0] = 0;
+      s_tags[ind][0] = 0;
+      s_country[ind][0] = 0;
+      s_codec[ind][0] = 0;
+      s_bitrate[ind][0] = 0;
+    }
 }
 
 static void
@@ -210,20 +232,24 @@ my_recognize_http (const char *recvbuf, int i_len)
   for (int iInd = 0; iInd < i_len; iInd++)
     {
       char ch = *(recvbuf + iInd);
-      load_field (ch, c_stationuuid, &i_POS_stationuuid, s_stationuuid,
-                  &i_LOAD_stationuuid, sizeof (s_stationuuid));
-      load_field (ch, c_name, &i_POS_name, s_name, &i_LOAD_name,
-                  sizeof (s_name));
-      load_field (ch, c_url_resolved, &i_POS_url_resolved, s_url_resolved,
-                  &i_LOAD_url_resolved, sizeof (s_url_resolved));
-      load_field (ch, c_tags, &i_POS_tags, s_tags, &i_LOAD_tags,
-                  sizeof (s_tags));
-      load_field (ch, c_country, &i_POS_country, s_country, &i_LOAD_country,
-                  sizeof (s_country));
-      load_field (ch, c_codec, &i_POS_codec, s_codec, &i_LOAD_codec,
-                  sizeof (s_codec));
-      load_field (ch, c_bitrate, &i_POS_bitrate, s_bitrate, &i_LOAD_bitrate,
-                  sizeof (s_bitrate));
+      load_field (ch, c_stationuuid, &i_POS_stationuuid,
+                  s_stationuuid[u8_index], &i_LOAD_stationuuid,
+                  sizeof (s_stationuuid[u8_index]));
+      load_field (ch, c_name, &i_POS_name, s_name[u8_index], &i_LOAD_name,
+                  sizeof (s_name[u8_index]));
+      load_field (ch, c_url_resolved, &i_POS_url_resolved,
+                  s_url_resolved[u8_index], &i_LOAD_url_resolved,
+                  sizeof (s_url_resolved[u8_index]));
+      load_field (ch, c_tags, &i_POS_tags, s_tags[u8_index], &i_LOAD_tags,
+                  sizeof (s_tags[u8_index]));
+      load_field (ch, c_country, &i_POS_country, s_country[u8_index],
+                  &i_LOAD_country, sizeof (s_country[u8_index]));
+      load_field (ch, c_codec, &i_POS_codec, s_codec[u8_index], &i_LOAD_codec,
+                  sizeof (s_codec[u8_index]));
+      load_field (ch, c_bitrate, &i_POS_bitrate, s_bitrate[u8_index],
+                  &i_LOAD_bitrate, sizeof (s_bitrate[u8_index]));
+      if (ch == '}' && u8_index < MAX_INDEX_LOAD_FIND - 1)
+        u8_index++;
     }
 }
 
@@ -238,6 +264,7 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
   char *Buffer = NULL;
   HTTP_SESSION_HANDLE pHTTP;
   u32 nSndDataLen;
+  my_recognize_http_reset ();
   do
     {
       Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
@@ -414,10 +441,13 @@ http_get_web_station_by_random (void)
     case 8:
       s_tag = "k-pop";
       break;
+    case 9:
+      s_tag = "chopin";
+      break;
     default:
       s_tag = "top";
     }
-  if (++u8_ch_st_uri > 8)
+  if (++u8_ch_st_uri > 9)
     {
       u8_ch_st_uri = 0;
       u8_ch_st_ord = ~u8_ch_st_ord;
@@ -437,8 +467,8 @@ http_get_web_station_by_random (void)
   memset (httpParams.Uri, 0, 128);
   sprintf (
       httpParams.Uri,
-      "http://all.api.radio-browser.info/json/stations/bytag/%s?limit=1&%s",
-      s_tag, s_order);
+      "http://all.api.radio-browser.info/json/stations/bytag/%s?limit=%d&%s",
+      s_tag, MAX_INDEX_LOAD_FIND, s_order);
   httpParams.Verbose = TRUE;
   printf ("Location: %s\n", httpParams.Uri);
   http_get (httpParams);
