@@ -96,16 +96,16 @@ static char s_bitrate[MAX_INDEX_LOAD_FIND][5];
 char *
 my_recognize_ret_stationuuid (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return s_stationuuid[index];
 }
 
 char *
 my_recognize_ret_name (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   if (strlen (s_name[index]) == 0)
     {
       return s_tags[index];
@@ -116,48 +116,48 @@ my_recognize_ret_name (u8 index)
 char *
 my_recognize_ret_url_resolved (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return s_url_resolved[index];
 }
 
 char *
 my_recognize_ret_country (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return s_country[index];
 }
 
 char *
 my_recognize_ret_tags (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return s_tags[index];
 }
 
 char *
 my_recognize_ret_codec (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return s_codec[index];
 }
 
 char *
 my_recognize_ret_bitrate (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return s_bitrate[index];
 }
 
 bool
 my_recognize_ret_https (u8 index)
 {
-  if (index > u8_index)
-    index = u8_index;
+  if (index > MAX_INDEX_LOAD_FIND - 1)
+    index = MAX_INDEX_LOAD_FIND - 1;
   return (strstr (s_url_resolved[index], "https:") != NULL);
 }
 
@@ -215,6 +215,8 @@ load_field (const char ch, const char *c_find, u16 *i_pos_find, char *s_field,
               s_field[(*i_pos_field)] = ch;
               if ((*i_pos_field) == (i_len_field - 2) || ch == '"')
                 {
+                  if ((*i_pos_field) == (i_len_field - 2))
+                    (*i_pos_field)++;
                   s_field[(*i_pos_field)] = 0;
                   (*i_pos_field) = i_len_field;
                   printf ("%s=\"%s\"\n", c_find, s_field);

@@ -8,7 +8,7 @@ extern "C"
 
 #include "wm_type_def.h"
 
-#define MAX_INDEX_LOAD_FIND 8
+#define MAX_INDEX_LOAD_FIND 10
 
   void my_recognize_http_reset (void);
 

@@ -45,7 +45,7 @@ extern u32 VS1053_WEB_RADIO_nTotal;
 static u8g2_t u8g2;
 
 static u8 i_switch_menu = 0;
-static u16 i_menu = 0;
+static int i_menu = 0;
 static u8 u8_ind_ch_st = 0;
 
 static u16 u16_volume = 0; //
@@ -77,6 +77,8 @@ MenuActionClick (void)
       if (i_menu % 2 != 0)
         {
           flash_cfg_load_stantion_uuid (stantion_uuid, u8_stantion_id);
+          // printf ("flash_cfg_load stantion_uuid %s,u8_stantion_id
+          // %d\n",stantion_uuid,u8_stantion_id);
           VS1053_stop_PlayMP3 ();
         }
       else
@@ -107,7 +109,9 @@ MenuActionClick (void)
               flash_cfg_store_stantion_uuid (
                   my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
             }
-          // printf ("i_find_stantion_id %d\n",i_find_stantion_id);
+          // printf (
+          //    "i_find_stantion_id=%d, u8_ind_ch_st=%d, u8_stantion_id=%d\n",
+          //    i_find_stantion_id, u8_ind_ch_st, u8_stantion_id);
           display_refresh ();
         }
     }
@@ -245,7 +249,7 @@ static const u16 i_pos_dreb_SW
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
 static const u16 i_pos_DBL_CLICK
-    = 3000; // таймер 300 Мкс, значит будет 0.9 сек
+    = 6000; // таймер 300 Мкс, значит будет 1.8 сек
 volatile static u16 i_delay_SW_DBL_CLICK
     = 0; // двойной клик, переход в меню и обратно
 
@@ -295,9 +299,9 @@ demo_timer_irq (u8 *arg) //
                   else
                     i_menu++;
                   if (i_menu < 0)
-                    i_menu = 0;
-                  if (i_menu > MENU_MAX_POS)
                     i_menu = MENU_MAX_POS;
+                  if (i_menu > MENU_MAX_POS)
+                    i_menu = 0;
                 }
 
               display_refresh ();
@@ -322,6 +326,7 @@ demo_timer_irq (u8 *arg) //
           i_delay_SW_DBL_CLICK = 0;
           if (i_switch_menu == 0)
             {
+              // printf ("i_switch_menu == 0\n");
               stantion_uuid[0] = 0;
               VS1053_stop_PlayMP3 ();
             }
@@ -540,7 +545,9 @@ demo_console_task (void *sdata)
 
   stantion_uuid[0] = 0;
   flash_cfg_load_u16 (&u16_volume, MENU_STORE_VOLUME);
-  flash_cfg_load_u16 (&i_menu, MENU_STORE_INDEX);
+  u16 i_menu_temp;
+  flash_cfg_load_u16 (&i_menu_temp, MENU_STORE_INDEX);
+  i_menu = i_menu_temp;
   if (i_menu > MENU_MAX_POS)
     i_menu = 0;
   if (u16_volume > 100) //после обновления прошивки?
