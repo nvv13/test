@@ -1,3 +1,5 @@
+
+
 /*****************************************************************************
  *
  * File Name : main.c
@@ -32,7 +34,6 @@
 //#include "wm_regs.h"
 #include "wm_rtc.h"
 
-
 #include "UTFT.h"
 #include "u_jpeg.h"
 
@@ -46,9 +47,8 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 
-
-#include "wm_gpio_afsel.h"
 #include "ff.h"
+#include "wm_gpio_afsel.h"
 
 FRESULT
 scan_files (
@@ -88,11 +88,11 @@ scan_files (
               if (strstr (FileName, "320x240") != NULL && strstr (FileName, ".jpg") != NULL)
                {
                UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
-               //UTFT_loadBitmap (0, 0, 480, 320, FileName); // выводим на дисплей картинку
-               UTFT_setFont (BigFont);
-               UTFT_setColor2 (VGA_FUCHSIA);
+               //UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим на дисплей картинку
+               UTFT_setFont (SmallFont);
+               UTFT_setColor2 (VGA_BLUE);
                UTFT_setBackColor2 (VGA_TRANSPARENT);
-               UTFT_print (fno.fname, CENTER, 200, 0);
+               UTFT_print (fno.fname, CENTER, 210, 0);
                tls_os_time_delay (HZ * 3);
                }
             }
@@ -103,24 +103,37 @@ scan_files (
   return res;
 }
 
-
-
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.2 TFT_320QDT_9341 320x240 16bit bus\n");
+  printf ("user_app1_task start TFT02_0V89 240x320 HW SPI st7789\n");
 
-  //Цветной графический дисплей 3.2 TFT 320x240
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_397T_NT35510, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02, (u8)WM_IO_PA_03,
-             (u8)WM_IO_PA_04, 0, 0);
-  //                               byte RS,         byte WR,         byte CS,
-  //                               byte RST, byte SER, u32 spi_freq
-  // UTFT тип дисплея TFT_320QDT_9341
-  // и номера выводов W801 к которым подключён дисплей: RS, WR,
-  // CS, RST. Выводы параллельной шины данных не указываются
-  // в данном случае, параллельная 16 бит шина = PB0 ... PB15
 
+  // TFT02_0V89 - для ST7789v
+  UTFT_UTFT (TFT02_0V89, (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS  CS
+             ,
+             (u8)WM_IO_PB_21 // RST reset RES
+             ,
+             (u8)WM_IO_PB_23 // SER => DC !
+             ,
+             20000000
+             /* spi_freq(Герц) для 5 контактных SPI дисплеев
+                (где отдельно ножка комманда/данные)
+             програмируеться HW SPI на ножки (предопред)
+                 wm_spi_cs_config (WM_IO_PB_14);
+                 wm_spi_ck_config (WM_IO_PB_15);
+                 wm_spi_di_config (WM_IO_PB_16);
+                 wm_spi_do_config (WM_IO_PB_17);
+             но, можно отказаться от HW SPI в пользу Soft SPI
+             установив spi_freq=0
+             эмуляции SPI, это удобно для разных ножек
+           */
+  );
 
   FATFS fs;
   FRESULT res_sd;
@@ -128,13 +141,11 @@ user_app1_task (void *sdata)
                   // системы
   wm_sdio_host_config (0);
 
-
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-  //
+  // UTFT_InitLCD (PORTRAIT);
 
   while (1)
-    { //
-
+    {                 //
       UTFT_clrScr (); // стираем всю информацию с дисплея
 
       UTFT_setColor2 (VGA_WHITE); // 240x280
@@ -231,6 +242,7 @@ user_app1_task (void *sdata)
       tls_os_time_delay (HZ * 3);
 
 
+
       unsigned int t=0; // used to save time relative to 1970
       struct tm *tblock;
       tblock = localtime ((const time_t *)&t); // switch to local time
@@ -256,6 +268,7 @@ user_app1_task (void *sdata)
       sprintf (mesg, "=%d FPS=%d", count, count/sec);
       UTFT_print (mesg, CENTER, 50, 0);       
       tls_os_time_delay (HZ * 10);
+
 
 
 
@@ -294,9 +307,6 @@ user_app1_task (void *sdata)
       // unmount file system
       f_mount (NULL, "0:", 1);
       tls_os_time_delay (HZ * 1);
-
-
-
 
     } //
 }
