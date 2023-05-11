@@ -236,7 +236,7 @@ display_refresh (void)
 #define KNOOB_DT WM_IO_PA_12
 #define KNOOB_CLK WM_IO_PA_13
 
-static const u16 i_pos_dreb_CLK = 2; // таймер 300 Мкс, значит будет 300 MKs
+static const u16 i_pos_dreb_CLK = 1; // таймер 300 Мкс, значит будет 300 MKs
 volatile static u16 i_dreb_CLK = 0; // от дребезга
 
 static int i_rotar = 10;
@@ -399,13 +399,13 @@ static void
 KNOOB_CLK_isr_callback (void *context)
 {
   u16 retC = tls_get_gpio_irq_status (KNOOB_CLK);
-  u16 retD = tls_get_gpio_irq_status (KNOOB_DT);
-  if (retC || retD)
+  //u16 retD = tls_get_gpio_irq_status (KNOOB_DT);
+  if (retC)// || retD)
     {
       if (retC)
         tls_clr_gpio_irq_status (KNOOB_CLK);
-      if (retD)
-        tls_clr_gpio_irq_status (KNOOB_DT);
+      //if (retD)
+      //  tls_clr_gpio_irq_status (KNOOB_DT);
 
       if (i_dreb_CLK == 0)
         {
@@ -546,8 +546,8 @@ demo_console_task (void *sdata)
   tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
-  tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
+  //tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
+  //tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
 
   stantion_uuid[0] = 0;
