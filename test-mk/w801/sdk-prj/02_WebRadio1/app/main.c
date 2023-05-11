@@ -46,6 +46,7 @@ static u8g2_t u8g2;
 
 static u8 i_switch_menu = 0;
 static int i_menu = 0;
+static int i_menu2 = 0;
 static u8 u8_ind_ch_st = 0;
 
 static u16 u16_volume = 0; //
@@ -60,6 +61,8 @@ static void display_refresh (void);
 #define MENU_STORE_VOLUME 0
 #define MENU_STORE_INDEX 1
 #define MENU_MAX_POS (USER_CNT_REC_STANTION_NAME * 2)
+
+#define MENU2_MAX_POS (MAX_INDEX_LOAD_FIND-1)
 
 void
 MenuActionClick (void)
@@ -115,6 +118,16 @@ MenuActionClick (void)
           display_refresh ();
         }
     }
+}
+
+void
+Menu2ActionClick (void)
+{
+  u8_ind_ch_st = i_menu2;
+  sprintf (stantion_uuid, my_recognize_ret_stationuuid (u8_ind_ch_st));
+  // printf ("flash_cfg_load stantion_uuid %s,u8_stantion_id
+  // %d\n",stantion_uuid,u8_stantion_id);
+  VS1053_stop_PlayMP3 ();
 }
 
 static void
@@ -183,22 +196,22 @@ display_refresh (void)
               &u8g2, 90, 60,
               (my_recognize_ret_https (u8_ind_ch_st) ? "https" : "http"));
         }
-      else
+      if (i_switch_menu == 1)
         {
           u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-          sprintf (buf_str_ind, "Menu");
+          sprintf (buf_str_ind, "Menu1");
           u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
           //
 
           u8g2_SetFont (&u8g2, u8g2_font_5x8_t_cyrillic);
           sprintf (buf_str_ind, "%d", i_menu);
-          u8g2_DrawStr (&u8g2, 65, 10, buf_str_ind);
+          u8g2_DrawStr (&u8g2, 75, 10, buf_str_ind);
 
           if (i_menu == MENU_STORE_VOLUME)
             u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
           else
             u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 65, 20, "Store Vol");
+          u8g2_DrawStr (&u8g2, 75, 20, "St.Vol");
 
           u8 u8_stantion_id = (i_menu / 2);
           if ((u8_stantion_id * 2) == i_menu && u8_stantion_id > 0)
@@ -217,6 +230,26 @@ display_refresh (void)
               i_find_stantion_id = -1;
               i_delay_WAIT = 1;
             }
+        }
+
+      if (i_switch_menu == 2)
+        {
+          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+          sprintf (buf_str_ind, "Menu2");
+          u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
+
+          u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
+          sprintf (buf_str_ind, "%d", i_menu2);
+          u8g2_DrawStr (&u8g2, 85, 15, buf_str_ind);
+
+          sprintf (buf_str_ind, my_recognize_ret_name (i_menu2));
+          u8g2_DrawUTF8 (&u8g2, 1, 38, buf_str_ind);
+
+          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec (i_menu2));
+          u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate (i_menu2));
+          u8g2_DrawStr (&u8g2, 90, 60,
+                        (my_recognize_ret_https (i_menu2) ? "https" : "http"));
         }
 
       if (VS1053_status_get_status () != VS1053_PLAY
@@ -245,16 +278,16 @@ volatile static u16 i_rotar_one = 0;
 static u8 u8_enc_state = 0;
 
 static const u16 i_pos_dreb_SW
-    = 2000; //кнопка,таймер 300 Мкс, значит будет 600 миллисекунд.
+    = 3000; //кнопка,таймер 300 Мкс, значит будет 900 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
 static const u16 i_pos_DBL_CLICK
-    = 6000; // таймер 300 Мкс, значит будет 1.8 сек
+    = 6000; // таймер 300 Мкс, значит будет 1.2 сек
 volatile static u16 i_delay_SW_DBL_CLICK
     = 0; // двойной клик, переход в меню и обратно
 
 static const u16 i_pos_delay_volume
-    = 6000; // таймер 300 Мкс, значит будет 0.9 сек
+    = 6000; // таймер 300 Мкс, значит будет 1.2 сек
 volatile static u16 i_delay_volume = 0;
 
 static void
@@ -292,7 +325,7 @@ demo_timer_irq (u8 *arg) //
                       VS1053_setVolume (u16_volume);
                     }
                 }
-              else
+              if (i_switch_menu == 1)
                 {
                   if (i_rotar_zero > i_rotar_one)
                     i_menu--;
@@ -302,6 +335,17 @@ demo_timer_irq (u8 *arg) //
                     i_menu = MENU_MAX_POS;
                   if (i_menu > MENU_MAX_POS)
                     i_menu = 0;
+                }
+              if (i_switch_menu == 2)
+                {
+                  if (i_rotar_zero > i_rotar_one)
+                    i_menu2--;
+                  else
+                    i_menu2++;
+                  if (i_menu2 < 0)
+                    i_menu2 = MENU2_MAX_POS;
+                  if (i_menu2 > MENU2_MAX_POS)
+                    i_menu2 = 0;
                 }
 
               display_refresh ();
@@ -330,8 +374,10 @@ demo_timer_irq (u8 *arg) //
               stantion_uuid[0] = 0;
               VS1053_stop_PlayMP3 ();
             }
-          else
+          if (i_switch_menu == 1)
             MenuActionClick ();
+          if (i_switch_menu == 2)
+            Menu2ActionClick ();
         }
     }
 
@@ -377,7 +423,9 @@ KNOOB_SW_isr_callback (void *context)
           else
             {
               i_delay_SW_DBL_CLICK = 0;
-              i_switch_menu = ~i_switch_menu;
+              i_switch_menu++;
+              if (i_switch_menu > 2)
+                i_switch_menu = 0;
               // i_menu = 0;
               /*
               if (i_switch_menu == 0)
@@ -388,7 +436,7 @@ KNOOB_SW_isr_callback (void *context)
                     flash_cfg_store_u16 (i_menu, MENU_STORE_INDEX);
                 }
               */
-              if (i_switch_menu != 0 && i_menu > 1 && i_menu % 2 == 0)
+              if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
                 i_menu--;
               display_refresh ();
             }
@@ -399,12 +447,12 @@ static void
 KNOOB_CLK_isr_callback (void *context)
 {
   u16 retC = tls_get_gpio_irq_status (KNOOB_CLK);
-  //u16 retD = tls_get_gpio_irq_status (KNOOB_DT);
-  if (retC)// || retD)
+  // u16 retD = tls_get_gpio_irq_status (KNOOB_DT);
+  if (retC) // || retD)
     {
       if (retC)
         tls_clr_gpio_irq_status (KNOOB_CLK);
-      //if (retD)
+      // if (retD)
       //  tls_clr_gpio_irq_status (KNOOB_DT);
 
       if (i_dreb_CLK == 0)
@@ -546,8 +594,8 @@ demo_console_task (void *sdata)
   tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_RISING_EDGE);
   //
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  //tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
-  //tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_RISING_EDGE);
+  // tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
+  // tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_RISING_EDGE);
   //
 
   stantion_uuid[0] = 0;
@@ -586,27 +634,29 @@ demo_console_task (void *sdata)
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
-          my_recognize_http_reset ();
-          display_refresh ();
+          if (i_switch_menu != 2)
+            {
+              my_recognize_http_reset ();
+              display_refresh ();
 
-          if (strlen (stantion_uuid) == 36)
-            {
-              http_get_web_station_by_stationuuid (stantion_uuid);
-              stantion_uuid[0] = 0;
-              u8_ind_ch_st = 0;
-            }
-          else
-            {
-              http_get_web_station_by_random ();
-              for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+              if (strlen (stantion_uuid) == 36)
                 {
-                  printf ("ind=%d,%s\n", ind, my_recognize_ret_name (ind));
+                  http_get_web_station_by_stationuuid (stantion_uuid);
+                  stantion_uuid[0] = 0;
+                  u8_ind_ch_st = 0;
                 }
+              else
+                {
+                  http_get_web_station_by_random ();
+                  for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+                    {
+                      printf ("ind=%d,%s\n", ind, my_recognize_ret_name (ind));
+                    }
 
-              u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
-              printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
+                  u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
+                  printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
+                }
             }
-
           display_refresh ();
           i_delay_WAIT = 1;
 
