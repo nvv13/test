@@ -59,7 +59,7 @@ static void display_refresh (void);
 
 #define MENU_STORE_VOLUME 0
 #define MENU_STORE_INDEX 1
-#define MENU_MAX_POS (28 * 2)
+#define MENU_MAX_POS (USER_CNT_REC_STANTION_NAME * 2)
 
 void
 MenuActionClick (void)
@@ -236,7 +236,7 @@ display_refresh (void)
 #define KNOOB_DT WM_IO_PA_12
 #define KNOOB_CLK WM_IO_PA_13
 
-static const u16 i_pos_dreb_CLK = 1; // таймер 300 Мкс, значит будет 300 MKs
+static const u16 i_pos_dreb_CLK = 2; // таймер 300 Мкс, значит будет 300 MKs
 volatile static u16 i_dreb_CLK = 0; // от дребезга
 
 static int i_rotar = 10;
@@ -398,10 +398,15 @@ KNOOB_SW_isr_callback (void *context)
 static void
 KNOOB_CLK_isr_callback (void *context)
 {
-  u16 ret = tls_get_gpio_irq_status (KNOOB_CLK);
-  if (ret)
+  u16 retC = tls_get_gpio_irq_status (KNOOB_CLK);
+  u16 retD = tls_get_gpio_irq_status (KNOOB_DT);
+  if (retC || retD)
     {
-      tls_clr_gpio_irq_status (KNOOB_CLK);
+      if (retC)
+        tls_clr_gpio_irq_status (KNOOB_CLK);
+      if (retD)
+        tls_clr_gpio_irq_status (KNOOB_DT);
+
       if (i_dreb_CLK == 0)
         {
           if (tls_gpio_read (KNOOB_DT))
@@ -484,7 +489,7 @@ demo_console_task (void *sdata)
 
     .i2c_scl = WM_IO_PA_01,
     .i2c_sda = WM_IO_PA_04,
-    .i2c_freq = 100000 // частота i2c в герцах
+    .i2c_freq = 150000 // частота i2c в герцах
 
   };
   u8g2_SetUserPtr (&u8g2, &user_data_8x8);
@@ -541,6 +546,8 @@ demo_console_task (void *sdata)
   tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
+  tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
 
   stantion_uuid[0] = 0;

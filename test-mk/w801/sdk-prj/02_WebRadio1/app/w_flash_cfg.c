@@ -78,11 +78,11 @@ flash_cfg_store_u16 (u16 u16_value, u8 u8_index)
 int
 flash_cfg_load_stantion_name (char *name_buf_len29, u8 u8_index)
 {
-  if (u8_index > 27)
+  if (u8_index > USER_CNT_REC_STANTION_NAME - 1)
     {
-      printf ("\nflash_cfg_load_stantion_name error, invalid index (0...27) = "
+      printf ("\nflash_cfg_load_stantion_name error, invalid index (0...%d) = "
               "%d\n",
-              u8_index);
+              USER_CNT_REC_STANTION_NAME - 1, u8_index);
       return WM_FAILED;
     }
 
@@ -117,11 +117,12 @@ flash_cfg_load_stantion_name (char *name_buf_len29, u8 u8_index)
 int
 flash_cfg_store_stantion_name (char *name_buf_len28, u8 u8_index)
 {
-  if (u8_index > 27)
+  if (u8_index > USER_CNT_REC_STANTION_NAME - 1)
     {
-      printf ("\nflash_cfg_store_stantion_name error, invalid index (0...27) "
-              "= %d\n",
-              u8_index);
+      printf (
+          "\nflash_cfg_store_stantion_name error, invalid index (0...%d) = "
+          "%d\n",
+          USER_CNT_REC_STANTION_NAME - 1, u8_index);
       return WM_FAILED;
     }
 
@@ -158,11 +159,11 @@ flash_cfg_store_stantion_name (char *name_buf_len28, u8 u8_index)
 int
 flash_cfg_load_stantion_uuid (char *uuid_buf_len37, u8 u8_index)
 {
-  if (u8_index > 27)
+  if (u8_index > USER_CNT_REC_STANTION_NAME - 1)
     {
-      printf ("\nflash_cfg_load_stantion_uuid error, invalid index (0...27) = "
+      printf ("\nflash_cfg_load_stantion_uuid error, invalid index (0...%d) = "
               "%d\n",
-              u8_index);
+              USER_CNT_REC_STANTION_NAME - 1, u8_index);
       return WM_FAILED;
     }
 
@@ -197,11 +198,12 @@ flash_cfg_load_stantion_uuid (char *uuid_buf_len37, u8 u8_index)
 int
 flash_cfg_store_stantion_uuid (char *uuid_buf_len36, u8 u8_index)
 {
-  if (u8_index > 27)
+  if (u8_index > USER_CNT_REC_STANTION_NAME - 1)
     {
-      printf ("\nflash_cfg_store_stantion_uuid error, invalid index (0...27) "
-              "= %d\n",
-              u8_index);
+      printf (
+          "\nflash_cfg_store_stantion_uuid error, invalid index (0...%d) = "
+          "%d\n",
+          USER_CNT_REC_STANTION_NAME - 1, u8_index);
       return WM_FAILED;
     }
 
@@ -239,7 +241,7 @@ int
 flash_cfg_find_stantion_id_by_uuid (char *uuid_buf_len36)
 {
   char uuid_buf_len37[37];
-  for (int i_cnt = 0; i_cnt < 28; i_cnt++)
+  for (int i_cnt = 0; i_cnt < USER_CNT_REC_STANTION_NAME; i_cnt++)
     {
       flash_cfg_load_stantion_uuid (uuid_buf_len37, i_cnt);
       if (strlen (uuid_buf_len37) == 36 && strlen (uuid_buf_len36) == 36
