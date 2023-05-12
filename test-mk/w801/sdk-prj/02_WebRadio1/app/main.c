@@ -278,16 +278,16 @@ volatile static u16 i_rotar_one = 0;
 static u8 u8_enc_state = 0;
 
 static const u16 i_pos_dreb_SW
-    = 3000; //кнопка,таймер 300 Мкс, значит будет 900 миллисекунд.
+    = 1000; //кнопка,таймер 300 Мкс, значит будет 300 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
 static const u16 i_pos_DBL_CLICK
-    = 6000; // таймер 300 Мкс, значит будет 1.2 сек
+    = 4000; // таймер 300 Мкс, значит будет 1.2 сек
 volatile static u16 i_delay_SW_DBL_CLICK
     = 0; // двойной клик, переход в меню и обратно
 
 static const u16 i_pos_delay_volume
-    = 6000; // таймер 300 Мкс, значит будет 1.2 сек
+    = 6000; // таймер 300 Мкс, значит будет 1.8 сек
 volatile static u16 i_delay_volume = 0;
 
 static void
@@ -577,7 +577,7 @@ demo_console_task (void *sdata)
   struct tls_timer_cfg timer_cfg;
   // timer_cfg.unit = TLS_TIMER_UNIT_MS; // MS или Миллисекунды = 10^-3
   timer_cfg.unit = TLS_TIMER_UNIT_US; // US или Микросекунды = 10^-6
-  timer_cfg.timeout = 300; // 100 US, значит частота 10KHz
+  timer_cfg.timeout = 300; // 300 US, значит частота 3.333KHz
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
@@ -587,12 +587,11 @@ demo_console_task (void *sdata)
   //
   tls_gpio_cfg (KNOOB_SW, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   tls_gpio_isr_register (KNOOB_SW, KNOOB_SW_isr_callback, NULL);
-  tls_gpio_irq_enable (KNOOB_SW, WM_GPIO_IRQ_TRIG_RISING_EDGE);
+  tls_gpio_irq_enable (KNOOB_SW, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   //
   tls_gpio_cfg (KNOOB_CLK, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   tls_gpio_isr_register (KNOOB_CLK, KNOOB_CLK_isr_callback, NULL);
   tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_RISING_EDGE);
-  //
   tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
   // tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
   // tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_RISING_EDGE);
