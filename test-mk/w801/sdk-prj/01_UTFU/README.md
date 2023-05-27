@@ -605,6 +605,66 @@ SD Card
 
 
 
+
+
+-----------------------------
+
+board HLK-W801-KIT-V1.1 + 3.97 TFT_397T_NT35510 800x480 16bit bus
+
+Видео
+
+
+Дисплей
+фото 1 
+фото2
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_397T_NT35510
+
+соединения
+
+надо соединить по схеме:
+~~~
+вид с низу, разьем слева
+connect to TFT_397T_NT35510
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+PA01 RS      CS   PA03
+3.3v RD      WR   PA02
+PB00 DBO     RST  PA04 
+PB13 DB2     DB1  PB12
+PB15 DB4     DB3  PB14
+PB01 DB6     DB5  PB02
+PB17 DB8     DB7  PB16
+PB26 DB10    DB9  PB18
+PB24 DB12    DB11 PB25
+PB22 DB14    DB13 PB23
+     NC      DB15 PB21
+3.3v VCC       BL 3.3v 
+gnd  GND      VCC 3.3v 
+     NC       GND gnd 
+ PA8 MOSI    MISO PA7
+     NC       PEN PA9
+PA5  CLK     T_CS PA6
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 800x480! -rotate 180 -define bmp:subtype=RGB565 j%03d-800x480.bmp
+
+если используется библиотека libTJPEG.a
+# convert *.jpg -resize 800x480! j%03d-800x480.jpg
+
+
+~~~
+
+
+
+------------------------------------------------
+
+
 -----------------------------
 после сборки, файл libUTFT.a 
 лежит ./bin/build/w800/lib/libUTFT.a

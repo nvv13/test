@@ -252,8 +252,9 @@ static void pulse_low_WR_repeat(u32 u32_count)
     {
     tls_reg_write32 (HR_GPIO_DATA + offset,
                    reg & (~(1 << pin))); /* write low from pin */
+
     tls_reg_write32 (HR_GPIO_DATA + offset,
-                   reg | (1 << pin)); /* write Hi from pin */
+                  reg | (1 << pin)); /* write Hi from pin */
     }
 
   tls_reg_write32 (HR_GPIO_DATA_EN + offset, reg_en); // reg_en return

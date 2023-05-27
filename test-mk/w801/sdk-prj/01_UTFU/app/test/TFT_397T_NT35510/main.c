@@ -85,15 +85,15 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "800x480") != NULL && strstr (FileName, ".jpg") != NULL)
+              if (strstr (FileName, "320x240") != NULL && strstr (FileName, ".jpg") != NULL)
                {
                UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
                //UTFT_loadBitmap (0, 0, 480, 320, FileName); // выводим на дисплей картинку
                UTFT_setFont (BigFont);
                UTFT_setColor2 (VGA_FUCHSIA);
                UTFT_setBackColor2 (VGA_TRANSPARENT);
-               UTFT_print (fno.fname, CENTER, 400, 0);
-               tls_os_time_delay (HZ * 6);
+               UTFT_print (fno.fname, CENTER, 200, 0);
+               tls_os_time_delay (HZ * 3);
                }
             }
         }
@@ -137,10 +137,10 @@ user_app1_task (void *sdata)
 
       UTFT_clrScr (); // стираем всю информацию с дисплея
 
-      UTFT_setColor2 (VGA_WHITE); // 800x480
-      for (int i = 1; i < 480; i++)
+      UTFT_setColor2 (VGA_WHITE); // 240x280
+      for (int i = 2; i < 59; i++)
         {
-          UTFT_drawRect (1, 1, i * 2, i );
+          UTFT_drawRect (2, 2, i * 5, i * 4);
         }
 
       tls_os_time_delay (HZ * 3); //
@@ -149,8 +149,8 @@ user_app1_task (void *sdata)
 
       UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
       UTFT_drawRoundRect (
-          10, 10, 790,
-          470); // Рисуем прямоугольник со скруглёнными углами (с
+          10, 10, 310,
+          230); // Рисуем прямоугольник со скруглёнными углами (с
                 // противоположными углами в координатах 10x110 - 170x210)
       tls_os_time_delay (HZ * 3); //
                                   //
@@ -159,19 +159,19 @@ user_app1_task (void *sdata)
                      ,
                      11 // по вертикали?
                      ,
-                     791 //длинна?
+                     309 //длинна?
                      ,
-                     471 //высота?
+                     229 //высота?
       ); // Рисуем закрашенный прямоугольник (с противоположными углами
          // в координатах 10x220 - 170x310)
       tls_os_time_delay (HZ * 3); //
                                   //
       UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
       UTFT_drawCircle (
-          400, 240,
+          160, 120,
           70); // Рисуем окружность (с центром в точке x y  и радиусом r)
 
-      UTFT_fillCircle (400, 240, 50); // Рисуем закрашенную окружность (с
+      UTFT_fillCircle (160, 120, 50); // Рисуем закрашенную окружность (с
                                      // центром в точке x y и радиусом r)
       tls_os_time_delay (HZ * 3);
 
@@ -240,7 +240,7 @@ user_app1_task (void *sdata)
       tls_get_rtc (&tstart);
       u32 current_tick = tls_os_get_time();
       u32 count=0;
-      while( (tls_os_get_time() - current_tick) <= (HZ) )
+      while( (tls_os_get_time() - current_tick) <= (HZ*10) )
        {
        UTFT_fillScr2 (count);
        count++;
