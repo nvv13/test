@@ -47,14 +47,15 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.97 TFT_397T_NT35510 800x480 16bit bus\n");
+  printf ("user_app1_task start 3.2 TFT_320QDT_9341 320x240 16bit bus\n");
 
-  // Цветной графический дисплей 3.97 TFT_397T_NT35510 с тачскрином
+  // Цветной графический дисплей 3.2 TFT 320x240 с тачскрином
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_397T_NT35510, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
+  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
              (u8)WM_IO_PA_03, (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
+  // UTFT тип дисплея TFT_320QDT_9341
   // и номера выводов W801 к которым подключён дисплей: RS, WR,
   // CS, RST. Выводы параллельной шины данных не указываются
   // в данном случае, параллельная 16 бит шина = PB0 ... PB15
@@ -62,12 +63,11 @@ user_app1_task (void *sdata)
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
 
-  UTFT_setColor2 (VGA_WHITE); // 800x480
-  for (int i = 2; i < 160; i++)
+  UTFT_setColor2 (VGA_WHITE); // 240x280
+  for (int i = 2; i < 59; i++)
     {
-      UTFT_drawRect (2, 2, i * 5, i * 3);
+      UTFT_drawRect (2, 2, i * 5, i * 4);
     }
-  tls_os_time_delay (HZ*3); //
 
   // URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
   URTouch_URTouch ((u8)WM_IO_PA_05 // byte tclk
