@@ -66,7 +66,7 @@ typedef unsigned char prog_uchar;
 
 #define PIN8 WM_IO_PB_16
 #define PIN9 WM_IO_PB_01 // WM_IO_PB_11 Освободил контакты для SD Card
-#define PIN10 WM_IO_PB_02 // WM_IO_PB_10 Освободил контакты для SD Card
+#define PIN10 WM_IO_PB_27 // WM_IO_PB_10 Освободил контакты для SD Card, WM_IO_PB_02 - освободид для spi
 #define PIN11 WM_IO_PB_15
 #define PIN12 WM_IO_PB_14
 #define PIN13 WM_IO_PB_13

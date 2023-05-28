@@ -436,9 +436,16 @@ case TFT_397T_NT35510:
 
 		LCD_WR_REG(0x3500); LCD_WR_DATA(0x00);
 		LCD_WR_REG(0x3600); LCD_WR_DATA(0x00);
-		LCD_WR_REG(0x3a00); LCD_WR_DATA(0x55);  ////55=16?/////66=18?
+
+#define  NT35510_CMD_COLMOD                0x3A  /* Interface pixel format */
+/* Possible values of COLMOD parameter corresponding to used pixel formats */
+#define  NT35510_COLMOD_RGB565             0x55
+#define  NT35510_COLMOD_RGB888             0x77
+
+		LCD_WR_REG(0x3a00); LCD_WR_DATA(NT35510_COLMOD_RGB565);  ////55=16?/////66=18?
+
 		LCD_WR_REG(0x1100);
-		delay(120); 
+		delay(200); 
 		LCD_WR_REG(0x2900 ); 
 		LCD_WR_REG(0x2c00);
 
@@ -478,6 +485,7 @@ case TFT_397T_NT35510:
 //	LCD_LED=1;//点亮背光	 
 //	LCD_Clear(WHITE);//清全屏白色
 
+		delay(120); 
 
 
 	break;
