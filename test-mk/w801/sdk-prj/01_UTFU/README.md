@@ -439,6 +439,7 @@ W801 LCD
 
 board HLK-W801-KIT-V1.1 + 2.0 TFT SPI 240x320 
 
+по углам обзора - похоже на IPS
 
 Видео
 https://youtu.be/fxX3JLcDdj8
@@ -538,6 +539,73 @@ W801 LCD
 
 
 
+
+
+
+-----------------------------
+
+board HLK-W801-KIT-V1.1 + 3.97 TFT_397T_NT35510 800x480 16bit bus
+
+по углам обзора - похоже на IPS
+
+Видео
+https://youtu.be/OAJxVA2hCOE
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480.jpg" alt="top side" title="top side" /></p>
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_397T_NT35510
+
+соединения
+
+надо соединить по схеме:
+~~~
+вид с низу, разъём слева
+connect to TFT_397T_NT35510
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+PA01 RS      CS   PA03
+3.3v RD      WR   PA02
+PB00 DBO     RST  PA04 
+PB13 DB2     DB1  PB12
+PB15 DB4     DB3  PB14
+PB01 DB6     DB5  PB27
+PB17 DB8     DB7  PB16
+PB26 DB10    DB9  PB18
+PB24 DB12    DB11 PB25
+PB22 DB14    DB13 PB23
+     NC      DB15 PB21
+3.3v VCC       BL 3.3v 
+gnd  GND      VCC 3.3v 
+     NC       GND gnd 
+PA07 MOSI    MISO PA08
+     NC       PEN PA09
+PA05 CLK     T_CS PA06
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 800x480! -rotate 180 -define bmp:subtype=RGB565 j%03d-800x480.bmp
+
+если используется библиотека libTJPEG.a
+# convert *.jpg -resize 800x480! j%03d-800x480.jpg
+
+
+~~~
+
+
+
+------------------------------------------------
+
+
+
+
 ------------------------------------------------
 
 
@@ -607,64 +675,6 @@ SD Card
 
 
 
------------------------------
-
-board HLK-W801-KIT-V1.1 + 3.97 TFT_397T_NT35510 800x480 16bit bus
-
-Видео
-
-
-Дисплей
-фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480_back.jpg" alt="back side" title="back side" /></p>
-фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480.jpg" alt="top side" title="top side" /></p>
-
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_397T_NT35510
-
-соединения
-
-надо соединить по схеме:
-~~~
-вид с низу, разьем слева
-connect to TFT_397T_NT35510
----- ------------ ----
-W801 LCD      LCD W801
----- ------------ ----
-PA01 RS      CS   PA03
-3.3v RD      WR   PA02
-PB00 DBO     RST  PA04 
-PB13 DB2     DB1  PB12
-PB15 DB4     DB3  PB14
-PB01 DB6     DB5  PB27
-PB17 DB8     DB7  PB16
-PB26 DB10    DB9  PB18
-PB24 DB12    DB11 PB25
-PB22 DB14    DB13 PB23
-     NC      DB15 PB21
-3.3v VCC       BL 3.3v 
-gnd  GND      VCC 3.3v 
-     NC       GND gnd 
-PA07 MOSI    MISO PA08
-     NC       PEN PA09
-PA05 CLK     T_CS PA06
----- ------------ ----
-W801 LCD      LCD W801
----- ------------ ----
-
-
-*подготовка изображений для SD Card (инф.ниже)
-# convert *.jpg -resize 800x480! -rotate 180 -define bmp:subtype=RGB565 j%03d-800x480.bmp
-
-если используется библиотека libTJPEG.a
-# convert *.jpg -resize 800x480! j%03d-800x480.jpg
-
-
-~~~
-
-
-
-------------------------------------------------
 
 
 -----------------------------
