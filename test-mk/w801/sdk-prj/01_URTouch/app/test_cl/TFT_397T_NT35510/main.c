@@ -40,7 +40,6 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 
 #define TOUCH_ORIENTATION  PORTRAIT
-//#define TOUCH_ORIENTATION  LANDSCAPE
 
 // Declare which fonts we will be using
 extern uint8_t SmallFont[];
@@ -176,7 +175,7 @@ void startup()
 {
   UTFT_setColor(255, 0, 0);
   UTFT_fillRect(0, 0, dispx-1, 13);
-  UTFT_setColor2 (VGA_WHITE);//UTFT_setColor(255, 255, 255);
+  UTFT_setColor(255, 255, 255);
   UTFT_setBackColor(255, 0, 0);
   UTFT_drawLine(0, 14, dispx-1, 14);
   UTFT_print("URTouch Calibration", CENTER, 1,0);
@@ -223,7 +222,7 @@ void done()
   UTFT_clrScr();
   UTFT_setColor(255, 0, 0);
   UTFT_fillRect(0, 0, dispx-1, 13);
-  UTFT_setColor2 (VGA_WHITE);//UTFT_setColor(255, 255, 255);
+  UTFT_setColor(255, 255, 255);
   UTFT_setBackColor(255, 0, 0);
   UTFT_drawLine(0, 14, dispx-1, 14);
   UTFT_print("URTouch Calibration", CENTER, 1,0);
@@ -235,7 +234,7 @@ void done()
     UTFT_print("settings you must edit the", LEFT, 42,0);
     UTFT_setColor(160, 160, 255);
     UTFT_print("URTouchCD.h", LEFT, 54,0);
-    UTFT_setColor2 (VGA_WHITE);//UTFT_setColor(255, 255, 255);
+    UTFT_setColor(255, 255, 255);
     UTFT_print("file and change", 88, 54,0);
     UTFT_print("the following values. The", LEFT, 66,0);
     UTFT_print("values are located right", LEFT, 78,0);
@@ -249,10 +248,6 @@ void done()
     UTFT_print(buf, 75, 122,0);
     toHex(cals);
     UTFT_print(buf, 75, 134,0);
-
-    printf ("URTouchCD.h Hex CAL_X=%X CAL_Y=%X CAL_S=%X \n",calx, caly,cals);
-    printf ("URTouchCD.h Dec CAL_X=%d CAL_Y=%d CAL_S=%d \n",calx, caly,cals);
-
   }
   else
   {  
@@ -261,7 +256,7 @@ void done()
     UTFT_print("settings you must edit the", LEFT, 62,0);
     UTFT_setColor(160, 160, 255);
     UTFT_print("URTouchCD.h", LEFT, 74,0);
-    UTFT_setColor2 (VGA_WHITE);//UTFT_setColor(255, 255, 255);
+    UTFT_setColor(255, 255, 255);
     UTFT_print("file and change", 88, 74,0);
     UTFT_print("the following values.", LEFT, 86,0);
     UTFT_print("The values are located right", LEFT, 98,0);
@@ -277,10 +272,6 @@ void done()
     UTFT_print(buf, 75, 162,0);
     toHex(cals);
     UTFT_print(buf, 75, 174,0);
-
-    printf ("URTouchCD.h Hex CAL_X=%X CAL_Y=%X CAL_S=%X \n",calx, caly,cals);
-    printf ("URTouchCD.h Dec CAL_X=%d CAL_Y=%d CAL_S=%d \n",calx, caly,cals);
-
   }
   
 }
@@ -425,14 +416,9 @@ user_app1_task (void *sdata)
 
   done();
 
-
-//URTouchCD.h Hex CAL_X=1F3C7E2 CAL_Y=1FB47EF CAL_S=8031F1DF 
-//URTouchCD.h Dec CAL_X=32753634 CAL_Y=33245167 CAL_S=-2144210465 
-
-  URTouch_set_calibrate(calx,caly,cals);
  
   int x = 0, y = 0;
-  //UTFT_clrScr();
+  UTFT_clrScr();
   while (1)
     { //
 
@@ -440,12 +426,12 @@ user_app1_task (void *sdata)
         {
           URTouch_read ();
           x = URTouch_getX ();
-          y = URTouch_getY ();
+          y = UTFT_getDisplayYSize () - URTouch_getY ();
           if (x >= 0 && y >= 0)
             {
-              //char mesg[50];
-              //sprintf (mesg, "X=%.3d Y=%.3d", x, y);
-              //UTFT_print (mesg, CENTER, 10, 0);
+              char mesg[50];
+              sprintf (mesg, "X=%.3d Y=%.3d", x, y);
+              UTFT_print (mesg, CENTER, 10, 0);
               UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
               printf ("touch X=%.3d Y=%.3d\n",x, y);
             }

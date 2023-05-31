@@ -61,6 +61,7 @@ int16_t	URTouch_getX();
 int16_t	URTouch_getY();
 void	URTouch_setPrecision(byte precision);
 void	URTouch_calibrateRead();
+void URTouch_set_calibrate(uint32_t calx,uint32_t  caly,uint32_t  cals);
     
 
 

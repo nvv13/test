@@ -303,7 +303,7 @@ void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 s
   void UTFT_drawRect (int x1, int y1, int x2, int y2);
   void UTFT_drawRoundRect (int x1, int y1, int x2, int y2);
   void UTFT_fillRect (int x1, int y1, int x2, int y2);
-  void UTFT_fillRoundRect2 (int x1, int y1, int x2, int y2);
+  void UTFT_fillRoundRect (int x1, int y1, int x2, int y2);
   void UTFT_drawCircle (int x, int y, int radius);
   void UTFT_fillCircle (int x, int y, int radius);
   void UTFT_setColor (byte r, byte g, byte b);

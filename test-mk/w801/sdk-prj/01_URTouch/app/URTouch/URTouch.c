@@ -29,6 +29,9 @@
 
 #include "hardware/sky/HW_SKY_defines.h"
 
+static uint32_t CAL_X = 0x00378F66UL;
+static uint32_t CAL_Y = 0x03C34155UL;
+static uint32_t CAL_S = 0x000EF13FUL;
 
 
 static regtype *P_CLK, *P_CS, *P_DIN, *P_DOUT, *P_IRQ;
@@ -57,6 +60,20 @@ void URTouch_URTouch(byte tclk, byte tcs, byte din, byte dout, byte irq)
 	T_DIN	= din;
 	T_DOUT	= dout;
 	T_IRQ	= irq;
+}
+
+void URTouch_set_calibrate(uint32_t calx,uint32_t  caly,uint32_t  cals)
+{
+CAL_X = calx;
+CAL_Y = caly;
+CAL_S = cals;
+	_default_orientation	= CAL_S>>31;
+	touch_x_left			= (CAL_X>>14) & 0x3FFF;
+	touch_x_right			= CAL_X & 0x3FFF;
+	touch_y_top				= (CAL_Y>>14) & 0x3FFF;
+	touch_y_bottom			= CAL_Y & 0x3FFF;
+	disp_x_size				= (CAL_S>>12) & 0x0FFF;
+	disp_y_size				= CAL_S & 0x0FFF;
 }
 
 void URTouch_InitTouch(byte orientation)

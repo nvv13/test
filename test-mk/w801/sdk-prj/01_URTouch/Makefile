@@ -33,8 +33,10 @@ endif
 
 COMPONENTS_$(TARGET) =	\
     $(TOP_DIR)/app/libuser$(LIB_EXT) \
-    $(TOP_DIR)/app/libURTouch$(LIB_EXT) #\
+    $(TOP_DIR)/app/libURTouch$(LIB_EXT) \
+    $(TOP_DIR)/app/libUTFT_Buttons$(LIB_EXT) #\
 #    $(TOP_DIR)/demo/libdemo$(LIB_EXT)
+
 
 ifeq ($(USE_LIB), 0)
 COMPONENTS_$(TARGET) += \

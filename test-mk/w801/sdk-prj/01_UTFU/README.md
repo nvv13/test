@@ -557,6 +557,9 @@ https://youtu.be/OAJxVA2hCOE
 фото 2
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480.jpg" alt="top side" title="top side" /></p>
 
+wiki
+http://www.lcdwiki.com/3.97inch_16BIT_Module_NT35510_SKU:MRB3973
+
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_397T_NT35510
 
 соединения
