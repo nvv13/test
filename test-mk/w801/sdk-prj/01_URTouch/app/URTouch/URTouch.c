@@ -29,10 +29,7 @@
 
 #include "hardware/sky/HW_SKY_defines.h"
 
-static uint32_t CAL_X = 0x00378F66UL;
-static uint32_t CAL_Y = 0x03C34155UL;
-static uint32_t CAL_S = 0x000EF13FUL;
-
+int16_t	URTouch_TP_X ,URTouch_TP_Y;
 
 static regtype *P_CLK, *P_CS, *P_DIN, *P_DOUT, *P_IRQ;
 static regsize B_CLK, B_CS, B_DIN, B_DOUT, B_IRQ;
@@ -64,28 +61,19 @@ void URTouch_URTouch(byte tclk, byte tcs, byte din, byte dout, byte irq)
 
 void URTouch_set_calibrate(uint32_t calx,uint32_t  caly,uint32_t  cals)
 {
-CAL_X = calx;
-CAL_Y = caly;
-CAL_S = cals;
-	_default_orientation	= CAL_S>>31;
-	touch_x_left			= (CAL_X>>14) & 0x3FFF;
-	touch_x_right			= CAL_X & 0x3FFF;
-	touch_y_top				= (CAL_Y>>14) & 0x3FFF;
-	touch_y_bottom			= CAL_Y & 0x3FFF;
-	disp_x_size				= (CAL_S>>12) & 0x0FFF;
-	disp_y_size				= CAL_S & 0x0FFF;
+	_default_orientation	= cals>>31;
+	touch_x_left			= (calx>>14) & 0x3FFF;
+	touch_x_right			= calx & 0x3FFF;
+	touch_y_top				= (caly>>14) & 0x3FFF;
+	touch_y_bottom			= caly & 0x3FFF;
+	disp_x_size				= (cals>>12) & 0x0FFF;
+	disp_y_size				= cals & 0x0FFF;
 }
 
 void URTouch_InitTouch(byte orientation)
 {
 	orient					= orientation;
-	_default_orientation	= CAL_S>>31;
-	touch_x_left			= (CAL_X>>14) & 0x3FFF;
-	touch_x_right			= CAL_X & 0x3FFF;
-	touch_y_top				= (CAL_Y>>14) & 0x3FFF;
-	touch_y_bottom			= CAL_Y & 0x3FFF;
-	disp_x_size				= (CAL_S>>12) & 0x0FFF;
-	disp_y_size				= CAL_S & 0x0FFF;
+        URTouch_set_calibrate(CAL_X,CAL_Y,CAL_S);
 	prec					= 10;
 
 	P_CLK	= portOutputRegister(digitalPinToPort(T_CLK));
@@ -186,14 +174,36 @@ void URTouch_read()
 	}
 }
 
+static tls_gpio_irq_callback isr_callback=NULL;
+
 bool URTouch_dataAvailable()
 {
-	bool avail;
-	pinMode(T_IRQ,  INPUT);
-	avail = !(rbi(P_IRQ, B_IRQ));
-	pinMode(T_IRQ,  OUTPUT);
+	bool avail=false;
+        if(isr_callback==NULL)
+          {
+   	  pinMode(T_IRQ,  INPUT);
+	  avail = !(rbi(P_IRQ, B_IRQ));
+	  pinMode(T_IRQ,  OUTPUT);
+          }
 	return avail;
 }
+
+//typedef void (*URTouch_callback_func)(void *arg);
+void URTouch_register_irq_callback_func(tls_gpio_irq_callback callback)
+{
+isr_callback=callback;
+if(isr_callback!=NULL)
+ {
+ tls_gpio_cfg (T_IRQ, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_PULLHIGH);//WM_GPIO_ATTR_FLOATING
+ tls_gpio_isr_register (T_IRQ, isr_callback, NULL);
+ tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
+ }
+ else
+ {
+ tls_gpio_irq_disable(T_IRQ);
+ }
+}
+
 
 int16_t URTouch_getX()
 {

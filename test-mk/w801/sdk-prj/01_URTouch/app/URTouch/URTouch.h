@@ -35,6 +35,8 @@ extern "C"
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "wm_gpio.h"
+
 typedef u8 byte;
 typedef u16 word;
 
@@ -51,7 +53,7 @@ typedef u16 word;
 #define PREC_HI				3
 #define PREC_EXTREME		4
 
-int16_t	URTouch_TP_X ,URTouch_TP_Y;
+extern int16_t	URTouch_TP_X ,URTouch_TP_Y;
 
 void	URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
 void	URTouch_InitTouch(byte orientation);//byte orientation = LANDSCAPE
@@ -62,6 +64,8 @@ int16_t	URTouch_getY();
 void	URTouch_setPrecision(byte precision);
 void	URTouch_calibrateRead();
 void URTouch_set_calibrate(uint32_t calx,uint32_t  caly,uint32_t  cals);
+
+void URTouch_register_irq_callback_func(tls_gpio_irq_callback callback);
     
 
 

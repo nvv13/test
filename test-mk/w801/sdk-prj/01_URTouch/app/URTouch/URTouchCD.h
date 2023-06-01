@@ -18,6 +18,7 @@
 // calibration sketch anyway. If you are using a display with any other
 // resolution you MUST calibrate it as these settings WILL NOT work.
 
-//#define CAL_X 0x00378F66UL
-//#define CAL_Y 0x03C34155UL
-//#define CAL_S 0x000EF13FUL
+#define CAL_X 0x00378F66UL
+#define CAL_Y 0x03C34155UL
+#define CAL_S 0x000EF13FUL
+

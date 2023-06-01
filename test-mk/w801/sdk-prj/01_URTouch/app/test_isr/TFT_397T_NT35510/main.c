@@ -46,6 +46,21 @@ extern uint8_t SmallSymbolFont[];
 
 
 #define TOUCH_IRQ WM_IO_PA_09
+static volatile u8 flag_touch_isr=false;
+static void isr_callback (void *context)
+{
+  u16 ret = tls_get_gpio_irq_status (TOUCH_IRQ);
+  if (ret)
+    {
+      tls_clr_gpio_irq_status (TOUCH_IRQ);
+      flag_touch_isr=true;
+      //if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
+      //  {
+      //    i_dreb_SW = 1;
+      //  }
+    }
+}
+
 
 void
 user_app1_task (void *sdata)
@@ -87,6 +102,7 @@ user_app1_task (void *sdata)
   URTouch_InitTouch (LANDSCAPE);
   URTouch_setPrecision (PREC_MEDIUM);
 
+  URTouch_register_irq_callback_func(isr_callback);
   //
   int x = 0, y = 0;
 
@@ -97,8 +113,9 @@ user_app1_task (void *sdata)
   while (1)
     { //
 
-      if (URTouch_dataAvailable ())
+      if (flag_touch_isr)//;URTouch_dataAvailable ())
         {
+          flag_touch_isr=false;
           URTouch_read ();
           x = URTouch_getX ();
           y = URTouch_getY ();
