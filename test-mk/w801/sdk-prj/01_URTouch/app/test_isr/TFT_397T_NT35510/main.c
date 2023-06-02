@@ -128,6 +128,8 @@ user_app1_task (void *sdata)
               printf ("touch X=%.3d Y=%.3d\n",x, y);
             }
         }
+        else
+        tls_os_time_delay (1);
 
     } //
 }

@@ -433,7 +433,7 @@ user_app1_task (void *sdata)
 
   done ();
 
-  // URTouchCD.h Hex CAL_X=1F3C7E2 CAL_Y=1FB47EF CAL_S=8031F1DF
+  // URTouchCD.h Hex CAL_X= 1F3C7E2 CAL_Y= 1FB47EF CAL_S=   8031F1DF
   // URTouchCD.h Dec CAL_X=32753634 CAL_Y=33245167 CAL_S=-2144210465
 
   //URTouch_set_calibrate (calx, caly, cals);
