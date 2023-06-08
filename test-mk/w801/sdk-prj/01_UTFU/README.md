@@ -592,6 +592,7 @@ PA05 CLK     T_CS PA06
 W801 LCD      LCD W801
 ---- ------------ ----
 
+*выводы PA05,PA06,PA07,PA08,PA09 используются для touchscreen, если он не используется, можно не подсоединять
 
 *подготовка изображений для SD Card (инф.ниже)
 # convert *.jpg -resize 800x480! -rotate 180 -define bmp:subtype=RGB565 j%03d-800x480.bmp
@@ -599,6 +600,72 @@ W801 LCD      LCD W801
 если используется библиотека libTJPEG.a
 # convert *.jpg -resize 800x480! j%03d-800x480.jpg
 
+
+~~~
+
+
+
+------------------------------------------------
+
+
+-----------------------------
+
+board HLK-W801-KIT-V1.1 + 2.4inch 16BIT Module ILI9341 SKU:MRB2408 320x240 16bit bus
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MRB2408_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MRB2408.jpg" alt="top side" title="top side" /></p>
+
+wiki
+http://www.lcdwiki.com/2.4inch_16BIT_Module_ILI9341_SKU:MRB2408
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_320QDT_9341
+
+соединения
+
+надо соединить по схеме:
+~~~
+вид с низу, разъём слева
+connect to TFT_24_MRB2408
+---- ------------ ----
+W801 LCD     LCD  W801
+---- ------------ ----
+PA01 RS        CS PA03
+3.3v RD        WR PA02
+PB00 D1       RST PA04 
+PB13 D3        D2 PB12
+PB15 D5        D4 PB14
+PB01 D7        D6 PB27
+PB17 D10       D8 PB16
+PB26 D12      D11 PB18
+PB24 D14      D13 PB25
+PB22 D16      D15 PB23
+     SCS      D17 PB21
+3.3v VDD       BL 3.3v 
+gnd  GND      VDD 3.3v 
+     5V       GND gnd 
+PA07 MOSI    MISO PA08
+     FCS      PEN PA09
+PA05 CLK      TCS PA06
+---- ------------ ----
+W801 LCD      LCD W801
+---- ------------ ----
+
+
+*выводы PA05,PA06,PA07,PA08,PA09 используются для touchscreen (библиотека URTouch), если он не используется, можно не подсоединять
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 320x240! -rotate 180 -define bmp:subtype=RGB565 j%03d-320x240.bmp
+
+если используется библиотека libTJPEG.a
+# convert *.jpg -resize 320x240! j%03d-320x240.jpg
 
 ~~~
 

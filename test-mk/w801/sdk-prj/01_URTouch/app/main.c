@@ -38,8 +38,8 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-#define TOUCH_ORIENTATION PORTRAIT
-//#define TOUCH_ORIENTATION  LANDSCAPE
+//#define TOUCH_ORIENTATION PORTRAIT
+#define TOUCH_ORIENTATION  LANDSCAPE
 
 // Declare which fonts we will be using
 extern uint8_t SmallFont[];
@@ -301,11 +301,10 @@ done ()
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.97 TFT_397T_NT35510 800x480 16bit bus\n");
+  printf ("user_app1_task start 3.2 TFT_320QDT_9341 320x240 16bit bus\n");
 
-  // Цветной графический дисплей 3.97 TFT_397T_NT35510 с тачскрином
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_397T_NT35510, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
+  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
              (u8)WM_IO_PA_03, (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
@@ -362,9 +361,9 @@ user_app1_task (void *sdata)
   calibrate (dispx - 11, dispy - 11, 7);
 
   if (TOUCH_ORIENTATION == LANDSCAPE)
-    cals = ((long)(dispx - 1) << 12) + (dispy - 1);
+    cals = ((int32_t)(dispx - 1) << 12) + (dispy - 1);
   else
-    cals = ((long)(dispy - 1) << 12) + (dispx - 1);
+    cals = ((int32_t)(dispy - 1) << 12) + (dispx - 1);
 
   if (TOUCH_ORIENTATION == PORTRAIT)
     px = abs ((((float)(rx[2] + rx[4] + rx[7]) / 3)
@@ -426,8 +425,8 @@ user_app1_task (void *sdata)
       cby = cby - (py * 10);
     }
 
-  calx = ((long)(clx) << 14) + (long)(crx);
-  caly = ((long)(cty) << 14) + (long)(cby);
+  calx = ((int32_t)(clx) << 14) + (int32_t)(crx);
+  caly = ((int32_t)(cty) << 14) + (int32_t)(cby);
   if (TOUCH_ORIENTATION == LANDSCAPE)
     cals = cals + (1L << 31);
 
@@ -435,6 +434,8 @@ user_app1_task (void *sdata)
 
   // URTouchCD.h Hex CAL_X= 1F3C7E2 CAL_Y= 1FB47EF CAL_S=   8031F1DF
   // URTouchCD.h Dec CAL_X=32753634 CAL_Y=33245167 CAL_S=-2144210465
+  //URTouch_set_calibrate ( 0x03C34155UL, 0x00378F66UL, cals);
+
 
   //URTouch_set_calibrate (calx, caly, cals);
 
@@ -446,8 +447,10 @@ user_app1_task (void *sdata)
       if (URTouch_dataAvailable ())
         {
           URTouch_read ();
-          x = URTouch_getX ();
-          y = URTouch_getY ();
+//          x = URTouch_getX ();
+//          y = URTouch_getY ();
+          x = UTFT_getDisplayXSize () - URTouch_getX ();
+          y = UTFT_getDisplayYSize () - URTouch_getY ();
           if (x >= 0 && y >= 0)
             {
               // char mesg[50];

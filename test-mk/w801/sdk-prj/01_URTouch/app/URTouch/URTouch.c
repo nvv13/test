@@ -20,6 +20,7 @@
   examples and tools supplied with the library.
 */
 
+
 #include "URTouch.h"
 #include "URTouchCD.h"
 
@@ -30,18 +31,21 @@ int16_t URTouch_TP_X, URTouch_TP_Y;
 static regtype *P_CLK, *P_CS, *P_DIN, *P_DOUT, *P_IRQ;
 static regsize B_CLK, B_CS, B_DIN, B_DOUT, B_IRQ;
 static byte T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ;
-static long _default_orientation;
+static int32_t _default_orientation;
 static byte orient;
 static byte prec;
 // static byte	display_model;
-static long disp_x_size, disp_y_size; //, default_orientation;
-static long touch_x_left, touch_x_right, touch_y_top, touch_y_bottom;
+static int32_t disp_x_size, disp_y_size; //, default_orientation;
+static int32_t touch_x_left, touch_x_right, touch_y_top, touch_y_bottom;
 
 static void URTouch_touch_WriteData (byte data);
 static word URTouch_touch_ReadData ();
 
-#include "hardware/sky/HW_SKY.h"
 #include "hardware/sky/HW_W801_p.h"
+
+#include "hardware/sky/HW_SKY.h"
+
+#define URT_SERIAL_DEBUG
 
 void
 URTouch_URTouch (byte tclk, byte tcs, byte din, byte dout, byte irq)
@@ -63,6 +67,14 @@ URTouch_set_calibrate (uint32_t calx, uint32_t caly, uint32_t cals)
   touch_y_bottom = caly & 0x3FFF;
   disp_x_size = (cals >> 12) & 0x0FFF;
   disp_y_size = cals & 0x0FFF;
+#ifdef URT_SERIAL_DEBUG
+     printf ("URTouch_set_calibrate: calx=%X, caly=%X, cals=%X\n", calx,caly,cals);
+     printf (" _default_orientation=%X\n", _default_orientation);
+     printf (" touch_x_left=%X=%d, touch_x_right=%X=%d\n",touch_x_left,touch_x_left,touch_x_right,touch_x_right);
+     printf (" touch_y_top=%X=%d, touch_y_bottom=%X=%d\n", touch_y_top,touch_y_top,touch_y_bottom,touch_y_bottom);
+     printf (" disp_x_size=%X=%d, disp_y_size=%X=%d\n", disp_x_size, disp_x_size,disp_y_size,disp_y_size);
+#endif
+
 }
 
 void
@@ -98,10 +110,10 @@ URTouch_InitTouch (byte orientation)
 void
 URTouch_read ()
 {
-  unsigned long tx = 0, temp_x = 0;
-  unsigned long ty = 0, temp_y = 0;
-  unsigned long minx = 99999, maxx = 0;
-  unsigned long miny = 99999, maxy = 0;
+  uint32_t tx = 0, temp_x = 0;
+  uint32_t ty = 0, temp_y = 0;
+  uint32_t minx = 99999, maxx = 0;
+  uint32_t miny = 99999, maxy = 0;
   int datacount = 0;
 
   cbi (P_CS, B_CS);
@@ -208,14 +220,14 @@ URTouch_register_irq_callback_func (tls_gpio_irq_callback callback)
 int16_t
 URTouch_getX ()
 {
-  long c;
+  int32_t c;
 
   if ((URTouch_TP_X == -1) || (URTouch_TP_Y == -1))
     return -1;
   if (orient == _default_orientation)
     {
-      c = (long)((long)(URTouch_TP_X - touch_x_left) * (disp_x_size))
-          / (long)(touch_x_right - touch_x_left);
+      c = (int32_t)((int32_t)(URTouch_TP_X - touch_x_left) * (disp_x_size))
+          / (int32_t)(touch_x_right - touch_x_left);
       if (c < 0)
         c = 0;
       if (c > disp_x_size)
@@ -224,12 +236,12 @@ URTouch_getX ()
   else
     {
       if (_default_orientation == PORTRAIT)
-        c = (long)((long)(URTouch_TP_X - touch_y_top) * (-disp_y_size))
-                / (long)(touch_y_bottom - touch_y_top)
-            + (long)(disp_y_size);
+        c = (int32_t)((int32_t)(URTouch_TP_X - touch_y_top) * (-disp_y_size))
+                / (int32_t)(touch_y_bottom - touch_y_top)
+            + (int32_t)(disp_y_size);
       else
-        c = (long)((long)(URTouch_TP_X - touch_y_top) * (disp_y_size))
-            / (long)(touch_y_bottom - touch_y_top);
+        c = (int32_t)((int32_t)(URTouch_TP_X - touch_y_top) * (disp_y_size))
+            / (int32_t)(touch_y_bottom - touch_y_top);
       if (c < 0)
         c = 0;
       if (c > disp_y_size)
@@ -247,8 +259,8 @@ URTouch_getY ()
     return -1;
   if (orient == _default_orientation)
     {
-      c = (long)((long)(URTouch_TP_Y - touch_y_top) * (disp_y_size))
-          / (long)(touch_y_bottom - touch_y_top);
+      c = (int32_t)((int32_t)(URTouch_TP_Y - touch_y_top) * (disp_y_size))
+          / (int32_t)(touch_y_bottom - touch_y_top);
       if (c < 0)
         c = 0;
       if (c > disp_y_size)
@@ -257,12 +269,12 @@ URTouch_getY ()
   else
     {
       if (_default_orientation == PORTRAIT)
-        c = (long)((long)(URTouch_TP_Y - touch_x_left) * (disp_x_size))
-            / (long)(touch_x_right - touch_x_left);
+        c = (int32_t)((int32_t)(URTouch_TP_Y - touch_x_left) * (disp_x_size))
+            / (int32_t)(touch_x_right - touch_x_left);
       else
-        c = (long)((long)(URTouch_TP_Y - touch_x_left) * (-disp_x_size))
-                / (long)(touch_x_right - touch_x_left)
-            + (long)(disp_x_size);
+        c = (int32_t)((int32_t)(URTouch_TP_Y - touch_x_left) * (-disp_x_size))
+                / (int32_t)(touch_x_right - touch_x_left)
+            + (int32_t)(disp_x_size);
       if (c < 0)
         c = 0;
       if (c > disp_x_size)
@@ -297,8 +309,8 @@ URTouch_setPrecision (byte precision)
 void
 URTouch_calibrateRead ()
 {
-  unsigned long tx = 0;
-  unsigned long ty = 0;
+  word tx = 0;
+  word ty = 0;
 
   cbi (P_CS, B_CS);
 
@@ -314,4 +326,10 @@ URTouch_calibrateRead ()
 
   URTouch_TP_X = ty;
   URTouch_TP_Y = tx;
+
+//#ifdef URT_SERIAL_DEBUG
+//     printf ("URTouch_calibrateRead: tx=%X, ty=%X \n", tx,ty);
+//#endif
+
+
 }
