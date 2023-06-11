@@ -38,8 +38,8 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-//#define TOUCH_ORIENTATION PORTRAIT
-#define TOUCH_ORIENTATION  LANDSCAPE
+#define TOUCH_ORIENTATION PORTRAIT
+//#define TOUCH_ORIENTATION  LANDSCAPE
 
 // Declare which fonts we will be using
 extern uint8_t SmallFont[];
@@ -306,18 +306,16 @@ done ()
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.97 TFT_397T_NT35510 800x480 16bit bus\n");
+  printf ("user_app1_task start 3.2 TFT_320QDT_9341 320x240 16bit bus\n");
 
-  // Цветной графический дисплей 3.97 TFT_397T_NT35510 с тачскрином
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_397T_NT35510, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
+  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
              (u8)WM_IO_PA_03, (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
   // и номера выводов W801 к которым подключён дисплей: RS, WR,
   // CS, RST. Выводы параллельной шины данных не указываются
   // в данном случае, параллельная 16 бит шина = PB0 ... PB15
-
   UTFT_InitLCD (TOUCH_ORIENTATION); // LANDSCAPE); // инициируем дисплей
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
@@ -440,6 +438,10 @@ user_app1_task (void *sdata)
 //    cals = cals + (1L << 31);
 
   done ();
+
+
+// LANDSCAPE = URTouch_set_calibrate: calx=, caly=, cals=
+// PORTRAIT  = URTouch_set_calibrate: calx=, caly=, cals=
 
 
  URTouch_set_calibrate (calx, caly, cals);

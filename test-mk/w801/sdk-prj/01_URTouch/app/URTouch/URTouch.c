@@ -60,6 +60,9 @@ URTouch_URTouch (byte tclk, byte tcs, byte din, byte dout, byte irq)
 void
 URTouch_set_calibrate (uint32_t calx, uint32_t caly, uint32_t cals)
 {
+#ifdef URT_SERIAL_DEBUG
+     printf ("URTouch_set_calibrate: calx=%X, caly=%X, cals=%X\n", calx,caly,cals);
+#endif
   _default_orientation = cals >> 31;
   touch_x_left = (calx >> 14) & 0x3FFF;
   touch_x_right = calx & 0x3FFF;
@@ -68,7 +71,6 @@ URTouch_set_calibrate (uint32_t calx, uint32_t caly, uint32_t cals)
   disp_x_size = (cals >> 12) & 0x0FFF;
   disp_y_size = cals & 0x0FFF;
 #ifdef URT_SERIAL_DEBUG
-     printf ("URTouch_set_calibrate: calx=%X, caly=%X, cals=%X\n", calx,caly,cals);
      printf (" _default_orientation=%X\n", _default_orientation);
      printf (" touch_x_left=%X=%d, touch_x_right=%X=%d\n",touch_x_left,touch_x_left,touch_x_right,touch_x_right);
      printf (" touch_y_top=%X=%d, touch_y_bottom=%X=%d\n", touch_y_top,touch_y_top,touch_y_bottom,touch_y_bottom);
