@@ -79,7 +79,7 @@ board HLK-W801-KIT-V1.1 + 3.97 TFT_397T_NT35510 800x480 16bit bus
  PORTRAIT  = URTouch_set_calibrate: calx=31CEF2, caly=3ECC03D, cals=1DF31F
 
 Видео
-
+https://youtu.be/sM8lupmjGR8?t=87
 
 Дисплей
 фото 1 
