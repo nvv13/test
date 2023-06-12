@@ -409,6 +409,26 @@ demo_timer_irq (u8 *arg) //
             }
         }
     }
+
+      int x = 0, y = 0;
+      if (URTouch_flag_touch_isr)
+        {
+          URTouch_read ();
+          x = URTouch_getX ();
+          y = URTouch_getY ();
+          //x = UTFT_getDisplayXSize () - x;
+          //y = UTFT_getDisplayYSize () - y;
+          //printf ("touch X=%.3d Y=%.3d\n", x, y);
+          if (x >= 0 && y >= 0)
+            {
+              // char mesg[50];
+              // sprintf (mesg, "X=%.3d Y=%.3d", x, y);
+              // UTFT_print (mesg, CENTER, 10, 0);
+              UTFT_setColor2 (VGA_BLUE); // 800x480
+              UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
+            }
+        }
+
 }
 
 
@@ -476,15 +496,35 @@ demo_console_task (void *sdata)
   // CS, RST. Выводы параллельной шины данных не указываются
   // в данном случае, параллельная 16 бит шина = PB0 ... PB15
 
+  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+  UTFT_clrScr (); // стираем всю информацию с дисплея
+  UTFT_setColor2 (VGA_SILVER); // 
+
+  // URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
+  URTouch_URTouch ((u8)WM_IO_PA_05 // byte tclk
+                   ,
+                   (u8)WM_IO_PA_06 // byte tcs
+                   ,
+                   (u8)WM_IO_PA_07 // byte tdin
+                   ,
+                   (u8)WM_IO_PA_08 // byte dout
+                   ,
+                   (u8)WM_IO_PA_09 // byte irq
+  );
+
+  URTouch_InitTouch (LANDSCAPE);
+// LANDSCAPE = URTouch_set_calibrate: calx=2C8F31, caly=3DDC053, cals=1DF31F
+// PORTRAIT  = URTouch_set_calibrate: calx=31CEF2, caly=3ECC03D, cals=1DF31F
+  URTouch_set_calibrate (0x2C8F31, 0x3DDC053, 0x1DF31F);
+  URTouch_setPrecision (PREC_MEDIUM);
+
+
   FATFS fs;
   FRESULT res_sd;
   char buff[256]; // буффер для названия директории при сканировании файловой
                   // системы
   wm_sdio_host_config (0);
 
-  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-  UTFT_clrScr (); // стираем всю информацию с дисплея
-  UTFT_setColor2 (VGA_WHITE); // 
 
 
   /* vs1053 */
