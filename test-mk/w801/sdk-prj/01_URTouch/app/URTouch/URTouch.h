@@ -52,6 +52,7 @@ extern "C"
 #define PREC_EXTREME 4
 
   extern int16_t URTouch_TP_X, URTouch_TP_Y;
+  extern volatile bool URTouch_flag_touch_isr;
 
   void URTouch_URTouch (byte tclk, byte tcs, byte tdin, byte dout, byte irq);
   void URTouch_InitTouch (byte orientation); // byte orientation = LANDSCAPE
@@ -62,8 +63,6 @@ extern "C"
   void URTouch_setPrecision (byte precision);
   void URTouch_calibrateRead ();
   void URTouch_set_calibrate (uint32_t calx, uint32_t caly, uint32_t cals);
-
-  void URTouch_register_irq_callback_func (tls_gpio_irq_callback callback);
 
 #ifdef __cplusplus
 }

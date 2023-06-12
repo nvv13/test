@@ -317,7 +317,6 @@ user_app1_task (void *sdata)
   // и номера выводов W801 к которым подключён дисплей: RS, WR,
   // CS, RST. Выводы параллельной шины данных не указываются
   // в данном случае, параллельная 16 бит шина = PB0 ... PB15
-
   UTFT_InitLCD (TOUCH_ORIENTATION); // LANDSCAPE); // инициируем дисплей
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
@@ -440,6 +439,10 @@ user_app1_task (void *sdata)
 //    cals = cals + (1L << 31);
 
   done ();
+
+
+// LANDSCAPE = URTouch_set_calibrate: calx=3CC40D9, caly=2BCE3A, cals=EF13F
+// PORTRAIT  = URTouch_set_calibrate: calx=3C00111, caly=200E6C, cals=EF13F
 
 
  URTouch_set_calibrate (calx, caly, cals);

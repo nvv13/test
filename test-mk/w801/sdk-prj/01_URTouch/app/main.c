@@ -49,10 +49,11 @@ extern uint8_t Dingbats1_XL[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 2.4 TFT_320QDT_9341 320x240 16bit bus\n");
+  printf ("user_app1_task start 3.97 TFT_397T_NT35510 800x480 16bit bus\n");
 
+  // Цветной графический дисплей 3.97 TFT_397T_NT35510 с тачскрином
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
+  UTFT_UTFT (TFT_397T_NT35510, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
              (u8)WM_IO_PA_03, (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
@@ -63,7 +64,7 @@ user_app1_task (void *sdata)
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
 
-  UTFT_setColor2 (VGA_WHITE); // 800x480
+  UTFT_setColor2 (VGA_GREEN); // 800x480
   for (int i = 2; i < 160; i++)
     {
       UTFT_drawRect (2, 2, i * 5, i * 3);
@@ -83,10 +84,9 @@ user_app1_task (void *sdata)
   );
 
   URTouch_InitTouch (LANDSCAPE);
-// LANDSCAPE = URTouch_set_calibrate: calx=3CC40D9, caly=2BCE3A, cals=EF13F
-// PORTRAIT  = URTouch_set_calibrate: calx=3C00111, caly=200E6C, cals=EF13F
-  URTouch_set_calibrate (0x3CC40D9, 0x2BCE3A, 0xEF13F);
-
+// LANDSCAPE = URTouch_set_calibrate: calx=2C8F31, caly=3DDC053, cals=1DF31F
+// PORTRAIT  = URTouch_set_calibrate: calx=31CEF2, caly=3ECC03D, cals=1DF31F
+  URTouch_set_calibrate (0x2C8F31, 0x3DDC053, 0x1DF31F);
 
   URTouch_setPrecision (PREC_MEDIUM);
 
@@ -113,7 +113,7 @@ user_app1_task (void *sdata)
 
   UTFT_print("You pressed:", 110, 205,0);
   UTFT_setColor2(VGA_BLACK);
-  UTFT_setBackColor2(VGA_WHITE);
+  UTFT_setBackColor2(VGA_GREEN);
   UTFT_print("None    ", 110, 220,0);
 
 //  int x = 0, y = 0;
@@ -121,23 +121,6 @@ user_app1_task (void *sdata)
   while (1)
     { //
 
-/*
-      if (URTouch_dataAvailable ())
-        {
-          URTouch_read ();
-          x = URTouch_getX ();
-          y = UTFT_getDisplayYSize () - URTouch_getY ();
-          if (x >= 0 && y >= 0)
-            {
-              char mesg[50];
-              sprintf (mesg, "X=%.3d Y=%.3d", x, y);
-              UTFT_print (mesg, CENTER, 10, 0);
-              UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
-              printf ("touch X=%.3d Y=%.3d\n",x, y);
-            }
-        }
-
-*/
 
     if (URTouch_dataAvailable() == true)
     {

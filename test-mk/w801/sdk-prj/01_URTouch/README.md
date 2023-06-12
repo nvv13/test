@@ -1,7 +1,3 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
-
 
 project URTouch
 
@@ -29,6 +25,7 @@ PORTRAIT  = URTouch_set_calibrate: calx=378F66, caly=3C34155, cals=EF13F
 фото2
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft.jpg" alt="top side" title="top side" /></p>
 
+для него тест (main.c) лежит в директории 01_URTouch/app/test/TFT_320QDT_9341
 
 соединения
 
@@ -78,14 +75,22 @@ W801  LCD  LCD    W801
 
 board HLK-W801-KIT-V1.1 + 3.97 TFT_397T_NT35510 800x480 16bit bus
 
+ LANDSCAPE = URTouch_set_calibrate: calx=2C8F31, caly=3DDC053, cals=1DF31F
+ PORTRAIT  = URTouch_set_calibrate: calx=31CEF2, caly=3ECC03D, cals=1DF31F
+
 Видео
 
 
 Дисплей
 фото 1 
-фото2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480.jpg" alt="top side" title="top side" /></p>
 
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_397T_NT35510
+для него тест (main.c) лежит в директории 
+ 01_URTouch/app/test/TFT_397T_NT35510
+ 01_URTouch/app/test_btn/TFT_397T_NT35510
+ 01_URTouch/app/test_cl/TFT_397T_NT35510
 
 соединения
 
@@ -133,7 +138,7 @@ PORTRAIT  = URTouch_set_calibrate: calx=3C00111, caly=200E6C, cals=EF13F
 
 
 Видео
-
+https://youtu.be/sM8lupmjGR8
 
 Дисплей
 фото 1 
@@ -144,7 +149,10 @@ PORTRAIT  = URTouch_set_calibrate: calx=3C00111, caly=200E6C, cals=EF13F
 wiki
 http://www.lcdwiki.com/2.4inch_16BIT_Module_ILI9341_SKU:MRB2408
 
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_320QDT_9341
+для него тест (main.c) лежит в директории 
+ 01_URTouch/app/test/MRB2408
+ 01_URTouch/app/test_btn/MRB2408
+ 01_URTouch/app/test_cl/MRB2408
 
 соединения
 

@@ -85,6 +85,9 @@ user_app1_task (void *sdata)
   );
 
   URTouch_InitTouch (LANDSCAPE);
+// LANDSCAPE = URTouch_set_calibrate: calx=2C8F31, caly=3DDC053, cals=1DF31F
+// PORTRAIT  = URTouch_set_calibrate: calx=31CEF2, caly=3ECC03D, cals=1DF31F
+  URTouch_set_calibrate (0x2C8F31, 0x3DDC053, 0x1DF31F);
   URTouch_setPrecision (PREC_MEDIUM);
 
   //

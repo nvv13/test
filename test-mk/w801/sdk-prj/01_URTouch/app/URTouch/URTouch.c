@@ -79,6 +79,22 @@ URTouch_set_calibrate (uint32_t calx, uint32_t caly, uint32_t cals)
 
 }
 
+volatile bool URTouch_flag_touch_isr=false;
+static void isr_callback (void *context)
+{
+  u16 ret = tls_get_gpio_irq_status (T_IRQ);
+  if (ret)
+    {
+      tls_clr_gpio_irq_status (T_IRQ);
+      URTouch_flag_touch_isr=true;
+      //if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
+      //  {
+      //    i_dreb_SW = 1;
+      //  }
+    }
+}
+
+
 void
 URTouch_InitTouch (byte orientation)
 {
@@ -101,17 +117,27 @@ URTouch_InitTouch (byte orientation)
   pinMode (T_CS, OUTPUT);
   pinMode (T_DIN, OUTPUT);
   pinMode (T_DOUT, INPUT);
-  pinMode (T_IRQ, OUTPUT);
+  //pinMode (T_IRQ, OUTPUT);
 
   sbi (P_CS, B_CS);
   sbi (P_CLK, B_CLK);
   sbi (P_DIN, B_DIN);
   sbi (P_IRQ, B_IRQ);
+
+  URTouch_flag_touch_isr=false;
+  tls_gpio_cfg (T_IRQ, WM_GPIO_DIR_INPUT,
+                    WM_GPIO_ATTR_PULLHIGH); // WM_GPIO_ATTR_FLOATING
+  tls_gpio_isr_register (T_IRQ, isr_callback, NULL);
+  tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
+
 }
 
 void
 URTouch_read ()
 {
+  tls_gpio_irq_disable (T_IRQ);
+  URTouch_flag_touch_isr=false;
+
   uint32_t tx = 0, temp_x = 0;
   uint32_t ty = 0, temp_y = 0;
   uint32_t minx = 99999, maxx = 0;
@@ -120,7 +146,7 @@ URTouch_read ()
 
   cbi (P_CS, B_CS);
 
-  pinMode (T_IRQ, INPUT);
+  //pinMode (T_IRQ, INPUT);
   for (int i = 0; i < prec; i++)
     {
       if (!rbi (P_IRQ, B_IRQ))
@@ -156,7 +182,7 @@ URTouch_read ()
             }
         }
     }
-  pinMode (T_IRQ, OUTPUT);
+  //pinMode (T_IRQ, OUTPUT);
 
   if (prec > 5)
     {
@@ -184,40 +210,29 @@ URTouch_read ()
       URTouch_TP_X = -1;
       URTouch_TP_Y = -1;
     }
+
+  tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
 }
 
-static tls_gpio_irq_callback isr_callback = NULL;
 
 bool
 URTouch_dataAvailable ()
 {
-  bool avail = false;
-  if (isr_callback == NULL)
-    {
-      pinMode (T_IRQ, INPUT);
-      avail = !(rbi (P_IRQ, B_IRQ));
-      pinMode (T_IRQ, OUTPUT);
-    }
+  tls_gpio_irq_disable (T_IRQ);
+  bool avail = URTouch_flag_touch_isr;
+  URTouch_flag_touch_isr=false;
+
+  if(!avail){
+   //pinMode (T_IRQ, INPUT);
+   avail = !(rbi (P_IRQ, B_IRQ));
+   //pinMode (T_IRQ, OUTPUT);
+   }
+
+  tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
   return avail;
 }
 
-// typedef void (*URTouch_callback_func)(void *arg);
-void
-URTouch_register_irq_callback_func (tls_gpio_irq_callback callback)
-{
-  isr_callback = callback;
-  if (isr_callback != NULL)
-    {
-      tls_gpio_cfg (T_IRQ, WM_GPIO_DIR_INPUT,
-                    WM_GPIO_ATTR_PULLHIGH); // WM_GPIO_ATTR_FLOATING
-      tls_gpio_isr_register (T_IRQ, isr_callback, NULL);
-      tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
-    }
-  else
-    {
-      tls_gpio_irq_disable (T_IRQ);
-    }
-}
+
 
 int16_t
 URTouch_getX ()
@@ -311,6 +326,9 @@ URTouch_setPrecision (byte precision)
 void
 URTouch_calibrateRead ()
 {
+  tls_gpio_irq_disable (T_IRQ);
+  URTouch_flag_touch_isr=false;
+
   word tx = 0;
   word ty = 0;
 
@@ -328,6 +346,8 @@ URTouch_calibrateRead ()
 
   URTouch_TP_X = ty;
   URTouch_TP_Y = tx;
+
+  tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
 
 //#ifdef URT_SERIAL_DEBUG
 //     printf ("URTouch_calibrateRead: tx=%X, ty=%X \n", tx,ty);

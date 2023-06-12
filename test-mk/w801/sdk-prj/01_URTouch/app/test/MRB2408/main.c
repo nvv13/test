@@ -44,35 +44,18 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 
-
-#define TOUCH_IRQ WM_IO_PA_09
-static volatile u8 flag_touch_isr=false;
-static void isr_callback (void *context)
-{
-  u16 ret = tls_get_gpio_irq_status (TOUCH_IRQ);
-  if (ret)
-    {
-      tls_clr_gpio_irq_status (TOUCH_IRQ);
-      flag_touch_isr=true;
-      //if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
-      //  {
-      //    i_dreb_SW = 1;
-      //  }
-    }
-}
-
-
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.97 TFT_397T_NT35510 800x480 16bit bus\n");
+  printf ("user_app1_task start 3.2 TFT_320QDT_9341 320x240 16bit bus\n");
 
-  // Цветной графический дисплей 3.97 TFT_397T_NT35510 с тачскрином
+  // Цветной графический дисплей 3.2 TFT 320x240 с тачскрином
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT_397T_NT35510, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
+  UTFT_UTFT (TFT_320QDT_9341, (u8)WM_IO_PA_01, (u8)WM_IO_PA_02,
              (u8)WM_IO_PA_03, (u8)WM_IO_PA_04, 0, 0);
   //                               byte RS,         byte WR,         byte CS,
   //                               byte RST, byte SER, u32 spi_freq
+  // UTFT тип дисплея TFT_320QDT_9341
   // и номера выводов W801 к которым подключён дисплей: RS, WR,
   // CS, RST. Выводы параллельной шины данных не указываются
   // в данном случае, параллельная 16 бит шина = PB0 ... PB15
@@ -80,12 +63,11 @@ user_app1_task (void *sdata)
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
 
-  UTFT_setColor2 (VGA_WHITE); // 800x480
-  for (int i = 2; i < 160; i++)
+  UTFT_setColor2 (VGA_WHITE); // 240x280
+  for (int i = 2; i < 59; i++)
     {
-      UTFT_drawRect (2, 2, i * 5, i * 3);
+      UTFT_drawRect (2, 2, i * 5, i * 4);
     }
-  tls_os_time_delay (HZ*3); //
 
   // URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
   URTouch_URTouch ((u8)WM_IO_PA_05 // byte tclk
@@ -96,13 +78,15 @@ user_app1_task (void *sdata)
                    ,
                    (u8)WM_IO_PA_08 // byte dout
                    ,
-                   (u8)TOUCH_IRQ // byte irq
+                   (u8)WM_IO_PA_09 // byte irq
   );
 
   URTouch_InitTouch (LANDSCAPE);
+// LANDSCAPE = URTouch_set_calibrate: calx=3CC40D9, caly=2BCE3A, cals=EF13F
+// PORTRAIT  = URTouch_set_calibrate: calx=3C00111, caly=200E6C, cals=EF13F
+  URTouch_set_calibrate (0x3CC40D9, 0x2BCE3A, 0xEF13F);
   URTouch_setPrecision (PREC_MEDIUM);
 
-  URTouch_register_irq_callback_func(isr_callback);
   //
   int x = 0, y = 0;
 
@@ -113,12 +97,11 @@ user_app1_task (void *sdata)
   while (1)
     { //
 
-      if (flag_touch_isr)//;URTouch_dataAvailable ())
+      if (URTouch_dataAvailable ())
         {
-          flag_touch_isr=false;
           URTouch_read ();
           x = URTouch_getX ();
-          y = URTouch_getY ();
+          y = UTFT_getDisplayYSize () - URTouch_getY ();
           if (x >= 0 && y >= 0)
             {
               char mesg[50];
@@ -128,8 +111,6 @@ user_app1_task (void *sdata)
               printf ("touch X=%.3d Y=%.3d\n",x, y);
             }
         }
-        else
-        tls_os_time_delay (1);
 
     } //
 }

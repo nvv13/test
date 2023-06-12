@@ -121,24 +121,6 @@ user_app1_task (void *sdata)
   while (1)
     { //
 
-/*
-      if (URTouch_dataAvailable ())
-        {
-          URTouch_read ();
-          x = URTouch_getX ();
-          y = UTFT_getDisplayYSize () - URTouch_getY ();
-          if (x >= 0 && y >= 0)
-            {
-              char mesg[50];
-              sprintf (mesg, "X=%.3d Y=%.3d", x, y);
-              UTFT_print (mesg, CENTER, 10, 0);
-              UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
-              printf ("touch X=%.3d Y=%.3d\n",x, y);
-            }
-        }
-
-*/
-
     if (URTouch_dataAvailable() == true)
     {
       pressed_button = UTFT_Buttons_checkButtons();
