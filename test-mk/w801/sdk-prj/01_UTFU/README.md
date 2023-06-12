@@ -796,11 +796,11 @@ $ mkdir w801
 
 $ cd w801  
 
-$ git clone https://github.com/droppingy/W801_SDK-linux.git
+$ git clone https://github.com/leoay/wm-sdk-w80x-2023.git
 
 3) далее, собираем приложение
 
-$ cd W801_SDK-linux
+$ cd wm-sdk-w80x-2023/
 
      если тут запустить make, то собирается демо приложение которое идет вместе с SDK, об этом я писал кратко в https://github.com/nvv13/test/tree/main/test-mk/w801 
      но мы хотим собрать другой проект
