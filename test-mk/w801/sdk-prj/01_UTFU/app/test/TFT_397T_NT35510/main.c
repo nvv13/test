@@ -138,10 +138,10 @@ user_app1_task (void *sdata)
       UTFT_clrScr (); // стираем всю информацию с дисплея
 
       UTFT_setColor2 (VGA_WHITE); // 800x480
-      for (int i = 1; i < 200; i++)
-        {
-          UTFT_drawRect (1, 1, i * 4, i * 2);
-        }
+      for (int i = 2; i < 160; i++)
+       {
+         UTFT_drawRect (2, 2, i * 5, i * 3);
+       }
 
       tls_os_time_delay (HZ * 3); //
 
