@@ -115,9 +115,9 @@ PB22 DB14    DB13 PB23
 3.3v VCC       BL 3.3v 
 gnd  GND      VCC 3.3v 
      NC       GND gnd 
- PA7 MOSI    MISO PA8
-     NC       PEN PA9
-PA5  CLK     T_CS PA6
+PA07 MOSI    MISO PA08
+     NC       PEN PA09
+PA05 CLK     T_CS PA06
 ---- ------------ ----
 W801 LCD      LCD W801
 ---- ------------ ----

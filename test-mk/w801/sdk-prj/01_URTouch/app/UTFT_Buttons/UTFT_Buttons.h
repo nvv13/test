@@ -37,7 +37,6 @@ extern "C"
 	#error : You will need UTFT v2.41 or higher to use this add-on library...
 #endif
 
-#include "hardware/sky/HW_SKY_defines.h"
 
 #define MAX_BUTTONS	20	// Maximum number of buttons available at one time
 

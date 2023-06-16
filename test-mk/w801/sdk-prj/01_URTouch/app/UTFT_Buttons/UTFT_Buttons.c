@@ -26,6 +26,8 @@
 #include <mod1/UTFT.h>
 #include <mod1/URTouch.h>
 
+#include "hardware/sky/HW_SKY_defines.h"
+
 //static UTFT		*_UTFT;
 //static URTouch		*_URTouch;
 static button_type	buttons[MAX_BUTTONS];

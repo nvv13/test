@@ -39,10 +39,15 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 
 #include "mod1/VS1053.h"
 #include "mod1/URTouch.h"
+#include "mod1/UTFT_Buttons.h"
 #include "mod1/UTFT.h"
 #include "mod1/u_jpeg.h"
 
 //****************************************************************************************************//
+extern uint8_t BigFont[];   // подключаем большой шрифт
+extern uint8_t Dingbats1_XL[];
+static int but1;
+
 u8 u8_wifi_state = 0;
 extern u32 VS1053_WEB_RADIO_nTotal;
 
@@ -133,7 +138,6 @@ Menu2ActionClick (void)
   VS1053_stop_PlayMP3 ();
 }
 
-extern uint8_t BigFont[];   // подключаем большой шрифт
 
 static void
 display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
@@ -183,7 +187,18 @@ static void
 display_refresh (void)
 {
     {
-      UTFT_clrScr (); // стираем всю информацию с дисплея
+      //UTFT_clrScr (); // стираем всю информацию с дисплея
+
+      UTFT_setColor2 (VGA_BLACK); // Устанавливаем цвет
+      UTFT_fillRect (0          //по горизонтали?
+                     ,
+                     0 // по вертикали?
+                     ,
+                     200//791 //длинна?
+                     ,
+                     200 //высота?
+      ); // Рисуем закрашенный прямоугольник 
+
       //u8g2_SetDrawColor (&u8g2, 1);
       if (i_switch_menu == 0)
         {
@@ -413,20 +428,21 @@ demo_timer_irq (u8 *arg) //
       int x = 0, y = 0;
       if (URTouch_flag_touch_isr)
         {
-          URTouch_read ();
-          x = URTouch_getX ();
-          y = URTouch_getY ();
-          //x = UTFT_getDisplayXSize () - x;
-          //y = UTFT_getDisplayYSize () - y;
-          //printf ("touch X=%.3d Y=%.3d\n", x, y);
-          if (x >= 0 && y >= 0)
-            {
-              // char mesg[50];
-              // sprintf (mesg, "X=%.3d Y=%.3d", x, y);
-              // UTFT_print (mesg, CENTER, 10, 0);
-              UTFT_setColor2 (VGA_BLUE); // 800x480
-              UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
-            }
+          int pressed_button = UTFT_Buttons_checkButtons();
+
+          if (pressed_button==but1)
+           UTFT_print("Button 1", 330, 330, 0);
+          if (pressed_button==-1)
+           UTFT_print("None    ", 330, 330, 0);
+
+          //URTouch_read ();
+          //x = URTouch_getX ();
+          //y = URTouch_getY ();
+          //if (x >= 0 && y >= 0)
+          //  {
+          //    UTFT_setColor2 (VGA_BLUE); // 800x480
+          //    UTFT_fillCircle (x, y, 2); // Рисуем закрашенную окружность
+          //  }
         }
 
 }
@@ -518,6 +534,11 @@ demo_console_task (void *sdata)
   URTouch_set_calibrate (0x2C8F31, 0x3DDC053, 0x1DF31F);
   URTouch_setPrecision (PREC_MEDIUM);
 
+  UTFT_Buttons_UTFT_Buttons();
+  UTFT_Buttons_setTextFont(BigFont);
+  UTFT_Buttons_setSymbolFont(Dingbats1_XL);
+
+  but1 = UTFT_Buttons_addButton( 400,  400, 300,  30, "Button 1",0);
 
   FATFS fs;
   FRESULT res_sd;
