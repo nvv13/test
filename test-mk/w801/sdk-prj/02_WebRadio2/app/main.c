@@ -187,16 +187,15 @@ static void
 display_refresh (void)
 {
     {
-      //UTFT_clrScr (); // стираем всю информацию с дисплея
-
-      UTFT_setColor2 (VGA_BLACK); // Устанавливаем цвет
+      UTFT_setBackColor2(VGA_GRAY);
+      UTFT_setColor2 (VGA_GRAY); // Устанавливаем цвет
       UTFT_fillRect (0          //по горизонтали?
                      ,
                      0 // по вертикали?
                      ,
-                     200//791 //длинна?
+                     791 //длинна?
                      ,
-                     200 //высота?
+                     300 //высота?
       ); // Рисуем закрашенный прямоугольник 
 
       //u8g2_SetDrawColor (&u8g2, 1);
@@ -373,7 +372,7 @@ demo_timer_irq (u8 *arg) //
         }
     }
 
-  if (i_dreb_SW != 0
+  if (i_dreb_SW != 0                                                                                                                	
       && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
     {
       i_dreb_SW = 0; // от дребезга
@@ -425,13 +424,18 @@ demo_timer_irq (u8 *arg) //
         }
     }
 
-      int x = 0, y = 0;
+      //int x = 0, y = 0;
       if (URTouch_flag_touch_isr)
         {
           int pressed_button = UTFT_Buttons_checkButtons();
 
           if (pressed_button==but1)
-           UTFT_print("Button 1", 330, 330, 0);
+	    {
+            UTFT_print("Button 1", 330, 330, 0);
+            i_dreb_SW = 1;
+            if (i_delay_SW_DBL_CLICK == 0)
+             i_delay_SW_DBL_CLICK = 1;
+	    }
           if (pressed_button==-1)
            UTFT_print("None    ", 330, 330, 0);
 
@@ -514,7 +518,12 @@ demo_console_task (void *sdata)
 
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   UTFT_clrScr (); // стираем всю информацию с дисплея
-  UTFT_setColor2 (VGA_SILVER); // 
+  UTFT_setColor2 (VGA_WHITE); // 800x480
+  for (int i = 2; i < 160; i++)
+    {
+      UTFT_drawRect (2, 2, i * 5, i * 3);
+    }
+  tls_os_time_delay (HZ*3); //
 
   // URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
   URTouch_URTouch ((u8)WM_IO_PA_05 // byte tclk
@@ -534,11 +543,17 @@ demo_console_task (void *sdata)
   URTouch_set_calibrate (0x2C8F31, 0x3DDC053, 0x1DF31F);
   URTouch_setPrecision (PREC_MEDIUM);
 
+
   UTFT_Buttons_UTFT_Buttons();
   UTFT_Buttons_setTextFont(BigFont);
   UTFT_Buttons_setSymbolFont(Dingbats1_XL);
 
-  but1 = UTFT_Buttons_addButton( 400,  400, 300,  30, "Button 1",0);
+  UTFT_clrScr ();
+  UTFT_setFont (BigFont);
+  UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+
+  but1 = UTFT_Buttons_addButton( 40,  430, 300,  30, "Button 1",0);
+  UTFT_Buttons_drawButtons();
 
   FATFS fs;
   FRESULT res_sd;
