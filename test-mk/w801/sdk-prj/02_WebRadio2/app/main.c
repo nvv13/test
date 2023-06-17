@@ -187,8 +187,8 @@ static void
 display_refresh (void)
 {
     {
-      UTFT_setBackColor2(VGA_GRAY);
-      UTFT_setColor2 (VGA_GRAY); // Устанавливаем цвет
+      //UTFT_setBackColor2(VGA_BLACK);
+      UTFT_setColor2 (VGA_BLACK); // Устанавливаем цвет
       UTFT_fillRect (0          //по горизонтали?
                      ,
                      0 // по вертикали?
@@ -395,6 +395,7 @@ demo_timer_irq (u8 *arg) //
             MenuActionClick ();
           if (i_switch_menu == 2)
             Menu2ActionClick ();
+          UTFT_Buttons_enableButton(but1, true);
         }
     }
 
@@ -431,6 +432,7 @@ demo_timer_irq (u8 *arg) //
 
           if (pressed_button==but1)
 	    {
+            UTFT_Buttons_disableButton(but1, true);
             UTFT_print("Button 1", 330, 330, 0);
             i_dreb_SW = 1;
             if (i_delay_SW_DBL_CLICK == 0)
