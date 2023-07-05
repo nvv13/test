@@ -245,6 +245,18 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 
 ----
 
+PS: 
+еще информации про VS1053:
+
+https://imax9.narod.ru/publs/F407les05.html
+
+https://github.com/baldram/ESP_VS1053_Library
+
+  дискурсия про ring buffer
+https://github.com/baldram/ESP_VS1053_Library/issues/47
+
+https://github.com/nopnop2002/esp-idf-vs1053
+
 
 
 

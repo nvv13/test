@@ -1271,6 +1271,7 @@ u32 VS1053_WEB_RADIO_nTotal = 0;
 
 
 #define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size)
+#define PRED_BUFFER_SIZE        (vs1053_chunk_size*64) // 32*64 = 2048
 
 static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
@@ -1279,6 +1280,7 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
   int nRetCode;
   u32 nSize = 0;
   char *Buffer = NULL;
+  char *PredBuffer = NULL;
   HTTP_SESSION_HANDLE pHTTP;
   u32 nSndDataLen;
   my_sost = VS1053_HW_INIT;
@@ -1362,13 +1364,27 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           break;
         }
       tls_os_time_delay (HZ);
-      printf ("Start to receive data from remote server...\r\n");
 
-      u16 u16_connect_timeout_sec=100;
+      u16 u16_connect_timeout_sec=10;
       if(strstr(ClientParams.Uri,"https")!=NULL)
-          u16_connect_timeout_sec=500;
+          u16_connect_timeout_sec=30;
 
       if(my_sost != VS1053_QUERY_TO_STOP)my_sost = VS1053_PLAY;
+
+      PredBuffer = (char *)tls_mem_alloc (PRED_BUFFER_SIZE);
+      if (PredBuffer != NULL)
+       {
+       printf ("Start to receive data from remote server... PredBuffer\r\n");
+       nSize = PRED_BUFFER_SIZE;
+       // Get the data
+       nRetCode = HTTPClientReadData (pHTTP, PredBuffer, nSize, u16_connect_timeout_sec, &nSize);
+       if (nRetCode == HTTP_CLIENT_SUCCESS)
+         VS1053_playChunk ((u8*)PredBuffer, nSize);
+       tls_mem_free (PredBuffer);
+       PredBuffer = NULL;
+       }
+       else
+       printf ("Start to receive data from remote server... Buffer\r\n");
 
       VS1053_WEB_RADIO_nTotal=0;
       // Get the data until we get an error or end of stream code
@@ -1378,7 +1394,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, u16_connect_timeout_sec, &nSize);
-          if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS && my_sost == VS1053_PLAY)
+          if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
           //printf("%d\n", nTotal);
           //VS1053_playChunk ((u8*)Buffer, nSize);
