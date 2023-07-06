@@ -67,8 +67,8 @@
 
 #include "VS1053.h"
 
-#define FCLK_SLOW_VS1053   200000
-#define FCLK_FAST_VS1053  4000000
+#define FCLK_SLOW_VS1053 200000
+#define FCLK_FAST_VS1053 4000000
 #define FCLK_SUPER_FAST_VS1053 6000000
 //-----------------------------------------------------
 #ifndef _BV
@@ -266,7 +266,7 @@ SPI_writeBytes (u8 *data, size_t chunk_length)
 const uint8_t VS1053_SCI_READ = 0x03;  // Serial read address
 const uint8_t VS1053_SCI_WRITE = 0x02; // Serial write address
 
-const uint8_t vs1053_chunk_size = 32;
+// const uint8_t vs1053_chunk_size = 32;
 
 //* SCI Register
 const uint8_t SCI_MODE = 0x00;   // Mode control
@@ -464,26 +464,25 @@ VS1053_softReset ()
       printf ("There is something wrong with VS10xx\n");
     }
 
-
   // VS1053_writeRegister(SPI_CLOCKF,0XC000);   //Set the clock
   VS1053_writeRegister (SCI_AUDATA, 0xbb81); // samplerate 48k,stereo
   VS1053_writeRegister (SCI_BASS, 0x0055);   // set accent
   // VS1053_writeRegister (SCI_VOL, 0x4040);    // Set volume level
   VS1053_setVolume (curvol); // restore volume
 
-//  VS1053_writeRegister (
-//      SCI_CLOCKF,
-//      6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
-                // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
+  //  VS1053_writeRegister (
+  //      SCI_CLOCKF,
+  //      6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
+  // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
 
   VS1053_writeRegister (
       SCI_CLOCKF,
       0x0e << 12); // XTALI×5.0 clock settings multiplyer 5.0 = 20 MHz
-                // SPI Clock to 6 MHz. Now you can set high speed SPI clock.
+                   // SPI Clock to 6 MHz. Now you can set high speed SPI clock.
 
   VS1053_await_data_request ();
 
-//  VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
+  //  VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
   VS1053_SPI = SPI_Settings (FCLK_SUPER_FAST_VS1053);
 }
 
@@ -659,20 +658,20 @@ VS1053_begin ()
       VS1053_writeRegister (SCI_AUDATA, 44101); // 44.1kHz stereo
       // The next clocksetting allows SPI clocking at 5 MHz, 4 MHz is safe
       // then.
-//      VS1053_writeRegister (
-//          SCI_CLOCKF,
-//          6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
+      //      VS1053_writeRegister (
+      //          SCI_CLOCKF,
+      //          6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
       // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
-//      VS1053_await_data_request ();
-//      VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
+      //      VS1053_await_data_request ();
+      //      VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
 
       VS1053_writeRegister (
           SCI_CLOCKF,
           0x0e << 12); // XTALI×5.0 clock settings multiplyer 5.0 = 20 MHz
-                // SPI Clock to 6 MHz. Now you can set high speed SPI clock.
+                       // SPI Clock to 6 MHz. Now you can set high speed SPI
+                       // clock.
       VS1053_await_data_request ();
       VS1053_SPI = SPI_Settings (FCLK_SUPER_FAST_VS1053);
-
 
       VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_LINE1));
       VS1053_testComm (
@@ -1157,297 +1156,3 @@ VS1053_GPIO_digitalRead_pin (uint8_t pin)
 }
 
 /************************/
-
-static volatile enum VS1053_status my_sost = VS1053_NONE;
-
-enum VS1053_status
-VS1053_status_get_status (void)
-{
-  return my_sost;
-};
-void
-VS1053_stop_PlayMP3 (void)
-{
-  if (my_sost != VS1053_STOP)
-    my_sost = VS1053_QUERY_TO_STOP;
-};
-
-// pack(push,1) - Byte alignment ?
-#pragma pack(push, 1)
-// MP3 Header
-typedef struct tagMP3
-{
-  char ID3[3]; // = "ID3"
-  u8 ver;
-  u8 sum_ver;
-  u8 flag;
-  u8 header_size[4];
-
-} MP3HDR, *PMP3HDR;
-#pragma pack(pop)
-
-static FIL fnew;       // file object
-static FRESULT res_sd; // file operation results
-static UINT fnum;      // The number of files successfully read and written
-
-#define DEMO_DATA_SIZE 32 // 4096
-static u8 file_buffer[DEMO_DATA_SIZE] = { 0 };
-#define SERIAL_DEBUG
-//#define SERIAL_DEBUG_ALL
-
-FRESULT
-VS1053_PlayMp3 (char *filename)
-{
-
-  VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
-                             // include!)
-
-  uint32_t start;
-
-  // Open the file
-  res_sd = f_open (&fnew, filename, FA_OPEN_EXISTING | FA_READ);
-  // file opened successfully?
-  if (res_sd == FR_OK)
-    {
-#ifdef SERIAL_DEBUG_ALL
-      printf ("Open file successfully! Start reading data!\r\n");
-#endif
-      res_sd = f_read (&fnew, file_buffer, sizeof (MP3HDR), &fnum);
-      if (res_sd == FR_OK)
-        {
-          // Parse BMP header to get the information we need
-          PMP3HDR aHead = (PMP3HDR)file_buffer;
-          if (strstr (aHead->ID3, "ID3") != NULL)
-            {
-#ifdef SERIAL_DEBUG_ALL
-              printf ("MP3 header ok\r\n");
-#endif
-              if (!(aHead->ver > 0 && aHead->ver < 6))
-                {
-                  printf ("Wrong `version` value %d\r\n", aHead->ver);
-                  f_close (&fnew);
-                  return -7;
-                }
-
-              start = 0ul;
-              start |= (0x7F & aHead->header_size[0]);
-              start <<= 7;
-              start |= (0x7F & aHead->header_size[1]);
-              start <<= 7;
-              start |= (0x7F & aHead->header_size[2]);
-              start <<= 7;
-              start |= (0x7F & aHead->header_size[3]);
-
-              res_sd = f_lseek (&fnew, start);
-#ifdef SERIAL_DEBUG
-              printf ("f_lseek successfully! %d\r\n", start);
-#endif
-
-              fnum = vs1053_chunk_size;
-              my_sost = VS1053_PLAY;
-              VS1053_data_mode_on ();
-              while (fnum == vs1053_chunk_size
-                     && my_sost == VS1053_PLAY) // More to do?
-                {
-                  VS1053_await_data_request (); // Wait for space available
-                  res_sd
-                      = f_read (&fnew, file_buffer, vs1053_chunk_size, &fnum);
-                  SPI_writeBytes (file_buffer, fnum);
-                }
-              VS1053_data_mode_off ();
-              my_sost = VS1053_STOP;
-            }
-        }
-      // close file
-      f_close (&fnew);
-    }
-  return res_sd;
-}
-
-
-
-
-u32 VS1053_WEB_RADIO_nTotal = 0;
-
-
-#define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size)
-#define PRED_BUFFER_SIZE        (vs1053_chunk_size*64) // 32*64 = 2048
-
-static u32
-http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
-              u8 parseXmlJson)
-{
-  int nRetCode;
-  u32 nSize = 0;
-  char *Buffer = NULL;
-  char *PredBuffer = NULL;
-  HTTP_SESSION_HANDLE pHTTP;
-  u32 nSndDataLen;
-  my_sost = VS1053_HW_INIT;
-  VS1053_WEB_RADIO_nTotal=0;
-
-  Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
-  if (Buffer == NULL)
-    {
-      return HTTP_CLIENT_ERROR_NO_MEMORY;
-    }
-  memset (Buffer, 0, HTTP_CLIENT_BUFFER_SIZE);
-  printf ("HTTP Client v1.0\r\n");
-  nSndDataLen = (pSndData == NULL ? 0 : strlen (pSndData));
-  // Open the HTTP request handle
-  pHTTP = HTTPClientOpenRequest (0);
-  if (!pHTTP)
-    {
-      nRetCode = HTTP_CLIENT_ERROR_INVALID_HANDLE;
-      tls_mem_free (Buffer);
-      return nRetCode;
-    }
-
-      /*
-if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
-"application/json", 1))!= HTTP_CLIENT_SUCCESS)
-      {
-  break;
-}
-      */
-    // Set the Verb
-  nRetCode = HTTPClientSetVerb (pHTTP, verb);
-  if (nRetCode != HTTP_CLIENT_SUCCESS)
-    {
-      tls_mem_free (Buffer);
-      return nRetCode;
-     }
-#if TLS_CONFIG_HTTP_CLIENT_AUTH
-        // Set authentication
-//        if(ClientParams.AuthType != AuthSchemaNone)
-//        {
-//            if((nRetCode = HTTPClientSetAuth(pHTTP, ClientParams.AuthType,
-//            NULL)) != HTTP_CLIENT_SUCCESS)
-//            {
-//                break;
-//            }
-//
-//            // Set authentication
-//            if((nRetCode = HTTPClientSetCredentials(pHTTP,
-//            ClientParams.UserName, ClientParams.Password)) !=
-//            HTTP_CLIENT_SUCCESS)
-//            {
-//                break;
-//            }
-//        }
-#endif // TLS_CONFIG_HTTP_CLIENT_AUTH
-#if TLS_CONFIG_HTTP_CLIENT_PROXY
-        // Use Proxy server
-//        if(ClientParams.UseProxy == TRUE)
-//        {
-//            if((nRetCode = HTTPClientSetProxy(pHTTP, ClientParams.ProxyHost,
-//            ClientParams.ProxyPort, NULL, NULL)) != HTTP_CLIENT_SUCCESS)
-//            {
-//                break;
-//            }
-//        }
-#endif // TLS_CONFIG_HTTP_CLIENT_PROXY
-
-  do
-    {
-      if ((nRetCode = HTTPClientSendRequest (
-               pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
-               verb == VerbPost || verb == VerbPut, 0, 0))
-          != HTTP_CLIENT_SUCCESS)
-        {
-          break;
-        }
-      // Retrieve the the headers and analyze them
-      if ((nRetCode = HTTPClientRecvResponse (pHTTP, 30))
-          != HTTP_CLIENT_SUCCESS)
-        {
-          break;
-        }
-      tls_os_time_delay (HZ);
-
-      u16 u16_connect_timeout_sec=10;
-      if(strstr(ClientParams.Uri,"https")!=NULL)
-          u16_connect_timeout_sec=30;
-
-      if(my_sost != VS1053_QUERY_TO_STOP)my_sost = VS1053_PLAY;
-
-      PredBuffer = (char *)tls_mem_alloc (PRED_BUFFER_SIZE);
-      if (PredBuffer != NULL)
-       {
-       printf ("Start to receive data from remote server... PredBuffer\r\n");
-       nSize = PRED_BUFFER_SIZE;
-       // Get the data
-       nRetCode = HTTPClientReadData (pHTTP, PredBuffer, nSize, u16_connect_timeout_sec, &nSize);
-       if (nRetCode == HTTP_CLIENT_SUCCESS)
-         VS1053_playChunk ((u8*)PredBuffer, nSize);
-       tls_mem_free (PredBuffer);
-       PredBuffer = NULL;
-       }
-       else
-       printf ("Start to receive data from remote server... Buffer\r\n");
-
-      VS1053_WEB_RADIO_nTotal=0;
-      // Get the data until we get an error or end of stream code
-      while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS) && my_sost == VS1053_PLAY)
-        {
-          // Set the size of our buffer
-          nSize = HTTP_CLIENT_BUFFER_SIZE;
-          // Get the data
-          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, u16_connect_timeout_sec, &nSize);
-          if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
-            break;
-          //printf("%d\n", nTotal);
-          //VS1053_playChunk ((u8*)Buffer, nSize);
-          VS1053_data_mode_on ();
-          VS1053_await_data_request (); // Wait for space available
-          SPI_writeBytes ((u8*)Buffer, nSize);
-
-          if(VS1053_WEB_RADIO_nTotal>512)tls_watchdog_clr ();
-          VS1053_WEB_RADIO_nTotal += nSize;
-        }
-        VS1053_data_mode_off ();
-    }
-  while (my_sost == VS1053_PLAY); // Run only once
-  tls_mem_free (Buffer);
-  my_sost = VS1053_STOP;
-
-  if (pHTTP)
-    HTTPClientCloseRequest (&pHTTP);
-  if (ClientParams.Verbose == TRUE)
-    {
-      printf ("\n\nHTTP Client terminated %d (got %d b)\n\n", nRetCode,
-              VS1053_WEB_RADIO_nTotal);
-    }
-  return nRetCode;
-}
-
-static u32
-http_get (HTTPParameters ClientParams)
-{
-  return http_snd_req (ClientParams, VerbGet, NULL, 0);
-}
-
-FRESULT
-VS1053_PlayHttpMp3 (const char *Uri)
-{
-
-  VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
-                             // include!)
-
-  HTTPParameters httpParams;
-  memset (&httpParams, 0, sizeof (HTTPParameters));
-  httpParams.Uri = (char *)tls_mem_alloc (200);
-  if (httpParams.Uri == NULL)
-    {
-      printf ("malloc error.\n");
-      return WM_FAILED;
-    }
-  memset (httpParams.Uri, 0, 200);
-  sprintf (httpParams.Uri, "%s", Uri);
-  httpParams.Verbose = TRUE;
-  printf ("Location: %s\n", httpParams.Uri);
-  res_sd = http_get (httpParams);
-  tls_mem_free (httpParams.Uri);
-
-  return res_sd;
-}

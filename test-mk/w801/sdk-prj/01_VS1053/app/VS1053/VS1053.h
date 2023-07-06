@@ -41,8 +41,8 @@ extern "C"
 #endif
 
 #include "ff.h"
-#include "wm_type_def.h"
 #include "wm_io.h"
+#include "wm_type_def.h"
 
   enum VS1053_I2S_RATE
   {
@@ -58,6 +58,8 @@ extern "C"
 #ifndef gpio_is_valid
 #define gpio_is_valid(pin) ((pin != GPIO_UNDEF))
 #endif
+
+#define vs1053_chunk_size 32
 
   typedef struct
   {
@@ -208,9 +210,11 @@ extern "C"
     VS1053_QUERY_TO_STOP = 5,
   } _VS1053_status;
 
-  FRESULT VS1053_PlayMp3 (char *filename);
+  extern volatile enum VS1053_status my_sost;
 
   enum VS1053_status VS1053_status_get_status (void);
+
+  FRESULT VS1053_PlayMp3 (char *filename);
 
   void VS1053_stop_PlayMP3 (void);
 
