@@ -46,7 +46,7 @@ static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
 
 MessageBufferHandle_t xMessageBuffer = NULL;
 #define xMessageBufferSize                                                    \
-  (http_chunk_size * 128) //  64*128 = 8192 // 32*128 = 4096   // 32*64 = 2048 // 102400L
+      8400 //  (http_chunk_size * 128) //  64*128 = 8192 // 32*128 = 4096   // 32*64 = 2048 // 102400L
 
 void
 vs1053_buf_play_task (void *sdata)
