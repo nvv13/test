@@ -36,19 +36,20 @@
 
 u32 VS1053_WEB_RADIO_nTotal = 0;
 
-#define http_chunk_size (vs1053_chunk_size*2)
+#define http_chunk_size (vs1053_chunk_size * 2)  // вот 64 и зффективнее, а больше -> нет эффекта
 #define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size)
 
 #define VS1053_TASK_SIZE 2048
-tls_os_task_t vs1053_buf_play_task_hdl = NULL;
+static tls_os_task_t vs1053_buf_play_task_hdl = NULL;
 static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
 #define VS1053_TASK_PRIO 32
 
 MessageBufferHandle_t xMessageBuffer = NULL;
 #define xMessageBufferSize                                                    \
-      8400 //  (http_chunk_size * 128) //  64*128 = 8192 // 32*128 = 4096   // 32*64 = 2048 // 102400L
+  8400 //Положительный эффект стал наблюдатся при буфере в 8000 байт, 
+       //НО! больше 8400 сделать нельзя - страдают другие части программы
 
-void
+static void
 vs1053_buf_play_task (void *sdata)
 {
   printf ("start vs1053_buf_play_task\n");
@@ -58,7 +59,7 @@ vs1053_buf_play_task (void *sdata)
   while (1)
     {
       size_t item_size;
-      while (xMessageBuffer != NULL &&  buffer != NULL && my_sost != VS1053_STOP
+      while (xMessageBuffer != NULL && buffer != NULL && my_sost != VS1053_STOP
              && my_sost != VS1053_QUERY_TO_STOP)
         {
           if (my_sost == VS1053_PLAY)
@@ -156,8 +157,13 @@ break;
 //        }
 #endif // TLS_CONFIG_HTTP_CLIENT_PROXY
 
-  if(xMessageBuffer==NULL)
+  if (xMessageBuffer == NULL)
     xMessageBuffer = xMessageBufferCreate (xMessageBufferSize);
+  if (xMessageBuffer == NULL)
+    {
+      tls_mem_free (Buffer);
+      return HTTP_CLIENT_ERROR_NO_MEMORY;
+    }
 
   if (vs1053_buf_play_task_hdl == NULL)
     tls_os_task_create (
@@ -196,15 +202,15 @@ break;
         {
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-          //printf (" freeSize=%d\r\n", freeSize);
-          if (freeSize < (nSize+3))
+          // printf (" freeSize=%d\r\n", freeSize);
+          if (freeSize < (nSize + 3))
             break;
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode == HTTP_CLIENT_SUCCESS)
             {
-                  xMessageBufferSend (xMessageBuffer, Buffer, nSize,
-                                      portMAX_DELAY);
+              xMessageBufferSend (xMessageBuffer, Buffer, nSize,
+                                  portMAX_DELAY);
               tls_watchdog_clr ();
             }
         }
@@ -229,7 +235,7 @@ break;
           while (my_sost == VS1053_PLAY)
             {
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-              if ((freeSize+3) >= nSize)
+              if ((freeSize + 3) >= nSize)
                 {
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
@@ -254,8 +260,8 @@ break;
   //    vs1053_buf_play_task_hdl = NULL;
   //  }
   tls_mem_free (Buffer);
-  //vMessageBufferDelete (xMessageBuffer);
-  xMessageBufferReset( xMessageBuffer );
+  // vMessageBufferDelete (xMessageBuffer);
+  xMessageBufferReset (xMessageBuffer);
 
   if (pHTTP)
     HTTPClientCloseRequest (&pHTTP);
