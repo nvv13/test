@@ -1,83 +1,29 @@
-project simple WebRadio
+board HLK-W801-KIT-V1.1 
 
-board HLK-W801-KIT-V1.1 + VS1053 = simple WebRadio
+project psram
 
+/**
+ * @brief  config the pins used for psram ck cs dat0 dat1 dat2 dat3
+ * @param  numsel: config psram ck cs dat0 dat1 dat2 dat3 pins multiplex relation,valid para 0,1
+ *			0:                 1: only for 56pin
+ *			  psram_ck   PB00    psram_ck   PA15
+ *			  psram_cs   PB01    psram_cs   PB27
+ *			  psram_dat0 PB02    psram_dat0 PB02
+ *			  psram_dat1 PB03    psram_dat1 PB03
+ *			  psram_dat2 PB04    psram_dat2 PB04
+ *			  psram_dat3 PB05    psram_dat3 PB05
 
-видео:
-https://youtu.be/WgBXT7bLOw8
+ * @return None
 
-------
-Позже (в видео нет), добавил переход в Меню1, Меню2 и обратно, по двойному клику
-~~~
-В Меню1:
-(0) можно сохранить текущий уровень громкости (при рестарте уст.)
-(1) загрузить ранее сохр станцию, позиция 0. (2) Сохранить текущую станцию, позиция 0.
-(3) загрузить ранее сохр станцию, позиция 1. (4) Сохранить текущую станцию, позиция 1.
-....
-    и так до 44 станций                   
-~~~
-~~~
-В Меню2:
-Выбор из 10 станций последнего поиска...
-~~~
+  void wm_psram_config(uint8_t numsel);
+ */
 
-------
-
-соединения
-
-дисплей
-
-Светодиодный модуль OLED 1,3 дюйма, синий I2C, 128X64, 1,3 дюйма, контроллер sh1106
-
-или
-
-дисплей OLED 128x64 2.4 дюйма, 2.42OLED-IIC VER:1.1, I2C, контроллер ssd1309
 
 
 надо соединить по схеме:
 ~~~
-connect to
-DISPLAY   w801
------ -------------
-GND       GND
-VCC       3.3v 
-scl       PA01
-sda       PA04
------ -------------
 
 
-
-W801  VS1053
------ -------------
-PB17  XRST
-PB21  XCS
-PB22  XDCS
-PB18  DREQ
-PB24  SCK
-PB03  MISO
-PB26  MOSI
-5V    5V
-GND   DGND
------ -------------
-
-
-
-Регулятор Громкости, кнопка - следующая станция, Энкодер KY-040 или Cap EC11
-connect to
-W801   KY-040 
-GPIO   PIN    Cap EC11 PIN
------  ------ -------------------------------------------
-GND    GND    GND
-+3.3   +      +
-PA11   KEY    SW
-PA12   DT     S1
-PA13   CLK    S2
------  ----- ---------------------------------------------
-если на Энкодере нет RC цепочки, то надо ее добавть!
-к выводам DT и CLK подключаемся через резистор 10Ком, потом конденсаторы на землю ~100пФ и это уже к W801
-
-
-если есть (памяти берёт 128к из psram)
 W801  psram     LY68L6400
 ----- --------- -------
 PB00  SCLK      (6)
@@ -92,24 +38,7 @@ GND   Vss       (4)
 
 * вывод PB04 на макетке board HLK-W801-KIT-V1.1 ошибочно назван PB24 в месте рядом с разьемом type-c
 
-
 ~~~
-
-
-
---------
-
-в проекте используеться библиотека u8g2 + библиотека VS1053
-
-
-
-
---------
-
-
-
-
-
 
 
 
@@ -194,15 +123,17 @@ $ make flash
 
     Всё!
 
-
-
 ~~~
 
 
 
 
 
-  далее подцепляемся к платке, если интересует вывод на консоль
+
+
+Прочее:
+
+  подцепляемся к платке, если интересует вывод на консоль (используеться в проекте)
 
 $ picocom --echo -b 115200 /dev/ttyUSB0
 
@@ -212,18 +143,10 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
           выход из picocom - CTRL + A + Q  (это выход без сброса порта (Skipping tty reset...))
 
 
-------
 
-PS:
-исходники u8g2, взяты с сайта https://github.com/olikraus/u8g2
 
-пример адаптации взят из https://github.com/RIOT-OS/RIOT, (хотя можно было взять из LuatOS, к примеру)
 
-библиотека VS1053 источник:
-https://github.com/baldram/ESP_VS1053_Library.git
-https://github.com/adafruit/Adafruit_VS1053_Library.git
 
-------
 
 
 

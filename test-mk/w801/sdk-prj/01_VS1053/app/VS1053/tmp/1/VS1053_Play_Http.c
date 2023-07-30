@@ -36,21 +36,20 @@
 
 u32 VS1053_WEB_RADIO_nTotal = 0;
 
-#define http_chunk_size (vs1053_chunk_size * 2)
+#define http_chunk_size (vs1053_chunk_size * 2)  // вот 64 и зффективнее, а больше -> нет эффекта
 #define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size)
 
 #define VS1053_TASK_SIZE 1024
-tls_os_task_t vs1053_buf_play_task_hdl = NULL;
+static tls_os_task_t vs1053_buf_play_task_hdl = NULL;
 static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
 #define VS1053_TASK_PRIO 32
 
 MessageBufferHandle_t xMessageBuffer = NULL;
-#define xMessageBufferSize  4000 
-  // 4000 - не вызывает проблем, но эффект начинаеться от 8000,
-  //   но тут глючит прога
-  // а чтоб нормально работал HTTPS  нужно 250Кб, примено
+#define xMessageBufferSize                                                    \
+  9400 //Положительный эффект стал наблюдатся при буфере в 8000 байт, 
+       //НО! больше 8400 сделать нельзя - страдают другие части программы
 
-void
+static void
 vs1053_buf_play_task (void *sdata)
 {
   printf ("start vs1053_buf_play_task\n");
@@ -160,6 +159,11 @@ break;
 
   if (xMessageBuffer == NULL)
     xMessageBuffer = xMessageBufferCreate (xMessageBufferSize);
+  if (xMessageBuffer == NULL)
+    {
+      tls_mem_free (Buffer);
+      return HTTP_CLIENT_ERROR_NO_MEMORY;
+    }
 
   if (vs1053_buf_play_task_hdl == NULL)
     tls_os_task_create (
@@ -193,13 +197,11 @@ break;
       printf ("Start to receive data from remote server\r\n");
 
       //сначала заполняем буффер данными
-      while (
-          (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
-          && my_sost == VS1053_HW_INIT)
+      while (nRetCode == HTTP_CLIENT_SUCCESS && my_sost == VS1053_HW_INIT)
         {
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-          printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+          // printf (" freeSize=%d\r\n", freeSize);
           if (freeSize < (nSize + 3))
             break;
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
@@ -217,9 +219,7 @@ break;
 
       VS1053_WEB_RADIO_nTotal = 0;
       // Get the data until we get an error or end of stream code
-      while (
-          (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
-          && my_sost == VS1053_PLAY)
+      while (nRetCode == HTTP_CLIENT_SUCCESS  && my_sost == VS1053_PLAY)
         {
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;

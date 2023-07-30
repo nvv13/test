@@ -112,9 +112,9 @@ MenuActionClick (void)
               flash_cfg_store_stantion_uuid (
                   my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
             }
-           printf (
-              "i_find_stantion_id=%d, u8_ind_ch_st=%d, u8_stantion_id=%d name=%s uuid=%s\n",
-              i_find_stantion_id, u8_ind_ch_st, u8_stantion_id, my_recognize_ret_name (u8_ind_ch_st), my_recognize_ret_stationuuid (u8_ind_ch_st));
+          // printf (
+          //    "i_find_stantion_id=%d, u8_ind_ch_st=%d, u8_stantion_id=%d\n",
+          //    i_find_stantion_id, u8_ind_ch_st, u8_stantion_id);
           display_refresh ();
         }
     }
