@@ -189,6 +189,127 @@ W801 LCD      LCD W801
 
 
 
+
+
+
+
+
+
+
+
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 2.4 TFT SPI 240x320 V1.3
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341.jpg" alt="top side" title="top side" /></p>
+
+
+для него тест (main.c) лежит в директории 
+  01_URTouch/app/test_cl/TFT2_4SP_9341
+
+соединения
+
+надо соединить по схеме:
+~~~
+connect to TFT2_4SP_9341
+---- ------
+W801 LCD   
+---- ------
+PA09   T_IRQ
+PA08   T_DO
+PA07   T_DIN
+PA06   T_CS
+PA05   T_CLK
+PB16  SDO(MISO)
+3.3v  LED
+PB15  SCK         синхросигнал
+PB17  SDI(MOSI)
+PB23  DC          комманда/данные
+PB21  RESET       сброс
+PB14  CS          выбор чипа
+gnd   GND
+3.3v  VCC
+---- ------
+W801 LCD   
+---- ------
+
+
+~~~
+
+
+-----------------------------
+
+
+
+
+------------------------------------------------
+
+
+
+board HLK-W801-KIT-V1.1 + 3.2 TFT SPI 240x320 V1.0
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft_spi_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft_spi.jpg" alt="top side" title="top side" /></p>
+
+
+для него тест (main.c) лежит в директории 
+ 01_URTouch/app/test_cl/TFT3_2SP_9341
+
+соединения
+
+надо соединить по схеме:
+~~~
+connect to TFT3_2SP_9341
+---- ------
+W801  LCD   
+---- ------
+PA09   T_IRQ
+PA08   T_DO
+PA07   T_DIN
+PA06   T_CS
+PA05   T_CLK
+PB16  SDO(MISO)
+3.3v  LED
+PB15  SCK         синхросигнал
+PB17  SDI(MOSI)
+PB23  DC          комманда/данные
+PB21  RESET       сброс
+PB14  CS          выбор чипа
+gnd   GND
+3.3v  VCC
+---- ------
+W801  LCD   
+---- ------
+
+
+~~~
+
+-----------------------------
+
+
+
+
+
+
+
+
 -----------------------------
 после сборки, файл libUTFT.a 
 лежит ./bin/build/w800/lib/libURTouch.a

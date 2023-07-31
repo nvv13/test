@@ -39,3 +39,15 @@ There are additional repositories: pico-extras, and pico-playground that you may
 git clone -b master https://github.com/raspberrypi/pico-extras.git
 git clone -b master https://github.com/raspberrypi/pico-playground.git
 
+
+PS: 
+ pico-project-generator
+  This is a command line or GUI tool, written in Python, to automatically generate a Pico C SDK Project.
+  https://github.com/raspberrypi/pico-project-generator
+
+How To Url
+https://habr.com/ru/articles/538994/
+https://hackspace.raspberrypi.com/articles/what-is-programmable-i-o-on-raspberry-pi-pico
+https://habr.com/ru/companies/timeweb/articles/750108/
+
+
