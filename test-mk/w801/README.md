@@ -61,6 +61,8 @@ Dimensions – About 70 x 26 mm
 
 w801_pinout
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/W801_SDK-linux/doc/w801_pinout.png" alt="HLK W801 pinout" title="HLK W801 pinout" /></p>
+w801_pinout
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/w801_pinout.png" alt="HLK W801 pinout" title="HLK W801 pinout" /></p>
 
 
 WinnerMicro W801 Block Diagram

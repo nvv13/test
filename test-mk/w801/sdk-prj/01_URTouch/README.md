@@ -203,6 +203,8 @@ W801 LCD      LCD W801
 
 board HLK-W801-KIT-V1.1 + 2.4 TFT SPI 240x320 V1.3
 
+PORTRAIT  = URTouch_set_calibrate: calx=4E4EE3, caly=3DF80B2, cals=EF13F
+LANDSCAPE = URTouch_set_calibrate: calx=3F8F2E, caly=3D1C0C3, cals=EF13F
 
 Видео
 
@@ -258,6 +260,8 @@ W801 LCD
 
 board HLK-W801-KIT-V1.1 + 3.2 TFT SPI 240x320 V1.0
 
+PORTRAIT  = URTouch_set_calibrate: calx=2A8EF6, caly=3D9C02B, cals=EF13F
+LANDSCAPE = URTouch_set_calibrate: calx=260EC4, caly=3CD0050, cals=EF13F
 
 Видео
 

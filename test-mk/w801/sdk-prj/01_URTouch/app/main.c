@@ -38,8 +38,8 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-#define TOUCH_ORIENTATION PORTRAIT
-//#define TOUCH_ORIENTATION  LANDSCAPE
+//#define TOUCH_ORIENTATION PORTRAIT
+#define TOUCH_ORIENTATION  LANDSCAPE
 
 // Declare which fonts we will be using
 extern uint8_t SmallFont[];
@@ -306,10 +306,10 @@ done ()
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.2 TFT 240x320 HW SPI \n");
+  printf ("user_app1_task start 2.4 TFT 240x320 HW SPI \n");
 
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT3_2SP_9341 //
+  UTFT_UTFT (TFT2_4SP_9341 //TFT01_24SP 
              ,(u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL
@@ -333,6 +333,7 @@ user_app1_task (void *sdata)
              эмуляции SPI, это удобно для разных ножек
            */
   );
+
 
 
   UTFT_InitLCD (TOUCH_ORIENTATION); // LANDSCAPE); // инициируем дисплей
