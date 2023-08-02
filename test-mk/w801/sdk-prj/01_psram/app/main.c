@@ -21,6 +21,7 @@
 #include "wm_psram.h"
 #include "wm_regs.h"
 #include "wm_rtc.h"
+#include "wm_pmu.h"
 
 #include "psram.h"
 
@@ -60,7 +61,9 @@ UserMain (void)
    * @return None
   void wm_psram_config(uint8_t numsel);
    */
-  wm_psram_config (0);
+
+  wm_psram_config (1);
+
 
   /**
    * @brief          This function is used to init the psram .
@@ -76,7 +79,7 @@ UserMain (void)
       PSRAM_SPI); // PSRAM_QPI - почему то не заработал, что то не так сделал
 
   /* PSRAM enters the QPI mode */
-  /*
+ /*
     volatile unsigned int value = tls_reg_read32 (HR_PSRAM_CTRL_ADDR);
     value |= 0x02;
     tls_reg_write32 (HR_PSRAM_CTRL_ADDR, value);

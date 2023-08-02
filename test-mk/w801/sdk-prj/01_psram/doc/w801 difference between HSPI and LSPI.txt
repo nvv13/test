@@ -1,0 +1,31 @@
+http://ask.winnermicro.com/question/64.html
+
+Posted on 2022-04-15 13:57:37
+The function description in the w801 chip specification is too simple. Is there a detailed function description document?
+I want to see the difference between HSPI and LSPI,,,
+
+
+to the name
+isme certified specialist2022-04-15
+Iced Watermelon
+HSPI can only be used as a slave, with a maximum clock frequency of 50MHZ,
+  which is slightly different from ordinary SPI usage.
+LSPI can be used as a host, with a maximum clock frequency of 20MHZ,
+   which is exactly the same as that of ordinary SPI.
+
+   2 replies  collect  grateful  report
+musk	
+musk2022-04-15
+This guy hasn't written anything yet
+Is there any relevant documentation for the difference in usage, or refer to the routine
+
+  
+to the name	
+to the name2022-04-15
+Iced Watermelon
+@musk HSPI use can refer to this article
+STM32 and Lianshengde W800/W600 SPI simplified instruction TCP transparent transmission DEMO
+  http://ask.isme.fun/addons/ask/go?url=http%3A%2F%2Fwww.beewu.cn%2F%3Flog%3Dblog%26id%3D47
+  
+
+

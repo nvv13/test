@@ -26,8 +26,8 @@ project psram
 
 W801  psram     LY68L6400
 ----- --------- -------
-PB00  SCLK      (6)
-PB01  CE#       (1)
+PA15  SCLK      (6)
+PB27  CE#       (1)
 PB02  SI/SIO[0] (5)
 PB03  SO/SIO[1] (2)
 PB04*    SIO[2] (3)

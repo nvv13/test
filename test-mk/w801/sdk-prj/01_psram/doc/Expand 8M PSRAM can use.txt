@@ -1,0 +1,84 @@
+http://ask.winnermicro.com/question/19.html
+
+
+Expand 8M PSRAM, can you use __attribute__((at(0x30000000))) to define variables like this?
+Posted on 2022-04-08 14:25:48
+I want to do a memory management, similar to the memory management of stm32, but if it exceeds the chip's own memory, an error will be reported.
+This definition compiles normally
+uint8_t membase[1024] __attribute__((at(0x30000000)));
+this will report an error of memory overflow
+uint8_t membase[300 *1024] __attribute__((at(0x30000000)));
+image.png
+image.png
+
+
+
+**********************
+
+It's ok, I tried it with my externally expanded psram board, and the data can be printed normally.
+image.png
+image.png
+
+
+**********************
+
+
+
+isme
+isme certified specialist2022-04-08
+Iced Watermelon
+By default, all functions of W800 are run by xip. Compared with ram, xip runs at a lower speed. If the algorithm requires computing power, you can specify some functions to run in ram. The implementation method is as follows:
+Set attribute to the function
+__attribute__((section(".sram.text")))
+int TestSram(void)
+{
+    return 0;
+}
+Modify gcc_csky.ld, add the following line in .data
+  *(.sram.text)
+W800 also supports some files or code segments of some libraries to run in ram, the implementation method is as follows:
+Modify gcc_csky.ld, put the following three lines in .text
+  *(.text)
+  *(.text*)
+  *(.text.*)
+replace with
+
+  *(EXCLUDE_FILE (*libuser.a *wm_diy_demo.o).text*)
+Modify gcc_csky.ld, add the following line in .data
+  *(.text*)
+W800 supports loading some read-only global variables into ram, the implementation method is as follows
+Set attribute for global variable
+ __attribute__((section(".sram.data")))
+char sram_buf[16] = "hello";
+Modify gcc_csky.ld, add the following line in .data
+  *(.sram.data)
+The above content comes from the great god @Alex
+
+
+**********************
+
+
+QUR	
+QUR2022-04-08
+I no longer support the reply of any W80X-related questions, please do not send private messages, if you have any questions, please contact isme Thank you
+@heeson You can use this way of writing in ARMCC, but the 800 series is gcc or something else, I temporarily adjusted it, you can change it yourself, find the gcc_csky.ld link file, add it in the MEMORY definition The following content
+1.png
+defines a section segment of its own below as follows
+
+  .ExternRAM : {
+     . = ALIGN(4);
+    __ExternRAM_start = .;      
+    *(.ExternRAM)
+    *(.ExternRAM*)
+    . = ALIGN(4);
+    __ExternRAM_end = .;   
+ } > REGION_EPSAM AT > REGION_RODATA
+2.png
+
+Define an array in the C file and
+3.png
+view the map file after compiling as follows
+4.png
+
+
+***************************
