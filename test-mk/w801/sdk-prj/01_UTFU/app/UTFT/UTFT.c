@@ -239,6 +239,15 @@ void ili9488_write16to24(uint16_t RGBCode)
 }
 #endif
 
+
+      uint16_t color = b1 << 8 | b2;
+      linebuff[pixcount] = (((color & 0xF800) >> 11)* 255) / 31;
+      pixcount++;
+      linebuff[pixcount] = (((color & 0x07E0) >> 5) * 255) / 63;
+      pixcount++;
+      linebuff[pixcount] = ((color & 0x001F)* 255) / 31;
+
+
 */
 void
 UTFT_LCD_Write_DATA (char VH, char VL)
