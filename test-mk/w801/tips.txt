@@ -71,3 +71,5 @@ static void delay(u32 ms)
 
 2) CPU:xt804 - little-endiann 
 
+
+3) printf("---> GetHeap:%d\n",tls_mem_get_avail_heapsize());

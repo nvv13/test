@@ -85,7 +85,7 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "480x320") != NULL && strstr (FileName, ".jpg") != NULL)
+              if (strstr (FileName, "320x240") != NULL && strstr (FileName, ".jpg") != NULL)
                {
                UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
                //UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим на дисплей картинку

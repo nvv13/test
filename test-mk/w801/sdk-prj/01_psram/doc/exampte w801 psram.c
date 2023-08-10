@@ -6,6 +6,7 @@ Published on 2022-08-26 17:04:46
 
 1.Code modification (possible)
 Add or modify the psram config function in wm_gpio_afsel.c (pay attention to whether it is consistent):
+ это Диза наверное, в последнем W800 SDK v1.00.10 | 2022/12/29 по другому 
 void wm_psram_config(uint8_t numsel)
 {
     switch(numsel)
