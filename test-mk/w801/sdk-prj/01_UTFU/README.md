@@ -750,7 +750,7 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 фото 1 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488_back.jpg" alt="back side" title="back side" /></p>
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488_back.jpg" alt="top side" title="top side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488.jpg" alt="top side" title="top side" /></p>
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT3_5SP_9488
