@@ -255,9 +255,9 @@ case TFT3_5SP_9488:
 
   //#if LCD_SPI_MODE != 2
   // LCD_IO_WriteCmd8(0xFB); LCD_IO_WriteData8(0x80);
-  //UTFT_LCD_Write_COM(ILI9488_IMCTR); UTFT_LCD_Write_DATA2(0x80); // Interface Mode Control (SDO NOT USE)
+  UTFT_LCD_Write_COM(ILI9488_IMCTR); UTFT_LCD_Write_DATA2(0x80); // Interface Mode Control (SDO NOT USE)
   //#else
-  UTFT_LCD_Write_COM(ILI9488_IMCTR); UTFT_LCD_Write_DATA2(0x00); // Interface Mode Control (SDO USE)
+  //UTFT_LCD_Write_COM(ILI9488_IMCTR); UTFT_LCD_Write_DATA2(0x00); // Interface Mode Control (SDO USE)
   //#endif
   #elif ILI9488_INTERFACE == 1
     UTFT_LCD_Write_COM(ILI9488_PIXFMT); UTFT_LCD_Write_DATA2(0x55); // Interface Pixel Format (16 bit)
@@ -265,6 +265,8 @@ case TFT3_5SP_9488:
 
   UTFT_LCD_Write_COM(ILI9488_FRMCTR1); UTFT_LCD_Write_DATA2(0xA0); // Frame rate (60Hz)
   UTFT_LCD_Write_COM(ILI9488_INVCTR); UTFT_LCD_Write_DATA2(0x02); // Display Inversion Control (2-dot)
+  //UTFT_LCD_Write_COM(ILI9488_INVON);
+  //UTFT_LCD_Write_COM(ILI9488_INVOFF);
   UTFT_LCD_Write_COM(ILI9488_DFUNCTR); UTFT_LCD_Write_DATA2(0x02);UTFT_LCD_Write_DATA2(0x02); // Display Function Control RGB/MCU Interface Control
   UTFT_LCD_Write_COM(ILI9488_IMGFUNCT); UTFT_LCD_Write_DATA2(0x00); // Set Image Functio (Disable 24 bit data)
   UTFT_LCD_Write_COM(ILI9488_ADJCTR3); UTFT_LCD_Write_DATA2(0xA9);UTFT_LCD_Write_DATA2(0x51);UTFT_LCD_Write_DATA2(0x2C);UTFT_LCD_Write_DATA2(0x82); // Adjust Control (D7 stream, loose)

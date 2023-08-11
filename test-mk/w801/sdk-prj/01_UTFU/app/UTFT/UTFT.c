@@ -72,13 +72,15 @@ static boolean _transparent;
 static boolean LCD_Write_1byte_Flag = 0;
 static u32 _spi_freq ;
 static u8 _spi_mode;
-
+static u8 display_bitpixel;
+ 
 #include "hardware/sky/HW_W801_p.h"
 
 static void UTFT_LCD_Writ_Bus (char VH, char VL, byte mode);
 static void UTFT_LCD_Writ_Bus_SPI (const u8 *buf, u32 len);
 static void UTFT_LCD_Write_COM (char VL);
 static void UTFT_LCD_Write_DATA (char VH, char VL);
+static void UTFT_LCD_Write_DATA_Pixel (char VH, char VL); //точно известно что на выход пиксель идёт
 static void UTFT_LCD_Write_DATA2 (char VL);
 static void UTFT_LCD_Write_COM_DATA (char com1, int dat1);
 static void UTFT__hw_special_init ();
@@ -121,10 +123,12 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
 /*	размер y:	 */	word dsy[] = {	319,		399,		319,		319,		319,		319,		219,		219,		399,        159,		127,		319,		479,		799,		319,		319,		319,		0,			0,			319,		799,		479,		319,		219,		159,		319,		319,		479,		479,		479,		159,		159,		319,		319,		479,		479			,219          ,159	     ,239	    ,319           ,239           ,279           ,319            ,319            ,319            ,799               ,319           ,479           };
 /*	размер шины: */		byte dtm[] = {	16,		16,		16,		8,		8,		16,		8,		SERIAL_4PIN,	16,	    SERIAL_5PIN,	SERIAL_5PIN,	16,		16,		16,		8,		16,		LATCHED_16,	0,			0,			8,		16,		16,		16,		8,		SERIAL_5PIN,	SERIAL_5PIN,	SERIAL_4PIN,	16,		16,		16,		SERIAL_5PIN, 	SERIAL_5PIN,	8,		8,		8,		16			,SERIAL_5PIN  ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,16             ,SERIAL_5PIN    ,SERIAL_5PIN    ,16                ,SERIAL_5PIN   ,SERIAL_5PIN   };
 /*	режим HW SPI */	       u8 spi_md[] = {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    TLS_SPI_MODE_3,	0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,		TLS_SPI_MODE_3,		0,		0,	0,		0,		0,		0, 		TLS_SPI_MODE_3,	0,		0,		0,		0			,0	      ,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,0              ,TLS_SPI_MODE_3 ,TLS_SPI_MODE_3 ,0                 ,TLS_SPI_MODE_3,TLS_SPI_MODE_3};
+/*	режим bit на PIXEL */ u8 bitpixel[]= {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    0,			0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,			     0,		0,		0,	0,		0,		0,		0, 			     0,	0,		0,		0,		0			,0	      ,0	     ,0     	    ,0		   ,0		  ,0		 ,0              ,0	 	 ,0		 ,0                 ,0 		   ,24 		  };
 
   disp_x_size = dsx[model];
   disp_y_size = dsy[model];
   display_transfer_mode = dtm[model];
+  display_bitpixel = bitpixel[model];
   display_model = model;
 
   __p1 = RS;
@@ -147,10 +151,10 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
       display_serial_mode = SERIAL_5PIN;
     }
 
-  //if(buf_4x_line==NULL && display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
-  //  {
-  buf_4x_line = tls_mem_alloc((disp_x_size+1)*4);
-  //  }
+  if(buf_4x_line==NULL && display_bitpixel!=24 )// display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+    {
+    buf_4x_line = tls_mem_alloc((disp_x_size+1)*4);
+    }
 
 
   if (display_transfer_mode != 1)
@@ -249,6 +253,38 @@ void ili9488_write16to24(uint16_t RGBCode)
 
 
 */
+void UTFT_LCD_Write_DATA_Pixel (char VH, char VL) //точно известно что на выход пиксель идёт
+{
+if(display_bitpixel==24 && display_transfer_mode == 1)
+ {
+      uint16_t color = ~ ( VH << 8 | VL );
+
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+        {
+          sbi_RS();
+          u8 buf[3] = {
+  ((color & 0xF800) >> 8),
+  ((color & 0x07E0) >> 3),
+  ((color & 0x001F) << 3)
+
+//            (((color & 0xF800) >> 11)* 255) / 31,
+//            (((color & 0x07E0) >> 5) * 255) / 63,
+//            ((color & 0x001F)* 255) / 31   
+    };
+          UTFT_LCD_Writ_Bus_SPI (buf, 3);
+        }
+      else
+        {
+          UTFT_LCD_Writ_Bus (0x01, ((color & 0xF800) >> 8) , display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ((color & 0x07E0) >> 3) , display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ((color & 0x001F) << 3) , display_transfer_mode);
+        }
+
+ }
+ else
+ UTFT_LCD_Write_DATA (VH, VL);
+}
+
 void
 UTFT_LCD_Write_DATA (char VH, char VL)
 {
@@ -694,13 +730,13 @@ UTFT_drawCircle (int x, int y, int radius)
 
   cbi (P_CS, B_CS);
   UTFT_setXY (x, y + radius, x, y + radius);
-  UTFT_LCD_Write_DATA (fch, fcl);
+  UTFT_LCD_Write_DATA_Pixel (fch, fcl);
   UTFT_setXY (x, y - radius, x, y - radius);
-  UTFT_LCD_Write_DATA (fch, fcl);
+  UTFT_LCD_Write_DATA_Pixel (fch, fcl);
   UTFT_setXY (x + radius, y, x + radius, y);
-  UTFT_LCD_Write_DATA (fch, fcl);
+  UTFT_LCD_Write_DATA_Pixel (fch, fcl);
   UTFT_setXY (x - radius, y, x - radius, y);
-  UTFT_LCD_Write_DATA (fch, fcl);
+  UTFT_LCD_Write_DATA_Pixel (fch, fcl);
 
   while (x1 < y1)
     {
@@ -714,21 +750,21 @@ UTFT_drawCircle (int x, int y, int radius)
       ddF_x += 2;
       f += ddF_x;
       UTFT_setXY (x + x1, y + y1, x + x1, y + y1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x - x1, y + y1, x - x1, y + y1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x + x1, y - y1, x + x1, y - y1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x - x1, y - y1, x - x1, y - y1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x + y1, y + x1, x + y1, y + x1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x - y1, y + x1, x - y1, y + x1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x + y1, y - x1, x + y1, y - x1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
       UTFT_setXY (x - y1, y - x1, x - y1, y - x1);
-      UTFT_LCD_Write_DATA (fch, fcl);
+      UTFT_LCD_Write_DATA_Pixel (fch, fcl);
     }
   sbi (P_CS, B_CS);
   UTFT_clrXY ();
@@ -796,24 +832,12 @@ UTFT_fillScr2 (word color)
        }
        else
        {
-       buf_4x_line[0]=ch;
-       buf_4x_line[1]=cl;
        for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
         {
           if (display_transfer_mode != 1)
             UTFT_LCD_Writ_Bus (ch, cl, display_transfer_mode);
           else
-            {
-              if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
-                {
-                  UTFT_LCD_Writ_Bus_SPI (buf_4x_line, 2);
-                }
-              else
-                {
-                  UTFT_LCD_Writ_Bus (1, ch, display_transfer_mode);
-                  UTFT_LCD_Writ_Bus (1, cl, display_transfer_mode);
-                }
-            }
+            UTFT_LCD_Write_DATA_Pixel(ch ,cl);
         }
        }
     }
@@ -870,7 +894,7 @@ UTFT_getBackColor ()
 void
 UTFT_setPixel (word color)
 {
-  UTFT_LCD_Write_DATA ((color >> 8), (color & 0xFF)); // rrrrrggggggbbbbb
+  UTFT_LCD_Write_DATA_Pixel ((color >> 8), (color & 0xFF)); // rrrrrggggggbbbbb
 }
 
 void
@@ -905,7 +929,7 @@ UTFT_drawLine (int x1, int y1, int x2, int y2)
           while (true)
             {
               UTFT_setXY (col, row, col, row);
-              UTFT_LCD_Write_DATA (fch, fcl);
+              UTFT_LCD_Write_DATA_Pixel (fch, fcl);
               if (row == y2)
                 return;
               row += ystep;
@@ -923,7 +947,7 @@ UTFT_drawLine (int x1, int y1, int x2, int y2)
           while (true)
             {
               UTFT_setXY (col, row, col, row);
-              UTFT_LCD_Write_DATA (fch, fcl);
+              UTFT_LCD_Write_DATA_Pixel (fch, fcl);
               if (col == x2)
                 return;
               col += xstep;
@@ -964,7 +988,7 @@ UTFT_drawHLine (int x, int y, int l)
     {
       for (int i = 0; i < l + 1; i++)
         {
-          UTFT_LCD_Write_DATA (fch, fcl);
+          UTFT_LCD_Write_DATA_Pixel (fch, fcl);
         }
     }
   sbi (P_CS, B_CS);
@@ -995,7 +1019,7 @@ UTFT_drawVLine (int x, int y, int l)
     {
       for (int i = 0; i < l + 1; i++)
         {
-          UTFT_LCD_Write_DATA (fch, fcl);
+          UTFT_LCD_Write_DATA_Pixel (fch, fcl);
         }
     }
   sbi (P_CS, B_CS);
@@ -1494,7 +1518,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
           for (tc = 0; tc < (sx * sy); tc++)
             {
               col = pgm_read_word (&data[tc]);
-              UTFT_LCD_Write_DATA (col >> 8, col & 0xff);
+              UTFT_setPixel(col);
             }
           sbi (P_CS, B_CS);
         }
@@ -1507,7 +1531,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
               for (tx = sx - 1; tx >= 0; tx--)
                 {
                   col = pgm_read_word (&data[(ty * sx) + tx]);
-                  UTFT_LCD_Write_DATA (col >> 8, col & 0xff);
+                  UTFT_setPixel(col);
                 }
             }
           sbi (P_CS, B_CS);
@@ -1527,7 +1551,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
                   {
                     col = pgm_read_word (&data[(ty * sx) + tx]);
                     for (tsx = 0; tsx < scale; tsx++)
-                      UTFT_LCD_Write_DATA (col >> 8, col & 0xff);
+                      UTFT_setPixel(col);
                   }
             }
           sbi (P_CS, B_CS);
@@ -1545,7 +1569,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
                     {
                       col = pgm_read_word (&data[(ty * sx) + tx]);
                       for (tsx = 0; tsx < scale; tsx++)
-                        UTFT_LCD_Write_DATA (col >> 8, col & 0xff);
+                        UTFT_setPixel(col);
                     }
                 }
             }
@@ -1582,7 +1606,7 @@ UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data, int deg,
                       + ((tx - rox) * sin (radian)));
 
             UTFT_setXY (newx, newy, newx, newy);
-            UTFT_LCD_Write_DATA (col >> 8, col & 0xff);
+            UTFT_setPixel(col);
           }
       sbi (P_CS, B_CS);
     }

@@ -123,7 +123,7 @@ UTFT_LCD_Writ_Bus (char VH, char VL, byte mode)
   switch (mode)
     {
     case 1:
-      /* в этом режиме VH==1 значит комменда, 0 - данные, передаем */
+      /* в этом режиме VH==1 значит комманда, 0 - данные, передаем */
       if (display_serial_mode == SERIAL_4PIN)
         { /* SERIAL_4PIN значит 1 передаваемый бит - означает комманда/данные
            */

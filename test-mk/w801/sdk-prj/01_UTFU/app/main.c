@@ -85,15 +85,17 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "480x320") != NULL && strstr (FileName, ".jpg") != NULL)
-               {
-               UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
-               //UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим на дисплей картинку
-               UTFT_setFont (SmallFont);
-               UTFT_setColor2 (VGA_FUCHSIA);
-               UTFT_print (fno.fname, CENTER, 210, 0);
-               tls_os_time_delay (HZ * 3);
-               }
+              if (strstr (FileName, "480x320") != NULL
+                  && strstr (FileName, ".jpg") != NULL)
+                {
+                  UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
+                  // UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим
+                  // на дисплей картинку
+                  UTFT_setFont (SmallFont);
+                  UTFT_setColor2 (VGA_FUCHSIA);
+                  UTFT_print (fno.fname, CENTER, 210, 0);
+                  tls_os_time_delay (HZ * 3);
+                }
             }
         }
       f_closedir (&dir);
@@ -109,7 +111,8 @@ user_app1_task (void *sdata)
 
   // подключаем библиотеку UTFT
   UTFT_UTFT (TFT3_5SP_9488 //
-             ,(u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL
              ,
@@ -140,7 +143,7 @@ user_app1_task (void *sdata)
   wm_sdio_host_config (0);
 
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-  //UTFT_InitLCD (PORTRAIT);
+  // UTFT_InitLCD (PORTRAIT);
 
   while (1)
     {                 //
@@ -158,7 +161,7 @@ user_app1_task (void *sdata)
       UTFT_fillScr2 (VGA_BLACK);
 
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
-      UTFT_drawRect (                              		
+      UTFT_drawRect (
           5, 5, 320 - 5,
           240 - 5); // Рисуем прямоугольник (с противоположными углами)
       tls_os_time_delay (HZ); //
@@ -193,7 +196,7 @@ user_app1_task (void *sdata)
           70); // Рисуем окружность (с центром в точке x y  и радиусом r)
 
       UTFT_fillCircle (160, 120, 50); // Рисуем закрашенную окружность (с
-                                     // центром в точке x y и радиусом r)
+                                      // центром в точке x y и радиусом r)
 
       tls_os_time_delay (HZ * 3);
 
@@ -261,37 +264,32 @@ user_app1_task (void *sdata)
                   0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
 
-
-
-
-
-      unsigned int t=0; // used to save time relative to 1970
+      unsigned int t = 0; // used to save time relative to 1970
       struct tm *tblock;
       tblock = localtime ((const time_t *)&t); // switch to local time
       tls_set_rtc (tblock);
       struct tm tstart;
       struct tm tstop;
       tls_get_rtc (&tstart);
-      u32 current_tick = tls_os_get_time();
-      u32 count=0;
-      while( (tls_os_get_time() - current_tick) <= (HZ*10) )
-       {
-       UTFT_fillScr2 (count);
-       count++;
-       }
+      u32 current_tick = tls_os_get_time ();
+      u32 count = 0;
+      while ((tls_os_get_time () - current_tick) <= (HZ * 10))
+        {
+          UTFT_fillScr2 (count);
+          count++;
+        }
       tls_get_rtc (&tstop);
-      int sec=(tstop.tm_hour*3600 + tstop.tm_min*60 + tstop.tm_sec) - (tstart.tm_hour*3600 + tstart.tm_min*60 + tstart.tm_sec);
+      int sec = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
+                - (tstart.tm_hour * 3600 + tstart.tm_min * 60 + tstart.tm_sec);
       UTFT_clrScr ();
       UTFT_setFont (BigFont);
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
       char mesg[50];
-      sprintf (mesg, "run %d sec" , sec);
-      UTFT_print (mesg, CENTER, 20, 0);       
-      sprintf (mesg, "=%d FPS=%d", count, count/sec);
-      UTFT_print (mesg, CENTER, 50, 0);       
+      sprintf (mesg, "run %d sec", sec);
+      UTFT_print (mesg, CENTER, 20, 0);
+      sprintf (mesg, "=%d FPS=%d", count, count / sec);
+      UTFT_print (mesg, CENTER, 50, 0);
       tls_os_time_delay (HZ * 10);
-
-
 
       // mount SD card
       res_sd = f_mount (&fs, "0:", 1);
