@@ -492,6 +492,8 @@ W801  LCD
 
 
 
+--------------------------------------------------
+
 ------------------------------------------------
 
 
@@ -729,6 +731,68 @@ W801 LCD      LCD W801
 
 ~~~
 
+
+
+
+------------------------------------------------
+
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
+
+назывался "3,5-дюймовый TFT ЖК SPI IPS ILI9488 с емкостным касанием FT6236"
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488_back.jpg" alt="top side" title="top side" /></p>
+
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT3_5SP_9488
+
+соединения
+
+надо соединить по схеме:
+~~~
+connect to TFT3_5SP_9488
+---- ------
+W801  LCD   
+---- ------
+      CTP_RST
+      CTP_INT
+      CTP_SCL
+      CTP_SDA
+      NC/3V3 
+PB16  SDO         MISO
+3.3v  BL          подсветка
+PB15  SCK         синхросигнал
+PB17  SDI         MOSI
+PB23  D/C         комманда/данные
+PB21  RST         сброс
+PB14  CS          выбор чипа
+gnd   GND         земля
+3.3v  VDD         питание
+---- ------
+W801  LCD   
+---- ------
+
+
+*подготовка изображений для SD Card + используется библиотека libTJPEG.a
+
+# convert *.jpg -resize 480x320! j%03d-480x320.jpg
+
+~~~
+
+
+
+
+
+--------------------------------------------------
 
 
 ------------------------------------------------
