@@ -257,15 +257,15 @@ void UTFT_LCD_Write_DATA_Pixel (char VH, char VL) //точно известно 
 {
 if(display_bitpixel==24 && display_transfer_mode == 1)
  {
-      uint16_t color = ~ ( VH << 8 | VL );
+      uint16_t color =  ( VH << 8 | VL );
 
       if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
         {
           sbi_RS();
           u8 buf[3] = {
-  ((color & 0xF800) >> 8),
-  ((color & 0x07E0) >> 3),
-  ((color & 0x001F) << 3)
+ ~ ((color & 0xF800) >> 8),
+ ~ ((color & 0x07E0) >> 3),
+ ~ ((color & 0x001F) << 3)
 
 //            (((color & 0xF800) >> 11)* 255) / 31,
 //            (((color & 0x07E0) >> 5) * 255) / 63,
@@ -275,9 +275,9 @@ if(display_bitpixel==24 && display_transfer_mode == 1)
         }
       else
         {
-          UTFT_LCD_Writ_Bus (0x01, ((color & 0xF800) >> 8) , display_transfer_mode);
-          UTFT_LCD_Writ_Bus (0x01, ((color & 0x07E0) >> 3) , display_transfer_mode);
-          UTFT_LCD_Writ_Bus (0x01, ((color & 0x001F) << 3) , display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ~ ((color & 0xF800) >> 8) , display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ~ ((color & 0x07E0) >> 3) , display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ~ ((color & 0x001F) << 3) , display_transfer_mode);
         }
 
  }
