@@ -44,11 +44,10 @@
 
 #include "memorysaver.h"
 
-#include "wm_mem.h"
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
 #include "wm_io.h"
-
+#include "wm_mem.h"
 
 #include "hardware/sky/HW_SKY_defines.h"
 
@@ -70,17 +69,22 @@ static byte __p1, __p2, __p3, __p4, __p5;
 static _current_font cfont;
 static boolean _transparent;
 static boolean LCD_Write_1byte_Flag = 0;
-static u32 _spi_freq ;
+static u32 _spi_freq;
 static u8 _spi_mode;
 static u8 display_bitpixel;
- 
+
 #include "hardware/sky/HW_W801_p.h"
 
 static void UTFT_LCD_Writ_Bus (char VH, char VL, byte mode);
 static void UTFT_LCD_Writ_Bus_SPI (const u8 *buf, u32 len);
 static void UTFT_LCD_Write_COM (char VL);
 static void UTFT_LCD_Write_DATA (char VH, char VL);
-static void UTFT_LCD_Write_DATA_Pixel (char VH, char VL); //точно известно что на выход пиксель идёт
+static void
+UTFT_LCD_Write_DATA_Pixel (char VH,
+                           char VL); //точно известно что на выход пиксель идёт
+static void UTFT_LCD_Write_DATA_Pixel24bpp (
+    u8 VR, u8 VG,
+    u8 VB); //точно известно что на выход пиксель идёт
 static void UTFT_LCD_Write_DATA2 (char VL);
 static void UTFT_LCD_Write_COM_DATA (char com1, int dat1);
 static void UTFT__hw_special_init ();
@@ -96,12 +100,10 @@ static void UTFT__fast_fill_16 (byte VH, byte VL, long pix);
 static void UTFT__fast_fill_8 (int ch, long pix);
 static void UTFT__convert_float (char *buf, double num, int width, byte prec);
 
-static void LCD_WR_REG(u16 Value);
-static void LCD_WR_DATA(u8 VL);
+static void LCD_WR_REG (u16 Value);
+static void LCD_WR_DATA (u8 VL);
 
-
-static u8 *buf_4x_line=NULL;
-
+static u8 *buf_4x_line = NULL;
 
 // Подключение аппаратно-зависимых функций, для правильной работы
 // микроконтроллеров
@@ -112,6 +114,7 @@ void
 UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
            u32 spi_freq)
 {
+
 //	обозначение:				--		--		CTE32		--		DMTFT24104	--		--		--		CTE32W	    --			LPH9135		--		--		CTE50		--		--		ELEE32_REVA	--			--			ELEE32_REVB	CTE70		CTE32HR		CTE28		CTE22		--		DMTFT28105	MI0283QT9	CTE35IPS	CTE40		CTE50CPLD	DMTFT18101	--		--		--		--		--
 //						--		--		--		--		DMTFT28103	--		--		--		--	    --			--		--		--		EHOUSE50	--		--		INFINIT32	--			--			--		EHOUSE70	--		--		DMTFT22102	--		--		--		--		--		CTE70CPLD	--		--		--		--		--		--
 //						ITDB32		ITDB32WC	ITDB32S		ITDB24		ITDB28		--		ITDB22		ITDB22SP	ITDB32WD    ITDB18SP		--		ITDB25H		ITDB43		ITDB50		ITDB24E_8	--		--		--			--			--		--		--		--		--		--		--		--		--		--		EHOUSE50CPLD    --		--		--		--		--		--
@@ -125,6 +128,8 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
 /*	режим HW SPI */	       u8 spi_md[] = {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    TLS_SPI_MODE_3,	0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,		TLS_SPI_MODE_3,		0,		0,	0,		0,		0,		0, 		TLS_SPI_MODE_3,	0,		0,		0,		0			,0	      ,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,0              ,TLS_SPI_MODE_3 ,TLS_SPI_MODE_3 ,0                 ,TLS_SPI_MODE_3,TLS_SPI_MODE_3};
 /*	режим bit на PIXEL */ u8 bitpixel[]= {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    0,			0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,			     0,		0,		0,	0,		0,		0,		0, 			     0,	0,		0,		0,		0			,0	      ,0	     ,0     	    ,0		   ,0		  ,0		 ,0              ,0	 	 ,0		 ,0                 ,0 		   ,24 		  };
 
+
+
   disp_x_size = dsx[model];
   disp_y_size = dsy[model];
   display_transfer_mode = dtm[model];
@@ -136,9 +141,8 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
   __p3 = CS;
   __p4 = RST;
   __p5 = SER;
-  _spi_freq = spi_freq ;
-  _spi_mode=spi_md[model];
-
+  _spi_freq = spi_freq;
+  _spi_mode = spi_md[model];
 
   if (display_transfer_mode == SERIAL_4PIN)
     {
@@ -151,11 +155,12 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
       display_serial_mode = SERIAL_5PIN;
     }
 
-  if(buf_4x_line==NULL && display_bitpixel!=24 )// display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+  if (buf_4x_line == NULL
+      && display_bitpixel
+             != 24) // display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
     {
-    buf_4x_line = tls_mem_alloc((disp_x_size+1)*4);
+      buf_4x_line = tls_mem_alloc ((disp_x_size + 1) * 4);
     }
-
 
   if (display_transfer_mode != 1)
     {
@@ -205,16 +210,18 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
     }
 }
 
-static void LCD_WR_REG(u16 Value)
+static void
+LCD_WR_REG (u16 Value)
 {
-cbi_RS();
-//LCD_Write_1byte_Flag = 0;
-UTFT_LCD_Writ_Bus (Value>>8, Value & 0xff , 16);
+  cbi_RS ();
+  // LCD_Write_1byte_Flag = 0;
+  UTFT_LCD_Writ_Bus (Value >> 8, Value & 0xff, 16);
 }
 
-static void LCD_WR_DATA(byte VL)
+static void
+LCD_WR_DATA (byte VL)
 {
-UTFT_LCD_Write_DATA2 (VL);
+  UTFT_LCD_Write_DATA2 (VL);
 }
 
 void
@@ -222,7 +229,7 @@ UTFT_LCD_Write_COM (char VL)
 {
   if (display_transfer_mode != 1)
     {
-      cbi_RS();
+      cbi_RS ();
       LCD_Write_1byte_Flag = 1;
       UTFT_LCD_Writ_Bus (0x00, VL, display_transfer_mode);
       LCD_Write_1byte_Flag = 0;
@@ -231,58 +238,83 @@ UTFT_LCD_Write_COM (char VL)
     UTFT_LCD_Writ_Bus (0x00, VL, display_transfer_mode);
 }
 
-/*
-
- The SPI mode not capable the 16bpp mode -> convert to 24bpp 
-#if ILI9488_INTERFACE == 0
-void ili9488_write16to24(uint16_t RGBCode)
+void
+UTFT_LCD_Write_DATA_Pixel (char VH,
+                           char VL) //точно известно что на выход пиксель идёт
 {
-  UTFT_LCD_Write_DATA2((RGBCode & 0xF800) >> 8);
-  UTFT_LCD_Write_DATA2((RGBCode & 0x07E0) >> 3);
-  UTFT_LCD_Write_DATA2((RGBCode & 0x001F) << 3);
-}
-#endif
+  if (display_bitpixel == 24 && display_transfer_mode == 1)
+    {
+      uint16_t color = ~(VH << 8 | VL);
 
-
-      uint16_t color = b1 << 8 | b2;
-      linebuff[pixcount] = (((color & 0xF800) >> 11)* 255) / 31;
-      pixcount++;
-      linebuff[pixcount] = (((color & 0x07E0) >> 5) * 255) / 63;
-      pixcount++;
-      linebuff[pixcount] = ((color & 0x001F)* 255) / 31;
-
-
-*/
-void UTFT_LCD_Write_DATA_Pixel (char VH, char VL) //точно известно что на выход пиксель идёт
-{
-if(display_bitpixel==24 && display_transfer_mode == 1)
- {
-      uint16_t color =  ( VH << 8 | VL );
-
-      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq != 0)
         {
-          sbi_RS();
-          u8 buf[3] = {
- ~ ((color & 0xF800) >> 8),
- ~ ((color & 0x07E0) >> 3),
- ~ ((color & 0x001F) << 3)
+          sbi_RS ();
 
-//            (((color & 0xF800) >> 11)* 255) / 31,
-//            (((color & 0x07E0) >> 5) * 255) / 63,
-//            ((color & 0x001F)* 255) / 31   
-    };
+          u8 buf[3];
+
+          if (color == 0xFFFF)
+            {
+              buf[0] = 0xFF;
+              buf[1] = 0xFF;
+              buf[2] = 0xFF;
+            }
+          else
+            {
+              buf[0] = ((color & 0xF800)
+                        >> 8); // 1111 1000 0000 0000 -> 1111 1000  RRRRRRRR
+              buf[1] = ((color & 0x07E0)
+                        >> 3); // 0000 0111 1110 0000 -> 1111 1100  GGGGGGGG
+              buf[2] = ((color & 0x001F)
+                        << 3); // 0000 0000 0001 1111 -> 1111 1000  BBBBBBBB
+            }
           UTFT_LCD_Writ_Bus_SPI (buf, 3);
         }
       else
         {
-          UTFT_LCD_Writ_Bus (0x01, ~ ((color & 0xF800) >> 8) , display_transfer_mode);
-          UTFT_LCD_Writ_Bus (0x01, ~ ((color & 0x07E0) >> 3) , display_transfer_mode);
-          UTFT_LCD_Writ_Bus (0x01, ~ ((color & 0x001F) << 3) , display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ((color & 0xF800) >> 8),
+                             display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ((color & 0x07E0) >> 3),
+                             display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ((color & 0x001F) << 3),
+                             display_transfer_mode);
         }
+    }
+  else
+    UTFT_LCD_Write_DATA (VH, VL);
+}
 
- }
- else
- UTFT_LCD_Write_DATA (VH, VL);
+void
+UTFT_LCD_Write_DATA_Pixel24bpp (
+    u8 VR, u8 VG,
+    u8 VB) //точно известно что на выход пиксель идёт
+{
+  if (display_bitpixel == 24 && display_transfer_mode == 1)
+    {
+
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq != 0)
+        {
+          sbi_RS ();
+
+          u8 buf[3];
+          buf[0] = ~VR;
+          buf[1] = ~VG;
+          buf[2] = ~VB;
+          UTFT_LCD_Writ_Bus_SPI (buf, 3);
+        }
+      else
+        {
+          UTFT_LCD_Writ_Bus (0x01, ~VR, display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ~VG, display_transfer_mode);
+          UTFT_LCD_Writ_Bus (0x01, ~VB, display_transfer_mode);
+        }
+    }
+  else
+    {
+      u16 w = (VR & 0xF8) << 8; /* RRRRR----------- */
+      w |= (VG & 0xFC) << 3;    /* -----GGGGGG----- */
+      w |= VB >> 3;             /* -----------BBBBB */
+      UTFT_LCD_Write_DATA ((w >> 8) & 0xFF, w & 0xFF);
+    }
 }
 
 void
@@ -290,14 +322,14 @@ UTFT_LCD_Write_DATA (char VH, char VL)
 {
   if (display_transfer_mode != 1)
     {
-      sbi_RS();
+      sbi_RS ();
       UTFT_LCD_Writ_Bus (VH, VL, display_transfer_mode);
     }
   else
     {
-      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq != 0)
         {
-          sbi_RS();
+          sbi_RS ();
           u8 buf[2] = { VH, VL };
           UTFT_LCD_Writ_Bus_SPI (buf, 2);
         }
@@ -314,7 +346,7 @@ UTFT_LCD_Write_DATA2 (char VL)
 {
   if (display_transfer_mode != 1)
     {
-      sbi_RS();
+      sbi_RS ();
       LCD_Write_1byte_Flag = 1;
       UTFT_LCD_Writ_Bus (0x00, VL, display_transfer_mode);
       LCD_Write_1byte_Flag = 0;
@@ -651,7 +683,7 @@ UTFT_fillRect (int x1, int y1, int x2, int y2)
     {
       cbi (P_CS, B_CS);
       UTFT_setXY (x1, y1, x2, y2);
-      sbi_RS();
+      sbi_RS ();
       UTFT__fast_fill_16 (fch, fcl,
                           (((long)(x2 - x1) + 1) * ((long)(y2 - y1) + 1)));
       sbi (P_CS, B_CS);
@@ -660,7 +692,7 @@ UTFT_fillRect (int x1, int y1, int x2, int y2)
     {
       cbi (P_CS, B_CS);
       UTFT_setXY (x1, y1, x2, y2);
-      sbi_RS();
+      sbi_RS ();
       UTFT__fast_fill_8 (fch, (((long)(x2 - x1) + 1) * ((long)(y2 - y1) + 1)));
       sbi (P_CS, B_CS);
     }
@@ -808,7 +840,7 @@ UTFT_fillScr2 (word color)
   cbi (P_CS, B_CS);
   UTFT_clrXY ();
   if (display_transfer_mode != 1)
-    sbi_RS();
+    sbi_RS ();
   if (display_transfer_mode == 16)
     UTFT__fast_fill_16 (ch, cl, ((disp_x_size + 1) * (disp_y_size + 1)));
   else if ((display_transfer_mode == 8) && (ch == cl))
@@ -816,30 +848,32 @@ UTFT_fillScr2 (word color)
   else
     {
       if (display_serial_mode == SERIAL_5PIN)
-        sbi_RS();
-      if (display_serial_mode == SERIAL_5PIN && _spi_freq!=0 && buf_4x_line!=NULL)
-       {
-       for (i = 0; i < ((disp_x_size + 1)*2); i++)
+        sbi_RS ();
+      if (display_serial_mode == SERIAL_5PIN && _spi_freq != 0
+          && buf_4x_line != NULL)
         {
-        buf_4x_line[i*2]=ch;
-        buf_4x_line[i*2+1]=cl;
+          for (i = 0; i < ((disp_x_size + 1) * 2); i++)
+            {
+              buf_4x_line[i * 2] = ch;
+              buf_4x_line[i * 2 + 1] = cl;
+            }
+          for (i = 0; i < ((disp_y_size + 1) / 2); i++)
+            {
+              UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1) * 4));
+            }
+          if ((disp_y_size + 1) % 2)
+            UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1) * 2));
         }
-       for (i = 0; i < ((disp_y_size + 1)/2); i++)
+      else
         {
-        UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1)*4));
+          for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
+            {
+              if (display_transfer_mode != 1)
+                UTFT_LCD_Writ_Bus (ch, cl, display_transfer_mode);
+              else
+                UTFT_LCD_Write_DATA_Pixel (ch, cl);
+            }
         }
-       if((disp_y_size + 1)%2)UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1)*2));
-       }
-       else
-       {
-       for (i = 0; i < ((disp_x_size + 1) * (disp_y_size + 1)); i++)
-        {
-          if (display_transfer_mode != 1)
-            UTFT_LCD_Writ_Bus (ch, cl, display_transfer_mode);
-          else
-            UTFT_LCD_Write_DATA_Pixel(ch ,cl);
-        }
-       }
     }
   sbi (P_CS, B_CS);
 }
@@ -894,7 +928,8 @@ UTFT_getBackColor ()
 void
 UTFT_setPixel (word color)
 {
-  UTFT_LCD_Write_DATA_Pixel ((color >> 8), (color & 0xFF)); // rrrrrggggggbbbbb
+  UTFT_LCD_Write_DATA_Pixel ((color >> 8),
+                             (color & 0xFF)); // rrrrrggggggbbbbb 565
 }
 
 void
@@ -976,12 +1011,12 @@ UTFT_drawHLine (int x, int y, int l)
   UTFT_setXY (x, y, x + l, y);
   if (display_transfer_mode == 16)
     {
-      sbi_RS();
+      sbi_RS ();
       UTFT__fast_fill_16 (fch, fcl, l);
     }
   else if ((display_transfer_mode == 8) && (fch == fcl))
     {
-      sbi_RS();
+      sbi_RS ();
       UTFT__fast_fill_8 (fch, l);
     }
   else
@@ -1007,12 +1042,12 @@ UTFT_drawVLine (int x, int y, int l)
   UTFT_setXY (x, y, x, y + l);
   if (display_transfer_mode == 16)
     {
-      sbi_RS();
+      sbi_RS ();
       UTFT__fast_fill_16 (fch, fcl, l);
     }
   else if ((display_transfer_mode == 8) && (fch == fcl))
     {
-      sbi_RS();
+      sbi_RS ();
       UTFT__fast_fill_8 (fch, l);
     }
   else
@@ -1504,6 +1539,78 @@ UTFT_getFontYsize ()
 }
 
 void
+UTFT_drawBitmap24bpp (int x, int y, int sx, int sy, u32 *data)
+{
+
+  if (display_bitpixel != 24)
+    {
+      /* Convert RGB888 to RGB565 if needed */
+      if (1 == 1)
+        {
+          uint8_t *s = (uint8_t *)data;
+          uint16_t w, *d = (uint16_t *)s;
+          unsigned int n = sx * sy;
+
+          do
+            {
+              w = (*s++ & 0xF8) << 8;  /* RRRRR----------- */
+              w |= (*s++ & 0xFC) << 3; /* -----GGGGGG----- */
+              w |= *s++ >> 3;          /* -----------BBBBB */
+              *d++ = w;
+            }
+          while (--n);
+        }
+
+      return UTFT_drawBitmap (x, y, sx, sy, ((u16 *)data), 1);
+    }
+
+  // u32 col;
+  int tx, ty, tc;
+  u8 *u8dat = (u8 *)data;
+
+  if (orient == PORTRAIT)
+    {
+      cbi (P_CS, B_CS);
+      UTFT_setXY (x, y, x + sx - 1, y + sy - 1);
+      for (tc = 0; tc < (sx * sy); tc++)
+        {
+          // col = pgm_read_u32 (&data[tc]);
+          // col = *(data+tc);
+          // UTFT_setPixel24bpp (col);
+          uint8_t *s = (u8dat + (tc * 3));
+          u8 VR = (*s++);
+          u8 VG = (*s++);
+          u8 VB = (*s++);
+          UTFT_LCD_Write_DATA_Pixel24bpp (
+              VR, VG, VB); // rrrrrrrr gggggggg bbbbbbbb 888
+        }
+      sbi (P_CS, B_CS);
+    }
+  else
+    {
+      cbi (P_CS, B_CS);
+      for (ty = 0; ty < sy; ty++)
+        {
+          UTFT_setXY (x, y + ty, x + sx - 1, y + ty);
+          for (tx = sx - 1; tx >= 0; tx--)
+            {
+              //                  col = pgm_read_u32 (&data[(ty * sx) + tx]);
+              // col = *(data + ((ty * sx) + tx));
+              //                UTFT_setPixel24bpp (col);
+              uint8_t *s = (u8dat + (((ty * sx) + tx) * 3));
+              u8 VR = (*s++);
+              u8 VG = (*s++);
+              u8 VB = (*s++);
+              UTFT_LCD_Write_DATA_Pixel24bpp (
+                  VR, VG, VB); // rrrrrrrr gggggggg bbbbbbbb 888
+            }
+        }
+      sbi (P_CS, B_CS);
+    }
+  UTFT_clrXY ();
+}
+
+void
 UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
 {
   unsigned int col;
@@ -1518,7 +1625,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
           for (tc = 0; tc < (sx * sy); tc++)
             {
               col = pgm_read_word (&data[tc]);
-              UTFT_setPixel(col);
+              UTFT_setPixel (col);
             }
           sbi (P_CS, B_CS);
         }
@@ -1531,7 +1638,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
               for (tx = sx - 1; tx >= 0; tx--)
                 {
                   col = pgm_read_word (&data[(ty * sx) + tx]);
-                  UTFT_setPixel(col);
+                  UTFT_setPixel (col);
                 }
             }
           sbi (P_CS, B_CS);
@@ -1551,7 +1658,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
                   {
                     col = pgm_read_word (&data[(ty * sx) + tx]);
                     for (tsx = 0; tsx < scale; tsx++)
-                      UTFT_setPixel(col);
+                      UTFT_setPixel (col);
                   }
             }
           sbi (P_CS, B_CS);
@@ -1569,7 +1676,7 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
                     {
                       col = pgm_read_word (&data[(ty * sx) + tx]);
                       for (tsx = 0; tsx < scale; tsx++)
-                        UTFT_setPixel(col);
+                        UTFT_setPixel (col);
                     }
                 }
             }
@@ -1606,13 +1713,12 @@ UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data, int deg,
                       + ((tx - rox) * sin (radian)));
 
             UTFT_setXY (newx, newy, newx, newy);
-            UTFT_setPixel(col);
+            UTFT_setPixel (col);
           }
       sbi (P_CS, B_CS);
     }
   UTFT_clrXY ();
 }
-
 
 /*
 void

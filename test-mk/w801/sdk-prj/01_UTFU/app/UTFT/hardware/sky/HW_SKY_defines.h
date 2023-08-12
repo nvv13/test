@@ -40,6 +40,7 @@ static void sbi (uint32_t *PORT_REG, u8 PIN);
 #define PROGMEM
 #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 #define pgm_read_word(addr) (*(const unsigned short *)(addr))
+#define pgm_read_u32(addr) (*(const u32 *)(addr))
 typedef unsigned char prog_uchar;
 
 #ifdef bitmapdatatype

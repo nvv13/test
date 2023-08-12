@@ -13,7 +13,7 @@
 
 
 
-#define LUAT_LCD_COLOR_DEPTH 16
+#define LUAT_LCD_COLOR_DEPTH 32
 
 
 

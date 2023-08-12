@@ -58,4 +58,4 @@
 
 #define DISABLE_ILI9225B 1 //
 
-//#define DISABLE_ST7789 1 
+//#define DISABLE_ST7789 1

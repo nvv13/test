@@ -87,7 +87,10 @@ int y  = y1;
 int sx = x2 - x1 + 1;
 int sy = y2 - y1 + 1;
 */
-UTFT_drawBitmap ( x1, y1, x2 - x1 + 1, y2 - y1 + 1, color, 1);
+
+UTFT_drawBitmap24bpp ( x1, y1, x2 - x1 + 1, y2 - y1 + 1, color);
+
+//UTFT_drawBitmap ( x1, y1, x2 - x1 + 1, y2 - y1 + 1, color,1);
 //UTFT_drawBitmapLEBF ( x1, y1, x2 - x1 + 1, y2 - y1 + 1, color);
 return 0;
 };

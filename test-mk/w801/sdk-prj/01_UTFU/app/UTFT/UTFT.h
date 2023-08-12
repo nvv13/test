@@ -69,12 +69,15 @@ v. 7.1.0](https://coollib.net/b/558566-ivan-georgievich-titarenko-rukovodstvo-po
 
 например, конвертировать все изображения png (или jpg ниже), текущей
 директории, в bmp формат размера 480 на 320 без сохранения соотношения сторон
-для формата цвета пикселя RGB565 (такой нужен для TFT дисплея)
+для формата цвета пикселя RGB565 (такой нужен для TFT большенства дисплеев)
 
 # convert *.png -resize 480x320! -define bmp:subtype=RGB565 p%03d.bmp
 # convert *.jpg -resize 480x320! -define bmp:subtype=RGB565 j%03d.bmp
 # convert *.JPG -resize 480x320! -rotate 180 -define bmp:subtype=RGB565
 j%03d.bmp
+
+или если дисплей 24 бит на пиксель RGB888, то просто resize
+convert *.jpg -resize 480x320! j%03d-480x320.jpg
 
 */
 
@@ -135,7 +138,7 @@ extern "C"
 #define HX8357C 35
 #define ILI9225B 36
 #define TFT00_96SP 37
-#define TFT01_3SP  38
+#define TFT01_3SP 38
 #define TFT01_47V89 39
 #define TFT01_14V89 40
 #define TFT01_69V89 41
@@ -238,8 +241,8 @@ extern "C"
 #define VGA_PURPLE 0x8010
 #define VGA_TRANSPARENT 0xFFFFFFFF
 
-#include "wm_type_def.h"
 #include "wm_hostspi.h"
+#include "wm_type_def.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -263,35 +266,36 @@ extern "C"
   typedef _current_font_t _current_font;
 
   typedef bool boolean;
-/*
-void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 spi_freq, u8 spi_mode);
+  /*
+  void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
+  u32 spi_freq, u8 spi_mode);
 
-для паралельной шины, указываются RS, WR, CS, RST
- Выводы параллельной шины данных не указываются
-  если, параллельная 16 бит шина = PB0 ... PB15 !
-  если было бы 8 бит шина = PB0 ... PB7 !
+  для паралельной шины, указываются RS, WR, CS, RST
+   Выводы параллельной шины данных не указываются
+    если, параллельная 16 бит шина = PB0 ... PB15 !
+    если было бы 8 бит шина = PB0 ... PB7 !
 
-для шины SPI
- RS это SDA  данные
- WR это SCL  синхросигнал
- CS это  CS  выбор чипа
- RST это RES сброс (reset)
- SER это DC  комманда/данные
- spi_freq    частота SPI(Герц) 
- 
- для 5 контактных SPI дисплеев
- (где отдельно ножка комманда/данные)
- програмируеться HW SPI на ножки (предопред)
-       wm_spi_cs_config (WM_IO_PB_14); - не исп, но занята
-  WR = wm_spi_ck_config (WM_IO_PB_15);
-       wm_spi_di_config (WM_IO_PB_16); - не исп, но занята
-  RS = wm_spi_do_config (WM_IO_PB_17);
- но, можно отказаться от HW SPI в пользу Soft SPI 
-  установив spi_freq=0 -  эмуляция SPI
-  это удобно для разных ножек
+  для шины SPI
+   RS это SDA  данные
+   WR это SCL  синхросигнал
+   CS это  CS  выбор чипа
+   RST это RES сброс (reset)
+   SER это DC  комманда/данные
+   spi_freq    частота SPI(Герц)
 
-  максимально, частота spi_freq = 20000000 (20MHz)
-*/
+   для 5 контактных SPI дисплеев
+   (где отдельно ножка комманда/данные)
+   програмируеться HW SPI на ножки (предопред)
+         wm_spi_cs_config (WM_IO_PB_14); - не исп, но занята
+    WR = wm_spi_ck_config (WM_IO_PB_15);
+         wm_spi_di_config (WM_IO_PB_16); - не исп, но занята
+    RS = wm_spi_do_config (WM_IO_PB_17);
+   но, можно отказаться от HW SPI в пользу Soft SPI
+    установив spi_freq=0 -  эмуляция SPI
+    это удобно для разных ножек
+
+    максимально, частота spi_freq = 20000000 (20MHz)
+  */
   void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
                   u32 spi_freq);
 
@@ -331,9 +335,12 @@ void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER, u32 s
                         int scale);
   // drawBitmap(int x, int y, int sx, int sy, bitmapdatatype data, int
   // scale=1);
+  void UTFT_drawBitmap24bpp (int x, int y, int sx, int sy, u32 *data);
+
   void UTFT_drawBitmap2 (int x, int y, int sx, int sy, bitmapdatatype data,
                          int deg, int rox, int roy);
-  //void UTFT_drawBitmapLEBF (int x, int y, int sx, int sy, bitmapdatatype data);
+  // void UTFT_drawBitmapLEBF (int x, int y, int sx, int sy, bitmapdatatype
+  // data);
 
   void UTFT_lcdOff ();
   void UTFT_lcdOn ();

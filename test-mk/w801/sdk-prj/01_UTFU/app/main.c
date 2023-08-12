@@ -94,7 +94,7 @@ scan_files (
                   UTFT_setFont (SmallFont);
                   UTFT_setColor2 (VGA_FUCHSIA);
                   UTFT_print (fno.fname, CENTER, 300, 0);
-                  tls_os_time_delay (HZ * 3);
+                  tls_os_time_delay (HZ * 6);
                 }
             }
         }
