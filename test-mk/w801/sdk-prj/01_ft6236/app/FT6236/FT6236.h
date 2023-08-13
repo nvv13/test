@@ -51,15 +51,12 @@ typedef struct
   int16_t z;
 } TS_Point;
 
-void FT6236_FT6236(void);
-void FT6236_debug(void);
 boolean FT6236_begin(uint8_t thresh, int8_t sda, int8_t scl);
+void FT6236_debug(void);
 //boolean FT6236_begin(uint8_t thresh = FT6236_DEFAULT_THRESHOLD, int8_t sda = -1, int8_t scl = -1);
 uint8_t FT6236_touched(void);
 TS_Point FT6236_getPoint(uint8_t n);
 //TS_Point FT6236_getPoint(uint8_t n = 0);
-uint8_t touches;
-uint16_t touchX[2], touchY[2], touchID[2];
 
 
 #endif

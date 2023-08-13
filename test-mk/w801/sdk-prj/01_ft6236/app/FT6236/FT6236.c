@@ -122,7 +122,7 @@ u8 Wire_read(void)
  return 0;
 }
 
-/*
+/*                                                             	
 Example
 #include <Wire.h>
 
@@ -165,13 +165,15 @@ static  void    FT6236_writeRegister8(uint8_t reg, uint8_t val);
 static  uint8_t FT6236_readRegister8(uint8_t reg);
 static  void    FT6236_readData(void);
 
+static uint8_t touches;
+static uint16_t touchX[2], touchY[2], touchID[2];
 
-/* New class. */
-void FT6236_FT6236(void) { touches = 0; }
 
 /* Start I2C and check if the FT6236 is found. */
 boolean FT6236_begin(uint8_t thresh, int8_t sda, int8_t scl)
 {
+
+    touches = 0;
 
     Wire_begin(sda, scl);
 
