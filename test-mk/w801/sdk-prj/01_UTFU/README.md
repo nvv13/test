@@ -763,10 +763,10 @@ connect to TFT3_5SP_9488
 ---- ------
 W801  LCD   
 ---- ------
-      CTP_RST
-      CTP_INT
-      CTP_SCL
-      CTP_SDA
+      CTP_RST     сброс CTP
+      CTP_INT     прерывание
+      CTP_SCL     
+      CTP_SDA     
       NC/3V3 
 PB16  SDO         MISO
 3.3v  BL          подсветка
