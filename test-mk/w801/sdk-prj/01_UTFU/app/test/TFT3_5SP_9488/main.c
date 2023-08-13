@@ -158,6 +158,8 @@ user_app1_task (void *sdata)
 
       tls_os_time_delay (HZ*3); //
 
+      UTFT_clrScr (); // стираем всю информацию с дисплея
+
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
       UTFT_drawRect (10, 20, 170,
                      100); // Рисуем прямоугольник (с противоположными углами в
