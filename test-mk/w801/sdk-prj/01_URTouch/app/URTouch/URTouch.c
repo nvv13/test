@@ -20,6 +20,7 @@
   examples and tools supplied with the library.
 */
 
+#include "FT6236.h"
 
 #include "URTouch.h"
 #include "URTouchCD.h"
@@ -30,7 +31,8 @@ int16_t URTouch_TP_X, URTouch_TP_Y;
 
 static regtype *P_CLK, *P_CS, *P_DIN, *P_DOUT, *P_IRQ;
 static regsize B_CLK, B_CS, B_DIN, B_DOUT, B_IRQ;
-static byte T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ;
+static enum tls_io_name T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ;
+static enum sensor_type T_SENSOR;
 static int32_t _default_orientation;
 static byte orient;
 static byte prec;
@@ -47,14 +49,15 @@ static word URTouch_touch_ReadData ();
 
 #define URT_SERIAL_DEBUG
 
-void
-URTouch_URTouch (byte tclk, byte tcs, byte din, byte dout, byte irq)
+void URTouch_URTouch (enum sensor_type sensor, enum tls_io_name tclk_scl, enum tls_io_name tcs_sda
+                      , enum tls_io_name din, enum tls_io_name dout, enum tls_io_name irq)
 {
-  T_CLK = tclk;
-  T_CS = tcs;
-  T_DIN = din;
+  T_SENSOR=sensor; 
+  T_CLK  = tclk_scl;
+  T_CS   = tcs_sda;
+  T_DIN  = din;
   T_DOUT = dout;
-  T_IRQ = irq;
+  T_IRQ  = irq;
 }
 
 void

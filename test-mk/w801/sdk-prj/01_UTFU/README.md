@@ -763,7 +763,7 @@ connect to TFT3_5SP_9488
 ---- ------
 W801  LCD   
 ---- ------
-      CTP_RST     сброс CTP
+PB21  CTP_RST     сброс CTP
       CTP_INT     прерывание
 PA01  CTP_SCL     
 PA04  CTP_SDA     

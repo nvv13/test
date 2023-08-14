@@ -1,5 +1,3 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
 
 project ft6236
 
@@ -32,7 +30,6 @@ LANDSCAPE = URTouch_set_calibrate:
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488.jpg" alt="top side" title="top side" /></p>
 
 
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT3_5SP_9488
 
 соединения
 
@@ -42,7 +39,7 @@ connect to TFT3_5SP_9488
 ---- ------
 W801  LCD   
 ---- ------
-      CTP_RST     сброс CTP
+PB21  CTP_RST     сброс CTP
       CTP_INT     прерывание
 PA01  CTP_SCL     
 PA04  CTP_SDA     
@@ -194,8 +191,10 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 --------------------------------
 
 главный источник: 
-## License and Credits 
+(1)
 This project is based on the original https://github.com/DustinWatts/FT6236
+(2)
+https://github.com/adafruit/Adafruit_FT6206_Library
 
 
 --------------------------------

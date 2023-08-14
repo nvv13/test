@@ -28,6 +28,7 @@ extern "C"
 {
 #endif
 
+
 #include "wm_hostspi.h"
 #include "wm_type_def.h"
 
@@ -36,8 +37,8 @@ extern "C"
 
 #include "wm_gpio.h"
 
-  typedef u8 byte;
-  typedef u16 word;
+typedef u8 byte;
+typedef u16 word;
 
 #define URTOUCH_VERSION 202
 
@@ -54,7 +55,16 @@ extern "C"
   extern int16_t URTouch_TP_X, URTouch_TP_Y;
   extern volatile bool URTouch_flag_touch_isr;
 
-  void URTouch_URTouch (byte tclk, byte tcs, byte tdin, byte dout, byte irq);
+
+typedef enum sensor_type
+  {
+    TS_XPT2046 = 0,
+    TS_FT6236  = 1
+  } _sensor_type;
+
+
+  void URTouch_URTouch (enum sensor_type sensor, enum tls_io_name tclk_scl, enum tls_io_name tcs_sda
+                      , enum tls_io_name din, enum tls_io_name dout, enum tls_io_name irq);
   void URTouch_InitTouch (byte orientation); // byte orientation = LANDSCAPE
   void URTouch_read ();
   bool URTouch_dataAvailable ();

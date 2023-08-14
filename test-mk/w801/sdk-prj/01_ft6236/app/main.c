@@ -98,7 +98,6 @@ user_app1_task (void *sdata)
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
   UTFT_setFont (BigFont); // устанавливаем большой шрифт
-  UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
   char char_buff[100];
 
   while (1)
@@ -108,11 +107,17 @@ user_app1_task (void *sdata)
         {
           // Retrieve a point
           TS_Point p = FT6236_getPoint (0);
-
+          p.y=UTFT_getDisplayXSize () - p.y;
           // Print coordinates to the serial output
-          sprintf (char_buff, "X Coordinate: %d, Y Coordinate: %d", p.x, p.y);
-          printf ("%s\n", char_buff);
-          UTFT_print (char_buff, CENTER, 100, 0); // выводим текст на дисплей
+          sprintf (char_buff, "     X=%d, Y=%d     ", p.x, p.y);
+          //printf ("%s\n", char_buff);
+          UTFT_setColor2 (VGA_WHITE);
+          UTFT_print (char_buff, CENTER, 250, 0); // выводим текст на дисплей
+          if (p.x >= 0 && p.y >= 0)
+            {
+              UTFT_setColor2 (VGA_BLUE); 
+              UTFT_fillCircle ( p.y, p.x, 2); // Рисуем закрашенную окружность
+            }
         }
 
       // Debouncing. To avoid returning the same touch multiple times you can
