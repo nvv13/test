@@ -38,6 +38,7 @@ extern "C"
 
 #include "FT6236.h"
 
+
   typedef u8 byte;
   typedef u16 word;
 
