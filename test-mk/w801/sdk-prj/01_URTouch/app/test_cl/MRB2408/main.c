@@ -322,8 +322,10 @@ user_app1_task (void *sdata)
   UTFT_setColor2 (VGA_LIME); // 800x480
   UTFT_setFont (SmallFont);
 
-  // URTouch_URTouch(byte tclk, byte tcs, byte tdin, byte dout, byte irq);
-  URTouch_URTouch ((u8)WM_IO_PA_05 // byte tclk
+//URTouch_URTouch(sensor_type, byte tclk_scl, byte tcs_sda, byte tdin_thresh, byte dout_none, byte irq_irq);
+  URTouch_URTouch (TS_XPT2046
+                   ,
+                   (u8)WM_IO_PA_05 // byte tclk
                    ,
                    (u8)WM_IO_PA_06 // byte tcs
                    ,

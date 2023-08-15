@@ -36,6 +36,8 @@ extern "C"
 
 #include "wm_gpio.h"
 
+#include "FT6236.h"
+
   typedef u8 byte;
   typedef u16 word;
 
@@ -54,7 +56,14 @@ extern "C"
   extern int16_t URTouch_TP_X, URTouch_TP_Y;
   extern volatile bool URTouch_flag_touch_isr;
 
-  void URTouch_URTouch (byte tclk, byte tcs, byte tdin, byte dout, byte irq);
+  typedef enum sensor_type
+  {
+    TS_XPT2046 = 0,
+    TS_FT6236 = 1
+  } _sensor_type;
+
+  void URTouch_URTouch (enum sensor_type sensor, byte tclk_scl, byte tcs_sda,
+                        byte din_thresh, byte dout_none, byte irq_irq);
   void URTouch_InitTouch (byte orientation); // byte orientation = LANDSCAPE
   void URTouch_read ();
   bool URTouch_dataAvailable ();

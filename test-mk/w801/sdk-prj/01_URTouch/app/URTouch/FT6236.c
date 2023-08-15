@@ -23,9 +23,6 @@ MIT license, all text above must be included in any redistribution
 
 #include "Wire.h"
 
-
-
-
 static void FT6236_writeRegister8 (uint8_t reg, uint8_t val);
 static uint8_t FT6236_readRegister8 (uint8_t reg);
 static void FT6236_readData (void);
@@ -33,8 +30,6 @@ static void FT6236_debug (void);
 
 static uint8_t touches;
 static uint16_t touchX[2], touchY[2], touchID[2];
-
-
 
 /* Start I2C and check if the FT6236 is found. */
 boolean
@@ -45,7 +40,7 @@ FT6236_begin (uint8_t thresh, int8_t sda, int8_t scl)
 
   Wire_begin (scl, sda);
 
-  FT6236_debug();
+  FT6236_debug ();
 
   // Adjust threshold
   FT6236_writeRegister8 (FT6236_REG_THRESHHOLD, thresh);
