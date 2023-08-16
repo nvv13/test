@@ -113,8 +113,8 @@ user_app1_task (void *sdata)
 
   int but1, but2, pressed_button;
   
-  but1 = UTFT_Buttons_addButton( 10 ,  240, 100,  50, "On",0);
-  but2 = UTFT_Buttons_addButton( 140,  240, 100,  50, "Off",0);
+  but1 = UTFT_Buttons_addButton( 10 ,  240, 100,  50, "RED",0);
+  but2 = UTFT_Buttons_addButton( 140,  240, 110,  50, "GREEN",0);
   UTFT_Buttons_disableButton(but2, true);
 
   UTFT_Buttons_drawButtons();
@@ -131,11 +131,24 @@ user_app1_task (void *sdata)
         {
           UTFT_Buttons_disableButton(but1, true);
           UTFT_Buttons_enableButton(but2, true);
+          //UTFT_fillScr2 (VGA_RED);
+          //UTFT_Buttons_drawButtons();
+          UTFT_setColor2 (VGA_RED); // Устанавливаем лаймовый цвет
+          UTFT_fillRect (
+             10, 10, 100,
+             200); // Рисуем закрашенный прямоугольник (с противоположными углами
+
         }
       if (pressed_button==but2)
         {
           UTFT_Buttons_disableButton(but2, true);
           UTFT_Buttons_enableButton(but1, true);
+          //UTFT_fillScr2 (VGA_GREEN);
+          //UTFT_Buttons_drawButtons();
+          UTFT_setColor2 (VGA_GREEN); // Устанавливаем лаймовый цвет
+          UTFT_fillRect (
+             10, 10, 100,
+             200); // Рисуем закрашенный прямоугольник (с противоположными углами
         }
 
     }

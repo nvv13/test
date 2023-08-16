@@ -315,7 +315,7 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 
 назывался "3,5-дюймовый TFT ЖК SPI IPS ILI9488 с емкостным касанием FT6236"
 
-PORTRAIT  = URTouch_set_calibrate: 
+PORTRAIT  = URTouch_set_calibrate: калибровка не требуется, похоже их калибруют при производстве
 LANDSCAPE = URTouch_set_calibrate: 
 
 Видео
@@ -329,7 +329,7 @@ LANDSCAPE = URTouch_set_calibrate:
 
 
 для него тест (main.c) лежит в директории 
- 01_URTouch/app/test_cl/TFT3_5SP_9488
+ 01_URTouch/app/test_btn/TFT3_5SP_9488
 
 соединения
 
@@ -339,7 +339,7 @@ connect to TFT3_5SP_9488
 ---- ------
 W801  LCD   
 ---- ------
-PB21  CTP_RST     сброс CTP
+PB21  CTP_RST     сброс CTP (т.е. соеденить с RST)
 PA09  CTP_INT     прерывание
 PA01  CTP_SCL     
 PA04  CTP_SDA     
