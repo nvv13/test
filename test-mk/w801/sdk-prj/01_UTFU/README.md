@@ -545,7 +545,6 @@ W801 LCD
 ~~~
 
 
-TFT01_18SP
 
 ------------------------------------------------
 
@@ -610,8 +609,19 @@ board HLK-W801-KIT-V1.1 + 3.97 TFT_397T_NT35510 800x480 16bit bus
 
 по углам обзора - похоже на IPS
 
+
+wiki
+http://www.lcdwiki.com/3.97inch_16BIT_Module_NT35510_SKU:MRB3973
+
+
+бывают еще очень похожие дисплеи, но с другим драйвером, 
+http://www.lcdwiki.com/3.97inch_16BIT_Module_OTM8009A_SKU:MRB3971
+с драйвером от NT35510 - работать не будет.
+
+
 Видео
 https://youtu.be/OAJxVA2hCOE
+
 
 Дисплей
 фото 1 
@@ -661,6 +671,31 @@ W801 LCD      LCD W801
 
 если используется библиотека libTJPEG.a
 # convert *.jpg -resize 800x480! j%03d-800x480.jpg
+
+
+
+
+* резисторы на плате переключают режимы
+8bit  R2,R4 > 80-series 8-bit MPU interface, D[7:0]  - не пробовал
+
+16bit R3,R4 > 80-series 16-bit MPU interface, D[15:0] - наш вариант
+
+24bit R2,R4 > это не выведено на пины...
+
+SPI   R3,R6 > 16-bit SPI, SDI/SDO serial data, SCL rising trigger, CS - chip select
+  тогда получится:
+-------------------------------------
+|разьем LCD|шлейф дисплея 1-51| SPI |
+-------------------------------------
+|   CS     |   18             | CS  |
+|   WR     |   16             | SCL |
+|          |   14             | SDI | 
+|          |   13             | SDO | 
+|   RS     |   15             | DCX |? 
+-------------------------------------
+ вывод RS (Cmd/Data), используется ли в режиме SPI ?
+ или может тут пакет с 9 битами, первый бит для обозначения 
+  комманда/данные ?
 
 
 ~~~
@@ -742,6 +777,11 @@ W801 LCD      LCD W801
 board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 
 назывался "3,5-дюймовый TFT ЖК SPI IPS ILI9488 с емкостным касанием FT6236"
+
+
+Некоторые Datasheets по тому из чего собран данный дисплейный модуль можно посмотреть по ссылке: 
+ https://github.com/LaskaKit/ESPD-35/tree/main/Datasheets/LiangHaoCai-3.5%E5%AF%B8-40p-ILI9488%E8%B5%84%E6%96%99%E5%8C%85
+
 
 Видео
 
