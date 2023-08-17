@@ -561,8 +561,9 @@ board HLK-W801-KIT-V1.1 + 1.8 TFT SPI 128x160  1'8 tft 128*rgb*160 ver 1.0
 
 Дисплей
 фото 1 
-
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_18SP_Back.jpg" alt="back side" title="back side" /></p>
 фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_18SP.jpg" alt="top side" title="top side" /></p>
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_18SP
