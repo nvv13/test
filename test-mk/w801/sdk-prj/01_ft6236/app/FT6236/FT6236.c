@@ -23,9 +23,6 @@ MIT license, all text above must be included in any redistribution
 
 #include "Wire.h"
 
-
-
-
 static void FT6236_writeRegister8 (uint8_t reg, uint8_t val);
 static uint8_t FT6236_readRegister8 (uint8_t reg);
 static void FT6236_readData (void);
@@ -33,8 +30,6 @@ static void FT6236_debug (void);
 
 static uint8_t touches;
 static uint16_t touchX[2], touchY[2], touchID[2];
-
-
 
 /* Start I2C and check if the FT6236 is found. */
 boolean
@@ -45,7 +40,7 @@ FT6236_begin (uint8_t thresh, int8_t sda, int8_t scl)
 
   Wire_begin (scl, sda);
 
-  FT6236_debug();
+  FT6236_debug ();
 
   // Adjust threshold
   FT6236_writeRegister8 (FT6236_REG_THRESHHOLD, thresh);
@@ -80,10 +75,10 @@ FT6236_touched (void)
 static TS_Point p1;
 /* Get a touch point */
 TS_Point
-FT6236_getPoint (uint8_t n)
+FT6236_getPoint (void)
 {
   FT6236_readData ();
-  if ((touches == 0) || (n > 1))
+  if ((touches == 0))// || (n > 1))
     {
       p1.x = 0;
       p1.y = 0;
@@ -92,9 +87,21 @@ FT6236_getPoint (uint8_t n)
     }
   else
     {
-      p1.x = touchX[n];
-      p1.y = touchY[n];
+      p1.x = touchX[0];
+      p1.y = touchY[0];
       p1.z = 1;
+      if(touches==2)
+        {
+        p1.x2 = touchX[1];
+        p1.y2 = touchY[1];
+        p1.z2 = 1;
+        }
+        else
+        {
+        p1.x2 = 0;
+        p1.y2 = 0;
+        p1.z2 = 0;
+        }
       return p1;
     }
 }

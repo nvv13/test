@@ -48,13 +48,16 @@ typedef struct
   int16_t x;
   int16_t y;
   int16_t z;
+
+  int16_t x2;
+  int16_t y2;
+  int16_t z2;
 } TS_Point;
 
 boolean FT6236_begin (uint8_t thresh, int8_t sda, int8_t scl);
 // boolean FT6236_begin(uint8_t thresh = FT6236_DEFAULT_THRESHOLD, int8_t sda =
 // -1, int8_t scl = -1);
 uint8_t FT6236_touched (void);
-TS_Point FT6236_getPoint (uint8_t n);
-// TS_Point FT6236_getPoint(uint8_t n = 0);
+TS_Point FT6236_getPoint (void);
 
 #endif

@@ -106,10 +106,12 @@ user_app1_task (void *sdata)
       if (FT6236_touched ())
         {
           // Retrieve a point
-          TS_Point p = FT6236_getPoint (0);
+          TS_Point p = FT6236_getPoint ();
           p.y=UTFT_getDisplayXSize () - p.y;
+          if(p.z2==1)
+            p.y2=UTFT_getDisplayXSize () - p.y2;
           // Print coordinates to the serial output
-          sprintf (char_buff, "     X=%d, Y=%d     ", p.x, p.y);
+          sprintf (char_buff, "  x=%d,y=%d,x2=%d,y2=%d  ", p.x, p.y, p.x2, p.y2);
           //printf ("%s\n", char_buff);
           UTFT_setColor2 (VGA_WHITE);
           UTFT_print (char_buff, CENTER, 250, 0); // выводим текст на дисплей
@@ -117,6 +119,11 @@ user_app1_task (void *sdata)
             {
               UTFT_setColor2 (VGA_BLUE); 
               UTFT_fillCircle ( p.y, p.x, 2); // Рисуем закрашенную окружность
+            }
+          if (p.x2 >= 0 && p.y2 >= 0)
+            {
+              UTFT_setColor2 (VGA_RED); 
+              UTFT_fillCircle ( p.y2, p.x2, 2); 
             }
         }
 

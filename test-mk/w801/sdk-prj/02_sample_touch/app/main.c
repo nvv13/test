@@ -33,11 +33,13 @@
 
 #include "mod1/URTouch.h"
 #include "mod1/UTFT.h"
-#include "mod1/UTFT_Buttons.h"
+#include "mod1/u_jpeg.h"
+
+#include "ff.h"
+#include "wm_gpio_afsel.h"
 
 //#define TOUCH_ORIENTATION PORTRAIT
-#define TOUCH_ORIENTATION  LANDSCAPE
-
+#define TOUCH_ORIENTATION LANDSCAPE
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
@@ -56,8 +58,7 @@ user_app1_task (void *sdata)
   printf ("user_app1_task start 3.5 TFT 320x480 HW SPI \n");
 
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT3_5SP_9488
-             ,(u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
+  UTFT_UTFT (TFT3_5SP_9488, (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL
              ,
@@ -83,8 +84,9 @@ user_app1_task (void *sdata)
 
   UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
 
-//URTouch_URTouch(sensor_type, byte tclk_scl, byte tcs_sda, byte tdin_thresh, byte dout_none, byte irq_irq);
-  URTouch_URTouch (TS_FT6236  // sensor_type
+  // URTouch_URTouch(sensor_type, byte tclk_scl, byte tcs_sda, byte
+  // tdin_thresh, byte dout_none, byte irq_irq);
+  URTouch_URTouch (TS_FT6236 // sensor_type
                    ,
                    WM_IO_PA_01 // byte tclk_scl
                    ,
@@ -97,63 +99,108 @@ user_app1_task (void *sdata)
                    WM_IO_PA_09 // byte irq_irq
   );
 
-
   URTouch_InitTouch (TOUCH_ORIENTATION);
   URTouch_setPrecision (PREC_MEDIUM);
 
-  UTFT_Buttons_UTFT_Buttons();
-  UTFT_Buttons_setTextFont(BigFont);
-  UTFT_Buttons_setSymbolFont(Dingbats1_XL);
-
-  //
-
   UTFT_clrScr ();
   UTFT_setFont (BigFont);
+
+  char char_buff[100];
+
+  FATFS fs;
+  FRESULT res_sd;
+  wm_sdio_host_config (0);
+  // mount SD card
+  res_sd = f_mount (&fs, "0:", 1);
+  //***********************formatting test****************************
+  if (res_sd == FR_NO_FILESYSTEM)
+    {
+      printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably "
+              "because the file "
+              "initialization failed! error code:%d\r\n",
+              res_sd);
+    }
+  int ind_file = -1;
+
   UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-
-  int but1, but2, pressed_button;
-  
-  but1 = UTFT_Buttons_addButton( 10 ,  240, 100,  50, "RED",0);
-  but2 = UTFT_Buttons_addButton( 140,  240, 110,  50, "GREEN",0);
-  UTFT_Buttons_disableButton(but2, true);
-
-  UTFT_Buttons_drawButtons();
+  //             x      y    x    y
+  UTFT_drawRect (1, 1, 60, 320);
+  UTFT_drawRect (420, 1, 479, 320);
+  UTFT_setColor2 (VGA_WHITE);
+  UTFT_drawRect (1, 270, 479, 320);
 
   while (1)
     { //
 
-
-    if (URTouch_dataAvailable() == true)
-    {
-      pressed_button = UTFT_Buttons_checkButtons();
-
-      if (pressed_button==but1)
+      if (URTouch_dataAvailable () == true)
         {
-          UTFT_Buttons_disableButton(but1, true);
-          UTFT_Buttons_enableButton(but2, true);
-          //UTFT_fillScr2 (VGA_RED);
-          //UTFT_Buttons_drawButtons();
-          UTFT_setColor2 (VGA_RED); // Устанавливаем лаймовый цвет
-          UTFT_fillRect (
-             10, 10, 100,
-             200); // Рисуем закрашенный прямоугольник (с противоположными углами
 
-        }
-      if (pressed_button==but2)
-        {
-          UTFT_Buttons_disableButton(but2, true);
-          UTFT_Buttons_enableButton(but1, true);
-          //UTFT_fillScr2 (VGA_GREEN);
-          //UTFT_Buttons_drawButtons();
-          UTFT_setColor2 (VGA_GREEN); // Устанавливаем лаймовый цвет
-          UTFT_fillRect (
-             10, 10, 100,
-             200); // Рисуем закрашенный прямоугольник (с противоположными углами
-        }
+          URTouch_read ();
 
-    }
+          if (URTouch_TP_X > 0 && URTouch_TP_Y > 0)
+            {
+              UTFT_setColor2 (VGA_BLUE);
+              UTFT_fillCircle (URTouch_TP_X, URTouch_TP_Y,
+                               2); // Рисуем закрашенную окружность
+            }
+          if (URTouch_TP_X2 > 0 && URTouch_TP_Y2 > 0)
+            {
+              UTFT_setColor2 (VGA_RED);
+              UTFT_fillCircle (URTouch_TP_X2, URTouch_TP_Y2, 2);
+            }
+
+          if (URTouch_TP_X > 0 || URTouch_TP_Y > 0 || URTouch_TP_X2 > 0
+              || URTouch_TP_Y2 > 0)
+            {
+
+              sprintf (char_buff, "  x=%d,y=%d,x2=%d,y2=%d  ", URTouch_TP_X,
+                       URTouch_TP_Y, URTouch_TP_X2, URTouch_TP_Y2);
+              // printf ("%s\n", char_buff);
+              UTFT_setColor2 (VGA_WHITE);
+              UTFT_print (char_buff, CENTER, 300,
+                          0); // выводим текст на дисплей
+            }
+          if (URTouch_TP_Y > 270)
+            {
+              UTFT_clrScr ();
+              UTFT_setColor2 (
+                  VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+              UTFT_drawRect (1, 1, 60, 320);
+              UTFT_drawRect (420, 1, 479, 320);
+              UTFT_setColor2 (VGA_WHITE);
+              UTFT_drawRect (1, 270, 479, 320);
+            }
+
+          if (res_sd == FR_OK)
+            {
+              bool l_draw = false;
+              if (URTouch_TP_X > 420)
+                {
+                  ind_file++;
+                  l_draw = true;
+                }
+              if (URTouch_TP_X > 0 && URTouch_TP_X < 60 && ind_file > 0)
+                {
+                  ind_file--;
+                  l_draw = true;
+                }
+              if (l_draw)
+                {
+                  char FileName[256];
+                  sprintf (FileName, "0:480x320/j%0.3d-480x320.jpg", ind_file);
+                  printf ("%s\n", FileName);
+                  if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
+                    {
+                      ind_file = -1;
+                    }
+                }
+            }
+        }
 
     } //
+
+  // unmount file system
+  f_mount (NULL, "0:", 1);
 }
 
 void

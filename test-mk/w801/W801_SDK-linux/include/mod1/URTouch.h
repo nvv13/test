@@ -36,8 +36,6 @@ extern "C"
 
 #include "wm_gpio.h"
 
-#include "FT6236.h"
-
 
   typedef u8 byte;
   typedef u16 word;
@@ -54,7 +52,10 @@ extern "C"
 #define PREC_HI 3
 #define PREC_EXTREME 4
 
-  extern int16_t URTouch_TP_X, URTouch_TP_Y;
+#define FT6236_DEFAULT_THRESHOLD 128 // Default threshold for touch detection
+
+  extern int16_t URTouch_TP_X , URTouch_TP_Y;
+  extern int16_t URTouch_TP_X2, URTouch_TP_Y2; //для 2-х точечного ввода (FT6236)
   extern volatile bool URTouch_flag_touch_isr;
 
   typedef enum sensor_type

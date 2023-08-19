@@ -21,12 +21,14 @@
 */
 
 #include "URTouch.h"
+#include "FT6236.h"
 #include "URTouchCD.h"
 #include <mod1/UTFT.h>
 
 #include "hardware/sky/HW_SKY_defines.h"
 
 int16_t URTouch_TP_X, URTouch_TP_Y;
+int16_t URTouch_TP_X2, URTouch_TP_Y2;
 
 static regtype *P_CLK, *P_CS, *P_DIN, *P_DOUT, *P_IRQ;
 static regsize B_CLK, B_CS, B_DIN, B_DOUT, B_IRQ;
@@ -237,22 +239,32 @@ URTouch_read ()
       break;
     case TS_FT6236:
       {
-        TS_Point p = FT6236_getPoint (0);
+        TS_Point p = FT6236_getPoint ();
         if (orient == LANDSCAPE)
           {
-            URTouch_TP_X = disp_x_size - p.y;
+            if (p.z == 1)
+              URTouch_TP_X = disp_x_size - p.y;
+            else
+              URTouch_TP_X = 0;
             URTouch_TP_Y = p.x;
+            if (p.z2 == 1)
+              URTouch_TP_X2 = disp_x_size - p.y2;
+            else
+              URTouch_TP_X2 = 0;
+            URTouch_TP_Y2 = p.x2;
           }
         else
           {
             URTouch_TP_X = p.x;
             URTouch_TP_Y = p.y;
+            URTouch_TP_X2 = p.x2;
+            URTouch_TP_Y2 = p.y2;
           }
-        // printf ("X=%d,Y=%d  -  x=%d,y=%d\n", URTouch_TP_X,
-        // URTouch_TP_Y,disp_x_size,disp_y_size);
       };
       break;
     }
+  // printf ("X=%d,Y=%d  -  x=%d,y=%d\n", URTouch_TP_X,
+  // URTouch_TP_Y,disp_x_size,disp_y_size);
 
   tls_gpio_irq_enable (T_IRQ, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
 }
@@ -439,7 +451,7 @@ URTouch_calibrateRead ()
       break;
     case TS_FT6236:
       {
-        TS_Point p = FT6236_getPoint (0);
+        TS_Point p = FT6236_getPoint ();
         ty = p.y;
         tx = p.x;
       };

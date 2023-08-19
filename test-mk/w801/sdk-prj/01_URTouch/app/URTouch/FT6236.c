@@ -75,10 +75,10 @@ FT6236_touched (void)
 static TS_Point p1;
 /* Get a touch point */
 TS_Point
-FT6236_getPoint (uint8_t n)
+FT6236_getPoint (void)
 {
   FT6236_readData ();
-  if ((touches == 0) || (n > 1))
+  if ((touches == 0)) // || (n > 1))
     {
       p1.x = 0;
       p1.y = 0;
@@ -87,9 +87,21 @@ FT6236_getPoint (uint8_t n)
     }
   else
     {
-      p1.x = touchX[n];
-      p1.y = touchY[n];
+      p1.x = touchX[0];
+      p1.y = touchY[0];
       p1.z = 1;
+      if (touches == 2)
+        {
+          p1.x2 = touchX[1];
+          p1.y2 = touchY[1];
+          p1.z2 = 1;
+        }
+      else
+        {
+          p1.x2 = 0;
+          p1.y2 = 0;
+          p1.z2 = 0;
+        }
       return p1;
     }
 }
