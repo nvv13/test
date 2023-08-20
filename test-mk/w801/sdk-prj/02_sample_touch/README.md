@@ -17,6 +17,7 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 
 
 Видео
+https://youtu.be/COopMgUwCrc
 
 
 Дисплей

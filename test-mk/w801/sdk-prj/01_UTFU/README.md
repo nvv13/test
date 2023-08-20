@@ -785,7 +785,7 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 
 
 Видео
-
+https://youtu.be/COopMgUwCrc
 
 Дисплей
 фото 1 
@@ -805,7 +805,7 @@ connect to TFT3_5SP_9488
 W801  LCD   
 ---- ------
 PB21  CTP_RST     сброс CTP
-      CTP_INT     прерывание
+PA09  CTP_INT     прерывание
 PA01  CTP_SCL     
 PA04  CTP_SDA     
       NC/3V3 

@@ -319,6 +319,7 @@ PORTRAIT  = URTouch_set_calibrate: калибровка не требуется,
 LANDSCAPE = URTouch_set_calibrate: 
 
 Видео
+https://youtu.be/COopMgUwCrc
 
 
 Дисплей
