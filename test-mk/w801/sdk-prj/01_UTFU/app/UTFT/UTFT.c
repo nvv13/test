@@ -155,11 +155,12 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
       display_serial_mode = SERIAL_5PIN;
     }
 
-  if (buf_4x_line == NULL
-      && display_bitpixel
-             != 24) // display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
+  if (buf_4x_line == NULL) // display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
     {
-      buf_4x_line = tls_mem_alloc ((disp_x_size + 1) * 4);
+      if(display_bitpixel == 24)
+        buf_4x_line = tls_mem_alloc ((disp_x_size + 1) * 3);
+      else
+        buf_4x_line = tls_mem_alloc ((disp_x_size + 1) * 4);
     }
 
   if (display_transfer_mode != 1)
@@ -852,6 +853,40 @@ UTFT_fillScr2 (word color)
       if (display_serial_mode == SERIAL_5PIN && _spi_freq != 0
           && buf_4x_line != NULL)
         {
+         if (display_bitpixel == 24)
+          {
+          uint16_t color = ~(ch << 8 | cl);
+          u8 buf[3];
+          if (color == 0xFFFF)
+            {
+              buf[0] = 0xFF;
+              buf[1] = 0xFF;
+              buf[2] = 0xFF;
+            }
+          else
+            {
+              buf[0] = ((color & 0xF800)
+                        >> 8); // 1111 1000 0000 0000 -> 1111 1000  RRRRRRRR
+              buf[1] = ((color & 0x07E0)
+                        >> 3); // 0000 0111 1110 0000 -> 1111 1100  GGGGGGGG
+              buf[2] = ((color & 0x001F)
+                        << 3); // 0000 0000 0001 1111 -> 1111 1000  BBBBBBBB
+            }
+          for (i = 0; i < ((disp_x_size + 1)); i++)
+            {
+              buf_4x_line[i * 3    ] = buf[0];
+              buf_4x_line[i * 3 + 1] = buf[1];
+              buf_4x_line[i * 3 + 2] = buf[2];
+            }
+          for (i = 0; i < ((disp_y_size + 1)); i++)
+            {
+              UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1) * 3));
+            }
+          if ((disp_y_size + 1) % 3)
+            UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1) * 3));
+          }
+         else
+          {
           for (i = 0; i < ((disp_x_size + 1) * 2); i++)
             {
               buf_4x_line[i * 2] = ch;
@@ -863,6 +898,7 @@ UTFT_fillScr2 (word color)
             }
           if ((disp_y_size + 1) % 2)
             UTFT_LCD_Writ_Bus_SPI (buf_4x_line, ((disp_x_size + 1) * 2));
+          }  
         }
       else
         {
