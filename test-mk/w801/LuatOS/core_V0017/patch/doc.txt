@@ -1,0 +1,14 @@
+версия v0017
+https://gitee.com/openLuat/LuatOS/archive/refs/tags/v0007.air101.v0017.tar.gz
+
+
+-------------------------------------------
+текущие исходники
+
+https://gitee.com/openLuat/luatos-soc-air101.git
+или, что быстрее, из
+https://github.com/openLuat/luatos-soc-air101.git
+
+https://gitee.com/openLuat/LuatOS.git
+или, что быстрее, из
+https://github.com/openLuat/LuatOS.git

@@ -190,3 +190,21 @@ unset env
 ssh-add -t 300
 
 ---------------------------------------------------------------------------------------------------------
+
+
+
+http.lowSpeedLimit, http.lowSpeedTime:
+If the HTTP transfer speed, in bytes per second, is less than 'http.lowSpeedLimit' 
+ for longer than 'http.lowSpeedTime' seconds, the transfer is aborted.
+Can be overridden by the 
+GIT_HTTP_LOW_SPEED_LIMIT and GIT_HTTP_LOW_SPEED_TIME environment variables.
+
+
+export GIT_HTTP_LOW_SPEED_LIMIT=1000
+export GIT_HTTP_LOW_SPEED_TIME=600
+
+иногда надо, если качать с https://gitee.com например
+
+---------------------------------------------------------------------------------------------------------
+
+
