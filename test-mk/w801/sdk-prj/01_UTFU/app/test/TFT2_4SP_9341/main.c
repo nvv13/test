@@ -130,6 +130,13 @@ user_app1_task (void *sdata)
              но, можно отказаться от HW SPI в пользу Soft SPI
              установив spi_freq=0
              эмуляции SPI, это удобно для разных ножек
+
+             если spi_freq > 20000000 тогда работает spi SDIO
+              контакты:
+             WM_IO_PB_23 CS ?
+             WM_IO_PB_06 CK
+             WM_IO_PB_07 CMD
+             WM_IO_PB_08 D0
            */
   );
 

@@ -215,8 +215,8 @@ pulse_low_SCL (void)
   tls_os_release_critical (cpu_sr); // enable Interrupt
 }
 
-
-static void pulse_low_WR_repeat(u32 u32_count)
+static void
+pulse_low_WR_repeat (u32 u32_count)
 {
 
   if (B_WR == NO_GPIO_PIN)
@@ -229,7 +229,7 @@ static void pulse_low_WR_repeat(u32 u32_count)
   u16 offset;
 
   if (B_WR >= WM_IO_PB_00) // w801 chip, only two GPIO port, PA (GPIOA - 16
-                            // bit) and PB (GPIOB - 32 bit), max power 12ma
+                           // bit) and PB (GPIOB - 32 bit), max power 12ma
     {
       pin = B_WR - WM_IO_PB_00;
       offset = TLS_IO_AB_OFFSET;
@@ -248,13 +248,13 @@ static void pulse_low_WR_repeat(u32 u32_count)
 
   reg = tls_reg_read32 (HR_GPIO_DATA + offset); // load all pins from port
 
-  for(u32 i=0;i<u32_count;i++)
+  for (u32 i = 0; i < u32_count; i++)
     {
-    tls_reg_write32 (HR_GPIO_DATA + offset,
-                   reg & (~(1 << pin))); /* write low from pin */
+      tls_reg_write32 (HR_GPIO_DATA + offset,
+                       reg & (~(1 << pin))); /* write low from pin */
 
-    tls_reg_write32 (HR_GPIO_DATA + offset,
-                  reg | (1 << pin)); /* write Hi from pin */
+      tls_reg_write32 (HR_GPIO_DATA + offset,
+                       reg | (1 << pin)); /* write Hi from pin */
     }
 
   tls_reg_write32 (HR_GPIO_DATA_EN + offset, reg_en); // reg_en return
@@ -262,11 +262,11 @@ static void pulse_low_WR_repeat(u32 u32_count)
   tls_os_release_critical (cpu_sr); // enable Interrupt
 }
 
-static void pulse_low_WR(void)
+static void
+pulse_low_WR (void)
 {
-    pulse_low_WR_repeat (1);
+  pulse_low_WR_repeat (1);
 }
-
 
 /*
 static void pulse_high(uint32_t* PORT_REG, u8 PIN)

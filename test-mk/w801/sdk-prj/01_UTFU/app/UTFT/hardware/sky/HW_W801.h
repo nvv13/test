@@ -35,27 +35,39 @@ SPI_print_retval (int i_retval, char *help)
     }
 }
 
+
+static void sdio_spi_init (u32 fclk);
+static int sdio_spi_send (const u8 *buf, u32 len);
+
 // *** Hardware specific functions ***
 void
 UTFT__hw_special_init ()
 {
   if (display_serial_mode == SERIAL_5PIN && _spi_freq != 0)
     {
-      /*MASTER SPI configuratioin*/
-      wm_spi_cs_config (WM_IO_PB_14);
-      wm_spi_ck_config (WM_IO_PB_15);
-      wm_spi_di_config (WM_IO_PB_16);
-      wm_spi_do_config (WM_IO_PB_17);
+      if (_spi_freq > 20000000)
+        {
+          sdio_spi_init (_spi_freq);
+        }
+      else
+        {
+          /*MASTER SPI configuratioin*/
+          wm_spi_cs_config (WM_IO_PB_14);
+          wm_spi_ck_config (WM_IO_PB_15);
+          wm_spi_di_config (WM_IO_PB_16);
+          wm_spi_do_config (WM_IO_PB_17);
 
-      LOG ("MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, do--PB17; "
-           "spi_freq=%d \n",
-           _spi_freq);
-      tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
-      // tls_spi_trans_type (SPI_BYTE_TRANSFER); // byte , word, dma
-      SPI_print_retval (tls_spi_setup (_spi_mode,      // TLS_SPI_MODE_1
-                                       TLS_SPI_CS_LOW, // TLS_SPI_CS_LOW,
-                                       _spi_freq),
-                        "tls_spi_setup");
+          LOG ("MASTER SPI configuratioin cs--PB14, ck--PB15, di--PB16, "
+               "do--PB17; "
+               "spi_freq=%d \n",
+               _spi_freq);
+          tls_spi_trans_type (SPI_DMA_TRANSFER); // byte , word, dma
+          // tls_spi_trans_type (SPI_BYTE_TRANSFER); // byte , word, dma
+          SPI_print_retval (tls_spi_setup (_spi_mode,      // TLS_SPI_MODE_1
+                                           TLS_SPI_CS_LOW, // TLS_SPI_CS_LOW,
+                                           _spi_freq),
+                            "tls_spi_setup");
+        }
     }
 }
 
@@ -78,6 +90,12 @@ extern int spiWaitIdle (void);
 int
 n_spi_write (const u8 *buf, u32 len)
 {
+
+  if (_spi_freq > 20000000)
+    {
+      return sdio_spi_send (buf, len);
+    }
+
   if (len <= 4)
     {
       u32 data32 = 0;
@@ -359,17 +377,21 @@ UTFT__set_direction_registers (byte mode)
 void
 UTFT__fast_fill_16 (byte VH, byte VL, long pix)
 {
-        if(pix>0)UTFT_LCD_Writ_Bus (VH, VL, 16);
+  if (pix > 0)
+    UTFT_LCD_Writ_Bus (VH, VL, 16);
 
-        if(pix>1)pulse_low_WR_repeat ( pix-1 );
+  if (pix > 1)
+    pulse_low_WR_repeat (pix - 1);
 }
 
 void
 UTFT__fast_fill_8 (int ch, long pix)
 {
-        if(pix>0)UTFT_LCD_Writ_Bus (ch, ch, 8);
+  if (pix > 0)
+    UTFT_LCD_Writ_Bus (ch, ch, 8);
 
-        if(pix>1)pulse_low_WR_repeat ( (pix-1) * 2 );
+  if (pix > 1)
+    pulse_low_WR_repeat ((pix - 1) * 2);
 }
 
 // extern void n_delay_ms (uint32_t ms);
@@ -383,3 +405,163 @@ delay (u32 ms)
     tick++; //в данном случае в большую сторону сделаем
   tls_os_time_delay (tick);
 };
+
+#include "wm_cpu.h"
+#include "wm_dma.h"
+#include "wm_mem.h"
+#include "wm_sdio_host.h"
+
+extern void delay_cnt (int count);
+extern int wm_sd_card_dma_config (u32 *mbuf, u32 bufsize, u8 dir);
+
+/*
+source
+https://github.com/openLuat/luatos-soc-air101.git
+MIT License
+
+static void sdio_host_reset(void)
+
+*/
+static void
+sdio_host_reset (void)
+{
+  tls_bitband_write (HR_CLK_RST_CTL, 27, 0);
+  delay_cnt (1000);
+  tls_bitband_write (HR_CLK_RST_CTL, 27, 1);
+  while (tls_bitband_read (HR_CLK_RST_CTL, 27) == 0)
+    ;
+}
+
+/*
+source
+https://github.com/openLuat/luatos-soc-air101.git
+MIT License
+
+void sdio_spi_init(u32 fclk);
+
+*/
+static void
+sdio_spi_init (u32 fclk)
+{
+
+  //wm_spi_cs_config (WM_IO_PB_23);              // CS ?
+  tls_io_cfg_set (WM_IO_PB_06, WM_IO_OPTION2); /*CK    -> SCL */
+  tls_io_cfg_set (WM_IO_PB_07, WM_IO_OPTION2); /*CMD   -> MOSI */
+  //tls_io_cfg_set (WM_IO_PB_08, WM_IO_OPTION2); /*D0*/
+  tls_open_peripheral_clock (TLS_PERIPHERAL_TYPE_SDIO_MASTER);
+
+  sdio_host_reset ();
+
+  tls_sys_clk sysclk;
+  tls_sys_clk_get (&sysclk);
+
+  SDIO_HOST->MMC_CARDSEL = 0xC0 | (sysclk.cpuclk / 2 - 1); // enable module, enable mmcclk
+
+  uint8_t ti = sysclk.cpuclk / 2 / fclk;
+  LOG ("sdio_spi_init sysclk.cpuclk = %d, fclk = %d, ti = %d \n",sysclk.cpuclk,fclk, ti);
+
+  //SDIO_HOST->MMC_CTL = 0x542 | (ti << 3);
+  //SDIO_HOST->MMC_CTL = 0x542;
+
+  //SDIO_HOST->MMC_CTL = 0x542; // 000 1/2
+  SDIO_HOST->MMC_CTL = 0x542 | (0b001 << 3); // 001 1/4
+  // SDIO_HOST->MMC_CTL = 0x542 | (0b010 << 3); // 010 1/6
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b011 << 3); // 011 1/8
+  // SDIO_HOST->MMC_CTL = 0x542 | (0b100 << 3); // 100 1/10
+  // SDIO_HOST->MMC_CTL = 0x542 | (0b101 << 3); // 101 1/12
+  // SDIO_HOST->MMC_CTL = 0x542 | (0b110 << 3); // 110 1/14
+  // SDIO_HOST->MMC_CTL = 0x542 | (0b111 << 3); // 111 1/16
+
+  SDIO_HOST->MMC_INT_MASK = 0x100; // unmask sdio data interrupt.
+  SDIO_HOST->MMC_CRCCTL = 0x00;
+  SDIO_HOST->MMC_TIMEOUTCNT = 0;
+  SDIO_HOST->MMC_BYTECNTL = 0;
+}
+
+/*
+source
+https://github.com/openLuat/luatos-soc-air101.git
+MIT License
+
+int sdio_spi_send(const u8 * buf, u32 len);
+
+    int ret;
+    if (spi_id==5){
+        ret = sdio_spi_send(send_buf, length);
+        return ret?-1:length;
+    }
+
+*/
+static int
+sdio_spi_send (const u8 *buf, u32 len)
+{
+  if ((buf == NULL) || (len == 0))
+    {
+      return -1;
+    }
+  if (len < 4)
+    { // Direct transfer, the reason for this is that DMA cannot continuously
+      // transfer data of less than 4 bytes
+      SDIO_HOST->BUF_CTL = 0x4820;
+      SDIO_HOST->DATA_BUF[0] = *((u32 *)buf);
+      SDIO_HOST->MMC_BYTECNTL = len;
+      SDIO_HOST->MMC_IO = 0x01;
+      while (1)
+        {
+          if ((SDIO_HOST->MMC_IO & 0x01) == 0x00)
+            break;
+        }
+    }
+  else
+    { 
+      // DMA transfer
+      u32 sendlen, txlen;
+      txlen = len & 0xfffffffc; // If there are not enough words, I will post
+                                // it separately at the end
+      sendlen = txlen / 4;
+
+/*
+      SDIO_HOST->BUF_CTL = 0x4000; // disable dma,
+      unsigned char sdio_spi_dma_channel
+          = wm_sd_card_dma_config ((u32 *)buf, sendlen, 1);
+      SDIO_HOST->BUF_CTL = 0xC20;      // enable dma, write sd card
+      SDIO_HOST->MMC_INT_SRC |= 0x7ff; // clear all firstly
+      SDIO_HOST->MMC_BYTECNTL = txlen;
+      SDIO_HOST->MMC_IO = 0x01;
+      tls_dma_free (sdio_spi_dma_channel);
+      while (1)
+        {
+          if ((SDIO_HOST->MMC_IO & 0x01) == 0x00)
+            break;
+        }
+*/
+      u32 _sendlen=0;
+      while(_sendlen<sendlen)
+       {
+          SDIO_HOST->BUF_CTL = 0x4820;
+          SDIO_HOST->DATA_BUF[0] = *((u32 *)buf + _sendlen);
+          SDIO_HOST->MMC_BYTECNTL = 4;
+          SDIO_HOST->MMC_IO = 0x01;
+          while (1)
+            {
+              if ((SDIO_HOST->MMC_IO & 0x01) == 0x00)
+                break;
+            }
+         _sendlen++;
+       }
+
+      if (len > txlen)
+        {
+          SDIO_HOST->BUF_CTL = 0x4820;
+          SDIO_HOST->DATA_BUF[0] = *((u32 *)buf + sendlen);
+          SDIO_HOST->MMC_BYTECNTL = len - txlen;
+          SDIO_HOST->MMC_IO = 0x01;
+          while (1)
+            {
+              if ((SDIO_HOST->MMC_IO & 0x01) == 0x00)
+                break;
+            }
+        }
+    }
+  return 0;
+}

@@ -275,7 +275,8 @@ extern "C"
     если, параллельная 16 бит шина = PB0 ... PB15 !
     если было бы 8 бит шина = PB0 ... PB7 !
 
-  для шины SPI
+
+  для шины SPI 
    RS это SDA  данные
    WR это SCL  синхросигнал
    CS это  CS  выбор чипа
@@ -295,6 +296,14 @@ extern "C"
     это удобно для разных ножек
 
     максимально, частота spi_freq = 20000000 (20MHz)
+
+    если spi_freq > 20000000 тогда работает spi SDIO
+    контакты:
+   WM_IO_PB_23 CS ?
+   WM_IO_PB_06 CK
+   WM_IO_PB_07 CMD
+   WM_IO_PB_08 D0
+
   */
   void UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
                   u32 spi_freq);
