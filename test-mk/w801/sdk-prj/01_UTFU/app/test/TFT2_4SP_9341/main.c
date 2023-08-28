@@ -131,12 +131,11 @@ user_app1_task (void *sdata)
              установив spi_freq=0
              эмуляции SPI, это удобно для разных ножек
 
-             если spi_freq > 20000000 тогда работает spi SDIO
-              контакты:
-             WM_IO_PB_23 CS ?
-             WM_IO_PB_06 CK
-             WM_IO_PB_07 CMD
-             WM_IO_PB_08 D0
+
+    максимально, частота spi_freq = 20000000 (20MHz)
+        но!      если spi_freq > 20000000 тогда работает spi SDIO
+        частоту можно ставить от 21000000 до 120000000 герц (работает при
+    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL WM_IO_PB_07 CMD  -> MOSI
            */
   );
 

@@ -457,20 +457,34 @@ sdio_spi_init (u32 fclk)
 
   SDIO_HOST->MMC_CARDSEL = 0xC0 | (sysclk.cpuclk / 2 - 1); // enable module, enable mmcclk
 
-  uint8_t ti = sysclk.cpuclk / 2 / fclk;
-  LOG ("sdio_spi_init sysclk.cpuclk = %d, fclk = %d, ti = %d \n",sysclk.cpuclk,fclk, ti);
+  uint8_t ti = (sysclk.cpuclk / 2 / (fclk / 1000000) - 1);
+  if(ti>7)ti=0;
+  u32 itog_clk=0;
+  switch(ti)
+   {
+    case 0: itog_clk = sysclk.cpuclk / 2 * 1000000; break;
+    case 1: itog_clk = sysclk.cpuclk / 4 * 1000000; break;
+    case 2: itog_clk = sysclk.cpuclk / 6 * 1000000; break;
+    case 3: itog_clk = sysclk.cpuclk / 8 * 1000000; break;
+    case 4: itog_clk = sysclk.cpuclk / 10 * 1000000; break;
+    case 5: itog_clk = sysclk.cpuclk / 12 * 1000000; break;
+    case 6: itog_clk = sysclk.cpuclk / 14 * 1000000; break;
+    case 7: itog_clk = sysclk.cpuclk / 16 * 1000000; break;
+   }
+  LOG ("sdio_spi_init sysclk.cpuclk = %d, fclk = %d, ti = %d, itog_clk=%d \n",sysclk.cpuclk,fclk, ti, itog_clk);
 
-  //SDIO_HOST->MMC_CTL = 0x542 | (ti << 3);
-  //SDIO_HOST->MMC_CTL = 0x542;
+//  sdio_spi_init sysclk.cpuclk = 240, fclk = 50000000, ti = 0 
 
-  //SDIO_HOST->MMC_CTL = 0x542; // 000 1/2
-  SDIO_HOST->MMC_CTL = 0x542 | (0b001 << 3); // 001 1/4
-  // SDIO_HOST->MMC_CTL = 0x542 | (0b010 << 3); // 010 1/6
-  //SDIO_HOST->MMC_CTL = 0x542 | (0b011 << 3); // 011 1/8
-  // SDIO_HOST->MMC_CTL = 0x542 | (0b100 << 3); // 100 1/10
-  // SDIO_HOST->MMC_CTL = 0x542 | (0b101 << 3); // 101 1/12
-  // SDIO_HOST->MMC_CTL = 0x542 | (0b110 << 3); // 110 1/14
-  // SDIO_HOST->MMC_CTL = 0x542 | (0b111 << 3); // 111 1/16
+  SDIO_HOST->MMC_CTL = 0x542 | (ti << 3);
+  
+  //SDIO_HOST->MMC_CTL = 0x542; // 000 1/2     119 Mhz (240Mhz sys)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b001 << 3); // 001 1/4   60.24 Mhz (240Mhz sys) (~39 fps)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b010 << 3); // 010 1/6   40.48 Mhz (240Mhz sys)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b011 << 3); // 011 1/8    29.85 Mhz (240Mhz sys)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b100 << 3); // 100 1/10   23.80 Mhz (240Mhz sys)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b101 << 3); // 101 1/12  20 Mhz (240Mhz sys)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b110 << 3); // 110 1/14   17.09 Mhz (240Mhz sys)
+  //SDIO_HOST->MMC_CTL = 0x542 | (0b111 << 3); // 111 1/16  14.92 Mhz (240Mhz sys) (~11 fps)
 
   SDIO_HOST->MMC_INT_MASK = 0x100; // unmask sdio data interrupt.
   SDIO_HOST->MMC_CRCCTL = 0x00;
