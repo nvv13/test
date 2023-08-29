@@ -397,7 +397,12 @@ board HLK-W801-KIT-V1.1 + 2.4 TFT SPI 240x320 V1.3
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341.jpg" alt="top side" title="top side" /></p>
 
 
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT2_4SP_9341
+для него тест (main.c) лежит в директории 
+01_UTFU/app/test/TFT2_4SP_9341
+
+версия с использованием SDIO 
+01_UTFU/app/test/TFT2_4SP_9341/spi_SDIO
+
 
 соединения
 
