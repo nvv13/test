@@ -553,15 +553,20 @@ sdio_spi_send (const u8 *buf, u32 len)
       while(_sendlen<sendlen)
        {
           SDIO_HOST->BUF_CTL = 0x4820;
-          SDIO_HOST->DATA_BUF[0] = *((u32 *)buf + _sendlen);
-          SDIO_HOST->MMC_BYTECNTL = 4;
+          u32 _index=0;
+          while(_sendlen<sendlen && _index<128)
+            { 
+              // __IOM uint32_t  DATA_BUF[128]; 
+              SDIO_HOST->DATA_BUF[_index] = *((u32 *)buf + _sendlen);
+              _sendlen++;_index++;
+            }
+          SDIO_HOST->MMC_BYTECNTL = (_index<<2);
           SDIO_HOST->MMC_IO = 0x01;
           while (1)
             {
               if ((SDIO_HOST->MMC_IO & 0x01) == 0x00)
                 break;
             }
-         _sendlen++;
        }
 
       if (len > txlen)

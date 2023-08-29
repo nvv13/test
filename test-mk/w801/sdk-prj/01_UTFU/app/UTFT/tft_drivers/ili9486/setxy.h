@@ -1,4 +1,5 @@
 case ILI9486:
+case MHS3528:
 case TFT3_5SP_9488:
 	UTFT_LCD_Write_COM(0x2a); 
 	UTFT_LCD_Write_DATA2(x1>>8);

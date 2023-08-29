@@ -1,4 +1,5 @@
 case ILI9486:
+case MHS3528:
 	UTFT_LCD_Write_COM(0x11);		// Sleep OUT
 	delay(50);
  
