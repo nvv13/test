@@ -437,14 +437,14 @@ W801 LCD
 connect to TFT2_4SP_9341
 ---- ------
 W801 LCD   
----- ------
-3.3v VCC
-gnd  GND  
-PB21 RESET сброс
-PB23 CS    выбор чипа
+---- ------             
+3.3v VCC                  
+gnd  GND                  
+PB21 RESET сброс          
+PB23 CS    выбор чипа     
 PB22 DC    комманда/данные
-PB07 SDI   данные
-PB06 SCK   синхросигнал
+PB07 SDI   данные         
+PB06 SCK   синхросигнал   
 3.3v LED  
 ---- ------
 W801 LCD   
