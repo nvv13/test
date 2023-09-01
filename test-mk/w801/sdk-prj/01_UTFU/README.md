@@ -863,10 +863,10 @@ W801  LCD
 ------------------------------------------------
 
 
-board HLK-W801-KIT-V1.1 + 3.5 TFT MHS3528
+board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480 HW SPI SDIO 120Mhz MHS3528
 
 Видео
-
+https://youtu.be/-t7Vrt6VjbA
 
 Дисплей
 фото 1 

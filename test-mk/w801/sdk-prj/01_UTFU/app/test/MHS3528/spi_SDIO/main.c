@@ -113,91 +113,101 @@ W801 LCD
       UTFT_clrScr (); // стираем всю информацию с дисплея
       tls_os_time_delay (HZ); //
 
-
-      UTFT_setColor2 (VGA_WHITE); // 
-      for (int i = 2; i < 80; i++)
+      extern unsigned short j001_240x160[0x9600];
+      extern unsigned short j002_240x160[0x9600];
+      extern unsigned short j011_240x160[0x9600];
+      extern unsigned short j013_240x160[0x9600];
+      u8 p=0;
+      for (int i = 0; i < 100; i++)
         {
-          UTFT_drawRect (2, 2, i * 6, i * 4);
+        switch(p)
+         {
+         case 3: { 
+         UTFT_drawBitmap (0, 0, 240, 160,     j001_240x160, 1);
+         UTFT_drawBitmap (0, 160, 240, 160,   j002_240x160, 1);
+         UTFT_drawBitmap (240, 160, 240, 160, j011_240x160, 1);
+         UTFT_drawBitmap (240, 0, 240, 160,   j013_240x160, 1);
+                  };break;
+         case 2: { 
+         UTFT_drawBitmap (0, 0, 240, 160,     j013_240x160, 1);
+         UTFT_drawBitmap (0, 160, 240, 160,   j001_240x160, 1);
+         UTFT_drawBitmap (240, 160, 240, 160, j002_240x160, 1);
+         UTFT_drawBitmap (240, 0, 240, 160,   j011_240x160, 1);
+                  };break;
+         case 1: { 
+         UTFT_drawBitmap (0, 0, 240, 160,     j011_240x160, 1);
+         UTFT_drawBitmap (0, 160, 240, 160,   j013_240x160, 1);
+         UTFT_drawBitmap (240, 160, 240, 160, j001_240x160, 1);
+         UTFT_drawBitmap (240, 0, 240, 160,   j002_240x160, 1);
+                  };break;
+         case 0: { 
+         UTFT_drawBitmap (0, 0, 240, 160,     j002_240x160, 1);
+         UTFT_drawBitmap (0, 160, 240, 160,   j011_240x160, 1);
+         UTFT_drawBitmap (240, 160, 240, 160, j013_240x160, 1);
+         UTFT_drawBitmap (240, 0, 240, 160,   j001_240x160, 1);
+                  };break;
+         }
+         p++;
+         p&=0x3;
+         if(i<5)tls_os_time_delay (400);
+         if(i<20)tls_os_time_delay (100);
         }
+                                     
 
-      tls_os_time_delay (HZ * 3); //
 
       UTFT_fillScr2 (VGA_BLACK);
 
       UTFT_setColor2 (VGA_GREEN); // Устанавливаем зелёный цвет
       UTFT_drawRect (
-          5, 5, 320 - 5,
-          240 - 5); // Рисуем прямоугольник (с противоположными углами)
-      tls_os_time_delay (HZ); //
+          5, 5, 480 - 5,
+          320 - 5); // Рисуем прямоугольник (с противоположными углами)
 
       UTFT_setColor2 (VGA_RED); // Устанавливаем красный цвет
       UTFT_drawLine (1, 1, 150,
                      70);     // Рисуем линию
-      tls_os_time_delay (HZ); //
 
       UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
       UTFT_drawRoundRect (
-          10, 10, 310,
-          230); // Рисуем прямоугольник со скруглёнными углами (с
+          10, 10, 470,
+          310); // Рисуем прямоугольник со скруглёнными углами (с
                 // противоположными углами в координатах 10x110 - 170x210)
-      tls_os_time_delay (HZ * 3); //
                                   //
       UTFT_setColor2 (VGA_LIME); // Устанавливаем лаймовый цвет
       UTFT_fillRect (11          //по горизонтали?
                      ,
                      11 // по вертикали?
                      ,
-                     311 //длинна?
+                     471 //длинна?
                      ,
-                     231 //высота?
+                     311 //высота?
       ); // Рисуем закрашенный прямоугольник (с противоположными углами
          // в координатах 10x220 - 170x310)
-      tls_os_time_delay (HZ * 3); //
                                   //
       UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
       UTFT_drawCircle (
-          160, 120,
+          240, 160,
           70); // Рисуем окружность (с центром в точке x y  и радиусом r)
 
-      UTFT_fillCircle (160, 120, 50); // Рисуем закрашенную окружность (с
-                                      // центром в точке x y и радиусом r)
-
-      tls_os_time_delay (HZ * 3);
-
+      UTFT_fillCircle (240, 160, 50); // Рисуем закрашенную окружность (с
+                                    // центром в точке x y и радиусом r)
       UTFT_fillScr2 (VGA_RED);
-      tls_os_time_delay (HZ); // заливаем
-      //   дисплей красным,     ждём 1 секунду
-
       UTFT_fillScr2 (VGA_GREEN);
-      tls_os_time_delay (HZ); // заливаем
-      //   дисплей зелёным,     ждём 1 секунду
-
       UTFT_fillScr2 (VGA_BLUE);
-      tls_os_time_delay (HZ); // заливаем дисплей синим,       ждём 1   секунду
-
       UTFT_fillScr2 (VGA_SILVER);
-      tls_os_time_delay (HZ); //   заливаем дисплей серебристым, ждём 1 секунду
-
       UTFT_fillScr2 (VGA_MAROON);
-      tls_os_time_delay (HZ); // заливаем  дисплей бордовым,    ждём 1 секунду
-
       UTFT_fillScr2 (VGA_NAVY);
-      tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
-
       UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setFont (BigFont); // устанавливаем большой шрифт
       UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
       UTFT_print ("BigFont", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
       UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setColor2 (VGA_RED); // устанавливаем
       UTFT_setBackColor2 (VGA_TRANSPARENT);
       UTFT_print ("12:35", CENTER, 40,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
-      tls_os_time_delay (HZ * 3);
       //
 
       UTFT_clrScr (); // стираем всю информацию с дисплея
@@ -208,7 +218,6 @@ W801 LCD
       UTFT_print ("12345678", CENTER, 50,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
-      tls_os_time_delay (HZ * 3);
       //
       UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
                                       // семисегментный индикатор
@@ -217,7 +226,6 @@ W801 LCD
       UTFT_print ("12345", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
-      tls_os_time_delay (HZ * 3);
 
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
       UTFT_print ("SmallFont", CENTER, 80,
@@ -226,7 +234,6 @@ W801 LCD
       UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
       UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 100,
                   0); // выводим текст на дисплей (выравнивание по ширине -
-      tls_os_time_delay (HZ * 3);
 
       unsigned int t = 0; // used to save time relative to 1970
       struct tm *tblock;
