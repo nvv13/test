@@ -865,8 +865,8 @@ W801  LCD
 
 board HLK-W801-KIT-V1.1 + 3.5 TFT MHS3528
 
-
 Видео
+
 
 Дисплей
 фото 1 
@@ -874,6 +874,8 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT MHS3528
 фото 2
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MHS3528.jpg" alt="top side" title="top side" /></p>
 
+wiki
+http://www.lcdwiki.com/MHS-3.5inch_RPi_Display
 
 для него тест (main.c) лежит в директории 
 01_UTFU/app/test/MHS3528
