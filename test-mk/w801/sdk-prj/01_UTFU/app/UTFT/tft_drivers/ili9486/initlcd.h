@@ -1,5 +1,4 @@
 case ILI9486:
-case MHS3528:
 	UTFT_LCD_Write_COM(0x11);		// Sleep OUT
 	delay(50);
  
@@ -282,3 +281,178 @@ case TFT3_5SP_9488:
   UTFT_LCD_Write_COM(ILI9488_MADCTL); UTFT_LCD_Write_DATA2(ILI9488_MAD_DATA_RIGHT_THEN_DOWN);
 
 	break;
+
+
+
+case MHS3528:
+
+      if(_SPI_16bit)
+        {// SPI 16bit
+        LCD_WR_REG(0xb0); // Interface Mode Control
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+
+        LCD_WR_REG(0x11); // Sleep out, also SW reset
+        delay(250);
+
+        LCD_WR_REG(0x3A); // Interface Pixel Format, 16 bits / pixel
+        UTFT_LCD_Write_DATA (0x00 ,0x55);
+
+        LCD_WR_REG(0xC2); // Power Control 3 (For Normal Mode)
+        UTFT_LCD_Write_DATA (0x00 ,0x44);
+
+        LCD_WR_REG(0xC5); // VCOM Control
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+
+        LCD_WR_REG(0xE0); // PGAMCTRL(Positive Gamma Control)
+        UTFT_LCD_Write_DATA (0x00 ,0x0F);
+        UTFT_LCD_Write_DATA (0x00 ,0x1F);
+        UTFT_LCD_Write_DATA (0x00 ,0x1C);
+        UTFT_LCD_Write_DATA (0x00 ,0x0C);
+        UTFT_LCD_Write_DATA (0x00 ,0x0F);
+        UTFT_LCD_Write_DATA (0x00 ,0x08);
+        UTFT_LCD_Write_DATA (0x00 ,0x48);
+        UTFT_LCD_Write_DATA (0x00 ,0x98);
+        UTFT_LCD_Write_DATA (0x00 ,0x37);
+        UTFT_LCD_Write_DATA (0x00 ,0x0A);
+        UTFT_LCD_Write_DATA (0x00 ,0x13);
+        UTFT_LCD_Write_DATA (0x00 ,0x04);
+        UTFT_LCD_Write_DATA (0x00 ,0x11);
+        UTFT_LCD_Write_DATA (0x00 ,0x0D);
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+
+        LCD_WR_REG(0xE1); // NGAMCTRL (Negative Gamma Correction)
+        UTFT_LCD_Write_DATA (0x00 ,0x0F);
+        UTFT_LCD_Write_DATA (0x00 ,0x32);
+        UTFT_LCD_Write_DATA (0x00 ,0x2E);
+        UTFT_LCD_Write_DATA (0x00 ,0x0B);
+        UTFT_LCD_Write_DATA (0x00 ,0x0D);
+        UTFT_LCD_Write_DATA (0x00 ,0x05);
+        UTFT_LCD_Write_DATA (0x00 ,0x47);
+        UTFT_LCD_Write_DATA (0x00 ,0x75);
+        UTFT_LCD_Write_DATA (0x00 ,0x37);
+        UTFT_LCD_Write_DATA (0x00 ,0x06);
+        UTFT_LCD_Write_DATA (0x00 ,0x10);
+        UTFT_LCD_Write_DATA (0x00 ,0x03);
+        UTFT_LCD_Write_DATA (0x00 ,0x24);
+        UTFT_LCD_Write_DATA (0x00 ,0x20);
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+
+
+        LCD_WR_REG(0xE2); // Digital Gamma Control 1
+        UTFT_LCD_Write_DATA (0x00 ,0x0F);
+        UTFT_LCD_Write_DATA (0x00 ,0x32);
+        UTFT_LCD_Write_DATA (0x00 ,0x2E);
+        UTFT_LCD_Write_DATA (0x00 ,0x0B);
+        UTFT_LCD_Write_DATA (0x00 ,0x0D);
+        UTFT_LCD_Write_DATA (0x00 ,0x05);
+        UTFT_LCD_Write_DATA (0x00 ,0x47);
+        UTFT_LCD_Write_DATA (0x00 ,0x75);
+        UTFT_LCD_Write_DATA (0x00 ,0x37);
+        UTFT_LCD_Write_DATA (0x00 ,0x06);
+        UTFT_LCD_Write_DATA (0x00 ,0x10);
+        UTFT_LCD_Write_DATA (0x00 ,0x03);
+        UTFT_LCD_Write_DATA (0x00 ,0x24);
+        UTFT_LCD_Write_DATA (0x00 ,0x20);
+        UTFT_LCD_Write_DATA (0x00 ,0x00);
+
+
+        LCD_WR_REG(0x20); // Display Inversion OFF   RPi LCD (A)
+//      LCD_WR_REG(0x21); // Display Inversion ON    RPi LCD (B)
+
+        LCD_WR_REG(0x36); // Memory Access Control  RGB = 0x48
+        UTFT_LCD_Write_DATA (0x00 ,0x48);
+                          // Memory Access Control, BGR = 0x28
+
+        LCD_WR_REG(0x29); // Display ON
+      }
+      else
+      { // SPI 8bit
+
+        UTFT_LCD_Write_COM(0xb0); // Interface Mode Control
+        UTFT_LCD_Write_DATA2(0x00);
+
+        UTFT_LCD_Write_COM(0x11); // Sleep out, also SW reset
+        delay(250);
+
+        UTFT_LCD_Write_COM(0x3A); // Interface Pixel Format, 16 bits / pixel
+        UTFT_LCD_Write_DATA2(0x55);
+
+        UTFT_LCD_Write_COM(0xC2); // Power Control 3 (For Normal Mode)
+        UTFT_LCD_Write_DATA2(0x44);
+
+        UTFT_LCD_Write_COM(0xC5); // VCOM Control
+        UTFT_LCD_Write_DATA2(0x00);
+        UTFT_LCD_Write_DATA2(0x00);
+        UTFT_LCD_Write_DATA2(0x00);
+        UTFT_LCD_Write_DATA2(0x00);
+
+        UTFT_LCD_Write_COM(0xE0); // PGAMCTRL(Positive Gamma Control)
+        UTFT_LCD_Write_DATA2(0x0F);
+        UTFT_LCD_Write_DATA2(0x1F);
+        UTFT_LCD_Write_DATA2(0x1C);
+        UTFT_LCD_Write_DATA2(0x0C);
+        UTFT_LCD_Write_DATA2(0x0F);
+        UTFT_LCD_Write_DATA2(0x08);
+        UTFT_LCD_Write_DATA2(0x48);
+        UTFT_LCD_Write_DATA2(0x98);
+        UTFT_LCD_Write_DATA2(0x37);
+        UTFT_LCD_Write_DATA2(0x0A);
+        UTFT_LCD_Write_DATA2(0x13);
+        UTFT_LCD_Write_DATA2(0x04);
+        UTFT_LCD_Write_DATA2(0x11);
+        UTFT_LCD_Write_DATA2(0x0D);
+        UTFT_LCD_Write_DATA2(0x00);
+
+        UTFT_LCD_Write_COM(0xE1); // NGAMCTRL (Negative Gamma Correction)
+        UTFT_LCD_Write_DATA2(0x0F);
+        UTFT_LCD_Write_DATA2(0x32);
+        UTFT_LCD_Write_DATA2(0x2E);
+        UTFT_LCD_Write_DATA2(0x0B);
+        UTFT_LCD_Write_DATA2(0x0D);
+        UTFT_LCD_Write_DATA2(0x05);
+        UTFT_LCD_Write_DATA2(0x47);
+        UTFT_LCD_Write_DATA2(0x75);
+        UTFT_LCD_Write_DATA2(0x37);
+        UTFT_LCD_Write_DATA2(0x06);
+        UTFT_LCD_Write_DATA2(0x10);
+        UTFT_LCD_Write_DATA2(0x03);
+        UTFT_LCD_Write_DATA2(0x24);
+        UTFT_LCD_Write_DATA2(0x20);
+        UTFT_LCD_Write_DATA2(0x00);
+
+
+        UTFT_LCD_Write_COM(0xE2); // Digital Gamma Control 1
+        UTFT_LCD_Write_DATA2(0x0F);
+        UTFT_LCD_Write_DATA2(0x32);
+        UTFT_LCD_Write_DATA2(0x2E);
+        UTFT_LCD_Write_DATA2(0x0B);
+        UTFT_LCD_Write_DATA2(0x0D);
+        UTFT_LCD_Write_DATA2(0x05);
+        UTFT_LCD_Write_DATA2(0x47);
+        UTFT_LCD_Write_DATA2(0x75);
+        UTFT_LCD_Write_DATA2(0x37);
+        UTFT_LCD_Write_DATA2(0x06);
+        UTFT_LCD_Write_DATA2(0x10);
+        UTFT_LCD_Write_DATA2(0x03);
+        UTFT_LCD_Write_DATA2(0x24);
+        UTFT_LCD_Write_DATA2(0x20);
+        UTFT_LCD_Write_DATA2(0x00);
+
+
+        UTFT_LCD_Write_COM(0x20); // Display Inversion OFF   RPi LCD (A)
+//      UTFT_LCD_Write_COM(0x21); // Display Inversion ON    RPi LCD (B)
+
+        UTFT_LCD_Write_COM(0x36); // Memory Access Control  RGB = 0x48
+        UTFT_LCD_Write_DATA2(0x48);
+                          // Memory Access Control, BGR = 0x28
+
+        UTFT_LCD_Write_COM(0x29); // Display ON
+      }
+        delay(250);
+
+	break;
+
+

@@ -141,7 +141,7 @@ UTFT_LCD_Writ_Bus (char VH, char VL, byte mode)
   switch (mode)
     {
     case 1:
-      /* в этом режиме VH==1 значит комманда, 0 - данные, передаем */
+      /* в этом режиме VH==1 значит данные, 0 - комманда, передаем */
       if (display_serial_mode == SERIAL_4PIN)
         { /* SERIAL_4PIN значит 1 передаваемый бит - означает комманда/данные
            */
@@ -210,15 +210,18 @@ UTFT_LCD_Writ_Bus (char VH, char VL, byte mode)
       break;
     case 8:
       /* в этом режиме VH и VL - данные */
-      tls_gpio_write (PIN0, VH & 0x80 ? 1 : 0);
-      tls_gpio_write (PIN1, VH & 0x40 ? 1 : 0);
-      tls_gpio_write (PIN2, VH & 0x20 ? 1 : 0);
-      tls_gpio_write (PIN3, VH & 0x10 ? 1 : 0);
-      tls_gpio_write (PIN4, VH & 0x08 ? 1 : 0);
-      tls_gpio_write (PIN5, VH & 0x04 ? 1 : 0);
-      tls_gpio_write (PIN6, VH & 0x02 ? 1 : 0);
-      tls_gpio_write (PIN7, VH & 0x01 ? 1 : 0);
-      pulse_low_WR ();
+      if(LCD_Write_1byte_Flag!=1)
+	{
+      	  tls_gpio_write (PIN0, VH & 0x80 ? 1 : 0);
+      	  tls_gpio_write (PIN1, VH & 0x40 ? 1 : 0);
+      	  tls_gpio_write (PIN2, VH & 0x20 ? 1 : 0);
+      	  tls_gpio_write (PIN3, VH & 0x10 ? 1 : 0);
+      	  tls_gpio_write (PIN4, VH & 0x08 ? 1 : 0);
+      	  tls_gpio_write (PIN5, VH & 0x04 ? 1 : 0);
+      	  tls_gpio_write (PIN6, VH & 0x02 ? 1 : 0);
+      	  tls_gpio_write (PIN7, VH & 0x01 ? 1 : 0);
+      	  pulse_low_WR ();
+	}
       tls_gpio_write (PIN0, VL & 0x80 ? 1 : 0);
       tls_gpio_write (PIN1, VL & 0x40 ? 1 : 0);
       tls_gpio_write (PIN2, VL & 0x20 ? 1 : 0);

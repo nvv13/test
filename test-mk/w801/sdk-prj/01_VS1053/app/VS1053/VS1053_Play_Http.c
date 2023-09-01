@@ -44,18 +44,23 @@ tls_os_task_t vs1053_buf_play_task_hdl = NULL;
 static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
 #define VS1053_TASK_PRIO 32
 
-MessageBufferHandle_t xMessageBuffer = NULL;
-#define xMessageBufferSize  4000 
+
+#define xMessageBufferSize 4000 
   // 4000 - не вызывает проблем, но эффект начинаеться от 8000,
   //   но тут глючит прога
   // а чтоб нормально работал HTTPS  нужно 250Кб, примено
+static uint8_t * ucStorageBuffer = NULL; // [ xMessageBufferSize+1 ];
+/* The variable used to hold the message buffer structure. */
+StaticMessageBuffer_t xMessageBufferStruct;
+MessageBufferHandle_t xMessageBuffer = NULL;
+
 
 void
 vs1053_buf_play_task (void *sdata)
 {
   printf ("start vs1053_buf_play_task\n");
 
-  char *buffer = (char *)tls_mem_alloc (http_chunk_size);
+  u8 *buffer = (u8 *)tls_mem_alloc (http_chunk_size);
 
   while (1)
     {
@@ -68,7 +73,7 @@ vs1053_buf_play_task (void *sdata)
               item_size = xMessageBufferReceive (
                   xMessageBuffer, buffer, http_chunk_size, portMAX_DELAY);
               if (item_size > 0)
-                VS1053_playChunk ((u8 *)buffer, item_size);
+                VS1053_playChunk (buffer, item_size);
               else
                 tls_os_time_delay (1);
             }
@@ -159,7 +164,17 @@ break;
 #endif // TLS_CONFIG_HTTP_CLIENT_PROXY
 
   if (xMessageBuffer == NULL)
-    xMessageBuffer = xMessageBufferCreate (xMessageBufferSize);
+    {
+    ucStorageBuffer = (u8 *)tls_mem_alloc (xMessageBufferSize+1);
+    if (ucStorageBuffer == NULL)
+      {
+        return HTTP_CLIENT_ERROR_NO_MEMORY;
+      }
+    xMessageBuffer = xMessageBufferCreateStatic( xMessageBufferSize,
+                         ucStorageBuffer,  &xMessageBufferStruct );
+    }
+
+
 
   if (vs1053_buf_play_task_hdl == NULL)
     tls_os_task_create (
@@ -200,7 +215,7 @@ break;
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
           printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
-          if (freeSize < (nSize + 3))
+          if (freeSize < (nSize + 4))
             break;
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
@@ -233,7 +248,7 @@ break;
           while (my_sost == VS1053_PLAY)
             {
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-              if ((freeSize + 3) >= nSize)
+              if ((freeSize + 4) >= nSize)
                 {
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
@@ -258,7 +273,6 @@ break;
   //    vs1053_buf_play_task_hdl = NULL;
   //  }
   tls_mem_free (Buffer);
-  // vMessageBufferDelete (xMessageBuffer);
   xMessageBufferReset (xMessageBuffer);
 
   if (pHTTP)

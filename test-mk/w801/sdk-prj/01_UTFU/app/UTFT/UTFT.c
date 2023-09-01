@@ -72,6 +72,7 @@ static boolean LCD_Write_1byte_Flag = 0;
 static u32 _spi_freq;
 static u8 _spi_mode;
 static u8 display_bitpixel;
+static u8 _SPI_16bit=0;
 
 #include "hardware/sky/HW_W801_p.h"
 
@@ -127,6 +128,7 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
 /*	размер шины: */		byte dtm[] = {	16,		16,		16,		8,		8,		16,		8,		SERIAL_4PIN,	16,	    SERIAL_5PIN,	SERIAL_5PIN,	16,		16,		16,		8,		16,		LATCHED_16,	0,			0,			8,		16,		16,		16,		8,		SERIAL_5PIN,	SERIAL_5PIN,	SERIAL_4PIN,	16,		16,		16,		SERIAL_5PIN, 	SERIAL_5PIN,	8,		8,		8,		16			,SERIAL_5PIN  ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   ,16             ,SERIAL_5PIN    ,SERIAL_5PIN    ,16                ,SERIAL_5PIN   ,SERIAL_5PIN   ,SERIAL_5PIN   };
 /*	режим HW SPI */	       u8 spi_md[] = {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    TLS_SPI_MODE_3,	0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,		TLS_SPI_MODE_3,		0,		0,	0,		0,		0,		0, 		TLS_SPI_MODE_3,	0,		0,		0,		0			,0	      ,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3,0              ,TLS_SPI_MODE_3 ,TLS_SPI_MODE_3 ,0                 ,TLS_SPI_MODE_3,TLS_SPI_MODE_3,TLS_SPI_MODE_3};
 /*	режим bit на PIXEL */ u8 bitpixel[]= {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    0,			0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,			     0,		0,		0,	0,		0,		0,		0, 			     0,	0,		0,		0,		0			,0	      ,0	     ,0     	    ,0		   ,0		  ,0		 ,0              ,0	 	 ,0		 ,0                 ,0 		   ,24 		  ,0             };
+/*	режим _SPI_16bit  */ u8 SPI_16bit[]= {	 0,		 0,		 0,		0,		0,		 0,		0,		0, 		0,	    0,			0,		0,		0,		0,		0,		0,		0,		0,			0,			0,		0,		0,		0,		0,			     0,		0,		0,	0,		0,		0,		0, 			     0,	0,		0,		0,		0			,0	      ,0	     ,0     	    ,0		   ,0		  ,0		 ,0              ,0	 	 ,0		 ,0                 ,0 		   ,0 		  ,1             };
 
 
 
@@ -134,6 +136,7 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
   disp_y_size = dsy[model];
   display_transfer_mode = dtm[model];
   display_bitpixel = bitpixel[model];
+  _SPI_16bit= SPI_16bit[model];
   display_model = model;
 
   __p1 = RS;
@@ -214,9 +217,17 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
 static void
 LCD_WR_REG (u16 Value)
 {
-  cbi_RS ();
-  // LCD_Write_1byte_Flag = 0;
-  UTFT_LCD_Writ_Bus (Value >> 8, Value & 0xff, 16);
+  if (display_transfer_mode != 1)
+    {
+      cbi_RS ();
+      LCD_Write_1byte_Flag = 0;
+      UTFT_LCD_Writ_Bus (Value >> 8, Value & 0xff, display_transfer_mode);
+    }
+  else
+   {
+      UTFT_LCD_Writ_Bus (0x00, Value >> 8  , display_transfer_mode);
+      UTFT_LCD_Writ_Bus (0x00, Value & 0xff, display_transfer_mode);
+   }
 }
 
 static void

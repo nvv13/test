@@ -1,0 +1,29 @@
+https://hackaday.io/project/189549-azzduino/details
+
+* * THE PSRAM * *
+
+The W806 MCU allows to expand the internal RAM space address using an external 64Mbit PSRAM. 
+In the following image the address range used to access the PSRAM contents:
+
+
+The address space reserved to PSRAM is in the range from 0x30000000 to 0x30800000 (equivalent to 0x800000 bytes = 8MBytes).
+When the PSRAM is active reading or writing inside that range will behave like "normal" RAM,
+ as all the operations to write/read to/from the PSRAM are managed by the PSRAM controller HW transparently.
+
+The maximum frequency supported for PSRAM access is 80MHz,
+ and can be selected with a field inside the PSRAM controller registers. 
+It is a 4bit divider for the PSRAM clock that can be set in the range [0x3..0xF] ,
+ where 0x3 corresponds to the maximum 80MHz PSRAM clock (240MHZ / 3 = 80MHz).
+
+More, the PSRAM controller can work as SPI or QSPI. Of course the QSPI is the fastest mode.
+
+The documentation and the SDK are both misleading about the use of the PSRAM controller,
+ so it was not easy understand how setup the MCU.
+
+To use the PSRAM you have to configure:
+
+    the GPIO pin set "linked" to the PSRAM controller (the are two possible set of GPIO to choose);
+    the registers of the PSRAM controller (PSRAM chip reset, clock setting, SPI/QSPI setting).
+
+I've uploaded in the Files section a demo of the PSRAM usage (with comments).
+  https://hackaday.io/project/189549/files

@@ -64,31 +64,16 @@ UserMain (void)
 
   wm_psram_config (1);
 
-
-  /**
-   * @brief          This function is used to init the psram .
-   *
-   * @param[in]      mode   is work mode, PSRAM_SPI or PSRAM_QPI
-   *
-   * @retval        none
-   *
-   * @note           None
-  void psram_init(psram_mode_t mode);
-   */
+  //чтоб там инициализация DMA была, мало ли пригодится
   psram_init (
-      PSRAM_SPI); // PSRAM_QPI - почему то не заработал, что то не так сделал
+     PSRAM_SPI ); // PSRAM_QPI - почему то не заработал, что то не так сделал
 
-  /* PSRAM enters the QPI mode */
- /*
-    volatile unsigned int value = tls_reg_read32 (HR_PSRAM_CTRL_ADDR);
-    value |= 0x02;
-    tls_reg_write32 (HR_PSRAM_CTRL_ADDR, value);
-    do
-      {
-        value = tls_reg_read32 (HR_PSRAM_CTRL_ADDR);
-      }
-    while (!(value & 0x02));
-  */
+  //инициализация с учетом частоты микросхемы LY68L6400, 80MHz, большенство таких.
+  d_psram_init (
+     PSRAM_QPI,0,0 );
+
+  d_psram_check();
+
   tls_os_time_delay (HZ);
 
   /*

@@ -52,10 +52,10 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 2.4 TFT 240x320 HW SPI_SDIO \n");
+  printf ("user_app1_task start 3.5 TFT 320x480 HW SPI_SDIO MHS3528 \n");
 
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT2_4SP_9341 // TFT01_24SP
+  UTFT_UTFT (MHS3528 // 
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
@@ -67,7 +67,7 @@ user_app1_task (void *sdata)
              ,
              (u8)WM_IO_PB_22 // SER => DC !
              ,
-             60000000
+             120000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -86,6 +86,24 @@ user_app1_task (void *sdata)
                                WM_IO_PB_07 CMD  -> MOSI
            */
   );
+/*
+---- ------
+W801 LCD   
+---- ------             
+5v   2
+3.3v 1
+gnd  6,25
+PB21 22    RESET сброс           
+PB23 24    CS выбор чипа       
+PB22 18    комманда/данные  
+PB07 19    данные           
+PB06 23    синхросигнал     
+---- ------
+W801 LCD   
+---- ------
+
+
+*/
 
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   // UTFT_InitLCD (PORTRAIT);
@@ -95,8 +113,9 @@ user_app1_task (void *sdata)
       UTFT_clrScr (); // стираем всю информацию с дисплея
       tls_os_time_delay (HZ); //
 
-      UTFT_setColor2 (VGA_WHITE); // 240x320
-      for (int i = 2; i < 54; i++)
+
+      UTFT_setColor2 (VGA_WHITE); // 
+      for (int i = 2; i < 80; i++)
         {
           UTFT_drawRect (2, 2, i * 6, i * 4);
         }
