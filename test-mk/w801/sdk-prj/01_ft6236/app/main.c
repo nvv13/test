@@ -51,10 +51,13 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.5 TFT 320x480 HW SPI \n");
 
+  //printf ("user_app1_task start 3.5 TFT 320x480 HW SPI \n");
+  //UTFT_UTFT (TFT3_5SP_9488 //
+
+  printf ("user_app1_task start 3.2 TFT 240x320 HW SPI MSP2834 \n");
   // подключаем библиотеку UTFT
-  UTFT_UTFT (TFT3_5SP_9488 //
+  UTFT_UTFT (MSP2834
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,

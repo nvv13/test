@@ -96,7 +96,7 @@ user_app1_task (void *sdata)
                    ,
                    NO_GPIO_PIN // dout_none
                    ,
-                   NO_GPIO_PIN //WM_IO_PA_09 // byte irq_irq
+                   WM_IO_PA_09 // byte irq_irq
   );
 
   URTouch_InitTouch (TOUCH_ORIENTATION);
@@ -124,10 +124,10 @@ user_app1_task (void *sdata)
 
   UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
   //             x      y    x    y
-  UTFT_drawRect (1, 1, 40, 239);
-  UTFT_drawRect (280, 1, 319, 239);
+  UTFT_drawRect (1, 1, 60, 320);
+  UTFT_drawRect (420, 1, 479, 320);
   UTFT_setColor2 (VGA_WHITE);
-  UTFT_drawRect (1, 210, 319, 239);
+  UTFT_drawRect (1, 270, 479, 320);
 
   while (1)
     { //
@@ -157,29 +157,29 @@ user_app1_task (void *sdata)
                        URTouch_TP_Y, URTouch_TP_X2, URTouch_TP_Y2);
               // printf ("%s\n", char_buff);
               UTFT_setColor2 (VGA_WHITE);
-              UTFT_print (char_buff, CENTER, 200,
+              UTFT_print (char_buff, CENTER, 300,
                           0); // выводим текст на дисплей
             }
-          if (URTouch_TP_Y > 210)
+          if (URTouch_TP_Y > 270)
             {
               UTFT_clrScr ();
               UTFT_setColor2 (
                   VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-             UTFT_drawRect (1, 1, 40, 239);
-             UTFT_drawRect (280, 1, 319, 239);
-             UTFT_setColor2 (VGA_WHITE);
-             UTFT_drawRect (1, 220, 319, 239);
+              UTFT_drawRect (1, 1, 60, 320);
+              UTFT_drawRect (420, 1, 479, 320);
+              UTFT_setColor2 (VGA_WHITE);
+              UTFT_drawRect (1, 270, 479, 320);
             }
 
           if (res_sd == FR_OK)
             {
               bool l_draw = false;
-              if (URTouch_TP_X > 280)
+              if (URTouch_TP_X > 420)
                 {
                   ind_file++;
                   l_draw = true;
                 }
-              if (URTouch_TP_X > 0 && URTouch_TP_X < 40 && ind_file > 0)
+              if (URTouch_TP_X > 0 && URTouch_TP_X < 60 && ind_file > 0)
                 {
                   ind_file--;
                   l_draw = true;
