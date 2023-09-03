@@ -70,7 +70,7 @@ UserMain (void)
 
   //инициализация с учетом частоты микросхемы LY68L6400, 80MHz, большенство таких.
   d_psram_init (
-     PSRAM_QPI,0,0 );
+     PSRAM_QPI,6,9 );
 
   d_psram_check();
 
