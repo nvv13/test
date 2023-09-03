@@ -1,6 +1,7 @@
 case ILI9341_S5P:
 case TFT2_4SP_9341:
 case TFT3_2SP_9341:
+case MSP2834:
 	UTFT_LCD_Write_COM(0x2a); 
 	UTFT_LCD_Write_DATA2(x1>>8);
 	UTFT_LCD_Write_DATA2(x1);
