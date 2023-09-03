@@ -867,9 +867,6 @@ W801  LCD
 
 board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834
 
-Некоторые Datasheets по тому из чего собран данный дисплейный модуль можно посмотреть по ссылке: 
- https://github.com/LaskaKit/ESPD-35/tree/main/Datasheets/LiangHaoCai-3.5%E5%AF%B8-40p-ILI9488%E8%B5%84%E6%96%99%E5%8C%85
-
 
 Видео
 
