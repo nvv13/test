@@ -21,7 +21,7 @@ MIT license, all text above must be included in any redistribution
 #include "wm_gpio_afsel.h"
 //#include "wm_hostspi.h"
 
-#include "Wire.h"
+#include "SoftWire.h"
 
 static void FT6236_writeRegister8 (uint8_t reg, uint8_t val);
 static uint8_t FT6236_readRegister8 (uint8_t reg);
@@ -38,7 +38,7 @@ FT6236_begin (uint8_t thresh, int8_t sda, int8_t scl)
 
   touches = 0;
 
-  Wire_begin (scl, sda);
+  IIC_Init (scl, sda);
 
   FT6236_debug ();
 
@@ -78,7 +78,7 @@ TS_Point
 FT6236_getPoint (void)
 {
   FT6236_readData ();
-  if ((touches == 0))// || (n > 1))
+  if ((touches == 0)) // || (n > 1))
     {
       p1.x = 0;
       p1.y = 0;
@@ -90,17 +90,17 @@ FT6236_getPoint (void)
       p1.x = touchX[0];
       p1.y = touchY[0];
       p1.z = 1;
-      if(touches==2)
+      if (touches == 2)
         {
-        p1.x2 = touchX[1];
-        p1.y2 = touchY[1];
-        p1.z2 = 1;
+          p1.x2 = touchX[1];
+          p1.y2 = touchY[1];
+          p1.z2 = 1;
         }
-        else
+      else
         {
-        p1.x2 = 0;
-        p1.y2 = 0;
-        p1.z2 = 0;
+          p1.x2 = 0;
+          p1.y2 = 0;
+          p1.z2 = 0;
         }
       return p1;
     }
@@ -111,11 +111,8 @@ FT6236_readData (void)
 {
 
   uint8_t i2cdat[16];
-  Wire_beginTransmission (FT6236_ADDR);
-  Wire_write ((byte)0);
-  Wire_endTransmission ();
 
-  Wire_read_buf (FT6236_ADDR, i2cdat, 16);
+  Wire_read_buf (FT6236_ADDR,0, i2cdat, 16);
 
   touches = i2cdat[0x02];
   if ((touches > 2) || (touches == 0))
@@ -140,13 +137,7 @@ uint8_t
 FT6236_readRegister8 (uint8_t reg)
 {
   uint8_t x = 0;
-
-  Wire_beginTransmission (FT6236_ADDR);
-  Wire_write ((byte)reg);
-  Wire_endTransmission ();
-
-  Wire_read_buf (FT6236_ADDR, &x, 1);
-
+  Wire_read_buf (FT6236_ADDR,reg, &x, 1);
   return x;
 }
 
@@ -154,11 +145,7 @@ FT6236_readRegister8 (uint8_t reg)
 void
 FT6236_writeRegister8 (uint8_t reg, uint8_t val)
 {
-
-  Wire_beginTransmission (FT6236_ADDR);
-  Wire_write ((byte)reg);
-  Wire_write ((byte)val);
-  Wire_endTransmission ();
+  Wire_write_buf(FT6236_ADDR,reg,&val,1);
 }
 
 /* Debug */

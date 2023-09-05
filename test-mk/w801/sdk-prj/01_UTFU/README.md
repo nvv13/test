@@ -894,7 +894,7 @@ W801  LCD
       SD_CS
 PA09  CTP_INT     прерывание
 PA04  CTP_SDA     
-PB21  CTP_RST     сброс CTP
+PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
 PA01  CTP_SCL     
 PB16  SDO(MISO)
 3.3v  LED         подсветка

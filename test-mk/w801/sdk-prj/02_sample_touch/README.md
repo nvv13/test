@@ -27,6 +27,9 @@ https://youtu.be/COopMgUwCrc
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488.jpg" alt="top side" title="top side" /></p>
 
 
+для него тест (main.c) лежит в директории 01_UTFU/app/TFT3_5SP_9488
+
+
 соединения
 
 надо соединить по схеме:
@@ -35,7 +38,7 @@ connect to TFT3_5SP_9488
 ---- ------
 W801  LCD   
 ---- ------
-PB21  CTP_RST     сброс CTP
+PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
 PA09  CTP_INT     прерывание
 PA01  CTP_SCL     
 PA04  CTP_SDA     
@@ -59,6 +62,64 @@ W801  LCD
 # convert *.jpg -resize 480x320! j%03d-480x320.jpg
 
 ~~~
+
+
+
+--------------------------------------------------
+------------------------------------------------
+
+
+board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP2834_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP2834.jpg" alt="top side" title="top side" /></p>
+
+
+wiki
+http://www.lcdwiki.com/2.8inch_IPS_SPI_Module_ILI9341
+
+для него тест (main.c) лежит в директории 01_UTFU/app/MSP2834
+
+соединения
+
+надо соединить по схеме:
+~~~
+connect to MSP2834
+---- ------
+W801  LCD   
+---- ------
+      SD_CS
+PA09  CTP_INT     прерывание
+PA04  CTP_SDA     
+PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
+PA01  CTP_SCL     
+PB16  SDO(MISO)
+3.3v  LED         подсветка
+PB15  SCK         синхросигнал
+PB17  SDI(MOSI)
+PB23  LCD_RS      комманда/данные
+PB21  LCD_RST     сброс
+PB14  LCD_CS      выбор чипа
+gnd   GND         земля
+3v3   VDD         питание (3.3v - 5v)
+---- ------
+W801  LCD   
+---- ------
+
+
+*подготовка изображений для SD Card + используется библиотека libTJPEG.a
+# convert *.jpg -resize 320x240! j%03d-320x240.jpg
+
+~~~
+
+
 
 
 

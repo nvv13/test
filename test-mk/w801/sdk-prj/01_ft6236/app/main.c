@@ -86,7 +86,8 @@ user_app1_task (void *sdata)
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   // UTFT_InitLCD (PORTRAIT);
 
-  FT6236_begin (FT6236_DEFAULT_THRESHOLD, WM_IO_PA_04, WM_IO_PA_01);
+  FT6236_begin (50 //FT6236_DEFAULT_THRESHOLD
+   , WM_IO_PA_04, WM_IO_PA_01);
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
   tls_os_time_delay (HZ); //

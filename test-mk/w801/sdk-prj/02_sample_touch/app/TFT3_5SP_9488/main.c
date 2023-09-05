@@ -92,7 +92,7 @@ user_app1_task (void *sdata)
                    ,
                    WM_IO_PA_04 // byte tcs_sda
                    ,
-                   FT6236_DEFAULT_THRESHOLD // byte din_thresh
+                   50//FT6236_DEFAULT_THRESHOLD // byte din_thresh
                    ,
                    NO_GPIO_PIN // dout_none
                    ,
