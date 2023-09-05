@@ -168,7 +168,7 @@ user_app1_task (void *sdata)
              UTFT_drawRect (1, 1, 40, 239);
              UTFT_drawRect (280, 1, 319, 239);
              UTFT_setColor2 (VGA_WHITE);
-             UTFT_drawRect (1, 220, 319, 239);
+             UTFT_drawRect (1, 210, 319, 239);
             }
 
           if (res_sd == FR_OK)
