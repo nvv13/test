@@ -105,7 +105,7 @@ scan_files (
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.2 TFT 240x320 HW SPI MSP2834 \n");
+  printf ("user_app1_task start 2.8 TFT 240x320 HW SPI MSP2834 \n");
 
   // подключаем библиотеку UTFT
   UTFT_UTFT (MSP2834 //

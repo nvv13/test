@@ -105,10 +105,10 @@ scan_files (
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 2.8 TFT 240x320 HW SPI MSP2834 \n");
+  printf ("user_app1_task start 3.2 TFT 240x320 HW SPI MSP3223 \n");
 
   // подключаем библиотеку UTFT
-  UTFT_UTFT (MSP2834 //
+  UTFT_UTFT (MSP3223 //
              ,(u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL

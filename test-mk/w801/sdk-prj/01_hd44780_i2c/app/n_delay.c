@@ -7,7 +7,7 @@
 
  ns - Nanoseconds  10^-9
 
- 1000 ms = 1 µs OR 1 us
+ 1000 ns = 1 µs OR 1 us
 
 */
 
@@ -63,7 +63,7 @@ n_delay_us (uint32_t us)
   /*
   при 240MHz значение sysclk.cpuclk=240
   то есть
-  1 cpuclk = 1 микросекунда
+  240 cpuclk = 1 микросекунда
   или 1MHz,
   то есть
   System Tick Timer (CORET) - меняеться с частотой CPU в сторону уменьшения

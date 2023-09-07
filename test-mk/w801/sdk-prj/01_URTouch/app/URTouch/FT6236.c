@@ -158,3 +158,40 @@ FT6236_debug (void)
   printf ("Point Rate Hz: %d\n", FT6236_readRegister8 (FT6236_REG_POINTRATE));
   printf ("Thresh: %d\n", FT6236_readRegister8 (FT6236_REG_THRESHHOLD));
 }
+
+
+
+/*
+ft6336 источник 
+https://github.com/ProYCS/ft6336_driver_for_stm32.git
+*/
+
+
+unsigned char ft6336_get_td_status(void)
+{
+		unsigned char a;
+		a=FT6236_readRegister8 (FT6336_ADDR_TD_STATUS);
+		return a;
+}
+
+void ft6336_get_touch1_position(unsigned int *x,unsigned int *y)
+{
+		unsigned int xh=0,xl=0,yh=0,yl=0;
+		xh=FT6236_readRegister8 (FT6336_ADDR_TOUCH1_XH);
+		xl=FT6236_readRegister8 (FT6336_ADDR_TOUCH1_XL);
+		yh=FT6236_readRegister8 (FT6336_ADDR_TOUCH1_YH);
+		yl=FT6236_readRegister8 (FT6336_ADDR_TOUCH1_YL);
+		*x=((xh&0x000F)<<8)|xl;
+		*y=((yh&0x000F)<<8)|yl;
+}
+
+void ft6336_get_touch2_position(unsigned int *x,unsigned int *y)
+{
+		unsigned int xh=0,xl=0,yh=0,yl=0;
+		xh=FT6236_readRegister8 (FT6336_ADDR_TOUCH2_XH);
+		xl=FT6236_readRegister8 (FT6336_ADDR_TOUCH2_XL);
+		yh=FT6236_readRegister8 (FT6336_ADDR_TOUCH2_YH);
+		yl=FT6236_readRegister8 (FT6336_ADDR_TOUCH2_YL);
+		*x=((xh&0x000F)<<8)|xl;
+		*y=((yh&0x000F)<<8)|yl;
+}

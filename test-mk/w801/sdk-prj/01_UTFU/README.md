@@ -925,6 +925,66 @@ W801  LCD
 ------------------------------------------------
 
 
+board HLK-W801-KIT-V1.1 + 3.2 TFT 240x320 MSP3223
+
+
+Видео
+
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3223_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3223.jpg" alt="top side" title="top side" /></p>
+
+
+wiki
+http://www.lcdwiki.com/3.2inch_IPS_SPI_Module_ILI9341
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/MSP3223
+
+соединения
+
+надо соединить по схеме:
+~~~
+connect to MSP3223
+---- ------
+W801  LCD   
+---- ------
+      SD_CS
+PA09  CTP_INT     прерывание
+PA04  CTP_SDA     
+PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
+PA01  CTP_SCL     
+PB16  SDO(MISO)
+3.3v  LED         подсветка
+PB15  SCK         синхросигнал
+PB17  SDI(MOSI)
+PB23  LCD_RS      комманда/данные
+PB21  LCD_RST     сброс
+PB14  LCD_CS      выбор чипа
+gnd   GND         земля
+3v3   VDD         питание (3.3v - 5v)
+---- ------
+W801  LCD   
+---- ------
+
+
+*подготовка изображений для SD Card + используется библиотека libTJPEG.a
+# convert *.jpg -resize 320x240! j%03d-320x240.jpg
+
+~~~
+
+
+
+
+
+--------------------------------------------------
+
+
+------------------------------------------------
+
+
 board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480 HW SPI SDIO 120Mhz MHS3528
 
 Видео

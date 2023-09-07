@@ -69,8 +69,9 @@ UserMain (void)
      PSRAM_SPI ); // PSRAM_QPI - почему то не заработал, что то не так сделал
 
   //инициализация с учетом частоты микросхемы LY68L6400, 80MHz, большенство таких.
-  d_psram_init (
-     PSRAM_QPI,6,9 );
+
+  //d_psram_init (
+  //   PSRAM_QPI,0,0 );
 
   d_psram_check();
 

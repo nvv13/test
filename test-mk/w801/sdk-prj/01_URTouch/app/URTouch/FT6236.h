@@ -1,5 +1,10 @@
 /*!
  * FT6236.h
+
+
+ ft6336 источник 
+ https://github.com/ProYCS/ft6336_driver_for_stm32.git
+
  */
 
 #ifndef FT6236_H
@@ -32,6 +37,28 @@
 #define FT6336G_CHIPID 0x01  // FT6336G ID
 #define FT6336U_CHIPID 0x02  // FT6336U ID
 #define FT6426_CHIPID  0x03   // FT6426 ID
+
+
+#define FT6336_ADDR               0x38
+
+#define FT6336_ADDR_DEVICE_MODE   0x00
+#define FT6336_ADDR_TD_STATUS     0x02
+
+#define FT6336_ADDR_TOUCH1_EVENT  0x03
+#define FT6336_ADDR_TOUCH1_ID     0x05
+#define FT6336_ADDR_TOUCH1_XH     0x03
+#define FT6336_ADDR_TOUCH1_XL     0x04
+#define FT6336_ADDR_TOUCH1_YH     0x05
+#define FT6336_ADDR_TOUCH1_YL     0x06
+
+#define FT6336_ADDR_TOUCH2_EVENT  0x09
+#define FT6336_ADDR_TOUCH2_ID     0x0B
+#define FT6336_ADDR_TOUCH2_XH     0x09
+#define FT6336_ADDR_TOUCH2_XL     0x0A
+#define FT6336_ADDR_TOUCH2_YH     0x0B
+#define FT6336_ADDR_TOUCH2_YL     0x0C
+
+#define FT6336_ADDR_FIRMARE_ID    0xA6
 
 
 #define FT6236_DEFAULT_THRESHOLD 128 // Default threshold for touch detection

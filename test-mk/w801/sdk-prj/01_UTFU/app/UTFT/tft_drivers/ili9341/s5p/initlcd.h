@@ -108,8 +108,10 @@ case TFT3_2SP_9341:
 
 
 case MSP2834:
-	//LCD_RESET(); //LCD 复位
-//*************2.8 ILI9341 IPS初始化**********//	
+case MSP3223:
+	//LCD_RESET(); 
+//*************2.8 ILI9341 IPS initialization**********//	
+//**************3.2 ILI9341 IPS initialization************//
 	UTFT_LCD_Write_COM(0xCF);  
 	UTFT_LCD_Write_DATA2(0x00); 
 	UTFT_LCD_Write_DATA2(0xC1); 
@@ -147,11 +149,17 @@ case MSP2834:
 	UTFT_LCD_Write_DATA2(0x13);     //SAP[2:0];BT[3:0] 
  
 	UTFT_LCD_Write_COM(0xC5);       //VCM control 
-	UTFT_LCD_Write_DATA2(0x22);   //22
+	if(display_model==MSP3223)
+          UTFT_LCD_Write_DATA2(0x1C);   //22
+          else
+          UTFT_LCD_Write_DATA2(0x22);   //22
 	UTFT_LCD_Write_DATA2(0x35);   //35
  
 	UTFT_LCD_Write_COM(0xC7);       //VCM control2 
-	UTFT_LCD_Write_DATA2(0xBD);  //AF
+        if(display_model==MSP3223)
+          UTFT_LCD_Write_DATA2(0xC8);  //22
+          else
+   	  UTFT_LCD_Write_DATA2(0xBD);  //AF
 
 	UTFT_LCD_Write_COM(0x21);
 
@@ -216,6 +224,6 @@ case MSP2834:
 	UTFT_LCD_Write_COM(0x11);       //Exit Sleep 
 	delay(120); 
 	UTFT_LCD_Write_COM(0x29);       //Display on 
-        //LCD_direction(USE_HORIZONTAL);//设置LCD显示方向 
+        //LCD_direction(USE_HORIZONTAL);//
 	break;
 
