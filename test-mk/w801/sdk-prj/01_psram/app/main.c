@@ -70,6 +70,9 @@ UserMain (void)
 
   //инициализация с учетом частоты микросхемы LY68L6400, 80MHz, большенство таких.
 
+  d_psram_init (
+     PSRAM_QPI,0,0,0,0 );
+
   //d_psram_init (
   //   PSRAM_QPI,0,0 );
 
@@ -110,10 +113,8 @@ UserMain (void)
                                         у нас LY68L6400 памяти 64M Bits, или 8
   MB
   */
-  //  char *test = dram_heap_malloc(1048576);
-  //  char *test = dram_heap_malloc(2097152);
-  // u32 i_size = 4194304;
-  u32 i_size = 8 * 1048576;
+
+  u32 i_size = 8 * 1024 * 1024;
 
   unsigned int t = 0; // used to save time relative to 1970
   struct tm *tblock;
@@ -125,7 +126,8 @@ UserMain (void)
   u8 *test = (u8 *)PSRAM_ADDR_START;
   printf ("start test psram addr %d to size = %d \r\n", (int)test, i_size);
 
-  u8 u8_cnt=10;
+  u8 b1 = 0;
+  u8 u8_cnt=3;
   while (u8_cnt--)
     {
 
@@ -133,13 +135,13 @@ UserMain (void)
 
       uint32_t cur = tls_os_get_time ();
 
-      u8 b1 = 0;
+      b1 = u8_cnt;
       for (int i = 0; i < i_size; i++)
         {
           test[i] = b1++;
         }
       u8 b2_error = 0;
-      b1 = 0;
+      b1 = u8_cnt;
       for (int i = 0; i < i_size; i++)
         {
           if (test[i] != b1++)
@@ -165,72 +167,77 @@ UserMain (void)
       // printf("%s",test);
     }
 
+#define TST_BUF_SIZE 512
 
-  u8 buf[256];
-  u8 buf2[256];
-  strcpy((char*)buf,"hello1 world!!!\r\n");
-  printf (" memcpy_dma test, buf  byte = %d  \r\n",
-              memcpy_dma (test, buf, 256));
-  printf("test %s",test);
-  printf (" memcpy_dma buf2, test byte = %d  \r\n",
-              memcpy_dma (buf2, test, 256));
-  printf("buf2 %s",buf2);
+  u8 buf[TST_BUF_SIZE];
+  u8 buf2[TST_BUF_SIZE];
 
-
-  for (u8 i = 0; i <= 255; i++)
+  u8_cnt=10;
+  while (u8_cnt--)
     {
-      buf[i] = i;
-      if (i == 255)
-        break;
+      sprintf((char*)buf,"hello%d world!!! hello%d world!!! hello%d world!!! hello%d world!!!\r\n",u8_cnt+1,u8_cnt+2,u8_cnt+3,u8_cnt+4);
+      printf (" memcpy_dma test, buf  byte = %d  \r\n",
+              memcpy_dma (test, buf, TST_BUF_SIZE));
+      printf("test %s",test);
+      printf (" memcpy_dma buf2, test byte = %d  \r\n",
+              memcpy_dma (buf2, test, TST_BUF_SIZE));
+      printf("buf2 %s",buf2);
+    tls_os_time_delay (HZ); //
     }
-  i_size = 256;
-  printf ("fill buf \r\n");
 
-
-
-  u8_cnt=100;
+  u8_cnt=50;
+  i_size = 8 * 1024 * 1024;
   while (u8_cnt--)
     {
 
-      for (u8 i = 0; i <= 255; i++)
+      for (int i = 0; i < TST_BUF_SIZE; i++)
         {
           buf2[i] = 0;
-          if (i == 255)
-            break;
         }
 
-      u8 b1 = u8_cnt;
-      for (u8 i = 0; i <= 255; i++)
+      b1 = u8_cnt;
+      for (int i = 0; i < TST_BUF_SIZE; i++)
         {
           buf[i] = b1++;
-          if (i == 255)
-            break;
         }
 
       tls_get_rtc (&tstart);
 
       uint32_t cur = tls_os_get_time ();
 
-      printf (" memcpy_dma test, buf  byte = %d  \r\n",
-              memcpy_dma (test, buf, 256));
-      printf (" memcpy_dma buf2, test byte = %d  \r\n",
-              memcpy_dma (buf2, test, 256));
+
+      int i_len=0;
+      for (int i = 0; i < i_size/TST_BUF_SIZE; i++)
+        {
+          i_len+=memcpy_dma ((test + (i * TST_BUF_SIZE)), buf, TST_BUF_SIZE);
+        }
+      printf ("memcpy_dma test, buf  byte = %d  \r\n", i_len);
+
 
       u8 b2_error = 0;
-      b1 = u8_cnt;
-      for (int i = 0; i < i_size; i++)
+      i_len=0;
+      for (int i = 0; i < i_size/TST_BUF_SIZE; i++)
         {
-          if (buf2[i] != b1++)
+          i_len+=memcpy_dma (buf2, (test + (i * TST_BUF_SIZE)), TST_BUF_SIZE);
+          b1 = u8_cnt;
+          for (int it = 0; it < TST_BUF_SIZE; it++)
             {
-              printf ("error pos = %d \r\n", i);
-              b2_error = 1;
-              break;
-            };
+              if (buf2[it] != b1++)
+                {
+                  printf ("error pos = %d \r\n", (i * TST_BUF_SIZE) + it );
+                  b2_error = 1;
+                  break;
+                };
+            }
+          if (b2_error)
+                  break;
         }
       if (b2_error)
-        printf ("error test size = %d ", i_size);
+        printf ("error test size = %d ", i_len);
       else
-        printf ("ok test size = %d ", i_size);
+        printf ("ok test size = %d ", i_len);
+      printf (" memcpy_dma buf2, test byte = %d  \r\n", i_len);
+
 
       tls_get_rtc (&tstop);
       printf (
@@ -243,7 +250,7 @@ UserMain (void)
       // printf("%s",test);
     }
 
-  i_size = 8 * 1048576 - 1024;
+  i_size = 8 * 1024 * 1024 - 256;
 
   test = dram_heap_malloc (i_size);
   printf ("start test psram addr %d to size = %d \r\n", (int)test, i_size);

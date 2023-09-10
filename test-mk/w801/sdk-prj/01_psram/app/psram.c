@@ -446,9 +446,16 @@ bit    |access|Instructions                                                  |re
 
 */
 
-void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH)
+void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH, u8 BURST, u16 OVERTIMER)
 {
+
 	volatile unsigned int value = 0x00000000;
+
+        value=(OVERTIMER & 0x7FF);
+        printf("set value to HR_PSRAM_OVERTIMER_ADDR = 0x%08X\n", value);
+        tls_reg_write32(HR_PSRAM_OVERTIMER_ADDR, value);
+
+        value = 0x00000000;
 
         // [10:8] |RW    |tCPH, the shortest time setting of CS high level,             |3'd6
         tCPH &= 0x7; 
@@ -467,6 +474,10 @@ void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH)
             }
         value |= frequency_divider<<4; 
 
+ 	if(BURST)
+	{
+		value |= 0x1<<2;
+	}
 
  	if(mode == PSRAM_QPI)
 	{
@@ -475,7 +486,7 @@ void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH)
 
 	/*reset psram*/
 	value |= 0x1;
-        printf("HR_PSRAM_CTRL_ADDR = 0x%08X\n", value);
+        printf("set value to HR_PSRAM_CTRL_ADDR = 0x%08X\n", value);
 
 	tls_reg_write32(HR_PSRAM_CTRL_ADDR, value);
 	do{

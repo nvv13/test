@@ -25,7 +25,7 @@ int dram_heap_check_addr (void *addr);
 #include "wm_psram.h"
 
 
-void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH);
+void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH, u8 BURST, u16 OVERTIMER);
 bool d_psram_check(void);
 
 #endif
