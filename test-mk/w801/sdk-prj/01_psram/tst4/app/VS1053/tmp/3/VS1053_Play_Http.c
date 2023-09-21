@@ -4,7 +4,7 @@
 //#include "wm_type_def.h"
 //#include "wm_uart.h"
 //#include "wm_gpio.h"
-#include "wm_gpio_afsel.h"
+//#include "wm_gpio_afsel.h"
 //#include "wm_hostspi.h"
 //#include "wm_socket.h"
 //#include "wm_sockets.h"
@@ -32,7 +32,6 @@
 
 #include "ConsoleLogger.h"
 
-#include "psram.h"
 #include "VS1053.h"
 
 u32 VS1053_WEB_RADIO_nTotal = 0;
@@ -46,7 +45,7 @@ static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
 #define VS1053_TASK_PRIO 32
 
 
-static volatile u32 xMessageBufferSize=4000;
+#define xMessageBufferSize 4000 
   // 4000 - не вызывает проблем, но эффект начинаеться от 8000,
   //   но тут глючит прога
   // а чтоб нормально работал HTTPS  нужно 250Кб, примено
@@ -69,22 +68,14 @@ vs1053_buf_play_task (void *sdata)
       while (xMessageBuffer != NULL && buffer != NULL && my_sost != VS1053_STOP
              && my_sost != VS1053_QUERY_TO_STOP)
         {
-          if (my_sost == VS1053_PLAY || my_sost == VS1053_PLAY_BUF)
+          if (my_sost == VS1053_PLAY)
             {
               item_size = xMessageBufferReceive (
                   xMessageBuffer, buffer, http_chunk_size, portMAX_DELAY);
               if (item_size > 0)
-                {
                 VS1053_playChunk (buffer, item_size);
-                //printf ("-");
-                if (VS1053_WEB_RADIO_nTotal > 512)
-                   tls_watchdog_clr ();
-                }
               else
-                {
                 tls_os_time_delay (1);
-                printf ("0");
-                }
             }
           else
             tls_os_time_delay (HZ / 100);
@@ -107,7 +98,7 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
   char *Buffer = NULL;
   HTTP_SESSION_HANDLE pHTTP;
   u32 nSndDataLen;
-  if(my_sost != VS1053_PLAY_BUF)my_sost = VS1053_HW_INIT;
+  my_sost = VS1053_HW_INIT;
   VS1053_WEB_RADIO_nTotal = 0;
 
   Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
@@ -174,19 +165,7 @@ break;
 
   if (xMessageBuffer == NULL)
     {
-    wm_psram_config (1);
-    d_psram_init (PSRAM_SPI,2,2,1,2);
-    tls_os_time_delay (HZ/10);
-    if(d_psram_check())
-      {
-      xMessageBufferSize=256000;//больще не надо! глючит! 
-      ucStorageBuffer = dram_heap_malloc (xMessageBufferSize+1);
-      }
-      else
-      {
-      xMessageBufferSize=4000;
-      ucStorageBuffer = (u8 *)tls_mem_alloc (xMessageBufferSize+1);
-      }
+    ucStorageBuffer = (u8 *)tls_mem_alloc (xMessageBufferSize+1);
     if (ucStorageBuffer == NULL)
       {
         return HTTP_CLIENT_ERROR_NO_MEMORY;
@@ -204,10 +183,9 @@ break;
         VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
         VS1053_TASK_PRIO, 0);
 
-  if(my_sost != VS1053_PLAY_BUF)my_sost = VS1053_HW_INIT;
   do
     {
-      if(my_sost != VS1053_HW_INIT)my_sost = VS1053_PLAY_BUF;
+      my_sost = VS1053_HW_INIT;
       if ((nRetCode = HTTPClientSendRequest (
                pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
                verb == VerbPost || verb == VerbPut, 0, 0))
@@ -221,15 +199,14 @@ break;
         {
           break;
         }
-      tls_os_time_delay (HZ/3);
+      tls_os_time_delay (HZ);
 
-      u16 u16_connect_timeout_sec = 100;
+      u16 u16_connect_timeout_sec = 10;
       if (strstr (ClientParams.Uri, "https") != NULL)
-        u16_connect_timeout_sec = 300;
+        u16_connect_timeout_sec = 30;
 
       printf ("Start to receive data from remote server\r\n");
 
-      //int i_cnt=0;
       //сначала заполняем буффер данными
       while (
           (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
@@ -237,12 +214,9 @@ break;
         {
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-          //printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
-          if (freeSize < (nSize + 4))// || i_cnt++>4096)
-            {
-            printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+          printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+          if (freeSize < (nSize + 4))
             break;
-            }
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode == HTTP_CLIENT_SUCCESS)
@@ -274,31 +248,32 @@ break;
           while (my_sost == VS1053_PLAY)
             {
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-              if (freeSize > (nSize + 4))
+              if ((freeSize + 4) >= nSize)
                 {
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
-                  //printf (" %d ", freeSize);
-                  //printf ("+");
                   break;
                 }
               tls_os_time_delay (HZ / 100);
             }
 
-          //if (VS1053_WEB_RADIO_nTotal > 512)
-          //  tls_watchdog_clr ();
+          if (VS1053_WEB_RADIO_nTotal > 512)
+            tls_watchdog_clr ();
           VS1053_WEB_RADIO_nTotal += nSize;
         }
     }
   while (my_sost == VS1053_PLAY); // Run only once
 
-  if(my_sost != VS1053_PLAY_BUF)
-   {
-   my_sost = VS1053_STOP;
-   tls_os_time_delay (HZ);
-   xMessageBufferReset (xMessageBuffer);
-   }
+  my_sost = VS1053_STOP;
+  tls_os_time_delay (HZ);
+  // if (vs1053_buf_play_task_hdl)
+  //  {
+  //    tls_os_task_del_by_task_handle (vs1053_buf_play_task_hdl,
+  //                                    NULL /*task_vs1053_free*/);
+  //    vs1053_buf_play_task_hdl = NULL;
+  //  }
   tls_mem_free (Buffer);
+  xMessageBufferReset (xMessageBuffer);
 
   if (pHTTP)
     HTTPClientCloseRequest (&pHTTP);

@@ -208,6 +208,7 @@ extern "C"
     VS1053_END_FILE = 3,
     VS1053_STOP = 4,
     VS1053_QUERY_TO_STOP = 5,
+    VS1053_PLAY_BUF = 6,
   } _VS1053_status;
 
   extern volatile enum VS1053_status my_sost;

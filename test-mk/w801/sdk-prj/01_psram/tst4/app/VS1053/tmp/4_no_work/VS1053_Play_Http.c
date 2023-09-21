@@ -4,7 +4,7 @@
 //#include "wm_type_def.h"
 //#include "wm_uart.h"
 //#include "wm_gpio.h"
-#include "wm_gpio_afsel.h"
+//#include "wm_gpio_afsel.h"
 //#include "wm_hostspi.h"
 //#include "wm_socket.h"
 //#include "wm_sockets.h"
@@ -32,13 +32,11 @@
 
 #include "ConsoleLogger.h"
 
-#include "psram.h"
 #include "VS1053.h"
+#include "ring_buf64.h"
 
 u32 VS1053_WEB_RADIO_nTotal = 0;
 
-#define http_chunk_size (vs1053_chunk_size * 2)
-#define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size)
 
 #define VS1053_TASK_SIZE 1024
 tls_os_task_t vs1053_buf_play_task_hdl = NULL;
@@ -46,45 +44,27 @@ static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
 #define VS1053_TASK_PRIO 32
 
 
-static volatile u32 xMessageBufferSize=4000;
-  // 4000 - не вызывает проблем, но эффект начинаеться от 8000,
-  //   но тут глючит прога
-  // а чтоб нормально работал HTTPS  нужно 250Кб, примено
-static uint8_t * ucStorageBuffer = NULL; // [ xMessageBufferSize+1 ];
-/* The variable used to hold the message buffer structure. */
-StaticMessageBuffer_t xMessageBufferStruct;
-MessageBufferHandle_t xMessageBuffer = NULL;
-
 
 void
 vs1053_buf_play_task (void *sdata)
 {
   printf ("start vs1053_buf_play_task\n");
 
-  u8 *buffer = (u8 *)tls_mem_alloc (http_chunk_size);
+  u8 *buffer = (u8 *)tls_mem_alloc (BUF_BYTE_CHUNK_SIZE);
 
   while (1)
     {
       size_t item_size;
-      while (xMessageBuffer != NULL && buffer != NULL && my_sost != VS1053_STOP
+      while (HeadRingBuf () != NULL && buffer != NULL && my_sost != VS1053_STOP
              && my_sost != VS1053_QUERY_TO_STOP)
         {
-          if (my_sost == VS1053_PLAY || my_sost == VS1053_PLAY_BUF)
+          if (my_sost == VS1053_PLAY)
             {
-              item_size = xMessageBufferReceive (
-                  xMessageBuffer, buffer, http_chunk_size, portMAX_DELAY);
+              item_size = PopRingBufChunk (buffer); 
               if (item_size > 0)
-                {
                 VS1053_playChunk (buffer, item_size);
-                //printf ("-");
-                if (VS1053_WEB_RADIO_nTotal > 512)
-                   tls_watchdog_clr ();
-                }
               else
-                {
                 tls_os_time_delay (1);
-                printf ("0");
-                }
             }
           else
             tls_os_time_delay (HZ / 100);
@@ -107,15 +87,15 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
   char *Buffer = NULL;
   HTTP_SESSION_HANDLE pHTTP;
   u32 nSndDataLen;
-  if(my_sost != VS1053_PLAY_BUF)my_sost = VS1053_HW_INIT;
+  my_sost = VS1053_HW_INIT;
   VS1053_WEB_RADIO_nTotal = 0;
 
-  Buffer = (char *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
+  Buffer = (char *)tls_mem_alloc (BUF_BYTE_CHUNK_SIZE);
   if (Buffer == NULL)
     {
       return HTTP_CLIENT_ERROR_NO_MEMORY;
     }
-  memset (Buffer, 0, HTTP_CLIENT_BUFFER_SIZE);
+  memset (Buffer, 0, BUF_BYTE_CHUNK_SIZE);
   printf ("HTTP Client v1.0\r\n");
   nSndDataLen = (pSndData == NULL ? 0 : strlen (pSndData));
   // Open the HTTP request handle
@@ -172,29 +152,14 @@ break;
 //        }
 #endif // TLS_CONFIG_HTTP_CLIENT_PROXY
 
-  if (xMessageBuffer == NULL)
+  if (HeadRingBuf () == NULL)
     {
-    wm_psram_config (1);
-    d_psram_init (PSRAM_SPI,2,2,1,2);
-    tls_os_time_delay (HZ/10);
-    if(d_psram_check())
-      {
-      xMessageBufferSize=256000;//больще не надо! глючит! 
-      ucStorageBuffer = dram_heap_malloc (xMessageBufferSize+1);
-      }
-      else
-      {
-      xMessageBufferSize=4000;
-      ucStorageBuffer = (u8 *)tls_mem_alloc (xMessageBufferSize+1);
-      }
-    if (ucStorageBuffer == NULL)
+    CreateRingBuf ();
+    if (HeadRingBuf () == NULL)
       {
         return HTTP_CLIENT_ERROR_NO_MEMORY;
       }
-    xMessageBuffer = xMessageBufferCreateStatic( xMessageBufferSize,
-                         ucStorageBuffer,  &xMessageBufferStruct );
     }
-
 
 
   if (vs1053_buf_play_task_hdl == NULL)
@@ -204,10 +169,9 @@ break;
         VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
         VS1053_TASK_PRIO, 0);
 
-  if(my_sost != VS1053_PLAY_BUF)my_sost = VS1053_HW_INIT;
   do
     {
-      if(my_sost != VS1053_HW_INIT)my_sost = VS1053_PLAY_BUF;
+      my_sost = VS1053_HW_INIT;
       if ((nRetCode = HTTPClientSendRequest (
                pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
                verb == VerbPost || verb == VerbPut, 0, 0))
@@ -221,34 +185,29 @@ break;
         {
           break;
         }
-      tls_os_time_delay (HZ/3);
+      tls_os_time_delay (HZ);
 
-      u16 u16_connect_timeout_sec = 100;
+      u16 u16_connect_timeout_sec = 10;
       if (strstr (ClientParams.Uri, "https") != NULL)
-        u16_connect_timeout_sec = 300;
+        u16_connect_timeout_sec = 30;
 
       printf ("Start to receive data from remote server\r\n");
 
-      //int i_cnt=0;
       //сначала заполняем буффер данными
       while (
           (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
           && my_sost == VS1053_HW_INIT)
         {
-          nSize = HTTP_CLIENT_BUFFER_SIZE;
-          size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-          //printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
-          if (freeSize < (nSize + 4))// || i_cnt++>4096)
-            {
-            printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+          nSize = BUF_BYTE_CHUNK_SIZE;
+          size_t freeSize = RingBufChunkAvailable ();
+          printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+          if (freeSize <=0 )
             break;
-            }
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode == HTTP_CLIENT_SUCCESS)
             {
-              xMessageBufferSend (xMessageBuffer, Buffer, nSize,
-                                  portMAX_DELAY);
+              PushRingBufChunk((u8*)Buffer);
               tls_watchdog_clr ();
             }
         }
@@ -263,7 +222,7 @@ break;
           && my_sost == VS1053_PLAY)
         {
           // Set the size of our buffer
-          nSize = HTTP_CLIENT_BUFFER_SIZE;
+          nSize = BUF_BYTE_CHUNK_SIZE;
           // Get the data
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
@@ -273,32 +232,32 @@ break;
           //ждем свободное место в буфере, и заполняем его
           while (my_sost == VS1053_PLAY)
             {
-              size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-              if (freeSize > (nSize + 4))
+              size_t freeSize = RingBufChunkAvailable();
+              if (freeSize>0)
                 {
-                  xMessageBufferSend (xMessageBuffer, Buffer, nSize,
-                                      portMAX_DELAY);
-                  //printf (" %d ", freeSize);
-                  //printf ("+");
+                  PushRingBufChunk((u8*)Buffer);
                   break;
                 }
               tls_os_time_delay (HZ / 100);
             }
 
-          //if (VS1053_WEB_RADIO_nTotal > 512)
-          //  tls_watchdog_clr ();
+          if (VS1053_WEB_RADIO_nTotal > 512)
+            tls_watchdog_clr ();
           VS1053_WEB_RADIO_nTotal += nSize;
         }
     }
   while (my_sost == VS1053_PLAY); // Run only once
 
-  if(my_sost != VS1053_PLAY_BUF)
-   {
-   my_sost = VS1053_STOP;
-   tls_os_time_delay (HZ);
-   xMessageBufferReset (xMessageBuffer);
-   }
+  my_sost = VS1053_STOP;
+  tls_os_time_delay (HZ);
+  // if (vs1053_buf_play_task_hdl)
+  //  {
+  //    tls_os_task_del_by_task_handle (vs1053_buf_play_task_hdl,
+  //                                    NULL /*task_vs1053_free*/);
+  //    vs1053_buf_play_task_hdl = NULL;
+  //  }
   tls_mem_free (Buffer);
+  ResetRingBuf();
 
   if (pHTTP)
     HTTPClientCloseRequest (&pHTTP);
