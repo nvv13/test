@@ -47,6 +47,20 @@ sda       PA04
 
 
 
+W801(1)  psram   LY68L6400  cfg(0)
+------ --------- -------    -----
+PA15   SCLK      (6)        PB00
+PB27   CE#       (1)        PB01
+PB02   SI/SIO[0] (5)
+PB03   SO/SIO[1] (2)
+PB04*     SIO[2] (3)
+PB05      SIO[3] (7)
+3.3V   Vcc       (8)
+GND    Vss       (4)
+------ --------- -------
+* вывод PB04 на макетке board HLK-W801-KIT-V1.1 ошибочно назван PB24 в месте рядом с разьемом type-c
+
+
 W801  VS1053
 ----- -------------
 PB17  XRST
@@ -54,7 +68,7 @@ PB21  XCS
 PB22  XDCS
 PB18  DREQ
 PB24  SCK
-PB03  MISO
+PB16  MISO //PB03
 PB26  MOSI
 5V    5V
 GND   DGND

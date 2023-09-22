@@ -108,20 +108,23 @@ UserMain (void)
 
       tls_os_time_delay (HZ*3);
 
-      u8 u8_ntp_state = 0;
-      ntp_set_server_demo ("time.google.com", "ntp0.ntp-servers.net", NULL);
-      while (u8_ntp_state < 3)
-        {
-          printf ("trying to get ntp\n");
-          if (u8_ntp_state == 0 && ntp_demo () == WM_SUCCESS)
-            u8_ntp_state = 100;
-          else
-            {
-              tls_os_time_delay (HZ*3);
-              tls_watchdog_clr ();
-              u8_ntp_state++;
-            }
-        }
+//      u8 u8_ntp_state = 0;
+//      ntp_set_server_demo ("216.239.35.12","time.google.com", "ntp0.ntp-servers.net");
+ntp_set_server_demo ("0.fedora.pool.ntp.org","1.fedora.pool.ntp.org","2.fedora.pool.ntp.org");
+//      tls_os_time_delay (HZ*3);
+//      while (u8_ntp_state < 3)
+  //      {
+//          printf ("trying to get ntp\n");
+//          if (u8_ntp_state == 0 && 
+          ntp_demo ();// == WM_SUCCESS)
+//            u8_ntp_state = 100;
+//          else
+//            {
+//              tls_os_time_delay (HZ*3);
+//              tls_watchdog_clr ();
+//              u8_ntp_state++;
+//            }
+//        }
 
       struct tm tblock;
       tls_get_rtc (&tblock);
@@ -132,8 +135,8 @@ UserMain (void)
       my_recognize_http_reset ();
       printf ("load default stantion 0\n");
       //flash_cfg_load_stantion_uuid (stantion_uuid, 0);
-      sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
-
+      //sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
+      sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           my_recognize_http_reset ();

@@ -66,8 +66,8 @@ vs1053_buf_play_task (void *sdata)
   while (1)
     {
       size_t item_size;
-      while (xMessageBuffer != NULL && buffer != NULL && my_sost != VS1053_STOP
-             && my_sost != VS1053_QUERY_TO_STOP)
+      while (xMessageBuffer != NULL && buffer != NULL /* && my_sost != VS1053_STOP && my_sost != VS1053_QUERY_TO_STOP */
+              )
         {
           if (my_sost == VS1053_PLAY || my_sost == VS1053_PLAY_BUF)
             {
@@ -82,8 +82,8 @@ vs1053_buf_play_task (void *sdata)
                 }
               else
                 {
-                tls_os_time_delay (1);
-                printf ("0");
+                tls_os_time_delay (10);
+                //printf ("0");
                 }
             }
           else
@@ -179,7 +179,7 @@ break;
     tls_os_time_delay (HZ/10);
     if(d_psram_check())
       {
-      xMessageBufferSize=256000;//больще не надо! глючит! 
+      xMessageBufferSize=256000;//256000;//больще не надо! глючит! 
       ucStorageBuffer = dram_heap_malloc (xMessageBufferSize+1);
       }
       else
@@ -193,6 +193,7 @@ break;
       }
     xMessageBuffer = xMessageBufferCreateStatic( xMessageBufferSize,
                          ucStorageBuffer,  &xMessageBufferStruct );
+    printf ("xMessageBufferSize=%d\r\n", xMessageBufferSize);
     }
 
 
@@ -204,7 +205,8 @@ break;
         VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
         VS1053_TASK_PRIO, 0);
 
-  if(my_sost != VS1053_PLAY_BUF)my_sost = VS1053_HW_INIT;
+  //if(my_sost != VS1053_PLAY_BUF)
+  my_sost = VS1053_HW_INIT;
   do
     {
       if(my_sost != VS1053_HW_INIT)my_sost = VS1053_PLAY_BUF;
@@ -231,13 +233,15 @@ break;
 
       //int i_cnt=0;
       //сначала заполняем буффер данными
+      u32 current_tick = tls_os_get_time();
       while (
           (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
-          && my_sost == VS1053_HW_INIT)
+          //&& my_sost == VS1053_HW_INIT
+          )
         {
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-          //printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+          //ptintf ("%d ", freeSize);
           if (freeSize < (nSize + 4))// || i_cnt++>4096)
             {
             printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
@@ -249,8 +253,15 @@ break;
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
+              //printf ("f");
               tls_watchdog_clr ();
             }
+        }
+      u32 u_fur=tls_os_get_time()+(tls_os_get_time() - current_tick);
+      while(u_fur>tls_os_get_time())//my_sost == VS1053_HW_INIT)
+        {
+        tls_os_time_delay (1);
+        tls_watchdog_clr ();
         }
 
       if (my_sost != VS1053_QUERY_TO_STOP)

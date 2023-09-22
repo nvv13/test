@@ -555,7 +555,7 @@ demo_console_task (void *sdata)
 
     .spi_cs = WM_IO_PB_23, /* not wire, но назначить надо */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
-    .spi_di = WM_IO_PB_03, //WM_IO_PB_25, 
+    .spi_di = WM_IO_PB_16,//WM_IO_PB_03, //WM_IO_PB_25, 
    /* master miso di <- miso slave, на макетке board
                               HLK-W801-KIT-V1.1 работает только WM_IO_PB_03 или 
  wm_spi_di_config - возможные пины
