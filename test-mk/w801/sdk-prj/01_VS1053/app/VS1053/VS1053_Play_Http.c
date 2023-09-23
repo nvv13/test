@@ -37,8 +37,10 @@
 
 u32 VS1053_WEB_RADIO_nTotal = 0;
 
+#define HTTP_1053_SERIAL_DEBUG
+
 #define http_chunk_size (vs1053_chunk_size * 2)
-#define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size)
+#define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size * 2)
 
 #define VS1053_TASK_SIZE 1024
 tls_os_task_t vs1053_buf_play_task_hdl = NULL;
@@ -61,7 +63,7 @@ vs1053_buf_play_task (void *sdata)
 {
   printf ("start vs1053_buf_play_task\n");
 
-  u8 *buffer = (u8 *)tls_mem_alloc (http_chunk_size);
+  u8 *buffer = (u8 *)tls_mem_alloc (HTTP_CLIENT_BUFFER_SIZE);
 
   while (1)
     {
@@ -72,18 +74,22 @@ vs1053_buf_play_task (void *sdata)
           if (my_sost == VS1053_PLAY || my_sost == VS1053_PLAY_BUF)
             {
               item_size = xMessageBufferReceive (
-                  xMessageBuffer, buffer, http_chunk_size, portMAX_DELAY);
+                  xMessageBuffer, buffer, HTTP_CLIENT_BUFFER_SIZE, portMAX_DELAY);
               if (item_size > 0)
                 {
                 VS1053_playChunk (buffer, item_size);
-                //printf ("-");
+#ifdef HTTP_1053_SERIAL_DEBUG
+                printf ("-");
+#endif
                 if (VS1053_WEB_RADIO_nTotal > 512)
                    tls_watchdog_clr ();
                 }
               else
                 {
                 tls_os_time_delay (10);
-                //printf ("0");
+#ifdef HTTP_1053_SERIAL_DEBUG
+                printf ("0");
+#endif
                 }
             }
           else
@@ -172,6 +178,9 @@ break;
 //        }
 #endif // TLS_CONFIG_HTTP_CLIENT_PROXY
 
+  P_HTTP_SESSION  pHTTPSession = (P_HTTP_SESSION)pHTTP;
+  pHTTPSession->HttpFlags = pHTTPSession->HttpFlags | HTTP_CLIENT_FLAG_KEEP_ALIVE;
+
   if (xMessageBuffer == NULL)
     {
     wm_psram_config (1);
@@ -179,7 +188,7 @@ break;
     tls_os_time_delay (HZ/10);
     if(d_psram_check())
       {
-      xMessageBufferSize=256000;//256000;//больще не надо! глючит! 
+      xMessageBufferSize=(HTTP_CLIENT_BUFFER_SIZE+4)*200;//256000;//больще не надо! глючит! 
       ucStorageBuffer = dram_heap_malloc (xMessageBufferSize+1);
       }
       else
@@ -225,15 +234,14 @@ break;
         }
       tls_os_time_delay (HZ/3);
 
-      u16 u16_connect_timeout_sec = 100;
+      u16 u16_connect_timeout_sec = 300;
       if (strstr (ClientParams.Uri, "https") != NULL)
-        u16_connect_timeout_sec = 300;
+        u16_connect_timeout_sec = 600;
 
       printf ("Start to receive data from remote server\r\n");
 
       //int i_cnt=0;
       //сначала заполняем буффер данными
-      u32 current_tick = tls_os_get_time();
       while (
           (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
           //&& my_sost == VS1053_HW_INIT
@@ -247,22 +255,21 @@ break;
             printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
             break;
             }
+          u32 u_fur=tls_os_get_time();
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
+          if(tls_os_get_time()-u_fur-2<HZ)tls_os_time_delay (tls_os_get_time()-u_fur-2);
           if (nRetCode == HTTP_CLIENT_SUCCESS)
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
-              //printf ("f");
+#ifdef HTTP_1053_SERIAL_DEBUG
+              printf ("f");
+#endif
               tls_watchdog_clr ();
             }
         }
-      u32 u_fur=tls_os_get_time()+(tls_os_get_time() - current_tick);
-      while(u_fur>tls_os_get_time())//my_sost == VS1053_HW_INIT)
-        {
-        tls_os_time_delay (1);
-        tls_watchdog_clr ();
-        }
+      tls_os_time_delay (100);
 
       if (my_sost != VS1053_QUERY_TO_STOP)
         my_sost = VS1053_PLAY;
@@ -276,10 +283,12 @@ break;
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
+          u32 u_fur=tls_os_get_time();
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
+          if(tls_os_get_time()-u_fur<HZ)tls_os_time_delay (tls_os_get_time()-u_fur);
 
           //ждем свободное место в буфере, и заполняем его
           while (my_sost == VS1053_PLAY)
@@ -290,7 +299,9 @@ break;
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
                   //printf (" %d ", freeSize);
-                  //printf ("+");
+#ifdef HTTP_1053_SERIAL_DEBUG
+                  printf ("+");
+#endif
                   break;
                 }
               tls_os_time_delay (HZ / 100);

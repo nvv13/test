@@ -29,6 +29,7 @@
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
 #include "w_wifi.h"
+#include "w_ntp.h"
 
 #define DEMO_TASK_SIZE 2048
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
@@ -654,6 +655,10 @@ void wm_psram_config(uint8_t numsel);
       tls_watchdog_clr ();
 
       tls_os_time_delay (HZ);
+
+      ntp_set_server_demo ("0.fedora.pool.ntp.org","1.fedora.pool.ntp.org","2.fedora.pool.ntp.org");
+      ntp_demo ();
+
       my_recognize_http_reset ();
       printf ("load default stantion 0\n");
       flash_cfg_load_stantion_uuid (stantion_uuid, 0);

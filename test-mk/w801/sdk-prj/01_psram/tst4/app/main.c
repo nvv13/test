@@ -136,7 +136,8 @@ ntp_set_server_demo ("0.fedora.pool.ntp.org","1.fedora.pool.ntp.org","2.fedora.p
       printf ("load default stantion 0\n");
       //flash_cfg_load_stantion_uuid (stantion_uuid, 0);
       //sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
-      sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https 
+      //sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https 
+      sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           my_recognize_http_reset ();
