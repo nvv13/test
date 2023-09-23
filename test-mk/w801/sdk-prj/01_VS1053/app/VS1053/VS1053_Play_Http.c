@@ -37,7 +37,7 @@
 
 u32 VS1053_WEB_RADIO_nTotal = 0;
 
-#define HTTP_1053_SERIAL_DEBUG
+//#define HTTP_1053_SERIAL_DEBUG
 
 #define http_chunk_size (vs1053_chunk_size * 2)
 #define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size * 2)
