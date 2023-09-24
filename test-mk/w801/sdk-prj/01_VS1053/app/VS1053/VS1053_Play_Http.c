@@ -35,9 +35,9 @@
 #include "psram.h"
 #include "VS1053.h"
 
+
 u32 VS1053_WEB_RADIO_nTotal = 0;
 
-//#define HTTP_1053_SERIAL_DEBUG
 
 #define http_chunk_size (vs1053_chunk_size * 2)
 #define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size * 2)
@@ -56,6 +56,38 @@ static uint8_t * ucStorageBuffer = NULL; // [ xMessageBufferSize+1 ];
 /* The variable used to hold the message buffer structure. */
 StaticMessageBuffer_t xMessageBufferStruct;
 MessageBufferHandle_t xMessageBuffer = NULL;
+
+
+
+static    u16 no_psram_BufferSize=4000;// подойдет 4000, более - программа начнет глючить
+static    u16 psram_BufferSize=(HTTP_CLIENT_BUFFER_SIZE+4)*200;   // подойдет 26400 более не надо! глючит! 
+static    u8 psram_config=1;//0 или 1 
+static    psram_mode_t psram_mode=PSRAM_SPI;// делай PSRAM_SPI, PSRAM_QPI - так и не работает
+static    u8 psram_frequency_divider=2;//2 - хорошо работает для ESP-PSRAM64H 
+static    u8 psram_tCPH=2;//2 - хорошо работает для ESP-PSRAM64H 
+static    u8 psram_BURST=1;//1 - хорошо работает для ESP-PSRAM64H 
+static    u16 psram_OVERTIMER=2;//2 - хорошо работает для ESP-PSRAM64H 
+static    u8 load_buffer_debug=0;//0 или 1 
+
+void VS1053_PlayHttpMp3_set (libVS1053_t *set_pin)
+{
+    load_buffer_debug=set_pin->load_buffer_debug;
+
+    if(set_pin->no_psram_BufferSize>0)
+        no_psram_BufferSize=set_pin->no_psram_BufferSize;
+
+    if(set_pin->psram_BufferSize>0)
+     {
+        psram_BufferSize=set_pin->psram_BufferSize;   
+        psram_config=set_pin->psram_config;
+        psram_mode=set_pin->psram_mode;
+        psram_frequency_divider=set_pin->psram_frequency_divider;
+        psram_tCPH=set_pin->psram_tCPH;
+        psram_BURST=set_pin->psram_BURST;
+        psram_OVERTIMER=set_pin->psram_OVERTIMER;
+     }
+}
+
 
 
 void
@@ -78,18 +110,16 @@ vs1053_buf_play_task (void *sdata)
               if (item_size > 0)
                 {
                 VS1053_playChunk (buffer, item_size);
-#ifdef HTTP_1053_SERIAL_DEBUG
-                printf ("-");
-#endif
+                if(load_buffer_debug)
+                   printf ("-");
                 if (VS1053_WEB_RADIO_nTotal > 512)
                    tls_watchdog_clr ();
                 }
               else
                 {
                 tls_os_time_delay (10);
-#ifdef HTTP_1053_SERIAL_DEBUG
-                printf ("0");
-#endif
+                if(load_buffer_debug)
+                   printf ("0");
                 }
             }
           else
@@ -103,6 +133,9 @@ vs1053_buf_play_task (void *sdata)
 
   printf ("stop vs1053_buf_play_task\n");
 }
+
+
+
 
 static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
@@ -183,17 +216,17 @@ break;
 
   if (xMessageBuffer == NULL)
     {
-    wm_psram_config (1);
-    d_psram_init (PSRAM_SPI,2,2,1,2);
+    wm_psram_config (psram_config);
+    d_psram_init (psram_mode,psram_frequency_divider,psram_tCPH,psram_BURST,psram_OVERTIMER);
     tls_os_time_delay (HZ/10);
     if(d_psram_check())
       {
-      xMessageBufferSize=(HTTP_CLIENT_BUFFER_SIZE+4)*200;//256000;//больще не надо! глючит! 
+      xMessageBufferSize=psram_BufferSize;
       ucStorageBuffer = dram_heap_malloc (xMessageBufferSize+1);
       }
       else
       {
-      xMessageBufferSize=4000;
+      xMessageBufferSize=no_psram_BufferSize;
       ucStorageBuffer = (u8 *)tls_mem_alloc (xMessageBufferSize+1);
       }
     if (ucStorageBuffer == NULL)
@@ -263,9 +296,8 @@ break;
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
-#ifdef HTTP_1053_SERIAL_DEBUG
-              printf ("f");
-#endif
+              if(load_buffer_debug)
+                  printf ("f");
               tls_watchdog_clr ();
             }
         }
@@ -299,9 +331,8 @@ break;
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
                   //printf (" %d ", freeSize);
-#ifdef HTTP_1053_SERIAL_DEBUG
-                  printf ("+");
-#endif
+                  if(load_buffer_debug)
+                     printf ("+");
                   break;
                 }
               tls_os_time_delay (HZ / 100);

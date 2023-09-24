@@ -396,6 +396,8 @@ VS1053_data_mode_off (void)
 //  return (digitalRead(dreq_pin) == HIGH);
 //}
 
+extern void VS1053_PlayHttpMp3_set (libVS1053_t *set_pin);
+
 void
 VS1053_VS1053 (libVS1053_t *set_pin)
 {
@@ -408,6 +410,9 @@ VS1053_VS1053 (libVS1053_t *set_pin)
   spi_ck = set_pin->spi_ck;
   spi_di = set_pin->spi_di;
   spi_do = set_pin->spi_do;
+
+  VS1053_PlayHttpMp3_set(set_pin);
+
 }
 
 static uint16_t

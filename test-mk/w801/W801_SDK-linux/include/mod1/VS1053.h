@@ -43,6 +43,7 @@ extern "C"
 #include "ff.h"
 #include "wm_io.h"
 #include "wm_type_def.h"
+#include "wm_psram.h"
 
   enum VS1053_I2S_RATE
   {
@@ -88,6 +89,19 @@ extern "C"
                               */
 
     enum tls_io_name spi_do; /* mosi MOSI (Master Out Slave In) pin -> */
+
+    /* далее настройки для VS1053_PlayHttpMp3 */
+    u16 no_psram_BufferSize;// подойдет 4000, более - программа начнет глючить
+    u16 psram_BufferSize;   // подойдет 26400 более не надо! глючит! 
+
+    u8 psram_config;//0 или 1 
+    psram_mode_t psram_mode;// делай PSRAM_SPI, PSRAM_QPI - так и не работает
+    u8 psram_frequency_divider;//2 - хорошо работает для ESP-PSRAM64H 
+    u8 psram_tCPH;//2 - хорошо работает для ESP-PSRAM64H 
+    u8 psram_BURST;//1 - хорошо работает для ESP-PSRAM64H 
+    u16 psram_OVERTIMER;//2 - хорошо работает для ESP-PSRAM64H 
+
+    u8 load_buffer_debug;//0 , 1 - выводит инфу по заполнению f или +, и опусташению буффера -
 
   } libVS1053_t;
 
