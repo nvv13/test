@@ -45,7 +45,15 @@ case TFT00_96SP_2:
 	UTFT_LCD_Write_DATA2(0x1A); 
  
 	UTFT_LCD_Write_COM(0x36); //MX, MY, RGB mode 
+//	UTFT_LCD_Write_DATA2(0xC0); 
+if(display_model==TFT00_96SP_2)
+{
+	UTFT_LCD_Write_DATA2(0xC8); 
+}
+else
+{
 	UTFT_LCD_Write_DATA2(0xC0); 
+}
 
 	//ST7735R Gamma Sequence
 	UTFT_LCD_Write_COM(0xE0); 
