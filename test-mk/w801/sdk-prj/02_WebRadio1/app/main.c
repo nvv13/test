@@ -368,6 +368,7 @@ demo_timer_irq (u8 *arg) //
     {
       if (i_delay_SW_DBL_CLICK++ > i_pos_DBL_CLICK)
         {
+          printf ("demo_timer_irq i_delay_SW_DBL_CLICK=%d i_switch_menu=%d\n",i_delay_SW_DBL_CLICK,i_switch_menu);
           i_delay_SW_DBL_CLICK = 0;
           if (i_switch_menu == 0)
             {
@@ -416,6 +417,7 @@ KNOOB_SW_isr_callback (void *context)
   if (ret)
     {
       tls_clr_gpio_irq_status (KNOOB_SW);
+      printf ("KNOOB_SW_isr_callback i_dreb_SW=%d\n",i_dreb_SW);
       if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
         {
           i_dreb_SW = 1;
