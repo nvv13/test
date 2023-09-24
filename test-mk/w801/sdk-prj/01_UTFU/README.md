@@ -865,7 +865,7 @@ W801  LCD
 ------------------------------------------------
 
 
-board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834
+board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834 или MSP3223 
 
 
 Видео
@@ -880,6 +880,8 @@ board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834
 
 wiki
 http://www.lcdwiki.com/2.8inch_IPS_SPI_Module_ILI9341
+такой же по софту
+http://www.lcdwiki.com/3.2inch_IPS_SPI_Module_ILI9341
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/MSP2834
 
@@ -887,7 +889,7 @@ http://www.lcdwiki.com/2.8inch_IPS_SPI_Module_ILI9341
 
 надо соединить по схеме:
 ~~~
-connect to MSP2834
+connect to MSP2834 or MSP3223
 ---- ------
 W801  LCD   
 ---- ------

@@ -151,6 +151,7 @@ extern "C"
 #define MHS3528 48
 #define MSP2834 49
 #define MSP3223 50
+#define TFT00_96SP_2 51
 
 #define ITDB32 0 // HX8347-A (16bit)
 #define ITDB32WC 1 // ILI9327  (16bit)

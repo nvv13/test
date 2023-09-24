@@ -1,4 +1,5 @@
 case ST7735S:
+case TFT00_96SP_2:
 
 	UTFT_LCD_Write_COM(0x11);//Sleep exit 
 	delay(120);
@@ -352,10 +353,6 @@ Lcd_WriteIndex(0x2c);
 
 
 
-
-
-
-
 case TFT00_96SP: // on case
 
 // 7735R init, part 1 (red or green tab)
@@ -506,3 +503,5 @@ UTFT_LCD_Write_DATA2(0xC0);
 
 
 	break;
+
+
