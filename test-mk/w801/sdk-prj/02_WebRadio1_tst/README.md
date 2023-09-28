@@ -1,3 +1,9 @@
+!!!В РАБОТЕ!!!
+!!!underway!!!
+
+это для теста некоторых нюансов 
+
+
 project simple WebRadio
 
 board HLK-W801-KIT-V1.1 + VS1053 = simple WebRadio

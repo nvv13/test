@@ -39,6 +39,8 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
 
+#include "encoder.h"
+
 //****************************************************************************************************//
 u8 u8_wifi_state = 0;
 extern u32 VS1053_WEB_RADIO_nTotal;
@@ -266,20 +268,11 @@ display_refresh (void)
 
 //****************************************************************************************************//
 
-#define KNOOB_SW WM_IO_PA_11
-#define KNOOB_CLK WM_IO_PA_12
-#define KNOOB_DT WM_IO_PA_13
-
-static const u16 i_pos_dreb_CLK = 1; // таймер 300 Мкс, значит будет 300 MKs
-volatile static u16 i_dreb_CLK = 0; // от дребезга
 
 static int i_rotar = 10;
-volatile static u16 i_rotar_zero = 0;
-volatile static u16 i_rotar_one = 0;
-static u8 u8_enc_state = 0;
 
 static const u16 i_pos_dreb_SW
-    = 1000; //кнопка,таймер 300 Мкс, значит будет 300 миллисекунд.
+    = 500; //кнопка,таймер 300 Мкс, значит будет 150 миллисекунд.
 volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
 
 static const u16 i_pos_DBL_CLICK
@@ -294,22 +287,16 @@ volatile static u16 i_delay_volume = 0;
 static void
 demo_timer_irq (u8 *arg) //
 {
-
-  if (i_dreb_CLK != 0)
+  int i_enc_diff= get_encoder_diff();
+  if (i_enc_diff!=0)//i_dreb_CLK != 0)
     {
-      if (i_dreb_CLK++ > i_pos_dreb_CLK) //можно отсчитывать временной интервал
+        set_encoder_diff(0);  
         {
-          i_dreb_CLK = 0; // от дребезга
-
-          u8_enc_state = ~u8_enc_state; // у меня "Полношаговый" энкодер, даёт
-                                        // 4 сигнала на один щелчок, поэтому
-                                        // исп. переменная u8_enc_state
-          if (u8_enc_state)
             {
 
               if (i_switch_menu == 0)
                 {
-                  if (i_rotar_zero > i_rotar_one)
+                  if (i_enc_diff<0)
                     i_rotar--;
                   else
                     i_rotar++;
@@ -328,7 +315,7 @@ demo_timer_irq (u8 *arg) //
                 }
               if (i_switch_menu == 1)
                 {
-                  if (i_rotar_zero > i_rotar_one)
+                  if (i_enc_diff<0)
                     i_menu--;
                   else
                     i_menu++;
@@ -339,7 +326,7 @@ demo_timer_irq (u8 *arg) //
                 }
               if (i_switch_menu == 2)
                 {
-                  if (i_rotar_zero > i_rotar_one)
+                  if (i_enc_diff<0)
                     i_menu2--;
                   else
                     i_menu2++;
@@ -351,8 +338,6 @@ demo_timer_irq (u8 *arg) //
 
               display_refresh ();
             }
-          i_rotar_zero = 0;
-          i_rotar_one = 0;
         }
     }
 
@@ -408,66 +393,33 @@ demo_timer_irq (u8 *arg) //
             }
         }
     }
-}
 
-static void
-KNOOB_SW_isr_callback (void *context)
-{
-  u16 ret = tls_get_gpio_irq_status (KNOOB_SW);
-  if (ret)
+  if(get_encoder_btn_state()==0) //Нажали
     {
-      tls_clr_gpio_irq_status (KNOOB_SW);
-      printf ("KNOOB_SW_isr_callback i_dreb_SW=%d\n",i_dreb_SW);
       if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
         {
+          //printf ("get_encoder_btn_state()==0 i_delay_SW_DBL_CLICK=%d\n",i_delay_SW_DBL_CLICK);
           i_dreb_SW = 1;
+
           if (i_delay_SW_DBL_CLICK == 0)
             i_delay_SW_DBL_CLICK = 1;
           else
             {
+            if (i_delay_SW_DBL_CLICK > i_pos_dreb_SW)
+              {
               i_delay_SW_DBL_CLICK = 0;
               i_switch_menu++;
               if (i_switch_menu > 2)
                 i_switch_menu = 0;
-              // i_menu = 0;
-              /*
-              if (i_switch_menu == 0)
-                {
-                  u16 menu_tmp;
-                  flash_cfg_load_u16 (&menu_tmp, MENU_STORE_INDEX);
-                  if (menu_tmp != i_menu)
-                    flash_cfg_store_u16 (i_menu, MENU_STORE_INDEX);
-                }
-              */
               if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
                 i_menu--;
               display_refresh ();
+              }
             }
         }
     }
 }
-static void
-KNOOB_CLK_isr_callback (void *context)
-{
-  u16 retC = tls_get_gpio_irq_status (KNOOB_CLK);
-  // u16 retD = tls_get_gpio_irq_status (KNOOB_DT);
-  if (retC) // || retD)
-    {
-      if (retC)
-        tls_clr_gpio_irq_status (KNOOB_CLK);
-      // if (retD)
-      //  tls_clr_gpio_irq_status (KNOOB_DT);
 
-      if (i_dreb_CLK == 0)
-        {
-          if (tls_gpio_read (KNOOB_DT))
-            i_rotar_one++;
-          else
-            i_rotar_zero++;
-          i_dreb_CLK = 1;
-        }
-    }
-}
 
 //****************************************************************************************************//
 /*
@@ -627,17 +579,14 @@ void wm_psram_config(uint8_t numsel);
   tls_timer_start (timer_id);
   printf ("timer start\n");
   //
-  tls_gpio_cfg (KNOOB_SW, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_isr_register (KNOOB_SW, KNOOB_SW_isr_callback, NULL);
-  tls_gpio_irq_enable (KNOOB_SW, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
-  //
-  tls_gpio_cfg (KNOOB_CLK, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_isr_register (KNOOB_CLK, KNOOB_CLK_isr_callback, NULL);
-  tls_gpio_irq_enable (KNOOB_CLK, WM_GPIO_IRQ_TRIG_RISING_EDGE);
-  tls_gpio_cfg (KNOOB_DT, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-  // tls_gpio_isr_register (KNOOB_DT, KNOOB_CLK_isr_callback, NULL);
-  // tls_gpio_irq_enable (KNOOB_DT, WM_GPIO_IRQ_TRIG_RISING_EDGE);
-  //
+
+  libENCODER_t enc_pin = {
+	 .ENCODER_S=WM_IO_PA_11,
+	 .ENCODER_A=WM_IO_PA_12, 
+	 .ENCODER_B=WM_IO_PA_13, 
+   };
+
+  bsp_encoder_init(&enc_pin);
 
   stantion_uuid[0] = 0;
   flash_cfg_load_u16 (&u16_volume, MENU_STORE_VOLUME);
