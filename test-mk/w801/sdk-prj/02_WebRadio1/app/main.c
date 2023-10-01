@@ -657,7 +657,7 @@ void wm_psram_config(uint8_t numsel);
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (u8_ind_ch_st));
 
           tls_os_time_delay (HZ);
-          tls_watchdog_clr ();
+          //tls_watchdog_clr ();
         }
     }
 }

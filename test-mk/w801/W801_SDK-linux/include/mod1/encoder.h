@@ -9,6 +9,10 @@ https://gitee.com/beewu123/w80x-sdk-lcd.git
 #ifndef __ENCODER_H__
 #define __ENCODER_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "wm_type_def.h"
 
 #include "wm_io.h"
@@ -29,5 +33,8 @@ int32_t get_encoder_diff();
 void set_encoder_diff(int32_t val);
 
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif

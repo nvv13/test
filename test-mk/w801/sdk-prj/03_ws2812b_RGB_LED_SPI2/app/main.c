@@ -62,7 +62,6 @@ static u8 volatile u8_dreb = 2; // от дребезга кнопки
 
 static u16 volatile u16_delay_timer_sw = 0;
 
-extern volatile u32 u32_IR_scan_result;
 static int volatile i_delay_timer_IR = -1;
 static int volatile i_IR_decode = 0;
 

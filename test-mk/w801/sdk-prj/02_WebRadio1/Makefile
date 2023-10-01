@@ -5,8 +5,8 @@ ifndef PDIR # {
 GEN_IMAGES = $(TARGET).elf
 GEN_BINS = $(TARGET).bin
 SUBDIRS = \
-    $(TOP_DIR)/app #\
-#    $(TOP_DIR)/demo
+    $(TOP_DIR)/app \
+   $(TOP_DIR)/app/encoder
 MYAPPDIRS = $(TOP_DIR)/app
 endif # } PDIR
 
@@ -31,8 +31,8 @@ endif
 endif
 
 COMPONENTS_$(TARGET) =	\
-    $(TOP_DIR)/app/libuser$(LIB_EXT) #\
-#    $(TOP_DIR)/demo/libdemo$(LIB_EXT)
+    $(TOP_DIR)/app/libuser$(LIB_EXT) \
+    $(TOP_DIR)/app/lib_encoder$(LIB_EXT)
 
 ifeq ($(USE_LIB), 0)
 COMPONENTS_$(TARGET) += \

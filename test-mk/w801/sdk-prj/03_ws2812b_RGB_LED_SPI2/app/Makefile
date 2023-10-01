@@ -11,6 +11,7 @@ endif
 sinclude $(TOP_DIR)/tools/w800/rules.mk
 
 INCLUDES := $(INCLUDES) -I $(PDIR)include
+INCLUDES += -I ./IR_Scan
 
 PDIR := ../$(PDIR)
 sinclude $(PDIR)Makefile

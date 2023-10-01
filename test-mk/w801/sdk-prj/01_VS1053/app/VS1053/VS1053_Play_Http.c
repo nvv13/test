@@ -298,7 +298,9 @@ break;
                                   portMAX_DELAY);
               if(load_buffer_debug)
                   printf ("f");
-              tls_watchdog_clr ();
+              VS1053_WEB_RADIO_nTotal += nSize;
+              if (VS1053_WEB_RADIO_nTotal > 512)
+                 tls_watchdog_clr ();
             }
         }
       tls_os_time_delay (100);
@@ -338,8 +340,6 @@ break;
               tls_os_time_delay (HZ / 100);
             }
 
-          //if (VS1053_WEB_RADIO_nTotal > 512)
-          //  tls_watchdog_clr ();
           VS1053_WEB_RADIO_nTotal += nSize;
         }
     }
