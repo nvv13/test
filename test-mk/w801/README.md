@@ -28,7 +28,7 @@ Expansion – 2x 24-pin headers with
  Up to 44x GPIOs, 5x PWM
  Up to 15 touch sensors
  ISO/IEC 7816 smart card interface
- Reset, Wakeup, 3.3V, and GND signals
+ Reset, 3.3V, and GND signals
 Debugging – CH340 via USB-C port
 Misc – Reset and Boot buttons, 7x user LEDs including two connected to PWM capable pins
 Power Supply – 5V via USB-C port

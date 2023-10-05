@@ -166,6 +166,14 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
       return nRetCode;
     }
 
+  //Icy-MetaData:1
+//  if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"Icy-MetaData","1", 1))!= HTTP_CLIENT_SUCCESS)
+//    {
+//      tls_mem_free (Buffer);
+//      return nRetCode;
+//    }
+
+
   /*
 if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
 "application/json", 1))!= HTTP_CLIENT_SUCCESS)
@@ -291,7 +299,7 @@ break;
           u32 u_fur=tls_os_get_time();
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
-          if(tls_os_get_time()-u_fur-2<HZ)tls_os_time_delay (tls_os_get_time()-u_fur-2);
+          if(tls_os_get_time()-u_fur<HZ)tls_os_time_delay (tls_os_get_time()-u_fur);
           if (nRetCode == HTTP_CLIENT_SUCCESS)
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
@@ -322,7 +330,7 @@ break;
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
-          if(tls_os_get_time()-u_fur<HZ)tls_os_time_delay (tls_os_get_time()-u_fur);
+          if((tls_os_get_time()-u_fur-3)<HZ)tls_os_time_delay (tls_os_get_time()-u_fur-3);
 
           //ждем свободное место в буфере, и заполняем его
           while (my_sost == VS1053_PLAY)

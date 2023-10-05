@@ -257,6 +257,10 @@ https://github.com/baldram/ESP_VS1053_Library/issues/47
 
 https://github.com/nopnop2002/esp-idf-vs1053
 
+PS 2: 
+https://www.opennet.ru/base/sys/radio_protocols.txt.html
+https://gist.github.com/niko/2a1d7b2d109ebe7f7ca2f860c3505ef0
+https://cast.readme.io/docs/icy
 
 
 

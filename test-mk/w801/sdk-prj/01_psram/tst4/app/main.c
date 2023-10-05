@@ -69,7 +69,7 @@ UserMain (void)
 
     .spi_cs = WM_IO_PB_23, /* not wire, но назначить надо */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
-    .spi_di = WM_IO_PB_16, //
+    .spi_di = WM_IO_PB_16,//WM_IO_PB_03, //WM_IO_PB_25, 
    /* master miso di <- miso slave, на макетке board
                               HLK-W801-KIT-V1.1 работает только WM_IO_PB_03 или 
  wm_spi_di_config - возможные пины
@@ -82,7 +82,46 @@ UserMain (void)
 
 */
     .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
+
+
+/**
+ * @brief  config the pins used for psram ck cs dat0 dat1 dat2 dat3
+ * @param  numsel: config psram ck cs dat0 dat1 dat2 dat3 pins multiplex relation,valid para 0,1
+ *			0:                 1: only for 56pin
+ *			  psram_ck   PB00    psram_ck   PA15
+ *			  psram_cs   PB01    psram_cs   PB27
+ *			  psram_dat0 PB02    psram_dat0 PB02
+ *			  psram_dat1 PB03    psram_dat1 PB03
+ *			  psram_dat2 PB04    psram_dat2 PB04
+ *			  psram_dat3 PB05    psram_dat3 PB05
+
+ * @return None
+void wm_psram_config(uint8_t numsel);
+ */
+
+    /* далее настройки для VS1053_PlayHttpMp3 */
+    .no_psram_BufferSize=4000,// подойдет 4000, более - программа начнет глючить
+    .psram_BufferSize=26400,   // подойдет 26400 более не надо! глючит! 
+    .psram_config=1,//0 или 1 
+    .psram_mode=PSRAM_SPI,// делай PSRAM_SPI, PSRAM_QPI - так и не работает
+    .psram_frequency_divider=2,//2 - хорошо работает для ESP-PSRAM64H 
+    .psram_tCPH=2,//2 - хорошо работает для ESP-PSRAM64H 
+    .psram_BURST=1,//1 - хорошо работает для ESP-PSRAM64H 
+    .psram_OVERTIMER=2,//2 - хорошо работает для ESP-PSRAM64H 
+    .load_buffer_debug=1,//0 , 1 - выводит инфу по заполнению "f" или "+", и опусташению буффера "-", "0" - нехватка данных
+
+
   };
+
+  /**
+   * config the pins used for spi di
+   * WM_IO_PB_00 - не работает,
+   * WM_IO_PB_03 - работает!
+   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный к
+   * данному контакту на макетке
+   * WM_IO_PB_25 only for 56pin - не работает, мешает светодиод подключенный к
+   * данному контакту на макетке
+   */
 
 
   VS1053_VS1053 (&user_data53);
@@ -137,19 +176,20 @@ ntp_set_server_demo ("0.fedora.pool.ntp.org","1.fedora.pool.ntp.org","2.fedora.p
       //flash_cfg_load_stantion_uuid (stantion_uuid, 0);
       //sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
       //sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https 
-      sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https 
+      //sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https 
+      sprintf(stantion_uuid,"%s","06bb1bd0-99f4-4ddd-b06a-eac29e313724");//trance
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           my_recognize_http_reset ();
-          //http_get_web_station_by_stationuuid (stantion_uuid);
-          http_get_web_station_by_random();
+          http_get_web_station_by_stationuuid (stantion_uuid);
+          //http_get_web_station_by_random();
           printf (" my_recognize_ret_name = %s\n",my_recognize_ret_name (0));
           printf (" my_recognize_ret_url_resolved = %s\n",my_recognize_ret_url_resolved (0));
   
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
 
           tls_os_time_delay (HZ);
-          tls_watchdog_clr ();
+          //tls_watchdog_clr ();
         }
     }
 
