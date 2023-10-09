@@ -261,6 +261,11 @@ PS 2:
 https://www.opennet.ru/base/sys/radio_protocols.txt.html
 https://gist.github.com/niko/2a1d7b2d109ebe7f7ca2f860c3505ef0
 https://cast.readme.io/docs/icy
+https://github.com/schreibfaul1/ESP32-audioI2S.git
+
+PS 3: 
+ пример для изучения
+$ curl -i -H 'Icy-Metadata: 1' --output 1.bin http://stream-160.zeno.fm/62twtv23sfeuv?zs=zPF1ujlnT0uSbEe2nOK3Pw
 
 
 

@@ -92,7 +92,7 @@ extern "C"
 
     /* далее настройки для VS1053_PlayHttpMp3 */
     u16 no_psram_BufferSize;// подойдет 4000, более - программа начнет глючить
-    u16 psram_BufferSize;   // подойдет 26400 более не надо! глючит! 
+    u32 psram_BufferSize;   // подойдет 26400 более не надо! глючит! 
 
     u8 psram_config;//0 или 1 
     psram_mode_t psram_mode;// делай PSRAM_SPI, PSRAM_QPI - так и не работает

@@ -60,7 +60,7 @@ MessageBufferHandle_t xMessageBuffer = NULL;
 
 
 static    u16 no_psram_BufferSize=4000;// подойдет 4000, более - программа начнет глючить
-static    u16 psram_BufferSize=(HTTP_CLIENT_BUFFER_SIZE+4)*200;   // подойдет 26400 более не надо! глючит! 
+static    u32 psram_BufferSize=(HTTP_CLIENT_BUFFER_SIZE+4)*200;   // подойдет 26400 более не надо! глючит! 
 static    u8 psram_config=1;//0 или 1 
 static    psram_mode_t psram_mode=PSRAM_SPI;// делай PSRAM_SPI, PSRAM_QPI - так и не работает
 static    u8 psram_frequency_divider=2;//2 - хорошо работает для ESP-PSRAM64H 
