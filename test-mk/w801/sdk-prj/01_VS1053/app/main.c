@@ -22,6 +22,7 @@
 
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
+#include "mod1/encoder.h"
 
 static u8g2_t u8g2;
 
@@ -32,6 +33,8 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
 #include "ff.h"
+
+static int i_type_file=0;
 
 FRESULT
 scan_files (
@@ -68,8 +71,10 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, ".mp3") != NULL
-                  || strstr (FileName, ".MP3") != NULL)
+              if (((strstr (FileName, ".mp3") != NULL || strstr (FileName, ".MP3") != NULL) && i_type_file==0) ||
+                  ((strstr (FileName, ".flac") != NULL || strstr (FileName, ".FLAC") != NULL) && i_type_file==1) ||
+                  ((strstr (FileName, ".ogg") != NULL || strstr (FileName, ".OGG") != NULL) && i_type_file==2) 
+                 )
                 {
                   printf ("FileName = %s \n", FileName);
 
@@ -106,7 +111,10 @@ scan_files (
                     }
                   while (u8g2_NextPage (&u8g2));
 
-                  VS1053_PlayMp3 (FileName);
+                  if(i_type_file==0)
+                    VS1053_PlayMp3 (FileName);
+                    else
+                    VS1053_PlayFlac (FileName);
                   tls_os_time_delay (HZ);
                 }
             }
@@ -119,17 +127,33 @@ scan_files (
 
 #define VOLUME 100 // volume level 0-100
 
-#define KNOOB_SW WM_IO_PA_11
-static const u16 i_pos_dreb_SW = 300; //кнопка
+static const u16 i_pos_dreb_SW
+    = 500; //кнопка,таймер 300 Мкс, значит будет 150 миллисекунд.
 volatile static u8 i_dreb_SW = 0;     // от дребезга кнопки
 
 static void
-KNOOB_SW_isr_callback (void *context)
+demo_timer_irq (u8 *arg) // здесь будет смена режима
 {
-  u16 ret = tls_get_gpio_irq_status (KNOOB_SW);
-  if (ret)
+
+  int i_enc_diff= get_encoder_diff();
+  if (i_enc_diff!=0)//i_dreb_CLK != 0)
     {
-      tls_clr_gpio_irq_status (KNOOB_SW);
+      if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
+        {
+          i_dreb_SW = 1;
+          set_encoder_diff(0);  
+          i_type_file++;
+          if(i_type_file>2)i_type_file=0;
+          if (VS1053_status_get_status () == VS1053_PLAY)
+            {
+              VS1053_stop_PlayMP3 ();
+            };
+        }
+    }
+
+
+  if(get_encoder_btn_state()==0) //Нажали
+    {
       if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
         {
           i_dreb_SW = 1;
@@ -139,16 +163,13 @@ KNOOB_SW_isr_callback (void *context)
             };
         }
     }
-}
 
-static void
-demo_timer_irq (u8 *arg) // здесь будет смена режима
-{
   if (i_dreb_SW != 0
       && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
     {
       i_dreb_SW = 0; // от дребезга
     }
+
 }
 
 void
@@ -159,21 +180,22 @@ user_app1_task (void *sdata)
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
   timer_cfg.unit = TLS_TIMER_UNIT_US;
-  timer_cfg.timeout = 100;
+  timer_cfg.timeout = 300;
   timer_cfg.is_repeat = 1;
   timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
   timer_cfg.arg = NULL;
   timer_id = tls_timer_create (&timer_cfg);
-  if (true)
-    {
-      tls_timer_start (timer_id);
-      printf ("timer start\n");
-    }
+  tls_timer_start (timer_id);
+  printf ("timer start\n");
 
-  //
-  tls_gpio_cfg (KNOOB_SW, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_PULLHIGH);
-  tls_gpio_isr_register (KNOOB_SW, KNOOB_SW_isr_callback, NULL);
-  tls_gpio_irq_enable (KNOOB_SW, WM_GPIO_IRQ_TRIG_FALLING_EDGE);
+  libENCODER_t enc_pin = {
+	 .ENCODER_S=WM_IO_PA_11,
+	 .ENCODER_A=WM_IO_PA_12, 
+	 .ENCODER_B=WM_IO_PA_13, 
+   };
+  bsp_encoder_init(&enc_pin);
+
+
 
   /* initialize to SPI */
   puts ("Initializing to I2C oled Display.");

@@ -690,7 +690,7 @@ VS1053_begin ()
       delay (100);
     }
 
-  if (VS1053_getChipVersion () == 4 || spi_di == WM_IO_PB_25)
+  if (VS1053_getChipVersion () == 4 || spi_di != WM_IO_PB_03)
     { // Only perform an update if we really are using a VS1053, not. eg.
       // VS1003
       VS1053_loadDefaultVs1053Patches ();

@@ -116,3 +116,63 @@ VS1053_PlayMp3 (char *filename)
     }
   return res_sd;
 }
+
+#include "patches/vs1053b-patches-flac.plg"
+
+
+FRESULT
+VS1053_PlayFlac (char *filename)
+{
+
+  //VS1053_reset ();
+
+  VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
+                             // include!)
+  VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
+
+  uint32_t start;
+
+  // Open the file
+  res_sd = f_open (&fnew, filename, FA_OPEN_EXISTING | FA_READ);
+  // file opened successfully?
+  if (res_sd == FR_OK)
+    {
+#ifdef SERIAL_DEBUG_ALL
+      printf ("Open file successfully! Start reading data!\r\n");
+#endif
+      res_sd = f_read (&fnew, file_buffer, 32, &fnum);
+      if (res_sd == FR_OK)
+        {
+          // Parse BMP header to get the information we need
+          if (1)
+            {
+
+              start = 0ul;
+
+              res_sd = f_lseek (&fnew, start);
+#ifdef SERIAL_DEBUG
+              printf ("f_lseek successfully! %d\r\n", start);
+#endif
+
+              fnum = vs1053_chunk_size;
+              my_sost = VS1053_PLAY;
+              //(2)VS1053_data_mode_on ();
+              while (fnum == vs1053_chunk_size
+                     && my_sost == VS1053_PLAY) // More to do?
+                {
+                  //(2)VS1053_await_data_request (); // Wait for space
+                  // available
+                  res_sd
+                      = f_read (&fnew, file_buffer, vs1053_chunk_size, &fnum);
+                  //(2)SPI_writeBytes (file_buffer, fnum);
+                  VS1053_playChunk ((u8 *)file_buffer, fnum);
+                }
+              //(2)VS1053_data_mode_off ();
+              my_sost = VS1053_STOP;
+            }
+        }
+      // close file
+      f_close (&fnew);
+    }
+  return res_sd;
+}
