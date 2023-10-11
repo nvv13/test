@@ -67,8 +67,7 @@ static    u8 psram_frequency_divider=2;//2 - хорошо работает дл�
 static    u8 psram_tCPH=2;//2 - хорошо работает для ESP-PSRAM64H 
 static    u8 psram_BURST=1;//1 - хорошо работает для ESP-PSRAM64H 
 static    u16 psram_OVERTIMER=2;//2 - хорошо работает для ESP-PSRAM64H 
-static    u8 load_buffer_debug=0;//0 или 1  - on
-static    u8 load_MetaData=0;//0 или 1 - on
+static    u8 load_buffer_debug=0;//0 или 1 
 
 void VS1053_PlayHttpMp3_set (libVS1053_t *set_pin)
 {
@@ -89,68 +88,6 @@ void VS1053_PlayHttpMp3_set (libVS1053_t *set_pin)
      }
 }
 
-
-static const char *c_metadata_resolved = "StreamTitle=";
-static u16 i_POS_metadata_resolved = 0;
-static u16 i_LOAD_metadata_resolved = 0;
-static char s_metadata_resolved[200];
-
-char *
-my_recognize_ret_metadata_resolved (void)
-{
-  return s_metadata_resolved;
-}
-
-static void
-load_field (const char ch, const char *c_find, u16 *i_pos_find, char *s_field,
-            u16 *i_pos_field, const u16 i_len_field)
-{
-  if ((*i_pos_find) < strlen (c_find) && ch == c_find[(*i_pos_find)])
-    (*i_pos_find)++;
-  else
-    {
-      if ((*i_pos_find) < strlen (c_find))
-        (*i_pos_find) = 0;
-      else
-        {
-          if ((*i_pos_field) < (i_len_field - 1))
-            {
-              s_field[(*i_pos_field)] = ch;
-              if ((*i_pos_field) == (i_len_field - 2) || ch == '\0')
-                {
-                  if ((*i_pos_field) == (i_len_field - 2))
-                    (*i_pos_field)++;
-                  s_field[(*i_pos_field)] = 0;
-                  (*i_pos_field) = i_len_field;
-                  printf ("%s\"%s\"\n", c_find, s_field);
-                  i_POS_metadata_resolved = 0;
-                  i_LOAD_metadata_resolved = 0;
-                }
-              (*i_pos_field)++;
-            }
-        }
-    }
-}
-
-static u32 MetaFindAndCut(char* recvbuf, u32 nSize)
-{
-
-  for (u32 iInd = 0; iInd < nSize; iInd++)
-    {
-      char ch = *(recvbuf + iInd);
-      load_field (ch, c_metadata_resolved, &i_POS_metadata_resolved,
-                  s_metadata_resolved, &i_LOAD_metadata_resolved,
-                  sizeof (s_metadata_resolved));
-    }
-
-//  for (int iPos = 0; iPos < nSize; iPos++)
-//    {
-//       printf ("%.2x ", *(Buffer + iPos));
-//    }
-//    printf ("\n");
-//nSize = MetaFindAndCut(Buffer, nSize);
-  return nSize;
-}
 
 
 void
@@ -229,19 +166,13 @@ http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
       return nRetCode;
     }
 
-
-  i_POS_metadata_resolved = 0;
-  i_LOAD_metadata_resolved = 0;
-  s_metadata_resolved[0] = 0;
   //Icy-MetaData:1
-  if(load_MetaData)
-    {
-      if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"Icy-MetaData","1", 1))!= HTTP_CLIENT_SUCCESS)
-        {
-          tls_mem_free (Buffer);
-          return nRetCode;
-        }
-    }
+//  if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"Icy-MetaData","1", 1))!= HTTP_CLIENT_SUCCESS)
+//    {
+//      tls_mem_free (Buffer);
+//      return nRetCode;
+//    }
+
 
   /*
 if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
@@ -371,21 +302,13 @@ break;
           if(tls_os_get_time()-u_fur<HZ)tls_os_time_delay (tls_os_get_time()-u_fur);
           if (nRetCode == HTTP_CLIENT_SUCCESS)
             {
-              //printf (" %d ", freeSize);
-              if(load_MetaData)
-                {
-                  nSize = MetaFindAndCut(Buffer, nSize);
-                }
-              if(nSize)
-                {
-                  xMessageBufferSend (xMessageBuffer, Buffer, nSize,
-                                    portMAX_DELAY);
-                  if(load_buffer_debug)
-                     printf ("f");
-                  VS1053_WEB_RADIO_nTotal += nSize;
-                  if (VS1053_WEB_RADIO_nTotal > 512)
-                     tls_watchdog_clr ();
-                }
+              xMessageBufferSend (xMessageBuffer, Buffer, nSize,
+                                  portMAX_DELAY);
+              if(load_buffer_debug)
+                  printf ("f");
+              VS1053_WEB_RADIO_nTotal += nSize;
+              if (VS1053_WEB_RADIO_nTotal > 512)
+                 tls_watchdog_clr ();
             }
         }
       tls_os_time_delay (100);
@@ -415,18 +338,11 @@ break;
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
               if (freeSize > (nSize + 4))
                 {
-                  if(load_MetaData)
-                    {
-                      nSize = MetaFindAndCut(Buffer, nSize);
-                    }
-                  if(nSize)
-                    {
-                      xMessageBufferSend (xMessageBuffer, Buffer, nSize,
-                                        portMAX_DELAY);
-                      //printf (" %d ", freeSize);
-                      if(load_buffer_debug)
-                         printf ("+");
-                    }
+                  xMessageBufferSend (xMessageBuffer, Buffer, nSize,
+                                      portMAX_DELAY);
+                  //printf (" %d ", freeSize);
+                  if(load_buffer_debug)
+                     printf ("+");
                   break;
                 }
               tls_os_time_delay (HZ / 100);

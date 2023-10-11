@@ -230,6 +230,7 @@ extern "C"
   enum VS1053_status VS1053_status_get_status (void);
 
   FRESULT VS1053_PlayMp3 (char *filename);
+  FRESULT VS1053_PlayFlac (char *filename);
 
   void VS1053_stop_PlayMP3 (void);
 
