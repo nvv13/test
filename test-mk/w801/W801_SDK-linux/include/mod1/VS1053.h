@@ -92,7 +92,7 @@ extern "C"
 
     /* далее настройки для VS1053_PlayHttpMp3 */
     u16 no_psram_BufferSize;// подойдет 4000, более - программа начнет глючить
-    u32 psram_BufferSize;   // подойдет 26400 более не надо! глючит! 
+    u32 psram_BufferSize;   // подойдет 26400 более не надо! лучьше не становится
 
     u8 psram_config;//0 или 1 
     psram_mode_t psram_mode;// делай PSRAM_SPI, PSRAM_QPI - так и не работает
@@ -103,6 +103,8 @@ extern "C"
 
     u8 load_buffer_debug;//0 , 1 - выводит инфу по заполнению f или +, и опусташению буффера -
 
+    u8 spi_fastest_speed;//0 - 4 MHz работает на большенстве плат, 1 - 6 MHz это может приводить к срыву передачи на некоторых платах
+    
   } libVS1053_t;
 
   // Constructor.  Only sets pin values.  Doesn't touch the chip.  Be sure to

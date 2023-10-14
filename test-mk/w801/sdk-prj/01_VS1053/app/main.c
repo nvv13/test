@@ -238,6 +238,7 @@ user_app1_task (void *sdata)
     .spi_di = WM_IO_PB_03, /* master miso di <- miso slave, на макетке board
                               HLK-W801-KIT-V1.1 работает только WM_IO_PB_03  */
     .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
+    .spi_fastest_speed = 0,
   };
 
   /**

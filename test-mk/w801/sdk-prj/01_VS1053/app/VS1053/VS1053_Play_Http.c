@@ -32,7 +32,7 @@
 
 #include "ConsoleLogger.h"
 
-#include "psram.h"
+#include "mod1/psram.h"
 #include "VS1053.h"
 
 

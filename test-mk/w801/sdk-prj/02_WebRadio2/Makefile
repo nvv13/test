@@ -68,6 +68,7 @@ LINKLIB += \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libUTFT_Buttons$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libUTFT$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libVS1053$(LIB_EXT)  \
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/lib_psram$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmarch$(LIB_EXT)      \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmcommon$(LIB_EXT)    \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libdrivers$(LIB_EXT)     \
