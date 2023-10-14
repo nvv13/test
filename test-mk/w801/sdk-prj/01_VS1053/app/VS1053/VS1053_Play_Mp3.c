@@ -41,8 +41,8 @@ static FIL fnew;       // file object
 static FRESULT res_sd; // file operation results
 static UINT fnum;      // The number of files successfully read and written
 
-#define DEMO_DATA_SIZE 32 // 4096
-static u8 file_buffer[DEMO_DATA_SIZE] = { 0 };
+#define LEN_FILE_BUF vs1053_chunk_size // 32
+static u8 file_buffer[LEN_FILE_BUF] = { 0 };
 #define SERIAL_DEBUG
 //#define SERIAL_DEBUG_ALL
 
@@ -130,7 +130,7 @@ VS1053_PlayFlac (char *filename)
                              // include!)
   VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
 
-  uint32_t start;
+  uint32_t start = 0ul;
 
   // Open the file
   res_sd = f_open (&fnew, filename, FA_OPEN_EXISTING | FA_READ);
@@ -140,14 +140,56 @@ VS1053_PlayFlac (char *filename)
 #ifdef SERIAL_DEBUG_ALL
       printf ("Open file successfully! Start reading data!\r\n");
 #endif
-      res_sd = f_read (&fnew, file_buffer, 32, &fnum);
+      res_sd = f_read (&fnew, file_buffer, LEN_FILE_BUF, &fnum);
       if (res_sd == FR_OK)
         {
-          // Parse BMP header to get the information we need
+          // Note: To be able to play the .3gp, .3g2, .mp4 and .m4a files, the mdat atom must be the
+          // last atom in the MP4 file.
+/*
+          if(strstr (filename, ".m4a") != NULL  || 
+             strstr (filename, ".M4A") != NULL  || 
+             strstr (filename, ".3gp") != NULL  || 
+             strstr (filename, ".3GP") != NULL  || 
+             strstr (filename, ".3g2") != NULL  || 
+             strstr (filename, ".3G2") != NULL  || 
+             strstr (filename, ".mp4") != NULL  || 
+             strstr (filename, ".MP4") != NULL ) 
+            {
+              #define LEN_MDAT_ATOM 4
+              char const cFind[LEN_MDAT_ATOM]="mdat";
+              u8 upPosFind=0; 
+              while(res_sd == FR_OK)
+                {
+                  for(int i=0;i<fnum;i++)
+                    {
+                      if(file_buffer[i]==cFind[upPosFind])
+                        {
+                          upPosFind++;
+                          if(upPosFind==LEN_MDAT_ATOM)
+                            {
+                            start+=i;start++;
+                            start-=8;//LEN_MDAT_ATOM;
+#ifdef SERIAL_DEBUG
+                            printf (" find mdat atom %d\r\n",start);
+#endif
+                            break;
+                            }
+                        }
+                        else
+                        upPosFind=0;
+                    }
+                  if(upPosFind==LEN_MDAT_ATOM)
+                    break;
+                  res_sd = f_read (&fnew, file_buffer, LEN_FILE_BUF, &fnum);
+                  start+=fnum;
+                }
+              
+            }
+*/
+          //
           if (1)
             {
 
-              start = 0ul;
 
               res_sd = f_lseek (&fnew, start);
 #ifdef SERIAL_DEBUG

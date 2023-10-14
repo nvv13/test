@@ -71,9 +71,21 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (((strstr (FileName, ".mp3") != NULL || strstr (FileName, ".MP3") != NULL) && i_type_file==0) ||
+              if (((strstr (FileName, ".mp3") != NULL  || strstr (FileName, ".MP3")  != NULL) && i_type_file==0) ||
                   ((strstr (FileName, ".flac") != NULL || strstr (FileName, ".FLAC") != NULL) && i_type_file==1) ||
-                  ((strstr (FileName, ".ogg") != NULL || strstr (FileName, ".OGG") != NULL) && i_type_file==2) 
+                  ((strstr (FileName, ".ogg") != NULL  || strstr (FileName, ".OGG")  != NULL) && i_type_file==2) ||
+                  (
+                   (strstr (FileName, ".m4a") != NULL  || 
+                    strstr (FileName, ".M4A") != NULL  || 
+                    strstr (FileName, ".3gp") != NULL  || 
+                    strstr (FileName, ".3GP") != NULL  || 
+                    strstr (FileName, ".3g2") != NULL  || 
+                    strstr (FileName, ".3G2") != NULL  || 
+                    strstr (FileName, ".mp4") != NULL  || 
+                    strstr (FileName, ".MP4") != NULL  || 
+                    strstr (FileName, ".aac") != NULL  || 
+                    strstr (FileName, ".AAC") != NULL
+                  ) && i_type_file==3) 
                  )
                 {
                   printf ("FileName = %s \n", FileName);
@@ -143,7 +155,7 @@ demo_timer_irq (u8 *arg) // здесь будет смена режима
           i_dreb_SW = 1;
           set_encoder_diff(0);  
           i_type_file++;
-          if(i_type_file>2)i_type_file=0;
+          if(i_type_file>3)i_type_file=0;
           if (VS1053_status_get_status () == VS1053_PLAY)
             {
               VS1053_stop_PlayMP3 ();
