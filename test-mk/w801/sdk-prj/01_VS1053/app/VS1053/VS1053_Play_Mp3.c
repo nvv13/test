@@ -118,6 +118,8 @@ VS1053_PlayMp3 (char *filename)
 }
 
 #include "patches/vs1053b-patches-flac.plg"
+//#include "patches/vs1053b-patches-flac-latm.plg"
+//#include "patches/vs1053b-patches-latm.plg"
 
 
 FRESULT
@@ -129,6 +131,8 @@ VS1053_PlayFlac (char *filename)
   VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
                              // include!)
   VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
+  //VS1053_loadUserCode (PATCHES_FLAC_LATM, PLUGIN_FLAC_LATM_SIZE);
+  //VS1053_loadUserCode (PATCHES_LATM, PLUGIN_LATM_SIZE);
 
   uint32_t start = 0ul;
 
