@@ -69,7 +69,7 @@
 
 #define FCLK_SLOW_VS1053 200000
 #define FCLK_FAST_VS1053 4000000
-//#define FCLK_SUPER_FAST_VS1053 6000000
+#define FCLK_SUPER_FAST_VS1053 6000000
 //-----------------------------------------------------
 #ifndef _BV
 #define _BV(x) (1UL << (x))
@@ -136,6 +136,7 @@ static enum tls_io_name
 static enum tls_io_name spi_ck; /* */
 static enum tls_io_name spi_di; /* */
 static enum tls_io_name spi_do; /* */
+static u8 spi_fastest_speed;//0 - 4 MHz работает на большенстве плат, 1 - 6 MHz это может приводить к срыву передачи на некоторых платах
 
 static void
 SPI_print_retval (int i_retval, char *help)
@@ -410,6 +411,7 @@ VS1053_VS1053 (libVS1053_t *set_pin)
   spi_ck = set_pin->spi_ck;
   spi_di = set_pin->spi_di;
   spi_do = set_pin->spi_do;
+  spi_fastest_speed=set_pin->spi_fastest_speed;
 
   VS1053_PlayHttpMp3_set(set_pin);
 
@@ -475,17 +477,30 @@ VS1053_softReset ()
   // VS1053_writeRegister (SCI_VOL, 0x4040);    // Set volume level
   VS1053_setVolume (curvol); // restore volume
 
-  VS1053_writeRegister (
+  if(spi_fastest_speed)
+    {
+      VS1053_writeRegister (
+        SCI_CLOCKF,
+        0x0e << 12); // XTALI×5.0 clock settings multiplyer 5.0 = 20 MHz
+                   // SPI Clock to 6 MHz. Now you can set high speed SPI clock.
+    }
+  else
+    {
+      VS1053_writeRegister (
         SCI_CLOCKF,
         6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
-  //VS1053_writeRegister (
-  //    SCI_CLOCKF,
-  //    0x0e << 12); // XTALI×5.0 clock settings multiplyer 5.0 = 20 MHz
-                   // SPI Clock to 6 MHz. Now you can set high speed SPI clock.
+    }
+
   VS1053_await_data_request ();
-  // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
-  VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
-  //VS1053_SPI = SPI_Settings (FCLK_SUPER_FAST_VS1053);
+
+  if(spi_fastest_speed)
+    {
+      VS1053_SPI = SPI_Settings (FCLK_SUPER_FAST_VS1053);
+    }
+    else
+    {
+      VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);// SPI Clock to 4 MHz. Now you can set high speed SPI clock.
+    }
 }
 
 void
@@ -660,20 +675,33 @@ VS1053_begin ()
       // Switch on the analog parts
       VS1053_writeRegister (SCI_AUDATA, 44101); // 44.1kHz stereo
 
-      // The next clocksetting allows SPI clocking at 5 MHz, 4 MHz is safe
-      // then.
-      VS1053_writeRegister (
-                SCI_CLOCKF,
-                6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
-      //VS1053_writeRegister (
-      //    SCI_CLOCKF,
-      //    0x0e << 12); // XTALI×5.0 clock settings multiplyer 5.0 = 20 MHz
+      if(spi_fastest_speed)
+        {
+          VS1053_writeRegister (
+             SCI_CLOCKF,
+             0x0e << 12); // XTALI×5.0 clock settings multiplyer 5.0 = 20 MHz
                        // SPI Clock to 6 MHz. Now you can set high speed SPI
                        // clock.
+        }
+      else
+        {
+          // The next clocksetting allows SPI clocking at 5 MHz, 4 MHz is safe
+          // then.
+          VS1053_writeRegister (
+             SCI_CLOCKF,
+             6 << 12); // Normal clock settings multiplyer 3.0 = 12.2 MHz
+        }
+
       VS1053_await_data_request ();
-      // SPI Clock to 4 MHz. Now you can set high speed SPI clock.
-      VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);
-      //VS1053_SPI = SPI_Settings (FCLK_SUPER_FAST_VS1053);
+      
+      if(spi_fastest_speed)
+        {
+          VS1053_SPI = SPI_Settings (FCLK_SUPER_FAST_VS1053);
+        }
+      else
+        {
+          VS1053_SPI = SPI_Settings (FCLK_FAST_VS1053);// SPI Clock to 4 MHz. Now you can set high speed SPI clock.
+        }
 
       VS1053_writeRegister (SCI_MODE, _BV (SM_SDINEW) | _BV (SM_LINE1));
       VS1053_testComm (
