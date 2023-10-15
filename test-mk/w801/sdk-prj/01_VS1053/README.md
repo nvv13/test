@@ -9,7 +9,7 @@ https://youtu.be/942BgG0cVuE
 
 
 ~~~
-проигывает файлы(проверенно) .mp3, .flac, .ogg, .m4a
+проигрывает файлы(проверенно) .mp3, .flac, .ogg, .m4a
 для .m4a нужно их "оптимизировать" 27 страница даташита:
 
 Note: To be able to play the .3gp, .3g2, .mp4 and .m4a files, the mdat atom must be the
