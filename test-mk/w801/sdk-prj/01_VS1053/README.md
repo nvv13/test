@@ -8,6 +8,23 @@ board HLK-W801-KIT-V1.1 + VS1053 + OLED + SD Card + Button
 https://youtu.be/942BgG0cVuE
 
 
+~~~
+проигывает файлы(проверенно) .mp3, .flac, .ogg, .m4a
+для .m4a нужно их "оптимизировать" 27 страница даташита:
+
+Note: To be able to play the .3gp, .3g2, .mp4 and .m4a files, the mdat atom must be the
+last atom in the MP4 file. Because VS1053b receives all data as a stream, all metadata must
+be available before the music data is received. Several MP4 file formatters do not satisfy this
+requirement and some kind of conversion is required. This is also why the streamable ADTS
+format is recommended.
+
+Programs exist that optimize the .mp4 and .m4a into so-called streamable format that has the
+mdat atom last in the file, and thus suitable for web servers’ audio streaming. You can use this
+kind of tool to process files for VS1053b too. For example mp4creator -optimize file.mp4 .
+~~~
+
+
+
 библиотека VS1053 источник:
 https://github.com/baldram/ESP_VS1053_Library.git
 https://github.com/adafruit/Adafruit_VS1053_Library.git
