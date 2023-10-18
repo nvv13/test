@@ -110,7 +110,7 @@ user_app1_task (void *sdata)
   printf ("user_app1_task start 3.5 TFT 320x480 HW SPI MSP3526 \n");
 
   // подключаем библиотеку UTFT
-  UTFT_UTFT (MSP3526 
+  UTFT_UTFT (MSP3526 //
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
