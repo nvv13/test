@@ -1040,6 +1040,40 @@ W801  LCD
 *подготовка изображений для SD Card + используется библиотека libTJPEG.a
 # convert *.jpg -resize 480x320! j%03d-480x320.jpg
 
+
+
+
+
+
+версия с использованием SDIO (60 Mhz) 
+01_UTFU/app/test/MSP3526/spi_SDIO
+
+для SDIO надо соединить по схеме:
+connect to MSP3526
+---- ------
+W801  LCD   
+---- ------
+      SD_CS
+PA09  CTP_INT     прерывание
+PA04  CTP_SDA     
+PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
+PA01  CTP_SCL     
+
+      SDO(MISO)
+3.3v  LED         подсветка
+PB06  SCK         синхросигнал
+PB07  SDI(MOSI)
+PB22  LCD_RS      комманда/данные
+PB21  LCD_RST     сброс
+PB23  LCD_CS      выбор чипа
+gnd   GND         земля
+3v3   VDD         питание (3.3v - 5v)
+---- ------
+W801  LCD   
+---- ------
+
+
+
 ~~~
 
 
@@ -1068,7 +1102,7 @@ http://www.lcdwiki.com/MHS-3.5inch_RPi_Display
 для него тест (main.c) лежит в директории 
 01_UTFU/app/test/MHS3528
 
-версия с использованием SDIO 
+версия с использованием SDIO (120Mhz)
 01_UTFU/app/test/MHS3528/spi_SDIO
 
 
