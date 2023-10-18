@@ -1,0 +1,23 @@
+Hello! For w801 init function must be
+static void PSRAM_Init(void)
+{
+__HAL_RCC_PSRAM_CLK_ENABLE();
+__HAL_RCC_GPIO_CLK_ENABLE();
+// For W801
+__HAL_AFIO_REMAP_PSRAM_CS(GPIOB, GPIO_PIN_27);
+__HAL_AFIO_REMAP_PSRAM_CLK(GPIOB, GPIO_PIN_0);
+__HAL_AFIO_REMAP_PSRAM_D0(GPIOB, GPIO_PIN_2);
+__HAL_AFIO_REMAP_PSRAM_D1(GPIOB, GPIO_PIN_3);
+__HAL_AFIO_REMAP_PSRAM_D2(GPIOB, GPIO_PIN_4);
+__HAL_AFIO_REMAP_PSRAM_D3(GPIOB, GPIO_PIN_5);
+
+hpsram.Instance = PSRAM;
+hpsram.Init.Div = 2;
+hpsram.Init.Mode = PSRAM_MODE_QSPI;
+
+if (HAL_PSRAM_Init(&hpsram) != HAL_OK)
+{
+Serial.printf("Init error...\r\n");
+}
+}
+It is work!
