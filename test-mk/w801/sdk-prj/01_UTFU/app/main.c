@@ -151,6 +151,10 @@ user_app1_task (void *sdata)
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   // UTFT_InitLCD (PORTRAIT);
 
+  printf (" UTFT_getDisplayXSize = %d \n",UTFT_getDisplayXSize ());
+  printf (" UTFT_getDisplayYSize = %d \n",UTFT_getDisplayYSize ());
+
+
   while (1)
     {                 //
       UTFT_clrScr (); // стираем всю информацию с дисплея
