@@ -284,7 +284,7 @@ break;
       //int i_cnt=0;
       //сначала заполняем буффер данными
       while (
-          (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
+          (nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
           //&& my_sost == VS1053_HW_INIT
           )
         {
@@ -319,7 +319,7 @@ break;
       VS1053_WEB_RADIO_nTotal = 0;
       // Get the data until we get an error or end of stream code
       while (
-          (nRetCode == HTTP_CLIENT_SUCCESS /* || nRetCode != HTTP_CLIENT_EOS*/)
+          (nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
           && my_sost == VS1053_PLAY)
         {
           // Set the size of our buffer

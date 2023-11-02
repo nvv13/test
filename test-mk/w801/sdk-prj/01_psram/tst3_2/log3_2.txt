@@ -1,0 +1,34 @@
+*** RTS: down ***
+set value to HR_PSRAM_OVERTIMER_test ring buf
+set value to HR_PSRAM_OVERTIMER_ADDR = 0x00000002
+set value to HR_PSRAM_CTRL_ADDR = 0x00000225
+var1Psram = 0x000000AA
+var2Psram = 0x0000BB11
+var3Psram = 0xAABBCC00
+ PSRAM found 
+  Address of HR_PSRAM_CTRL = 0x40002200
+  Content of HR_PSRAM_CTRL = 0x00000224
+  Content of HR_PSRAM_OVERTIMER = 0x00000002
+  Content of IP_TRUST_VLD0 = 0x29400000
+  Content of IP_TRUST_VLD1 = 0x00000032
+heap init
+ use ucStorageBuffer address= 805306376, size 262145 
+
+start vs1053_buf_play_task
+3
+
+test Ok,  i_total_read64=1049089,  byte/sec=58282
+
+test Ok,  i_total_read64=2097761,  byte/sec=56696
+
+test Ok,  i_total_read64=3146679,  byte/sec=57212
+	
+test Ok,  i_total_read64=4195358,  byte/sec=57470
+
+test Ok,  i_total_read64=5244187,  byte/sec=57002
+
+test Ok,  i_total_read64=6292800,  byte/sec=57207
+
+test Ok,  i_total_read64=7341819,  byte/sec=57357
+
+test Ok,  i_total_read64=8390629,  byte/sec=57079

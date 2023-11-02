@@ -11,8 +11,8 @@
 #include "diskio.h"		/* Declarations of disk functions */
 
 /* Definitions of physical drive number for each drive */
-#define DEV_RAM		1	/* Example: Map Ramdisk to physical drive 0 */
-#define DEV_MMC		0	/* Example: Map MMC/SD card to physical drive 1 */
+#define DEV_MMC		0	/* Example: Map MMC/SD card to physical drive 0 */
+#define DEV_RAM		1	/* Example: Map Ramdisk to physical drive 1 */
 #define DEV_USB		2	/* Example: Map USB MSD to physical drive 2 */
 
 
@@ -31,9 +31,18 @@ extern int wm_sd_card_set_blocklen(uint32_t blocklen);
 
 static uint32_t fs_rca;
 
+#define MIN_DISK_SIZE 65536 /* minmal disk size calculated as 128 * _MIN_SS (ff.c ln 4112) , 128*512=65536 
+              ram_disk =       источник https://github.com/alibaba/AliOS-Things */
+#include "mod1/psram.h"
+#define RAM_DISK_BYTE_SIZE 4194304 // 8192 * 512 = 4194304 т.е. 4 мегабайта
+static u32 ram_disk_size = RAM_DISK_BYTE_SIZE;
+static uint8_t * ram_disk_space = NULL;
 
 static int RAM_disk_status(void)
 {
+    	if (ram_disk_space==NULL) {
+        	return STA_NOINIT;
+    	}
 	return 0;
 }
 
@@ -49,6 +58,13 @@ static int USB_disk_status(void)
 
 static int RAM_disk_initialize(void)
 {
+        if(ram_disk_space==NULL && d_psram_check()) {
+                ram_disk_space = dram_heap_malloc (ram_disk_size);
+        }
+
+    	if (ram_disk_space==NULL) {
+        	return STA_NOINIT;
+    	}
 	return 0;
 }
 
@@ -76,7 +92,11 @@ static int USB_disk_initialize(void)
 
 static int RAM_disk_read(	BYTE *buff, LBA_t sector, UINT count)
 {
-	return 0;
+    if (ram_disk_space==NULL) {
+        return RES_PARERR;
+    }
+    memcpy(buff, ram_disk_space + sector * BLOCK_SIZE, BLOCK_SIZE * count);
+    return 0;
 }
 
 static int MMC_disk_read(	BYTE *buff, LBA_t sector, UINT count)
@@ -127,7 +147,11 @@ static int USB_disk_read(	BYTE *buff, LBA_t sector, UINT count)
 
 static int RAM_disk_write(	BYTE *buff, LBA_t sector, UINT count)
 {
-	return 0;
+    if (ram_disk_space==NULL) {
+        return RES_PARERR;
+    }
+    memcpy(ram_disk_space + sector * BLOCK_SIZE, buff, BLOCK_SIZE * count);
+    return 0;
 }
 
 static int MMC_disk_write(	BYTE *buff, LBA_t sector, UINT count)
@@ -192,7 +216,7 @@ DSTATUS disk_status (
 
 	switch (pdrv) {
 	case DEV_RAM :
-		RAM_disk_status();
+		stat = RAM_disk_status();
 
 		// translate the reslut code here
 
@@ -234,6 +258,7 @@ DSTATUS disk_initialize (
 		result = RAM_disk_initialize();
 
 		// translate the reslut code here
+		(result == 0)?(stat &= ~STA_NOINIT):(stat = STA_NOINIT);
 
 		return stat;
 
@@ -278,6 +303,7 @@ DRESULT disk_read (
 		result = RAM_disk_read(buff, sector, count);
 
 		// translate the reslut code here
+		(result == 0)?(res = RES_OK):(res = RES_ERROR);
 
 		return res;
 
@@ -329,6 +355,7 @@ DRESULT disk_write (
 		result = RAM_disk_write((BYTE *)buff, sector, count);
 
 		// translate the reslut code here
+		(result == 0)?(res = RES_OK):(res = RES_ERROR);
 
 		return res;
 
@@ -375,7 +402,31 @@ DRESULT disk_ioctl (
 
 		// Process of the command for the RAM drive
 
-		return res;
+		    if (ram_disk_space==NULL) {
+		        res = RES_PARERR;
+		    }
+		
+		    switch (cmd) {
+		        case GET_SECTOR_COUNT:
+		            *(uint32_t *)buff = ram_disk_size / BLOCK_SIZE;
+		            res = RES_OK;
+		            break;
+		
+		        case GET_SECTOR_SIZE:
+		            *(uint32_t *)buff = BLOCK_SIZE;
+		            res = RES_OK;
+		            break;
+		
+		        case CTRL_SYNC:
+		            res = RES_OK;
+		            break;
+		
+		        default:
+		            break;
+		    }
+
+		    return res;
+
 
 	case DEV_MMC :
 

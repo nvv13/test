@@ -293,3 +293,9 @@ http://we.easyelectronics.ru/part/w801-zhk-ekranchik-i-lozhechka-degtya.html
 
 -----------
 
+
+про DSP
+https://ai.nationalchip.com/dsp/DSP_en/html/csky__rfft__q15_8c.html
+
+
+-----------

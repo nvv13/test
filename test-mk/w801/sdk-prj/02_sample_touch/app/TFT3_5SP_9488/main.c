@@ -187,7 +187,7 @@ user_app1_task (void *sdata)
               if (l_draw)
                 {
                   char FileName[256];
-                  sprintf (FileName, "0:480x320/j%0.3d-480x320.jpg", ind_file);
+                  sprintf (FileName, "0:480x320/j%.3d-480x320.jpg", ind_file);
                   printf ("%s\n", FileName);
                   if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
                     {

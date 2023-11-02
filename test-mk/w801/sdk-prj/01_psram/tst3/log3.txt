@@ -1,0 +1,55 @@
+*** RTS: down ***
+set value to HR_PSRAM_OVERTIMER_test ring buf
+set value to HR_PSRAM_OVERTIMER_ADDR = 0x00000002
+set value to HR_PSRAM_CTRL_ADDR = 0x00000225
+var1Psram = 0x000000AA
+var2Psram = 0x0000BB11
+var3Psram = 0xAABBCC00
+ PSRAM found 
+  Address of HR_PSRAM_CTRL = 0x40002200
+  Content of HR_PSRAM_CTRL = 0x00000224
+  Content of HR_PSRAM_OVERTIMER = 0x00000002
+  Content of IP_TRUST_VLD0 = 0x29400000
+  Content of IP_TRUST_VLD1 = 0x00000032
+heap init
+ use RingBuf address= 805306376, size 262144 
+
+start vs1053_buf_play_task
+3
+
+test Ok,  i_total_read64=1048583,  byte/sec=104858
+
+test Ok,  i_total_read64=2097770,  byte/sec=104888
+
+test Ok,  i_total_read64=3146928,  byte/sec=108514
+
+test Ok,  i_total_read64=4195507,  byte/sec=107577
+
+test Ok,  i_total_read64=5244695,  byte/sec=107034
+
+test Ok,  i_total_read64=6293891,  byte/sec=108515
+
+test Ok,  i_total_read64=7343042,  byte/sec=107985
+
+test Ok,  i_total_read64=8391622,  byte/sec=107584
+
+
+
+
+*** RTS: down ***
+set value to HR_PSRAM_OVERTIMER_test ring buf
+set value to HR_PSRAM_OVERTIMER_ADDR = 0x00000002
+set value to HR_PSRAM_CTRL_ADDR = 0x00000225
+ CreateRingBuf address= 536972884, size 1024 
+
+start vs1053_buf_play_task
+3
+
+test Ok,  i_total_read64=1048592,  byte/sec=4161
+
+test Ok,  i_total_read64=2097184,  byte/sec=4144
+
+test Ok,  i_total_read64=3145776,  byte/sec=4150
+
+test Ok,  i_total_read64=4194368,  byte/sec=4152
+

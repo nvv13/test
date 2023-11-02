@@ -48,7 +48,7 @@ fill_buf (void)
     {
       // u32 nSize = BUF_BYTE_CHUNK_SIZE;
       size_t freeSize = RingBufChunkAvailable ();
-      //printf ("free=%d i_rand=%d", freeSize, i_rand);
+      //printf ("free=%d i_rand=%d ", freeSize, i_rand);
       if (freeSize == 0 || i_rand-- < 0)
         {
           // printf ("\r\n");
@@ -176,7 +176,7 @@ UserMain (void)
   while (1)
     {
       fill_buf ();
-      //printf ("4\r\n");
+      //printf ("i_total_read64=%d\r\n",i_total_read64);
       //tls_os_time_delay (HZ);
 
       //ждем свободное место в буфере,
