@@ -221,7 +221,7 @@ user_app1_task (void *sdata)
             {
 
               char FileName[256];
-              sprintf (FileName, "1:test%d.jpg", ind_file++);
+              sprintf (FileName, "1:test%d.jpg", ind_file);
               printf ("FileName = %s\n", FileName);
               sprintf (WriteBuffer, "white txt %s file name", FileName);
 
