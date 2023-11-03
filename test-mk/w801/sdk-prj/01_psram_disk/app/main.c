@@ -38,13 +38,15 @@
 
 #include "ff.h"
 #include "wm_gpio_afsel.h"
+#include "utils.h"
 
 #include "lfile_http.h"
 
+#include "../../../../../../w_wifi_pass.h"
 //#define MY_WIFI_AP "bred8"
 //#define MY_WIFI_PASS "123123123"
-#define MY_WIFI_AP "bred1"
-#define MY_WIFI_PASS "9115676369"
+//#define MY_WIFI_AP "bred1"
+//#define MY_WIFI_PASS "9115676369"
 
 #include "w_wifi.h"
 u8 volatile u8_wifi_state = 0;
@@ -63,24 +65,53 @@ extern uint8_t
 extern uint8_t SmallSymbolFont[];
 extern uint8_t Dingbats1_XL[];
 
+#define COUNT_IMG 22
+const char* a_Url[COUNT_IMG]={
+ "http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-34.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-06.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-04.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-02.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-01.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-60.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-59.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-58.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-57.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2011-08-07-29.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-96.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-15.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-18.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-13.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-12-1.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-07.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-03.jpg"
+,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7011.jpg"
+,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7026.jpg"
+,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7028.jpg"
+,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7001.jpg"
+,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_6921.jpg"
+};
+
+
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.5 TFT 480x320 HW SPI MSP3526 \n");
+  printf ("user_app1_task start 3.5 TFT 480x320 HW SDIO SPI MSP3526 \n");
 
   // подключаем библиотеку UTFT
-  UTFT_UTFT (MSP3526,
+  UTFT_UTFT (MSP3526 //
+             ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS  CS
+             WM_IO_PB_23 //(u8)NO_GPIO_PIN // WM_IO_PB_14  //CS  CS
              ,
              (u8)WM_IO_PB_21 // RST reset RES
              ,
-             (u8)WM_IO_PB_23 // SER => DC !
+             (u8)WM_IO_PB_22 // SER => DC !
              ,
-             20000000
+             //120000000
+                60000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -91,8 +122,15 @@ user_app1_task (void *sdata)
              но, можно отказаться от HW SPI в пользу Soft SPI
              установив spi_freq=0
              эмуляции SPI, это удобно для разных ножек
+
+    максимально, частота spi_freq = 20000000 (20MHz)
+        но!      если spi_freq > 20000000 тогда работает spi SDIO
+        частоту можно ставить от 21000000 до 120000000 герц (работает при
+    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL 
+                               WM_IO_PB_07 CMD  -> MOSI
            */
   );
+
 
   UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
 
@@ -158,97 +196,102 @@ user_app1_task (void *sdata)
   if (res_sd == FR_OK)
     {
       int ind_file = 0;
-      while (1 == 1)
+      int ind_url = 0;
+      tls_watchdog_init (60 * 1000
+                         * 1000); // u32 usec microseconds, около 60 сек
+
+      for (;;) // цикл(1) с подсоединением к wifi и запросом времени
         {
-          char FileName[256];
-          sprintf (FileName, "1:test%d.jpg", ind_file++);
-          printf ("FileName = %s\n", FileName);
-          sprintf (WriteBuffer, "white txt %s file name", FileName);
-
-          res_sd = f_open (&fnew, FileName, FA_CREATE_ALWAYS | FA_WRITE);
-          if (res_sd == FR_OK)
+          while (u8_wifi_state == 0)
             {
-              printf ("f_open ok\r\n");
-// котики -inurl:https
-              res_sd = download_file_http ("http://www.wincore.ru/uploads/posts/2018-07/1531464926_01_gettyimages_108226626_resized.jpg",&fnew);
-//              res_sd
-//                  = f_write (&fnew, WriteBuffer, sizeof (WriteBuffer), &fnum);
+              printf ("trying to connect wifi\n");
+              if (u8_wifi_state == 0
+                  && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
+                u8_wifi_state = 1;
+              else
+                {
+                  tls_os_time_delay (HZ * 5);
+                }
+            }
+
+          tls_os_time_delay (HZ * 5);
+          tls_watchdog_clr ();
+
+          while (u8_wifi_state == 1) // основной цикл(2)
+            {
+
+              char FileName[256];
+              sprintf (FileName, "1:test%d.jpg", ind_file++);
+              printf ("FileName = %s\n", FileName);
+              sprintf (WriteBuffer, "white txt %s file name", FileName);
+
+              res_sd = f_open (&fnew, FileName, FA_CREATE_ALWAYS | FA_WRITE);
               if (res_sd == FR_OK)
                 {
-                  printf ("fnum = %d\r\n", fnum);
-                  printf ("WriteBuffer = %s \r\n", WriteBuffer);
+                  printf ("f_open ok, try load url = %s \r\n", a_Url[ind_url]);
+                  // котики -inurl:https
+                  res_sd = download_file_http (a_Url[ind_url], &fnew);
+                  ind_url++;
+                  if(ind_url>=COUNT_IMG)ind_url=0;
+
+                  //              res_sd
+                  //                  = f_write (&fnew, WriteBuffer, sizeof
+                  //                  (WriteBuffer), &fnum);
+                  if (res_sd == FR_OK)
+                    {
+                      printf ("fnum = %d\r\n", fnum);
+                      printf ("WriteBuffer = %s \r\n", WriteBuffer);
+                    }
+                  else
+                    {
+                      printf ("f_write failed! error code:%d\r\n", res_sd);
+                      tls_os_time_delay (HZ);
+                    }
+
+                  f_close (&fnew);
                 }
               else
                 {
-                  printf ("f_write failed! error code:%d\r\n", res_sd);
+                  printf ("f_open failed! error code:%d\r\n", res_sd);
                   tls_os_time_delay (HZ);
                 }
 
-              f_close (&fnew);
-            }
-          else
-            {
-              printf ("f_open failed! error code:%d\r\n", res_sd);
-              tls_os_time_delay (HZ);
-            }
+              UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
 
-          // if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
-          //  {
-          //  }
-
-          res_sd = f_open (&fnew, FileName, FA_OPEN_EXISTING | FA_READ);
-          if (res_sd == FR_OK)
-            {
-              printf ("f_open ok\r\n");
-              res_sd = f_read (&fnew, ReadBuffer, sizeof (ReadBuffer), &fnum);
-
+              res_sd = f_open (&fnew, FileName, FA_OPEN_EXISTING | FA_READ);
               if (res_sd == FR_OK)
                 {
-                  printf ("fnum = %d\r\n", fnum);
-                  printf ("ReadBuffer = %s\r\n", ReadBuffer);
+                  printf ("f_open ok\r\n");
+                  res_sd
+                      = f_read (&fnew, ReadBuffer, sizeof (ReadBuffer), &fnum);
+
+                  if (res_sd == FR_OK)
+                    {
+                      printf ("fnum = %d\r\n", fnum);
+                      //printf ("ReadBuffer = %s\r\n", ReadBuffer);
+                      dumpBuffer("jpg", (char*)ReadBuffer, fnum);
+                    }
+                  else
+                    {
+                      printf ("f_read failed! error code:%d\r\n", res_sd);
+                      tls_os_time_delay (HZ);
+                    }
+
+                  f_close (&fnew);
                 }
               else
                 {
-                  printf ("f_read failed! error code:%d\r\n", res_sd);
+                  printf ("f_open failed! error code:%d\r\n", res_sd);
                   tls_os_time_delay (HZ);
                 }
 
-              f_close (&fnew);
-            }
-          else
-            {
-              printf ("f_open failed! error code:%d\r\n", res_sd);
-              tls_os_time_delay (HZ);
+              tls_os_time_delay (HZ * 10);
+              tls_watchdog_clr ();
             }
         }
+
       // unmount file system
       f_mount (NULL, "1:", 1);
-    }
-
-  tls_watchdog_init (20 * 1000 * 1000); // u32 usec microseconds, около 20 сек
-
-  for (;;) // цикл(1) с подсоединением к wifi и запросом времени
-    {
-      while (u8_wifi_state == 0)
-        {
-          printf ("trying to connect wifi\n");
-          if (u8_wifi_state == 0
-              && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
-            u8_wifi_state = 1;
-          else
-            {
-              tls_os_time_delay (HZ * 5);
-            }
-        }
-
-      tls_os_time_delay (HZ * 3);
-      tls_watchdog_clr ();
-      while (u8_wifi_state == 1) // основной цикл(2)
-        {
-
-          tls_os_time_delay (HZ);
-          // tls_watchdog_clr ();
-        }
     }
 }
 

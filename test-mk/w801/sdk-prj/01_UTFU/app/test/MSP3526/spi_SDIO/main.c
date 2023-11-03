@@ -52,7 +52,7 @@ extern uint8_t SmallSymbolFont[];
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start 3.5 TFT 320x480 HW SPI MSP3526 \n");
+  printf ("user_app1_task start 3.5 TFT 320x480 HW SDIO SPI MSP3526 \n");
 
   // подключаем библиотеку UTFT
   UTFT_UTFT (MSP3526 //

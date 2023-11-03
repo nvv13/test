@@ -35,7 +35,7 @@
 
 static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
-              u8 parseXmlJson, FIL* pfnew)
+              u8 parseXmlJson, FIL *pfnew)
 {
   int nRetCode;
   u32 nSize = 0;
@@ -109,6 +109,8 @@ break;
   pHTTPSession->HttpFlags
       = pHTTPSession->HttpFlags | HTTP_CLIENT_FLAG_KEEP_ALIVE;
 
+  int i_ByteTotal = 0;
+  u32 content_length = 0;
   do
     {
       if ((nRetCode = HTTPClientSendRequest (
@@ -124,6 +126,22 @@ break;
         {
           break;
         }
+
+      char token[32];
+      UINT32 size = 32;
+      if ((nRetCode = HTTPClientFindFirstHeader (pHTTP, "content-length",
+                                                 (CHAR *)token, &size))
+          != HTTP_CLIENT_SUCCESS)
+        {
+          HTTPClientFindCloseHeader (pHTTP);
+        }
+      else
+        {
+          HTTPClientFindCloseHeader (pHTTP);
+          content_length = atol (strstr (token, ":") + 1);
+          printf ("content_length: %d\n", content_length);
+        }
+
       tls_os_time_delay (HZ / 3);
 
       u16 u16_connect_timeout_sec = 300;
@@ -131,10 +149,10 @@ break;
         u16_connect_timeout_sec = 600;
 
       printf ("Start to receive data from remote server\r\n");
+      tls_os_time_delay (HZ);
 
-      int i_ByteTotal = 0;
       // Get the data until we get an error or end of stream code
-      while ( nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS )
+      while (nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
         {
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
@@ -142,9 +160,12 @@ break;
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
-            break;
+            {
+              printf ("HTTPClientReadData nRetCode:%d\r\n", nRetCode);
+              break;
+            }
 
-          FRESULT res_sd  = f_write (pfnew, Buffer, nSize, &nSize);
+          FRESULT res_sd = f_write (pfnew, Buffer, nSize, &nSize);
           if (res_sd != FR_OK)
             {
               nRetCode = res_sd;
@@ -153,21 +174,25 @@ break;
             }
 
           i_ByteTotal += nSize;
-          printf ("download bytes: %d\n", i_ByteTotal);
-
+          printf ("download bytes: %d\r", i_ByteTotal);
+          if (i_ByteTotal == content_length)
+            break;
         }
     }
   while (1 == 0);
   tls_mem_free (Buffer);
+  printf (" download bytes: %d\r\n", i_ByteTotal);
+
+  if (i_ByteTotal == content_length || nRetCode == HTTP_CLIENT_EOS)
+    nRetCode = FR_OK;
 
   if (pHTTP)
     HTTPClientCloseRequest (&pHTTP);
   return nRetCode;
 }
 
-
 FRESULT
-download_file_http (const char *Uri, FIL* pfnew)
+download_file_http (const char *Uri, FIL *pfnew)
 {
 
   HTTPParameters httpParams;

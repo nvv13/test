@@ -14,7 +14,7 @@ static int server_fd = -1;
 static int i_start_recive = -1;
 
 extern u8 volatile u8_wifi_state;
-//extern volatile enum VS1053_status my_sost;
+// extern volatile enum VS1053_status my_sost;
 
 static void
 con_net_status_changed_event (u8 status)
@@ -38,7 +38,7 @@ con_net_status_changed_event (u8 status)
           closesocket (server_fd);
         server_fd = -1;
         u8_wifi_state = 0;
-        //if (my_sost == VS1053_PLAY)
+        // if (my_sost == VS1053_PLAY)
         //  my_sost = VS1053_PLAY_BUF; // VS1053_QUERY_TO_STOP;
       };
       break;
@@ -261,7 +261,7 @@ demo_connect_net (const char *ssid, const char *pwd)
     }
 
   printf ("\nssid:%s\n", ssid);
-  printf ("password=%s\n", pwd);
+  printf ("password=******\n");//, pwd);
   tls_wifi_disconnect ();
 
   while (i_start_recive != -1)
