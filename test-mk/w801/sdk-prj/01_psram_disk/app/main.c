@@ -65,9 +65,11 @@ extern uint8_t
 extern uint8_t SmallSymbolFont[];
 extern uint8_t Dingbats1_XL[];
 
-#define COUNT_IMG 22
+#define COUNT_IMG 24
 const char* a_Url[COUNT_IMG]={
- "http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-34.jpg"
+ "http://192.168.1.1:8088/jpg/j001-480x320.jpg"
+,"http://192.168.1.1:8088/jpg/j002-480x320.jpg"
+,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-34.jpg"
 ,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-06.jpg"
 ,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-04.jpg"
 ,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-02.jpg"
