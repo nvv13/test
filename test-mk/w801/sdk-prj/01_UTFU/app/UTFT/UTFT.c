@@ -1594,7 +1594,15 @@ UTFT_getFontYsize ()
 
 void
 UTFT_drawBitmap24bpp (int x, int y, int sx, int sy, u32 *data)
-{
+{  
+  //проверить, входит ли квадратик в область дисплея, если нет, то не отображать
+  if(
+    !((orient == PORTRAIT && (x<disp_x_size + 1 && y<disp_y_size + 1)) ||
+      (orient != PORTRAIT && (x<disp_y_size + 1 && y<disp_x_size + 1)))
+   )
+  {
+    return;
+  }
 
   if (display_bitpixel != 24)
     {
