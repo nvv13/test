@@ -65,34 +65,6 @@ extern uint8_t
 extern uint8_t SmallSymbolFont[];
 extern uint8_t Dingbats1_XL[];
 
-#define COUNT_IMG 24
-const char* a_Url[COUNT_IMG]={
- "http://192.168.1.1:8088/jpg/j001-480x320.jpg"
-,"http://192.168.1.1:8088/jpg/j002-480x320.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-34.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-06.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-04.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-02.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-01.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-60.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-59.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-58.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-57.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2011-08-07-29.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-96.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-15.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-18.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-13.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-12-1.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-07.jpg"
-,"http://www.strannik-sergey.ru/2012/2/2012-06-RusPriroda/photos/2012-06-10-12-03.jpg"
-,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7011.jpg"
-,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7026.jpg"
-,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7028.jpg"
-,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_7001.jpg"
-,"http://www.turpohod-foto.narod.ru/treks/sav_iksha-nekras/nekras-iksha_03-mar-13_foto/zavar/img_6921.jpg"
-};
-
 
 void
 user_app1_task (void *sdata)
@@ -161,9 +133,9 @@ user_app1_task (void *sdata)
   FATFS fs;
   FIL fnew;
   FRESULT res_sd;
-  UINT fnum;
-  char WriteBuffer[100];
-  BYTE ReadBuffer[256] = { 0 };
+  //UINT fnum;
+  //char WriteBuffer[100];
+  //BYTE ReadBuffer[256] = { 0 };
 
   wm_psram_config (1);
   d_psram_init (PSRAM_SPI, 2, 2, 1, 2);
@@ -198,7 +170,6 @@ user_app1_task (void *sdata)
   if (res_sd == FR_OK)
     {
       int ind_file = 0;
-      int ind_url = 0;
       tls_watchdog_init (60 * 1000
                          * 1000); // u32 usec microseconds, около 60 сек
 
@@ -222,27 +193,29 @@ user_app1_task (void *sdata)
           while (u8_wifi_state == 1) // основной цикл(2)
             {
 
-              char FileName[256];
-              sprintf (FileName, "1:test%d.jpg", ind_file);
-              printf ("FileName = %s\n", FileName);
-              sprintf (WriteBuffer, "white txt %s file name", FileName);
+              char FileName[20];
+              sprintf (FileName, "1:test0.jpg");
+
+              char s_Url[256];
+              sprintf (s_Url, "http://192.168.1.1:8088/jpg/j%.3d-480x320.jpg", ind_file);
+
+              printf ("s_Url = %s\n", s_Url);
+              //sprintf (WriteBuffer, "white txt %s file name", FileName);
 
               res_sd = f_open (&fnew, FileName, FA_CREATE_ALWAYS | FA_WRITE);
               if (res_sd == FR_OK)
                 {
-                  printf ("f_open ok, try load url = %s \r\n", a_Url[ind_url]);
-                  // котики -inurl:https
-                  res_sd = download_file_http (a_Url[ind_url], &fnew);
-                  ind_url++;
-                  if(ind_url>=COUNT_IMG)ind_url=0;
+                  printf ("f_open ok, try load url = %s \r\n", s_Url);
+                  // природа -inurl:https
+                  res_sd = download_file_http (s_Url, &fnew);
 
                   //              res_sd
                   //                  = f_write (&fnew, WriteBuffer, sizeof
                   //                  (WriteBuffer), &fnum);
                   if (res_sd == FR_OK)
                     {
-                      printf ("fnum = %d\r\n", fnum);
-                      printf ("WriteBuffer = %s \r\n", WriteBuffer);
+                      //printf ("fnum = %d\r\n", fnum);
+                      //printf ("WriteBuffer = %s \r\n", WriteBuffer);
                     }
                   else
                     {
@@ -258,8 +231,13 @@ user_app1_task (void *sdata)
                   tls_os_time_delay (HZ);
                 }
 
-              UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
+              if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
+                    {
+                      ind_file = -1;
+                    }
+              ind_file++;
 
+              /*
               res_sd = f_open (&fnew, FileName, FA_OPEN_EXISTING | FA_READ);
               if (res_sd == FR_OK)
                 {
@@ -286,6 +264,7 @@ user_app1_task (void *sdata)
                   printf ("f_open failed! error code:%d\r\n", res_sd);
                   tls_os_time_delay (HZ);
                 }
+              */
 
               tls_os_time_delay (HZ * 10);
               tls_watchdog_clr ();
