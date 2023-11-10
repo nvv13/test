@@ -84,7 +84,7 @@ user_app1_task (void *sdata)
              (u8)WM_IO_PB_22 // SER => DC !
              ,
              // 120000000
-             40000000
+             60000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -265,7 +265,7 @@ user_app1_task (void *sdata)
 
               //tls_os_time_delay (HZ * 10);
               uint32_t cur = tls_os_get_time ();
-              while (tls_os_get_time ()<(cur - HZ * 10))
+              while (cur > (tls_os_get_time () - (HZ * 10)))
                 { //
 
                   if (URTouch_dataAvailable () == true)
