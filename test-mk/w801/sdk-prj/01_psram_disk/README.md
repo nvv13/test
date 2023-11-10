@@ -5,15 +5,11 @@ project psram_disk DEMO
 
 
 
------------------------------
-
-
 
 ------------------------------------------------
 
 
-board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
-назывался "3,5-дюймовый TFT ЖК SPI IPS ILI9488 с емкостным касанием FT6236"
+board HLK-W801-KIT-V1.1 + 3.2 TFT IPS 320xRGBx480 MSP3526
 
 
 Видео
@@ -21,72 +17,25 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488_back.jpg" alt="back side" title="back side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3526_back.jpg" alt="back side" title="back side" /></p>
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488.jpg" alt="top side" title="top side" /></p>
-
-
-соединения
-
-надо соединить по схеме:
-~~~
-connect to TFT3_5SP_9488
----- ------
-W801  LCD   
----- ------
-PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
-PA09  CTP_INT     прерывание
-PA01  CTP_SCL     
-PA04  CTP_SDA     
-      NC/3V3 
-PB16  SDO         MISO
-3.3v  BL          подсветка
-PB15  SCK         синхросигнал
-PB17  SDI         MOSI
-PB23  D/C         комманда/данные
-PB21  RST         сброс
-PB14  CS          выбор чипа
-gnd   GND         земля
-3v3   VDD         питание (3.3v - 5v)
----- ------
-W801  LCD   
----- ------
-
-
-*подготовка изображений для SD Card + используется библиотека libTJPEG.a
-
-# convert *.jpg -resize 480x320! j%03d-480x320.jpg
-
-~~~
-
-
-
---------------------------------------------------
-------------------------------------------------
-
-
-board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834
-
-
-Видео
-
-
-Дисплей
-фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP2834_back.jpg" alt="back side" title="back side" /></p>
-фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP2834.jpg" alt="top side" title="top side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3526.jpg" alt="top side" title="top side" /></p>
 
 
 wiki
-http://www.lcdwiki.com/2.8inch_IPS_SPI_Module_ILI9341
+http://www.lcdwiki.com/3.5inch_IPS_SPI_Module_ST7796
 
 
 соединения
 
 надо соединить по схеме:
 ~~~
-connect to MSP2834
+
+
+версия с использованием SDIO (60 Mhz) 
+
+для SDIO надо соединить по схеме:
+connect to MSP3526
 ---- ------
 W801  LCD   
 ---- ------
@@ -95,13 +44,14 @@ PA09  CTP_INT     прерывание
 PA04  CTP_SDA     
 PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
 PA01  CTP_SCL     
-PB16  SDO(MISO)
+
+      SDO(MISO)
 3.3v  LED         подсветка
-PB15  SCK         синхросигнал
-PB17  SDI(MOSI)
-PB23  LCD_RS      комманда/данные
+PB06  SCK         синхросигнал
+PB07  SDI(MOSI)
+PB22  LCD_RS      комманда/данные
 PB21  LCD_RST     сброс
-PB14  LCD_CS      выбор чипа
+PB23  LCD_CS      выбор чипа
 gnd   GND         земля
 3v3   VDD         питание (3.3v - 5v)
 ---- ------
@@ -109,11 +59,14 @@ W801  LCD
 ---- ------
 
 
-*подготовка изображений для SD Card + используется библиотека libTJPEG.a
-# convert *.jpg -resize 320x240! j%03d-320x240.jpg
 
 ~~~
 
+
+
+
+
+--------------------------------------------------
 
 
 

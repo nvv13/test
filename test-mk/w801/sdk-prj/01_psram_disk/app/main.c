@@ -37,8 +37,8 @@
 #include "mod1/u_jpeg.h"
 
 #include "ff.h"
-#include "wm_gpio_afsel.h"
 #include "utils.h"
+#include "wm_gpio_afsel.h"
 
 #include "lfile_http.h"
 
@@ -65,7 +65,6 @@ extern uint8_t
 extern uint8_t SmallSymbolFont[];
 extern uint8_t Dingbats1_XL[];
 
-
 void
 user_app1_task (void *sdata)
 {
@@ -84,8 +83,8 @@ user_app1_task (void *sdata)
              ,
              (u8)WM_IO_PB_22 // SER => DC !
              ,
-             //120000000
-                40000000
+             // 120000000
+             40000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -100,42 +99,39 @@ user_app1_task (void *sdata)
     максимально, частота spi_freq = 20000000 (20MHz)
         но!      если spi_freq > 20000000 тогда работает spi SDIO
         частоту можно ставить от 21000000 до 120000000 герц (работает при
-    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL 
+    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL
                                WM_IO_PB_07 CMD  -> MOSI
            */
   );
 
-
   UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
 
   // URTouch_URTouch(sensor_type, byte tclk_scl, byte tcs_sda, byte
-  // tdin_thresh, byte dout_none, byte irq_irq);
-  /*
-    URTouch_URTouch (TS_FT6236 // sensor_type
-                     ,
-                     WM_IO_PA_01 // byte tclk_scl
-                     ,
-                     WM_IO_PA_04 // byte tcs_sda
-                     ,
-                     50//FT6236_DEFAULT_THRESHOLD // byte din_thresh
-                     ,
-                     NO_GPIO_PIN // dout_none
-                     ,
-                     NO_GPIO_PIN //WM_IO_PA_09 // byte irq_irq
-    );
+  //     tdin_thresh, byte dout_none, byte irq_irq);
+  URTouch_URTouch (TS_FT6236 // sensor_type
+                   ,
+                   WM_IO_PA_01 // byte tclk_scl
+                   ,
+                   WM_IO_PA_04 // byte tcs_sda
+                   ,
+                   50 // FT6236_DEFAULT_THRESHOLD // byte din_thresh
+                   ,
+                   NO_GPIO_PIN // dout_none
+                   ,
+                   NO_GPIO_PIN // WM_IO_PA_09 // byte irq_irq
+  );
+  URTouch_InitTouch (TOUCH_ORIENTATION);
+  URTouch_setPrecision (PREC_MEDIUM);
 
-    URTouch_InitTouch (TOUCH_ORIENTATION);
-    URTouch_setPrecision (PREC_MEDIUM);
-  */
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
   FATFS fs;
   FIL fnew;
   FRESULT res_sd;
-  //UINT fnum;
-  //char WriteBuffer[100];
-  //BYTE ReadBuffer[256] = { 0 };
+  // UINT fnum;
+  // char WriteBuffer[100];
+  // BYTE ReadBuffer[256] = { 0 };
 
   wm_psram_config (1);
   d_psram_init (PSRAM_SPI, 2, 2, 1, 2);
@@ -197,10 +193,11 @@ user_app1_task (void *sdata)
               sprintf (FileName, "1:test0.jpg");
 
               char s_Url[256];
-              sprintf (s_Url, "http://192.168.1.1:8088/jpg/j%.3d-480x320.jpg", ind_file);
+              sprintf (s_Url, "http://192.168.1.1:8088/jpg/j%.3d-480x320.jpg",
+                       ind_file);
 
               printf ("s_Url = %s\n", s_Url);
-              //sprintf (WriteBuffer, "white txt %s file name", FileName);
+              // sprintf (WriteBuffer, "white txt %s file name", FileName);
 
               res_sd = f_open (&fnew, FileName, FA_CREATE_ALWAYS | FA_WRITE);
               if (res_sd == FR_OK)
@@ -214,8 +211,8 @@ user_app1_task (void *sdata)
                   //                  (WriteBuffer), &fnum);
                   if (res_sd == FR_OK)
                     {
-                      //printf ("fnum = %d\r\n", fnum);
-                      //printf ("WriteBuffer = %s \r\n", WriteBuffer);
+                      // printf ("fnum = %d\r\n", fnum);
+                      // printf ("WriteBuffer = %s \r\n", WriteBuffer);
                     }
                   else
                     {
@@ -232,9 +229,9 @@ user_app1_task (void *sdata)
                 }
 
               if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
-                    {
-                      ind_file = -1;
-                    }
+                {
+                  ind_file = -1;
+                }
               ind_file++;
 
               /*
@@ -266,7 +263,24 @@ user_app1_task (void *sdata)
                 }
               */
 
-              tls_os_time_delay (HZ * 10);
+              //tls_os_time_delay (HZ * 10);
+              uint32_t cur = tls_os_get_time ();
+              while (tls_os_get_time ()<(cur - HZ * 10))
+                { //
+
+                  if (URTouch_dataAvailable () == true)
+                    {
+
+                      URTouch_read ();
+
+                      if (URTouch_TP_X > 0 && URTouch_TP_Y > 0)
+                        {
+                          UTFT_setColor2 (VGA_BLUE);
+                          UTFT_fillCircle (URTouch_TP_X, URTouch_TP_Y,
+                                           2); // Рисуем закрашенную окружность
+                        }
+                    }
+                }
               tls_watchdog_clr ();
             }
         }
