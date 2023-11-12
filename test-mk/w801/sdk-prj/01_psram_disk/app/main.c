@@ -26,6 +26,7 @@
 //#include "wm_pwm.h"
 //#include "wm_params.h"
 #include "wm_osal.h"
+#include "wm_timer.h"
 //#include "wm_netif.h"
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
@@ -64,6 +65,29 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 extern uint8_t Dingbats1_XL[];
+
+static void
+my_timer_irq (u8 *arg) // здесь будет смена режима
+{
+  /*
+    if (URTouch_flag_touch_isr)
+      {
+
+        if (URTouch_dataAvailable () == true)
+          {
+
+            URTouch_read ();
+
+            if (URTouch_TP_X > 0 && URTouch_TP_Y > 0)
+              {
+                UTFT_setColor2 (VGA_BLUE);
+                UTFT_fillCircle (URTouch_TP_X, URTouch_TP_Y,
+                                 2); // Рисуем закрашенную окружность
+              }
+          }
+      }
+  */
+}
 
 void
 user_app1_task (void *sdata)
@@ -118,10 +142,24 @@ user_app1_task (void *sdata)
                    ,
                    NO_GPIO_PIN // dout_none
                    ,
-                   NO_GPIO_PIN // WM_IO_PA_09 // byte irq_irq
+                   NO_GPIO_PIN // WM_IO_PA_09 // byte irq_irq //NO_GPIO_PIN
   );
   URTouch_InitTouch (TOUCH_ORIENTATION);
   URTouch_setPrecision (PREC_MEDIUM);
+
+  u8 timer_id;
+  struct tls_timer_cfg timer_cfg;
+  timer_cfg.unit = TLS_TIMER_UNIT_MS;
+  timer_cfg.timeout = 100; //
+  timer_cfg.is_repeat = 1;
+  timer_cfg.callback = (tls_timer_irq_callback)my_timer_irq;
+  timer_cfg.arg = NULL;
+  timer_id = tls_timer_create (&timer_cfg);
+  if (true)
+    {
+      tls_timer_start (timer_id);
+      printf ("timer start\n");
+    }
 
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
@@ -168,7 +206,7 @@ user_app1_task (void *sdata)
       int ind_file = 0;
       tls_watchdog_init (60 * 1000
                          * 1000); // u32 usec microseconds, около 60 сек
-
+      u8 u8_cnt_jp_err=0;
       for (;;) // цикл(1) с подсоединением к wifi и запросом времени
         {
           while (u8_wifi_state == 0)
@@ -230,7 +268,11 @@ user_app1_task (void *sdata)
 
               if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
                 {
+                if(++u8_cnt_jp_err>2)
+                  {
                   ind_file = -1;
+                  u8_cnt_jp_err=0; 
+                  }
                 }
               ind_file++;
 
@@ -263,21 +305,19 @@ user_app1_task (void *sdata)
                 }
               */
 
-              //tls_os_time_delay (HZ * 10);
+              // tls_os_time_delay (HZ * 10);
               uint32_t cur = tls_os_get_time ();
-              while (cur > (tls_os_get_time () - (HZ * 10)))
+              while ((tls_os_get_time () - cur) < (HZ * 10))
                 { //
 
                   if (URTouch_dataAvailable () == true)
                     {
-
                       URTouch_read ();
 
                       if (URTouch_TP_X > 0 && URTouch_TP_Y > 0)
                         {
                           UTFT_setColor2 (VGA_BLUE);
-                          UTFT_fillCircle (URTouch_TP_X, URTouch_TP_Y,
-                                           2); // Рисуем закрашенную окружность
+                          UTFT_fillCircle (URTouch_TP_X, URTouch_TP_Y, 2);
                         }
                     }
                 }
