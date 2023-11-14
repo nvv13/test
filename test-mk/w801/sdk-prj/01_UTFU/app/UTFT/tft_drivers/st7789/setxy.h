@@ -78,6 +78,7 @@ case TFT01_69V89:
 	UTFT_LCD_Write_COM(ST77XX_RAMWR); 
 	break;
 
+/*
 case TFT02_0V89:
 #define TFT02_0V89_COL_SHIFT_PIXEL 0
 #define TFT02_0V89_ROW_SHIFT_PIXEL 0
@@ -96,3 +97,4 @@ case TFT02_0V89:
 #define ST77XX_RAMWR 0x2C
 	UTFT_LCD_Write_COM(ST77XX_RAMWR); 
 	break;
+*/

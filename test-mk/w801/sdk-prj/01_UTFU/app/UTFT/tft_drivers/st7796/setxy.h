@@ -1,4 +1,5 @@
 case MSP3526:
+case TFT02_0V89:
 
 
 //	#define lcddev_setxcmd 0x2A

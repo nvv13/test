@@ -8,76 +8,60 @@ project psram_disk DEMO
 
 ------------------------------------------------
 
-
-board HLK-W801-KIT-V1.1 + 3.2 TFT IPS 320xRGBx480 MSP3526
-
-
-Видео
-
+board HLK-W801-KIT-V1.1 + 2.0 TFT SPI 240x320 
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3526_back.jpg" alt="back side" title="back side" /></p>
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT02_0V89_back.jpg" alt="back side" title="back side" /></p>
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3526.jpg" alt="top side" title="top side" /></p>
-
-
-wiki
-http://www.lcdwiki.com/3.5inch_IPS_SPI_Module_ST7796
-
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT02_0V89.jpg" alt="top side" title="top side" /></p>
 
 соединения
 
-надо соединить по схеме:
-~~~
-
-
 версия с использованием SDIO (60 Mhz) 
-
 для SDIO надо соединить по схеме:
-connect to MSP3526
+~~~
+connect to TFT02_0V89 
 ---- ------
-W801  LCD   
+W801 LCD   
 ---- ------
-      SD_CS
-PA09  CTP_INT     прерывание
-PA04  CTP_SDA     
-PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
-PA01  CTP_SCL     
-
-      SDO(MISO)
-3.3v  LED         подсветка
-PB06  SCK         синхросигнал
-PB07  SDI(MOSI)
-PB22  LCD_RS      комманда/данные
-PB21  LCD_RST     сброс
-PB23  LCD_CS      выбор чипа
-gnd   GND         земля
-3v3   VDD         питание (3.3v - 5v)
+gnd  GND  
+3.3v VCC
+PB06 SCL  синхросигнал
+PB07 SDA  данные
+PB21 RES  сброс (reset)
+PB22 DC   команда/данные
+PB14 CS   выбор чипа
 ---- ------
-W801  LCD   
+W801 LCD   
 ---- ------
 
+
+для HW SPI надо соединить по схеме:
+connect to TFT02_0V89 
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB22 DC   команда/данные
+PB14 CS   выбор чипа
+---- ------
+W801 LCD   
+---- ------
 
 
 ~~~
 
 
+------------------------------------------------
 
 
 
---------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
+-----------------------------
 -----------------------------
 
 
