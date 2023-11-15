@@ -6,7 +6,9 @@ extern "C"
 {
 #endif
 
-  FRESULT download_file_http (const char *Uri, FIL *pfnew);
+#include "ff.h"
+
+FRESULT download_file_http (const char *Uri, FIL *pfnew);
 
 #ifdef __cplusplus
 }

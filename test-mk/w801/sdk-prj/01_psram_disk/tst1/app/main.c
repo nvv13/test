@@ -118,7 +118,7 @@ user_app1_task (void *sdata)
   wm_psram_config (1);
   d_psram_init (PSRAM_SPI, 2, 2, 1, 2);
   tls_os_time_delay (HZ / 10);
-  // mount psram disk !
+  // mount psram disk ! не забудь заменить libapp на /mod1/libapp в makefile!
   res_sd = f_mount (&fs, "1:", 1);
   //***********************formatting test****************************
   if (res_sd == FR_NO_FILESYSTEM)

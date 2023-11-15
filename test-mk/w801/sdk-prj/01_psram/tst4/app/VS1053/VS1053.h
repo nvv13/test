@@ -228,6 +228,9 @@ extern "C"
   } _VS1053_status;
 
   extern volatile enum VS1053_status my_sost;
+  extern volatile int VS1053_WEB_RADIO_nTotal;
+  extern volatile int VS1053_WEB_RADIO_buf_chunk_free;
+  extern volatile int VS1053_WEB_RADIO_buf_chunk_total;
 
   enum VS1053_status VS1053_status_get_status (void);
 

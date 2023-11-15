@@ -36,11 +36,13 @@
 #include "VS1053.h"
 
 
-u32 VS1053_WEB_RADIO_nTotal = 0;
+volatile int VS1053_WEB_RADIO_nTotal = 0;
+volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;
+volatile int VS1053_WEB_RADIO_buf_chunk_total = 0;
 
+//#define http_chunk_size (vs1053_chunk_size * 2)
+#define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size * 4)
 
-#define http_chunk_size (vs1053_chunk_size * 2)
-#define HTTP_CLIENT_BUFFER_SIZE (http_chunk_size * 2)
 
 #define VS1053_TASK_SIZE 1024
 tls_os_task_t vs1053_buf_play_task_hdl = NULL;
@@ -112,6 +114,7 @@ vs1053_buf_play_task (void *sdata)
                 VS1053_playChunk (buffer, item_size);
                 if(load_buffer_debug)
                    printf ("-");
+                VS1053_WEB_RADIO_buf_chunk_free--;
                 if (VS1053_WEB_RADIO_nTotal > 512)
                    tls_watchdog_clr ();
                 }
@@ -283,35 +286,54 @@ break;
 
       //int i_cnt=0;
       //сначала заполняем буффер данными
+      VS1053_WEB_RADIO_buf_chunk_free = 0;
       while (
           (nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
           //&& my_sost == VS1053_HW_INIT
           )
         {
+
+          u32 u_fur=tls_os_get_time();
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
           //ptintf ("%d ", freeSize);
-          if (freeSize < (nSize + 4))// || i_cnt++>4096)
+          if (freeSize < (nSize + 4) || VS1053_WEB_RADIO_buf_chunk_free>200)// || i_cnt++>4096)
             {
             printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
             break;
             }
-          u32 u_fur=tls_os_get_time();
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
-          if(tls_os_get_time()-u_fur<HZ)tls_os_time_delay (tls_os_get_time()-u_fur);
+          u32 u_cur = tls_os_get_time ();
+          //printf ("u_cur=%d, u_fur=%d \n",u_cur, u_fur );
+          if((u_cur-u_fur-3)>0 && (u_cur-u_fur-3)<HZ)
+             tls_os_time_delay (u_cur-u_fur-3);
+          else 
+             tls_os_time_delay (0);
+
           if (nRetCode == HTTP_CLIENT_SUCCESS)
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
               if(load_buffer_debug)
                   printf ("f");
+              VS1053_WEB_RADIO_buf_chunk_free++;
               VS1053_WEB_RADIO_nTotal += nSize;
               if (VS1053_WEB_RADIO_nTotal > 512)
                  tls_watchdog_clr ();
             }
         }
+      if(VS1053_WEB_RADIO_buf_chunk_free>VS1053_WEB_RADIO_buf_chunk_total)
+        VS1053_WEB_RADIO_buf_chunk_total=VS1053_WEB_RADIO_buf_chunk_free;
+      //u32 u_cur = tls_os_get_time ();
+      //printf ("u_cur=%d, u_fur=%d \n",u_cur, u_fur );
+      //while ( (tls_os_get_time () - u_cur) < (u_cur-u_fur)  && my_sost == VS1053_HW_INIT )
+      //  { //
+      //    tls_os_time_delay (0);
+      //    tls_watchdog_clr ();
+      //  }
       tls_os_time_delay (100);
+      printf ("start play\n");
 
       if (my_sost != VS1053_QUERY_TO_STOP)
         my_sost = VS1053_PLAY;
@@ -330,7 +352,14 @@ break;
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
-          if((tls_os_get_time()-u_fur-3)<HZ)tls_os_time_delay (tls_os_get_time()-u_fur-3);
+          u32 u_cur = tls_os_get_time ();
+          //printf ("u_cur=%d, u_fur=%d \n",u_cur, u_fur );
+          if((u_cur-u_fur-3)>0 && (u_cur-u_fur-3)<HZ)
+             tls_os_time_delay (u_cur-u_fur-3);
+          else 
+             tls_os_time_delay (0);
+
+
 
           //ждем свободное место в буфере, и заполняем его
           while (my_sost == VS1053_PLAY)
@@ -343,6 +372,9 @@ break;
                   //printf (" %d ", freeSize);
                   if(load_buffer_debug)
                      printf ("+");
+                  VS1053_WEB_RADIO_buf_chunk_free++;
+                  if(VS1053_WEB_RADIO_buf_chunk_free>VS1053_WEB_RADIO_buf_chunk_total)
+                    VS1053_WEB_RADIO_buf_chunk_total=VS1053_WEB_RADIO_buf_chunk_free;
                   break;
                 }
               tls_os_time_delay (HZ / 100);

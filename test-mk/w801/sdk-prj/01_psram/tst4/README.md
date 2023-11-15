@@ -5,6 +5,7 @@
 ~~~
 
 
+------ --------- -------    
 W801(1)  psram   LY68L6400* cfg(0)
 ------ --------- -------    -----
 PA15   SCLK      (6)        PB00
@@ -21,19 +22,66 @@ GND    Vss       (4)
 
 ---
 
+
+----- -------------
 W801  VS1053
 ----- -------------
 PB17  XRST
-PB21  XCS
-PB22  XDCS
+PB11  XCS
+PB16  XDCS
 PB18  DREQ
+PB23  -
 PB24  SCK
-PB16  MISO (PB0,PB3,PB16,PB25)
+PB25  MISO (PB0,PB3,PB16,PB25)
 PB26  MOSI
 5V    5V
 GND   DGND
 ----- -------------
 
+
+
+версия с использованием SDIO (60 Mhz) 
+для SDIO надо соединить по схеме:
+connect to TFT02_0V89 
+---- --------------
+W801 LCD TFT02_0V89   
+---- --------------
+gnd  GND  
+3.3v VCC
+PB06 SCL  синхросигнал
+PB07 SDA  данные
+PB21 RES  сброс (reset)
+PB22 DC   команда/данные
+PB14 CS   выбор чипа
+---- ------
+W801 LCD   
+---- ------
+
+
+или 
+для SDIO надо соединить по схеме:
+connect to MSP3526
+---- ------------
+W801  LCD MSP3526 
+---- ------------
+      SD_CS
+PA09  CTP_INT     прерывание
+PA04  CTP_SDA     
+PB21  CTP_RST     сброс CTP  (не должен висеть "в воздухе"!)
+PA01  CTP_SCL     
+
+      SDO(MISO)
+3.3v  LED         подсветка
+PB06  SCK         синхросигнал
+PB07  SDI(MOSI)
+PB22  LCD_RS      комманда/данные
+PB21  LCD_RST     сброс
+PB14  LCD_CS      выбор чипа
+gnd   GND         земля
+3v3   VDD         питание (3.3v - 5v)
+---- ------
+W801  LCD   
+---- ------
 
 
 ~~~

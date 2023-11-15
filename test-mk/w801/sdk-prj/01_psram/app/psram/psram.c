@@ -449,6 +449,12 @@ bit    |access|Instructions                                                  |re
 void d_psram_init(psram_mode_t mode, u8 frequency_divider,u8 tCPH, u8 BURST, u16 OVERTIMER)
 {
 
+        if (s_freelist_tail != NULL)
+          {
+            printf("s_freelist_tail != NULL, PSRAM no init, skip\n");
+            return;
+          }
+
 	volatile unsigned int value = 0x00000000;
 
         value=(OVERTIMER & 0x7FF);
@@ -532,6 +538,10 @@ bool d_psram_check(void)
 {
     bool b_ok=false;
 
+    u32 var1=var1Psram;
+    u32 var2=var2Psram;
+    u32 var3=var3Psram;
+
     var1Psram = (u32) VALUE_1;
     var2Psram = (u32) VALUE_2;
     var3Psram = (u32) VALUE_3;
@@ -554,6 +564,10 @@ bool d_psram_check(void)
     {
       printf(" PSRAM not found \n");
     }
+
+    var1Psram=var1;
+    var2Psram=var2;
+    var3Psram=var3;
 
     return b_ok;
 }

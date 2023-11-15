@@ -3,8 +3,8 @@
 #include "wm_osal.h"
 
 //#include "decode_cmd.h"
-#include "w_wifi.h"
 #include "mod1/VS1053.h"
+#include "w_wifi.h"
 
 #define DEMO_SOCK_BUF_SIZE 1024
 static char sock_rx[DEMO_SOCK_BUF_SIZE] = { 0 };
@@ -39,7 +39,7 @@ con_net_status_changed_event (u8 status)
         server_fd = -1;
         u8_wifi_state = 0;
         if (my_sost == VS1053_PLAY)
-         my_sost = VS1053_PLAY_BUF;//VS1053_QUERY_TO_STOP;
+          my_sost = VS1053_PLAY_BUF; // VS1053_QUERY_TO_STOP;
       };
       break;
     case NETIF_IP_NET_UP:
