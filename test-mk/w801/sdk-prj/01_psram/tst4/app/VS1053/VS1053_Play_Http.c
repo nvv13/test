@@ -39,6 +39,7 @@
 volatile int VS1053_WEB_RADIO_nTotal = 0;
 volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;
 volatile int VS1053_WEB_RADIO_buf_chunk_total = 0;
+#define DF_VS1053_WEB_RADIO_buf_chunk_top 300
 
 //#define http_chunk_size (vs1053_chunk_size * 2)
 #define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size * 4)
@@ -120,13 +121,13 @@ vs1053_buf_play_task (void *sdata)
                 }
               else
                 {
-                tls_os_time_delay (10);
+                tls_os_time_delay (1);
                 if(load_buffer_debug)
                    printf ("0");
                 }
             }
           else
-            tls_os_time_delay (HZ / 100);
+            tls_os_time_delay (10);
         }
       tls_os_time_delay (HZ / 100);
     }
@@ -297,7 +298,7 @@ break;
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
           //ptintf ("%d ", freeSize);
-          if (freeSize < (nSize + 4) || VS1053_WEB_RADIO_buf_chunk_free>200)// || i_cnt++>4096)
+          if (freeSize < (nSize + 4))// || VS1053_WEB_RADIO_buf_chunk_free>DF_VS1053_WEB_RADIO_buf_chunk_top)// || i_cnt++>4096)
             {
             printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
             break;
@@ -332,11 +333,11 @@ break;
       //    tls_os_time_delay (0);
       //    tls_watchdog_clr ();
       //  }
-      tls_os_time_delay (100);
       printf ("start play\n");
 
       if (my_sost != VS1053_QUERY_TO_STOP)
         my_sost = VS1053_PLAY;
+      tls_os_time_delay (1000);
 
       VS1053_WEB_RADIO_nTotal = 0;
       // Get the data until we get an error or end of stream code
@@ -365,7 +366,7 @@ break;
           while (my_sost == VS1053_PLAY)
             {
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-              if (freeSize > (nSize + 4))
+              if (freeSize > (nSize + 4) && VS1053_WEB_RADIO_buf_chunk_free<=DF_VS1053_WEB_RADIO_buf_chunk_top)
                 {
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
@@ -377,7 +378,7 @@ break;
                     VS1053_WEB_RADIO_buf_chunk_total=VS1053_WEB_RADIO_buf_chunk_free;
                   break;
                 }
-              tls_os_time_delay (HZ / 100);
+              tls_os_time_delay (1);
             }
 
           VS1053_WEB_RADIO_nTotal += nSize;
