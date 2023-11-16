@@ -37,13 +37,12 @@
 #include "mod1/psram.h"
 #include "mod1/u_jpeg.h"
 
-#include "ff.h"
-#include "utils.h"
-#include "wm_gpio_afsel.h"
+//#include "ff.h"
+//#include "utils.h"
+//#include "wm_gpio_afsel.h"
 
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
-#include "w_ntp.h"
 #include "w_wifi.h"
 
 #include "mod1/VS1053.h"
@@ -74,21 +73,23 @@ extern uint8_t
 extern uint8_t SmallSymbolFont[];
 extern uint8_t Dingbats1_XL[];
 
-
-static char char_buff[100];
+// static char char_buff[100];
 
 static void
 my_timer_irq (u8 *arg) // здесь будет смена режима
 {
 
-              sprintf (char_buff, "  %d / %d  ", VS1053_WEB_RADIO_buf_chunk_free,VS1053_WEB_RADIO_buf_chunk_total );
-              UTFT_setFont (BigFont);
-              UTFT_setColor2 (VGA_RED);
-              UTFT_print (char_buff, CENTER, 50, 0); // выводим текст на дисплей
-
-
+  /*
+                sprintf (char_buff, "  %d / %d  ",
+     VS1053_WEB_RADIO_buf_chunk_free,VS1053_WEB_RADIO_buf_chunk_total );
+                UTFT_setFont (BigFont);
+                UTFT_setColor2 (VGA_RED);
+                UTFT_print (char_buff, CENTER, 50, 0); // выводим текст на
+     дисплей
+  */
 }
 
+/*
 #define URL_ARR_SIZE 14
 static const char *aUrl[URL_ARR_SIZE] = {
   "http://188.9.157.80:81/axis-cgi/jpg/image.cgi?resolution=320x240",
@@ -108,6 +109,7 @@ static const char *aUrl[URL_ARR_SIZE] = {
   "http://mobiliv.ru/_ph/94/2/597387039.jpg",
   "http://mobiliv.ru/_ph/94/2/395978212.jpg"
 };
+*/
 
 void
 user_app1_task (void *sdata)
@@ -154,14 +156,14 @@ user_app1_task (void *sdata)
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
     .psram_BufferSize
-    = 1024 * 50 , // 26400,   // подойдет 26400 более не надо! глючит!
+    = 1024 * 50, // 26400,   // подойдет 26400 более не надо! глючит!
     .psram_config = 1, // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
     .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
     .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
-    .load_buffer_debug = 0, // 0 , 1 - выводит инфу по заполнению "f" или "+",
+    .load_buffer_debug = 1, // 0 , 1 - выводит инфу по заполнению "f" или "+",
                             // и опусташению буффера "-", "0" - нехватка данных
 
   };
@@ -249,219 +251,63 @@ user_app1_task (void *sdata)
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
-  FATFS fs;
-  FIL fnew;
-  FRESULT res_sd;
-  // UINT fnum;
-  // char WriteBuffer[100];
-  // BYTE ReadBuffer[256] = { 0 };
-
-  wm_psram_config (1);
-  d_psram_init (PSRAM_SPI, 2, 2, 1, 2);
-  tls_os_time_delay (HZ / 10);
-
-  // mount psram disk ! не забудь заменить libapp на /mod1/libapp в makefile!
-  res_sd = f_mount (&fs, "1:", 1);
-  //***********************formatting test****************************
-  if (res_sd == FR_NO_FILESYSTEM)
+  tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 60 сек
+  for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
-      printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably "
-              "because the file "
-              "initialization failed! error code:%d\r\n",
-              res_sd);
-
-      BYTE work[FF_MAX_SS];
-      res_sd = f_mkfs ("1:", 0, work, sizeof (work));
-
-      if (res_sd == FR_OK)
+      while (u8_wifi_state == 0)
         {
-          printf ("mount again\r\n");
-          res_sd = f_mount (NULL, "1:", 1);
-          printf ("code:%d\r\n", res_sd);
-          res_sd = f_mount (&fs, "1:", 1);
-          printf ("code:%d\r\n", res_sd);
-        }
-      else
-        {
-          printf ("f_mkfs failed! error code:%d\r\n", res_sd);
-        }
-    }
-
-  if (res_sd == FR_OK)
-    {
-      int ind_file = 0;
-      tls_watchdog_init (30 * 1000
-                         * 1000); // u32 usec microseconds, около 60 сек
-      u8 u8_cnt_jp_err = 0;
-      for (;;) // цикл(1) с подсоединением к wifi и запросом времени
-        {
-          while (u8_wifi_state == 0)
+          printf ("trying to connect wifi\n");
+          if (u8_wifi_state == 0
+              && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
             {
-              printf ("trying to connect wifi\n");
-              if (u8_wifi_state == 0
-                  && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
-                u8_wifi_state = 1;
-              else
+              while (u8_wifi_state == 0)
                 {
-                  tls_os_time_delay (HZ * 5);
+                  tls_os_time_delay (100);
                 }
+              // u8_wifi_state = 1;
             }
+          else
+            {
+              tls_os_time_delay (HZ * 5);
+            }
+        }
 
-          tls_os_time_delay (HZ * 5);
+      tls_os_time_delay (HZ * 5);
+      tls_watchdog_clr ();
+
+      while (u8_wifi_state == 1) // основной цикл(2)
+        {
+
           tls_watchdog_clr ();
 
+          printf ("load default stantion 0\n");
+          // flash_cfg_load_stantion_uuid (stantion_uuid, 0);
+          // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
+          // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
+          // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
+          sprintf (stantion_uuid, "%s",
+                   "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // trance
           while (u8_wifi_state == 1) // основной цикл(2)
             {
-
-              char FileName[20];
-              sprintf (FileName, "1:test0.jpg");
-
-              char s_Url[256];
-              sprintf (s_Url, "%s", aUrl[ind_file]);
-
-              printf ("s_Url = %s\n", s_Url);
-              // sprintf (WriteBuffer, "white txt %s file name", FileName);
-
-              res_sd = f_open (&fnew, FileName, FA_CREATE_ALWAYS | FA_WRITE);
-              if (res_sd == FR_OK)
+              if (my_sost != VS1053_PLAY_BUF)
                 {
-                  printf ("f_open ok, try load url = %s \r\n", s_Url);
-                  // природа -inurl:https
-                  tls_os_time_delay (HZ / 4);
-                  res_sd = download_file_http (s_Url, &fnew);
-
-                  //              res_sd
-                  //                  = f_write (&fnew, WriteBuffer, sizeof
-                  //                  (WriteBuffer), &fnum);
-                  if (res_sd == FR_OK)
-                    {
-                      // printf ("fnum = %d\r\n", fnum);
-                      // printf ("WriteBuffer = %s \r\n", WriteBuffer);
-                    }
-                  else
-                    {
-                      printf ("f_write failed! error code:%d\r\n", res_sd);
-                      tls_os_time_delay (HZ);
-                    }
-
-                  f_close (&fnew);
-                }
-              else
-                {
-                  printf ("f_open failed! error code:%d\r\n", res_sd);
-                  tls_os_time_delay (HZ);
-                }
-
-              if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
-                {
-                  if (++u8_cnt_jp_err > 2)
-                    {
-                      ind_file = -1;
-                      u8_cnt_jp_err = 0;
-                    }
-                }
-              ind_file++;
-              if (ind_file > URL_ARR_SIZE)
-                ind_file = 0;
-
-              /*
-              res_sd = f_open (&fnew, FileName, FA_OPEN_EXISTING | FA_READ);
-              if (res_sd == FR_OK)
-                {
-                  printf ("f_open ok\r\n");
-                  res_sd
-                      = f_read (&fnew, ReadBuffer, sizeof (ReadBuffer), &fnum);
-
-                  if (res_sd == FR_OK)
-                    {
-                      printf ("fnum = %d\r\n", fnum);
-                      //printf ("ReadBuffer = %s\r\n", ReadBuffer);
-                      dumpBuffer("jpg", (char*)ReadBuffer, fnum);
-                    }
-                  else
-                    {
-                      printf ("f_read failed! error code:%d\r\n", res_sd);
-                      tls_os_time_delay (HZ);
-                    }
-
-                  f_close (&fnew);
-                }
-              else
-                {
-                  printf ("f_open failed! error code:%d\r\n", res_sd);
-                  tls_os_time_delay (HZ);
-                }
-              */
-
-              // tls_os_time_delay (HZ * 10);
-              uint32_t cur = tls_os_get_time ();
-              while ((tls_os_get_time () - cur) < (HZ * 10))
-                { //
-
-                  tls_watchdog_clr ();
-
-                  tls_os_time_delay (HZ * 3);
-
-                  //      u8 u8_ntp_state = 0;
-                  //      ntp_set_server_demo
-                  //      ("216.239.35.12","time.google.com",
-                  //      "ntp0.ntp-servers.net");
-                  ntp_set_server_demo ("0.fedora.pool.ntp.org",
-                                       "1.fedora.pool.ntp.org",
-                                       "2.fedora.pool.ntp.org");
-                  //      tls_os_time_delay (HZ*3);
-                  //      while (u8_ntp_state < 3)
-                  //      {
-                  //          printf ("trying to get ntp\n");
-                  //          if (u8_ntp_state == 0 &&
-                  ntp_demo (); // == WM_SUCCESS)
-                               //            u8_ntp_state = 100;
-                               //          else
-                               //            {
-                               //              tls_os_time_delay (HZ*3);
-                               //              tls_watchdog_clr ();
-                               //              u8_ntp_state++;
-                               //            }
-                               //        }
-
-                  struct tm tblock;
-                  tls_get_rtc (&tblock);
-                  printf ("sec=%d,min=%d,hour=%d,mon=%d,year=%d\n",
-                          tblock.tm_sec, tblock.tm_min, tblock.tm_hour,
-                          tblock.tm_mon + 1, tblock.tm_year + 1900);
-
-                  tls_watchdog_clr ();
-
                   my_recognize_http_reset ();
-                  printf ("load default stantion 0\n");
-                  // flash_cfg_load_stantion_uuid (stantion_uuid, 0);
-                  // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
-                  // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
-                  // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
-                  sprintf (stantion_uuid, "%s",
-                           "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // trance
-                  while (u8_wifi_state == 1) // основной цикл(2)
-                    {
-                      my_recognize_http_reset ();
-                      http_get_web_station_by_stationuuid (stantion_uuid);
-                      // http_get_web_station_by_random();
-                      printf (" my_recognize_ret_name = %s\n",
-                              my_recognize_ret_name (0));
-                      printf (" my_recognize_ret_url_resolved = %s\n",
-                              my_recognize_ret_url_resolved (0));
-
-                      VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
-
-                      tls_os_time_delay (HZ);
-                      // tls_watchdog_clr ();
-                    }
+                  http_get_web_station_by_stationuuid (stantion_uuid);
+                  // http_get_web_station_by_random();
+                  printf (" my_recognize_ret_name = %s\n",
+                          my_recognize_ret_name (0));
+                  printf (" my_recognize_ret_url_resolved = %s\n",
+                          my_recognize_ret_url_resolved (0));
                 }
-              tls_watchdog_clr ();
+
+              VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
+
+              if (my_sost != VS1053_PLAY_BUF)
+                tls_os_time_delay (HZ);
+              // tls_watchdog_clr ();
             }
         }
-
-      // unmount file system
-      f_mount (NULL, "1:", 1);
+      tls_watchdog_clr ();
     }
 }
 

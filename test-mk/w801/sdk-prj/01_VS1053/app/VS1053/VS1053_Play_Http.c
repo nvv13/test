@@ -39,16 +39,17 @@
 volatile int VS1053_WEB_RADIO_nTotal = 0;
 volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;
 volatile int VS1053_WEB_RADIO_buf_chunk_total = 0;
-#define DF_VS1053_WEB_RADIO_buf_chunk_top 300
+#define DF_VS1053_WEB_RADIO_buf_chunk_top 400
 
 //#define http_chunk_size (vs1053_chunk_size * 2)
-#define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size * 4)
+#define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size * 2)
 
 
-#define VS1053_TASK_SIZE 1024
+#define VS1053_TASK_SIZE 2048
 tls_os_task_t vs1053_buf_play_task_hdl = NULL;
 static OS_STK vs1053_buf_playTaskStk[VS1053_TASK_SIZE];
-#define VS1053_TASK_PRIO 32
+#define VS1053_TASK_PRIO 32 
+// Low priority numbers denote low priority tasks. The idle task has priority zero (tskIDLE_PRIORITY).
 
 
 static volatile u32 xMessageBufferSize=4000;
@@ -118,6 +119,7 @@ vs1053_buf_play_task (void *sdata)
                 VS1053_WEB_RADIO_buf_chunk_free--;
                 if (VS1053_WEB_RADIO_nTotal > 512)
                    tls_watchdog_clr ();
+                //tls_os_time_delay (0);
                 }
               else
                 {
@@ -277,7 +279,7 @@ break;
         {
           break;
         }
-      tls_os_time_delay (HZ/3);
+      tls_os_time_delay (3);
 
       u16 u16_connect_timeout_sec = 300;
       if (strstr (ClientParams.Uri, "https") != NULL)
@@ -294,25 +296,25 @@ break;
           )
         {
 
-          u32 u_fur=tls_os_get_time();
+          //u32 u_fur=tls_os_get_time();
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
           //ptintf ("%d ", freeSize);
-          if (freeSize < (nSize + 4))// || VS1053_WEB_RADIO_buf_chunk_free>DF_VS1053_WEB_RADIO_buf_chunk_top)// || i_cnt++>4096)
+          if (freeSize < (nSize + 4) || VS1053_WEB_RADIO_buf_chunk_free>DF_VS1053_WEB_RADIO_buf_chunk_top)// || i_cnt++>4096)
             {
             printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
             break;
             }
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
-          u32 u_cur = tls_os_get_time ();
+          //u32 u_cur = tls_os_get_time ();
           //printf ("u_cur=%d, u_fur=%d \n",u_cur, u_fur );
-          if((u_cur-u_fur-3)>0 && (u_cur-u_fur-3)<HZ)
-             tls_os_time_delay (u_cur-u_fur-3);
-          else 
-             tls_os_time_delay (0);
+          //if((u_cur-u_fur)>0 && (u_cur-u_fur)<HZ)
+          //    tls_os_time_delay (u_cur-u_fur);
+          //else 
+          //   tls_os_time_delay (0);
 
-          if (nRetCode == HTTP_CLIENT_SUCCESS)
+          if (nRetCode == HTTP_CLIENT_SUCCESS && nSize>0)
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
@@ -335,9 +337,9 @@ break;
       //  }
       printf ("start play\n");
 
+      tls_os_time_delay (1);
       if (my_sost != VS1053_QUERY_TO_STOP)
         my_sost = VS1053_PLAY;
-      tls_os_time_delay (1000);
 
       VS1053_WEB_RADIO_nTotal = 0;
       // Get the data until we get an error or end of stream code
@@ -348,25 +350,25 @@ break;
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
-          u32 u_fur=tls_os_get_time();
+          //u32 u_fur=tls_os_get_time();
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
                                          u16_connect_timeout_sec, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
-          u32 u_cur = tls_os_get_time ();
+          //u32 u_cur = tls_os_get_time ();
           //printf ("u_cur=%d, u_fur=%d \n",u_cur, u_fur );
-          if((u_cur-u_fur-3)>0 && (u_cur-u_fur-3)<HZ)
-             tls_os_time_delay (u_cur-u_fur-3);
-          else 
-             tls_os_time_delay (0);
+          //if((u_cur-u_fur-3)>0 && (u_cur-u_fur-3)<HZ)
+          //   tls_os_time_delay (u_cur-u_fur-3);
+          //else 
+          //   tls_os_time_delay (0);
 
 
 
           //ждем свободное место в буфере, и заполняем его
-          while (my_sost == VS1053_PLAY)
+          while (my_sost == VS1053_PLAY && nSize>0)
             {
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
-              if (freeSize > (nSize + 4) && VS1053_WEB_RADIO_buf_chunk_free<=DF_VS1053_WEB_RADIO_buf_chunk_top)
+              if (freeSize > (nSize + 4) && VS1053_WEB_RADIO_buf_chunk_free<=(DF_VS1053_WEB_RADIO_buf_chunk_top+10))
                 {
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
@@ -376,9 +378,10 @@ break;
                   VS1053_WEB_RADIO_buf_chunk_free++;
                   if(VS1053_WEB_RADIO_buf_chunk_free>VS1053_WEB_RADIO_buf_chunk_total)
                     VS1053_WEB_RADIO_buf_chunk_total=VS1053_WEB_RADIO_buf_chunk_free;
+                  //tls_os_time_delay (0);
                   break;
                 }
-              tls_os_time_delay (1);
+              tls_os_time_delay (0);
             }
 
           VS1053_WEB_RADIO_nTotal += nSize;

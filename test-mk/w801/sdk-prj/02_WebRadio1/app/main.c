@@ -541,7 +541,7 @@ void wm_psram_config(uint8_t numsel);
 
     /* далее настройки для VS1053_PlayHttpMp3 */
     .no_psram_BufferSize=4000,// подойдет 4000, более - программа начнет глючить
-    .psram_BufferSize=1024 * 50, //26400,   // подойдет 26400 более не надо! глючит! 
+    .psram_BufferSize=1024 * 100, //26400,   // подойдет 26400 более не надо! глючит! 
     .psram_config=1,//0 или 1 
     .psram_mode=PSRAM_SPI,// делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider=2,//2 - хорошо работает для ESP-PSRAM64H 

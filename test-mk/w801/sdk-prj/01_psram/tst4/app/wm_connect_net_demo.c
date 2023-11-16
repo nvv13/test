@@ -14,7 +14,6 @@ static int server_fd = -1;
 static int i_start_recive = -1;
 
 extern u8 volatile u8_wifi_state;
-extern volatile enum VS1053_status my_sost;
 
 static void
 con_net_status_changed_event (u8 status)
@@ -23,6 +22,7 @@ con_net_status_changed_event (u8 status)
     {
     case NETIF_WIFI_JOIN_SUCCESS:
       printf ("NETIF_WIFI_JOIN_SUCCESS\n");
+      u8_wifi_state = 1;
       break;
     case NETIF_WIFI_JOIN_FAILED:
       printf ("NETIF_WIFI_JOIN_FAILED\n");
