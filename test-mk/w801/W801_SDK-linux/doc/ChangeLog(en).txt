@@ -1,103 +1,107 @@
- ==========================================================
-|	CHANGELOG: WinnerMicro Software Development Kit	   |
- ==========================================================
+================================================== ========
+| 	CHANGELOG: WinnerMicro Software Development Kit 	|
+================================================== ========
+W800 SDK v1.00.10 | 2023/08/25
+==========================
+1.Wi-Fi library update: solve the problem of sta connection under ap; solve the problem of wifi calibration parameters not being saved
+
 W800 SDK v1.00.10 | 2022/12/29
 ==========================
 1. Driver update
-    1) Provide module ADC calibration function interface
-    2) Fix the problem of incomplete PSRAM IO multiplexing
-    3) Flash driver modification no longer writes the status register every time
-    4) Add RF parameter backup mechanism
-    5) Modify the support for SD 1.0 card
+1) Provide module ADC calibration function interface
+2) Fix the problem of incomplete PSRAM IO multiplexing
+3) The Flash driver has been modified so that it no longer writes the status register every time.
+4) Add RF parameter backup mechanism
+5) Modify support for SD 1.0 card
 
-2. Update secboot to support QIO mode switching of Ivy Flash; optimize the operation of operating the flash status register to switch to QIO mode during each boot process
+2. Update secboot to support QIO mode switching of Qingteng Flash; optimize the operation of operating the flash status register to switch QIO mode during each startup process
 
 3. Upgrade the LWIP version to V2.1.3
-4. Optimize the one-key distribution network function
+4. Optimize the one-click network distribution function
 5. Demo modification:
-     1) The DEMO update of the slave device of HSPI and SDIO, and the initialization of HSPI and SDIO are distinguished by parameters
-     2) Modify the receiving process of the demo console to solve the problem that the console cannot be used after receiving insufficient command words
-     3) Add a new networking demo
-     4) Add new scanning demo
-     5) Add the blacklist function demo of softap
-6. Fix the problem of power consumption fluctuation in sleep mode of the chip, modify the default configuration of GPIO to input pull-up; when customers use it, use the specified pull-up and pull-down function according to the IO multiplexing configuration
-7. RTOS bug fix
-    1) Repair the rtos adaptation function without the operation of judging whether the pointer is empty
-    2) Fix handle assignment processing when RTOS tasks are created
-8. Fix the possible division by 0 operation caused by adjusting the tick value and performing time calculation
+1) DEMO update of HSPI and SDIO slave devices, distinguish the initialization of HSPI and SDIO through parameters
+2) Modify the reception processing of the demo console to solve the problem of being unable to use the console after receiving insufficient command words.
+3) Add new networking demo
+4) Add new scanning demo
+5) Add softap’s blacklist function demo
+6. Fixed the problem of power consumption fluctuation in the chip's Sleep mode, and modified the GPIO default configuration to input pull-up; when used by customers, follow the IO multiplexing configuration and use the specified pull-up and pull-down functions.
+7. RTOS problem fix
+1) Fixed the problem that the rtos adaptation function does not determine whether the pointer is empty.
+2) Fix handle assignment processing when creating RTOS tasks
+8. Fix the possible division by 0 operation caused by adjusting the tick value and performing time calculation.
 
-9. Wi-Fi library updates:
-     1) Add WLAN digital gain adjustable interface
-     2) Increase the controllable API of the time when the connection cannot scan the hotspot
-     3) Add an API that can be configured to connect to open/wep networks
-     4) Increase the API of whether to scan and connect to the AP immediately
-     5) Support AP blacklist function
-     6) Fix the problem that some mobile phones cannot be connected in APSTA mode (because some channel-related information in the beacon frame is not updated when the channel changes)
+9. Wi-Fi library update content:
+1) Add WLAN digital gain adjustable interface
+2) Add an API that can control the time when hotspots cannot be found during connection scanning.
+3) Added API to configure whether open/wep network can be connected
+4) Add whether to scan the API to connect to the AP immediately
+5) Support AP blacklist function
+6) Fixed the problem that some mobile phones cannot connect in APSTA mode (because some channel-related information in the beacon frame is not updated when the channel is changed)
 
 10. Compilation related
-     1) Fix the compilation error reporting problem in some scenarios (for example: the memory debugging is turned on, the mbedtls module compilation error reporting problem)
-     2) Modify the compilation tool chain to support the compilation of CPP code
-     3) Because of the upgrade of LWIP and MQTT, the compilation project of CDK has changed. It is recommended to use a new project to combine the previous changes;
-          If you really want to use the previous project, you need to add the relevant files. Before compiling, you need to clean up the files in the process of compiling the project (.mk, .bat, .txt, LST and OBJ)
-     4) If the user opens more demos, or performs memory debugging, or opens the wm_debug.h debugging function, and uses the classic Bluetooth CDK project to compile
-         Or use make to compile, you need to adjust the I-SRAM in the link file (position, size), which brings a series of adjustments (the location where the compiled firmware is stored should also be adjusted)
-     5) Clean up compilation warnings
+1) Fixed compilation error reporting issues in certain scenarios (for example: memory debugging turned on, mbedtls module compilation error reporting issues)
+2) Modify the compilation tool chain to support the compilation of CPP code
+3) Due to the upgrade of LWIP and MQTT, the compilation project of CDK has changed. It is recommended to use a new project and combine the previous changes;
+If you really want to use the previous project, you need to add the relevant files. Before compiling, clean up the in-process files (.mk, .bat, .txt, LST and OBJ) under the compilation project.
+4) If the user opens more demos, or performs memory debugging, or turns on the wm_debug.h debugging function, and uses the classic Bluetooth CDK project to compile
+Or use make to compile, you need to adjust the I-SRAM in the link file (position, size), which will bring about a series of adjustments (the location where the compiled firmware is stored must also be adjusted)
+5) Clear compilation alarms
 
 W800 SDK v1.00.08 | 2022/07/26
-========================== 
-***********
-SDK function (due to the v1.00.06 version problem solved, upgrade the version number to V1.00.08)
-***********
-1. Fix BLE mesh problem
-2. Solve the problem that in softap mode, the condition of whether to hide the SSID does not take effect immediately
+==========================
+*********
+SDK function (due to the problem of v1.00.06 version, the version number is upgraded to V1.00.08)
+*********
+1.Fix BLE mesh problem
+2. Solve the problem that in softap mode, the SSID hiding condition does not take effect immediately
 3.wm_tool tool modification:
-   Modify the generation of wm_tool and use the compression library of zlib-1.2.11 to solve the problem of failure to generate compressed packages for some files
-4. Solve the problem that the frequency offset compensation value caused by adding calibration parameters is incorrect, resulting in frequency compensation errors, and causing network scanning and networking failures
-5. Clean up compilation warnings
-6. Solve the problem that some IO pull-down interrupts are generated when the ADC is working
-7. Change the memory release process when the task is deleted
+Modify wm_tool generation and use the compression library of zlib-1.2.11 to solve the problem of failure to generate compressed packages for some files.
+4. Solve the problem of incorrect frequency offset compensation value after adding calibration parameters, resulting in frequency compensation error and failure of scanning network and networking.
+5. Clear compilation alarms
+6. Solve the problem that causes certain IO pull-down interrupts when the ADC is working
+7. Change the memory release processing when task deletion
 
 W800 SDK v1.00.06 | 2022/05/12
-========================== 
+==========================
 *********
 SDK function
-***********
-1. Bluetooth:
-   1) Support mesh function
-   2) Add link script of BR_EDR, when using BT project, use gcc_csky_bt.ld link script
+*********
+1.Bluetooth:
+1) Support mesh function
+2) Add the link script of BR_EDR. When using the BT project, use the gcc_csky_bt.ld link script.
 
-2. RTOS version: upgrade to V10.4.1
-   About the operation of rolling back the OS version: To roll back the FreeRTOS V7.0.2 version, you need to replace the OS folder with the previous version of the OS; specific methods:
-      0) Delete the current OS folder and copy the OS folder in the old SDK
-      1) For the CDK project, it is necessary to update the OS-related code in the CDK project to the old OS code (specifically, delete the folder in the project and add the OS again);
-      2) Command line compilation, you need to re-make lib to generate libos.a under the command line
+2.RTOS version: upgrade to V10.4.1
+Regarding the operation of rolling back the OS version: To roll back the FreeRTOS V7.0.2 version, you need to replace the OS folder with the previous version of the OS; specific methods:
+0) Delete the current OS folder and copy the OS folder in the old version of the SDK.
+1) For the CDK project, it is necessary to update the OS-related code in the CDK project to the old OS code (specifically, delete the folder in the project and re-add the OS);
+2) Command line compilation requires remaking lib under the command line to generate libos.a
 
-3. Wi-Fi networking function
-   * Solve the problem that the IP address cannot be obtained after connecting to some Wi-Fi6 routers
-   * Optimize the problem of high failure probability of repeatedly connecting to certain networks
+3.Wi-Fi networking function
+*Solve the problem of being unable to obtain an IP address after connecting to some Wi-Fi6 routers
+*Optimize the problem of high failure probability of repeated connection to certain networks
 
 4. Driver related
-   *Calibration parameters after the production line calibrates the ADC function are modified
-   * Solve the problem of using DMA interface in UART DMA sending function
-   *The same type of Flash with different capacities can cause startup failure due to differences in status registers
-   * touch and TRNG use the same clock, the clock configuration is changed to open by default
-   * Modify the IO multiplexing function problem of a group of PSRAM
-   * Added touch function configuration interface
+*The calibration parameters used after calibrating the ADC function on the production line are modified.
+*Solve the problem of using DMA interface in UART DMA sending function
+*The same model of Flash with different capacities causes startup failure due to differences in status registers
+*touch and TRNG use the same clock, and the clock configuration is changed to open by default
+*Modify the IO multiplexing function problem of a group of PSRAM
+*New touch function configuration interface
 
-5. Support the initialization of C++ constructors
+5. Support initialization of C++ constructor
 
-6. demo
-   * Add LCD demo
-   * Modify the demo of touch
-   * Modify the socket client demo to use select to prevent blocking caused by network exceptions
+6.demo
+*Add LCD demo
+*Modify touch demo
+*Modify the socket client demo to use select to prevent blocking caused by network abnormalities
 
 7.wm_tool tool modification:
-   1) Modify the compression level of the compressed file generated by wm_tool to the default level
-   2) Fix the incomplete generation of some compressed files when using BEST_COMPRESS
+1) Modify the compression level of the compressed file generated by wm_tool to the default level
+2) Fix the problem of incomplete generation of some compressed files when using BEST_COMPRESS
 
-8. Upgrade:
-   *fwup upgrade adds image_type detection, only supports IMG_TYPE_FLASHBIN0 type upgrade
-   *Fixed the problem of incomplete printing of the upgrade progress bar via http
+8.Upgrade:
+*fwup upgrade adds image_type detection, only supports IMG_TYPE_FLASHBIN0 type upgrade
+*Fixed the problem of incomplete printing of progress bar when upgrading via http method
 
 9. Clean up invalid DSP header files
 
@@ -105,273 +109,271 @@ W800 SDK v1.00.04 | 2021/10/30
 ==========================
 *********
 SDK function
-***********
+*********
 1. Driver related
-   *When the low-speed SPI is in charge, the default IO multiplexing is PB2, PB3, PB4, PB5 (consistent with DEMO)
-   *Add UART5 function
-   *Fix the problem that 32K is not calibrated when using 40M frequency division, and the accuracy of RTC is basically no problem when using 40M frequency division
-   *Fix the problem that the LCD function does not work
-   * Increase the function of ADC to obtain the power supply voltage
-   * Increase the OTP operation of Flash, increase the operation of reading Unique ID
-   *Add touch function
-   * Modify the problem that some read operations of the Flash drive are not protected
-   *Fixed the problem of turning off the entire IO interrupt when disabling an IO interrupt enable bit
+*When low-speed SPI calls the shots, the default IO multiplexing is PB2, PB3, PB4, PB5 (consistent with DEMO)
+*Add UART5 function
+*Fixed the problem of inaccuracy caused by 32K miscalibration when using 40M frequency division. There is basically no problem with accuracy when RTC uses 40M frequency division.
+*Fix the problem of LCD function not working
+*Add the function of ADC to obtain the supply voltage
+*Add Flash OTP operation and add Unique ID reading operation
+*Add touch function
+*Modify the problem that some read operations of the Flash driver are not protected
+*Fixed the problem of disabling the entire IO interrupt when disabling an IO interrupt enable bit
   
-2. DEMO-related
-   *Increase access to power supply voltage DEMO
-   * Add PMU demo to select clock usage
+2.DEMO related
+*Add access to power supply voltage DEMO
+*Add PMU demo to select clock usage
 
 3. Debugging related
-   * Increase the print port can be set to UART0/UART1 configurable operation (UART0 is used by default)
+*Added printing port can be set as configurable operation of UART0/UART1 (UART0 is used by default)
 
 4. Distribution network related
-   * The memory usage of UGASID one-key distribution network
-   *Add TLS_CONFIG_BLE_WIFI_ONESHOT macro definition
+*Optimize the memory usage of Lianshengde one-click distribution network
+*Add TLS_CONFIG_BLE_WIFI_ONESHOT macro definition
 
 5. Compilation and packaging related:
-   * Clean up some invalid code
-   *Fix the problem that the PPP_SUPPORT macro definition is opened and the compilation error is reported
-   *Fix the problem that TLS_CONFIG_HOSTIF macro is closed and RMMS compiles an error
-   *wm_tool.c packaging tool is updated to solve the problem that the packaged file cannot be upgraded successfully when the upgrade file is smaller than 1024Byte
-   * Add flash driver for CKLINK debugging download (tools/w800/utilities/W800_Flash_Tool.elf)
+*Clean up some invalid codes
+*Fixed the problem of compilation error when PPP_SUPPORT macro definition is opened
+*Fixed the problem of RMMS compilation error when TLS_CONFIG_HOSTIF macro is turned off
+*wm_tool.c packaging tool is updated to solve the problem that when the upgrade file is less than 1024Byte, the packaged file cannot be upgraded successfully.
+*Add flash driver for CKLINK debugging download (tools/w800/utilities/W800_Flash_Tool.elf)
 
-6. Bluetooth related
-   *Fix the problem that the bluetooth wm_ble_client_demo_on_mtu does not set the limit when setting the MTU
+6.Bluetooth related
+*Fixed the problem of Bluetooth wm_ble_client_demo_on_mtu not setting limit when setting MTU
 
-7. Wi-Fi related
-   * When the ssid is empty, the automatic networking in the tls_sys.c file still triggers the problem
-   *Fix the problem that hotspots can still be created successfully when apssid is empty
-   * Optimize Wi-Fi networking
-   *Optimize networking for low power consumption
-   *Fix Beacon frame sending problem in hotspot mode
+7.Wi-Fi related
+*Fixed the problem that automatic networking in the tls_sys.c file still triggers when the ssid is empty
+*Fixed the issue where hotspot can still be created successfully when apssid is empty
+*Optimize Wi-Fi networking
+*Optimize networking and low power consumption
+*Fixed the problem of Beacon frame sending in hotspot mode
 
-8. AT related
-   *When UART is used as the AT command transmission channel, it can be designated as any UART except UART0.
-   *Fix the problem that the network status cannot be queried when the AT command adds the network for the second time when the IP is fixed in STA mode
+8.AT related
+*When UART is used as the AT command transmission channel, it can be designated as any UART except UART0.
+*Fixed the problem that when the IP is fixed in STA mode, the AT command is used to join the network for the second time and the network status cannot be queried.
   
-9. Add AT commands that support production testing alone (under the src/app/factorycmd directory)
-   *Support sending test
-   *Support reception test
-   *Support frequency offset compensation (AT+FREQ)
-   *Support whether to calibrate query (AT+&CALFIN)
+9. Add AT commands to support production testing alone (under the src/app/factorycmd directory)
+*Support sending test
+*Support acceptance testing
+*Support frequency offset compensation (AT+FREQ)
+*Support calibration query (AT+&CALFIN)
 
 W800 SDK v1.00.02 | 2021/5/13
-============================
-***********
+==========================
+*********
 SDK function
-***********
-1. Simplified RAM allocation adjustment, see wm_ram_config.h for details (except HSPI and WiFi must use static memory).
+*********
+1. Simplify RAM allocation adjustment, see wm_ram_config.h for details (except HSPI and WiFi must use static memory).
 
 2. Code space adjustment instructions:
-    1) Adjust the LENGTH value of the I-SRAM in the ld file. If the LENGTH value plus the ORIGIN value exceeds the FLASH capacity, adjust the initial value of ORIGIN
-    2) Choose to adjust based on CDK compilation project or direct make
-       (1) In the CDK project, to adjust the size of the code space, in addition to step 1), you need to adjust the tools\w800\uitilities\aft_build_project.sh file
-run_img_header and run_img_pos, run_img_pos must be consistent with the value of ORIGIN; run_img_header is the value of ORIGIN minus 0x400
-       (2) Compile in command line mode, except for step 1), adjust the values of CONFIG_W800_IMAGE_HEADER and CONFIG_W800_RUN_ADDRESS, the method is the same as (1)
-    3) As the code space becomes larger, the user space will become smaller, so you need to pay attention to the location of the user space as a limitation of use.
+1) Adjust the LENGTH value of I-SRAM in the ld file. If the LENGTH value plus the ORIGIN value exceeds the FLASH capacity, adjust the initial value of ORIGIN.
+2) Select adjustment based on whether it is CDK compilation project or direct make.
+(1) In the CDK project, to adjust the code space size, in addition to step 1), you need to adjust the tools\w800\uitilities\aft_build_project.sh file.
+	run_img_header and run_img_pos, run_img_pos must be consistent with the value of ORIGIN; run_img_header is the value of ORIGIN minus 0x400
+(2) Compile in command line mode. In addition to step 1), adjust the values of CONFIG_W800_IMAGE_HEADER and CONFIG_W800_RUN_ADDRESS. The method is the same as (1)
+3) As the code space becomes larger, the user space will become smaller, so you need to pay attention to the location of the user space as a limitation in use.
 
 3. Bluetooth:
-   1) Switch the ble host to nimble, the default Bluetooth protocol stack
-   2) Added ble multi-connection example
-   3) Bluetooth controller code optimization
-   4) Standard Bluetooth part: br_edr lib files are provided: libbtcontroller_br_edr.a and libbthost_br_edr.a
-        If you need to use standard Bluetooth, you need to operate:
-        (1) Set the macro TLS_CONFIG_BR_EDR in wm_config.h to CFG_ON
-        (2) When compiling:
-            If you use the command line to compile, you need to make menuconfig. In the compilation option menu, disable the nimble option, or modify the .config file to remove NIMBLE_FTR
-            If you use CDK to compile, you need to set DNIMBLE_FTR to 0, in the compilation settings of CDK
-        (3) Correspondingly, libbtcontroller_br_edr.a and libbthost_br_edr.a need to be changed to libbtcontroller.a and libbthost.a
-        (4) You also need to compile the src/app directory separately (command line compilation)
-        (5) Due to the increased Code Size of Bluetooth, it is necessary to expand the space of I-SRAM in the gcc.ld file
+1) Switch ble host to nimble, the default Bluetooth protocol stack
+2) Added ble multi-connection example
+3) Bluetooth controller code optimization
+4) Standard Bluetooth part: br_edr lib files are provided: libbtcontroller_br_edr.a and libbthost_br_edr.a
+If you need to use standard Bluetooth, you need to do the following:
+(1) Set the macro TLS_CONFIG_BR_EDR in wm_config.h to CFG_ON
+(2) When compiling:
+If you use the command line to compile, you need to make menuconfig. In the compilation options menu, enable the nimble option, or modify the .config file to remove NIMBLE_FTR.
+If you use CDK to compile, you need to set DNIMBLE_FTR to 0 in the CDK compilation settings.
+(3) Correspondingly, libbtcontroller_br_edr.a and libbthost_br_edr.a need to be changed to libbtcontroller.a and libbthost.a
+(4) You also need to compile the src/app directory separately (command line compilation)
+(5) Because Bluetooth increases the Code Size, it is necessary to expand the I-SRAM space in the gcc.ld file.
 
-    5) The bluetooth task deletion is uniformly modified to be deleted through the handle
-    6) The code of the Bluetooth host is unified and open source, and the location is located in the directory: src\bt
+5) Bluetooth task deletion has been changed to delete via handle.
+6) The code of Bluetooth host is unified and open source, located in the directory: src\bt
 
 4. Wi-Fi optimization:
-    1) STA energy-saving processing optimization
-    2) The soft ap function does not support the wmm function at the moment
+1) STA energy-saving processing optimization
+2) The soft ap function does not currently support the wmm function.
 
-5. Driver problem handling:
-    DMA: Fix the problem that the interrupt is not generated due to incorrect processing of the loop address when the DMA is in the loop mode
-    ADC: The callback interface of DMA mode is unified, and the memory used in DMA is dynamically applied for memory; the callback function of ADC is processed uniformly
-    GPIO: Fixed the problem that the GPIOB did not operate correctly when the interrupt shutdown operation was performed
-    FLASH: Fix the operand exception of Flash lock operation
-    PMU: Delete the repeated csi_kernel_intrpt_exit calls in the PMU interrupt processing to trigger the scheduled operation
-    7816: Add 7816 interface demo
-    SPI: Low-speed main SPI, when using DMA transmission, the memory used is dynamically allocated memory
-    IO multiplexing: Added the IO multiplexing function setting interface of W801
-    uart: In order to adapt to some platforms, the added single character is the callback interface.
+5. Troubleshooting driver issues:
+DMA: Fixed the issue where interrupts are not generated due to incorrect loop address processing when DMA is in loop mode.
+ADC: The DMA mode callback interface is unified, and the memory used in DMA is dynamically applied for memory; the ADC callback function is processed uniformly
+GPIO: Fixed the problem that GPIOB's interrupt shutdown operation did not operate correctly
+FLASH: Fix the operand exception of Flash lock operation
+PMU: Delete duplicate csi_kernel_intrpt_exit calls in PMU interrupt processing that trigger scheduled operations
+7816: Add 7816 interface demo
+SPI: Low-speed main SPI. When using DMA transmission, the memory used is dynamically allocated memory.
+IO multiplexing: Added W801 IO multiplexing function setting interface
+uart: In order to adapt to some platforms, the single character added is the callback interface.
 
-6. OS:
-    1) Add the operation of deleting tasks through the task handle (wm_osal_rtos.c, tasks.c)
-    2) Improve the operation of deleting tasks by priority (wm_osal_rtos.c, tasks.c)
-    3) Part of the os adaptation interface has increased the use protection in the interrupt (wm_osal_rtos.c)
+6.OS:
+1) Add the operation of deleting tasks through task handles (wm_osal_rtos.c, tasks.c)
+2) Improve the operation of deleting tasks by priority (wm_osal_rtos.c, tasks.c)
+3) Some OS adaptation interfaces have added usage protection in interrupts (wm_osal_rtos.c)
 
-7. Network modification:
-     1) Change the network host name to: WinnerMicro_+mac address at the end of the format of the 2 fields. (ethernetif.c)
-2) Repair the queue delete function in sys_arch.c, no longer use switch interrupt protection
+7. Modifications to the network part:
+1) The network host name is changed to: WinnerMicro_+ the format of the last 2 fields of the mac address. (ethernetif.c)
+	2 ) Repair the queue delete function in sys_arch.c and no longer use switch interrupt protection.
 
-8. The main task in wm_main.c can be deleted. By turning on the macro switch, the tasks in wm_main can be deleted after use
+8. The main task in wm_main.c adds a deletable operation. You can turn on the macro switch to delete the task in wm_main after use.
 
-9. The package function of memory allocation (wm_mem.c) is changed to only use semaphore to manage
+9. The encapsulated function of memory allocation (wm_mem.c) is changed to only use semaphores to manage it.
 
 10. Apply fixes:
-    1) The FATFS file system adds reentrant protection processing, and handles the non-4-byte alignment when writing to the SD card when the SDIO HOST part is connected.
-    2) SSL no longer uses the previous version and uses mbed TLS 2.7.10 instead
-    3) Fix the problem that the oneshot macro is closed and the link fails
+1) The FATFS file system adds reentrant protection processing, and handles the non-4-byte alignment when writing to the SD card connected to the SDIO HOST part.
+2) SSL no longer uses the previous version and instead uses mbed TLS 2.7.10
+3) Fixed the problem of oneshot macro being closed and link failure
 
-11. Clean up some compilation warnings
+11. Clear some compilation warnings
 
 
 W800 SDK v1.00.01 | 2020/12/29
-============================
-***********
+==========================
+*********
 SDK function
-***********
-*ld adjustments:
-      Due to the addition of the BT function, the code space exceeds 1MB, the current setting is 1MB+64KB, and the corresponding user area needs to be reduced by 64KB
-      Userland macro adjustment (wm_flash_map.h): #define USER_ADDR_START (0x81E0000UL)
-      The current upgrade area can only choose to use the compressed ota firmware for the case of more than 1MB
+*********
+*ld adjustment:
+Due to the addition of BT function, the code space exceeds 1MB. The current setting is 1MB+64KB, and the corresponding user area needs to be reduced by 64KB.
+User area macro adjustment (wm_flash_map.h): #define USER_ADDR_START (0x81E0000UL)
+For the current upgrade area that exceeds 1MB, you can only choose to use compressed ota firmware.
 
 *Level 2 BOOT update:
-     1) Publish the operation of adding the secboot.bin file in the SDK to generate the img, so as to prevent the customer from adjusting the start address of the running area, because the header information of secboot does not match with it, resulting in the failure to start the upgraded fls
+1) Add the secboot.bin file to the release SDK to generate the img operation, so as to prevent customers from adjusting the starting address of the running area, and the upgrade fls cannot be started because the header information of secboot does not match it.	 
 
 *Bluetooth:
-      1) Provide three kinds of bluetooth libraries, lib for both bt and ble, separate lib for standard bt, lib for separate ble
-         Users can rename the related lib to libbt.a according to the actual needs according to the settings of TLS_CONFIG_BR_EDR and TLS_CONFIG_BLE in wm_config.h.
-      2) When publishing, the libs that are available in ble are used by default
-3) Optimize Bluetooth parameters
-4) Add Bluetooth demo
+1) Provide three Bluetooth libraries, lib for both bt and ble, standard bt lib alone, and ble lib alone
+Users can rename the relevant lib to libbt.a according to actual needs according to the settings of TLS_CONFIG_BR_EDR and TLS_CONFIG_BLE in wm_config.h.
+2) When publishing, the lib that is available in ble will be used by default.
+	3 ) Optimize Bluetooth parameters
+	4 ) Add Bluetooth demo
 
 *Wi-Fi:
-     1) Optimize the low power consumption function
-2) Optimize exception recovery processing
+1) Optimize low power consumption functions
+	2 ) Optimize exception recovery processing
 
 *System parameters and drivers:
-     1) Increase the write protection operation of the key parameter area
-2) Optimize the use of memory in the parameter area and use only one piece of static memory instead
-     3) Solve the problem of SDIO multi-block write operation failure
-4) The task stack used by the Master SPI is changed to use the application to create tasks, and no longer use static memory
+1) Add write protection operation for key parameter area
+	2 ) Optimize the use of memory in the parameter area and use only a piece of static memory.
+3) Solve the problem of SDIO multi-block write operation failure
+	4 ) The task stack used by Master SPI is changed to use application creation tasks and no longer uses static memory.
 
 *Modification of the sleep and standby functions of the chip:
-     1) Modify the entry conditions of sleep and standby
-     2) The chip Sleep and standby functions required by AT+ENTS in the at command are moved from wifi lib to wm_cmdp.c
+1) Modification of the entry conditions for sleep and standby
+2) The chip Sleep and standby functions required by AT+ENTS in the at command are moved from wifi lib to wm_cmdp.c
 
-
+	
 W800 SDK v1.00.00 | 2020/08/04
-============================
-***********
+==========================
+*********
 SDK function
-***********
-*ld adjustments:
-      Due to the addition of the BT function, the code space exceeds 1MB, the current setting is 1MB+64KB, and the corresponding user area needs to be reduced by 64KB
-      Userland macro adjustment (wm_flash_map.h): #define USER_ADDR_START (0x81E0000UL)
-      The current upgrade area can only choose to use the compressed ota firmware for the case of more than 1MB
+*********
+*ld adjustment:
+Due to the addition of BT function, the code space exceeds 1MB. The current setting is 1MB+64KB, and the corresponding user area needs to be reduced by 64KB.
+User area macro adjustment (wm_flash_map.h): #define USER_ADDR_START (0x81E0000UL)
+For the current upgrade area that exceeds 1MB, you can only choose to use compressed ota firmware.
 *Bluetooth:
-      1) Support BT function, provide API related to Audio sink and hands-free phone
-      2) Provide three kinds of bluetooth libraries, lib for both bt and ble, separate lib for standard bt, lib for separate ble
-         Users can rename the related lib to libbt.a according to the actual needs according to the settings of TLS_CONFIG_BR_EDR and TLS_CONFIG_BLE in wm_config.h.
-      3) By default, both bt and ble are used when publishing
+1) Supports BT function and provides APIs related to Audio sink and hands-free phone
+2) Provide three Bluetooth libraries, a lib for both bt and ble, a separate standard bt lib, and a separate lib for ble
+Users can rename the relevant lib to libbt.a according to the actual needs according to the settings of TLS_CONFIG_BR_EDR and TLS_CONFIG_BLE in wm_config.h.
+3) By default, the lib used by both bt and ble is used when publishing.
 *Wi-Fi:
-     1) Solve the problem that the number of scans is too long to scan when setting parameters, but the number of scans is small
-* Increase DSP function (provided in lib and demo mode)
-*Related demos that provide dsp functions, see the relevant codes contained in the DEMO_DSP macro for details
+1) Solve the problem of setting parameters to scan and the number of scans is too small if the time is too long.
+*Add DSP function (provided in lib and demo mode)
+*Provides demos related to the dsp function. For details, see the related code included in the DEMO_DSP macro.
 *Add IO pull-down function configuration
-*Modify GPIO demo, add pull-down function, GPIO output high or low test
-*Modify the ADC function, provide the test of chip temperature and external input voltage, and do not support the detection function of chip power supply voltage.
-*Modify the PWM demo to support the test demo of two groups of PWM multiplexing
-*SDK provides CDK compilation project (the compilation limit path length is within 80 characters)
-*CDK (CSKY Development Kit) version: >V2.2.2, access path: https://occ.t-head.cn/community/download?id=575997419775328256
-* Add demo of BLE data communication
+*Modify GPIO demo, add pull-down function, test GPIO output high or low
+*Modify the ADC function to provide testing of chip temperature and external input voltage, but does not support the detection function of chip power supply voltage.
+*Modify the PWM demo to support the test demo of two sets of PWM multiplexing
+*SDK provides CDK compilation project (compilation limit path length is within 80 characters)
+*CDK (CSKY Development Kit) version: >V2.2.2, acquisition path: https://occ.t-head.cn/community/download?id=575997419775328256
+*Add demo of BLE data communication
 
 W800 SDK v0.00.06 | 2020/07/07
 ==========================
 *********
 SDK function
-***********
-* Low power consumption:
-     1) When there is only Wi-Fi, it will also enter energy saving when the network is disconnected
-     2) The clock of some peripherals is only turned on when in use (LSPI)
-*Bluetooth: open bluetooth application code, path: src/app/btapp
+*********
+*Low power consumption:
+1) When there is only Wi-Fi, you can enter energy saving mode even if the network is disconnected.
+2) The clocks of some peripherals are changed to only be turned on when in use (LSPI)
+*Bluetooth: Open Bluetooth application code, path: src/app/btapp
 *Wi-Fi:
-     1) Add a scan API interface that can be configured with scan parameters: tls_wifi_scan_by_param
-     2) Internal gain optimization
-     3) Wi-FI debug LOG is disabled by default
-     4) Update Wi-Fi default gain parameters
-     5) Deal with the problem of triggering networking when the SSID length is 0
-6) The default wifi work uses temperature compensation (set in wm_main.c)
-* The API naming of the IO multiplexing configuration related to PWM is changed to 0, 1, 2, 3, 4 numbers, that is, the function: wm_pwmX_config (X=0, 1, 2, 3, 4)
-*Change the IO usage of some DEMOs (GPIO, PWM, LSPI, I2S)
-* Solve the problem that LSD ONESHOT may use an empty SSID to connect to the Internet
-* After handling the IPERF SERVER test, the client test cannot be started
-*Changed result calculation of internal temperature detection function (average value is no longer calculated)
-*Solve the problem of memory not being released when RMMS is created repeatedly
+1) Add a scanning API interface that can be configured with scanning parameters: tls_wifi_scan_by_param
+2) Internal gain optimization
+3) Wi-FI debugging LOG is turned off by default
+4) Update Wi-Fi default gain parameters
+5) Solve the problem of networking being triggered even when the SSID length is 0
+	6 ) The default wifi work uses warm compensation (set in wm_main.c)
+*The API naming of IO multiplexing configuration related to PWM is changed to 0,1,2,3,4 numbers, that is, function: wm_pwmX_config (X=0,1,2,3,4)
+*Change some DEMO IO usage (GPIO, PWM, LSPI, I2S)
+*Solve the problem that LSD ONESHOT may use empty SSID to connect to the Internet
+*Handle the problem that the Client test cannot be started after the IPERF SERVER test
+*Change the result calculation of the internal temperature detection function (average is no longer calculated)
+*Solve the problem of memory not releasing when RMMS is repeatedly created
 *Adjust the task stack size of ping
-* Solve the problem that some routers cannot get IP through DHCP
+*Solve the problem that DHCP cannot get IP for some routes
 
 W800 SDK v0.00.05 | 2020/06/12
-============================
-***********
+==========================
+*********
 SDK function
-***********
-* Modify the CPU default clock to 80M
-*By default, the energy-saving function of Wi-Fi is turned on (when Wi-Fi and Bluetooth coexist, Wi-Fi does not save energy)
-* Optimize Bluetooth network compatibility
-* Modify part of the task stack to use dynamic memory allocation, no longer use static array
-* Turn on and take effect of the local oscillator and phase compensation function of Wi-Fi
-* Fix data definition boundary issue for GPIO
-*Delete the link file, the current default make uses use lib
-*Fix the problem that the compilation result of the command line does not change: it is caused by the elf file not being moved
+*********
+*Modify the CPU default clock to 80M
+*The energy-saving function of Wi-Fi is turned on by default (when Wi-Fi and Bluetooth coexist, Wi-Fi does not save energy)
+*Optimize Bluetooth distribution network compatibility
+*Modify some task stacks to dynamically apply for memory and no longer use static arrays
+*Turn on and take effect the local oscillator and phase compensation functions of Wi-Fi
+*Fix GPIO data definition boundary problem
+*Delete the link file. The current default make is use lib.
+*Fixed the problem of unchanged command line compilation results: caused by the elf file not being moved
 
 W800 SDK v0.00.04 | 2020/06/04
-============================
-***********
+==========================
+*********
 SDK function
-***********
-* Optimize Bluetooth network compatibility
-* Add CK-LINK multiplex on and off macro switch: WM_SWD_ENABLE, open by default
-* code cleanup
-* Add compiled firmware (bin directory) in the sdk package
-* Modify Standby and Sleep power consumption issues
-*Modify ADC acquisition internal temperature function (acquisition voltage function is not yet supported)
+*********
+*Optimize Bluetooth distribution network compatibility
+*Add macro switch for CK-LINK multiplexing to turn on and off: WM_SWD_ENABLE, enabled by default
+*Code cleaning
+*Add compiled firmware (bin directory) to the sdk package
+*Modify Standby and Sleep power consumption issues
+*Modify the ADC internal temperature collection function (the voltage collection function is not yet supported)
 
 W800 SDK v0.00.03 | 2020/06/01
-============================
-***********
+==========================
+*********
 SDK function
-***********
-* Optimize Bluetooth network compatibility
-* Optimize the baseband parameters of Wi-Fi to solve the problem of maximum input level
+*********
+*Optimize Bluetooth distribution network compatibility
+*Optimize Wi-Fi baseband parameters to solve the maximum input level problem
 *Add mbedtls and demo
-*The default JTAG multiplexing function is turned on
+*JTAG multiplexing function is enabled by default
 
 W800 SDK v0.00.02 | 2020/05/19
-============================
-***********
+==========================
+*********
 SDK function
-***********
+*********
 *Updated and optimized Wi-Fi related parameters
 *Update Flash working mode and working frequency (80MHz)
 *Update SDIO HOST and I2S driver
-*Update the Sleep and Standby functions of AT+ENTS, and update the documentation
+*Update the Sleep and Standby functions of AT+ENTS and update the documentation
 *Update the return value description of AT+HTTPC and update the documentation
-* update secboot version
-*IPERF function is enabled by default
+*Update secboot version
+*IPERF function is turned on by default
 
 W800 SDK v0.00.01 | 2020/04/30
-============================
-***********
+==========================
+*********
 SDK function
-***********
+*********
 *Wi-Fi basic functions: STA, AP, APSTA
-*Wi-Fi distribution network function: oneshot, bluetooth, ap, web
+*Wi-Fi network functions: oneshot, Bluetooth, ap, web
 *Basic driver functions (except adc, sdio host, i2s)
 *Flash layout and parameter area
 *Upgrade function: serial port upgrade, OTA (http server upgrade)
-* Encryption function
+*Encryption function
 *Basic demo
-
-
 
 
 
