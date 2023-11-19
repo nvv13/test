@@ -81,10 +81,13 @@ W800 address mapping
 
 про SDK, инициализацию и старт https://javamana.com/2022/03/202203272225056680.html
 
-вот наиболее свежий SDK что я нашел https://github.com/ggggxiaolong/wm_sdk_w800
-есть описание, и более подробно что где скачать
-+ что то подправлено
-( есть новая версия SDK !! https://github.com/leoay/wm-sdk-w80x-2023.git )
+
+вот наиболее свежий SDK что я нашел 
+версия SDK от 2023/08/25 и бывают обновления !!, ищите на странице https://www.winnermicro.com/html/1/156/158/558.html
+
+
+
+
 
 еще приложил в папку doc, документы переведенные с китайского на английский, с помощью - Machine Translated by Google.
 
