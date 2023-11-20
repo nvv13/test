@@ -261,7 +261,7 @@ demo_connect_net (const char *ssid, const char *pwd)
     }
 
   printf ("\nssid:%s\n", ssid);
-  printf ("password=%s\n", pwd);
+  printf ("password=***\n");//, pwd);
   tls_wifi_disconnect ();
 
   while (i_start_recive != -1)

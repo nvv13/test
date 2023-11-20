@@ -3,6 +3,7 @@
 #include "wm_osal.h"
 
 //#include "decode_cmd.h"
+#include "mod1/VS1053.h"
 #include "w_wifi.h"
 
 #define DEMO_SOCK_BUF_SIZE 1024
@@ -21,6 +22,7 @@ con_net_status_changed_event (u8 status)
     {
     case NETIF_WIFI_JOIN_SUCCESS:
       printf ("NETIF_WIFI_JOIN_SUCCESS\n");
+      u8_wifi_state = 1;
       break;
     case NETIF_WIFI_JOIN_FAILED:
       printf ("NETIF_WIFI_JOIN_FAILED\n");
@@ -36,6 +38,8 @@ con_net_status_changed_event (u8 status)
           closesocket (server_fd);
         server_fd = -1;
         u8_wifi_state = 0;
+        if (my_sost == VS1053_PLAY)
+          my_sost = VS1053_PLAY_BUF; // VS1053_QUERY_TO_STOP;
       };
       break;
     case NETIF_IP_NET_UP:
@@ -257,7 +261,7 @@ demo_connect_net (const char *ssid, const char *pwd)
     }
 
   printf ("\nssid:%s\n", ssid);
-  printf ("password=%s\n", pwd);
+  printf ("password=***\n"); //, pwd);
   tls_wifi_disconnect ();
 
   while (i_start_recive != -1)

@@ -28,8 +28,8 @@
 
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
-#include "w_wifi.h"
 #include "w_ntp.h"
+#include "w_wifi.h"
 
 #define DEMO_TASK_SIZE 2048
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
@@ -64,7 +64,7 @@ static void display_refresh (void);
 #define MENU_STORE_INDEX 1
 #define MENU_MAX_POS (USER_CNT_REC_STANTION_NAME * 2)
 
-#define MENU2_MAX_POS (MAX_INDEX_LOAD_FIND-1)
+#define MENU2_MAX_POS (MAX_INDEX_LOAD_FIND - 1)
 
 void
 MenuActionClick (void)
@@ -114,9 +114,11 @@ MenuActionClick (void)
               flash_cfg_store_stantion_uuid (
                   my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
             }
-           printf (
-              "i_find_stantion_id=%d, u8_ind_ch_st=%d, u8_stantion_id=%d name=%s uuid=%s\n",
-              i_find_stantion_id, u8_ind_ch_st, u8_stantion_id, my_recognize_ret_name (u8_ind_ch_st), my_recognize_ret_stationuuid (u8_ind_ch_st));
+          printf ("i_find_stantion_id=%d, u8_ind_ch_st=%d, u8_stantion_id=%d "
+                  "name=%s uuid=%s\n",
+                  i_find_stantion_id, u8_ind_ch_st, u8_stantion_id,
+                  my_recognize_ret_name (u8_ind_ch_st),
+                  my_recognize_ret_stationuuid (u8_ind_ch_st));
           display_refresh ();
         }
     }
@@ -267,7 +269,6 @@ display_refresh (void)
 
 //****************************************************************************************************//
 
-
 static int i_rotar = 10;
 
 static const u16 i_pos_dreb_SW
@@ -286,58 +287,58 @@ volatile static u16 i_delay_volume = 0;
 static void
 demo_timer_irq (u8 *arg) //
 {
-  int i_enc_diff= get_encoder_diff();
-  if (i_enc_diff!=0)//i_dreb_CLK != 0)
+  int i_enc_diff = get_encoder_diff ();
+  if (i_enc_diff != 0) // i_dreb_CLK != 0)
     {
-        set_encoder_diff(0);  
+      set_encoder_diff (0);
+      {
         {
+
+          if (i_switch_menu == 0)
             {
+              if (i_enc_diff < 0)
+                i_rotar--;
+              else
+                i_rotar++;
 
-              if (i_switch_menu == 0)
+              if (i_rotar < 0)
+                i_rotar = 0;
+              if (i_rotar > 100)
+                i_rotar = 100;
+
+              u16_volume = 100 - i_rotar;
+              if (i_delay_volume == 0)
                 {
-                  if (i_enc_diff<0)
-                    i_rotar--;
-                  else
-                    i_rotar++;
-
-                  if (i_rotar < 0)
-                    i_rotar = 0;
-                  if (i_rotar > 100)
-                    i_rotar = 100;
-
-                  u16_volume = 100 - i_rotar;
-                  if (i_delay_volume == 0)
-                    {
-                      i_delay_volume = 1;
-                      VS1053_setVolume (u16_volume);
-                    }
+                  i_delay_volume = 1;
+                  VS1053_setVolume (u16_volume);
                 }
-              if (i_switch_menu == 1)
-                {
-                  if (i_enc_diff<0)
-                    i_menu--;
-                  else
-                    i_menu++;
-                  if (i_menu < 0)
-                    i_menu = MENU_MAX_POS;
-                  if (i_menu > MENU_MAX_POS)
-                    i_menu = 0;
-                }
-              if (i_switch_menu == 2)
-                {
-                  if (i_enc_diff<0)
-                    i_menu2--;
-                  else
-                    i_menu2++;
-                  if (i_menu2 < 0)
-                    i_menu2 = MENU2_MAX_POS;
-                  if (i_menu2 > MENU2_MAX_POS)
-                    i_menu2 = 0;
-                }
-
-              display_refresh ();
             }
+          if (i_switch_menu == 1)
+            {
+              if (i_enc_diff < 0)
+                i_menu--;
+              else
+                i_menu++;
+              if (i_menu < 0)
+                i_menu = MENU_MAX_POS;
+              if (i_menu > MENU_MAX_POS)
+                i_menu = 0;
+            }
+          if (i_switch_menu == 2)
+            {
+              if (i_enc_diff < 0)
+                i_menu2--;
+              else
+                i_menu2++;
+              if (i_menu2 < 0)
+                i_menu2 = MENU2_MAX_POS;
+              if (i_menu2 > MENU2_MAX_POS)
+                i_menu2 = 0;
+            }
+
+          display_refresh ();
         }
+      }
     }
 
   if (i_dreb_SW != 0
@@ -352,7 +353,8 @@ demo_timer_irq (u8 *arg) //
     {
       if (i_delay_SW_DBL_CLICK++ > i_pos_DBL_CLICK)
         {
-          printf ("demo_timer_irq i_delay_SW_DBL_CLICK=%d i_switch_menu=%d\n",i_delay_SW_DBL_CLICK,i_switch_menu);
+          printf ("demo_timer_irq i_delay_SW_DBL_CLICK=%d i_switch_menu=%d\n",
+                  i_delay_SW_DBL_CLICK, i_switch_menu);
           i_delay_SW_DBL_CLICK = 0;
           if (i_switch_menu == 0)
             {
@@ -393,32 +395,32 @@ demo_timer_irq (u8 *arg) //
         }
     }
 
-  if(get_encoder_btn_state()==0) //Нажали
+  if (get_encoder_btn_state () == 0) //Нажали
     {
       if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
         {
-          //printf ("get_encoder_btn_state()==0 i_delay_SW_DBL_CLICK=%d\n",i_delay_SW_DBL_CLICK);
+          // printf ("get_encoder_btn_state()==0
+          // i_delay_SW_DBL_CLICK=%d\n",i_delay_SW_DBL_CLICK);
           i_dreb_SW = 1;
 
           if (i_delay_SW_DBL_CLICK == 0)
             i_delay_SW_DBL_CLICK = 1;
           else
             {
-            if (i_delay_SW_DBL_CLICK > i_pos_dreb_SW)
-              {
-              i_delay_SW_DBL_CLICK = 0;
-              i_switch_menu++;
-              if (i_switch_menu > 2)
-                i_switch_menu = 0;
-              if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
-                i_menu--;
-              display_refresh ();
-              }
+              if (i_delay_SW_DBL_CLICK > i_pos_dreb_SW)
+                {
+                  i_delay_SW_DBL_CLICK = 0;
+                  i_switch_menu++;
+                  if (i_switch_menu > 2)
+                    i_switch_menu = 0;
+                  if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
+                    i_menu--;
+                  display_refresh ();
+                }
             }
         }
     }
 }
-
 
 //****************************************************************************************************//
 /*
@@ -509,47 +511,46 @@ demo_console_task (void *sdata)
 
     .spi_cs = WM_IO_PB_23, /* not wire, но назначить надо */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
-    .spi_di = WM_IO_PB_16,//WM_IO_PB_03, //WM_IO_PB_25, 
-   /* master miso di <- miso slave, на макетке board
-                              HLK-W801-KIT-V1.1 работает только WM_IO_PB_03 или 
- wm_spi_di_config - возможные пины
- 			-WM_IO_PB_00
- 			-WM_IO_PB_03
- 			WM_IO_PB_16 only for 56pin - !если для MISO - спаять светодиод! 
-                           а можно и оставить с vs1053 будет работать, только читать из неё не сможет
- 			WM_IO_PB_25 only for 56pin - !если для MISO - спаять светодиод!  
-                           а можно и оставить с vs1053 будет работать, только читать из неё не сможет
+    .spi_di = WM_IO_PB_16, // WM_IO_PB_03, //WM_IO_PB_25,
+    /* master miso di <- miso slave, на макетке board
+                               HLK-W801-KIT-V1.1 работает только WM_IO_PB_03
+  или wm_spi_di_config - возможные пины -WM_IO_PB_00 -WM_IO_PB_03 WM_IO_PB_16
+  only for 56pin - !если для MISO - спаять светодиод! а можно и оставить с
+  vs1053 будет работать, только читать из неё не сможет WM_IO_PB_25 only for
+  56pin - !если для MISO - спаять светодиод! а можно и оставить с vs1053 будет
+  работать, только читать из неё не сможет
 
-*/
+ */
     .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
 
+    /**
+     * @brief  config the pins used for psram ck cs dat0 dat1 dat2 dat3
+     * @param  numsel: config psram ck cs dat0 dat1 dat2 dat3 pins multiplex
+    relation,valid para 0,1 *			0:                 1: only for
+    56pin *			  psram_ck   PB00    psram_ck   PA15 *
+    psram_cs   PB01    psram_cs   PB27
+     *			  psram_dat0 PB02    psram_dat0 PB02
+     *			  psram_dat1 PB03    psram_dat1 PB03
+     *			  psram_dat2 PB04    psram_dat2 PB04
+     *			  psram_dat3 PB05    psram_dat3 PB05
 
-/**
- * @brief  config the pins used for psram ck cs dat0 dat1 dat2 dat3
- * @param  numsel: config psram ck cs dat0 dat1 dat2 dat3 pins multiplex relation,valid para 0,1
- *			0:                 1: only for 56pin
- *			  psram_ck   PB00    psram_ck   PA15
- *			  psram_cs   PB01    psram_cs   PB27
- *			  psram_dat0 PB02    psram_dat0 PB02
- *			  psram_dat1 PB03    psram_dat1 PB03
- *			  psram_dat2 PB04    psram_dat2 PB04
- *			  psram_dat3 PB05    psram_dat3 PB05
-
- * @return None
-void wm_psram_config(uint8_t numsel);
- */
+     * @return None
+    void wm_psram_config(uint8_t numsel);
+     */
 
     /* далее настройки для VS1053_PlayHttpMp3 */
-    .no_psram_BufferSize=4000,// подойдет 4000, более - программа начнет глючить
-    .psram_BufferSize=1024 * 100, //26400,   // подойдет 26400 более не надо! глючит! 
-    .psram_config=1,//0 или 1 
-    .psram_mode=PSRAM_SPI,// делай PSRAM_SPI, PSRAM_QPI - так и не работает
-    .psram_frequency_divider=2,//2 - хорошо работает для ESP-PSRAM64H 
-    .psram_tCPH=2,//2 - хорошо работает для ESP-PSRAM64H 
-    .psram_BURST=1,//1 - хорошо работает для ESP-PSRAM64H 
-    .psram_OVERTIMER=2,//2 - хорошо работает для ESP-PSRAM64H 
-    .load_buffer_debug=0,//0 , 1 - выводит инфу по заполнению "f" или "+", и опусташению буффера "-", "0" - нехватка данных
-
+    .no_psram_BufferSize
+    = 4000, // подойдет 4000, более - программа начнет глючить
+    .psram_BufferSize
+    = 1024 * 100, // 26400,   // подойдет 26400 более не надо! глючит!
+    .psram_config = 1, // 0 или 1
+    .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
+    .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
+    .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
+    .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
+    .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
+    .load_buffer_debug = 0, // 0 , 1 - выводит инфу по заполнению "f" или "+",
+                            // и опусташению буффера "-", "0" - нехватка данных
 
   };
 
@@ -580,12 +581,12 @@ void wm_psram_config(uint8_t numsel);
   //
 
   libENCODER_t enc_pin = {
-	 .ENCODER_S=WM_IO_PA_11,
-	 .ENCODER_A=WM_IO_PA_12, 
-	 .ENCODER_B=WM_IO_PA_13, 
-   };
+    .ENCODER_S = WM_IO_PA_11,
+    .ENCODER_A = WM_IO_PA_12,
+    .ENCODER_B = WM_IO_PA_13,
+  };
 
-  bsp_encoder_init(&enc_pin);
+  bsp_encoder_init (&enc_pin);
 
   stantion_uuid[0] = 0;
   flash_cfg_load_u16 (&u16_volume, MENU_STORE_VOLUME);
@@ -607,7 +608,13 @@ void wm_psram_config(uint8_t numsel);
           printf ("trying to connect wifi\n");
           if (u8_wifi_state == 0
               && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
-            u8_wifi_state = 1;
+            {
+              while (u8_wifi_state == 0)
+                {
+                  tls_os_time_delay (100);
+                }
+              // u8_wifi_state = 1;
+            }
           else
             {
               tls_os_time_delay (HZ * 5);
@@ -616,47 +623,56 @@ void wm_psram_config(uint8_t numsel);
 
       tls_watchdog_clr ();
 
-      tls_os_time_delay (HZ);
+      if (my_sost != VS1053_PLAY_BUF)
+        {
+          tls_os_time_delay (HZ);
 
-      ntp_set_server_demo ("0.fedora.pool.ntp.org","1.fedora.pool.ntp.org","2.fedora.pool.ntp.org");
-      ntp_demo ();
+          ntp_set_server_demo ("0.fedora.pool.ntp.org",
+                               "1.fedora.pool.ntp.org",
+                               "2.fedora.pool.ntp.org");
+          ntp_demo ();
 
-      my_recognize_http_reset ();
-      printf ("load default stantion 0\n");
-      flash_cfg_load_stantion_uuid (stantion_uuid, 0);
+          my_recognize_http_reset ();
+          printf ("load default stantion 0\n");
+          flash_cfg_load_stantion_uuid (stantion_uuid, 0);
+        }
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
-          if (i_switch_menu != 2)
+          if (my_sost != VS1053_PLAY_BUF)
             {
-              my_recognize_http_reset ();
-              display_refresh ();
+              if (i_switch_menu != 2)
+                {
+                  my_recognize_http_reset ();
+                  display_refresh ();
 
-              if (strlen (stantion_uuid) == 36)
-                {
-                  http_get_web_station_by_stationuuid (stantion_uuid);
-                  stantion_uuid[0] = 0;
-                  u8_ind_ch_st = 0;
-                }
-              else
-                {
-                  http_get_web_station_by_random ();
-                  for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+                  if (strlen (stantion_uuid) == 36)
                     {
-                      printf ("ind=%d,%s\n", ind, my_recognize_ret_name (ind));
+                      http_get_web_station_by_stationuuid (stantion_uuid);
+                      stantion_uuid[0] = 0;
+                      u8_ind_ch_st = 0;
                     }
+                  else
+                    {
+                      http_get_web_station_by_random ();
+                      for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+                        {
+                          printf ("ind=%d,%s\n", ind,
+                                  my_recognize_ret_name (ind));
+                        }
 
-                  u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
-                  printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
+                      u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
+                      printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
+                    }
                 }
+              display_refresh ();
+              i_delay_WAIT = 1;
             }
-          display_refresh ();
-          i_delay_WAIT = 1;
-
           VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (u8_ind_ch_st));
 
-          tls_os_time_delay (HZ);
-          //tls_watchdog_clr ();
+          if (my_sost != VS1053_PLAY_BUF)
+            tls_os_time_delay (HZ);
+          // tls_watchdog_clr ();
         }
     }
 }

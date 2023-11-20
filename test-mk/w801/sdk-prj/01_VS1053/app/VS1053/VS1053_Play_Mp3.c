@@ -121,18 +121,17 @@ VS1053_PlayMp3 (char *filename)
 //#include "patches/vs1053b-patches-flac-latm.plg"
 //#include "patches/vs1053b-patches-latm.plg"
 
-
 FRESULT
 VS1053_PlayFlac (char *filename)
 {
 
-  //VS1053_reset ();
+  // VS1053_reset ();
 
   VS1053_switchToMp3Mode (); // optional, some boards require this (softReset
                              // include!)
   VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
-  //VS1053_loadUserCode (PATCHES_FLAC_LATM, PLUGIN_FLAC_LATM_SIZE);
-  //VS1053_loadUserCode (PATCHES_LATM, PLUGIN_LATM_SIZE);
+  // VS1053_loadUserCode (PATCHES_FLAC_LATM, PLUGIN_FLAC_LATM_SIZE);
+  // VS1053_loadUserCode (PATCHES_LATM, PLUGIN_LATM_SIZE);
 
   uint32_t start = 0ul;
 
@@ -147,53 +146,52 @@ VS1053_PlayFlac (char *filename)
       res_sd = f_read (&fnew, file_buffer, LEN_FILE_BUF, &fnum);
       if (res_sd == FR_OK)
         {
-          // Note: To be able to play the .3gp, .3g2, .mp4 and .m4a files, the mdat atom must be the
-          // last atom in the MP4 file.
-/*
-          if(strstr (filename, ".m4a") != NULL  || 
-             strstr (filename, ".M4A") != NULL  || 
-             strstr (filename, ".3gp") != NULL  || 
-             strstr (filename, ".3GP") != NULL  || 
-             strstr (filename, ".3g2") != NULL  || 
-             strstr (filename, ".3G2") != NULL  || 
-             strstr (filename, ".mp4") != NULL  || 
-             strstr (filename, ".MP4") != NULL ) 
-            {
-              #define LEN_MDAT_ATOM 4
-              char const cFind[LEN_MDAT_ATOM]="mdat";
-              u8 upPosFind=0; 
-              while(res_sd == FR_OK)
-                {
-                  for(int i=0;i<fnum;i++)
-                    {
-                      if(file_buffer[i]==cFind[upPosFind])
-                        {
-                          upPosFind++;
-                          if(upPosFind==LEN_MDAT_ATOM)
-                            {
-                            start+=i;start++;
-                            start-=8;//LEN_MDAT_ATOM;
-#ifdef SERIAL_DEBUG
-                            printf (" find mdat atom %d\r\n",start);
-#endif
-                            break;
-                            }
-                        }
-                        else
-                        upPosFind=0;
-                    }
-                  if(upPosFind==LEN_MDAT_ATOM)
-                    break;
-                  res_sd = f_read (&fnew, file_buffer, LEN_FILE_BUF, &fnum);
-                  start+=fnum;
-                }
-              
-            }
-*/
+          // Note: To be able to play the .3gp, .3g2, .mp4 and .m4a files, the
+          // mdat atom must be the last atom in the MP4 file.
+          /*
+                    if(strstr (filename, ".m4a") != NULL  ||
+                       strstr (filename, ".M4A") != NULL  ||
+                       strstr (filename, ".3gp") != NULL  ||
+                       strstr (filename, ".3GP") != NULL  ||
+                       strstr (filename, ".3g2") != NULL  ||
+                       strstr (filename, ".3G2") != NULL  ||
+                       strstr (filename, ".mp4") != NULL  ||
+                       strstr (filename, ".MP4") != NULL )
+                      {
+                        #define LEN_MDAT_ATOM 4
+                        char const cFind[LEN_MDAT_ATOM]="mdat";
+                        u8 upPosFind=0;
+                        while(res_sd == FR_OK)
+                          {
+                            for(int i=0;i<fnum;i++)
+                              {
+                                if(file_buffer[i]==cFind[upPosFind])
+                                  {
+                                    upPosFind++;
+                                    if(upPosFind==LEN_MDAT_ATOM)
+                                      {
+                                      start+=i;start++;
+                                      start-=8;//LEN_MDAT_ATOM;
+          #ifdef SERIAL_DEBUG
+                                      printf (" find mdat atom %d\r\n",start);
+          #endif
+                                      break;
+                                      }
+                                  }
+                                  else
+                                  upPosFind=0;
+                              }
+                            if(upPosFind==LEN_MDAT_ATOM)
+                              break;
+                            res_sd = f_read (&fnew, file_buffer, LEN_FILE_BUF,
+          &fnum); start+=fnum;
+                          }
+
+                      }
+          */
           //
           if (1)
             {
-
 
               res_sd = f_lseek (&fnew, start);
 #ifdef SERIAL_DEBUG

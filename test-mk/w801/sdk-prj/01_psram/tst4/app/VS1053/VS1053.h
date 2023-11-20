@@ -42,8 +42,8 @@ extern "C"
 
 #include "ff.h"
 #include "wm_io.h"
-#include "wm_type_def.h"
 #include "wm_psram.h"
+#include "wm_type_def.h"
 
   enum VS1053_I2S_RATE
   {
@@ -91,20 +91,23 @@ extern "C"
     enum tls_io_name spi_do; /* mosi MOSI (Master Out Slave In) pin -> */
 
     /* далее настройки для VS1053_PlayHttpMp3 */
-    u16 no_psram_BufferSize;// подойдет 4000, более - программа начнет глючить
-    u32 psram_BufferSize;   // подойдет 26400 более не надо! лучьше не становится
+    u16 no_psram_BufferSize; // подойдет 4000, более - программа начнет глючить
+    u32 psram_BufferSize; // подойдет 26400 более не надо! лучьше не становится
 
-    u8 psram_config;//0 или 1 
-    psram_mode_t psram_mode;// делай PSRAM_SPI, PSRAM_QPI - так и не работает
-    u8 psram_frequency_divider;//2 - хорошо работает для ESP-PSRAM64H 
-    u8 psram_tCPH;//2 - хорошо работает для ESP-PSRAM64H 
-    u8 psram_BURST;//1 - хорошо работает для ESP-PSRAM64H 
-    u16 psram_OVERTIMER;//2 - хорошо работает для ESP-PSRAM64H 
+    u8 psram_config; // 0 или 1
+    psram_mode_t psram_mode; // делай PSRAM_SPI, PSRAM_QPI - так и не работает
+    u8 psram_frequency_divider; // 2 - хорошо работает для ESP-PSRAM64H
+    u8 psram_tCPH;  // 2 - хорошо работает для ESP-PSRAM64H
+    u8 psram_BURST; // 1 - хорошо работает для ESP-PSRAM64H
+    u16 psram_OVERTIMER; // 2 - хорошо работает для ESP-PSRAM64H
 
-    u8 load_buffer_debug;//0 , 1 - выводит инфу по заполнению f или +, и опусташению буффера -
+    u8 load_buffer_debug; // 0 , 1 - выводит инфу по заполнению f или +, и
+                          // опусташению буффера -
 
-    u8 spi_fastest_speed;//0 - 4 MHz работает на большенстве плат, 1 - 6 MHz это может приводить к срыву передачи на некоторых платах
-    
+    u8 spi_fastest_speed; // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
+                          // это может приводить к срыву передачи на некоторых
+                          // платах
+
   } libVS1053_t;
 
   // Constructor.  Only sets pin values.  Doesn't touch the chip.  Be sure to

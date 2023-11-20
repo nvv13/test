@@ -163,8 +163,9 @@ user_app1_task (void *sdata)
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
     .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
     .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
-    .load_buffer_debug = 1, // 0 , 1 - выводит инфу по заполнению "f" или "+",
+    .load_buffer_debug = 0, // 0 , 1 - выводит инфу по заполнению "f" или "+",
                             // и опусташению буффера "-", "0" - нехватка данных
+    .spi_fastest_speed = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz 
 
   };
 
@@ -285,8 +286,19 @@ user_app1_task (void *sdata)
           // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
           // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
           // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
+
           sprintf (stantion_uuid, "%s",
-                   "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // trance
+                   "06bb1bd0-99f4-4ddd-b06a-eac29e313724");// America Stereo Relax
+
+          //sprintf (stantion_uuid, "%s",
+          //         "01899f00-cbe9-46bc-85ee-e7bfe6496f97");// "Europe 2 Happy Rock Hours" https 128
+
+          //sprintf (stantion_uuid, "%s",
+          //         "45d3bd35-1f11-4027-a1f1-f273b22a343d");// "Slide Guitar / Caprice Radio""AAC+""bitrate":="320,"
+
+          //- sprintf (stantion_uuid, "%s",
+          //-         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny Classic Rock. " 320 https!
+
           while (u8_wifi_state == 1) // основной цикл(2)
             {
               if (my_sost != VS1053_PLAY_BUF)
@@ -294,10 +306,19 @@ user_app1_task (void *sdata)
                   my_recognize_http_reset ();
                   http_get_web_station_by_stationuuid (stantion_uuid);
                   // http_get_web_station_by_random();
+                  u8 index=0;
                   printf (" my_recognize_ret_name = %s\n",
-                          my_recognize_ret_name (0));
+                          my_recognize_ret_name (index));
                   printf (" my_recognize_ret_url_resolved = %s\n",
-                          my_recognize_ret_url_resolved (0));
+                          my_recognize_ret_url_resolved (index));
+                  printf (" my_recognize_ret_country = %s\n",
+                          my_recognize_ret_country (index));
+                  printf (" my_recognize_ret_tags = %s\n",
+                          my_recognize_ret_tags (index));
+                  printf (" my_recognize_ret_codec = %s\n",
+                          my_recognize_ret_codec (index));
+                  printf (" my_recognize_ret_bitrate = %s\n",
+                          my_recognize_ret_bitrate (index));
                 }
 
               VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
