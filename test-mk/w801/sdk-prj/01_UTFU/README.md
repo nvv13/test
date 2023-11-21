@@ -1142,7 +1142,61 @@ SDI PB07 19 20
 ------------------------------------------------
 
 
+
 ------------------------------------------------
+
+
+
+
+board HLK-W801-KIT-V1.1 + 1.9 TFT SPI 170xRGBx320 
+
+по углам обзора - похоже на IPS
+
+Видео
+
+Дисплей
+фото 1 
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_9V89_back.jpg" alt="back side" title="back side" /></p>
+фото 2
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_9V89.jpg" alt="top side" title="top side" /></p>
+
+
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_9V89
+
+соединения
+
+надо соединить по схеме:
+~~~
+connect to TFT01_9V89 
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB15 SCL  синхросигнал
+PB17 SDA  данные
+PB21 RES  сброс (reset)
+PB23 DC   команда/данные
+PB14 CS   выбор чипа
+---- ------
+W801 LCD   
+---- ------
+
+
+
+*подготовка изображений для SD Card (инф.ниже)
+# convert *.jpg -resize 320x170! j%03d-320x170.jpg
+
+~~~
+
+
+
+------------------------------------------------
+
+
+------------------------------------------------
+
+
 
 
 
