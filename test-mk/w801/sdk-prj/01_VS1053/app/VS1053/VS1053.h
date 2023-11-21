@@ -242,6 +242,10 @@ extern "C"
 
   void VS1053_stop_PlayMP3 (void);
 
+#define VSHTTP_DEBUG_NO_DEBUG 0
+#define VSHTTP_DEBUG_TYPE1    1
+#define VSHTTP_DEBUG_TYPE2    2
+
   FRESULT VS1053_PlayHttpMp3 (const char *Uri);
 
 #ifdef __cplusplus

@@ -43,6 +43,7 @@
 
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
+#include "w_ntp.h"
 #include "w_wifi.h"
 
 #include "mod1/VS1053.h"
@@ -156,14 +157,14 @@ user_app1_task (void *sdata)
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
     .psram_BufferSize
-    = 1024 * 50, // 26400,   // подойдет 26400 более не надо! глючит!
+    = 1024 * 120, // 26400,   // подойдет 26400 более не надо! глючит!
     .psram_config = 1, // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
     .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
     .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
-    .load_buffer_debug = 0, // 0 , 1 - выводит инфу по заполнению "f" или "+",
+    .load_buffer_debug = 1, // 0 , 1 - выводит инфу по заполнению "f" или "+",
                             // и опусташению буффера "-", "0" - нехватка данных
     .spi_fastest_speed = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz 
 
@@ -276,6 +277,11 @@ user_app1_task (void *sdata)
       tls_os_time_delay (HZ * 5);
       tls_watchdog_clr ();
 
+      ntp_set_server_demo ("0.fedora.pool.ntp.org",
+                               "1.fedora.pool.ntp.org",
+                               "2.fedora.pool.ntp.org");
+      ntp_demo ();
+
       while (u8_wifi_state == 1) // основной цикл(2)
         {
 
@@ -287,17 +293,17 @@ user_app1_task (void *sdata)
           // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
           // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
 
+          //sprintf (stantion_uuid, "%s",
+          //         "06bb1bd0-99f4-4ddd-b06a-eac29e313724");// America Stereo Relax
+
           sprintf (stantion_uuid, "%s",
-                   "06bb1bd0-99f4-4ddd-b06a-eac29e313724");// America Stereo Relax
+                   "01899f00-cbe9-46bc-85ee-e7bfe6496f97");// "Europe 2 Happy Rock Hours" https 128
+
+          sprintf (stantion_uuid, "%s",
+                   "45d3bd35-1f11-4027-a1f1-f273b22a343d");// "Slide Guitar / Caprice Radio""AAC+""bitrate":="320,"
 
           //sprintf (stantion_uuid, "%s",
-          //         "01899f00-cbe9-46bc-85ee-e7bfe6496f97");// "Europe 2 Happy Rock Hours" https 128
-
-          //sprintf (stantion_uuid, "%s",
-          //         "45d3bd35-1f11-4027-a1f1-f273b22a343d");// "Slide Guitar / Caprice Radio""AAC+""bitrate":="320,"
-
-          //- sprintf (stantion_uuid, "%s",
-          //-         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny Classic Rock. " 320 https!
+          //         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny Classic Rock. " 320 https!
 
           while (u8_wifi_state == 1) // основной цикл(2)
             {

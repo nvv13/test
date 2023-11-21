@@ -122,7 +122,7 @@ digitalWrite (enum tls_io_name pin, u8 val)
 static void
 yield (void)
 {
-  tls_os_time_delay (0);
+  tls_os_time_delay (1);
 }; // Very short delay
 
 //-----------------------------------------------------
