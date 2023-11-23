@@ -110,7 +110,6 @@ user_app1_task (void *sdata)
 
   // подключаем библиотеку UTFT
 
-  // TFT02_0V89 - для ST7789v
   UTFT_UTFT (TFT01_9V89
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA

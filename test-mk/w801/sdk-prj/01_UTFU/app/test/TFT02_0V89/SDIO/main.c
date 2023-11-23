@@ -85,14 +85,14 @@ scan_files (
                 sprintf (FileName, "0:%s/%s", path, fno.fname);
               else
                 sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "320x170") != NULL && strstr (FileName, ".jpg") != NULL)
+              if (strstr (FileName, "320x240") != NULL && strstr (FileName, ".jpg") != NULL)
                {
                UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
                //UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим на дисплей картинку
                UTFT_setFont (SmallFont);
                UTFT_setColor2 (VGA_BLUE);
                UTFT_setBackColor2 (VGA_TRANSPARENT);
-               UTFT_print (fno.fname, CENTER, 150, 0);
+               UTFT_print (fno.fname, CENTER, 210, 0);
                tls_os_time_delay (HZ * 3);
                }
             }
@@ -106,23 +106,22 @@ scan_files (
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start TFT01_9V89 170x320 HW SPI st7789\n");
 
-  // подключаем библиотеку UTFT
 
-  UTFT_UTFT (TFT01_9V89
+  printf ("user_app1_task start TFT02_0V89 240x320 SDIO SPI st7789\n");
+  UTFT_UTFT (TFT02_0V89
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
+             (u8)NO_GPIO_PIN // WM_IO_PB_17  // SDA
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
+             (u8)NO_GPIO_PIN // WM_IO_PB_15  // SCL
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
+             (u8)WM_IO_PB_14 //(u8)NO_GPIO_PIN //  //CS  CS
              ,
              (u8)WM_IO_PB_21 // RST reset RES
              ,
-             (u8)WM_IO_PB_23 // SER => DC !
+             (u8)WM_IO_PB_22 // SER => DC !
              ,
-             20000000
+                 60000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -133,8 +132,15 @@ user_app1_task (void *sdata)
              но, можно отказаться от HW SPI в пользу Soft SPI
              установив spi_freq=0
              эмуляции SPI, это удобно для разных ножек
+
+    максимально, частота spi_freq = 20000000 (20MHz)
+        но!      если spi_freq > 20000000 тогда работает spi SDIO
+        частоту можно ставить от 21000000 до 120000000 герц (работает при
+    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL 
+                               WM_IO_PB_07 CMD  -> MOSI
            */
   );
+
 
   FATFS fs;
   FRESULT res_sd;
@@ -162,7 +168,7 @@ user_app1_task (void *sdata)
       UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
       UTFT_drawRoundRect (
           10, 10, 310,
-          160); // Рисуем прямоугольник со скруглёнными углами (с
+          230); // Рисуем прямоугольник со скруглёнными углами (с
                 // противоположными углами в координатах 10x110 - 170x210)
       tls_os_time_delay (HZ * 3); //
                                   //
@@ -173,17 +179,17 @@ user_app1_task (void *sdata)
                      ,
                      309 //длинна?
                      ,
-                     159 //высота?
+                     229 //высота?
       ); // Рисуем закрашенный прямоугольник (с противоположными углами
          // в координатах 10x220 - 170x310)
       tls_os_time_delay (HZ * 3); //
                                   //
       UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
       UTFT_drawCircle (
-          160, 85,
+          160, 120,
           70); // Рисуем окружность (с центром в точке x y  и радиусом r)
 
-      UTFT_fillCircle (160, 85, 50); // Рисуем закрашенную окружность (с
+      UTFT_fillCircle (160, 120, 50); // Рисуем закрашенную окружность (с
                                      // центром в точке x y и радиусом r)
       tls_os_time_delay (HZ * 3);
 
@@ -210,20 +216,20 @@ user_app1_task (void *sdata)
       UTFT_clrScr (); // стираем всю информацию с дисплея
       UTFT_setFont (BigFont); // устанавливаем большой шрифт
       UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
-      UTFT_print ("BigFont", CENTER, 20,
+      UTFT_print ("BigFont", CENTER, 100,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 50,
+      UTFT_print ("12345678", CENTER, 115,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
       tls_os_time_delay (HZ * 3);
       //
 
       UTFT_setFont (SmallFont); // устанавливаем большой шрифт
-      UTFT_print ("SmallFont", CENTER, 70,
+      UTFT_print ("SmallFont", CENTER, 130,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 90,
+      UTFT_print ("12345678", CENTER, 145,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 115 точек)
       tls_os_time_delay (HZ * 3);
@@ -231,7 +237,7 @@ user_app1_task (void *sdata)
       UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
                                       // семисегментный индикатор
       UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      UTFT_print ("1234567890", CENTER, 100,
+      UTFT_print ("1234567890", CENTER, 150,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 150 точек)
       tls_os_time_delay (HZ * 3);

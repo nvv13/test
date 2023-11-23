@@ -537,7 +537,8 @@ https://youtu.be/fxX3JLcDdj8
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT02_0V89.jpg" alt="top side" title="top side" /></p>
 
 
-для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT02_0V89
+для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT02_0V89 
+для SDIO 01_UTFU/app/test/TFT02_0V89/SDIO
 
 соединения
 
@@ -553,6 +554,23 @@ PB15 SCL  синхросигнал
 PB17 SDA  данные
 PB21 RES  сброс (reset)
 PB23 DC   команда/данные
+PB14 CS   выбор чипа
+---- ------
+W801 LCD   
+---- ------
+
+версия с использованием SDIO (60 Mhz) 
+для SDIO надо соединить по схеме:
+connect to TFT02_0V89 
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB06 SCL  синхросигнал
+PB07 SDA  данные
+PB21 RES  сброс (reset)
+PB22 DC   команда/данные
 PB14 CS   выбор чипа
 ---- ------
 W801 LCD   
@@ -1178,6 +1196,24 @@ PB17 SDA  данные
 PB21 RES  сброс (reset)
 PB23 DC   команда/данные
 PB14 CS   выбор чипа
+3.3v BLK  подсветка
+---- ------
+W801 LCD   
+---- ------
+
+для SDIO надо соединить по схеме:
+connect to TFT01_9V89 
+---- ------
+W801 LCD   
+---- ------
+gnd  GND  
+3.3v VCC
+PB06 SCL  синхросигнал
+PB07 SDA  данные
+PB21 RES  сброс (reset)
+PB22 DC   команда/данные
+PB23 CS   выбор чипа
+3.3v BLK  подсветка
 ---- ------
 W801 LCD   
 ---- ------
@@ -1186,6 +1222,8 @@ W801 LCD
 
 *подготовка изображений для SD Card (инф.ниже)
 # convert *.jpg -resize 320x170! j%03d-320x170.jpg
+
+
 
 ~~~
 

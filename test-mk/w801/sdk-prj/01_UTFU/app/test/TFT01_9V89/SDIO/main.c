@@ -106,23 +106,24 @@ scan_files (
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start TFT01_9V89 170x320 HW SPI st7789\n");
+  printf ("user_app1_task start TFT01_9V89 170x320 SDIO SPI st7789\n");
 
   // подключаем библиотеку UTFT
 
+  // TFT02_0V89 - для ST7789v
   UTFT_UTFT (TFT01_9V89
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
+             (u8)WM_IO_PB_23 // WM_IO_PB_14  //CS
              ,
              (u8)WM_IO_PB_21 // RST reset RES
              ,
-             (u8)WM_IO_PB_23 // SER => DC !
+             (u8)WM_IO_PB_22 // SER => DC !
              ,
-             20000000
+             21000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -133,6 +134,12 @@ user_app1_task (void *sdata)
              но, можно отказаться от HW SPI в пользу Soft SPI
              установив spi_freq=0
              эмуляции SPI, это удобно для разных ножек
+
+    максимально, частота spi_freq = 20000000 (20MHz)
+        но!      если spi_freq > 20000000 тогда работает spi SDIO
+        частоту можно ставить от 21000000 до 120000000 герц (работает при
+    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL 
+                               WM_IO_PB_07 CMD  -> MOSI
            */
   );
 
