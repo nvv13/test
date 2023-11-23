@@ -32,6 +32,7 @@
 //#include "wm_mem.h"
 //#include "wm_regs.h"
 #include "wm_rtc.h"
+#include "wm_uart.h"
 
 #include "mod1/UTFT.h"
 #include "mod1/psram.h"
@@ -57,8 +58,13 @@
 
 #include "w_wifi.h"
 
+extern void dumpBuffer (char *name, char *buffer, int len);
+
 u8 volatile u8_wifi_state = 0;
 static char stantion_uuid[39];
+static boolean b_ChkStationUuid = false;
+static u16 u16_volume = 75;
+static u8 stantion_index = 0;
 
 //#define TOUCH_ORIENTATION PORTRAIT
 #define TOUCH_ORIENTATION LANDSCAPE
@@ -66,6 +72,10 @@ static char stantion_uuid[39];
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
+
+#define USER_APP2_TASK_SIZE 2048
+static OS_STK UserApp2TaskStk[USER_APP2_TASK_SIZE];
+#define USER_APP2_TASK_PRIO 31 // меньше цифра, меньше приоретет!
 
 extern uint8_t SmallFont[]; // подключаем маленький шрифт
 extern uint8_t BigFont[];   // подключаем большой шрифт
@@ -112,6 +122,163 @@ static const char *aUrl[URL_ARR_SIZE] = {
 };
 */
 
+#define CONSOLE_BUF_SIZE 512
+u8 rx_buf[CONSOLE_BUF_SIZE + 1];
+volatile int rx_data_len;
+volatile u32 rptr;
+
+s16
+proc_console_rx (u16 len, void *user_data)
+{
+  rx_data_len += len;
+  return 0;
+}
+
+void
+user_app2_task (void *sdata)
+{
+  memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+  rx_data_len = 0;
+  rptr = 0;
+
+  tls_uart_set_baud_rate (TLS_UART_0, 115200);
+  tls_uart_rx_callback_register (TLS_UART_0, proc_console_rx, NULL);
+
+  while (1)
+    {
+      tls_os_time_delay (200);
+      if (b_ChkStationUuid && VS1053_WEB_RADIO_nTotal > (1024 * 1024 * 1))
+        {
+          b_ChkStationUuid = false;
+          char cfg_stantion_uuid[39];
+          flash_cfg_load_stantion_uuid (cfg_stantion_uuid, stantion_index);
+          if (!strstr (cfg_stantion_uuid, stantion_uuid))
+            {
+              flash_cfg_store_stantion_uuid (stantion_uuid, stantion_index);
+              printf ("flash_cfg_store_ new stantion_uuid index=%d\r\n",stantion_index);
+            }
+        }
+      if (rx_data_len > 0)
+        {
+          if (rptr + rx_data_len > CONSOLE_BUF_SIZE)
+            {
+              printf ("rptr + rx_data_len > CONSOLE_BUF_SIZE\r\n");
+              memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+              rx_data_len = 0;
+              rptr = 0;
+            }
+          else
+            {
+              int ret = tls_uart_read (TLS_UART_0, rx_buf + rptr, rx_data_len);
+              if (ret > 0)
+                {
+                  // printf ("%s", (char *)(rx_buf + rptr));
+                  // dumpBuffer ("\ruart0", (char *)rx_buf, 64);
+                  /*
+
+                  Клавиши - стрелки, кода:
+                  uart0  Left: 1B, 5B, 44,
+                  uart0    Up: 1B, 5B, 41,
+                  uart0  Down: 1B, 5B, 42,
+                  uart0 Right: 1B, 5B, 43,
+
+                  */
+                  char *pHeaderEnd = strstr ((char *)(rx_buf + rptr), "\r");
+                  rx_data_len -= ret;
+                  rptr += ret;
+                  if (pHeaderEnd)
+                    {
+                      (*pHeaderEnd) = 0;
+                      pHeaderEnd--;
+                      if ((*pHeaderEnd) == '"')
+                        (*pHeaderEnd) = 0;
+                      pHeaderEnd = (char *)rx_buf;
+                      if ((*pHeaderEnd) == '"')
+                        pHeaderEnd++;
+                      printf ("buf = \"%s\"\r\n", pHeaderEnd);
+                      if (strlen (pHeaderEnd) == 36)
+                        {
+                          sprintf (stantion_uuid, "%s", pHeaderEnd);
+                          tls_os_time_delay (500);
+                          printf ("new %d stantion_uuid = \"%s\"\r\n"
+                                  ,stantion_index,stantion_uuid);
+                          my_sost = VS1053_QUERY_TO_STOP;
+                        }
+                      memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+                      rx_data_len = 0;
+                      rptr = 0;
+                    }
+                  else
+                    {
+                      pHeaderEnd = strstr ((char *)(rx_buf),
+                                           "\x1B\x5B\x41"); // Up
+                      if (pHeaderEnd && u16_volume < 100)
+                        {
+                          u16_volume++;
+                          VS1053_setVolume (u16_volume);
+                          memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+                          rx_data_len = 0;
+                          rptr = 0;
+                          printf ("setVolume++ = %d \r\n", u16_volume);
+                        }
+                      pHeaderEnd = strstr ((char *)(rx_buf),
+                                           "\x1B\x5B\x42"); // Down
+                      if (pHeaderEnd && u16_volume > 2)
+                        {
+                          u16_volume--;
+                          VS1053_setVolume (u16_volume);
+                          memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+                          rx_data_len = 0;
+                          rptr = 0;
+                          printf ("setVolume-- = %d \r\n", u16_volume);
+                        }
+
+                      pHeaderEnd = strstr ((char *)(rx_buf),
+                                           "\x1B\x5B\x44"); // Left
+                      if (pHeaderEnd && stantion_index > 1)
+                        {
+                          stantion_index--;
+                          memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+                          rx_data_len = 0;
+                          rptr = 0;
+                          printf ("set -- stantion_index = %d \r\n", stantion_index);
+                          char cfg_stantion_uuid[39];
+                          flash_cfg_load_stantion_uuid (cfg_stantion_uuid, stantion_index);
+                          if(strlen(cfg_stantion_uuid)==36 && cfg_stantion_uuid[0]>=0x30 && cfg_stantion_uuid[0]<=0x7A)
+                            {
+                              flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
+                              my_sost = VS1053_QUERY_TO_STOP;
+                            }
+                          else 
+                            printf ("empty stantion_index = %d \r\n", stantion_index);
+                        }
+
+                      pHeaderEnd = strstr ((char *)(rx_buf),
+                                           "\x1B\x5B\x43"); // Right
+                      if (pHeaderEnd && stantion_index < 43)
+                        {
+                          stantion_index++;
+                          memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
+                          rx_data_len = 0;
+                          rptr = 0;
+                          printf ("set ++ stantion_index = %d \r\n", stantion_index);
+                          char cfg_stantion_uuid[39];
+                          flash_cfg_load_stantion_uuid (cfg_stantion_uuid, stantion_index);
+                          if(strlen(cfg_stantion_uuid)==36 && cfg_stantion_uuid[0]>=0x30 && cfg_stantion_uuid[0]<=0x7A)
+                            {
+                              flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
+                              my_sost = VS1053_QUERY_TO_STOP;
+                            }
+                          else 
+                            printf ("empty stantion_index = %d \r\n", stantion_index);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 void
 user_app1_task (void *sdata)
 {
@@ -132,8 +299,8 @@ user_app1_task (void *sdata)
   или wm_spi_di_config - возможные пины -WM_IO_PB_00 -WM_IO_PB_03 WM_IO_PB_16
   only for 56pin - !если для MISO - спаять светодиод! а можно и оставить с
   vs1053 будет работать, только читать из неё не сможет WM_IO_PB_25 only for
-  56pin - !если для MISO - спаять светодиод! а можно и оставить с vs1053 будет
-  работать, только читать из неё не сможет
+  56pin - !если для MISO - спаять светодиод! а можно и оставить с vs1053
+  будет работать, только читать из неё не сможет
 
  */
     .spi_do = WM_IO_PB_26, /* master mosi do -> mosi slave */
@@ -157,16 +324,17 @@ user_app1_task (void *sdata)
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
     .psram_BufferSize
-    = 1024 * 120, // 26400,   // подойдет 26400 более не надо! глючит!
+    = 1024 * 26, // 26400,   // подойдет 26400 более не надо! глючит!
     .psram_config = 1, // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
     .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
     .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
-    .load_buffer_debug = 1, // 0 , 1 - выводит инфу по заполнению "f" или "+",
+    .load_buffer_debug = 0, // 0 , 1 - выводит инфу по заполнению "f" или "+",
                             // и опусташению буффера "-", "0" - нехватка данных
-    .spi_fastest_speed = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz 
+    .spi_fastest_speed
+    = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
 
   };
 
@@ -174,15 +342,14 @@ user_app1_task (void *sdata)
    * config the pins used for spi di
    * WM_IO_PB_00 - не работает,
    * WM_IO_PB_03 - работает!
-   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный к
-   * данному контакту на макетке
-   * WM_IO_PB_25 only for 56pin - не работает, мешает светодиод подключенный к
-   * данному контакту на макетке
+   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный
+   * к данному контакту на макетке WM_IO_PB_25 only for 56pin - не работает,
+   * мешает светодиод подключенный к данному контакту на макетке
    */
 
   VS1053_VS1053 (&user_data53);
   VS1053_begin ();
-  u16 u16_volume = 75;
+  u16_volume = 75;
   VS1053_setVolume (u16_volume);
 
   // подключаем библиотеку UTFT
@@ -244,15 +411,53 @@ user_app1_task (void *sdata)
   timer_cfg.callback = (tls_timer_irq_callback)my_timer_irq;
   timer_cfg.arg = NULL;
   timer_id = tls_timer_create (&timer_cfg);
-  if (true)
+  if (false)
     {
       tls_timer_start (timer_id);
       printf ("timer start\n");
     }
 
+  tls_os_task_create (NULL, NULL, user_app2_task, NULL,
+                      (void *)UserApp2TaskStk, /* task's stack start address */
+                      USER_APP2_TASK_SIZE
+                          * sizeof (u32), /* task's stack size, unit:byte */
+                      USER_APP2_TASK_PRIO, 0);
+
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
+  stantion_index=0;
+  printf ("load default stantion index = %d\n",stantion_index);
+  flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
+  if (strlen (stantion_uuid) != 36)
+    {
+      printf ("strlen (stantion_uuid) != 36, set default uuid\n");
+      // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
+      // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
+      // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
+      sprintf (stantion_uuid, "%s",
+               "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // America Stereo Relax - норм
+
+
+      // лучьшее sprintf (stantion_uuid, "%s","dbaf0701-7987-11ea-8a3b-52543be04c81"); //depeche mode,ebm,futurepop,synt
+
+      // норм sprintf (stantion_uuid, "%s",
+      //         "01899f00-cbe9-46bc-85ee-e7bfe6496f97"); // "Europe 2 Happy
+      //                                                  // Rock Hours"
+      //                                                  // https 128
+
+      // так себе sprintf (
+      //     stantion_uuid, "%s",
+      //     "45d3bd35-1f11-4027-a1f1-f273b22a343d"); // "Slide Guitar /
+      // Caprice
+      // Radio""AAC+""bitrate":="320,"
+      // sprintf (stantion_uuid, "%s",
+      //         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny
+      //         Classic Rock. " 320 https!
+    }
+
+  printf ("key Up Down - volume control (1-100) \n");
+  printf ("key Right Left - stantion index (0-43)\n");
   tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 60 сек
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
@@ -274,36 +479,16 @@ user_app1_task (void *sdata)
             }
         }
 
-      tls_os_time_delay (HZ * 5);
+      tls_os_time_delay (HZ * 3);
       tls_watchdog_clr ();
-
-      ntp_set_server_demo ("0.fedora.pool.ntp.org",
-                               "1.fedora.pool.ntp.org",
-                               "2.fedora.pool.ntp.org");
-      ntp_demo ();
+      //ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
+      //                     "2.fedora.pool.ntp.org");
+      //ntp_demo ();
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
 
           tls_watchdog_clr ();
-
-          printf ("load default stantion 0\n");
-          // flash_cfg_load_stantion_uuid (stantion_uuid, 0);
-          // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
-          // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
-          // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
-
-          //sprintf (stantion_uuid, "%s",
-          //         "06bb1bd0-99f4-4ddd-b06a-eac29e313724");// America Stereo Relax
-
-          sprintf (stantion_uuid, "%s",
-                   "01899f00-cbe9-46bc-85ee-e7bfe6496f97");// "Europe 2 Happy Rock Hours" https 128
-
-          sprintf (stantion_uuid, "%s",
-                   "45d3bd35-1f11-4027-a1f1-f273b22a343d");// "Slide Guitar / Caprice Radio""AAC+""bitrate":="320,"
-
-          //sprintf (stantion_uuid, "%s",
-          //         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny Classic Rock. " 320 https!
 
           while (u8_wifi_state == 1) // основной цикл(2)
             {
@@ -312,19 +497,20 @@ user_app1_task (void *sdata)
                   my_recognize_http_reset ();
                   http_get_web_station_by_stationuuid (stantion_uuid);
                   // http_get_web_station_by_random();
-                  u8 index=0;
+		  VS1053_WEB_RADIO_nTotal=0;
+                  b_ChkStationUuid = true;
                   printf (" my_recognize_ret_name = %s\n",
-                          my_recognize_ret_name (index));
+                          my_recognize_ret_name (stantion_index));
                   printf (" my_recognize_ret_url_resolved = %s\n",
-                          my_recognize_ret_url_resolved (index));
+                          my_recognize_ret_url_resolved (stantion_index));
                   printf (" my_recognize_ret_country = %s\n",
-                          my_recognize_ret_country (index));
+                          my_recognize_ret_country (stantion_index));
                   printf (" my_recognize_ret_tags = %s\n",
-                          my_recognize_ret_tags (index));
+                          my_recognize_ret_tags (stantion_index));
                   printf (" my_recognize_ret_codec = %s\n",
-                          my_recognize_ret_codec (index));
+                          my_recognize_ret_codec (stantion_index));
                   printf (" my_recognize_ret_bitrate = %s\n",
-                          my_recognize_ret_bitrate (index));
+                          my_recognize_ret_bitrate (stantion_index));
                 }
 
               VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
