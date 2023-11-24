@@ -64,7 +64,7 @@ u8 volatile u8_wifi_state = 0;
 static char stantion_uuid[39];
 static boolean b_ChkStationUuid = false;
 static u16 u16_volume = 75;
-static u8 stantion_index = 0;
+static u16 stantion_index = 0;
 
 //#define TOUCH_ORIENTATION PORTRAIT
 #define TOUCH_ORIENTATION LANDSCAPE
@@ -156,6 +156,13 @@ user_app2_task (void *sdata)
             {
               flash_cfg_store_stantion_uuid (stantion_uuid, stantion_index);
               printf ("flash_cfg_store_ new stantion_uuid index=%d\r\n",stantion_index);
+            }
+          u16 st_index=0; 
+          flash_cfg_load_u16 (&st_index,0);
+          if(stantion_index!=st_index)
+            {
+              flash_cfg_store_u16 (stantion_index,0);
+              printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",stantion_index);
             }
         }
       if (rx_data_len > 0)
@@ -427,6 +434,8 @@ user_app1_task (void *sdata)
   UTFT_setFont (SmallFont);
 
   stantion_index=0;
+  flash_cfg_load_u16 (&stantion_index,0);
+  if(stantion_index>44)stantion_index=0;
   printf ("load default stantion index = %d\n",stantion_index);
   flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
   if (strlen (stantion_uuid) != 36)
