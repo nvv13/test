@@ -1,6 +1,5 @@
 case MSP3526:
 case TFT02_0V89:
-case TFT01_9V89:
 
 //*************3.5 ST7796S IPS**********//	
 	UTFT_LCD_Write_COM(0x11);     
