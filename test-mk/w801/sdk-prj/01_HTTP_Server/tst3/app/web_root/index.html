@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>example W801 + mongoose = HTTP Server</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #container { margin-right: auto; margin-left: auto; max-width: 480px; }
+      #info { background: #e0f0f0; border-radius: .5em; padding: 2em;  }
+      #static, #live { background: #f0f0f0; border-radius: .5em; padding: 0.5em; max-height: 10em; overflow: auto; height: 100%; }
+      #wrapper { display: flex; justify-content: flex-evenly; margin-top: 1em; }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="info">
+         микроконтроллер W801 + mongoose = HTTP Server
+        <br/><br/>
+         собрано из примера <a href="https://mongoose.ws/documentation/tutorials/webui-push/">webui-push</a>
+        <br/><br/>
+         В блоке static ниже показан файл log.txt.
+         Код JS на этой странице сначала извлекает /api/log/static, который 
+         возвращает содержимое log.txt, 
+         затем извлекает /api/log/live, который передает фрагменты данных
+         по мере их поступления (живой журнал).
+        <br/><br/>
+        Вы также можете использовать утилиту командной строки 
+        <code>curl</code>, чтобы увидеть журналы:
+        (в примере IP 192.168.1.87, у вас может быть своё) 
+        <br/><code>curl 192.168.1.87/api/log/static</code>
+        <br/><code>curl 192.168.1.87/api/log/live</code>
+      </div>
+      <div id="wrapper">
+        <div style="width: 50%"><b>Static</b><pre id="static"></pre></div>
+        <div style="width: 1em;"></div>
+        <div style="width: 50%"><b>Live</b><pre id="live"></pre></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    setInterval(f,200);
+    var f = function(r) {
+      return r.read().then(function(result) {
+        var data = String.fromCharCode.apply(null, result.value);
+        document.getElementById('live').innerText = data;  // live log
+        if (!result.done) f(r);  // Read next chunk
+      });
+    };
+    window.onload = ev => fetch('/api/log/static')
+      .then(r => r.text())
+      .then(r => { document.getElementById('static').innerText = r; })
+      .then(r => fetch('/api/log/live'))
+      .then(r => r.body.getReader())
+      .then(f);
+  </script>
+</html>
