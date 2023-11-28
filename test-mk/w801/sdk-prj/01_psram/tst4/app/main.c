@@ -242,7 +242,7 @@ user_app2_task (void *sdata)
 
                       pHeaderEnd = strstr ((char *)(rx_buf),
                                            "\x1B\x5B\x44"); // Left
-                      if (pHeaderEnd && stantion_index > 1)
+                      if (pHeaderEnd && stantion_index > 0)
                         {
                           stantion_index--;
                           memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
