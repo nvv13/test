@@ -15,3 +15,11 @@ INCLUDES := $(INCLUDES) -I $(PDIR)include
 PDIR := ../$(PDIR)
 sinclude $(PDIR)Makefile
 
+
+PACK = ../../../../mongoose/tools/pack             # Utility to pack files into a packed filesystem
+
+FILES_TO_EMBED ?= $(wildcard web_root/*)
+
+packfs:                    # Cleanup. Delete built program and all build artifacts
+	$(PACK) $(FILES_TO_EMBED) > packed_fs.c
+

@@ -254,6 +254,7 @@ sdk-prj
 03_ws2812b_RGB_LED - управлени адресной лентой ws2812b 
 04_wifi_ntp        - часы по NTP протоколу     
 05_https_weather   - запрос погоды по протоколу https, пример ОТА 
+01_HTTP_Server     - примеры использования Mongoose networking library 
 ~~~
 
 

@@ -16,7 +16,7 @@ PDIR := ../$(PDIR)
 sinclude $(PDIR)Makefile
 
 
-PACK = ../../../../W801_SDK-linux/tools/mongoose/pack             # Utility to pack files into a packed filesystem
+PACK = ../../../../mongoose/tools/pack             # Utility to pack files into a packed filesystem
 
 FILES_TO_EMBED ?= $(wildcard web_root/*)
 

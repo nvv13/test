@@ -250,8 +250,8 @@ static const struct packed_file {
   size_t size;
   time_t mtime;
 } packed_files[] = {
-  {"/web_root/index.html", v1, sizeof(v1), 1701205234},
-  {"/web_root/log.txt", v2, sizeof(v2), 1701202155},
+  {"/web_root/index.html", v1, sizeof(v1), 1701234907},
+  {"/web_root/log.txt", v2, sizeof(v2), 1701234907},
   {NULL, NULL, 0, 0}
 };
 

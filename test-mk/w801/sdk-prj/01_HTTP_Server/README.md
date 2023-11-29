@@ -6,6 +6,8 @@ Mongoose networking library
 https://mongoose.ws/documentation/
 
 
+исходники Mongoose
+https://github.com/cesanta/mongoose.git
 
 
 ------------------------------------------------

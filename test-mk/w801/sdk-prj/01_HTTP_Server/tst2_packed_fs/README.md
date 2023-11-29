@@ -11,6 +11,9 @@ https://mongoose.ws/documentation/
 https://mongoose.ws/tutorials/embedded-filesystem/ 
 
 
+исходники Mongoose
+https://github.com/cesanta/mongoose.git
+
 
 ------------------------------------------------
 

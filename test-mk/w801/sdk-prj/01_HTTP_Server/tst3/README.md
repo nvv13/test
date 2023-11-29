@@ -10,6 +10,8 @@ https://mongoose.ws/documentation/
 собрано из примера 
 https://mongoose.ws/documentation/tutorials/webui-push/
 
+исходники Mongoose
+https://github.com/cesanta/mongoose.git
 
 
 ------------------------------------------------
