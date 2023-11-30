@@ -22,22 +22,25 @@ var bstyle_on=["green","red","blue"];
 function onoff(element,id)
 {
 	btn_state[id]= 1 - btn_state[id];
-	var bstyle, bcolor;
+	var child=element.firstChild;
 	if(btn_state[id])
 	{
-		bstyle=bstyle_on[id];
-		bcolor="lightgray";
-                fetch('/api/on?'+id);
+                fetch('/api/on?'+id)
+                  .then(r => r.text())
+                  .then(r => { if(r=="123"){
+         	   child.style.background=bstyle_on[id];
+	           child.style.color="lightgray";
+               };}); 
 	}
 	else
 	{
-		bstyle="lightgray";
-		bcolor=bstyle_on[id];
-                fetch('/api/off?'+id);
+                fetch('/api/off?'+id)
+                  .then(r => r.text())
+                  .then(r => { if(r=="321"){
+	            child.style.background="lightgray";
+	            child.style.color=bstyle_on[id];
+            };}); 
 	}
-	var child=element.firstChild;
-	child.style.background=bstyle;
-	child.style.color=bcolor;
 }
 
 var f = function(r) {

@@ -1,15 +1,13 @@
 /*
 
-на основе 
-Mongoose networking library 
+на основе
+Mongoose networking library
 https://mongoose.ws/documentation/
 
 исходники Mongoose
 https://github.com/cesanta/mongoose.git
 
 */
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,9 +35,10 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 const char *s_listening_url = "http://0.0.0.0:80";
 
 #define DF_AR_LAMP_COUNT 3
-static unsigned char arLamp[DF_AR_LAMP_COUNT]={0,0,0};
-static unsigned char pin[DF_AR_LAMP_COUNT]={WM_IO_PB_11,WM_IO_PB_16,WM_IO_PB_25};
-#define DF_ON  0  //зависит от того, к земле или к питанию привяханы светодиоды
+static unsigned char arLamp[DF_AR_LAMP_COUNT] = { 0, 0, 0 };
+static unsigned char pin[DF_AR_LAMP_COUNT]
+    = { WM_IO_PB_11, WM_IO_PB_16, WM_IO_PB_25 };
+#define DF_ON 0 //зависит от того, к земле или к питанию привяханы светодиоды
 #define DF_OFF 1
 // Mongoose event handler function, gets called by the mg_mgr_poll()
 
@@ -61,34 +60,41 @@ fn (struct mg_connection *c, int ev, void *ev_data, void *fn_data)
         }
       else if (mg_http_match_uri (hm, "/api/sost"))
         {
-          int i_lamp=255;
-          if(hm->query.len>0)i_lamp=hm->query.ptr[0]-48;
-          if(i_lamp<DF_AR_LAMP_COUNT){MG_INFO(("lamp %d sost %d",i_lamp,arLamp[i_lamp]));}
-          mg_http_reply(c, 200, "", "%u", (i_lamp<DF_AR_LAMP_COUNT?arLamp[i_lamp]:255) );
+          int i_lamp = 255;
+          if (hm->query.len > 0)
+            i_lamp = hm->query.ptr[0] - 48;
+          if (i_lamp < DF_AR_LAMP_COUNT)
+            {
+              MG_INFO (("lamp %d sost %d", i_lamp, arLamp[i_lamp]));
+            }
+          mg_http_reply (c, 200, "", "%u",
+                         (i_lamp < DF_AR_LAMP_COUNT ? arLamp[i_lamp] : 255));
         }
       else if (mg_http_match_uri (hm, "/api/on"))
         {
-          int i_lamp=255;
-          if(hm->query.len>0)i_lamp=hm->query.ptr[0]-48;
-          if(i_lamp<DF_AR_LAMP_COUNT)
-             {
-              arLamp[i_lamp]=1;
-              MG_INFO(("lamp %d on",i_lamp));
+          int i_lamp = 255;
+          if (hm->query.len > 0)
+            i_lamp = hm->query.ptr[0] - 48;
+          if (i_lamp < DF_AR_LAMP_COUNT)
+            {
+              arLamp[i_lamp] = 1;
+              MG_INFO (("lamp %d on", i_lamp));
               tls_gpio_write (pin[i_lamp], DF_ON);
-             }
-          mg_http_reply(c, 200, "", "{%m:%u}\n",MG_ESC("on"), i_lamp );
-
+            }
+          mg_http_reply (c, 200, "", "%u", 123);
         }
       else if (mg_http_match_uri (hm, "/api/off"))
         {
-          int i_lamp=255;
-          if(hm->query.len>0)i_lamp=hm->query.ptr[0]-48;
-          if(i_lamp<DF_AR_LAMP_COUNT){
-              arLamp[i_lamp]=0;
-              MG_INFO(("lamp %d off",i_lamp));
+          int i_lamp = 255;
+          if (hm->query.len > 0)
+            i_lamp = hm->query.ptr[0] - 48;
+          if (i_lamp < DF_AR_LAMP_COUNT)
+            {
+              arLamp[i_lamp] = 0;
+              MG_INFO (("lamp %d off", i_lamp));
               tls_gpio_write (pin[i_lamp], DF_OFF);
-              }
-          mg_http_reply(c, 200, "", "{%m:%u}\n",MG_ESC("off"), i_lamp);
+            }
+          mg_http_reply (c, 200, "", "%u", 321);
         }
 
       else
@@ -118,7 +124,7 @@ static void
 timer_fn (void *arg)
 {
   char buf[64];
-  snprintf (buf, sizeof (buf), "= %lu\n", (unsigned long)mg_millis()/1000);
+  snprintf (buf, sizeof (buf), "= %lu\n", (unsigned long)mg_millis () / 1000);
   broadcast_message (arg, buf);
 }
 
@@ -134,7 +140,7 @@ user_app1_task (void *sdata)
 
   struct mg_mgr mgr;
   mg_mgr_init (&mgr); // Init manager
-  //mg_log_set (MG_LL_DEBUG); // Set debug log level. Default is MG_LL_INFO
+  // mg_log_set (MG_LL_DEBUG); // Set debug log level. Default is MG_LL_INFO
   mg_log_set (MG_LL_INFO);
   mg_timer_add (&mgr, 1000, MG_TIMER_REPEAT, timer_fn, &mgr);
 
@@ -162,7 +168,7 @@ user_app1_task (void *sdata)
       while (u8_wifi_state == 1) // основной цикл(2)
         {
           printf ("mg_http_listen start \n");
-          mg_http_listen(&mgr, s_listening_url, fn, NULL);// Setup listener
+          mg_http_listen (&mgr, s_listening_url, fn, NULL); // Setup listener
 
           while (u8_wifi_state == 1)
             mg_mgr_poll (&mgr, 500); // Infinite event loop

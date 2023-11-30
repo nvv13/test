@@ -54,14 +54,14 @@ fn (struct mg_connection *c, int ev, void *ev_data, void *fn_data)
           int i_lamp=255;
           if(hm->query.len>0)i_lamp=hm->query.ptr[0]-48;
           if(i_lamp<DF_AR_LAMP_COUNT){arLamp[i_lamp]=1;MG_INFO(("lamp %d on",i_lamp));}
-          mg_http_reply(c, 200, "", "{%m:%u}\n",MG_ESC("on"), i_lamp );
+          mg_http_reply(c, 200, "", "%u", 123 );
         }
       else if (mg_http_match_uri (hm, "/api/off"))
         {
           int i_lamp=255;
           if(hm->query.len>0)i_lamp=hm->query.ptr[0]-48;
           if(i_lamp<DF_AR_LAMP_COUNT){arLamp[i_lamp]=0;MG_INFO(("lamp %d off",i_lamp));}
-          mg_http_reply(c, 200, "", "{%m:%u}\n",MG_ESC("off"), i_lamp);
+          mg_http_reply(c, 200, "", "%u", 321 );
         }
 
       else

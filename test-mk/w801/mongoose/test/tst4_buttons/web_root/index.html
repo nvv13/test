@@ -8,7 +8,7 @@
     <style>
       #container { margin-right: auto; margin-left: auto; max-width: 480px; }
       #info { background: #e0f0f0; border-radius: .5em; padding: 2em;  }
-      #static, #live { background: #f0f0f0; border-radius: .5em; padding: 0.5em; max-height: 10em; overflow: auto; height: 100%; }
+      #live { background: #f0f0f0; border-radius: .5em; padding: 0.5em; max-height: 10em; overflow: auto; height: 100%; }
       #wrapper { display: flex; justify-content: flex-evenly; margin-top: 1em; }
     </style>
   </head>
@@ -22,22 +22,25 @@ var bstyle_on=["green","red","blue"];
 function onoff(element,id)
 {
 	btn_state[id]= 1 - btn_state[id];
-	var bstyle, bcolor;
+	var child=element.firstChild;
 	if(btn_state[id])
 	{
-		bstyle=bstyle_on[id];
-		bcolor="lightgray";
-                fetch('/api/on?'+id);
+                fetch('/api/on?'+id)
+                  .then(r => r.text())
+                  .then(r => { if(r=="123"){
+         	   child.style.background=bstyle_on[id];
+	           child.style.color="lightgray";
+               };}); 
 	}
 	else
 	{
-		bstyle="lightgray";
-		bcolor=bstyle_on[id];
-                fetch('/api/off?'+id);
+                fetch('/api/off?'+id)
+                  .then(r => r.text())
+                  .then(r => { if(r=="321"){
+	            child.style.background="lightgray";
+	            child.style.color=bstyle_on[id];
+            };}); 
 	}
-	var child=element.firstChild;
-	child.style.background=bstyle;
-	child.style.color=bcolor;
 }
 
 var f = function(r) {
@@ -48,10 +51,7 @@ var f = function(r) {
       });
     };
 
-window.onload = ev => fetch('/api/log/static')
-      .then(r => r.text())
-      .then(r => { document.getElementById('static').innerText = r; })
-      .then(r => fetch('/api/sost?0'))
+window.onload = ev => fetch('/api/sost?0')
       .then(r => r.text())
       .then(r => { if(r=="1"){btn_state[0]=1;
 	var child=document.getElementById('off0');
@@ -120,9 +120,7 @@ window.onload = ev => fetch('/api/log/static')
 </fieldset>
 
       <div id="wrapper">
-        <div style="width: 50%"><b>Сообщение</b><pre id="static"></pre></div>
-        <div style="width: 1em;"></div>
-        <div style="width: 50%"><b>Время millis на плате</b><pre id="live"></pre></div>
+        <div style="width: 50%"><b>Прошло секунд со старта мк</b><pre id="live"></pre></div>
       </div>
     </div>
 
