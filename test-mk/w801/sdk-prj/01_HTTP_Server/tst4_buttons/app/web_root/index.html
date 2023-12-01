@@ -19,6 +19,11 @@
 var btn_state=[0,0,0];
 var bstyle_on=["green","red","blue"];
 
+/**
+* функция onoff - переключает кнопку в другое состояние
+* причем, обращается к серверу, за подтверждением операции
+* если сервер не подтверждает (потеряно связь с устройством) - состояние не меняется
+*/
 function onoff(element,id)
 {
 	btn_state[id]= 1 - btn_state[id];
@@ -43,6 +48,10 @@ function onoff(element,id)
 	}
 }
 
+/**
+* функция запускается при загрузке страницы, и постоянно читает данные с сервера
+* browser на мобильном устройстве, может отправится в сон, чтение прекратится до принудительного обновления страницы
+*/
 var f = function(r) {
       return r.read().then(function(result) {
         var data = String.fromCharCode.apply(null, result.value);
