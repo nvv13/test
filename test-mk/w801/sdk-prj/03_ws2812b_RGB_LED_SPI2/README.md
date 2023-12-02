@@ -1,5 +1,11 @@
 
 project
+w801 + ws2812b = елочная гирлянда
+
+
+Видео
+https://youtu.be/1lcRWqYRtUs
+
 
 board HLK-W801-KIT-V1.1 + ws2812b RGB address LED + wifi + OTA upgrade + IR remote
 
