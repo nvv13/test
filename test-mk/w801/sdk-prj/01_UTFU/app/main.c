@@ -35,6 +35,7 @@
 #include "wm_rtc.h"
 
 #include "UTFT.h"
+#include "mod1/psram.h"
 #include "u_jpeg.h"
 
 #define USER_APP1_TASK_SIZE 2048
@@ -50,79 +51,28 @@ extern uint8_t SmallSymbolFont[];
 #include "ff.h"
 #include "wm_gpio_afsel.h"
 
-FRESULT
-scan_files (
-    char *path /* Start node to be scanned (***also used as work area***) */
-)
-{ /* http://elm-chan.org/fsw/ff/doc/readdir.html */
-  FRESULT res;
-  DIR dir;
-  UINT i;
-  static FILINFO fno;
-
-  res = f_opendir (&dir, path); /* Open the directory */
-  if (res == FR_OK)
-    {
-      for (;;)
-        {
-          res = f_readdir (&dir, &fno); /* Read a directory item */
-          if (res != FR_OK || fno.fname[0] == 0)
-            break; /* Break on error or end of dir */
-          if (fno.fattrib & AM_DIR)
-            { /* It is a directory */
-              i = strlen (path);
-              sprintf (&path[i], "/%s", fno.fname);
-              res = scan_files (path); /* Enter the directory */
-              if (res != FR_OK)
-                break;
-              path[i] = 0;
-            }
-          else
-            { /* It is a file. */
-              printf ("%s/%s\n", path, fno.fname);
-              char FileName[256];
-              if (strlen (path) != 0)
-                sprintf (FileName, "0:%s/%s", path, fno.fname);
-              else
-                sprintf (FileName, "0:%s", fno.fname);
-              if (strstr (FileName, "320x170") != NULL && strstr (FileName, ".jpg") != NULL)
-               {
-               UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0);
-               //UTFT_loadBitmap (  0, 0, 280, 240, FileName); // выводим на дисплей картинку
-               UTFT_setFont (SmallFont);
-               UTFT_setColor2 (VGA_BLUE);
-               UTFT_setBackColor2 (VGA_TRANSPARENT);
-               UTFT_print (fno.fname, CENTER, 150, 0);
-               tls_os_time_delay (HZ * 3);
-               }
-            }
-        }
-      f_closedir (&dir);
-    }
-
-  return res;
-}
-
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start TFT01_9V89 170x320 HW SPI st7789\n");
+  wm_psram_config (1);
+  d_psram_init (PSRAM_SPI, 2, 2, 1, 2);
+  tls_os_time_delay (HZ / 10);
 
   // подключаем библиотеку UTFT
-
-  UTFT_UTFT (TFT01_9V89
+  printf ("user_app1_task start TFT02_0V89 240x320 SDIO SPI st7789\n");
+  UTFT_UTFT (TFT02_0V89,
+             (u8)NO_GPIO_PIN // WM_IO_PB_17  // SDA
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
+             (u8)NO_GPIO_PIN // WM_IO_PB_15  // SCL
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
-             ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
+             (u8)WM_IO_PB_14 //(u8)NO_GPIO_PIN //  //CS  CS
              ,
              (u8)WM_IO_PB_21 // RST reset RES
              ,
-             (u8)WM_IO_PB_23 // SER => DC !
+             (u8)WM_IO_PB_22 // SER => DC !
              ,
-             20000000
+             // 120000000
+             60000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -136,17 +86,13 @@ user_app1_task (void *sdata)
            */
   );
 
-  FATFS fs;
-  FRESULT res_sd;
-  char buff[256]; // буффер для названия директории при сканировании файловой
-                  // системы
-  wm_sdio_host_config (0);
-
+  // UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   // UTFT_InitLCD (PORTRAIT);
-
+  bool b_Land=true;
   while (1)
-    {                 //
+    { //
+
       UTFT_clrScr (); // стираем всю информацию с дисплея
 
       UTFT_setColor2 (VGA_WHITE); // 240x280
@@ -155,159 +101,182 @@ user_app1_task (void *sdata)
           UTFT_drawRect (2, 2, i * 5, i * 4);
         }
 
-      tls_os_time_delay (HZ * 3); //
+      tls_os_time_delay (HZ * 1); //
 
       UTFT_fillScr2 (VGA_BLACK);
 
-      UTFT_setColor2 (VGA_BLUE); // Устанавливаем синий цвет
-      UTFT_drawRoundRect (
-          10, 10, 310,
-          160); // Рисуем прямоугольник со скруглёнными углами (с
-                // противоположными углами в координатах 10x110 - 170x210)
-      tls_os_time_delay (HZ * 3); //
-                                  //
-      UTFT_setColor2 (VGA_LIME); // Устанавливаем лаймовый цвет
-      UTFT_fillRect (11          //по горизонтали?
-                     ,
-                     11 // по вертикали?
-                     ,
-                     309 //длинна?
-                     ,
-                     159 //высота?
-      ); // Рисуем закрашенный прямоугольник (с противоположными углами
-         // в координатах 10x220 - 170x310)
-      tls_os_time_delay (HZ * 3); //
-                                  //
-      UTFT_setColor2 (VGA_PURPLE); // Устанавливаем фиолетовый цвет
-      UTFT_drawCircle (
-          160, 85,
-          70); // Рисуем окружность (с центром в точке x y  и радиусом r)
+      u8 *buf_prsam = UTFT_store_to_psram (true);
+      int x_size = UTFT_getDisplayXSize (); // 320
+      int y_size = UTFT_getDisplayYSize (); // 240
 
-      UTFT_fillCircle (160, 85, 50); // Рисуем закрашенную окружность (с
-                                     // центром в точке x y и радиусом r)
-      tls_os_time_delay (HZ * 3);
-
-      UTFT_fillScr2 (VGA_RED);
-      tls_os_time_delay (HZ); // заливаем
-      //   дисплей красным,     ждём 1 секунду
-
-      UTFT_fillScr2 (VGA_GREEN);
-      tls_os_time_delay (HZ); // заливаем
-      //   дисплей зелёным,     ждём 1 секунду
-
-      UTFT_fillScr2 (VGA_BLUE);
-      tls_os_time_delay (HZ); // заливаем дисплей синим,       ждём 1   секунду
-
-      UTFT_fillScr2 (VGA_SILVER);
-      tls_os_time_delay (HZ); //   заливаем дисплей серебристым, ждём 1 секунду
-
-      UTFT_fillScr2 (VGA_MAROON);
-      tls_os_time_delay (HZ); // заливаем  дисплей бордовым,    ждём 1 секунду
-
-      UTFT_fillScr2 (VGA_NAVY);
-      tls_os_time_delay (HZ); // заливаем дисплей тем. синим,  ждём 1  секунду
-
-      UTFT_clrScr (); // стираем всю информацию с дисплея
-      UTFT_setFont (BigFont); // устанавливаем большой шрифт
-      UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
-      UTFT_print ("BigFont", CENTER, 20,
-                  0); // выводим текст на дисплей (выравнивание по ширине -
-                      // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 50,
-                  0); // выводим текст на дисплей (выравнивание по ширине -
-                      // центр дисплея, координата по высоте 115 точек)
-      tls_os_time_delay (HZ * 3);
-      //
-
-      UTFT_setFont (SmallFont); // устанавливаем большой шрифт
-      UTFT_print ("SmallFont", CENTER, 70,
-                  0); // выводим текст на дисплей (выравнивание по ширине -
-                      // центр дисплея, координата по высоте 100 точек)
-      UTFT_print ("12345678", CENTER, 90,
-                  0); // выводим текст на дисплей (выравнивание по ширине -
-                      // центр дисплея, координата по высоте 115 точек)
-      tls_os_time_delay (HZ * 3);
-      //
-      UTFT_setFont (SevenSegNumFont); // устанавливаем шрифт имитирующий
-                                      // семисегментный индикатор
-      UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      UTFT_print ("1234567890", CENTER, 100,
-                  0); // выводим текст на дисплей (выравнивание по ширине -
-                      // центр дисплея, координата по высоте 150 точек)
-      tls_os_time_delay (HZ * 3);
-
-
-      UTFT_setFont (SmallSymbolFont); // устанавливаем шрифт имитирующий
-      UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 130,
-                  0); // выводим текст на дисплей (выравнивание по ширине -
-      tls_os_time_delay (HZ * 3);
-
-
-
-      unsigned int t=0; // used to save time relative to 1970
-      struct tm *tblock;
-      tblock = localtime ((const time_t *)&t); // switch to local time
-      tls_set_rtc (tblock);
-      struct tm tstart;
-      struct tm tstop;
-      tls_get_rtc (&tstart);
-      u32 current_tick = tls_os_get_time();
-      u32 count=0;
-      while( (tls_os_get_time() - current_tick) <= (HZ*10) )
-       {
-       UTFT_fillScr2 (count);
-       count++;
-       }
-      tls_get_rtc (&tstop);
-      int sec=(tstop.tm_hour*3600 + tstop.tm_min*60 + tstop.tm_sec) - (tstart.tm_hour*3600 + tstart.tm_min*60 + tstart.tm_sec);
-      UTFT_clrScr ();
-      UTFT_setFont (BigFont);
-      UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
-      char mesg[50];
-      sprintf (mesg, "run %d sec" , sec);
-      UTFT_print (mesg, CENTER, 20, 0);       
-      sprintf (mesg, "=%d FPS=%d", count, count/sec);
-      UTFT_print (mesg, CENTER, 50, 0);       
-      tls_os_time_delay (HZ * 10);
-
-
-
-
-
-
-      // mount SD card
-      res_sd = f_mount (&fs, "0:", 1);
-      //***********************formatting test****************************
-      if (res_sd == FR_NO_FILESYSTEM)
+      if (1 == 0)
         {
-          printf ("FR_NO_FILESYSTEM:Failed to mount file system! Probably "
-                  "because the file "
-                  "initialization failed! error code:%d\r\n",
-                  res_sd);
+          int xl=0;
+          UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+          x_size = UTFT_getDisplayXSize (); // 320
+          y_size = UTFT_getDisplayYSize (); // 240
+          int disp_y_size = x_size - 1;
+          int disp_x_size = y_size - 1;
+          int x, y, sx, sy;
+          sx = 16;
+          sy = 16;
+          for (y = 0; y <= disp_x_size; y += sy)
+            {
+              xl++;
+              for (x = 0; x <= disp_y_size; x += sx)
+                {
+
+                  uint16_t col = 0xffff;
+                  if(xl++%2==0)col= 0x001f; // RGB565  
+                  uint16_t *buf = (uint16_t *)buf_prsam;
+                  int tx, ty; //, tc;
+
+                  printf ("x=%d, y=%d, sx=%d, sy=%d, disp_x_size=%d, "
+                          "disp_y_size=%d \r\n",
+                          x, y, sx, sy, (int)disp_x_size, (int)disp_y_size);
+                  for (ty = 0; ty < sy; ty++)
+                    {
+                      // UTFT_setXY (x, y + ty, x + sx - 1, y + ty);
+                      for (tx = sx - 1; tx >= 0; tx--)
+                        {
+                          //col = 0xffff - tx; // pgm_read_word (&data[(ty * sx) +
+                                        // tx]);
+                          // UTFT_setPixel (col);
+
+                          //uint8_t *s = (uint8_t *)&col;
+                          //col = (((uint16_t)s[0] << 8) + (uint16_t)s[1]);
+
+                          //*(buf + x + (y*x_size) ) = 0xffff;
+                          /*
+                             x= 0...304,     y= 0...224
+                          disp_x_size=239, disp_y_size=319
+                          */
+
+                          //printf ("ty=%d, tx=%d, x + (sx - 1 - tx) =%d, ( (y + ty)*(disp_y_size + 1)=%d \r\n",
+                          //     ty,tx,        x + (sx - 1 - tx) , ( (y + ty) * (disp_y_size + 1)));
+                          buf[
+                              //                                  x + tx +
+                              //                                  x + tx + (sx
+                              //                                  - 1 - tx)   +
+                              x + (sx - 1 - tx) +
+                              //                                  x  + (sx -
+                              //                                  tx)   +
+
+                                                               ( (y + ty) *
+                                                               (disp_y_size +
+                                                               1) )
+                              //((y + (sy - ty - 1)) * (disp_y_size + 1))
+                              //                               ( (y + (sy - ty
+                              //                               )) *
+                              //                               (disp_y_size +
+                              //                               1) )
+
+                          ] = col;
+                        }
+                    }
+                  UTFT_psram_to_drawBitmap ();
+                  //tls_os_time_delay (HZ/2); //
+                }
+            }
+          UTFT_psram_to_drawBitmap ();
         }
-      else if (res_sd != FR_OK)
+
+      if (1 == 0)
         {
-          printf ("Failed to mount file system! Probably because the file "
-                  "initialization failed! error code:%d\r\n",
-                  res_sd);
+          UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+          x_size = UTFT_getDisplayXSize (); // 320
+          y_size = UTFT_getDisplayYSize (); // 240
+
+          for (int y = 20; y < y_size - 80; y++)
+            {
+              for (int x = 40; x < x_size - 20; x++)
+                {
+                  *(((u16 *)buf_prsam) + x + (y * x_size)) = 0x07e0; // RGB565
+                }
+            }
+          printf ("UTFT_psram_to_drawBitmap LANDSCAPE\r\n");
+          UTFT_psram_to_drawBitmap ();
+          tls_os_time_delay (HZ * 1); //
         }
-      else
+
+      if (1 == 0)
         {
-          printf ("The file system is successfully mounted, and the read and "
-                  "write test can be performed!\r\n");
-          memset (buff, 0, sizeof (buff));
-          strcpy (buff, "/");
-          res_sd = scan_files (buff);
+          UTFT_InitLCD (PORTRAIT);
+          x_size = UTFT_getDisplayXSize (); // 240
+          y_size = UTFT_getDisplayYSize (); // 320
+          buf_prsam = UTFT_store_to_psram (true);
+
+          for (int y = 20; y < y_size - 80; y++)
+            {
+              for (int x = 40; x < x_size - 20; x++)
+                {
+                  *(((u16 *)buf_prsam) + x + (y * x_size)) = 0xf800; // RGB565
+                }
+            }
+          printf ("UTFT_psram_to_drawBitmap PORTRAIT\r\n");
+          UTFT_psram_to_drawBitmap ();
+          tls_os_time_delay (HZ * 1); //
+          buf_prsam = UTFT_store_to_psram (true);
+
+          for (int y = 80; y < y_size - 20; y++)
+            {
+              for (int x = 80; x < x_size - 80; x++)
+                {
+                  *(((u16 *)buf_prsam) + x + (y * x_size)) = 0x001f; // RGB565
+                }
+            }
+          printf ("UTFT_psram_to_drawBitmap PORTRAIT 2\r\n");
+          UTFT_psram_to_drawBitmap ();
+          tls_os_time_delay (HZ * 1); //
         }
-      if (res_sd == FR_OK)
+
+      if (1 == 1)
         {
-          memset (buff, 0, sizeof (buff));
-          strcpy (buff, "/");
-          res_sd = scan_files (buff);
+          if(b_Land)
+            UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+          else
+            UTFT_InitLCD (PORTRAIT);
+          b_Land=!b_Land;
+          x_size = UTFT_getDisplayXSize (); // 320
+          y_size = UTFT_getDisplayYSize (); // 240
+          unsigned int t = 0; // used to save time relative to 1970
+          struct tm *tblock;
+          tblock = localtime ((const time_t *)&t); // switch to local time
+          tls_set_rtc (tblock);
+          struct tm tstart;
+          struct tm tstop;
+          tls_get_rtc (&tstart);
+          u32 current_tick = tls_os_get_time ();
+          u32 count = 0;
+          buf_prsam = UTFT_store_to_psram (true);
+          while ((tls_os_get_time () - current_tick) <= (HZ * 10))
+            {
+              for (int y = count & 0x3f; y < (y_size - (count & 0x3f)); y++)
+                {
+                  for (int x = count & 0x3f; x < (x_size - (count & 0x3f));
+                       x++)
+                    {
+                      *(((u16 *)buf_prsam) + x + (y * x_size))
+                          = (count & 0xffff); // RGB565
+                    }
+                }
+              UTFT_psram_to_drawBitmap ();
+              count++;
+            }
+          tls_get_rtc (&tstop);
+          int sec
+              = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
+                - (tstart.tm_hour * 3600 + tstart.tm_min * 60 + tstart.tm_sec);
+          UTFT_clrScr ();
+          UTFT_setFont (BigFont);
+          UTFT_setColor2 (VGA_FUCHSIA); // устанавливаем пурпурный цвет текста
+          char mesg[50];
+          sprintf (mesg, "run %d sec", sec);
+          UTFT_print (mesg, CENTER, 20, 0);
+          sprintf (mesg, "=%d FPS=%d", count, count / sec);
+          UTFT_print (mesg, CENTER, 50, 0);
+          tls_os_time_delay (HZ * 10);
         }
-      // unmount file system
-      f_mount (NULL, "0:", 1);
-      tls_os_time_delay (HZ * 1);
 
     } //
 }

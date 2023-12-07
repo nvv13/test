@@ -15,6 +15,13 @@ https://mongoose.ws/tutorials/embedded-filesystem/
 https://github.com/cesanta/mongoose.git
 
 
+~~~
+примечание,
+для "обновления" файла packed_fs.c
+заходим в директррию app и вводим комманду
+make packfs
+~~~
+
 ------------------------------------------------
 
 

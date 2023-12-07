@@ -49,6 +49,8 @@
 #include "wm_io.h"
 #include "wm_mem.h"
 
+#include "mod1/psram.h"
+
 #include "hardware/sky/HW_SKY_defines.h"
 
 /*
@@ -105,6 +107,8 @@ static void LCD_WR_REG (u16 Value);
 static void LCD_WR_DATA (u8 VL);
 
 static u8 *buf_4x_line = NULL;
+static bool store_to_psram=false;
+static u8 *full_buf_psram = NULL;
 
 // Подключение аппаратно-зависимых функций, для правильной работы
 // микроконтроллеров
@@ -160,10 +164,13 @@ UTFT_UTFT (byte model, byte RS, byte WR, byte CS, byte RST, byte SER,
 
   if (buf_4x_line == NULL) // display_serial_mode == SERIAL_5PIN && _spi_freq!=0)
     {
+      int size=(disp_x_size + 1);
+      if(disp_y_size>disp_x_size)
+        size=(disp_y_size + 1);
       if(display_bitpixel == 24)
-        buf_4x_line = tls_mem_alloc ((disp_x_size + 1) * 3);
+        buf_4x_line = tls_mem_alloc (size * 3);
       else
-        buf_4x_line = tls_mem_alloc ((disp_x_size + 1) * 4);
+        buf_4x_line = tls_mem_alloc (size * 4);
     }
 
   if (display_transfer_mode != 1)
@@ -1604,6 +1611,7 @@ UTFT_drawBitmap24bpp (int x, int y, int sx, int sy, u32 *data)
     return;
   }
 
+
   if (display_bitpixel != 24)
     {
       /* Convert RGB888 to RGB565 if needed */
@@ -1623,53 +1631,125 @@ UTFT_drawBitmap24bpp (int x, int y, int sx, int sy, u32 *data)
           while (--n);
         }
 
-      return UTFT_drawBitmap (x, y, sx, sy, ((u16 *)data), 1);
-    }
-
-  // u32 col;
-  int tx, ty, tc;
-  u8 *u8dat = (u8 *)data;
-
-  if (orient == PORTRAIT)
-    {
-      cbi (P_CS, B_CS);
-      UTFT_setXY (x, y, x + sx - 1, y + sy - 1);
-      for (tc = 0; tc < (sx * sy); tc++)
+      if(store_to_psram && full_buf_psram != NULL)
         {
-          // col = pgm_read_u32 (&data[tc]);
-          // col = *(data+tc);
-          // UTFT_setPixel24bpp (col);
-          uint8_t *s = (u8dat + (tc * 3));
-          u8 VR = (*s++);
-          u8 VG = (*s++);
-          u8 VB = (*s++);
-          UTFT_LCD_Write_DATA_Pixel24bpp (
-              VR, VG, VB); // rrrrrrrr gggggggg bbbbbbbb 888
-        }
-      sbi (P_CS, B_CS);
-    }
-  else
-    {
-      cbi (P_CS, B_CS);
-      for (ty = 0; ty < sy; ty++)
-        {
-          UTFT_setXY (x, y + ty, x + sx - 1, y + ty);
-          for (tx = sx - 1; tx >= 0; tx--)
+          uint16_t  col;
+          int tx, ty, tc;
+          if (orient == PORTRAIT)
             {
-              //                  col = pgm_read_u32 (&data[(ty * sx) + tx]);
-              // col = *(data + ((ty * sx) + tx));
-              //                UTFT_setPixel24bpp (col);
-              uint8_t *s = (u8dat + (((ty * sx) + tx) * 3));
-              u8 VR = (*s++);
-              u8 VG = (*s++);
-              u8 VB = (*s++);
-              UTFT_LCD_Write_DATA_Pixel24bpp (
-                  VR, VG, VB); // rrrrrrrr gggggggg bbbbbbbb 888
+              int xx=0;
+              for (tc = 0; tc < (sx * sy); tc++)
+                {
+                  col = pgm_read_word (&((u16 *)data)[tc]);
+                  if((tc-xx*sx)>(sx-1))xx++;
+                  *(((uint16_t*)full_buf_psram) + x + (tc-xx*sx)  +
+                               ( (y + xx) * (disp_x_size + 1) )     ) = col;
+                }
+            }
+          else
+            {
+              for (ty = 0; ty < sy; ty++)
+                {
+                  for (tx = sx - 1; tx >= 0; tx--)
+                    {
+                      col = pgm_read_word (&((u16 *)data)[(ty * sx) + tx]);
+                      *(((uint16_t*)full_buf_psram) + x + tx + ( (y + ty) * (disp_y_size + 1) )) = col;
+                    }
+                }
             }
         }
-      sbi (P_CS, B_CS);
+      else
+        UTFT_drawBitmap (x, y, sx, sy, ((u16 *)data), 1);
+      return;
     }
-  UTFT_clrXY ();
+
+if(store_to_psram && full_buf_psram != NULL)
+  {
+    // u32 col;
+    int tx, ty, tc;
+    u8 *u8dat = (u8 *)data;
+    
+    if (orient == PORTRAIT)
+      {
+        int xx=0;
+        for (tc = 0; tc < (sx * sy); tc++)
+          {
+            uint8_t *s = (u8dat + (tc * 3));
+            u8 VR = (*s++);
+            u8 VG = (*s++);
+            u8 VB = (*s++);
+            if((tc-xx*sx)>(sx-1))xx++;
+            *(full_buf_psram + x + 0 + (tc-xx*sx) + ((y + xx) * (disp_x_size + 1))) = VR;
+            *(full_buf_psram + x + 1 + (tc-xx*sx) + ((y + xx) * (disp_x_size + 1))) = VG;
+            *(full_buf_psram + x + 2 + (tc-xx*sx) + ((y + xx) * (disp_x_size + 1))) = VB;
+          }
+      }
+    else
+      {
+        for (ty = 0; ty < sy; ty++)
+          {
+            for (tx = sx - 1; tx >= 0; tx--)
+              {
+                uint8_t *s = (u8dat + (((ty * sx) + tx) * 3));
+                u8 VR = (*s++);
+                u8 VG = (*s++);
+                u8 VB = (*s++);
+                // rrrrrrrr gggggggg bbbbbbbb 888
+                *(full_buf_psram + x + tx + 0 + ( (y + ty) * (disp_y_size + 1) )) = VR;
+                *(full_buf_psram + x + tx + 1 + ( (y + ty) * (disp_y_size + 1) )) = VG;
+                *(full_buf_psram + x + tx + 2 + ( (y + ty) * (disp_y_size + 1) )) = VB;
+
+              }
+          }
+      }
+  }
+else 
+  {
+    // u32 col;
+    int tx, ty, tc;
+    u8 *u8dat = (u8 *)data;
+    
+    if (orient == PORTRAIT)
+      {
+        cbi (P_CS, B_CS);
+        UTFT_setXY (x, y, x + sx - 1, y + sy - 1);
+        for (tc = 0; tc < (sx * sy); tc++)
+          {
+            // col = pgm_read_u32 (&data[tc]);
+            // col = *(data+tc);
+            // UTFT_setPixel24bpp (col);
+            uint8_t *s = (u8dat + (tc * 3));
+            u8 VR = (*s++);
+            u8 VG = (*s++);
+            u8 VB = (*s++);
+            UTFT_LCD_Write_DATA_Pixel24bpp (
+                VR, VG, VB); // rrrrrrrr gggggggg bbbbbbbb 888
+          }
+        sbi (P_CS, B_CS);
+      }
+    else
+      {
+        cbi (P_CS, B_CS);
+        for (ty = 0; ty < sy; ty++)
+          {
+            UTFT_setXY (x, y + ty, x + sx - 1, y + ty);
+            for (tx = sx - 1; tx >= 0; tx--)
+              {
+                //                  col = pgm_read_u32 (&data[(ty * sx) + tx]);
+                // col = *(data + ((ty * sx) + tx));
+                //                UTFT_setPixel24bpp (col);
+                uint8_t *s = (u8dat + (((ty * sx) + tx) * 3));
+                u8 VR = (*s++);
+                u8 VG = (*s++);
+                u8 VB = (*s++);
+                UTFT_LCD_Write_DATA_Pixel24bpp (
+                    VR, VG, VB); // rrrrrrrr gggggggg bbbbbbbb 888
+              }
+          }
+        sbi (P_CS, B_CS);
+      }
+    UTFT_clrXY ();
+  }
 }
 
 void
@@ -1700,7 +1780,18 @@ UTFT_drawBitmap (int x, int y, int sx, int sy, bitmapdatatype data, int scale)
               for (tx = sx - 1; tx >= 0; tx--)
                 {
                   col = pgm_read_word (&data[(ty * sx) + tx]);
-                  UTFT_setPixel (col);
+                  if(buf_4x_line!=NULL && display_bitpixel != 24 && display_transfer_mode == 1 && display_serial_mode == SERIAL_5PIN && _spi_freq != 0)
+                    {
+                    *(buf_4x_line+(sx-1-tx)*2+0)=col >> 8;
+                    *(buf_4x_line+(sx-1-tx)*2+1)=col & 0xff;
+                    }
+                  else
+                    UTFT_setPixel (col);
+                }
+              if(buf_4x_line!=NULL && display_bitpixel != 24 && display_transfer_mode == 1 && display_serial_mode == SERIAL_5PIN && _spi_freq != 0)
+                {
+                  sbi_RS ();
+                  UTFT_LCD_Writ_Bus_SPI (buf_4x_line, sx*2); 
                 }
             }
           sbi (P_CS, B_CS);
@@ -1933,6 +2024,59 @@ UTFT_setWritePage (byte page)
       break;
     }
   sbi (P_CS, B_CS);
+}
+
+
+u8 *
+UTFT_store_to_psram(bool b_Set_store_to_psram)
+{
+  if(b_Set_store_to_psram)
+    {
+      int i_size=(disp_x_size + 1) * (disp_y_size + 1) * (display_bitpixel==24?3:2);
+      if(full_buf_psram == NULL && d_psram_check())
+        {
+          full_buf_psram = dram_heap_malloc (i_size);
+          if(full_buf_psram!=NULL)
+            LOG (" UTFT_store_to_psram dram malloc %d Ok\n", i_size);
+          else
+            LOG (" UTFT_store_to_psram dram malloc %d Error\n", i_size);
+        }
+      store_to_psram=(full_buf_psram!=NULL);
+      if(full_buf_psram!=NULL)memset(full_buf_psram, 0, i_size);
+    }
+  else
+    {
+      store_to_psram=false;
+      if(full_buf_psram!=NULL)
+        {
+          dram_heap_free (full_buf_psram);
+          full_buf_psram=NULL;
+        }
+    }
+  return full_buf_psram;
+}
+
+void
+UTFT_psram_to_drawBitmap(void)
+{
+  if(full_buf_psram==NULL)return;
+
+  if (display_bitpixel != 24)
+    {
+      if(orient == PORTRAIT)
+        UTFT_drawBitmap (0,0, disp_x_size + 1 , disp_y_size + 1, (uint16_t*)full_buf_psram,  1);
+      else
+        UTFT_drawBitmap (0,0, disp_y_size + 1 , disp_x_size + 1, (uint16_t*)full_buf_psram,  1);
+    }  
+  else
+    { 
+      if(orient == PORTRAIT)
+        UTFT_drawBitmap24bpp (0,0, disp_x_size + 1 , disp_y_size + 1, (u32 *)full_buf_psram);
+      else
+        UTFT_drawBitmap24bpp (0,0, disp_y_size + 1 , disp_x_size + 1, (u32 *)full_buf_psram);
+    }
+
+  return;
 }
 
 #include "hardware/sky/HW_W801_load.h"

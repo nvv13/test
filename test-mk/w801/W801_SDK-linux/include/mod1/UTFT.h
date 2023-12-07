@@ -365,6 +365,11 @@ extern "C"
   void UTFT_setWritePage (byte page);
   word UTFT_loadBitmap (int x, int y, int sx, int sy, char *filename);
 
+  /* включить, выключить, сохранение распаковки jpg в память psram */
+  u8 * UTFT_store_to_psram(bool b_Set_store_to_psram);
+  /* из памяти psram на дисплей */
+  void UTFT_psram_to_drawBitmap(void);
+
 #ifdef __cplusplus
 }
 #endif

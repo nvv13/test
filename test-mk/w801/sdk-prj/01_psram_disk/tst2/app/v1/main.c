@@ -58,24 +58,6 @@ u8 volatile u8_wifi_state = 0;
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-#define URL_ARR_SIZE 14
-static const char *aUrl[URL_ARR_SIZE] = {
-  "http://188.9.157.80:81/axis-cgi/jpg/image.cgi?resolution=320x240",
-  "http://www.cek.ef.uni-lj.si/EBSLG2004/EBSLG%20Continental%20Meeting%202004,%20Ljubljana/slides/P1010039.jpg",
-  "http://www.cek.ef.uni-lj.si/EBSLG2004/EBSLG%20Continental%20Meeting%202004,%20Ljubljana/slides/P1010038.jpg",
-  "http://mobiliv.ru/_ph/94/2/663041550.jpg",
-    "http://mobiliv.ru/_ph/94/2/842704552.jpg",
-  "http://mobiliv.ru/_ph/94/2/111786880.jpg",
-    "http://mobiliv.ru/_ph/94/2/619137566.jpg",
-    "http://mobiliv.ru/_ph/94/2/732111012.jpg",
-    "http://mobiliv.ru/_ph/94/2/649581166.jpg",
-    "http://mobiliv.ru/_ph/94/2/883010373.jpg",
-    "http://mobiliv.ru/_ph/94/2/344263385.jpg",
-  "http://mobiliv.ru/_ph/94/2/63757809.jpg",
-  "http://mobiliv.ru/_ph/94/2/597387039.jpg" //,
-    "http://mobiliv.ru/_ph/94/2/395978212.jpg"
-};
-
 extern uint8_t SmallFont[]; // подключаем маленький шрифт
 extern uint8_t BigFont[];   // подключаем большой шрифт
 extern uint8_t
@@ -86,6 +68,7 @@ extern uint8_t Dingbats1_XL[];
 static void
 my_timer_irq (u8 *arg) // здесь будет смена режима
 {
+
 }
 
 void
@@ -95,7 +78,8 @@ user_app1_task (void *sdata)
   // подключаем библиотеку UTFT
 
   printf ("user_app1_task start TFT02_0V89 240x320 SDIO SPI st7789\n");
-  UTFT_UTFT (TFT02_0V89,
+  UTFT_UTFT (TFT02_0V89
+             ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  // SDA
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_15  // SCL
@@ -107,7 +91,7 @@ user_app1_task (void *sdata)
              (u8)WM_IO_PB_22 // SER => DC !
              ,
              // 120000000
-             60000000
+                 60000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -121,27 +105,29 @@ user_app1_task (void *sdata)
            */
   );
 
-  /*
-    printf ("user_app1_task start TFT02_0V89 240x320 HW SPI st7789\n");
-    UTFT_UTFT (TFT02_0V89
-               ,
-               (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
-               ,
-               (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
-               ,
-               (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
-               ,
-               (u8)WM_IO_PB_21 // RST reset RES
-               ,
-               (u8)WM_IO_PB_22 // SER => DC !
-               ,
-               20000000
-    );
-  */
+/*
+  printf ("user_app1_task start TFT02_0V89 240x320 HW SPI st7789\n");
+  UTFT_UTFT (TFT02_0V89
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
+             ,
+             (u8)WM_IO_PB_21 // RST reset RES
+             ,
+             (u8)WM_IO_PB_22 // SER => DC !
+             ,
+             20000000
+  );
+*/
 
-  // UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
-  //UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-  UTFT_InitLCD (PORTRAIT);
+
+  //UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
+  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+  // UTFT_InitLCD (PORTRAIT);
+
 
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
@@ -157,7 +143,6 @@ user_app1_task (void *sdata)
       printf ("timer start\n");
     }
 
-  UTFT_fillScr2 (VGA_NAVY);
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
@@ -202,9 +187,9 @@ user_app1_task (void *sdata)
   if (res_sd == FR_OK)
     {
       int ind_file = 0;
-      tls_watchdog_init (600 * 1000
+      tls_watchdog_init (60 * 1000
                          * 1000); // u32 usec microseconds, около 60 сек
-      u8 u8_cnt_jp_err = 0;
+      u8 u8_cnt_jp_err=0;
       for (;;) // цикл(1) с подсоединением к wifi и запросом времени
         {
           while (u8_wifi_state == 0)
@@ -228,10 +213,9 @@ user_app1_task (void *sdata)
               char FileName[20];
               sprintf (FileName, "1:test0.jpg");
 
-              if (ind_file > URL_ARR_SIZE - 1)
-                ind_file = 0;
               char s_Url[256];
-              sprintf (s_Url, "%s", aUrl[ind_file]);
+              sprintf (s_Url, "http://192.168.1.1:8088/jpg/j%.3d-320x240.jpg",
+                       ind_file);
 
               printf ("s_Url = %s\n", s_Url);
               // sprintf (WriteBuffer, "white txt %s file name", FileName);
@@ -265,36 +249,14 @@ user_app1_task (void *sdata)
                   tls_os_time_delay (HZ);
                 }
 
-              UTFT_InitLCD (PORTRAIT);
-              UTFT_store_to_psram (false);
-              if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) >= 0)
+              if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) < 0)
                 {
-                  tls_os_time_delay (HZ * 2);
-                  UTFT_clrScr (); // стираем всю информацию с дисплея
-                  tls_os_time_delay (HZ / 2);
-                  UTFT_store_to_psram (true);
-                  if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) >= 0)
-                    {
-                    UTFT_psram_to_drawBitmap ();
-                    }
+                if(++u8_cnt_jp_err>2)
+                  {
+                  ind_file = -1;
+                  u8_cnt_jp_err=0; 
+                  }
                 }
-              tls_os_time_delay (HZ * 6);
-
-              UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-              UTFT_store_to_psram (false);
-              if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) >= 0)
-                {
-                  tls_os_time_delay (HZ * 2);
-                  UTFT_clrScr (); // стираем всю информацию с дисплея
-                  tls_os_time_delay (HZ / 2);
-                  UTFT_store_to_psram (true);
-                  if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) >= 0)
-                    {
-                    UTFT_psram_to_drawBitmap ();
-                    }
-                }
-              tls_os_time_delay (HZ * 6);
-
               ind_file++;
 
               /*
@@ -327,10 +289,11 @@ user_app1_task (void *sdata)
               */
 
               // tls_os_time_delay (HZ * 10);
-              //uint32_t cur = tls_os_get_time ();
-              //while ((tls_os_get_time () - cur) < (HZ * 20))
-              // { //
-              // }
+              uint32_t cur = tls_os_get_time ();
+              while ((tls_os_get_time () - cur) < (HZ * 10))
+                { //
+
+                }
               tls_watchdog_clr ();
             }
         }
