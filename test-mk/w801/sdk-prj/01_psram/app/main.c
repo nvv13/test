@@ -63,15 +63,19 @@ UserMain (void)
    */
 
   wm_psram_config (1);
+  d_psram_init (PSRAM_SPI, 2, 2, 1, 2); 
+// * при смене режима, PSRAM_SPI<>PSRAM_QPI, рекомендуется снимать питание и вкл снова
+//    PSRAM_QPI - почему то не заработал, что то не так сделал
+  tls_os_time_delay (HZ / 10);
 
   //чтоб там инициализация DMA была, мало ли пригодится
-  psram_init (
-     PSRAM_SPI ); // PSRAM_QPI - почему то не заработал, что то не так сделал
+  //psram_init (
+  //   PSRAM_SPI ); 
 
   //инициализация с учетом частоты микросхемы LY68L6400, 80MHz, большенство таких.
 
-  d_psram_init (
-     PSRAM_QPI,0,0,0,0 );
+//  d_psram_init (
+//     PSRAM_QPI,0,0,0,0 );
 
   //d_psram_init (
   //   PSRAM_QPI,0,0 );
