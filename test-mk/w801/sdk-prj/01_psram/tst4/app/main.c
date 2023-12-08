@@ -509,17 +509,27 @@ user_app1_task (void *sdata)
 		  VS1053_WEB_RADIO_nTotal=0;
                   b_ChkStationUuid = true;
                   printf (" my_recognize_ret_name = %s\n",
-                          my_recognize_ret_name (stantion_index));
+                          my_recognize_ret_name (0));
                   printf (" my_recognize_ret_url_resolved = %s\n",
-                          my_recognize_ret_url_resolved (stantion_index));
+                          my_recognize_ret_url_resolved (0));
                   printf (" my_recognize_ret_country = %s\n",
-                          my_recognize_ret_country (stantion_index));
+                          my_recognize_ret_country (0));
                   printf (" my_recognize_ret_tags = %s\n",
-                          my_recognize_ret_tags (stantion_index));
+                          my_recognize_ret_tags (0));
                   printf (" my_recognize_ret_codec = %s\n",
-                          my_recognize_ret_codec (stantion_index));
+                          my_recognize_ret_codec (0));
                   printf (" my_recognize_ret_bitrate = %s\n",
-                          my_recognize_ret_bitrate (stantion_index));
+                          my_recognize_ret_bitrate (0));
+
+                  UTFT_clrScr (); // стираем всю информацию с дисплея
+                  UTFT_setFont (BigFont); // устанавливаем большой шрифт
+                  UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
+                  UTFT_print (my_recognize_ret_name (0), LEFT, 10,0); 
+                  UTFT_print (my_recognize_ret_country (0), LEFT, 40,0); 
+                  UTFT_print (my_recognize_ret_tags (0), LEFT, 70,0); 
+                  UTFT_print (my_recognize_ret_codec (0), LEFT, 100,0); 
+                  UTFT_print (my_recognize_ret_bitrate (0), LEFT, 130,0);
+
                 }
 
               VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
