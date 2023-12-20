@@ -211,6 +211,19 @@ user_app2_task (void *sdata)
                                   ,stantion_index,stantion_uuid);
                           my_sost = VS1053_QUERY_TO_STOP;
                         }
+                      else
+                        {
+                          if(strstr (pHeaderEnd,"D"))
+                            {
+                              switch(VS1053_WEB_RADIO_load_buffer_debug)
+                                {
+                                  case VSHTTP_DEBUG_TYPE2    : VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_NO_DEBUG;break;
+                                  case VSHTTP_DEBUG_NO_DEBUG : VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_TYPE1;break;
+                                  case VSHTTP_DEBUG_TYPE1    : VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_TYPE2;break;
+                                  default:VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_NO_DEBUG;
+                                }
+                            } 
+                        } 
                       memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
                       rx_data_len = 0;
                       rptr = 0;

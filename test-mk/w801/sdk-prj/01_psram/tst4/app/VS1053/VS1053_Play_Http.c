@@ -36,7 +36,7 @@
 #include "mod1/psram.h"
 
 volatile int VS1053_WEB_RADIO_nTotal = 0;
-volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;
+volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;  /* логика в обратную сторону чем меньше, тем больше свободной памяти, от 0 стартует */
 volatile int VS1053_WEB_RADIO_buf_chunk_total = 0;
 #define DF_VS1053_WEB_RADIO_buf_chunk_top 150 //800
 
@@ -70,12 +70,12 @@ static u8 psram_frequency_divider = 2; // 2 - хорошо работает дл
 static u8 psram_tCPH = 2; // 2 - хорошо работает для ESP-PSRAM64H
 static u8 psram_BURST = 1; // 1 - хорошо работает для ESP-PSRAM64H
 static u16 psram_OVERTIMER = 2; // 2 - хорошо работает для ESP-PSRAM64H
-static u8 load_buffer_debug = VSHTTP_DEBUG_NO_DEBUG; // 0 или 1
+volatile u8 VS1053_WEB_RADIO_load_buffer_debug = VSHTTP_DEBUG_NO_DEBUG; // 0 или 1
 
 void
 VS1053_PlayHttpMp3_set (libVS1053_t *set_pin)
 {
-  load_buffer_debug = set_pin->load_buffer_debug;
+  VS1053_WEB_RADIO_load_buffer_debug = set_pin->load_buffer_debug;
 
   if (set_pin->no_psram_BufferSize > 0)
     no_psram_BufferSize = set_pin->no_psram_BufferSize;
@@ -110,7 +110,7 @@ vs1053_buf_play_task (void *sdata)
           if (my_sost == VS1053_PLAY || my_sost == VS1053_PLAY_BUF)
             {
 
-              if (load_buffer_debug==VSHTTP_DEBUG_TYPE2)
+              if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE2)
                 printf ("%d/%d   \r",VS1053_WEB_RADIO_buf_chunk_free,VS1053_WEB_RADIO_buf_chunk_total);
 
               //if(VS1053_WEB_RADIO_buf_chunk_free>0)
@@ -127,7 +127,7 @@ vs1053_buf_play_task (void *sdata)
               if (item_size > 0)
                 {
                   VS1053_playChunk (buffer, item_size);
-                  if (load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+                  if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
                     printf ("-");
                   VS1053_WEB_RADIO_buf_chunk_free--;
                   if (VS1053_WEB_RADIO_nTotal > 512)
@@ -137,7 +137,7 @@ vs1053_buf_play_task (void *sdata)
               else
                 {
                   tls_os_time_delay (1);
-                  if (load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+                  if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
                     printf ("0");
                 }
 
@@ -333,7 +333,7 @@ break;
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
-              if (load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+              if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
                 printf ("f");
               VS1053_WEB_RADIO_buf_chunk_free++;
               VS1053_WEB_RADIO_nTotal += nSize;
@@ -388,7 +388,7 @@ break;
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
                   // printf (" %d ", freeSize);
-                  if (load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+                  if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
                     printf ("+");
                   VS1053_WEB_RADIO_buf_chunk_free++;
                   if (VS1053_WEB_RADIO_buf_chunk_free

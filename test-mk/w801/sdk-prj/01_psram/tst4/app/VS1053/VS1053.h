@@ -232,8 +232,9 @@ extern "C"
 
   extern volatile enum VS1053_status my_sost;
   extern volatile int VS1053_WEB_RADIO_nTotal;
-  extern volatile int VS1053_WEB_RADIO_buf_chunk_free;
+  extern volatile int VS1053_WEB_RADIO_buf_chunk_free; /* логика в обратную сторону чем меньше, тем больше свободной памяти, от 0 стартует */
   extern volatile int VS1053_WEB_RADIO_buf_chunk_total;
+  extern volatile u8 VS1053_WEB_RADIO_load_buffer_debug;
 
   enum VS1053_status VS1053_status_get_status (void);
 
