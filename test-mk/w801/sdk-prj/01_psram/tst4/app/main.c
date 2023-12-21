@@ -155,14 +155,16 @@ user_app2_task (void *sdata)
           if (!strstr (cfg_stantion_uuid, stantion_uuid))
             {
               flash_cfg_store_stantion_uuid (stantion_uuid, stantion_index);
-              printf ("flash_cfg_store_ new stantion_uuid index=%d\r\n",stantion_index);
+              printf ("flash_cfg_store_ new stantion_uuid index=%d\r\n",
+                      stantion_index);
             }
-          u16 st_index=0; 
-          flash_cfg_load_u16 (&st_index,0);
-          if(stantion_index!=st_index)
+          u16 st_index = 0;
+          flash_cfg_load_u16 (&st_index, 0);
+          if (stantion_index != st_index)
             {
-              flash_cfg_store_u16 (stantion_index,0);
-              printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",stantion_index);
+              flash_cfg_store_u16 (stantion_index, 0);
+              printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",
+                      stantion_index);
             }
         }
       if (rx_data_len > 0)
@@ -207,23 +209,43 @@ user_app2_task (void *sdata)
                         {
                           sprintf (stantion_uuid, "%s", pHeaderEnd);
                           tls_os_time_delay (500);
-                          printf ("new %d stantion_uuid = \"%s\"\r\n"
-                                  ,stantion_index,stantion_uuid);
+                          printf ("new %d stantion_uuid = \"%s\"\r\n",
+                                  stantion_index, stantion_uuid);
                           my_sost = VS1053_QUERY_TO_STOP;
                         }
                       else
                         {
-                          if(strstr (pHeaderEnd,"D"))
+                          if (strstr (pHeaderEnd, "D"))
                             {
-                              switch(VS1053_WEB_RADIO_load_buffer_debug)
+                              switch (VS1053_WEB_RADIO_load_buffer_debug)
                                 {
-                                  case VSHTTP_DEBUG_TYPE2    : VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_NO_DEBUG;break;
-                                  case VSHTTP_DEBUG_NO_DEBUG : VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_TYPE1;break;
-                                  case VSHTTP_DEBUG_TYPE1    : VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_TYPE2;break;
-                                  default:VS1053_WEB_RADIO_load_buffer_debug=VSHTTP_DEBUG_NO_DEBUG;
+                                case VSHTTP_DEBUG_TYPE2:
+                                  {
+                                    VS1053_WEB_RADIO_load_buffer_debug
+                                        = VSHTTP_DEBUG_NO_DEBUG;
+                                    printf ("off debug\r\n");
+                                  };
+                                  break;
+                                case VSHTTP_DEBUG_NO_DEBUG:
+                                  {
+                                    VS1053_WEB_RADIO_load_buffer_debug
+                                        = VSHTTP_DEBUG_TYPE1;
+                                    printf ("on debug 1\r\n");
+                                  };
+                                  break;
+                                case VSHTTP_DEBUG_TYPE1:
+                                  {
+                                    VS1053_WEB_RADIO_load_buffer_debug
+                                        = VSHTTP_DEBUG_TYPE2;
+                                    printf ("on debug 2\r\n");
+                                  };
+                                  break;
+                                default:
+                                  VS1053_WEB_RADIO_load_buffer_debug
+                                      = VSHTTP_DEBUG_NO_DEBUG;
                                 }
-                            } 
-                        } 
+                            }
+                        }
                       memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
                       rx_data_len = 0;
                       rptr = 0;
@@ -261,16 +283,22 @@ user_app2_task (void *sdata)
                           memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
                           rx_data_len = 0;
                           rptr = 0;
-                          printf ("set -- stantion_index = %d \r\n", stantion_index);
+                          printf ("set -- stantion_index = %d \r\n",
+                                  stantion_index);
                           char cfg_stantion_uuid[39];
-                          flash_cfg_load_stantion_uuid (cfg_stantion_uuid, stantion_index);
-                          if(strlen(cfg_stantion_uuid)==36 && cfg_stantion_uuid[0]>=0x30 && cfg_stantion_uuid[0]<=0x7A)
+                          flash_cfg_load_stantion_uuid (cfg_stantion_uuid,
+                                                        stantion_index);
+                          if (strlen (cfg_stantion_uuid) == 36
+                              && cfg_stantion_uuid[0] >= 0x30
+                              && cfg_stantion_uuid[0] <= 0x7A)
                             {
-                              flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
+                              flash_cfg_load_stantion_uuid (stantion_uuid,
+                                                            stantion_index);
                               my_sost = VS1053_QUERY_TO_STOP;
                             }
-                          else 
-                            printf ("empty stantion_index = %d \r\n", stantion_index);
+                          else
+                            printf ("empty stantion_index = %d \r\n",
+                                    stantion_index);
                         }
 
                       pHeaderEnd = strstr ((char *)(rx_buf),
@@ -281,16 +309,22 @@ user_app2_task (void *sdata)
                           memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
                           rx_data_len = 0;
                           rptr = 0;
-                          printf ("set ++ stantion_index = %d \r\n", stantion_index);
+                          printf ("set ++ stantion_index = %d \r\n",
+                                  stantion_index);
                           char cfg_stantion_uuid[39];
-                          flash_cfg_load_stantion_uuid (cfg_stantion_uuid, stantion_index);
-                          if(strlen(cfg_stantion_uuid)==36 && cfg_stantion_uuid[0]>=0x30 && cfg_stantion_uuid[0]<=0x7A)
+                          flash_cfg_load_stantion_uuid (cfg_stantion_uuid,
+                                                        stantion_index);
+                          if (strlen (cfg_stantion_uuid) == 36
+                              && cfg_stantion_uuid[0] >= 0x30
+                              && cfg_stantion_uuid[0] <= 0x7A)
                             {
-                              flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
+                              flash_cfg_load_stantion_uuid (stantion_uuid,
+                                                            stantion_index);
                               my_sost = VS1053_QUERY_TO_STOP;
                             }
-                          else 
-                            printf ("empty stantion_index = %d \r\n", stantion_index);
+                          else
+                            printf ("empty stantion_index = %d \r\n",
+                                    stantion_index);
                         }
                     }
                 }
@@ -446,10 +480,11 @@ user_app1_task (void *sdata)
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
-  stantion_index=0;
-  flash_cfg_load_u16 (&stantion_index,0);
-  if(stantion_index>44)stantion_index=0;
-  printf ("load default stantion index = %d\n",stantion_index);
+  stantion_index = 0;
+  flash_cfg_load_u16 (&stantion_index, 0);
+  if (stantion_index > 44)
+    stantion_index = 0;
+  printf ("load default stantion index = %d\n", stantion_index);
   flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
   if (strlen (stantion_uuid) != 36)
     {
@@ -458,10 +493,12 @@ user_app1_task (void *sdata)
       // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
       // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
       sprintf (stantion_uuid, "%s",
-               "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // America Stereo Relax - норм
+               "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // America Stereo Relax
+                                                        // - норм
 
-
-      // лучьшее sprintf (stantion_uuid, "%s","dbaf0701-7987-11ea-8a3b-52543be04c81"); //depeche mode,ebm,futurepop,synt
+      // лучьшее sprintf (stantion_uuid,
+      // "%s","dbaf0701-7987-11ea-8a3b-52543be04c81"); //depeche
+      // mode,ebm,futurepop,synt
 
       // норм sprintf (stantion_uuid, "%s",
       //         "01899f00-cbe9-46bc-85ee-e7bfe6496f97"); // "Europe 2 Happy
@@ -478,6 +515,16 @@ user_app1_task (void *sdata)
       //         Classic Rock. " 320 https!
     }
 
+  // printf ("start scan_demo \n");
+  // scan_demo();
+  // printf ("stop scan_demo \n");
+  printf ("start scan_format2_demo \n");
+  scan_format2_demo ();
+  printf ("stop scan_format2_demo \n");
+
+  printf ("key insert \"stantion_uuid\" + Enter - change stantion, uuid "
+          "looking for https://www.radio-browser.info/ \n");
+  printf ("key D + Enter - change Debug \n");
   printf ("key Up Down - volume control (1-100) \n");
   printf ("key Right Left - stantion index (0-43)\n");
   tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 60 сек
@@ -503,9 +550,9 @@ user_app1_task (void *sdata)
 
       tls_os_time_delay (HZ * 3);
       tls_watchdog_clr ();
-      //ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
+      // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
       //                     "2.fedora.pool.ntp.org");
-      //ntp_demo ();
+      // ntp_demo ();
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
@@ -519,7 +566,7 @@ user_app1_task (void *sdata)
                   my_recognize_http_reset ();
                   http_get_web_station_by_stationuuid (stantion_uuid);
                   // http_get_web_station_by_random();
-		  VS1053_WEB_RADIO_nTotal=0;
+                  VS1053_WEB_RADIO_nTotal = 0;
                   b_ChkStationUuid = true;
                   printf (" my_recognize_ret_name = %s\n",
                           my_recognize_ret_name (0));
@@ -537,12 +584,11 @@ user_app1_task (void *sdata)
                   UTFT_clrScr (); // стираем всю информацию с дисплея
                   UTFT_setFont (BigFont); // устанавливаем большой шрифт
                   UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
-                  UTFT_print (my_recognize_ret_name (0), LEFT, 10,0); 
-                  UTFT_print (my_recognize_ret_country (0), LEFT, 40,0); 
-                  UTFT_print (my_recognize_ret_tags (0), LEFT, 70,0); 
-                  UTFT_print (my_recognize_ret_codec (0), LEFT, 100,0); 
-                  UTFT_print (my_recognize_ret_bitrate (0), LEFT, 130,0);
-
+                  UTFT_print (my_recognize_ret_name (0), LEFT, 10, 0);
+                  UTFT_print (my_recognize_ret_country (0), LEFT, 40, 0);
+                  UTFT_print (my_recognize_ret_tags (0), LEFT, 70, 0);
+                  UTFT_print (my_recognize_ret_codec (0), LEFT, 100, 0);
+                  UTFT_print (my_recognize_ret_bitrate (0), LEFT, 130, 0);
                 }
 
               VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));

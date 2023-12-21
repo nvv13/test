@@ -30,6 +30,14 @@ extern "C"
 
   int create_socket_server (const int port);
 
+  int scan_demo (void);
+
+  int scan_format2_demo (void);
+
+  /*specified Scan demo*/
+  int scan_specified_demo (u8 *ssid, u8 *mac, u32 chan, u32 scan_type,
+                           u32 min_interval, u32 max_interval);
+
 #ifdef __cplusplus
 }
 #endif
