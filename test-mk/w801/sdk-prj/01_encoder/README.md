@@ -1,33 +1,16 @@
 project VS1053
 
 
-board HLK-W801-KIT-V1.1 + VS1053 + OLED + SD Card + Button
+board HLK-W801-KIT-V1.1 + 
 
 
 Видео
-https://youtu.be/942BgG0cVuE
 
 
 ~~~
-проигрывает файлы(проверенно) .mp3, .flac, .ogg, .m4a
-для .m4a нужно их "оптимизировать" 27 страница даташита:
-
-Note: To be able to play the .3gp, .3g2, .mp4 and .m4a files, the mdat atom must be the
-last atom in the MP4 file. Because VS1053b receives all data as a stream, all metadata must
-be available before the music data is received. Several MP4 file formatters do not satisfy this
-requirement and some kind of conversion is required. This is also why the streamable ADTS
-format is recommended.
-
-Programs exist that optimize the .mp4 and .m4a into so-called streamable format that has the
-mdat atom last in the file, and thus suitable for web servers’ audio streaming. You can use this
-kind of tool to process files for VS1053b too. For example mp4creator -optimize file.mp4 .
 ~~~
 
 
-
-библиотека VS1053 источник:
-https://github.com/baldram/ESP_VS1053_Library.git
-https://github.com/adafruit/Adafruit_VS1053_Library.git
 
 
 
@@ -38,19 +21,6 @@ https://github.com/adafruit/Adafruit_VS1053_Library.git
 надо соединить по схеме:
 ~~~
 
-
-W801  VS1053
------ -------------
-PB17  XRST
-PB21  XCS
-PB22  XDCS
-PB18  DREQ
-PB24  SCK
-PB03  MISO
-PB26  MOSI
-5V    5V
-GND   DGND
------ -------------
 
 
 
@@ -71,52 +41,6 @@ PA13   CLK    S2
 
 
 
-sdio host
-Подключаем SD Card по схеме
-W801	Pin #	SD 4-bit Mode	Описание
------  -------------------------------------------------
-PB10	9	DAT[2]		Data Line 2 /Read Wait
- PB11	1	CD/DAT[3]	Data Line 3
- PB07	2	CMD		Command Line
- Gnd	3	VSS1		Ground
- 3.3v	4	VDD		Supply Voltage
- PB06	5	CLK		Clock
- Gnd	6	Vss2		Ground
- PB08	7	DAT[0]		Data Line 0
- PB09	8	DAT[1]		Data Line 1 / Interrupt
------  -------------------------------------------------
-
-
-SD Card 
-Вид со стороны контактов (с низу)
-  ---------
- |12345678|
-|9        |
-|         |
-| SD Card |
-|         |
------------
-
-рядом с считывателем
-Контакты 1,2,7,8,9 - подключаем через резисторы, примерно ~10кОм...100кОм к +3.3v контакт 4
-К контактам Gnd(3,6) и +3.3v(4) - подключам конденсаторы, керамический ~0,047мКф и электролит ~10мКф от помех...
-
-
-
-
-
-
-Светодиодный модуль OLED 1,3 дюйма, синий I2C, 128X64, 1,3 дюйма, контроллер sh1106
-     4 pin
-надо соединить по схеме:
-connect to
-DISPLAY     w801
------  -------------------------------------------------
-1 GND       GND
-2 VCC       5v 
-3 scl       PA01
-4 sda       PA04
------  -------------------------------------------------
 
 
 ~~~
@@ -128,42 +52,15 @@ DISPLAY     w801
 
 
 
-в проекте используеться библиотека u8g2
-~~~
-
-ее сборка https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/01_u8g2_st7920_spi
-после сборки, сама библиотека libu8g2.a 
- разместить в директорию 
-.\lib\w800\mod1\
-и заголовочные файлы u8g2.h u8x8.h u8x8_riotos.h
- разместить директорию
-.\include\mod1\
-
-их еще можно взять из 
-https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/lib/w800/mod1
-https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/include/mod1
-
-
-в Makefile директории . этого проекта
-секция LINKLIB добавлено
-    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
-
-~~~
 
 
 ----
 
-
-в SDK используеться FatFs 
-
- это по моему, сайт автора http://elm-chan.org/fsw/ff/00index_e.html
- и там есть подробное описание FatFs 
-
- тут например про её использование - настройку и примеры кода
- http://elm-chan.org/fsw/ff/doc/appnote.html
 
 
 -------
+
+
 
 
 Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):
@@ -272,26 +169,6 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
 ----
 
 PS: 
-еще информации про VS1053:
-
-https://imax9.narod.ru/publs/F407les05.html
-
-https://github.com/baldram/ESP_VS1053_Library
-
-  дискурсия про ring buffer
-https://github.com/baldram/ESP_VS1053_Library/issues/47
-
-https://github.com/nopnop2002/esp-idf-vs1053
-
-PS 2: 
-https://www.opennet.ru/base/sys/radio_protocols.txt.html
-https://gist.github.com/niko/2a1d7b2d109ebe7f7ca2f860c3505ef0
-https://cast.readme.io/docs/icy
-https://github.com/schreibfaul1/ESP32-audioI2S.git
-
-PS 3: 
- пример для изучения
-$ curl -i -H 'Icy-Metadata: 1' --output 1.bin http://stream-160.zeno.fm/62twtv23sfeuv?zs=zPF1ujlnT0uSbEe2nOK3Pw
 
 
 

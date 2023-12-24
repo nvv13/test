@@ -1,10 +1,12 @@
+
+
 /*****************************************************************************
  *
  * File Name : main.c
  *
  * Description: main
  *
- * Date : 2022-12-21
+ * Date : 2023-04-11
  *****************************************************************************/
 
 #include <stdio.h>
@@ -14,15 +16,30 @@
 #include "wm_type_def.h"
 
 #include "wm_cpu.h"
-#include "wm_timer.h"
+
+//#include "wm_watchdog.h"
+//#include "wm_uart.h"
+#include "wm_gpio.h"
+//#include "wm_hostspi.h"
+//#include "wm_socket.h"
+//#include "wm_sockets.h"
+//#include "wm_wifi.h"
+//#include "wm_hspi.h"
+//#include "wm_pwm.h"
+//#include "wm_params.h"
+#include "wm_osal.h"
+//#include "wm_netif.h"
+//#include "wm_efuse.h"
+//#include "wm_mem.h"
+//#include "wm_regs.h"
 #include "wm_rtc.h"
 
-#include "wm_gpio.h"
-#include "wm_gpio_afsel.h"
-#include "wm_osal.h"
+#include "UTFT.h"
+#include "u_jpeg.h"
 
-#include "mod1/UTFT.h"
-#include "mod1/u_jpeg.h"
+#define USER_APP1_TASK_SIZE 2048
+static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
+#define USER_APP1_TASK_PRIO 32
 
 extern uint8_t SmallFont[]; // подключаем маленький шрифт
 extern uint8_t BigFont[];   // подключаем большой шрифт
@@ -31,77 +48,12 @@ extern uint8_t
 extern uint8_t SmallSymbolFont[];
 
 
-#include "encoder.h"
-
-
-#define USER_APP1_TASK_SIZE 2048
-static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
-#define USER_APP1_TASK_PRIO 32
-
-static const u16 i_pos_dreb_SW
-    = 500; //кнопка,таймер 300 Мкс, значит будет 150 миллисекунд.
-volatile static u8 i_dreb_SW = 0;     // от дребезга кнопки
-
-static void
-demo_timer_irq (u8 *arg) // здесь будет смена режима
-{
-
-  int i_enc_diff= get_encoder_diff();
-  if (i_enc_diff!=0)//i_dreb_CLK != 0)
-    {
-      if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
-        {
-          i_dreb_SW = 1;
-          set_encoder_diff(0);  
-        }
-    }
-
-
-  if(get_encoder_btn_state()==0) //Нажали
-    {
-      if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
-        {
-          i_dreb_SW = 1;
-        }
-    }
-
-  if (i_dreb_SW != 0
-      && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
-    {
-      i_dreb_SW = 0; // от дребезга
-    }
-
-}
-
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start\n");
-
-  u8 timer_id;
-  struct tls_timer_cfg timer_cfg;
-  timer_cfg.unit = TLS_TIMER_UNIT_US;
-  timer_cfg.timeout = 300;
-  timer_cfg.is_repeat = 1;
-  timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
-  timer_cfg.arg = NULL;
-  timer_id = tls_timer_create (&timer_cfg);
-  tls_timer_start (timer_id);
-  printf ("timer start\n");
-
-  libENCODER_t enc_pin = {
-	 .ENCODER_S=WM_IO_PA_11,
-	 .ENCODER_A=WM_IO_PA_12, 
-	 .ENCODER_B=WM_IO_PA_13, 
-   };
-  bsp_encoder_init(&enc_pin);
-
-
-
-  printf ("user_app1_task start TFT01_18SP 128x160\n");
+  printf ("user_app1_task start TFT01_18SP 128x160 HW SPI st7735S\n");
 
   // подключаем библиотеку UTFT
-
   UTFT_UTFT (TFT01_18SP
              ,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
@@ -157,12 +109,8 @@ W801 LCD
   UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   // UTFT_InitLCD (PORTRAIT);
 
-
-
-
   while (1)
-    { //
-
+    {                 //
       UTFT_clrScr (); // стираем всю информацию с дисплея
 
       UTFT_setColor2 (VGA_WHITE); // 240x280
@@ -235,7 +183,7 @@ W801 LCD
       tls_os_time_delay (HZ * 3);
       //
 
-      UTFT_setFont (SmallFont); // устанавливаем шрифт
+      UTFT_setFont (SmallFont); // устанавливаем большой шрифт
       UTFT_print ("SmallFont", CENTER, 80,
                   0); // выводим текст на дисплей (выравнивание по ширине -
                       // центр дисплея, координата по высоте 100 точек)
@@ -257,6 +205,8 @@ W801 LCD
       UTFT_print ("\x20\x21\x22\x23\x24\x25", CENTER, 10,
                   0); // выводим текст на дисплей (выравнивание по ширине -
       tls_os_time_delay (HZ * 3);
+
+
 
       unsigned int t=0; // used to save time relative to 1970
       struct tm *tblock;
@@ -287,7 +237,6 @@ W801 LCD
 
 
 
-      tls_os_time_delay (HZ * 1);
 
     } //
 }
@@ -297,6 +246,10 @@ UserMain (void)
 {
   printf ("UserMain start");
   tls_sys_clk_set (CPU_CLK_240M);
+  // tls_sys_clk_set (CPU_CLK_2M);
+  // tls_sys_clk_set (CPU_CLK_40M);
+  // tls_sys_clk_set (CPU_CLK_80M);
+  // tls_sys_clk_set (CPU_CLK_160M);
 
   tls_os_task_create (NULL, NULL, user_app1_task, NULL,
                       (void *)UserApp1TaskStk, /* task's stack start address */
