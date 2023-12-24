@@ -5,7 +5,9 @@ ifndef PDIR # {
 GEN_IMAGES = $(TARGET).elf
 GEN_BINS = $(TARGET).bin
 SUBDIRS = \
-    $(TOP_DIR)/app #\
+    $(TOP_DIR)/app \
+    $(TOP_DIR)/app/encoder #\
+#    $(TOP_DIR)/demo
 MYAPPDIRS = $(TOP_DIR)/app
 endif # } PDIR
 
@@ -30,7 +32,9 @@ endif
 endif
 
 COMPONENTS_$(TARGET) =	\
-    $(TOP_DIR)/app/libuser$(LIB_EXT) #\
+    $(TOP_DIR)/app/libuser$(LIB_EXT) \
+    $(TOP_DIR)/app/lib_encoder$(LIB_EXT) #\
+#    $(TOP_DIR)/demo/libdemo$(LIB_EXT)
 
 ifeq ($(USE_LIB), 0)
 COMPONENTS_$(TARGET) += \
@@ -58,18 +62,15 @@ LINKLIB = 	\
 
 
 ifeq ($(USE_LIB), 1)
-LINKLIB += \
-    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libapp$(LIB_EXT)         \
+LINKLIB += $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libapp$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libu8g2$(LIB_EXT)  \
-    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/libVS1053$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/lib_psram$(LIB_EXT)  \
-    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/mod1/lib_encoder$(LIB_EXT)  \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmarch$(LIB_EXT)      \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmcommon$(LIB_EXT)    \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libdrivers$(LIB_EXT)     \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libnetwork$(LIB_EXT)     \
     $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libos$(LIB_EXT)          \
-    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmsys$(LIB_EXT)
+    $(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libwmsys$(LIB_EXT) 
 ifeq ($(USE_NIMBLE), 1)
 LINKLIB += \
 	$(TOP_DIR)/lib/$(CONFIG_ARCH_TYPE)/libblehost$(LIB_EXT)

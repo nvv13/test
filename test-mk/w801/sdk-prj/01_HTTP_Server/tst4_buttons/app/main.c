@@ -23,8 +23,6 @@ https://github.com/cesanta/mongoose.git
 //#define MY_WIFI_AP "bred1"
 //#define MY_WIFI_PASS "9115676369"
 
-u8 volatile u8_wifi_state = 0;
-
 #define USER_APP1_TASK_SIZE 4096
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32

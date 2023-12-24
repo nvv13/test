@@ -49,7 +49,6 @@
 //#define MY_WIFI_PASS "9115676369"
 
 #include "w_wifi.h"
-u8 volatile u8_wifi_state = 0;
 
 //#define TOUCH_ORIENTATION PORTRAIT
 #define TOUCH_ORIENTATION LANDSCAPE
@@ -211,17 +210,22 @@ W801 LCD
                          * 1000); // u32 usec microseconds, около 60 сек
       for (;;) // цикл(1) с подсоединением к wifi и запросом времени
         {
-          while (u8_wifi_state == 0)
+      while (u8_wifi_state == 0)
+        {
+          printf ("trying to connect wifi\n");
+          if (u8_wifi_state == 0
+              && wifi_connect (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
             {
-              printf ("trying to connect wifi\n");
-              if (u8_wifi_state == 0
-                  && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
-                u8_wifi_state = 1;
-              else
+              while (u8_wifi_state == 0)
                 {
-                  tls_os_time_delay (HZ * 5);
+                  tls_os_time_delay (100);
                 }
             }
+          else
+            {
+              tls_os_time_delay (HZ * 5);
+            }
+        }
 
           tls_os_time_delay (HZ * 5);
           tls_watchdog_clr ();
@@ -270,9 +274,12 @@ W801 LCD
                 }
 
               UTFT_store_to_psram (true);
+              printf ("unpack jpeg file to PSRAM\r\n");
               if (UTFT_ADD_lcd_draw_jpeg (FileName, 0, 0) >= 0)
                 {
+                  printf ("unpack jpeg Ok. next => psram_to_drawBitmap \r\n");
                   UTFT_psram_to_drawBitmap ();
+                  printf (" pause 6 seconds \r\n");
                   tls_os_time_delay (HZ * 6); //
                 }
 

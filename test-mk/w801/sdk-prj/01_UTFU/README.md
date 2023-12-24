@@ -1014,7 +1014,7 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT IPS 320xRGBx480 MSP3526
 
 
 Видео
-
+https://youtu.be/y2GYyCNDz_s
 
 Дисплей
 фото 1 

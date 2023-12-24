@@ -38,8 +38,7 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #include "mod1/VS1053.h"
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
-
-#include "encoder.h"
+#include "mod1/encoder.h"
 
 //****************************************************************************************************//
 u8 u8_wifi_state = 0;

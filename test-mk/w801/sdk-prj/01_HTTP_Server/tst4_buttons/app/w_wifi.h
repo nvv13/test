@@ -13,6 +13,8 @@ extern "C"
 
   int wifi_connect (const char *ssid, const char *pwd);
 
+  extern u8 volatile u8_wifi_state;
+
 #ifdef __cplusplus
 }
 #endif
