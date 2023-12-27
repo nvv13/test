@@ -271,7 +271,7 @@ my_recognize_http (const char *recvbuf, int i_len)
     }
 }
 
-#define HTTP_CLIENT_BUFFER_SIZE 512
+#define HTTP_CLIENT_BUFFER_SIZE 256
 
 static u32
 http_snd_req (HTTPParameters ClientParams, HTTP_VERB verb, char *pSndData,
@@ -350,7 +350,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
 #endif // TLS_CONFIG_HTTP_CLIENT_PROXY
       if ((nRetCode = HTTPClientSendRequest (
                pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
-               verb == VerbPost || verb == VerbPut, 0, 0))
+               verb == VerbPost || verb == VerbPut, 30, 0))
           != HTTP_CLIENT_SUCCESS)
         {
           my_recognize_http_error ();
@@ -363,6 +363,8 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           my_recognize_http_error ();
           break;
         }
+
+      tls_os_time_delay (10);
       printf ("Start to receive data from remote server...\r\n");
 
       // Get the data until we get an error or end of stream code
@@ -371,7 +373,7 @@ if((nRetCode = HTTPClientAddRequestHeaders(pHTTP,"media type",
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
           // Get the data
-          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 500, &nSize);
+          nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize, 50, &nSize);
           if (nRetCode != HTTP_CLIENT_SUCCESS && nRetCode != HTTP_CLIENT_EOS)
             break;
           // printf("%s", Buffer);

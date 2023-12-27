@@ -36,12 +36,11 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
 #include "mod1/VS1053.h"
+#include "mod1/encoder.h"
 #include "mod1/u8g2.h"
 #include "mod1/u8x8_riotos.h"
-#include "mod1/encoder.h"
 
 //****************************************************************************************************//
-u8 u8_wifi_state = 0;
 
 static u8g2_t u8g2;
 
@@ -606,7 +605,7 @@ demo_console_task (void *sdata)
         {
           printf ("trying to connect wifi\n");
           if (u8_wifi_state == 0
-              && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
+              && wifi_connect (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
             {
               while (u8_wifi_state == 0)
                 {
@@ -626,9 +625,9 @@ demo_console_task (void *sdata)
         {
           tls_os_time_delay (HZ);
 
-          ntp_set_server_demo ("0.fedora.pool.ntp.org",
-                               "1.fedora.pool.ntp.org",
-                               "2.fedora.pool.ntp.org");
+          // ntp_set_server_demo ("0.fedora.pool.ntp.org",
+          //                     "1.fedora.pool.ntp.org",
+          //                     "2.fedora.pool.ntp.org");
           ntp_demo ();
 
           my_recognize_http_reset ();
@@ -638,40 +637,46 @@ demo_console_task (void *sdata)
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
-          if (my_sost != VS1053_PLAY_BUF)
+
+          tls_watchdog_clr ();
+
+          while (u8_wifi_state == 1) // основной цикл(2)
             {
-              if (i_switch_menu != 2)
+              if (my_sost != VS1053_PLAY_BUF)
                 {
-                  my_recognize_http_reset ();
-                  display_refresh ();
+                  if (i_switch_menu != 2)
+                    {
+                      my_recognize_http_reset ();
+                      display_refresh ();
 
-                  if (strlen (stantion_uuid) == 36)
-                    {
-                      http_get_web_station_by_stationuuid (stantion_uuid);
-                      stantion_uuid[0] = 0;
-                      u8_ind_ch_st = 0;
-                    }
-                  else
-                    {
-                      http_get_web_station_by_random ();
-                      for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+                      if (strlen (stantion_uuid) == 36)
                         {
-                          printf ("ind=%d,%s\n", ind,
-                                  my_recognize_ret_name (ind));
+                          http_get_web_station_by_stationuuid (stantion_uuid);
+                          stantion_uuid[0] = 0;
+                          u8_ind_ch_st = 0;
                         }
+                      else
+                        {
+                          http_get_web_station_by_random ();
+                          for (u8 ind = 0; ind < MAX_INDEX_LOAD_FIND; ind++)
+                            {
+                              printf ("ind=%d,%s\n", ind,
+                                      my_recognize_ret_name (ind));
+                            }
 
-                      u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
-                      printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
+                          u8_ind_ch_st = random (0, MAX_INDEX_LOAD_FIND - 1);
+                          printf ("u8_ind_ch_st=%d\n", u8_ind_ch_st);
+                        }
                     }
+                  display_refresh ();
+                  i_delay_WAIT = 1;
                 }
-              display_refresh ();
-              i_delay_WAIT = 1;
-            }
-          VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (u8_ind_ch_st));
+              VS1053_PlayHttpMp3 (
+                  my_recognize_ret_url_resolved (u8_ind_ch_st));
 
-          if (my_sost != VS1053_PLAY_BUF)
-            tls_os_time_delay (HZ);
-          // tls_watchdog_clr ();
+              if (my_sost != VS1053_PLAY_BUF)
+                tls_os_time_delay (HZ);
+            }
         }
     }
 }

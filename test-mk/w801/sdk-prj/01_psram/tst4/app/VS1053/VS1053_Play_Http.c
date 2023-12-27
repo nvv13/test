@@ -38,7 +38,8 @@
 volatile int VS1053_WEB_RADIO_nTotal = 0;
 volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;  /* логика в обратную сторону чем меньше, тем больше свободной памяти, от 0 стартует */
 volatile int VS1053_WEB_RADIO_buf_chunk_total = 0;
-#define DF_VS1053_WEB_RADIO_buf_chunk_top 150 //800
+
+static int VS1053_WEB_RADIO_buf_chunk_top=150; //800
 
 //#define http_chunk_size (vs1053_chunk_size * 2)
 #define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size * 3)
@@ -129,7 +130,8 @@ vs1053_buf_play_task (void *sdata)
                   VS1053_playChunk (buffer, item_size);
                   if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
                     printf ("-");
-                  VS1053_WEB_RADIO_buf_chunk_free--;
+                  if (VS1053_WEB_RADIO_buf_chunk_free>0)
+                    VS1053_WEB_RADIO_buf_chunk_free--;
                   if (VS1053_WEB_RADIO_nTotal > 512)
                     tls_watchdog_clr ();
                   // tls_os_time_delay (0);
@@ -252,6 +254,8 @@ break;
         {
           xMessageBufferSize = psram_BufferSize;
           ucStorageBuffer = dram_heap_malloc (xMessageBufferSize + 1);
+          VS1053_WEB_RADIO_buf_chunk_top=(xMessageBufferSize/HTTP_CLIENT_BUFFER_SIZE - 10);
+          if(VS1053_WEB_RADIO_buf_chunk_top<150)VS1053_WEB_RADIO_buf_chunk_top=150;
         }
       else
         {
@@ -274,15 +278,15 @@ break;
         VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
         VS1053_TASK_PRIO, 0);
 
-  // if(my_sost != VS1053_PLAY_BUF)
-  my_sost = VS1053_HW_INIT;
+  if(my_sost != VS1053_PLAY_BUF)
+    my_sost = VS1053_HW_INIT;
   do
     {
       if (my_sost != VS1053_HW_INIT)
         my_sost = VS1053_PLAY_BUF;
       if ((nRetCode = HTTPClientSendRequest (
                pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
-               verb == VerbPost || verb == VerbPut, 0, 0))
+               verb == VerbPost || verb == VerbPut, 30, 0))
           != HTTP_CLIENT_SUCCESS)
         {
           break;
@@ -293,17 +297,18 @@ break;
         {
           break;
         }
-      tls_os_time_delay (3);
+      tls_os_time_delay (1);
 
-      u16 u16_connect_timeout_sec = 300;
+      u16 u16_connect_timeout_sec = 30;
       if (strstr (ClientParams.Uri, "https") != NULL)
-        u16_connect_timeout_sec = 600;
+        u16_connect_timeout_sec = 60;
 
       printf ("Start to receive data from remote server\r\n");
 
       // int i_cnt=0;
       //сначала заполняем буффер данными
-      VS1053_WEB_RADIO_buf_chunk_free = 0;
+      if(my_sost != VS1053_PLAY_BUF)
+        VS1053_WEB_RADIO_buf_chunk_free = 0;
       while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
              //&& my_sost == VS1053_HW_INIT
       )
@@ -315,9 +320,10 @@ break;
           // ptintf ("%d ", freeSize);
           if (freeSize < (nSize + 4)
               || VS1053_WEB_RADIO_buf_chunk_free
-                     > DF_VS1053_WEB_RADIO_buf_chunk_top) // || i_cnt++>4096)
+                     > VS1053_WEB_RADIO_buf_chunk_top
+              || VS1053_WEB_RADIO_buf_chunk_free>1000 ) // || i_cnt++>4096)
             {
-              printf ("PreLoad buf, freeSize=%d\r\n", freeSize);
+              printf ("PreLoad buf, freeSize=%d, buf_chunk_allow=%d \r\n", freeSize, VS1053_WEB_RADIO_buf_chunk_free);
               break;
             }
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
@@ -353,6 +359,10 @@ break;
       //  }
       printf ("start play\n");
 
+      u16_connect_timeout_sec = 3;
+      if (strstr (ClientParams.Uri, "https") != NULL)
+        u16_connect_timeout_sec = 6;
+
       tls_os_time_delay (1);
       if (my_sost != VS1053_QUERY_TO_STOP)
         my_sost = VS1053_PLAY;
@@ -383,7 +393,7 @@ break;
               size_t freeSize = xMessageBufferSpacesAvailable (xMessageBuffer);
               if (freeSize > (nSize + 4)
                   && VS1053_WEB_RADIO_buf_chunk_free
-                         <= (DF_VS1053_WEB_RADIO_buf_chunk_top + 10))
+                         <= (VS1053_WEB_RADIO_buf_chunk_top + 10))
                 {
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
@@ -405,6 +415,9 @@ break;
         }
     }
   while (my_sost == VS1053_PLAY); // Run only once
+
+  if(my_sost == VS1053_PLAY)
+    my_sost = VS1053_PLAY_BUF;
 
   if (my_sost != VS1053_PLAY_BUF)
     {

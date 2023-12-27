@@ -60,7 +60,6 @@
 
 extern void dumpBuffer (char *name, char *buffer, int len);
 
-u8 volatile u8_wifi_state = 0;
 static char stantion_uuid[39];
 static boolean b_ChkStationUuid = false;
 static u16 u16_volume = 75;
@@ -244,7 +243,14 @@ user_app2_task (void *sdata)
                                   VS1053_WEB_RADIO_load_buffer_debug
                                       = VSHTTP_DEBUG_NO_DEBUG;
                                 }
+                              tls_watchdog_clr ();
                             }
+                          if (strstr (pHeaderEnd, "W"))
+                            {
+                              // restart WiFi ?
+                              u8_wifi_state = 0;
+                              tls_watchdog_clr ();
+                            } 
                         }
                       memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
                       rx_data_len = 0;
@@ -262,6 +268,7 @@ user_app2_task (void *sdata)
                           rx_data_len = 0;
                           rptr = 0;
                           printf ("setVolume++ = %d \r\n", u16_volume);
+                          tls_watchdog_clr ();
                         }
                       pHeaderEnd = strstr ((char *)(rx_buf),
                                            "\x1B\x5B\x42"); // Down
@@ -273,6 +280,7 @@ user_app2_task (void *sdata)
                           rx_data_len = 0;
                           rptr = 0;
                           printf ("setVolume-- = %d \r\n", u16_volume);
+                          tls_watchdog_clr ();
                         }
 
                       pHeaderEnd = strstr ((char *)(rx_buf),
@@ -295,6 +303,7 @@ user_app2_task (void *sdata)
                               flash_cfg_load_stantion_uuid (stantion_uuid,
                                                             stantion_index);
                               my_sost = VS1053_QUERY_TO_STOP;
+                              tls_watchdog_clr ();
                             }
                           else
                             printf ("empty stantion_index = %d \r\n",
@@ -321,6 +330,7 @@ user_app2_task (void *sdata)
                               flash_cfg_load_stantion_uuid (stantion_uuid,
                                                             stantion_index);
                               my_sost = VS1053_QUERY_TO_STOP;
+                              tls_watchdog_clr ();
                             }
                           else
                             printf ("empty stantion_index = %d \r\n",
@@ -336,6 +346,8 @@ user_app2_task (void *sdata)
 void
 user_app1_task (void *sdata)
 {
+
+  tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 60 сек
 
   /* vs1053 */
   libVS1053_t user_data53 = {
@@ -378,14 +390,14 @@ user_app1_task (void *sdata)
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
     .psram_BufferSize
-    = 1024 * 26, // 26400,   // подойдет 26400 более не надо! глючит!
+    = 1024 * 260, // 26400,   // подойдет 26400 более не надо! глючит!
     .psram_config = 1, // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
     .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
     .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
-    .load_buffer_debug = 0, // 0 , 1 - выводит инфу по заполнению "f" или "+",
+    .load_buffer_debug = VSHTTP_DEBUG_NO_DEBUG, //VSHTTP_DEBUG_TYPE2, // 0 , 1 - выводит инфу по заполнению "f" или "+",
                             // и опусташению буффера "-", "0" - нехватка данных
     .spi_fastest_speed
     = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
@@ -527,14 +539,14 @@ user_app1_task (void *sdata)
   printf ("key D + Enter - change Debug \n");
   printf ("key Up Down - volume control (1-100) \n");
   printf ("key Right Left - stantion index (0-43)\n");
-  tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 60 сек
+  tls_watchdog_clr ();
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
       while (u8_wifi_state == 0)
         {
           printf ("trying to connect wifi\n");
           if (u8_wifi_state == 0
-              && demo_connect_net (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
+              && wifi_connect (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
             {
               while (u8_wifi_state == 0)
                 {
@@ -552,7 +564,7 @@ user_app1_task (void *sdata)
       tls_watchdog_clr ();
       // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
       //                     "2.fedora.pool.ntp.org");
-      // ntp_demo ();
+      ntp_demo ();
 
       while (u8_wifi_state == 1) // основной цикл(2)
         {
@@ -595,7 +607,6 @@ user_app1_task (void *sdata)
 
               if (my_sost != VS1053_PLAY_BUF)
                 tls_os_time_delay (HZ);
-              // tls_watchdog_clr ();
             }
         }
       tls_watchdog_clr ();

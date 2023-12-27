@@ -90,7 +90,7 @@ break;
     {
       if ((nRetCode = HTTPClientSendRequest (
                pHTTP, ClientParams.Uri, pSndData, nSndDataLen,
-               verb == VerbPost || verb == VerbPut, 0, 0))
+               verb == VerbPost || verb == VerbPut, 30, 0))
           != HTTP_CLIENT_SUCCESS)
         {
           break;
@@ -119,9 +119,9 @@ break;
 
       tls_os_time_delay (HZ / 3);
 
-      u16 u16_connect_timeout_sec = 300;
+      u16 u16_connect_timeout_sec = 30;
       if (strstr (ClientParams.Uri, "https") != NULL)
-        u16_connect_timeout_sec = 600;
+        u16_connect_timeout_sec = 60;
 
       printf ("Start to receive data from remote server\r\n");
       tls_os_time_delay (HZ);
