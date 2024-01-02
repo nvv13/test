@@ -31,7 +31,7 @@
 #define HTTPS_DEMO_TASK_SIZE 2048 // 1024
 #define HTTPS_DEMO_QUEUE_SIZE 4
 
-#define HTTPS_RECV_BUF_LEN_MAX 1024
+#define HTTPS_RECV_BUF_LEN_MAX 512
 
 #define HTTPS_DEMO_CMD_START 0x1
 
@@ -165,9 +165,9 @@ https_demo_task (void *p)
                       fd = -1;
                       break;
                     }
-
                   do
                     {
+                      tls_os_time_delay (HZ);
                       ret = HTTPWrapperSSLRecv (ssl_p, fd, recvbuf,
                                                 HTTPS_RECV_BUF_LEN_MAX, 0);
                       if (ret <= 0)
@@ -204,9 +204,12 @@ https_demo_task (void *p)
 
                   // tls_mem_free(recvbuf);
                   HTTPWrapperSSLClose (ssl_p, fd);
+                  wm_printf ("step 3.4\r\n");
                   close (fd);
+                  wm_printf ("step 3.5\r\n");
                   fd = -1;
                   my_recognize_http_reset ();
+                  wm_printf ("step 3.6\r\n");
 
                   struct tm t_last_query = my_recognize_ret_t_last_query ();
                   wm_printf (
@@ -253,7 +256,7 @@ https_demo (void)
   if (!https_demo_inited)
     {
       tls_os_task_create (
-          NULL, NULL, https_demo_task, NULL,
+          NULL, "https_task", https_demo_task, NULL,
           (void *)https_demo_task_stk, /* task's stack start address */
           HTTPS_DEMO_TASK_SIZE
               * sizeof (u32), /* task's stack size, unit:byte */

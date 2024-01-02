@@ -49,7 +49,7 @@
 static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #define DEMO_TASK_PRIO 32
 
-#define DEMO_SOCK_S_TASK_SIZE 1024
+#define DEMO_SOCK_S_TASK_SIZE 2048
 static OS_STK sock_s_task_stk[DEMO_SOCK_S_TASK_SIZE];
 #define DEMO_SOCK_S_PRIO (DEMO_TASK_PRIO + 1)
 
@@ -207,6 +207,7 @@ demo_console_task (void *sdata)
               tls_os_time_delay (5000);
             }
         }
+      tls_os_disp_task_stat_info ();
 
       u8 u8_ntp_state = 0;
       while (u8_ntp_state == 0)
@@ -400,20 +401,20 @@ UserMain (void)
   tls_gpio_cfg (WM_IO_PB_10, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW); // 11
   tls_gpio_cfg (WM_IO_PB_15, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW); // 12
 
-  tls_os_task_create (NULL, NULL, demo_console_task, NULL,
+  tls_os_task_create (NULL, "DEMO_TASK", demo_console_task, NULL,
                       (void *)DemoTaskStk, /* task's stack start address */
                       DEMO_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
                       DEMO_TASK_PRIO, 0);
 
-  tls_os_task_create (NULL, NULL, sock_s_task, NULL,
+  tls_os_task_create (NULL, "SOCK_S_TASK", sock_s_task, NULL,
                       (void *)sock_s_task_stk, /* task's stack start address */
                       DEMO_SOCK_S_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
                       DEMO_SOCK_S_PRIO, 0);
 
-  //    tls_os_time_delay(1000 * 10);
-  //    tls_os_disp_task_stat_info();
+  // tls_os_time_delay(1000 * 10);
+  // tls_os_disp_task_stat_info();
   //	while(1)
   //	{
   //	}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>example W801 + mongoose = HTTP Server</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #container { margin-right: auto; margin-left: auto; max-width: 480px; }
+      #info { background: #e0f0f0; border-radius: .5em; padding: 2em;  }
+      #live { background: #f0f0f0; border-radius: .5em; padding: 0.5em; max-height: 10em; overflow: auto; height: 100%; }
+      #wrapper { display: flex; justify-content: flex-evenly; margin-top: 1em; }
+    </style>
+  </head>
+
+<script>
+"use strict";
+
+var btn_state=[0,0,0];
+var bstyle_on=["green","red","blue"];
+
+/**
+* функция onoff - переключает кнопку в другое состояние
+* причем, обращается к серверу, за подтверждением операции
+* если сервер не подтверждает (потеряно связь с устройством) - состояние не меняется
+*/
+function onoff(element,id)
+{
+	btn_state[id]= 1 - btn_state[id];
+	var child=element.firstChild;
+	if(btn_state[id])
+	{
+                fetch('/api/on?'+id)
+                  .then(r => r.text())
+                  .then(r => { if(r=="123"){
+         	   child.style.background=bstyle_on[id];
+	           child.style.color="lightgray";
+               };}); 
+	}
+	else
+	{
+                fetch('/api/off?'+id)
+                  .then(r => r.text())
+                  .then(r => { if(r=="321"){
+	            child.style.background="lightgray";
+	            child.style.color=bstyle_on[id];
+            };}); 
+	}
+}
+
+/**
+* функция запускается при загрузке страницы, и постоянно читает данные с сервера
+* browser на мобильном устройстве, может отправится в сон, чтение прекратится до принудительного обновления страницы
+*/
+var f = function(r) {
+      return r.read().then(function(result) {
+        var data = String.fromCharCode.apply(null, result.value);
+        document.getElementById('live').innerText = data;  // live log
+        if (!result.done) f(r);  // Read next chunk
+      });
+    };
+
+window.onload = ev => fetch('/api/sost?0')
+      .then(r => r.text())
+      .then(r => { if(r=="1"){btn_state[0]=1;
+	var child=document.getElementById('off0');
+	child.style.background=bstyle_on[0];
+	child.style.color="lightgray";	} 
+        })
+      .then(r => fetch('/api/sost?1'))
+      .then(r => r.text())
+      .then(r => { if(r=="1"){btn_state[1]=1;
+	var child=document.getElementById('off1');
+	child.style.background=bstyle_on[1];
+	child.style.color="lightgray";	} 
+        })
+      .then(r => fetch('/api/sost?2'))
+      .then(r => r.text())
+      .then(r => { if(r=="1"){btn_state[2]=1;
+	var child=document.getElementById('off2');
+	child.style.background=bstyle_on[2];
+	child.style.color="lightgray";	} 
+        })
+      .then(r => fetch('/api/log/live'))
+      .then(r => r.body.getReader())
+      .then(f);
+
+</script>
+  <body>
+
+
+    <div id="container">
+      <div id="info">
+         микроконтроллер W801 + mongoose = HTTP Server
+        <br/><br/>
+         кнопки
+      </div>
+
+<fieldset style="padding:16px">
+<style>
+.onoff
+{
+	width:64px;
+	height:64px;
+	padding:3px 2px 3px 3px;	
+	font-size:12px;
+	background:lightgray;
+}
+.onoff div
+{
+	width:48px;
+	height:48px;
+	min-height:48px;	
+	background:lightgray;
+	overflow:hidden;
+	border-top:1px solid gray;
+	border-right:1px solid white;
+	border-bottom:1px solid white;
+	border-left:1px solid gray;			
+	margin:0 auto;
+	xpadding-top:2px;
+	color:gray;
+	text-align:center;	
+}
+</style>
+ <button class="onoff" onclick="onoff(this,0)"><div id="off0">Green</div></button>
+ <button class="onoff" onclick="onoff(this,1)"><div id="off1">Red</div></button>
+ <button class="onoff" onclick="onoff(this,2)"><div id="off2">Blue</div></button>
+</fieldset>
+
+      <div id="wrapper">
+        <div style="width: 50%"><b>Прошло секунд со старта мк</b><pre id="live"></pre></div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

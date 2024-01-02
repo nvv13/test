@@ -1,9 +1,12 @@
 #ifndef MY_RECOGNIZE_H
 #define MY_RECOGNIZE_H
 
-#define HTTPS_DEMO_SERVER "www.gismeteo.ru"
+//#define HTTPS_DEMO_SERVER "www.gismeteo.ru"                 залочили сайт
+// CloudFlare #define HTTPS_DEMO_GET "/weather-arkhangelsk-3915/now/"
+
+#define HTTPS_DEMO_SERVER "world-weather.ru"
+#define HTTPS_DEMO_GET "/pogoda/russia/arkhangelsk/"
 #define HTTPS_DEMO_PORT 443
-#define HTTPS_DEMO_GET "/weather-arkhangelsk-3915/now/"
 
 void my_recognize_http_reset (void);
 void my_recognize_http_error (void);

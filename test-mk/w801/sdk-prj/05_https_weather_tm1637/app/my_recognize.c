@@ -74,7 +74,11 @@ void
 my_recognize_http_reset (void)
 {
   if (u8_status_find != RG_FIND_END)
-    my_recognize_http_error ();
+    {
+      i_temperature_c = MY_RECOGNIZE_NO_VALUE;
+      i_sign = 1;
+      i_temperature_mantissa_c = 0;
+    }
   //
   u8_status_find = RG_START_FIND;
   i_POS_PRE1 = 0;
