@@ -9,7 +9,7 @@ https://youtu.be/y2GYyCNDz_s
 
 ------------------------------------------------
 
-board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480 HW SDIO SPI MSP3526
+board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480 HW SDIO SPI MSP3526 или MSP3525
 
 Дисплей
 фото 1 

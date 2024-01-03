@@ -152,6 +152,7 @@ extern "C"
 #define MSP2834 49
 #define MSP3223 50
 #define TFT00_96SP_2 51
+#define MSP3525 52
 #define MSP3526 52
 #define TFT01_9V89 53
 
