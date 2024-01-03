@@ -150,7 +150,7 @@ my_recognize_http (const char *recvbuf, int i_len)
                         l_znak = false;
                         if (buf_temperatura[iI - 1] == '-')
                           {
-                            i_sign = 0;
+                            i_sign = -1;
                           }
                       }
                   }

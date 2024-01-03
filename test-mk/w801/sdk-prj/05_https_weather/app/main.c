@@ -339,11 +339,11 @@ demo_console_task (void *sdata)
             }
 
           if (i_mode_global != GL_MODE_CLOCK
-              && (tblock.tm_min == 0
+              && (tblock.tm_min == random (0, 3)
                   || (tblock.tm_min > 0 && tblock.tm_min % 2 == 0 && my_recognize_ret_cur_temperature () == MY_RECOGNIZE_NO_VALUE) //каждые 2 минуты
                   || (tblock.tm_min > 0 && tblock.tm_min == i_last_rand_min )   
                  )
-              && tblock.tm_sec == 0) 
+              && tblock.tm_sec < 2) 
             {
               u8_wifi_state
                   = 0; // переход на цикл(1) wifi по новой и запрос температуы
@@ -377,7 +377,7 @@ demo_console_task (void *sdata)
                       tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
                       tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
               // tls_mem_alloc_info();
-              tls_os_time_delay (1000 - 300);
+              tls_os_time_delay (HZ*2);
             }
 
           if (u8_wait_start_ota_upgrade)
