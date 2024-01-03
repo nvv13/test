@@ -161,6 +161,49 @@ demo_timer_irq (u8 *arg) // здесь будет вывод на LCD
     }
 }
 
+/*
+constrain(x, a, b)
+Функция проверяет и если надо задает новое значение,
+так чтобы оно была в области допустимых значений, заданной параметрами.
+
+Параметры
+x: проверяемое значение, любой тип
+a: нижняя граница области допустимых значений, любой тип
+b: верхняя граница области допустимых значений, любой тип
+*/
+static int
+constrain (int x, int a, int b)
+{
+  if (x < a)
+    return a;
+  if (x > b)
+    return b;
+  return x;
+}
+
+
+static int
+random (int min_num, int max_num)
+{
+  int result = 0, low_num = 0, hi_num = 0;
+
+  if (min_num < max_num)
+    {
+      low_num = min_num;
+      hi_num = max_num + 1; // include max_num in output
+    }
+  else
+    {
+      low_num = max_num;
+      hi_num = min_num + 1; // include max_num in output
+    }
+
+  result = (rand () % (hi_num - low_num)) + low_num;
+  result = constrain (result, low_num, hi_num - 1);
+  return result;
+}
+
+
 u8 u8_wait_start_ota_upgrade;
 
 // console task use UART0 as communication port with PC
@@ -169,11 +212,12 @@ demo_console_task (void *sdata)
 {
   printf ("wifi test app\n");
 
+  srand (tls_os_get_time ());
   u8_wait_start_ota_upgrade = 0;
   u8 cnt_no_value = 0;
   u8 timer_id;
   struct tls_timer_cfg timer_cfg;
-
+  int i_last_rand_min = 0;
   // timer_cfg.unit = TLS_TIMER_UNIT_MS;
   // timer_cfg.timeout = 1;//4
   timer_cfg.unit
@@ -296,8 +340,10 @@ demo_console_task (void *sdata)
 
           if (i_mode_global != GL_MODE_CLOCK
               && (tblock.tm_min == 0
-                  || (tblock.tm_min > 0 && tblock.tm_min % 2 == 0))
-              && tblock.tm_sec == 0) //каждые 2 минуты
+                  || (tblock.tm_min > 0 && tblock.tm_min % 2 == 0 && my_recognize_ret_cur_temperature () == MY_RECOGNIZE_NO_VALUE) //каждые 2 минуты
+                  || (tblock.tm_min > 0 && tblock.tm_min == i_last_rand_min )   
+                 )
+              && tblock.tm_sec == 0) 
             {
               u8_wifi_state
                   = 0; // переход на цикл(1) wifi по новой и запрос температуы
@@ -309,6 +355,7 @@ demo_console_task (void *sdata)
                 }
               else
                 cnt_no_value = 0;
+              i_last_rand_min = random (5, 35);
               struct tm t_last_query = my_recognize_ret_t_last_query ();
               printf ("cur_temperature=%d,%d  cnt_no_value=%d\n"
                       "last query=%d.%02d.%02d %02d:%02d:%02d\n"

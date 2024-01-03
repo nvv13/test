@@ -4,8 +4,15 @@
 //#define HTTPS_DEMO_SERVER "www.gismeteo.ru"                 залочили сайт
 // CloudFlare #define HTTPS_DEMO_GET "/weather-arkhangelsk-3915/now/"
 
-#define HTTPS_DEMO_SERVER "world-weather.ru"
-#define HTTPS_DEMO_GET "/pogoda/russia/arkhangelsk/"
+//#define HTTPS_DEMO_SERVER "world-weather.ru"                защита капчей
+//#define HTTPS_DEMO_GET "/pogoda/russia/arkhangelsk/"
+
+#define HTTPS_DEMO_SERVER "m.rp5.ru"
+#define HTTPS_DEMO_GET                                                        \
+  "/%D0%9F%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0_%D0%B2_%D0%90%D1%80%D1%85%D0%B0%D0%" \
+  "BD%D0%B3%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%B5,_%D0%90%D1%80%D1%85%D0%B0%"   \
+  "D0%BD%D0%B3%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%" \
+  "D0%B0%D1%81%D1%82%D1%8C"
 #define HTTPS_DEMO_PORT 443
 
 void my_recognize_http_reset (void);

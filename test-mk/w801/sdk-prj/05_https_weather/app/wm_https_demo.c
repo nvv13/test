@@ -165,9 +165,9 @@ https_demo_task (void *p)
                       fd = -1;
                       break;
                     }
+                  tls_os_time_delay (HZ / 10);
                   do
                     {
-                      tls_os_time_delay (HZ);
                       ret = HTTPWrapperSSLRecv (ssl_p, fd, recvbuf,
                                                 HTTPS_RECV_BUF_LEN_MAX, 0);
                       if (ret <= 0)

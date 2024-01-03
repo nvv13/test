@@ -43,14 +43,15 @@ enum
 
 static u8 u8_status_find = RG_START_FIND;
 
-char *c_PRE1 = "id=\"weather-now-number\">";
-int i_POS_PRE1 = 0;
+static char *c_PRE1 = "<meta name=\"description\" content=";
+static int i_POS_PRE1 = 0;
 
-char *c_PRE2 = "<";
-int i_POS_PRE2 = 0;
+static char *c_PRE2 = "/>";
+static int i_POS_PRE2 = 0;
 
-char buf_temperatura[10];
-u8 u8_buf_pos_temperatura = 0;
+#define BUF_SIZE 512
+static char buf_temperatura[BUF_SIZE];
+static u16 u8_buf_pos_temperatura = 0;
 
 void
 my_recognize_http_reset (void)
@@ -77,7 +78,9 @@ my_recognize_http_error (void)
   i_temperature_mantissa_c = 0;
 }
 
-// <div id="weather-now-number">-29<span>°</span></div>
+//     <meta name="description" content="В Архангельске сегодня ожидается
+//     -19..-15 °C, преимущественно без осадков, туман, легкий ветер. Завтра:
+//     -19..-22 °C, без осадков, туман, легкий ветер. РП5" />
 void
 my_recognize_http (const char *recvbuf, int i_len)
 {
@@ -88,7 +91,7 @@ my_recognize_http (const char *recvbuf, int i_len)
         {
         case RG_START_FIND:
           {
-            if (ch == c_PRE1[i_POS_PRE1]) // id="weather-now-number">
+            if (ch == c_PRE1[i_POS_PRE1]) // <meta name="description" content="
               i_POS_PRE1++;
             else
               {
@@ -96,7 +99,7 @@ my_recognize_http (const char *recvbuf, int i_len)
                   i_POS_PRE1 = 0;
                 else
                   {
-                    if (u8_buf_pos_temperatura < 9)
+                    if (u8_buf_pos_temperatura < BUF_SIZE - 1)
                       buf_temperatura[u8_buf_pos_temperatura++] = ch;
                     u8_status_find = RG_FIND_PRE2;
                   }
@@ -106,22 +109,18 @@ my_recognize_http (const char *recvbuf, int i_len)
 
         case RG_FIND_PRE2:
           {
-            if (ch
-                == c_PRE2[i_POS_PRE2]) // далее идёт число со знаком +
-                                       // температура -29<span>°</span></div>
+            if (ch == c_PRE2[i_POS_PRE2]) // />
               i_POS_PRE2++;
             else
               {
                 if (i_POS_PRE2 < strlen (c_PRE2))
                   {
-                    if (u8_buf_pos_temperatura < 9)
+                    if (u8_buf_pos_temperatura < BUF_SIZE - 1)
                       buf_temperatura[u8_buf_pos_temperatura++] = ch;
                     i_POS_PRE2 = 0;
                   }
                 else
                   {
-                    // if (u8_buf_pos_temperatura < 9)
-                    //  buf_temperatura[u8_buf_pos_temperatura++] = ch;
                     u8_status_find = RG_FIND_PRE3;
                   }
               }
@@ -130,26 +129,43 @@ my_recognize_http (const char *recvbuf, int i_len)
 
         case RG_FIND_PRE3:
           {
-            bool l_znak = false;
-            if (buf_temperatura[0] == '-')
-              {
-                i_sign = 0;
-                l_znak = true;
-              }
-            else
-              i_sign = 1;
-            if (buf_temperatura[0] == '+')
-              {
-                i_sign = 1;
-                l_znak = true;
-              }
-            if (u8_buf_pos_temperatura < 10)
+            bool l_znak = true;
+            i_sign = 1;
+            if (u8_buf_pos_temperatura < BUF_SIZE)
               buf_temperatura[u8_buf_pos_temperatura++] = 0x00;
-            if (l_znak)
-              i_temperature_c = atoi (buf_temperatura + 1);
-            else
-              i_temperature_c = atoi (buf_temperatura);
-            printf ("%s \r\n", buf_temperatura);
+
+            // "В Архангельске сегодня ожидается -17..-15 °C, преимущественно
+            // без осадков, туман, легкий ветер. Завтра: -19..-22 °C, без
+            // осадков, туман, легкий ветер. РП5"
+            char buf[10];
+            u8 u8_pos = 0;
+            for (int iI = 0; iI < u8_buf_pos_temperatura; iI++)
+              {
+                char ch = buf_temperatura[iI];
+                if (iI > 0 && ch >= '0' && ch<= '9')
+                  {
+                    buf[u8_pos++] = ch;
+                    if (l_znak)
+                      {
+                        l_znak = false;
+                        if (buf_temperatura[iI - 1] == '-')
+                          {
+                            i_sign = 0;
+                          }
+                      }
+                  }
+                else
+                  {
+                    if (!l_znak)
+                      {
+                        buf[u8_pos++] = 0x00;
+                        i_temperature_c = atoi (buf);
+                        break;
+                      }
+                  }
+              }
+
+            printf ("load: %s, %d\r\n", buf_temperatura, i_temperature_c);
             u8_status_find = RG_FIND_END;
             tls_get_rtc (&t_last_query);
             //          i_temperature_mantissa_c = ch - 0x30;
