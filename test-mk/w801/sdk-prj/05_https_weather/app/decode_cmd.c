@@ -37,7 +37,7 @@ fast_decode_cmd (char *sock_rx, int len)
           "date %d.%02d.%02d %02d:%02d:%02d  currrent temperature=%d,%d  \n"
           "last query=%d.%02d.%02d %02d:%02d:%02d\n"
           "t_last_start_main_task=%d.%02d.%02d %02d:%02d:%02d\n"
-          "total_mem_size=%d",
+          "total_mem_size=%d, %s",
           tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
           tblock.tm_hour, tblock.tm_min, tblock.tm_sec,
           my_recognize_ret_cur_temperature_sign ()
@@ -48,7 +48,8 @@ fast_decode_cmd (char *sock_rx, int len)
           t_last_query.tm_sec, t_last_start_main_task.tm_year + 1900,
           t_last_start_main_task.tm_mon + 1, t_last_start_main_task.tm_mday,
           t_last_start_main_task.tm_hour, t_last_start_main_task.tm_min,
-          t_last_start_main_task.tm_sec, total_mem_size);
+          t_last_start_main_task.tm_sec, total_mem_size,
+          my_recognize_ret_buf_temperature());
     }
 
   if (strncmp ((char *)sock_rx, "upgrade", 7) == 0)

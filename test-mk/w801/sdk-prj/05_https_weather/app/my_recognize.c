@@ -12,6 +12,17 @@ static int i_sign = 1;
 static int i_temperature_mantissa_c = 0;
 static struct tm t_last_query;
 
+#define BUF_SIZE 512
+static char buf_temperatura[BUF_SIZE] = { 0 };
+static u16 u8_buf_pos_temperatura = 0;
+
+char *
+my_recognize_ret_buf_temperature (void)
+{
+  return buf_temperatura;
+}
+
+
 struct tm
 my_recognize_ret_t_last_query (void)
 {
@@ -49,9 +60,6 @@ static int i_POS_PRE1 = 0;
 static char *c_PRE2 = "/>";
 static int i_POS_PRE2 = 0;
 
-#define BUF_SIZE 512
-static char buf_temperatura[BUF_SIZE];
-static u16 u8_buf_pos_temperatura = 0;
 
 void
 my_recognize_http_reset (void)
