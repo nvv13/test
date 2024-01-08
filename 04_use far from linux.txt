@@ -14,7 +14,7 @@ https://github.com/unxed/far2l-deb/tree/master/portable
 
 подготовка
 ~~~
-$ dnf install -y gawk m4 gcc-c++ wxGTK3-devel cmake git
+$ dnf install -y gawk m4 gcc-c++ wxGTK-devel cmake git
 $ dnf install -y libssh-devel libsmbclient-devel libnfs-devel libarchive-devel neon-devel
 $ dnf install -y uchardet uchardet-devel spdlog spdlog-devel python-devel xerces-c xerces-c-devel
 ~~~
