@@ -74,7 +74,7 @@ static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 
 #define USER_APP2_TASK_SIZE 2048
 static OS_STK UserApp2TaskStk[USER_APP2_TASK_SIZE];
-#define USER_APP2_TASK_PRIO 31 // меньше цифра, меньше приоретет!
+#define USER_APP2_TASK_PRIO 31 // меньше цифра, больше приоретет!
 
 extern uint8_t SmallFont[]; // подключаем маленький шрифт
 extern uint8_t BigFont[];   // подключаем большой шрифт

@@ -71,5 +71,21 @@ static void delay(u32 ms)
 
 2) CPU:xt804 - little-endiann 
 
+------------
 
 3) printf("---> GetHeap:%d\n",tls_mem_get_avail_heapsize());
+
+------------
+
+4) в FreeRTOS
+ #define USER_APP_TASK_PRIO 31 // меньше цифра, больше приоретет! 
+это так для tls_os_task_create будет (там делается configMAX_PRIORITIES - prio ) 
+где prio  -  the task's priority.  
+ #define configMAX_PRIORITIES		(63)
+ A unique priority MUST be assigned to each task and the lower the number, the higher the priority.
+ Каждой задаче ДОЛЖЕН быть назначен уникальный приоритет, и чем меньше его число, тем выше приоритет.
+
+------------
+
+
+
