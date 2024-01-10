@@ -46,6 +46,9 @@ user_app1_task (void *sdata)
     .ENCODER_S = WM_IO_PA_11,
     .ENCODER_A = WM_IO_PA_12,
     .ENCODER_B = WM_IO_PA_13,
+    .ADD_BUTTON_1 = NO_GPIO_PIN,
+    .ADD_BUTTON_2 = NO_GPIO_PIN,
+    .ADD_BUTTON_3 = NO_GPIO_PIN,
   };
   bsp_encoder_init (&enc_pin);
 

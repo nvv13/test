@@ -31,9 +31,13 @@
 #include "w_ntp.h"
 #include "w_wifi.h"
 
-#define DEMO_TASK_SIZE 2048
-static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
-#define DEMO_TASK_PRIO 32
+#define INIT_TASK_SIZE 2048
+static OS_STK InitTaskStk[INIT_TASK_SIZE];
+#define INIT_TASK_PRIO 32
+
+#define MENU_TASK_SIZE 2048
+static OS_STK MenuTaskStk[MENU_TASK_SIZE];
+#define MENU_TASK_PRIO (INIT_TASK_PRIO + 1)
 
 #include "mod1/VS1053.h"
 #include "mod1/encoder.h"
@@ -41,437 +45,154 @@ static OS_STK DemoTaskStk[DEMO_TASK_SIZE];
 #include "mod1/u8x8_riotos.h"
 
 //****************************************************************************************************//
-
-static u8g2_t u8g2;
-
-static u8 i_switch_menu = 0;
-static int i_menu = 0;
-static int i_menu2 = 0;
-static u8 u8_ind_ch_st = 0;
-
-static u16 u16_volume = 0; //
-static char buf_str_ind[50];
-static char stantion_uuid[39];
-static int i_find_stantion_id = -1;
-static char stantion_name_temp[50];
-static char stantion_uuid_temp[39];
-
-static void display_refresh (void);
-
-#define MENU_STORE_VOLUME 0
-#define MENU_STORE_INDEX 1
-#define MENU_MAX_POS (USER_CNT_REC_STANTION_NAME * 2)
-
-#define MENU2_MAX_POS (MAX_INDEX_LOAD_FIND - 1)
-
-void
-MenuActionClick (void)
-{
-  if (i_menu == MENU_STORE_VOLUME)
-    flash_cfg_store_u16 (u16_volume, MENU_STORE_VOLUME);
-  else
-    {
-      u8 u8_stantion_id = (i_menu / 2);
-      if ((u8_stantion_id * 2) == i_menu && u8_stantion_id > 0)
-        u8_stantion_id--;
-      //
-      // printf ("MenuActionClick i_menu %d,i_menu2 %d,u8_stantion_id
-      // %d\n",i_menu,i_menu % 2,u8_stantion_id);
-      if (i_menu % 2 != 0)
-        {
-          flash_cfg_load_stantion_uuid (stantion_uuid, u8_stantion_id);
-          // printf ("flash_cfg_load stantion_uuid %s,u8_stantion_id
-          // %d\n",stantion_uuid,u8_stantion_id);
-          VS1053_stop_PlayMP3 ();
-        }
-      else
-        {
-          i_find_stantion_id = flash_cfg_find_stantion_id_by_uuid (
-              my_recognize_ret_stationuuid (u8_ind_ch_st));
-          if (i_find_stantion_id == -1 || i_find_stantion_id == u8_stantion_id)
-            {
-              flash_cfg_store_stantion_name (
-                  my_recognize_ret_name (u8_ind_ch_st), u8_stantion_id);
-              flash_cfg_store_stantion_uuid (
-                  my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
-            }
-          else
-            { //Если нашло в другом месте, то обмен позиций
-              flash_cfg_load_stantion_uuid (stantion_uuid_temp,
-                                            u8_stantion_id);
-              flash_cfg_load_stantion_name (stantion_name_temp,
-                                            u8_stantion_id);
-
-              flash_cfg_store_stantion_name (stantion_name_temp,
-                                             i_find_stantion_id);
-              flash_cfg_store_stantion_uuid (stantion_uuid_temp,
-                                             i_find_stantion_id);
-
-              flash_cfg_store_stantion_name (
-                  my_recognize_ret_name (u8_ind_ch_st), u8_stantion_id);
-              flash_cfg_store_stantion_uuid (
-                  my_recognize_ret_stationuuid (u8_ind_ch_st), u8_stantion_id);
-            }
-          printf ("i_find_stantion_id=%d, u8_ind_ch_st=%d, u8_stantion_id=%d "
-                  "name=%s uuid=%s\n",
-                  i_find_stantion_id, u8_ind_ch_st, u8_stantion_id,
-                  my_recognize_ret_name (u8_ind_ch_st),
-                  my_recognize_ret_stationuuid (u8_ind_ch_st));
-          display_refresh ();
-        }
-    }
-}
-
-void
-Menu2ActionClick (void)
-{
-  u8_ind_ch_st = i_menu2;
-  sprintf (stantion_uuid, my_recognize_ret_stationuuid (u8_ind_ch_st));
-  // printf ("flash_cfg_load stantion_uuid %s,u8_stantion_id
-  // %d\n",stantion_uuid,u8_stantion_id);
-  VS1053_stop_PlayMP3 ();
-}
-
-static void
-display_menu_stantion_pos (u8 u8_stantion_id, u8 u8_stpos)
-{
-  u8 u8_Page_Disp = u8_stantion_id / 4; //по 4 станции влезает на дисплей
-
-  bool l_name_choice = ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id
-                        && i_menu % 2 != 0 && i_menu != 0);
-  bool l_store_choice = ((u8_Page_Disp * 4 + u8_stpos) == u8_stantion_id
-                         && i_menu % 2 == 0 && i_menu != 0);
-
-  if (l_name_choice)
-    u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
-  else
-    u8g2_SetFont (&u8g2, u8g2_font_4x6_t_cyrillic);
-  sprintf (buf_str_ind, "%.2d.", (u8_Page_Disp * 4 + u8_stpos));
-  u8g2_DrawStr (&u8g2, 1, 30 + u8_stpos * 10, buf_str_ind);
-  flash_cfg_load_stantion_name (buf_str_ind, (u8_Page_Disp * 4 + u8_stpos));
-  if (buf_str_ind[0] == 0xd0)
-    buf_str_ind[(l_store_choice ? 24 : 28)] = 0;
-  else
-    buf_str_ind[(l_store_choice ? 12 : 14)] = 0;
-  u8g2_DrawUTF8 (&u8g2, 16, 30 + u8_stpos * 10, buf_str_ind);
-
-  if (!l_name_choice)
-    {
-      if (l_store_choice)
-        {
-          u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
-          sprintf (buf_str_ind, "Store%.2d", (u8_Page_Disp * 4 + u8_stpos));
-          u8g2_DrawStr (&u8g2, 80, 30 + u8_stpos * 10, buf_str_ind);
-        }
-      else
-        {
-          u8g2_SetFont (&u8g2, u8g2_font_4x6_t_cyrillic);
-          sprintf (buf_str_ind, "St%.2d", (u8_Page_Disp * 4 + u8_stpos));
-          u8g2_DrawStr (&u8g2, 100, 30 + u8_stpos * 10, buf_str_ind);
-        }
-    }
-}
-
-volatile static u16 i_delay_WAIT
-    = 0; //если не 0, значит ждем данных с сервера веб станции
-
-static void
-display_refresh (void)
-{
-  u8g2_FirstPage (&u8g2);
-  do
-    {
-      u8g2_SetDrawColor (&u8g2, 1);
-      if (i_switch_menu == 0)
-        {
-          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-          sprintf (buf_str_ind, "vol:%.3d", u16_volume);
-          u8g2_DrawStr (&u8g2, 10, 20, buf_str_ind);
-          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawUTF8 (&u8g2, 1, 30, my_recognize_ret_name (u8_ind_ch_st));
-          u8g2_DrawUTF8 (&u8g2, 1, 40, my_recognize_ret_tags (u8_ind_ch_st));
-          u8g2_DrawStr (&u8g2, 1, 50, my_recognize_ret_country (u8_ind_ch_st));
-          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec (u8_ind_ch_st));
-          u8g2_DrawStr (&u8g2, 60, 60,
-                        my_recognize_ret_bitrate (u8_ind_ch_st));
-          u8g2_DrawStr (
-              &u8g2, 90, 60,
-              (my_recognize_ret_https (u8_ind_ch_st) ? "https" : "http"));
-        }
-      if (i_switch_menu == 1)
-        {
-          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-          sprintf (buf_str_ind, "Menu1");
-          u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
-          //
-
-          u8g2_SetFont (&u8g2, u8g2_font_5x8_t_cyrillic);
-          sprintf (buf_str_ind, "%d", i_menu);
-          u8g2_DrawStr (&u8g2, 75, 10, buf_str_ind);
-
-          if (i_menu == MENU_STORE_VOLUME)
-            u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
-          else
-            u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 75, 20, "St.Vol");
-
-          u8 u8_stantion_id = (i_menu / 2);
-          if ((u8_stantion_id * 2) == i_menu && u8_stantion_id > 0)
-            u8_stantion_id--;
-          display_menu_stantion_pos (u8_stantion_id, 0);
-          display_menu_stantion_pos (u8_stantion_id, 1);
-          display_menu_stantion_pos (u8_stantion_id, 2);
-          display_menu_stantion_pos (u8_stantion_id, 3);
-
-          if (i_find_stantion_id >= 0)
-            {
-              u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-              sprintf (buf_str_ind, "St%.2d.OV(%.2d)", u8_stantion_id,
-                       i_find_stantion_id);
-              u8g2_DrawStr (&u8g2, 0, 45, buf_str_ind);
-              i_find_stantion_id = -1;
-              i_delay_WAIT = 1;
-            }
-        }
-
-      if (i_switch_menu == 2)
-        {
-          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-          sprintf (buf_str_ind, "Menu2");
-          u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
-
-          u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
-          sprintf (buf_str_ind, "%d", i_menu2);
-          u8g2_DrawStr (&u8g2, 85, 15, buf_str_ind);
-
-          sprintf (buf_str_ind, my_recognize_ret_name (i_menu2));
-          u8g2_DrawUTF8 (&u8g2, 1, 38, buf_str_ind);
-
-          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
-          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec (i_menu2));
-          u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate (i_menu2));
-          u8g2_DrawStr (&u8g2, 90, 60,
-                        (my_recognize_ret_https (i_menu2) ? "https" : "http"));
-        }
-
-      if (VS1053_status_get_status () != VS1053_PLAY
-          || VS1053_WEB_RADIO_nTotal < 512)
-        {
-          u8g2_SetDrawColor (&u8g2, 1);
-          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
-          u8g2_DrawStr (&u8g2, 30, 45, "WAIT...");
-        }
-    }
-  while (u8g2_NextPage (&u8g2));
-}
+#include "my_display.h"
+#include "my_rand.h"
 
 //****************************************************************************************************//
 
 static int i_rotar = 10;
+//****************************************************************************************************//
 
-static const u16 i_pos_dreb_SW
-    = 500; //кнопка,таймер 300 Мкс, значит будет 150 миллисекунд.
-volatile static u8 i_dreb_SW = 0; // от дребезга кнопки
-
-static const u16 i_pos_DBL_CLICK
-    = 4000; // таймер 300 Мкс, значит будет 1.2 сек
-volatile static u16 i_delay_SW_DBL_CLICK
-    = 0; // двойной клик, переход в меню и обратно
-
-static const u16 i_pos_delay_volume
-    = 6000; // таймер 300 Мкс, значит будет 1.8 сек
-volatile static u16 i_delay_volume = 0;
-
-static void
-demo_timer_irq (u8 *arg) //
+void
+menu_task (void *sdata)
 {
-  int i_enc_diff = get_encoder_diff ();
-  if (i_enc_diff != 0) // i_dreb_CLK != 0)
+  set_encoder_diff (0);
+  bool btn_state = get_encoder_btn_state ();
+  bool add_btn_1 = get_add_btn_1_state ();
+  while (1)
     {
-      set_encoder_diff (0);
-      {
+
+      int i_enc_diff = get_encoder_diff ();
+      if (i_enc_diff != 0)
         {
-
-          if (i_switch_menu == 0)
-            {
-              if (i_enc_diff < 0)
-                i_rotar--;
-              else
-                i_rotar++;
-
-              if (i_rotar < 0)
-                i_rotar = 0;
-              if (i_rotar > 100)
-                i_rotar = 100;
-
-              u16_volume = 100 - i_rotar;
-              if (i_delay_volume == 0)
+          set_encoder_diff (0);
+          {
+            switch (i_switch_menu)
+              {
+              case 0:
                 {
-                  i_delay_volume = 1;
-                  VS1053_setVolume (u16_volume);
+                  if (i_enc_diff < 0)
+                    i_rotar--;
+                  else
+                    i_rotar++;
+                  if (i_rotar < 0)
+                    i_rotar = 0;
+                  if (i_rotar > 100)
+                    i_rotar = 100;
+                  if (u16_volume != 100 - i_rotar)
+                    {
+                      u16_volume = 100 - i_rotar;
+                      VS1053_setVolume (u16_volume);
+                      tls_os_time_delay (HZ / 2);
+                    }
+                };
+                break;
+              case 1:
+                {
+                  if (i_enc_diff < 0)
+                    i_menu--;
+                  else
+                    i_menu++;
+                  if (i_menu < 0)
+                    i_menu = MENU_MAX_POS;
+                  if (i_menu > MENU_MAX_POS)
+                    i_menu = 0;
+                };
+                break;
+              case 2:
+                {
+                  if (i_enc_diff < 0)
+                    i_menu2--;
+                  else
+                    i_menu2++;
+                  if (i_menu2 < 0)
+                    i_menu2 = MENU2_MAX_POS;
+                  if (i_menu2 > MENU2_MAX_POS)
+                    i_menu2 = 0;
+                };
+                break;
+              }
+            display_refresh ();
+          }
+        }
+
+      bool btn_state_curr = get_encoder_btn_state ();
+      if (btn_state != btn_state_curr) //Нажали
+        {
+          btn_state = btn_state_curr;
+          if (btn_state)
+            {
+              // sprintf (msg, " button RELEASE ");
+            }
+          else
+            {
+              // sprintf (msg, "  button PUSH   ");
+              switch (i_switch_menu)
+                {
+                case 0:
+                  {
+                    stantion_uuid[0] = 0;
+                    VS1053_stop_PlayMP3 ();
+                  };
+                  break;
+                case 1:
+                  MenuActionClick ();
+                  break;
+                case 2:
+                  Menu2ActionClick ();
+                  break;
                 }
             }
-          if (i_switch_menu == 1)
+        }
+
+      if (i_delay_WAIT > 0) // ждем (x сек) для того чтоб убрать надпись
+                            // "WAIT..." на дисплее, если уже воспроизведение
+        {
+          if (i_delay_WAIT++ > 100)
             {
-              if (i_enc_diff < 0)
-                i_menu--;
+              if (VS1053_status_get_status () != VS1053_PLAY
+                  || VS1053_WEB_RADIO_nTotal < 512)
+                i_delay_WAIT = 1;
               else
-                i_menu++;
-              if (i_menu < 0)
-                i_menu = MENU_MAX_POS;
-              if (i_menu > MENU_MAX_POS)
-                i_menu = 0;
-            }
-          if (i_switch_menu == 2)
-            {
-              if (i_enc_diff < 0)
-                i_menu2--;
-              else
-                i_menu2++;
-              if (i_menu2 < 0)
-                i_menu2 = MENU2_MAX_POS;
-              if (i_menu2 > MENU2_MAX_POS)
-                i_menu2 = 0;
-            }
-
-          display_refresh ();
-        }
-      }
-    }
-
-  if (i_dreb_SW != 0
-      && i_dreb_SW++ > i_pos_dreb_SW) //можно отсчитывать временной интервал
-    {
-      i_dreb_SW = 0; // от дребезга
-    }
-
-  if (i_delay_SW_DBL_CLICK
-      > 0) //если время двойного нажатия просрочено (1 сек), то действие в
-           //зависимости от , в меню мы или нет
-    {
-      if (i_delay_SW_DBL_CLICK++ > i_pos_DBL_CLICK)
-        {
-          printf ("demo_timer_irq i_delay_SW_DBL_CLICK=%d i_switch_menu=%d\n",
-                  i_delay_SW_DBL_CLICK, i_switch_menu);
-          i_delay_SW_DBL_CLICK = 0;
-          if (i_switch_menu == 0)
-            {
-              // printf ("i_switch_menu == 0\n");
-              stantion_uuid[0] = 0;
-              VS1053_stop_PlayMP3 ();
-            }
-          if (i_switch_menu == 1)
-            MenuActionClick ();
-          if (i_switch_menu == 2)
-            Menu2ActionClick ();
-        }
-    }
-
-  if (i_delay_volume > 0) // регулятор громкости, защитим от зависаний, слишком
-                          // быстро - нельзя
-    {
-      if (i_delay_volume++ > i_pos_delay_volume)
-        {
-          i_delay_volume = 0;
-          VS1053_setVolume (u16_volume);
-        }
-    }
-
-  if (i_delay_WAIT > 0) // ждем (1 сек) для того чтоб убрать надпись "WAIT..."
-                        // на дисплее, если уже воспроизведение
-    {
-      if (i_delay_WAIT++ > i_pos_DBL_CLICK)
-        {
-          if (VS1053_status_get_status () != VS1053_PLAY
-              || VS1053_WEB_RADIO_nTotal < 512)
-            i_delay_WAIT = 1;
-          else
-            {
-              i_delay_WAIT = 0;
-              display_refresh ();
-            }
-        }
-    }
-
-  if (get_encoder_btn_state () == 0) //Нажали
-    {
-      if (i_dreb_SW == 0) // защита от ддребезга контактов для кнопки
-        {
-          // printf ("get_encoder_btn_state()==0
-          // i_delay_SW_DBL_CLICK=%d\n",i_delay_SW_DBL_CLICK);
-          i_dreb_SW = 1;
-
-          if (i_delay_SW_DBL_CLICK == 0)
-            i_delay_SW_DBL_CLICK = 1;
-          else
-            {
-              if (i_delay_SW_DBL_CLICK > i_pos_dreb_SW)
                 {
-                  i_delay_SW_DBL_CLICK = 0;
-                  i_switch_menu++;
-                  if (i_switch_menu > 2)
-                    i_switch_menu = 0;
-                  if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
-                    i_menu--;
+                  i_delay_WAIT = 0;
                   display_refresh ();
                 }
             }
         }
+
+      bool add_btn_1_curr = get_add_btn_1_state ();
+      if (add_btn_1 != add_btn_1_curr) //Нажали
+        {
+          add_btn_1 = add_btn_1_curr;
+          if (add_btn_1)
+            {
+              // sprintf (msg, " button RELEASE ");
+            }
+          else
+            {
+              // sprintf (msg, "  button PUSH   ");
+              i_switch_menu++;
+              if (i_switch_menu > 2)
+                i_switch_menu = 0;
+              if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
+                i_menu--;
+              display_refresh ();
+            }
+        }
+
+      tls_os_time_delay (HZ / 200);
     }
 }
 
-//****************************************************************************************************//
-/*
-constrain(x, a, b)
-Функция проверяет и если надо задает новое значение,
-так чтобы оно была в области допустимых значений, заданной параметрами.
-
-Параметры
-x: проверяемое значение, любой тип
-a: нижняя граница области допустимых значений, любой тип
-b: верхняя граница области допустимых значений, любой тип
-*/
-static int
-constrain (int x, int a, int b)
-{
-  if (x < a)
-    return a;
-  if (x > b)
-    return b;
-  return x;
-}
-static int
-random (int min_num, int max_num)
-{
-  int result = 0, low_num = 0, hi_num = 0;
-
-  if (min_num < max_num)
-    {
-      low_num = min_num;
-      hi_num = max_num + 1; // include max_num in output
-    }
-  else
-    {
-      low_num = max_num;
-      hi_num = min_num + 1; // include max_num in output
-    }
-
-  result = (rand () % (hi_num - low_num)) + low_num;
-  result = constrain (result, low_num, hi_num - 1);
-  return result;
-}
-
-// console task use UART0 as communication port with PC
 void
-demo_console_task (void *sdata)
+init_task (void *sdata)
 {
-
-  printf ("wifi test app\n");
 
   tls_watchdog_init (20 * 1000 * 1000); // u32 usec microseconds, около 20 сек
   srand (tls_os_get_time ());           // time(NULL));
 
-  puts ("Initializing to I2C oled Display.");
+  printf ("Initializing to I2C oled Display.\n");
 
   // u8g2_Setup_sh1106_i2c_128x64_noname_f (&u8g2, U8G2_R0,
   // u8x8_byte_hw_i2c_riotos, u8x8_gpio_and_delay_riotos);
@@ -495,10 +216,10 @@ demo_console_task (void *sdata)
 
   };
   u8g2_SetUserPtr (&u8g2, &user_data_8x8);
-  puts ("Initializing display.");
   u8g2_InitDisplay (&u8g2);
   u8g2_SetPowerSave (&u8g2, 0);
 
+  printf ("Initializing to SPI vs1053.\n");
   /* vs1053 */
   libVS1053_t user_data53 = {
 
@@ -565,27 +286,18 @@ demo_console_task (void *sdata)
   VS1053_VS1053 (&user_data53);
   VS1053_begin ();
 
-  u8 timer_id;
-  struct tls_timer_cfg timer_cfg;
-  // timer_cfg.unit = TLS_TIMER_UNIT_MS; // MS или Миллисекунды = 10^-3
-  timer_cfg.unit = TLS_TIMER_UNIT_US; // US или Микросекунды = 10^-6
-  timer_cfg.timeout = 300; // 300 US, значит частота 3.333KHz
-  timer_cfg.is_repeat = 1;
-  timer_cfg.callback = (tls_timer_irq_callback)demo_timer_irq;
-  timer_cfg.arg = NULL;
-  timer_id = tls_timer_create (&timer_cfg);
-  tls_timer_start (timer_id);
-  printf ("timer start\n");
-  //
-
+  printf ("Initializing to GPIO ENCODER.\n");
   libENCODER_t enc_pin = {
     .ENCODER_S = WM_IO_PA_11,
     .ENCODER_A = WM_IO_PA_12,
     .ENCODER_B = WM_IO_PA_13,
+    .ADD_BUTTON_1 = WM_IO_PA_14,
+    .ADD_BUTTON_2 = NO_GPIO_PIN,
+    .ADD_BUTTON_3 = NO_GPIO_PIN,
   };
-
   bsp_encoder_init (&enc_pin);
 
+  printf ("Load def and prev store values.\n");
   stantion_uuid[0] = 0;
   flash_cfg_load_u16 (&u16_volume, MENU_STORE_VOLUME);
   u16 i_menu_temp;
@@ -598,6 +310,14 @@ demo_console_task (void *sdata)
   i_rotar = 100 - u16_volume;
   VS1053_setVolume (u16_volume);
   display_refresh ();
+
+  /**/
+  tls_os_task_create (NULL, "MENU_TASK", menu_task, NULL,
+                      (void *)MenuTaskStk, /* task's stack start address */
+                      MENU_TASK_SIZE
+                          * sizeof (u32), /* task's stack size, unit:byte */
+                      MENU_TASK_PRIO, 0);
+  /**/
 
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
@@ -688,9 +408,9 @@ UserMain (void)
 
   tls_sys_clk_set (CPU_CLK_240M);
 
-  tls_os_task_create (NULL, NULL, demo_console_task, NULL,
-                      (void *)DemoTaskStk, /* task's stack start address */
-                      DEMO_TASK_SIZE
+  tls_os_task_create (NULL, "INIT_TASK", init_task, NULL,
+                      (void *)InitTaskStk, /* task's stack start address */
+                      INIT_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
-                      DEMO_TASK_PRIO, 0);
+                      INIT_TASK_PRIO, 0);
 }
