@@ -145,7 +145,8 @@ user_app2_task (void *sdata)
 
   while (1)
     {
-      tls_os_time_delay (200);
+      tls_os_time_delay (HZ/4);
+      tls_watchdog_clr ();// пока есть управление, не перезапускаем!
       if (b_ChkStationUuid && VS1053_WEB_RADIO_nTotal > (1024 * 1024 * 1))
         {
           b_ChkStationUuid = false;
@@ -161,10 +162,11 @@ user_app2_task (void *sdata)
           flash_cfg_load_u16 (&st_index, 0);
           if (stantion_index != st_index)
             {
-              flash_cfg_store_u16 (stantion_index, 0);
-              printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",
-                      stantion_index);
-            }
+              //flash_cfg_store_u16 (stantion_index, 0);
+              //printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",
+              //        stantion_index);
+              // тут слишком часто, flash не выдержит, можно сохранять только настройки!
+            } 
         }
       if (rx_data_len > 0)
         {
@@ -250,6 +252,12 @@ user_app2_task (void *sdata)
                               // restart WiFi ?
                               u8_wifi_state = 0;
                               tls_watchdog_clr ();
+                              printf ("u8_wifi_state = 0, restart WiFi ?\r\n");
+                            } 
+                          if (strstr (pHeaderEnd, "S"))
+                            {
+                              my_sost = VS1053_QUERY_TO_STOP; 
+                              printf ("VS1053_QUERY_TO_STOP\r\n");
                             } 
                         }
                       memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
@@ -347,7 +355,7 @@ void
 user_app1_task (void *sdata)
 {
 
-  tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 60 сек
+  tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 30 сек
 
   /* vs1053 */
   libVS1053_t user_data53 = {
@@ -492,10 +500,10 @@ user_app1_task (void *sdata)
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
-  stantion_index = 0;
-  flash_cfg_load_u16 (&stantion_index, 0);
-  if (stantion_index > 44)
-    stantion_index = 0;
+  stantion_index = 0;// во flash это бы не надо сохранять! слишком часто
+  //flash_cfg_load_u16 (&stantion_index, 0);
+  //if (stantion_index > 44)
+  //  stantion_index = 0;
   printf ("load default stantion index = %d\n", stantion_index);
   flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
   if (strlen (stantion_uuid) != 36)

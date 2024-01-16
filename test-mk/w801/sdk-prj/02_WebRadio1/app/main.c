@@ -37,7 +37,7 @@ static OS_STK InitTaskStk[INIT_TASK_SIZE];
 
 #define MENU_TASK_SIZE 2048
 static OS_STK MenuTaskStk[MENU_TASK_SIZE];
-#define MENU_TASK_PRIO (INIT_TASK_PRIO + 1)
+#define MENU_TASK_PRIO (INIT_TASK_PRIO)
 
 #include "mod1/VS1053.h"
 #include "mod1/encoder.h"
@@ -71,10 +71,7 @@ menu_task (void *sdata)
               {
               case 0:
                 {
-                  if (i_enc_diff < 0)
-                    i_rotar--;
-                  else
-                    i_rotar++;
+                  i_rotar+=i_enc_diff;
                   if (i_rotar < 0)
                     i_rotar = 0;
                   if (i_rotar > 100)
@@ -89,10 +86,7 @@ menu_task (void *sdata)
                 break;
               case 1:
                 {
-                  if (i_enc_diff < 0)
-                    i_menu--;
-                  else
-                    i_menu++;
+                  i_menu+=i_enc_diff;
                   if (i_menu < 0)
                     i_menu = MENU_MAX_POS;
                   if (i_menu > MENU_MAX_POS)
@@ -101,10 +95,7 @@ menu_task (void *sdata)
                 break;
               case 2:
                 {
-                  if (i_enc_diff < 0)
-                    i_menu2--;
-                  else
-                    i_menu2++;
+                  i_menu2+=i_enc_diff;
                   if (i_menu2 < 0)
                     i_menu2 = MENU2_MAX_POS;
                   if (i_menu2 > MENU2_MAX_POS)
@@ -181,7 +172,7 @@ menu_task (void *sdata)
             }
         }
 
-      tls_os_time_delay (HZ / 200);
+      tls_os_time_delay (HZ / 100);
     }
 }
 

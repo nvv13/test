@@ -30,29 +30,137 @@ extern uint8_t
     SevenSegNumFont[]; // подключаем шрифт имитирующий семисегментный индикатор
 extern uint8_t SmallSymbolFont[];
 
-#include "encoder.h"
+#include "ds3231.h"
+#define ISOSTR_LEN (20U)
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
+static ds3231_t _dev;
+
+/* parse ISO date string (YYYY-MM-DDTHH:mm:ss) to struct tm */
+static int
+_tm_from_str (const char *str, struct tm *time)
+{
+  char tmp[5];
+
+  if (strlen (str) != ISOSTR_LEN - 1)
+    {
+      return -1;
+    }
+  if ((str[4] != '-') || (str[7] != '-') || (str[10] != 'T')
+      || (str[13] != ':') || (str[16] != ':'))
+    {
+      return -1;
+    }
+
+  memset (time, 0, sizeof (struct tm));
+
+  memcpy (tmp, str, 4);
+  tmp[4] = '\0';
+  str += 5;
+  time->tm_year = atoi (tmp) - 1900;
+
+  memcpy (tmp, str, 2);
+  tmp[2] = '\0';
+  str += 3;
+  time->tm_mon = atoi (tmp) - 1;
+
+  memcpy (tmp, str, 2);
+  str += 3;
+  time->tm_mday = atoi (tmp);
+
+  memcpy (tmp, str, 2);
+  str += 3;
+  time->tm_hour = atoi (tmp);
+
+  memcpy (tmp, str, 2);
+  str += 3;
+  time->tm_min = atoi (tmp);
+
+  memcpy (tmp, str, 2);
+  time->tm_sec = atoi (tmp);
+
+  return 0;
+}
+
+static int
+_cmd_get (int argc, char **argv)
+{
+  (void)argc;
+  (void)argv;
+  char dstr[ISOSTR_LEN];
+
+  struct tm time;
+  ds3231_get_time (&_dev, &time);
+
+  size_t pos = strftime (dstr, ISOSTR_LEN, "%Y-%m-%dT%H:%M:%S", &time);
+  dstr[pos] = '\0';
+  printf ("The current time is: %s\n", dstr);
+
+  return 0;
+}
+
+static int
+_cmd_set (int argc, char **argv)
+{
+  if (argc != 2)
+    {
+      printf ("usage: %s <iso-date-str YYYY-MM-DDTHH:mm:ss>\n", argv[0]);
+      return 1;
+    }
+
+  if (strlen (argv[1]) != (ISOSTR_LEN - 1))
+    {
+      puts ("error: input date string has invalid length");
+      return 1;
+    }
+
+  struct tm target_time;
+  int res = _tm_from_str (argv[1], &target_time);
+  if (res != 0)
+    {
+      puts ("error: unable do parse input date string");
+      return 1;
+    }
+
+  ds3231_set_time (&_dev, &target_time);
+
+  printf ("success: time set to %s\n", argv[1]);
+  return 0;
+}
 
 void
 user_app1_task (void *sdata)
 {
-  printf ("user_app1_task start\n");
 
-  libENCODER_t enc_pin = {
-    .ENCODER_S = WM_IO_PA_11,
-    .ENCODER_A = WM_IO_PA_12,
-    .ENCODER_B = WM_IO_PA_13,
-    .ADD_BUTTON_1 = WM_IO_PA_14,
-    .ADD_BUTTON_2 = NO_GPIO_PIN,
-    .ADD_BUTTON_3 = NO_GPIO_PIN,
+  int res;
+
+  puts ("DS3231 RTC test\n");
+
+  i2c_param_t user_i2c = {
+    .i2c_freq = 200000,     /* частота i2c в герцах */
+    .i2c_scl = WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
+    .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
   };
-  bsp_encoder_init (&enc_pin);
-/*
-  printf ("user_app1_task start TFT01_18SP 128x160\n");
+
+  ds3231_params_t par = { .bus = &user_i2c, .opt = DS3231_OPT_BAT_ENABLE };
+
+  /* initialize the device */
+  res = ds3231_init (&_dev, &par);
+  if (res != 0)
+    {
+      puts ("error: unable to initialize DS3231 [I2C initialization error]");
+      return;
+    }
+
+  struct tm time;
+  ds3231_get_time (&_dev, &time);
+
+  printf ("init TFT01_18SP 128x160\n");
+
+  // подключаем библиотеку UTFT
   UTFT_UTFT (TFT01_18SP,
              (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
              ,
@@ -66,25 +174,6 @@ user_app1_task (void *sdata)
              ,
              // 120000000
              60000000
-  );         */
-
-  printf ("user_app1_task start 3.5 TFT 320x480 HW SDIO SPI MSP3526 \n");
-
-  // подключаем библиотеку UTFT
-  UTFT_UTFT (MSP3526 //
-             ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_17  //RS  SDA
-             ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_15  //WR  SCL
-             ,
-             WM_IO_PB_23 //(u8)NO_GPIO_PIN // WM_IO_PB_14  //CS  CS
-             ,
-             (u8)WM_IO_PB_21 // RST reset RES
-             ,
-             (u8)WM_IO_PB_22 // SER => DC !
-             ,
-             //120000000
-                60000000
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -99,7 +188,7 @@ user_app1_task (void *sdata)
     максимально, частота spi_freq = 20000000 (20MHz)
         но!      если spi_freq > 20000000 тогда работает spi SDIO
         частоту можно ставить от 21000000 до 120000000 герц (работает при
-    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL 
+    240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL
                                WM_IO_PB_07 CMD  -> MOSI
            */
   );
@@ -126,69 +215,13 @@ user_app1_task (void *sdata)
   // UTFT_InitLCD (PORTRAIT);
 
   UTFT_clrScr (); // стираем всю информацию с дисплея
-  //UTFT_setFont (SmallFont); // устанавливаем шрифт
-  UTFT_setFont (BigFont); // устанавливаем шрифт
+  UTFT_setFont (SmallFont); // устанавливаем шрифт
   char msg[100];
   msg[0] = 0;
 
-  int i_enc_diff = get_encoder_diff () + 1;
-  bool btn_state = !get_encoder_btn_state ();
-  bool add_btn_1 = !get_add_btn_1_state ();
   while (1)
     { //
-
-      int i_enc_curr = get_encoder_diff ();
-      if (i_enc_curr != i_enc_diff)
-        {
-          i_enc_diff = i_enc_curr;
-          if (i_enc_diff > 0)
-            UTFT_setColor2 (VGA_GREEN);
-          else if (i_enc_diff == 0)
-            UTFT_setColor2 (VGA_WHITE);
-          else
-            UTFT_setColor2 (VGA_BLUE);
-          sprintf (msg, " i_enc_diff=%d ", i_enc_diff);
-          UTFT_print (msg, CENTER, 50, 0);
-        }
-
-      bool btn_state_curr = get_encoder_btn_state ();
-      if (btn_state != btn_state_curr) //Нажали
-        {
-          btn_state = btn_state_curr;
-          if (btn_state)
-            {
-              UTFT_setColor2 (VGA_WHITE);
-              sprintf (msg, " button encoder RELEASE ");
-            }
-          else
-            {
-              UTFT_setColor2 (VGA_RED);
-              sprintf (msg, "  button encoder PUSH   ");
-              set_encoder_diff (0);
-            }
-          UTFT_print (msg, CENTER, 80, 0);
-        }
-
-
-      bool add_btn_1_curr = get_add_btn_1_state ();
-      if (add_btn_1 != add_btn_1_curr) //Нажали
-        {
-          add_btn_1 = add_btn_1_curr;
-          if (add_btn_1)
-            {
-              UTFT_setColor2 (VGA_WHITE);
-              sprintf (msg, " button 1 RELEASE ");
-            }
-          else
-            {
-              UTFT_setColor2 (VGA_RED);
-              sprintf (msg, "  button 1 PUSH   ");
-              set_encoder_diff (0);
-            }
-          UTFT_print (msg, CENTER, 120, 0);
-        }
-
-      tls_os_time_delay (HZ / 50);
+      tls_os_time_delay (1);
 
     } //
 }

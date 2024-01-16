@@ -2,14 +2,14 @@
 #include "wm_i2c.h"
 
 static void
-Wire_begin (enum tls_io_name i2c_scl, enum tls_io_name i2c_sda)
+HWire_init (enum tls_io_name i2c_scl, enum tls_io_name i2c_sda, u32 i2c_freq)
 {
   wm_i2c_scl_config (i2c_scl);
   wm_i2c_sda_config (i2c_sda);
-  tls_i2c_init (100000);
+  tls_i2c_init (i2c_freq);
 }
 
-static void Wire_read_buf(u8 addr,u8 reg, u8 *buf, u8 len)
+static void HWire_read_buf(u8 addr,u8 reg, u8 *buf, u8 len)
 {
   tls_i2c_write_byte ((addr << 1) | 0x00, 1);
   tls_i2c_wait_ack ();
@@ -24,10 +24,9 @@ static void Wire_read_buf(u8 addr,u8 reg, u8 *buf, u8 len)
       len--;
     }
   *buf = tls_i2c_read_byte (0, 1);
-  tls_i2c_stop();
 }
 
-static u8 Wire_write_buf(u8 addr,u8 reg,u8 *buf, u8 u8_Len)
+static u8 HWire_write_buf(u8 addr,u8 reg,u8 *buf, u8 u8_Len)
 {
   tls_i2c_write_byte ((addr << 1) | 0x00, 1);
   if(tls_i2c_wait_ack ()!=WM_SUCCESS)

@@ -299,9 +299,9 @@ break;
         }
       tls_os_time_delay (1);
 
-      u16 u16_connect_timeout_sec = 30;
+      u16 u16_connect_timeout_sec = 10;
       if (strstr (ClientParams.Uri, "https") != NULL)
-        u16_connect_timeout_sec = 60;
+        u16_connect_timeout_sec = 15;
 
       printf ("Start to receive data from remote server\r\n");
 
@@ -309,9 +309,7 @@ break;
       //сначала заполняем буффер данными
       if(my_sost != VS1053_PLAY_BUF)
         VS1053_WEB_RADIO_buf_chunk_free = 0;
-      while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
-             //&& my_sost == VS1053_HW_INIT
-      )
+      while (nRetCode == HTTP_CLIENT_SUCCESS && my_sost != VS1053_QUERY_TO_STOP)
         {
 
           // u32 u_fur=tls_os_get_time();
@@ -369,8 +367,7 @@ break;
 
       VS1053_WEB_RADIO_nTotal = 0;
       // Get the data until we get an error or end of stream code
-      while ((nRetCode == HTTP_CLIENT_SUCCESS || nRetCode != HTTP_CLIENT_EOS)
-             && my_sost == VS1053_PLAY)
+      while (nRetCode == HTTP_CLIENT_SUCCESS && my_sost == VS1053_PLAY)
         {
           // Set the size of our buffer
           nSize = HTTP_CLIENT_BUFFER_SIZE;
