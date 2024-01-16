@@ -16,6 +16,10 @@ board HLK-W801-KIT-V1.1 +
 
 
 ~~~
+module ds3231 
+вот такой
+https://protosupplies.com/product/ds3231s-rtc-with-eeprom-module/
+
 ~~~
 
 
@@ -31,17 +35,16 @@ board HLK-W801-KIT-V1.1 +
 
 
 
-
-
 connect to
 W801   module ds3231
 GPIO   PIN    
 -----  ------ 
+PA02   32K    (32kHz) выход меандра с частотой 32.768кГц
+PA03   SQW    (INT/SQW) (INTerrupt / SQuare Wave) прерывание / программируемый меандр
+PA01   SCL    i2c clock   
+PA04   SDA    i2c data      
++3.3   VCC     
 GND    GND    
-+3.3        
-PA11       
-PA12        
-PA13       
 -----  ------ 
 
 
