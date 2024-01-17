@@ -58,6 +58,8 @@
 
 #include "w_wifi.h"
 
+#include "psram_disk_util.h"
+
 extern void dumpBuffer (char *name, char *buffer, int len);
 
 static char stantion_uuid[39];
@@ -145,8 +147,8 @@ user_app2_task (void *sdata)
 
   while (1)
     {
-      tls_os_time_delay (HZ/4);
-      tls_watchdog_clr ();// пока есть управление, не перезапускаем!
+      tls_os_time_delay (HZ / 4);
+      tls_watchdog_clr (); // пока есть управление, не перезапускаем!
       if (b_ChkStationUuid && VS1053_WEB_RADIO_nTotal > (1024 * 1024 * 1))
         {
           b_ChkStationUuid = false;
@@ -162,11 +164,12 @@ user_app2_task (void *sdata)
           flash_cfg_load_u16 (&st_index, 0);
           if (stantion_index != st_index)
             {
-              //flash_cfg_store_u16 (stantion_index, 0);
-              //printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",
+              // flash_cfg_store_u16 (stantion_index, 0);
+              // printf ("flash_cfg_store_u16 new stantion_index=%d\r\n",
               //        stantion_index);
-              // тут слишком часто, flash не выдержит, можно сохранять только настройки!
-            } 
+              // тут слишком часто, flash не выдержит, можно сохранять только
+              // настройки!
+            }
         }
       if (rx_data_len > 0)
         {
@@ -253,12 +256,12 @@ user_app2_task (void *sdata)
                               u8_wifi_state = 0;
                               tls_watchdog_clr ();
                               printf ("u8_wifi_state = 0, restart WiFi ?\r\n");
-                            } 
+                            }
                           if (strstr (pHeaderEnd, "S"))
                             {
-                              my_sost = VS1053_QUERY_TO_STOP; 
+                              my_sost = VS1053_QUERY_TO_STOP;
                               printf ("VS1053_QUERY_TO_STOP\r\n");
-                            } 
+                            }
                         }
                       memset (rx_buf, 0, CONSOLE_BUF_SIZE + 1);
                       rx_data_len = 0;
@@ -405,8 +408,11 @@ user_app1_task (void *sdata)
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
     .psram_BURST = 1, // 1 - хорошо работает для ESP-PSRAM64H
     .psram_OVERTIMER = 2, // 2 - хорошо работает для ESP-PSRAM64H
-    .load_buffer_debug = VSHTTP_DEBUG_NO_DEBUG, //VSHTTP_DEBUG_TYPE2, // 0 , 1 - выводит инфу по заполнению "f" или "+",
-                            // и опусташению буффера "-", "0" - нехватка данных
+    .load_buffer_debug
+    = VSHTTP_DEBUG_NO_DEBUG, // VSHTTP_DEBUG_TYPE2, // 0 , 1 - выводит инфу по
+                             // заполнению "f" или "+",
+                             // и опусташению буффера "-", "0" - нехватка
+                             // данных
     .spi_fastest_speed
     = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
 
@@ -500,9 +506,11 @@ user_app1_task (void *sdata)
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
-  stantion_index = 0;// во flash это бы не надо сохранять! слишком часто
-  //flash_cfg_load_u16 (&stantion_index, 0);
-  //if (stantion_index > 44)
+  psram_disk_init ();
+
+  stantion_index = 0; // во flash это бы не надо сохранять! слишком часто
+  // flash_cfg_load_u16 (&stantion_index, 0);
+  // if (stantion_index > 44)
   //  stantion_index = 0;
   printf ("load default stantion index = %d\n", stantion_index);
   flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
@@ -569,6 +577,8 @@ user_app1_task (void *sdata)
         }
 
       tls_os_time_delay (HZ * 3);
+      if (res_sd == FR_OK)
+        psram_disk_load_list ();
       tls_watchdog_clr ();
       // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
       //                     "2.fedora.pool.ntp.org");
@@ -611,6 +621,11 @@ user_app1_task (void *sdata)
                   UTFT_print (my_recognize_ret_bitrate (0), LEFT, 130, 0);
                 }
 
+              struct tm tblock;
+              tls_get_rtc (&tblock); // получаем текущее время
+              printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
+                      tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
+                      tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
               VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
 
               if (my_sost != VS1053_PLAY_BUF)

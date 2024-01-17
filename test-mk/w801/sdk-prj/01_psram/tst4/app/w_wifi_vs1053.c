@@ -2,7 +2,6 @@
 #include "w_wifi.h"
 #include <string.h>
 
-
 u8 volatile u8_wifi_state = 0;
 
 static void
