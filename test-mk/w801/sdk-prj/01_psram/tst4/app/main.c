@@ -56,6 +56,14 @@
 //#define MY_WIFI_AP "bred1"
 //#define MY_WIFI_PASS "9115676369"
 
+#define WIFI_ARR_COUNT 3
+static const char *aWIFI[WIFI_ARR_COUNT*2] = {
+  "bred8","123123123",
+  "bred1","9115676369",
+  MY_WIFI_AP,MY_WIFI_PASS,
+ };
+static u8 u8_select_wifi=0;
+
 #include "w_wifi.h"
 
 #include "psram_disk_util.h"
@@ -101,27 +109,7 @@ my_timer_irq (u8 *arg) // здесь будет смена режима
   */
 }
 
-/*
-#define URL_ARR_SIZE 14
-static const char *aUrl[URL_ARR_SIZE] = {
-  "http://188.9.157.80:81/axis-cgi/jpg/image.cgi?resolution=320x240",
-  "http://www.cek.ef.uni-lj.si/EBSLG2004/"
-  "EBSLG%20Continental%20Meeting%202004,%20Ljubljana/slides/P1010039.jpg",
-  "http://www.cek.ef.uni-lj.si/EBSLG2004/"
-  "EBSLG%20Continental%20Meeting%202004,%20Ljubljana/slides/P1010038.jpg",
-  "http://mobiliv.ru/_ph/94/2/663041550.jpg",
-  "http://mobiliv.ru/_ph/94/2/842704552.jpg",
-  "http://mobiliv.ru/_ph/94/2/111786880.jpg",
-  "http://mobiliv.ru/_ph/94/2/619137566.jpg",
-  "http://mobiliv.ru/_ph/94/2/732111012.jpg",
-  "http://mobiliv.ru/_ph/94/2/649581166.jpg",
-  "http://mobiliv.ru/_ph/94/2/883010373.jpg",
-  "http://mobiliv.ru/_ph/94/2/344263385.jpg",
-  "http://mobiliv.ru/_ph/94/2/63757809.jpg",
-  "http://mobiliv.ru/_ph/94/2/597387039.jpg",
-  "http://mobiliv.ru/_ph/94/2/395978212.jpg"
-};
-*/
+
 
 #define CONSOLE_BUF_SIZE 512
 u8 rx_buf[CONSOLE_BUF_SIZE + 1];
@@ -401,7 +389,7 @@ user_app1_task (void *sdata)
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
     .psram_BufferSize
-    = 1024 * 260, // 26400,   // подойдет 26400 более не надо! глючит!
+    = 1024 * 512,  // подойдет от 26400 
     .psram_config = 1, // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
@@ -547,7 +535,7 @@ user_app1_task (void *sdata)
   // scan_demo();
   // printf ("stop scan_demo \n");
   printf ("start scan_format2_demo \n");
-  scan_format2_demo ();
+  u8_select_wifi=scan_format2_demo (aWIFI,WIFI_ARR_COUNT);
   printf ("stop scan_format2_demo \n");
 
   printf ("key insert \"stantion_uuid\" + Enter - change stantion, uuid "
@@ -562,7 +550,7 @@ user_app1_task (void *sdata)
         {
           printf ("trying to connect wifi\n");
           if (u8_wifi_state == 0
-              && wifi_connect (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
+              && wifi_connect (aWIFI[u8_select_wifi*2],aWIFI[u8_select_wifi*2+1]) == WM_SUCCESS)
             {
               while (u8_wifi_state == 0)
                 {

@@ -5,6 +5,7 @@ static u8g2_t u8g2;
 static u8 i_switch_menu = 0;
 static int i_menu = 0;
 static int i_menu2 = 0;
+static int i_menu3 = 0;
 static u8 u8_ind_ch_st = 0;
 
 static u16 u16_volume = 0; //
@@ -87,6 +88,12 @@ Menu2ActionClick (void)
   sprintf (stantion_uuid, my_recognize_ret_stationuuid (u8_ind_ch_st));
   // printf ("flash_cfg_load stantion_uuid %s,u8_stantion_id
   // %d\n",stantion_uuid,u8_stantion_id);
+  VS1053_stop_PlayMP3 ();
+}
+
+void
+Menu3ActionClick (void)
+{
   VS1053_stop_PlayMP3 ();
 }
 
@@ -210,6 +217,26 @@ display_refresh (void)
           u8g2_DrawStr (&u8g2, 60, 60, my_recognize_ret_bitrate (i_menu2));
           u8g2_DrawStr (&u8g2, 90, 60,
                         (my_recognize_ret_https (i_menu2) ? "https" : "http"));
+        }
+
+      if (i_switch_menu == 3)
+        {
+          u8g2_SetFont (&u8g2, u8g2_font_courB18_tf);
+          sprintf (buf_str_ind, "Menu3");
+          u8g2_DrawStr (&u8g2, 0, 20, buf_str_ind);
+
+          u8g2_SetFont (&u8g2, u8g2_font_6x12_t_cyrillic);
+          sprintf (buf_str_ind, "%d", i_menu3);
+          u8g2_DrawStr (&u8g2, 85, 15, buf_str_ind);
+
+          sprintf (buf_str_ind, aUrl[i_menu3*2]);
+          u8g2_DrawUTF8 (&u8g2, 1, 38, buf_str_ind);
+
+          u8g2_SetFont (&u8g2, u8g2_font_5x7_t_cyrillic);
+//          u8g2_DrawStr (&u8g2, 1, 60, my_recognize_ret_codec (i_menu3));
+          u8g2_DrawStr (&u8g2, 60, 1, aUrl[i_menu3*2+1]);
+//          u8g2_DrawStr (&u8g2, 90, 60,
+//                        (my_recognize_ret_https (i_menu3) ? "https" : "http"));
         }
 
       if (VS1053_status_get_status () != VS1053_PLAY

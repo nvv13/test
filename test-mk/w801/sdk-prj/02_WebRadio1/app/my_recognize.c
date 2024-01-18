@@ -93,6 +93,17 @@ static u16 i_POS_bitrate = 0;
 static u16 i_LOAD_bitrate = 0;
 static char s_bitrate[MAX_INDEX_LOAD_FIND][5];
 
+
+void set_web_station_by_url (u8 index,const char * name,const char * url)
+{
+if(index>MAX_INDEX_LOAD_FIND-1)return;
+memcpy(s_name[index],name,32);
+s_name[index][31]=0;
+memcpy(s_url_resolved[index],url,200);
+s_url_resolved[index][199]=0;
+}
+
+
 char *
 my_recognize_ret_stationuuid (u8 index)
 {

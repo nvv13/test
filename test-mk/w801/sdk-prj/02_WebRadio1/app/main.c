@@ -23,8 +23,17 @@
 //#include "../../../../../../w_wifi_pass.h"
 //#define MY_WIFI_AP "bred8"
 //#define MY_WIFI_PASS "123123123"
-#define MY_WIFI_AP "bred1"
-#define MY_WIFI_PASS "9115676369"
+//#define MY_WIFI_AP "bred1"
+//#define MY_WIFI_PASS "9115676369"
+
+#define WIFI_ARR_COUNT 2
+static const char *aWIFI[WIFI_ARR_COUNT*2] = {
+  "bred8","123123123",
+  "bred1","9115676369",
+ // MY_WIFI_AP,MY_WIFI_PASS,
+ };
+static u8 u8_select_wifi=0;
+
 
 #include "my_recognize.h"
 #include "w_flash_cfg.h"
@@ -45,6 +54,7 @@ static OS_STK MenuTaskStk[MENU_TASK_SIZE];
 #include "mod1/u8x8_riotos.h"
 
 //****************************************************************************************************//
+#include "get_radio_url.h"
 #include "my_display.h"
 #include "my_rand.h"
 
@@ -102,6 +112,15 @@ menu_task (void *sdata)
                     i_menu2 = 0;
                 };
                 break;
+              case 3:
+                {
+                  i_menu3+=i_enc_diff;
+                  if (i_menu3 < 0)
+                    i_menu3 = URL_COUNT-1;
+                  if (i_menu3 > URL_COUNT-1)
+                    i_menu3 = 0;
+                };
+                break;
               }
             display_refresh ();
           }
@@ -131,6 +150,9 @@ menu_task (void *sdata)
                   break;
                 case 2:
                   Menu2ActionClick ();
+                  break;
+                case 3:
+                  Menu3ActionClick ();
                   break;
                 }
             }
@@ -164,7 +186,7 @@ menu_task (void *sdata)
             {
               // sprintf (msg, "  button PUSH   ");
               i_switch_menu++;
-              if (i_switch_menu > 2)
+              if (i_switch_menu > 3)
                 i_switch_menu = 0;
               if (i_switch_menu == 1 && i_menu > 1 && i_menu % 2 == 0)
                 i_menu--;
@@ -203,7 +225,7 @@ init_task (void *sdata)
 
     .i2c_scl = WM_IO_PA_01,
     .i2c_sda = WM_IO_PA_04,
-    .i2c_freq = 150000 // частота i2c в герцах
+    .i2c_freq = 100000 // частота i2c в герцах
 
   };
   u8g2_SetUserPtr (&u8g2, &user_data_8x8);
@@ -252,7 +274,7 @@ init_task (void *sdata)
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
     .psram_BufferSize
-    = 1024 * 100, // 26400,   // подойдет 26400 более не надо! глючит!
+    = 1024 * 512,  // подойдет от 26400 
     .psram_config = 1, // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
@@ -310,13 +332,17 @@ init_task (void *sdata)
                       MENU_TASK_PRIO, 0);
   /**/
 
+  printf ("start scan wifi \n");
+  u8_select_wifi=scan_format2_demo (aWIFI,WIFI_ARR_COUNT);
+  printf ("stop scan wifi \n");
+
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
     {
       while (u8_wifi_state == 0)
         {
           printf ("trying to connect wifi\n");
           if (u8_wifi_state == 0
-              && wifi_connect (MY_WIFI_AP, MY_WIFI_PASS) == WM_SUCCESS)
+              && wifi_connect (aWIFI[u8_select_wifi*2],aWIFI[u8_select_wifi*2+1]) == WM_SUCCESS)
             {
               while (u8_wifi_state == 0)
                 {
@@ -360,9 +386,12 @@ init_task (void *sdata)
                       my_recognize_http_reset ();
                       display_refresh ();
 
-                      if (strlen (stantion_uuid) == 36)
+                      if (strlen (stantion_uuid) == 36 || i_switch_menu==3)
                         {
-                          http_get_web_station_by_stationuuid (stantion_uuid);
+                          if(i_switch_menu==3)
+                            set_web_station_by_url (0,aUrl[i_menu3*2],aUrl[i_menu3*2+1]);
+                          else
+                            http_get_web_station_by_stationuuid (stantion_uuid);
                           stantion_uuid[0] = 0;
                           u8_ind_ch_st = 0;
                         }

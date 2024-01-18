@@ -157,6 +157,10 @@ end:
     }
 }
 
+static u8 _u8_WIFI_ARR_COUNT;
+static char **_aWIFI=NULL;
+static int _select_wifi=0;
+
 static void
 wifi_scan_format2_handler (void)
 {
@@ -203,6 +207,21 @@ wifi_scan_format2_handler (void)
       ssid[bss_info->ssid_len] = '\0';
 
       j += sprintf (buf1 + j, "%s", ssid);
+
+      //printf ("ssid=[%s]\n",ssid);
+      if(strlen((const char *)ssid)>0)
+        {
+        for(u8 ind=0;ind<_u8_WIFI_ARR_COUNT;ind++)
+          {
+            //printf ("find ssid=[%s]\n",_aWIFI[ind*2]);
+            if(strstr((const char *)_aWIFI[ind*2],(const char *)ssid)!=0)
+              {
+                if(_select_wifi<0 || _select_wifi>ind) 
+                _select_wifi=ind;
+              }
+          }
+        }
+
 
       j += sprintf (buf1 + j, ",%d, ", (signed char)bss_info->rssi);
 
@@ -465,9 +484,12 @@ scan_demo (void)
   return WM_SUCCESS;
 }
 
-int
-scan_format2_demo (void)
+
+u8 scan_format2_demo (const char ** aWIFI,const u8 u8_WIFI_ARR_COUNT)
 {
+  _u8_WIFI_ARR_COUNT=u8_WIFI_ARR_COUNT;
+  _aWIFI=(char **)aWIFI;
+  _select_wifi=-1;
   scan_done = 0;
   tls_wifi_scan_result_cb_register (wifi_scan_format2_handler);
   while (WM_SUCCESS != tls_wifi_scan ())
@@ -479,7 +501,10 @@ scan_format2_demo (void)
       tls_os_time_delay (HZ / 5);
     }
   scan_done = 0;
-  return WM_SUCCESS;
+  if(_select_wifi<0)
+    return 0;
+  else
+    return _select_wifi;
 }
 
 /*specified Scan demo*/

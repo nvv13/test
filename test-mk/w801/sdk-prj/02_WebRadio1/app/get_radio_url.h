@@ -66,7 +66,7 @@ static const char *aUrl[URL_ARR_SIZE] = {
        , "Country One Radio", "prmstrm.1.fm:8000/country"
        , "Dance One Radio", "prmstrm.1.fm:8000/dance"
        , "Dance Wave Retro!", "retro.dancewave.online/retrodance.mp3"
-       , "Dance Wave!", "dancewave.online/dance.mp3"
+       , "Dance Wave!", "https://dancewave.online/dance.mp3"
        , "Deep House Radio", "prmstrm.1.fm:8000/deephouse"
        , "Deep Melon radio", "stream.melonradio.com/deep"
        , "Deep Techno & Deep House", "prmstrm.1.fm:8000/deeptech"

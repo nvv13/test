@@ -24,6 +24,8 @@ extern "C"
   int http_get_web_station_by_random (void);
   int http_get_web_station_by_stationuuid (char *in_stationuuid);
 
+  void set_web_station_by_url (u8 index,const char * name,const char * url);
+
 #ifdef __cplusplus
 }
 #endif

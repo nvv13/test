@@ -21,8 +21,8 @@ typedef enum {
     I2C_SPEED_LOW = 10000,            /**< low speed mode: ~10kbit/s */
     I2C_SPEED_NORMAL = 100000,        /**< normal mode: ~100kbit/s */
     I2C_SPEED_FAST = 400000,          /**< fast mode: ~400kbit/sj */
-    I2C_SPEED_FAST_PLUS = 1000000,    /**< fast plus mode: ~1Mbit/s */
-    I2C_SPEED_HIGH = 3400000,         /**< high speed mode: ~3.4Mbit/s */
+   // не для w801 I2C_SPEED_FAST_PLUS = 1000000,    /**< fast plus mode: ~1Mbit/s */
+   // не для w801 I2C_SPEED_HIGH = 3400000,         /**< high speed mode: ~3.4Mbit/s */
 } i2c_speed_t;
 
 typedef enum {

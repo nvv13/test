@@ -35,6 +35,10 @@ int i2c_read_reg(i2c_t dev, uint16_t addr, uint16_t reg,
 int i2c_read_regs(i2c_t dev, uint16_t addr, uint16_t reg,
                   void *data, size_t len, uint8_t flags)
 {
+  if (flags & (I2C_REG16 | I2C_ADDR10 | I2C_NOSTART | I2C_NOSTOP)) 
+    {
+      return -EOPNOTSUPP;
+    }
   if (dev->hw_wire)
     return HWire_read_regs(dev,addr,reg,data,len,flags);
   else 
