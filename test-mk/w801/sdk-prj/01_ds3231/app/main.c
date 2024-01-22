@@ -140,12 +140,12 @@ user_app1_task (void *sdata)
   puts ("DS3231 RTC test\n");
 
   i2c_param_t user_i2c = {
-    .i2c_freq = 200000,     /* частота i2c в герцах */
+    .i2c_freq = 100000,     /* частота i2c в герцах */
     .i2c_scl = WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
     .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
   };
 
-  ds3231_params_t par = { .bus = &user_i2c, .opt = DS3231_OPT_BAT_ENABLE };
+  ds3231_params_t par = { .bus = &user_i2c, .opt = DS3231_OPT_BAT_ENABLE /* | DS3231_OPT_INTER_ENABLE */ };
 
   /* initialize the device */
   res = ds3231_init (&_dev, &par);
@@ -155,8 +155,12 @@ user_app1_task (void *sdata)
       return;
     }
 
-  struct tm time;
-  ds3231_get_time (&_dev, &time);
+  struct tm tblock;
+  ds3231_get_time (&_dev, &tblock);
+  //            tls_get_rtc (&tblock); // получаем текущее время
+  printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
+                      tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
+                      tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
 
   printf ("init TFT01_18SP 128x160\n");
 
@@ -221,7 +225,12 @@ user_app1_task (void *sdata)
 
   while (1)
     { //
-      tls_os_time_delay (1);
+      ds3231_get_time (&_dev, &tblock);
+      //            tls_get_rtc (&tblock); // получаем текущее время
+      printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
+                      tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
+                      tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
+      tls_os_time_delay (HZ);
 
     } //
 }
