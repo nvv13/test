@@ -279,7 +279,6 @@ at24cxxx_init (at24cxxx_t *dev, const at24cxxx_params_t *params)
       gpio_init (DEV_PIN_WP, GPIO_OUT);
       at24cxxx_disable_write_protect (dev);
     }
-  i2c_init(DEV_I2C_BUS);
   /* Check I2C bus once */
   i2c_acquire (DEV_I2C_BUS);
   i2c_release (DEV_I2C_BUS);

@@ -23,6 +23,20 @@
 
 #include "mod1/UTFT.h"
 #include "mod1/u_jpeg.h"
+#include "w_ntp.h"
+#include "w_wifi.h"
+
+#include "../../../../../../../w_wifi_pass.h"
+//#define MY_WIFI_AP "bred8"
+//#define MY_WIFI_PASS "123123123"
+//#define MY_WIFI_AP "bred1"
+//#define MY_WIFI_PASS "9115676369"
+
+#define WIFI_ARR_COUNT 3
+static const char *aWIFI[WIFI_ARR_COUNT * 2] = {
+  "bred8", "123123123", "bred1", "9115676369", MY_WIFI_AP, MY_WIFI_PASS,
+};
+static u8 u8_select_wifi = 0;
 
 extern uint8_t SmallFont[]; // подключаем маленький шрифт
 extern uint8_t BigFont[];   // подключаем большой шрифт
@@ -140,12 +154,18 @@ user_app1_task (void *sdata)
   puts ("DS3231 RTC test\n");
 
   i2c_param_t user_i2c = {
-    .i2c_freq = 100000,     /* частота i2c в герцах */
+    .i2c_freq = 400000,     /* частота i2c в герцах */
     .i2c_scl = WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
     .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
   };
 
-  ds3231_params_t par = { .bus = &user_i2c, .opt = DS3231_OPT_BAT_ENABLE /* | DS3231_OPT_INTER_ENABLE */ };
+  ds3231_params_t par
+      = { .bus = &user_i2c,
+          .opt = DS3231_OPT_BAT_ENABLE /* | DS3231_OPT_INTER_ENABLE */ };
+
+  /* initialize the i2c */
+  i2c_init (&user_i2c);
+  tls_os_time_delay (HZ);
 
   /* initialize the device */
   res = ds3231_init (&_dev, &par);
@@ -158,10 +178,11 @@ user_app1_task (void *sdata)
   struct tm tblock;
   ds3231_get_time (&_dev, &tblock);
   //            tls_get_rtc (&tblock); // получаем текущее время
-  printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
-                      tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
-                      tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
+  printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n", tblock.tm_year + 1900,
+          tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
+          tblock.tm_sec);
 
+/*
   printf ("init TFT01_18SP 128x160\n");
 
   // подключаем библиотеку UTFT
@@ -178,6 +199,7 @@ user_app1_task (void *sdata)
              ,
              // 120000000
              60000000
+*/
              /* spi_freq(Герц) для 5 контактных SPI дисплеев
                 (где отдельно ножка комманда/данные)
              програмируеться HW SPI на ножки (предопред)
@@ -195,7 +217,7 @@ user_app1_task (void *sdata)
     240Mhz тактовой) контакты: WM_IO_PB_06 CK   -> SCL
                                WM_IO_PB_07 CMD  -> MOSI
            */
-  );
+//  );
   /*
   ---- ------
   W801 LCD
@@ -215,30 +237,70 @@ user_app1_task (void *sdata)
 
   */
 
-  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+//  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
   // UTFT_InitLCD (PORTRAIT);
 
-  UTFT_clrScr (); // стираем всю информацию с дисплея
-  UTFT_setFont (SmallFont); // устанавливаем шрифт
+//  UTFT_clrScr (); // стираем всю информацию с дисплея
+//  UTFT_setFont (SmallFont); // устанавливаем шрифт
   char msg[100];
   msg[0] = 0;
 
-  while (1)
-    { //
-      ds3231_get_time (&_dev, &tblock);
-      //            tls_get_rtc (&tblock); // получаем текущее время
-      printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
-                      tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
-                      tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
-      tls_os_time_delay (HZ);
+  printf ("start scan_format2_demo \n");
+  u8_select_wifi = scan_format2_demo (aWIFI, WIFI_ARR_COUNT);
+  printf ("stop scan_format2_demo \n");
 
-    } //
+  for (;;) // цикл(1) с подсоединением к wifi и запросом времени
+    {
+      /*
+      while (u8_wifi_state == 0)
+        {
+          printf ("trying to connect wifi\n");
+          if (u8_wifi_state == 0
+              && wifi_connect (aWIFI[u8_select_wifi * 2],
+                               aWIFI[u8_select_wifi * 2 + 1])
+                     == WM_SUCCESS)
+            {
+              while (u8_wifi_state == 0)
+                {
+                  tls_os_time_delay (100);
+                }
+              // u8_wifi_state = 1;
+            }
+          else
+            {
+              tls_os_time_delay (HZ * 5);
+            }
+        }
+
+      tls_os_time_delay (HZ * 3);
+      // tls_watchdog_clr ();
+      // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
+      //                     "2.fedora.pool.ntp.org");
+      ntp_demo ();
+      tls_get_rtc (&tblock); // получаем текущее время
+      printf (" rtc time %d.%02d.%02d %02d:%02d:%02d\n", tblock.tm_year + 1900,
+              tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
+              tblock.tm_sec);
+      if(tblock.tm_year>2000) 
+      	ds3231_set_time (&_dev, &tblock);
+      */
+      //while (u8_wifi_state == 1) // основной цикл(2)
+     //   {
+          ds3231_get_time (&_dev, &tblock);
+          //            tls_get_rtc (&tblock); // получаем текущее время
+          printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r",
+                  tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
+                  tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
+          tls_os_time_delay (HZ);
+          // tls_watchdog_clr ();
+     //   }
+    }
 }
 
 void
 UserMain (void)
 {
-  printf ("UserMain start");
+  printf ("UserMain start \n");
   tls_sys_clk_set (CPU_CLK_240M);
 
   tls_os_task_create (NULL, NULL, user_app1_task, NULL,

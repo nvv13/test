@@ -7,6 +7,8 @@ https://github.com/ProYCS/ft6336_driver_for_stm32.git
 #include <stdio.h>
 #include <string.h>
 
+#include "endian.h"
+
 /*
 
  mc - Milliseconds 10^-3
@@ -275,14 +277,27 @@ static int SWire_write_regs(i2c_t dev, uint16_t addr, uint16_t reg,
   _i2c_scl = dev->i2c_scl;
   _i2c_sda = dev->i2c_sda;
   IIC_Start ();
+
   IIC_Send_Byte ((addr << 1) | 0);
   if (IIC_Wait_Ack ())
     {
       IIC_Stop ();
       return 1;
     }
-  IIC_Send_Byte (reg);
-  IIC_Wait_Ack ();
+
+  if (flags & I2C_REG16) 
+    {
+      reg = htons(reg); /* Make sure register is in big-endian on I2C bus */
+      IIC_Send_Byte (reg & 0xFF);
+      IIC_Wait_Ack ();
+      IIC_Send_Byte (((reg & 0xFF00) >> 8));
+      IIC_Wait_Ack ();
+    }
+    else
+    {
+      IIC_Send_Byte (reg);
+      IIC_Wait_Ack ();
+    }
 
   for (u16 u8_index = 0; u8_index < len; u8_index++)
     {
@@ -306,8 +321,21 @@ static int SWire_read_regs(i2c_t dev, uint16_t addr, uint16_t reg,
   IIC_Start ();
   IIC_Send_Byte ((addr << 1) | 0);
   IIC_Wait_Ack ();
-  IIC_Send_Byte (reg);
-  IIC_Wait_Ack ();
+
+  if (flags & I2C_REG16) 
+    {
+      reg = htons(reg); /* Make sure register is in big-endian on I2C bus */
+      IIC_Send_Byte (reg & 0xFF);
+      IIC_Wait_Ack ();
+      IIC_Send_Byte (((reg & 0xFF00) >> 8));
+      IIC_Wait_Ack ();
+    }
+    else
+    {
+      IIC_Send_Byte (reg);
+      IIC_Wait_Ack ();
+    }
+
   IIC_Start ();
   IIC_Send_Byte ((addr << 1) | 1);
   IIC_Wait_Ack ();

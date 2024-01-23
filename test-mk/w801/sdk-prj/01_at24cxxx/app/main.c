@@ -61,11 +61,11 @@ Test (void)
   #define AT24CXXX_PAGE_SIZE              (AT24C32_PAGE_SIZE)
   #define AT24CXXX_MAX_POLLS              (AT24C32_MAX_POLLS)
   #define AT24CXXX_PIN_WP                 (GPIO_UNDEF)
-  #define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR)
+  #define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 7)
 
   i2c_param_t user_i2c = 
       {            
-      .i2c_freq=200000,             /* частота i2c в герцах */
+      .i2c_freq=400000,             /* частота i2c в герцах */
       .i2c_scl=WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
       .i2c_sda=WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
       };
@@ -79,6 +79,9 @@ Test (void)
      .page_size   = AT24CXXX_PAGE_SIZE,          
      .max_polls   = AT24CXXX_MAX_POLLS           
      };
+
+  /* initialize the i2c */
+  i2c_init(&user_i2c);
 
   /* Test: Init */
   check = at24cxxx_init (&at24cxxx_dev, &user_data);
@@ -233,4 +236,6 @@ UserMain (void)
 {
   printf ("UserMain start");
   tls_sys_clk_set (CPU_CLK_240M);
+  Test ();
+
 }
