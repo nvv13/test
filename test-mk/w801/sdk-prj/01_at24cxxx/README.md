@@ -15,6 +15,17 @@ board HLK-W801-KIT-V1.1 +
 
 
 ~~~
+
+at24c32..at24c256
+Pin     NameFunction
+------- ------------------ 
+A0 - A2 Address Inputs
+SDA     Serial Data
+SCL     Serial Clock Input
+WP      Write Protect
+------- -------------------
+
+
 ~~~
 
 
@@ -29,20 +40,23 @@ board HLK-W801-KIT-V1.1 +
 ~~~
 
 
+A0 - A2 = GND = 0x50
 
-
-connect to
-W801   at24c32
+connect to 8-Pin PDIP
+W801   at24c32 (64...256)
 GPIO   PIN    
 -----  ------ 
-GND    GND    
-+3.3        
-PA11       
-PA12        
-PA13       
+GND    1 A0
+GND    2 A1
+GND    3 A2
+GND    4 GND    
+PA04   5 SDA  Serial Data          - 3.3 kOm - +3.3
+PA01   6 SCL  Serial Clock Input   - 3.3 kOm - +3.3
+GND    7 WP   Write Protect
++3.3   8 VCC     
 -----  ------ 
 
-
+SDA и SDL - подтянуть к +3.3 через резисторы (если на шине I2C еще нет их)
 
 
 

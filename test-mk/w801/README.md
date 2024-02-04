@@ -145,7 +145,7 @@ $ picocom --echo -b 115200 /dev/ttyUSB0
   поэтому делаем CTRL + A + G   - это комманда picocom - RTS down, (нажимать надо достаточно быстро, (одновременно, но сначала CTRL))
   и пользуемся ... или в опция --lower-rts 
 
-$ picocom --echo -b 115200 /dev/ttyUSB0 --lower-rts
+$ picocom --lower-rts --echo -b 115200 /dev/ttyUSB0 
 
           выход из picocom - CTRL + A + Q  (это выход без сброса порта (Skipping tty reset...))
   и еще, у меня не удавалось в терминале, просто набрать комманду,
@@ -222,6 +222,15 @@ Sequence  Command             Description
 подправляем t-connect("mywifi2","94510984")
 и вставляем в терминал...
                          
+-----------
+
+*в Windows мне было удобнее использовать https://github.com/pyserial/pyserial
+в нем есть утилита miniterm, (ставим python, потом pip install pyserial)
+ пример:
+
+C:\Python27\Lib\site-packages\serial\tools>miniterm.py COM4 115200 --rts 0
+
+
 -----------
 
 4) что дальше?

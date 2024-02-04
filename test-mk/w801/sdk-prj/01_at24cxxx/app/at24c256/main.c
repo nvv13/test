@@ -29,9 +29,9 @@
 #define AT24CXXX_ERASE (0)
 #endif
 
-#define AT24CXXX_EEPROM_SIZE            (AT24C64_EEPROM_SIZE)
-#define AT24CXXX_PAGE_SIZE              (AT24C64_PAGE_SIZE)
-#define AT24CXXX_MAX_POLLS              (AT24C64_MAX_POLLS)
+#define AT24CXXX_EEPROM_SIZE            (AT24C256_EEPROM_SIZE)
+#define AT24CXXX_PAGE_SIZE              (AT24C256_PAGE_SIZE)
+#define AT24CXXX_MAX_POLLS              (AT24C256_MAX_POLLS)
 #define AT24CXXX_PIN_WP                 (GPIO_UNDEF)
 #define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 0) // A0=0,A1=0,A2=0  
 //#define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 7) // A0=1,A1=1,A2=1

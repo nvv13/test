@@ -494,7 +494,7 @@ user_app1_task (void *sdata)
   UTFT_clrScr ();
   UTFT_setFont (SmallFont);
 
-  psram_disk_init ();
+  //psram_disk_init ();
 
   stantion_index = 0; // во flash это бы не надо сохранять! слишком часто
   // flash_cfg_load_u16 (&stantion_index, 0);
@@ -565,8 +565,8 @@ user_app1_task (void *sdata)
         }
 
       tls_os_time_delay (HZ * 3);
-      if (res_sd == FR_OK)
-        psram_disk_load_list ();
+      //if (res_sd == FR_OK)
+      //  psram_disk_load_list ();
       tls_watchdog_clr ();
       // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
       //                     "2.fedora.pool.ntp.org");
