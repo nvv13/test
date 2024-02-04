@@ -17,11 +17,11 @@
 #include "wm_rtc.h"
 #include "wm_timer.h"
 
-#include "utils.h"
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
-#include "wm_io.h"
 #include "wm_osal.h"
+#include "wm_io.h"
+#include "utils.h"
 
 #include "at24cxxx.h"
 
@@ -29,13 +29,13 @@
 #define AT24CXXX_ERASE (0)
 #endif
 
-#define AT24CXXX_EEPROM_SIZE (AT24C64_EEPROM_SIZE)
-#define AT24CXXX_PAGE_SIZE (AT24C64_PAGE_SIZE)
-#define AT24CXXX_MAX_POLLS (AT24C64_MAX_POLLS)
-#define AT24CXXX_PIN_WP (GPIO_UNDEF)
-#define AT24CXXX_ADDR (AT24CXXX_DEF_DEV_ADDR + 0) // A0=0,A1=0,A2=0
-// #define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 7) //
-// A0=1,A1=1,A2=1
+#define AT24CXXX_EEPROM_SIZE            (AT24C256_EEPROM_SIZE)
+#define AT24CXXX_PAGE_SIZE              (AT24C256_PAGE_SIZE)
+#define AT24CXXX_MAX_POLLS              (AT24C256_MAX_POLLS)
+#define AT24CXXX_PIN_WP                 (GPIO_UNDEF)
+#define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 0) // A0=0,A1=0,A2=0  
+//#define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 7) // A0=1,A1=1,A2=1
+
 
 #define WRITE_BYTE_POSITION (12U)
 #define WRITE_BYTE_CHARACTER 'A'
@@ -61,21 +61,26 @@ Test (void)
   printf ("EEPROM size: %u byte\n", AT24CXXX_EEPROM_SIZE);
   printf ("Page size  : %u byte\n", AT24CXXX_PAGE_SIZE);
 
-  i2c_param_t user_i2c = {
-    .i2c_freq = 400000,     /* частота i2c в герцах */
-    .i2c_scl = WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
-    .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
-  };
 
-  at24cxxx_params_t user_data = { .i2c = &user_i2c,
-                                  .pin_wp = AT24CXXX_PIN_WP,
-                                  .eeprom_size = AT24CXXX_EEPROM_SIZE,
-                                  .dev_addr = AT24CXXX_ADDR,
-                                  .page_size = AT24CXXX_PAGE_SIZE,
-                                  .max_polls = AT24CXXX_MAX_POLLS };
+  i2c_param_t user_i2c = 
+      {            
+      .i2c_freq=400000,             /* частота i2c в герцах */
+      .i2c_scl=WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
+      .i2c_sda=WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
+      };
+
+  at24cxxx_params_t user_data = 
+      {            
+     .i2c         = &user_i2c,
+     .pin_wp      = AT24CXXX_PIN_WP,                
+     .eeprom_size = AT24CXXX_EEPROM_SIZE,      
+     .dev_addr    = AT24CXXX_ADDR,                
+     .page_size   = AT24CXXX_PAGE_SIZE,          
+     .max_polls   = AT24CXXX_MAX_POLLS           
+     };
 
   /* initialize the i2c */
-  i2c_init (&user_i2c);
+  i2c_init(&user_i2c);
 
   /* Test: Init */
   check = at24cxxx_init (&at24cxxx_dev, &user_data);
@@ -131,7 +136,7 @@ Test (void)
 
   if (c != WRITE_BYTE_CHARACTER)
     {
-#define PRId8 "d"
+      #define PRId8 "d"
       printf ("[FAILURE] write_byte/read_byte: (%" PRId8 " != %d)\n", c,
               WRITE_BYTE_CHARACTER);
       return 1;
@@ -222,6 +227,8 @@ Test (void)
 
   puts ("Finished tests for module at24cxxx");
 
+
+
   unsigned int t = 0; // used to save time relative to 1970
   struct tm *tblock;
   tblock = localtime ((const time_t *)&t); // switch to local time
@@ -246,7 +253,12 @@ Test (void)
       iPos += BUF_LEN;
       u8_Pos++;
     }
-  printf ("end write iPos: %d\n", iPos);
+
+  tls_get_rtc (&tstop);
+  int sec = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
+            - (tstart.tm_hour * 3600 + tstart.tm_min * 60 + tstart.tm_sec);
+
+  printf ("end write iPos: %d, %d sec\n", iPos, sec);
 
   iPos = 0;
   while (iPos < AT24CXXX_EEPROM_SIZE)
@@ -265,9 +277,10 @@ Test (void)
   printf ("end read iPos: %d\n", iPos);
 
   tls_get_rtc (&tstop);
-  int sec = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
+  sec = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
             - (tstart.tm_hour * 3600 + tstart.tm_min * 60 + tstart.tm_sec);
   printf ("run %d sec", sec);
+
 
   return 0;
 }
@@ -278,4 +291,5 @@ UserMain (void)
   printf ("UserMain start");
   tls_sys_clk_set (CPU_CLK_240M);
   Test ();
+
 }

@@ -228,22 +228,58 @@ Test (void)
 
   puts ("Finished tests for module at24cxxx");
 
-  #define BUF_LEN 256 
-  u8 ReadBuffer[BUF_LEN] = { 0 };
-  int iPos=0;
-  while(1)
-  {
-    check = at24cxxx_read (&at24cxxx_dev, iPos, ReadBuffer, BUF_LEN);
-    if (check != AT24CXXX_OK)
-      {
-        printf ("[FAILURE] read iPos: %d\n", iPos);
-        return 1;
-      }
+
+  unsigned int t = 0; // used to save time relative to 1970
+  struct tm *tblock;
+  tblock = localtime ((const time_t *)&t); // switch to local time
+  tls_set_rtc (tblock);
+  struct tm tstart;
+  struct tm tstop;
+  tls_get_rtc (&tstart);
+
+#define BUF_LEN 256
+  u8 Buffer[BUF_LEN] = { 0 };
+  int iPos = 0;
+  u8 u8_Pos = 0;
+  while (iPos < AT24CXXX_EEPROM_SIZE)
+    {
+      memset (Buffer, u8_Pos, BUF_LEN);
+      check = at24cxxx_write (&at24cxxx_dev, iPos, Buffer, BUF_LEN);
+      if (check != AT24CXXX_OK)
+        {
+          printf ("[FAILURE] write iPos: %d\n", iPos);
+          return 1;
+        }
+      iPos += BUF_LEN;
+      u8_Pos++;
+    }
+
+  tls_get_rtc (&tstop);
+  int sec = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
+            - (tstart.tm_hour * 3600 + tstart.tm_min * 60 + tstart.tm_sec);
+
+  printf ("end write iPos: %d, %d sec\n", iPos, sec);
+
+  iPos = 0;
+  while (iPos < AT24CXXX_EEPROM_SIZE)
+    {
+      check = at24cxxx_read (&at24cxxx_dev, iPos, Buffer, BUF_LEN);
+      if (check != AT24CXXX_OK)
+        {
+          printf ("[FAILURE] read iPos: %d\n", iPos);
+          return 1;
+        }
       else
-      printf ("read iPos: %d\n", iPos);
-    dumpBuffer("dump", (char*)ReadBuffer, BUF_LEN);
-    iPos+=BUF_LEN;
-  }
+        printf ("read iPos: %d\n", iPos);
+      dumpBuffer ("dump", (char *)Buffer, BUF_LEN);
+      iPos += BUF_LEN;
+    }
+  printf ("end read iPos: %d\n", iPos);
+
+  tls_get_rtc (&tstop);
+  sec = (tstop.tm_hour * 3600 + tstop.tm_min * 60 + tstop.tm_sec)
+            - (tstart.tm_hour * 3600 + tstart.tm_min * 60 + tstart.tm_sec);
+  printf ("run %d sec", sec);
 
   return 0;
 }
