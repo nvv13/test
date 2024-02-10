@@ -17,7 +17,8 @@ board HLK-W801-KIT-V1.1
 
 
 Видео
-
+https://youtube.com/shorts/FFi1oQs1AvA?feature=share
+https://youtu.be/t5ucduUAD8s
 
 
 

@@ -440,6 +440,9 @@ http_get (HTTPParameters ClientParams)
   return http_snd_req (ClientParams, VerbGet, NULL, 0);
 }
 
+extern const unsigned short PATCHES_FLAC[];
+#define PLUGIN_FLAC_SIZE 8414
+
 FRESULT
 VS1053_PlayHttpMp3 (const char *Uri)
 {
@@ -447,7 +450,12 @@ VS1053_PlayHttpMp3 (const char *Uri)
   if (my_sost != VS1053_PLAY_BUF)
     {
       VS1053_switchToMp3Mode (); // optional, some boards require this (softReset include!)
-    } 
+      if (strstr (Uri, "flac") != NULL)
+        {
+          printf ("load flac patch.\n");
+          VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
+        }
+   } 
 
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));

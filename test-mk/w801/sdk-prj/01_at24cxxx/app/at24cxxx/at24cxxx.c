@@ -35,7 +35,14 @@ https://github.com/RIOT-OS/RIOT
 
 
 #define ENABLE_DEBUG 0
+
+#if (ENABLE_DEBUG==1)
 #define DEBUG(format, ...) printf (format, ##__VA_ARGS__)
+#else
+#define DEBUG(format, ...) tls_os_time_delay(5)
+#endif
+
+
 
 #define MIN(x, y) (x < y ? x : y)
 #define MAX(x, y) (x > y ? x : y)

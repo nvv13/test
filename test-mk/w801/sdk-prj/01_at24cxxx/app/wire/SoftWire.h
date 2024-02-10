@@ -352,4 +352,56 @@ static int SWire_read_regs(i2c_t dev, uint16_t addr, uint16_t reg,
   return 0;
 }
 
+static int SWire_write_bytes(i2c_t dev, uint16_t addr, const void *data, size_t len, uint8_t flags)
+{
+  _i2c_scl = dev->i2c_scl;
+  _i2c_sda = dev->i2c_sda;
+  IIC_Start ();
+
+  IIC_Send_Byte ((addr << 1) | 0);
+  if (IIC_Wait_Ack ())
+    {
+      IIC_Stop ();
+      return 1;
+    }
+
+  for (u16 u8_index = 0; u8_index < len; u8_index++)
+    {
+      u8 dat = ((u8*)data)[u8_index];
+      IIC_Send_Byte (dat);
+      if (IIC_Wait_Ack ())
+        {
+          IIC_Stop ();
+          return 1;
+        }
+    }
+  IIC_Stop ();
+  return 0;
+}
+
+static int SWire_read_bytes(i2c_t dev, uint16_t addr, 
+                  void *data, size_t len, uint8_t flags)
+{
+  _i2c_scl = dev->i2c_scl;
+  _i2c_sda = dev->i2c_sda;
+  IIC_Start ();
+  IIC_Send_Byte ((addr << 1) | 0);
+  IIC_Wait_Ack ();
+
+  IIC_Start ();
+  IIC_Send_Byte ((addr << 1) | 1);
+  IIC_Wait_Ack ();
+
+  u8* buf=(u8*)data;
+  while (len > 1)
+    {
+      *buf++ = IIC_Read_Byte (1);
+      // printf("\nread byte=%x\n",*(pBuffer - 1));
+      len--;
+    }
+  *buf = IIC_Read_Byte (0);
+  IIC_Stop ();
+  return 0;
+}
+
 //************************************************************************8

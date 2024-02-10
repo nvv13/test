@@ -63,5 +63,15 @@ printf("b=3 %s\r\n",s);
 itob(n, s, 2);
 printf("b=2 %s\r\n",s);
 
+char ch1=9;
+printf("ch1=9 %d\r\n",ch1);
+
+char * pch1=&ch1;
+
+printf("*pch1=9 %d\r\n",*pch1);
+
+printf("pch1[0]=9 %d\r\n",pch1[0]);
+
+
 }
 
