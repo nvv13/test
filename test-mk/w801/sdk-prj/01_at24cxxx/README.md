@@ -1,18 +1,20 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
-
-
-
-
-
 project at24cxxx EEPROM
-
 
 board HLK-W801-KIT-V1.1 + 
 
 
 Видео
 
+
+
+
+~~~
+пример использования внешней EEPROM
+ для разных микросхем:
+./app/at24c256/main.c
+./app/at24c32/main.c
+./app/at24c64/main.c
+~~~
 
 ~~~
 
@@ -27,11 +29,6 @@ WP      Write Protect
 
 
 ~~~
-
-
-
-
-
 
 
 соединения
