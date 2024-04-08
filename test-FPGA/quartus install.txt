@@ -24,11 +24,14 @@ https://github.com/CTSRD-CHERI/quartus-install
 [nvv@localhost quartus-install]$ sudo /opt/intelFPGA/20.1.1lite/quartus/bin/quartus
 quartus: error while loading shared libraries: libnsl.so.1: cannot open shared object file: No such file or directory
 
-
 [nvv@localhost quartus-install]$ sudo dnf install libnsl
 
 
 
+nvv@fedora:~$ /opt/intelFPGA/20.1.1lite/quartus/bin/quartus
+quartus: error while loading shared libraries: libcrypt.so.1: cannot open shared object file: No such file or directory
+
+[nvv@localhost quartus-install]$ sudo dnf install libxcrypt-compat
 
 
 
