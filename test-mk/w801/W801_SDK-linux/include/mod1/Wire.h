@@ -33,9 +33,9 @@ typedef enum {
 } i2c_flags_t;
 
 typedef struct {
-    enum tls_io_name i2c_scl;
-    enum tls_io_name i2c_sda;
-    u32 i2c_freq;
+    enum tls_io_name i2c_scl; /* WM_IO_PA_01 or WM_IO_PB_20 */
+    enum tls_io_name i2c_sda; /* WM_IO_PA_04 or WM_IO_PB_19 */
+    u32 i2c_freq; /* частота i2c в герцах, если = 0 - то софтверный вариант, любые gpio можно использовать */
     bool hw_wire;
 } i2c_param_t;
 

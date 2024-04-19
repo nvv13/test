@@ -62,7 +62,7 @@ Test (void)
   printf ("Page size  : %u byte\n", AT24CXXX_PAGE_SIZE);
 
   i2c_param_t user_i2c = {
-    .i2c_freq = 400000,     /* частота i2c в герцах */
+    .i2c_freq = 400000,     /* частота i2c в герцах, если = 0 - то софтверный вариант, любые gpio можно использовать */
     .i2c_scl = WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
     .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
   };
