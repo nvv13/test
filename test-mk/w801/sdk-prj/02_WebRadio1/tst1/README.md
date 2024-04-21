@@ -134,7 +134,7 @@ $ sudo git clone https://github.com/droppingy/hlk-w80x-toolchain.git /opt/w80x-t
    это чтоб в menuconfig не переделывать, такой там путь по умолчанию
    (еще, в этом мануале https://github.com/IOsetting/wm-sdk-w806, есть ссылки как получить данный Toolchain на другие архитектуры, типа i386)
 
-2) далее качаем SDK
+2) далее качаем-распаковываем SDK
 
     перемещаемся в домашнюю директорию
  
@@ -146,7 +146,13 @@ $ mkdir w801
 
 $ cd w801  
 
-$ git clone https://github.com/leoay/wm-sdk-w80x-2023.git
+    качаем
+
+$ wget https://orangepi.nvv13.keenetic.link/nextcloud/index.php/s/HPkiXrT6TpeRzz3/download/W801_SDK-linux.tar.gz
+
+    распаковка
+
+$ tar xvf W801_SDK-linux.tar.gz
 
 3) далее, собираем приложение
 

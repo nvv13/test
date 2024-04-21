@@ -5,6 +5,13 @@ W806_SDK-linux - сделан по мотивам архива "RTOS_W806_SDK(W8
 спасибо автору
 
 
+также этот каталог W806_SDK-linux
+  можно скачать в виде архива по ссылке 
+  https://orangepi.nvv13.keenetic.link/nextcloud/index.php/s/twFmJCGsKNAdnz5/download/W806_SDK-linux.tar.gz
+
+
+
+
 
 
 
