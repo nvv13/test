@@ -59,7 +59,7 @@ PWM
 
 
 ~~~
-	Pin Mapping Table Air101
+	Pin Mapping Table Air101 Chip
 GPIO number	name	Default and extended functions
 0		PA0	BOOT
 1		PA1	I2C_SCL/ADC0
