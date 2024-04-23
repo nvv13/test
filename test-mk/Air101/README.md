@@ -8,15 +8,19 @@ Specific features
 
 CPU   
   32-bit processor, maximum operating frequency 240MHz
+Kernel 
+  xt804
 
 Flash 
   2MByte, with on-chip file system (*air103 1MByte)
 
+Total Ram 
+  288k
 Lua available memory 
   176-232KB, default 176KB
 
 serial port
-  Support 5-channel UART, one of which is fixed as download and log port
+  Support 5-channel UART, one of which is fixed as download and log port (*air103 6UART)
   Baud rate range: 1200bps - 2Mbps
   Data bits: 5-8bit
   Stop bit: 1bit/2bit
@@ -38,7 +42,7 @@ ADC
   Support reading core temperature
 
 GPIO
-  Supports up to 18 GPIOs
+  Supports up to 18 GPIOs (*air103 44 GPIOs)
 
 SDIO
   Support 1 channel SDIO interface
@@ -55,7 +59,7 @@ PWM
 
 
 ~~~
-	Pin Mapping Table 
+	Pin Mapping Table Air101
 GPIO number	name	Default and extended functions
 0		PA0	BOOT
 1		PA1	I2C_SCL/ADC0

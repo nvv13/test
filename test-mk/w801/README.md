@@ -18,7 +18,7 @@ Expansion – 2x 24-pin headers with
  1x SDIO device up to 200 Mbps (for 4 data line)
  Up to 6x UART
  1x I2C working frequency support can be configured, 100K-400K.
- 1x high-speed SPI interface, supporting up to 50MHz
+ 1x high-speed SPI interface (slave interface), supporting up to 50MHz
  1x master/slave SPI up to 20MHz (8-word-deep FIFOs for transmit and receive paths,
     Support full duplex and half duplex, The master device supports bit transmission,
     up to 65536 bit transmission (8192 byte) )
