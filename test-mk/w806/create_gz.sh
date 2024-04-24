@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm -f ~/Nextcloud/mk/W806_SDK-linux.tar.gz
+rm -f ~/Nextcloud/mk/W806_sdk-prj.tar.gz
+
 tar cvzf ~/Nextcloud/mk/W806_SDK-linux.tar.gz ./W806_SDK-linux
 tar cvzf ~/Nextcloud/mk/W806_sdk-prj.tar.gz ./sdk-prj
 
