@@ -57,32 +57,12 @@ PWM
 
 ~~~
 
-
-~~~
-	Pin Mapping Table Air101 Chip
-GPIO number	name	Default and extended functions
-0		PA0	BOOT
-1		PA1	I2C_SCL/ADC0
-4		PA4	I2C_SDA/ADC1
-7		PA7	GPIO/PWM4
-16		PB0	GPIO/PWM0/UART3_TX
-17		PB1	GPIO/PWM1/UART3_RX
-18		PB2	SPI_SCK/PWM2/UART2_TX
-19		PB3	SPI_MISO/PWM3/UART2_RX
-20		PB4	SPI_CS/UART4_TX
-21		PB5	SPI_MOSI/UART4_RX
-22		PB6	UART1_TX
-23		PB7	UART1_RX
-24		PB8	GPIO
-25		PB9	GPIO
-26		PB10	GPIO
-27		PB11	GPIO
-35		PB19	UART0_TX
-36		PB20	UART0_RX
-~~~
+Платка
+ https://wiki.luatos.com/_static/bom/Air101.html
 
 о luatos для чипа Air101/Air103 (+ еще W800/W801/W806)
  https://gitee.com/openLuat/luatos-soc-air101
+ https://wiki.luatos.com/chips/air101/hardware.html
 
 о компиляции luatos, если нужно, так то есть готовые образы прошивки для Air101/Air103
  https://wiki.luatos.com/develop/compile/Air101.html

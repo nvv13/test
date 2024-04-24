@@ -16,13 +16,13 @@ menu "Firmware Configuration"
 
     config W800_IMAGE_HEADER
         hex "image header address"
-        default 80D0000
+	default 8010000
         help
             w800 image header address.
 
     config W800_RUN_ADDRESS
         hex "image run address"
-        default 80D0400
+        default 8010400
         help
             w800 image run address.
 

@@ -20,6 +20,7 @@
 //#include "wm_mem.h"
 //#include "wm_regs.h"
 #include "wm_cpu.h"
+#include "air103_def.h"
 
 // extern void UserMain(void);
 
@@ -60,10 +61,9 @@ demo_console_task (void *sdata)
 {
   printf ("user task\n");
 
-  tls_gpio_cfg (WM_IO_PB_00, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_cfg (WM_IO_PB_01, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_cfg (WM_IO_PB_02, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_cfg (WM_IO_PB_25, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (AIR103_LED_D1, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (AIR103_LED_D2, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_cfg (AIR103_LED_D3, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
   u8 u8_led_state = 0;
 
   tls_os_queue_create (&ir_code_msg_q, IR_QUEUE_SIZE);
@@ -104,10 +104,9 @@ demo_console_task (void *sdata)
       else
         u8_led_state = 0;
 
-      tls_gpio_write (WM_IO_PB_00, u8_led_state);
-      tls_gpio_write (WM_IO_PB_01, u8_led_state);
-      tls_gpio_write (WM_IO_PB_02, u8_led_state);
-      tls_gpio_write (WM_IO_PB_25, ~u8_led_state);
+      tls_gpio_write (AIR103_LED_D1, u8_led_state);
+      tls_gpio_write (AIR103_LED_D2, u8_led_state);
+      tls_gpio_write (AIR103_LED_D3, ~u8_led_state);
     }
 }
 

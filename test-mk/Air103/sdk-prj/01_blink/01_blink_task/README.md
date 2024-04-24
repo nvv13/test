@@ -1,16 +1,12 @@
 
-project blink PMU
+project task blink
 
-board HLK-W806
-
-
-в режиме "засыпания" платку может не увидеть прошивальшщик, тогда, удерживаем reset
+board Air103-V1.1
 
 
 
 
-
-Сборка  (это не конкретно этого проекта, а к примеру)
+Сборка  (это не конкретно этого проекта, а к примеру
 ~~~
 делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
    у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет
@@ -32,9 +28,9 @@ $ cd ~
 
     делаем директорию для проекта
 
-$ mkdir w806
+$ mkdir Air103
 
-$ cd w806  
+$ cd Air103  
 
     качаем
 
@@ -66,9 +62,9 @@ $ mkdir app
 
 $ cd app
 
-$ wget https://raw.githubusercontent.com/nvv13/test/main/test-mk/w806/sdk-prj/01_blink/01_blink_task/app/Makefile
+$ wget https://raw.githubusercontent.com/nvv13/test/main/test-mk/Air103/sdk-prj/01_blink/01_blink_task/app/Makefile
 
-$ wget https://raw.githubusercontent.com/nvv13/test/main/test-mk/w806/sdk-prj/01_blink/01_blink_task/app/main.c
+$ wget https://raw.githubusercontent.com/nvv13/test/main/test-mk/Air103/sdk-prj/01_blink/01_blink_task/app/main.c
 
      возвращаемся в директорию SDK
 $ cd ..
@@ -94,10 +90,7 @@ $ make erase
     записать прошивку
 $ make flash
 
-  и тут програма вероятнее всего попросит нажать reset на платке для синхронизации
-
-  нажимаем reset
-   
+  
 
     Всё!
 

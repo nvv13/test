@@ -21,11 +21,12 @@ extern "C"
 //#include "wm_pwm.h"
 //#include "wm_params.h"
 #include "wm_osal.h"
-  //#include "wm_efuse.h"
-  //#include "wm_mem.h"
-  //#include "wm_regs.h"
+//#include "wm_efuse.h"
+//#include "wm_mem.h"
+//#include "wm_regs.h"
 #include "csi_core.h"
 #include "wm_cpu.h"
+#include "air103_def.h"
 
 #if defined(__cplusplus)
 }
@@ -83,8 +84,10 @@ UserMain (void)
   u32 t5 = 0;
   u32 t6 = 0;
 
-  CBlink ob_Blink1 = CBlink (WM_IO_PB_00);
-  CBlink ob_Blink2 = CBlink (WM_IO_PB_01);
+
+  CBlink ob_Blink1 = CBlink (AIR103_LED_D1);
+  CBlink ob_Blink2 = CBlink (AIR103_LED_D2);
+  CBlink ob_Blink3 = CBlink (AIR103_LED_D3);
   while (1)
     {
       tls_sys_clk_set (CPU_CLK_240M);
@@ -171,6 +174,8 @@ UserMain (void)
 
       ob_Blink2.Toggle ();
       tls_os_time_delay (HZ);
+
+      ob_Blink3.Toggle ();
     }
   return 0;
 }
