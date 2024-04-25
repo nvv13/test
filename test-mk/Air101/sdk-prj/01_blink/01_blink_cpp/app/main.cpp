@@ -21,13 +21,12 @@ extern "C"
 //#include "wm_pwm.h"
 //#include "wm_params.h"
 #include "wm_osal.h"
-  //#include "wm_efuse.h"
-  //#include "wm_mem.h"
-  //#include "wm_regs.h"
+//#include "wm_efuse.h"
+//#include "wm_mem.h"
+//#include "wm_regs.h"
 #include "csi_core.h"
 #include "wm_cpu.h"
-
-#include "w806_def.h"
+#include "air103_def.h"
 
 #if defined(__cplusplus)
 }
@@ -85,8 +84,10 @@ UserMain (void)
   u32 t5 = 0;
   u32 t6 = 0;
 
+
   CBlink ob_Blink1 = CBlink (BUILDIN_LED_D1);
   CBlink ob_Blink2 = CBlink (BUILDIN_LED_D2);
+  CBlink ob_Blink3 = CBlink (BUILDIN_LED_D3);
   while (1)
     {
       tls_sys_clk_set (CPU_CLK_240M);
@@ -104,7 +105,7 @@ UserMain (void)
       printf ("%d %d %d %d %d %d\n", t1, t2, t3, t4, t5, t6);
 
       ob_Blink1.Toggle ();
-      tls_os_time_delay (HZ);
+      tls_os_time_delay (HZ/2);
 
       tls_sys_clk_set (CPU_CLK_160M);
       tls_sys_clk_get (&sysclk);
@@ -121,7 +122,7 @@ UserMain (void)
       printf ("%d %d %d %d %d %d\n", t1, t2, t3, t4, t5, t6);
 
       ob_Blink1.Toggle ();
-      tls_os_time_delay (HZ);
+      tls_os_time_delay (HZ/2);
 
       tls_sys_clk_set (CPU_CLK_80M);
       tls_sys_clk_get (&sysclk);
@@ -138,7 +139,7 @@ UserMain (void)
       printf ("%d %d %d %d %d %d\n", t1, t2, t3, t4, t5, t6);
 
       ob_Blink1.Toggle ();
-      tls_os_time_delay (HZ);
+      tls_os_time_delay (HZ/2);
 
       tls_sys_clk_set (CPU_CLK_40M);
       tls_sys_clk_get (&sysclk);
@@ -155,7 +156,7 @@ UserMain (void)
       printf ("%d %d %d %d %d %d\n", t1, t2, t3, t4, t5, t6);
 
       ob_Blink2.Toggle ();
-      tls_os_time_delay (HZ);
+      tls_os_time_delay (HZ/2);
 
       tls_sys_clk_set (CPU_CLK_2M);
       tls_sys_clk_get (&sysclk);
@@ -172,7 +173,9 @@ UserMain (void)
       printf ("%d %d %d %d %d %d\n", t1, t2, t3, t4, t5, t6);
 
       ob_Blink2.Toggle ();
-      tls_os_time_delay (HZ);
+      tls_os_time_delay (HZ/2);
+
+      ob_Blink3.Toggle ();
     }
   return 0;
 }

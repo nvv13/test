@@ -18,7 +18,7 @@
 //#include "wm_efuse.h"
 //#include "wm_mem.h"
 //#include "wm_regs.h"
-#include "air103_def.h"
+#include "air101_def.h"
 
 
 

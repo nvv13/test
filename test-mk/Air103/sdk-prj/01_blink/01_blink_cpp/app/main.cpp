@@ -85,9 +85,9 @@ UserMain (void)
   u32 t6 = 0;
 
 
-  CBlink ob_Blink1 = CBlink (AIR103_LED_D1);
-  CBlink ob_Blink2 = CBlink (AIR103_LED_D2);
-  CBlink ob_Blink3 = CBlink (AIR103_LED_D3);
+  CBlink ob_Blink1 = CBlink (BUILDIN_LED_D1);
+  CBlink ob_Blink2 = CBlink (BUILDIN_LED_D2);
+  CBlink ob_Blink3 = CBlink (BUILDIN_LED_D3);
   while (1)
     {
       tls_sys_clk_set (CPU_CLK_240M);

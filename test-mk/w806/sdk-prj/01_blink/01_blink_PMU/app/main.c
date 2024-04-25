@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "w806_def.h"
+
 volatile static u8 u8_led_state = 0;
 
 static void
@@ -19,7 +21,7 @@ pmu_timer1_irq (u8 *arg)
 void
 UserMain (void)
 {
-  enum tls_io_name pin1 = WM_IO_PB_01;
+  enum tls_io_name pin1 = BUILDIN_LED_D1;
 
   tls_gpio_cfg (pin1, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
   tls_gpio_write (pin1, u8_led_state);
