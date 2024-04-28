@@ -75,3 +75,9 @@ low power mode
 
 
 -----------
+
+
+архив W806_SDK-linux.tar.gz доступен по ссылке
+ https://orangepi.nvv13.keenetic.link/nextcloud/index.php/s/6ZRAwg7taaC6Ho4 
+
+

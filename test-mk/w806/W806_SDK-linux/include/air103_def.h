@@ -7,5 +7,6 @@
 #define BUILDIN_LED_D2 WM_IO_PB_26
 #define BUILDIN_LED_D3 WM_IO_PB_24
 
+#define BUILDIN_SW1 WM_IO_PA_00
 
 #endif

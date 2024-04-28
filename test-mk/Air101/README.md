@@ -96,3 +96,6 @@ Learn Lua in 15 Minutes
 о платке
  https://wiki.luatos.com/chips/air101/board.html
 
+архив W806_SDK-linux.tar.gz доступен по ссылке
+ https://orangepi.nvv13.keenetic.link/nextcloud/index.php/s/6ZRAwg7taaC6Ho4 
+

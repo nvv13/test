@@ -56,7 +56,8 @@ $ cd w806
 
     качаем
 
-$ wget https://orangepi.nvv13.keenetic.link/nextcloud/index.php/s/twFmJCGsKNAdnz5/download/W806_SDK-linux.tar.gz
+  виде архива W806_SDK-linux.tar.gz по ссылке
+  https://orangepi.nvv13.keenetic.link/nextcloud/index.php/s/6ZRAwg7taaC6Ho4 
 
     распаковка
 
