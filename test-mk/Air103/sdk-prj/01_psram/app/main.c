@@ -259,15 +259,16 @@ UserMain (void)
       // printf("%s",test);
     }
 
-  i_size = 8 * 1024 * 1024;
+  i_size = 8 * 1024 * 1024 - 16;
+
+  tls_gpio_write (BUILDIN_LED_D1, 0);
+  tls_gpio_write (BUILDIN_LED_D2, 0);
 
   test = dram_heap_malloc (i_size);
   printf ("start dram test psram addr %d to size = %d \r\n", (int)test, i_size);
   while (1)
     {
-      tls_gpio_write (BUILDIN_LED_D1, 1);
-      tls_gpio_write (BUILDIN_LED_D2, 0);
-      tls_gpio_write (BUILDIN_LED_D3, 0);
+      tls_gpio_write (BUILDIN_LED_D3, 1);
 
       tls_get_rtc (&tstart);
 
@@ -279,8 +280,7 @@ UserMain (void)
           test[i] = b1++;
         }
       u8 b2_error = 0;
-      tls_gpio_write (BUILDIN_LED_D1, 0);
-      tls_gpio_write (BUILDIN_LED_D2, 1);
+      tls_gpio_write (BUILDIN_LED_D3, 0);
       b1 = 0;
       for (int i = 0; i < i_size; i++)
         {
@@ -291,13 +291,17 @@ UserMain (void)
               break;
             };
         }
-      tls_gpio_write (BUILDIN_LED_D2, 0);
-      tls_gpio_write (BUILDIN_LED_D3, 1);
       if (b2_error)
+        {
+        tls_gpio_write (BUILDIN_LED_D1, 0);
+        tls_gpio_write (BUILDIN_LED_D2, 1);
         printf ("error test size = %d ", i_size);
+        }
       else
+        {
+        tls_gpio_write (BUILDIN_LED_D1, 1);
         printf ("ok test size = %d ", i_size);
-
+        }
       tls_get_rtc (&tstop);
       printf (
           "run test %d sec, %d tic \r\n",
