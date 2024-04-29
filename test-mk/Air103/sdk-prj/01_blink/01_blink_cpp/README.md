@@ -130,6 +130,13 @@ $ make flash
 
 $ picocom --echo -b 115200 /dev/ttyUSB0
 
+  после подсоединения платка "висит", это из за сигнала RTS (про это есть обьяснение в статье https://www.cnblogs.com/milton/p/15621540.html)
+  поэтому делаем CTRL + A + G   - это комманда picocom - RTS down, (нажимать надо достаточно быстро, (одновременно, но сначала CTRL))
+  и пользуемся ...
+          выход из picocom - CTRL + A + Q  (это выход без сброса порта (Skipping tty reset...))
+
+
+
 
 
 

@@ -1,7 +1,46 @@
+board Air103 v1.1
 
-project task blink
+project psram
 
-board Air103-V1.1
+psram - припаевается на подготовленое место! см. доки. "Air103_Core Board Design Manual V1.2.pdf"
+
+/**
+ * @brief  config the pins used for psram ck cs dat0 dat1 dat2 dat3
+ * @param  numsel: config psram ck cs dat0 dat1 dat2 dat3 pins multiplex relation,valid para 0,1
+ *			0:                 1: only for 56pin Air103
+ *			  psram_ck   PB00    psram_ck   PA15
+ *			  psram_cs   PB01    psram_cs   PB27
+ *			  psram_dat0 PB02    psram_dat0 PB02
+ *			  psram_dat1 PB03    psram_dat1 PB03
+ *			  psram_dat2 PB04    psram_dat2 PB04
+ *			  psram_dat3 PB05    psram_dat3 PB05
+
+ * @return None
+
+  void wm_psram_config(uint8_t numsel);
+ */
+
+
+
+надо соединить по схеме:
+~~~
+
+
+Air103 psram     LY68L6400  
+------ --------- -------    
+PA15   SCLK      (6)        
+PB27   CE#       (1)        
+PB02   SI/SIO[0] (5)
+PB03   SO/SIO[1] (2)
+PB04*     SIO[2] (3)
+PB05      SIO[3] (7)
+3.3V   Vcc       (8)
+GND    Vss       (4)
+------ --------- -------
+
+* вывод PB04 на макетке board HLK-W801-KIT-V1.1 ошибочно назван PB24 в месте рядом с разьемом type-c
+
+~~~
 
 
 
