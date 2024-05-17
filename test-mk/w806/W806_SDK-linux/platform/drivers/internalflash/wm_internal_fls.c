@@ -19,14 +19,14 @@
 
 static struct tls_inside_fls *inside_fls = NULL;
 
-/**System parameter, default for 2M flash*/
-unsigned int  TLS_FLASH_MESH_PARAM_ADDR      =        (0x81FA000UL);
-unsigned int  TLS_FLASH_PARAM_DEFAULT        =		  (0x81FB000UL);
-unsigned int  TLS_FLASH_PARAM1_ADDR          =		  (0x81FC000UL);
-unsigned int  TLS_FLASH_PARAM2_ADDR          =		  (0x81FD000UL);
-unsigned int  TLS_FLASH_PARAM_RESTORE_ADDR   =	      (0x81FE000UL);
-unsigned int  TLS_FLASH_OTA_FLAG_ADDR        =	      (0x81FF000UL);
-unsigned int  TLS_FLASH_END_ADDR             =		  (0x81FFFFFUL);
+/**System parameter, default for 2M flash,   change all 0x81F to 0x80F 1M flash*/
+unsigned int  TLS_FLASH_MESH_PARAM_ADDR      =        (0x80FA000UL);
+unsigned int  TLS_FLASH_PARAM_DEFAULT        =	      (0x80FB000UL);
+unsigned int  TLS_FLASH_PARAM1_ADDR          =	      (0x80FC000UL);
+unsigned int  TLS_FLASH_PARAM2_ADDR          =	      (0x80FD000UL);
+unsigned int  TLS_FLASH_PARAM_RESTORE_ADDR   =	      (0x80FE000UL);
+unsigned int  TLS_FLASH_OTA_FLAG_ADDR        =	      (0x80FF000UL);
+unsigned int  TLS_FLASH_END_ADDR             =	      (0x80FFFFFUL);
 
 
 static vu32 read_first_value(void)
