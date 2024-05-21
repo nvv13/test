@@ -30,7 +30,7 @@
 #include "wm_gpio_afsel.h"
 #include "wm_i2s.h"
 
-#include "BabyElephantWalk60_mp3.h"
+#include "Sleepmakeswaves.mp3.h"
 #include "w806_def.h"
 
 #define DEMO_TASK_SIZE 2048
@@ -119,7 +119,7 @@ user_task (void *sdata)
       // a semaphore without first "taking" it!
     }
 
-  decode (BabyElephantWalk60_mp3, BabyElephantWalk60_mp3_len);
+  decode (Arr_mp3, Arr_mp3_len);
 
   wm_i2s_tx_rx_stop ();
   if (i2s_DMABUF != NULL)
