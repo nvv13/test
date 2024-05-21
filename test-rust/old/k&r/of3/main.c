@@ -15,7 +15,6 @@ FILE *fptr;
 // Create a file
 fptr = fopen(filename, "w");
 
-int nlen;
 fwrite(buffer, len, 1, fptr);
 
 // Close the file
