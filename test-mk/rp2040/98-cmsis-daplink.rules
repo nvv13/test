@@ -1,0 +1,22 @@
+# CMSIS-DAP compatible adapters
+# reload rules : udevadm control --reload-rules && udevadm trigger
+# test from pid : openocd --command "adapter driver cmsis-dap; cmsis_dap_vid_pid 0xc251 0xf001; cmsis_dap_backend hid"
+# test from pid : openocd --command "adapter driver cmsis-dap; cmsis_dap_vid_pid 0xd6e7 0x3507;"
+
+#ATTRS{product}=="*CMSIS-DAP*", MODE="664", GROUP="plugdev"
+
+# c251:f001 Arm DAPLink nanoDAP v2.2
+SUBSYSTEM=="usb", ATTR{idVendor}=="c251", ATTR{idProduct}=="f001", MODE:="666"
+
+# Slogic Combo8, RV CMSIS-DAP, idVendor=d6e7, idProduct=3507, SerialNumber: 012345ABCDEF
+SUBSYSTEM=="usb", ATTR{idVendor}=="d6e7", ATTR{idProduct}=="3507", MODE:="666"
+
+# Slogic Combo8, Slogic 8 ch, idVendor=359f, idProduct=0300, SerialNumber: SI 8ch
+SUBSYSTEM=="usb", ATTR{idVendor}=="359f", ATTR{idProduct}=="0300", MODE:="666"
+
+# Slogic Combo8, CKLink-HS, idVendor=42bf, idProduct=b210, SerialNumber: FactoryAIOT
+SUBSYSTEM=="usb", ATTR{idVendor}=="42bf", ATTR{idProduct}=="b210", MODE:="666"
+
+
+
+
