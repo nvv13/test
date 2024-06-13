@@ -71,7 +71,7 @@ scan_files (
                   || strstr (FileName, ".WAV") != NULL)
                 {
                   sprintf (buf_str_ind, "%.3d", u8_volume);
-                  //n_i2s_PlayWav (FileName);
+                  // n_i2s_PlayWav (FileName);
                 }
               if (strstr (FileName, ".mp3") != NULL
                   || strstr (FileName, ".mp3") != NULL)

@@ -23,9 +23,8 @@ https://github.com/pschatzmann/arduino-audio-tools.git
 // #define SERIAL_DEBUG_ALL
 
 // #define DEMO_DATA_SIZE (4096+2048)
-// #define MP3_FRAME_LEN 4 * 1152
-#define DEMO_DATA_SIZE (6 * 1152)
-
+#define MP3_FRAME_LEN 1152
+#define DEMO_DATA_SIZE (8 * MP3_FRAME_LEN)
 
 static enum n_i2s_status my_sost = N_I2S_NONE;
 
@@ -51,11 +50,11 @@ static u8 info_bits_per_sample = 16;
 
 #include "mod1/mad.h"
 #include "wm_mem.h"
-//#define MP3_FRAME_LEN 4 * 1152
-//static u8 file_buf_mp3[MP3_FRAME_LEN] = { 0 };
-//static u16 mp3_hz;
-//static u16 mp3_out_len = 0;
-//static u16 mp3_used = 0;
+// #define MP3_FRAME_LEN 4 * 1152
+// static u8 file_buf_mp3[MP3_FRAME_LEN] = { 0 };
+// static u16 mp3_hz;
+// static u16 mp3_out_len = 0;
+// static u16 mp3_used = 0;
 
 #include "wm_i2s.h"
 
@@ -162,6 +161,7 @@ static int decode (unsigned char const *, unsigned long);
 static u16 i2s_DMABUF_SIZE = 0;
 static u8 *i2s_DMABUF = NULL;
 static u8 *mp3_BUF = NULL;
+static volatile u8 stat_fbuf = 0; // следит за заполнение 0 или 1 части буфера
 
 typedef enum dma_status
 {
@@ -198,8 +198,6 @@ i2sDmaSendHalfCpltCallback (wm_dma_handler_type *hdma)
   BaseType_t xHigherPriorityTaskWoken = pdFALSE;
   xSemaphoreGiveFromISR (xSemaphore, &xHigherPriorityTaskWoken);
 }
-
-
 
 /**************************************************/
 static void
@@ -573,12 +571,12 @@ FRESULT
 n_i2s_PlayMp3 (char *filename)
 {
 
-//  if (sizeof (file_buf_mp3) < MP3_FRAME_LEN)
-//    {
-//      printf ("Error %d file_buf_mp3 < MP3_FRAME_LEN %d\r\n",
-//              sizeof (file_buf_mp3), MP3_FRAME_LEN);
-//      return -55;
-//    }
+  //  if (sizeof (file_buf_mp3) < MP3_FRAME_LEN)
+  //    {
+  //      printf ("Error %d file_buf_mp3 < MP3_FRAME_LEN %d\r\n",
+  //              sizeof (file_buf_mp3), MP3_FRAME_LEN);
+  //      return -55;
+  //    }
 
   uint32_t start;
 
@@ -615,6 +613,7 @@ n_i2s_PlayMp3 (char *filename)
               start |= (0x7F & aHead->header_size[2]);
               start <<= 7;
               start |= (0x7F & aHead->header_size[3]);
+              start  += sizeof (MP3HDR);
 
               res_sd = f_lseek (&fnew, start);
 #ifdef SERIAL_DEBUG
@@ -632,6 +631,7 @@ n_i2s_PlayMp3 (char *filename)
                   // a semaphore without first "taking" it!
                 }
 
+              stat_fbuf = 11;
               decode (file_buffer, fnum);
 
               wm_i2s_tx_rx_stop ();
@@ -683,13 +683,35 @@ input (void *data, struct mad_stream *stream)
 
   mad_stream_buffer (stream, buffer->start, buffer->length);
 
+//      if (stat_fbuf == 0)
+//      {
+        res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE*2, &fnum);
+//        stat_fbuf=10;
+//      }
+//      if (stat_fbuf == 1)
+//      {
+//        res_sd = f_read (&fnew, (file_buffer + DEMO_DATA_SIZE), DEMO_DATA_SIZE,
+//                         &fnum);
+//        stat_fbuf=11;
+//      }
 
-  res_sd = f_read (&fnew, file_buffer, DEMO_DATA_SIZE * 2, &fnum);
-  //res_sd = f_read (&fnew, file_buffer + DEMO_DATA_SIZE, DEMO_DATA_SIZE, &fnum);
   if (res_sd == FR_OK)
-    buffer->length = fnum;
+//    {
+//      if (stat_fbuf == 0 || stat_fbuf == 10)//готово 0
+//        { 
+//        buffer->start = file_buffer;
+//        stat_fbuf=1;//заполнить 1
+//        }
+//      else
+//        {
+//        buffer->start = (file_buffer + DEMO_DATA_SIZE);
+//        stat_fbuf=0;//заполнить 0
+//        }
+      buffer->length = fnum;
+//    }
   else
     buffer->length = 0;
+
 
   return MAD_FLOW_CONTINUE;
 }
@@ -742,7 +764,9 @@ output (void *data, struct mad_header const *header, struct mad_pcm *pcm)
       i2s_DMABUF_SIZE
           = nsamples * 2
             * nchannels; // по 2 байта на 1 sample - на количество каналов
-      i2s_DMABUF = malloc (i2s_DMABUF_SIZE * 2); // удвоенный для работы дма
+      i2s_DMABUF
+          = malloc (i2s_DMABUF_SIZE
+                    * 2); // удвоенный для работы дма, первая и вторая половины
       if (i2s_DMABUF == NULL)
         {
           printf ("error malloc i2s_DMABUF\r\n");
@@ -757,7 +781,7 @@ output (void *data, struct mad_header const *header, struct mad_pcm *pcm)
           return MAD_FLOW_BREAK;
         }
       int ix = 0;
-      while (nsamples--)
+      while (nsamples--) // заполняем первую половину буфера DMA
         {
           signed int sample;
 
@@ -850,7 +874,7 @@ output (void *data, struct mad_header const *header, struct mad_pcm *pcm)
 
   if (stat_dma == D_HW_INIT)
     {
-      int ix = i2s_DMABUF_SIZE;
+      int ix = i2s_DMABUF_SIZE; // заполняем вторую половину буфера DMA
       while (nsamples--)
         {
           signed int sample;
@@ -886,7 +910,8 @@ output (void *data, struct mad_header const *header, struct mad_pcm *pcm)
       if (xSemaphoreTake (xSemaphore, LONG_TIME) == pdTRUE)
         {
           int ix = 0;
-          while (nsamples--)
+          while (nsamples--) // заполняем промежуточный буффер  декодированными
+                             // PCM данными, будет в DMA перебрасывать
             {
               signed int sample;
 
