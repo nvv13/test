@@ -1,0 +1,44 @@
+(0) сборка образа для sd
+
+поставить docker (если небыло)
+добавить себя в группу docker
+$ sudo usermod -a -G docker <имя пользователя>
+перезайти в сесию
+
+
+собирал по инструкции
+https://github.com/milkv-duo/duo-buildroot-sdk
+с места 
+"2. Compiled using Docker"
+
+клонируем SDK
+$ git clone https://github.com/milkv-duo/duo-buildroot-sdk.git --depth=1
+я не так сделал (потому что сборка выпадала в ошибку)
+я скачал релиз, вот этот, последний был на момент
+$ wget https://github.com/milkv-duo/duo-buildroot-sdk/archive/refs/tags/Duo-V1.1.1.tar.gz      
+распаковка
+$ tar xzf Duo-V1.1.1.tar.gz
+
+перейти в SDK
+$ cd duo-buildroot-sdk
+в моем случае в
+$ cd duo-buildroot-sdk-Duo-V1.1.1
+
+скачать и запустить образ контейнера для сборки
+$ docker run -itd --name duodocker -v $(pwd):/home/work milkvtech/milkv-duo:latest /bin/bash
+
+смотрим, как там duodocker
+$ docker ps -a
+
+запускаем сборку (просто в терминале), для вырианта milkv-duo-sd
+$ docker exec -it duodocker /bin/bash -c "cd /home/work && cat /etc/issue && ./build.sh milkv-duo-sd"
+
+если будут ошибки типа 
+"make: /bin/sh: Operation not permitted"
+то надо подновить сам docker (у меня так было)
+
+
+
+
+
+
