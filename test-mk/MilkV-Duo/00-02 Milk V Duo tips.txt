@@ -30,10 +30,24 @@ $ docker run -itd --name duodocker -v $(pwd):/home/work milkvtech/milkv-duo:late
 смотрим, как там duodocker
 $ docker ps -a
 
-запускаем сборку (просто в терминале), для вырианта milkv-duo-sd
-$ docker exec -it duodocker /bin/bash -c "cd /home/work && cat /etc/issue && ./build.sh milkv-duo-sd"
+смотрим какие есть варианты образов для сборки
+$ docker exec -it duodocker /bin/bash -c "cd /home/work && ./build.sh"
 
-если будут ошибки типа 
+допустим нам надо "milkv-duo"
+запускаем сборку (просто в терминале), для вырианта milkv-duo-sd
+$ docker exec -it duodocker /bin/bash -c "cd /home/work && cat /etc/issue && ./build.sh milkv-duo"
+
+после компиляции, останавливаем и удаляем образ контейнера для сборки
+ смотрим его "CONTAINER ID"
+$ docker ps -a
+ допустим "CONTAINER ID" = 52bf3ab8dc6d
+$ docker stop 52bf3ab8dc6d
+$ docker rm 52bf3ab8dc6d
+
+
+
+-----------------------------------------------
+PS: если будут ошибки типа 
 "make: /bin/sh: Operation not permitted"
 то надо подновить сам docker (у меня так было)
 
