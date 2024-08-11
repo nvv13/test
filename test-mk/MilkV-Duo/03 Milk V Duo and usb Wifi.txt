@@ -283,7 +283,7 @@ $ ln -sf /mnt/system/usb-host.sh /mnt/sd/mnt/system/usb.sh
 $ cp ethtool /mnt/sd/usr/local/bin/
 $ mkdir /mnt/sd/opt/MMDVMHost
 $ cp MMDVMHost RemoteCommand /mnt/sd/opt/MMDVMHost/
-$ vim /mnt/sd/opt/MMDVMHost/start_mmdvm
+$ mcedit /mnt/sd/opt/MMDVMHost/start_mmdvm
 ------------------------------------------end--------------------------------------------
 
 The contents of the start_mmdvm script are given here.
@@ -335,7 +335,7 @@ Create a self-starting script.
 Создайте самозапускающийся скрипт.
 
 ------------------------------------------begin------------------------------------------
-$ vim /mnt/sd/etc/init.d/S99zuser
+$ mcedit /mnt/sd/etc/init.d/S99zuser
 ------------------------------------------end--------------------------------------------
 
 The script content is given here,
@@ -417,7 +417,7 @@ Now you can start the configuration of MMDVMHost and Wireless LAN Wifi.
 ------------------------------------------begin------------------------------------------
 $ cp MMDVM.ini /mnt/sd/etc
 $ mkdir /mnt/sd/etc/wpa_supplicant
-$ vim /mnt/sd/etc/wpa_supplicant/wpa_supplicant.conf
+$ mcedit /mnt/sd/etc/wpa_supplicant/wpa_supplicant.conf
 ------------------------------------------end--------------------------------------------
 
 For wpa_supplicant.conf, you can refer to the following content.

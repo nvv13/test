@@ -24,7 +24,7 @@ $ cd duo-buildroot-sdk
 в моем случае в
 $ cd duo-buildroot-sdk-Duo-V1.1.1
 
-скачать и запустить образ контейнера для сборки
+скачать и запустить образ контейнера для сборки (просто в терминале)
 $ docker run -itd --name duodocker -v $(pwd):/home/work milkvtech/milkv-duo:latest /bin/bash
 
 смотрим, как там duodocker
