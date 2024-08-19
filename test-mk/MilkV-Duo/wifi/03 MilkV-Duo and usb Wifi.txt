@@ -154,7 +154,7 @@ Build a new Milkv Duo image
 The purpose of refactoring the image is to increase available RAM
  and kernel with RTL8188 wireless card driver.
 Целью рефакторинга образа является увеличение доступной оперативной памяти
- и ядра с помощью драйвера беспроводной карты RTL8188.
+ + сборка ядра с драйвером беспроводной карты RTL8188.
 
 Start by cloning the latest mainline branch.
 Начните с клонирования последней основной ветки.
@@ -166,12 +166,12 @@ $ cd duo-buildroot-sdk
 Note that the latest mainline branch requires building the image in the Ubuntu 22.04 LTS environment,
  which requires preparation by yourself.
 Обратите внимание, что последняя основная ветка требует сборки образа в среде Ubuntu 22.04 LTS,
- что требует самостоятельной подготовки.
+ что требует самостоятельной подготовки. (я собирал с помощью docker)
 
 Here is a patch that turns on all Realtek USB wireless network card driver options available in the SDK
- and increases the root directory size to 4G.
+ and increases the root directory size to 2G.
 Вот патч, который включает все параметры драйвера беспроводной сетевой карты Realtek USB, доступные в SDK,
- и увеличивает размер корневого каталога до 4G.
+ и увеличивает размер корневого каталога до 2G.
 
 ------------------------------------------begin patch------------------------------------------
 diff --git a/build/boards/cv180x/cv1800b_milkv_duo_sd/linux/cvitek_cv1800b_milkv_duo_sd_defconfig b/build/boards/cv180x/cv1800b_milkv_duo_sd/linux/cvitek_cv1800b_milkv_duo_sd_defconfig
@@ -224,7 +224,7 @@ index 71938363b..943583bd3 100644
                 label = "rootfs"
         }
 -       size = 768M
-+       size = 4096M
++       size = 1700M
  }
  
  image milkv-duo.img {
@@ -237,14 +237,14 @@ Note
 Обратите внимание:
  хотя в промежуточном каталоге есть драйвер RTL8188EU,
  он сломан, по крайней мере, он не может управлять RTL8188EUS.
- В последнем разделе этой статьи представлены доступные внешние драйверы для RTL8188EUS.
+ В последнем разделе этой статьи представлены доступные внешние драйверы для RTL8188EUS. (я это не пробовал, у меня была RTL8188)
 
 After testing,
  there are no problems with the RTL8188CU and RTL8188FTV modules.
  The onboard type-c interface and OTG adapter can also be directly plugged into the RTL8188CU USB network card.
 После тестирования
  с модулями RTL8188CU и RTL8188FTV проблем не возникло.
- Встроенный интерфейс Type-C и адаптер OTG также можно напрямую подключить к сетевой USB-карте RTL8188CU.
+ Встроенный интерфейс Type-C и адаптер OTG также можно напрямую подключить к сетевой USB-карте RTL8188CU. (с OTG и делал)
 
 Start building the image.
  Note
