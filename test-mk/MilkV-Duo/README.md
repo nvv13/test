@@ -18,7 +18,7 @@ SoC	CVITEK CV1800B
 	16-bit audio codec with built-in mic input and output functions.
 	Flexible network configurations with 1 Ethernet PHY.
 
-RISC-V CPU	C906@1Ghz + C906@700MHz
+RISC-V CPU	C906@1Ghz (Vector+FPU)  +  C906@700MHz (FPU)
         *насколько я понял, это 2 разных CPU но общей шине,
          1Ghz - с раширениями комманд RISC-V для запуска Linux
          700MHz - используют для RTOS, набор комманд RISC-V - Linux не поддерживает ("из коробки")
@@ -91,14 +91,16 @@ SoC	SG2002
 	Flexible network configurations with 1 Ethernet PHY.
 	QFN88
 
-RISC-V CPU	C906@1Ghz + C906@700MHz
+RISC-V CPU  C906@1Ghz (Vector+FPU)  +  C906@700MHz (FPU)
         *насколько я понял, это 2 разных CPU но общей шине,
          1Ghz - с раширениями комманд RISC-V для запуска Linux
          700MHz - используют для RTOS, набор комманд RISC-V - Linux не поддерживает ("из коробки")
 
-Arm CPU	1 x Cortex-A53@1GHz
+Arm CPU	1 x Cortex-A53@1GHz (neon+FPU)
+	*насколько я понял, при старте MK - проверяеться ножка boot, и исходя из этого
+         стартует либо C906@1Ghz либо A53@1GHz - т.е. одновременно они не работают.
 
-MCU	8051@6KB SRAM
+MCU	8051@8KB SRAM  (25Mz - 300Mz)
         *Подсистема 8051 расположена в модуле, который независимо питается от RTC. 
 	Подсистема сконфигурирована с 8051, контроллером I2C/UART/SPI NOR/SD, таймером/WDT,
 	управлением прерываниями и mailbox IP (взаимодействие между CPU).

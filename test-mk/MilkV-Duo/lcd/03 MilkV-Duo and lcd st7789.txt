@@ -291,8 +291,8 @@ GPIO18    |         CS
 (3) Connect the cables, burn the SD card, plug it into the duo, plug in the USB to power it up, and execute the following code test
 
 --------------------------------------------------------------------------------------------------------------
-cat /dev/urandom > /dev/fb0  //显示花屏
-cat /dev/zero > /dev/fb0  //清空屏幕，也就是黑屏了
+cat /dev/urandom > /dev/fb0  //Display screen
+cat /dev/zero > /dev/fb0  //Clear the screen, that is, black screen
 --------------------------------------------------------------------------------------------------------------
 If you have performed the above operations correctly,
   and the first line can display the screen normally during the test,
