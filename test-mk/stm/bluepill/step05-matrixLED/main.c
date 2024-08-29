@@ -246,7 +246,8 @@ int cmd_init(int argc, char **argv)
         puts("error: unable to initialize the given chip select line");
         return 1;
     }
-    tmp = spi_acquire(spiconf.dev, spiconf.cs, spiconf.mode, spiconf.clk);
+    spi_acquire(spiconf.dev, spiconf.cs, spiconf.mode, spiconf.clk);
+    /*tmp = spi_acquire(spiconf.dev, spiconf.cs, spiconf.mode, spiconf.clk);
     if (tmp == SPI_NOMODE) {
         puts("error: given SPI mode is not supported");
         return 1;
@@ -258,7 +259,7 @@ int cmd_init(int argc, char **argv)
     else if (tmp != SPI_OK) {
         puts("error: unable to acquire bus with given parameters");
         return 1;
-    }
+    }*/
     spi_release(spiconf.dev);
 
     printf("SPI_DEV(%i) initialized: mode: %i, clk: %i, cs_port: %i, cs_pin: %i\n",
@@ -467,11 +468,14 @@ int32_t i_adc_result;
 int setCommand(uint8_t command, uint8_t value)
 {
     /* get access to the bus */
+    spi_acquire(spiconf.dev, spiconf.cs,
+                    spiconf.mode, spiconf.clk);
+    /*
     if (spi_acquire(spiconf.dev, spiconf.cs,
                     spiconf.mode, spiconf.clk) != SPI_OK) {
         puts(" error sendCommand - spi_acquire \t\n");
         return 1;
-    }
+    }*/
     gpio_write(pin15,0);
 //    xtimer_usleep(1);
 
@@ -507,11 +511,14 @@ int setCommand2(uint8_t command)
     if(!(command>=max7219_reg_digit0 && command<=max7219_reg_digit7))return 1;
 
     /* get access to the bus */
+    spi_acquire(spiconf.dev, spiconf.cs,
+                    spiconf.mode, spiconf.clk);
+    /*
     if (spi_acquire(spiconf.dev, spiconf.cs,
                     spiconf.mode, spiconf.clk) != SPI_OK) {
         puts(" error sendCommand - spi_acquire \t\n");
         return 1;
-    }
+    }*/
     gpio_write(pin15,0);
 
     uint8_t value1=0;

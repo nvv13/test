@@ -1,7 +1,15 @@
 # name of your application
-APPLICATION = test_spi_adc_01
+APPLICATION = max7219clock
 
-BOARD ?= bluepill
+#BOARD ?= bluepill-stm32f030c8
+BOARD ?= bluepill-stm32f103c8
+#BOARD ?= bluepill-stm32f103cb
+#BOARD ?= blackpill-stm32f103c8
+#BOARD ?= weact-f411ce
+#BOARD ?= weact-f401ce
+#BOARD ?= seeedstudio-gd32
+
+
 PORT=/dev/ttyUSB0
 
 #include ../Makefile.tests_common
@@ -15,7 +23,7 @@ FEATURES_REQUIRED += periph_adc
 
 USEMODULE += xtimer
 USEMODULE += shell
-USEMODULE += shell_commands
+USEMODULE += shell_cmds_default
 USEMODULE += ds3231
 
 # Optional feature to trigger suit update through gpio callback

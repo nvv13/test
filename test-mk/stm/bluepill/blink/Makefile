@@ -2,7 +2,12 @@
 APPLICATION = Task03
 
 # If no BOARD is found in the environment, use this default:
-BOARD ?= bluepill
+#BOARD ?= bluepill-stm32f030c8
+BOARD ?= bluepill-stm32f103c8
+#BOARD ?= bluepill-stm32f103cb
+#BOARD ?= blackpill-stm32f103c8
+#BOARD ?= weact-f411ce
+#BOARD ?= weact-f401ce
 
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../../../../../../RIOT
@@ -18,7 +23,7 @@ QUIET ?= 1
 # Modules to include:
 USEMODULE += xtimer
 USEMODULE += shell
-USEMODULE += shell_commands
+USEMODULE += shell_cmds_default
 USEMODULE += ps
 FEATURES_REQUIRED = periph_gpio
 
