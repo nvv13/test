@@ -1,9 +1,10 @@
-*******************************************************************************
-получить документация по платкам:
-$ git clone https://github.com/milkv-duo/duo-files.git
-*******************************************************************************
 
-*******************************************************************************
+документация по платкам:
+$ git clone https://github.com/milkv-duo/duo-files.git
+
+
+~~~~~~
+
 (0) сборка образа для sd
 
 поставить docker (если небыло)
@@ -30,10 +31,17 @@ $ cd duo-buildroot-sdk
 в моем случае в
 $ cd duo-buildroot-sdk-Duo-V1.1.2
 
+
+!останавливаем и удаляем старый образ контейнера duodocker для сборки, если он есть!
+ смотрим его "CONTAINER ID"
+$ docker ps -a | grep duodocker
+ допустим "CONTAINER ID" = 52bf3ab8dc6d
+$ docker stop 52bf3ab8dc6d
+$ docker rm 52bf3ab8dc6d
+
+
 скачать и запустить образ контейнера для сборки (просто в терминале)
 $ docker run -itd --name duodocker -v $(pwd):/home/work milkvtech/milkv-duo:latest /bin/bash
- или если уже есть контейнер (да еще в нужной директории $(pwd), вобщем проще stop и rm сделать) 
-$ docker start duodocker
 
 смотрим, как там duodocker
 $ docker ps -a
@@ -47,7 +55,7 @@ $ docker exec -it duodocker /bin/bash -c "cd /home/work && cat /etc/issue && ./b
 
 после компиляции, останавливаем и удаляем образ контейнера для сборки
  смотрим его "CONTAINER ID"
-$ docker ps -a
+$ docker ps -a | grep duodocker
  допустим "CONTAINER ID" = 52bf3ab8dc6d
 $ docker stop 52bf3ab8dc6d
 $ docker rm 52bf3ab8dc6d
@@ -61,9 +69,5 @@ PS: если будут ошибки типа
 
 
 
-*******************************************************************************
 
-
-
-
-
+~~~~~~

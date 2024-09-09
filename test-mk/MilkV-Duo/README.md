@@ -1,13 +1,23 @@
-источник https://milkv.io/ru/docs/duo/overview
 
+
+
+milkv-duo and milkv-duo 256m front
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20front.jpg" alt="milkv-duo%20front.jpg" title="milkv-duo front" /></p>
+
+milkv-duo and milkv-duo 256m back
+<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20back.jpg" alt="milkv-duo%20back.jpg" title="milkv-duo back" /></p>
+
+
+
+
+
+источник https://milkv.io/ru/docs/duo/overview
 
 
 *******************************************************************************
 https://milkv.io/ru/docs/duo/getting-started/duo
 
 	Milk-V Duo
-
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20and%20wifi.jpg" alt="milkv-duo and wifi" title="milkv-duo and wifi" /></p>
 
 SoC	CVITEK CV1800B
 	1GHz and 700MHz RISC-V C906 processors
@@ -77,8 +87,6 @@ Size	21mm*51mm
 https://milkv.io/ru/docs/duo/getting-started/duo256m
 
 	Milk-V  Duo 256M
-
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20256m%20and%20wifi.jpg" alt="milkv-duo 256m and wifi" title="milkv-duo 256m and wifi" /></p>
 
 SoC	SG2002
 	1GHz and 700MHz RISC-V C906 processors

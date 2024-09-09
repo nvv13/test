@@ -1,6 +1,7 @@
 источник
 
 https://community.milkv.io/t/milk-v-duo-spi-st7789/131
+(что то похожее есть в https://github.com/milkv-duo/duo-lvgl-fb-demo.git)
 
 firstman 8 Jun 2023
 
