@@ -1,5 +1,8 @@
 #!/bin/bash
 #
+# для Linux
+# "поробовать" risc-v
+# 
 # install qemu
 #
 #  dnf install qemu-system-riscv
