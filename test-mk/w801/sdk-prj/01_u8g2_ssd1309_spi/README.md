@@ -6,7 +6,7 @@ board HLK-W801-KIT-V1.1 + u8g2 + OLED 128x64  2'4 дюйма, SPI, контро�
 
 Видео
 https://youtu.be/nirQxYLzDgw
-
+https://rutube.ru/video/54ddcdd98b1cd9d534dd3383c649d957/?r=wd
 
 
 
@@ -80,7 +80,8 @@ https://github.com/nvv13/test/tree/main/test-mk/w801/W801_SDK-linux/include/mod1
 
 
 
-Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):
+Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc 
+           https://rutube.ru/video/664a1f911677ecb82c431247c4a5b3b7/?r=wd ):
 ~~~
 делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
    у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет

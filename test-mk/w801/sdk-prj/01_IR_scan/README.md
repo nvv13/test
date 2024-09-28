@@ -4,6 +4,7 @@ board HLK-W801-KIT-V1.1 + hd44780 + tsop48 + LCD1602
 
 
 видео https://youtu.be/YmEWTExZXCI
+https://rutube.ru/video/b028b442c12eddd5d2665d715896cb77/?r=wd
 
 
 соединения
@@ -59,7 +60,8 @@ https://github.com/nvv13/test/tree/main/test-mk/w801/sdk-prj/03_ws2812b_RGB_LED_
 
 
 
-Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):
+Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc 
+           https://rutube.ru/video/664a1f911677ecb82c431247c4a5b3b7/?r=wd ):
 ~~~
 делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
    у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет

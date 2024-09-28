@@ -4,6 +4,8 @@ board HLK-W801-KIT-V1.1 + u8g2 + st7920 + spi
 
 Видео
 https://youtu.be/ZmhRPNjVMo0
+https://rutube.ru/video/3a47965de226679021f69a8c4551750b/?r=wd
+
 
 исходники u8g2, взяты с сайта https://github.com/olikraus/u8g2
 
@@ -115,7 +117,8 @@ st7920      W801 descreption
 -----------------------------
 
 
-Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):
+Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc 
+            https://rutube.ru/video/664a1f911677ecb82c431247c4a5b3b7/?r=wd ):
 ~~~
 делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
    у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет

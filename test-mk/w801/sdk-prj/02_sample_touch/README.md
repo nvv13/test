@@ -18,6 +18,7 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 
 Видео
 https://youtu.be/COopMgUwCrc
+https://rutube.ru/video/0e6d4146d2113a0a713511386e7a2766/?r=wd
 
 
 Дисплей
@@ -139,7 +140,8 @@ W801  LCD
 -----------------------------
 
 
-Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc ):
+Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc
+           https://rutube.ru/video/664a1f911677ecb82c431247c4a5b3b7/?r=wd  ):
 ~~~
 делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
    у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет
