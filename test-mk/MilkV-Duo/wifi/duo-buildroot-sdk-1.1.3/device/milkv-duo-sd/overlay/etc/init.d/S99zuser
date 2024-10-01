@@ -1,0 +1,37 @@
+#!/bin/sh
+${CVI_SHOPTS}
+#
+# Control eth0 speed and start wpa_supplicant
+#
+
+set_network() {
+  if [ -f /mnt/system/ko/8188eu.ko ]; then
+    echo Insmod 8188eu.ko
+    insmod /mnt/system/ko/8188eu.ko
+    sleep 1s
+  fi
+  if /sbin/ip link | grep eth0; then
+    echo Set eth0 to 10Mbps
+    # ethtool -s eth0 speed 10
+  fi
+  if /sbin/ip link | grep wlan0; then
+    echo Check wifi config
+    [ -f /etc/wpa_supplicant/wpa_supplicant.conf ] && wpa_supplicant -B -Dnl80211 -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
+  fi
+}
+
+case "$1" in
+  start)
+        set_network 2>&1 > /var/log/mylog
+        /opt/MMDVMHost/start_mmdvm >> /var/log/mylog &
+        ;;
+  stop)
+        ;;
+  restart|reload)
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
