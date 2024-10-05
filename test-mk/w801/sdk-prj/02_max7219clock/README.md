@@ -52,10 +52,10 @@ connect to
 W801   module max7219(4) + max7219(4) = 8 
 GPIO   PIN    
 -----  ------ 
-PB23   cs
+PB25   cs
 PB24   clk
 PB26   din
-+3.3   VCC     
++5.0   VCC     
 GND    GND    
 -----  ------ 
 

@@ -65,7 +65,7 @@ console_task (void *sdata)
 
                       if (strstr (pHeaderEnd, "help") == pHeaderEnd)
                         {
-                          printf ("usage:");
+                          printf ("usage:\r\n");
                           int ind_cmd = 0;
                           while (shell_commands[ind_cmd].name != NULL)
                             {

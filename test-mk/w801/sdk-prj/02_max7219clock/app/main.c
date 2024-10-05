@@ -85,6 +85,10 @@ user_app1_task (void *sdata)
       return;
     }
 
+  pin_cs=WM_IO_PB_25;
+  tls_gpio_cfg (pin_cs, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
+  tls_gpio_write (pin_cs, 0);
+
   SPI_cfg_t spi_max7219 = {
     .spi_cs = WM_IO_PB_23, /* */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
@@ -95,9 +99,9 @@ user_app1_task (void *sdata)
     .mode = TLS_SPI_MODE_0,      // TLS_SPI_MODE_0 ... TLS_SPI_MODE_3
     .cs_active = TLS_SPI_CS_LOW, // TLS_SPI_CS_LOW TLS_SPI_CS_HIGH
     .fclk
-    = TLS_SPI_FCLK_MIN * 10, // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
+    = 100000, // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
     .type
-    = SPI_DMA_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER SPI_WORD_TRANSFER
+    = SPI_BYTE_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER SPI_WORD_TRANSFER
   };
   /* initialize the device SPI */
   res = SPI_Settings (&spi_max7219);
@@ -106,15 +110,22 @@ user_app1_task (void *sdata)
       puts ("error: unable to initialize SPI");
       return;
     }
-
+  clear();
+ 
   struct tm tblock;
+  ds3231_get_time (&_dev, &tblock);
+  printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r\n", tblock.tm_year + 1900,
+          tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
+          tblock.tm_sec);
+  puts ("enter help for usage\n");
+
   for (;;) // цикл(1) с
     {
+      refresh();
       ds3231_get_time (&_dev, &tblock);
-      //            tls_get_rtc (&tblock); // получаем текущее время
-      printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year + 1900,
-              tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
-              tblock.tm_sec);
+      //printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year + 1900,
+      //        tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
+      //        tblock.tm_sec);
       h_1 = tblock.tm_hour / 10;
       h_2 = tblock.tm_hour % 10;
 

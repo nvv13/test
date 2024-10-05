@@ -75,10 +75,12 @@ extern "C"
   }
 
   static int const num_use_module = 8;
+  static enum tls_io_name pin_cs;
 
   int
   setCommand (uint8_t command, uint8_t value)
   {
+    tls_gpio_write (pin_cs, 0);
     for (int j = 0; j < num_use_module; j++)
       {
         // printf("set Command  = %i , value= %i.\n", (int)command,
@@ -92,6 +94,7 @@ extern "C"
         // if(command>=max7219_reg_digit0 &&
         // command<=max7219_reg_digit7)buffer_matrix[j*8+command-1]=value;
       }
+    tls_gpio_write (pin_cs, 1);
     return 0;
   }
 
@@ -108,6 +111,8 @@ extern "C"
   {
     if (!(command >= max7219_reg_digit0 && command <= max7219_reg_digit7))
       return 1;
+
+    tls_gpio_write (pin_cs, 0);
 
     uint8_t value1 = 0;
     uint8_t value2 = 0;
@@ -190,6 +195,7 @@ extern "C"
           SPI_write ((value01));
       }
 
+    tls_gpio_write (pin_cs, 1);
     return 0;
   }
 
