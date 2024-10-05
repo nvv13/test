@@ -3,7 +3,6 @@
 static OS_STK UserApp2TaskStk[console_TASK_SIZE];
 #define console_TASK_PRIO 31 // меньше цифра, больше приоретет!
 
-
 #define CONSOLE_BUF_SIZE 512
 u8 rx_buf[CONSOLE_BUF_SIZE + 1];
 volatile int rx_data_len;
@@ -15,6 +14,8 @@ proc_console_rx (u16 len, void *user_data)
   rx_data_len += len;
   return 0;
 }
+
+extern void dumpBuffer (char *name, char *buffer, int len);
 
 void
 console_task (void *sdata)
@@ -52,6 +53,7 @@ console_task (void *sdata)
                   uart0    Up: 1B, 5B, 41,
                   uart0  Down: 1B, 5B, 42,
                   uart0 Right: 1B, 5B, 43,
+                    backspace: 7F
                   */
 
                   char *pHeaderEnd = strstr ((char *)(rx_buf + rptr), "\r");
@@ -92,7 +94,10 @@ console_task (void *sdata)
                                     {
                                       argc++;
                                       char *pPos = strstr (pHeaderEnd, " ");
-                                      if (pPos != NULL && pPos<((char*)(rx_buf+CONSOLE_BUF_SIZE)))
+                                      if (pPos != NULL
+                                          && pPos < ((
+                                                 char *)(rx_buf
+                                                         + CONSOLE_BUF_SIZE)))
                                         {
                                           *pPos = 0;
                                           pPos++;
@@ -114,9 +119,25 @@ console_task (void *sdata)
                       rx_data_len = 0;
                       rptr = 0;
                     }
+                  else
+                    {
+                      pHeaderEnd = strstr ((char *)(rx_buf),
+                                           "\x7f"); // backspace
+                      if (pHeaderEnd)
+                        {
+                          (*pHeaderEnd) = 0;
+                          rx_data_len = 0;
+                          rptr--;
+                          if (rptr > 0)
+                            {
+                              pHeaderEnd--;
+                              (*pHeaderEnd) = 0;
+                              rptr--;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 }
-

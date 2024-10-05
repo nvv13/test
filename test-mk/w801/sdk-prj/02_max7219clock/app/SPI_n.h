@@ -200,7 +200,7 @@ extern "C"
     SPI_print_retval (tls_spi_write (data, chunk_length), "SPI_writeBytes");
   };
 
-    //-----------------------------------------------------
+  //-----------------------------------------------------
 
 #ifdef __cplusplus
 }

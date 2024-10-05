@@ -28,16 +28,13 @@
 #include "max7219c.h"
 #include "shell.h"
 
-
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-
 static ds3231_t _dev;
 
 #include "ds3231_util.h"
-
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
@@ -85,7 +82,7 @@ user_app1_task (void *sdata)
       return;
     }
 
-  pin_cs=WM_IO_PB_25;
+  pin_cs = WM_IO_PB_25;
   tls_gpio_cfg (pin_cs, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
   tls_gpio_write (pin_cs, 0);
 
@@ -98,10 +95,9 @@ user_app1_task (void *sdata)
 
     .mode = TLS_SPI_MODE_0,      // TLS_SPI_MODE_0 ... TLS_SPI_MODE_3
     .cs_active = TLS_SPI_CS_LOW, // TLS_SPI_CS_LOW TLS_SPI_CS_HIGH
-    .fclk
-    = 100000, // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
-    .type
-    = SPI_BYTE_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER SPI_WORD_TRANSFER
+    .fclk = 100000,            // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
+    .type = SPI_BYTE_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER
+                               // SPI_WORD_TRANSFER
   };
   /* initialize the device SPI */
   res = SPI_Settings (&spi_max7219);
@@ -110,8 +106,8 @@ user_app1_task (void *sdata)
       puts ("error: unable to initialize SPI");
       return;
     }
-  clear();
- 
+  clear ();
+
   struct tm tblock;
   ds3231_get_time (&_dev, &tblock);
   printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r\n", tblock.tm_year + 1900,
@@ -121,11 +117,12 @@ user_app1_task (void *sdata)
 
   for (;;) // цикл(1) с
     {
-      refresh();
+      refresh ();
       ds3231_get_time (&_dev, &tblock);
-      //printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year + 1900,
-      //        tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
-      //        tblock.tm_sec);
+      // printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year +
+      // 1900,
+      //         tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour,
+      //         tblock.tm_min, tblock.tm_sec);
       h_1 = tblock.tm_hour / 10;
       h_2 = tblock.tm_hour % 10;
 
