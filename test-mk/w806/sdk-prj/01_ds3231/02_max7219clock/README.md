@@ -1,5 +1,3 @@
-!!!В РАБОТЕ!!!
-!!!underway!!!
 
 
 
@@ -9,7 +7,6 @@
 project ds3231 + max7219 
 
 
-board HLK-W801-KIT-V1.1 + 
 
 
 Видео
@@ -36,7 +33,7 @@ https://protosupplies.com/product/ds3231s-rtc-with-eeprom-module/
 
 
 connect to
-W801   module ds3231
+W806   module ds3231
 GPIO   PIN    
 -----  ------ 
 PA02   32K    (32kHz) выход меандра с частотой 32.768кГц
@@ -49,7 +46,7 @@ GND    GND
 
 
 connect to
-W801   module max7219(4) + max7219(4) = 8 
+W806   module max7219(4) + max7219(4) = 8 
 GPIO   PIN    
 -----  ------ 
 PB25   cs
