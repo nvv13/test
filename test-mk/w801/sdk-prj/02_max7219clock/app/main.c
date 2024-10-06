@@ -95,7 +95,6 @@ user_app1_task (void *sdata)
 #define CFG_intensity_BYTE 1
 
   u8 u8_value=b_intensity;
-  /*
   if (ReadByte (CFG_intensity_BYTE, &u8_value) == 0)
     {
       if (u8_value != 255)
@@ -104,7 +103,6 @@ user_app1_task (void *sdata)
           b_intensity = u8_value;
         }
     }
-  */
 
   ds3231_params_t par
       = { .bus = &user_i2c,
