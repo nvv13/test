@@ -193,7 +193,7 @@ extern "C"
  */
 #define AT24C32_EEPROM_SIZE (4096U)
 /**
- * @brief   256 pages of 32 bytes each
+ * @brief   128 pages of 32 bytes each
  */
 #define AT24C32_PAGE_SIZE (32U)
 /**

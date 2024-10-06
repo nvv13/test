@@ -213,7 +213,7 @@ extern "C"
   {
     if (argc != 2)
       {
-        printf ("usage: %s 0-255\n", argv[0]);
+        printf ("usage: %s 0-254\n", argv[0]);
         return 1;
       }
 

@@ -23,6 +23,7 @@
 #include "wm_gpio_afsel.h"
 #include "wm_osal.h"
 
+#include "mod1/at24cxxx.h"
 #include "mod1/ds3231.h"
 
 #include "max7219c.h"
@@ -32,20 +33,18 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-#include "at24c32_util.h"
-
-static ds3231_t _dev;
 static at24cxxx_t at24cxxx_dev;
+static ds3231_t _dev;
 
+#include "at24c32_util.h"
 #include "ds3231_util.h"
-
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
   { "time-get", "get current time", _cmd_get },
   { "time-set", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", _cmd_set },
   { "int-get", "get current intensity", _int_get },
-  { "int-set", "set intensity 0-255", _int_set },
+  { "int-set", "set intensity 0-254", _int_set },
   { NULL, NULL, NULL }
 };
 
@@ -72,19 +71,15 @@ user_app1_task (void *sdata)
     .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
   };
 
-
-  at24cxxx_params_t user_at24 = 
-      {            
-     .i2c         = &user_i2c,
-     .pin_wp      = AT24CXXX_PIN_WP,                
-     .eeprom_size = AT24CXXX_EEPROM_SIZE,      
-     .dev_addr    = AT24CXXX_ADDR,                
-     .page_size   = AT24CXXX_PAGE_SIZE,          
-     .max_polls   = AT24CXXX_MAX_POLLS           
-     };
+  at24cxxx_params_t user_at24 = { .i2c = &user_i2c,
+                                  .pin_wp = AT24CXXX_PIN_WP,
+                                  .eeprom_size = AT24CXXX_EEPROM_SIZE,
+                                  .dev_addr = AT24CXXX_ADDR,
+                                  .page_size = AT24CXXX_PAGE_SIZE,
+                                  .max_polls = AT24CXXX_MAX_POLLS };
 
   /* initialize the i2c */
-  i2c_init(&user_i2c);
+  i2c_init (&user_i2c);
 
   /* Test: Init */
   int check = at24cxxx_init (&at24cxxx_dev, &user_at24);
@@ -97,7 +92,19 @@ user_app1_task (void *sdata)
       puts ("[SUCCESS] at24cxxx_init");
     }
 
+#define CFG_intensity_BYTE 1
 
+  u8 u8_value=b_intensity;
+  /*
+  if (ReadByte (CFG_intensity_BYTE, &u8_value) == 0)
+    {
+      if (u8_value != 255)
+        {
+          printf ("Read intensity: (%d)\n", u8_value);
+          b_intensity = u8_value;
+        }
+    }
+  */
 
   ds3231_params_t par
       = { .bus = &user_i2c,
@@ -124,7 +131,7 @@ user_app1_task (void *sdata)
 
     .mode = TLS_SPI_MODE_0,      // TLS_SPI_MODE_0 ... TLS_SPI_MODE_3
     .cs_active = TLS_SPI_CS_LOW, // TLS_SPI_CS_LOW TLS_SPI_CS_HIGH
-    .fclk = 100000,           // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
+    .fclk = 400000,           // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
     .type = SPI_DMA_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER
                               // SPI_WORD_TRANSFER
   };
@@ -162,6 +169,15 @@ user_app1_task (void *sdata)
         c_sec = 1;
       else
         c_sec = 0;
+
+      if (u8_value != b_intensity)
+        {
+          u8_value = b_intensity;
+          if (WriteByte (CFG_intensity_BYTE, b_intensity) == 0)
+            {
+              printf ("Write New intensity: (%d)\n", u8_value);
+            }
+        }
 
       tls_os_time_delay (HZ);
     }
