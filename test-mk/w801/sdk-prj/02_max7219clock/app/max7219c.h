@@ -201,6 +201,27 @@ extern "C"
     return 0;
   }
 
+  static int
+  _int_get (int argc, char **argv)
+  {
+    printf ("The current intensity is: %d\n", b_intensity);
+    return 0;
+  }
+
+  static int
+  _int_set (int argc, char **argv)
+  {
+    if (argc != 2)
+      {
+        printf ("usage: %s 0-255\n", argv[0]);
+        return 1;
+      }
+
+    b_intensity = atoi (argv[1]);
+    printf ("success: time set to %d\n", b_intensity);
+    return 0;
+  }
+
   void
   clear (void)
   {

@@ -32,14 +32,20 @@
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
+#include "at24c32_util.h"
+
 static ds3231_t _dev;
+static at24cxxx_t at24cxxx_dev;
 
 #include "ds3231_util.h"
 
+
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
-  { "time_get", "get current time", _cmd_get },
-  { "time_set", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", _cmd_set },
+  { "time-get", "get current time", _cmd_get },
+  { "time-set", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", _cmd_set },
+  { "int-get", "get current intensity", _int_get },
+  { "int-set", "set intensity 0-255", _int_set },
   { NULL, NULL, NULL }
 };
 
@@ -65,6 +71,33 @@ user_app1_task (void *sdata)
     .i2c_scl = WM_IO_PA_01, /* WM_IO_PA_01 or WM_IO_PB_20 */
     .i2c_sda = WM_IO_PA_04, /* WM_IO_PA_04 or WM_IO_PB_19 */
   };
+
+
+  at24cxxx_params_t user_at24 = 
+      {            
+     .i2c         = &user_i2c,
+     .pin_wp      = AT24CXXX_PIN_WP,                
+     .eeprom_size = AT24CXXX_EEPROM_SIZE,      
+     .dev_addr    = AT24CXXX_ADDR,                
+     .page_size   = AT24CXXX_PAGE_SIZE,          
+     .max_polls   = AT24CXXX_MAX_POLLS           
+     };
+
+  /* initialize the i2c */
+  i2c_init(&user_i2c);
+
+  /* Test: Init */
+  int check = at24cxxx_init (&at24cxxx_dev, &user_at24);
+  if (check != AT24CXXX_OK)
+    {
+      printf ("[FAILURE] at24cxxx_init: (%d)\n", check);
+    }
+  else
+    {
+      puts ("[SUCCESS] at24cxxx_init");
+    }
+
+
 
   ds3231_params_t par
       = { .bus = &user_i2c,

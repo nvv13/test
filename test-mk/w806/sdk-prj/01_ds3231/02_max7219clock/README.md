@@ -4,7 +4,7 @@
 
 
 
-project ds3231 + max7219 
+project HLK-W806-KIT + ds3231 + max7219 
 
 
 
@@ -13,9 +13,20 @@ project ds3231 + max7219
 
 
 ~~~
-module ds3231 
-вот такой
+компоненты
+
+(1)
+module ds3231 с eeprom на борту 24c32
+вот такой (для примера только)
 https://protosupplies.com/product/ds3231s-rtc-with-eeprom-module/
+
+(2)
+MAX7219 8×8 Dot Matrix
+вот такой (для примера только)
+https://protosupplies.com/product/max7219-8x8-dot-matrix-x4-red-display-module/
+
+(3)
+board HLK-W806-KIT  
 
 ~~~
 
