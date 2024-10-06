@@ -74,27 +74,29 @@ extern "C"
     return b;
   }
 
+#define DMA_BUF_SIZE 512
+  static u8 dma_buf[DMA_BUF_SIZE];
+
   static int const num_use_module = 8;
-  static enum tls_io_name pin_cs;
 
   int
   setCommand (uint8_t command, uint8_t value)
   {
-    tls_gpio_write (pin_cs, 0);
+    size_t i_length = 0;
     for (int j = 0; j < num_use_module; j++)
       {
         // printf("set Command  = %i , value= %i.\n", (int)command,
         // (int)value);
-        SPI_write (command);
+        dma_buf[i_length++] = command;
         if (command >= max7219_reg_digit0 && command <= max7219_reg_digit7
             && j > 3)
-          SPI_write (reverse_bit_in_byte (value));
+          dma_buf[i_length++] = reverse_bit_in_byte (value);
         else
-          SPI_write (value);
+          dma_buf[i_length++] = value;
         // if(command>=max7219_reg_digit0 &&
         // command<=max7219_reg_digit7)buffer_matrix[j*8+command-1]=value;
       }
-    tls_gpio_write (pin_cs, 1);
+    SPI_writeBytes (dma_buf, i_length);
     return 0;
   }
 
@@ -112,7 +114,7 @@ extern "C"
     if (!(command >= max7219_reg_digit0 && command <= max7219_reg_digit7))
       return 1;
 
-    tls_gpio_write (pin_cs, 0);
+    size_t i_length = 0;
 
     uint8_t value1 = 0;
     uint8_t value2 = 0;
@@ -120,7 +122,7 @@ extern "C"
     uint8_t value02 = 0;
     for (int j = 0; j < num_use_module; j++)
       {
-        SPI_write (command); // позиция
+        dma_buf[i_length++] = command; // позиция
 
         // Декодер, что же в эту позицию поставить!
         switch (j)
@@ -190,12 +192,12 @@ extern "C"
 
         // смотрим, нижную или верхнюю часть выводить...
         if (j > 3)
-          SPI_write (reverse_bit_in_byte (value02));
+          dma_buf[i_length++] = reverse_bit_in_byte (value02);
         else
-          SPI_write ((value01));
+          dma_buf[i_length++] = value01;
       }
 
-    tls_gpio_write (pin_cs, 1);
+    SPI_writeBytes (dma_buf, i_length);
     return 0;
   }
 

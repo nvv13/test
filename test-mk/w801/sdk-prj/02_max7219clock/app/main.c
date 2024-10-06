@@ -82,10 +82,6 @@ user_app1_task (void *sdata)
       return;
     }
 
-  pin_cs = WM_IO_PB_25;
-  tls_gpio_cfg (pin_cs, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-  tls_gpio_write (pin_cs, 0);
-
   SPI_cfg_t spi_max7219 = {
     .spi_cs = WM_IO_PB_23, /* */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
@@ -95,9 +91,9 @@ user_app1_task (void *sdata)
 
     .mode = TLS_SPI_MODE_0,      // TLS_SPI_MODE_0 ... TLS_SPI_MODE_3
     .cs_active = TLS_SPI_CS_LOW, // TLS_SPI_CS_LOW TLS_SPI_CS_HIGH
-    .fclk = 100000,            // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
-    .type = SPI_BYTE_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER
-                               // SPI_WORD_TRANSFER
+    .fclk = 100000,           // between TLS_SPI_FCLK_MIN and TLS_SPI_FCLK_MAX
+    .type = SPI_DMA_TRANSFER, // SPI_BYTE_TRANSFER SPI_DMA_TRANSFER
+                              // SPI_WORD_TRANSFER
   };
   /* initialize the device SPI */
   res = SPI_Settings (&spi_max7219);

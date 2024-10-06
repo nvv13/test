@@ -3,12 +3,12 @@
 static OS_STK UserApp2TaskStk[console_TASK_SIZE];
 #define console_TASK_PRIO 31 // меньше цифра, больше приоретет!
 
-#define CONSOLE_BUF_SIZE 512
-u8 rx_buf[CONSOLE_BUF_SIZE + 1];
-volatile int rx_data_len;
-volatile u32 rptr;
+#define CONSOLE_BUF_SIZE 254
+static u8 rx_buf[CONSOLE_BUF_SIZE + 1];
+static volatile int rx_data_len;
+static volatile u32 rptr;
 
-s16
+static s16
 proc_console_rx (u16 len, void *user_data)
 {
   rx_data_len += len;
