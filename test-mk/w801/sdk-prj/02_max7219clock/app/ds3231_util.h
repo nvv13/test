@@ -10,7 +10,7 @@ extern "C"
 
 #define ISOSTR_LEN (20U)
 
-  static ds3231_t ds3231_dev;
+  extern ds3231_t ds3231_dev;
 
   int ds3231_cmd_get (int argc, char **argv);
 
