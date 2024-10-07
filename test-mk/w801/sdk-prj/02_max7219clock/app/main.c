@@ -23,32 +23,36 @@
 #include "wm_gpio_afsel.h"
 #include "wm_osal.h"
 
-#include "mod1/at24cxxx.h"
-#include "mod1/ds3231.h"
 
+#include "SPI_n.h"
 #include "max7219c.h"
 #include "shell.h"
+
+#include "at24c32_util.h"
+#include "console_util.h"
+#include "ds3231_util.h"
 
 #define USER_APP1_TASK_SIZE 2048
 static OS_STK UserApp1TaskStk[USER_APP1_TASK_SIZE];
 #define USER_APP1_TASK_PRIO 32
 
-static at24cxxx_t at24cxxx_dev;
-static ds3231_t _dev;
+#define console_TASK_SIZE 2048
+static OS_STK UserApp2TaskStk[console_TASK_SIZE];
+#define console_TASK_PRIO 31 // меньше цифра, больше приоретет!
 
-#include "at24c32_util.h"
-#include "ds3231_util.h"
+static at24cxxx_t at24c32_dev;
+static int i_second_delay_from_store = 0;
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
-  { "time-get", "get current time", _cmd_get },
-  { "time-set", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", _cmd_set },
-  { "int-get", "get current intensity", _int_get },
-  { "int-set", "set intensity 0-254", _int_set },
+  { "time-get", "get current time", ds3231_cmd_get },
+  { "time-set", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss",
+    ds3231_cmd_set },
+  { "int-get", "get current intensity", max7219_int_get },
+  { "int-set", "set intensity 0-254", max7219_int_set },
   { NULL, NULL, NULL }
 };
 
-#include "console_util.h"
 
 void
 user_app1_task (void *sdata)
@@ -59,7 +63,7 @@ user_app1_task (void *sdata)
   puts ("DS3231 RTC test\n");
 
   tls_watchdog_init (30 * 1000 * 1000); // u32 usec microseconds, около 30 сек
-  tls_os_task_create (NULL, NULL, console_task, NULL,
+  tls_os_task_create (NULL, "shell", console_task, (void *)shell_commands,
                       (void *)UserApp2TaskStk, /* task's stack start address */
                       console_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */
@@ -82,7 +86,7 @@ user_app1_task (void *sdata)
   i2c_init (&user_i2c);
 
   /* Test: Init */
-  int check = at24cxxx_init (&at24cxxx_dev, &user_at24);
+  int check = at24cxxx_init (&at24c32_dev, &user_at24);
   if (check != AT24CXXX_OK)
     {
       printf ("[FAILURE] at24cxxx_init: (%d)\n", check);
@@ -94,13 +98,13 @@ user_app1_task (void *sdata)
 
 #define CFG_intensity_BYTE 1
 
-  u8 u8_value=b_intensity;
-  if (ReadByte (CFG_intensity_BYTE, &u8_value) == 0)
+  u8 u8_value = max7219_get_intensity();
+  if (at24c_ReadByte (&at24c32_dev,CFG_intensity_BYTE, &u8_value) == 0)
     {
       if (u8_value != 255)
         {
           printf ("Read intensity: (%d)\n", u8_value);
-          b_intensity = u8_value;
+          max7219_set_intensity(u8_value);
         }
     }
 
@@ -113,7 +117,7 @@ user_app1_task (void *sdata)
   tls_os_time_delay (HZ);
 
   /* initialize the device ds3231_init */
-  res = ds3231_init (&_dev, &par);
+  res = ds3231_init (&ds3231_dev, &par);
   if (res != 0)
     {
       puts ("error: unable to initialize DS3231 [I2C initialization error]");
@@ -140,10 +144,10 @@ user_app1_task (void *sdata)
       puts ("error: unable to initialize SPI");
       return;
     }
-  clear ();
+  max7219_clear ();
 
   struct tm tblock;
-  ds3231_get_time (&_dev, &tblock);
+  ds3231_get_time (&ds3231_dev, &tblock);
   printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r\n", tblock.tm_year + 1900,
           tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
           tblock.tm_sec);
@@ -151,32 +155,43 @@ user_app1_task (void *sdata)
 
   for (;;) // цикл(1) с
     {
-      refresh ();
-      ds3231_get_time (&_dev, &tblock);
-      // printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year +
+      max7219_refresh ();
+      ds3231_get_time (&ds3231_dev, &tblock);
+      //printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year +
       // 1900,
       //         tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour,
       //         tblock.tm_min, tblock.tm_sec);
-      h_1 = tblock.tm_hour / 10;
-      h_2 = tblock.tm_hour % 10;
 
-      m_2 = tblock.tm_min / 10;
-      m_1 = tblock.tm_min % 10;
+      max7219_set_h_1(tblock.tm_hour / 10);
+      max7219_set_h_2(tblock.tm_hour % 10);
+
+      max7219_set_m_1(tblock.tm_min / 10);
+      max7219_set_m_2(tblock.tm_min % 10);
 
       if (tblock.tm_sec % 2 == 0)
-        c_sec = 1;
+        max7219_set_c_sec(1);
       else
-        c_sec = 0;
+        max7219_set_c_sec(0);
 
-      if (u8_value != b_intensity)
+      if (u8_value != max7219_get_intensity())
         {
-          u8_value = b_intensity;
-          if (WriteByte (CFG_intensity_BYTE, b_intensity) == 0)
-            {
-              printf ("Write New intensity: (%d)\n", u8_value);
-            }
+          u8_value = max7219_get_intensity();
+          i_second_delay_from_store
+              = 20; //Задержка до сохранения 20 сек, вдруг пользовательбыдет
+                    //"проверять" подсветку
         }
 
+      if (i_second_delay_from_store > 0)
+        {
+          i_second_delay_from_store--;
+          if (i_second_delay_from_store == 0)
+            {
+              if (at24c_WriteByte (&at24c32_dev,CFG_intensity_BYTE, u8_value) == 0)
+                {
+                  printf ("Write New intensity: (%d)\n", u8_value);
+                }
+            }
+        }
       tls_os_time_delay (HZ);
     }
 }
@@ -187,7 +202,7 @@ UserMain (void)
   printf ("UserMain start \n");
   tls_sys_clk_set (CPU_CLK_240M);
 
-  tls_os_task_create (NULL, NULL, user_app1_task, NULL,
+  tls_os_task_create (NULL, "app1", user_app1_task, NULL,
                       (void *)UserApp1TaskStk, /* task's stack start address */
                       USER_APP1_TASK_SIZE
                           * sizeof (u32), /* task's stack size, unit:byte */

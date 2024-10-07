@@ -1,3 +1,10 @@
+#ifndef AT24C32_UTIL_H
+#define AT24C32_UTIL_H
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,11 +12,6 @@
 
 #include "wm_type_def.h"
 
-#include "wm_cpu.h"
-#include "wm_rtc.h"
-#include "wm_timer.h"
-
-#include "utils.h"
 #include "wm_gpio.h"
 #include "wm_gpio_afsel.h"
 #include "wm_io.h"
@@ -25,53 +27,16 @@
 #define AT24CXXX_PAGE_SIZE (AT24C32_PAGE_SIZE)
 #define AT24CXXX_MAX_POLLS (AT24C32_MAX_POLLS)
 #define AT24CXXX_PIN_WP (GPIO_UNDEF)
-#define AT24CXXX_ADDR (AT24CXXX_DEF_DEV_ADDR + 7) // A0=0,A1=0,A2=0
-// #define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 7) //
-//0xAE addr ACK found! = 0x57
-// A0=1,A1=1,A2=1
+#define AT24CXXX_ADDR (AT24CXXX_DEF_DEV_ADDR + 7)
+  // 0xAE addr ACK found! = 0x57
 
-#define WRITE_BYTE_POSITION (12U)
-#define WRITE_BYTE_CHARACTER 'A'
 
-#define WRITE_POSITION (AT24CXXX_EEPROM_SIZE - 3 * AT24CXXX_PAGE_SIZE - 4)
-#define WRITE_CHARACTERS                                                      \
-  {                                                                           \
-    'B', 'E', 'E', 'R', '4', 'F', 'R', 'E', 'E', '\0'                         \
-  }
+  int at24c_ReadByte (const at24cxxx_t *dev,int iPosition, u8 *u8_value);
 
-#define SET_POSITION (AT24CXXX_EEPROM_SIZE - 7 * AT24CXXX_PAGE_SIZE - 4)
-#define SET_CHARACTER 'G'
-#define SET_LEN (20U)
+  int at24c_WriteByte (const at24cxxx_t *dev,int iPosition, u8 u8_value);
 
-int
-ReadByte (int iPosition, u8 *u8_value)
-{
-  int check = at24cxxx_read_byte (&at24cxxx_dev, iPosition, u8_value);
-  if (check < 0)
-    {
-      printf ("[FAILURE] at24cxxx_read_byte: %d\n", check);
-      return 1;
-    }
-  else
-    {
-      puts ("[SUCCESS] at24cxxx_read_byte");
-    }
-  return 0;
+#ifdef __cplusplus
 }
+#endif
 
-int
-WriteByte (int iPosition, u8 u8_value)
-{
-  /* Test: Write/Read Byte */
-  int check = at24cxxx_write_byte (&at24cxxx_dev, iPosition, u8_value);
-  if (check != AT24CXXX_OK)
-    {
-      printf ("[FAILURE] at24cxxx_write_byte: %d\n", check);
-      return 1;
-    }
-  else
-    {
-      puts ("[SUCCESS] at24cxxx_write_byte");
-    }
-  return 0;
-}
+#endif /* AT24C32_UTIL_H */
