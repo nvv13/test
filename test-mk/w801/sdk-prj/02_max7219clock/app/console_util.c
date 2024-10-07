@@ -17,7 +17,7 @@
 #include "console_util.h"
 #include "shell.h"
 
-#define CONSOLE_BUF_SIZE 254
+#define CONSOLE_BUF_SIZE 127
 static u8 rx_buf[CONSOLE_BUF_SIZE + 1];
 static volatile int rx_data_len;
 static volatile u32 rptr;

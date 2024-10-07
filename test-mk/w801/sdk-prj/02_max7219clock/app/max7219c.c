@@ -72,7 +72,7 @@ reverse_bit_in_byte (uint8_t b)
 }
 
 #define num_use_module 8
-#define DMA_BUF_SIZE num_use_module * 3
+#define DMA_BUF_SIZE num_use_module * 2 + 1
 
 static u8 dma_buf[DMA_BUF_SIZE];
 
