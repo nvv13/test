@@ -30,10 +30,9 @@ extern "C"
 #define AT24CXXX_ADDR (AT24CXXX_DEF_DEV_ADDR + 7)
   // 0xAE addr ACK found! = 0x57
 
+  int at24c_ReadByte (const at24cxxx_t *dev, int iPosition, u8 *u8_value);
 
-  int at24c_ReadByte (const at24cxxx_t *dev,int iPosition, u8 *u8_value);
-
-  int at24c_WriteByte (const at24cxxx_t *dev,int iPosition, u8 u8_value);
+  int at24c_WriteByte (const at24cxxx_t *dev, int iPosition, u8 u8_value);
 
 #ifdef __cplusplus
 }

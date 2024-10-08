@@ -23,7 +23,6 @@
 #include "wm_gpio_afsel.h"
 #include "wm_osal.h"
 
-
 #include "SPI_n.h"
 #include "max7219c.h"
 #include "shell.h"
@@ -52,7 +51,6 @@ static const shell_command_t shell_commands[] = {
   { "int-set", "set intensity 0-254", max7219_int_set },
   { NULL, NULL, NULL }
 };
-
 
 void
 user_app1_task (void *sdata)
@@ -98,13 +96,13 @@ user_app1_task (void *sdata)
 
 #define CFG_intensity_BYTE 1
 
-  u8 u8_value = max7219_get_intensity();
-  if (at24c_ReadByte (&at24c32_dev,CFG_intensity_BYTE, &u8_value) == 0)
+  u8 u8_value = max7219_get_intensity ();
+  if (at24c_ReadByte (&at24c32_dev, CFG_intensity_BYTE, &u8_value) == 0)
     {
       if (u8_value != 255)
         {
           printf ("Read intensity: (%d)\n", u8_value);
-          max7219_set_intensity(u8_value);
+          max7219_set_intensity (u8_value);
         }
     }
 
@@ -157,25 +155,25 @@ user_app1_task (void *sdata)
     {
       max7219_refresh ();
       ds3231_get_time (&ds3231_dev, &tblock);
-      //printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year +
+      // printf (" cur time %d.%02d.%02d %02d:%02d:%02d\r", tblock.tm_year +
       // 1900,
       //         tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour,
       //         tblock.tm_min, tblock.tm_sec);
 
-      max7219_set_h_1(tblock.tm_hour / 10);
-      max7219_set_h_2(tblock.tm_hour % 10);
+      max7219_set_h_1 (tblock.tm_hour / 10);
+      max7219_set_h_2 (tblock.tm_hour % 10);
 
-      max7219_set_m_1(tblock.tm_min / 10);
-      max7219_set_m_2(tblock.tm_min % 10);
+      max7219_set_m_1 (tblock.tm_min / 10);
+      max7219_set_m_2 (tblock.tm_min % 10);
 
       if (tblock.tm_sec % 2 == 0)
-        max7219_set_c_sec(1);
+        max7219_set_c_sec (1);
       else
-        max7219_set_c_sec(0);
+        max7219_set_c_sec (0);
 
-      if (u8_value != max7219_get_intensity())
+      if (u8_value != max7219_get_intensity ())
         {
-          u8_value = max7219_get_intensity();
+          u8_value = max7219_get_intensity ();
           i_second_delay_from_store
               = 20; //Задержка до сохранения 20 сек, вдруг пользовательбыдет
                     //"проверять" подсветку
@@ -186,7 +184,8 @@ user_app1_task (void *sdata)
           i_second_delay_from_store--;
           if (i_second_delay_from_store == 0)
             {
-              if (at24c_WriteByte (&at24c32_dev,CFG_intensity_BYTE, u8_value) == 0)
+              if (at24c_WriteByte (&at24c32_dev, CFG_intensity_BYTE, u8_value)
+                  == 0)
                 {
                   printf ("Write New intensity: (%d)\n", u8_value);
                 }

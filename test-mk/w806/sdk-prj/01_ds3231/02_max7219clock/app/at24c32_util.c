@@ -1,7 +1,7 @@
 #include "at24c32_util.h"
 
 int
-at24c_ReadByte (const at24cxxx_t *dev,int iPosition, u8 *u8_value)
+at24c_ReadByte (const at24cxxx_t *dev, int iPosition, u8 *u8_value)
 {
   int check = at24cxxx_read_byte (dev, iPosition, u8_value);
   if (check < 0)
@@ -17,7 +17,7 @@ at24c_ReadByte (const at24cxxx_t *dev,int iPosition, u8 *u8_value)
 }
 
 int
-at24c_WriteByte (const at24cxxx_t *dev,int iPosition, u8 u8_value)
+at24c_WriteByte (const at24cxxx_t *dev, int iPosition, u8 u8_value)
 {
   /* Test: Write/Read Byte */
   int check = at24cxxx_write_byte (dev, iPosition, u8_value);

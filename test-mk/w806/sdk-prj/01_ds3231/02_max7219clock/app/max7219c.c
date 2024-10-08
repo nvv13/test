@@ -83,27 +83,67 @@ static u8 m_2 = 0;
 static u8 c_sec = 0;
 static u8 b_intensity = 0x06;
 
-u8 max7219_get_intensity(void)
+u8
+max7219_get_intensity (void)
 {
-return b_intensity;
+  return b_intensity;
 }
-void max7219_set_intensity(u8 val)
+void
+max7219_set_intensity (u8 val)
 {
-b_intensity=val;
+  b_intensity = val;
 }
 
-u8 max7219_get_h_1(void){return h_1;}
-u8 max7219_get_h_2(void){return h_2;}
-u8 max7219_get_m_1(void){return m_1;}
-u8 max7219_get_m_2(void){return m_2;}
-u8 max7219_get_c_sec(void){return c_sec;}
-void max7219_set_h_1(u8 val){h_1=val;};
-void max7219_set_h_2(u8 val){h_2=val;};
-void max7219_set_m_1(u8 val){m_1=val;};
-void max7219_set_m_2(u8 val){m_2=val;};
-void max7219_set_c_sec(u8 val){c_sec=val;};
-
-
+u8
+max7219_get_h_1 (void)
+{
+  return h_1;
+}
+u8
+max7219_get_h_2 (void)
+{
+  return h_2;
+}
+u8
+max7219_get_m_1 (void)
+{
+  return m_2; //так надо
+}
+u8
+max7219_get_m_2 (void)
+{
+  return m_1; //так надо
+}
+u8
+max7219_get_c_sec (void)
+{
+  return c_sec;
+}
+void
+max7219_set_h_1 (u8 val)
+{
+  h_1 = val;
+};
+void
+max7219_set_h_2 (u8 val)
+{
+  h_2 = val;
+};
+void
+max7219_set_m_1 (u8 val)
+{
+  m_2 = val; //так надо
+};
+void
+max7219_set_m_2 (u8 val)
+{
+  m_1 = val; //так надо
+};
+void
+max7219_set_c_sec (u8 val)
+{
+  c_sec = val;
+};
 
 static int
 setCommand (uint8_t command, uint8_t value)
