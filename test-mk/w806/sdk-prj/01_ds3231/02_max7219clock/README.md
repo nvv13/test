@@ -6,6 +6,7 @@ project HLK-W806-KIT + ds3231 + max7219
 
 
 Видео
+https://rutube.ru/video/fea91be3b2752fbb304cc0a20ada9ad7/?r=wd
 
 
 ~~~
