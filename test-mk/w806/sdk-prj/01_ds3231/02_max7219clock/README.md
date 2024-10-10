@@ -56,7 +56,7 @@ connect to
 W806   module max7219(4) + max7219(4) = 8 
 GPIO   PIN    
 -----  ------ 
-PB23   cs
+PB14   cs
 PB24   clk
 PB26   din
 +5.0   VCC     

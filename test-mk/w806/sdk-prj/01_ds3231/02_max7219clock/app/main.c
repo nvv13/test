@@ -123,7 +123,7 @@ user_app1_task (void *sdata)
     }
 
   SPI_cfg_t spi_max7219 = {
-    .spi_cs = WM_IO_PB_23, /* */
+    .spi_cs = WM_IO_PB_14, /* */
     .spi_ck = WM_IO_PB_24, /*      ck -> sck Clock pin */
     .spi_di = WM_IO_PB_03, /* master miso di <- miso slave, на макетке board
                               HLK-W801-KIT-V1.1 работает только WM_IO_PB_03  */
