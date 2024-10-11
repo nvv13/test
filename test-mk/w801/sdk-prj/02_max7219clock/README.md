@@ -9,6 +9,7 @@ project HLK-W801-KIT-V1.1 + ds3231 + max7219
 
 
 Видео
+https://youtu.be/TNM8vkSJKMk
 https://rutube.ru/video/fea91be3b2752fbb304cc0a20ada9ad7/?r=wd
 
 
