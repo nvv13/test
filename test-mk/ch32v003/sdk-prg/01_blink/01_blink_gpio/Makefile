@@ -24,7 +24,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 FLAGS ?= -march=rv32ec_zicsr -mabi=ilp32e -msmall-data-limit=8 -mno-save-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized  -g
 ASFLAGS ?= $(FLAGS) -x assembler $(INC_FLAGS) -MMD -MP
 CPPFLAGS ?=  $(FLAGS) $(INC_FLAGS) -std=gnu99 -MMD -MP
-LDFLAGS ?= $(FLAGS) -T ./vendor/Ld/Link.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/CH32V203.map" --specs=nano.specs --specs=nosys.specs
+LDFLAGS ?= $(FLAGS) -T ./vendor/Ld/Link.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/CH32V003.map" --specs=nano.specs --specs=nosys.specs
 
 
 $(BUILD_DIR)/$(TARGET_ELF): $(OBJS)

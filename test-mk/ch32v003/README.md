@@ -44,3 +44,11 @@ https://github.com/cnlohr/ch32v003fun
 https://github.com/wuxx/CH32V003-makefile-example
 https://github.com/gregdavill/CH32V307-makefile-example
 
+
+# Datasheet and Reference and Core Manual
+### Download URL
+
+- CH32V003RM.PDF-http://www.wch-ic.com/downloads/CH32V003RM_PDF.html
+- CH32V003DS0.PDF-http://www.wch-ic.com/downloads/CH32V003DS0_PDF.html
+- QingKeV2_Processor_Manual.PDF-http://www.wch-ic.com/downloads/QingKeV2_Processor_Manual_PDF.html
+
