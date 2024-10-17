@@ -68,7 +68,7 @@ main (void)
 
   while (1)
     {
-      Delay_Ms (200);
+      Delay_Ms (1000);
       GPIO_WriteBit (GPIOA, GPIO_Pin_1,
                      (i == 0) ? (i = Bit_SET) : (i = Bit_RESET));
     }
