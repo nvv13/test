@@ -86,6 +86,7 @@ main (void)
 
   USARTx_CFG ();
   printf ("SystemClk1:%d\r\n", SystemCoreClock);
+  printf (" key 0..9 to set Delay ms 100...1000\r\n");
 
   GPIO_Toggle_init ();
 
@@ -105,11 +106,11 @@ main (void)
         {
           /* waiting for receiving finish */
           val = (USART_ReceiveData (USART1));
-          USART_SendData (USART1, val);
-          while (USART_GetFlagStatus (USART1, USART_FLAG_TXE) == RESET)
-            {
-              /* waiting for sending finish */
-            }
+          // USART_SendData (USART1, val);
+          // while (USART_GetFlagStatus (USART1, USART_FLAG_TXE) == RESET)
+          //   {
+          //     /* waiting for sending finish */
+          //   }
           if (val >= 0x30 && val <= 0x39)
             {
               i_c = (uint32_t)(val - 0x30 + 1) * p_ms * 100;
@@ -117,7 +118,7 @@ main (void)
             }
         }
 
-      if (!((SysTick->SR & (1 << 0)) != (1 << 0)))
+      if (((SysTick->SR & (1 << 0)) == (1 << 0)))
         {
           SysTick->CTLR &= ~(1 << 0);
           SysTick->SR &= ~(1 << 0);

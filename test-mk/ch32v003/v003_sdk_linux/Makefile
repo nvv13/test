@@ -26,6 +26,7 @@ ASFLAGS ?= $(FLAGS) -x assembler $(INC_FLAGS) -MMD -MP
 CPPFLAGS ?=  $(FLAGS) $(INC_FLAGS) -std=gnu99 -MMD -MP
 LDFLAGS ?= $(FLAGS) -T ./vendor/Ld/Link.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/CH32V003.map" --specs=nano.specs --specs=nosys.specs
 
+all: $(BUILD_DIR)/$(TARGET_ELF)
 
 $(BUILD_DIR)/$(TARGET_ELF): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
@@ -58,8 +59,8 @@ clean:
 
 MKDIR_P ?= mkdir -p
 
-flash:
-	$(TOP_DIR)/tools/minichlink/minichlink -w $(BUILD_DIR)/$(TARGET_BIN) 
+flash:all
+	$(TOP_DIR)/tools/minichlink/minichlink -w $(BUILD_DIR)/$(TARGET_BIN) 0x00000000
 	$(TOP_DIR)/tools/minichlink/minichlink -b 
 
 chipinfo:
