@@ -1,4 +1,43 @@
 
+Платка CH32V003 или её еще просто обзывают TWen32F003 на МК CH32V003F4P6
+их несколько вариантов
+
+мне попалась с кнопкой и двумя светодиодами - зелёным и красным,
+   кнопка подсоединена к питанию и выводу PC0
+   красный светиться когда загружаешь прошивку, к выводу SWD подсоединён
+   зелёный - к земле и питанию (через резистор)
+
+
+~~~
+https://www.wch-ic.com/products/CH32V003.html
+
+CH32V003F4P6 корпус TSSOP20
+ QingKe 32-bit RISC-V2A processor, supporting 2 levels of interrupt nesting
+ Maximum 48MHz system main frequency
+ 2KB SRAM, 16KB Flash
+ Power supply voltage: 3.3/5V
+ Multiple low-power modes: Sleep, Standby
+ Power on/off reset, programmable voltage detector
+ 1 group of 1-channel general-purpose DMA controller
+ 1 group of op-amp comparator
+ 1 group of 10-bit ADC
+ 1×16-bit advanced-control timer, 1×16-bit general-purpose timer
+ 2 WDOG, 1×32-bit SysTick
+ 1 USART interface, 1 group of I2C interface, 1 group of SPI interface
+ 18 I/O ports, mapping an external interrupt
+ 64-bit chip unique ID
+ 1-wire serial debug interface (SDI)
+~~~
+
+
+
+
+
+
+~~~
+
+напоминалка:
+
 делал в fedora linux 39, в других возможно немного по другому надо
 
 
@@ -14,7 +53,7 @@
 
 
 
-(2) установка для прошивки 
+(2) утилита для прошивки через WCH-linkE (у меня версия WCH-linkE-R0-1v3.FP)
 
 собираем из проекта 
 
@@ -35,11 +74,12 @@ $ sudo reboot
  
 
 
-
+~~~
 
 
 PS:
  источники
+https://github.com/openwch/ch32v003
 https://github.com/cnlohr/ch32v003fun
 https://github.com/wuxx/CH32V003-makefile-example
 https://github.com/gregdavill/CH32V307-makefile-example
