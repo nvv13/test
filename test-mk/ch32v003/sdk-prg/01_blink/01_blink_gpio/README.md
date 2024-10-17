@@ -14,17 +14,17 @@
 connect to
 v003   WCH-LinkE
 -----  ------ 
-PD05    RX  
-SWD     SWDIO
-V       3V3
-G       GND    
+PD5    RX  
+SWD    SWDIO
+V      3V3
+G      GND    
 -----  ------ 
 
 
 connect to
 v003   LED
 -----  ------ 
-PA01   LED + резистор 300 Ом - 1 Ком на землю
+PA1    LED + резистор 300 Ом - 1 Ком на землю
 GND    GND    
 -----  ------ 
 
