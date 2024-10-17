@@ -3,9 +3,9 @@
 их несколько вариантов
 
 мне попалась с кнопкой и двумя светодиодами - зелёным и красным,
-   кнопка подсоединена к питанию и выводу PC0
-   красный светиться когда загружаешь прошивку, к выводу SWD подсоединён
-   зелёный - к земле и питанию (через резистор)
+	   кнопка подсоединена к питанию и выводу PC0
+	   красный светиться когда загружаешь прошивку, к выводу SWD подсоединён
+	   зелёный POWER - подсоединён к земле и питанию (через резистор) 
 
 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/ch32v003/doc/TWen32F003.jpg" alt="TWen32F003" title="CH32V003" /></p>
@@ -15,21 +15,62 @@
 https://www.wch-ic.com/products/CH32V003.html
 
 CH32V003F4P6 корпус TSSOP20
- QingKe 32-bit RISC-V2A processor, supporting 2 levels of interrupt nesting
- Maximum 48MHz system main frequency
- 2KB SRAM, 16KB Flash
- Power supply voltage: 3.3/5V
- Multiple low-power modes: Sleep, Standby
- Power on/off reset, programmable voltage detector
- 1 group of 1-channel general-purpose DMA controller
- 1 group of op-amp comparator
- 1 group of 10-bit ADC
- 1×16-bit advanced-control timer, 1×16-bit general-purpose timer
- 2 WDOG, 1×32-bit SysTick
- 1 USART interface, 1 group of I2C interface, 1 group of SPI interface
- 18 I/O ports, mapping an external interrupt
- 64-bit chip unique ID
- 1-wire serial debug interface (SDI)
+
+Features
+
+Core
+ - QingKe 32-bit RISC-V core, RV32EC instruction set
+ - Fast programmable interrupt controller + hardware interrupt stack
+ - Support 2-level interrupt nesting
+ - Support system main frequency 48MHz
+
+Memory
+ - 2KB volatile data storage area SRAM
+ - 16KB program memory CodeFlash
+ - 1920B BootLoader
+ - 64B non-volatile system configuration memory
+ - 64B user-defined memory
+
+Power management and low-power consumption
+ - System power supply VDD: 3.3V or 5V
+ - Low-power mode: Sleep, Standby
+
+Clock & Reset
+ - Built-in factory-trimmed 24MHz RC oscillator
+ - Built-in 128KHz RC oscillator
+ - High-speed external 4~25MHz oscillator
+ - Power on/down reset, programmable voltage detector
+
+7-channel general-purpose DMA controller
+ - 7 channels, support ring buffer
+ - Support TIMx/ADC /USART/I2C/SPI 
+
+1 group of OPA and comparator: connected with ADC and TIM2
+
+1 group of 10-bit ADC
+ - Analog input range: 0~VDD
+ - 8 external signals + 2 internal signals
+ - Support external delayed triggering
+
+Multiple timers
+ - 16-bit advanced-control timer, with dead zone control and emergency brake; can offer PWM complementary output for motor control
+ - 16-bit general-purpose timer, provide input capture/output comparison/PWM/pulse counting/incremental encoder input
+ - 2 watchdog timers (independent watchdog and window watchdog)
+ - SysTick: 32-bit counter
+
+Communication interfaces
+ - USART interface
+ - I2C interface
+ - SPI interface
+
+GPIO port
+ - 3 groups of GPIO ports, 18 I/O ports
+ - Mapping 1 external interrupt
+
+Security features: 96-bit unique ID
+
+Debug mode: 1-wire serial debug interface (SDI)
+
 ~~~
 
 
