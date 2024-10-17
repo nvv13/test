@@ -60,8 +60,13 @@ MKDIR_P ?= mkdir -p
 
 flash:
 	$(TOP_DIR)/tools/minichlink/minichlink -w $(BUILD_DIR)/$(TARGET_BIN) 0x00000000
+	$(TOP_DIR)/tools/minichlink/minichlink -b 
 
 chipinfo:
 	$(TOP_DIR)/tools/minichlink/minichlink -i
 
+reboot:
+	$(TOP_DIR)/tools/minichlink/minichlink -b
 
+fmt:
+	clang-format --style=GNU --verbose -i ./app/*.c ./app/*.h

@@ -1,6 +1,5 @@
-/********************************** (C) COPYRIGHT *******************************
- * File Name          : main.c
- * Author             : WCH
+/********************************** (C) COPYRIGHT
+ ******************************** File Name          : main.c Author : WCH
  * Version            : V1.0.0
  * Date               : 2021/06/06
  * Description        : Main program body.
@@ -8,9 +7,7 @@
  * SPDX-License-Identifier: Apache-2.0
  *******************************************************************************/
 
-
 #include "debug.h"
-
 
 /* Global define */
 
@@ -23,15 +20,16 @@
  *
  * @return  none
  */
-void GPIO_Toggle_init(void)
+void
+GPIO_Toggle_init (void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure = {0};
+  GPIO_InitTypeDef GPIO_InitStructure = { 0 };
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+  RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOA, ENABLE);
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init (GPIOA, &GPIO_InitStructure);
 }
 
 /*********************************************************************
@@ -41,19 +39,20 @@ void GPIO_Toggle_init(void)
  *
  * @return  none
  */
-int main(void)
+int
+main (void)
 {
-    u8 i = 0;
-    RCC_ClocksTypeDef RCC_ClocksStatus={0};
+  u8 i = 0;
+  RCC_ClocksTypeDef RCC_ClocksStatus = { 0 };
 
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-    Delay_Init();
-    Delay_Ms(100);
-    USART_Printf_Init(115200);
-    printf("SystemClk:%ld\r\n", SystemCoreClock);
+  NVIC_PriorityGroupConfig (NVIC_PriorityGroup_2);
+  Delay_Init ();
+  Delay_Ms (100);
+  USART_Printf_Init (115200);
+  printf ("SystemClk:%ld\r\n", SystemCoreClock);
 
-    SystemCoreClockUpdate();
-    printf("SystemClk:%d\r\n",SystemCoreClock);
+  SystemCoreClockUpdate ();
+  printf ("SystemClk:%d\r\n", SystemCoreClock);
 
 #if 0
     RCC_GetClocksFreq(&RCC_ClocksStatus);
@@ -64,13 +63,13 @@ int main(void)
 
 #endif
 
-    printf("GPIO Toggle TEST\r\n");
-    GPIO_Toggle_init();
+  printf ("GPIO Toggle TEST\r\n");
+  GPIO_Toggle_init ();
 
-    while (1)
+  while (1)
     {
-        Delay_Ms(1000);
-        GPIO_WriteBit(GPIOA, GPIO_Pin_1, (i == 0) ? (i = Bit_SET) : (i = Bit_RESET));
+      Delay_Ms (200);
+      GPIO_WriteBit (GPIOA, GPIO_Pin_1,
+                     (i == 0) ? (i = Bit_SET) : (i = Bit_RESET));
     }
-
 }
