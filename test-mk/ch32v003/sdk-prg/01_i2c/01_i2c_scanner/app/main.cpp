@@ -57,7 +57,7 @@ i2c_send_addr (uint8_t addr)
   I2C_Send7bitAddress (I2C1, addr, I2C_Direction_Transmitter);
 
   I2C_CheckEvent (I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
-  Delay_Ms (2);
+  Delay_Us (200);
   uint32_t u83 = I2C_GetLastEvent (I2C1);
 
   I2C_GenerateSTOP (I2C1, ENABLE);
