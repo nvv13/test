@@ -83,7 +83,7 @@ main (void)
   for (uint8_t addr = 0x08; addr < 0xF0; addr += 2)
     {
       uint32_t res = i2c_send_addr (addr);
-      if (res != 0x30400)
+      if (res != 0x30400) //0x70482
         {
           sprintf (char_buff,
                    "0x%.2X addr ACK found! = 0x%.2X      "
