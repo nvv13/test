@@ -14,8 +14,9 @@
 connect to
 v003   WCH-LinkE
 -----   ------ 
-PD5(TX)  RX  
-PD6(RX)  TX  
+PD5(TX)  RX    - это чтобы увидеть вывод программы
+PD6(RX)  TX    - это чтобы послать ответ
+                 $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE 
 SWD      SWDIO
 V        3V3
 G        GND    

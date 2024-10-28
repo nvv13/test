@@ -87,14 +87,29 @@ Debug mode: 1-wire serial debug interface (SDI)
 
 (1) установка пакетов для сборки riskv кода
 
-# sudo dnf install pnpm
+$ sudo dnf install pnpm   (или может sudo dnf install npm ?)
+$ sudo npm install --location=global xpm@latest
+$ xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --global --verbose
 
-# sudo npm install --location=global xpm@latest
 
-# xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --global --verbose
-
-# export PATH=$HOME/.local/xPacks/@xpack-dev-tools/riscv-none-elf-gcc/14.2.0-2.1/.content/bin:$PATH
-
+************************************
+    или, установка пакетов для сборки riskv кода - вручную
+$ cd ~
+$ mkdir .local
+$ cd .local
+$ mkdir xPacks
+$ cd xPacks/
+$ mkdir @xpack-dev-tools
+$ cd @xpack-dev-tools/
+$ mkdir riscv-none-elf-gcc
+$ cd riscv-none-elf-gcc/
+$ mkdir 14.2.0-2.1
+$ cd 14.2.0-2.1/
+$ wget https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v14.2.0-2/xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz
+$ tar xzf xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz
+$ rm xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz 
+$ mv xpack-riscv-none-elf-gcc-14.2.0-2/ .content/
+************************************
 
 
 (2) утилита для прошивки через WCH-linkE (у меня версия WCH-linkE-R0-1v3.FP)
@@ -123,6 +138,7 @@ $ sudo reboot
 
 PS:
  источники
+https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack
 https://github.com/openwch/ch32v003
 https://github.com/cnlohr/ch32v003fun
 https://github.com/wuxx/CH32V003-makefile-example

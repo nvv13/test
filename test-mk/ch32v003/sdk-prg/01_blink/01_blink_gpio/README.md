@@ -14,7 +14,8 @@
 connect to
 v003   WCH-LinkE
 -----  ------ 
-PD5    RX  
+PD5    RX      - это чтобы увидеть вывод программы, результат сканирования
+                 $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE и смотрим
 SWD    SWDIO
 V      3V3
 G      GND    

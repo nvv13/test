@@ -42,7 +42,6 @@ IIC_Init (u32 bound, u16 address)
   I2C_Cmd (I2C1, ENABLE);
 }
 
-char char_buff[30];
 
 uint32_t
 i2c_send_addr (uint8_t addr)
@@ -80,6 +79,7 @@ main (void)
   IIC_Init (100000, 0x00);
   printf ("Start I2C Address scan...\n\r");
   bool l_find = false;
+  char char_buff[100];
   for (uint8_t addr = 0x08; addr < 0xF0; addr += 2)
     {
       uint32_t res = i2c_send_addr (addr);
