@@ -1,5 +1,6 @@
 /*
-
+  источник
+  https://github.com/openwch/ch32v003.git
 */
 
 #include "debug.h"

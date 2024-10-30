@@ -1,3 +1,8 @@
+/*
+  источник
+  https://github.com/openwch/ch32v003.git
+*/
+
 
 #include "ch32v00x_dbgmcu.h"
 #include "debug.h"

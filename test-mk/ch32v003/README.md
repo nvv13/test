@@ -118,6 +118,9 @@ $ mv xpack-riscv-none-elf-gcc-14.2.0-2/ .content/
 
 https://github.com/cnlohr/ch32v003fun.git
 
+возможно надо будет поставить
+$ dnf install systemd-devel
+
 minichlink
 
 копируем оттуда файл

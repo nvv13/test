@@ -31,3 +31,8 @@ GND    GND
 
 
 
+~~~
+
+PS
+https://forum.cxem.net/index.php?/blogs/entry/764-systick/
+https://nc-pin.com/index.php/2022/05/05/testing-the-toolchain-interrupt/
