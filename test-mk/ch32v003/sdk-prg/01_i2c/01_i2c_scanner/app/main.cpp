@@ -100,7 +100,7 @@ main (void)
     }
   printf ("I2C Address scan finished \n\r");
 
-  CBlink ob_Blink1 = CBlink (GPIOA, GPIO_Pin_1, GPIO_Speed_50MHz);
+  CBlink ob_Blink1 = CBlink (PA_01);
 
   while (1)
     {

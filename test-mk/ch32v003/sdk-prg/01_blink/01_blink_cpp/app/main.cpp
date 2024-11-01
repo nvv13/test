@@ -21,8 +21,8 @@ main (void)
   printf ("SystemClk:%d\r\n", SystemCoreClock);
 
   printf ("GPIO Toggle TEST\r\n");
-  CBlink ob_Blink1 = CBlink (GPIOA, GPIO_Pin_1, GPIO_Speed_50MHz);
-  CBlink ob_Blink2 = CBlink (GPIOA, GPIO_Pin_2, GPIO_Speed_50MHz);
+  CBlink ob_Blink1 = CBlink (PA_01);
+  CBlink ob_Blink2 = CBlink (PA_02);
 
   while (1)
     {

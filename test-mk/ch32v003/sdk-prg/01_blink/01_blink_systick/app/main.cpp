@@ -34,7 +34,7 @@ main (void)
   SysTick->CNT = 0;
   SysTick->CTLR = 0xF;
 
-  CBlink ob_Blink1 = CBlink (GPIOA, GPIO_Pin_1, GPIO_Speed_50MHz);
+  CBlink ob_Blink1 = CBlink (PA_01);
 
   int i_count = 0;
   while (1)
