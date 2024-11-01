@@ -150,7 +150,7 @@ ds3231_cmd_get (int argc, char **argv)
   ds3231_get_time (&ds3231_dev, &tblock);
   // получаем текущее время
   if (tblock.tm_year > 80)
-    printf ("cur time %d.%d.%d %d:%d:%d \r\n", tblock.tm_year + 1900,
+    printf ("cur time %d.%02d.%02d %02d:%02d:%02d \r\n", tblock.tm_year + 1900,
             tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
             tblock.tm_sec);
 
