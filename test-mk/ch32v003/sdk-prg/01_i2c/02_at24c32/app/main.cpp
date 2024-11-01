@@ -9,52 +9,27 @@
 
 #include "CShell.hpp"
 
-#include "CBlink.hpp"
-
 #include "at24cxxx.h"
 
-CBlink *Pob_Blink1 = NULL;
-
-int
-led_on (int argc, char **argv)
-{
-  Pob_Blink1->On ();
-  printf ("ob_Blink1.On()\r\n");
-  return 0;
-};
-
-int
-led_off (int argc, char **argv)
-{
-  Pob_Blink1->Off ();
-  printf ("ob_Blink1.Off()\r\n");
-  return 0;
-};
 
 int test_at24c32 (int argc, char **argv);
 
+
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
-  { "led-on", "set LED On", led_on },
-  { "led-off", "set LED Off", led_off },
-  { "test", "start test EPPROM at24c32", test_at24c32 },
+  { "test", "test EPPROM at24c32", test_at24c32 },
   { NULL, NULL, NULL }
 };
-
-
-
-
 
 #ifndef AT24CXXX_ERASE
 #define AT24CXXX_ERASE (0)
 #endif
 
-#define AT24CXXX_EEPROM_SIZE            (AT24C32_EEPROM_SIZE)
-#define AT24CXXX_PAGE_SIZE              (AT24C32_PAGE_SIZE)
-#define AT24CXXX_MAX_POLLS              (AT24C32_MAX_POLLS)
-#define AT24CXXX_PIN_WP                 (GPIO_UNDEF)
-#define AT24CXXX_ADDR                   (AT24CXXX_DEF_DEV_ADDR + 7)  
-
+#define AT24CXXX_EEPROM_SIZE (AT24C32_EEPROM_SIZE)
+#define AT24CXXX_PAGE_SIZE (AT24C32_PAGE_SIZE)
+#define AT24CXXX_MAX_POLLS (AT24C32_MAX_POLLS)
+#define AT24CXXX_PIN_WP (GPIO_UNDEF)
+#define AT24CXXX_ADDR (AT24CXXX_DEF_DEV_ADDR + 7)
 
 #define WRITE_BYTE_POSITION (12U)
 #define WRITE_BYTE_CHARACTER 'A'
@@ -73,7 +48,7 @@ int
 test_at24c32 (int argc, char **argv)
 {
 
-  puts ("Starting tests for module at24cxxx\r\n");
+  puts ("tests at24cxxx\r\n");
 
   at24cxxx_t at24cxxx_dev;
   int check;
@@ -81,28 +56,22 @@ test_at24c32 (int argc, char **argv)
   printf ("EEPROM size: %u byte\r\n", AT24CXXX_EEPROM_SIZE);
   printf ("Page size  : %u byte\r\n", AT24CXXX_PAGE_SIZE);
 
+  i2c_param_t user_i2c = {
+    .i2c_scl = PC_02,   /* */
+    .i2c_sda = PC_01,   /* */
+    .i2c_freq = 400000, /* частота i2c в герцах */
+    .hw_wire = false,
+  };
 
-  i2c_param_t user_i2c = 
-      {            
-      .i2c_scl=PC_02, /* */
-      .i2c_sda=PC_01, /* */
-      .i2c_freq=400000,       /* частота i2c в герцах */
-      .hw_wire=false,
-      };
-
-
-  at24cxxx_params_t user_data = 
-      {            
-     .i2c         = &user_i2c,
-     .pin_wp      = AT24CXXX_PIN_WP,                
-     .eeprom_size = AT24CXXX_EEPROM_SIZE,      
-     .dev_addr    = AT24CXXX_ADDR,                
-     .page_size   = AT24CXXX_PAGE_SIZE,          
-     .max_polls   = AT24CXXX_MAX_POLLS           
-     };
+  at24cxxx_params_t user_data = { .i2c = &user_i2c,
+                                  .pin_wp = AT24CXXX_PIN_WP,
+                                  .eeprom_size = AT24CXXX_EEPROM_SIZE,
+                                  .dev_addr = AT24CXXX_ADDR,
+                                  .page_size = AT24CXXX_PAGE_SIZE,
+                                  .max_polls = AT24CXXX_MAX_POLLS };
 
   /* initialize the i2c */
-  i2c_init(&user_i2c);
+  i2c_init (&user_i2c);
 
   /* Test: Init */
   check = at24cxxx_init (&at24cxxx_dev, &user_data);
@@ -246,11 +215,11 @@ test_at24c32 (int argc, char **argv)
       puts ("[SUCCESS] set/read\r\n");
     }
 
-  puts ("Finished tests for module at24cxxx\r\n");
-
+  puts ("Finished tests at24cxxx\r\n");
 
   return 0;
 }
+
 
 int
 main (void)
@@ -259,8 +228,6 @@ main (void)
   SystemCoreClockUpdate ();
   Delay_Init ();
   // USART_Printf_Init (115000);
-  CBlink ob_Blink1 = CBlink (PA_01);
-  Pob_Blink1 = &ob_Blink1;
   CShell oCShell = CShell (shell_commands);
   printf ("SystemClk1:%d\r\n", SystemCoreClock);
   printf ("enter help for usage\r\n");

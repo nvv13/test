@@ -9,6 +9,16 @@
 
 надо соединить по схеме:
 ~~~
+компоненты
+
+(1)
+module ds3231 с eeprom на борту 24c32
+вот такой (для примера только)
+https://protosupplies.com/product/ds3231s-rtc-with-eeprom-module/
+
+(2)
+CH32V003F4P6
+
 
 
 connect to
@@ -31,4 +41,12 @@ GND    GND
 -----  ------ 
 
 
+connect to
+v003   module ds3231 
+-----  ------ 
+PC2    SCL   i2c clock   
+PC1    SDA   i2c data   
+V      VCC     
+G      GND    
+-----  ------ 
 

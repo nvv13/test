@@ -3,7 +3,7 @@
 
 #include "CUsart.hpp"
 
-#define TxSize1 127
+#define TxSize1 63
 
 static u8 RxBuffer1[TxSize1 + 1] = { 0 };
 static volatile u8 RxCnt1 = 0, RxLineLen = 0;
