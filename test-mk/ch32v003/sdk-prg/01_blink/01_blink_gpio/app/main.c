@@ -23,49 +23,12 @@ int
 main (void)
 {
   u8 i = 0;
-  RCC_ClocksTypeDef RCC_ClocksStatus = { 0 };
-
-
 
   NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
   Delay_Init ();
   Delay_Ms (100);
-  USART_Printf_Init (115200);
-  printf ("SystemClk:%ld\r\n", SystemCoreClock);
-
   SystemCoreClockUpdate ();
-  printf ("SystemClk:%d\r\n", SystemCoreClock);
 
-#if 1
-  RCC_GetClocksFreq (&RCC_ClocksStatus);
-  printf ("SYSCLK_Frequency-%d\r\n", RCC_ClocksStatus.SYSCLK_Frequency);
-  printf ("HCLK_Frequency-%d\r\n", RCC_ClocksStatus.HCLK_Frequency);
-  printf ("PCLK1_Frequency-%d\r\n", RCC_ClocksStatus.PCLK1_Frequency);
-  printf ("PCLK2_Frequency-%d\r\n", RCC_ClocksStatus.PCLK2_Frequency);
-
-#endif
-
-  union
-  {
-    short s;
-    char c[sizeof (short)];
-  } un;
-  un.s = 0x0102;
-  printf (" CPU: - ");
-  if (sizeof (short) == 2)
-    {
-      if (un.c[0] == 1 && un.c[1] == 2)
-        printf ("big-endiann \n");
-      else if (un.c[0] == 2 && un.c[1] == 1)
-        printf ("little-endiann \n");
-      else
-        printf ("unknownn \n");
-    }
-  else
-    printf ("sizeof(short) = %d \n", sizeof (short));
-
-
-  printf ("GPIO Toggle TEST\r\n");
   GPIO_Toggle_init ();
 
   while (1)

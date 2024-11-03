@@ -11,25 +11,21 @@ extern "C" int
 main (void)
 {
 
-  NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
+  //NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
   Delay_Init ();
   Delay_Ms (100);
-  USART_Printf_Init (115200);
-  printf ("SystemClk:%ld\r\n", SystemCoreClock);
 
   SystemCoreClockUpdate ();
-  printf ("SystemClk:%d\r\n", SystemCoreClock);
-
-  printf ("GPIO Toggle TEST\r\n");
   CBlink ob_Blink1 = CBlink (PA_01);
   CBlink ob_Blink2 = CBlink (PA_02);
 
   while (1)
     {
-      Delay_Ms (500);
-      ob_Blink1.Toggle ();
+      ob_Blink1.On ();
+      Delay_Ms (100);
+      ob_Blink1.Off ();
       ob_Blink2.Toggle ();
-      Delay_Ms (200);
+      Delay_Ms (500);
       ob_Blink2.Toggle ();
     }
 }
