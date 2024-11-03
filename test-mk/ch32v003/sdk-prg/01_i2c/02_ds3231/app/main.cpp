@@ -161,14 +161,19 @@ ds3231_cmd_get (int argc, char **argv)
       PoCShell->oUsart->SendPSZstring ("cur time ");
       PoCShell->oUsart->SendIntToStr (tblock.tm_year + 1900);
       PoCShell->oUsart->SendPSZstring (".");
+      if(tblock.tm_mon + 1 <10)PoCShell->oUsart->SendPSZstring ("0");
       PoCShell->oUsart->SendIntToStr (tblock.tm_mon + 1);
       PoCShell->oUsart->SendPSZstring (".");
+      if(tblock.tm_mday <10)PoCShell->oUsart->SendPSZstring ("0");
       PoCShell->oUsart->SendIntToStr (tblock.tm_mday);
       PoCShell->oUsart->SendPSZstring (" ");
+      if(tblock.tm_hour <10)PoCShell->oUsart->SendPSZstring ("0");
       PoCShell->oUsart->SendIntToStr (tblock.tm_hour);
       PoCShell->oUsart->SendPSZstring (":");
+      if(tblock.tm_min <10)PoCShell->oUsart->SendPSZstring ("0");
       PoCShell->oUsart->SendIntToStr (tblock.tm_min);
       PoCShell->oUsart->SendPSZstring (":");
+      if(tblock.tm_sec <10)PoCShell->oUsart->SendPSZstring ("0");
       PoCShell->oUsart->SendIntToStr (tblock.tm_sec);
       PoCShell->oUsart->SendPSZstring ("\r\n");
     }
