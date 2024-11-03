@@ -4,6 +4,7 @@
 */
 
 #include <cstring>
+#include <stdlib.h>
 
 #include "debug.h"
 
@@ -11,9 +12,9 @@
 
 #include "at24cxxx.h"
 
+CShell *PoCShell = NULL;
 
 int test_at24c32 (int argc, char **argv);
-
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
@@ -48,13 +49,17 @@ int
 test_at24c32 (int argc, char **argv)
 {
 
-  puts ("tests at24cxxx\r\n");
+  PoCShell->oUsart->SendPSZstring ("tests at24cxxx\r\n");
 
   at24cxxx_t at24cxxx_dev;
   int check;
 
-  printf ("EEPROM size: %u byte\r\n", AT24CXXX_EEPROM_SIZE);
-  printf ("Page size  : %u byte\r\n", AT24CXXX_PAGE_SIZE);
+  PoCShell->oUsart->SendPSZstring ("EEPROM size:");
+  PoCShell->oUsart->SendIntToStr (AT24CXXX_EEPROM_SIZE);
+  PoCShell->oUsart->SendPSZstring ("\r\n");
+  PoCShell->oUsart->SendPSZstring ("Page size  :");
+  PoCShell->oUsart->SendIntToStr (AT24CXXX_PAGE_SIZE);
+  PoCShell->oUsart->SendPSZstring ("\r\n");
 
   i2c_param_t user_i2c = {
     .i2c_scl = PC_02,   /* */
@@ -77,12 +82,14 @@ test_at24c32 (int argc, char **argv)
   check = at24cxxx_init (&at24cxxx_dev, &user_data);
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_init: (%d)\r\n", check);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_init");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_init\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_init\r\n");
     }
 
     /* erase EEPROM to exclude side effects from prior test runs */
@@ -90,13 +97,15 @@ test_at24c32 (int argc, char **argv)
   check = at24cxxx_erase (&at24cxxx_dev);
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_erase: %d (EEPROM size = %" PRId32 ")\r\n",
-              check, at24cxxx_dev.params.eeprom_size);
+      //      printf ("[FAILURE] at24cxxx_erase: %d (EEPROM size = %" PRId32
+      //      ")\r\n",
+      //              check, at24cxxx_dev.params.eeprom_size);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_erase:\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_erase\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_erase\r\n");
     }
 #endif
 
@@ -105,35 +114,42 @@ test_at24c32 (int argc, char **argv)
                                WRITE_BYTE_CHARACTER);
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_write_byte: %d\r\n", check);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_write_byte: ");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_write_byte\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_write_byte\r\n");
     }
 
   uint8_t c;
   check = at24cxxx_read_byte (&at24cxxx_dev, WRITE_BYTE_POSITION, &c);
   if (check < 0)
     {
-      printf ("[FAILURE] at24cxxx_read_byte: %d\r\n", check);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_read_byte:");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_read_byte\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_read_byte\r\n");
     }
 
   if (c != WRITE_BYTE_CHARACTER)
     {
-      printf ("[FAILURE] write_byte/read_byte: (%d != %d)\r\n", c,
-              WRITE_BYTE_CHARACTER);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] write_byte/read_byte: ");
+      PoCShell->oUsart->SendIntToStr (c);
+      PoCShell->oUsart->SendPSZstring (" != ");
+      PoCShell->oUsart->SendIntToStr (WRITE_BYTE_CHARACTER);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] write_byte/read_byte\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] write_byte/read_byte\r\n");
     }
 
   /* Test: Write */
@@ -143,13 +159,16 @@ test_at24c32 (int argc, char **argv)
                           sizeof (expected_write_data));
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_write: %d (size = %u)\r\n", check,
-              sizeof (expected_write_data));
+      //      printf ("[FAILURE] at24cxxx_write: %d (size = %u)\r\n", check,
+      //              sizeof (expected_write_data));
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_write");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_write\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_write\r\n");
     }
 
   /* Test: Read */
@@ -159,25 +178,29 @@ test_at24c32 (int argc, char **argv)
                          sizeof (actual_write_data));
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_read: %d\r\n", check);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_read: ");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_read\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_read\r\n");
     }
 
   if (memcmp (actual_write_data, expected_write_data,
               sizeof (actual_write_data))
       != 0)
     {
-      printf ("[FAILURE] write/read: (%s != %s)\r\n", actual_write_data,
-              expected_write_data);
+      //      printf ("[FAILURE] write/read: (%s != %s)\r\n",
+      //      actual_write_data,
+      //              expected_write_data);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] write/read\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] write/read\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] write/read\r\n");
     }
 
   /* Test: Set */
@@ -189,37 +212,42 @@ test_at24c32 (int argc, char **argv)
   check = at24cxxx_set (&at24cxxx_dev, SET_POSITION, SET_CHARACTER, SET_LEN);
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_set: %d (size = %u)\r\n", check, SET_LEN);
+      // printf ("[FAILURE] at24cxxx_set: %d (size = %u)\r\n", check, SET_LEN);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_set: ");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_set\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_set\r\n");
     }
 
   check
       = at24cxxx_read (&at24cxxx_dev, SET_POSITION, actual_set_data, SET_LEN);
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] set/read: %d\r\n", check);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE 1] set/read:\r\n");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else if (memcmp (actual_set_data, expected_set_data, SET_LEN) != 0)
     {
-      printf ("[FAILURE] set/read: (%s != %s)\r\n", actual_set_data,
-              expected_set_data);
+      //      printf ("[FAILURE] set/read: (%s != %s)\r\n", actual_set_data,
+      //              expected_set_data);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE 2] set/read:\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] set/read\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] set/read\r\n");
     }
 
-  puts ("Finished tests at24cxxx\r\n");
+  PoCShell->oUsart->SendPSZstring ("Finished tests at24cxxx\r\n");
 
   return 0;
 }
-
 
 int
 main (void)
@@ -227,10 +255,13 @@ main (void)
   NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
   SystemCoreClockUpdate ();
   Delay_Init ();
-  // USART_Printf_Init (115000);
   CShell oCShell = CShell (shell_commands);
-  printf ("SystemClk1:%d\r\n", SystemCoreClock);
-  printf ("enter help for usage\r\n");
+  PoCShell = &oCShell;
+  oCShell.oUsart->SendPSZstring ("SystemClk1:");
+  oCShell.oUsart->SendIntToStr (SystemCoreClock);
+  oCShell.oUsart->SendPSZstring ("\r\n");
+
+  oCShell.oUsart->SendPSZstring ("enter help for usage\r\n");
 
   while (1)
     {

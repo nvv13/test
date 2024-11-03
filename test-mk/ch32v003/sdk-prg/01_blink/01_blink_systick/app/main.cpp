@@ -9,6 +9,8 @@
 
 #include "CBlink.hpp"
 
+#define DBG_PRINTF 0
+
 /* Global Variable */
 static volatile bool l_flag = false;
 
@@ -24,9 +26,11 @@ main (void)
 {
   SystemCoreClockUpdate ();
   Delay_Init ();
+#if DBG_PRINTF
   USART_Printf_Init (115200);
   printf ("SystemClk:%d\r\n", SystemCoreClock);
   printf ("ChipID:%08x\r\n", DBGMCU_GetCHIPID ());
+#endif
 
   NVIC_EnableIRQ (SysTicK_IRQn);
   SysTick->SR &= ~(1 << 0);
@@ -44,7 +48,9 @@ main (void)
           __disable_irq ();
           l_flag = false;
           __enable_irq ();
+#if DBG_PRINTF
           printf ("tic=%d\r\n", i_count++);
+#endif
           ob_Blink1.Toggle ();
         }
     };

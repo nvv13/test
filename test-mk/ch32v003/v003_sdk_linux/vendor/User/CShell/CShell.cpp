@@ -9,18 +9,21 @@
 
 CShell::CShell (const shell_command_t *shell_cmd) : Fshell_cmd (shell_cmd)
 {
-  FoUsart = CUsart::GetInstance ();
+  oUsart = CUsart::GetInstance ();
 }
 
 void
 CShell::print_help (void)
 {
-  printf ("usage:\r\n");
+  oUsart->SendPSZstring ("usage:\r\n");
   int ind_cmd = 0;
   while (Fshell_cmd[ind_cmd].name != NULL)
     {
-      printf ("  \"%s\" : \"%s\"\r\n", Fshell_cmd[ind_cmd].name,
-              Fshell_cmd[ind_cmd].desc);
+      oUsart->SendPSZstring ("  ");
+      oUsart->SendPSZstring (Fshell_cmd[ind_cmd].name);
+      oUsart->SendPSZstring (" : ");
+      oUsart->SendPSZstring (Fshell_cmd[ind_cmd].desc);
+      oUsart->SendPSZstring ("\r\n");
       ind_cmd++;
     }
 }
@@ -28,12 +31,16 @@ CShell::print_help (void)
 void
 CShell::Idle (void)
 {
-  if (FoUsart->is_recive_line ())
+  if (oUsart->is_recive_line ())
     {
-      u8 *rx_buf = FoUsart->line_cstr ();
-      u8 line_len = FoUsart->line_len ();
+      u8 *rx_buf = oUsart->line_cstr ();
+      u8 line_len = oUsart->line_len ();
       char *pHeaderEnd = (char *)rx_buf;
-      //printf (" line:%s\r\n", pHeaderEnd);
+      /*
+      oUsart->SendPSZstring (" line:");
+      oUsart->SendPSZstring (pHeaderEnd);
+      oUsart->SendPSZstring ("\r\n");
+      */
 
       if (strstr (pHeaderEnd, "help") == pHeaderEnd)
         {

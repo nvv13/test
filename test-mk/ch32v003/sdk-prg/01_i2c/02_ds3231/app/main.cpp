@@ -15,6 +15,7 @@
 
 static ds3231_t ds3231_dev;
 static i2c_param_t user_i2c;
+static CShell *PoCShell = NULL;
 
 int init_at24c32 (int argc, char **argv);
 
@@ -58,13 +59,17 @@ int
 init_at24c32 (int argc, char **argv)
 {
 
-  puts ("init at24cxxx\r\n");
+  PoCShell->oUsart->SendPSZstring ("init at24cxxx\r\n");
 
   at24cxxx_t at24cxxx_dev;
   int check;
 
-  printf ("EEPROM size: %u byte\r\n", AT24CXXX_EEPROM_SIZE);
-  printf ("Page size  : %u byte\r\n", AT24CXXX_PAGE_SIZE);
+  PoCShell->oUsart->SendPSZstring ("EEPROM size:");
+  PoCShell->oUsart->SendIntToStr (AT24CXXX_EEPROM_SIZE);
+  PoCShell->oUsart->SendPSZstring ("\r\n");
+  PoCShell->oUsart->SendPSZstring ("Page size  :");
+  PoCShell->oUsart->SendIntToStr (AT24CXXX_PAGE_SIZE);
+  PoCShell->oUsart->SendPSZstring ("\r\n");
 
   user_i2c = {
     .i2c_scl = PC_02,   /* */
@@ -87,12 +92,14 @@ init_at24c32 (int argc, char **argv)
   check = at24cxxx_init (&at24cxxx_dev, &user_data);
   if (check != AT24CXXX_OK)
     {
-      printf ("[FAILURE] at24cxxx_init: (%d)\r\n", check);
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_init");
+      PoCShell->oUsart->SendIntToStr (check);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      puts ("[SUCCESS] at24cxxx_init\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_init\r\n");
     }
 
   return 0;
@@ -150,10 +157,21 @@ ds3231_cmd_get (int argc, char **argv)
   ds3231_get_time (&ds3231_dev, &tblock);
   // получаем текущее время
   if (tblock.tm_year > 80)
-    printf ("cur time %d.%02d.%02d %02d:%02d:%02d \r\n", tblock.tm_year + 1900,
-            tblock.tm_mon + 1, tblock.tm_mday, tblock.tm_hour, tblock.tm_min,
-            tblock.tm_sec);
-
+    {
+      PoCShell->oUsart->SendPSZstring ("cur time ");
+      PoCShell->oUsart->SendIntToStr (tblock.tm_year + 1900);
+      PoCShell->oUsart->SendPSZstring (".");
+      PoCShell->oUsart->SendIntToStr (tblock.tm_mon + 1);
+      PoCShell->oUsart->SendPSZstring (".");
+      PoCShell->oUsart->SendIntToStr (tblock.tm_mday);
+      PoCShell->oUsart->SendPSZstring (" ");
+      PoCShell->oUsart->SendIntToStr (tblock.tm_hour);
+      PoCShell->oUsart->SendPSZstring (":");
+      PoCShell->oUsart->SendIntToStr (tblock.tm_min);
+      PoCShell->oUsart->SendPSZstring (":");
+      PoCShell->oUsart->SendIntToStr (tblock.tm_sec);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
+    }
   return 0;
 }
 
@@ -165,8 +183,11 @@ main (void)
   Delay_Init ();
   // USART_Printf_Init (115000);
   CShell oCShell = CShell (shell_commands);
-  printf ("SystemClk1:%d\r\n", SystemCoreClock);
-  printf ("enter help for usage\r\n");
+  PoCShell = &oCShell;
+  PoCShell->oUsart->SendPSZstring ("SystemClk1:");
+  PoCShell->oUsart->SendIntToStr (SystemCoreClock);
+  PoCShell->oUsart->SendPSZstring ("\r\n");
+  PoCShell->oUsart->SendPSZstring ("enter help for usage\r\n");
 
   while (1)
     {

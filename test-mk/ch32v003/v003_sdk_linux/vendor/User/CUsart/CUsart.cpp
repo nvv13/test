@@ -1,9 +1,11 @@
 
+#include <stdlib.h>
+
 #include "debug.h"
 
 #include "CUsart.hpp"
 
-#define TxSize1 63
+#define TxSize1 127
 
 static u8 RxBuffer1[TxSize1 + 1] = { 0 };
 static volatile u8 RxCnt1 = 0, RxLineLen = 0;
@@ -129,4 +131,48 @@ u8
 CUsart::line_len (void)
 {
   return RxLineLen;
+}
+
+int
+CUsart::SendData (uint8_t *data, size_t len)
+{
+  if (len == 0)
+    return 0;
+  int pos = 0;
+  u8 val = data[pos];
+  while (++pos < len)
+    {
+      USART_SendData (USART1, val);
+      while (USART_GetFlagStatus (USART1, USART_FLAG_TXE) == RESET)
+        {
+          /* waiting for sending finish */
+        }
+      val = data[pos];
+    }
+  return pos;
+}
+
+int
+CUsart::SendPSZstring (const char *str)
+{
+  int pos = 0;
+  u8 val = (u8)str[pos];
+  while (val != 0)
+    {
+      pos++;
+      USART_SendData (USART1, val);
+      while (USART_GetFlagStatus (USART1, USART_FLAG_TXE) == RESET)
+        {
+          /* waiting for sending finish */
+        }
+      val = (u8)str[pos];
+    }
+  return pos;
+}
+
+int CUsart::SendIntToStr (int inum)
+{
+  char psz[2 + 8 * sizeof(int)];
+  itoa(inum, psz, 10);
+  return SendPSZstring (psz);
 }
