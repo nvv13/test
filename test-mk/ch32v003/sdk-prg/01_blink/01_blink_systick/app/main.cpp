@@ -40,14 +40,18 @@ main (void)
 
   CBlink ob_Blink1 = CBlink (PA_01);
 
+#if DBG_PRINTF
   int i_count = 0;
+#endif
   while (1)
     {
       if (l_flag)
         {
-          __disable_irq ();
+          NVIC_DisableIRQ (SysTicK_IRQn);
+          //__disable_irq ();
           l_flag = false;
-          __enable_irq ();
+          //__enable_irq ();
+          NVIC_EnableIRQ (SysTicK_IRQn);
 #if DBG_PRINTF
           printf ("tic=%d\r\n", i_count++);
 #endif

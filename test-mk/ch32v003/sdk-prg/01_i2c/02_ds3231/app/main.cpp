@@ -5,6 +5,7 @@
 
 #include <cstring>
 
+
 #include "debug.h"
 
 #include "CShell.hpp"
@@ -21,13 +22,15 @@ int init_at24c32 (int argc, char **argv);
 
 int init_ds3231 (int argc, char **argv);
 
-int ds3231_cmd_get (int argc, char **argv);
+//int ds3231_cmd_get (int argc, char **argv){return 0;};
+//int ds3231_cmd_set (int argc, char **argv){return 0;};
+#include "ds3231_util.h"
+
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
-  { "time-get", "get cur time", ds3231_cmd_get },
-  //  { "time-set", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss",
-  //    ds3231_cmd_set },
+  { "tget", "get cur time", ds3231_cmd_get },
+  { "tset", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", ds3231_cmd_set },
   { "init", "init ds3231", init_ds3231 },
   { NULL, NULL, NULL }
 };
@@ -149,36 +152,7 @@ init_ds3231 (int argc, char **argv)
   return 0;
 }
 
-int
-ds3231_cmd_get (int argc, char **argv)
-{
-  struct tm tblock;
 
-  ds3231_get_time (&ds3231_dev, &tblock);
-  // получаем текущее время
-  if (tblock.tm_year > 80)
-    {
-      PoCShell->oUsart->SendPSZstring ("cur time ");
-      PoCShell->oUsart->SendIntToStr (tblock.tm_year + 1900);
-      PoCShell->oUsart->SendPSZstring (".");
-      if(tblock.tm_mon + 1 <10)PoCShell->oUsart->SendPSZstring ("0");
-      PoCShell->oUsart->SendIntToStr (tblock.tm_mon + 1);
-      PoCShell->oUsart->SendPSZstring (".");
-      if(tblock.tm_mday <10)PoCShell->oUsart->SendPSZstring ("0");
-      PoCShell->oUsart->SendIntToStr (tblock.tm_mday);
-      PoCShell->oUsart->SendPSZstring (" ");
-      if(tblock.tm_hour <10)PoCShell->oUsart->SendPSZstring ("0");
-      PoCShell->oUsart->SendIntToStr (tblock.tm_hour);
-      PoCShell->oUsart->SendPSZstring (":");
-      if(tblock.tm_min <10)PoCShell->oUsart->SendPSZstring ("0");
-      PoCShell->oUsart->SendIntToStr (tblock.tm_min);
-      PoCShell->oUsart->SendPSZstring (":");
-      if(tblock.tm_sec <10)PoCShell->oUsart->SendPSZstring ("0");
-      PoCShell->oUsart->SendIntToStr (tblock.tm_sec);
-      PoCShell->oUsart->SendPSZstring ("\r\n");
-    }
-  return 0;
-}
 
 int
 main (void)
