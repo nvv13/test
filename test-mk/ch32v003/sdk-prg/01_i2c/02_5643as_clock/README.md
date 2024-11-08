@@ -1,3 +1,6 @@
+!!!В РАБОТЕ!!!
+!!!underway!!!
+
 
 Платка CH32V003 или её еще просто обзывают TWen32F003 на МК CH32V003F4P6
 
@@ -33,13 +36,6 @@ G        GND
 -----  ------ 
 
 
-connect to
-v003   LED
------  ------ 
-PA1    LED + резистор 300 Ом - 1 Ком на землю
-GND    GND    
------  ------ 
-
 
 connect to
 v003   module ds3231 
@@ -50,5 +46,26 @@ V      VCC
 G      GND    
 -----  ------ 
 
+
+connect to
+v003 5643AS-1 
+---- ----- 
+PD7  1  E
+PD4  2  D
+PD3  3  DP
+PD2  4  C
+PD1  5  G
+PD0  6  Dig4
+PC7  7  B
+PC6  8  Dig3
+PC5  9  Dig2
+PC4  10 F
+PC3  11 A
+PC0  12 Dig1
+---- ------ 
+
+
+
 ~~~
+
 

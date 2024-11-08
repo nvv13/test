@@ -33,13 +33,6 @@ G        GND
 -----  ------ 
 
 
-connect to
-v003   LED
------  ------ 
-PA1    LED + резистор 300 Ом - 1 Ком на землю
-GND    GND    
------  ------ 
-
 
 connect to
 v003   module ds3231 
@@ -49,4 +42,6 @@ PC1    SDA   i2c data
 V      VCC     
 G      GND    
 -----  ------ 
+
+~~~
 
