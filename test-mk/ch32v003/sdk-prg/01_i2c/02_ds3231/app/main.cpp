@@ -5,7 +5,6 @@
 
 #include <cstring>
 
-
 #include "debug.h"
 
 #include "CShell.hpp"
@@ -17,21 +16,69 @@
 static ds3231_t ds3231_dev;
 static i2c_param_t user_i2c;
 static CShell *PoCShell = NULL;
+static at24cxxx_t at24c32_dev;
+static u8 b_intensity = 100;
+
+#include "at24c32_util.h"
+#include "ds3231_util.h"
 
 int init_at24c32 (int argc, char **argv);
 
 int init_ds3231 (int argc, char **argv);
 
-//int ds3231_cmd_get (int argc, char **argv){return 0;};
-//int ds3231_cmd_set (int argc, char **argv){return 0;};
-#include "ds3231_util.h"
+// int ds3231_cmd_get (int argc, char **argv){return 0;};
+// int ds3231_cmd_set (int argc, char **argv){return 0;};
+#define CFG_intensity_BYTE 1
 
+int
+clock_int_get (int argc, char **argv)
+{
+  u8 u8_value = b_intensity;
+  if (at24c_ReadByte (&at24c32_dev, CFG_intensity_BYTE, &u8_value) == 0)
+    {
+      if (u8_value != 255)
+        {
+          b_intensity = u8_value;
+        }
+    }
+  PoCShell->oUsart->SendPSZstring ("The current intensity is: ");
+  PoCShell->oUsart->SendIntToStr (b_intensity);
+  PoCShell->oUsart->SendPSZstring ("\r\n");
+  return 0;
+}
+
+int
+clock_int_set (int argc, char **argv)
+{
+  if (argc != 2)
+    {
+      PoCShell->oUsart->SendPSZstring ("usage: ");
+      PoCShell->oUsart->SendPSZstring (argv[0]);
+      PoCShell->oUsart->SendPSZstring ("0-254\r\n");
+      return 1;
+    }
+
+  u8 u8_value = atoi (argv[1]);
+  if (u8_value != b_intensity
+      && at24c_WriteByte (&at24c32_dev, CFG_intensity_BYTE, u8_value) == 0)
+    {
+      b_intensity = u8_value;
+      PoCShell->oUsart->SendPSZstring ("success: intensity set to ");
+      PoCShell->oUsart->SendIntToStr (b_intensity);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
+    }
+  else
+    PoCShell->oUsart->SendPSZstring ("error: set intensity \r\n");
+  return 0;
+}
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
   { "tget", "get cur time", ds3231_cmd_get },
   { "tset", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", ds3231_cmd_set },
   { "init", "init ds3231", init_ds3231 },
+  { "iget", "get current intensity", clock_int_get },
+  { "iset", "set intensity 0-254", clock_int_set },
   { NULL, NULL, NULL }
 };
 
@@ -62,9 +109,8 @@ int
 init_at24c32 (int argc, char **argv)
 {
 
-  PoCShell->oUsart->SendPSZstring ("init at24cxxx\r\n");
+  PoCShell->oUsart->SendPSZstring ("init at24c32\r\n");
 
-  at24cxxx_t at24cxxx_dev;
   int check;
 
   PoCShell->oUsart->SendPSZstring ("EEPROM size:");
@@ -92,17 +138,17 @@ init_at24c32 (int argc, char **argv)
   i2c_init (&user_i2c);
 
   /* Test: Init */
-  check = at24cxxx_init (&at24cxxx_dev, &user_data);
+  check = at24cxxx_init (&at24c32_dev, &user_data);
   if (check != AT24CXXX_OK)
     {
-      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24cxxx_init");
+      PoCShell->oUsart->SendPSZstring ("[FAILURE] at24c32 init");
       PoCShell->oUsart->SendIntToStr (check);
       PoCShell->oUsart->SendPSZstring ("\r\n");
       return 1;
     }
   else
     {
-      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24cxxx_init\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] at24c32 init\r\n");
     }
 
   return 0;
@@ -116,7 +162,7 @@ init_ds3231 (int argc, char **argv)
 
   int res;
 
-  puts ("DS3231 init\r\n");
+  PoCShell->oUsart->SendPSZstring ("DS3231 init\r\n");
 
   user_i2c = {
     .i2c_scl = PC_02,   /* */
@@ -137,12 +183,13 @@ init_ds3231 (int argc, char **argv)
   res = ds3231_init (&ds3231_dev, &par);
   if (res != 0)
     {
-      puts ("error: unable to init DS3231 [I2C initialization error]\r\n");
+      PoCShell->oUsart->SendPSZstring (
+          "error: unable to init DS3231 [I2C initialization error]\r\n");
       return -1;
     }
   else
     {
-      puts ("[SUCCESS] ds3231_init\r\n");
+      PoCShell->oUsart->SendPSZstring ("[SUCCESS] ds3231_init\r\n");
     }
 
   Delay_Ms (500);
@@ -151,8 +198,6 @@ init_ds3231 (int argc, char **argv)
 
   return 0;
 }
-
-
 
 int
 main (void)
@@ -166,12 +211,14 @@ main (void)
   PoCShell->oUsart->SendPSZstring ("SystemClk1:");
   PoCShell->oUsart->SendIntToStr (SystemCoreClock);
   PoCShell->oUsart->SendPSZstring ("\r\n");
+  init_at24c32 (0, NULL);
+  init_ds3231 (0, NULL);
   PoCShell->oUsart->SendPSZstring ("enter help for usage\r\n");
 
   while (1)
     {
       oCShell.Idle ();
-      Delay_Ms (1000);
-      ds3231_cmd_get (0, NULL);
+      // Delay_Ms (1000);
+      // ds3231_cmd_get (0, NULL);
     }
 }
