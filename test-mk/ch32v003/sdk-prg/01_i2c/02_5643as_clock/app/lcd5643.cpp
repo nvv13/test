@@ -4,18 +4,18 @@
 
 #include "CBlink.hpp"
 
-CBlink *PoE = NULL;
-CBlink *PoD = NULL;
-CBlink *PoDP = NULL;
-CBlink *PoC = NULL;
-CBlink *PoG = NULL;
-CBlink *PoDig4 = NULL;
-CBlink *PoB = NULL;
-CBlink *PoDig3 = NULL;
-CBlink *PoDig2 = NULL;
-CBlink *PoF = NULL;
-CBlink *PoA = NULL;
-CBlink *PoDig1 = NULL;
+static CBlink *PoE = NULL;
+static CBlink *PoD = NULL;
+static CBlink *PoDP = NULL;
+static CBlink *PoC = NULL;
+static CBlink *PoG = NULL;
+static CBlink *PoDig4 = NULL;
+static CBlink *PoB = NULL;
+static CBlink *PoDig3 = NULL;
+static CBlink *PoDig2 = NULL;
+static CBlink *PoF = NULL;
+static CBlink *PoA = NULL;
+static CBlink *PoDig1 = NULL;
 
 void
 lcd5643_init_pin (void)
