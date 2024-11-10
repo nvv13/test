@@ -4,6 +4,13 @@
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/ch32v003/doc/TWen32F003.jpg" alt="TWen32F003" title="CH32V003" /></p>
 
 
+Видео:
+
+https://youtu.be/_4sMsVg9BHc
+
+https://rutube.ru/video/7dd18879fff89e7681880fa2ce01eb89/
+
+
 
 соединения
 
@@ -18,19 +25,6 @@ https://protosupplies.com/product/ds3231s-rtc-with-eeprom-module/
 
 (2)
 CH32V003F4P6
-
-
-
-connect to
-v003   WCH-LinkE
------   ------ 
-PD5(TX)  RX    - это чтобы увидеть вывод программы
-PD6(RX)  TX    - это чтобы послать ответ
-                 $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE 
-SWD      SWDIO
-V        3V3
-G        GND    
------  ------ 
 
 
 
@@ -62,6 +56,18 @@ PC0  12 Dig1
 ---- ------ 
 
 
+
+Только для прошивки, и установки времени в часах
+connect to
+v003   WCH-LinkE
+-----   ------ 
+PD5(TX)  RX    - это чтобы увидеть вывод программы
+PD6(RX)  TX    - это чтобы послать ответ
+                 $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE 
+SWD      SWDIO
+V        3V3
+G        GND    
+-----  ------ 
 
 
 ~~~
