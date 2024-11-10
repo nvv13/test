@@ -1,14 +1,17 @@
 #include "debug.h"
 
-#include "lcd5643.hpp"
+#include "lcd5643.h"
 
-#include "CBlink.hpp"
+#define OUT_SEC_IND 0
+#define OUT_SIG_1 1
+#define OUT_DIG_1 1
+#define OUT_DIG_2 2
+#define OUT_DIG_3 3
+#define OUT_DIG_4 4
+#define OUT_C_4 4
 
-#define D_ON Bit_SET
-#define D_OFF Bit_RESET
-
-#define DGOUP_E GPIOD
-#define DPORT_E GPIO_Pin_7
+#define DGOUP_E GPIOA
+#define DPORT_E GPIO_Pin_1
 
 #define DGOUP_D GPIOD
 #define DPORT_D GPIO_Pin_4
@@ -19,8 +22,8 @@
 #define DGOUP_C GPIOD
 #define DPORT_C GPIO_Pin_2
 
-#define DGOUP_G GPIOD
-#define DPORT_G GPIO_Pin_1
+#define DGOUP_G GPIOA
+#define DPORT_G GPIO_Pin_2
 
 #define DGOUP_Dig4 GPIOD
 #define DPORT_Dig4 GPIO_Pin_0
@@ -44,13 +47,12 @@
 #define DPORT_Dig1 GPIO_Pin_0
 
 /*
-PD7  1  E
+PA1  1  E
 PD4  2  D
 PD3  3  DP
 PD2  4  C
-PD1  5  G
+PA2  5  G
 PD0  6  Dig4
-
 PC7  7  B
 PC6  8  Dig3
 PC5  9  Dig2
@@ -59,10 +61,24 @@ PC3  11 A
 PC0  12 Dig1
 */
 
-extern "C" void
-lcd5643_init_pin (void)
-{
+static BitAction D_ON = Bit_SET;
+static BitAction D_OFF = Bit_RESET;
 
+void
+lcd5643_init_pin (u8 i_common_mode)
+{
+  if (i_common_mode == MODE_COMMON_ANODE)
+    {
+      D_ON = Bit_SET;
+      D_OFF = Bit_RESET;
+    }
+  else
+    {
+      D_OFF = Bit_SET;
+      D_ON = Bit_RESET;
+    }
+
+  RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOA, ENABLE);
   RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOC, ENABLE);
   RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOD, ENABLE);
 
@@ -77,28 +93,15 @@ lcd5643_init_pin (void)
 
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6 | GPIO_Pin_5
                                 | GPIO_Pin_4 | GPIO_Pin_3 | GPIO_Pin_0;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed;
   GPIO_Init (GPIOC, &GPIO_InitStructure);
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
+  GPIO_Init (GPIOA, &GPIO_InitStructure);
 }
 
 static void
 reg_set_num (u8 i_num) //
 {
-  /*
-PD7  1  E
-PD4  2  D
-PD3  3  DP
-PD2  4  C
-PD1  5  G
-PD0  6  Dig4
-PC7  7  B
-PC6  8  Dig3
-PC5  9  Dig2
-PC4  10 F
-PC3  11 A
-PC0  12 Dig1
-  */
 
   switch (i_num)
     {
@@ -227,7 +230,7 @@ PC0  12 Dig1
 
 static u8 i_off = 0;
 
-extern "C" void
+static void
 lcd5643printDigit (u8 i_pos, u8 i_num, u8 iMode)
 {
   if (i_pos > OUT_DIG_4 && i_off == 1)
@@ -355,5 +358,105 @@ lcd5643printDigit (u8 i_pos, u8 i_num, u8 iMode)
         i_off = 1;
       };
       break;
+    }
+}
+
+u8 i_5643_hour = 0;
+u8 i_5643_min = 0;
+u8 i_5643_sec_state = 0;
+u8 i_5643_Mode = MODE_CLOCK;
+int i_5643_t_sign = 0;
+int i_5643_t_value = 88;
+int i_5643_t_mantissa = 0;
+
+static u16 i_out = 0;
+
+#define LCD_VAL_LG_spb_low 600
+#define LCD_VAL_LG_low 200
+#define LCD_VAL_LG_middle 50
+#define LCD_VAL_LG_spb_hi 10
+#define LCD_VAL_LG_hi 5
+u16 i_max_out = LCD_VAL_LG_spb_hi; //
+
+void
+lcd5643_update_disp (void) // здесь будет вывод на LCD
+{
+  //        printf("timer irq hour=%d,min=%d\n",i_5643_hour,i_5643_min);
+  u8 i_HiHour;
+  u8 i_LoHour;
+  u8 i_HiMin;
+  u8 i_LoMin;
+
+  if (i_5643_Mode == MODE_CLOCK)
+    {
+      i_HiHour = i_5643_hour / 10;
+      i_LoHour = i_5643_hour % 10;
+      i_HiMin = i_5643_min / 10;
+      i_LoMin = i_5643_min % 10;
+    }
+
+  // printf("timer irq hh:mm %d%d:%d%d \n",i_HiHour,i_LoHour,i_HiMin,i_LoMin);
+  int i_t = i_5643_t_value;
+  if (i_5643_t_mantissa > 5)
+    i_t++;
+
+  switch (i_out)
+    {
+    case 0:
+      {
+        if (i_5643_Mode == MODE_CLOCK)
+          lcd5643printDigit (OUT_DIG_1, i_HiHour, i_5643_Mode);
+        else
+          {
+            if (i_5643_t_sign > 0)
+              lcd5643printDigit (OUT_SIG_1, 1, i_5643_Mode); // "+"
+            else
+              lcd5643printDigit (OUT_SIG_1, 0, i_5643_Mode); // "-"
+          }
+      };
+      break;
+    case 1:
+      {
+        if (i_5643_Mode == MODE_CLOCK)
+          lcd5643printDigit (OUT_DIG_2, i_LoHour, i_5643_Mode);
+        else
+          lcd5643printDigit (OUT_DIG_2, i_t / 10, i_5643_Mode);
+      };
+      break;
+    case 2:
+      {
+        if (i_5643_Mode == MODE_CLOCK)
+          lcd5643printDigit (OUT_DIG_3, i_HiMin, i_5643_Mode);
+        else
+          lcd5643printDigit (OUT_DIG_3, i_t % 10, i_5643_Mode);
+      };
+      break;
+    case 3:
+      {
+        if (i_5643_Mode == MODE_CLOCK)
+          lcd5643printDigit (OUT_DIG_4, i_LoMin, i_5643_Mode);
+        else
+          lcd5643printDigit (OUT_C_4, 0, i_5643_Mode);
+      };
+      break;
+    case 4:
+      {
+        if (i_5643_Mode == MODE_CLOCK)
+          lcd5643printDigit (OUT_SEC_IND, i_5643_sec_state,
+                             i_5643_Mode); // on sec state
+      };
+      break;
+    default:
+      {
+        lcd5643printDigit (
+            5, 0,
+            i_5643_Mode); // off  пока i_out будет больше 4, - выключить LCD
+      };
+      break;
+    }
+
+  if (i_out++ > i_max_out) // от 5 ...
+    {
+      i_out = 0;
     }
 }
