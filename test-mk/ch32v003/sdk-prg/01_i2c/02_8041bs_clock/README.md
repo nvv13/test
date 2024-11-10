@@ -6,7 +6,7 @@
 
 Видео:
 
-https://youtu.be/_4sMsVg9BHc
+https://youtu.be/wZxzk2wER3Y
 
 https://rutube.ru/video/7dd18879fff89e7681880fa2ce01eb89/
 
