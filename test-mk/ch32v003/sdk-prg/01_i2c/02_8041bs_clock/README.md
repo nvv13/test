@@ -45,7 +45,7 @@ G      GND
 
 
 connect to
-v003 5643AS-1 
+v003 8041BS-1 
 ---- ----- 
 PA1  1  E
 PD4  2  D

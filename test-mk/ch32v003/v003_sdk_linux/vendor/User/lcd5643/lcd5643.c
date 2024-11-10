@@ -376,7 +376,7 @@ static u16 i_out = 0;
 #define LCD_VAL_LG_middle 50
 #define LCD_VAL_LG_spb_hi 10
 #define LCD_VAL_LG_hi 5
-u16 i_max_out = LCD_VAL_LG_spb_hi; //
+u16 i_max_out = LCD_VAL_LG_hi; //
 
 void
 lcd5643_update_disp (void) // здесь будет вывод на LCD
