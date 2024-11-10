@@ -76,7 +76,7 @@ main (void)
   PoCShell->oUsart->SendPSZstring ("enter help for usage\r\n");
 
   lcd5643_init_pin ();
-
+  PoCShell->oUsart->SendPSZstring ("start\r\n");
   // NVIC_EnableIRQ (SysTicK_IRQn);
   // SysTick->SR &= ~(1 << 0);
   // SysTick->CMP = SystemCoreClock / 10; //
@@ -87,7 +87,7 @@ main (void)
   while (1)
     {
       oCShell.Idle ();
-      Delay_Ms (10);
+      //Delay_Ms (10);
       l_flag = true;
       // ds3231_cmd_get (0, NULL);
       if (l_flag)
@@ -97,7 +97,7 @@ main (void)
           l_flag = false;
           //__enable_irq ();
           // NVIC_EnableIRQ (SysTicK_IRQn);
-          if (i_cnt_disp++ > 800)
+          if (i_cnt_disp++ > 500)
             {
               // PoCShell->oUsart->SendPSZstring ("i_cnt_disp++ > 1000\r\n");
               i_cnt_disp = 0;
@@ -116,7 +116,7 @@ main (void)
               PoCShell->oUsart->SendIntToStr (i_5643_min);
               PoCShell->oUsart->SendPSZstring ("\r\n");
             }
-           update_disp ();
+              update_disp ();
           //__enable_irq ();
           // NVIC_EnableIRQ (SysTicK_IRQn);
         }
@@ -139,7 +139,7 @@ static u16 i_out = 0;
 #define LCD_VAL_LG_middle 50
 #define LCD_VAL_LG_spb_hi 10
 #define LCD_VAL_LG_hi 5
-u16 i_max_out = LCD_VAL_LG_spb_hi; //
+u16 i_max_out = LCD_VAL_LG_middle; //
 
 static int i_5643_t_sign = 0;
 static int i_5643_t_value = 88;

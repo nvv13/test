@@ -4,48 +4,82 @@
 
 #include "CBlink.hpp"
 
-static CBlink *PoE = NULL;
-static CBlink *PoD = NULL;
-static CBlink *PoDP = NULL;
-static CBlink *PoC = NULL;
-static CBlink *PoG = NULL;
-static CBlink *PoDig4 = NULL;
-static CBlink *PoB = NULL;
-static CBlink *PoDig3 = NULL;
-static CBlink *PoDig2 = NULL;
-static CBlink *PoF = NULL;
-static CBlink *PoA = NULL;
-static CBlink *PoDig1 = NULL;
+#define D_ON Bit_SET
+#define D_OFF Bit_RESET
 
-void
+#define DGOUP_E GPIOD
+#define DPORT_E GPIO_Pin_7
+
+#define DGOUP_D GPIOD
+#define DPORT_D GPIO_Pin_4
+
+#define DGOUP_DP GPIOD
+#define DPORT_DP GPIO_Pin_3
+
+#define DGOUP_C GPIOD
+#define DPORT_C GPIO_Pin_2
+
+#define DGOUP_G GPIOD
+#define DPORT_G GPIO_Pin_1
+
+#define DGOUP_Dig4 GPIOD
+#define DPORT_Dig4 GPIO_Pin_0
+
+#define DGOUP_B GPIOC
+#define DPORT_B GPIO_Pin_7
+
+#define DGOUP_Dig3 GPIOC
+#define DPORT_Dig3 GPIO_Pin_6
+
+#define DGOUP_Dig2 GPIOC
+#define DPORT_Dig2 GPIO_Pin_5
+
+#define DGOUP_F GPIOC
+#define DPORT_F GPIO_Pin_4
+
+#define DGOUP_A GPIOC
+#define DPORT_A GPIO_Pin_3
+
+#define DGOUP_Dig1 GPIOC
+#define DPORT_Dig1 GPIO_Pin_0
+
+/*
+PD7  1  E
+PD4  2  D
+PD3  3  DP
+PD2  4  C
+PD1  5  G
+PD0  6  Dig4
+
+PC7  7  B
+PC6  8  Dig3
+PC5  9  Dig2
+PC4  10 F
+PC3  11 A
+PC0  12 Dig1
+*/
+
+extern "C" void
 lcd5643_init_pin (void)
 {
 
-  CBlink oE = CBlink (PD_07);    //  1  E
-  CBlink oD = CBlink (PD_04);    //  2  D
-  CBlink oDP = CBlink (PD_03);   //  3  DP
-  CBlink oC = CBlink (PD_02);    //  4  C
-  CBlink oG = CBlink (PD_01);    //  5  G
-  CBlink oDig4 = CBlink (PD_00); //  6  Dig4
-  CBlink oB = CBlink (PC_07);    //  7  B
-  CBlink oDig3 = CBlink (PC_06); //  8  Dig3
-  CBlink oDig2 = CBlink (PC_05); //  9  Dig2
-  CBlink oF = CBlink (PC_04);    //  10 F
-  CBlink oA = CBlink (PC_03);    //  11 A
-  CBlink oDig1 = CBlink (PC_00); //  12 Dig1
+  RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOC, ENABLE);
+  RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOD, ENABLE);
 
-  PoE = &oE;
-  PoD = &oD;
-  PoDP = &oDP;
-  PoC = &oC;
-  PoG = &oG;
-  PoDig4 = &oDig4;
-  PoB = &oB;
-  PoDig3 = &oDig3;
-  PoDig2 = &oDig2;
-  PoF = &oF;
-  PoA = &oA;
-  PoDig1 = &oDig1;
+  GPIOSpeed_TypeDef GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitTypeDef GPIO_InitStructure = { 0 };
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_4 | GPIO_Pin_3
+                                | GPIO_Pin_2 | GPIO_Pin_1 | GPIO_Pin_0;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed;
+  GPIO_Init (GPIOD, &GPIO_InitStructure);
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6 | GPIO_Pin_5
+                                | GPIO_Pin_4 | GPIO_Pin_3 | GPIO_Pin_0;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed;
+  GPIO_Init (GPIOC, &GPIO_InitStructure);
 }
 
 static void
@@ -65,126 +99,127 @@ PC4  10 F
 PC3  11 A
 PC0  12 Dig1
   */
+
   switch (i_num)
     {
     case 0:
       {
-        PoA->On ();
-        PoB->On ();
-        PoC->On ();
-        PoD->On ();
-        PoE->On ();
-        PoF->On ();
-        PoG->Off ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_ON);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_OFF);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 1: //
       {
-        PoA->Off ();
-        PoB->On ();
-        PoC->On ();
-        PoD->Off ();
-        PoE->Off ();
-        PoF->Off ();
-        PoG->Off ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_OFF);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_OFF);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_OFF);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 2: //
       {
-        PoA->On ();
-        PoB->On ();
-        PoC->Off ();
-        PoD->On ();
-        PoE->On ();
-        PoF->Off ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_OFF);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_ON);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 3: //
       {
-        PoA->On ();
-        PoB->On ();
-        PoC->On ();
-        PoD->On ();
-        PoE->Off ();
-        PoF->Off ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 4: //
       {
-        PoA->Off ();
-        PoB->On ();
-        PoC->On ();
-        PoD->Off ();
-        PoE->Off ();
-        PoF->On ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_OFF);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_OFF);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 5: //
       {
-        PoA->On ();
-        PoB->Off ();
-        PoC->On ();
-        PoD->On ();
-        PoE->Off ();
-        PoF->On ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_OFF);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 6: //
       {
-        PoA->On ();
-        PoB->Off ();
-        PoC->On ();
-        PoD->On ();
-        PoE->On ();
-        PoF->On ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_OFF);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_ON);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 7: //
       {
-        PoA->On ();
-        PoB->On ();
-        PoC->On ();
-        PoD->Off ();
-        PoE->Off ();
-        PoF->Off ();
-        PoG->Off ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_OFF);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_OFF);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 8: //
       {
-        PoA->On ();
-        PoB->On ();
-        PoC->On ();
-        PoD->On ();
-        PoE->On ();
-        PoF->On ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_ON);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     case 9: //
       {
-        PoA->On ();
-        PoB->On ();
-        PoC->On ();
-        PoD->On ();
-        PoE->Off ();
-        PoF->On ();
-        PoG->On ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_ON);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_ON);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
       };
       break;
     }
@@ -192,7 +227,7 @@ PC0  12 Dig1
 
 static u8 i_off = 0;
 
-void
+extern "C" void
 lcd5643printDigit (u8 i_pos, u8 i_num, u8 iMode)
 {
   if (i_pos > OUT_DIG_4 && i_off == 1)
@@ -207,28 +242,28 @@ lcd5643printDigit (u8 i_pos, u8 i_num, u8 iMode)
       {
         if (iMode == MODE_CLOCK)
           {
-            PoA->Off ();
-            PoB->Off ();
-            PoC->Off ();
-            PoD->Off ();
-            PoE->Off ();
-            PoF->Off ();
-            PoG->Off ();
+            GPIO_WriteBit (DGOUP_A, DPORT_A, D_OFF);
+            GPIO_WriteBit (DGOUP_B, DPORT_B, D_OFF);
+            GPIO_WriteBit (DGOUP_C, DPORT_C, D_OFF);
+            GPIO_WriteBit (DGOUP_D, DPORT_D, D_OFF);
+            GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+            GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+            GPIO_WriteBit (DGOUP_G, DPORT_G, D_OFF);
             if (i_num)
               {
-                PoDP->On ();
-                PoDig1->On ();
-                PoDig2->Off ();
-                PoDig3->On ();
-                PoDig4->On ();
+                GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_ON);
+                GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_ON);
+                GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_OFF);
+                GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_ON);
+                GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_ON);
               }
             else
               {
-                PoDP->Off ();
-                PoDig1->On ();
-                PoDig2->On ();
-                PoDig3->On ();
-                PoDig4->On ();
+                GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
+                GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_ON);
+                GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_ON);
+                GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_ON);
+                GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_ON);
               }
           }
       };
@@ -243,38 +278,38 @@ lcd5643printDigit (u8 i_pos, u8 i_num, u8 iMode)
           }
         else
           {
-            PoA->Off ();
-            PoB->Off ();
-            PoC->Off ();
-            PoD->Off ();
-            PoE->Off ();
-            PoF->Off ();
-            PoG->On ();
-            PoDP->Off ();
+            GPIO_WriteBit (DGOUP_A, DPORT_A, D_OFF);
+            GPIO_WriteBit (DGOUP_B, DPORT_B, D_OFF);
+            GPIO_WriteBit (DGOUP_C, DPORT_C, D_OFF);
+            GPIO_WriteBit (DGOUP_D, DPORT_D, D_OFF);
+            GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+            GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+            GPIO_WriteBit (DGOUP_G, DPORT_G, D_ON);
+            GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
           }
-        PoDig1->Off ();
-        PoDig2->On ();
-        PoDig3->On ();
-        PoDig4->On ();
+        GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_OFF);
+        GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_ON);
+        GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_ON);
+        GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_ON);
       };
       break;
 
     case OUT_DIG_2: // digit 2, 0=9 1=12,8,6 - i_num=11.7.4.2.1.10.5
       {
         reg_set_num (i_num);
-        PoDig1->On ();
-        PoDig2->Off ();
-        PoDig3->On ();
-        PoDig4->On ();
+        GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_ON);
+        GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_OFF);
+        GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_ON);
+        GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_ON);
       };
       break;
     case OUT_DIG_3: // digit 3, 0=8 1=12,9,6 - i_num=11.7.4.2.1.10.5
       {
         reg_set_num (i_num);
-        PoDig1->On ();
-        PoDig2->On ();
-        PoDig3->Off ();
-        PoDig4->On ();
+        GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_ON);
+        GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_ON);
+        GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_OFF);
+        GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_ON);
       };
       break;
 
@@ -287,37 +322,36 @@ lcd5643printDigit (u8 i_pos, u8 i_num, u8 iMode)
           }
         else
           {
-            PoA->On ();
-            PoB->Off ();
-            PoC->Off ();
-            PoD->On ();
-            PoE->On ();
-            PoF->On ();
-            PoG->Off ();
-            PoDP->Off ();
+            GPIO_WriteBit (DGOUP_A, DPORT_A, D_ON);
+            GPIO_WriteBit (DGOUP_B, DPORT_B, D_OFF);
+            GPIO_WriteBit (DGOUP_C, DPORT_C, D_OFF);
+            GPIO_WriteBit (DGOUP_D, DPORT_D, D_ON);
+            GPIO_WriteBit (DGOUP_E, DPORT_E, D_ON);
+            GPIO_WriteBit (DGOUP_F, DPORT_F, D_ON);
+            GPIO_WriteBit (DGOUP_G, DPORT_G, D_OFF);
+            GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
           }
-        PoDig1->On ();
-        PoDig2->On ();
-        PoDig3->On ();
-        PoDig4->Off ();
+        GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_ON);
+        GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_ON);
+        GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_ON);
+        GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_OFF);
       };
       break;
 
     default: // off ligth
       {
-        PoDig1->On ();
-        PoDig2->On ();
-        PoDig3->On ();
-        PoDig4->On ();
-
-        PoA->Off ();
-        PoB->Off ();
-        PoC->Off ();
-        PoD->Off ();
-        PoE->Off ();
-        PoF->Off ();
-        PoG->Off ();
-        PoDP->Off ();
+        GPIO_WriteBit (DGOUP_Dig1, DPORT_Dig1, D_ON);
+        GPIO_WriteBit (DGOUP_Dig2, DPORT_Dig2, D_ON);
+        GPIO_WriteBit (DGOUP_Dig3, DPORT_Dig3, D_ON);
+        GPIO_WriteBit (DGOUP_Dig4, DPORT_Dig4, D_ON);
+        GPIO_WriteBit (DGOUP_A, DPORT_A, D_OFF);
+        GPIO_WriteBit (DGOUP_B, DPORT_B, D_OFF);
+        GPIO_WriteBit (DGOUP_C, DPORT_C, D_OFF);
+        GPIO_WriteBit (DGOUP_D, DPORT_D, D_OFF);
+        GPIO_WriteBit (DGOUP_E, DPORT_E, D_OFF);
+        GPIO_WriteBit (DGOUP_F, DPORT_F, D_OFF);
+        GPIO_WriteBit (DGOUP_G, DPORT_G, D_OFF);
+        GPIO_WriteBit (DGOUP_DP, DPORT_DP, D_OFF);
         i_off = 1;
       };
       break;
