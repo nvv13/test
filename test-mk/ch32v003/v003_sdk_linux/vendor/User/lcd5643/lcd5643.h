@@ -46,6 +46,14 @@ extern "C"
   extern int i_5643_t_value;
   extern int i_5643_t_mantissa;
 
+  extern u8 i_5643_out;
+#define LCD_VAL_LG_spb_low 254
+#define LCD_VAL_LG_low 200
+#define LCD_VAL_LG_middle 50
+#define LCD_VAL_LG_spb_hi 10
+#define LCD_VAL_LG_hi 5
+  extern u8 i_5643_max_out; //
+
   void lcd5643_update_disp (void); // здесь будет вывод на LCD
 
 #ifdef __cplusplus

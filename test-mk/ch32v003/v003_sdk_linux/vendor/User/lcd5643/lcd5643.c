@@ -67,6 +67,8 @@ static BitAction D_OFF = Bit_RESET;
 void
 lcd5643_init_pin (u8 i_common_mode)
 {
+  i_5643_out = 0;
+  i_5643_max_out = LCD_VAL_LG_hi; 
   if (i_common_mode == MODE_COMMON_ANODE)
     {
       D_ON = Bit_SET;
@@ -369,14 +371,8 @@ int i_5643_t_sign = 0;
 int i_5643_t_value = 88;
 int i_5643_t_mantissa = 0;
 
-static u16 i_out = 0;
-
-#define LCD_VAL_LG_spb_low 600
-#define LCD_VAL_LG_low 200
-#define LCD_VAL_LG_middle 50
-#define LCD_VAL_LG_spb_hi 10
-#define LCD_VAL_LG_hi 5
-u16 i_max_out = LCD_VAL_LG_hi; //
+u8 i_5643_out = 0;
+u8 i_5643_max_out = LCD_VAL_LG_hi; //
 
 void
 lcd5643_update_disp (void) // здесь будет вывод на LCD
@@ -400,7 +396,7 @@ lcd5643_update_disp (void) // здесь будет вывод на LCD
   if (i_5643_t_mantissa > 5)
     i_t++;
 
-  switch (i_out)
+  switch (i_5643_out)
     {
     case 0:
       {
@@ -450,13 +446,13 @@ lcd5643_update_disp (void) // здесь будет вывод на LCD
       {
         lcd5643printDigit (
             5, 0,
-            i_5643_Mode); // off  пока i_out будет больше 4, - выключить LCD
+            i_5643_Mode); // off  пока i_5643_out будет больше 4, - выключить LCD
       };
       break;
     }
 
-  if (i_out++ > i_max_out) // от 5 ...
+  if (i_5643_out++ > i_5643_max_out) // от 5 ...
     {
-      i_out = 0;
+      i_5643_out = 0;
     }
 }

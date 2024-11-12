@@ -80,3 +80,7 @@ Features
  Package: 
   LQFP48 
 
+
+
+-------------------------------------------------
+https://github.com/openwch/ch32v20x.git

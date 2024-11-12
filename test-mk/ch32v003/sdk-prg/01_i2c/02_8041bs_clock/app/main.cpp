@@ -205,7 +205,7 @@ main (void)
     {
       oCShell.Idle ();
       Delay_Ms (1);
-      if (i_cnt_disp++ > 999)
+      if (i_cnt_disp++ > 999 && i_5643_out<5)
         {
           i_cnt_disp = 0;
           struct tm tblock;
