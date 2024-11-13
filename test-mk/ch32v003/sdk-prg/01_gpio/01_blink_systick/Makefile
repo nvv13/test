@@ -25,7 +25,7 @@ FLAGS ?= -march=rv32ec_zicsr -mabi=ilp32e -msmall-data-limit=8 -mno-save-restore
 
 ASFLAGS ?= $(FLAGS) -x assembler $(INC_FLAGS) -MMD -MP
 CPPFLAGS ?=  $(FLAGS) $(INC_FLAGS)  -MMD -MP 
-LDFLAGS ?= $(FLAGS) -T ./vendor/Ld/Link.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/CH32V003.map" --specs=nano.specs --specs=nosys.specs
+LDFLAGS ?= $(FLAGS) -T ./vendor/Ld/Link.ld -nostartfiles -Xlinker --gc-sections -Wl,--print-memory-usage -Wl,-Map,"$(BUILD_DIR)/CH32V003.map" --specs=nano.specs --specs=nosys.specs
 
 all: $(BUILD_DIR)/$(TARGET_ELF)
 
