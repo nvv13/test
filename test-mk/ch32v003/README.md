@@ -7,9 +7,6 @@
 	   красный светиться когда загружаешь прошивку, к выводу SWD подсоединён
 	   зелёный POWER - подсоединён к земле и питанию (через резистор) 
 
-
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/ch32v003/doc/TWen32F003.jpg" alt="TWen32F003" title="CH32V003" /></p>
-
 ![photo](doc/TWen32F003.jpg)
 
 ~~~

@@ -54,27 +54,24 @@ Dimensions – About 70 x 26 mm
 
 
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/HLK-W801-KIT-V1.1.jpg" alt="HLK-W801-KIT-V1.1" title="HLK-W801-KIT-V1.1" /></p>
+![photo](jpg/HLK-W801-KIT-V1.1.jpg)
 
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/HLK-W801-KIT-V1-1.jpg" alt="HLK-W801-KIT-V1-1" title="HLK-W801-KIT-V1-1" /></p>
+![photo](jpg/HLK-W801-KIT-V1-1.jpg)
 
 w801_pinout
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/W801_SDK-linux/doc/w801_pinout.png" alt="HLK W801 pinout" title="HLK W801 pinout" /></p>
+![photo](doc/w801_pinout.png)
 w801_pinout
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/w801_pinout.png" alt="HLK W801 pinout" title="HLK W801 pinout" /></p>
-
+![photo](jpg/w801_pinout.png)
 
 WinnerMicro W801 Block Diagram
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/winnermicro-w801-block-diagram.jpg" alt="WinnerMicro W801 Block Diagram" title="WinnerMicro W801 Block Diagram" /></p>
-
+![photo](jpg/winnermicro-w801-block-diagram.jpg)
 
 W800 Clock Structure
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/W800%20Clock%20Structure.jpg" alt="W800 Clock Structure" title="W800 Clock Structure" /></p>
-
+![photo](jpg/W800%20Clock%20Structure.jpg)
 
 W800 address mapping
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/jpg/W800%20address%20mapping.jpg" alt="W800 address mapping" title="W800 address mapping" /></p>
+![photo](jpg/W800%20address%20mapping.jpg)
 
 
 подробнее на https://chowdera.com/2022/03/202203272225090142.html
