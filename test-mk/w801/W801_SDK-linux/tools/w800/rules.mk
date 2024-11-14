@@ -57,7 +57,7 @@ DEP_LIBS_$(1) = $$(foreach lib,$$(filter %$(LIB_EXT),$$(COMPONENTS_$(1))),$$(LIB
 DEP_OBJS_$(1) = $$(foreach obj,$$(filter %.o,$$(COMPONENTS_$(1))),$$(OBJODIR)/$$(notdir $$(obj)))
 $$(IMAGEODIR)/$(1).elf: $$(OBJS) $$(DEP_OBJS_$(1)) $$(DEP_LIBS_$(1)) $$(DEPENDS_$(1))
 	@mkdir -p $$(IMAGEODIR)
-	$(LINK) -Wl,--gc-sections -Wl,-zmax-page-size=1024 -Wl,--whole-archive $$(OBJS) $$(DEP_OBJS_$(1)) $$(DEP_LIBS_$(1)) $$(if $$(LINKFLAGS_$(1)),$$(LINKFLAGS_$(1))) -Wl,--no-whole-archive $(LINKFLAGS) $(MAP) -o $$@
+	$(LINK) -Wl,--gc-sections -Wl,-zmax-page-size=1024 -Wl,--whole-archive -Wl,--print-memory-usage $$(OBJS) $$(DEP_OBJS_$(1)) $$(DEP_LIBS_$(1)) $$(if $$(LINKFLAGS_$(1)),$$(LINKFLAGS_$(1))) -Wl,--no-whole-archive $(LINKFLAGS) $(MAP) -o $$@
 endef
 
 $(BINODIR)/%.bin: $(IMAGEODIR)/%.elf

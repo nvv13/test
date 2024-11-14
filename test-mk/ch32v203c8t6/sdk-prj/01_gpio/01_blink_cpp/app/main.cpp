@@ -1,6 +1,6 @@
 /*
   источник
-  https://github.com/openwch/ch32v003.git
+  https://github.com/openwch/ch32v20x.git
 */
 
 

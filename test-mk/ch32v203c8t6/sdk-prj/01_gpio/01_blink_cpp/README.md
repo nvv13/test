@@ -22,7 +22,7 @@ G      GND
 
 
 connect to
-v003   LED
+v203   LED
 -----  ------ 
 PA1    LED + резистор 300 Ом - 1 Ком на землю
 GND    GND    

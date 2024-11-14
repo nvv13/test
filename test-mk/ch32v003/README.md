@@ -10,6 +10,7 @@
 
 <p><img src="https://github.com/nvv13/test/blob/main/test-mk/ch32v003/doc/TWen32F003.jpg" alt="TWen32F003" title="CH32V003" /></p>
 
+![photo](doc/TWen32F003.jpg)
 
 ~~~
 https://www.wch-ic.com/products/CH32V003.html
