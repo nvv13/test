@@ -11,13 +11,15 @@
 
 
 connect to
-v003   WCH-LinkE
+v203   WCH-LinkE
 -----  ------ 
 PD5    RX      - это чтобы увидеть вывод программы
                  $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE и смотрим
-SWD    SWDIO
-V      3V3
-G      GND    
+PA13   swdio
+PA14   swclk
+NRST   NRST
+3.3    3V3
+GND    GND    
 -----  ------ 
 
 

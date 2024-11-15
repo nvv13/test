@@ -10,14 +10,15 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей Ultra HD 320X480 HX8367C 16bit 
 
 Видео
 https://youtu.be/ULZDZhmtduk
-https://rutube.ru/video/838e6cfcbbca392da33edcaa4634499d/?r=wd
+
+[3.2 TFT дисплей Ultra HD 320X480 HX8367C 16bit bus](https://rutube.ru/video/838e6cfcbbca392da33edcaa4634499d/?r=wd)
 
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113125.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/IMG_20230204_113125.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/IMG_20230204_113136.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/IMG_20230204_113136.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT32MEGA_2 
 
@@ -75,12 +76,13 @@ board HLK-W801-KIT-V1.1 + 0.96 TFT 80x160 дисплей st7735s SPI
 Видео
 https://youtu.be/RTD7CE0EDUw
 
+[0.96 TFT 80x160 (начало ролика)](https://rutube.ru/video/ec465c24d1d1ead0105c849e8e884040/?r=wd&t=3)
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/0.96tft-back.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/0.96tft.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/0.96tft.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT00_96SP
 
@@ -125,11 +127,13 @@ board HLK-W801-KIT-V1.1 + 1.3 TFT 240x240 дисплей st7789 SPI
 Видео
 https://youtu.be/RTD7CE0EDUw?t=93
 
+[1.3 TFT 240x240](https://rutube.ru/video/ec465c24d1d1ead0105c849e8e884040/?r=wd&t=32)
+
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.3tft-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/1.3tft-back.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.3tft.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/1.3tft.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT1_3SP
 
@@ -175,9 +179,9 @@ board HLK-W801-KIT-V1.1 + 1.14 TFT 135x240 дисплей st7789v SPI
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.14tft-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/1.14tft-back.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.14tft.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/1.14tft.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_14V89
 
@@ -223,9 +227,9 @@ board HLK-W801-KIT-V1.1 + 1.47 TFT 172x320 дисплей st7789v3 SPI
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/1.47tft-back.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.47tft.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/1.47tft.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_47V89
 
@@ -277,9 +281,9 @@ board HLK-W801-KIT-V1.1 + 1.69 TFT 240x280 дисплей st7789v2 SPI
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.69tft-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/1.69tft-back.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/1.69tft.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/1.69tft.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_69V89
 
@@ -325,11 +329,13 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT дисплей 320X240 16bit bus
 Видео
 https://youtu.be/Jpsm4nAKuIg
 
+[3.2 TFT дисплей 320X240 16bit bus](https://rutube.ru/video/c71990fa424558939ec15a6e39cc9123/)
+
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/3.2tft_back.jpg)
 фото2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/3.2tft.jpg)
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT_320QDT_9341
 
@@ -393,9 +399,9 @@ board HLK-W801-KIT-V1.1 + 2.4 TFT SPI 240x320 V1.3
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/TFT2_4SP_9341_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT2_4SP_9341.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/TFT2_4SP_9341.jpg)
 
 
 для него тест (main.c) лежит в директории 
@@ -471,9 +477,9 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT SPI 240x320 V1.0
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft_spi_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/3.2tft_spi_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.2tft_spi.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/3.2tft_spi.jpg)
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT3_2SP_9341
@@ -531,11 +537,13 @@ board HLK-W801-KIT-V1.1 + 2.0 TFT SPI 240x320
 Видео
 https://youtu.be/fxX3JLcDdj8
 
+[2.0 TFT SPI 240x320](https://rutube.ru/video/20d39b3309229190c4d08950b38cac4d/)
+
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT02_0V89_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/TFT02_0V89_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT02_0V89.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/TFT02_0V89.jpg)
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT02_0V89 
@@ -604,9 +612,9 @@ board HLK-W801-KIT-V1.1 + 1.8 TFT SPI 128x160  1'8 tft 128*rgb*160 ver 1.0
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_18SP_Back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/TFT01_18SP_Back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_18SP.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/TFT01_18SP.jpg)
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_18SP
@@ -681,12 +689,13 @@ http://www.lcdwiki.com/3.97inch_16BIT_Module_OTM8009A_SKU:MRB3971
 Видео
 https://youtu.be/OAJxVA2hCOE
 
+[3.97 TFT_397T_NT35510 800x480 16bit bus](https://rutube.ru/video/e25bac8202becb40c301e229cf2b42e4/)
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/3.97_TFT_NT35510_800x480_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/3.97_TFT_NT35510_800x480.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/3.97_TFT_NT35510_800x480.jpg)
 
 wiki
 http://www.lcdwiki.com/3.97inch_16BIT_Module_NT35510_SKU:MRB3973
@@ -774,9 +783,9 @@ board HLK-W801-KIT-V1.1 + 2.4inch 16BIT Module ILI9341 SKU:MRB2408 320x240 16bit
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MRB2408_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/MRB2408_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MRB2408.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/MRB2408.jpg)
 
 wiki
 http://www.lcdwiki.com/2.4inch_16BIT_Module_ILI9341_SKU:MRB2408
@@ -845,11 +854,13 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480  V2.2
 Видео
 https://youtu.be/COopMgUwCrc
 
+[3.5 TFT 320x480 V2.2](https://rutube.ru/video/0e6d4146d2113a0a713511386e7a2766/)
+
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/TFT3_5SP_9488_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT3_5SP_9488.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/TFT3_5SP_9488.jpg)
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT3_5SP_9488
@@ -907,9 +918,9 @@ board HLK-W801-KIT-V1.1 + 2.8 TFT 240x320 MSP2834 или MSP3223
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP2834_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/MSP2834_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP2834.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/MSP2834.jpg)
 
 
 wiki
@@ -969,9 +980,9 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT 240x320 MSP3223
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3223_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/MSP3223_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3223.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/MSP3223.jpg)
 
 
 wiki
@@ -1032,11 +1043,13 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT IPS 320xRGBx480 MSP3526
 Видео
 https://youtu.be/y2GYyCNDz_s
 
+[3.2 TFT IPS 320xRGBx480 MSP3526](https://rutube.ru/video/4db9d73c6b09d5c772550671216374d2/)
+
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3526_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/MSP3526_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3526.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/MSP3526.jpg)
 
 
 wiki
@@ -1124,11 +1137,13 @@ board HLK-W801-KIT-V1.1 + 3.5 TFT 320x480 HW SPI SDIO 120Mhz MHS3528
 Видео
 https://youtu.be/vrIQAcVDOHw
 
+[3.5 TFT 320x480 HW SPI SDIO 120Mhz MHS3528]https://rutube.ru/video/4675747666eb74dab3d981ca504370b4/
+
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MHS3528_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/MHS3528_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MHS3528.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/MHS3528.jpg)
 
 wiki
 http://www.lcdwiki.com/MHS-3.5inch_RPi_Display
@@ -1190,9 +1205,9 @@ board HLK-W801-KIT-V1.1 + 1.9 TFT SPI 170xRGBx320
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_9V89_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/TFT01_9V89_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/TFT01_9V89.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/TFT01_9V89.jpg)
 
 
 для него тест (main.c) лежит в директории 01_UTFU/app/test/TFT01_9V89
@@ -1243,9 +1258,9 @@ board HLK-W801-KIT-V1.1 + 3.2 TFT IPS 320xRGBx480 MSP3525
 
 Дисплей
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3525_back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/MSP3525_back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_UTFU/jpg/MSP3525.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/MSP3525.jpg)
 
 
 wiki
@@ -1430,7 +1445,9 @@ SD Card
 
 
 Сборка  (это не конкретно этого проекта, а к примеру видео https://www.youtube.com/watch?v=uMJ7SQkhtYc 
-              https://rutube.ru/video/664a1f911677ecb82c431247c4a5b3b7/?r=wd ):
+
+              https://rutube.ru/video/664a1f911677ecb82c431247c4a5b3b7/?r=wd 
+         ):
 ~~~
 делал по инструкциям из этого проекта https://github.com/droppingy/W801_SDK-linux
    у меня Linux Fedora 33 x86_64, думаю для всех Linux x86_64 подойдет

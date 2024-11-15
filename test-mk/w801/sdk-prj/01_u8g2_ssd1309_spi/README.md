@@ -17,9 +17,10 @@ https://rutube.ru/video/54ddcdd98b1cd9d534dd3383c649d957/?r=wd
 
 
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_u8g2_ssd1309_spi/jpg/2_4_OLED-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/2_4_OLED-back.jpg)
+
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_u8g2_ssd1309_spi/jpg/2_4_OLED-top.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/2_4_OLED-top.jpg)
 
 
 

@@ -6,11 +6,11 @@ board HLK-W801-KIT-V1.1 + hd44780
 LCD1602 
 
 фото  
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_hd44780_gpio/jpg/LCD1602.jpg" alt="LCD1602" title="LCD1602" /></p>
+![photo](jpg/LCD1602.jpg)
 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_hd44780_gpio/jpg/LCD1602_w801.jpg" alt="LCD1602_w801" title="LCD1602_w801" /></p>
+![photo](jpg/LCD1602_w801.jpg)
 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/01_hd44780_gpio/jpg/LCD1602_w801 2.jpg" alt="LCD1602_w801 2" title="LCD1602_w801 2" /></p>
+![photo](jpg/LCD1602_w801 2.jpg)
 
 
 

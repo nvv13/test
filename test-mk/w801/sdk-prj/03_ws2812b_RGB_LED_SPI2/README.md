@@ -98,7 +98,7 @@ GND   Pin2
 
 
 IR управление, подогнано под такую лентяйку: 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/w801/sdk-prj/03_ws2812b_RGB_LED_SPI2/jpg/remote1.jpg" alt="remote1" title="remote1" /></p>
+![photo](jpg/remote1.jpg)
 
 
 если нужно под другую (найти кода и т.д.), можно начать с 

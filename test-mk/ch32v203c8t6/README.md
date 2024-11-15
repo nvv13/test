@@ -84,3 +84,21 @@ Features
 
 -------------------------------------------------
 https://github.com/openwch/ch32v20x.git
+
+
+-------------------------------------------------
+
+~~~
+connect to
+v203   WCH-LinkE
+-----  ------ 
+PA13   swdio
+PA14   swclk
+NRST   NRST
+3.3    3V3
+GND    GND    
+-----  ------ 
+
+~~~
+
+
