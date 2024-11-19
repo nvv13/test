@@ -15,15 +15,10 @@ This example will create a new project called my_new_project directly into the d
 
 то есть
 
-# сохраним текущий путь
-export my1pwd=$PWD
 
 # настраиваем окружение
-cd ~/esp-idf/
-. ./export.sh
-
-# потом обратно, в иректорию с проектами
-cd $my1pwd
+делаем перед сборкой и т.д.
+$ source ~/esp-idf/export.sh
 
 # далее - делаем директорию с пустым проектом
 idf.py create-project --path test1 test1prj
