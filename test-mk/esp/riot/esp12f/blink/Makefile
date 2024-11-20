@@ -6,7 +6,7 @@ BOARD ?= esp8266-esp-12x
 
 # This has to be the absolute path to the RIOT base directory:
 #RIOTBASE ?= $(CURDIR)/../../../../../../RIOT
-RIOTBASE ?= /home/nvv/github.com/OS/riot/RIOT-2024.07
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the
@@ -19,7 +19,6 @@ QUIET ?= 1
 # Modules to include:
 USEMODULE += xtimer
 USEMODULE += shell
-USEMODULE += shell_commands
 USEMODULE += ps
 FEATURES_REQUIRED = periph_gpio
 

@@ -4,7 +4,7 @@ APPLICATION = sntp-test02
 BOARD ?= esp32-wroom-32
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../RIOT
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 
 #view msg prog tools
 PROGRAMMER_QUIET=0
@@ -31,7 +31,6 @@ ifneq (,$(DEFAULT_MQTT_PWD))
 endif
 
 USEMODULE += shell
-USEMODULE += shell_commands
 USEMODULE += ps
 #USEMODULE += netdev_default
 #USEPKG += paho-mqtt

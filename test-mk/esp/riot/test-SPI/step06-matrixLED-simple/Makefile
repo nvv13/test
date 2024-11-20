@@ -6,7 +6,7 @@ PORT=/dev/ttyUSB0
 
 #include ../Makefile.tests_common
 
-RIOTBASE ?= $(CURDIR)/../../../RIOT
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 
 PROGRAMMER_QUIET = 0
 
@@ -14,7 +14,6 @@ FEATURES_REQUIRED += periph_spi
 
 USEMODULE += xtimer
 USEMODULE += shell
-USEMODULE += shell_commands
 USEMODULE += ds3231
 
 # Optional feature to trigger suit update through gpio callback

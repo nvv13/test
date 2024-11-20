@@ -91,7 +91,7 @@ $ xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --global --verbose
 
 
 ************************************
-    или, установка пакетов для сборки riskv кода - вручную
+    или, установка пакетов для сборки riskv кода - вручную (версия 14.2.0-2, проверяйте, вдруг есть новее)
 $ cd ~
 $ mkdir .local
 $ cd .local

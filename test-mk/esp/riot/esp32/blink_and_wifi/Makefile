@@ -15,7 +15,7 @@ PORT=/dev/ttyUSB0
 #PORT ?= /dev/ttyUSB0
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../../../../RIOT
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 
 
 
@@ -46,7 +46,6 @@ ifneq (,$(DEFAULT_MQTT_PWD))
 endif
 
 USEMODULE += shell
-USEMODULE += shell_commands
 USEMODULE += ps
 #USEMODULE += netdev_default
 #USEPKG += paho-mqtt

@@ -12,7 +12,7 @@ PORT ?= /dev/ttyUSB0
 #AVRDUDE_PROGRAMMER = usbasp
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../RIOT
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 #RIOTBASE ?= $(CURDIR)/../../../../RIOT
 
 CFLAGS += -DDEVELHELP

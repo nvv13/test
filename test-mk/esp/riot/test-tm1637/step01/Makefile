@@ -10,7 +10,7 @@ BOARD ?= arduino-uno
 PORT ?= /dev/ttyUSB0
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../RIOT
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 
 USEMODULE += arduino
 

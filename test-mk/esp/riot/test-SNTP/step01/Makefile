@@ -7,7 +7,7 @@ APPLICATION = task-09
 BOARD ?= esp32-wroom-32
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../RIOT
+RIOTBASE ?= $(HOME)/github.com/OS/riot/RIOT-2024.07
 
 BOARD_INSUFFICIENT_MEMORY := airfy-beacon chronos msb-430 msb-430h nrf51dongle \
                           nrf6310 nucleo-f103 nucleo-f334 pca10000 pca10005 spark-core \
@@ -35,7 +35,6 @@ USEMODULE += gnrc_icmpv6_echo
 
 # Add also the shell, some shell commands
 USEMODULE += shell
-USEMODULE += shell_commands
 USEMODULE += ps
 USEMODULE += netstats_l2
 USEMODULE += netstats_ipv6
