@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
+set(PICO_PLATFORM rp2350)
+
 include(pico_sdk_import.cmake)
 
 project(sdk-prj C CXX ASM)

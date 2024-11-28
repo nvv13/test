@@ -2,6 +2,15 @@
 https://www.raspberrypi.com/documentation/microcontrollers/silicon.html#rp2350
 https://www.cnx-software.com/2024/08/08/raspberry-pi-pico-2-raspberry-pi-rp2350-dual-core-risc-v-or-arm-cortex-m33-microcontroller/
 
+
+платка от WeAct без повышающего преобразователя по питанию
+![photo](jpg/WeAct_RP2350A_V10.jpg)
+
+платка от WeAct почти как Pico-2 только микросхема flash другая
+devboard
+![photo](jpg/WeAct_RP2350A_V20.jpg)
+
+
 *******************************************************************************
 Dual-core Arm Cortex-M33 @ 150 MHz with Arm Trustzone, Secure boot OR
 Dual-core 32-bit RISC-V Hazard3 @ 150 MHz (3-stage in-order pipeline; RV32IMAC with Zba, Zbb, Zbs, Zbkb, Zcb, Zcmp, and Zicsr extensions)
