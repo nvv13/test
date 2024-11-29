@@ -2,9 +2,9 @@ air105
 
 отладочная плата (4M bytes Flash, 640K bytes of RAM)
 фото 1 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/Air105/jpg/air105-back.jpg" alt="back side" title="back side" /></p>
+![photo](jpg/air105-back.jpg)
 фото 2
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/Air105/jpg/air105-top.jpg" alt="top side" title="top side" /></p>
+![photo](jpg/air105-top.jpg)
 
 о чипе
  https://wiki.luatos.com/chips/air105/hardware.html

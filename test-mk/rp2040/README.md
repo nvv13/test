@@ -1,6 +1,12 @@
 --------------------------------------------------------------------------------------
 Raspberry Pi Pico
 
+
+![photo](jpg/rp2040_board_pinout.jpeg)
+
+![photo](jpg/RP2040-Zero-details-7.jpg)
+
+
 RP2040 is manufactured on a modern 40nm process node, delivering high performance,
 low dynamic power consumption, and low leakage, with a variety of low-power modes to
 support extended-duration operation on battery power.
@@ -24,6 +30,9 @@ Operating temperature: -20°C to +85°C
 
 --------------------------------------------------------------------------------------
 Raspberry Pi Pico W 
+
+![photo](jpg/Raspberry-Pi-Pico-W-rp2040-WiFi-pinout-mischianti.jpg)
+
 
 Raspberry Pi Pico W offers 2.4GHz 802.11 b/g/n wireless LAN support and Bluetooth
 5.2, with an on-board antenna, and modular compliance certification. It is able to operate

@@ -2,11 +2,10 @@
 
 
 milkv-duo and milkv-duo 256m front
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20front.jpg" alt="milkv-duo%20front.jpg" title="milkv-duo front" /></p>
+![photo](jpg/milkv-duo%20front.jpg)
 
 milkv-duo and milkv-duo 256m back
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20back.jpg" alt="milkv-duo%20back.jpg" title="milkv-duo back" /></p>
-
+![photo](jpg/milkv-duo%20back.jpg)
 
 
 

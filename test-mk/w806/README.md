@@ -1,6 +1,8 @@
 платка 
 HLK-W806
 
+![photo](jpg/w806_pinout.jpeg)
+
 ~~~
 
 W806 Chip appearance
