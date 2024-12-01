@@ -18,7 +18,7 @@ main (void)
 
   SystemCoreClockUpdate ();
   CBlink ob_Blink1 = CBlink (PA_01);
-  CBlink ob_Blink2 = CBlink (PA_02);
+  CBlink ob_Blink2 = CBlink (PB_02);
 
   while (1)
     {

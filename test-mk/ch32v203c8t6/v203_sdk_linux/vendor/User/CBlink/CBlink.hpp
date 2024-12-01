@@ -8,7 +8,7 @@ class CBlink
 private:
   GPIO_TypeDef *port;
   GPIO_InitTypeDef GPIO_InitStructure = { 0 };
-  u8 GPIO_Pin = 0;
+  u16 GPIO_Pin = 0;
   u8 u8_led_state = 0;
 
 public:
@@ -67,6 +67,109 @@ public:
           port = GPIOA;
         };
         break;
+
+
+
+      case PB_00:
+        {
+          GPIO_Pin = GPIO_Pin_0;
+          port = GPIOB;
+        };
+        break;
+      case PB_01:
+        {
+          GPIO_Pin = GPIO_Pin_1;
+          port = GPIOB;
+        };
+        break;
+      case PB_02:
+        {
+          GPIO_Pin = GPIO_Pin_2;
+          port = GPIOB;
+        };
+        break;
+      case PB_03:
+        {
+          GPIO_Pin = GPIO_Pin_3;
+          port = GPIOB;
+        };
+        break;
+      case PB_04:
+        {
+          GPIO_Pin = GPIO_Pin_4;
+          port = GPIOB;
+        };
+        break;
+      case PB_05:
+        {
+          GPIO_Pin = GPIO_Pin_5;
+          port = GPIOB;
+        };
+        break;
+      case PB_06:
+        {
+          GPIO_Pin = GPIO_Pin_6;
+          port = GPIOB;
+        };
+        break;
+      case PB_07:
+        {
+          GPIO_Pin = GPIO_Pin_7;
+          port = GPIOB;
+        };
+        break;
+
+
+      case PB_08:
+        {
+          GPIO_Pin = GPIO_Pin_8;
+          port = GPIOB;
+        };
+        break;
+      case PB_09:
+        {
+          GPIO_Pin = GPIO_Pin_9;
+          port = GPIOB;
+        };
+        break;
+      case PB_10:
+        {
+          GPIO_Pin = GPIO_Pin_10;
+          port = GPIOB;
+        };
+        break;
+      case PB_11:
+        {
+          GPIO_Pin = GPIO_Pin_11;
+          port = GPIOB;
+        };
+        break;
+      case PB_12:
+        {
+          GPIO_Pin = GPIO_Pin_12;
+          port = GPIOB;
+        };
+        break;
+      case PB_13:
+        {
+          GPIO_Pin = GPIO_Pin_13;
+          port = GPIOB;
+        };
+        break;
+      case PB_14:
+        {
+          GPIO_Pin = GPIO_Pin_14;
+          port = GPIOB;
+        };
+        break;
+      case PB_15:
+        {
+          GPIO_Pin = GPIO_Pin_15;
+          port = GPIOB;
+        };
+        break;
+
+
       case PC_00:
         {
           GPIO_Pin = GPIO_Pin_0;
@@ -168,6 +271,8 @@ public:
     u8_led_state = 0;
     if (port == GPIOA)
       RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOA, ENABLE);
+    if (port == GPIOB)
+      RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOB, ENABLE);
     if (port == GPIOC)
       RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOC, ENABLE);
     if (port == GPIOD)
