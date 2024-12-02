@@ -67,7 +67,54 @@ public:
           port = GPIOA;
         };
         break;
-
+      case PA_08:
+        {
+          GPIO_Pin = GPIO_Pin_8;
+          port = GPIOA;
+        };
+        break;
+      case PA_09:
+        {
+          GPIO_Pin = GPIO_Pin_9;
+          port = GPIOA;
+        };
+        break;
+      case PA_10:
+        {
+          GPIO_Pin = GPIO_Pin_10;
+          port = GPIOA;
+        };
+        break;
+      case PA_11:
+        {
+          GPIO_Pin = GPIO_Pin_11;
+          port = GPIOA;
+        };
+        break;
+      case PA_12:
+        {
+          GPIO_Pin = GPIO_Pin_12;
+          port = GPIOA;
+        };
+        break;
+      case PA_13:
+        {
+          GPIO_Pin = GPIO_Pin_13;
+          port = GPIOA;
+        };
+        break;
+      case PA_14:
+        {
+          GPIO_Pin = GPIO_Pin_14;
+          port = GPIOA;
+        };
+        break;
+      case PA_15:
+        {
+          GPIO_Pin = GPIO_Pin_15;
+          port = GPIOA;
+        };
+        break;
 
 
       case PB_00:
@@ -218,6 +265,57 @@ public:
           port = GPIOC;
         };
         break;
+      case PC_08:
+        {
+          GPIO_Pin = GPIO_Pin_8;
+          port = GPIOC;
+        };
+        break;
+      case PC_09:
+        {
+          GPIO_Pin = GPIO_Pin_9;
+          port = GPIOC;
+        };
+        break;
+      case PC_10:
+        {
+          GPIO_Pin = GPIO_Pin_10;
+          port = GPIOC;
+        };
+        break;
+      case PC_11:
+        {
+          GPIO_Pin = GPIO_Pin_11;
+          port = GPIOC;
+        };
+        break;
+      case PC_12:
+        {
+          GPIO_Pin = GPIO_Pin_12;
+          port = GPIOC;
+        };
+        break;
+      case PC_13:
+        {
+          GPIO_Pin = GPIO_Pin_13;
+          port = GPIOC;
+        };
+        break;
+      case PC_14:
+        {
+          GPIO_Pin = GPIO_Pin_14;
+          port = GPIOC;
+        };
+        break;
+      case PC_15:
+        {
+          GPIO_Pin = GPIO_Pin_15;
+          port = GPIOC;
+        };
+        break;
+
+
+
       case PD_00:
         {
           GPIO_Pin = GPIO_Pin_0;
@@ -266,7 +364,59 @@ public:
           port = GPIOD;
         };
         break;
+      case PD_08:
+        {
+          GPIO_Pin = GPIO_Pin_8;
+          port = GPIOD;
+        };
+        break;
+      case PD_09:
+        {
+          GPIO_Pin = GPIO_Pin_9;
+          port = GPIOD;
+        };
+        break;
+      case PD_10:
+        {
+          GPIO_Pin = GPIO_Pin_10;
+          port = GPIOD;
+        };
+        break;
+      case PD_11:
+        {
+          GPIO_Pin = GPIO_Pin_11;
+          port = GPIOD;
+        };
+        break;
+      case PD_12:
+        {
+          GPIO_Pin = GPIO_Pin_12;
+          port = GPIOD;
+        };
+        break;
+      case PD_13:
+        {
+          GPIO_Pin = GPIO_Pin_13;
+          port = GPIOD;
+        };
+        break;
+      case PD_14:
+        {
+          GPIO_Pin = GPIO_Pin_14;
+          port = GPIOD;
+        };
+        break;
+      case PD_15:
+        {
+          GPIO_Pin = GPIO_Pin_15;
+          port = GPIOD;
+        };
+        break;
+
+
+
       }
+
 
     u8_led_state = 0;
     if (port == GPIOA)

@@ -61,7 +61,7 @@ clean:
 MKDIR_P ?= mkdir -p
 
 flash:all
-	$(TOP_DIR)/tools/minichlink/minichlink -w $(BUILD_DIR)/$(TARGET_BIN) 0x00000000
+	$(TOP_DIR)/tools/minichlink/minichlink -w $(BUILD_DIR)/$(TARGET_BIN) 0x08000000
 	$(TOP_DIR)/tools/minichlink/minichlink -b 
 
 chipinfo:

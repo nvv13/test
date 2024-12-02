@@ -1,5 +1,12 @@
 ch32v203c8t6
 
+платка от WeAct 
+
+![photo](jpg/WeActCH32V203_Front.jpg)
+![photo](jpg/WeActCH32V203_Back.jpg)
+
+
+
 Features
  Core:
 - QingKe V4B 32-bit RISC-V core with multiple instruction set combinations

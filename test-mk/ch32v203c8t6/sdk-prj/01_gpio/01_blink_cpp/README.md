@@ -13,7 +13,7 @@
 connect to
 v203   WCH-LinkE
 -----  ------ 
-PD5    RX      - это чтобы увидеть вывод программы
+PA9    RX      - это чтобы увидеть вывод программы
                  $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE и смотрим
 PA13   swdio
 PA14   swclk
