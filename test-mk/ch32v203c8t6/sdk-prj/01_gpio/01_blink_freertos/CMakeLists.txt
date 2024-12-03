@@ -150,14 +150,14 @@ set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/FreeRTOS/Ld/Link.ld)
 
 # Add link options
 add_link_options(
-    -march=rv32imac_zicsr  # 设置目标架构为RISC-V，具有RV32I基础整数指令集，M标准乘法和除法扩展，A标准原子扩展，C标准压缩扩展
-    -mabi=ilp32  # 设置应用二进制接口（ABI）为ilp32，即整数、长整数和指针都是32位
-    -nostartfiles  # 不使用标准系统启动文件
-    -Xlinker --gc-sections  # 通过链接器选项--gc-sections，删除未使用的代码和数据块
-    -Wl,--print-memory-usage  # 通过链接器选项--print-memory-usage，打印内存使用情况
-    -Wl,-Map,${PROJECT_NAME}.map  # 通过链接器选项-Map，生成map文件，显示符号的分布情况
-    --specs=nano.specs  # 使用nano.specs规格文件，这会链接更小的C库
-    --specs=nosys.specs  # 使用nosys.specs规格文件，这会链接一个不包含系统调用的C库
+    -march=rv32imac_zicsr  # Set the target architecture to RISC-V, with RV32I basic integer instruction set, M standard multiplication and division extensions, A standard atomic extensions, C standard compression extensions
+    -mabi=ilp32  # Set the application binary interface (ABI) to ilp32, that is, integers, long integers and pointers are all 32 bits
+    -nostartfiles  # Do not use standard system startup files
+    -Xlinker --gc-sections  # Remove unused code and data blocks through the linker option --gc-sections
+    -Wl,--print-memory-usage  # Print memory usage through the linker option --print-memory-usage
+    -Wl,-Map,${PROJECT_NAME}.map  # Generate a map file through the linker option -Map to show the distribution of symbols
+    --specs=nano.specs  # Use the nano.specs specification file, which will link a smaller C library
+    --specs=nosys.specs  # Use the nosys.specs spec file, which will link a C library that does not include system calls
 )
 
 # Add link script options
@@ -176,8 +176,10 @@ set(LST_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.lst)
 
 # Add a custom command to generate output files after building a target
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE} # 生成 .hex 文件
-    COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE} # 生成 .bin 文件
-    COMMAND ${CMAKE_OBJDUMP} --all-headers --demangle --disassemble $<TARGET_FILE:${PROJECT_NAME}.elf> > ${LST_FILE} # 生成 .lst 文件
-    COMMENT "Building ${HEX_FILE}\nBuilding ${BIN_FILE}" # 在生成输出文件后显示消息
+    COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE} # Generate .hex file
+    COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE} # Generate .bin file
+    COMMAND ${CMAKE_OBJDUMP} --all-headers --demangle --disassemble $<TARGET_FILE:${PROJECT_NAME}.elf> > ${LST_FILE} # Generate .lst file
+    COMMENT "Building ${HEX_FILE}\nBuilding ${BIN_FILE}" # Display a message after generating output files
+    COMMENT "now to flash $ ../tools/minichlink/minichlink -w ${BIN_FILE} 0x08000000"
 )
+
