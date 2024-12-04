@@ -21,21 +21,21 @@ CH32V003F4P6
 
 
 connect to
-v003   WCH-LinkE
------   ------ 
-PD5(TX)  RX    - это чтобы увидеть вывод программы
+v003     WCH-LinkE
+-----    ------ 
+PD5(TX)   RX    - это чтобы увидеть вывод программы
                  $ picocom --echo -b 115200 /dev/ttyACM0 -подключаемся к WCH-LinkE 
-SWD      SWDIO
-V        5V      только ленту не запитывайте с WCH-LinkE, это только для прошивки
-G        GND    
------  ------ 
+SWD(PD1)  SWDIO
+V         5V      только ленту не запитывайте с WCH-LinkE, это только для прошивки
+G         GND    
+-----    ------ 
 
 
 
 connect to
 v003   ws2812b лента 
 -----  ------ 
-PA1    data
+PC1    data
 +5v    +5v
 GND    GND
 -----  ------ 

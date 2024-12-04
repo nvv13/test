@@ -9,6 +9,8 @@
 #include "ws2812b.h"
 #include "ws2812b_params.h"
 
+#include "CUsart.hpp"
+
 #define US_PER_MS 1
 
 /**
@@ -58,36 +60,43 @@ setcolor (int color, uint8_t alpha)
     }
 }
 
-int
+extern "C" int
 main (void)
 {
+
+
 
   NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
   Delay_Init ();
   Delay_Ms (100);
   SystemCoreClockUpdate ();
 
+  CUsart *oUsart = CUsart::GetInstance ();
+  oUsart->SendPSZstring ("SystemClk1:");
+  oUsart->SendIntToStr (SystemCoreClock);
+  oUsart->SendPSZstring ("\r\n");
+
   int pos = 0;
   int step = 1;
   color_hsv_t col = { 0.0, 1.0, 1.0 };
 
-  // puts ("WS2812B Test App");
+  oUsart->SendPSZstring ("WS2812B Test App\r\n");
 
   /* initialize all LED color values to black (off) */
   memset (leds, 0, sizeof (color_rgba_t) * WS2812B_PARAM_LED_NUMOF);
 
   ws2812b_params_t param;
   param.led_numof = WS2812B_PARAM_LED_NUMOF;
-  param.data_pin = PA_01;
+  param.data_pin = PC_01;
 
   ws2812b_init (&dev, &param);
 
-  // puts ("Initialization done.");
+  oUsart->SendPSZstring ("Initialization done.\r\n");
 
-  //    while (1) {
-  //    setcolor(1, 123);
-  //    ws2812b_load_rgba(&dev, leds);
-  //}
+      while (1) {
+      setcolor(1, 123);
+      ws2812b_load_rgba(&dev, leds);
+  }
 
   /* set to each red, green, and blue, and fade each color in and out */
   for (int col = 0; col <= 2; col++)
@@ -108,7 +117,7 @@ main (void)
         }
     }
 
-  // puts ("Color Fading done");
+  oUsart->SendPSZstring ("Color Fading done\r\n");
 
   /* reset color values */
   setcolor (-1, 255);

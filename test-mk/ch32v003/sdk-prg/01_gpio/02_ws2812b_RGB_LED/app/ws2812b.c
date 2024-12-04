@@ -13,7 +13,7 @@
 
 #include "debug.h"
 
-//#include "assert.h"
+//#include "assert.h" - не включать, много памяти отнимает у прошивки!
 
 #include "ws2812b.h"
 
@@ -51,24 +51,29 @@ shift (uint32_t data)
         { // 1
           GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
                          Bit_SET); /* write high */
-          Delay_Us (
-              170); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us,
+          volatile int ic=1;
+          while(ic--);
+
+          //Delay_Us (
+          //    0); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us,
                     // + - значения чуть подравлены с учетом операторов в цикле
           GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
                          Bit_RESET); /* write low */
-          Delay_Us (
-              61); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
+          //Delay_Us (
+          //    0); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
         }
       else
         { // 0
           GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
                          Bit_SET); /* write high */
-          Delay_Us (
-              60); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
+          //Delay_Us (
+          //    0); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
           GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
                          Bit_RESET); /* write low */
-          Delay_Us (
-              163); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
+          volatile int ic=1;
+          while(ic--);
+          //Delay_Us (
+          //    0); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
         }
     }
 }
@@ -269,5 +274,5 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
   __enable_irq ();
 
   // RES above 50μs
-  Delay_Us (13000);
+  Delay_Us (100);
 }
