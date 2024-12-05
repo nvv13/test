@@ -7,8 +7,7 @@ class CBlink
 {
 private:
   GPIO_TypeDef *port;
-  GPIO_InitTypeDef GPIO_InitStructure = { 0 };
-  u8 GPIO_Pin = 0;
+  u16 GPIO_Pin = 0;
   u8 u8_led_state = 0;
 
 public:
@@ -172,6 +171,7 @@ public:
       RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOC, ENABLE);
     if (port == GPIOD)
       RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOD, ENABLE);
+    GPIO_InitTypeDef GPIO_InitStructure = { 0 };
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed;
@@ -190,11 +190,13 @@ public:
   void
   On (void)
   {
-    GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin, Bit_SET);
+    //GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin, Bit_SET);
+    port->BSHR = GPIO_Pin; /* write high */
   }
   void
   Off (void)
   {
-    GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin, Bit_RESET);
+    //GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin, Bit_RESET);
+    port->BCR = GPIO_Pin; /* write low */
   }
 };

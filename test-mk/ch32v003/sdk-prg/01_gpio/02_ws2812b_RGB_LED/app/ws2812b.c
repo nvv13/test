@@ -9,13 +9,8 @@
  * @}
  */
 
-//#include <string.h>
-
-#include "debug.h"
-
-//#include "assert.h" - не включать, много памяти отнимает у прошивки!
-
 #include "ws2812b.h"
+#include "debug.h"
 
 #define BLUE (0xff0000)
 #define GREEN (0x00ff00)
@@ -38,41 +33,35 @@ RES low voltage time Above 50μs
 */
 
 static GPIO_TypeDef *port;
-static GPIO_InitTypeDef GPIO_InitStructure = { 0 };
-static u8 GPIO_Pin = 0;
+static u16 GPIO_Pin = 0;
 
 static inline void
 shift (uint32_t data)
 {
   for (int i = 23; i >= 0; i--)
     {
-
+      port->BSHR = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin)   */
       if (((data >> i) & 0x01))
         { // 1
-          GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
-                         Bit_SET); /* write high */
-          volatile int ic=1;
-          while(ic--);
-
-          //Delay_Us (
+          volatile int ic = 1;
+          while (ic--)
+            ;
+          // Delay_Us (
           //    0); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us,
-                    // + - значения чуть подравлены с учетом операторов в цикле
-          GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
-                         Bit_RESET); /* write low */
-          //Delay_Us (
+          // + - значения чуть подравлены с учетом операторов в цикле
+          port->BCR = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
+          // Delay_Us (
           //    0); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
         }
       else
         { // 0
-          GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
-                         Bit_SET); /* write high */
-          //Delay_Us (
+          // Delay_Us (
           //    0); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
-          GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin,
-                         Bit_RESET); /* write low */
-          volatile int ic=1;
-          while(ic--);
-          //Delay_Us (
+          port->BCR = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
+          volatile int ic = 1;
+          while (ic--)
+            ;
+          // Delay_Us (
           //    0); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
         }
     }
@@ -81,8 +70,6 @@ shift (uint32_t data)
 void
 ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
 {
-  //assert (dev && params);
-
   *dev = *params;
 
   GPIOSpeed_TypeDef GPIO_Speed = GPIO_Speed_50MHz;
@@ -242,20 +229,18 @@ ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
     RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOC, ENABLE);
   if (port == GPIOD)
     RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOD, ENABLE);
+  GPIO_InitTypeDef GPIO_InitStructure = { 0 };
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed;
   GPIO_Init (port, &GPIO_InitStructure);
-  GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin, Bit_RESET); /* write low */
+  port->BCR = GPIO_Pin; /* write low */
 }
 
 void
 ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
 {
-  //assert (dev && vals);
-
   __disable_irq ();
-
   for (int i = 0; i < dev->led_numof; i++)
     {
       uint32_t data = 0; // HEAD;
@@ -268,9 +253,6 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
       data |= vals[i].color.r & (uint32_t)vals[i].alpha;
       shift (data);
     }
-
-  GPIO_WriteBit (port, GPIO_InitStructure.GPIO_Pin, Bit_RESET); /* write low */
-
   __enable_irq ();
 
   // RES above 50μs

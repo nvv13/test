@@ -64,8 +64,6 @@ extern "C" int
 main (void)
 {
 
-
-
   NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
   Delay_Init ();
   Delay_Ms (100);
@@ -93,10 +91,11 @@ main (void)
 
   oUsart->SendPSZstring ("Initialization done.\r\n");
 
-      while (1) {
-      setcolor(1, 123);
-      ws2812b_load_rgba(&dev, leds);
-  }
+  while (1)
+    {
+      setcolor (1, 123);
+      ws2812b_load_rgba (&dev, leds);
+    }
 
   /* set to each red, green, and blue, and fade each color in and out */
   for (int col = 0; col <= 2; col++)

@@ -42,17 +42,17 @@ https://github.com/ProYCS/ft6336_driver_for_stm32.git
 static GPIOSpeed_TypeDef GPIO_Speed = GPIO_Speed_50MHz;
 
 static GPIO_TypeDef *port_i2c_scl;
-static u8 pin_i2c_scl;
+static u16 pin_i2c_scl;
 
 static GPIO_TypeDef *port_i2c_sda;
-static u8 pin_i2c_sda;
+static u16 pin_i2c_sda;
 
-#define IIC_SCL(n)                                                            \
-  (n ? GPIO_WriteBit (port_i2c_scl, pin_i2c_scl, Bit_SET)                     \
-     : GPIO_WriteBit (port_i2c_scl, pin_i2c_scl, Bit_RESET))
-#define IIC_SDA(n)                                                            \
-  (n ? GPIO_WriteBit (port_i2c_sda, pin_i2c_sda, Bit_SET)                     \
-     : GPIO_WriteBit (port_i2c_sda, pin_i2c_sda, Bit_RESET))
+#define IIC_SCL(n)                               \
+  (n ? GPIO_SetBits(port_i2c_sda, pin_i2c_sda)   \
+     : GPIO_ResetBits(port_i2c_sda, pin_i2c_sda))
+#define IIC_SDA(n)                               \
+  (n ? GPIO_SetBits(port_i2c_sda, pin_i2c_sda)   \
+     : GPIO_ResetBits(port_i2c_sda, pin_i2c_sda))
 #define READ_SDA GPIO_ReadInputDataBit (port_i2c_sda, pin_i2c_sda)
 #define delay_us(n) Delay_Us(n)
 

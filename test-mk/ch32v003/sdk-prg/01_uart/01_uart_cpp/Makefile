@@ -21,7 +21,7 @@ DEPS := $(OBJS:.o=.d)
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-FLAGS ?= -march=rv32ec_zicsr -mabi=ilp32e -msmall-data-limit=8 -mno-save-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized  -g
+FLAGS ?= -march=rv32ec_zicsr -mabi=ilp32e -mcmodel=medany -msmall-data-limit=8 -mno-save-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized  -g
 
 ASFLAGS ?= $(FLAGS) -x assembler $(INC_FLAGS) -MMD -MP
 CPPFLAGS ?=  $(FLAGS) $(INC_FLAGS)  -MMD -MP 

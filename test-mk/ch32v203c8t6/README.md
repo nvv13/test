@@ -1,6 +1,6 @@
 ch32v203c8t6
 
-платка от WeAct 
+например: платка от WeAct 
 
 ![photo](jpg/WeActCH32V203_Front.jpg)
 ![photo](jpg/WeActCH32V203_Back.jpg)

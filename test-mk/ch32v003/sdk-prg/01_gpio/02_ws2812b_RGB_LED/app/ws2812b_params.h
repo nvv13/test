@@ -22,7 +22,7 @@ extern "C"
  * @{
  */
 #ifndef WS2812B_PARAM_LED_NUMOF
-#define WS2812B_PARAM_LED_NUMOF (5) /* many have 60 per meter... */
+#define WS2812B_PARAM_LED_NUMOF (100) /* many have 60 per meter... */
 #endif
 #ifndef WS2812B_PARAM_DATA_PIN
 #define WS2812B_PARAM_DATA_PIN (PA_01)
