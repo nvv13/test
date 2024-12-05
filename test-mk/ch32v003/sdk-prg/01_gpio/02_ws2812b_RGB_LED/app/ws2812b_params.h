@@ -10,7 +10,7 @@
 #ifndef WS2812B_PARAMS_H
 #define WS2812B_PARAMS_H
 
-//#include "board.h"
+// #include "board.h"
 
 #ifdef __cplusplus
 extern "C"

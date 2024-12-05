@@ -91,11 +91,13 @@ main (void)
 
   oUsart->SendPSZstring ("Initialization done.\r\n");
 
+  /* test
   while (1)
     {
       setcolor (1, 123);
       ws2812b_load_rgba (&dev, leds);
     }
+  */
 
   /* set to each red, green, and blue, and fade each color in and out */
   for (int col = 0; col <= 2; col++)

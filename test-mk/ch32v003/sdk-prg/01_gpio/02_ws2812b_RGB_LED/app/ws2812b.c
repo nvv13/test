@@ -35,38 +35,6 @@ RES low voltage time Above 50μs
 static GPIO_TypeDef *port;
 static u16 GPIO_Pin = 0;
 
-static inline void
-shift (uint32_t data)
-{
-  for (int i = 23; i >= 0; i--)
-    {
-      port->BSHR = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin)   */
-      if (((data >> i) & 0x01))
-        { // 1
-          volatile int ic = 1;
-          while (ic--)
-            ;
-          // Delay_Us (
-          //    0); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us,
-          // + - значения чуть подравлены с учетом операторов в цикле
-          port->BCR = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
-          // Delay_Us (
-          //    0); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
-        }
-      else
-        { // 0
-          // Delay_Us (
-          //    0); // freg 1.250009  MHz CPU_CLK_240M     half period 0.4 us
-          port->BCR = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
-          volatile int ic = 1;
-          while (ic--)
-            ;
-          // Delay_Us (
-          //    0); // freg 571.420  KHz CPU_CLK_240M     half period 0.85 us
-        }
-    }
-}
-
 void
 ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
 {
@@ -251,10 +219,52 @@ ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
       data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
                << GREEN_SHIFT);
       data |= vals[i].color.r & (uint32_t)vals[i].alpha;
-      shift (data);
+
+      for (int i = 23; i >= 0; i--)
+        {
+          port->BSHR = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin) */
+          if (((data >> i) & 0x01))
+            { // 1
+              volatile int ic = 3;
+              while (ic--)
+                ;
+              //
+              // half period 0.85 us
+              port->BCR
+                  = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
+              // half period 0.4 us
+              ic = 0;
+              ic = 1;
+              ic = 0;
+              ic = 1;
+              ic = 0;
+              ic = 1;
+            }
+          else
+            {
+              //  half period 0.4 us
+              volatile int ic = 1;
+              ic = 0;
+              ic = 1;
+              ic = 0;
+              ic = 1;
+              ic = 0;
+              ic = 1;
+              ic = 0;
+              ic = 1;
+              port->BCR
+                  = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
+              ic = 2;
+              while (ic--)
+                ;
+              ic = 1;
+              ic = 0;
+              // half period 0.85 us
+            }
+        }
     }
   __enable_irq ();
 
   // RES above 50μs
-  Delay_Us (100);
+  Delay_Us (60);
 }

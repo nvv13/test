@@ -23,7 +23,7 @@
 #include "color.h"
 
 #define ENABLE_DEBUG 0
-//#include "debug.h"
+// #include "debug.h"
 
 void
 color_rgb2hsv (color_rgb_t *rgb, color_hsv_t *hsv)
@@ -96,9 +96,9 @@ color_hsv2rgb (color_hsv_t *hsv, color_rgb_t *rgb)
 
   if (hsv->s == 0.0f)
     {
-      rgb->r = (uint8_t) (hsv->v * 255.0f);
-      rgb->g = (uint8_t) (hsv->v * 255.0f);
-      rgb->b = (uint8_t) (hsv->v * 255.0f);
+      rgb->r = (uint8_t)(hsv->v * 255.0f);
+      rgb->g = (uint8_t)(hsv->v * 255.0f);
+      rgb->b = (uint8_t)(hsv->v * 255.0f);
       return;
     }
 
@@ -113,34 +113,34 @@ color_hsv2rgb (color_hsv_t *hsv, color_rgb_t *rgb)
   switch (i)
     {
     case 0:
-      rgb->r = (uint8_t) (hsv->v * 255.0f);
-      rgb->g = (uint8_t) (cc * 255.0f);
-      rgb->b = (uint8_t) (aa * 255.0f);
+      rgb->r = (uint8_t)(hsv->v * 255.0f);
+      rgb->g = (uint8_t)(cc * 255.0f);
+      rgb->b = (uint8_t)(aa * 255.0f);
       break;
     case 1:
-      rgb->r = (uint8_t) (bb * 255.0f);
-      rgb->g = (uint8_t) (hsv->v * 255.0f);
-      rgb->b = (uint8_t) (aa * 255.0f);
+      rgb->r = (uint8_t)(bb * 255.0f);
+      rgb->g = (uint8_t)(hsv->v * 255.0f);
+      rgb->b = (uint8_t)(aa * 255.0f);
       break;
     case 2:
-      rgb->r = (uint8_t) (aa * 255.0f);
-      rgb->g = (uint8_t) (hsv->v * 255.0f);
-      rgb->b = (uint8_t) (cc * 255.0f);
+      rgb->r = (uint8_t)(aa * 255.0f);
+      rgb->g = (uint8_t)(hsv->v * 255.0f);
+      rgb->b = (uint8_t)(cc * 255.0f);
       break;
     case 3:
-      rgb->r = (uint8_t) (aa * 255.0f);
-      rgb->g = (uint8_t) (bb * 255.0f);
-      rgb->b = (uint8_t) (hsv->v * 255.0f);
+      rgb->r = (uint8_t)(aa * 255.0f);
+      rgb->g = (uint8_t)(bb * 255.0f);
+      rgb->b = (uint8_t)(hsv->v * 255.0f);
       break;
     case 4:
-      rgb->r = (uint8_t) (cc * 255.0f);
-      rgb->g = (uint8_t) (aa * 255.0f);
-      rgb->b = (uint8_t) (hsv->v * 255.0f);
+      rgb->r = (uint8_t)(cc * 255.0f);
+      rgb->g = (uint8_t)(aa * 255.0f);
+      rgb->b = (uint8_t)(hsv->v * 255.0f);
       break;
     case 5:
-      rgb->r = (uint8_t) (hsv->v * 255.0f);
-      rgb->g = (uint8_t) (aa * 255.0f);
-      rgb->b = (uint8_t) (bb * 255.0f);
+      rgb->r = (uint8_t)(hsv->v * 255.0f);
+      rgb->g = (uint8_t)(aa * 255.0f);
+      rgb->b = (uint8_t)(bb * 255.0f);
       break;
     }
 }
