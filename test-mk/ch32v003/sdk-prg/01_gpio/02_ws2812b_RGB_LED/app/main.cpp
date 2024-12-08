@@ -11,7 +11,7 @@
 
 #include "CUsart.hpp"
 
-#define US_PER_MS 1
+#define US_PER_MS 2
 
 /**
  * @brief   Switch to the next LED every 10ms
