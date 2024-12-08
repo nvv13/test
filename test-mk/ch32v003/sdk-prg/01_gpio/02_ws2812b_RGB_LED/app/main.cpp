@@ -36,7 +36,7 @@ static ws2812b_t dev;
 /**
  * @brief   Allocate a color_rgb_t struct for each LED on the strip
  */
-static color_rgba_t leds[WS2812B_PARAM_LED_NUMOF];
+static color_rgba_t leds[WS2812B_PARAM_LED_NUMOF + 1];
 
 static void
 setcolor (int color, uint8_t alpha)
@@ -56,6 +56,13 @@ setcolor (int color, uint8_t alpha)
         case 2:
           leds[i].color.b = 255;
           break;
+        case 3:
+          {
+            leds[i].color.r = 255;
+            leds[i].color.g = 255;
+            leds[i].color.b = 255;
+          };
+          break;
         }
     }
 }
@@ -63,11 +70,13 @@ setcolor (int color, uint8_t alpha)
 extern "C" int
 main (void)
 {
+  // RCC_AdjustHSICalibrationValue(0x10);
+  // SetSysClock();
 
   NVIC_PriorityGroupConfig (NVIC_PriorityGroup_1);
+  SystemCoreClockUpdate ();
   Delay_Init ();
   Delay_Ms (100);
-  SystemCoreClockUpdate ();
 
   CUsart *oUsart = CUsart::GetInstance ();
   oUsart->SendPSZstring ("SystemClk1:");
@@ -91,13 +100,15 @@ main (void)
 
   oUsart->SendPSZstring ("Initialization done.\r\n");
 
-  /* test
+  /* test */
+  /*
   while (1)
     {
-      setcolor (1, 123);
+      setcolor (-1, 0);
       ws2812b_load_rgba (&dev, leds);
-    }
-  */
+      setcolor (3, 0xFF);
+      ws2812b_load_rgba (&dev, leds);
+    }*/
 
   /* set to each red, green, and blue, and fade each color in and out */
   for (int col = 0; col <= 2; col++)

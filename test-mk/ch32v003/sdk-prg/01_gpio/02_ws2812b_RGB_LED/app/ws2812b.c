@@ -205,66 +205,245 @@ ws2812b_init (ws2812b_t *dev, const ws2812b_params_t *params)
   port->BCR = GPIO_Pin; /* write low */
 }
 
+// #pragma optimize("", off)
+// #pragma GCC push_options
+// #pragma GCC optimize("O0")
 void
 ws2812b_load_rgba (const ws2812b_t *dev, const color_rgba_t vals[])
 {
   __disable_irq ();
-  for (int i = 0; i < dev->led_numof; i++)
+  uint32_t data1 = 0; // HEAD;
+  uint32_t data2 = 0; // HEAD;
+  /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
+   * 3 leas significant bits */
+  int y = 0;
+  data1 = (((uint32_t)vals[y].color.b & (uint32_t)vals[y].alpha) << BLUE_SHIFT)
+          | (((uint32_t)vals[y].color.g & (uint32_t)vals[y].alpha)
+             << GREEN_SHIFT)
+          | vals[y].color.r & (uint32_t)vals[y].alpha;
+  y++;
+  while (y <= dev->led_numof)
     {
-      uint32_t data = 0; // HEAD;
-      /* we scale the 8-bit alpha value to a 5-bit value by cutting off the
-       * 3 leas significant bits */
-      data |= (((uint32_t)vals[i].color.b & (uint32_t)vals[i].alpha)
-               << BLUE_SHIFT);
-      data |= (((uint32_t)vals[i].color.g & (uint32_t)vals[i].alpha)
-               << GREEN_SHIFT);
-      data |= vals[i].color.r & (uint32_t)vals[i].alpha;
 
       for (int i = 23; i >= 0; i--)
         {
-          port->BSHR = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin) */
-          if (((data >> i) & 0x01))
+          if (((data1 >> i) & 0x01))
             { // 1
-              volatile int ic = 3;
-              while (ic--)
-                ;
-              //
+              port->BSHR
+                  = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin) */
+              if (i == 23)
+                {
+                  data2
+                      = (((uint32_t)vals[y].color.b & (uint32_t)vals[y].alpha)
+                         << BLUE_SHIFT)
+                        | (((uint32_t)vals[y].color.g
+                            & (uint32_t)vals[y].alpha)
+                           << GREEN_SHIFT)
+                        | vals[y].color.r & (uint32_t)vals[y].alpha;
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
+              else
+                {
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
               // half period 0.85 us
               port->BCR
                   = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
               // half period 0.4 us
-              ic = 0;
-              ic = 1;
-              ic = 0;
-              ic = 1;
-              ic = 0;
-              ic = 1;
             }
           else
             {
-              //  half period 0.4 us
-              volatile int ic = 1;
-              ic = 0;
-              ic = 1;
-              ic = 0;
-              ic = 1;
-              ic = 0;
-              ic = 1;
-              ic = 0;
-              ic = 1;
+              port->BSHR
+                  = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin) */
+                              //  half period 0.4 us
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
               port->BCR
                   = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
-              ic = 2;
-              while (ic--)
-                ;
-              ic = 1;
-              ic = 0;
+              if (i == 23)
+                {
+                  data2
+                      = (((uint32_t)vals[y].color.b & (uint32_t)vals[y].alpha)
+                         << BLUE_SHIFT)
+                        | (((uint32_t)vals[y].color.g
+                            & (uint32_t)vals[y].alpha)
+                           << GREEN_SHIFT)
+                        | vals[y].color.r & (uint32_t)vals[y].alpha;
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
+              else
+                {
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
               // half period 0.85 us
             }
         }
+      y++;
+      if (y > dev->led_numof)
+        break;
+      for (int i = 23; i >= 0; i--)
+        {
+          if (((data2 >> i) & 0x01))
+            { // 1
+              port->BSHR
+                  = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin) */
+              if (i == 23)
+                {
+                  data1
+                      = (((uint32_t)vals[y].color.b & (uint32_t)vals[y].alpha)
+                         << BLUE_SHIFT)
+                        | (((uint32_t)vals[y].color.g
+                            & (uint32_t)vals[y].alpha)
+                           << GREEN_SHIFT)
+                        | vals[y].color.r & (uint32_t)vals[y].alpha;
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
+              else
+                {
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
+              // half period 0.85 us
+              port->BCR
+                  = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
+              // half period 0.4 us
+            }
+          else
+            {
+              port->BSHR
+                  = GPIO_Pin; /* write high GPIO_SetBits(port, GPIO_Pin) */
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              __asm__ ("nop");
+              //  half period 0.4 us
+              port->BCR
+                  = GPIO_Pin; /* write low GPIO_ResetBits(port, GPIO_Pin)  */
+              if (i == 23)
+                {
+                  data1
+                      = (((uint32_t)vals[y].color.b & (uint32_t)vals[y].alpha)
+                         << BLUE_SHIFT)
+                        | (((uint32_t)vals[y].color.g
+                            & (uint32_t)vals[y].alpha)
+                           << GREEN_SHIFT)
+                        | vals[y].color.r & (uint32_t)vals[y].alpha;
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
+              else
+                {
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                  __asm__ ("nop");
+                }
+              // half period 0.85 us
+            }
+        }
+      y++;
     }
   __enable_irq ();
 
   // RES above 50μs
   Delay_Us (60);
 }
+// #pragma GCC pop_options
+// #pragma optimize("", on)
