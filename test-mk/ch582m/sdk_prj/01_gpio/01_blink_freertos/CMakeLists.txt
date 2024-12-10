@@ -185,6 +185,6 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE} # Generate .bin file
     COMMAND ${CMAKE_OBJDUMP} --all-headers --demangle --disassemble $<TARGET_FILE:${PROJECT_NAME}.elf> > ${LST_FILE} # Generate .lst file
     COMMENT "Building ${HEX_FILE}\nBuilding ${BIN_FILE}" # Display a message after generating output files
-    COMMENT "now to flash $ ../tools/minichlink/minichlink -w ${BIN_FILE} 0x08000000"
+    COMMENT "now to flash $ ../tools/wchisp/wchisp flash ${BIN_FILE}"
 )
 

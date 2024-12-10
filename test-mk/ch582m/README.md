@@ -10,7 +10,7 @@ core:
 - 32-bit QingKe RISC-V processor WCH RISC-V4A
 - Support RV32IMAC instruction set, hardware multiplication and division
 - Low-power 2-stage assembly line, high-performance 1.56DMIPS
-- Multi-speed system frequency: minimum 32 KHz  (вроде до 80MHz)
+- Multi-speed system frequency: minimum 32 KHz  (максимум вроде до 80MHz, хотя обычно пишут 60MHz)
 - Unique high-speed interrupt response mechanism
 
 512K-byte non-volatile memory FlashROM:

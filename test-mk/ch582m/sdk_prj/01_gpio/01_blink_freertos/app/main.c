@@ -100,10 +100,10 @@ void task2_task(void *pvParameters)
 {
     while (1)
     {
-        GPIOA_ResetBits(GPIO_Pin_1);
+        GPIOB_ResetBits(GPIO_Pin_4);
         App_Printf("task2 entry 1\n");
         vTaskDelay(configTICK_RATE_HZ / 2);
-        GPIOA_SetBits(GPIO_Pin_1);
+        GPIOB_SetBits(GPIO_Pin_4);
         App_Printf("task2 entry 2\n");
         vTaskDelay(configTICK_RATE_HZ / 2);
     }
@@ -171,8 +171,8 @@ int main(void)
     UART1_DefInit();
 #endif
 
-    GPIOA_ModeCfg(GPIO_Pin_1,GPIO_ModeOut_PP_20mA);
-    GPIOA_ResetBits(GPIO_Pin_1);
+    GPIOB_ModeCfg(GPIO_Pin_4,GPIO_ModeOut_PP_20mA);
+    GPIOB_ResetBits(GPIO_Pin_4);
     PRINT("start.\n");
 
     printMutex = xSemaphoreCreateMutex();

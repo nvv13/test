@@ -2,16 +2,19 @@
 !!!underway!!!
 
 
-
 исходник 
 src:
  https://www.wch.cn/downloads/CH583EVT_ZIP.html 
  https://github.com/openwch/ch583.git
 
-идея из
+
+
+идея файла cmake из
  https://github.com/cch9897/CH32V203-FreeRTOS-Cmake.git
 
+
 собираем так
+
 
 
 делаем директорию build
@@ -31,8 +34,9 @@ $ cmake ..
 
 $ make
 
-вот это еще не пробовал
-$ ../tools/minichlink/minichlink -w ch582m-FreeRTOS.bin 0x08000000
+вот это еще не пробовал, вроде как, перед этим,
+ надо удерживая кнопку "boot" - подключить к USB компа, и тогда прошивать...
+$ ../tools/wchisp/wchisp flash ch582m-FreeRTOS.bin
 
 
 ~~~
