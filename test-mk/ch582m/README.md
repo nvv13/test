@@ -1,5 +1,9 @@
 ch582m
 
+  
+![photo](jpg/DevBoard_CH582M_front.jpg)
+![photo](jpg/DevBoard_CH582M_back.jpg)
+
 
 The CH583 is a RISC-V MCU integrated with BLE wireless communication. It integrates 2Mbps Bluetooth Low
 Energy communication module, 2 full-speed USB host and device controllers and transceiver, 2 SPIs, 4 UARTs,

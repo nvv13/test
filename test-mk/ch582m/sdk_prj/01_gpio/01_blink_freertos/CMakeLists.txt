@@ -186,5 +186,10 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJDUMP} --all-headers --demangle --disassemble $<TARGET_FILE:${PROJECT_NAME}.elf> > ${LST_FILE} # Generate .lst file
     COMMENT "Building ${HEX_FILE}\nBuilding ${BIN_FILE}" # Display a message after generating output files
     COMMENT "now to flash $ ../tools/wchisp/wchisp flash ${BIN_FILE}"
+    COMMENT "go $ make flash"
 )
+
+add_custom_target(flash COMMAND ${CMAKE_SOURCE_DIR}/tools/wchisp/wchisp flash ${BIN_FILE} DEPENDS ${BIN_FILE}) 
+add_custom_target(chipinfo COMMAND ${CMAKE_SOURCE_DIR}/tools/wchisp/wchisp info) 
+
 

@@ -1,7 +1,10 @@
 # ch552
 
 попалась как то мне devboard от WeAct на мк ch552t,
+  
 
+![photo](jpg/DevBoard_CH552T_front.jpg)
+![photo](jpg/DevBoard_CH552T_back.jpg)
 
 
 

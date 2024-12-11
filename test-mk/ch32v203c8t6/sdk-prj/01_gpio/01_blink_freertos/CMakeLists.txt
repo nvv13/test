@@ -181,5 +181,10 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJDUMP} --all-headers --demangle --disassemble $<TARGET_FILE:${PROJECT_NAME}.elf> > ${LST_FILE} # Generate .lst file
     COMMENT "Building ${HEX_FILE}\nBuilding ${BIN_FILE}" # Display a message after generating output files
     COMMENT "now to flash $ ../tools/minichlink/minichlink -w ${BIN_FILE} 0x08000000"
+    COMMENT "go $ make flash"
 )
+
+add_custom_target(flash COMMAND ${CMAKE_SOURCE_DIR}/tools/minichlink/minichlink -w ${BIN_FILE} 0x08000000 DEPENDS ${BIN_FILE}) 
+
+
 

@@ -6,28 +6,14 @@ src:
 
 
 
-идея файла cmake из
- https://github.com/cch9897/CH32V203-FreeRTOS-Cmake.git
-
-
 собираем так
 
-
-
-делаем директорию build
-переходим в нее
-и запускаем cmake..
-потом make
+запускаем make
 и далее, прошить...
 
 
 ~~~
 
-$ mkdir build
-
-$ cd build
-
-$ cmake ..
 
 $ make
 
@@ -39,6 +25,7 @@ $ make flash
 
 
 ~~~
+
 
 Соединения
 ~~~
