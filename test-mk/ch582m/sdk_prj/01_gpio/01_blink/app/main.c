@@ -24,7 +24,6 @@ main (void)
 
   PRINT("Start\r\n");
 
-  SetSysClock (CLK_SOURCE_PLL_60MHz);
   Delay_Init();
   GPIOB_ModeCfg(GPIO_Pin_4,GPIO_ModeOut_PP_20mA);
   GPIOB_ResetBits(GPIO_Pin_4);
@@ -32,9 +31,9 @@ main (void)
   while (1)
     {
         GPIOB_SetBits(GPIO_Pin_4);
-        Delay_Ms(200);
+        Delay_Ms(100);
         GPIOB_ResetBits(GPIO_Pin_4);
-        Delay_Ms(500);
+        Delay_Ms(900);
         PRINT("iCount=%d\r\n",iCount++);
     }
 }

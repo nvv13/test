@@ -19,7 +19,7 @@ core:
 
 512K-byte non-volatile memory FlashROM:
 - 448KB user application program memory area CodeFlash
-- 32KB user non-volatile data memory area DataFlash
+- 32KB user non-volatile data memory area DataFlash (EEPROM ?)
 - 24KB system boot program memory area BootLoader
 - 8KB system non-volatile configuration information memory area InfoFlash
 - Support ICP, ISP and IAP, support OTA wireless upgrade
