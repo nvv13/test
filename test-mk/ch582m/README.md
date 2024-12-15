@@ -113,15 +113,7 @@ https://github.com/openwch/ch583.git
 -------------------------------------------------
 
 ~~~
-connect to
-ch582m   WCH-LinkE
-------  ------ 
-        swdio
-        swclk
-        NRST
-3.3     3V3
-GND     GND    
-------  ------ 
+прошиваеться по USB
 
 ~~~
 
