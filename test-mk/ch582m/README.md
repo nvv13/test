@@ -118,3 +118,81 @@ https://github.com/openwch/ch583.git
 ~~~
 
 
+
+
+~~~
+
+напоминалка:
+
+делал в fedora linux 39, в других возможно немного по другому надо
+
+
+(1) установка пакетов для сборки riskv кода
+
+$ sudo dnf install pnpm   (или может sudo dnf install npm ?)
+$ sudo npm install --location=global xpm@latest
+$ xpm install @xpack-dev-tools/riscv-none-elf-gcc@latest --global --verbose
+
+
+************************************
+    или, установка пакетов для сборки riskv кода - вручную (версия 14.2.0-2, проверяйте, вдруг есть новее)
+$ cd ~
+$ mkdir .local
+$ cd .local
+$ mkdir xPacks
+$ cd xPacks/
+$ mkdir @xpack-dev-tools
+$ cd @xpack-dev-tools/
+$ mkdir riscv-none-elf-gcc
+$ cd riscv-none-elf-gcc/
+$ mkdir 14.2.0-2.1
+$ cd 14.2.0-2.1/
+$ wget https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v14.2.0-2/xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz
+$ tar xzf xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz
+$ rm xpack-riscv-none-elf-gcc-14.2.0-2-linux-x64.tar.gz 
+$ mv xpack-riscv-none-elf-gcc-14.2.0-2/ .content/
+************************************
+
+
+(2) утилита для прошивки через USB 
+
+собираем из проекта 
+ https://github.com/ch32-rs/wchisp.git
+
+
+использование
+
+  перед этим, надо удерживая кнопку "boot" - подключить к USB компа, и тогда прошивать...
+
+$ wchisp info
+
+$ wchisp flash ./path/to/firmware.{bin,hex,elf}
+
+$ wchisp config info
+
+$ wchisp config reset
+
+
+
+
+
+ещё
+копируем файл
+`50-wch.rules`
+в
+`/etc/udev/rules.d/`
+
+$ sudo groupadd plugdev
+$ sudo usermod -a -G plugdev cur_user
+$ sudo reboot
+
+(3)
+ 
+
+
+~~~
+
+
+PS:
+ источники
+https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack
