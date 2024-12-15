@@ -4,8 +4,8 @@
 /* Author:   W.ch 2020.06        */
 /* V1.0 FlashROM library for USER/BOOT */
 /* for the target in USER code area on the chip divided into USER code area and BOOT area */
-/* 用于具有用户代码区和引导区的芯片、操作目标为用户代码区的情况，
-   可以在用户代码中被调用（IAP，擦写自身），也可以在引导代码中被调用（更新用户代码） */
+/* For chips with user code area and boot area, when the operation target is the user code area, 
+   it can be called in the user code (IAP, erase itself) or in the boot code (update user code) */
 
 /* Flash-ROM feature:
      for store program code, support block erasing, dword and page writing, dword verifying, unit for Length is byte,
