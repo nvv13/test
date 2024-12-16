@@ -196,3 +196,4 @@ $ sudo reboot
 PS:
  источники
 https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack
+https://github.com/openwch/ch583.git
