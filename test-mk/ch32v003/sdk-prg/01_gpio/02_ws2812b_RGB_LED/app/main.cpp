@@ -101,15 +101,14 @@ main (void)
   oUsart->SendPSZstring ("Initialization done.\r\n");
 
   /* test */
-  /*
-  while (1)
+  /*while (1)
     {
-      setcolor (-1, 0);
-      ws2812b_load_rgba (&dev, leds);
+      //setcolor (-1, 0);
+      //ws2812b_load_rgba (&dev, leds);
       setcolor (3, 0xFF);
       ws2812b_load_rgba (&dev, leds);
-    }*/
-
+    }
+  */
   /* set to each red, green, and blue, and fade each color in and out */
   for (int col = 0; col <= 2; col++)
     {
@@ -135,7 +134,8 @@ main (void)
   setcolor (-1, 255);
   ws2812b_load_rgba (&dev, leds);
 
-  while (1)
+  int ic=WS2812B_PARAM_LED_NUMOF*3;
+  while (ic--)
     {
       /* change the active color by running around the hue circle */
       col.h += 1.0;
@@ -159,5 +159,11 @@ main (void)
         }
 
       Delay_Ms (STEP);
+    }
+
+  while (1)
+    {
+    setcolor (3, 75);
+    ws2812b_load_rgba (&dev, leds);
     }
 }

@@ -153,6 +153,8 @@ LINKFLAGS := -mcpu=ck804ef \
     -nostartfiles \
     -mhard-float \
     -lm \
+    -Xlinker --gc-sections \
+    -Wl,--print-memory-usage \
     -Wl,-T$(LD_FILE)
 
 MAP := -Wl,-ckmap=$(IMAGEODIR)/$(TARGET).map
