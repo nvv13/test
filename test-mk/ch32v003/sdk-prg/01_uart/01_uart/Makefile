@@ -69,6 +69,12 @@ chipinfo:
 reboot:
 	$(TOP_DIR)/tools/minichlink/minichlink -b
 
+unpotect:
+	$(TOP_DIR)/tools/minichlink/minichlink -p
+
+chiperase:
+	$(TOP_DIR)/tools/minichlink/minichlink -E
+
 fmt:
 	clang-format --style=GNU --verbose -i ./app/*.c ./app/*.h
 
