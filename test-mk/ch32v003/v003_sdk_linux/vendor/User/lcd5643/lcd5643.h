@@ -1,6 +1,6 @@
 /*
 
-connect to
+connect to (MODE_COMMON_CATHODE)
 v003 5643AS-1 
 ---- ----- 
 PA1  1  E
@@ -16,6 +16,45 @@ PC4  10 F
 PC3  11 A
 PC0  12 Dig1
 ---- ------ 
+
+connect to (MODE_COMMON_ANODE)
+v003 8041BS-1 
+---- ----- 
+PA1  1  E
+PD4  2  D
+PD3  3  DP
+PD2  4  C
+PA2  5  G
+PD0  6  Dig4
+PC7  7  B
+PC6  8  Dig3
+PC5  9  Dig2
+PC4  10 F
+PC3  11 A
+PC0  12 Dig1
+---- ------ 
+
+connect to (MODE_COMMON_ANODE)
+v003 8042BS-1F 
+---- ----- 
+PA1  1  E
+PD4  2  D
+     3  DP
+PD3  8  D1+D2 CATHOD
+PD2  4  C
+PA2  5  G
+PD0  6  Dig4
+PC7  9  B
+PC6  10 Dig3
+
+PC5  11 Dig2
+PC5  7  D1+D2 ANOD
+
+PC4  12 F
+PC3  13 A
+PC0  14 Dig1
+---- ------ 
+
 
 
 */
@@ -33,8 +72,8 @@ extern "C"
 #define MODE_CLOCK 0
 #define MODE_WEATHER 1
 
-#define MODE_COMMON_ANODE 0
-#define MODE_COMMON_CATHODE 1
+#define MODE_COMMON_CATHODE 0   // (CC)
+#define MODE_COMMON_ANODE   1   // (CA)
 
   void lcd5643_init_pin (u8 i_common_mode);
 

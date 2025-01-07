@@ -198,7 +198,7 @@ main (void)
   PoCShell->oUsart->SendPSZstring ("\r\n");
   init_at24c32 (0, NULL);
   init_ds3231 (0, NULL);
-  lcd5643_init_pin (MODE_COMMON_CATHODE);
+  lcd5643_init_pin (MODE_COMMON_ANODE);
   PoCShell->oUsart->SendPSZstring ("enter help for usage\r\n");
   int i_cnt_disp = 0;
   while (1)
