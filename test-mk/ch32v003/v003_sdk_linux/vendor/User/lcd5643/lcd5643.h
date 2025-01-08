@@ -72,8 +72,8 @@ extern "C"
 #define MODE_CLOCK 0
 #define MODE_WEATHER 1
 
-#define MODE_COMMON_CATHODE 0   // (CC)
 #define MODE_COMMON_ANODE   1   // (CA)
+#define MODE_COMMON_CATHODE 0   // (CC)
 
   void lcd5643_init_pin (u8 i_common_mode);
 

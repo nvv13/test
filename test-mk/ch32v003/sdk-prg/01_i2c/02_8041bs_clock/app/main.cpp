@@ -41,10 +41,15 @@ clock_int_get (int argc, char **argv)
         {
           b_intensity = u8_value;
         }
+      PoCShell->oUsart->SendPSZstring ("The current intensity is: ");
+      PoCShell->oUsart->SendIntToStr (b_intensity);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
     }
-  PoCShell->oUsart->SendPSZstring ("The current intensity is: ");
-  PoCShell->oUsart->SendIntToStr (b_intensity);
-  PoCShell->oUsart->SendPSZstring ("\r\n");
+  else
+    {
+      PoCShell->oUsart->SendPSZstring ("error get intensity\r\n");
+    }
+
   return 0;
 }
 
@@ -197,15 +202,15 @@ main (void)
   PoCShell->oUsart->SendIntToStr (SystemCoreClock);
   PoCShell->oUsart->SendPSZstring ("\r\n");
   init_at24c32 (0, NULL);
-  init_ds3231 (0, NULL);
   lcd5643_init_pin (MODE_COMMON_ANODE);
+  init_ds3231 (0, NULL);
   PoCShell->oUsart->SendPSZstring ("enter help for usage\r\n");
   int i_cnt_disp = 0;
   while (1)
     {
       oCShell.Idle ();
       Delay_Ms (1);
-      if (i_cnt_disp++ > 999 && i_5643_out<5)
+      if (i_cnt_disp++ > 999 && i_5643_out < 5)
         {
           i_cnt_disp = 0;
           struct tm tblock;

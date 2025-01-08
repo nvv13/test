@@ -69,7 +69,7 @@ lcd5643_init_pin (u8 i_common_mode)
 {
   i_5643_out = 0;
   i_5643_max_out = LCD_VAL_LG_hi; 
-  if (i_common_mode == MODE_COMMON_ANODE)
+  if (i_common_mode == MODE_COMMON_CATHODE)
     {
       D_ON = Bit_SET;
       D_OFF = Bit_RESET;
