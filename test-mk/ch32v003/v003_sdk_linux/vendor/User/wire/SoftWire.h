@@ -48,8 +48,8 @@ static GPIO_TypeDef *port_i2c_sda;
 static u16 pin_i2c_sda;
 
 #define IIC_SCL(n)                               \
-  (n ? GPIO_SetBits(port_i2c_sda, pin_i2c_sda)   \
-     : GPIO_ResetBits(port_i2c_sda, pin_i2c_sda))
+  (n ? GPIO_SetBits(port_i2c_scl, pin_i2c_scl)   \
+     : GPIO_ResetBits(port_i2c_scl, pin_i2c_scl))
 #define IIC_SDA(n)                               \
   (n ? GPIO_SetBits(port_i2c_sda, pin_i2c_sda)   \
      : GPIO_ResetBits(port_i2c_sda, pin_i2c_sda))
@@ -364,13 +364,13 @@ SWire_init (i2c_t dev)
   port_i2c_sda = port;
   pin_i2c_sda = GPIO_Pin;
 
-  GPIO_InitTypeDef GPIO_InitStructure = { 0 };
   if (port_i2c_sda == GPIOA)
     RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOA, ENABLE);
   if (port_i2c_sda == GPIOC)
     RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOC, ENABLE);
   if (port_i2c_sda == GPIOD)
     RCC_APB2PeriphClockCmd (RCC_APB2Periph_GPIOD, ENABLE);
+  GPIO_InitTypeDef GPIO_InitStructure = { 0 };
   GPIO_InitStructure.GPIO_Pin = pin_i2c_sda;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD; // open-drain mode as needed
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed;

@@ -2,6 +2,7 @@
   источник
   https://github.com/openwch/ch32v003.git
 */
+#include "port.h"
 
 #include <stdlib.h>
 
