@@ -16,12 +16,12 @@ milkv-duo and milkv-duo 256m back
 
 
 
-источник https://milkv.io/ru/docs/duo/overview
+[overview](https://milkv.io/ru/docs/duo/overview)
 
 
 *******************************************************************************
-https://milkv.io/ru/docs/duo/getting-started/duo
-
+[Milk-V Duo](https://milkv.io/docs/duo/getting-started/duo)
+~~~
 	Milk-V Duo
 
 SoC	CVITEK CV1800B
@@ -86,13 +86,14 @@ Power	5V/1A
 OS Support	Buildroot, RTOS
 
 Size	21mm*51mm
+~~~
 *******************************************************************************
 
 *******************************************************************************
-https://milkv.io/ru/docs/duo/getting-started/duo256m
+[Milk-V Duo 256M](https://milkv.io/docs/duo/getting-started/duo256m)
 
 	Milk-V  Duo 256M
-
+~~~
 SoC	SG2002
 	1GHz and 700MHz RISC-V C906 processors
 	Optional T-Head C906@1GHz or Cortex-A53@1GHz
@@ -162,10 +163,109 @@ Power	5V/1A
 OS Support	Buildroot, RTOS
 
 Size	21mm*51mm
+~~~
 *******************************************************************************
 
 
 
+*******************************************************************************
+[Milk-V Duo S](https://milkv.io/docs/duo/getting-started/duos)
+
+![pinout](jpg/duos-pinout.jpg)
+
+~~~
+Milk-V Duo S is an upgraded model of Duo,
+ featuring an upgraded SG2000 main controller with a larger 512MB memory and expanded IO capabilities.
+
+ It integrates wireless capabilities with WI-FI 6/BT 5,
+ and comes equipped with a USB 2.0 HOST interface
+ and a 100Mbps Ethernet port for user convenience.
+
+ Supporting dual cameras (2x MIPI CSI 2-lane) and MIPI video output (MIPI DSI 4-lane),
+ it allows for versatile applications.
+
+ The device also supports switching between RISC-V and ARM boot through a switch.
+
+https://milkv.io/chips/sg2000
+
+Hardware
+
+RISC-V CPU
+	1 x C906@1GHz + 1 x C906@700MHz
+
+Arm CPU
+	1 x Cortex-A53@1GHz
+
+MCU
+	8051@6KB SRAM
+
+NPU
+	0.5 TOPS@INT8
+
+Memory
+	Sip DRAM 512M
+
+Video Module
+	ISP 5M@30fps
+	2L MIPI DSI 5M@30fps
+	4L or 2L+2L MIPI CSI 5M@30fps
+	H.265/H.264 Decoding and Encoding 5M@30fps
+
+Audio Module
+	16bit Audio Codec
+	2 x I2S/PCM
+	1 x DMIC
+
+Storage
+	SPI-NOR, SPI-NAND, eMMC5.0, 2 x SDIO3.0
+
+Network
+	10M/100M MAC PHY
+
+Security Module
+	Crypto/Secure boot/TRNG/Efuze
+
+Peripherals
+	1 x USB2.0 DRD
+        5 x UART
+        4 x SPI
+        16 x PWM
+        1 x IR
+        6 x I2C
+        6 x ADC
+        GPIOs
+
+Temperature Range
+	0℃～70℃
+
+Package Type
+	LFBGA
+
+Package Dimensions
+	10mm x 10mm x 1.3mm
+
+Pin Pitch
+	0.65mm
+
+Total Pins
+	205
+~~~
+
+[схема duo-s](doc/duo-s/duo_s_SCH_v1.1.pdf)
+
+взято из https://github.com/sophgo/sophgo-doc
+
+[sg2000 technical reference manual](doc/duo-s/sg2000_trm_en.pdf)
+
+прочие, в
+
+[Cvitek Reference Documentation](https://milkv.io/docs/duo/resources/mmf)
+
+альтернативные загрузочные образы
+
+[third-party-img](https://milkv.io/docs/duo/resources/third-party-img)
+
+*******************************************************************************
 
 
 

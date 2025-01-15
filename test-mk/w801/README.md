@@ -1,8 +1,8 @@
 платка 
 HLK-W801-KIT-V1.1
+[описание](https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2)
 
 ~~~
-описание есть на https://www.cnx-software.com/2021/11/30/hlk-w801-board-features-alibaba-xuantie-xt804-based-mcu-with-wifi-4-bluetooth-le-4-2
 
 HLK-W801 board specifications:
 
@@ -59,8 +59,6 @@ Dimensions – About 70 x 26 mm
 фото2
 ![photo](jpg/HLK-W801-KIT-V1-1.jpg)
 
-w801_pinout
-![photo](doc/w801_pinout.png)
 w801_pinout
 ![photo](jpg/w801_pinout.png)
 

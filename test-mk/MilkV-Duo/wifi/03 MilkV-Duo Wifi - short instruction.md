@@ -1,10 +1,10 @@
 Соединения 
 
 фото milkv-duo and wifi
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20and%20wifi.jpg" alt="milkv-duo and wifi" title="milkv-duo and wifi" /></p>
+![photo](../jpg/milkv-duo%20and%20wifi.jpg)
 
 фото milkv-duo 256m and wifi
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/MilkV-Duo/jpg/milkv-duo%20256m%20and%20wifi.jpg" alt="milkv-duo 256m and wifi" title="milkv-duo 256m and wifi" /></p>
+![photo](../jpg/milkv-duo%20256m%20and%20wifi.jpg)
 
 
 
