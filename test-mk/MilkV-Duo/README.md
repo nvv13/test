@@ -253,17 +253,28 @@ Total Pins
 
 [схема duo-s](doc/duo-s/duo_s_SCH_v1.1.pdf)
 
-взято из https://github.com/sophgo/sophgo-doc
-
+взято из https://github.com/sophgo/sophgo-doc  
 [sg2000 technical reference manual](doc/duo-s/sg2000_trm_en.pdf)
 
-прочие, в
+прочие, в  
+[Cvitek Reference Documentation](https://milkv.io/docs/duo/resources/mmf)  
+[MIPI DSI Screen Development](https://milkv.io/docs/duo/low-level-dev/mipi-dsi)  
 
-[Cvitek Reference Documentation](https://milkv.io/docs/duo/resources/mmf)
-
-альтернативные загрузочные образы
-
+альтернативные загрузочные образы  
 [third-party-img](https://milkv.io/docs/duo/resources/third-party-img)
+
+Например  
+[debian](https://github.com/Fishwaldo/sophgo-sg200x-debian)
+
+
+прчее на community.milkv.io  
+[Programming the 8051: Step1, the Compiler](https://community.milkv.io/t/programming-the-8051-step1-the-compiler/1448)  
+[Programming the 8051: Step 2, peripheral theory and access](https://community.milkv.io/t/programming-the-8051-step-2-peripheral-theory-and-access/1453)  
+[Programming the 8051: Step3, 8051-only Blinky](https://community.milkv.io/t/programming-the-8051-step3-8051-only-blinky/1595)
+
+
+
+
 
 *******************************************************************************
 
