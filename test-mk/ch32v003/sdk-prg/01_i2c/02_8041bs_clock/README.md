@@ -55,6 +55,26 @@ PC3  11 A
 PC0  12 Dig1
 ---- ------ 
 
+или
+connect to (MODE_COMMON_ANODE)
+v003 8042BS-1F 
+---- ----- 
+PA1  1  E
+PD4  2  D
+     3  DP
+PD2  4  C
+PA2  5  G
+PD0  6  Dig4
+ PC5 7  D1+D2 ANOD
+PD3  8  D1+D2 CATHOD
+PC7  9  B
+PC6  10 Dig3
+ PC5 11 Dig2
+PC4  12 F
+PC3  13 A
+PC0  14 Dig1
+---- ------ 
+
 
 
 Только для прошивки, и установки времени в часах

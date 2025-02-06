@@ -17,6 +17,9 @@ PC3  11 A
 PC0  12 Dig1
 ---- ------ 
 
+
+
+
 connect to (MODE_COMMON_ANODE)
 v003 8041BS-1 
 ---- ----- 
@@ -34,26 +37,27 @@ PC3  11 A
 PC0  12 Dig1
 ---- ------ 
 
+
+
 connect to (MODE_COMMON_ANODE)
 v003 8042BS-1F 
 ---- ----- 
 PA1  1  E
 PD4  2  D
      3  DP
-PD3  8  D1+D2 CATHOD
 PD2  4  C
 PA2  5  G
 PD0  6  Dig4
+ PC5 7  D1+D2 ANOD
+PD3  8  D1+D2 CATHOD
 PC7  9  B
 PC6  10 Dig3
-
-PC5  11 Dig2
-PC5  7  D1+D2 ANOD
-
+ PC5 11 Dig2
 PC4  12 F
 PC3  13 A
 PC0  14 Dig1
 ---- ------ 
+
 
 
 
