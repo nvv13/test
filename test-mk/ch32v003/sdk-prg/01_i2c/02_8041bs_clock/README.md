@@ -1,7 +1,7 @@
 
 Платка CH32V003 или её еще просто обзывают TWen32F003 на МК CH32V003F4P6
 
-<p><img src="https://github.com/nvv13/test/blob/main/test-mk/ch32v003/doc/TWen32F003.jpg" alt="TWen32F003" title="CH32V003" /></p>
+![photo](../../../doc/TWen32F003.jpg)
 
 
 Видео:

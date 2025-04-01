@@ -125,6 +125,44 @@ extern "C"
     return 0;
   }
 
+int
+clock_aging_get (int argc, char **argv)
+{
+  int8_t value = 0;
+  if (ds3231_get_aging_offset(&ds3231_dev, &value) == 0)
+    {
+    PoCShell->oUsart->SendPSZstring ("aging offset: ");
+    PoCShell->oUsart->SendIntToStr (value);
+    PoCShell->oUsart->SendPSZstring ("\r\n");
+    }
+  else
+    PoCShell->oUsart->SendPSZstring ("error: get aging offset \r\n");
+  return 0;
+}
+
+int
+clock_aging_set (int argc, char **argv)
+{
+  if (argc != 2)
+    {
+      PoCShell->oUsart->SendPSZstring ("usage: ");
+      PoCShell->oUsart->SendPSZstring (argv[0]);
+      PoCShell->oUsart->SendPSZstring ("-127 … +127\r\n");
+      return 1;
+    }
+
+  int8_t value = atoi (argv[1]);
+  if (ds3231_set_aging_offset(&ds3231_dev, value) == 0)
+    {
+      PoCShell->oUsart->SendPSZstring ("success: set aging offset ");
+      PoCShell->oUsart->SendIntToStr (value);
+      PoCShell->oUsart->SendPSZstring ("\r\n");
+    }
+  else
+    PoCShell->oUsart->SendPSZstring ("error: set aging offset \r\n");
+  return 0;
+}
+
 #ifdef __cplusplus
 }
 #endif

@@ -17,7 +17,6 @@ static ds3231_t ds3231_dev;
 static i2c_param_t user_i2c;
 static CShell *PoCShell = NULL;
 static at24cxxx_t at24c32_dev;
-static u8 b_intensity = 100;
 
 #include "at24c32_util.h"
 #include "ds3231_util.h"
@@ -26,59 +25,14 @@ int init_at24c32 (int argc, char **argv);
 
 int init_ds3231 (int argc, char **argv);
 
-// int ds3231_cmd_get (int argc, char **argv){return 0;};
-// int ds3231_cmd_set (int argc, char **argv){return 0;};
-#define CFG_intensity_BYTE 1
-
-int
-clock_int_get (int argc, char **argv)
-{
-  u8 u8_value = b_intensity;
-  if (at24c_ReadByte (&at24c32_dev, CFG_intensity_BYTE, &u8_value) == 0)
-    {
-      if (u8_value != 255)
-        {
-          b_intensity = u8_value;
-        }
-    }
-  PoCShell->oUsart->SendPSZstring ("The current intensity is: ");
-  PoCShell->oUsart->SendIntToStr (b_intensity);
-  PoCShell->oUsart->SendPSZstring ("\r\n");
-  return 0;
-}
-
-int
-clock_int_set (int argc, char **argv)
-{
-  if (argc != 2)
-    {
-      PoCShell->oUsart->SendPSZstring ("usage: ");
-      PoCShell->oUsart->SendPSZstring (argv[0]);
-      PoCShell->oUsart->SendPSZstring ("0-254\r\n");
-      return 1;
-    }
-
-  u8 u8_value = atoi (argv[1]);
-  if (u8_value != b_intensity
-      && at24c_WriteByte (&at24c32_dev, CFG_intensity_BYTE, u8_value) == 0)
-    {
-      b_intensity = u8_value;
-      PoCShell->oUsart->SendPSZstring ("success: intensity set to ");
-      PoCShell->oUsart->SendIntToStr (b_intensity);
-      PoCShell->oUsart->SendPSZstring ("\r\n");
-    }
-  else
-    PoCShell->oUsart->SendPSZstring ("error: set intensity \r\n");
-  return 0;
-}
 
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
   { "tget", "get cur time", ds3231_cmd_get },
   { "tset", "set time from iso-date-str YYYY-MM-DDTHH:mm:ss", ds3231_cmd_set },
   { "init", "init ds3231", init_ds3231 },
-  { "iget", "get current intensity", clock_int_get },
-  { "iset", "set intensity 0-254", clock_int_set },
+  { "aget", "get aging offset", clock_aging_get },
+  { "aset", "set aging offset", clock_aging_set },
   { NULL, NULL, NULL }
 };
 
