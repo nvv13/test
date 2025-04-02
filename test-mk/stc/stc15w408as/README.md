@@ -94,7 +94,9 @@ $ git clone https://github.com/grigorig/stcgal.git
 
 $ cd stcgal
 
-$ python3 setup.py
+$ python3 setup.py build
+
+$ sudo python3 setup.py install
 
 
 
