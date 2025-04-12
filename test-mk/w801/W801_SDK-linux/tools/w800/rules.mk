@@ -66,9 +66,9 @@ $(BINODIR)/%.bin: $(IMAGEODIR)/%.elf
 	$(OBJCOPY) -O binary $(IMAGEODIR)/$(TARGET).elf $(FIRMWAREDIR)/$(TARGET)/$(TARGET).bin
 
 ifeq ($(UNAME_S),Linux)
-	@$(RM) -rf $(SDK_TOOLS)/wm_tool
-	@make -C $(SDK_TOOLS)/zlib-1.2.11
-	@gcc $(SDK_TOOLS)/wm_tool.c -lpthread -o $(WM_TOOL) -L. $(SDK_TOOLS)/zlib-1.2.11/libz.a
+#	@$(RM) -rf $(SDK_TOOLS)/wm_tool
+#	@make -C $(SDK_TOOLS)/zlib-1.2.11
+#	@gcc $(SDK_TOOLS)/wm_tool.c -lpthread -o $(WM_TOOL) -L. $(SDK_TOOLS)/zlib-1.2.11/libz.a
 else
 ifeq ($(UNAME_O),Darwin)
 	@$(RM) -rf $(SDK_TOOLS)/wm_tool

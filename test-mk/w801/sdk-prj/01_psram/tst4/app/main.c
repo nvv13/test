@@ -540,8 +540,8 @@ user_app1_task (void *sdata)
 
   printf ("key insert \"stantion_uuid\" + Enter - change stantion, uuid "
           "looking for https://www.radio-browser.info/ \n");
-  printf ("key D + Enter - change Debug \n");
-  printf ("key Up Down - volume control (1-100) \n");
+  printf ("key D + Enter - change Debug!\n");
+  printf ("key Up Down - volume control (1-100)\n");
   printf ("key Right Left - stantion index (0-43)\n");
   tls_watchdog_clr ();
   for (;;) // цикл(1) с подсоединением к wifi и запросом времени
