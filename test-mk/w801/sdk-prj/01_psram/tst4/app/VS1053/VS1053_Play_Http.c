@@ -455,6 +455,9 @@ VS1053_PlayHttpMp3 (const char *Uri)
           printf ("load flac patch.\n");
           VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
         }
+      VS1053_enableI2sOut (VS1053_I2S_RATE_192_KHZ);
+//      VS1053_enableI2sOut (VS1053_I2S_RATE_96_KHZ);
+//      VS1053_enableI2sOut (VS1053_I2S_RATE_48_KHZ);
    } 
 
   HTTPParameters httpParams;
