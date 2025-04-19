@@ -268,7 +268,7 @@ SPI_writeBytes (u8 *data, size_t chunk_length)
 //-----------------------------------------------------
 
 /* The following macro is for VS1063, VS1053, VS1033, VS1003, VS1103.
-   Divide hz by two when calling if SM_CLK_RANGE = 1 
+   Divide hz by two when calling if SM_CLK_RANGE = 1
  source http://www.vlsi.fi/en/support/software/microcontrollersoftware.html
 */
 #define HZ_TO_SC_FREQ(hz) (((hz)-8000000 + 2000) / 4000)
@@ -363,6 +363,7 @@ static enum tls_io_name dcs_pin;  // Pin where DCS line is connected
 static enum tls_io_name dreq_pin; // Pin where DREQ line is connected
 static uint8_t curvol = 0x40;     // Current volume setting 0..100%
 static s8_t curbalance = 0;       // Current balance setting -100..100
+static enum VS1053_I2S_RATE i2sRateOut = VS1053_I2S_NONE;
 
 static void
 VS1053_await_data_request (void)
@@ -437,6 +438,7 @@ VS1053_VS1053 (libVS1053_t *set_pin)
   spi_di = set_pin->spi_di;
   spi_do = set_pin->spi_do;
   spi_fastest_speed = set_pin->spi_fastest_speed;
+  i2sRateOut = set_pin->i2sRateOut;
 
   VS1053_PlayHttpMp3_set (set_pin);
 }
@@ -527,6 +529,7 @@ VS1053_softReset ()
           = SPI_Settings (FCLK_FAST_VS1053); // SPI Clock to 4 MHz. Now you can
                                              // set high speed SPI clock.
     }
+  VS1053_enableI2sOut (i2sRateOut);
 }
 
 void
@@ -746,6 +749,8 @@ VS1053_begin ()
       // VS1003
       VS1053_loadDefaultVs1053Patches ();
     }
+
+  VS1053_enableI2sOut (i2sRateOut);
 }
 
 void
@@ -931,6 +936,11 @@ VS1053_disableI2sOut ()
 void
 VS1053_enableI2sOut (enum VS1053_I2S_RATE i2sRate)
 {
+  if (i2sRate == VS1053_I2S_NONE)
+    {
+      return;
+    }
+
   // configure GPIO0 4-7 (I2S) as output
   // leave other GPIOs unchanged
   uint16_t cur_ddr = VS1053_wram_read (ADDR_REG_GPIO_DDR_RW);

@@ -53,12 +53,16 @@ psram_disk_load_list (void)
   char FileName[20];
   sprintf (FileName, "1:test0.jpg");
 
-  //char s_Url[1024];
-  //sprintf (s_Url, "%s","https://disk.yandex.ru/d/PT1ai6H4rHEJzw"); // aUrl[ind_file]);
-  //const char * s_Url="https://raw.githubusercontent.com/nvv13/test/main/android%20command-line%20tools.txt";
-  //const char * s_Url="https://raw.githubusercontent.com/nvv13/test/main/README.md";
-  //const char * s_Url="https://gitflic.ru/project/nvv13/test/blob/raw?file=test-mk%2Fw801%2Ftips.txt&inline=false&commit=645505eff0c493243485a430f7974ab7373ec67e";
-  const char * s_Url="https://gitflic.ru/project/nvv13/test/blob/raw?file=test-mk%2Fw801%2Ftips.txt";
+  // char s_Url[1024];
+  // sprintf (s_Url, "%s","https://disk.yandex.ru/d/PT1ai6H4rHEJzw"); //
+  // aUrl[ind_file]); const char *
+  // s_Url="https://raw.githubusercontent.com/nvv13/test/main/android%20command-line%20tools.txt";
+  // const char *
+  // s_Url="https://raw.githubusercontent.com/nvv13/test/main/README.md"; const
+  // char *
+  // s_Url="https://gitflic.ru/project/nvv13/test/blob/raw?file=test-mk%2Fw801%2Ftips.txt&inline=false&commit=645505eff0c493243485a430f7974ab7373ec67e";
+  const char *s_Url = "https://gitflic.ru/project/nvv13/test/blob/"
+                      "raw?file=test-mk%2Fw801%2Ftips.txt";
   printf ("s_Url = %s\n", s_Url);
   res_sd = f_open (&fnew, FileName, FA_CREATE_ALWAYS | FA_WRITE);
   if (res_sd == FR_OK)
@@ -101,7 +105,6 @@ psram_disk_load_list (void)
             }
 
           f_close (&fnew);
-
         }
       else
         {
@@ -109,7 +112,5 @@ psram_disk_load_list (void)
           tls_os_time_delay (HZ);
         }
     }
- return res_sd;
+  return res_sd;
 }
-
-

@@ -47,9 +47,10 @@ extern "C"
 
   enum VS1053_I2S_RATE
   {
-    VS1053_I2S_RATE_192_KHZ,
-    VS1053_I2S_RATE_96_KHZ,
-    VS1053_I2S_RATE_48_KHZ
+    VS1053_I2S_NONE = 0,
+    VS1053_I2S_RATE_192_KHZ = 1,
+    VS1053_I2S_RATE_96_KHZ = 2,
+    VS1053_I2S_RATE_48_KHZ = 3
   };
 
 #ifndef GPIO_UNDEF
@@ -107,6 +108,10 @@ extern "C"
     u8 spi_fastest_speed; // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
                           // это может приводить к срыву передачи на некоторых
                           // платах
+
+    enum VS1053_I2S_RATE
+        i2sRateOut; // VS1053_I2S_NONE or VS1053_I2S_RATE_192_KHZ, контакты
+                    // vs1053b = 11 12 25 36
 
   } libVS1053_t;
 
@@ -232,7 +237,10 @@ extern "C"
 
   extern volatile enum VS1053_status my_sost;
   extern volatile int VS1053_WEB_RADIO_nTotal;
-  extern volatile int VS1053_WEB_RADIO_buf_chunk_free; /* логика в обратную сторону чем меньше, тем больше свободной памяти, от 0 стартует */
+  extern volatile int
+      VS1053_WEB_RADIO_buf_chunk_free; /* логика в обратную сторону чем меньше,
+                                          тем больше свободной памяти, от 0
+                                          стартует */
   extern volatile int VS1053_WEB_RADIO_buf_chunk_total;
   extern volatile u8 VS1053_WEB_RADIO_load_buffer_debug;
 
@@ -244,8 +252,8 @@ extern "C"
   void VS1053_stop_PlayMP3 (void);
 
 #define VSHTTP_DEBUG_NO_DEBUG 0
-#define VSHTTP_DEBUG_TYPE1    1
-#define VSHTTP_DEBUG_TYPE2    2
+#define VSHTTP_DEBUG_TYPE1 1
+#define VSHTTP_DEBUG_TYPE2 2
 
   FRESULT VS1053_PlayHttpMp3 (const char *Uri);
 

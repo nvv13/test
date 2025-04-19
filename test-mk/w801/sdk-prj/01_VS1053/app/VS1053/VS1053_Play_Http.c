@@ -36,10 +36,12 @@
 #include "mod1/psram.h"
 
 volatile int VS1053_WEB_RADIO_nTotal = 0;
-volatile int VS1053_WEB_RADIO_buf_chunk_free = 0;  /* логика в обратную сторону чем меньше, тем больше свободной памяти, от 0 стартует */
+volatile int VS1053_WEB_RADIO_buf_chunk_free
+    = 0; /* логика в обратную сторону чем меньше, тем больше свободной памяти,
+            от 0 стартует */
 volatile int VS1053_WEB_RADIO_buf_chunk_total = 0;
 
-static int VS1053_WEB_RADIO_buf_chunk_top=150; //800
+static int VS1053_WEB_RADIO_buf_chunk_top = 150; // 800
 
 //#define http_chunk_size (vs1053_chunk_size * 2)
 #define HTTP_CLIENT_BUFFER_SIZE (vs1053_chunk_size * 3)
@@ -71,7 +73,8 @@ static u8 psram_frequency_divider = 2; // 2 - хорошо работает дл
 static u8 psram_tCPH = 2; // 2 - хорошо работает для ESP-PSRAM64H
 static u8 psram_BURST = 1; // 1 - хорошо работает для ESP-PSRAM64H
 static u16 psram_OVERTIMER = 2; // 2 - хорошо работает для ESP-PSRAM64H
-volatile u8 VS1053_WEB_RADIO_load_buffer_debug = VSHTTP_DEBUG_NO_DEBUG; // 0 или 1
+volatile u8 VS1053_WEB_RADIO_load_buffer_debug
+    = VSHTTP_DEBUG_NO_DEBUG; // 0 или 1
 
 void
 VS1053_PlayHttpMp3_set (libVS1053_t *set_pin)
@@ -111,16 +114,17 @@ vs1053_buf_play_task (void *sdata)
           if (my_sost == VS1053_PLAY || my_sost == VS1053_PLAY_BUF)
             {
 
-              if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE2)
-                printf ("%d/%d   \r",VS1053_WEB_RADIO_buf_chunk_free,VS1053_WEB_RADIO_buf_chunk_total);
+              if (VS1053_WEB_RADIO_load_buffer_debug == VSHTTP_DEBUG_TYPE2)
+                printf ("%d/%d   \r", VS1053_WEB_RADIO_buf_chunk_free,
+                        VS1053_WEB_RADIO_buf_chunk_total);
 
-              //if(VS1053_WEB_RADIO_buf_chunk_free>0)
+              // if(VS1053_WEB_RADIO_buf_chunk_free>0)
               //  {
-                item_size = xMessageBufferReceive (xMessageBuffer, buffer,
+              item_size = xMessageBufferReceive (xMessageBuffer, buffer,
                                                  HTTP_CLIENT_BUFFER_SIZE,
                                                  portMAX_DELAY);
               //  }
-              //else
+              // else
               //  {
               //  item_size=0;
               //  }
@@ -128,9 +132,9 @@ vs1053_buf_play_task (void *sdata)
               if (item_size > 0)
                 {
                   VS1053_playChunk (buffer, item_size);
-                  if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+                  if (VS1053_WEB_RADIO_load_buffer_debug == VSHTTP_DEBUG_TYPE1)
                     printf ("-");
-                  if (VS1053_WEB_RADIO_buf_chunk_free>0)
+                  if (VS1053_WEB_RADIO_buf_chunk_free > 0)
                     VS1053_WEB_RADIO_buf_chunk_free--;
                   if (VS1053_WEB_RADIO_nTotal > 512)
                     tls_watchdog_clr ();
@@ -139,11 +143,9 @@ vs1053_buf_play_task (void *sdata)
               else
                 {
                   tls_os_time_delay (1);
-                  if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+                  if (VS1053_WEB_RADIO_load_buffer_debug == VSHTTP_DEBUG_TYPE1)
                     printf ("0");
                 }
-
-
             }
           else
             tls_os_time_delay (10);
@@ -254,8 +256,10 @@ break;
         {
           xMessageBufferSize = psram_BufferSize;
           ucStorageBuffer = dram_heap_malloc (xMessageBufferSize + 1);
-          VS1053_WEB_RADIO_buf_chunk_top=(xMessageBufferSize/HTTP_CLIENT_BUFFER_SIZE - 10);
-          if(VS1053_WEB_RADIO_buf_chunk_top<150)VS1053_WEB_RADIO_buf_chunk_top=150;
+          VS1053_WEB_RADIO_buf_chunk_top
+              = (xMessageBufferSize / HTTP_CLIENT_BUFFER_SIZE - 10);
+          if (VS1053_WEB_RADIO_buf_chunk_top < 150)
+            VS1053_WEB_RADIO_buf_chunk_top = 150;
         }
       else
         {
@@ -278,7 +282,7 @@ break;
         VS1053_TASK_SIZE * sizeof (u32), /* task's stack size, unit:byte */
         VS1053_TASK_PRIO, 0);
 
-  if(my_sost != VS1053_PLAY_BUF)
+  if (my_sost != VS1053_PLAY_BUF)
     my_sost = VS1053_HW_INIT;
   do
     {
@@ -307,9 +311,10 @@ break;
 
       // int i_cnt=0;
       //сначала заполняем буффер данными
-      if(my_sost != VS1053_PLAY_BUF)
+      if (my_sost != VS1053_PLAY_BUF)
         VS1053_WEB_RADIO_buf_chunk_free = 0;
-      while (nRetCode == HTTP_CLIENT_SUCCESS && my_sost != VS1053_QUERY_TO_STOP)
+      while (nRetCode == HTTP_CLIENT_SUCCESS
+             && my_sost != VS1053_QUERY_TO_STOP)
         {
 
           // u32 u_fur=tls_os_get_time();
@@ -319,9 +324,10 @@ break;
           if (freeSize < (nSize + 4)
               || VS1053_WEB_RADIO_buf_chunk_free
                      > VS1053_WEB_RADIO_buf_chunk_top
-              || VS1053_WEB_RADIO_buf_chunk_free>1000 ) // || i_cnt++>4096)
+              || VS1053_WEB_RADIO_buf_chunk_free > 1000) // || i_cnt++>4096)
             {
-              printf ("PreLoad buf, freeSize=%d, buf_chunk_allow=%d \r\n", freeSize, VS1053_WEB_RADIO_buf_chunk_free);
+              printf ("PreLoad buf, freeSize=%d, buf_chunk_allow=%d \r\n",
+                      freeSize, VS1053_WEB_RADIO_buf_chunk_free);
               break;
             }
           nRetCode = HTTPClientReadData (pHTTP, Buffer, nSize,
@@ -337,7 +343,7 @@ break;
             {
               xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                   portMAX_DELAY);
-              if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+              if (VS1053_WEB_RADIO_load_buffer_debug == VSHTTP_DEBUG_TYPE1)
                 printf ("f");
               VS1053_WEB_RADIO_buf_chunk_free++;
               VS1053_WEB_RADIO_nTotal += nSize;
@@ -395,7 +401,7 @@ break;
                   xMessageBufferSend (xMessageBuffer, Buffer, nSize,
                                       portMAX_DELAY);
                   // printf (" %d ", freeSize);
-                  if (VS1053_WEB_RADIO_load_buffer_debug==VSHTTP_DEBUG_TYPE1)
+                  if (VS1053_WEB_RADIO_load_buffer_debug == VSHTTP_DEBUG_TYPE1)
                     printf ("+");
                   VS1053_WEB_RADIO_buf_chunk_free++;
                   if (VS1053_WEB_RADIO_buf_chunk_free
@@ -413,7 +419,7 @@ break;
     }
   while (my_sost == VS1053_PLAY); // Run only once
 
-  if(my_sost == VS1053_PLAY)
+  if (my_sost == VS1053_PLAY)
     my_sost = VS1053_PLAY_BUF;
 
   if (my_sost != VS1053_PLAY_BUF)
@@ -440,14 +446,23 @@ http_get (HTTPParameters ClientParams)
   return http_snd_req (ClientParams, VerbGet, NULL, 0);
 }
 
+extern const unsigned short PATCHES_FLAC[];
+#define PLUGIN_FLAC_SIZE 8414
+
 FRESULT
 VS1053_PlayHttpMp3 (const char *Uri)
 {
 
   if (my_sost != VS1053_PLAY_BUF)
     {
-      VS1053_switchToMp3Mode (); // optional, some boards require this (softReset include!)
-    } 
+      VS1053_switchToMp3Mode (); // optional, some boards require this
+                                 // (softReset include!)
+      if (strstr (Uri, "flac") != NULL)
+        {
+          printf ("load flac patch.\n");
+          VS1053_loadUserCode (PATCHES_FLAC, PLUGIN_FLAC_SIZE);
+        }
+    }
 
   HTTPParameters httpParams;
   memset (&httpParams, 0, sizeof (HTTPParameters));

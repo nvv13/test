@@ -47,7 +47,8 @@
 #include "w_ntp.h"
 #include "w_wifi.h"
 
-#include "mod1/VS1053.h"
+//#include "mod1/VS1053.h"
+#include "VS1053.h"
 #include "mod1/lfile_http.h"
 
 #include "../../../../../../../w_wifi_pass.h"
@@ -57,12 +58,10 @@
 //#define MY_WIFI_PASS "9115676369"
 
 #define WIFI_ARR_COUNT 3
-static const char *aWIFI[WIFI_ARR_COUNT*2] = {
-  "bred8","123123123",
-  "bred1","9115676369",
-  MY_WIFI_AP,MY_WIFI_PASS,
- };
-static u8 u8_select_wifi=0;
+static const char *aWIFI[WIFI_ARR_COUNT * 2] = {
+  "bred8", "123123123", "bred1", "9115676369", MY_WIFI_AP, MY_WIFI_PASS,
+};
+static u8 u8_select_wifi = 0;
 
 #include "w_wifi.h"
 
@@ -108,8 +107,6 @@ my_timer_irq (u8 *arg) // здесь будет смена режима
      дисплей
   */
 }
-
-
 
 #define CONSOLE_BUF_SIZE 512
 u8 rx_buf[CONSOLE_BUF_SIZE + 1];
@@ -388,9 +385,8 @@ user_app1_task (void *sdata)
     /* далее настройки для VS1053_PlayHttpMp3 */
     .no_psram_BufferSize
     = 4000, // подойдет 4000, более - программа начнет глючить
-    .psram_BufferSize
-    = 1024 * 512,  // подойдет от 26400 
-    .psram_config = 1, // 0 или 1
+    .psram_BufferSize = 1024 * 512, // подойдет от 26400
+    .psram_config = 1,              // 0 или 1
     .psram_mode = PSRAM_SPI, // делай PSRAM_SPI, PSRAM_QPI - так и не работает
     .psram_frequency_divider = 2, // 2 - хорошо работает для ESP-PSRAM64H
     .psram_tCPH = 2,  // 2 - хорошо работает для ESP-PSRAM64H
@@ -404,224 +400,227 @@ user_app1_task (void *sdata)
     .spi_fastest_speed
     = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
 
-  };
+    .i2sRateOut = VS1053_I2S_RATE_192_KHZ,
+};
 
-  /**
-   * config the pins used for spi di
-   * WM_IO_PB_00 - не работает,
-   * WM_IO_PB_03 - работает!
-   * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный
-   * к данному контакту на макетке WM_IO_PB_25 only for 56pin - не работает,
-   * мешает светодиод подключенный к данному контакту на макетке
-   */
+/**
+ * config the pins used for spi di
+ * WM_IO_PB_00 - не работает,
+ * WM_IO_PB_03 - работает!
+ * WM_IO_PB_16 only for 56pin - не работает, мешает светодиод подключенный
+ * к данному контакту на макетке WM_IO_PB_25 only for 56pin - не работает,
+ * мешает светодиод подключенный к данному контакту на макетке
+ */
 
-  VS1053_VS1053 (&user_data53);
-  VS1053_begin ();
-  u16_volume = 75;
-  VS1053_setVolume (u16_volume);
+VS1053_VS1053 (&user_data53);
+VS1053_begin ();
+u16_volume = 75;
+VS1053_setVolume (u16_volume);
 
-  // подключаем библиотеку UTFT
+// подключаем библиотеку UTFT
 
-  printf ("user_app1_task start TFT02_0V89 240x320 SDIO SPI st7789\n");
-  UTFT_UTFT (TFT02_0V89,
-             (u8)NO_GPIO_PIN // WM_IO_PB_17  // SDA
+printf ("user_app1_task start TFT02_0V89 240x320 SDIO SPI st7789\n");
+UTFT_UTFT (TFT02_0V89,
+           (u8)NO_GPIO_PIN // WM_IO_PB_17  // SDA
+           ,
+           (u8)NO_GPIO_PIN // WM_IO_PB_15  // SCL
+           ,
+           (u8)WM_IO_PB_14 //(u8)NO_GPIO_PIN //  //CS  CS
+           ,
+           (u8)WM_IO_PB_21 // RST reset RES
+           ,
+           (u8)WM_IO_PB_22 // SER => DC !
+           ,
+           // 120000000
+           60000000
+           /* spi_freq(Герц) для 5 контактных SPI дисплеев
+              (где отдельно ножка комманда/данные)
+           програмируеться HW SPI на ножки (предопред)
+               wm_spi_cs_config (WM_IO_PB_14);
+               wm_spi_ck_config (WM_IO_PB_15);
+               wm_spi_di_config (WM_IO_PB_16);
+               wm_spi_do_config (WM_IO_PB_17);
+           но, можно отказаться от HW SPI в пользу Soft SPI
+           установив spi_freq=0
+           эмуляции SPI, это удобно для разных ножек
+         */
+);
+
+/*
+  printf ("user_app1_task start TFT02_0V89 240x320 HW SPI st7789\n");
+  UTFT_UTFT (TFT02_0V89
              ,
-             (u8)NO_GPIO_PIN // WM_IO_PB_15  // SCL
+             (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
              ,
-             (u8)WM_IO_PB_14 //(u8)NO_GPIO_PIN //  //CS  CS
+             (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
+             ,
+             (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
              ,
              (u8)WM_IO_PB_21 // RST reset RES
              ,
              (u8)WM_IO_PB_22 // SER => DC !
              ,
-             // 120000000
-             60000000
-             /* spi_freq(Герц) для 5 контактных SPI дисплеев
-                (где отдельно ножка комманда/данные)
-             програмируеться HW SPI на ножки (предопред)
-                 wm_spi_cs_config (WM_IO_PB_14);
-                 wm_spi_ck_config (WM_IO_PB_15);
-                 wm_spi_di_config (WM_IO_PB_16);
-                 wm_spi_do_config (WM_IO_PB_17);
-             но, можно отказаться от HW SPI в пользу Soft SPI
-             установив spi_freq=0
-             эмуляции SPI, это удобно для разных ножек
-           */
+             20000000
   );
+*/
 
-  /*
-    printf ("user_app1_task start TFT02_0V89 240x320 HW SPI st7789\n");
-    UTFT_UTFT (TFT02_0V89
-               ,
-               (u8)NO_GPIO_PIN // WM_IO_PB_17  //SDA
-               ,
-               (u8)NO_GPIO_PIN // WM_IO_PB_15  //SCL
-               ,
-               (u8)NO_GPIO_PIN // WM_IO_PB_14  //CS
-               ,
-               (u8)WM_IO_PB_21 // RST reset RES
-               ,
-               (u8)WM_IO_PB_22 // SER => DC !
-               ,
-               20000000
-    );
-  */
+// UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
+UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
+// UTFT_InitLCD (PORTRAIT);
 
-  // UTFT_InitLCD (TOUCH_ORIENTATION); // инициируем дисплей
-  UTFT_InitLCD (LANDSCAPE); // инициируем дисплей
-  // UTFT_InitLCD (PORTRAIT);
+u8 timer_id;
+struct tls_timer_cfg timer_cfg;
+timer_cfg.unit = TLS_TIMER_UNIT_MS;
+timer_cfg.timeout = 1000; //
+timer_cfg.is_repeat = 1;
+timer_cfg.callback = (tls_timer_irq_callback)my_timer_irq;
+timer_cfg.arg = NULL;
+timer_id = tls_timer_create (&timer_cfg);
+if (false)
+  {
+    tls_timer_start (timer_id);
+    printf ("timer start\n");
+  }
 
-  u8 timer_id;
-  struct tls_timer_cfg timer_cfg;
-  timer_cfg.unit = TLS_TIMER_UNIT_MS;
-  timer_cfg.timeout = 1000; //
-  timer_cfg.is_repeat = 1;
-  timer_cfg.callback = (tls_timer_irq_callback)my_timer_irq;
-  timer_cfg.arg = NULL;
-  timer_id = tls_timer_create (&timer_cfg);
-  if (false)
-    {
-      tls_timer_start (timer_id);
-      printf ("timer start\n");
-    }
+tls_os_task_create (NULL, NULL, user_app2_task, NULL,
+                    (void *)UserApp2TaskStk, /* task's stack start address */
+                    USER_APP2_TASK_SIZE
+                        * sizeof (u32), /* task's stack size, unit:byte */
+                    USER_APP2_TASK_PRIO, 0);
 
-  tls_os_task_create (NULL, NULL, user_app2_task, NULL,
-                      (void *)UserApp2TaskStk, /* task's stack start address */
-                      USER_APP2_TASK_SIZE
-                          * sizeof (u32), /* task's stack size, unit:byte */
-                      USER_APP2_TASK_PRIO, 0);
+UTFT_clrScr ();
+UTFT_setFont (SmallFont);
 
-  UTFT_clrScr ();
-  UTFT_setFont (SmallFont);
+// psram_disk_init ();
 
-  //psram_disk_init ();
+stantion_index = 0; // во flash это бы не надо сохранять! слишком часто
+// flash_cfg_load_u16 (&stantion_index, 0);
+// if (stantion_index > 44)
+//  stantion_index = 0;
+printf ("load default stantion index = %d\n", stantion_index);
+flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
+if (strlen (stantion_uuid) != 36)
+  {
+    printf ("strlen (stantion_uuid) != 36, set default uuid\n");
+    // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
+    // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
+    // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
+    sprintf (stantion_uuid, "%s",
+             "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // America Stereo Relax
+                                                      // - норм
 
-  stantion_index = 0; // во flash это бы не надо сохранять! слишком часто
-  // flash_cfg_load_u16 (&stantion_index, 0);
-  // if (stantion_index > 44)
-  //  stantion_index = 0;
-  printf ("load default stantion index = %d\n", stantion_index);
-  flash_cfg_load_stantion_uuid (stantion_uuid, stantion_index);
-  if (strlen (stantion_uuid) != 36)
-    {
-      printf ("strlen (stantion_uuid) != 36, set default uuid\n");
-      // sprintf(stantion_uuid,"%s","960559b0-0601-11e8-ae97-52543be04c81");
-      // sprintf(stantion_uuid,"%s","3d0aad11-97ec-469c-835b-64f12c38dd0e");//https
-      // sprintf(stantion_uuid,"%s","fc2e6c39-7139-4f7a-a0c6-a859244332be");//https
-      sprintf (stantion_uuid, "%s",
-               "06bb1bd0-99f4-4ddd-b06a-eac29e313724"); // America Stereo Relax
-                                                        // - норм
+    // лучьшее sprintf (stantion_uuid,
+    // "%s","dbaf0701-7987-11ea-8a3b-52543be04c81"); //depeche
+    // mode,ebm,futurepop,synt
 
-      // лучьшее sprintf (stantion_uuid,
-      // "%s","dbaf0701-7987-11ea-8a3b-52543be04c81"); //depeche
-      // mode,ebm,futurepop,synt
+    // норм sprintf (stantion_uuid, "%s",
+    //         "01899f00-cbe9-46bc-85ee-e7bfe6496f97"); // "Europe 2 Happy
+    //                                                  // Rock Hours"
+    //                                                  // https 128
 
-      // норм sprintf (stantion_uuid, "%s",
-      //         "01899f00-cbe9-46bc-85ee-e7bfe6496f97"); // "Europe 2 Happy
-      //                                                  // Rock Hours"
-      //                                                  // https 128
+    // так себе sprintf (
+    //     stantion_uuid, "%s",
+    //     "45d3bd35-1f11-4027-a1f1-f273b22a343d"); // "Slide Guitar /
+    // Caprice
+    // Radio""AAC+""bitrate":="320,"
+    // sprintf (stantion_uuid, "%s",
+    //         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny
+    //         Classic Rock. " 320 https!
+  }
 
-      // так себе sprintf (
-      //     stantion_uuid, "%s",
-      //     "45d3bd35-1f11-4027-a1f1-f273b22a343d"); // "Slide Guitar /
-      // Caprice
-      // Radio""AAC+""bitrate":="320,"
-      // sprintf (stantion_uuid, "%s",
-      //         "8767165e-d2bd-4c74-838c-430c822ed6a5");// "Sfliny
-      //         Classic Rock. " 320 https!
-    }
+// printf ("start scan_demo \n");
+// scan_demo();
+// printf ("stop scan_demo \n");
+printf ("start scan_format2_demo \n");
+u8_select_wifi = scan_format2_demo (aWIFI, WIFI_ARR_COUNT);
+printf ("stop scan_format2_demo \n");
 
-  // printf ("start scan_demo \n");
-  // scan_demo();
-  // printf ("stop scan_demo \n");
-  printf ("start scan_format2_demo \n");
-  u8_select_wifi=scan_format2_demo (aWIFI,WIFI_ARR_COUNT);
-  printf ("stop scan_format2_demo \n");
+printf ("key insert \"stantion_uuid\" + Enter - change stantion, uuid "
+        "looking for https://www.radio-browser.info/ \n");
+printf ("key D + Enter - change Debug!\n");
+printf ("key Up Down - volume control (1-100)\n");
+printf ("key Right Left - stantion index (0-43)\n");
+tls_watchdog_clr ();
+for (;;) // цикл(1) с подсоединением к wifi и запросом времени
+  {
+    while (u8_wifi_state == 0)
+      {
+        printf ("trying to connect wifi\n");
+        if (u8_wifi_state == 0
+            && wifi_connect (aWIFI[u8_select_wifi * 2],
+                             aWIFI[u8_select_wifi * 2 + 1])
+                   == WM_SUCCESS)
+          {
+            while (u8_wifi_state == 0)
+              {
+                tls_os_time_delay (100);
+              }
+            // u8_wifi_state = 1;
+          }
+        else
+          {
+            tls_os_time_delay (HZ * 5);
+          }
+      }
 
-  printf ("key insert \"stantion_uuid\" + Enter - change stantion, uuid "
-          "looking for https://www.radio-browser.info/ \n");
-  printf ("key D + Enter - change Debug!\n");
-  printf ("key Up Down - volume control (1-100)\n");
-  printf ("key Right Left - stantion index (0-43)\n");
-  tls_watchdog_clr ();
-  for (;;) // цикл(1) с подсоединением к wifi и запросом времени
-    {
-      while (u8_wifi_state == 0)
-        {
-          printf ("trying to connect wifi\n");
-          if (u8_wifi_state == 0
-              && wifi_connect (aWIFI[u8_select_wifi*2],aWIFI[u8_select_wifi*2+1]) == WM_SUCCESS)
-            {
-              while (u8_wifi_state == 0)
-                {
-                  tls_os_time_delay (100);
-                }
-              // u8_wifi_state = 1;
-            }
-          else
-            {
-              tls_os_time_delay (HZ * 5);
-            }
-        }
+    tls_os_time_delay (HZ * 3);
+    // if (res_sd == FR_OK)
+    //  psram_disk_load_list ();
+    tls_watchdog_clr ();
+    // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
+    //                     "2.fedora.pool.ntp.org");
+    ntp_demo ();
 
-      tls_os_time_delay (HZ * 3);
-      //if (res_sd == FR_OK)
-      //  psram_disk_load_list ();
-      tls_watchdog_clr ();
-      // ntp_set_server_demo ("0.fedora.pool.ntp.org", "1.fedora.pool.ntp.org",
-      //                     "2.fedora.pool.ntp.org");
-      ntp_demo ();
+    while (u8_wifi_state == 1) // основной цикл(2)
+      {
 
-      while (u8_wifi_state == 1) // основной цикл(2)
-        {
+        tls_watchdog_clr ();
 
-          tls_watchdog_clr ();
+        while (u8_wifi_state == 1) // основной цикл(2)
+          {
+            if (my_sost != VS1053_PLAY_BUF)
+              {
+                my_recognize_http_reset ();
+                http_get_web_station_by_stationuuid (stantion_uuid);
+                // http_get_web_station_by_random();
+                VS1053_WEB_RADIO_nTotal = 0;
+                b_ChkStationUuid = true;
+                printf (" my_recognize_ret_name = %s\n",
+                        my_recognize_ret_name (0));
+                printf (" my_recognize_ret_url_resolved = %s\n",
+                        my_recognize_ret_url_resolved (0));
+                printf (" my_recognize_ret_country = %s\n",
+                        my_recognize_ret_country (0));
+                printf (" my_recognize_ret_tags = %s\n",
+                        my_recognize_ret_tags (0));
+                printf (" my_recognize_ret_codec = %s\n",
+                        my_recognize_ret_codec (0));
+                printf (" my_recognize_ret_bitrate = %s\n",
+                        my_recognize_ret_bitrate (0));
 
-          while (u8_wifi_state == 1) // основной цикл(2)
-            {
-              if (my_sost != VS1053_PLAY_BUF)
-                {
-                  my_recognize_http_reset ();
-                  http_get_web_station_by_stationuuid (stantion_uuid);
-                  // http_get_web_station_by_random();
-                  VS1053_WEB_RADIO_nTotal = 0;
-                  b_ChkStationUuid = true;
-                  printf (" my_recognize_ret_name = %s\n",
-                          my_recognize_ret_name (0));
-                  printf (" my_recognize_ret_url_resolved = %s\n",
-                          my_recognize_ret_url_resolved (0));
-                  printf (" my_recognize_ret_country = %s\n",
-                          my_recognize_ret_country (0));
-                  printf (" my_recognize_ret_tags = %s\n",
-                          my_recognize_ret_tags (0));
-                  printf (" my_recognize_ret_codec = %s\n",
-                          my_recognize_ret_codec (0));
-                  printf (" my_recognize_ret_bitrate = %s\n",
-                          my_recognize_ret_bitrate (0));
+                UTFT_clrScr (); // стираем всю информацию с дисплея
+                UTFT_setFont (BigFont); // устанавливаем большой шрифт
+                UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
+                UTFT_print (my_recognize_ret_name (0), LEFT, 10, 0);
+                UTFT_print (my_recognize_ret_country (0), LEFT, 40, 0);
+                UTFT_print (my_recognize_ret_tags (0), LEFT, 70, 0);
+                UTFT_print (my_recognize_ret_codec (0), LEFT, 100, 0);
+                UTFT_print (my_recognize_ret_bitrate (0), LEFT, 130, 0);
+              }
 
-                  UTFT_clrScr (); // стираем всю информацию с дисплея
-                  UTFT_setFont (BigFont); // устанавливаем большой шрифт
-                  UTFT_setColor2 (VGA_BLUE); // устанавливаем синий цвет текста
-                  UTFT_print (my_recognize_ret_name (0), LEFT, 10, 0);
-                  UTFT_print (my_recognize_ret_country (0), LEFT, 40, 0);
-                  UTFT_print (my_recognize_ret_tags (0), LEFT, 70, 0);
-                  UTFT_print (my_recognize_ret_codec (0), LEFT, 100, 0);
-                  UTFT_print (my_recognize_ret_bitrate (0), LEFT, 130, 0);
-                }
+            struct tm tblock;
+            tls_get_rtc (&tblock); // получаем текущее время
+            printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
+                    tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
+                    tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
+            VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
 
-              struct tm tblock;
-              tls_get_rtc (&tblock); // получаем текущее время
-              printf (" cur time %d.%02d.%02d %02d:%02d:%02d\n",
-                      tblock.tm_year + 1900, tblock.tm_mon + 1, tblock.tm_mday,
-                      tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
-              VS1053_PlayHttpMp3 (my_recognize_ret_url_resolved (0));
-
-              if (my_sost != VS1053_PLAY_BUF)
-                tls_os_time_delay (HZ);
-            }
-        }
-      tls_watchdog_clr ();
-    }
+            if (my_sost != VS1053_PLAY_BUF)
+              tls_os_time_delay (HZ);
+          }
+      }
+    tls_watchdog_clr ();
+  }
 }
 
 void
