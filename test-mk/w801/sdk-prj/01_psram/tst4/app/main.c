@@ -400,7 +400,8 @@ user_app1_task (void *sdata)
     .spi_fastest_speed
     = 0, // 0 - 4 MHz работает на большенстве плат, 1 - 6 MHz
 
-    .i2sRateOut = VS1053_I2S_RATE_192_KHZ,
+    //.i2sRateOut = VS1053_I2S_RATE_192_KHZ,
+    .i2sRateOut = VS1053_I2S_RATE_48_KHZ,
 };
 
 /**
