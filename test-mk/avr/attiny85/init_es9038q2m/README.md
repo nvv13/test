@@ -31,7 +31,9 @@ decoder--250516-164223.txt
 прога для переключения
 attiny85_wire1.ino
 
-~~~
+
+
+
 прг. для включения режима 16-bit data words, для es9038q2m
 
 для мк Attiny85 (была в наличии, показалось что норм. + )
@@ -39,8 +41,9 @@ attiny85_wire1.ino
 и на Arduino (переделать на что то другое, не проблема....)
 
 
-делал по статье https://alexgyver.ru/lessons/naked-chip/
+делал по статье [https://alexgyver.ru/lessons/naked-chip/](https://alexgyver.ru/lessons/naked-chip/)
 
+~~~
 для ATTinyCore – ядро для поддержки и расширенной настройки МК ATtiny 441/841, 44/84, 45/85, 461/861, 48/88, 828, 1634, 87, 167. 
     Ссылка для менеджера плат: http://drazzy.com/package_drazzy.com_index.json
 
@@ -53,10 +56,11 @@ ATtiny Pin 5 = SDA
 ATtiny Pin 7 = SCK 
 ATtiny Pin 8 = VCC +3.3 
 
-
-взял оттуда корстанты для программы
-https://forum.chipdip.ru/index.php?threads/es9038q2m-%D0%B0%D1%83%D0%B4%D0%B8%D0%BE-%D0%A6%D0%90%D0%9F.474/page-21#post-15544
 ~~~
+взял оттуда корстанты для программы
+[форум chipdip es9038q2m](https://forum.chipdip.ru/index.php?threads/es9038q2m-%D0%B0%D1%83%D0%B4%D0%B8%D0%BE-%D0%A6%D0%90%D0%9F.474/page-21#post-15544)
+
+
 
 Всё
 
