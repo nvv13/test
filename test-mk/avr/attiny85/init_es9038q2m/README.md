@@ -25,10 +25,14 @@
 протестировал с yoRadio, работает!
 ![photo](jpg/8.jpg)
 
+
 файл, лог скана i2c 
+
 decoder--250516-164223.txt
 
+
 прога для переключения
+
 attiny85_wire1.ino
 
 
@@ -57,7 +61,8 @@ ATtiny Pin 7 = SCK
 ATtiny Pin 8 = VCC +3.3 
 
 ~~~
-взял оттуда корстанты для программы
+взял оттуда корстанты для программы (тут обсуждает другую платку, то-же на основе es9038q2m)
+
 [форум chipdip es9038q2m](https://forum.chipdip.ru/index.php?threads/es9038q2m-%D0%B0%D1%83%D0%B4%D0%B8%D0%BE-%D0%A6%D0%90%D0%9F.474/page-21#post-15544)
 
 
