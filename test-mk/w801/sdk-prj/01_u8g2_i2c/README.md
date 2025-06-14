@@ -12,6 +12,10 @@ board HLK-W801-KIT-V1.1 + u8g2 + i2c OLED 128x64 Display
 
 дисплей OLED 128x64  1'3 дюйма, I2C, контроллер sh1106
 
+![photo](jpg/1.3_OLED_128x64.jpg)
+
+![photo](jpg/1.3_OLED_128x64_back.jpg)
+
 соеденить по схеме:
 ~~~
 connect to
@@ -29,6 +33,10 @@ DISPLAY     w801
 дисплей OLED 128x64 2.4 дюйма, 2.42OLED-IIC VER:1.1, I2C, контроллер ssd1309
 попадаються дисплеи с неправильным i2c, не дающие ask, 
   тогда используем u8x8_byte_hw_i2c_no_ask_riotos
+
+![photo](jpg/2.4_OLED_128x64.jpg)
+
+![photo](jpg/2.4_OLED_128x64_back.jpg)
 
 соеденить по схеме:
 ~~~
