@@ -1,9 +1,16 @@
-!!!!
-https://blog.podkalicki.com/100-projects-on-attiny13/
-!!!!
 
-https://blog.podkalicki.com/how-to-compile-and-burn-the-code-to-avr-chip-on-linuxmacosxwindows/
-https://blog.podkalicki.com/tag/attiny13/
+[100-projects-on-attiny13/](https://web.archive.org/web/20230325193416/https://blog.podkalicki.com/100-projects-on-attiny13/)
+
+[how-to-compile-and-burn-the-code-to-avr-chip-on-linuxmacosxwindows/](https://web.archive.org/web/20230204130319/https://blog.podkalicki.com/how-to-compile-and-burn-the-code-to-avr-chip-on-linuxmacosxwindows/)
+
+[ATTINY13A datasheet1](https://static.chipdip.ru/lib/348/DOC012348120.pdf)
+
+[ATTINY13A datasheet2](https://static.chipdip.ru/lib/514/DOC028514224.pdf)
+
+[ATTINY13A datasheet3](https://static.chipdip.ru/lib/775/DOC059775023.pdf)
+
+[ATTINY13A tech datasheet](https://static.chipdip.ru/lib/993/DOC012993651.pdf)
+
 
 
 linux install
@@ -12,8 +19,9 @@ linux install
 
 
 
-
+~~~
 https://www.microchip.com/en-us/product/ATtiny13A#
+
 ATtiny13A
 The Microchip picoPower® 8-bit AVR® RISC-based microcontroller features
  1 KB of ISP Flash,
@@ -38,7 +46,7 @@ By executing powerful instructions in a single clock cycle,
                        GND 4      5 PB0 (MOSI/AIN0/OC0A/PCINT0)
 *********************************************************************
 
-
+~~~
 
 
 
