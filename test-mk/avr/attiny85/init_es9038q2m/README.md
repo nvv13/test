@@ -86,7 +86,18 @@ ATtiny Pin 8 = VCC +3.3
 
 ложим в папку yoRadio/src/src/plugins
 
-...
+... (компилим, заливаем)
+
+выводы для подключения указываються в [es9038q2m_init/es9038q2m_init.cpp](es9038q2m_init.cpp)
+
+задано SDA = GPIO-6, SCL = GPIO-7 тут:
+~~~
+#define EQ_SDA_PIN 6
+#define EQ_SCL_PIN 7
+~~~
+
+если надо другие, меняем...
+
 
 
 
