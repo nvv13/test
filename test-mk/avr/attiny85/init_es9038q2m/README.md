@@ -78,7 +78,7 @@ PS: 15-08-2025
 
  а нет, не Всё
 
-![photo](yoRadio_plus_es8038g2m.jpg)
+![photo](jpg/yoRadio_plus_es8038g2m.jpg)
 
 в продолжение темы, сделал плагин для yoRadio, по просьбе одного товарища
 
