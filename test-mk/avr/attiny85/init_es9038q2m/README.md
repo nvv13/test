@@ -73,3 +73,21 @@ ATtiny Pin 8 = VCC +3.3
 
 
 
+
+PS: 15-08-2025
+
+ а нет, не Всё
+
+![photo](yoRadio_plus_es8038g2m.jpg)
+
+в продолжение темы, сделал плагин для yoRadio, по просьбе одного товарища
+
+папку с плагином es9038q2m_init
+
+ложим в папку yoRadio/src/src/plugins
+
+...
+
+
+
+
