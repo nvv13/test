@@ -93,14 +93,14 @@ ATtiny Pin 8 = VCC +3.3
 
 смысл тут в том, чтобы отказаться от внешней микросхемы инициализации, и делать это прямо от выводов esp32s3
 
-папку с плагином [es9038q2m_init](es9038q2m_init)
+папку с плагином [es9038q2m_init](other/yoRadio/src/src/plugins/es9038q2m_init)
 
 ложим в папку yoRadio/src/src/plugins
 
 
 ... (компилим, заливаем)
 
-выводы для подключения указываються в [es9038q2m_init.cpp](es9038q2m_init/es9038q2m_init.cpp)
+выводы для подключения указываються в [es9038q2m_init.cpp](other/yoRadio/src/src/plugins/es9038q2m_init/es9038q2m_init.cpp)
 
 задано SDA = GPIO-6, SCL = GPIO-7 тут:
 ~~~
