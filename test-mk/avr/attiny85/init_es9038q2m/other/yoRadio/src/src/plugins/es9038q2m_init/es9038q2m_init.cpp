@@ -1,14 +1,13 @@
 /*
 плагин. для включения режима 16-bit data words, для es9038q2m
 
-Выводы для подключения, меняем 
+Выводы для подключения, меняем тут
 #define EQ_SDA_PIN 6
 #define EQ_SCL_PIN 7
 
 */
 #include "es9038q2m_init.h" 
 #include <Arduino.h>
-#include <Wire.h>
 
 // I2C Pin Def //
 #define EQ_SDA_PIN 6
@@ -19,11 +18,6 @@
 
 // Регистры для инициализации //
 #define Mad_AutoSelect 0x01
-
-es9038q2m::es9038q2m() {
-  registerPlugin();
-  log_i("Plugin es9038q2m is registered");
-}
 
 typedef uint8_t   u8;
 typedef int8_t    s8;
@@ -157,8 +151,7 @@ static int SWire_write_bytes(uint16_t addr, const void *data, size_t len)
 }
 //************************************************************************8
 
-
-void yoradio_on_setup() {
+static void es9038_on_setup(void) {
 u8 dat[]={Mad_AutoSelect,4}; // select to 16 bit mode
 delay(1000);
 SWire_init();
@@ -169,4 +162,12 @@ IIC_SCL(0); //не отпускать шину!
 IIC_SDA(0);
 }
 
+void yoradio_on_setup() {
+es9038_on_setup();
+}
+
+es9038q2m::es9038q2m() {
+  registerPlugin();
+  log_i("Plugin es9038q2m is registered");
+}
 
