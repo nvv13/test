@@ -112,5 +112,11 @@ ATtiny Pin 8 = VCC +3.3
 
 
 
+---PS: 31-08-2025---
 
+
+ещё фото, тут еспользован мод yoradio-(Maleksm)-v0.9.512m + доработка библиотек [liblwip.a](other/yoRadio/esp32s3_5.4md), это есть в описании мода
+
+
+![photo](jpg/yoradio-(Maleksm)-v0.9.512m.jpg)
 
