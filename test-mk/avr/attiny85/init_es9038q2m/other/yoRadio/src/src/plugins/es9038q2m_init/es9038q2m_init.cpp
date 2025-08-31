@@ -153,12 +153,15 @@ static int SWire_write_bytes(uint16_t addr, const void *data, size_t len)
 
 static void es9038_on_setup(void) {
 u8 dat[]={Mad_AutoSelect,4}; // select to 16 bit mode
-delay(1000);
+delay(1000); //ждем секунду, пока пройдет основная инициализация платки es9038q2m
 SWire_init();
 delay(5);
 SWire_write_bytes(ES90381,dat,2);
 delay(5);
-IIC_SCL(0); //не отпускать шину!
+IIC_SCL(0); /*не отпускать шину! 
+  подробности - 
+  строка 390 - https://github.com/nvv13/test/blob/main/test-mk/avr/attiny85/init_es9038q2m/decoder--250516-164223.txt 
+  */
 IIC_SDA(0);
 }
 
