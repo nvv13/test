@@ -19,8 +19,8 @@
 //#define DTYPE     INITR_GREENTAB  /*  ST7735 display submodel. По умолчанию "INITR_BLACKTAB" */
 //#define DSP_MODEL    DSP_ILI9341 /* Select ILI9341*/
 //#define DSP_MODEL   DSP_ST7789  /* Select ST7789*/
-#define DSP_MODEL   DSP_ST7789_170  /* Select ST7789x170*/
-//#define DSP_MODEL    DSP_ILI9488 /* Select ILI9488*/
+//#define DSP_MODEL   DSP_ST7789_170  /* Select ST7789x170*/
+#define DSP_MODEL    DSP_ILI9488 /* Select ILI9488*/
 //#define DSP_MODEL    DSP_ST7796 /* Select ILI9486*/
 //#define DSP_MODEL    DSP_SSD1306x32    /* Select SSD1306-128х32*/
 //#define DSP_MODEL    DSP_SH1106    /* Select SH1106-128х64*/
