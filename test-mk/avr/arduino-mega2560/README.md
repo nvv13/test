@@ -1,3 +1,10 @@
+
+[arduino-mega-2560-r3-schematic](arduino-mega-2560-r3-schematic.pdf)
+
+![mega-pinout](doc/mega-pinout-1-1.jpg)
+
+![mega-pinout2](doc/mega-pinout-2.jpg)
+
 просто из даташита
 
 
@@ -77,3 +84,13 @@ and Extended Standby
 – ATmega2560/ATmega2561:
 • 0 - 16MHz @ 4.5V - 5.5V
 ~~~
+
+
+
+PS:
+  To teach the reader how to program Arduino based on AVR ATMEGA 2560 directly using avrgcc.
+  Hence, I have tried to keep the code as simple as possible.
+  [Elegoo_Mega_2560](https://github.com/enthusiasticgeek/Elegoo_Mega_2560.git)
+
+linux install
+ sudo dnf install avr-gcc avr-libc avrdude

@@ -1,4 +1,4 @@
-REOT OS
+RIOT OS
 
 Expected result
 ===============
