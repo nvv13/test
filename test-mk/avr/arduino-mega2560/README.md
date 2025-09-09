@@ -93,4 +93,4 @@ PS:
   [Elegoo_Mega_2560](https://github.com/enthusiasticgeek/Elegoo_Mega_2560.git)
 
 linux install
- sudo dnf install avr-gcc avr-libc avrdude
+ sudo dnf install avr-gcc avr-gcc-c++ avr-libc avrdude

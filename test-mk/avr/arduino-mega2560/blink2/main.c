@@ -6,7 +6,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define LED_PIN PB7
+#define LED_PIN PB7 // build in led D13
 
 int
 main(void)

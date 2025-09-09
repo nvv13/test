@@ -4,18 +4,13 @@ F_CPU=16000000UL  #
 LFUSE=0xff # 0xFF - default fuse, see https://www.engbedded.com/fusecalc/
 HFUSE=0xd8 # SPIEN, BOOTSZ1, BOOTSZ0, BOOTRST
 EFUSE=0xfd # BODLEVEL1
-CXX=avr-g++
+CC=avr-gcc
 OBJCOPY=avr-objcopy
 SIZE=avr-size
 AVRDUDE=avrdude
 CFLAGS=-std=c99 -Wall -g -Os -mmcu=${MCU} -DF_CPU=${F_CPU} -I.
-CXX_FLAGS=-Wall -Wstrict-prototypes -Os -std=gnu++11 -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
-
-
-
-
 TARGET=main
-SRCS=main.cpp ide_io.cpp atapi.cpp
+SRCS=main.c 
 
 ATMEGA=m2560
 PROTOCOL=wiring
@@ -24,7 +19,7 @@ BAUD=115200
 
 	
 all:
-	${CXX} ${CXX_FLAGS} -o ${TARGET}.bin ${SRCS}
+	${CC} ${CFLAGS} -o ${TARGET}.bin ${SRCS}
 	${OBJCOPY} -j .text -j .data -O ihex ${TARGET}.bin ${TARGET}.hex	
 	${SIZE} -C --mcu=${MCU} ${TARGET}.bin
 	
@@ -38,4 +33,4 @@ readfuse:
 	${AVRDUDE} -p $(ATMEGA) -c $(PROTOCOL) -P $(DEVICE) -b $(BAUD) -v -U lfuse:r:low_fuse_val.hex:h -U hfuse:r:high_fuse_val.hex:h -U efuse:r:ext_fuse_val.hex:h
 
 clean:
-	rm -f *.bin *.c~ *.o *.d *.elf *.hex
+	rm -f *.bin *.c~ *.o *.elf *.hex
