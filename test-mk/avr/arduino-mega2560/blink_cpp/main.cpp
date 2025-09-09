@@ -37,7 +37,7 @@ int main(void)
     /* loop */
     while (1) {
         x1->Toggle();
-        _delay_ms(500); // wait 0.5s
+        _delay_ms(3000); // wait 0.5s
     }
 
    delete x1;

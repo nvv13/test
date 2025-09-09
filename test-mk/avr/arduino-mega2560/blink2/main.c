@@ -20,6 +20,6 @@ main(void)
     while (1) {
         //PORTB ^= _BV(LED_PIN); // toggle LED pin
 	  PORTB ^= (1<<LED_PIN); // toggle LED pin
-        _delay_ms(500); // wait 0.5s
+        _delay_ms(100); // wait 0.5s
     }
 }
