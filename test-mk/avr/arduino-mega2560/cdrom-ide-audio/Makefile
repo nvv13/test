@@ -39,3 +39,6 @@ readfuse:
 
 clean:
 	rm -f *.bin *.c~ *.o *.d *.elf *.hex
+
+fmt:
+	clang-format --style=GNU --verbose -i ./*.cpp ./*.h
