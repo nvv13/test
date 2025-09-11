@@ -3,42 +3,22 @@
 // ********************************************************************
 
 #include "cplusplus.h"
+#include "CUsart.hpp"
 
-#include <avr/io.h>
-#include <util/delay.h>
-
-#define LED_PIN PB7 // build in led D13
-
-class CBlink
-{
-
-public:
-  CBlink ()
-  {
-    /* setup */
-    DDRB |= (1 << LED_PIN); // set LED pin as OUTPUT
-  }
-  void
-  Toggle (void)
-  {
-    PORTB ^= (1 << LED_PIN); // toggle LED pin
-  }
-};
-
-// extern "C" int
-int
+extern "C" int
 main (void)
 {
 
   /* setup */
-  CBlink *x1 = new CBlink ();
+  CUsart *oUsart = CUsart::GetInstance ();
 
   /* loop */
   while (1)
     {
-      x1->Toggle ();
-      _delay_ms (3000); // wait 0.5s
+      if(oUsart->is_recive_line())
+       {
+          printf ("Recived #%d: %s\n", oUsart->line_len(), oUsart->line_cstr());
+       }
     }
 
-  delete x1;
 }

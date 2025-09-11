@@ -8,14 +8,14 @@ CXX=avr-g++
 OBJCOPY=avr-objcopy
 SIZE=avr-size
 AVRDUDE=avrdude
-CFLAGS=-std=c99 -Wall -g -Os -mmcu=${MCU} -DF_CPU=${F_CPU} -I.
-CXX_FLAGS=-Wall -Wstrict-prototypes -Os -std=gnu++11 -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+CFLAGS=-std=c99 -Wall -g -Os -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -I../User
+CXX_FLAGS=-Wall -Os -std=gnu++11 -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -I../User -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 
 
 
 
 TARGET=main
-SRCS=main.cpp ide_io.cpp atapi.cpp
+SRCS=main.cpp ide_io.cpp atapi.cpp ../User/CUsart.cpp ../User/CShell.cpp
 
 ATMEGA=m2560
 PROTOCOL=wiring

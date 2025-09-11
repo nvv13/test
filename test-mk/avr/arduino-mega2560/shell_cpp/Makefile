@@ -12,7 +12,7 @@ CFLAGS=-std=c99 -Wall -g -Os -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -I../User
 CXX_FLAGS=-Wall -Os -std=gnu++11 -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -I../User -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 
 TARGET=main
-SRCS=main.cpp 
+SRCS=main.cpp ../User/CUsart.cpp ../User/CShell.cpp
 
 ATMEGA=m2560
 PROTOCOL=wiring
