@@ -62,7 +62,7 @@ SystemTime::Millis ()
 
   // Set Prescale to 64 -> 16000000/64=>250000 sec,
   // div to 250 = 1 ms (1000 sec)
-  t = (TCNT4 + this->ovfCount*65535) / 250;
+  t = (TCNT4 + this->ovfCount*65536) / 250;
   return t;
 }
 
