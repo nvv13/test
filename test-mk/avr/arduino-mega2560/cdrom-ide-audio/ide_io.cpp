@@ -52,6 +52,7 @@ IDE	           	      IDE             IDE
 
 #include "ide_io.h"
 #include <util/delay.h>
+#include <stdio.h>
 
 #define IO_EXP_DATALINES 0x22
 #define IO_EXP_REG_SEL 0x20
@@ -92,8 +93,7 @@ ide_io::read (uint8_t regval)
 
   if (_debug_ide_rw)
     {
-      // Serial.print(F("--- IDE READ regval="));
-      // Serial.print(regval);
+       printf("--- IDE READ regval=%d",regval);
     }
 
   // Set datalines to inputs
@@ -120,11 +120,7 @@ ide_io::read (uint8_t regval)
 
   if (_debug_ide_rw)
     {
-      // Serial.print(F(". Finished IDE READ"));
-      // Serial.print(F(", dataLval="));
-      // Serial.print(retval.low);
-      // Serial.print(F(", dataHval = "));
-      // Serial.println(retval.high);
+       printf(". Finished IDE READ, dataLval=%d, dataHval = %d\r\n",retval.low,retval.high);
     }
 
   return retval;
@@ -147,16 +143,7 @@ ide_io::write (uint8_t regval, uint8_t dataLval, uint8_t dataHval)
 
   if (_debug_ide_rw)
     {
-      // Serial.print(F("--- IDE WRITE _control_reg inital="));
-      // Serial.print(reg_inital, BIN);
-      // Serial.print(F(", regval="));
-      // Serial.print(regval, BIN);
-      // Serial.print(F(", NEW _control_reg="));
-      // Serial.print(_control_reg, BIN);
-      // Serial.print(F(", dataLval="));
-      // Serial.print(dataLval);
-      // Serial.print(F(", dataHval = "));
-      // Serial.print(dataHval);
+       printf("--- IDE WRITE _control_reg inital=%d, regval=%d, NEW _control_reg=%d, dataLval=%d, dataHval = %d",reg_inital,regval,_control_reg,dataLval,dataHval);
     }
 
   // set datalines as outputs
@@ -183,8 +170,7 @@ ide_io::write (uint8_t regval, uint8_t dataLval, uint8_t dataHval)
 
   if (_debug_ide_rw)
     {
-      // Serial.print(F(". IDE WRITE Done, set control reg = "));
-      // Serial.println(_control_reg, BIN);
+       printf(". IDE WRITE Done, set control reg = %d\r\n",_control_reg);
     }
 }
 

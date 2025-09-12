@@ -24,6 +24,7 @@
 
 #include "atapi.h"
 #include <string.h>
+#include <stdio.h>
 #include <util/delay.h>
 
 // IDE Register addresses - table 6, p59 & p68
@@ -180,9 +181,7 @@ atapi::play (uint8_t track)
     {
       if (!get_track_address (track, &track_addr))
         {
-          // Serial.print(F("Play failed: didn't find track "));
-          // Serial.print(track);
-          // Serial.println(F(" in TOC"));
+          printf("Play failed: didn't find track %d in TOC\r\n",track);
           return;
         }
     }
@@ -281,8 +280,7 @@ atapi::read_subchannel (struct sub_channel_data *data)
       read_val = _ide->read (ComSReg);
       if (cnt > 16)
         {
-          // Serial.print(F("Get sub chan data: ERROR >16 uint8_ts received,
-          // but DRQ still set. reg=")); Serial.println(read_val.low, BIN);
+          printf("Get sub chan data: ERROR >16 uint8_ts received, but DRQ still set. reg=%d\r\n",read_val.low);
           break;
         }
     }
@@ -336,8 +334,7 @@ atapi::read_toc ()
         toc_idx++;
       else
         {
-          // Serial.print(F("Read TOC: reached MAX_TOC_LENGTH, but DRQ still 0.
-          // reg=")); Serial.println(read_val.low, BIN);
+          printf("Read TOC: reached MAX_TOC_LENGTH, but DRQ still 0.reg=%d\r\n",read_val.low);
           break;
         }
 
@@ -443,7 +440,7 @@ atapi::eject ()
   // First, see if the door is already open
   if (mode_sense_media_status () == atapi::MediaStatus::DOOR_OPEN)
     {
-      // Serial.println(F("DOOR OPEN"));
+      printf("DOOR OPEN\r\n");
       load = 1;
     }
 
@@ -484,8 +481,7 @@ atapi::mode_sense_media_status ()
       count++;
       if (count > 200)
         {
-          // Serial.print(F("mode_sense_media_status: count>200 but DRQ still
-          // 0"));
+          printf("mode_sense_media_status: count>200 but DRQ still 0");
           break;
         }
     }

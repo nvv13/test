@@ -198,6 +198,9 @@ main (void)
 {
 
   /* setup */
+  DDRB |= (1 << LED_PIN); // set LED pin as OUTPUT
+  CUsart::GetInstance ();
+  printf ("Start\r\n");
   ide_io _ide = ide_io ();
   atapi _atapi = atapi (&_ide);
   P_atapi = &_atapi;
@@ -214,7 +217,10 @@ main (void)
     {
       printf ("No ATAPI Device!\r\n");
       while (1)
-        ; // No need to go ahead.
+        {
+          PORTB ^= (1 << LED_PIN); //
+          _delay_ms (100);         //
+        }; // No need to go ahead.
     }
 
   // Initialise task file
@@ -248,7 +254,7 @@ main (void)
   if (sd.asc == 0x29)               // Req. Sense returns 'HW Reset'
     {                               // (ASC=29h) at first since we had one.
       P_atapi->request_sense (&sd); // New Req. Sense returns if media
-    }                               // is present or not.
+    } // is present or not.
 
   do
     {
