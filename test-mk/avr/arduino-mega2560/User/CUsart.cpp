@@ -61,6 +61,21 @@ CUsart::GetInstance ()
 
 #pragma GCC diagnostic pop
 
+/*
+  error: designator order for field '__file::flags' does not match declaration
+  order in 'FILE'
+
+  https://stackoverflow.com/questions/74116905/designator-order-for-field-fileflags-does-not-match-the-declaration-order
+  https://github.com/avrdudes/avr-libc/issues/898
+
+*/
+#undef FDEV_SETUP_STREAM
+#define FDEV_SETUP_STREAM(p, g, f)                                            \
+  {                                                                           \
+    .buf = NULL, .unget = 0, .flags = f, .size = 0, .len = 0, .put = p,       \
+    .get = g, .udata = 0                                                      \
+  }
+
 static FILE mystdout
     = FDEV_SETUP_STREAM (uart_putchar, NULL, _FDEV_SETUP_WRITE);
 

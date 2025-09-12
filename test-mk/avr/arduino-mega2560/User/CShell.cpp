@@ -15,11 +15,12 @@ CShell::CShell (const shell_command_t *shell_cmd) : Fshell_cmd (shell_cmd)
 void
 CShell::print_help (void)
 {
-  printf("usage:\r\n");
+  printf ("usage:\r\n");
   int ind_cmd = 0;
   while (Fshell_cmd[ind_cmd].name != NULL)
     {
-      printf("  %s : %s\r\n",Fshell_cmd[ind_cmd].name,Fshell_cmd[ind_cmd].desc);
+      printf ("  %s : %s\r\n", Fshell_cmd[ind_cmd].name,
+              Fshell_cmd[ind_cmd].desc);
       ind_cmd++;
     }
 }
