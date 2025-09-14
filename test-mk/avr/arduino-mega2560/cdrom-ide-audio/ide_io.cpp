@@ -111,7 +111,7 @@ ide_io::read (uint8_t regval)
   DDRL = 0xff; // set all 8 pin portL as OUTPUT
   PORTL = _control_reg;
 
-  retval.low = PINA;
+  retval.low  = PINA;
   retval.high = PINC;
 
   _control_reg
