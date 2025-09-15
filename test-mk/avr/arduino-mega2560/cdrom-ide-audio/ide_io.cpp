@@ -51,8 +51,8 @@ IDE	           	      IDE             IDE
 */
 
 #include "ide_io.h"
-#include <util/delay.h>
 #include <stdio.h>
+#include <util/delay.h>
 
 #define IO_EXP_DATALINES 0x22
 #define IO_EXP_REG_SEL 0x20
@@ -79,11 +79,11 @@ ide_io::ide_io ()
   _control_reg = 0xF8;
   _debug_ide_rw = 0;
   DDRA = 0x00;  // set all 8 pin portA as INPUT
-  PORTA = 0xff; // pull-up inputs
+  PORTA = 0x00; // set datalines back to inputs (highz)
   DDRC = 0x00;  // set all 8 pin portC as INPUT
-  PORTC = 0xff; // pull-up inputs
+  PORTC = 0x00; // set datalines back to inputs (highz)
   DDRL = 0x00;  // set all 8 pin portL as INPUT
-  PORTL = 0xff; // pull-up inputs
+  PORTL = 0x00; // set datalines back to inputs (highz)
 }
 
 ide_io::data16
@@ -93,14 +93,14 @@ ide_io::read (uint8_t regval)
 
   if (_debug_ide_rw)
     {
-       printf("--- IDE READ regval=%d",regval);
+      printf ("--- IDE READ regval=%d", regval);
     }
 
   // Set datalines to inputs
   DDRA = 0x00;  // set all 8 pin portA as INPUT
-  PORTA = 0xff; // pull-up inputs
+  PORTA = 0x00; // set datalines back to inputs (highz)
   DDRC = 0x00;  // set all 8 pin portC as INPUT
-  PORTC = 0xff; // pull-up inputs
+  PORTC = 0x00; // set datalines back to inputs (highz)
 
   regval = regval & ~CTL_MASK; // Don't allow regval to set DIOR/DIOW/RST
   _control_reg = _control_reg & CTL_MASK; // Clear CS3FX/CS1FX/A2/A1/A0
@@ -111,7 +111,7 @@ ide_io::read (uint8_t regval)
   DDRL = 0xff; // set all 8 pin portL as OUTPUT
   PORTL = _control_reg;
 
-  retval.low  = PINA;
+  retval.low = PINA;
   retval.high = PINC;
 
   _control_reg
@@ -120,7 +120,8 @@ ide_io::read (uint8_t regval)
 
   if (_debug_ide_rw)
     {
-       printf(". Finished IDE READ, dataLval=%d, dataHval = %d\r\n",retval.low,retval.high);
+      printf (". Finished IDE READ, dataLval=%d, dataHval = %d\r\n",
+              retval.low, retval.high);
     }
 
   return retval;
@@ -143,7 +144,9 @@ ide_io::write (uint8_t regval, uint8_t dataLval, uint8_t dataHval)
 
   if (_debug_ide_rw)
     {
-       printf("--- IDE WRITE _control_reg inital=%d, regval=%d, NEW _control_reg=%d, dataLval=%d, dataHval = %d",reg_inital,regval,_control_reg,dataLval,dataHval);
+      printf ("--- IDE WRITE _control_reg inital=%d, regval=%d, NEW "
+              "_control_reg=%d, dataLval=%d, dataHval = %d",
+              reg_inital, regval, _control_reg, dataLval, dataHval);
     }
 
   // set datalines as outputs
@@ -164,13 +167,13 @@ ide_io::write (uint8_t regval, uint8_t dataLval, uint8_t dataHval)
 
   // set datalines back to inputs (highz)
   DDRA = 0x00;  // set all 8 pin portA as INPUT
-  PORTA = 0xff; // pull-up inputs
+  PORTA = 0x00; // set datalines back to inputs (highz)
   DDRC = 0x00;  // set all 8 pin portC as INPUT
-  PORTC = 0xff; // pull-up inputs
+  PORTC = 0x00; // set datalines back to inputs (highz)
 
   if (_debug_ide_rw)
     {
-       printf(". IDE WRITE Done, set control reg = %d\r\n",_control_reg);
+      printf (". IDE WRITE Done, set control reg = %d\r\n", _control_reg);
     }
 }
 

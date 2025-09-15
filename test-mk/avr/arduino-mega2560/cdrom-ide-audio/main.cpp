@@ -209,29 +209,18 @@ main (void)
   ide_io::data16 read_val;
   _scan_state = ScanState::NONE;
 
-
-while(1)
-{
   P_atapi->reset ();
-          _delay_ms (1000);         //
-_ide._debug_ide_rw=1;
   if (P_atapi->is_atapi_device ())
     printf ("Found ATAPI Dev.\r\n");
   else
     {
-_ide._debug_ide_rw=0;
       printf ("No ATAPI Device!\r\n");
-//  P_atapi->play (1);
-//      while (1)
+      while (1)
         {
           PORTB ^= (1 << LED_PIN); //
-          _delay_ms (3000);         //
-        P_atapi->eject ();
-          _delay_ms (3000);         //
-        }; // No need to go ahead.
+          _delay_ms (100);         //
+        };                         // No need to go ahead.
     }
- }
-_ide._debug_ide_rw=0;
 
   // Initialise task file
   printf ("Init task file\r\n");
@@ -264,7 +253,7 @@ _ide._debug_ide_rw=0;
   if (sd.asc == 0x29)               // Req. Sense returns 'HW Reset'
     {                               // (ASC=29h) at first since we had one.
       P_atapi->request_sense (&sd); // New Req. Sense returns if media
-    } // is present or not.
+    }                               // is present or not.
 
   do
     {
