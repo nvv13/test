@@ -126,8 +126,11 @@ cmd_stop (int argc, char **argv)
 static int
 cmd_play (int argc, char **argv)
 {
-  P_atapi->play (current_track);
-  printf ("=play\r\n");
+  int track=atoi(argv[1]);
+  printf ("play track %d ... ",track);
+  //P_atapi->play (current_track);
+  P_atapi->play (track);
+  printf ("=\r\n");
   return 0;
 };
 
@@ -179,11 +182,116 @@ cmd_RR (int argc, char **argv)
   return 0;
 };
 
+static int
+cmd_reset (int argc, char **argv)
+{
+  printf ("reset ... ");
+  P_atapi->reset ();
+  if (P_atapi->is_atapi_device ())
+    printf ("Found ATAPI Dev.\r\n");
+  else
+    printf ("No ATAPI Device!\r\n");
+  return 0;
+}
+static int
+cmd_init (int argc, char **argv)
+{
+  // Initialise task file
+  printf ("Init task file ... ");
+  P_atapi->init_task_file ();
+  printf ("Init task file done\r\n");
+  return 0;
+}
+static int
+cmd_diag (int argc, char **argv)
+{
+  // Run Self Diagnostic
+  printf ("Self Diag: ");
+  _delay_ms (3000);
+
+  if (P_atapi->run_self_diag ())
+    {
+      printf ("OK\r\n");
+    }
+  else
+    {
+      printf ("Fail\r\n"); // Units failing this may still work fine
+    }
+  return 0;
+}
+static int
+cmd_ident (int argc, char **argv)
+{
+  // Identify Device
+  printf ("ATAPI Device:");
+  struct atapi::identify_drive_details drive_details;
+  P_atapi->identify_drive (&drive_details);
+  printf (drive_details.model);
+  printf ("=\r\n");
+  return 0;
+}
+static int
+cmd_sense (int argc, char **argv)
+{
+  printf ("sense ... ");
+  struct atapi::sense_data sd;
+  P_atapi->request_sense (&sd);     // Send packet 'Request Sense'
+  if (sd.asc == 0x29)               // Req. Sense returns 'HW Reset'
+    {                               // (ASC=29h) at first since we had one.
+      P_atapi->request_sense (&sd); // New Req. Sense returns if media
+    } // is present or not.
+
+  do
+    {
+      // Wait until drive is ready.
+      P_atapi->request_sense (&sd); // Some devices take some time
+    }
+  while (sd.asc == 0x04); // ASC=04h -> LOGICAL DRIVE NOT READY
+  /* ATAPI init End*/
+  printf ("=\r\n");
+  return 0;
+}
+
+static bool b_media = false;
+
+static int
+cmd_media_on (int argc, char **argv)
+{
+  b_media = true;
+  printf ("b_media=true\r\n");
+  return 0;
+}
+static int
+cmd_media_off (int argc, char **argv)
+{
+  b_media = false;
+  printf ("b_media=false\r\n");
+  return 0;
+}
+
+static int
+cmd_toc (int argc, char **argv)
+{
+  printf ("reread_toc ... ");
+  reread_toc_on_disc_load (media_status);
+  printf ("=\r\n");
+  return 0;
+}
+
 static const shell_command_t shell_commands[] = {
   //{ "init", "Setup a particular SPI configuration", cmd_init },
+  { "1", "(1)reset", cmd_reset },
+  { "2", "(2)Init task file", cmd_init },
+  { "3", "(3)Self Diag:", cmd_diag },
+  { "4", "(4)Identify Device", cmd_ident },
+  { "5", "(5)Request Sense", cmd_sense },
+  { "on", "(6)scan media on", cmd_media_on },
+  { "off", "scan media off", cmd_media_off },
+
+  { "toc", "reread_toc_on_disc_load", cmd_toc },
   { "eject", "eject", cmd_eject },
   { "stop", "stop", cmd_stop },
-  { "play", "play", cmd_play },
+  { "play", "play XXX", cmd_play },
   { "pause", "pause", cmd_pause },
   { "prev", "prev", cmd_prev },
   { "next", "next", cmd_next },
@@ -206,63 +314,8 @@ main (void)
   P_atapi = &_atapi;
 
   /* ATAPI init */
-  ide_io::data16 read_val;
+  // ide_io::data16 read_val;
   _scan_state = ScanState::NONE;
-
-  P_atapi->reset ();
-  if (P_atapi->is_atapi_device ())
-    printf ("Found ATAPI Dev.\r\n");
-  else
-    {
-      printf ("No ATAPI Device!\r\n");
-      while (1)
-        {
-          PORTB ^= (1 << LED_PIN); //
-          _delay_ms (100);         //
-        };                         // No need to go ahead.
-    }
-
-  // Initialise task file
-  printf ("Init task file\r\n");
-  P_atapi->init_task_file ();
-  printf ("Init task file done\r\n");
-
-  // Run Self Diagnostic
-  _delay_ms (3000);
-  printf ("Self Diag: ");
-
-  if (P_atapi->run_self_diag ())
-    {
-      printf ("OK\r\n");
-    }
-  else
-    {
-      printf ("Fail\r\n"); // Units failing this may still work fine
-    }
-
-  printf ("ATAPI Device:\r\n");
-
-  // Identify Device
-  struct atapi::identify_drive_details drive_details;
-  P_atapi->identify_drive (&drive_details);
-  printf (drive_details.model);
-
-  struct atapi::sense_data sd;
-  P_atapi->request_sense (&sd); // Send packet 'Request Sense'
-
-  if (sd.asc == 0x29)               // Req. Sense returns 'HW Reset'
-    {                               // (ASC=29h) at first since we had one.
-      P_atapi->request_sense (&sd); // New Req. Sense returns if media
-    }                               // is present or not.
-
-  do
-    {
-      // Wait until drive is ready.
-      P_atapi->request_sense (&sd); // Some devices take some time
-    }
-  while (sd.asc == 0x04); // ASC=04h -> LOGICAL DRIVE NOT READY
-
-  /* ATAPI init End*/
 
   CShell oCShell = CShell (shell_commands);
   PoCShell = &oCShell;
@@ -271,44 +324,53 @@ main (void)
     {
       oCShell.Idle ();
 
-      struct atapi::sub_channel_data sub_ch_data;
-
-      if (sysTime.Millis () - last_mode_sense > 1000)
+      if (b_media)
         {
-          last_mode_sense = sysTime.Millis ();
-          media_status = P_atapi->mode_sense_media_status ();
+          struct atapi::sub_channel_data sub_ch_data;
+
+          if (sysTime.Millis () - last_mode_sense > 1000)
+            {
+              last_mode_sense = sysTime.Millis ();
+              media_status = P_atapi->mode_sense_media_status ();
+            }
+
+          if (media_status == atapi::MediaStatus::DOOR_CLOSED_NO_DISC)
+            {
+              //_display->show_message ("NO DISC");
+              printf ("display->NO DISC\r\n");
+            }
+
+          else if (media_status == atapi::MediaStatus::DOOR_OPEN)
+            {
+              //_display->show_message ("(OPEN)");
+              printf ("display->(OPEN)\r\n");
+            }
+
+          else if (sysTime.Millis () - last_subchannel_read > 100)
+            {
+              // bool deemph;
+              //_wm880x->loop ();
+              // deemph = _wm880x->is_deemph ();
+              // if (deemph)
+              //  digitalWrite (PIN_DEEMPH, HIGH);
+              // else
+              //  digitalWrite (PIN_DEEMPH, LOW);
+
+              P_atapi->read_subchannel (&sub_ch_data);
+              last_subchannel_read = sysTime.Millis ();
+
+              char state_char = get_state_char (&sub_ch_data);
+
+              //_display->show_position (
+              //    sub_ch_data.track_number, sub_ch_data.relative_address.M,
+              //    sub_ch_data.relative_address.S, deemph, state_char);
+              printf ("display->track_number:%d relative_address.M:%d "
+                      "relative_address.S:%d state_char:%d\r\n",
+                      sub_ch_data.track_number, sub_ch_data.relative_address.M,
+                      sub_ch_data.relative_address.S, (int)state_char);
+            }
+
+          reread_toc_on_disc_load (media_status);
         }
-
-      if (media_status == atapi::MediaStatus::DOOR_CLOSED_NO_DISC)
-        {
-          //_display->show_message ("NO DISC");
-        }
-
-      else if (media_status == atapi::MediaStatus::DOOR_OPEN)
-        {
-          //_display->show_message ("(OPEN)");
-        }
-
-      else if (sysTime.Millis () - last_subchannel_read > 100)
-        {
-          // bool deemph;
-          //_wm880x->loop ();
-          // deemph = _wm880x->is_deemph ();
-          // if (deemph)
-          //  digitalWrite (PIN_DEEMPH, HIGH);
-          // else
-          //  digitalWrite (PIN_DEEMPH, LOW);
-
-          P_atapi->read_subchannel (&sub_ch_data);
-          last_subchannel_read = sysTime.Millis ();
-
-          char state_char = get_state_char (&sub_ch_data);
-
-          //_display->show_position (
-          //    sub_ch_data.track_number, sub_ch_data.relative_address.M,
-          //    sub_ch_data.relative_address.S, deemph, state_char);
-        }
-
-      reread_toc_on_disc_load (media_status);
     }
 }

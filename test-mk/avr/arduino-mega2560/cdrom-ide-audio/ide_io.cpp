@@ -77,7 +77,7 @@ IDE	           	      IDE             IDE
 ide_io::ide_io ()
 {
   _control_reg = 0xF8;
-  _debug_ide_rw = 0;
+  _debug_ide_rw = false;
   DDRA = 0x00;  // set all 8 pin portA as INPUT
   PORTA = 0x00; // set datalines back to inputs (highz)
   DDRC = 0x00;  // set all 8 pin portC as INPUT
