@@ -152,7 +152,7 @@ static int SWire_write_bytes(uint16_t addr, const void *data, size_t len)
 //************************************************************************8
 
 static void es9038_on_setup(void) {
-Serial.print("## es9038_on_setup\t");
+Serial.print("## es9038_on_setup\n");
 u8 dat[]={Mad_AutoSelect,4}; // select to 16 bit mode
 delay(1000); //ждем секунду, пока пройдет основная инициализация платки es9038q2m
 SWire_init();
