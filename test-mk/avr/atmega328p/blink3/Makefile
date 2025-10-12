@@ -1,4 +1,4 @@
-# pinout https://microtechnics.ru/arduino-mega-2560-r3-raspinovka-i-princzipialnaya-shema/
+# pinout https://microtechnics.ru/arduino-uno-r3-obzor-raspinovka-princzipialnaya-shema/
 MCU=atmega328
 F_CPU=16000000UL  # 
 CC=avr-gcc
