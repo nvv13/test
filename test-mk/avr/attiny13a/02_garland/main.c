@@ -6,6 +6,7 @@
 //                        GND 4*****5 PB0 (MOSI/AIN0/OC0A/PCINT0)
 // ********************************************************************
 
+#include "eeprom_attiny.h"
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -13,14 +14,16 @@
 #define OUT_LED2 PB4
 #define IN_BUTTON PB3
 
-void
+#define EEPROM_ADDR_SWITCH 0
+
+static void
 my_delay_us (int i_cnt)
 {
   while (i_cnt--)
     _delay_us (1);
 }
 
-#define MAX_SWITCH 2
+#define MAX_SWITCH 3
 int
 main (void)
 {
@@ -34,7 +37,12 @@ main (void)
 
   int i_cnt = 0;
   int i_but_delay = 0;
-  int i_switch = 0;
+  int i_write_delay = 0;
+
+  unsigned char i_switch = read_from_internal_eeprom (EEPROM_ADDR_SWITCH);
+  if (i_switch > MAX_SWITCH)
+    i_switch = 0;
+
   /* loop */
   while (1)
     {
@@ -44,6 +52,7 @@ main (void)
           i_cnt = 0;
           if (++i_switch > MAX_SWITCH)
             i_switch = 0;
+          i_write_delay = 10000;
         }
 
       switch (i_switch)
@@ -78,6 +87,25 @@ main (void)
           {
             PORTB |= (1 << OUT_LED1);
             PORTB &= ~(1 << OUT_LED2);
+            if (i_cnt < 100)
+              _delay_ms (0);
+            else
+              _delay_ms (2);
+            PORTB |= (1 << OUT_LED2);
+            PORTB &= ~(1 << OUT_LED1);
+            if (i_cnt < 100)
+              _delay_ms (2);
+            else
+              _delay_ms (0);
+            if (i_cnt++ > 200)
+              i_cnt = 0;
+          };
+          break;
+
+        case 2:
+          {
+            PORTB |= (1 << OUT_LED1);
+            PORTB &= ~(1 << OUT_LED2);
             if (i_cnt < 500)
               _delay_ms (1);
             else
@@ -93,7 +121,7 @@ main (void)
           };
           break;
 
-        case 2:
+        case 3:
           {
             PORTB |= (1 << OUT_LED1);
             PORTB &= ~(1 << OUT_LED2);
@@ -111,8 +139,20 @@ main (void)
               i_cnt = 0;
           };
           break;
-        }
+
+        } // end switch
+
       if (i_but_delay > 0)
         i_but_delay--;
+
+      if (i_write_delay > 0)
+        {
+          i_write_delay--;
+          if (i_write_delay == 0)
+            {
+              if (read_from_internal_eeprom (EEPROM_ADDR_SWITCH) != i_switch)
+                write_internal_eeprom (EEPROM_ADDR_SWITCH, i_switch);
+            }
+        }
     }
 }
