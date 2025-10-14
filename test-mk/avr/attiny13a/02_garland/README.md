@@ -7,11 +7,10 @@
 
 ![photo](../jpg/new_attiny13a.jpg)
 
-Видео:
 
-https://youtu.be/A7c0qRhjPbY?si=3YPNpMdUkgfG_Zxz
+[Видео youtu](https://youtu.be/A7c0qRhjPbY?si=3YPNpMdUkgfG_Zxz)
 
-https://rutube.ru/video/fc1911c28bc9dab0a010f8cba6210e68/?r=wd
+[Видео rutube](https://rutube.ru/video/fc1911c28bc9dab0a010f8cba6210e68/?r=wd)
 
 
 
