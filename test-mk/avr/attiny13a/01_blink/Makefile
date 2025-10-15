@@ -16,13 +16,13 @@ all:
 	${SIZE} -C --mcu=${MCU} ${TARGET}.bin
 	
 flash:
-	${AVRDUDE} -p ${MCU} -c usbasp -U flash:w:${TARGET}.hex:i -F -P usb
+	${AVRDUDE} -p ${MCU} -c usbasp -B 125kHz -U flash:w:${TARGET}.hex:i -F -P usb
 
 writefuse:
-	${AVRDUDE} -p ${MCU} -c usbasp -U hfuse:w:${HFUSE}:m -U lfuse:w:${LFUSE}:m
+	${AVRDUDE} -p ${MCU} -c usbasp -B 125kHz -U hfuse:w:${HFUSE}:m -U lfuse:w:${LFUSE}:m
 
 readfuse:
-	${AVRDUDE} -p ${MCU} -c usbasp -U lfuse:r:low_fuse_val.hex:h -U hfuse:r:high_fuse_val.hex:h
+	${AVRDUDE} -p ${MCU} -c usbasp -B 125kHz -U lfuse:r:low_fuse_val.hex:h -U hfuse:r:high_fuse_val.hex:h
 
 clean:
 	rm -f *.bin *.c~ *.o *.elf *.hex

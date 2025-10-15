@@ -29,10 +29,10 @@ all:
 
 
 flash:
-	${AVRDUDE} -p ${MCU} -c usbasp -U flash:w:${TARGET}.hex:i -F -P usb
+	${AVRDUDE} -p ${MCU} -c usbasp -B 125kHz -U flash:w:${TARGET}.hex:i -F -P usb
 
 fuse:
-	$(AVRDUDE) -p ${MCU} -c usbasp -U hfuse:w:${FUSE_H}:m -U lfuse:w:${FUSE_L}:m
+	$(AVRDUDE) -p ${MCU} -c usbasp -B 125kHz -U hfuse:w:${FUSE_H}:m -U lfuse:w:${FUSE_L}:m
 
 clean:
 	rm -f *.bin *.c~ *.o *.elf *.hex
