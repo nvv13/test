@@ -77,6 +77,9 @@ RS485 Control  = есть
 
 ~~~
 
+![photo](jpg/STC15W408AS-35I-SKDIP28.png)
+
+![photo](jpg/STC15W408AS-35I-SOP20.png)
 
 
 
