@@ -101,6 +101,8 @@ $ python3 setup.py build
 
 $ sudo python3 setup.py install
 
+или просто $ pip3 install stcgal
+
 
 
 2.install sdcc
