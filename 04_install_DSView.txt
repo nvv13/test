@@ -1,0 +1,20 @@
+
+Fedora Linux 42
+
+dnf install git gcc g++ make cmake libtool pkgconfig glib2-devel \
+   zlib-devel libudev-devel libusb1-devel \
+   python3-devel qt-devel boost-devel fftw3-devel
+
+dnf install qt-creator qt-creator-doc qt5-designer qt6-designer qt5-doc \
+  qt-examples qt5-qtbase-examples qt6-qtbase-examples qt6-qtwayland-examples \
+  qt5-qtwayland-examples
+
+Step2: Get the DSView source code
+ $ git clone https://github.com/DreamSourceLab/DSView
+
+Step3: Building
+ $ cmake .
+ $ make 
+ $ sudo make install
+
+http://sigrok.org/wiki/Building
