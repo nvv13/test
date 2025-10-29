@@ -23,7 +23,7 @@ my_delay_us (int i_cnt)
     _delay_us (1);
 }
 
-#define MAX_SWITCH 3
+#define MAX_SWITCH 4
 int
 main (void)
 {
@@ -38,27 +38,33 @@ main (void)
   int i_cnt = 0;
   int i_but_delay = 0;
   int i_write_delay = 0;
+  int i_swdop = 0;
 
   unsigned char i_switch = read_from_internal_eeprom (EEPROM_ADDR_SWITCH);
   if (i_switch > MAX_SWITCH)
     i_switch = 0;
 
-  /* loop */
+  /* main loop */
   while (1)
     {
       if ((PINB & (1 << IN_BUTTON)) == 0 && i_but_delay == 0) // Down!
         {
+          PORTB &= ~(1 << OUT_LED1);
+          PORTB &= ~(1 << OUT_LED2);
+          _delay_ms (
+              500); // обозначим что есть переключение на следующую программу
           i_but_delay = 100;
           i_cnt = 0;
           if (++i_switch > MAX_SWITCH)
             i_switch = 0;
           i_write_delay = 10000;
+          i_swdop = 0;
         }
 
       switch (i_switch)
         {
 
-        case 0:
+        case 0: // плавный перелив
           {
             if (++i_cnt > 500)
               {
@@ -83,7 +89,7 @@ main (void)
           };
           break;
 
-        case 1:
+        case 1: // быстрое переключение
           {
             PORTB |= (1 << OUT_LED1);
             PORTB &= ~(1 << OUT_LED2);
@@ -102,7 +108,7 @@ main (void)
           };
           break;
 
-        case 2:
+        case 2: // медленное переключение
           {
             PORTB |= (1 << OUT_LED1);
             PORTB &= ~(1 << OUT_LED2);
@@ -121,7 +127,7 @@ main (void)
           };
           break;
 
-        case 3:
+        case 3: // средне
           {
             PORTB |= (1 << OUT_LED1);
             PORTB &= ~(1 << OUT_LED2);
@@ -137,6 +143,56 @@ main (void)
               _delay_ms (0);
             if (i_cnt++ > 1000)
               i_cnt = 0;
+          };
+          break;
+
+        case 4: // мигалка стробоскоп
+          {
+            switch (i_swdop)
+              {
+              case 0:
+                {
+                  i_but_delay = 3;
+                  PORTB &= ~(1 << OUT_LED2);
+                  while (i_but_delay--)
+                    {
+                      PORTB |= (1 << OUT_LED1);
+                      _delay_ms (30);
+                      PORTB &= ~(1 << OUT_LED1);
+                      _delay_ms (30);
+                    }
+                  _delay_ms (100);
+                  i_but_delay = 0;
+                  i_swdop++;
+                };
+                break;
+              case 1:
+                {
+                  i_but_delay = 3;
+                  PORTB &= ~(1 << OUT_LED1);
+                  PORTB &= ~(1 << OUT_LED2);
+                  _delay_ms (280);
+                  i_but_delay = 0;
+                  i_swdop++;
+                };
+                break;
+              case 2:
+                {
+                  i_but_delay = 3;
+                  PORTB &= ~(1 << OUT_LED1);
+                  while (i_but_delay--)
+                    {
+                      PORTB |= (1 << OUT_LED2);
+                      _delay_ms (30);
+                      PORTB &= ~(1 << OUT_LED2);
+                      _delay_ms (30);
+                    }
+                  _delay_ms (100);
+                  i_but_delay = 0;
+                  i_swdop = 0;
+                };
+                break;
+              }
           };
           break;
 
