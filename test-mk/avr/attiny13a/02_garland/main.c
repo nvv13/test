@@ -31,8 +31,7 @@ my_delay_ms (int i_cnt)
 {
   while (i_cnt--)
     {
-//      _delay_us (990);
-      _delay_ms (1);
+      _delay_us (990);
       if (i_write_delay > 1)
         i_write_delay--;
       if (i_but_delay > 0)
