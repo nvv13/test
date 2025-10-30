@@ -23,6 +23,23 @@ my_delay_us (int i_cnt)
     _delay_us (1);
 }
 
+static int i_but_delay = 0;
+static int i_write_delay = 0;
+
+static void
+my_delay_ms (int i_cnt)
+{
+  while (i_cnt--)
+    {
+//      _delay_us (990);
+      _delay_ms (1);
+      if (i_write_delay > 1)
+        i_write_delay--;
+      if (i_but_delay > 0)
+        i_but_delay--;
+    }
+}
+
 #define MAX_SWITCH 4
 int
 main (void)
@@ -36,9 +53,8 @@ main (void)
   PORTB |= (1 << IN_BUTTON); // HiGh IN
 
   int i_cnt = 0;
-  int i_but_delay = 0;
-  int i_write_delay = 0;
   int i_swdop = 0;
+  int i_delay2 = 0;
 
   unsigned char i_switch = read_from_internal_eeprom (EEPROM_ADDR_SWITCH);
   if (i_switch > MAX_SWITCH)
@@ -59,6 +75,7 @@ main (void)
             i_switch = 0;
           i_write_delay = 5000;
           i_swdop = 0;
+	  i_delay2 = 0;
         }
 
       switch (i_switch)
@@ -152,43 +169,51 @@ main (void)
               {
               case 0:
                 {
-                  i_but_delay = 3;
+                  i_delay2 = 3;
                   PORTB &= ~(1 << OUT_LED2);
-                  while (i_but_delay--)
+                  while (i_delay2--)
                     {
                       PORTB |= (1 << OUT_LED1);
-                      _delay_ms (30);
+                      my_delay_ms (70);
                       PORTB &= ~(1 << OUT_LED1);
-                      _delay_ms (30);
+                      my_delay_ms (70);
                     }
-                  _delay_ms (100);
-                  i_but_delay = 0;
+                  i_delay2 = 0;
                   i_swdop++;
                 };
                 break;
               case 1:
                 {
-                  i_but_delay = 3;
+                  i_delay2 = 3;
                   PORTB &= ~(1 << OUT_LED1);
                   PORTB &= ~(1 << OUT_LED2);
-                  _delay_ms (280);
-                  i_but_delay = 0;
+                  my_delay_ms (300);
+                  i_delay2 = 0;
                   i_swdop++;
                 };
                 break;
               case 2:
                 {
-                  i_but_delay = 3;
+                  i_delay2 = 3;
                   PORTB &= ~(1 << OUT_LED1);
-                  while (i_but_delay--)
+                  while (i_delay2--)
                     {
                       PORTB |= (1 << OUT_LED2);
-                      _delay_ms (30);
+                      my_delay_ms (70);
                       PORTB &= ~(1 << OUT_LED2);
-                      _delay_ms (30);
+                      my_delay_ms (70);
                     }
-                  _delay_ms (100);
-                  i_but_delay = 0;
+                  i_delay2 = 0;
+                  i_swdop++;
+                };
+                break;
+              case 3:
+                {
+                  i_delay2 = 3;
+                  PORTB &= ~(1 << OUT_LED1);
+                  PORTB &= ~(1 << OUT_LED2);
+                  my_delay_ms (300);
+                  i_delay2 = 0;
                   i_swdop = 0;
                 };
                 break;
