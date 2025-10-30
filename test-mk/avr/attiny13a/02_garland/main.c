@@ -57,7 +57,7 @@ main (void)
           i_cnt = 0;
           if (++i_switch > MAX_SWITCH)
             i_switch = 0;
-          i_write_delay = 10000;
+          i_write_delay = 5000;
           i_swdop = 0;
         }
 
@@ -207,7 +207,12 @@ main (void)
           if (i_write_delay == 0)
             {
               if (read_from_internal_eeprom (EEPROM_ADDR_SWITCH) != i_switch)
-                write_internal_eeprom (EEPROM_ADDR_SWITCH, i_switch);
+                {
+                  PORTB &= ~(1 << OUT_LED1);
+                  PORTB &= ~(1 << OUT_LED2);
+                  write_internal_eeprom (EEPROM_ADDR_SWITCH, i_switch);
+                  _delay_ms (500); // обозначим что запись
+                }
             }
         }
     }
