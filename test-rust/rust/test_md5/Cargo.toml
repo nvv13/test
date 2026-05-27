@@ -1,0 +1,8 @@
+[package]
+name = "md5_rust_implementation"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Используем популярную библиотеку для MD5
+md5 = "0.7" 
