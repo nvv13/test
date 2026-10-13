@@ -155,6 +155,7 @@ extern "C"
 #define MSP3525 52
 #define MSP3526 52
 #define TFT01_9V89 53
+#define TFT02_8V89 54
 
 #define ITDB32 0 // HX8347-A (16bit)
 #define ITDB32WC 1 // ILI9327  (16bit)

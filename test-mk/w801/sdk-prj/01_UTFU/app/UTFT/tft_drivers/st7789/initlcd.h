@@ -4,6 +4,7 @@ case TFT01_14V89:
 case TFT01_69V89:
 //case TFT02_0V89:
 case TFT01_9V89:
+case TFT02_8V89:
    //LOG("TFT01_3SP init 9 commands in list\n"); 
          // Init commands for 7789 screens
          //  9 commands in list:
@@ -41,9 +42,11 @@ case TFT01_9V89:
    UTFT_LCD_Write_DATA2(240>>8);
    UTFT_LCD_Write_DATA2(240&0xFF);  //     YEND = 240
 */
-
-    UTFT_LCD_Write_COM(ST77XX_INVON);//  7: hack
-    delay(10);
+    if(display_model!=TFT02_8V89) 
+     {
+     UTFT_LCD_Write_COM(ST77XX_INVON);//  7: hack
+     delay(10);
+     }
     UTFT_LCD_Write_COM(ST77XX_NORON);//  8: Normal display on, no args, w/delay
     delay(10);//     10 ms delay
     UTFT_LCD_Write_COM(ST77XX_DISPON);//  9: Main screen turn on, no args, delay
@@ -62,6 +65,7 @@ case TFT01_9V89:
    case TFT01_14V89: 
    case TFT01_69V89:
    case TFT02_0V89:
+   case TFT02_8V89:
    case TFT01_9V89:
     UTFT_LCD_Write_DATA2(ST77XX_MADCTL_MX | ST77XX_MADCTL_MY | ST7789_MADCTL_RGB);break; // rotation(0)  case TFT01_47V89
    default:
